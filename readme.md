@@ -8807,3 +8807,70 @@ else:
 
 Binary search is a fundamental algorithm with applications in many areas, including searching, sorting, and data structures.  Its logarithmic time complexity makes it significantly faster than linear search for large datasets.
 
+#  Linear search 
+Linear search is a simple searching algorithm that sequentially checks each element in a list until it finds the target value or reaches the end of the list.  It's straightforward but inefficient for large datasets.
+
+Here's a breakdown of linear search:
+
+**How it works:**
+
+1. **Start at the beginning:** The algorithm begins at the first element of the list.
+2. **Compare and check:** It compares the current element with the target value.
+3. **Match found:** If a match is found, the algorithm returns the index (or position) of the element.
+4. **No match:** If no match is found after checking all elements, the algorithm returns -1 (or a similar indicator) to signify that the target value is not present in the list.
+5. **Iteration:** If no match is found, the algorithm moves to the next element and repeats steps 2-4.
+
+
+**Example (Python):**
+
+```python
+def linear_search(arr, target):
+  """
+  Performs a linear search on a list.
+
+  Args:
+    arr: The list to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, -1 otherwise.
+  """
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+
+# Example usage:
+my_list = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]
+target_value = 23
+
+index = linear_search(my_list, target_value)
+
+if index != -1:
+  print(f"Target value {target_value} found at index {index}")
+else:
+  print(f"Target value {target_value} not found in the list")
+```
+
+**Time Complexity:**
+
+* **Best Case:** O(1) - The target element is the first element in the list.
+* **Average Case:** O(n) - The target element is somewhere in the middle of the list.
+* **Worst Case:** O(n) - The target element is at the end of the list, or not present at all.
+
+**Space Complexity:** O(1) - Linear search uses constant extra space, regardless of the input size.
+
+**Advantages:**
+
+* **Simple to understand and implement:**  Easy to learn and code.
+* **Works on unsorted lists:**  Doesn't require the list to be sorted.
+* **Suitable for small datasets:**  Reasonably efficient for small lists.
+
+**Disadvantages:**
+
+* **Inefficient for large datasets:**  The time it takes to search increases linearly with the size of the list, making it slow for large lists.
+* **Not suitable for frequently searched data:** For frequently searching large datasets, more efficient algorithms like binary search (for sorted data) or hash tables are preferred.
+
+
+Linear search is a basic but fundamental algorithm.  Understanding it is crucial before learning more advanced search techniques.
+
