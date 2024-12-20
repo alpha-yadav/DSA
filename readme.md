@@ -10654,3 +10654,6 @@ print(f"'{string5}' and '{string6}' are anagrams: {are_anagrams_counting(string5
 
 Therefore, **character counting is generally more efficient** for larger strings, offering linear time complexity compared to the slightly worse logarithmic time of sorting.  However, for very small strings, the difference might be negligible.  Choose the method that you find more readable and maintainable, unless performance is a critical concern for very large strings.
 
+#  Sample input and output 
+Please provide me with the task or problem you want sample input and output for.  I need to know what the program or function is supposed to do before I can give you relevant examples.
+
