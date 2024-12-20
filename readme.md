@@ -8607,3 +8607,54 @@ else:
 
 Binary search is a fundamental algorithm with wide applications in computer science, including searching in databases, finding elements in sorted data structures, and implementing other algorithms.
 
+#  Rabin Karp 
+The Rabin-Karp algorithm is a string-searching algorithm that uses hashing to find occurrences of a pattern string within a text string.  It's a probabilistic algorithm, meaning there's a small chance of false positives (incorrectly identifying a match), but these can be easily checked.  It's particularly efficient for searching for multiple occurrences of the same pattern.
+
+Here's a breakdown of how it works:
+
+**1. Hashing:**
+
+* Both the pattern and substrings of the text of the same length as the pattern are hashed using a rolling hash function. A rolling hash function is crucial for efficiency; it allows calculating the hash of the next substring in O(1) time based on the hash of the current substring, avoiding recalculating the entire hash each time.  A common choice is a polynomial rolling hash.
+
+* **Polynomial Rolling Hash:**  This represents a string as a polynomial where each character's ASCII value is a coefficient. For example, if the pattern is "abc" and we use base 10, the hash would be:  (a * 10^2) + (b * 10^1) + (c * 10^0).  The rolling hash efficiently updates the hash when moving to the next substring by subtracting the contribution of the leftmost character and adding the contribution of the rightmost character (with appropriate scaling by the base).  A prime number base (instead of 10) is often used to reduce collisions.  Modulo arithmetic is also used to keep the hash value within a manageable range.
+
+**2. Comparison:**
+
+* The algorithm iterates through the text, calculating the hash of each substring of the pattern's length.
+* If the hash of a substring matches the hash of the pattern, a potential match is found.
+* **Crucially:**  This potential match *must* be verified by a direct character-by-character comparison. This step eliminates false positives caused by hash collisions (where different strings have the same hash).
+
+**3. Rolling Hash Update:**
+
+* The key to the algorithm's efficiency is the rolling hash update. After comparing a substring, instead of recalculating the hash for the next substring, the algorithm efficiently updates the hash using the rolling hash function in O(1) time.
+
+**Pseudocode:**
+
+```
+function RabinKarp(text, pattern):
+  n = length(text)
+  m = length(pattern)
+  hpattern = hash(pattern) // Hash the pattern initially
+
+  for i = 0 to n - m:
+    hsubstring = hash(text[i...i+m-1]) // Hash the current substring
+    if hsubstring == hpattern:
+      if text[i...i+m-1] == pattern: // Verify the match
+        return i // Found a match at index i
+  return -1 // No match found
+```
+
+**Advantages:**
+
+* **Efficient for multiple searches:**  Once the pattern is hashed, searching for it multiple times within the same text is very fast.
+* **Good average-case performance:**  The average-case time complexity is O(n+m), where n is the length of the text and m is the length of the pattern.  This is better than brute-force search in many cases.
+
+**Disadvantages:**
+
+* **Worst-case performance:**  In the worst case (many hash collisions), the time complexity can degrade to O(nm), similar to brute-force.
+* **Sensitivity to hash function:**  A poorly chosen hash function can lead to many collisions and reduced performance.
+* **Requires extra space:**  Space is needed to store the hash values.
+
+
+**In summary:** The Rabin-Karp algorithm is a powerful string-searching technique that leverages hashing for efficient pattern matching. While it has a worst-case performance that can be poor, its average-case performance is often superior to brute-force methods, especially when searching for the same pattern multiple times.  The choice of hash function and handling of collisions are important considerations for its practical implementation.
+
