@@ -6338,3 +6338,83 @@ print("Sorted array:", sorted_list)
 
 Bubble sort is primarily used for educational purposes to illustrate the basic concepts of sorting algorithms.  It's rarely used in practical applications for large datasets due to its poor performance.
 
+#  Implementation in C & C++ 
+I can't provide a full C and C++ implementation for a specific task without knowing *what* you want implemented.  To help you, I need a description of the program or algorithm you want to create.  
+
+For example, tell me:
+
+* **What is the program supposed to do?** (e.g., "Calculate the factorial of a number," "Sort an array of integers," "Read data from a file and process it," "Implement a simple stack data structure")
+* **What are the inputs?** (e.g., "An integer from the command line," "A text file," "A list of numbers")
+* **What are the outputs?** (e.g., "The factorial printed to the console," "A sorted array printed to the console," "A summary of the processed data")
+* **Are there any specific requirements or constraints?** (e.g., "Use a specific algorithm," "Must be memory efficient," "Must handle errors gracefully")
+
+Once I have this information, I can provide you with a well-structured and commented C and C++ implementation.
+
+
+Here are some examples to illustrate the kind of requests I can handle:
+
+
+**Example 1: Factorial Calculation**
+
+**Request:**  Implement a function in C and C++ to calculate the factorial of a non-negative integer.
+
+**C Implementation:**
+
+```c
+#include <stdio.h>
+
+unsigned long long factorial(int n) {
+  if (n < 0) {
+    return 0; // Error: Factorial is not defined for negative numbers
+  } else if (n == 0) {
+    return 1;
+  } else {
+    unsigned long long result = 1;
+    for (int i = 1; i <= n; i++) {
+      result *= i;
+    }
+    return result;
+  }
+}
+
+int main() {
+  int num;
+  printf("Enter a non-negative integer: ");
+  scanf("%d", &num);
+  unsigned long long fact = factorial(num);
+  printf("Factorial of %d = %llu\n", num, fact);
+  return 0;
+}
+```
+
+**C++ Implementation:**
+
+```cpp
+#include <iostream>
+
+unsigned long long factorial(int n) {
+  if (n < 0) {
+    return 0; // Error: Factorial is not defined for negative numbers
+  } else if (n == 0) {
+    return 1;
+  } else {
+    unsigned long long result = 1;
+    for (int i = 1; i <= n; i++) {
+      result *= i;
+    }
+    return result;
+  }
+}
+
+int main() {
+  int num;
+  std::cout << "Enter a non-negative integer: ";
+  std::cin >> num;
+  unsigned long long fact = factorial(num);
+  std::cout << "Factorial of " << num << " = " << fact << std::endl;
+  return 0;
+}
+```
+
+Give me your requirements, and I'll do my best to help!
+
