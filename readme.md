@@ -8263,3 +8263,78 @@ These odd and even passes are repeated until no swaps are made in a complete cyc
 
 In summary, Odd-Even Sort is a simple, stable, and parallelizable sorting algorithm, but its quadratic time complexity limits its practicality for large-scale sorting tasks.  Its main advantage lies in its ease of implementation and suitability for parallel processing environments.
 
+#  Selection Sort 
+Selection sort is a simple sorting algorithm that works by repeatedly finding the minimum element from the unsorted part of the array and putting it at the beginning.  It's not very efficient for large datasets, but it's easy to understand and implement.
+
+Here's a breakdown of how it works:
+
+1. **Find the minimum:** Iterate through the unsorted part of the array to find the smallest element.
+2. **Swap:** Swap the minimum element with the first element of the unsorted part.
+3. **Repeat:** Repeat steps 1 and 2 for the remaining unsorted part of the array, shrinking the unsorted part by one element each time.
+
+**Example:**
+
+Let's say we have the array `[64, 25, 12, 22, 11]`.
+
+**Iteration 1:**
+
+* **Minimum:** 11
+* **Swap:** Swap 64 and 11.  The array becomes `[11, 25, 12, 22, 64]`.
+
+**Iteration 2:**
+
+* **Minimum:** 12 (considering only the unsorted part: `[25, 12, 22, 64]`)
+* **Swap:** Swap 25 and 12. The array becomes `[11, 12, 25, 22, 64]`.
+
+**Iteration 3:**
+
+* **Minimum:** 22
+* **Swap:** Swap 25 and 22. The array becomes `[11, 12, 22, 25, 64]`.
+
+**Iteration 4:**
+
+* **Minimum:** 25
+* **Swap:** No swap needed as 25 is already in its correct position.
+
+The array is now sorted: `[11, 12, 22, 25, 64]`.
+
+
+**Python Code Implementation:**
+
+```python
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        # Find the minimum element in the unsorted part
+        min_index = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_index]:
+                min_index = j
+
+        # Swap the minimum element with the first element
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+    return arr
+
+# Example usage
+my_array = [64, 25, 12, 22, 11]
+sorted_array = selection_sort(my_array)
+print("Sorted array:", sorted_array)
+```
+
+**Time and Space Complexity:**
+
+* **Time Complexity:** O(n²) -  Selection sort has a quadratic time complexity because of the nested loops.  This makes it inefficient for large datasets.
+* **Space Complexity:** O(1) - Selection sort is an in-place algorithm, meaning it sorts the array without requiring significant extra memory.  It has a constant space complexity.
+
+
+**When to use Selection Sort:**
+
+Selection sort is rarely used for large datasets due to its O(n²) time complexity.  However, it can be useful in the following situations:
+
+* **Small datasets:**  For very small arrays, the overhead of more complex algorithms might outweigh the performance benefits.
+* **Educational purposes:**  It's a simple algorithm that's easy to understand and implement, making it a good choice for teaching sorting concepts.
+* **Nearly sorted data:** If the data is almost sorted, selection sort might perform relatively better than other algorithms with worse-case O(n log n) time complexity.  However, even then, other algorithms such as insertion sort are usually preferred.
+
+
+In most practical scenarios, more efficient algorithms like merge sort, quicksort, or heapsort are preferred for larger datasets.
+
