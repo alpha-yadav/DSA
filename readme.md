@@ -9628,3 +9628,105 @@ print(f"Connected components (matrix): {components_matrix}") # Output will depen
 
 Remember to adapt the code to your specific graph representation (adjacency list or matrix).  The adjacency list version is generally preferred for its efficiency, especially with sparse graphs (graphs with relatively few edges).  The matrix version is simpler to understand for smaller, dense graphs but scales poorly.
 
+#  Depth First Search 
+Depth-First Search (DFS) is a graph traversal algorithm that explores a graph as deeply as possible along each branch before backtracking.  It uses a stack (implicitly or explicitly) to keep track of the vertices to visit.
+
+Here's a breakdown of DFS:
+
+**Core Idea:**
+
+DFS starts at a chosen node (often called the root or starting node).  It explores as far as possible along each branch before backtracking.  This "exploring as far as possible" means visiting all reachable nodes along a path before moving to another unvisited branch.
+
+**Algorithm:**
+
+1. **Initialization:** Start at a chosen starting node. Mark this node as visited.
+
+2. **Recursive Step (or Stack-based):**
+   * **Recursive Approach:** For each unvisited neighbor of the current node:
+     * Recursively call DFS on that neighbor.
+   * **Stack-based Approach:** Push all unvisited neighbors of the current node onto a stack. Pop a node from the stack and repeat until the stack is empty.
+
+3. **Termination:** The algorithm terminates when all reachable nodes from the starting node have been visited.
+
+**Data Structures:**
+
+* **Graph Representation:**  DFS can be implemented using various graph representations, such as adjacency lists or adjacency matrices. Adjacency lists are generally preferred for their efficiency.
+* **Stack (Implicit or Explicit):**  The recursive approach implicitly uses the call stack.  The iterative approach uses an explicit stack.
+* **Visited Set:** A set (or array) to keep track of visited nodes. This prevents cycles and ensures that each node is visited only once.
+
+**Implementation (Python using Adjacency List and Recursion):**
+
+```python
+def dfs_recursive(graph, node, visited):
+    """
+    Performs Depth-First Search recursively.
+
+    Args:
+      graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+      node: The starting node for DFS.
+      visited: A set to keep track of visited nodes.
+    """
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+visited = set()
+dfs_recursive(graph, 'A', visited)  # Start DFS from node 'A'
+# Output (order may vary slightly depending on dictionary order): A B D E F C
+```
+
+**Implementation (Python using Adjacency List and Iteration):**
+
+```python
+def dfs_iterative(graph, start_node):
+    visited = set()
+    stack = [start_node]
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            print(node, end=" ")
+            stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+# Using the same graph as above
+dfs_iterative(graph, 'A') # Output: A C F E B D (or similar order)
+
+```
+
+
+**Applications of DFS:**
+
+* **Finding paths:**  DFS can find a path between two nodes in a graph.
+* **Topological sorting:**  Ordering nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.
+* **Cycle detection:** Detecting cycles in a graph.
+* **Connected components:** Finding all connected components in an undirected graph.
+* **Spanning trees:** Finding a spanning tree of a graph.
+* **Solving puzzles:**  Games like mazes or Sudoku can be modeled as graphs and solved using DFS.
+
+
+**Differences between DFS and Breadth-First Search (BFS):**
+
+| Feature       | DFS                               | BFS                                   |
+|---------------|------------------------------------|---------------------------------------|
+| Exploration   | Deep first, explores one branch completely before moving to another | Breadth first, explores all neighbors at the current level before going deeper |
+| Data Structure | Stack (implicit or explicit)       | Queue                                  |
+| Path Finding  | Finds a path, but not necessarily the shortest path | Can find the shortest path (if edge weights are uniform) |
+
+
+Choosing between DFS and BFS depends on the specific application and its requirements.  If you need to find a path quickly or need the shortest path, BFS is often preferred. If you're dealing with problems that require exploring deeply, such as detecting cycles or topological sorting, DFS might be a better choice.
+
