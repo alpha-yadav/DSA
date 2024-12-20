@@ -5434,3 +5434,91 @@ print(f"Time taken with NumPy: {end_time - start_time:.4f} seconds")
 
 NumPy's `matmul` (or the `@` operator) will automatically leverage multiple cores if your system supports it and NumPy is built with appropriate libraries (like OpenBLAS or MKL).  This is almost always the most efficient approach for large-scale matrix multiplication.
 
+#  Multiplication matrix vector multithread 
+Multiplying a matrix by a vector can be significantly sped up using multithreading. Here's how you can do it, along with explanations and considerations for different programming languages and environments:
+
+**Core Concept:**
+
+The core idea is to divide the matrix-vector multiplication into smaller, independent sub-tasks that can be executed concurrently by different threads.  Each thread will compute a portion of the resulting vector.
+
+**Example (Python with NumPy and multiprocessing):**
+
+This example demonstrates a multithreaded matrix-vector multiplication using Python's `multiprocessing` library.  NumPy is used for efficient array operations, but the core parallelization logic is independent of NumPy and could be adapted to other array libraries or even implemented from scratch.
+
+```python
+import numpy as np
+import multiprocessing as mp
+
+def matrix_vector_mult_thread(matrix, vector, start_row, end_row, result_array):
+    """Computes a portion of the matrix-vector product."""
+    for i in range(start_row, end_row):
+        result_array[i] = np.dot(matrix[i, :], vector)
+
+def matrix_vector_mult_parallel(matrix, vector, num_threads=None):
+    """Computes the matrix-vector product in parallel."""
+    num_rows = matrix.shape[0]
+    if num_threads is None:
+        num_threads = mp.cpu_count()  # Use all available cores
+
+    chunk_size = num_rows // num_threads
+    result = mp.Array('d', num_rows)  # Shared array for results
+
+    processes = []
+    for i in range(num_threads):
+        start_row = i * chunk_size
+        end_row = (i + 1) * chunk_size if i < num_threads - 1 else num_rows
+        p = mp.Process(target=matrix_vector_mult_thread, args=(matrix, vector, start_row, end_row, result))
+        processes.append(p)
+        p.start()
+
+    for p in processes:
+        p.join()
+
+    return np.frombuffer(result.get_obj()).reshape((num_rows,))
+
+
+# Example usage:
+matrix = np.random.rand(1000, 1000)  # A 1000x1000 matrix
+vector = np.random.rand(1000)       # A 1000-element vector
+
+result = matrix_vector_mult_parallel(matrix, vector)
+#print(result) #uncomment to print the result
+
+
+#For comparison, the serial version:
+result_serial = np.dot(matrix, vector)
+
+#print(np.allclose(result, result_serial)) #check if both are equal.  Should be true.
+```
+
+**Explanation:**
+
+1. **`matrix_vector_mult_thread`:** This function computes a slice of the matrix-vector product.  It takes the matrix, vector, starting and ending row indices, and a shared array (`result_array`) to store the results.
+
+2. **`matrix_vector_mult_parallel`:** This function orchestrates the parallel computation.
+   - It determines the number of threads to use (defaults to the number of CPU cores).
+   - It divides the matrix into chunks based on the number of threads.
+   - It creates a shared array using `mp.Array` to store the results efficiently. This is crucial because threads need to share data.
+   - It creates and starts multiple processes, each responsible for processing a chunk of the matrix.
+   - It waits for all processes to finish using `p.join()`.
+   - Finally, it converts the shared array into a NumPy array and returns it.
+
+**Considerations:**
+
+* **Overhead:** Creating and managing threads introduces overhead.  For very small matrices, the overhead might outweigh the benefits of parallelization.
+* **Data Sharing:** Efficiently sharing data between threads is crucial for performance.  Using shared memory (like `mp.Array` in the example) is generally more efficient than repeatedly copying data.
+* **Load Balancing:**  Ideally, each thread should have roughly the same amount of work to do.  The example attempts this by dividing the rows evenly, but more sophisticated load balancing might be necessary for matrices with non-uniform characteristics.
+* **Number of Threads:** The optimal number of threads depends on the number of CPU cores and the size of the matrix.  Experimentation is often necessary to find the best value.
+* **Libraries:**  For larger-scale computations, consider using libraries specifically designed for parallel computing, such as OpenMP (C/C++), or highly optimized linear algebra libraries like BLAS and LAPACK (often used through wrappers like NumPy).
+
+
+**Other Languages (Conceptual):**
+
+The principles are the same in other languages. You'd use threading or multiprocessing libraries available in those languages:
+
+* **C++:** Use OpenMP or pthreads.
+* **Java:** Use `java.util.concurrent` classes.
+* **C#:** Use the `System.Threading` namespace or the Task Parallel Library (TPL).
+
+Remember to profile your code to determine the optimal number of threads and to identify potential bottlenecks in your implementation.  The performance gain from multithreading will vary greatly depending on the hardware and the size of the problem.
+
