@@ -7660,3 +7660,91 @@ print(f"Sorted list: {my_list}")
 
 Remember that while Quicksort is generally very fast, its worst-case performance can be a problem for specific input types.  For guaranteed O(n log n) performance, consider mergesort.  However, Quicksort is often faster in practice due to its smaller constant factors in its time complexity.
 
+#  Lomuto partition java implementation 
+Several Java implementations of the Lomuto partition scheme are possible, depending on how you handle array indices and whether you want to be in-place or return a new array. Here are a couple of versions:
+
+**Version 1: In-place partitioning (modifies the input array)**
+
+This version modifies the input array directly.  It's generally preferred for efficiency because it avoids creating a new array.
+
+```java
+public class LomutoPartition {
+
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high]; // Choosing the last element as the pivot
+        int i = (low - 1); // Index of smaller element
+
+        for (int j = low; j <= high - 1; j++) {
+            // If current element is smaller than or equal to pivot
+            if (arr[j] <= pivot) {
+                i++; // increment index of smaller element
+                // swap arr[i] and arr[j]
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        // swap arr[i+1] and arr[high] (pivot)
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return (i + 1); // return partition index
+    }
+
+
+    public static void main(String[] args) {
+        int[] arr = {10, 7, 8, 9, 1, 5};
+        int n = arr.length;
+        int partitionIndex = partition(arr, 0, n - 1);
+        System.out.println("Partition index: " + partitionIndex);
+        System.out.println("Array after partitioning:");
+        for (int x : arr) {
+            System.out.print(x + " ");
+        }
+    }
+}
+```
+
+**Version 2:  Returns a new partitioned array (doesn't modify the input)**
+
+This version creates a new array and returns it. This is less efficient but can be useful in certain situations where you want to preserve the original array.
+
+```java
+public class LomutoPartition {
+
+    public static int[] partition(int[] arr, int low, int high) {
+        int[] newArr = new int[arr.length];
+        System.arraycopy(arr, 0, newArr, 0, arr.length); // Copy the array
+
+        int pivot = newArr[high];
+        int i = (low - 1);
+
+        for (int j = low; j <= high - 1; j++) {
+            if (newArr[j] <= pivot) {
+                i++;
+                int temp = newArr[i];
+                newArr[i] = newArr[j];
+                newArr[j] = temp;
+            }
+        }
+        int temp = newArr[i + 1];
+        newArr[i + 1] = newArr[high];
+        newArr[high] = temp;
+
+        return newArr;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 7, 8, 9, 1, 5};
+        int[] partitionedArr = partition(arr, 0, arr.length - 1);
+        System.out.println("Array after partitioning:");
+        for (int x : partitionedArr) {
+            System.out.print(x + " ");
+        }
+    }
+}
+```
+
+Remember that the Lomuto partition scheme is not the most efficient partitioning scheme for Quicksort (Hoare's scheme is generally preferred).  However, it's simpler to understand and implement.  Both versions above choose the last element as the pivot; you can easily modify them to choose a different pivot selection strategy if needed (e.g., random pivot, median-of-three).
+
