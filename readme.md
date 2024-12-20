@@ -10916,3 +10916,30 @@ Remember to compile this code using a C compiler (like GCC):  `gcc your_file_nam
 
 The second version is generally preferred for larger triangles because it manages memory more efficiently and avoids potential stack overflow issues.  Always remember to free dynamically allocated memory to prevent memory leaks.  Choose the version that best suits your needs based on the expected size of the triangle.
 
+#  Algo
+"Algo" is short for **algorithm**.  An algorithm is a set of self-contained steps to solve a problem.  It's a precise sequence of instructions that can be followed to achieve a specific outcome.
+
+To better understand, let's break down what makes an algorithm:
+
+* **Well-defined:** Each step must be clear and unambiguous.  There should be no room for interpretation.
+* **Finite:** The algorithm must eventually terminate.  It can't run indefinitely.
+* **Input:** Algorithms typically take some input data.
+* **Output:** Algorithms produce a specific output based on the input and the steps followed.
+* **Effective:** Each step must be feasible to perform.
+
+**Examples of algorithms in everyday life:**
+
+* **A recipe:** A set of instructions to bake a cake.
+* **Instructions to assemble furniture:** Steps to put together a bookshelf.
+* **Directions to a destination:** A sequence of turns to reach a specific location.
+
+
+**Examples of algorithms in computer science:**
+
+* **Sorting algorithms:**  Algorithms to arrange data in a specific order (e.g., bubble sort, merge sort, quicksort).
+* **Searching algorithms:** Algorithms to find specific data within a larger dataset (e.g., linear search, binary search).
+* **Graph algorithms:** Algorithms to solve problems on networks (e.g., Dijkstra's algorithm for finding shortest paths).
+
+
+In short, whenever you have a process with a clear beginning, a series of steps, and a defined end, you're dealing with an algorithm, whether it's explicit or implicit.  The word "algo" is simply a shortened, informal way to refer to this concept.
+
