@@ -6418,3 +6418,13 @@ int main() {
 
 Give me your requirements, and I'll do my best to help!
 
+#  Implementation in C# 
+Please provide me with the task or problem you want me to implement in C#.  I need a description of what you want the code to do.  For example, tell me:
+
+* **What is the goal of the program?** (e.g., "Calculate the factorial of a number," "Read data from a file and display it," "Create a simple GUI application")
+* **What are the inputs?** (e.g., "An integer from the user," "A file path," "User clicks on a button")
+* **What are the outputs?** (e.g., "The factorial value," "The contents of the file," "A message box")
+* **Are there any specific requirements or constraints?** (e.g., "Use a specific algorithm," "Must handle errors gracefully," "Must be compatible with a specific framework")
+
+The more detail you provide, the better I can help you.
+
