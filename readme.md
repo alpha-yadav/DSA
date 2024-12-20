@@ -3667,3 +3667,96 @@ print(f"Selected jobs (details): {[jobs[i] for i in selected_jobs]}")
 
 This code efficiently solves the Weighted Job Scheduling problem using dynamic programming and binary search, resulting in a time complexity of O(n log n) due to the sorting.  The space complexity is O(n) because of the DP table. Remember that the index of the jobs in the `selected_jobs` list refers to the index in the *sorted* list, not necessarily the original input order.  The example usage demonstrates how to obtain both the maximum weight and the list of selected jobs. Remember to adjust the input format to match your specific problem definition.
 
+#  Longest Common Subsequence 
+The Longest Common Subsequence (LCS) problem is a classic computer science problem that aims to find the longest subsequence common to all sequences in a set of sequences (often just two).  A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.  Unlike substrings, subsequences don't need to be contiguous.
+
+**Formal Definition:**
+
+Given two sequences X = <x₁, x₂, ..., xₘ> and Y = <y₁, y₂, ..., yₙ>, find the longest sequence Z such that Z is a subsequence of both X and Y.
+
+**Example:**
+
+Let's say we have two sequences:
+
+X = "AGGTAB"
+Y = "GXTXAYB"
+
+The longest common subsequence is "GTAB".  Note that "GTAB" is not a substring of either X or Y, but it's a subsequence of both.
+
+**Approaches to Solving the LCS Problem:**
+
+The most common approaches are:
+
+1. **Brute-Force Approach (Recursive):**  This approach checks all possible subsequences of X and Y, comparing them to find the longest common one.  It's highly inefficient with exponential time complexity O(2<sup>m+n</sup>), where 'm' and 'n' are the lengths of the sequences.  It's not practical for anything beyond very small sequences.
+
+2. **Dynamic Programming:** This is the most efficient and commonly used approach.  It uses a table (usually a 2D array) to store results of subproblems to avoid redundant computations.  The time complexity is O(mn), and the space complexity is O(mn).
+
+   * **The Algorithm:**
+     1. Create a table `dp[m+1][n+1]` where `dp[i][j]` stores the length of the LCS of X[1...i] and Y[1...j].
+     2. Initialize the first row and column of `dp` to 0.
+     3. Iterate through the table:
+        * If `X[i] == Y[j]`, then `dp[i][j] = dp[i-1][j-1] + 1` (extend the LCS).
+        * Otherwise, `dp[i][j] = max(dp[i-1][j], dp[i][j-1])` (take the maximum from the previous row or column).
+     4. `dp[m][n]` will contain the length of the LCS.
+     5. To reconstruct the actual LCS sequence, trace back from `dp[m][n]` following the path of maximum values.
+
+
+**Python Code (Dynamic Programming):**
+
+```python
+def lcs_dynamic_programming(X, Y):
+    m = len(X)
+    n = len(Y)
+
+    # Create a table to store lengths of longest common subsequences of substrings.
+    # Note: We add an extra row and column to handle base cases (empty strings).
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+    # Fill the dp table
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if X[i - 1] == Y[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+
+    # Extract the length of the LCS
+    lcs_length = dp[m][n]
+
+    # Reconstruct the LCS (optional)
+    i = m
+    j = n
+    lcs = ""
+    while i > 0 and j > 0:
+        if X[i - 1] == Y[j - 1]:
+            lcs = X[i - 1] + lcs
+            i -= 1
+            j -= 1
+        else:
+            if dp[i - 1][j] > dp[i][j - 1]:
+                i -= 1
+            else:
+                j -= 1
+
+    return lcs_length, lcs
+
+
+X = "AGGTAB"
+Y = "GXTXAYB"
+length, sequence = lcs_dynamic_programming(X, Y)
+print(f"Length of LCS: {length}")
+print(f"LCS: {sequence}")  # Output: LCS: GTAB
+```
+
+**Applications:**
+
+The LCS problem has many applications in various fields, including:
+
+* **Bioinformatics:** Comparing DNA or protein sequences.
+* **Version control systems:** Identifying changes between different versions of a file.
+* **Spell checking:** Suggesting corrections for misspelled words.
+* **Data compression:** Finding common patterns in data.
+
+
+The dynamic programming approach provides an efficient and practical solution to the Longest Common Subsequence problem for a wide range of applications.  Remember that while the reconstruction of the LCS sequence is optional, it's often a valuable part of the solution in many real-world scenarios.
+
