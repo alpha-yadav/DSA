@@ -132,3 +132,78 @@ This problem can be solved using different approaches with varying time complexi
 
 This problem is a classic example used in interviews to assess a candidate's understanding of basic algorithmic concepts and data structures.  The choice of approach often reflects the candidate's understanding of time and space complexity trade-offs.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's simple to understand but helps illustrate fundamental concepts like loops and conditional statements. Here's how to implement it in Swift, starting with a basic version and then showing some improvements:
+
+**Basic FizzBuzz in Swift:**
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* It checks if the number is divisible by both 3 and 5 (15). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz") and then 5 ("Buzz").
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Improved FizzBuzz with String Interpolation:**
+
+This version uses string interpolation for slightly cleaner code:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This version is more concise.  It builds the output string conditionally and uses a ternary operator (`condition ? value1 : value2`) to print either the number or the "Fizz," "Buzz," or "FizzBuzz" string.
+
+
+**FizzBuzz with a Function for Reusability:**
+
+We can create a function to check divisibility for better readability and reusability:
+
+```swift
+func isDivisible(number: Int, by divisor: Int) -> Bool {
+    return number % divisor == 0
+}
+
+func fizzBuzzFunctional(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if isDivisible(number: i, by: 3) { output += "Fizz" }
+        if isDivisible(number: i, by: 5) { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzFunctional(n: 15) // Example usage
+```
+
+This separates the divisibility check into its own function, making the main FizzBuzz logic clearer.
+
+Remember to choose the version that best suits your needs and understanding.  The improved and functional versions are generally preferred for their readability and maintainability, especially as code complexity grows.  The basic version is a good starting point to understand the core logic.
+
