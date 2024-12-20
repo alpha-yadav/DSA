@@ -7495,3 +7495,85 @@ The choice of pivot significantly impacts performance.  Poor pivot selection (e.
 
 Quicksort is a powerful algorithm, but careful consideration of pivot selection is essential to avoid its worst-case performance.  For guaranteed O(n log n) performance, other algorithms like merge sort are preferable.  However, in practice, Quicksort's average-case efficiency often makes it the preferred choice for many sorting tasks.
 
+#  Quicksort Basics 
+Quicksort is a highly efficient sorting algorithm, known for its average-case time complexity of O(n log n).  However, its worst-case time complexity is O(n²), making it crucial to understand its mechanics and potential pitfalls.
+
+Here's a breakdown of the basics:
+
+**1. The Core Idea:**
+
+Quicksort employs a "divide and conquer" strategy.  It works by:
+
+* **Partitioning:** Selecting a pivot element from the array.  The array is then partitioned into two sub-arrays: one containing elements less than the pivot, and another containing elements greater than the pivot.  The pivot is now in its final sorted position.
+* **Recursion:**  The partitioning process is recursively applied to the two sub-arrays until each sub-array contains only one element (which is inherently sorted).
+
+**2. The Algorithm (Simplified):**
+
+1. **Choose a pivot:**  This is a crucial step, and different strategies exist (see below).
+2. **Partition:** Rearrange the array so that all elements smaller than the pivot come before it, and all elements greater than the pivot come after it.  The pivot's position is its final sorted position.
+3. **Recurse:** Recursively apply steps 1 and 2 to the sub-array of elements smaller than the pivot and the sub-array of elements greater than the pivot.
+
+**3. Pivot Selection Strategies:**
+
+The choice of pivot significantly impacts Quicksort's performance.  Common strategies include:
+
+* **First element:** Choosing the first element is simple but can lead to O(n²) performance on already sorted or nearly sorted arrays.
+* **Last element:** Similar to the first element, susceptible to worst-case scenarios.
+* **Random element:** Selecting a random element helps mitigate the worst-case scenario probability.
+* **Median-of-three:** Selecting the median of the first, middle, and last elements often provides a good pivot.
+
+**4. Partitioning Algorithm (Lomuto partition scheme - a common one):**
+
+This example uses the last element as the pivot:
+
+```
+function partition(array, low, high) {
+  let pivot = array[high];
+  let i = low - 1; // Index of smaller element
+
+  for (let j = low; j <= high - 1; j++) {
+    if (array[j] < pivot) {
+      i++;
+      // Swap array[i] and array[j]
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+  // Swap array[i + 1] and array[high] (pivot)
+  [array[i + 1], array[high]] = [array[high], array[i + 1]];
+  return (i + 1); // Return the pivot index
+}
+```
+
+**5. Quicksort Implementation (using Lomuto partition):**
+
+```javascript
+function quickSort(array, low, high) {
+  if (low < high) {
+    let pi = partition(array, low, high); // pi is partitioning index
+
+    quickSort(array, low, pi - 1);
+    quickSort(array, pi + 1, high);
+  }
+}
+
+// Example usage:
+let arr = [10, 7, 8, 9, 1, 5];
+quickSort(arr, 0, arr.length - 1);
+console.log("Sorted array:", arr); // Output: Sorted array: [1, 5, 7, 8, 9, 10]
+```
+
+**6. Advantages:**
+
+* **In-place sorting:**  It generally requires minimal extra space (O(log n) for the recursive calls).
+* **Very efficient on average:** O(n log n) average-case time complexity.
+* **Cache-friendly:** Accesses memory sequentially, leading to better cache utilization.
+
+
+**7. Disadvantages:**
+
+* **Worst-case performance:** O(n²) if the pivot selection consistently leads to highly unbalanced partitions (e.g., already sorted data and poor pivot choice).
+* **Not stable:** The relative order of equal elements might change.
+
+
+Understanding pivot selection and the partitioning algorithm is key to grasping Quicksort's efficiency and potential pitfalls.  The choice of implementation details (pivot selection, partitioning scheme) can significantly influence its performance.
+
