@@ -10952,3 +10952,74 @@ Please provide me with context!  "Sample Example" is too vague.  To give you a h
 
 Once I have this information, I can provide a much more useful sample example.
 
+#  Write the generic code 
+The concept of "generic code" refers to code that can work with different data types without being explicitly written for each type.  The specific syntax and implementation depend heavily on the programming language.  Here are examples in a few common languages:
+
+**C++:**
+
+```c++
+#include <iostream>
+
+template <typename T> // or template <class T>
+T max(T a, T b) {
+  return (a > b) ? a : b;
+}
+
+int main() {
+  int i = 5, j = 10;
+  double x = 3.14, y = 2.71;
+  std::cout << "Max of " << i << " and " << j << " is: " << max(i, j) << std::endl;
+  std::cout << "Max of " << x << " and " << y << " is: " << max(x, y) << std::endl;
+  return 0;
+}
+```
+
+This C++ code uses a `template` to create a generic `max` function.  The `typename T` (or `class T`) declares a type parameter, allowing the function to work with any type `T` that supports the `>` operator.
+
+
+**Java:**
+
+```java
+public class GenericMax {
+    public static <T extends Comparable<T>> T max(T a, T b) {
+        return a.compareTo(b) > 0 ? a : b;
+    }
+
+    public static void main(String[] args) {
+        Integer i = 5, j = 10;
+        Double x = 3.14, y = 2.71;
+        String str1 = "hello", str2 = "world";
+
+        System.out.println("Max of " + i + " and " + j + " is: " + max(i, j));
+        System.out.println("Max of " + x + " and " + y + " is: " + max(x, y));
+        System.out.println("Max of " + str1 + " and " + str2 + " is: " + max(str1, str2)); //Requires Comparable
+    }
+}
+```
+
+Java uses generics with angle brackets `<T extends Comparable<T>>`.  This restricts `T` to types that implement the `Comparable` interface, ensuring that the `compareTo` method is available for comparison.
+
+
+**Python:**
+
+Python doesn't have built-in generics in the same way as C++ or Java.  Type hinting provides some static type checking, but the code will still run with different types even if type hints are violated.
+
+```python
+from typing import TypeVar, Generic
+
+T = TypeVar('T')
+
+def max_generic(a: T, b: T) -> T:
+    return a if a > b else b
+
+print(max_generic(5, 10))  # int
+print(max_generic(3.14, 2.71)) # float
+# print(max_generic("hello", 5)) # Type error at compile time (if using type checker), but runs at runtime.
+
+```
+
+Python's type hinting improves readability and allows for static analysis, catching potential type errors *before* runtime, but it doesn't prevent runtime execution with incompatible types.
+
+
+These examples demonstrate the basic concept.  More complex generic code might involve multiple type parameters, constraints on those parameters, and more sophisticated use of generic programming techniques.  The best approach will vary depending on the programming language and the specific problem being solved.
+
