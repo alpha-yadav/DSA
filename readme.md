@@ -8937,3 +8937,60 @@ Most programming languages provide built-in functions or library modules for sub
 
 Remember to consider factors like text size, pattern size, and the frequency of searches when choosing the most appropriate substring search algorithm for your needs.
 
+#  Introduction To Knuth-Morris-Pratt (KMP) Algorithm 
+The Knuth-Morris-Pratt (KMP) algorithm is a string-searching algorithm that efficiently finds occurrences of a "pattern" string within a "text" string.  Unlike naive string searching, which can re-examine the same characters in the text multiple times, KMP cleverly utilizes information gleaned from the pattern itself to avoid unnecessary comparisons.  This results in a linear time complexity, O(m + n), where 'm' is the length of the pattern and 'n' is the length of the text.
+
+Here's a breakdown of the key concepts:
+
+**1. The Problem:**  Given a text string `T` and a pattern string `P`, find all occurrences of `P` within `T`.
+
+**2. Naive Approach Limitations:**  The naive approach compares the pattern to the text character by character, sliding the pattern one position at a time.  If a mismatch occurs, it starts the comparison from the beginning of the pattern again.  This can lead to redundant comparisons, especially if the pattern contains repeated substrings.
+
+**3. KMP's Key Insight: The Partial Match Table (PMT) / Failure Function:**  The core innovation of KMP is the pre-computation of a "partial match table" (PMT), also known as a "failure function." This table, `π`, stores for each position `i` in the pattern `P`, the length of the longest proper prefix of `P[0…i]` that is also a suffix of `P[0…i]`.
+
+* **Proper prefix:**  A prefix of a string excluding the string itself.
+* **Proper suffix:** A suffix of a string excluding the string itself.
+
+
+**Example:**
+
+Let's say our pattern `P` is "ABABCABAB".  The PMT would be:
+
+`π` = [0, 0, 1, 2, 0, 1, 2, 3, 4, 5]
+
+* `π[0]` = 0 (empty prefix)
+* `π[1]` = 0 ("A" has no proper prefix that's also a suffix)
+* `π[2]` = 1 ("AB" has "A" as a proper prefix and suffix)
+* `π[3]` = 2 ("ABA" has "AB" as a proper prefix and suffix)
+* `π[4]` = 0 ("ABAB" has no proper prefix that's also a suffix)
+* and so on...
+
+**4. How the PMT is Used:**
+
+When a mismatch occurs during the comparison of the pattern and text, instead of restarting the pattern comparison from the beginning, the algorithm uses the PMT to shift the pattern to the right.  The shift amount is determined by `π[i-1]`, where `i` is the index of the mismatch in the pattern. This shift ensures that the previously matched prefix is considered.
+
+**5. Algorithm Steps:**
+
+1. **Preprocessing (Compute PMT):** Calculate the PMT `π` for the pattern `P`.
+2. **Searching:**
+   * Initialize `i` (pattern index) and `j` (text index) to 0.
+   * Iterate through the text:
+     * If `P[i] == T[j]`, increment both `i` and `j`.
+     * If `i` equals the length of the pattern, a match is found at `j - i`. Reset `i` to `π[i-1]`.
+     * If `P[i] != T[j]`, and `i > 0`, set `i` to `π[i-1]`. (This is the crucial step utilizing the PMT).
+     * If `P[i] != T[j]` and `i == 0`, increment `j` (move to the next character in the text).
+
+
+**6. Advantages of KMP:**
+
+* **Efficiency:** Linear time complexity, O(m + n).
+* **Avoids redundant comparisons:**  Significantly faster than the naive approach, especially for patterns with repeating substrings.
+
+
+**7. Disadvantages of KMP:**
+
+* **Preprocessing overhead:** Requires pre-computation of the PMT, which adds a small amount of overhead.  However, this is usually negligible compared to the savings during the search phase.
+
+
+In summary, KMP is a powerful algorithm that provides a significant performance improvement over naive string searching by intelligently using the pattern's internal structure to minimize redundant comparisons.  Understanding the PMT is key to grasping its efficiency.
+
