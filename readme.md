@@ -4364,3 +4364,53 @@ print(f"Selected activities: {selected}")
 
 This explanation provides a comprehensive understanding of the Activity Selection Problem and its efficient solution using a greedy approach. Remember that the greedy approach only works correctly because of the specific structure of the problem;  the optimal substructure property holds.
 
+#  Change-making problem 
+The change-making problem is a classic computational problem in computer science and operations research.  It asks:  Given a set of coin denominations and a target amount, what is the minimum number of coins needed to make up that amount?  Or, more generally, find *all* possible combinations of coins that add up to the target amount.
+
+Here's a breakdown of the problem:
+
+**Formal Definition:**
+
+Given:
+
+* `C = {c₁, c₂, ..., cₙ}`: A set of coin denominations (integers, usually assumed to be positive).  These are the available coin values.
+* `A`: A target amount (integer, usually assumed to be positive).
+
+Find:
+
+* The minimum number of coins from `C` that sum to `A`.  Alternatively, find all combinations of coins from `C` that sum to `A`.
+
+**Variations:**
+
+* **Minimum Number of Coins:**  This is the most common version.  The goal is to find the smallest number of coins that add up to the target amount.
+* **All Combinations:** This version aims to find all possible combinations of coins that sum to the target amount.  This can be significantly more computationally expensive.
+* **Unlimited Supply:**  This is the typical assumption – you have an unlimited supply of each coin denomination.
+* **Limited Supply:** A more complex variation where you have a limited number of each coin denomination.
+
+**Algorithms:**
+
+Several algorithms can solve the change-making problem, each with varying efficiency depending on the problem's size and constraints:
+
+* **Greedy Algorithm:**  This is a simple, intuitive approach.  It repeatedly selects the largest coin denomination that is less than or equal to the remaining amount.  While simple and fast, it doesn't always find the optimal solution (minimum number of coins) for all coin denominations.  It works optimally for some denominations (e.g., US currency).
+* **Dynamic Programming:** This technique builds a table to store solutions to subproblems.  It's guaranteed to find the optimal solution (minimum number of coins) for any set of denominations.  It's generally more efficient than brute-force approaches for larger problems.
+* **Branch and Bound:**  This algorithm explores the solution space systematically, but prunes branches that are guaranteed not to lead to a better solution than the current best.  It can be more efficient than dynamic programming in some cases.
+* **Brute-Force:** This method tries all possible combinations of coins.  It's extremely inefficient for large problems but is conceptually simple.
+
+
+**Example:**
+
+Let's say:
+
+* `C = {1, 5, 10, 25}` (pennies, nickels, dimes, quarters)
+* `A = 37`
+
+The greedy algorithm would find the solution: 1 quarter (25), 1 dime (10), 2 pennies (2), for a total of 4 coins.  This is also the optimal solution in this case.  Dynamic programming would arrive at the same optimal solution.
+
+**Challenges and Considerations:**
+
+* **Computational Complexity:**  The complexity of finding the optimal solution can be NP-hard for certain coin denominations (particularly with limited supplies).
+* **Coin Denominations:** The choice of coin denominations significantly impacts the difficulty and efficiency of the algorithm.  Well-chosen denominations (like those used in most currencies) make the greedy algorithm work well.  Poorly chosen denominations can lead to suboptimal solutions with the greedy algorithm and require more computationally expensive methods.
+
+
+The change-making problem is a rich area of study, with many variations and algorithms to explore depending on the specific requirements and constraints of the problem.
+
