@@ -6765,3 +6765,173 @@ func main() {
 ```
 
 Remember to choose the implementation that best suits your needs.  For most cases, the recursive version is perfectly fine and easier to read. The iterative version offers better performance and scalability for extremely large datasets where the recursion depth could become a problem.  Both versions include the `merge` function, which is the core of the merge sort algorithm.  The iterative version needs a slight adjustment in the merge phase, because it needs to merge the elements from the stack.
+#  Merge Sort Implementation in C & C# 
+## Merge Sort Implementation in C and C#
+
+Both C and C# implementations below follow the same fundamental merge sort algorithm.  The core idea is to recursively divide the input array into smaller subarrays until each subarray contains only one element (which is inherently sorted). Then, it repeatedly merges the subarrays to produce new sorted subarrays until there's only one sorted array remaining.
+
+**C Implementation:**
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+void merge(int arr[], int left, int mid, int right) {
+    int i, j, k;
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    int L[n1], R[n2];
+
+    for (i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[mid + 1 + j];
+
+    i = 0;
+    j = 0;
+    k = left;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+void mergeSort(int arr[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+
+        merge(arr, left, mid, right);
+    }
+}
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int arr_size = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Unsorted array: \n");
+    printArray(arr, arr_size);
+
+    mergeSort(arr, 0, arr_size - 1);
+
+    printf("\nSorted array: \n");
+    printArray(arr, arr_size);
+    return 0;
+}
+```
+
+**C# Implementation:**
+
+```csharp
+using System;
+
+public class MergeSort
+{
+    public static void Merge(int[] arr, int left, int mid, int right)
+    {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+
+        Array.Copy(arr, left, L, 0, n1);
+        Array.Copy(arr, mid + 1, R, 0, n2);
+
+        int i = 0, j = 0, k = left;
+        while (i < n1 && j < n2)
+        {
+            if (L[i] <= R[j])
+            {
+                arr[k] = L[i];
+                i++;
+            }
+            else
+            {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1)
+        {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        while (j < n2)
+        {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+    public static void MergeSortRecursive(int[] arr, int left, int right)
+    {
+        if (left < right)
+        {
+            int mid = left + (right - left) / 2;
+
+            MergeSortRecursive(arr, left, mid);
+            MergeSortRecursive(arr, mid + 1, right);
+
+            Merge(arr, left, mid, right);
+        }
+    }
+
+    public static void PrintArray(int[] arr)
+    {
+        foreach (int num in arr)
+        {
+            Console.Write(num + " ");
+        }
+        Console.WriteLine();
+    }
+
+    public static void Main(string[] args)
+    {
+        int[] arr = { 12, 11, 13, 5, 6, 7 };
+
+        Console.WriteLine("Unsorted array:");
+        PrintArray(arr);
+
+        MergeSortRecursive(arr, 0, arr.Length - 1);
+
+        Console.WriteLine("\nSorted array:");
+        PrintArray(arr);
+    }
+}
+```
+
+Remember that merge sort has a time complexity of O(n log n) in all cases (best, average, and worst), making it efficient for large datasets.  However, it does require O(n) extra space for the merging process.  This is because of the temporary arrays `L` and `R` created during the merge step.
+
