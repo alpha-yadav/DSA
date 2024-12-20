@@ -7055,3 +7055,101 @@ public class MergeSortIterative {
 
 Both implementations use the same `merge` function.  Choose the version that best suits your needs and understanding.  The recursive version is generally preferred for its clarity, while the iterative version might offer a slight performance advantage for extremely large datasets. Remember that the space complexity of both versions is O(n) due to the temporary arrays used in the `merge` function.  The time complexity is O(n log n) for both.
 
+#  Merge Sort Implementation in Python 
+Several Python implementations of merge sort exist, each with slight variations in style and efficiency. Here are a few, starting with a clear and concise version, followed by a slightly optimized one:
+
+
+**Version 1: Clear and Concise**
+
+This version prioritizes readability and is easy to understand:
+
+```python
+def merge_sort(arr):
+    """Sorts a list using the merge sort algorithm."""
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left_half = arr[:mid]
+    right_half = arr[mid:]
+
+    left_half = merge_sort(left_half)
+    right_half = merge_sort(right_half)
+
+    return merge(left_half, right_half)
+
+def merge(left, right):
+    """Merges two sorted lists into a single sorted list."""
+    merged = []
+    i = j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            merged.append(left[i])
+            i += 1
+        else:
+            merged.append(right[j])
+            j += 1
+
+    merged.extend(left[i:])
+    merged.extend(right[j:])
+    return merged
+
+# Example usage:
+my_list = [38, 27, 43, 3, 9, 82, 10]
+sorted_list = merge_sort(my_list)
+print(f"Sorted list: {sorted_list}")
+```
+
+**Version 2: Slightly Optimized**
+
+This version avoids creating new lists in the `merge` function for slightly better performance (especially with large lists):
+
+
+```python
+def merge_sort_optimized(arr):
+    """Sorts a list using merge sort (optimized merge function)."""
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left_half = arr[:mid]
+    right_half = arr[mid:]
+
+    left_half = merge_sort_optimized(left_half)
+    right_half = merge_sort_optimized(right_half)
+
+    return merge_optimized(left_half, right_half, arr[:]) # Pass a pre-allocated array
+
+def merge_optimized(left, right, merged):
+    """Merges two sorted lists into a single sorted list (in-place)."""
+    i = j = k = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            merged[k] = left[i]
+            i += 1
+        else:
+            merged[k] = right[j]
+            j += 1
+        k += 1
+
+    while i < len(left):
+        merged[k] = left[i]
+        i += 1
+        k += 1
+
+    while j < len(right):
+        merged[k] = right[j]
+        j += 1
+        k += 1
+    return merged
+
+#Example Usage
+my_list = [38, 27, 43, 3, 9, 82, 10]
+sorted_list = merge_sort_optimized(my_list)
+print(f"Sorted list: {sorted_list}")
+```
+
+Both versions achieve the same result, but the optimized version might show a slight performance improvement for very large datasets due to reduced memory allocation and copying.  The first version, however, is generally easier to understand for beginners.  Choose the version that best suits your needs and understanding. Remember that merge sort has a time complexity of O(n log n) regardless of the input data, making it efficient for large datasets.
+
