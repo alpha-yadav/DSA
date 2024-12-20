@@ -6428,3 +6428,16 @@ Please provide me with the task or problem you want me to implement in C#.  I ne
 
 The more detail you provide, the better I can help you.
 
+#  Python Implementation 
+Please provide me with the task or problem you want a Python implementation for.  I need to know what you want the code to *do* before I can write it.
+
+For example, tell me:
+
+* "Write a Python function that calculates the factorial of a number."
+* "Implement a Python class to represent a simple bank account."
+* "Create a Python script that reads data from a CSV file and prints the average of a specific column."
+* "Write a Python program that scrapes data from a website."
+
+
+The more detail you give me, including specific requirements and constraints (e.g., error handling, input validation, specific libraries to use), the better I can tailor the Python implementation to your needs.
+
