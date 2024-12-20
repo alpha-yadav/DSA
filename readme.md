@@ -5633,3 +5633,98 @@ def merge_sort_parallel(arr):
 
 Remember to adapt the `num_threads` parameter to the number of CPU cores available for optimal performance.  Experimentation is key to finding the sweet spot for your system.
 
+#  Knuth Morris Pratt (KMP) Algorithm 
+The Knuth-Morris-Pratt (KMP) algorithm is an efficient string-searching algorithm.  Unlike naive string searching, which can have a time complexity of O(mn) where 'm' is the length of the pattern and 'n' is the length of the text, KMP achieves a time complexity of O(m + n).  This improvement is achieved by cleverly utilizing information about the pattern itself to avoid redundant comparisons.
+
+Here's a breakdown of how it works:
+
+**1. The LPS (Longest Proper Prefix Suffix) Array:**
+
+The core of the KMP algorithm is the LPS array (Longest Proper Prefix Suffix).  For a given pattern, the LPS array `lps[i]` stores the length of the longest proper prefix of the pattern that is also a suffix of the pattern's substring ending at index `i`.  A *proper* prefix doesn't include the entire pattern itself.
+
+* **Example:**  Let's consider the pattern "ABABCABAB".
+
+| i   | Pattern[0...i] | Longest Proper Prefix which is also a Suffix | lps[i] |
+|-----|-----------------|-------------------------------------------|---------|
+| 0   | A               |                                           | 0       |
+| 1   | AB              |                                           | 0       |
+| 2   | ABA             | A                                         | 1       |
+| 3   | ABAB            | AB                                        | 2       |
+| 4   | ABABC           | AB                                        | 2       |
+| 5   | ABABCA          | A                                         | 1       |
+| 6   | ABABCAB         | AB                                        | 2       |
+| 7   | ABABCABA        | ABA                                       | 3       |
+| 8   | ABABCABAB       | ABAB                                      | 4       |
+
+
+**2. Constructing the LPS Array:**
+
+The LPS array can be efficiently constructed in O(m) time using the following algorithm:
+
+```python
+def computeLPSArray(pattern):
+    m = len(pattern)
+    lps = [0] * m  # Initialize LPS array with 0s
+    length = 0  # Length of the previous longest prefix suffix
+
+    i = 1
+    while i < m:
+        if pattern[i] == pattern[length]:
+            length += 1
+            lps[i] = length
+            i += 1
+        else:
+            if length != 0:
+                length = lps[length - 1]
+            else:
+                lps[i] = 0
+                i += 1
+    return lps
+```
+
+**3. The Search Algorithm:**
+
+The search algorithm uses the LPS array to efficiently compare the pattern against the text.
+
+```python
+def kmpSearch(text, pattern):
+    n = len(text)
+    m = len(pattern)
+    lps = computeLPSArray(pattern)
+    i = 0  # Index for text
+    j = 0  # Index for pattern
+
+    while i < n:
+        if pattern[j] == text[i]:
+            i += 1
+            j += 1
+
+        if j == m:
+            print(f"Pattern found at index {i - j}")
+            j = lps[j - 1]  # Optimization: Shift using LPS
+        elif i < n and pattern[j] != text[i]:
+            if j != 0:
+                j = lps[j - 1]  # Optimization: Shift using LPS
+            else:
+                i += 1
+```
+
+**Explanation of the Search Algorithm:**
+
+* The algorithm iterates through the text.
+* If a mismatch occurs (`pattern[j] != text[i]`), instead of resetting `j` to 0, it uses the LPS array (`j = lps[j - 1]`). This shifts the pattern to a position where a potential match can still exist, avoiding redundant comparisons.
+* If `j` reaches the end of the pattern (`j == m`), a match is found.
+
+
+**Advantages of KMP:**
+
+* **Efficiency:** O(m + n) time complexity.
+* **Avoids redundant comparisons:**  The LPS array allows the algorithm to skip unnecessary comparisons.
+
+**Disadvantages of KMP:**
+
+* **Space Complexity:** Requires extra space for the LPS array (O(m)).  This might be a concern for very large patterns.
+
+
+The KMP algorithm is a powerful tool for string searching, particularly when dealing with large texts and repeated searches.  Its efficiency makes it superior to naive string searching in many applications.
+
