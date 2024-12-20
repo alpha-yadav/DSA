@@ -8728,3 +8728,82 @@ While average-case analysis is usually the most informative, understanding the b
 
 In contrast to these two, there's also **Worst Case**, representing the least favorable input, resulting in the longest execution time.  Analyzing all three cases (best, average, and worst) provides a complete picture of an algorithm's performance characteristics.
 
+#  Binary Search
+Binary search is a highly efficient algorithm designed to find a specific item (a "target" or "key") within a *sorted* array or list.  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process is repeated until the target value is found or the search interval is empty.
+
+**How it works:**
+
+1. **Sorted Data:** Binary search requires the input data to be sorted in ascending order.
+
+2. **Find the Middle:**  Determine the middle element of the search interval.
+
+3. **Compare:** Compare the target value with the middle element:
+   * **Target < Middle:** The target, if it exists, must be in the lower half.  Discard the upper half and repeat the process on the lower half.
+   * **Target > Middle:** The target, if it exists, must be in the upper half. Discard the lower half and repeat the process on the upper half.
+   * **Target == Middle:** The target has been found.  Return the index (position) of the middle element.
+
+4. **Repeat:** Continue steps 2 and 3 until the target is found or the search interval becomes empty (meaning the target is not present).
+
+**Example:**
+
+Let's say we have a sorted array: `[2, 5, 7, 8, 11, 12]` and we want to find the number `11`.
+
+1. **Middle element:** `(0 + 5) / 2 = 2`.  The middle element is `7`.
+2. **Compare:** `11 > 7`, so we discard the lower half `[2, 5, 7]` and continue searching in the upper half `[8, 11, 12]`.
+3. **Middle element:** `(3 + 5) / 2 = 4`. The middle element is `11`.
+4. **Compare:** `11 == 11`. The target is found at index 4.
+
+
+**Python Implementation:**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid  # Target found
+    elif arr[mid] < target:
+      low = mid + 1  # Search in the upper half
+    else:
+      high = mid - 1  # Search in the lower half
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+**Time Complexity:** O(log n) -  The search space is halved in each iteration.
+
+**Space Complexity:** O(1) - Constant space is used regardless of the input size.
+
+**Limitations:**
+
+* **Requires sorted data:**  Binary search only works on sorted arrays or lists.  Sorting the data beforehand adds to the overall time complexity.
+* **Not efficient for small datasets:** For very small datasets, a linear search might be faster due to the overhead of the binary search algorithm.
+
+
+Binary search is a fundamental algorithm with applications in many areas, including searching, sorting, and data structures.  Its logarithmic time complexity makes it significantly faster than linear search for large datasets.
+
