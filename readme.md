@@ -3817,3 +3817,86 @@ print(fibonacci(10))  # Output: 55
 
 This iterative approach is generally recommended for its efficiency.  For very large values of 'n', more advanced techniques (like matrix exponentiation) might be necessary for optimal performance.
 
+#  Longest Common Substring 
+The Longest Common Substring problem is a classic computer science problem that aims to find the longest substring (consecutive characters) that is common to all strings in a given set of strings.  Unlike the Longest Common Subsequence (LCS), which allows for non-consecutive characters, the substring must be a contiguous sequence within each input string.
+
+Here's a breakdown of the problem, approaches to solving it, and considerations:
+
+**Problem Definition:**
+
+Given a set of strings `S1, S2, ..., Sn`, find the longest substring that is present in all of the strings.  If multiple substrings have the same maximum length, you can return any one of them.
+
+**Approaches:**
+
+1. **Brute-Force Approach (Inefficient):**
+
+   This involves generating all possible substrings of the shortest string and checking if each substring is present in all other strings.  This has a time complexity that is exponential in the length of the shortest string, making it impractical for larger inputs.
+
+2. **Suffix Tree (Efficient for multiple strings):**
+
+   A suffix tree is a powerful data structure that allows for efficient searching of substrings within a string.  Constructing a generalized suffix tree for all input strings and finding the deepest internal node with descendants from all input strings gives you the longest common substring.  This approach offers better performance than the brute-force method, especially for multiple strings.  The time complexity is generally linear in the total length of the input strings.
+
+3. **Dynamic Programming (Efficient for two strings):**
+
+   When dealing with only two strings, dynamic programming provides an efficient solution.  You can create a table (matrix) where `dp[i][j]` represents the length of the longest common substring ending at `string1[i]` and `string2[j]`.  The table is filled using the following recurrence relation:
+
+   * If `string1[i] == string2[j]`, then `dp[i][j] = dp[i-1][j-1] + 1`.
+   * Otherwise, `dp[i][j] = 0`.
+
+   The maximum value in the `dp` table represents the length of the longest common substring.  The actual substring can be reconstructed by backtracking from the cell with the maximum value.  The time and space complexity are O(m*n), where 'm' and 'n' are the lengths of the two strings.
+
+**Example (Dynamic Programming for two strings):**
+
+Let's say we have two strings:
+
+`string1 = "abcdefg"`
+`string2 = "bcdefgh"`
+
+The `dp` table would look like this:
+
+```
+   0 b c d e f g h
+0  0 0 0 0 0 0 0 0
+a  0 0 0 0 0 0 0 0
+b  0 1 0 0 0 0 0 0
+c  0 0 2 0 0 0 0 0
+d  0 0 0 3 0 0 0 0
+e  0 0 0 0 4 0 0 0
+f  0 0 0 0 0 5 0 0
+g  0 0 0 0 0 0 6 0
+```
+
+The maximum value is 6, indicating the longest common substring is "bcdefg".
+
+
+**Python Code (Dynamic Programming for two strings):**
+
+```python
+def longest_common_substring(str1, str2):
+    m = len(str1)
+    n = len(str2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    max_length = 0
+    row_index = 0
+
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if str1[i - 1] == str2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+                if dp[i][j] > max_length:
+                    max_length = dp[i][j]
+                    row_index = i
+
+    if max_length == 0:
+        return ""  # No common substring
+
+    return str1[row_index - max_length:row_index]
+
+string1 = "abcdefg"
+string2 = "bcdefgh"
+result = longest_common_substring(string1, string2)
+print(f"Longest common substring: {result}")  # Output: bcdefg
+```
+
+Remember to choose the appropriate algorithm based on the number of strings you're working with.  For more than two strings, the suffix tree approach is generally more efficient.  For only two strings, dynamic programming is a good choice.
+
