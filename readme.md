@@ -11435,3 +11435,67 @@ Dynamic Time Warping (DTW) is a powerful algorithm for measuring similarity betw
 
 In summary, DTW is a powerful technique for comparing temporal sequences, but its computational cost and sensitivity to noise should be considered.  Its ability to handle variations in speed and length makes it a valuable tool in various applications where simple Euclidean distance is insufficient.
 
+#  Fast Fourier Transform 
+The Fast Fourier Transform (FFT) is an algorithm that computes the Discrete Fourier Transform (DFT) of a sequence, or its inverse (IDFT).  The DFT converts a sequence of N samples of a function of time (or space) into N samples of its representation in the frequency domain.  While the DFT has a direct formula, computing it naively takes O(N²) time.  The FFT achieves the same result in O(N log N) time, making it significantly faster for large N.  This speed improvement has revolutionized many fields.
+
+
+Here's a breakdown of key aspects:
+
+**1. Discrete Fourier Transform (DFT):**
+
+The DFT takes a sequence of N complex numbers, x₀, x₁, ..., xₙ₋₁, and transforms it into another sequence of N complex numbers, X₀, X₁, ..., Xₙ₋₁, where:
+
+```
+Xₖ = Σᵢ₌₀ⁿ⁻¹ xᵢ * e^(-j2πik/N)  ,  k = 0, 1, ..., N-1
+```
+
+where:
+
+* `j` is the imaginary unit (√-1)
+* `k` is the frequency index
+* `N` is the number of samples
+
+The inverse DFT (IDFT) recovers the original sequence from the transformed sequence:
+
+```
+xᵢ = (1/N) * Σₖ₌₀ⁿ⁻¹ Xₖ * e^(j2πik/N) , i = 0, 1, ..., N-1
+```
+
+**2. The Speed Advantage:**
+
+The direct computation of the DFT using the formulas above requires O(N²) complex multiplications and additions.  The FFT drastically reduces this to O(N log N) using clever algorithms that exploit the symmetry and periodicity properties of the DFT.
+
+**3. Common FFT Algorithms:**
+
+The most common FFT algorithms are based on a divide-and-conquer approach:
+
+* **Radix-2 FFT:**  This is the most popular algorithm and works best when N is a power of 2. It recursively divides the DFT into smaller DFTs of size N/2 until the problem becomes trivial.  Variations include Cooley-Tukey and Gentleman-Sande algorithms.
+* **Radix-4 FFT:** Similar to radix-2, but divides the problem into smaller DFTs of size N/4.  Generally faster than radix-2 for very large N.
+* **Mixed-radix FFT:**  Handles cases where N is not a power of 2 by using a combination of different radices.
+* **Prime-factor FFT:**  Efficient for N that is a product of small prime numbers.
+
+**4. Applications:**
+
+The FFT's speed and efficiency make it invaluable in numerous applications across diverse fields:
+
+* **Signal Processing:** Spectral analysis, filtering, convolution, correlation.  Used extensively in audio and image processing.
+* **Image Processing:** Image compression (JPEG), image enhancement, edge detection.
+* **Telecommunications:**  Digital modulation and demodulation, channel equalization.
+* **Medical Imaging:**  Magnetic resonance imaging (MRI), computed tomography (CT).
+* **Scientific Computing:**  Solving differential equations, simulations.
+* **Data Analysis:**  Time series analysis, spectral analysis of data.
+
+
+**5. Libraries and Implementations:**
+
+Most programming languages and numerical computing libraries provide highly optimized FFT implementations.  Popular examples include:
+
+* **Python:** NumPy's `fft` module (often based on FFTW).  SciPy also offers FFT functions.
+* **MATLAB:** Built-in `fft` function.
+* **C/C++:** FFTW (Fastest Fourier Transform in the West) is a very popular and high-performance library.
+
+
+**In Summary:**
+
+The FFT is a cornerstone algorithm in many areas of science and engineering. Its ability to efficiently compute the DFT has made previously intractable computations feasible, leading to significant advancements in numerous fields.  Understanding the basic principles of the DFT and the efficiency gains provided by the FFT is crucial for anyone working with signal processing, image processing, or related disciplines.
+
