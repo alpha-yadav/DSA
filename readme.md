@@ -157,3 +157,78 @@ print(longest_palindrome("cbbd"))   # Output: bb
 
 These examples demonstrate different levels of complexity and require different algorithmic approaches.  Remember that for harder problems, there might be multiple ways to solve them with varying levels of efficiency.  The key is to choose an approach that is correct and reasonably efficient for the given constraints.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple, clear approach and then showing a slightly more advanced version:
+
+
+**Version 1: Simple and Readable**
+
+This version uses a straightforward `for` loop and `if`/`else if`/`else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz").
+* Otherwise, it checks divisibility by 5 ("Buzz").
+* If none of the above are true, it prints the number itself.
+
+
+**Version 2: Slightly More Concise (using string interpolation)**
+
+This version uses string interpolation to make the code a bit more compact:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? i : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+This approach builds the output string (`output`) incrementally.  If it's empty after checking for divisibility by 3 and 5, it prints the number; otherwise, it prints the built-up string.
+
+
+**Version 3:  Functional Approach (using map)**
+
+This more advanced version uses a functional approach with the `map` function:
+
+```swift
+func fizzBuzzFunctional(n: Int) -> [String] {
+    return (1...n).map { i in
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        return output.isEmpty ? String(i) : output
+    }
+}
+
+print(fizzBuzzFunctional(n: 15)) // Call the function and print the result
+```
+
+This version uses `map` to transform the range of numbers (1...n) into an array of strings, applying the FizzBuzz logic to each number.  The result is an array of strings representing the FizzBuzz sequence.
+
+Remember to choose the version that best suits your understanding and the context of your project.  The first version is the easiest to understand for beginners, while the later versions demonstrate more advanced Swift techniques.  All versions achieve the same result.
+
