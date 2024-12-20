@@ -4924,3 +4924,73 @@ bresenham(1, 1, 10, 5)
 
 This is a simplified version of Bresenham's algorithm (handles only lines with slope <=1).  A complete implementation would need to handle all slopes and potentially octants.  You can find complete implementations online in various programming languages.  Remember to adapt the `print` statements to your graphics drawing API (e.g., using a library like Pygame or OpenGL).
 
+#  Bresenham Line Drawing Algorithm 
+The Bresenham line algorithm is an efficient algorithm for drawing lines on a computer screen.  Its primary advantage is that it uses only integer addition, subtraction, and bit shifting, making it significantly faster than algorithms that rely on floating-point arithmetic.  It's based on the idea of incrementally choosing the closest pixel to the ideal line.
+
+Here's a breakdown of the algorithm, focusing on lines with a slope between 0 and 1 (0° to 45°):
+
+**Assumptions & Simplifications:**
+
+* We'll only consider lines with a slope between 0 and 1 (0° ≤ θ ≤ 45°).  Lines with other slopes can be handled by swapping x and y coordinates or reflecting across the x or y axis.
+* We're drawing on a grid of pixels, where each pixel has integer coordinates.
+* The starting point (x0, y0) and ending point (x1, y1) are integers.
+
+
+**Algorithm Steps (0 ≤ m ≤ 1):**
+
+1. **Initialization:**
+   * Calculate `dx = x1 - x0`
+   * Calculate `dy = y1 - y0`
+   * Calculate `d = 2 * dy - dx`  (This is our decision parameter)
+   * Plot the first point: `plot(x0, y0)`
+
+2. **Iteration:**
+   * Iterate from `x = x0 + 1` to `x = x1`
+   * In each iteration:
+     * If `d < 0`: The next point is directly to the right (x+1, y)
+       * `d = d + 2 * dy`
+     * Else: The next point is diagonally to the right and up (x+1, y+1)
+       * `d = d + 2 * (dy - dx)`
+     * Plot the current point: `plot(x, y)`
+
+3. **Plotting Function:**  `plot(x, y)` simply sets the pixel at coordinates (x, y) to the desired color.
+
+
+**Example (Line from (2, 1) to (8, 5)):**
+
+1. `dx = 8 - 2 = 6`
+2. `dy = 5 - 1 = 4`
+3. `d = 2 * 4 - 6 = 2`
+4. Plot (2, 1)
+
+| x | y | d   | Decision | Next Point |
+|---|----|-----|----------|-------------|
+| 2 | 1 | 2   | d ≥ 0    | (3, 2)      |
+| 3 | 2 | 0   | d < 0     | (4, 2)      |
+| 4 | 2 | 8   | d ≥ 0    | (5, 3)      |
+| 5 | 3 | 6   | d ≥ 0    | (6, 4)      |
+| 6 | 4 | 4   | d ≥ 0    | (7, 5)      |
+| 7 | 5 | 2   | d ≥ 0    | (8, 5)      |
+| 8 | 5 | -     |          |             |
+
+
+**Handling Other Slopes:**
+
+* **m > 1:** Swap x and y. Apply the algorithm, then swap the x and y coordinates back in the output.
+* **m < 0:** Reflect across the x-axis (negate y). Apply the algorithm, then reflect back.
+* **m = 0 or m = ∞:** Handle these special cases separately.  They're just horizontal or vertical lines.
+
+
+**Advantages:**
+
+* **Fast:** Uses only integer arithmetic.
+* **Efficient:** Only requires a few calculations per pixel.
+* **Simple to implement:** Relatively easy to code.
+
+**Disadvantages:**
+
+* **Specialized cases:** Requires separate handling for slopes outside the 0-1 range.
+
+
+This detailed explanation allows you to understand and implement the Bresenham line algorithm effectively.  Remember to adapt the algorithm for different slope ranges as needed.  You can find numerous code implementations in various programming languages online.
+
