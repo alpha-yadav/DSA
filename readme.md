@@ -7748,3 +7748,74 @@ public class LomutoPartition {
 
 Remember that the Lomuto partition scheme is not the most efficient partitioning scheme for Quicksort (Hoare's scheme is generally preferred).  However, it's simpler to understand and implement.  Both versions above choose the last element as the pivot; you can easily modify them to choose a different pivot selection strategy if needed (e.g., random pivot, median-of-three).
 
+#  Counting Sort 
+Counting sort is a non-comparative sorting algorithm that sorts a collection of objects according to keys that are small integers.  It operates by counting the occurrences of each unique key, then using arithmetic on those counts to determine the position of each key in the output sequence.
+
+**How it works:**
+
+1. **Find the maximum:** Determine the maximum value (max) in the input array.
+
+2. **Initialize count array:** Create a count array of size (max + 1) and initialize all its elements to 0.  This array will store the frequency of each element in the input array.
+
+3. **Count occurrences:** Iterate through the input array. For each element `x`, increment the count at index `x` in the count array (i.e., `count[x]++`).
+
+4. **Cumulative sum:**  Perform a cumulative sum on the count array.  This means that each element in the count array will now store the number of elements less than or equal to its index.
+
+5. **Output array:** Create an output array of the same size as the input array.
+
+6. **Place elements:** Iterate through the input array in reverse order (this is crucial for stability). For each element `x`:
+   - Find its position in the output array using `count[x]`.
+   - Place `x` at `output[count[x]-1]`.
+   - Decrement `count[x]` (to place the next occurrence of `x` in the correct position).
+
+7. **Return output array:** The output array now contains the sorted elements.
+
+
+**Example:**
+
+Let's sort the array `[4, 2, 2, 8, 3, 3, 1]` using counting sort.
+
+1. **Maximum:** max = 8
+
+2. **Initialize count array:** `count = [0, 0, 0, 0, 0, 0, 0, 0, 0]` (size 9)
+
+3. **Count occurrences:**
+   - For 4: `count[4] = 1`
+   - For 2: `count[2] = 2`
+   - For 8: `count[8] = 1`
+   - For 3: `count[3] = 2`
+   - For 1: `count[1] = 1`
+   Now `count = [0, 1, 2, 2, 3, 3, 3, 3, 1]`
+
+4. **Cumulative sum:**
+   `count = [0, 1, 3, 5, 5, 5, 5, 5, 6]`
+
+5. **Output array:** `output = [ , , , , , , , , ]` (size 7)
+
+6. **Place elements (in reverse order):**
+   - 1: `output[count[1]-1] = output[0] = 1`; `count[1] = 0`
+   - 3: `output[count[3]-1] = output[4] = 3`; `count[3] = 4`
+   - 3: `output[count[3]-1] = output[3] = 3`; `count[3] = 3`
+   - 8: `output[count[8]-1] = output[5] = 8`; `count[8] = 0`
+   - 2: `output[count[2]-1] = output[2] = 2`; `count[2] = 2`
+   - 2: `output[count[2]-1] = output[1] = 2`; `count[2] = 1`
+   - 4: `output[count[4]-1] = output[6] = 4`; `count[4] = 4`
+   Now `output = [1, 2, 2, 3, 3, 8, 4]`
+
+7. **Return output array:** The sorted array is `[1, 2, 2, 3, 3, 4, 8]`
+
+
+**Advantages:**
+
+* Simple to implement.
+* Very efficient for a limited range of integer keys.  It has linear time complexity, O(n+k), where n is the number of elements and k is the range of keys.
+
+**Disadvantages:**
+
+* Not efficient for large ranges of keys because of the space complexity, O(k).
+* Doesn't work well for floating-point numbers or strings directly (though you could adapt it with some clever mapping).
+* It's not an in-place sort (requires extra space for the count and output arrays).
+
+
+Counting sort is a powerful algorithm when the key range is relatively small compared to the number of elements to be sorted.  It's often used as a subroutine in other algorithms like radix sort.
+
