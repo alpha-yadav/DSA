@@ -9773,3 +9773,52 @@ DFS can be implemented recursively (more concise) or iteratively (often more eff
 
 In short, DFS is a powerful and versatile algorithm with numerous applications in computer science and beyond.  Understanding its core principles is essential for anyone working with graphs.
 
+#  Hash Functions 
+Hash functions are fundamental cryptographic primitives used in a wide variety of applications.  They take an input of arbitrary size (the "message") and produce a fixed-size output (the "hash" or "digest").  Ideally, this process should be:
+
+* **Deterministic:** The same input always produces the same output.
+* **Efficient:**  Computationally inexpensive to compute the hash.
+* **One-way:**  It should be computationally infeasible to find the input given only the hash (pre-image resistance).
+* **Collision-resistant:** It should be computationally infeasible to find two different inputs that produce the same hash (collision resistance).
+* **Avalanche effect:** A small change in the input should result in a large change in the output.
+
+
+Let's break down these properties and explore their significance:
+
+**1. Deterministic:**  This is crucial for consistency.  If you hash the same data twice, you must get the same result.
+
+**2. Efficient:** Hashing should be fast, otherwise it becomes a bottleneck in applications where it's used frequently (e.g., databases, blockchain).
+
+**3. One-way (Pre-image resistance):** This is the core security property.  If you can easily find the original input from the hash, the function is broken.  This is important for password storage (storing the hash instead of the cleartext password), digital signatures, and many other security applications.  Note that "infeasible" is relative to the current computational power; what's infeasible today might become feasible with advancements in technology.
+
+**4. Collision-resistant:**  This property prevents attackers from finding two different inputs that generate the same hash.  This is vital for ensuring the integrity of data. If collisions are easily found, an attacker could substitute one piece of data with another without detection.  Finding collisions is harder than finding pre-images.
+
+**5. Avalanche effect:**  A small change in the input (e.g., flipping a single bit) should lead to a significant change in the output.  This makes it difficult to systematically manipulate the input to produce a desired hash.
+
+
+**Types of Hash Functions:**
+
+Several types of hash functions exist, each with varying levels of security and efficiency.  Some notable examples include:
+
+* **MD5 (Message Digest Algorithm 5):**  An older algorithm that's now considered cryptographically broken due to discovered vulnerabilities and the relative ease of finding collisions.  It's not recommended for security-sensitive applications.
+* **SHA-1 (Secure Hash Algorithm 1):**  Also considered broken and insecure for many applications due to discovered weaknesses.
+* **SHA-2 (Secure Hash Algorithm 2):** A family of hash functions (SHA-256, SHA-384, SHA-512) that are widely used and considered secure for now, though research is ongoing.
+* **SHA-3 (Secure Hash Algorithm 3):** A different design from SHA-2, offering a different approach to security and potentially improved resilience against future attacks.
+
+
+**Applications of Hash Functions:**
+
+Hash functions have a broad range of applications, including:
+
+* **Password storage:** Storing password hashes instead of plain text passwords significantly improves security.
+* **Data integrity verification:**  Hashing data and comparing the hash allows you to detect if the data has been modified.
+* **Digital signatures:**  Hashing the document before signing ensures the integrity of the document.
+* **Blockchain technology:**  Used extensively for ensuring the immutability of the blockchain.
+* **Data deduplication:**  Identifying duplicate files based on their hashes.
+* **Data structures:**  Used in hash tables for efficient data retrieval.
+
+
+**Choosing a Hash Function:**
+
+The choice of hash function depends on the specific application and security requirements.  For security-sensitive applications, always use a well-vetted and widely accepted function like SHA-256 or SHA-3.  Avoid using MD5 and SHA-1 in new systems.  Keep abreast of the latest cryptographic research and updates regarding the security of hash functions.
+
