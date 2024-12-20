@@ -7819,3 +7819,65 @@ Let's sort the array `[4, 2, 2, 8, 3, 3, 1]` using counting sort.
 
 Counting sort is a powerful algorithm when the key range is relatively small compared to the number of elements to be sorted.  It's often used as a subroutine in other algorithms like radix sort.
 
+#  Counting Sort Basic Information 
+Counting sort is a non-comparative sorting algorithm.  It operates by counting the occurrences of each unique element in the input array and then using that information to determine the position of each element in the sorted output array.
+
+Here's a breakdown of its basic information:
+
+**Key Characteristics:**
+
+* **Non-comparative:** Unlike algorithms like merge sort or quicksort, counting sort doesn't compare elements directly to each other.  This allows it to achieve better time complexity in certain situations.
+* **Stable:**  If two elements have the same value, their relative order in the input array is preserved in the output array. This is important in some applications.
+* **Integer-based:**  Counting sort is typically used for sorting integers or data that can be easily mapped to integers (e.g., characters).  It's not directly applicable to sorting floating-point numbers or complex data structures without significant modification.
+* **Auxiliary space:** It requires extra space proportional to the range of input values (more on this below).
+
+
+**Algorithm Steps:**
+
+1. **Find the maximum value:** Determine the maximum value (max) in the input array.
+2. **Initialize a count array:** Create an array of size `max + 1` and initialize all its elements to 0. This array will store the counts of each element.
+3. **Count occurrences:** Iterate through the input array and for each element `x`, increment `count[x]` by 1.  This step counts how many times each value appears.
+4. **Cumulative sum:**  Iterate through the `count` array and replace each element `count[i]` with the sum of itself and the previous element.  This transforms the count array into a cumulative count array.  `count[i]` now represents the number of elements less than or equal to `i`.
+5. **Place elements in sorted order:** Create an output array of the same size as the input array.  Iterate through the input array in reverse order. For each element `x`, place it at index `count[x] - 1` in the output array, and then decrement `count[x]`.  This ensures that elements with the same value are placed consecutively while maintaining stability.
+
+**Time and Space Complexity:**
+
+* **Time Complexity:** O(n + k), where n is the number of elements in the input array and k is the range of input values (max - min + 1).  If k is significantly smaller than n, this can be much faster than O(n log n) algorithms.
+* **Space Complexity:** O(k).  The auxiliary space used is dominated by the count array. This is a significant drawback if the range of input values is very large.
+
+
+**When to Use Counting Sort:**
+
+Counting sort is a good choice when:
+
+* The input consists of integers or easily mappable data within a relatively small range.
+* Stability is required.
+* Time complexity is critical, and the range of input values is sufficiently small that the space overhead is acceptable.
+
+**Example (Python):**
+
+```python
+def counting_sort(arr):
+    max_val = max(arr)
+    count = [0] * (max_val + 1)
+    output = [0] * len(arr)
+
+    for num in arr:
+        count[num] += 1
+
+    for i in range(1, max_val + 1):
+        count[i] += count[i - 1]
+
+    for i in range(len(arr) - 1, -1, -1):
+        output[count[arr[i]] - 1] = arr[i]
+        count[arr[i]] -= 1
+
+    return output
+
+arr = [4, 2, 2, 8, 3, 3, 1]
+sorted_arr = counting_sort(arr)
+print(f"Sorted array: {sorted_arr}")  # Output: Sorted array: [1, 2, 2, 3, 3, 4, 8]
+```
+
+In summary, counting sort is a powerful algorithm for specific scenarios, but its space requirements and reliance on integer data limit its general applicability.
+
