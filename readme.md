@@ -7405,3 +7405,93 @@ Please provide me with the task or problem you want a C# implementation for.  I 
 
 The more detail you give me, the better I can help you write the C# code.
 
+#  Quicksort 
+Quicksort is a highly efficient sorting algorithm, known for its average-case time complexity of O(n log n). However, its worst-case time complexity can be O(n²), making it crucial to understand its mechanics and potential pitfalls.
+
+Here's a breakdown of Quicksort:
+
+**Core Idea:**
+
+Quicksort employs a divide-and-conquer strategy:
+
+1. **Partitioning:**  Choose a pivot element from the array.  Rearrange the array so that all elements smaller than the pivot are placed before it, and all elements greater than the pivot are placed after it.  This partitions the array into two subarrays.  The pivot is now in its final sorted position.
+
+2. **Recursion:** Recursively apply Quicksort to the subarray of elements smaller than the pivot and the subarray of elements greater than the pivot.
+
+3. **Base Case:**  The recursion stops when a subarray has zero or one element (it's already sorted).
+
+
+**Algorithm Steps (Lomuto Partition Scheme):**
+
+This is one common partitioning scheme.  Others exist (e.g., Hoare partition scheme).
+
+1. **Choose a pivot:**  There are various strategies for choosing a pivot (discussed below).  A common (but not always optimal) choice is the last element of the array.
+
+2. **Partition:**
+   * Initialize an index `i` to point to the beginning of the array (index 0).
+   * Iterate through the array from the beginning up to (but not including) the pivot element.
+   * If an element is smaller than the pivot, swap it with the element at index `i`, and increment `i`.
+   * After the loop, swap the pivot element with the element at index `i`.  The element at index `i` is now in its final sorted position.
+
+3. **Recursion:** Recursively call Quicksort on the subarrays:  elements before `i` and elements after `i`.
+
+
+**Example (Lomuto Partition Scheme):**
+
+Let's sort the array `[8, 3, 1, 7, 0, 10, 2]` using the last element (10) as the pivot:
+
+1. **Pivot:** 10
+2. **Partition:**
+   * Iterate through [8, 3, 1, 7, 0, 10, 2].
+   * 8 > 10 (no swap), 3 < 10 (swap 3 and 8 -> [3, 8, 1, 7, 0, 10, 2], i = 1), 1 < 10 (swap 1 and 8 -> [3, 1, 8, 7, 0, 10, 2], i = 2), 7 < 10 (swap 7 and 8 -> [3, 1, 7, 8, 0, 10, 2], i = 3), 0 < 10 (swap 0 and 8 -> [3, 1, 7, 0, 8, 10, 2], i = 4).
+   * Swap pivot (10) with element at i (8) -> [3, 1, 7, 0, 2, 10, 8]
+3. **Recursion:**  Recursively sort [3, 1, 7, 0, 2] and [8].
+
+
+**Python Code (Lomuto Partition Scheme):**
+
+```python
+def quicksort(arr, low, high):
+    if low < high:
+        pivot_index = partition(arr, low, high)
+        quicksort(arr, low, pivot_index - 1)
+        quicksort(arr, pivot_index + 1, high)
+
+def partition(arr, low, high):
+    pivot = arr[high]
+    i = low - 1
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1
+
+my_array = [8, 3, 1, 7, 0, 10, 2]
+quicksort(my_array, 0, len(my_array) - 1)
+print(my_array)  # Output: [0, 1, 2, 3, 7, 8, 10]
+```
+
+**Pivot Selection:**
+
+The choice of pivot significantly impacts performance.  Poor pivot selection (e.g., always choosing the first or last element in an already sorted or nearly sorted array) leads to O(n²) worst-case behavior. Better strategies include:
+
+* **Random Pivot:** Choose a random element as the pivot. This helps avoid worst-case scenarios.
+* **Median-of-Three:** Choose the median of the first, middle, and last elements as the pivot. This often provides a good approximation of the true median.
+
+
+**Advantages of Quicksort:**
+
+* **In-place sorting:** It requires minimal extra memory.
+* **Generally very fast:**  O(n log n) average-case time complexity.
+* **Cache-friendly:**  It accesses memory locations sequentially, which improves performance on modern computers with caching.
+
+
+**Disadvantages of Quicksort:**
+
+* **Worst-case O(n²) time complexity:** This can occur with poor pivot selection or specific input data.
+* **Not stable:** The relative order of equal elements may not be preserved.
+
+
+Quicksort is a powerful algorithm, but careful consideration of pivot selection is essential to avoid its worst-case performance.  For guaranteed O(n log n) performance, other algorithms like merge sort are preferable.  However, in practice, Quicksort's average-case efficiency often makes it the preferred choice for many sorting tasks.
+
