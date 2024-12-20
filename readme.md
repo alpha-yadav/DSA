@@ -7992,3 +7992,65 @@ Please provide me with the task or problem you want a C# implementation for.  I 
 
 The more details you give me, the better I can assist you in creating the C# implementation.
 
+#  Heap Sort Basic Information 
+Heap sort is a comparison-based sorting algorithm that uses a binary heap data structure to sort an array of items.  Here's a breakdown of its basic information:
+
+**Core Concepts:**
+
+* **Binary Heap:**  A specialized tree-based data structure that satisfies the heap property.  This property dictates that for a *max-heap*, the value of each node is greater than or equal to the value of its children.  For a *min-heap*, the value of each node is less than or equal to the value of its children.  Heap sort typically uses a max-heap.  Heaps are often implemented as arrays for efficient memory management.
+
+* **Heapify:**  The process of transforming an array into a heap.  This involves recursively arranging elements to satisfy the heap property, starting from the last non-leaf node and working upwards.
+
+* **Extract-Max (or Extract-Min):**  Removing the root element (the maximum or minimum element) from the heap.  After removal, the heap property needs to be restored by replacing the root with the last element in the heap and then "heapifying down" (adjusting the position of the new root to maintain the heap property).
+
+
+**Algorithm Steps:**
+
+1. **Build Heap:**  Transform the input array into a max-heap.  This is typically done in O(n) time.
+
+2. **Repeatedly Extract Max:**  For each iteration:
+    * Swap the root (the maximum element) with the last element in the heap.
+    * Reduce the heap size by 1 (effectively removing the maximum element).
+    * Heapify down the new root to restore the heap property.
+    * Repeat this process until the heap is empty.
+
+The swapped elements are placed in their sorted order at the end of the array.
+
+**Example (Max-Heap):**
+
+Let's say we have the array: `[5, 13, 2, 25, 7, 17, 20, 8, 4]`
+
+1. **Build Heap:**  The array is transformed into a max-heap.
+
+2. **Repeated Extraction:**
+   * Swap 25 (root) with 4 (last element).  Array becomes: `[4, 13, 2, 8, 7, 17, 20, 5, 25]`
+   * Heapify down from the root (4).
+   * Repeat this process until the heap is empty. The elements will be placed in sorted order at the end of the array after each swap and reduction.
+
+
+**Time Complexity:**
+
+* **Best Case:** O(n log n)
+* **Average Case:** O(n log n)
+* **Worst Case:** O(n log n)
+
+**Space Complexity:**
+
+* O(1) – Heap sort is an in-place algorithm; it doesn't require significant extra space beyond the input array.
+
+
+**Advantages:**
+
+* **Guaranteed O(n log n) performance:**  Unlike some other sorting algorithms (like quicksort), heap sort's performance is consistent regardless of the input data.
+* **In-place sorting:**  It uses minimal extra space.
+* **Efficient for large datasets:**  Its consistent performance makes it suitable for large datasets.
+
+
+**Disadvantages:**
+
+* **Can be slower than quicksort in practice:**  While the worst-case performance is the same as quicksort's average case, quicksort is often faster in practice due to its better cache performance.
+* **Not as intuitive as some other sorting algorithms:** The concept of a heap can be slightly more complex to grasp than simpler algorithms like bubble sort or insertion sort.
+
+
+Heap sort is a valuable algorithm in situations where guaranteed performance and in-place sorting are critical.  While it might not always be the fastest in practice, its consistent performance and space efficiency make it a strong contender for various applications.
+
