@@ -10565,3 +10565,92 @@ The LIS problem has applications in various areas, including:
 
 This provides a comprehensive overview of the longest increasing subsequence problem.  If you'd like to delve into specific algorithmic details or code examples, just let me know.
 
+#  Check two strings are anagrams 
+Several approaches can be used to check if two strings are anagrams. Here are a few, with varying levels of efficiency:
+
+**Method 1: Sorting**
+
+This is a simple and relatively efficient approach.  If two strings are anagrams, they will have the same characters, just in a different order. Sorting the characters of each string will make it easy to compare them.
+
+```python
+def are_anagrams_sorting(str1, str2):
+  """Checks if two strings are anagrams using sorting.
+
+  Args:
+    str1: The first string.
+    str2: The second string.
+
+  Returns:
+    True if the strings are anagrams, False otherwise.  Handles case-insensitivity and ignores spaces.
+  """
+  str1 = str1.lower().replace(" ", "")
+  str2 = str2.lower().replace(" ", "")
+  return sorted(str1) == sorted(str2)
+
+# Example usage
+string1 = "listen"
+string2 = "silent"
+print(f"'{string1}' and '{string2}' are anagrams: {are_anagrams_sorting(string1, string2)}")  # Output: True
+
+string3 = "Debit card"
+string4 = "Bad credit"
+print(f"'{string3}' and '{string4}' are anagrams: {are_anagrams_sorting(string3, string4)}")  # Output: True
+
+string5 = "hello"
+string6 = "world"
+print(f"'{string5}' and '{string6}' are anagrams: {are_anagrams_sorting(string5, string6)}")  # Output: False
+```
+
+**Method 2: Character Counting**
+
+This method uses dictionaries (or hash maps) to count the occurrences of each character in both strings. If the counts are identical for all characters, the strings are anagrams.
+
+```python
+def are_anagrams_counting(str1, str2):
+  """Checks if two strings are anagrams using character counting.
+
+  Args:
+    str1: The first string.
+    str2: The second string.
+
+  Returns:
+    True if the strings are anagrams, False otherwise. Handles case-insensitivity and ignores spaces.
+  """
+  str1 = str1.lower().replace(" ", "")
+  str2 = str2.lower().replace(" ", "")
+
+  if len(str1) != len(str2):
+    return False
+
+  char_counts1 = {}
+  char_counts2 = {}
+
+  for char in str1:
+    char_counts1[char] = char_counts1.get(char, 0) + 1
+  for char in str2:
+    char_counts2[char] = char_counts2.get(char, 0) + 1
+
+  return char_counts1 == char_counts2
+
+# Example Usage (same output as the sorting method)
+string1 = "listen"
+string2 = "silent"
+print(f"'{string1}' and '{string2}' are anagrams: {are_anagrams_counting(string1, string2)}")  # Output: True
+
+string3 = "Debit card"
+string4 = "Bad credit"
+print(f"'{string3}' and '{string4}' are anagrams: {are_anagrams_counting(string3, string4)}")  # Output: True
+
+string5 = "hello"
+string6 = "world"
+print(f"'{string5}' and '{string6}' are anagrams: {are_anagrams_counting(string5, string6)}")  # Output: False
+```
+
+**Which method is better?**
+
+* **Sorting:**  Has a time complexity of O(n log n) due to the sorting algorithm.  Space complexity is O(n) in the worst case (if all characters are unique).
+
+* **Character Counting:** Has a time complexity of O(n) because it iterates through the strings once.  Space complexity is also O(n) in the worst case (if all characters are unique).
+
+Therefore, **character counting is generally more efficient** for larger strings, offering linear time complexity compared to the slightly worse logarithmic time of sorting.  However, for very small strings, the difference might be negligible.  Choose the method that you find more readable and maintainable, unless performance is a critical concern for very large strings.
+
