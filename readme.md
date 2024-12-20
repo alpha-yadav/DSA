@@ -9927,3 +9927,51 @@ Hash functions are ubiquitous in computer science and security:
 
 The choice of hash function depends on the specific application and security requirements.  For new applications, it is crucial to use a cryptographically secure hash function that is currently considered strong and not susceptible to known attacks.  Outdated algorithms should be avoided.  Consult up-to-date cryptographic standards and best practices when making a selection.
 
+#  Travelling Salesman 
+The Traveling Salesperson Problem (TSP) is one of the most famous problems in computer science and operations research.  It's deceptively simple to state but notoriously difficult to solve efficiently for large numbers of cities.
+
+**Problem Statement:**
+
+Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once and returns to the origin city?
+
+**Formal Definition:**
+
+Given a complete weighted graph G = (V, E), where V is a set of vertices (cities) and E is a set of edges with associated weights (distances), find a Hamiltonian cycle (a cycle that visits each vertex exactly once) with minimum total weight.
+
+**Complexity:**
+
+The TSP is an NP-hard problem. This means that there's no known algorithm that can solve it in polynomial time (i.e., time that grows reasonably with the number of cities).  For a large number of cities, finding the absolute optimal solution using brute force (checking every possible permutation) becomes computationally infeasible.
+
+**Approaches to Solving the TSP:**
+
+Several approaches exist to tackle the TSP, each with its own trade-offs between solution quality and computational time:
+
+* **Brute-Force:**  Trying every possible permutation of cities.  This is only feasible for a very small number of cities.
+
+* **Approximation Algorithms:** These algorithms don't guarantee the absolute best solution but provide a solution within a certain factor of the optimal solution in a reasonable amount of time.  Examples include:
+    * **Nearest Neighbor:**  Starts at a city and repeatedly visits the nearest unvisited city.  Simple but can produce poor results.
+    * **Christofides Algorithm:**  A more sophisticated approximation algorithm that guarantees a solution within 1.5 times the optimal for metric TSPs (where distances satisfy the triangle inequality).
+
+* **Heuristic Algorithms:** These algorithms use rules of thumb to find good, but not necessarily optimal, solutions. Examples include:
+    * **Greedy Algorithms:**  Making locally optimal choices at each step.
+    * **Genetic Algorithms:**  Using evolutionary principles to search for good solutions.
+    * **Simulated Annealing:**  A probabilistic technique that allows for occasional "uphill" moves to escape local optima.
+    * **Ant Colony Optimization:**  Mimicking the foraging behavior of ants to find good solutions.
+
+* **Integer Programming:**  Formulating the TSP as an integer programming problem and using specialized solvers to find optimal or near-optimal solutions.  This can be effective for moderately sized instances.
+
+* **Branch and Bound:**  A technique that systematically explores the search space, pruning branches that are guaranteed to not contain the optimal solution.  Can be effective for moderate-sized problems.
+
+**Applications:**
+
+The TSP has numerous real-world applications, including:
+
+* **Logistics and Transportation:**  Route planning for delivery trucks, airplanes, or other vehicles.
+* **Manufacturing:**  Optimizing the sequence of operations in a manufacturing process.
+* **Robotics:**  Planning paths for robots to move efficiently.
+* **Circuit board design:**  Determining the optimal order to connect components on a circuit board.
+* **DNA sequencing:**  Ordering DNA fragments to reconstruct the entire genome.
+
+
+The choice of algorithm depends heavily on the size of the problem and the desired level of accuracy. For very large instances, approximation or heuristic algorithms are usually necessary.  For smaller instances, exact algorithms like branch and bound or integer programming might be feasible.
+
