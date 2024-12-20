@@ -9493,3 +9493,138 @@ print(shortest_distances)  # Output: shortest distances from (0,0) to all other 
 
 Remember to adapt the code to your specific 2D graph representation and edge weight definition.  For A*, you'll need to implement a suitable heuristic function (`h(n)`).  Common heuristics for pathfinding include Manhattan distance, Euclidean distance, or Chebyshev distance.  Choose the heuristic that best suits your problem domain.
 
+#  Connected Components Of Undirected Graph Using BFS 
+The Breadth-First Search (BFS) algorithm is a perfect tool for finding connected components in an undirected graph.  Here's how it works, along with code examples in Python:
+
+**Algorithm:**
+
+1. **Initialization:** Create a set `visited` to track visited nodes, and initialize it as empty.  Also, create a list `connected_components` to store the components.
+
+2. **Iteration:** Iterate through all nodes in the graph.
+
+3. **BFS for Unvisited Nodes:** For each node `u` that hasn't been visited (`u not in visited`):
+   - Create a new list `component` to store the nodes in the current connected component.
+   - Perform a BFS starting from node `u`.  During the BFS:
+     - Add `u` to `visited` and to `component`.
+     - Explore its neighbors. For each unvisited neighbor `v`:
+       - Add `v` to `visited` and to `component`.
+       - Add `v` to the queue for BFS exploration.
+   - Add the `component` list to `connected_components`.
+
+4. **Return:** Return `connected_components`.
+
+**Python Code (using adjacency list representation):**
+
+```python
+from collections import deque
+
+def connected_components_bfs(graph):
+    """
+    Finds connected components of an undirected graph using BFS.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+               e.g., {'A': ['B', 'C'], 'B': ['A', 'D'], 'C': ['A'], 'D': ['B', 'E'], 'E': ['D']}
+
+    Returns:
+        A list of lists, where each inner list represents a connected component.
+    """
+
+    num_nodes = len(graph)
+    visited = set()
+    connected_components = []
+
+    for node in graph:
+        if node not in visited:
+            component = []
+            queue = deque([node])
+            visited.add(node)
+            while queue:
+                u = queue.popleft()
+                component.append(u)
+                for v in graph[u]:
+                    if v not in visited:
+                        visited.add(v)
+                        queue.append(v)
+            connected_components.append(component)
+
+    return connected_components
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D'],
+    'C': ['A'],
+    'D': ['B', 'E'],
+    'E': ['D'],
+    'F': ['G'],
+    'G': ['F']
+}
+
+components = connected_components_bfs(graph)
+print(f"Connected components: {components}")  # Output: [['A', 'B', 'C', 'D', 'E'], ['F', 'G']]
+
+
+graph2 = {
+  'A': ['B'],
+  'B': ['A', 'C'],
+  'C': ['B']
+}
+components2 = connected_components_bfs(graph2)
+print(f"Connected components: {components2}") # Output: [['A', 'B', 'C']]
+
+graph3 = {} #Empty Graph
+components3 = connected_components_bfs(graph3)
+print(f"Connected components: {components3}") # Output: []
+
+graph4 = {'A': []} #Single Node Graph
+components4 = connected_components_bfs(graph4)
+print(f"Connected components: {components4}") # Output: [['A']]
+
+```
+
+**Python Code (using adjacency matrix representation):**  (Less efficient than adjacency list for sparse graphs)
+
+```python
+from collections import deque
+
+def connected_components_bfs_matrix(graph):
+  num_nodes = len(graph)
+  visited = [False] * num_nodes
+  connected_components = []
+
+  for i in range(num_nodes):
+    if not visited[i]:
+      component = []
+      queue = deque([i])
+      visited[i] = True
+      while queue:
+        u = queue.popleft()
+        component.append(u)
+        for v in range(num_nodes):
+          if graph[u][v] == 1 and not visited[v]:
+            visited[v] = True
+            queue.append(v)
+      connected_components.append(component)
+  return connected_components
+
+
+#Example usage (adjacency matrix):
+
+graph_matrix = [
+    [0, 1, 1, 0, 0, 0, 0],
+    [1, 0, 0, 1, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 1, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 1, 0]
+]
+
+components_matrix = connected_components_bfs_matrix(graph_matrix)
+print(f"Connected components (matrix): {components_matrix}") # Output will depend on node numbering in the matrix
+
+```
+
+Remember to adapt the code to your specific graph representation (adjacency list or matrix).  The adjacency list version is generally preferred for its efficiency, especially with sparse graphs (graphs with relatively few edges).  The matrix version is simpler to understand for smaller, dense graphs but scales poorly.
+
