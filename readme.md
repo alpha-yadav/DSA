@@ -8338,3 +8338,14 @@ Selection sort is rarely used for large datasets due to its O(n²) time complexi
 
 In most practical scenarios, more efficient algorithms like merge sort, quicksort, or heapsort are preferred for larger datasets.
 
+#  Elixir Implementation 
+Please provide me with the task or problem you want me to solve using Elixir.  I need more information to give you an Elixir implementation.  For example, tell me:
+
+* **What is the desired functionality?** (e.g., "create a function that calculates the factorial of a number," "build a simple web server," "process a stream of data from a file," "implement a concurrent counter")
+* **What are the inputs and outputs?** (e.g., "input: an integer, output: an integer," "input: a list of strings, output: a sorted list of strings")
+* **Are there any specific requirements or constraints?** (e.g., "must use recursion," "must be fault-tolerant," "must handle large datasets efficiently")
+* **What libraries or modules should be used?** (e.g., "use `Enum` module,"  "use `HTTPoison` for HTTP requests")
+
+
+Once I have this information, I can provide you with a well-commented and efficient Elixir implementation.
+
