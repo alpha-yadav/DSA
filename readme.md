@@ -943,3 +943,107 @@ BSTs are used in various applications, including:
 
 In summary, BSTs provide a powerful and efficient way to store and manage sorted data.  However, understanding their limitations and choosing appropriate self-balancing variants when necessary is crucial for optimal performance.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement insertion into a Binary Search Tree (BST) in Python.  Here are a couple, with explanations:
+
+**Method 1: Recursive Insertion**
+
+This method is generally considered more elegant and easier to understand.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        """Inserts a new node with the given data into the BST recursively."""
+        self.root = self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        """Recursive helper function for insertion."""
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        else:
+            node.right = self._insert_recursive(node.right, data)
+        return node
+
+    def insert_iterative(self, data):
+      """Inserts a new node with the given data into the BST iteratively."""
+      new_node = Node(data)
+      if self.root is None:
+          self.root = new_node
+          return
+
+      current = self.root
+      while True:
+          if data < current.data:
+              if current.left is None:
+                  current.left = new_node
+                  break
+              else:
+                  current = current.left
+          else:
+              if current.right is None:
+                  current.right = new_node
+                  break
+              else:
+                  current = current.right
+
+
+# Example usage
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+bst.insert_iterative(4)
+
+
+#Helper function to print the tree (inorder traversal) for verification.  Not essential for insertion.
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+
+print("Inorder traversal of the BST:")
+inorder_traversal(bst.root) # Output should be: 1 3 4 6 8 10 14
+
+```
+
+**Method 2: Iterative Insertion**
+
+This method uses a `while` loop instead of recursion.  It might be slightly more efficient in some cases, as it avoids the overhead of function calls.
+
+(The iterative version is included in the code above.)
+
+
+**Explanation:**
+
+Both methods follow the same basic logic:
+
+1. **Empty Tree:** If the tree is empty (root is `None`), create a new node and make it the root.
+2. **Traversal:** Otherwise, traverse the tree to find the appropriate location for the new node.  If the data is less than the current node's data, go left; otherwise, go right.
+3. **Insertion:**  Once you reach a leaf node (a node with no children) where the next step would be to go to a `None` child, insert the new node at that location.
+
+
+**Choosing between recursive and iterative:**
+
+* **Readability:** The recursive approach is often considered more readable and easier to understand, especially for those new to BSTs.
+* **Efficiency:** For very deep trees, recursive calls could lead to stack overflow errors.  Iterative approaches avoid this risk.  However, the performance difference is often negligible for reasonably sized trees.
+* **Personal Preference:** Ultimately, the choice often comes down to personal preference and coding style.
+
+
+Remember to include a function (like `inorder_traversal` above) to verify that your insertion is working correctly.  Inorder traversal will print the nodes in ascending order, which is a key property of a BST.
+
