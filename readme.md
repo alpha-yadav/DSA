@@ -7982,3 +7982,13 @@ print("Sorted array:", arr)
 
 Heap sort is a valuable algorithm to understand because of its efficiency and its demonstration of the power of heap data structures.  While quicksort often performs better in practice on average, heap sort provides a reliable and predictable performance guarantee.
 
+#  C# Implementation 
+Please provide me with the task or problem you want a C# implementation for.  I need more information to help you.  For example, tell me:
+
+* **What should the code do?**  Describe the functionality you need.  Be as specific as possible.
+* **What inputs will it have?**  What data will the code receive?  What is its data type?
+* **What outputs will it produce?** What results should the code generate? What is its data type?
+* **Are there any specific requirements or constraints?** For example, should it use a particular library, adhere to a specific coding style, or handle errors in a certain way?
+
+The more details you give me, the better I can assist you in creating the C# implementation.
+
