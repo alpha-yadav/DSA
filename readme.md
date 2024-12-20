@@ -7893,3 +7893,92 @@ For example, tell me:
 
 Once I have this information, I can provide a clear and concise pseudocode implementation.
 
+#  Heap Sort 
+Heap sort is a comparison-based sorting algorithm that uses a binary heap data structure to sort an array.  It's known for its guaranteed O(n log n) time complexity, making it efficient for larger datasets.  Here's a breakdown of how it works:
+
+**1. Heapify:**
+
+* **Binary Heap:** A binary heap is a complete binary tree where the value of each node is greater than or equal to the values of its children (for a max-heap, as used in heap sort).  This property is crucial for efficient sorting.
+* **Building the Heap:** The first step is to transform the input array into a max-heap. This is done in-place, meaning no extra array is needed.  The `heapify` process starts from the middle of the array and works its way up, ensuring that each subtree satisfies the max-heap property.  This step takes O(n) time.
+
+**2. Sorting:**
+
+* **Repeated Extraction:**  Once the heap is built, the largest element (the root of the heap) is at the beginning of the array.  This element is swapped with the last element of the unsorted portion of the array.  The size of the unsorted portion is then reduced by one.
+* **Heapify Down:** After the swap, the root of the heap might violate the max-heap property.  To restore it, a `heapify-down` operation is performed. This involves comparing the root with its children and swapping it with the larger child until the max-heap property is restored. This step takes O(log n) time.
+* **Iteration:** Steps 2 and 3 are repeated until the unsorted portion of the array is empty.  Each iteration places the next largest element in its correct sorted position.
+
+
+**Example (Max-Heap):**
+
+Let's sort the array `[5, 13, 2, 25, 7, 17, 20, 8, 4]` using heap sort.
+
+1. **Heapify:**  The array is transformed into a max-heap. The process involves multiple "heapify down" operations from the middle of the array upwards.  The resulting heap might look like this (represented as a tree, though it's stored as an array):
+
+```
+          25
+       /      \
+      17       20
+     /  \     /  \
+    13   7   8   4
+   / \
+  5  2
+```
+
+2. **Sorting:**
+
+* **Iteration 1:** Swap 25 (root) and 4 (last element).  `[4, 13, 2, 17, 7, 17, 20, 8, 25]` . Heapify down from the root.
+* **Iteration 2:** Swap 20 (root) and 8 (last element of the unsorted portion). `[4, 13, 2, 17, 7, 8, 20, 17, 25]`. Heapify down.
+* ...and so on.
+
+This process continues until the array is fully sorted: `[2, 4, 5, 7, 8, 13, 17, 17, 20, 25]`
+
+
+**Python Code:**
+
+```python
+def heapify(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+
+    if l < n and arr[l] > arr[largest]:
+        largest = l
+
+    if r < n and arr[r] > arr[largest]:
+        largest = r
+
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+def heap_sort(arr):
+    n = len(arr)
+
+    # Build a maxheap.
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+
+    # One by one extract an element from heap
+    for i in range(n - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]  # swap
+        heapify(arr, i, 0)
+
+# Example usage
+arr = [5, 13, 2, 25, 7, 17, 20, 8, 4]
+heap_sort(arr)
+print("Sorted array:", arr)
+```
+
+**Advantages:**
+
+* **Guaranteed O(n log n) time complexity:**  Consistent performance even in worst-case scenarios.
+* **In-place sorting:**  Doesn't require significant extra memory.
+
+**Disadvantages:**
+
+* **Not as efficient as some other algorithms for smaller datasets.**  The overhead of building the heap can outweigh the benefits for small inputs.
+* **Recursive nature (in many implementations):** Can lead to stack overflow issues with extremely large arrays.
+
+
+Heap sort is a valuable algorithm to understand because of its efficiency and its demonstration of the power of heap data structures.  While quicksort often performs better in practice on average, heap sort provides a reliable and predictable performance guarantee.
+
