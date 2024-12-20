@@ -8994,3 +8994,38 @@ When a mismatch occurs during the comparison of the pattern and text, instead of
 
 In summary, KMP is a powerful algorithm that provides a significant performance improvement over naive string searching by intelligently using the pattern's internal structure to minimize redundant comparisons.  Understanding the PMT is key to grasping its efficiency.
 
+#  Introduction to Rabin-Karp Algorithm 
+The Rabin-Karp algorithm is a string-searching algorithm that uses hashing to find occurrences of a pattern string within a text string.  Unlike naive string searching (which compares the pattern to every possible substring of the text), Rabin-Karp employs a rolling hash to efficiently compare substrings.  This makes it significantly faster on average than naive methods, especially for larger patterns and texts.
+
+Here's a breakdown of the key concepts:
+
+**1. Hashing:**  The core idea is to compute a hash value for both the pattern and substrings of the text.  If the hash values match, it suggests (but doesn't guarantee) that the substring and the pattern are identical.  A mismatch in hash values definitively indicates a difference.
+
+**2. Rolling Hash:** To avoid recomputing the hash for every substring of the text, a rolling hash function is used.  This allows for efficient computation of the hash of the next substring based on the hash of the previous one.  Only a few arithmetic operations are required to update the hash as the "window" slides across the text.  A common choice for a rolling hash is based on Horner's method.
+
+**3. Algorithm Steps:**
+
+1. **Preprocessing:** Calculate the hash value of the pattern.
+2. **Sliding Window:**  A window of the same size as the pattern is slid across the text.
+3. **Hash Comparison:** At each position, the hash of the current window is calculated (efficiently using the rolling hash).
+4. **Hash Match:** If the hash of the window matches the pattern's hash, a full string comparison is performed to verify if it's an actual match (to account for hash collisions – where different strings have the same hash value).
+5. **Collision Handling:** If a hash collision occurs, a character-by-character comparison verifies if the strings are actually identical.
+6. **Repeat:** Steps 3-5 are repeated until the end of the text is reached.
+
+
+**Advantages of Rabin-Karp:**
+
+* **Average-case linear time complexity:**  O(m + n), where 'm' is the length of the pattern and 'n' is the length of the text. This is a significant improvement over naive string searching's O(mn) worst-case complexity.
+* **Efficient for multiple pattern searches:**  Can be adapted to find multiple occurrences of the same pattern.
+* **Good for large patterns:**  Its efficiency becomes more pronounced as the pattern length increases.
+
+
+**Disadvantages of Rabin-Karp:**
+
+* **Worst-case quadratic time complexity:**  O(mn) in the worst case (e.g., with a poor choice of hash function leading to many hash collisions).
+* **Space complexity:** Requires storing the pattern and potentially some intermediate hash values.
+* **Hash function selection:** The performance significantly depends on the chosen hash function; a poorly designed one can lead to many collisions and slow down the algorithm.
+
+
+In summary, Rabin-Karp offers a powerful and efficient approach to string searching, especially when dealing with larger patterns and texts.  However, a careful selection of the hash function is crucial to mitigate the risk of performance degradation due to excessive collisions.
+
