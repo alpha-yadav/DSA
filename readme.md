@@ -8147,3 +8147,73 @@ Please provide me with the algorithm or task you want me to write pseudocode for
 
 The more detail you give me, the better and more accurate the pseudocode will be.
 
+#  Odd-Even Sort 
+Odd-Even Sort (also known as Brick Sort) is a comparison-based sorting algorithm that operates in a similar manner to Bubble Sort, but it's slightly more efficient.  Instead of comparing adjacent elements repeatedly, Odd-Even Sort divides the comparison process into odd and even phases.
+
+**How it works:**
+
+1. **Odd Phase:** Compare and swap adjacent pairs of elements at odd indices (1st and 2nd, 3rd and 4th, 5th and 6th, etc.).
+
+2. **Even Phase:** Compare and swap adjacent pairs of elements at even indices (2nd and 3rd, 4th and 5th, 6th and 7th, etc.).
+
+3. **Repeat:** Alternate between odd and even phases until no swaps are made during a complete cycle. This indicates that the array is sorted.
+
+**Example:**
+
+Let's sort the array `[3, 1, 4, 1, 5, 9, 2, 6]` using Odd-Even Sort:
+
+**Iteration 1 (Odd Phase):**
+
+* Compare and swap (3, 1): [1, 3, 4, 1, 5, 9, 2, 6]
+* Compare and swap (4, 1): [1, 3, 1, 4, 5, 9, 2, 6]
+* Compare and swap (5, 9): [1, 3, 1, 4, 5, 9, 2, 6]
+* Compare and swap (2, 6): [1, 3, 1, 4, 5, 9, 2, 6]
+
+**Iteration 1 (Even Phase):**
+
+* Compare and swap (3, 1): [1, 1, 3, 4, 5, 9, 2, 6]
+* Compare and swap (4, 5): [1, 1, 3, 4, 5, 9, 2, 6]
+* Compare and swap (9, 2): [1, 1, 3, 4, 5, 2, 9, 6]
+
+**Iteration 2 (Odd Phase):**  (and so on...)  The process continues until no swaps occur in a complete cycle.
+
+
+**Python Implementation:**
+
+```python
+def odd_even_sort(arr):
+    n = len(arr)
+    sorted = False
+    while not sorted:
+        sorted = True
+        # Odd phase
+        for i in range(1, n - 1, 2):
+            if arr[i] > arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+                sorted = False
+        # Even phase
+        for i in range(0, n - 1, 2):
+            if arr[i] > arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+                sorted = False
+    return arr
+
+#Example Usage
+my_array = [3, 1, 4, 1, 5, 9, 2, 6]
+sorted_array = odd_even_sort(my_array)
+print(f"Sorted array: {sorted_array}")
+```
+
+**Advantages:**
+
+* **Simple to understand and implement.**
+* **Adaptable for parallel processing:** Odd and even phases can be executed concurrently.
+
+**Disadvantages:**
+
+* **Not very efficient for large datasets.** Its time complexity is O(n^2), making it slower than more advanced algorithms like merge sort or quicksort.
+* **Performance depends on the initial order of elements.**  It performs better on nearly sorted data.
+
+
+Odd-Even Sort is primarily of theoretical interest and educational value.  For practical applications with large datasets, more efficient algorithms are preferred.
+
