@@ -6261,3 +6261,80 @@ print("Sorted array:", sorted_list)
 
 Bubble Sort is simple to understand and implement, but it's highly inefficient for large datasets.  It's generally not recommended for practical applications except for educational purposes or very small lists.  More efficient algorithms like Merge Sort or Quick Sort should be preferred for larger datasets.
 
+#  Bubble Sort 
+Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted.  It's known for its simplicity but its inefficiency for large datasets.
+
+Here's a breakdown of Bubble Sort:
+
+**How it works:**
+
+1. **Iteration:** The algorithm iterates through the list multiple times.
+
+2. **Comparison:** In each iteration, it compares adjacent elements.
+
+3. **Swap:** If two adjacent elements are in the wrong order (the left element is greater than the right element), they are swapped.
+
+4. **Repeat:** This process is repeated until no more swaps are needed, indicating that the list is sorted.
+
+**Example:**
+
+Let's sort the list `[5, 1, 4, 2, 8]` using Bubble Sort:
+
+**Iteration 1:**
+
+- `[5, 1, 4, 2, 8]` -> `[1, 5, 4, 2, 8]` (5 and 1 swapped)
+- `[1, 5, 4, 2, 8]` -> `[1, 4, 5, 2, 8]` (5 and 4 swapped)
+- `[1, 4, 5, 2, 8]` -> `[1, 4, 2, 5, 8]` (5 and 2 swapped)
+- `[1, 4, 2, 5, 8]` -> `[1, 4, 2, 5, 8]` (no swap needed)
+
+**Iteration 2:**
+
+- `[1, 4, 2, 5, 8]` -> `[1, 2, 4, 5, 8]` (4 and 2 swapped)
+- `[1, 2, 4, 5, 8]` -> `[1, 2, 4, 5, 8]` (no swap needed)
+- `[1, 2, 4, 5, 8]` -> `[1, 2, 4, 5, 8]` (no swap needed)
+
+**Iteration 3:**
+
+- `[1, 2, 4, 5, 8]` -> `[1, 2, 4, 5, 8]` (no swap needed)
+- `[1, 2, 4, 5, 8]` -> `[1, 2, 4, 5, 8]` (no swap needed)
+- `[1, 2, 4, 5, 8]` -> `[1, 2, 4, 5, 8]` (no swap needed)
+
+The list is now sorted: `[1, 2, 4, 5, 8]`
+
+
+**Code Example (Python):**
+
+```python
+def bubble_sort(list_):
+    n = len(list_)
+    for i in range(n):
+        # Last i elements are already in place
+        for j in range(0, n-i-1):
+            # Swap if the element found is greater than the next element
+            if list_[j] > list_[j+1]:
+                list_[j], list_[j+1] = list_[j+1], list_[j]
+    return list_
+
+my_list = [5, 1, 4, 2, 8]
+sorted_list = bubble_sort(my_list)
+print("Sorted array:", sorted_list)
+```
+
+**Time Complexity:**
+
+- **Worst-case and average-case:** O(n²)  This happens when the list is reverse-sorted or nearly reverse-sorted.
+- **Best-case:** O(n)  This happens when the list is already sorted.
+
+**Space Complexity:** O(1) -  Bubble sort is an in-place algorithm, meaning it sorts the list without requiring significant extra memory.
+
+**Advantages:**
+
+- Simple to understand and implement.
+
+**Disadvantages:**
+
+- Very inefficient for large datasets.  Much slower than more advanced algorithms like merge sort or quicksort.
+
+
+Bubble sort is primarily used for educational purposes to illustrate the basic concepts of sorting algorithms.  It's rarely used in practical applications for large datasets due to its poor performance.
+
