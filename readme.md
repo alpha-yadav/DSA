@@ -3558,3 +3558,112 @@ print(f"Edit distance between '{string1}' and '{string2}' is {edit_distance(stri
 
 This code efficiently calculates the edit distance using dynamic programming.  Remember that the time and space complexity are both O(mn), where 'm' and 'n' are the lengths of the input strings.  For very large strings, optimized algorithms or approximations might be necessary.
 
+#  Weighted Job Scheduling Algorithm 
+The Weighted Job Scheduling (WJS) problem is a classic algorithm problem where you're given a set of jobs, each with a start time, finish time, and weight (profit).  The goal is to find a subset of non-overlapping jobs that maximizes the total weight.  This is different from the simpler Job Sequencing problem which only considers deadlines, not weights.
+
+Here's a breakdown of the problem and how to solve it using dynamic programming:
+
+**Problem Definition:**
+
+* **Input:** A set of `n` jobs, where each job `i` is defined by:
+    * `start_time[i]`: The time the job starts.
+    * `finish_time[i]`: The time the job finishes.
+    * `weight[i]`: The profit or weight associated with the job.
+
+* **Output:** A subset of jobs such that no two jobs overlap, and the sum of their weights is maximized.
+
+**Algorithm (Dynamic Programming):**
+
+1. **Sort:** Sort the jobs by their finish times in ascending order. This is crucial for the dynamic programming approach.
+
+2. **Create a DP table:** Create a 1D DP table `dp` of size `n`, where `dp[i]` stores the maximum weight achievable using jobs up to index `i` (including job `i` if possible).
+
+3. **Iteration:** Iterate through the sorted jobs:
+   * For each job `i`, `dp[i]` is the maximum of:
+     * `dp[i-1]`:  The maximum weight achievable without including job `i`.
+     * `weight[i] + dp[j]`: The weight of job `i` plus the maximum weight achievable using jobs up to the latest non-overlapping job `j` (found using binary search).
+
+4. **Binary Search (Finding `j`):**  This is the key efficiency improvement.  Instead of linearly scanning for the latest non-overlapping job `j`, we use binary search on the sorted jobs.  We need to find the largest index `j` such that `finish_time[j] <= start_time[i]`.
+
+5. **Result:** The maximum weight is stored in `dp[n-1]`.  To reconstruct the actual subset of jobs selected, you can backtrack through the `dp` table.
+
+**Python Code:**
+
+```python
+def weighted_job_scheduling(jobs):
+    """
+    Solves the weighted job scheduling problem using dynamic programming.
+
+    Args:
+        jobs: A list of tuples, where each tuple represents a job (start_time, finish_time, weight).
+
+    Returns:
+        A tuple containing:
+            - max_weight: The maximum total weight achievable.
+            - selected_jobs: A list of indices of the selected jobs.
+    """
+
+    # Sort jobs by finish times
+    jobs.sort(key=lambda x: x[1])
+
+    n = len(jobs)
+    dp = [0] * n  # DP table
+    selected_jobs = []
+
+
+    dp[0] = jobs[0][2]
+
+    for i in range(1, n):
+        # Binary search to find the latest non-overlapping job
+        j = binary_search(jobs, i)
+        profit_with_job_i = jobs[i][2]
+        if j != -1:
+            profit_with_job_i += dp[j]
+        dp[i] = max(dp[i-1], profit_with_job_i)
+
+
+    max_weight = dp[n-1]
+    # Backtracking to find selected jobs (optional)
+    i = n - 1
+    while i >= 0:
+        if (i == 0 or dp[i] != dp[i-1]):
+            selected_jobs.append(i)
+            j = binary_search(jobs, i)
+            if j != -1:
+              i = j
+            else:
+              i = -1
+        else:
+            i -= 1
+
+
+    return max_weight, selected_jobs[::-1] #reverse to get correct order
+
+
+def binary_search(jobs, i):
+    """
+    Finds the latest non-overlapping job using binary search.
+    """
+    low = 0
+    high = i - 1
+    ans = -1
+    while low <= high:
+        mid = (low + high) // 2
+        if jobs[mid][1] <= jobs[i][0]:
+            ans = mid
+            low = mid + 1
+        else:
+            high = mid - 1
+    return ans
+
+# Example Usage:
+jobs = [(1, 3, 5), (2, 5, 6), (4, 6, 5), (6, 7, 4), (5, 8, 11), (7,9,2)]
+max_weight, selected_jobs = weighted_job_scheduling(jobs)
+print(f"Maximum weight: {max_weight}")
+print(f"Selected jobs (indices): {selected_jobs}")
+print(f"Selected jobs (details): {[jobs[i] for i in selected_jobs]}")
+
+```
+
+This code efficiently solves the Weighted Job Scheduling problem using dynamic programming and binary search, resulting in a time complexity of O(n log n) due to the sorting.  The space complexity is O(n) because of the DP table. Remember that the index of the jobs in the `selected_jobs` list refers to the index in the *sorted* list, not necessarily the original input order.  The example usage demonstrates how to obtain both the maximum weight and the list of selected jobs. Remember to adjust the input format to match your specific problem definition.
+
