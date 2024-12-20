@@ -505,3 +505,62 @@ public class Main {
 
 These are all basic examples. Loops can be far more complex, incorporating nested loops, conditional statements within the loop body, and more sophisticated iteration techniques.  To get a more specific example, please tell me which programming language you're interested in and what you want the loop to accomplish.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or nested data structures.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop executes first.  Each iteration of the outer loop starts a new cycle for the inner loop.
+* **Inner Loop:** This loop is nested within the outer loop.  It executes completely for every single iteration of the outer loop.
+
+
+**Example (Python):**
+
+This code prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+**Explanation:**
+
+1. The outer loop iterates from 1 to 10 (inclusive).  This represents the rows of the multiplication table.
+2. The inner loop *also* iterates from 1 to 10.  For each row (outer loop iteration), it calculates and prints the product `i * j`.
+3. `end="\t"` prevents the `print()` function from automatically adding a newline after each number. Instead, it adds a tab, creating columns.
+4. `print()` at the end of the outer loop adds a newline to move to the next row.
+
+**Output:**
+
+```
+1       2       3       4       5       6       7       8       9       10      
+2       4       6       8       10      12      14      16      18      20      
+3       6       9       12      15      18      21      24      27      30      
+4       8       12      16      20      24      28      32      36      40      
+5       10      15      20      25      30      35      40      45      50      
+6       12      18      24      30      36      42      48      54      60      
+7       14      21      28      35      42      49      56      63      70      
+8       16      24      32      40      48      56      64      72      80      
+9       18      27      36      45      54      63      72      81      90      
+10      20      30      40      50      60      70      80      90      100     
+```
+
+
+**Use Cases:**
+
+Nested loops are used frequently for:
+
+* **Processing matrices and arrays:**  Iterating through rows and columns.
+* **Generating patterns:**  Creating geometric shapes or text-based designs.
+* **Searching nested data structures:**  Finding elements in lists of lists, dictionaries within dictionaries, etc.
+* **Combinatorial problems:**  Exploring all possible combinations of items.
+
+
+**Efficiency Considerations:**
+
+Nested loops can be computationally expensive, especially with large datasets.  The time complexity often increases proportionally to the product of the loop iterations.  If performance is critical, consider optimizing your code using techniques like vectorization (e.g., using NumPy in Python) or more efficient algorithms.
+
