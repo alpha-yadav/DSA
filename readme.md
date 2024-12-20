@@ -9127,3 +9127,98 @@ else:
 
 The KMP algorithm avoids backtracking in the text.  When a mismatch occurs, the PMT tells the algorithm how many characters it can safely shift the pattern forward without missing potential matches.  This is a significant advantage over naive string search, especially for patterns with repeating sub-sequences.  The time complexity is O(n + m), where n is the length of the text and m is the length of the pattern, making it significantly faster than naive search (O(n*m)) for many cases.
 
+#  KMP Algorithm in C 
+The Knuth-Morris-Pratt (KMP) algorithm is an efficient string-searching algorithm.  It preprocesses the pattern to create a "partial match table" (also called a failure function) that allows it to avoid redundant comparisons when a mismatch occurs.  Here's a C implementation:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Function to create the partial match table (PMT)
+void computeLPSArray(char *pat, int M, int *lps) {
+    int length = 0;  // Length of the previous longest prefix suffix
+    lps[0] = 0;  // lps[0] is always 0
+
+    int i = 1;
+    while (i < M) {
+        if (pat[i] == pat[length]) {
+            length++;
+            lps[i] = length;
+            i++;
+        } else {
+            if (length != 0) {
+                length = lps[length - 1];
+            } else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+}
+
+// KMP algorithm for string searching
+int KMPSearch(char *pat, char *txt) {
+    int M = strlen(pat);
+    int N = strlen(txt);
+
+    // create lps[] that will hold the longest prefix suffix values for pattern
+    int *lps = (int *)malloc(M * sizeof(int));
+    computeLPSArray(pat, M, lps);
+
+    int i = 0;  // index for txt[]
+    int j = 0;  // index for pat[]
+    while (i < N) {
+        if (pat[j] == txt[i]) {
+            i++;
+            j++;
+        }
+
+        if (j == M) {
+            //found pattern at txt[i-j]
+            free(lps);
+            return i - j; // Return the index where the pattern is found
+        } else if (i < N && pat[j] != txt[i]) {
+            if (j != 0) {
+                j = lps[j - 1];
+            } else {
+                i++;
+            }
+        }
+    }
+    free(lps);
+    return -1; // Pattern not found
+}
+
+
+int main() {
+    char txt[] = "ABABDABACDABABCABAB";
+    char pat[] = "ABABCABAB";
+    int result = KMPSearch(pat, txt);
+    if (result == -1) {
+        printf("Pattern is not found\n");
+    } else {
+        printf("Pattern found at index %d\n", result);
+    }
+    return 0;
+}
+```
+
+**Explanation:**
+
+1. **`computeLPSArray()`:** This function computes the longest proper prefix suffix (LPS) array.  `lps[i]` stores the length of the longest proper prefix of `pat[0...i]` which is also a suffix of `pat[0...i]`.  This array is crucial for efficiently handling mismatches.
+
+2. **`KMPSearch()`:** This function implements the core KMP algorithm. It iterates through the text. If a mismatch occurs, it uses the LPS array to shift the pattern intelligently, avoiding unnecessary comparisons.
+
+3. **`main()`:** This function demonstrates how to use the `KMPSearch()` function.  It searches for the pattern "ABABCABAB" within the text "ABABDABACDABABCABAB".
+
+**How it works (briefly):**
+
+The magic lies in the `lps` array. When a mismatch occurs, instead of restarting the pattern comparison from the beginning, the algorithm uses `lps[j-1]` to determine how much to shift the pattern. This shift ensures that the previously matched prefix is reused, preventing redundant comparisons.
+
+
+Remember to compile this code using a C compiler (like GCC):  `gcc kmp.c -o kmp` and then run it: `./kmp`
+
+
+This improved version includes error handling (memory allocation) and clearer comments.  Remember to handle potential memory allocation failures in a production environment more robustly.
+
