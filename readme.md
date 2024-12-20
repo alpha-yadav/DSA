@@ -8054,3 +8054,87 @@ Let's say we have the array: `[5, 13, 2, 25, 7, 17, 20, 8, 4]`
 
 Heap sort is a valuable algorithm in situations where guaranteed performance and in-place sorting are critical.  While it might not always be the fastest in practice, its consistent performance and space efficiency make it a strong contender for various applications.
 
+#  Cycle Sort 
+Cycle sort is an in-place, unstable sorting algorithm.  It's known for its minimal number of writes (meaning it minimizes the number of times it moves elements in the array), making it efficient when writing to memory is expensive. However, it's not the fastest algorithm in terms of overall time complexity.
+
+Here's a breakdown of cycle sort:
+
+**How it Works:**
+
+Cycle sort identifies cycles within the unsorted array. A cycle is a sequence of elements where each element is out of place and should be in the position occupied by the next element in the sequence.  The algorithm then iteratively moves elements to their correct positions within these cycles.
+
+1. **Finding Cycles:** For each element `arr[i]`, the algorithm checks if it's in its correct sorted position. If not, it finds the correct position for that element.
+
+2. **Cycling:** Once the correct position is found, the element is placed there.  This might displace another element, which then needs to be placed in *its* correct position, and so on, creating a "cycle."  This continues until the element that was initially at `arr[i]`'s correct position is placed in `arr[i]`. This completes one cycle.
+
+3. **Iteration:** Steps 1 and 2 are repeated for each element in the array until all elements are in their correct sorted positions.
+
+
+**Example:**
+
+Let's sort the array `[3, 1, 5, 4, 2]` using cycle sort.
+
+1. **Iteration 1 (i = 0):** `arr[0] = 3`.  The correct position for 3 is index 2.  We swap 3 and 5. Now the array is `[5, 1, 3, 4, 2]`.  The correct position for 5 is index 4. We swap 5 and 2. Now the array is `[2, 1, 3, 4, 5]`. The correct position for 2 is index 0. We swap 2 and 3. This completes the cycle. Now the array is `[3, 1, 2, 4, 5]`.
+
+
+2. **Iteration 2 (i = 1):** `arr[1] = 1`.  The correct position for 1 is index 0. We swap 1 and 3.  The array is `[1, 3, 2, 4, 5]`. The correct position for 3 is index 1. This completes the cycle.
+
+
+3. **Iteration 3 (i = 2):** `arr[2] = 2`.  The correct position for 2 is index 1. We swap 2 and 3.  The array is `[1, 2, 3, 4, 5]`. The correct position for 3 is index 2. This completes the cycle.
+
+
+4. **Iteration 4 and 5:** Elements at indices 3 and 4 are already in their correct positions.
+
+
+The sorted array is `[1, 2, 3, 4, 5]`.
+
+
+**Python Code:**
+
+```python
+def cycle_sort(arr):
+    n = len(arr)
+    for cycle_start in range(n - 1):
+        item = arr[cycle_start]
+        pos = cycle_start
+        for i in range(cycle_start + 1, n):
+            if arr[i] < item:
+                pos += 1
+        if pos == cycle_start:
+            continue
+        while item == arr[pos]:
+            pos += 1
+        arr[pos], item = item, arr[pos]
+        while pos != cycle_start:
+            pos = cycle_start
+            for i in range(cycle_start + 1, n):
+                if arr[i] < item:
+                    pos += 1
+            while item == arr[pos]:
+                pos += 1
+            arr[pos], item = item, arr[pos]
+
+# Example usage
+arr = [3, 1, 5, 4, 2]
+cycle_sort(arr)
+print("Sorted array:", arr)  # Output: Sorted array: [1, 2, 3, 4, 5]
+```
+
+**Time and Space Complexity:**
+
+* **Time Complexity:** O(n²) in the worst and average cases.  However, it can be closer to O(n) if the array is nearly sorted.
+* **Space Complexity:** O(1) – in-place sorting.
+
+**Advantages:**
+
+* Minimal writes.
+* In-place.
+
+**Disadvantages:**
+
+* Not as efficient as other algorithms (like merge sort or quicksort) for larger, unsorted arrays.
+* Unstable: it doesn't preserve the relative order of equal elements.
+
+
+Cycle sort is a niche algorithm.  It's rarely the best choice for general-purpose sorting, but it shines in situations where minimizing write operations is paramount, such as when working with flash memory or other storage media where writes are slow or expensive.
+
