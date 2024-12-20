@@ -11567,3 +11567,75 @@ Both achieve the same result, but their computational structures differ slightly
 
 The Radix-2 FFT is a fundamental algorithm in digital signal processing, used extensively in applications such as audio and image processing, spectral analysis, and telecommunications due to its computational efficiency.  While the mathematical details can be complex, understanding the core principles of divide and conquer, the butterfly operation, and bit-reversal permutation provides a good grasp of how this powerful algorithm works.
 
+#  Radix 2 Inverse FFT 
+The Radix-2 Inverse Fast Fourier Transform (IFFT) is an algorithm used to efficiently compute the inverse discrete Fourier transform (IDFT) of a sequence of complex numbers.  It's essentially the reverse process of the FFT.  The IFFT takes a frequency-domain representation and transforms it back to the time-domain (or spatial-domain, depending on the application).
+
+Here's a breakdown of the Radix-2 IFFT:
+
+**1. Understanding the IDFT:**
+
+The IDFT of a sequence `X[k]` (of length N) is given by:
+
+```
+x[n] = (1/N) * Σ_{k=0}^{N-1} X[k] * exp(j * 2π * n * k / N)
+```
+
+where:
+
+* `x[n]` is the time-domain sequence.
+* `X[k]` is the frequency-domain sequence.
+* `N` is the length of the sequences (must be a power of 2 for Radix-2 IFFT).
+* `j` is the imaginary unit (√-1).
+* The summation is from k = 0 to N-1.
+
+
+**2. The Radix-2 IFFT Algorithm:**
+
+The Radix-2 IFFT leverages the same divide-and-conquer strategy as the FFT, but with a few key differences:
+
+* **Twiddle Factors:** Instead of using `exp(-j * 2π * n * k / N)` (as in the FFT), the IFFT uses `exp(j * 2π * n * k / N)`.  This is the crucial difference that reverses the transform.
+
+* **Scaling:** The IFFT requires a scaling factor of `1/N` applied to the final result. This is often incorporated into the algorithm's final stage.
+
+* **Bit Reversal:** Like the FFT, the IFFT often benefits from bit-reversal permutation of the input sequence before processing, and may require bit reversal of the output depending on the implementation.
+
+**3. Algorithm Steps (Simplified):**
+
+1. **Input:** The input is the frequency-domain sequence `X[k]` of length N (N = 2<sup>m</sup>, where m is an integer).
+
+2. **Bit Reversal (Optional):**  Rearrange the input sequence `X[k]` according to the bit-reversed order of the indices `k`.  Many implementations perform this step.
+
+3. **Butterfly Operations:** The core of the IFFT are the butterfly operations.  These are recursive operations that combine pairs of elements using the twiddle factors:
+
+   ```
+   X'[n] = X[n] + W^n * X[n+N/2]
+   X'[n+N/2] = X[n] - W^n * X[n+N/2] 
+   ```
+
+   where:
+
+   * `X'` is the updated sequence.
+   * `W^n = exp(j * 2π * n / N)` is the twiddle factor.
+   * `n` ranges from 0 to N/2 - 1.
+
+
+4. **Recursion:** These butterfly operations are applied recursively, dividing the problem into smaller subproblems until reaching the base case (single-element sequences).
+
+5. **Scaling (Final):** After the recursive steps, the resulting sequence is scaled by `1/N`.
+
+6. **Output:** The output is the time-domain sequence `x[n]`.
+
+
+**4. Implementation Notes:**
+
+* The algorithm can be implemented iteratively or recursively.  Iterative implementations are generally preferred for efficiency.
+* Optimized implementations use lookup tables for twiddle factors to reduce computation time.
+* Efficient IFFT implementations are crucial in many signal processing applications, such as image reconstruction, audio processing, and communication systems.
+
+**5. Relationship to FFT:**
+
+The IFFT is closely related to the FFT. In fact, many FFT implementations can be easily adapted to perform the IFFT by simply changing the sign of the exponent in the twiddle factors and adding the scaling factor at the end.  Libraries like FFTW (Fastest Fourier Transform in the West) provide highly optimized implementations of both FFT and IFFT.
+
+
+This explanation provides a conceptual overview.  For a complete implementation, refer to algorithms textbooks or the documentation of numerical computation libraries.  The level of detail needed for a complete, functional code implementation is beyond the scope of a single response.
+
