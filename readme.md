@@ -8217,3 +8217,49 @@ print(f"Sorted array: {sorted_array}")
 
 Odd-Even Sort is primarily of theoretical interest and educational value.  For practical applications with large datasets, more efficient algorithms are preferred.
 
+#  Odd-Even Sort Basic Information 
+Odd-Even Sort is a relatively simple sorting algorithm that works by repeatedly comparing and swapping adjacent pairs of elements.  Unlike some other sorting algorithms, it's not particularly efficient for large datasets, but its simplicity and potential for parallelization make it noteworthy.
+
+Here's a breakdown of its basic information:
+
+**How it works:**
+
+Odd-Even Sort operates in phases.  Each phase consists of two passes:
+
+1. **Odd Pass:**  Elements at odd indices (1, 3, 5, ...) are compared with their immediate right neighbors (elements at even indices). If a pair is out of order, they are swapped.
+
+2. **Even Pass:** Elements at even indices (2, 4, 6, ...) are compared with their immediate right neighbors (elements at odd indices). Again, if a pair is out of order, they are swapped.
+
+These odd and even passes are repeated until no swaps are made in a complete cycle.  This indicates that the list is sorted.
+
+**Key Characteristics:**
+
+* **Comparison-based:** It relies on comparing adjacent elements to determine their order.
+* **In-place:** It sorts the data directly within the input array, without requiring significant extra memory.
+* **Stable:**  If two elements have the same value, their relative order remains unchanged after sorting.
+* **Simple to implement:**  The algorithm's logic is straightforward.
+* **Not very efficient:** Its time complexity is O(n²) in the worst and average cases, making it significantly slower than algorithms like merge sort or quicksort for large datasets.  It's best suited for small datasets or specific situations where its parallel nature is beneficial.
+* **Parallelizable:** The odd and even passes can be performed independently on different parts of the array, making it suitable for parallel processing.  This can significantly improve performance on multi-core processors.
+
+
+**Example (unsorted list: 5, 2, 8, 1, 9, 4):**
+
+* **Pass 1 (Odd):**
+    * Compare 5 and 2; swap: 2, 5, 8, 1, 9, 4
+    * Compare 8 and 1; swap: 2, 5, 1, 8, 9, 4
+    * Compare 9 and 4; swap: 2, 5, 1, 8, 4, 9
+
+* **Pass 2 (Even):**
+    * Compare 5 and 1; swap: 2, 1, 5, 8, 4, 9
+    * Compare 8 and 4; swap: 2, 1, 5, 4, 8, 9
+
+*(Continue passes until no more swaps are needed)*
+
+**Time and Space Complexity:**
+
+* **Time Complexity:** O(n²) - Worst case and Average case
+* **Space Complexity:** O(1) - In-place sorting
+
+
+In summary, Odd-Even Sort is a simple, stable, and parallelizable sorting algorithm, but its quadratic time complexity limits its practicality for large-scale sorting tasks.  Its main advantage lies in its ease of implementation and suitability for parallel processing environments.
+
