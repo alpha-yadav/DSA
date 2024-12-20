@@ -3331,3 +3331,87 @@ A* balances these by using a heuristic function to estimate the remaining distan
 
 A* is a powerful and widely used algorithm.  Its effectiveness hinges on choosing an appropriate heuristic function that accurately reflects the cost of reaching the goal.  Many variations and optimizations of A* exist to improve its performance in specific applications.
 
+#  Simple Example of A* Pathfinding
+This example demonstrates A* pathfinding on a small grid.  We'll use a simplified representation for clarity.  A real-world implementation would likely use more sophisticated data structures.
+
+**1. The Grid:**
+
+Let's represent our grid as a 2D array:
+
+```python
+grid = [
+    [0, 0, 0, 0, 1],
+    [0, 1, 1, 0, 0],
+    [0, 0, 0, 1, 0],
+    [1, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0]
+]
+
+# 0 represents walkable terrain, 1 represents an obstacle
+```
+
+**2. Heuristic Function (Manhattan Distance):**
+
+We'll use the Manhattan distance as our heuristic.  It estimates the distance between two points by summing the absolute differences of their coordinates:
+
+```python
+import math
+
+def heuristic(a, b):
+  return abs(a[0] - b[0]) + abs(a[1] - b[1])
+```
+
+**3. A* Algorithm:**
+
+```python
+import heapq
+
+def a_star(grid, start, end):
+  open_set = [(0, start)]  # (f_score, (x, y))
+  came_from = {}
+  g_score = {start: 0}
+  f_score = {start: heuristic(start, end)}
+
+  while open_set:
+    current = heapq.heappop(open_set)[1]
+
+    if current == end:
+      path = reconstruct_path(came_from, current)
+      return path
+
+    for dx, dy in [(0, 1), (1, 0), (0, -1), (-1, 0)]: # Check adjacent cells
+      neighbor = (current[0] + dx, current[1] + dy)
+      if 0 <= neighbor[0] < len(grid) and 0 <= neighbor[1] < len(grid[0]) and grid[neighbor[0]][neighbor[1]] == 0:
+        tentative_g_score = g_score[current] + 1
+        if neighbor not in g_score or tentative_g_score < g_score[neighbor]:
+          came_from[neighbor] = current
+          g_score[neighbor] = tentative_g_score
+          f_score[neighbor] = tentative_g_score + heuristic(neighbor, end)
+          heapq.heappush(open_set, (f_score[neighbor], neighbor))
+
+  return None  # No path found
+
+def reconstruct_path(came_from, current):
+  path = [current]
+  while current in came_from:
+    current = came_from[current]
+    path.append(current)
+  return path[::-1] # Reverse the path to get it from start to end
+```
+
+**4.  Running the Algorithm:**
+
+```python
+start = (0, 0)
+end = (4, 4)
+
+path = a_star(grid, start, end)
+
+if path:
+  print("Path found:", path)
+else:
+  print("No path found.")
+```
+
+This code will output a path (a list of coordinates) from the start to the end, avoiding obstacles.  If no path exists, it will indicate that.  Remember to install the `heapq` module if it's not already included (it's part of the Python standard library, so it likely is).  This is a basic example;  consider adding features like diagonal movement, different cost for different terrain types, etc., for more realistic scenarios.
+
