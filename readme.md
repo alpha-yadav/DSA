@@ -5728,3 +5728,75 @@ def kmpSearch(text, pattern):
 
 The KMP algorithm is a powerful tool for string searching, particularly when dealing with large texts and repeated searches.  Its efficiency makes it superior to naive string searching in many applications.
 
+#  KMP-Example 
+The Knuth-Morris-Pratt (KMP) algorithm is an efficient string-searching algorithm.  Instead of restarting the search from the beginning of the text every time a mismatch occurs, it uses a "partial match" table (also called a failure function) to shift the pattern intelligently. This table indicates how far to shift the pattern based on the previously matched characters.
+
+Let's illustrate with an example:
+
+**Text (T):**  `ababcababaabcabab`
+**Pattern (P):** `ababca`
+
+
+1. **Creating the Partial Match Table (π):**
+
+The π table tells us how many characters match at the beginning of the pattern if a mismatch occurs at a particular position.  It's calculated as follows:
+
+* π[0] = 0 (Always)
+* For i > 0,  π[i] is the length of the longest proper prefix of P[0...i] that is also a suffix of P[0...i].
+
+Let's build the π table for the pattern "ababca":
+
+| i | P[i] | Longest Proper Prefix which is also a Suffix | π[i] |
+|---|---|---|---|
+| 0 | a |  | 0 |
+| 1 | b |  | 0 |
+| 2 | a | a | 1 |
+| 3 | b | ab | 2 |
+| 4 | c |  | 0 |
+| 5 | a | a | 1 |
+
+
+Therefore, the π table is: `[0, 0, 1, 2, 0, 1]`
+
+
+2. **The KMP Search Algorithm:**
+
+Now, let's apply the KMP algorithm to search for "ababca" within "ababcababaabcabab":
+
+```
+Text:  ababcababaabcabab
+Pattern: ababca
+π table: [0, 0, 1, 2, 0, 1]
+
+i = 0 (index in Text)
+j = 0 (index in Pattern)
+
+Iteration | i | j | T[i] | P[j] | Match? | Action
+------- | -------- | -------- | -------- | -------- | -------- | --------
+1 | 0 | 0 | a | a | Yes | j++
+2 | 1 | 1 | b | b | Yes | j++
+3 | 2 | 2 | a | a | Yes | j++
+4 | 3 | 3 | b | b | Yes | j++
+5 | 4 | 4 | c | c | Yes | j++
+6 | 5 | 5 | a | a | Yes | j++  (Pattern found!)
+7 | 6 | 0 | b | a | No  | j = π[j-1] = π[5] = 1; i remains 6.
+8 | 6 | 1 | b | b | Yes | j++
+9 | 7 | 2 | a | a | Yes | j++
+10 | 8 | 3 | b | b | Yes | j++
+11 | 9 | 4 | a | c | No | j = π[j-1] = π[4] = 0; i++
+12 | 10 | 0 | b | a | No | j = π[j-1] = π[0] = 0; i++
+13 | 11 | 0 | c | a | No | j = π[j-1] = π[0] = 0; i++
+14 | 12 | 0 | a | a | Yes | j++
+15 | 13 | 1 | b | b | Yes | j++
+16 | 14 | 2 | b | a | No | j = π[j-1] = π[2] = 1; i remains 14.
+17 | 14 | 1 | b | b | Yes | j++
+18 | 15 | 2 | a | a | Yes | j++
+19 | 16 | 3 | b | b | Yes | j++
+20 | 17 | 4 | ... | ... | ...
+```
+
+The pattern "ababca" is found at index 5 in the text. The algorithm continues to search for any further occurrences.
+
+
+This example demonstrates the efficiency of KMP.  By using the π table, it avoids unnecessary comparisons and shifts the pattern effectively.  This is particularly beneficial when dealing with long texts and patterns with repeated sub-patterns.
+
