@@ -8405,3 +8405,113 @@ Selection sort is rarely used in practice for large datasets due to its O(n^2) t
 
 In summary, selection sort is a fundamental sorting algorithm, easy to learn, but not efficient for large-scale sorting tasks.  Understanding it provides a good foundation for learning more advanced sorting techniques.
 
+#  Implementation of Selection sort in C# 
+Several implementations of Selection Sort in C# are possible, depending on whether you want to sort in place or create a new sorted array.  Here are a couple of versions:
+
+**Version 1: In-place Selection Sort (modifies the original array)**
+
+This version is generally preferred for its efficiency in memory usage.
+
+```csharp
+using System;
+
+public class SelectionSort
+{
+    public static void Sort(int[] arr)
+    {
+        int n = arr.Length;
+
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < n - 1; i++)
+        {
+            // Find the minimum element in unsorted array
+            int min_idx = i;
+            for (int j = i + 1; j < n; j++)
+                if (arr[j] < arr[min_idx])
+                    min_idx = j;
+
+            // Swap the found minimum element with the first element
+            int temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    public static void Main(string[] args)
+    {
+        int[] arr = { 64, 25, 12, 22, 11 };
+        Console.WriteLine("Unsorted array:");
+        PrintArray(arr);
+
+        Sort(arr);
+
+        Console.WriteLine("\nSorted array:");
+        PrintArray(arr);
+    }
+
+    static void PrintArray(int[] arr)
+    {
+        int n = arr.Length;
+        for (int i = 0; i < n; ++i)
+            Console.Write(arr[i] + " ");
+        Console.WriteLine();
+    }
+}
+```
+
+**Version 2: Selection Sort creating a new sorted array (does not modify the original)**
+
+This version creates a new array containing the sorted elements.  It's less efficient in memory but can be useful in situations where you need to preserve the original array.
+
+
+```csharp
+using System;
+
+public class SelectionSort
+{
+    public static int[] Sort(int[] arr)
+    {
+        int n = arr.Length;
+        int[] sortedArr = new int[n];
+        Array.Copy(arr, sortedArr, n); //Copy to avoid modifying original
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            int min_idx = i;
+            for (int j = i + 1; j < n; j++)
+                if (sortedArr[j] < sortedArr[min_idx])
+                    min_idx = j;
+
+            int temp = sortedArr[min_idx];
+            sortedArr[min_idx] = sortedArr[i];
+            sortedArr[i] = temp;
+        }
+        return sortedArr;
+    }
+
+    public static void Main(string[] args)
+    {
+        int[] arr = { 64, 25, 12, 22, 11 };
+        Console.WriteLine("Unsorted array:");
+        PrintArray(arr);
+
+        int[] sortedArr = Sort(arr);
+
+        Console.WriteLine("\nSorted array:");
+        PrintArray(sortedArr);
+        Console.WriteLine("\nOriginal array unchanged:");
+        PrintArray(arr);
+    }
+
+    static void PrintArray(int[] arr)
+    {
+        int n = arr.Length;
+        for (int i = 0; i < n; ++i)
+            Console.Write(arr[i] + " ");
+        Console.WriteLine();
+    }
+}
+```
+
+Remember that Selection Sort has a time complexity of O(n²) which makes it inefficient for large datasets.  For larger datasets, consider using more efficient algorithms like Merge Sort or Quick Sort.  However, Selection Sort is simple to understand and implement, making it a good choice for educational purposes or very small datasets.
+
