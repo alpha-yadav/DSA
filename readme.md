@@ -9822,3 +9822,67 @@ Hash functions have a broad range of applications, including:
 
 The choice of hash function depends on the specific application and security requirements.  For security-sensitive applications, always use a well-vetted and widely accepted function like SHA-256 or SHA-3.  Avoid using MD5 and SHA-1 in new systems.  Keep abreast of the latest cryptographic research and updates regarding the security of hash functions.
 
+#  Hash codes for common types in C# 
+C# provides built-in hash code generation for many common types, and the `GetHashCode()` method is overridden to provide reasonable implementations. However, it's crucial to understand how these work and potential pitfalls, especially when dealing with custom classes.  Here's a breakdown for common types:
+
+**Built-in Types:**
+
+* **`int`, `long`, `short`, `byte`, `sbyte`, `uint`, `ulong`, `ushort`:  These integral types directly return their value as the hash code.**  This is efficient and usually works well since they are already uniformly distributed.
+
+* **`float`, `double`, `decimal`: These floating-point types use a more complex algorithm to generate the hash code.** The algorithm aims to produce a relatively uniform distribution of hash codes, even for values that are very close together.  Directly using the bit representation isn't ideal due to representation quirks of floating-point numbers.
+
+* **`bool`: `true` typically hashes to 1, and `false` to 0.**
+
+* **`char`: The numerical Unicode value of the character is used as the hash code.**
+
+* **`string`:  This is a more sophisticated algorithm.** It's not simply a sum of character codes. The implementation is optimized to minimize collisions and is designed for good performance.  It's case-sensitive.
+
+* **`DateTime`: Uses the internal representation of the `DateTime` object to generate the hash code.**  This usually works well, but remember that it's based on the *ticks* (100-nanosecond intervals).
+
+* **`Guid`: Guids have a built-in hash code generation which is highly effective at preventing collisions.** This is because they are specifically designed for uniqueness.
+
+
+**Important Considerations:**
+
+* **Value Types vs. Reference Types:** For value types, the hash code is based directly on the value. For reference types, it's based on the object's reference (memory address), *unless* `GetHashCode()` is overridden.  Two different objects of the same value type will have different hash codes if they are independently created.  Two references to the same object (reference type) will have the same hash code.
+
+* **Overriding `GetHashCode()`:**  When creating custom classes, you *must* override `GetHashCode()` if you override `Equals()`.  The contract is that if `a.Equals(b)` returns `true`, then `a.GetHashCode()` must equal `b.GetHashCode()`.   Failure to do so can break hash-based collections like `HashSet<T>` and `Dictionary<TKey, TValue>`.  If you don't override `Equals()`, you don't *need* to override `GetHashCode()`, though providing one can improve performance in some scenarios.
+
+* **Uniformity:** A good hash function aims for a uniform distribution of hash codes to minimize collisions. Poorly designed hash functions can lead to performance degradation in hash-based data structures.
+
+* **Immutability:**  For types that change after creation, the hash code should remain constant.  Otherwise, it might cause inconsistencies in hash-based collections. This is important especially for reference types.
+
+**Example of overriding `GetHashCode()` and `Equals()` in a custom class:**
+
+```csharp
+public class Person
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+
+        Person other = (Person)obj;
+        return FirstName == other.FirstName && LastName == other.LastName;
+    }
+
+    public override int GetHashCode()
+    {
+        unchecked // Overflow is fine, just wrap
+        {
+            int hash = 17;
+            hash = hash * 23 + FirstName.GetHashCode();
+            hash = hash * 23 + LastName.GetHashCode();
+            return hash;
+        }
+    }
+}
+```
+
+This example shows a robust way to override both methods, ensuring consistency and good hash code distribution (using a common prime number-based technique).  The `unchecked` keyword prevents overflow exceptions. Remember to handle `null` values appropriately within your `GetHashCode()` method for properties that could be null.  For instance, using `?.GetHashCode()` or similar pattern can avoid `NullReferenceException`.
+
