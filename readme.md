@@ -8349,3 +8349,59 @@ Please provide me with the task or problem you want me to solve using Elixir.  I
 
 Once I have this information, I can provide you with a well-commented and efficient Elixir implementation.
 
+#  Selection Sort Basic Information 
+Selection sort is a simple, in-place comparison-based sorting algorithm.  Here's a breakdown of its basic information:
+
+**How it works:**
+
+Selection sort repeatedly finds the minimum element from the unsorted part of the array and places it at the beginning.  It iteratively steps through the array, selecting the minimum element and swapping it into its correct position.
+
+**Algorithm Steps:**
+
+1. **Find the minimum:**  Find the minimum element in the unsorted part of the array.
+2. **Swap:** Swap the minimum element with the first element of the unsorted part.
+3. **Repeat:** Repeat steps 1 and 2 for the remaining unsorted part of the array until the entire array is sorted.
+
+
+**Example:**
+
+Let's sort the array [64, 25, 12, 22, 11]:
+
+1. **Iteration 1:** Minimum is 11. Swap 11 and 64. Array becomes [11, 25, 12, 22, 64].
+2. **Iteration 2:** Minimum of [25, 12, 22, 64] is 12. Swap 12 and 25. Array becomes [11, 12, 25, 22, 64].
+3. **Iteration 3:** Minimum of [25, 22, 64] is 22. Swap 22 and 25. Array becomes [11, 12, 22, 25, 64].
+4. **Iteration 4:** Minimum of [25, 64] is 25. No swap needed. Array remains [11, 12, 22, 25, 64].
+5. The array is now sorted.
+
+
+**Key Characteristics:**
+
+* **In-place:**  It sorts the array without needing a significant amount of extra memory.
+* **Comparison-based:**  It relies on comparing elements to determine their order.
+* **Simple to understand and implement:**  The algorithm is relatively straightforward.
+* **Inefficient for large datasets:**  Its time complexity is O(n^2), making it slow for large arrays.  This means the time it takes to sort increases quadratically with the number of elements.
+* **Stable:** A stable sort maintains the relative order of equal elements. Selection sort is *not* inherently stable, although variations can be made to achieve stability.
+* **Adaptive:**  It doesn't adapt to already-sorted data; it always performs the full sorting process.
+
+
+**Time Complexity:**
+
+* **Best-case:** O(n^2) -  Even if the array is already sorted, it still performs all comparisons.
+* **Average-case:** O(n^2)
+* **Worst-case:** O(n^2) - This happens when the array is in reverse order.
+
+
+**Space Complexity:** O(1) -  It's an in-place algorithm, requiring constant extra space.
+
+
+**When to use Selection Sort:**
+
+Selection sort is rarely used in practice for large datasets due to its O(n^2) time complexity. However, it can be useful in the following scenarios:
+
+* **Educational purposes:** Its simplicity makes it an excellent algorithm to learn sorting concepts.
+* **Small datasets:**  For very small arrays, the overhead of more complex algorithms might outweigh the benefits, making selection sort a reasonable choice.
+* **Situations where simplicity is prioritized over performance:**  If the code needs to be easily understood and maintained, and performance is not critical, selection sort can be a viable option.
+
+
+In summary, selection sort is a fundamental sorting algorithm, easy to learn, but not efficient for large-scale sorting tasks.  Understanding it provides a good foundation for learning more advanced sorting techniques.
+
