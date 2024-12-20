@@ -8874,3 +8874,66 @@ else:
 
 Linear search is a basic but fundamental algorithm.  Understanding it is crucial before learning more advanced search techniques.
 
+#  Substring Search 
+Substring search, also known as string searching, is the process of finding occurrences of a smaller string (the *pattern*) within a larger string (the *text*).  There are numerous algorithms to achieve this, each with different performance characteristics.  Here's a breakdown:
+
+**Common Substring Search Algorithms:**
+
+* **Naive String Search (Brute-Force):**
+
+    * **How it works:**  This is the simplest approach. It slides the pattern across the text, character by character, comparing the pattern to the corresponding substring of the text at each position.
+    * **Time Complexity:** O(mn), where 'm' is the length of the pattern and 'n' is the length of the text.  This is inefficient for large texts and patterns.
+    * **Space Complexity:** O(1) – constant space.
+    * **Example (Python):**
+
+    ```python
+    def naive_search(text, pattern):
+        n = len(text)
+        m = len(pattern)
+        for i in range(n - m + 1):
+            if text[i:i+m] == pattern:
+                return i  # Return the starting index of the first occurrence
+        return -1  # Pattern not found
+    ```
+
+* **Knuth-Morris-Pratt (KMP):**
+
+    * **How it works:**  KMP uses a pre-processing step to create a "partial match table" (or failure function) for the pattern. This table helps avoid redundant comparisons by leveraging information about previously matched characters.  When a mismatch occurs, the algorithm uses the table to efficiently shift the pattern to the right without rechecking already matched characters.
+    * **Time Complexity:** O(n) – linear time, regardless of the pattern length.
+    * **Space Complexity:** O(m) – linear space to store the partial match table.
+    * **Example (Python):  Requires implementing the partial match table separately.**  Many libraries provide optimized KMP implementations.
+
+
+* **Boyer-Moore:**
+
+    * **How it works:**  Boyer-Moore is another highly efficient algorithm. It uses two heuristics: the "bad character rule" and the "good suffix rule."  The bad character rule shifts the pattern based on the mismatched character in the text.  The good suffix rule shifts the pattern based on matching suffixes within the pattern.
+    * **Time Complexity:**  On average, O(n/m), which is sublinear in most cases.  Worst-case time complexity can be O(mn) but is rare in practice.
+    * **Space Complexity:** O(m) or O(σ) where σ is the size of the alphabet.
+    * **Example (Python): Implementing Boyer-Moore is more complex and generally done using library functions.**
+
+
+* **Rabin-Karp:**
+
+    * **How it works:**  This algorithm uses hashing to compare the pattern and the text substrings. It calculates a hash value for the pattern and rolls the hash value for the text substrings as it slides across the text.  If the hash values match, a full comparison is performed to confirm the match.
+    * **Time Complexity:**  Average case O(n + m), worst-case O(mn). The worst-case is heavily dependent on the hash function used and the probability of hash collisions.
+    * **Space Complexity:** O(1)
+
+
+**Choosing the Right Algorithm:**
+
+The best algorithm depends on the specific application:
+
+* **For small texts and patterns:** Naive search might be sufficient due to its simplicity.
+* **For large texts and patterns:** KMP, Boyer-Moore, or Rabin-Karp are significantly more efficient.  Boyer-Moore often performs best in practice, while KMP is a strong alternative.  Rabin-Karp can be advantageous when dealing with very long patterns or when multiple patterns need to be searched simultaneously.
+
+**Libraries and Built-in Functions:**
+
+Most programming languages provide built-in functions or library modules for substring search that often use highly optimized algorithms like KMP or Boyer-Moore under the hood.  For example:
+
+* **Python:**  The `str.find()` method is commonly used and highly efficient.
+* **Java:**  The `String.indexOf()` method is analogous to Python's `str.find()`.
+* **C++:**  The `<string>` library offers efficient string searching functions.
+
+
+Remember to consider factors like text size, pattern size, and the frequency of searches when choosing the most appropriate substring search algorithm for your needs.
+
