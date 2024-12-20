@@ -4579,3 +4579,71 @@ In contrast, using the SPT rule (C, A, B), also minimizes lateness in this insta
 
 Minimizing lateness is a multifaceted problem.  Choosing the right approach depends on a careful analysis of the specific problem characteristics and available resources.
 
+#  Prim's Algorithm 
+Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph.  A minimum spanning tree (MST) is a subset of the edges of a connected, edge-weighted undirected graph that connects all the vertices together, without any cycles and with the minimum possible total edge weight.
+
+Here's a breakdown of Prim's algorithm:
+
+**1. Initialization:**
+
+* Start with a single vertex (choose any vertex as the starting point).  This vertex is initially part of the MST.
+* Create a set `MST` to store the edges of the minimum spanning tree.  This set will be empty initially.
+* Create a set `Q` (priority queue) to store the vertices not yet included in the MST.  Initially, `Q` contains all vertices in the graph.  The priority queue is crucial for efficiency; it's ordered by the weight of the minimum edge connecting each vertex to the MST.
+
+**2. Iteration:**
+
+The algorithm iteratively adds vertices to the MST until all vertices are included.  Each iteration involves these steps:
+
+* **Select the vertex:**  Remove the vertex `u` from `Q` that has the minimum weight edge connecting it to the MST. This is the key step where the priority queue is used.  The minimum weight edge is found efficiently by examining the top element of the queue.
+* **Add to MST:** Add the edge connecting `u` to the MST (the edge that was used to select `u`).  This edge and vertex `u` are now part of the `MST`.
+* **Update Q:** For each neighbor `v` of `u` that is still in `Q`, check if the weight of the edge (u,v) is less than the current minimum weight edge connecting `v` to the MST. If it is, update the priority of `v` in `Q` to reflect this smaller weight.
+
+**3. Termination:**
+
+The algorithm terminates when `Q` is empty (all vertices are in the MST).  The set `MST` now contains the edges of the minimum spanning tree.
+
+
+**Example:**
+
+Let's say we have a graph with the following edges and weights:
+
+* A-B: 4
+* A-C: 2
+* B-C: 1
+* B-D: 5
+* C-D: 3
+
+1. **Start with A:**  `MST` = {}, `Q` = {A, B, C, D}
+2. **Select A:**  `MST` = {},  `Q` = {A (priority 0), B (priority 4), C (priority 2), D (priority ∞)} (∞ represents infinity, meaning no connection to MST yet)
+3. **Add A-C:** `MST` = {A-C}, `Q` = {B (priority 1), D (priority 3), A (removed)}  (Updated: B's priority is the weight of B-C, D's priority is the weight of C-D)
+4. **Select B:** `MST` = {A-C, B-C}, `Q` = {D (priority 3), B (removed)}
+5. **Add B-D:** `MST` = {A-C, B-C, B-D}, `Q` = {D (removed)}
+
+The minimum spanning tree has edges A-C, B-C, and B-D, with a total weight of 2 + 1 + 5 = 8.
+
+
+**Pseudocode:**
+
+```
+Prim(G, w):
+    MST = {}
+    Q = all vertices of G
+    key[v] = ∞ for all v in V[G]   // Initialize key values to infinity
+    key[r] = 0  // Select a root vertex r
+    while Q is not empty:
+        u = vertex with minimum key in Q
+        remove u from Q
+        add u to MST
+        for each vertex v adjacent to u:
+            if v is in Q and w(u, v) < key[v]:
+                key[v] = w(u, v)
+                parent[v] = u   // To reconstruct the MST later
+```
+
+**Data Structures:**
+
+The efficient implementation of Prim's algorithm relies on a priority queue (min-heap) to quickly find the vertex with the minimum key value. This allows the algorithm to run in O(E log V) time, where E is the number of edges and V is the number of vertices.
+
+
+Prim's algorithm is conceptually simple and can be effectively implemented using various data structures, making it a popular choice for finding minimum spanning trees.  It's closely related to Kruskal's algorithm, another common MST algorithm.
+
