@@ -8138,3 +8138,12 @@ print("Sorted array:", arr)  # Output: Sorted array: [1, 2, 3, 4, 5]
 
 Cycle sort is a niche algorithm.  It's rarely the best choice for general-purpose sorting, but it shines in situations where minimizing write operations is paramount, such as when working with flash memory or other storage media where writes are slow or expensive.
 
+#  Pseudocode Implementation 
+Please provide me with the algorithm or task you want me to write pseudocode for.  I need a description of the problem to create the pseudocode implementation.  For example, tell me:
+
+* **What is the input?** (e.g., a list of numbers, a string, a graph)
+* **What is the output?** (e.g., the largest number, the reversed string, the shortest path)
+* **What are the steps involved?** (Describe the algorithm or process)
+
+The more detail you give me, the better and more accurate the pseudocode will be.
+
