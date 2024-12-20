@@ -9029,3 +9029,101 @@ Here's a breakdown of the key concepts:
 
 In summary, Rabin-Karp offers a powerful and efficient approach to string searching, especially when dealing with larger patterns and texts.  However, a careful selection of the hash function is crucial to mitigate the risk of performance degradation due to excessive collisions.
 
+#  Python Implementation of KMP algorithm 
+The Knuth-Morris-Pratt (KMP) algorithm is an efficient string-searching algorithm.  Here's a Python implementation, broken down for clarity:
+
+```python
+def kmp_search(text, pattern):
+    """
+    Performs a Knuth-Morris-Pratt (KMP) search.
+
+    Args:
+        text: The text to search within.
+        pattern: The pattern to search for.
+
+    Returns:
+        A list of indices where the pattern is found in the text.  Returns an empty list if the pattern is not found.
+    """
+
+    # Preprocess the pattern to create the partial match table (PMT)
+    pmt = create_partial_match_table(pattern)
+
+    # Perform the search
+    matches = []
+    i = 0  # Index for the text
+    j = 0  # Index for the pattern
+    while i < len(text):
+        if pattern[j] == text[i]:
+            i += 1
+            j += 1
+            if j == len(pattern):  # Pattern found
+                matches.append(i - j)
+                j = pmt[j - 1]  # Continue searching from the next possible match
+        else:
+            j = pmt[j] if j > 0 else 0  # Move the pattern according to the PMT
+            i += 1
+
+    return matches
+
+
+def create_partial_match_table(pattern):
+    """
+    Creates the partial match table (PMT) for the KMP algorithm.
+
+    Args:
+        pattern: The pattern to create the PMT for.
+
+    Returns:
+        A list representing the PMT.
+    """
+
+    m = len(pattern)
+    pmt = [0] * m
+    length = 0  # Length of the previous longest prefix suffix
+
+    i = 1
+    while i < m:
+        if pattern[i] == pattern[length]:
+            length += 1
+            pmt[i] = length
+            i += 1
+        else:
+            if length != 0:
+                length = pmt[length - 1]
+            else:
+                i += 1
+
+    return pmt
+
+# Example Usage
+text = "ABABDABACDABABCABAB"
+pattern = "ABABCABAB"
+
+indices = kmp_search(text, pattern)
+if indices:
+    print(f"Pattern found at indices: {indices}")
+else:
+    print("Pattern not found")
+
+text = "this is a test string"
+pattern = "test"
+indices = kmp_search(text,pattern)
+if indices:
+    print(f"Pattern found at indices: {indices}")
+else:
+    print("Pattern not found")
+
+```
+
+**Explanation:**
+
+1. **`create_partial_match_table(pattern)`:** This function builds the Partial Match Table (PMT).  The PMT helps avoid redundant comparisons by indicating the length of the longest proper prefix of the pattern that is also a suffix of the pattern up to a given position.  This allows the algorithm to "shift" the pattern efficiently when a mismatch occurs.
+
+
+2. **`kmp_search(text, pattern)`:** This function performs the actual search.  It iterates through the text, comparing characters with the pattern.  The PMT guides the shifts of the pattern, significantly improving efficiency compared to naive string search.
+
+
+**How it Improves Efficiency:**
+
+The KMP algorithm avoids backtracking in the text.  When a mismatch occurs, the PMT tells the algorithm how many characters it can safely shift the pattern forward without missing potential matches.  This is a significant advantage over naive string search, especially for patterns with repeating sub-sequences.  The time complexity is O(n + m), where n is the length of the text and m is the length of the pattern, making it significantly faster than naive search (O(n*m)) for many cases.
+
