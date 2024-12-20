@@ -10351,3 +10351,82 @@ Solving nonlinear equations is often more challenging than solving linear equati
 
 Nonlinear equations can have multiple solutions, no solutions, or infinitely many solutions, unlike linear equations which have either one solution or infinitely many (in the case of a system of linearly dependent equations).  The context of the equation (e.g., physical problem it represents) often guides the search for relevant solutions.
 
+#  Longest Common Subsequence 
+The Longest Common Subsequence (LCS) problem is a classic computer science problem that aims to find the longest subsequence common to all sequences in a set of sequences (often just two).  A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.
+
+**Formal Definition:**
+
+Given two sequences, X = (x₁, x₂, ..., xₘ) and Y = (y₁, y₂, ..., yₙ), the longest common subsequence (LCS) is a subsequence that is common to both X and Y and has the maximum length among all common subsequences.
+
+**Example:**
+
+Let's consider two sequences:
+
+X = "AGGTAB"
+Y = "GXTXAYB"
+
+The LCS is "GTAB" (length 4).  Note that "GTAB" is a subsequence of both X and Y, and there is no other common subsequence of greater length.
+
+
+**Approaches to Solving the LCS Problem:**
+
+1. **Brute-Force Approach:** This approach examines all possible subsequences of X and checks if they are also subsequences of Y.  It's computationally expensive, with a time complexity of O(2<sup>m+n</sup>), where 'm' and 'n' are the lengths of the sequences.  This is impractical for even moderately sized sequences.
+
+2. **Dynamic Programming:** This is the most efficient approach for solving the LCS problem. It uses a table (typically a 2D array) to store the lengths of LCSs of prefixes of the input sequences.  The algorithm iterates through the sequences, filling the table using the following recurrence relation:
+
+   * **Base Cases:**
+     * `dp[i][0] = 0` for all `i`
+     * `dp[0][j] = 0` for all `j`
+
+   * **Recursive Relation:**
+     * If `xᵢ == yⱼ`:  `dp[i][j] = dp[i-1][j-1] + 1` (match found, extend the LCS)
+     * If `xᵢ != yⱼ`:  `dp[i][j] = max(dp[i-1][j], dp[i][j-1])` (no match, take the maximum from the previous row or column)
+
+
+   The value `dp[m][n]` will contain the length of the LCS.  To reconstruct the actual LCS sequence, backtracking from `dp[m][n]` is necessary, following the path that led to the maximum values.
+
+   The time complexity of dynamic programming is O(mn), and the space complexity is O(mn).
+
+
+**Python Code (Dynamic Programming):**
+
+```python
+def lcs(X, Y):
+    m = len(X)
+    n = len(Y)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if X[i - 1] == Y[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+
+    # Reconstruct LCS (optional)
+    i = m
+    j = n
+    lcs_str = ""
+    while i > 0 and j > 0:
+        if X[i - 1] == Y[j - 1]:
+            lcs_str = X[i - 1] + lcs_str
+            i -= 1
+            j -= 1
+        else:
+            if dp[i - 1][j] > dp[i][j - 1]:
+                i -= 1
+            else:
+                j -= 1
+
+    return dp[m][n], lcs_str  # Return length and the LCS string
+
+
+X = "AGGTAB"
+Y = "GXTXAYB"
+length, lcs_sequence = lcs(X, Y)
+print(f"Length of LCS: {length}")
+print(f"LCS: {lcs_sequence}")
+```
+
+The dynamic programming approach provides a significantly more efficient solution to the LCS problem compared to the brute-force method, making it suitable for larger input sequences.  Remember that the space complexity can be optimized to O(min(m, n)) using space optimization techniques if only the length of the LCS is needed.
+
