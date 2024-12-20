@@ -403,3 +403,105 @@ For a small array, the difference might be negligible.  However, for a very larg
 
 Big O notation is a crucial tool for analyzing and comparing algorithms' efficiency and choosing the most appropriate one for a given task, especially when dealing with large datasets.
 
+#  A Simple Loop 
+The concept of a "simple loop" is broad, depending on the programming language.  Here are examples of simple loops in a few common languages:
+
+**1. Python:**
+
+This example uses a `for` loop to iterate through a range of numbers:
+
+```python
+for i in range(5):  # Prints numbers 0 to 4
+    print(i)
+```
+
+This example uses a `while` loop to print numbers until a condition is met:
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+
+**2. JavaScript:**
+
+A `for` loop in JavaScript:
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i); // Prints numbers 0 to 4
+}
+```
+
+A `while` loop in JavaScript:
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+**3. C++:**
+
+A `for` loop in C++:
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl; // Prints numbers 0 to 4
+  }
+  return 0;
+}
+```
+
+A `while` loop in C++:
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+**4. Java:**
+
+A `for` loop in Java:
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i); // Prints numbers 0 to 4
+    }
+  }
+}
+```
+
+A `while` loop in Java:
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These are all basic examples. Loops can be far more complex, incorporating nested loops, conditional statements within the loop body, and more sophisticated iteration techniques.  To get a more specific example, please tell me which programming language you're interested in and what you want the loop to accomplish.
+
