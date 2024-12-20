@@ -5800,3 +5800,73 @@ The pattern "ababca" is found at index 5 in the text. The algorithm continues to
 
 This example demonstrates the efficiency of KMP.  By using the π table, it avoids unnecessary comparisons and shifts the pattern effectively.  This is particularly beneficial when dealing with long texts and patterns with repeated sub-patterns.
 
+#  Edit Distance Dynamic Algorithm 
+The dynamic programming algorithm for calculating the edit distance (Levenshtein distance) between two strings is a classic example of efficient algorithm design.  It's based on the principle of breaking down the problem into smaller, overlapping subproblems and storing their solutions to avoid redundant computations.
+
+Here's a breakdown of the algorithm, including code examples in Python and explanations:
+
+**Conceptual Understanding**
+
+The edit distance between two strings, `str1` and `str2`, is the minimum number of edits (insertions, deletions, or substitutions) needed to transform `str1` into `str2`.
+
+The dynamic programming approach uses a matrix (typically a 2D array) to store the edit distances between prefixes of the two strings.  Let `dp[i][j]` represent the edit distance between the first `i` characters of `str1` and the first `j` characters of `str2`.
+
+**Recursive Relation**
+
+The core of the algorithm lies in the recursive relationship:
+
+* `dp[i][j] = 0` if `i = 0` and `j = 0` (empty strings)
+* `dp[i][j] = i` if `j = 0` (insertions to transform empty string to `str1[0:i]`)
+* `dp[i][j] = j` if `i = 0` (deletions to transform empty string to `str2[0:j]`)
+* `dp[i][j] = dp[i-1][j-1]` if `str1[i-1] == str2[j-1]` (no edit needed if characters match)
+* `dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])` if `str1[i-1] != str2[j-1]` (minimum of insertion, deletion, or substitution)
+
+**Python Code**
+
+```python
+def edit_distance(str1, str2):
+    m = len(str1)
+    n = len(str2)
+
+    # Create a matrix to store results of subproblems
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+    # Initialize first row and column of the matrix
+    for i in range(m + 1):
+        dp[i][0] = i
+    for j in range(n + 1):
+        dp[0][j] = j
+
+    # Fill in the rest of the matrix
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if str1[i - 1] == str2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1]
+            else:
+                dp[i][j] = 1 + min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1])
+
+    return dp[m][n]
+
+# Example usage
+string1 = "kitten"
+string2 = "sitting"
+distance = edit_distance(string1, string2)
+print(f"The edit distance between '{string1}' and '{string2}' is: {distance}")  # Output: 3
+```
+
+**Explanation of the Code:**
+
+1. **Initialization:** The `dp` matrix is initialized. The first row and column represent the edit distance when one string is empty.  This is simply the length of the other string (all insertions or deletions).
+
+2. **Iteration:** The code iterates through the matrix, calculating `dp[i][j]` based on the recursive relation.
+
+3. **Return Value:**  `dp[m][n]` contains the final edit distance between the entire strings.
+
+**Time and Space Complexity:**
+
+* **Time Complexity:** O(m*n), where 'm' and 'n' are the lengths of the input strings. This is because the algorithm iterates through the entire `m x n` matrix.
+* **Space Complexity:** O(m*n) as well, due to the space used by the `dp` matrix.  It's possible to optimize this to O(min(m,n)) using space optimization techniques (only storing the current and previous row).
+
+
+This dynamic programming solution provides an efficient and accurate way to calculate the edit distance between two strings.  The code is relatively straightforward and easy to understand, making it a valuable tool for various applications involving string comparison and similarity analysis.
+
