@@ -4137,3 +4137,18 @@ With path compression and union by rank, both `find` and `union` operations have
 
 This implementation provides a clear and efficient way to manage disjoint sets. Remember to adapt the data types (e.g., using a dictionary for `parent` if you have non-integer elements) if needed for your specific application.
 
+#  Simple
+Okay.  I'm ready for your simple request.  Please tell me what you need.
+
+#  more detailed implementation 
+Please provide me with the context!  I need to know *what* you want a more detailed implementation of.  
+
+For example, tell me:
+
+* **What is the task or problem?** (e.g., "sorting a list of numbers," "building a simple web server," "implementing a binary search tree")
+* **What is the current, less detailed implementation?** (e.g., pseudocode, a high-level description, a partially completed code snippet)
+* **What programming language should I use?** (e.g., Python, Java, C++, JavaScript)
+* **What are the specific requirements?** (e.g., efficiency considerations, error handling, specific input/output formats)
+
+The more information you give me, the better I can help you create a more detailed implementation.
+
