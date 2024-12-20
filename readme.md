@@ -6935,3 +6935,123 @@ public class MergeSort
 
 Remember that merge sort has a time complexity of O(n log n) in all cases (best, average, and worst), making it efficient for large datasets.  However, it does require O(n) extra space for the merging process.  This is because of the temporary arrays `L` and `R` created during the merge step.
 
+#  Merge Sort Implementation in Java 
+Several implementations of merge sort in Java are possible, each with slight variations in efficiency and readability. Here are two common approaches: a top-down recursive version and a bottom-up iterative version.
+
+
+**1. Top-Down Recursive Merge Sort**
+
+This is the classic and often easier-to-understand implementation.
+
+```java
+import java.util.Arrays;
+
+public class MergeSort {
+
+    public static void mergeSort(int[] arr) {
+        if (arr == null || arr.length <= 1) {
+            return; // Already sorted or empty
+        }
+        mergeSortRecursive(arr, 0, arr.length - 1);
+    }
+
+    private static void mergeSortRecursive(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+            mergeSortRecursive(arr, left, mid);
+            mergeSortRecursive(arr, mid + 1, right);
+            merge(arr, left, mid, right);
+        }
+    }
+
+    private static void merge(int[] arr, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        // Create temporary arrays
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+
+        // Copy data to temporary arrays
+        System.arraycopy(arr, left, L, 0, n1);
+        System.arraycopy(arr, mid + 1, R, 0, n2);
+
+        // Merge the temporary arrays back into arr
+        int i = 0, j = 0, k = left;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k] = L[i];
+                i++;
+            } else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Copy remaining elements of L[], if any
+        while (i < n1) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        // Copy remaining elements of R[], if any
+        while (j < n2) {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        int[] arr = {12, 11, 13, 5, 6, 7};
+        System.out.println("Unsorted array: " + Arrays.toString(arr));
+        mergeSort(arr);
+        System.out.println("Sorted array: " + Arrays.toString(arr));
+    }
+}
+```
+
+**2. Bottom-Up Iterative Merge Sort**
+
+This version avoids recursion, potentially improving performance for very large arrays (though the difference might be negligible in practice).
+
+```java
+import java.util.Arrays;
+
+public class MergeSortIterative {
+
+    public static void mergeSort(int[] arr) {
+        if (arr == null || arr.length <= 1) {
+            return;
+        }
+
+        int n = arr.length;
+        for (int curr_size = 1; curr_size <= n - 1; curr_size = 2 * curr_size) {
+            for (int left_start = 0; left_start < n - 1; left_start += 2 * curr_size) {
+                int mid = Math.min(left_start + curr_size - 1, n - 1);
+                int right_end = Math.min(left_start + 2 * curr_size - 1, n - 1);
+                merge(arr, left_start, mid, right_end);
+            }
+        }
+    }
+
+    //The merge function remains the same as in the recursive version.
+    private static void merge(int[] arr, int left, int mid, int right) {
+        // ... (same merge function as above) ...
+    }
+
+
+    public static void main(String[] args) {
+        int[] arr = {12, 11, 13, 5, 6, 7};
+        System.out.println("Unsorted array: " + Arrays.toString(arr));
+        mergeSort(arr);
+        System.out.println("Sorted array: " + Arrays.toString(arr));
+    }
+}
+```
+
+Both implementations use the same `merge` function.  Choose the version that best suits your needs and understanding.  The recursive version is generally preferred for its clarity, while the iterative version might offer a slight performance advantage for extremely large datasets. Remember that the space complexity of both versions is O(n) due to the temporary arrays used in the `merge` function.  The time complexity is O(n log n) for both.
+
