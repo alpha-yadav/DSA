@@ -5134,3 +5134,81 @@ function floydWarshall(graph):
 
 Remember that these algorithms assume you have a representation of the graph (adjacency matrix or adjacency list) as input.  The choice of representation can also affect the efficiency of the chosen algorithm.  For extremely large graphs, more advanced techniques might be necessary.
 
+#  Catalan Number Algorithm 
+Catalan numbers are a sequence of natural numbers that occur in various counting problems.  The nth Catalan number is denoted by C<sub>n</sub>.  There are several ways to calculate them, each with different trade-offs in terms of efficiency and simplicity.
+
+Here are a few common algorithms to calculate Catalan numbers:
+
+**1. Recursive Approach (Inefficient):**
+
+This is the most straightforward but least efficient approach, especially for larger values of `n`.  It's based on the recursive definition:
+
+C<sub>n</sub> = Σ<sup>n-1</sup><sub>i=0</sub> (C<sub>i</sub> * C<sub>n-1-i</sub>)  with C<sub>0</sub> = 1
+
+```python
+def catalan_recursive(n):
+  """Calculates the nth Catalan number recursively.  Inefficient for large n."""
+  if n <= 1:
+    return 1
+  res = 0
+  for i in range(n):
+    res += catalan_recursive(i) * catalan_recursive(n-1-i)
+  return res
+
+# Example usage (Avoid large n with this method!)
+print(catalan_recursive(5))  # Output: 42
+```
+
+**2. Dynamic Programming (Efficient):**
+
+This approach avoids redundant calculations by storing previously computed Catalan numbers in an array. This significantly improves efficiency.
+
+```python
+def catalan_dynamic(n):
+  """Calculates the nth Catalan number using dynamic programming."""
+  if n <= 1:
+    return 1
+  dp = [0] * (n + 1)
+  dp[0] = dp[1] = 1
+  for i in range(2, n + 1):
+    for j in range(i):
+      dp[i] += dp[j] * dp[i - j - 1]
+  return dp[n]
+
+# Example usage
+print(catalan_dynamic(5))  # Output: 42
+print(catalan_dynamic(10)) # Output: 16796
+```
+
+**3. Direct Formula (Most Efficient):**
+
+The nth Catalan number can also be calculated directly using the formula:
+
+C<sub>n</sub> = (2n)! / ((n+1)! * n!)
+
+This approach is generally the most efficient, especially for larger values of `n`,  but it can also suffer from overflow issues for large `n` if you're not using a library that handles large integers well (like Python's built-in `int` which handles arbitrary precision).
+
+```python
+import math
+
+def catalan_formula(n):
+  """Calculates the nth Catalan number using the direct formula."""
+  if n <= 1:
+    return 1
+  return math.comb(2*n, n) // (n + 1) #Uses combinations function for efficiency
+
+
+# Example usage
+print(catalan_formula(5))  # Output: 42
+print(catalan_formula(10)) # Output: 16796
+print(catalan_formula(20)) # Output: 6564120420
+```
+
+**Choosing the right algorithm:**
+
+* For small values of `n`, the dynamic programming approach offers a good balance between readability and efficiency.
+* For larger values of `n`, the direct formula using `math.comb` (or a similar function in your chosen language) is the most efficient, provided you are using a language/library that handles large integers effectively.  Avoid the recursive approach entirely for anything beyond small `n` due to its exponential time complexity.
+
+
+Remember that Catalan numbers grow rapidly, so even the efficient methods will eventually be limited by the computational resources available.  For extremely large `n`, specialized algorithms or arbitrary-precision arithmetic libraries might be necessary.
+
