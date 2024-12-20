@@ -4759,3 +4759,83 @@ If a negative cycle is detected, you cannot meaningfully calculate shortest path
 
 In summary, Bellman-Ford is the go-to algorithm when you need to handle the possibility of negative cycles in a single-source shortest path problem.  It efficiently detects negative cycles and provides shortest path distances if no such cycles exist. Remember that the concept of "shortest path" becomes ambiguous when negative cycles are present.
 
+#  Detecting Negative Cycle in a Graph 
+Detecting negative cycles in a graph is a crucial problem in graph theory with applications in areas like shortest path algorithms and arbitrage detection in financial markets.  A negative cycle is a cycle in a graph where the sum of the weights of the edges in the cycle is negative.  The presence of a negative cycle implies that there's no shortest path because you can keep traversing the cycle to get an arbitrarily shorter path.
+
+Here are the common methods to detect negative cycles:
+
+**1. Bellman-Ford Algorithm:**
+
+The Bellman-Ford algorithm is the most widely used and robust method for detecting negative cycles.  It's based on the principle of relaxing edges repeatedly.
+
+* **Initialization:** Assign a distance of 0 to the source vertex and infinity to all other vertices.
+* **Relaxation:** Iterate through all edges `(u, v)` in the graph. If `dist[u] + weight(u, v) < dist[v]`, update `dist[v]` to `dist[u] + weight(u, v)`. This step is repeated |V| - 1 times, where |V| is the number of vertices.
+* **Negative Cycle Detection:** After |V| - 1 iterations, perform one more iteration. If any distance is updated in this final iteration, it means there's a negative cycle reachable from the source vertex.
+
+**Python Code (Bellman-Ford):**
+
+```python
+import sys
+
+def bellman_ford(graph, source):
+    """Detects negative cycles using the Bellman-Ford algorithm.
+
+    Args:
+        graph: A dictionary representing the graph where keys are vertices and values are lists of (neighbor, weight) tuples.
+        source: The source vertex.
+
+    Returns:
+        True if a negative cycle exists, False otherwise.
+    """
+    distances = {vertex: float('inf') for vertex in graph}
+    distances[source] = 0
+
+    num_vertices = len(graph)
+    for _ in range(num_vertices - 1):
+        for vertex in graph:
+            for neighbor, weight in graph[vertex]:
+                if distances[vertex] + weight < distances[neighbor]:
+                    distances[neighbor] = distances[vertex] + weight
+
+    for vertex in graph:
+        for neighbor, weight in graph[vertex]:
+            if distances[vertex] + weight < distances[neighbor]:
+                return True  # Negative cycle detected
+
+    return False
+
+
+# Example usage:
+graph = {
+    'A': [('B', -1), ('C', 4)],
+    'B': [('C', 3), ('D', 2)],
+    'C': [('D', 5), ('E', -3)],
+    'D': [('B', 1), ('E', 2)],
+    'E': [('A', 4)]
+}
+
+if bellman_ford(graph, 'A'):
+    print("Negative cycle detected!")
+else:
+    print("No negative cycle detected.")
+
+```
+
+
+**2. Floyd-Warshall Algorithm (for all pairs shortest paths):**
+
+The Floyd-Warshall algorithm finds the shortest paths between all pairs of vertices.  During its execution, it can detect negative cycles.  If the algorithm detects a negative cycle, the diagonal element of the distance matrix becomes negative.  However, it's less efficient than Bellman-Ford if you only need to detect negative cycles from a single source.
+
+**Limitations:**
+
+* Bellman-Ford has a time complexity of O(VE), where V is the number of vertices and E is the number of edges. This can be slow for very large graphs.
+* Floyd-Warshall has a time complexity of O(V³), making it unsuitable for large graphs.
+
+
+**Choosing the Right Algorithm:**
+
+* **Single-source negative cycle detection:** Use Bellman-Ford.
+* **All-pairs shortest paths and negative cycle detection:** Use Floyd-Warshall (but be mindful of its cubic time complexity).
+
+Remember to adapt the code to your specific graph representation (adjacency matrix, adjacency list, etc.).  The provided Python code uses an adjacency list representation.  Also, error handling (e.g., for invalid graph inputs) might need to be added for robust production-level code.
+
