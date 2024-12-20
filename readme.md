@@ -6646,3 +6646,122 @@ print("Sorted array is:", arr)
 
 This example demonstrates the recursive nature and the merging process.  The code first recursively sorts the left and right halves, then merges them back together.  This recursive structure embodies the divide-and-conquer strategy.
 
+#  Merge Sort Implementation in Go 
+Several Go implementations of merge sort are possible, each with slight variations in efficiency or style. Here are a few examples, starting with a straightforward recursive version and then a slightly more optimized iterative one.
+
+**Recursive Implementation:**
+
+This version is easier to understand but can be less efficient for very large datasets due to recursion depth limitations.
+
+```go
+package main
+
+import "fmt"
+
+func mergeSort(arr []int) []int {
+	if len(arr) <= 1 {
+		return arr
+	}
+
+	mid := len(arr) / 2
+	left := mergeSort(arr[:mid])
+	right := mergeSort(arr[mid:])
+
+	return merge(left, right)
+}
+
+func merge(left, right []int) []int {
+	merged := make([]int, 0, len(left)+len(right))
+	i, j := 0, 0
+
+	for i < len(left) && j < len(right) {
+		if left[i] <= right[j] {
+			merged = append(merged, left[i])
+			i++
+		} else {
+			merged = append(merged, right[j])
+			j++
+		}
+	}
+
+	merged = append(merged, left[i:]...)
+	merged = append(merged, right[j:]...)
+
+	return merged
+}
+
+func main() {
+	arr := []int{5, 2, 8, 1, 9, 4, 7, 3, 6}
+	sortedArr := mergeSort(arr)
+	fmt.Println("Sorted array:", sortedArr)
+}
+```
+
+
+**Iterative Implementation (using a stack):**
+
+This version avoids recursion, making it more suitable for very large datasets. It uses a stack to simulate the recursive calls.
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func mergeSortIterative(arr []int) []int {
+	if len(arr) <= 1 {
+		return arr
+	}
+
+	stack := [][]int{arr}
+	for len(stack) > 0 {
+		current := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		if len(current) <= 1 {
+			continue
+		}
+
+		mid := len(current) / 2
+		left := current[:mid]
+		right := current[mid:]
+		stack = append(stack, left, right)
+	}
+
+	result := make([]int, len(arr))
+	for i:=0;i<len(arr);i++{
+		result[i] = stack[i][0]
+	}
+    
+    return merge(result[:len(arr)/2], result[len(arr)/2:])
+}
+
+
+func merge(left, right []int) []int {
+	merged := make([]int, 0, len(left)+len(right))
+	i, j := 0, 0
+
+	for i < len(left) && j < len(right) {
+		if left[i] <= right[j] {
+			merged = append(merged, left[i])
+			i++
+		} else {
+			merged = append(merged, right[j])
+			j++
+		}
+	}
+
+	merged = append(merged, left[i:]...)
+	merged = append(merged, right[j:]...)
+
+	return merged
+}
+
+func main() {
+	arr := []int{5, 2, 8, 1, 9, 4, 7, 3, 6}
+	sortedArr := mergeSortIterative(arr)
+	fmt.Println("Sorted array:", sortedArr)
+}
+```
+
+Remember to choose the implementation that best suits your needs.  For most cases, the recursive version is perfectly fine and easier to read. The iterative version offers better performance and scalability for extremely large datasets where the recursion depth could become a problem.  Both versions include the `merge` function, which is the core of the merge sort algorithm.  The iterative version needs a slight adjustment in the merge phase, because it needs to merge the elements from the stack.
