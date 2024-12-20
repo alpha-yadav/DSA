@@ -10118,3 +10118,45 @@ print(knapsack_memo(capacity, weights, values, n)) # Output: 220
 
 These examples illustrate the core concepts of dynamic programming.  Many other optimization problems, such as shortest path algorithms (Bellman-Ford, Floyd-Warshall), sequence alignment, and others, can be efficiently solved using this technique.  The choice between memoization and tabulation often depends on the specific problem and personal preference, but tabulation tends to be slightly more efficient in space complexity in many cases.
 
+#  Knapsack Problem 
+The knapsack problem is a classic optimization problem in computer science and operations research.  The core idea is to maximize the value of items you can carry in a knapsack with a limited weight capacity.  There are several variations, but here's a breakdown of the most common:
+
+**0/1 Knapsack Problem:**
+
+* **Problem Statement:** You have a knapsack with a maximum weight capacity `W`.  You also have `n` items, each with a weight `w<sub>i</sub>` and a value `v<sub>i</sub>`.  You can either take an item completely or leave it behind (0 or 1).  The goal is to find the subset of items that maximizes the total value without exceeding the knapsack's weight capacity.
+
+* **Example:**  Imagine a knapsack with a capacity of 10 kg. You have three items:
+    * Item 1: weight = 5 kg, value = $10
+    * Item 2: weight = 4 kg, value = $40
+    * Item 3: weight = 6 kg, value = $30
+
+The optimal solution would be to take Item 2 and Item 1 (total weight = 9 kg, total value = $50).
+
+* **Solution Approaches:**
+    * **Dynamic Programming:** This is the most efficient approach for the 0/1 knapsack problem.  It builds a table to store the maximum value achievable for different weights and item combinations.  The time complexity is O(nW), where n is the number of items and W is the knapsack capacity.  This is pseudo-polynomial time because the complexity depends on the value of W, not just the number of items.
+    * **Greedy Approach:**  A greedy approach might seem intuitive (e.g., always pick the item with the highest value-to-weight ratio), but it doesn't guarantee the optimal solution for the 0/1 knapsack problem.  It can provide a good approximation, though.
+    * **Branch and Bound:** This technique explores the solution space intelligently, pruning branches that are guaranteed not to lead to a better solution than the current best.
+
+**Unbounded Knapsack Problem (or Multiple Knapsack Problem):**
+
+* **Problem Statement:**  Similar to the 0/1 knapsack problem, but you can take multiple instances of the same item.  You have an unlimited supply of each item.
+
+* **Example:**  Same knapsack (10 kg), but you can take as many of each item as you like.
+
+* **Solution Approaches:**
+    * **Dynamic Programming:**  A slightly different dynamic programming approach is used here, still offering an efficient solution.
+
+**Other Variations:**
+
+* **Fractional Knapsack Problem:** You can take fractions of items.  This problem is easily solved using a greedy approach (taking items in order of decreasing value-to-weight ratio until the knapsack is full).
+* **Multiple Knapsack Problem:**  You have multiple knapsacks with different weight capacities.
+* **Multi-dimensional Knapsack Problem:** Items have multiple constraints (e.g., weight and volume).
+
+
+**Choosing the Right Approach:**
+
+The choice of solution approach depends heavily on the specific variation of the knapsack problem.  Dynamic programming is generally the most reliable method for the 0/1 and unbounded knapsack problems, while greedy approaches work well for the fractional knapsack problem.  For larger instances, more advanced techniques like branch and bound or approximation algorithms might be necessary.
+
+
+In summary, the knapsack problem is a fundamental problem with many real-world applications, from resource allocation and portfolio optimization to cargo loading and cryptography.  Understanding the different variations and solution approaches is crucial for tackling these types of optimization challenges.
+
