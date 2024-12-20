@@ -5074,3 +5074,63 @@ After the algorithm completes, if any diagonal element `dist[i][i]` is negative,
 
 The Floyd-Warshall algorithm is a powerful tool for finding all-pairs shortest paths, especially when dealing with dense graphs where other algorithms might be less efficient. However, its cubic time complexity limits its applicability to large graphs.
 
+#  All Pair Shortest Path Algorithm 
+The All-Pairs Shortest Paths (APSP) problem aims to find the shortest paths between all pairs of vertices in a weighted graph.  Several algorithms solve this, each with its own strengths and weaknesses. Here are some prominent ones:
+
+**1. Floyd-Warshall Algorithm:**
+
+* **Idea:**  Dynamic programming approach. It iteratively considers all possible intermediate vertices between each pair of source and destination vertices.
+* **Time Complexity:** O(V³), where V is the number of vertices.  This is independent of the edge density.
+* **Space Complexity:** O(V²), to store the distance matrix.
+* **Advantages:** Simple to implement, works for both directed and undirected graphs, handles negative edge weights (but not negative cycles).
+* **Disadvantages:**  Cubic time complexity makes it inefficient for large graphs.
+
+* **Pseudocode:**
+
+```
+function floydWarshall(graph):
+  dist = graph // Initialize distance matrix with graph's edge weights (infinity for no direct edge)
+
+  for k from 1 to |V|: // Iterate through intermediate vertices
+    for i from 1 to |V|:
+      for j from 1 to |V|:
+        dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+
+  return dist
+```
+
+
+**2. Johnson's Algorithm:**
+
+* **Idea:** Combines Bellman-Ford algorithm and Dijkstra's algorithm. It first detects negative cycles (if any) and then uses Dijkstra's algorithm repeatedly for each source vertex.
+* **Time Complexity:** O(V² log V + VE), where V is the number of vertices and E is the number of edges.  Generally faster than Floyd-Warshall for sparse graphs.
+* **Space Complexity:** O(V²)
+* **Advantages:** Efficient for sparse graphs, handles negative edge weights (but not negative cycles).
+* **Disadvantages:** More complex to implement than Floyd-Warshall.
+
+* **High-level steps:**
+    1. Add a new vertex with zero-weight edges to all other vertices.
+    2. Run Bellman-Ford from the new vertex to detect negative cycles and compute potential values for each vertex.
+    3. Re-weight the graph using the potential values. This eliminates negative weights.
+    4. Run Dijkstra's algorithm from each vertex in the re-weighted graph.
+
+
+**3. Using Dijkstra's Algorithm repeatedly:**
+
+* **Idea:** Run Dijkstra's algorithm for each vertex as the source.
+* **Time Complexity:**  O(V(E log V)) using a Fibonacci heap implementation of Dijkstra's.  This can be faster than Floyd-Warshall for sparse graphs with non-negative weights.
+* **Space Complexity:** O(V²)
+* **Advantages:** Efficient for sparse graphs with non-negative edge weights.
+* **Disadvantages:** Doesn't handle negative edge weights.
+
+
+**Choosing the Right Algorithm:**
+
+* **Non-negative edge weights and dense graph:** Floyd-Warshall might be simpler, though potentially slower for very large graphs.
+* **Non-negative edge weights and sparse graph:**  Repeated Dijkstra's algorithm is usually more efficient.
+* **Negative edge weights (but no negative cycles):** Johnson's algorithm is the best choice.
+* **Negative cycles:**  None of the above algorithms directly work; you need to detect the negative cycle first using Bellman-Ford.
+
+
+Remember that these algorithms assume you have a representation of the graph (adjacency matrix or adjacency list) as input.  The choice of representation can also affect the efficiency of the chosen algorithm.  For extremely large graphs, more advanced techniques might be necessary.
+
