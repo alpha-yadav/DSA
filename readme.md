@@ -198,3 +198,106 @@ As you progress, you'll need to learn about common data structures.  These are w
 
 This structured approach will help you gradually build your understanding and skills in algorithms.  Remember to start small, focus on understanding the fundamentals, and practice consistently.  It's a journey, not a sprint!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Find the maximum value in an array of integers.
+
+**Input:** An array of integers, e.g., `[1, 5, 2, 8, 3]`
+
+**Output:** The maximum integer in the array, e.g., `8`
+
+**Solution (Python):**
+
+```python
+def find_maximum(arr):
+  """Finds the maximum value in an array."""
+  if not arr:
+    return None  # Handle empty array case
+  max_val = arr[0]
+  for num in arr:
+    if num > max_val:
+      max_val = num
+  return max_val
+
+print(find_maximum([1, 5, 2, 8, 3]))  # Output: 8
+```
+
+
+**Medium:**
+
+**Problem:**  Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  You may assume that each input would have exactly one solution, and you may not use the *same* element twice.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+
+Because `nums[0] + nums[1] == 9`, return `[0, 1]`.
+
+
+**Solution (Python):** (Uses a hash table for efficiency)
+
+```python
+def two_sum(nums, target):
+    num_map = {}  # Use a dictionary to store numbers and their indices
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    return None  # No solution found
+
+print(two_sum([2,7,11,15], 9)) # Output: [0, 1]
+```
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring in `s`.  If multiple palindromes have the same length, return any one of them.
+
+**Example:**
+
+`Input: s = "babad"`
+`Output: "bab" or "aba"` (both are valid answers)
+
+
+**Solution (Python):** (A dynamic programming approach is often used for optimal performance, but a simpler, less efficient approach is shown here for brevity):
+
+```python
+def longest_palindrome(s):
+    if not s:
+        return ""
+    n = len(s)
+    longest = ""
+    for i in range(n):
+        # Odd length palindromes
+        l, r = i, i
+        while l >= 0 and r < n and s[l] == s[r]:
+            if (r - l + 1) > len(longest):
+                longest = s[l:r+1]
+            l -= 1
+            r += 1
+        # Even length palindromes
+        l, r = i, i + 1
+        while l >= 0 and r < n and s[l] == s[r]:
+            if (r - l + 1) > len(longest):
+                longest = s[l:r+1]
+            l -= 1
+            r += 1
+    return longest
+
+print(longest_palindrome("babad")) # Output: bab or aba (depending on execution)
+```
+
+These examples demonstrate the range of complexity in algorithmic problems.  The "hard" problem, while solvable with the provided code, can be significantly optimized using more advanced techniques.  Remember that choosing the right algorithm and data structure is crucial for efficient problem-solving.
+
