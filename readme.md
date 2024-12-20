@@ -7331,3 +7331,67 @@ Please provide me with the task you want a Haskell implementation for.  I need a
 
 The more detail you provide, the better I can assist you.  Include any specific requirements or constraints you have.
 
+#  Bucket Sort 
+Bucket sort is a sorting algorithm that works by distributing the elements of an array into a number of buckets or bins. Each bucket is then sorted individually, either using a different sorting algorithm or recursively applying the bucket sort algorithm.  Finally, the sorted buckets are concatenated to produce the fully sorted array.
+
+**How it Works:**
+
+1. **Initialization:** Create an array of buckets. The number of buckets depends on the range of input values and desired performance.  A common approach is to use a number of buckets roughly equal to the square root of the number of elements.
+
+2. **Distribution:** Iterate through the input array. For each element, calculate which bucket it belongs to based on its value.  This typically involves mapping the element's value to a bucket index using a hash function or a simple range check.  Place the element into the corresponding bucket.
+
+3. **Sorting:** Sort each bucket individually.  Insertion sort is often a good choice for this step because it's efficient on small, nearly sorted lists, which is likely to be the case with the buckets.  You can also use other sorting algorithms like merge sort or quicksort, but the overhead might outweigh the benefit unless the buckets are very large.
+
+4. **Concatenation:** Concatenate the sorted buckets to produce the final sorted array. Since each bucket is already sorted, this step simply involves appending the contents of each bucket sequentially.
+
+
+**Example:**
+
+Let's say we want to sort the array `[0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434]` using 5 buckets.
+
+1. **Create Buckets:** We create 5 empty buckets (bucket 0, bucket 1, bucket 2, bucket 3, bucket 4).
+
+2. **Distribution:**  We can map elements to buckets by multiplying by the number of buckets (5) and taking the floor:
+
+   - 0.897 * 5 = 4.485 -> bucket 4
+   - 0.565 * 5 = 2.825 -> bucket 2
+   - 0.656 * 5 = 3.28 -> bucket 3
+   - 0.1234 * 5 = 0.617 -> bucket 0
+   - 0.665 * 5 = 3.325 -> bucket 3
+   - 0.3434 * 5 = 1.717 -> bucket 1
+
+   The buckets now contain:
+   - Bucket 0: [0.1234]
+   - Bucket 1: [0.3434]
+   - Bucket 2: [0.565]
+   - Bucket 3: [0.656, 0.665]
+   - Bucket 4: [0.897]
+
+
+3. **Sorting:** Each bucket is already sorted (or requires minimal sorting in this case).
+
+4. **Concatenation:** Concatenating the buckets gives the sorted array: `[0.1234, 0.3434, 0.565, 0.656, 0.665, 0.897]`
+
+
+**Advantages:**
+
+* **Simple to understand and implement.**
+* **Efficient for uniformly distributed data.**  It performs exceptionally well when the input data is uniformly distributed across the range.
+* **Can be highly efficient in practice (linear time on average).**
+
+**Disadvantages:**
+
+* **Performance degrades with non-uniform data distribution.**  If the data is clustered, many elements may fall into the same bucket, negating the efficiency gains.
+* **Space complexity can be high** if many buckets are required or the buckets need to be large.
+
+
+**Applications:**
+
+Bucket sort is suitable for applications where:
+
+* Data is uniformly distributed.
+* The range of input values is known.
+* Memory usage is not a primary concern.
+
+It's often used as a preprocessing step for other sorting algorithms or in situations where approximate sorting is acceptable.
+
