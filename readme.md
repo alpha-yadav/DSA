@@ -6560,3 +6560,89 @@ print(f"Sorted list: {sorted_list}")
 
 Merge sort's guaranteed O(n log n) time complexity makes it a preferred choice when dealing with large datasets where performance is critical.  However, its space complexity should be considered, especially when memory is a constraint.
 
+#  Merge Sort Basics 
+Merge Sort is a highly efficient, stable sorting algorithm based on the divide-and-conquer paradigm.  Here's a breakdown of its basics:
+
+**1. The Divide-and-Conquer Approach:**
+
+Merge Sort works by recursively breaking down a list into smaller sublists until each sublist contains only one element (which is inherently sorted).  Then, it repeatedly merges the sublists to produce new sorted sublists until there is only one sorted list remaining.
+
+**2. The Process:**
+
+* **Divide:** The unsorted list is divided into roughly two equal halves. This continues recursively until you have lists of size one.
+* **Conquer:** Lists of size one are inherently sorted.
+* **Merge:**  The sorted sublists are merged pairwise to produce larger sorted sublists.  This merging process is crucial and is where the efficiency of Merge Sort comes from.
+
+**3. The Merge Operation:**
+
+This is the heart of Merge Sort.  Consider two already-sorted sublists:
+
+```
+List 1: [2, 5, 8]
+List 2: [1, 3, 9]
+```
+
+The merge operation creates a new sorted list by comparing the smallest elements from each list and placing the smaller one into the new list. This process continues until all elements from both lists are in the new sorted list:
+
+1. Compare `2` and `1`. `1` is smaller, so add `1` to the new list: `[1]`
+2. Compare `2` and `3`. `2` is smaller, so add `2` to the new list: `[1, 2]`
+3. Compare `5` and `3`. `3` is smaller, so add `3` to the new list: `[1, 2, 3]`
+4. Compare `5` and `9`. `5` is smaller, so add `5` to the new list: `[1, 2, 3, 5]`
+5. Compare `8` and `9`. `8` is smaller, so add `8` to the new list: `[1, 2, 3, 5, 8]`
+6. Finally, add `9`: `[1, 2, 3, 5, 8, 9]`
+
+The resulting list `[1, 2, 3, 5, 8, 9]` is sorted.
+
+**4. Time Complexity:**
+
+Merge Sort has a time complexity of O(n log n) in all cases (best, average, and worst). This makes it significantly faster than algorithms like bubble sort or insertion sort for large datasets.
+
+**5. Space Complexity:**
+
+Merge Sort has a space complexity of O(n), meaning it requires linear extra space for the merging process. This is because it needs auxiliary space to store the merged sublists.  This is a disadvantage compared to some in-place sorting algorithms (though those often have worse time complexity).
+
+**6. Stability:**
+
+Merge Sort is a *stable* sorting algorithm. This means that the relative order of equal elements is preserved in the sorted output.  For example, if you have `[2a, 2b, 1]` where 'a' and 'b' differentiate equal values, after sorting you'd still have `[1, 2a, 2b]`.
+
+
+**7. Example (Python):**
+
+```python
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr)//2
+        L = arr[:mid]
+        R = arr[mid:]
+
+        merge_sort(L)
+        merge_sort(R)
+
+        i = j = k = 0
+
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                arr[k] = L[i]
+                i += 1
+            else:
+                arr[k] = R[j]
+                j += 1
+            k += 1
+
+        while i < len(L):
+            arr[k] = L[i]
+            i += 1
+            k += 1
+
+        while j < len(R):
+            arr[k] = R[j]
+            j += 1
+            k += 1
+
+arr = [12, 11, 13, 5, 6, 7]
+merge_sort(arr)
+print("Sorted array is:", arr)
+```
+
+This example demonstrates the recursive nature and the merging process.  The code first recursively sorts the left and right halves, then merges them back together.  This recursive structure embodies the divide-and-conquer strategy.
+
