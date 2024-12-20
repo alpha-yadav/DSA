@@ -10943,3 +10943,12 @@ To better understand, let's break down what makes an algorithm:
 
 In short, whenever you have a process with a clear beginning, a series of steps, and a defined end, you're dealing with an algorithm, whether it's explicit or implicit.  The word "algo" is simply a shortened, informal way to refer to this concept.
 
+#  Sample Example 
+Please provide me with context!  "Sample Example" is too vague.  To give you a helpful sample example, I need to know what kind of example you're looking for.  For example:
+
+* **What is the subject?** (e.g., a programming code example, a writing prompt example, a mathematical equation example, a business plan example)
+* **What is the purpose?** (e.g., to illustrate a concept, to demonstrate a technique, to provide a template)
+* **What is the desired level of detail?** (e.g., a simple example, a complex example)
+
+Once I have this information, I can provide a much more useful sample example.
+
