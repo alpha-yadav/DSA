@@ -10805,3 +10805,114 @@ Here's a breakdown of its key features:
 
 Pascal's Triangle is a simple yet powerful mathematical structure with connections to many different areas of mathematics and beyond. Its elegant structure and numerous applications make it a fascinating subject of study.
 
+#  Pascal triangle in C 
+Several ways exist to implement Pascal's Triangle in C. Here are two versions: one using a simple iterative approach and another that's slightly more advanced and uses dynamic memory allocation for better scalability.
+
+**Version 1: Iterative Approach (using arrays)**
+
+This version is straightforward and easy to understand. It's suitable for generating relatively small Pascal's Triangles.
+
+```c
+#include <stdio.h>
+
+void printPascalTriangle(int rows) {
+  int triangle[rows][rows];
+
+  // Initialize the triangle
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j <= i; j++) {
+      if (j == 0 || j == i) {
+        triangle[i][j] = 1;
+      } else {
+        triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+      }
+    }
+  }
+
+  // Print the triangle
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j <= i; j++) {
+      printf("%d ", triangle[i][j]);
+    }
+    printf("\n");
+  }
+}
+
+int main() {
+  int numRows;
+  printf("Enter the number of rows for Pascal's triangle: ");
+  scanf("%d", &numRows);
+
+  if (numRows <= 0) {
+    printf("Number of rows must be positive.\n");
+    return 1; // Indicate an error
+  }
+
+  printPascalTriangle(numRows);
+  return 0;
+}
+```
+
+**Version 2: Dynamic Memory Allocation (more scalable)**
+
+This version uses dynamic memory allocation, making it more suitable for generating larger Pascal's Triangles without the limitations of fixed-size arrays.  It avoids potential stack overflow errors for large `rows`.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+void printPascalTriangle(int rows) {
+  int **triangle;
+
+  // Allocate memory dynamically
+  triangle = (int **)malloc(rows * sizeof(int *));
+  for (int i = 0; i < rows; i++) {
+    triangle[i] = (int *)malloc((i + 1) * sizeof(int));
+  }
+
+  // Initialize and calculate the triangle
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j <= i; j++) {
+      if (j == 0 || j == i) {
+        triangle[i][j] = 1;
+      } else {
+        triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+      }
+    }
+  }
+
+  // Print the triangle
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j <= i; j++) {
+      printf("%d ", triangle[i][j]);
+    }
+    printf("\n");
+  }
+
+  // Free the dynamically allocated memory
+  for (int i = 0; i < rows; i++) {
+    free(triangle[i]);
+  }
+  free(triangle);
+}
+
+int main() {
+  int numRows;
+  printf("Enter the number of rows for Pascal's triangle: ");
+  scanf("%d", &numRows);
+
+  if (numRows <= 0) {
+    printf("Number of rows must be positive.\n");
+    return 1;
+  }
+
+  printPascalTriangle(numRows);
+  return 0;
+}
+```
+
+Remember to compile this code using a C compiler (like GCC):  `gcc your_file_name.c -o pascal` and then run it: `./pascal`
+
+
+The second version is generally preferred for larger triangles because it manages memory more efficiently and avoids potential stack overflow issues.  Always remember to free dynamically allocated memory to prevent memory leaks.  Choose the version that best suits your needs based on the expected size of the triangle.
+
