@@ -3760,3 +3760,60 @@ The LCS problem has many applications in various fields, including:
 
 The dynamic programming approach provides an efficient and practical solution to the Longest Common Subsequence problem for a wide range of applications.  Remember that while the reconstruction of the LCS sequence is optional, it's often a valuable part of the solution in many real-world scenarios.
 
+#  Fibonacci Number 
+The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, usually starting with 0 and 1.  The sequence goes:
+
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144...
+
+Here's a breakdown of key aspects of Fibonacci numbers:
+
+**Definition:**
+
+* **Recursive Definition:**  F(n) = F(n-1) + F(n-2)  where F(0) = 0 and F(1) = 1.  This means each number is the sum of the two before it.
+
+* **Iterative Definition:** This is a more practical way to calculate Fibonacci numbers, especially for larger values of 'n'.  It involves building up the sequence step-by-step.
+
+**Calculation Methods:**
+
+* **Recursive (Inefficient):** While elegant, recursively calculating Fibonacci numbers is highly inefficient for larger numbers because it involves many repeated calculations.
+
+* **Iterative (Efficient):** An iterative approach avoids redundant calculations, making it far more efficient for larger values of 'n'.
+
+* **Closed-Form Formula (Binet's Formula):**  This formula allows for direct calculation of the nth Fibonacci number without iteration or recursion. However, it involves irrational numbers (the golden ratio) and might lead to minor inaccuracies due to floating-point limitations when dealing with larger numbers.  The formula is:
+
+   F(n) = (φⁿ - ψⁿ) / √5
+
+   Where:
+     * φ = (1 + √5) / 2  (the golden ratio)
+     * ψ = (1 - √5) / 2
+
+**Properties:**
+
+* **Golden Ratio:**  The ratio of consecutive Fibonacci numbers approaches the golden ratio (approximately 1.618) as 'n' approaches infinity.
+
+* **Mathematical Applications:** Fibonacci numbers appear in various areas of mathematics, including number theory, combinatorics, and algebra.
+
+* **Nature:**  Fibonacci numbers surprisingly appear in many natural phenomena, such as the arrangement of leaves on a stem, the branching of trees, the spiral arrangement of florets in a sunflower, and the spiral shells of some mollusks.
+
+**Example Code (Python - Iterative):**
+
+```python
+def fibonacci(n):
+  """
+  Calculates the nth Fibonacci number iteratively.
+  """
+  if n <= 0:
+    return 0
+  elif n == 1:
+    return 1
+  else:
+    a, b = 0, 1
+    for _ in range(2, n + 1):
+      a, b = b, a + b
+    return b
+
+print(fibonacci(10))  # Output: 55
+```
+
+This iterative approach is generally recommended for its efficiency.  For very large values of 'n', more advanced techniques (like matrix exponentiation) might be necessary for optimal performance.
+
