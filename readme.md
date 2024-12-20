@@ -7577,3 +7577,86 @@ console.log("Sorted array:", arr); // Output: Sorted array: [1, 5, 7, 8, 9, 10]
 
 Understanding pivot selection and the partitioning algorithm is key to grasping Quicksort's efficiency and potential pitfalls.  The choice of implementation details (pivot selection, partitioning scheme) can significantly influence its performance.
 
+#  Quicksort in Python 
+Quicksort is a highly efficient sorting algorithm with an average time complexity of O(n log n).  However, its worst-case time complexity is O(n²), which occurs when the pivot selection consistently results in highly unbalanced partitions.  Here are a few Python implementations demonstrating different pivot selection strategies:
+
+**1. Quicksort with Random Pivot Selection:**
+
+This version chooses a random element as the pivot.  This helps mitigate the worst-case scenario associated with consistently bad pivot choices (like always picking the smallest or largest element).
+
+```python
+import random
+
+def quicksort_random(arr):
+    if len(arr) < 2:
+        return arr
+    else:
+        pivot = random.choice(arr)  # Random pivot selection
+        less = [i for i in arr if i < pivot]
+        equal = [i for i in arr if i == pivot]
+        greater = [i for i in arr if i > pivot]
+        return quicksort_random(less) + equal + quicksort_random(greater)
+
+#Example usage
+my_list = [10, 7, 8, 9, 1, 5]
+sorted_list = quicksort_random(my_list)
+print(f"Sorted list: {sorted_list}")
+```
+
+**2. Quicksort with First Element as Pivot:**
+
+This is a simpler implementation but more susceptible to worst-case performance with already sorted or reverse-sorted data.
+
+```python
+def quicksort_first(arr):
+    if len(arr) < 2:
+        return arr
+    else:
+        pivot = arr[0]  # First element as pivot
+        less = [i for i in arr[1:] if i <= pivot]
+        greater = [i for i in arr[1:] if i > pivot]
+        return quicksort_first(less) + [pivot] + quicksort_first(greater)
+
+#Example usage
+my_list = [10, 7, 8, 9, 1, 5]
+sorted_list = quicksort_first(my_list)
+print(f"Sorted list: {sorted_list}")
+
+```
+
+**3.  In-place Quicksort (more efficient):**
+
+This version modifies the list directly instead of creating new lists in each recursive call, making it more memory-efficient.  It's generally more complex to understand.
+
+```python
+def quicksort_inplace(arr, low, high):
+    if low < high:
+        p = partition(arr, low, high)
+        quicksort_inplace(arr, low, p - 1)
+        quicksort_inplace(arr, p + 1, high)
+
+def partition(arr, low, high):
+    pivot = arr[high]  # Choosing the last element as pivot
+    i = low - 1
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1
+
+#Example Usage
+my_list = [10, 7, 8, 9, 1, 5]
+quicksort_inplace(my_list, 0, len(my_list) - 1)
+print(f"Sorted list: {my_list}")
+
+```
+
+**Choosing the Right Implementation:**
+
+* For simplicity and understanding the basic algorithm, the first two (recursive, not in-place) versions are good starting points.  The random pivot version is generally preferred for its robustness against worst-case scenarios.
+* For performance and efficiency in handling large datasets, the in-place version is the best choice, but it's slightly harder to grasp.
+
+
+Remember that while Quicksort is generally very fast, its worst-case performance can be a problem for specific input types.  For guaranteed O(n log n) performance, consider mergesort.  However, Quicksort is often faster in practice due to its smaller constant factors in its time complexity.
+
