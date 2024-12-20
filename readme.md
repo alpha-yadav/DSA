@@ -3085,3 +3085,81 @@ Here's a breakdown of the key concepts:
 
 In summary, A* is a powerful and widely used algorithm for finding optimal paths in graphs. Its efficiency hinges on the choice of a good heuristic function.  Understanding the trade-offs between heuristic design, memory usage, and computational cost is essential for successfully applying A* to different problems.
 
+#  A* Pathfinding through a maze with no obstacles 
+A* pathfinding in a maze with *no* obstacles is trivial.  The optimal path is always a straight line.  A* will find this, but it's overkill.  Let's look at why and how to implement it (though you wouldn't normally use A* for this case).
+
+**Why A* is overkill:**
+
+A* is designed to find the optimal path efficiently *in the presence of obstacles*.  Its power comes from its heuristic function, which estimates the distance to the goal.  With no obstacles, the heuristic (e.g., Manhattan distance or Euclidean distance) is perfectly accurate, and the algorithm essentially becomes a glorified breadth-first search (BFS) or Dijkstra's algorithm.  These simpler algorithms are much more efficient for obstacle-free environments.
+
+**How A* would work (and why it's unnecessary):**
+
+1. **Initialization:**
+   - Start node: Your starting point in the maze.
+   - Goal node: Your destination point in the maze.
+   - Open set: Initially contains only the start node.
+   - Closed set: Initially empty.
+   - `g(n)`:  The cost to reach node `n` from the start node (usually just the distance).
+   - `h(n)`: The heuristic estimate of the distance from node `n` to the goal (e.g., Euclidean distance).
+   - `f(n)`: `g(n) + h(n)` (the total estimated cost).
+
+2. **Iteration:**
+   - While the open set is not empty:
+     - Select the node with the lowest `f(n)` from the open set (this is the key part of A*).
+     - If this node is the goal node, reconstruct the path and return.
+     - Add the selected node to the closed set.
+     - For each neighbor of the selected node:
+       - Calculate `g(neighbor)`, `h(neighbor)`, and `f(neighbor)`.
+       - If the neighbor is not in the open set or closed set, add it to the open set.  If it's already in the open set but with a higher `f(n)`, update its `f(n)`, `g(n)`, and parent node.
+
+3. **Path Reconstruction:**
+   - Trace back from the goal node to the start node by following the parent pointers.
+
+**Python Example (Illustrative, not efficient for no-obstacle case):**
+
+```python
+import heapq
+
+def heuristic(a, b):
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])  # Manhattan distance
+
+def a_star(start, goal, grid_size): #grid_size is just to define the limits
+    open_set = [(0, start)]  # (f, (x, y))
+    came_from = {}
+    g_score = {start: 0}
+    f_score = {start: heuristic(start, goal)}
+
+    while open_set:
+        current = heapq.heappop(open_set)[1]
+
+        if current == goal:
+            path = []
+            while current in came_from:
+                path.append(current)
+                current = came_from[current]
+            path.append(start)
+            return path[::-1]  # Reverse the path
+
+        for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]: #Consider only 4 directions
+            neighbor = (current[0] + dx, current[1] + dy)
+            if 0 <= neighbor[0] < grid_size and 0 <= neighbor[1] < grid_size: #Check bounds
+                tentative_g_score = g_score[current] + 1
+                if neighbor not in g_score or tentative_g_score < g_score[neighbor]:
+                    came_from[neighbor] = current
+                    g_score[neighbor] = tentative_g_score
+                    f_score[neighbor] = tentative_g_score + heuristic(neighbor, goal)
+                    heapq.heappush(open_set, (f_score[neighbor], neighbor))
+
+    return None  # No path found (shouldn't happen in an unobstructed maze)
+
+
+start = (0, 0)
+goal = (5, 5)
+grid_size = 10
+path = a_star(start, goal,grid_size)
+print(f"Path found: {path}")
+
+```
+
+For a maze with no obstacles, simply calculating the line between the start and end points is far superior.  Use A* only when obstacles are present.
+
