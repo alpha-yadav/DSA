@@ -4458,3 +4458,72 @@ The term "ticket automat" is a bit vague.  To give you a helpful response, I nee
 
 Please clarify your request with more details.
 
+#  Interval Scheduling 
+Interval scheduling is a classic problem in algorithm design that deals with selecting a subset of non-overlapping intervals from a given set of intervals.  The goal is typically to maximize the number of selected intervals or to maximize some other objective function related to the selected intervals (e.g., total duration).  There are several variations depending on the specifics of the problem.
+
+Here's a breakdown of interval scheduling:
+
+**Problem Statement:**
+
+Given a set of intervals, each defined by a start time and an end time, find a subset of these intervals such that no two intervals in the subset overlap.  Different versions of the problem might prioritize different objectives:
+
+* **Maximize the number of selected intervals:** This is the most common version.
+* **Maximize the total duration of selected intervals:**  This focuses on the total time covered by the chosen intervals.
+* **Weighted interval scheduling:** Each interval has an associated weight (e.g., profit or importance), and the goal is to maximize the total weight of the selected intervals.
+
+**Algorithms:**
+
+The most common approach to solving the basic interval scheduling problem (maximizing the number of intervals) is a greedy algorithm.  Here's how it works:
+
+1. **Sort the intervals:** Sort the intervals by their finish times in non-decreasing order.  This is crucial for the greedy approach to work correctly.
+
+2. **Iterate and select:**
+   - Initialize an empty set of selected intervals.
+   - Select the first interval (the one with the earliest finish time).
+   - Iterate through the remaining intervals.  For each interval, if its start time is greater than or equal to the finish time of the last selected interval, select it and add it to the set of selected intervals.
+
+**Example:**
+
+Let's say we have the following intervals:
+
+* (1, 4)
+* (3, 5)
+* (0, 6)
+* (5, 7)
+* (3, 8)
+* (5, 9)
+
+
+1. **Sort by finish time:** (1, 4), (3, 5), (5, 7), (5, 9), (3, 8), (0, 6)
+
+2. **Select intervals:**
+   - Select (1, 4)
+   - (3, 5) overlaps, skip
+   - (5, 7) doesn't overlap, select
+   - (5, 9) overlaps, skip
+   - (3,8) overlaps, skip
+   - (0,6) overlaps, skip
+
+The selected intervals are (1, 4) and (5, 7).
+
+**Weighted Interval Scheduling:**
+
+When each interval has a weight, the greedy approach doesn't work optimally.  Dynamic programming is typically used to solve this more complex version.  This involves building a table to store the maximum weight achievable up to a certain interval.
+
+**Applications:**
+
+Interval scheduling has many real-world applications, including:
+
+* **Resource allocation:** Scheduling tasks on a single machine or resource.
+* **Meeting scheduling:** Selecting a set of non-conflicting meetings.
+* **Course scheduling:** Choosing courses without time conflicts.
+* **Radio station broadcasting:** Scheduling commercials or programs.
+
+
+**Complexity:**
+
+The greedy algorithm for the basic interval scheduling problem has a time complexity of O(n log n), dominated by the sorting step. The dynamic programming approach for weighted interval scheduling has a time complexity of O(n log n), where 'n' is the number of intervals.
+
+
+This overview provides a solid foundation for understanding interval scheduling.  To delve deeper, you can explore specific algorithms and their implementations in more detail.  Many online resources and textbooks cover this topic comprehensively.
+
