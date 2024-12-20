@@ -9407,3 +9407,89 @@ print(shortest_distances) # Output: {'A': 0, 'B': 4, 'C': 2, 'D': 9, 'E': 5, 'F'
 
 Remember to adapt the code to your specific graph representation and needs.  This example provides a basic understanding of how to implement Dijkstra's algorithm.  For other algorithms, you'll need to consult their respective descriptions and adapt the code accordingly.
 
+#  Finding Shortest Path from Source in a 2D graph 
+Finding the shortest path from a source node in a 2D graph can be efficiently solved using algorithms like Dijkstra's algorithm or A* search.  The choice depends on whether you have heuristics available to estimate the distance to the goal.
+
+**1. Dijkstra's Algorithm (for graphs without heuristics):**
+
+Dijkstra's algorithm finds the shortest path from a single source node to all other reachable nodes in a graph with non-negative edge weights.  For a 2D graph, we typically represent the graph as a grid, where each cell is a node, and edges connect adjacent cells (horizontally, vertically, or diagonally, depending on the problem definition).
+
+* **Data Structures:**
+    * `distance`: A 2D array storing the shortest distance from the source to each node. Initialized to infinity for all nodes except the source (which is 0).
+    * `visited`: A 2D boolean array tracking visited nodes.
+    * `priorityQueue`: A priority queue (min-heap) storing nodes to explore, ordered by their distance from the source.
+
+* **Algorithm:**
+
+1. Initialize `distance` and `visited` arrays.  Add the source node to the `priorityQueue`.
+2. While the `priorityQueue` is not empty:
+   a. Remove the node `u` with the smallest distance from the `priorityQueue`.
+   b. Mark `u` as visited (`visited[u.row][u.col] = true`).
+   c. For each unvisited neighbor `v` of `u`:
+      i. Calculate the distance to `v` from the source: `dist = distance[u.row][u.col] + weight(u, v)`.  `weight(u, v)` is typically 1 for adjacent cells.
+      ii. If `dist < distance[v.row][v.col]`:
+          * Update `distance[v.row][v.col] = dist`.
+          * Add `v` to the `priorityQueue` (or update its priority if it's already there).
+3. After the loop, `distance` array contains the shortest distances from the source to all reachable nodes.  You can reconstruct the shortest path by backtracking from the target node.
+
+
+**2. A* Search (for graphs with heuristics):**
+
+A* is an informed search algorithm that uses a heuristic function, `h(n)`, to estimate the distance from a node `n` to the goal. This makes it more efficient than Dijkstra's algorithm, especially in large graphs.
+
+* **Data Structures:**  Similar to Dijkstra's, but uses a heuristic function.
+* **Algorithm:**
+
+1. Initialize `distance`, `visited`, and `priorityQueue`. The priority queue now orders nodes based on `f(n) = g(n) + h(n)`, where `g(n)` is the actual cost from the source to `n` (same as `distance`), and `h(n)` is the heuristic estimate.
+2. While the `priorityQueue` is not empty:
+   a. Remove the node `u` with the smallest `f(n)` from the `priorityQueue`.
+   b. If `u` is the goal node, reconstruct and return the path.
+   c. Mark `u` as visited.
+   d. For each unvisited neighbor `v` of `u`:
+      i. Calculate `g(v) = g(u) + weight(u, v)`.
+      ii. Calculate `f(v) = g(v) + h(v)`.
+      iii. If `f(v) < f(v)` (or `v` is not in the queue), update `distance[v.row][v.col] = g(v)` and add/update `v` in the `priorityQueue`.
+3. If the `priorityQueue` becomes empty without finding the goal, there is no path.
+
+
+**Example (Dijkstra's in Python):**
+
+```python
+import heapq
+
+def dijkstra(graph, start):
+    distances = {node: float('inf') for node in graph}
+    distances[start] = 0
+    priority_queue = [(0, start)]
+    visited = set()
+
+    while priority_queue:
+        current_distance, current_node = heapq.heappop(priority_queue)
+
+        if current_node in visited:
+            continue
+        visited.add(current_node)
+
+        for neighbor, weight in graph[current_node].items():
+            distance = current_distance + weight
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                heapq.heappush(priority_queue, (distance, neighbor))
+
+    return distances
+
+# Example graph (represented as an adjacency list)
+graph = {
+    (0, 0): {(0, 1): 1, (1, 0): 1},
+    (0, 1): {(0, 0): 1, (1, 1): 1},
+    (1, 0): {(0, 0): 1, (1, 1): 1},
+    (1, 1): {(0, 1): 1, (1, 0): 1}
+}
+
+shortest_distances = dijkstra(graph, (0, 0))
+print(shortest_distances)  # Output: shortest distances from (0,0) to all other nodes
+
+```
+
+Remember to adapt the code to your specific 2D graph representation and edge weight definition.  For A*, you'll need to implement a suitable heuristic function (`h(n)`).  Common heuristics for pathfinding include Manhattan distance, Euclidean distance, or Chebyshev distance.  Choose the heuristic that best suits your problem domain.
+
