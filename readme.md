@@ -2897,3 +2897,90 @@ print("\nVisited nodes:", dfs_matrix(graph_matrix, 0))
 
 Remember to adapt the code to your specific graph representation and needs.  The key concepts are the use of a stack (explicitly or implicitly through recursion) and tracking visited nodes to avoid cycles.  The choice between recursive and iterative depends on the size of your graph and potential stack overflow concerns.  The adjacency list representation is often preferred for its efficiency in space and time complexity compared to the adjacency matrix, especially for sparse graphs.
 
+#  Dijkstra's Shortest Path Algorithm 
+Dijkstra's algorithm is a graph search algorithm that solves the single-source shortest path problem for a graph with non-negative edge weights.  In simpler terms, it finds the shortest path from a single starting node to all other nodes in a graph.
+
+**Algorithm Steps:**
+
+1. **Initialization:**
+   - Create a set `unvisited_nodes` containing all nodes in the graph.
+   - Assign a tentative distance value to every node: set it to zero for our initial node and to infinity for all other nodes.
+   - Set the initial node as the current node.
+
+2. **Iteration:**
+   - For the current node, consider all of its unvisited neighbors and calculate their tentative distances through the current node.  Compare the newly calculated tentative distance to the current assigned value and assign the smaller one.
+   - When we are done considering all of the unvisited neighbors of the current node, mark the current node as visited and remove it from the `unvisited_nodes` set.
+
+3. **Selection:**
+   - Select the unvisited node that is marked with the smallest tentative distance, and set it as the new "current node."
+
+4. **Termination:**
+   - Repeat steps 2 and 3 until the `unvisited_nodes` set is empty, or until the target node has been marked visited (if you're only looking for the shortest path to a specific node).
+
+**Data Structures:**
+
+Typically, the following data structures are used:
+
+* **Priority Queue:**  A priority queue (like a min-heap) is highly recommended to efficiently select the unvisited node with the smallest tentative distance.  This significantly improves the algorithm's performance, especially for large graphs.  Without a priority queue, the selection step would require scanning all unvisited nodes in each iteration (O(V) time complexity).
+
+* **Distance Array/Dictionary:**  Stores the tentative distances from the source node to each other node.
+
+* **Previous Node Array/Dictionary:**  (Optional) Stores the previous node in the shortest path to each node.  This is used to reconstruct the actual path after the algorithm finishes.
+
+**Pseudocode:**
+
+```
+function Dijkstra(Graph, source):
+  // Initialize distances
+  distances[source] = 0
+  for each node v in Graph:
+    if v != source:
+      distances[v] = infinity
+  previousNode[v] = null
+
+  unvisitedNodes = set of all nodes in Graph
+  priorityQueue = new PriorityQueue() // Min-heap
+  priorityQueue.add(source, 0) // Add source node with distance 0
+
+  while priorityQueue is not empty:
+    current_node = priorityQueue.removeMin()
+    if current_node is visited: continue
+    mark current_node as visited
+
+    for each neighbor v of current_node:
+      tentative_distance = distances[current_node] + edgeWeight(current_node, v)
+      if tentative_distance < distances[v]:
+        distances[v] = tentative_distance
+        previousNode[v] = current_node
+        priorityQueue.add(v, tentative_distance)
+
+  // distances[] now contains shortest distances from source to all nodes
+  // previousNode[] can be used to reconstruct the paths
+
+  return distances, previousNode
+```
+
+**Time Complexity:**
+
+* Using a priority queue (min-heap): O(E log V), where E is the number of edges and V is the number of vertices.
+* Without a priority queue: O(V²)
+
+
+**Example (Simple Graph):**
+
+Let's say we have a graph with nodes A, B, C, and edges: A-B (weight 4), A-C (weight 2), B-C (weight 1).  If we start at node A, Dijkstra's algorithm would find the shortest paths:
+
+* A -> A: 0
+* A -> C: 2
+* A -> B: 3 (A->C->B is shorter than A->B directly)
+
+
+**Limitations:**
+
+* **Negative Edge Weights:** Dijkstra's algorithm doesn't work correctly with negative edge weights.  It may produce incorrect shortest paths.  For graphs with negative edge weights, the Bellman-Ford algorithm is used instead.
+
+* **Infinite Loops:**  If there's a cycle with negative weight, Dijkstra's algorithm will loop indefinitely.
+
+
+This comprehensive explanation should provide a solid understanding of Dijkstra's algorithm. Remember to choose the appropriate data structures for optimal performance.
+
