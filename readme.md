@@ -8528,3 +8528,82 @@ Searching is a broad topic. To help me give you a useful answer, please tell me 
 
 Please provide more detail so I can assist you effectively.
 
+#  Binary Search 
+Binary search is a highly efficient algorithm for finding a specific item within a *sorted* array or list.  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process is repeated until the target value is found or the search interval is empty.
+
+**How it works:**
+
+1. **Sorted Input:** Binary search requires the input array to be sorted in ascending order.
+
+2. **Find the Middle:** Determine the middle element of the search interval.
+
+3. **Compare:** Compare the target value with the middle element.
+
+   * **Target < Middle:** The target value, if present, must be in the lower half of the array.  Discard the upper half and repeat the process on the lower half.
+
+   * **Target > Middle:** The target value, if present, must be in the upper half of the array. Discard the lower half and repeat the process on the upper half.
+
+   * **Target == Middle:** The target value has been found. Return the index of the middle element.
+
+4. **Empty Interval:** If the search interval becomes empty (lower bound > upper bound), the target value is not present in the array.  Return an indication that the value is not found (e.g., -1).
+
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target value {target_value} found at index {index}")
+else:
+  print(f"Target value {target_value} not found in the array")
+```
+
+**Time Complexity:** O(log n) -  The search space is halved with each iteration.
+
+**Space Complexity:** O(1) -  Binary search uses a constant amount of extra space regardless of the input size.
+
+**Advantages:**
+
+* **Efficiency:** Significantly faster than linear search for large datasets.
+* **Simplicity:** Relatively easy to implement.
+
+**Disadvantages:**
+
+* **Requires Sorted Input:**  The input array must be sorted.  Sorting itself can take O(n log n) time, which negates the benefits of binary search if sorting is needed.
+* **Not suitable for unsorted data:**  Cannot be directly used on unsorted arrays.
+
+
+Binary search is a fundamental algorithm with wide applications in computer science, including searching in databases, finding elements in sorted data structures, and implementing other algorithms.
+
