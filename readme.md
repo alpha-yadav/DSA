@@ -6470,3 +6470,93 @@ Please provide me with the task or algorithm you want implemented in JavaScript.
 
 The more detail you give me, the better I can help.
 
+#  Merge Sort 
+Merge sort is a highly efficient, stable sorting algorithm that works by recursively dividing an unsorted list into smaller sublists until each sublist contains only one element (a list of one element is considered sorted).  Then, it repeatedly merges the sublists to produce new sorted sublists until there is only one sorted list remaining.  This final sorted list is the result.
+
+Here's a breakdown of how merge sort works:
+
+**1. Divide:**
+
+The unsorted list is divided into `n` sublists, each containing one element.  This is the base case of the recursion.
+
+**2. Conquer:**
+
+Consecutive sublists are repeatedly merged to produce new sorted sublists until there is only one sublist remaining.  The merging process is key to the algorithm's efficiency.
+
+**3. Merge:**
+
+This is the core operation.  It takes two sorted sublists as input and produces a single sorted sublist containing all the elements of the input sublists.  The merging process compares the first elements of each sublist and adds the smaller element to the output list.  This continues until one of the input lists is exhausted; then, the remaining elements of the other list are added to the output list.
+
+
+**Example:**
+
+Let's sort the list `[8, 3, 1, 7, 0, 10, 2]` using merge sort:
+
+1. **Divide:**
+   `[8], [3], [1], [7], [0], [10], [2]`
+
+2. **Conquer & Merge:**
+
+   - Merge `[8]` and `[3]` to get `[3, 8]`
+   - Merge `[1]` and `[7]` to get `[1, 7]`
+   - Merge `[0]` and `[10]` to get `[0, 10]`
+   - Merge `[2]` and `[ ]` to get `[2]` (handles odd-length lists)
+   - Now we have: `[3, 8], [1, 7], [0, 10], [2]`
+
+   - Merge `[3, 8]` and `[1, 7]` to get `[1, 3, 7, 8]`
+   - Merge `[0, 10]` and `[2]` to get `[0, 2, 10]`
+   - Now we have: `[1, 3, 7, 8], [0, 2, 10]`
+
+   - Merge `[1, 3, 7, 8]` and `[0, 2, 10]` to get `[0, 1, 2, 3, 7, 8, 10]`
+
+3. **Result:** The sorted list is `[0, 1, 2, 3, 7, 8, 10]`
+
+
+**Time Complexity:** O(n log n) in all cases (best, average, and worst). This makes it very efficient for large datasets.
+
+**Space Complexity:** O(n).  Merge sort is not an in-place algorithm; it requires additional space proportional to the input size for the merging process.
+
+**Stability:** Merge sort is a stable sorting algorithm. This means that the relative order of equal elements is preserved in the sorted output.
+
+**Python Code Implementation:**
+
+```python
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr)//2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        i = j = k = 0
+
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+
+    return arr
+
+my_list = [8, 3, 1, 7, 0, 10, 2]
+sorted_list = merge_sort(my_list)
+print(f"Sorted list: {sorted_list}")
+```
+
+Merge sort's guaranteed O(n log n) time complexity makes it a preferred choice when dealing with large datasets where performance is critical.  However, its space complexity should be considered, especially when memory is a constraint.
+
