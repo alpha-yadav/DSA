@@ -4839,3 +4839,20 @@ The Floyd-Warshall algorithm finds the shortest paths between all pairs of verti
 
 Remember to adapt the code to your specific graph representation (adjacency matrix, adjacency list, etc.).  The provided Python code uses an adjacency list representation.  Also, error handling (e.g., for invalid graph inputs) might need to be added for robust production-level code.
 
+#  Why do we need to relax all the edges at most (V-1) times 
+That statement refers to algorithms like Prim's algorithm or Kruskal's algorithm for finding a Minimum Spanning Tree (MST) in a graph.  Let's break down why relaxing all edges at most (V-1) times is sufficient:
+
+* **Minimum Spanning Tree:** An MST is a tree that connects all vertices of a graph with the minimum possible total edge weight.  It has exactly (V-1) edges, where V is the number of vertices.
+
+* **Relaxation:** In the context of MST algorithms, "relaxing an edge" means checking if using that edge can lead to a shorter path to a vertex.  If a shorter path is found, the distances are updated.  This process is crucial for finding the minimum weight paths.
+
+* **Why (V-1) relaxations suffice:**  Since an MST has (V-1) edges, we only need to find (V-1) edges to construct it.  Each time we successfully add an edge to the MST (during Prim's or Kruskal's algorithm), we're effectively connecting one more vertex to the growing tree. After finding (V-1) edges, all vertices are connected, and we have our MST.  Therefore, we don't need to examine any more edges; the process is complete.
+
+**In more detail (Prim's Algorithm example):**
+
+Prim's algorithm starts with a single vertex and iteratively adds the minimum-weight edge that connects a vertex in the MST to a vertex not yet in the MST. Each addition of an edge connects a new vertex.  After (V-1) iterations (and thus (V-1) edge additions), all vertices are part of the MST. While the algorithm might examine all edges during each iteration (relaxation step), it will only *select* and add at most (V-1) of them.
+
+**Kruskal's Algorithm:** This algorithm uses a disjoint-set data structure to find the MST. Although the implementation differs, the same principle applies.  Once (V-1) edges are found to form a connected tree, the algorithm terminates, regardless of the total number of edges examined.
+
+In summary, the (V-1) limit is not about the number of times *each* edge is relaxed, but rather the total number of edges added to the MST (and therefore, indirectly, the maximum number of successful relaxation operations that lead to the MST).  We are guaranteed to have a complete MST once we've added (V-1) edges.
+
