@@ -10281,3 +10281,38 @@ To solve an equation effectively, you need to:
 
 If you provide a specific equation, I can demonstrate the steps to solve it.
 
+#  Linear Equation 
+A linear equation is an algebraic equation in which each term is either a constant or the product of a constant and a single variable.  The highest power of the variable is 1.  They are often written in the following forms:
+
+* **Standard Form:** Ax + By = C, where A, B, and C are constants, and A and B are not both zero.
+
+* **Slope-Intercept Form:** y = mx + b, where m is the slope of the line and b is the y-intercept (the point where the line crosses the y-axis).
+
+* **Point-Slope Form:** y - y₁ = m(x - x₁), where m is the slope and (x₁, y₁) is a point on the line.
+
+
+**Key Characteristics:**
+
+* **Graph:** A linear equation always graphs as a straight line.
+* **Solution:** The solution to a linear equation is the value(s) of the variable(s) that make the equation true.  For a single-variable linear equation (like 2x + 3 = 7), there's usually one solution.  For a system of linear equations (multiple equations with multiple variables), there can be one solution, infinitely many solutions, or no solutions.
+* **Slope:** The slope (m) represents the steepness and direction of the line.  A positive slope indicates an upward-sloping line, a negative slope indicates a downward-sloping line, and a slope of zero indicates a horizontal line.  An undefined slope indicates a vertical line.
+* **Y-intercept:** The y-intercept (b) is the point where the line intersects the y-axis.
+
+
+**Examples:**
+
+* **2x + 5 = 9**  (Single-variable linear equation)
+* **y = 3x - 2** (Slope-intercept form)
+* **y - 1 = 2(x - 3)** (Point-slope form)
+* **2x + 3y = 6** (Standard form)
+* **x = 5** (Vertical line)
+* **y = 2** (Horizontal line)
+
+
+**Solving Linear Equations:**
+
+Solving a linear equation involves manipulating the equation using algebraic operations (like adding, subtracting, multiplying, and dividing) to isolate the variable and find its value.
+
+
+In summary, linear equations are fundamental in algebra and have numerous applications in various fields, including physics, engineering, and economics.  Understanding their properties and how to solve them is crucial for many mathematical concepts.
+
