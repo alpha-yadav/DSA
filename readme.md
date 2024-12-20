@@ -11208,3 +11208,34 @@ print(fibonacci(100))#Output: 354224848179261915075
 
 Remember that for large matrices, the time complexity of matrix multiplication itself becomes significant.  Optimized matrix multiplication algorithms (like Strassen's algorithm) can further improve performance for very large matrices.  However, for many problems, the O(log n) improvement from repeated squaring is already a substantial speedup.
 
+#  polynomial-time bounded algorithm for Minimum Vertex Cover 
+There is no known polynomial-time algorithm for the Minimum Vertex Cover problem.  Minimum Vertex Cover is an NP-hard problem.  This means that no algorithm is known that can solve it in polynomial time (i.e., time that's a polynomial function of the input size, like O(n²), O(n³), etc.).  The best known algorithms for it are approximation algorithms or run in exponential time in the worst case.
+
+**What are the approaches available?**
+
+1. **Approximation Algorithms:** These algorithms don't guarantee finding the absolute minimum vertex cover, but they find a solution within a guaranteed factor of the optimal solution.  For example, a simple greedy algorithm provides a 2-approximation:
+
+   ```
+   function greedy_vertex_cover(graph G):
+       C = empty set
+       E = edges of G
+       while E is not empty:
+           choose an edge (u, v) from E
+           add u and v to C
+           remove all edges incident to u or v from E
+       return C
+   ```
+
+   This algorithm always finds a vertex cover that's at most twice the size of the minimum vertex cover.
+
+2. **Exponential-Time Exact Algorithms:**  These algorithms guarantee finding the optimal solution, but their runtime is exponential in the number of vertices or edges.  Examples include:
+
+   * **Brute-force search:**  Trying all possible subsets of vertices and checking if they form a vertex cover. This has a runtime of O(2<sup>n</sup>), where n is the number of vertices.
+   * **Branch and bound:** A more sophisticated search technique that prunes the search space to improve efficiency, but still fundamentally exponential.
+   * **Dynamic programming:**  Certain formulations of the problem allow for dynamic programming solutions, but these also tend to have exponential runtime in the worst case for general graphs.
+
+3. **Integer Linear Programming (ILP):**  Minimum Vertex Cover can be formulated as an ILP problem.  ILP solvers can find the optimal solution, but their runtime can be exponential in the worst case, although they often perform well in practice on many instances.
+
+
+**In summary:**  While there are algorithms to solve Minimum Vertex Cover, none are guaranteed to run in polynomial time.  The choice of algorithm depends on the balance between the need for an optimal solution and the acceptable runtime.  For large graphs, approximation algorithms are often preferred for their practicality.  If an optimal solution is crucial and the graph is relatively small, then an exponential-time exact algorithm might be acceptable.
+
