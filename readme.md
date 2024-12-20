@@ -4414,3 +4414,33 @@ The greedy algorithm would find the solution: 1 quarter (25), 1 dime (10), 2 pen
 
 The change-making problem is a rich area of study, with many variations and algorithms to explore depending on the specific requirements and constraints of the problem.
 
+#  Applications of Greedy technique 
+The greedy technique is an algorithmic paradigm that follows the problem-solving heuristic of making the locally optimal choice at each stage with the hope of finding a global optimum.  It doesn't guarantee the best solution in all cases, but it often provides a good approximation quickly and efficiently.  Here are some applications of the greedy technique:
+
+**Classic Examples:**
+
+* **Huffman Coding:**  Building optimal prefix-free binary codes for data compression.  At each step, it merges the two least frequent symbols.
+* **Dijkstra's Algorithm:** Finding the shortest paths from a single source node in a graph with non-negative edge weights.  It iteratively selects the unvisited node with the smallest distance from the source.
+* **Prim's Algorithm:** Finding a minimum spanning tree for a weighted undirected graph. It iteratively adds the edge with the minimum weight that connects a vertex in the tree to a vertex outside the tree.
+* **Kruskal's Algorithm:** Another algorithm for finding a minimum spanning tree.  It iteratively adds edges with the smallest weight, ensuring no cycles are formed.
+* **Fractional Knapsack Problem:** Selecting items with maximum value within a weight constraint.  It prioritizes items with the highest value-to-weight ratio.  (Note: The 0/1 Knapsack problem is *not* typically solved optimally with a greedy approach.)
+
+
+**Other Applications:**
+
+* **Activity Selection Problem:** Selecting a maximum number of non-overlapping activities from a set with given start and finish times.  The greedy approach selects activities with the earliest finish times.
+* **Job Sequencing with Deadlines:** Scheduling jobs to maximize profit, considering deadlines.  Greedy strategies often prioritize jobs with higher profit or shorter processing times.
+* **Coin Change Problem (with specific coin denominations):** Finding the minimum number of coins to make up a given amount. The greedy approach works optimally only for certain coin systems (e.g., US currency, but not all).
+* **Scheduling (various types):**  Greedy approaches are frequently used in scheduling problems to minimize waiting time, maximize throughput, or optimize resource utilization.  Specific heuristics vary depending on the problem constraints.
+* **Clustering (some algorithms):**  Some clustering algorithms use greedy approaches to iteratively merge or split clusters based on proximity or other criteria.
+
+
+**Important Considerations:**
+
+* **Optimality:** Greedy algorithms don't always find the globally optimal solution.  They are often heuristics, meaning they offer a reasonable solution quickly but may not be the absolute best.
+* **Correctness:** Proving the correctness of a greedy algorithm often requires careful analysis and demonstrating that the locally optimal choices lead to a globally optimal solution (or a provably good approximation).
+* **Efficiency:** Greedy algorithms are generally efficient, often having polynomial time complexity.
+
+
+In summary, greedy techniques are powerful tools for solving optimization problems where a locally optimal solution is a reasonable approximation of the global optimum, offering a trade-off between solution quality and computational efficiency.  However, it's crucial to understand their limitations and to validate their performance in the specific context of the problem being solved.
+
