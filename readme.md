@@ -7247,3 +7247,77 @@ A top-down approach would start with a high-level design of the calculator (e.g.
 
 Most Java projects use a hybrid approach.  You might design the overall architecture top-down but implement some low-level utility classes bottoms-up to take advantage of their testability and reusability.  The best approach depends on the project's complexity, team size, and the level of uncertainty about the requirements.
 
+#  Insertion Sort 
+Insertion sort is a simple sorting algorithm that works similar to the way you sort playing cards in your hands.  The algorithm builds the final sorted array one item at a time.  It iterates through the input array and inserts each element into its correct position within the already-sorted portion of the array.
+
+**How it works:**
+
+1. **Iteration:** The algorithm starts by assuming the first element of the array is already sorted (a sorted subarray of size 1).  It then iterates through the rest of the array, one element at a time.
+
+2. **Comparison and Shifting:** For each element, it compares it with the elements in the already-sorted subarray.  If the current element is smaller than the elements in the sorted subarray, it shifts those larger elements one position to the right to make space for the current element.
+
+3. **Insertion:** Once the correct position for the current element is found (where the element to its left is smaller and the element to its right is larger), the current element is inserted into that position.
+
+4. **Repetition:** Steps 2 and 3 are repeated for each element in the unsorted portion of the array until the entire array is sorted.
+
+
+**Example:**
+
+Let's sort the array `[5, 2, 4, 6, 1, 3]` using insertion sort:
+
+1. **[5, 2, 4, 6, 1, 3]** - Start with the first element (5) as the sorted subarray.
+
+2. **[2, 5, 4, 6, 1, 3]** - Compare 2 with 5. 2 is smaller, so shift 5 to the right and insert 2 at the beginning.
+
+3. **[2, 4, 5, 6, 1, 3]** - Compare 4 with 5 and 2.  4 is between 2 and 5, so shift 5 to the right and insert 4.
+
+4. **[2, 4, 5, 6, 1, 3]** - 6 is already larger than 5, so it remains in its position.
+
+5. **[1, 2, 4, 5, 6, 3]** - Compare 1 with 6, 5, 4, 2. 1 is smaller than all, so it's shifted to the beginning.
+
+6. **[1, 2, 3, 4, 5, 6]** - Compare 3 with 6, 5, 4, 2, 1. 3 is inserted between 2 and 4.
+
+
+**Code (Python):**
+
+```python
+def insertion_sort(arr):
+  """Sorts an array using insertion sort."""
+  for i in range(1, len(arr)):
+    key = arr[i]
+    j = i - 1
+    while j >= 0 and key < arr[j]:
+      arr[j + 1] = arr[j]
+      j -= 1
+    arr[j + 1] = key
+  return arr
+
+my_array = [5, 2, 4, 6, 1, 3]
+sorted_array = insertion_sort(my_array)
+print(f"Sorted array: {sorted_array}")
+```
+
+**Time and Space Complexity:**
+
+* **Best-case time complexity:** O(n) - This occurs when the array is already sorted.
+* **Average-case time complexity:** O(n²)
+* **Worst-case time complexity:** O(n²) - This occurs when the array is sorted in reverse order.
+* **Space complexity:** O(1) - Insertion sort is an in-place algorithm, meaning it doesn't require significant extra memory.
+
+
+**Advantages:**
+
+* Simple to understand and implement.
+* Efficient for small datasets or nearly sorted datasets.
+* In-place algorithm (minimal extra memory).
+* Stable sort (preserves the relative order of equal elements).
+
+
+**Disadvantages:**
+
+* Inefficient for large datasets.
+* Quadratic time complexity in the worst and average cases makes it unsuitable for large-scale sorting.
+
+
+Insertion sort is a good choice when dealing with small arrays or when you need a simple, stable sorting algorithm.  For larger datasets, more efficient algorithms like merge sort or quicksort are preferred.
+
