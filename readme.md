@@ -11239,3 +11239,107 @@ There is no known polynomial-time algorithm for the Minimum Vertex Cover problem
 
 **In summary:**  While there are algorithms to solve Minimum Vertex Cover, none are guaranteed to run in polynomial time.  The choice of algorithm depends on the balance between the need for an optimal solution and the acceptable runtime.  For large graphs, approximation algorithms are often preferred for their practicality.  If an optimal solution is crucial and the graph is relatively small, then an exponential-time exact algorithm might be acceptable.
 
+#  Algorithm Pseudo Code 
+Algorithm pseudocode doesn't have a strict, universally agreed-upon syntax.  The goal is to be clear, concise, and human-readable, allowing a programmer to easily translate it into a specific programming language.  However, there are common conventions and structures used.  Here are some examples illustrating various algorithms and common pseudocode structures:
+
+**1. Sequential Search:**
+
+```
+Algorithm SequentialSearch(array A, value x)
+Input: An array A, a value x to search for
+Output: The index of x in A if found, -1 otherwise
+
+  for each index i in A do
+    if A[i] == x then
+      return i
+    end if
+  end for
+  return -1
+```
+
+**2. Binary Search (Iterative):**
+
+```
+Algorithm BinarySearch(sorted array A, value x)
+Input: A sorted array A, a value x to search for
+Output: The index of x in A if found, -1 otherwise
+
+  low ← 0
+  high ← length(A) - 1
+
+  while low ≤ high do
+    mid ← (low + high) / 2
+    if A[mid] == x then
+      return mid
+    else if A[mid] < x then
+      low ← mid + 1
+    else
+      high ← mid - 1
+    end if
+  end while
+
+  return -1
+```
+
+**3. Bubble Sort:**
+
+```
+Algorithm BubbleSort(array A)
+Input: An array A
+Output: The sorted array A
+
+  n ← length(A)
+  for i ← 0 to n - 2 do
+    for j ← 0 to n - 2 - i do
+      if A[j] > A[j + 1] then
+        swap A[j] and A[j + 1]
+      end if
+    end for
+  end for
+```
+
+**4. Recursive Factorial:**
+
+```
+Algorithm Factorial(n)
+Input: A non-negative integer n
+Output: The factorial of n
+
+  if n == 0 then
+    return 1
+  else
+    return n * Factorial(n - 1)
+  end if
+```
+
+**5. Function/Procedure Declaration:**
+
+```
+Function CalculateAverage(numbers)
+  //numbers is an array of numbers
+  sum ← 0
+  for each number in numbers do
+    sum ← sum + number
+  end for
+  return sum / length(numbers)
+End Function
+```
+
+
+**Common Pseudocode Elements:**
+
+* **Algorithm Name(parameters):**  Indicates the algorithm's name and input parameters.
+* **Input:** Describes the input data.
+* **Output:** Describes the output data.
+* **Variables:**  Declared using assignment (`←`).
+* **Control Structures:**
+    * `if-then-else`: Conditional statements.
+    * `for`: Loops iterating over a range or collection.
+    * `while`: Loops repeating while a condition is true.
+    * `repeat-until`: Loops repeating until a condition is true.
+* **Functions/Procedures:**  Modular blocks of code.
+* **Comments:**  Explanatory text using `//` or `/* ... */`.
+
+
+Remember, the key is clarity.  Use indentation to show structure and choose words and notation that are easily understood by your intended audience.  Don't be afraid to add comments to explain complex steps.  The level of detail should be appropriate for the intended reader.  For experienced programmers, a less detailed pseudocode might suffice, while beginners may benefit from more detail.
+
