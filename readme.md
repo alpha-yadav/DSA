@@ -4994,3 +4994,83 @@ Here's a breakdown of the algorithm, focusing on lines with a slope between 0 an
 
 This detailed explanation allows you to understand and implement the Bresenham line algorithm effectively.  Remember to adapt the algorithm for different slope ranges as needed.  You can find numerous code implementations in various programming languages online.
 
+#  Floyd-Warshall Algorithm 
+The Floyd-Warshall algorithm is a dynamic programming algorithm for finding the shortest paths between all pairs of vertices in a weighted graph.  It works for both directed and undirected graphs, and can handle negative edge weights (but not negative cycles – if a negative cycle exists, the algorithm will detect it).
+
+**Algorithm:**
+
+The algorithm iteratively considers all possible intermediate vertices between each pair of source and destination vertices.  It builds a distance matrix `dist`, where `dist[i][j]` represents the shortest distance from vertex `i` to vertex `j`.
+
+1. **Initialization:**
+   - Initialize `dist[i][j]` to the weight of the edge between `i` and `j` if an edge exists, otherwise set it to infinity (∞).
+   - Set `dist[i][i]` to 0 for all vertices `i`.
+
+2. **Iteration:**
+   - Iterate through all vertices `k` from 1 to `n` (where `n` is the number of vertices).
+   - For each pair of vertices `i` and `j`, check if going through `k` provides a shorter path:
+     - If `dist[i][k] + dist[k][j] < dist[i][j]`, then update `dist[i][j]` to `dist[i][k] + dist[k][j]`.  This means that a shorter path from `i` to `j` is found by going through `k`.
+
+3. **Result:**
+   - After iterating through all vertices `k`, the `dist` matrix contains the shortest path distances between all pairs of vertices.
+
+**Pseudocode:**
+
+```
+function floydWarshall(graph):
+  // Initialize distance matrix
+  dist = graph  // Assuming graph is represented as an adjacency matrix
+  n = number of vertices in graph
+
+  for i from 1 to n:
+    for j from 1 to n:
+      if i == j:
+        dist[i][j] = 0
+      else if dist[i][j] == ∞: // No direct edge
+        dist[i][j] = ∞
+
+
+  // Iterate through intermediate vertices
+  for k from 1 to n:
+    for i from 1 to n:
+      for j from 1 to n:
+        if dist[i][k] + dist[k][j] < dist[i][j]:
+          dist[i][j] = dist[i][k] + dist[k][j]
+
+  return dist
+```
+
+**Example:**
+
+Consider a graph with 4 vertices and the following adjacency matrix (infinity represents no direct edge):
+
+```
+   1  2  3  4
+1  0  5  ∞  10
+2  ∞  0  3  ∞
+3  ∞  ∞  0  1
+4  ∞  ∞  ∞  0
+```
+
+After running Floyd-Warshall, the `dist` matrix would contain the shortest paths:
+
+```
+   1  2  3  4
+1  0  8  4  9
+2  ∞  0  3  4
+3  ∞  ∞  0  1
+4  ∞  ∞  ∞  0
+```
+
+For instance, the shortest path from vertex 1 to vertex 3 is 4 (going through vertex 4).
+
+**Time and Space Complexity:**
+
+- **Time Complexity:** O(V³), where V is the number of vertices.  This is because of the three nested loops.
+- **Space Complexity:** O(V²), to store the distance matrix.
+
+**Detecting Negative Cycles:**
+
+After the algorithm completes, if any diagonal element `dist[i][i]` is negative, it indicates the presence of a negative cycle in the graph.  This is because a negative cycle would allow for infinitely decreasing path lengths.
+
+The Floyd-Warshall algorithm is a powerful tool for finding all-pairs shortest paths, especially when dealing with dense graphs where other algorithms might be less efficient. However, its cubic time complexity limits its applicability to large graphs.
+
