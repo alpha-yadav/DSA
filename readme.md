@@ -4679,3 +4679,83 @@ Imagine a graph representing cities and the distances between them. Prim's algor
 
 Prim's algorithm is a fundamental algorithm in graph theory with applications in network design, transportation planning, and other optimization problems.  It's often compared to Kruskal's algorithm, another popular algorithm for finding MSTs, but they differ in their approach.  The next step would be to look at a specific implementation of Prim's algorithm (e.g., using a priority queue).
 
+#  Single Source Shortest Path Algorithm (Given there is a negative cycle in a graph) 
+The standard single-source shortest path algorithms like Dijkstra's algorithm fail when there are negative cycles in the graph.  This is because negative cycles allow for arbitrarily short paths (you can just keep looping around the negative cycle to get a shorter and shorter path).  Therefore, you cannot find a *shortest* path in the traditional sense.
+
+However, you can still determine *if* a negative cycle exists and find the shortest paths *if no negative cycles exist*.  Here's how:
+
+**1. Detecting Negative Cycles using Bellman-Ford Algorithm:**
+
+The Bellman-Ford algorithm is a dynamic programming algorithm that can detect negative cycles.  Here's how it works:
+
+* **Initialization:**  Assign a distance of 0 to the source node and infinity to all other nodes.
+* **Relaxation:**  Iterate through the edges of the graph `|V| - 1` times (where `|V|` is the number of vertices). In each iteration, for each edge (u, v) with weight w, if `dist[u] + w < dist[v]`, update `dist[v]` to `dist[u] + w`. This step is called "relaxation".  It's essentially checking if we can find a shorter path to `v` by going through `u`.
+* **Negative Cycle Detection:** After `|V| - 1` iterations, perform one more iteration. If any distance is still updated, it indicates the presence of a negative cycle.
+
+**Python Code (Bellman-Ford with Negative Cycle Detection):**
+
+```python
+import sys
+
+def bellman_ford(graph, source):
+    """
+    Bellman-Ford algorithm for single-source shortest paths.  Detects negative cycles.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and 
+               values are dictionaries of neighbors with their edge weights.
+        source: The source node.
+
+    Returns:
+        A tuple: (distances, negative_cycle). distances is a dictionary of 
+        shortest distances from the source. negative_cycle is True if a 
+        negative cycle exists, False otherwise.
+    """
+    distances = {node: sys.maxsize for node in graph}
+    distances[source] = 0
+    num_vertices = len(graph)
+
+    for _ in range(num_vertices - 1):
+        for node in graph:
+            for neighbor, weight in graph[node].items():
+                if distances[node] + weight < distances[neighbor]:
+                    distances[neighbor] = distances[node] + weight
+
+    negative_cycle = False
+    for node in graph:
+        for neighbor, weight in graph[node].items():
+            if distances[node] + weight < distances[neighbor]:
+                negative_cycle = True
+                break
+        if negative_cycle:
+            break
+
+    return distances, negative_cycle
+
+# Example graph (adjacency list representation):
+graph = {
+    'A': {'B': -1, 'C': 4},
+    'B': {'C': 2, 'D': 5},
+    'C': {'D': -3},
+    'D': {'A': 4}
+}
+
+distances, negative_cycle = bellman_ford(graph, 'A')
+
+if negative_cycle:
+    print("Negative cycle detected!")
+else:
+    print("Shortest distances from source 'A':", distances)
+
+```
+
+**2.  Handling Negative Cycles:**
+
+If a negative cycle is detected, you cannot meaningfully calculate shortest paths.  Options include:
+
+* **Report the error:** Simply indicate that shortest paths cannot be computed due to the presence of a negative cycle.
+* **Find paths with the most negative weight:** You could modify the algorithm to find paths with the lowest total weight, even if they involve going through negative cycles multiple times. This might be useful in specific contexts (e.g., finding the most efficient route even if it involves backtracking).  However, this result wouldn't be a "shortest path" in the traditional sense.
+
+
+In summary, Bellman-Ford is the go-to algorithm when you need to handle the possibility of negative cycles in a single-source shortest path problem.  It efficiently detects negative cycles and provides shortest path distances if no such cycles exist. Remember that the concept of "shortest path" becomes ambiguous when negative cycles are present.
+
