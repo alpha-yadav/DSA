@@ -10768,3 +10768,40 @@ This method uses a hash map (or dictionary) to count the occurrences of each cha
 
 Remember to choose the method that best suits your needs based on factors like string length and performance requirements.  The sorting method is generally easier to understand, while the character counting method can be more efficient for very large strings.
 
+#  Pascal's Triangle 
+Pascal's Triangle is a triangular array of numbers where each number is the sum of the two numbers directly above it.  It's named after the French mathematician Blaise Pascal, although it was known centuries earlier in other parts of the world.
+
+Here's a breakdown of its key features:
+
+* **Construction:**  The triangle begins with a single "1" at the top. Each subsequent row starts and ends with a "1," and the numbers in between are the sum of the two numbers directly above them.
+
+* **First few rows:**
+
+```
+      1
+     1 1
+    1 2 1
+   1 3 3 1
+  1 4 6 4 1
+ 1 5 10 10 5 1
+1 6 15 20 15 6 1
+ ...and so on...
+```
+
+* **Properties and Applications:** Pascal's Triangle has numerous fascinating properties and applications across various fields, including:
+
+    * **Binomial Coefficients:**  The numbers in Pascal's Triangle are the binomial coefficients.  The *n*th row (starting from row 0) represents the coefficients of the binomial expansion of (x + y)ⁿ.  For example, row 3 (1 3 3 1) corresponds to the expansion (x + y)³ = 1x³ + 3x²y + 3xy² + 1y³.
+
+    * **Combinations:**  Each number in the triangle also represents the number of combinations of choosing *k* items from a set of *n* items, denoted as "n choose k" or nCk, where *n* is the row number (starting from 0) and *k* is the position of the number in that row (starting from 0). For example, the number 10 in row 5, position 2 is 5C2 = 10.
+
+    * **Fibonacci Sequence:**  Adding the numbers along diagonal lines in Pascal's Triangle results in the Fibonacci sequence (1, 1, 2, 3, 5, 8, 13...).
+
+    * **Powers of 11:**  The rows of Pascal's Triangle, when read as a number, represent successive powers of 11 (with a caveat that for powers beyond 11², you need to "carry-over" digits).  For example, row 1 (1 1) is 11¹, row 2 (1 2 1) is 121, row 3 (1 3 3 1) is 1331.
+
+    * **Probability:**  Pascal's Triangle is useful in probability calculations.
+
+    * **Fractals:**  Creating visual representations of Pascal's Triangle by coloring cells based on whether the numbers are even or odd, or by using other numerical properties, leads to interesting fractal patterns.
+
+
+Pascal's Triangle is a simple yet powerful mathematical structure with connections to many different areas of mathematics and beyond. Its elegant structure and numerous applications make it a fascinating subject of study.
+
