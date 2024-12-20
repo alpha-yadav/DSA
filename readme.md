@@ -6460,3 +6460,13 @@ The more detail you provide, the better I can assist you.  Include things like:
 
 Once you give me the task, I will provide you with a Java implementation.
 
+#  Implementation in Javascript 
+Please provide me with the task or algorithm you want implemented in JavaScript.  I need more information to give you a useful answer.  For example, tell me:
+
+* **What should the code do?**  (e.g., "Sort an array of numbers", "Calculate the factorial of a number", "Fetch data from an API", "Create a simple to-do list application")
+* **What are the inputs?** (e.g., "An array of integers", "A single integer", "A URL")
+* **What are the outputs?** (e.g., "A sorted array", "An integer", "JSON data", "A list displayed on the page")
+* **Are there any specific requirements or constraints?** (e.g., "Use a specific algorithm", "Must work in a browser", "Should be efficient for large datasets")
+
+The more detail you give me, the better I can help.
+
