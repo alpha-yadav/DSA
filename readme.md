@@ -4281,3 +4281,86 @@ Greedy algorithms are often a good choice when:
 
 Greedy algorithms provide a simple and efficient way to tackle optimization problems.  Their ease of implementation makes them attractive, but it's crucial to understand their limitations and ensure the problem is suitable for a greedy approach before applying it.  Always consider whether the problem exhibits optimal substructure and the greedy choice property before employing a greedy strategy.
 
+#  Activity Selection Problem 
+The Activity Selection Problem is a classic algorithmic problem in computer science.  It's a combinatorial optimization problem that aims to select the maximum number of non-overlapping activities from a set of activities with given start and finish times.  This means you can't choose two activities that overlap in time.
+
+Here's a breakdown of the problem, its solution, and related concepts:
+
+**Problem Statement:**
+
+Given a set of activities, each with a start time `sᵢ` and a finish time `fᵢ` (where `i` is the activity index), find the maximum number of activities that can be performed by a single person, assuming that a person can perform only one activity at a time.
+
+**Formal Definition:**
+
+Let `A = {a₁, a₂, ..., aₙ}` be a set of `n` activities, where each activity `aᵢ` has a start time `sᵢ` and a finish time `fᵢ`.  We assume that `fᵢ ≤ sⱼ` implies that activity `aᵢ` finishes before activity `aⱼ` starts.  The goal is to find a subset `A' ⊆ A` such that no two activities in `A'` overlap and the cardinality (size) of `A'` is maximized.
+
+**Greedy Approach (Optimal Solution):**
+
+The Activity Selection Problem can be solved optimally using a greedy algorithm.  The key idea is to sort the activities by their finish times in non-decreasing order.  Then, iteratively select the activity with the earliest finish time that doesn't overlap with the previously selected activity.
+
+**Algorithm:**
+
+1. **Sort:** Sort the activities by their finish times in non-decreasing order.  This is crucial for the greedy approach to work correctly.
+2. **Initialize:** Select the first activity (the one with the earliest finish time) and add it to the selected set `A'`.
+3. **Iterate:** Iterate through the remaining activities.  For each activity:
+   - If its start time is greater than or equal to the finish time of the last selected activity, select it and add it to `A'`.
+4. **Return:** Return the set `A'`.
+
+**Example:**
+
+Let's say we have the following activities:
+
+| Activity | Start Time (sᵢ) | Finish Time (fᵢ) |
+|---|---|---|
+| a₁ | 1 | 4 |
+| a₂ | 3 | 5 |
+| a₃ | 0 | 6 |
+| a₄ | 5 | 7 |
+| a₅ | 3 | 8 |
+| a₆ | 5 | 9 |
+| a₇ | 6 | 10 |
+
+
+1. **Sort by finish time:**  (a₁, a₂, a₄, a₇, a₆, a₅, a₃)
+
+2. **Select activities:**
+   - Select a₁ (f₁ = 4)
+   - a₂ overlaps with a₁, so skip it.
+   - a₄ doesn't overlap (s₄ = 5 > f₁ = 4), select a₄ (f₄ = 7)
+   - a₇ doesn't overlap (s₇ = 6 > f₄ = 7), select a₇ (f₇ = 10)
+   - a₆ overlaps with a₇, so skip it.
+   - a₅ overlaps with a₇, so skip it.
+   - a₃ overlaps with a₁, so skip it.
+
+3. **Result:** The selected activities are a₁, a₄, and a₇.  This is the optimal solution.
+
+**Python Code:**
+
+```python
+def activity_selection(activities):
+    # Sort activities by finish time
+    activities.sort(key=lambda x: x[1])  # Assuming activities are tuples (start, finish)
+
+    selected_activities = [activities[0]]  # Select the first activity
+
+    last_finish_time = activities[0][1]
+
+    for activity in activities[1:]:
+        if activity[0] >= last_finish_time:
+            selected_activities.append(activity)
+            last_finish_time = activity[1]
+
+    return selected_activities
+
+activities = [(1, 4), (3, 5), (0, 6), (5, 7), (3, 8), (5, 9), (6, 10)]
+selected = activity_selection(activities)
+print(f"Selected activities: {selected}")
+```
+
+**Time Complexity:**  The dominant factor is the sorting step, which takes O(n log n) time, where n is the number of activities. The rest of the algorithm is linear, O(n).  Therefore, the overall time complexity is O(n log n).
+
+**Space Complexity:** O(n) to store the activities (and the selected activities).
+
+
+This explanation provides a comprehensive understanding of the Activity Selection Problem and its efficient solution using a greedy approach. Remember that the greedy approach only works correctly because of the specific structure of the problem;  the optimal substructure property holds.
+
