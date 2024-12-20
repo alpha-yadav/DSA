@@ -10657,3 +10657,114 @@ Therefore, **character counting is generally more efficient** for larger strings
 #  Sample input and output 
 Please provide me with the task or problem you want sample input and output for.  I need to know what the program or function is supposed to do before I can give you relevant examples.
 
+#  Generic Code for Anagrams 
+The concept of finding anagrams involves determining if two or more strings contain the same characters, regardless of their order. Here's generic code for finding anagrams in various programming languages, along with explanations:
+
+**Method 1: Sorting Characters**
+
+This is a common and efficient approach.  We sort the characters of each string alphabetically. If the sorted strings are identical, the original strings are anagrams.
+
+**Python:**
+
+```python
+from collections import Counter
+
+def are_anagrams(str1, str2):
+  """Checks if two strings are anagrams using character sorting."""
+  return sorted(str1.lower()) == sorted(str2.lower())
+
+def find_anagrams(word_list):
+  """Finds all anagrams within a list of words."""
+  anagrams = {}
+  for word in word_list:
+    sorted_word = "".join(sorted(word.lower()))
+    if sorted_word in anagrams:
+      anagrams[sorted_word].append(word)
+    else:
+      anagrams[sorted_word] = [word]
+  return [group for group in anagrams.values() if len(group) > 1]
+
+
+words = ["listen", "silent", "enlist", "tinsel", "hello", "world", "olleh"]
+print(find_anagrams(words))  # Output: [['listen', 'silent', 'enlist', 'tinsel'], ['hello', 'olleh']]
+
+#Using Counter for improved efficiency (especially with larger words)
+def are_anagrams_counter(str1, str2):
+    return Counter(str1.lower()) == Counter(str2.lower())
+
+```
+
+**JavaScript:**
+
+```javascript
+function areAnagrams(str1, str2) {
+  //Convert to lowercase and sort characters
+  const sortedStr1 = str1.toLowerCase().split('').sort().join('');
+  const sortedStr2 = str2.toLowerCase().split('').sort().join('');
+  return sortedStr1 === sortedStr2;
+}
+
+function findAnagrams(words) {
+    const anagrams = {};
+    for (const word of words) {
+        const sortedWord = word.toLowerCase().split('').sort().join('');
+        if (!anagrams[sortedWord]) {
+            anagrams[sortedWord] = [];
+        }
+        anagrams[sortedWord].push(word);
+    }
+    return Object.values(anagrams).filter(group => group.length > 1);
+}
+
+const words = ["listen", "silent", "enlist", "tinsel", "hello", "world", "olleh"];
+console.log(findAnagrams(words)); // Output: [ [ 'listen', 'silent', 'enlist', 'tinsel' ], [ 'hello', 'olleh' ] ]
+```
+
+**Java:**
+
+```java
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Anagrams {
+
+    public static boolean areAnagrams(String str1, String str2) {
+        char[] charArray1 = str1.toLowerCase().toCharArray();
+        char[] charArray2 = str2.toLowerCase().toCharArray();
+        Arrays.sort(charArray1);
+        Arrays.sort(charArray2);
+        return Arrays.equals(charArray1, charArray2);
+    }
+
+    public static List<List<String>> findAnagrams(String[] words) {
+        Map<String, List<String>> anagramMap = new HashMap<>();
+        for (String word : words) {
+            String sortedWord = String.valueOf(word.toLowerCase().chars().sorted().toArray()); //Efficient sorting
+            anagramMap.computeIfAbsent(sortedWord, k -> new ArrayList<>()).add(word);
+        }
+        List<List<String>> result = new ArrayList<>();
+        for (List<String> group : anagramMap.values()) {
+            if (group.size() > 1) {
+                result.add(group);
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String[] words = {"listen", "silent", "enlist", "tinsel", "hello", "world", "olleh"};
+        System.out.println(findAnagrams(words)); // Output: [[listen, silent, enlist, tinsel], [hello, olleh]]
+    }
+}
+```
+
+**Method 2: Character Counting (using Hash Maps or Dictionaries)**
+
+This method uses a hash map (or dictionary) to count the occurrences of each character in each string.  If the character counts are identical, the strings are anagrams.  This method can be more efficient for larger strings than sorting.  (Python's `Counter` example above already demonstrates this).
+
+
+Remember to choose the method that best suits your needs based on factors like string length and performance requirements.  The sorting method is generally easier to understand, while the character counting method can be more efficient for very large strings.
+
