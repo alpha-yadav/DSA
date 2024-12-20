@@ -10519,3 +10519,49 @@ print(f"Longest Common Subsequence: {lcs_seq}, Length: {lcs_len}")
 
 The LCS problem has applications in various fields, including bioinformatics (comparing DNA sequences), version control systems (finding differences between files), and data compression.
 
+#  Longest Increasing Subsequence Basic Information 
+The Longest Increasing Subsequence (LIS) problem is a classic computer science problem that asks for the length (and sometimes the actual sequence) of the longest subsequence within a given sequence such that all elements of the subsequence are sorted in increasing order.  Here's a breakdown of basic information:
+
+**Formal Definition:**
+
+Given a sequence of numbers `a1, a2, ..., an`, a subsequence is a sequence obtained by removing zero or more elements from the original sequence without changing the order of the remaining elements.  An increasing subsequence is a subsequence where each element is strictly greater than the preceding element (or it's the first element). The LIS problem seeks to find the longest such increasing subsequence.
+
+**Example:**
+
+Consider the sequence: `[1, 3, 2, 4, 5]`
+
+* **Subsequences:**  `[1, 2, 4]`, `[1, 3, 4, 5]`, `[2, 4, 5]`, `[1]`, `[3, 5]` are some examples.
+* **Increasing Subsequences:** `[1, 3, 4, 5]`, `[1, 2, 4]`, `[1, 2, 5]`, `[1]`, `[2, 4, 5]`, `[2, 5]` etc.
+* **Longest Increasing Subsequence:** `[1, 3, 4, 5]` (length 4)
+
+
+**Key Aspects:**
+
+* **Subsequence vs. Substring:** A subsequence doesn't need to be contiguous elements like a substring.  You can pick elements from anywhere in the original sequence as long as their order is maintained.
+
+* **Strictly Increasing:**  Typically, the LIS problem requires the subsequence to be strictly increasing (each element > the previous).  Variations exist where non-strictly increasing (each element ≥ the previous) is allowed.
+
+* **Length vs. Sequence:**  The problem might ask just for the length of the LIS, or it may require the actual LIS sequence itself.
+
+
+**Algorithms:**
+
+Several algorithms solve the LIS problem, with varying time complexities:
+
+* **Dynamic Programming (DP):** This is a common and relatively efficient approach. It has a time complexity of O(n^2), where n is the length of the input sequence.
+
+* **Improved Dynamic Programming with Binary Search:** This optimized DP approach uses binary search to reduce the time complexity to O(n log n).  This is generally the preferred algorithm for its efficiency.
+
+
+**Applications:**
+
+The LIS problem has applications in various areas, including:
+
+* **Bioinformatics:** Analyzing gene sequences.
+* **Data Analysis:** Identifying trends and patterns in time series data.
+* **Computer Graphics:**  Finding the longest increasing sequence of pixel values.
+* **Algorithm Design:**  A foundational problem used in teaching and understanding dynamic programming and other algorithmic techniques.
+
+
+This provides a comprehensive overview of the longest increasing subsequence problem.  If you'd like to delve into specific algorithmic details or code examples, just let me know.
+
