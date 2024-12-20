@@ -4856,3 +4856,71 @@ Prim's algorithm starts with a single vertex and iteratively adds the minimum-we
 
 In summary, the (V-1) limit is not about the number of times *each* edge is relaxed, but rather the total number of edges added to the MST (and therefore, indirectly, the maximum number of successful relaxation operations that lead to the MST).  We are guaranteed to have a complete MST once we've added (V-1) edges.
 
+#  Line Algorithm 
+Line algorithms are used in computer graphics to draw lines on a raster display (like your computer screen).  A raster display is a grid of pixels, and the algorithm determines which pixels should be illuminated to create the illusion of a straight line.  Several algorithms exist, each with trade-offs in speed, accuracy, and complexity.  Here are some of the most common:
+
+**1. DDA (Digital Differential Analyzer):**
+
+* **Concept:** This is a simple incremental algorithm. It calculates the slope of the line and iteratively steps along the x-axis (or y-axis, depending on the slope), adding the slope to the y-coordinate (or x-coordinate) at each step to find the next pixel.
+* **Advantages:** Simple to implement.
+* **Disadvantages:** Requires floating-point arithmetic (which can be slower than integer arithmetic), and may suffer from accumulation of rounding errors, leading to inaccuracies, especially for long lines.
+
+**2. Bresenham's Line Algorithm:**
+
+* **Concept:** This algorithm uses only integer arithmetic, making it very efficient.  It works by iteratively choosing the pixel that is closest to the actual line. It avoids floating-point operations entirely by using a decision parameter that determines which pixel to choose at each step.
+* **Advantages:** Fast, uses only integer arithmetic, accurate.
+* **Disadvantages:** Slightly more complex to implement than the DDA algorithm.
+
+**3. Xiaolin Wu's Line Algorithm:**
+
+* **Concept:**  This algorithm generates anti-aliased lines.  Anti-aliasing smooths the edges of the line by blending the colors of adjacent pixels, reducing the jagged appearance ("stair-stepping") common in lines drawn using simpler algorithms.
+* **Advantages:** Produces smoother, less jagged lines.
+* **Disadvantages:** More computationally expensive than Bresenham's algorithm.
+
+
+**Comparison Table:**
+
+| Algorithm          | Speed      | Accuracy     | Anti-aliasing | Complexity |
+|----------------------|-------------|---------------|----------------|------------|
+| DDA                  | Moderate    | Moderate      | No              | Low         |
+| Bresenham's         | Fast        | High           | No              | Moderate    |
+| Xiaolin Wu's        | Slower      | High           | Yes             | High        |
+
+
+**Choosing the Right Algorithm:**
+
+The best algorithm depends on your specific needs:
+
+* **For speed and simplicity, especially in embedded systems:** Bresenham's algorithm is generally preferred.
+* **For smoother lines and higher quality graphics:** Xiaolin Wu's algorithm is the better choice, but at the cost of increased computational complexity.
+* **For a simple understanding and quick implementation (less critical applications):** The DDA algorithm can be sufficient.
+
+
+**Example (Bresenham's Algorithm - for lines with slope less than or equal to 1):**
+
+```python
+def bresenham(x1, y1, x2, y2):
+    dx = x2 - x1
+    dy = y2 - y1
+    p = 2 * dy - dx
+
+    x = x1
+    y = y1
+
+    print(f"({x},{y})")  # Plot the first point
+
+    while x < x2:
+        x += 1
+        if p < 0:
+            p += 2 * dy
+        else:
+            y += 1
+            p += 2 * (dy - dx)
+        print(f"({x},{y})") # Plot the subsequent points
+
+# Example usage:
+bresenham(1, 1, 10, 5)
+```
+
+This is a simplified version of Bresenham's algorithm (handles only lines with slope <=1).  A complete implementation would need to handle all slopes and potentially octants.  You can find complete implementations online in various programming languages.  Remember to adapt the `print` statements to your graphics drawing API (e.g., using a library like Pygame or OpenGL).
+
