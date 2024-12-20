@@ -3163,3 +3163,103 @@ print(f"Path found: {path}")
 
 For a maze with no obstacles, simply calculating the line between the start and end points is far superior.  Use A* only when obstacles are present.
 
+#  Solving 8-puzzle problem using A* algorithm 
+The A* algorithm solves the 8-puzzle by finding the shortest path from a start state to a goal state.  It does this by using a heuristic function to estimate the cost of reaching the goal from any given state.  Here's a breakdown of how to implement it:
+
+**1. Data Structures:**
+
+* **State:**  Represent the puzzle state as a list or array of 9 elements (0 represents the blank tile).  For example: `[1, 2, 3, 4, 0, 6, 7, 5, 8]`
+
+* **Priority Queue:**  Use a priority queue (like a min-heap) to store the states to be explored.  The priority is determined by the f-score (explained below).  Python's `heapq` module is suitable.
+
+* **Visited Set:** A set to keep track of visited states to avoid cycles.
+
+
+**2. Heuristic Function:**
+
+The heuristic function, `h(n)`, estimates the cost to reach the goal state from state `n`.  Two common heuristics for the 8-puzzle are:
+
+* **Manhattan Distance:**  For each tile, calculate the sum of the horizontal and vertical distances between its current position and its goal position.  This is admissible (never overestimates the actual cost) and consistent (satisfies the triangle inequality).
+
+* **Misplaced Tiles:** Count the number of tiles that are not in their goal positions. This is admissible but not consistent.  Generally, Manhattan distance is preferred because it leads to a more efficient search.
+
+
+**3. Cost Function:**
+
+The A* algorithm uses a cost function `f(n) = g(n) + h(n)`, where:
+
+* `g(n)` is the cost of the path from the start state to state `n`.  This is simply the number of moves made.
+* `h(n)` is the heuristic estimate (Manhattan distance or misplaced tiles).
+
+**4. Algorithm:**
+
+1. **Initialization:**
+   - Put the start state into the priority queue with `f(n) = g(n) + h(n)` (initially, `g(n) = 0`).
+   - Initialize the visited set to empty.
+
+2. **Iteration:**
+   - While the priority queue is not empty:
+     - Pop the state with the lowest f-score from the priority queue.
+     - If this state is the goal state, reconstruct and return the path.
+     - If this state has already been visited, continue to the next iteration.
+     - Mark the current state as visited.
+     - Generate all possible successor states by moving the blank tile (up, down, left, right).
+     - For each successor:
+       - Calculate `g(n)` (one more than the parent's `g(n)`).
+       - Calculate `h(n)` using the chosen heuristic.
+       - Calculate `f(n) = g(n) + h(n)`.
+       - If the successor is not in the visited set, add it to the priority queue with its `f(n)`.
+
+3. **Path Reconstruction:**  Once the goal state is found, trace back from the goal state to the start state using the parent pointers maintained during the search.
+
+
+**Python Code (using Manhattan distance):**
+
+```python
+import heapq
+
+def manhattan_distance(state, goal):
+    distance = 0
+    for i in range(9):
+        if state[i] != 0:
+            goal_row, goal_col = divmod(goal.index(state[i]), 3)
+            current_row, current_col = divmod(i, 3)
+            distance += abs(goal_row - current_row) + abs(goal_col - current_col)
+    return distance
+
+def a_star(start, goal):
+    queue = [(manhattan_distance(start, goal), 0, start, [])] # (f, g, state, path)
+    visited = set()
+
+    while queue:
+        _, g, current, path = heapq.heappop(queue)
+        if current == goal:
+            return path + [current]
+
+        visited.add(tuple(current))
+
+        blank_index = current.index(0)
+        row, col = divmod(blank_index, 3)
+        moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # Right, Left, Down, Up
+
+        for dr, dc in moves:
+            new_row, new_col = row + dr, col + dc
+            if 0 <= new_row < 3 and 0 <= new_col < 3:
+                new_index = new_row * 3 + new_col
+                neighbor = current[:]
+                neighbor[blank_index], neighbor[new_index] = neighbor[new_index], neighbor[blank_index]
+                if tuple(neighbor) not in visited:
+                    heapq.heappush(queue, (g + 1 + manhattan_distance(neighbor, goal), g + 1, neighbor, path + [current]))
+
+    return None # No solution found
+
+#Example Usage
+start = [1, 2, 3, 4, 0, 6, 7, 5, 8]
+goal = [1, 2, 3, 4, 5, 6, 7, 8, 0]
+solution = a_star(start, goal)
+print(solution)
+
+```
+
+Remember to install `heapq` if you don't have it already (it's part of the Python standard library, so you likely do).  This code provides a complete A* implementation for the 8-puzzle using the Manhattan distance heuristic.  You can adapt it to use the misplaced tiles heuristic if you prefer, but Manhattan distance will generally be more efficient. Remember to handle cases where no solution exists gracefully.
+
