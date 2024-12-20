@@ -10039,3 +10039,82 @@ The major limitation is its computational cost for large input sizes.  The runti
 
 In summary, brute force is a simple, easy-to-understand algorithm that guarantees a solution.  However, its inefficiency restricts its use to relatively small problem instances or situations where a more efficient algorithm is not known.  It often serves as a starting point before exploring more sophisticated and optimized algorithms.
 
+#  Dynamic Programming Algorithm 
+Dynamic programming is a powerful algorithmic technique used to solve optimization problems by breaking them down into smaller overlapping subproblems, solving each subproblem only once, and storing their solutions to avoid redundant computations. This stored information is often organized in a table or memoization structure.  The key idea is to exploit the optimal substructure property and overlapping subproblems property.
+
+**Optimal Substructure:**  A problem exhibits optimal substructure if an optimal solution to the problem can be constructed from optimal solutions to its subproblems.
+
+**Overlapping Subproblems:** A problem exhibits overlapping subproblems if the same subproblems are encountered multiple times during the recursive solution process.
+
+**Two main approaches to Dynamic Programming:**
+
+1. **Top-Down (Memoization):**  This approach starts with the original problem and recursively breaks it down into smaller subproblems.  The solutions to these subproblems are stored in a memoization table (usually a dictionary or array).  Before solving a subproblem, the algorithm checks if the solution is already available in the memoization table. If it is, the stored solution is returned; otherwise, the subproblem is solved, the solution is stored, and then returned.
+
+2. **Bottom-Up (Tabulation):** This approach starts by solving the smallest subproblems and then uses their solutions to build up solutions to larger subproblems until the original problem is solved.  The solutions are typically stored in a table (usually an array or matrix), which is filled in a systematic order.  This method often involves iterating through the table and filling it based on previously computed values.
+
+
+**Steps for Designing a Dynamic Programming Algorithm:**
+
+1. **Identify the subproblems:** Break the problem down into smaller, overlapping subproblems.
+
+2. **Define a recurrence relation:** Express the solution to the main problem in terms of the solutions to its subproblems. This relation will define how to combine the solutions of smaller subproblems to obtain the solution to a larger subproblem.
+
+3. **Choose a tabulation or memoization approach:** Decide whether to use a top-down (memoization) or bottom-up (tabulation) approach.
+
+4. **Implement the algorithm:**  Write the code to implement the chosen approach, ensuring efficient storage and retrieval of subproblem solutions.
+
+5. **Analyze the time and space complexity:** Determine the efficiency of your algorithm.
+
+
+**Example: Fibonacci Sequence (Bottom-Up)**
+
+The Fibonacci sequence is a classic example demonstrating dynamic programming.  The nth Fibonacci number is defined as:
+
+* F(0) = 0
+* F(1) = 1
+* F(n) = F(n-1) + F(n-2) for n > 1
+
+A naive recursive solution is very inefficient due to repeated calculations.  A dynamic programming solution using tabulation is much faster:
+
+```python
+def fibonacci_dp(n):
+  """Calculates the nth Fibonacci number using dynamic programming."""
+  if n <= 1:
+    return n
+  fib_table = [0] * (n + 1)
+  fib_table[1] = 1
+  for i in range(2, n + 1):
+    fib_table[i] = fib_table[i - 1] + fib_table[i - 2]
+  return fib_table[n]
+
+print(fibonacci_dp(10))  # Output: 55
+```
+
+**Example: 0/1 Knapsack Problem (Top-Down with Memoization)**
+
+The 0/1 knapsack problem involves selecting items with weights and values to maximize the total value within a weight capacity.
+
+```python
+def knapsack_memo(capacity, weights, values, n, memo={}):
+    if (n, capacity) in memo:
+        return memo[(n, capacity)]
+    if n == 0 or capacity == 0:
+        return 0
+    if weights[n-1] > capacity:
+        result = knapsack_memo(capacity, weights, values, n-1, memo)
+    else:
+        result = max(values[n-1] + knapsack_memo(capacity - weights[n-1], weights, values, n-1, memo),
+                    knapsack_memo(capacity, weights, values, n-1, memo))
+    memo[(n, capacity)] = result
+    return result
+
+values = [60, 100, 120]
+weights = [10, 20, 30]
+capacity = 50
+n = len(values)
+print(knapsack_memo(capacity, weights, values, n)) # Output: 220
+```
+
+
+These examples illustrate the core concepts of dynamic programming.  Many other optimization problems, such as shortest path algorithms (Bellman-Ford, Floyd-Warshall), sequence alignment, and others, can be efficiently solved using this technique.  The choice between memoization and tabulation often depends on the specific problem and personal preference, but tabulation tends to be slightly more efficient in space complexity in many cases.
+
