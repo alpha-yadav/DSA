@@ -294,3 +294,54 @@ Big-Theta is a combination of Big-O and Big-Ω.  If *f(n) = Θ(g(n))*, then *f(n
 
 **In summary:** Big-Theta notation provides a precise way to characterize the growth rate of algorithms and functions, focusing on the dominant terms and ignoring constant factors, which is crucial for analyzing algorithm efficiency.  It gives a more complete picture than Big-O alone, by specifying both upper and lower bounds.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly useful in analyzing the efficiency of algorithms.  The most common are Big O (O), Big Omega (Ω), and Big Theta (Θ). Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Intuition:**  f(n) grows no faster than g(n).
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows at most quadratically with the input size (n).  It could be faster, but it won't be significantly worse than quadratic.
+* **Focus:** Worst-case performance.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (though not always directly). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Intuition:** f(n) grows at least as fast as g(n).
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size.  It could be faster (e.g., O(n log n)), but it won't be significantly slower than linear.
+* **Focus:** Best-case or lower bound on performance.  Note that it doesn't necessarily mean the algorithm *always* takes that time; it simply guarantees it won't be *asymptotically* better.
+
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function. It means the function grows at the *same rate* as another function, both from above and below. We say f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n ≥ n₀.
+* **Intuition:** f(n) grows proportionally to g(n).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.  The algorithm's runtime is neither significantly faster nor significantly slower than n log n.
+* **Focus:** Precise characterization of the asymptotic growth rate.
+
+
+**Relationships:**
+
+* If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* O(g(n)) describes an upper bound, Ω(g(n)) a lower bound, and Θ(g(n)) a tight bound.
+
+
+**Other notations (less commonly used but worth mentioning):**
+
+* **Little o (o):**  f(n) = o(g(n)) means f(n) grows *strictly slower* than g(n).  Formally, for every constant c > 0, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Little omega (ω):** f(n) = ω(g(n)) means f(n) grows *strictly faster* than g(n).  Formally, for every constant c > 0, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+
+
+**In Summary:**
+
+| Notation | Meaning                               | Example      |
+|----------|---------------------------------------|---------------|
+| O(g(n))  | Upper bound                             | O(n²)        |
+| Ω(g(n))  | Lower bound                             | Ω(n)         |
+| Θ(g(n))  | Tight bound (both upper and lower)     | Θ(n log n)   |
+| o(g(n))  | Strictly slower growth                  | o(n)         |
+| ω(g(n))  | Strictly faster growth                  | ω(n²)        |
+
+
+Choosing the right notation depends on what aspect of the algorithm's performance you want to highlight.  Big O is the most commonly used because it focuses on the worst-case scenario, which is crucial for guaranteeing performance.  However, understanding all notations provides a more complete picture of the algorithm's behavior.
+
