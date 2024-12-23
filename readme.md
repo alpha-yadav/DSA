@@ -521,3 +521,99 @@ public class Main {
 
 These examples demonstrate the fundamental structure of simple loops.  More complex loops might involve nested loops (loops within loops), loop breaks (`break`), or loop continuations (`continue`), but these build upon the basic concepts shown above.  The choice between `for` and `while` depends on whether you know the number of iterations in advance (use `for`) or need to continue looping based on a condition (use `while`).
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to process data in a multi-dimensional way, often used for things like iterating over rows and columns of a matrix or processing combinations of items from multiple lists.
+
+Here's a breakdown with examples in several programming languages:
+
+**Basic Structure:**
+
+```
+outer_loop:
+  for outer_variable in outer_range:
+    inner_loop:
+      for inner_variable in inner_range:
+        # Code to execute for each inner and outer iteration
+```
+
+**Examples:**
+
+**1. Python:**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+**2. JavaScript:**
+
+This example iterates through a 2D array:
+
+```javascript
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+for (let i = 0; i < matrix.length; i++) { // Outer loop (rows)
+  for (let j = 0; j < matrix[i].length; j++) { // Inner loop (columns)
+    console.log(matrix[i][j]);
+  }
+}
+```
+
+**3. C++:**
+
+This example calculates the sum of all elements in a 2D array:
+
+```c++
+#include <iostream>
+
+int main() {
+  int matrix[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+  int sum = 0;
+
+  for (int i = 0; i < 3; i++) { // Outer loop
+    for (int j = 0; j < 3; j++) { // Inner loop
+      sum += matrix[i][j];
+    }
+  }
+
+  std::cout << "Sum of elements: " << sum << std::endl;
+  return 0;
+}
+```
+
+**4. Java:**
+
+This example prints all possible pairs from two arrays:
+
+```java
+public class NestedLoopExample {
+    public static void main(String[] args) {
+        String[] names = {"Alice", "Bob", "Charlie"};
+        String[] colors = {"Red", "Green", "Blue"};
+
+        for (String name : names) { // Outer loop
+            for (String color : colors) { // Inner loop
+                System.out.println(name + " likes " + color);
+            }
+        }
+    }
+}
+```
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly (often quadratically or even higher). Consider optimizing if performance becomes an issue.
+* **Readability:**  Proper indentation and clear variable names are crucial for understanding nested loops.  Overly complex nested loops can be difficult to debug and maintain.  Break down complex logic into smaller, more manageable functions if needed.
+
+
+Nested loops are a fundamental programming concept with many applications. Understanding how they work and their potential performance implications is essential for writing efficient and effective code.
+
