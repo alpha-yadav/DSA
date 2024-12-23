@@ -905,3 +905,81 @@ print(f"Tree 1 and Tree 3 are same (iterative): {are_trees_same_iterative(root1,
 
 Both methods achieve the same result. The recursive approach is often considered more readable for this specific problem, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues with very deep trees).  Choose the method that best suits your coding style and the constraints of your application. Remember to handle the `None` cases carefully in both methods to account for empty subtrees.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used to store data in a sorted manner.  They offer efficient search, insertion, and deletion operations, making them a valuable tool in various applications.
+
+Here's a breakdown of BSTs:
+
+**Key Properties:**
+
+* **Each node contains a key (value) and optionally, a payload (associated data).**
+* **The left subtree of a node contains only nodes with keys less than the node's key.**
+* **The right subtree of a node contains only nodes with keys greater than the node's key.**
+* **There are no duplicate keys.** (Some implementations allow duplicates, but it complicates the structure)
+
+**Visual Representation:**
+
+A BST is typically visualized as a tree structure, with the root node at the top.  For example:
+
+```
+      8
+     / \
+    3   10
+   / \    \
+  1   6    14
+     / \   /
+    4   7 13
+```
+
+In this example:
+
+* 8 is the root node.
+* All nodes in the left subtree (3, 1, 6, 4, 7) have keys less than 8.
+* All nodes in the right subtree (10, 14, 13) have keys greater than 8.
+* The same property applies recursively to each subtree.
+
+
+**Operations:**
+
+* **Search:**  To search for a key, you start at the root. If the key matches the root's key, you've found it. If the key is less than the root's key, you recursively search the left subtree. Otherwise, you recursively search the right subtree.  The time complexity is O(h), where h is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes.  In a worst-case scenario (a skewed tree), h can be n, resulting in O(n) time complexity.
+
+* **Insertion:** To insert a new key, you perform a search operation. If the key is not found, you insert it at the appropriate leaf node (the point where the search would have stopped).  The time complexity is also O(h).
+
+* **Deletion:** Deleting a node is more complex and has several cases to consider:
+    * **Leaf node:** Simply remove the node.
+    * **Node with one child:** Replace the node with its child.
+    * **Node with two children:**  The most complex case.  Common strategies include replacing the node with its inorder predecessor (the largest key in the left subtree) or its inorder successor (the smallest key in the right subtree).  The time complexity is O(h).
+
+* **Minimum/Maximum:** Finding the minimum or maximum key is straightforward.  The minimum key is the leftmost node, and the maximum key is the rightmost node.  Time complexity is O(h).
+
+
+**Advantages:**
+
+* **Efficient search, insertion, and deletion (in balanced trees).**
+* **In-order traversal provides a sorted sequence of keys.**
+* **Relatively simple to implement.**
+
+
+**Disadvantages:**
+
+* **Performance degrades significantly in unbalanced trees.**  In the worst case (a skewed tree resembling a linked list), operations become O(n).
+* **Not efficient for operations like finding the kth smallest element (except in specific variations).**
+
+
+**Balancing:**
+
+To prevent the worst-case scenario of unbalanced trees, self-balancing BSTs are used.  These algorithms (like AVL trees, red-black trees, B-trees) automatically rebalance the tree during insertion and deletion to maintain a relatively balanced structure, ensuring logarithmic time complexity for operations.
+
+
+**Applications:**
+
+BSTs are used in various applications, including:
+
+* **Symbol tables:**  Storing and retrieving data associated with keys.
+* **Databases:** Indexing data for efficient retrieval.
+* **Operating systems:** Managing file systems.
+* **Implementing other data structures:**  Heaps, sets, maps.
+
+
+In summary, Binary Search Trees are a powerful and versatile data structure, but their efficiency depends heavily on maintaining a balanced tree.  For guaranteed logarithmic performance, consider using self-balancing BST variations.
+
