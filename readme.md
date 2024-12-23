@@ -2300,3 +2300,13 @@ print(f"LCA of D and F is: {lca.data}") # Output: LCA of D and F is: A
 
 Remember to handle edge cases like when one or both nodes are not present in the tree.  The choice between recursive and iterative approaches often depends on factors like code readability, memory usage, and whether parent pointers are readily available.  The recursive approach is generally easier to understand for binary trees, while the iterative approach with parent pointers can be more efficient in some cases.  For general trees, the recursive approach is usually the most straightforward.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need the information to create the graph for you.  For example, you could give me:
+
+* **A set of data points:**  e.g., (1,2), (2,4), (3,6)
+* **An equation:** e.g., y = 2x + 1
+* **A description of the type of graph:** e.g., "a bar chart showing sales for each month"  (You'd then need to provide the sales data for each month).
+
+
+Once you give me the information, I can help you.
+
