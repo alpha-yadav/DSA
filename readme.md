@@ -2475,3 +2475,140 @@ Graph theory is used to solve a wide range of problems, including:
 
 This introduction provides a basic overview.  Each of the concepts mentioned above can be explored in much greater depth.  Further study would involve learning specific algorithms and techniques for solving various graph-related problems.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and efficient method, particularly when the graph is sparse (i.e., it has relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementations and considerations:
+
+**Concept:**
+
+An adjacency list represents a graph as an array (or a dictionary/hashmap) of lists. Each index in the array corresponds to a vertex in the graph. The list at that index contains the vertices that are adjacent to the vertex represented by the index.
+
+**Example:**
+
+Consider a directed graph with 5 vertices (0, 1, 2, 3, 4) and the following edges:
+
+* 0 -> 1
+* 0 -> 4
+* 1 -> 2
+* 2 -> 3
+* 3 -> 1
+* 4 -> 0
+
+
+The adjacency list representation would look like this:
+
+```
+0: [1, 4]
+1: [2]
+2: [3]
+3: [1]
+4: [0]
+```
+
+**Implementations:**
+
+The implementation varies depending on the programming language. Here are examples in Python and C++:
+
+**Python:**
+
+Using a dictionary for flexibility:
+
+```python
+graph = {
+    0: [1, 4],
+    1: [2],
+    2: [3],
+    3: [1],
+    4: [0]
+}
+
+# Accessing neighbors of vertex 0:
+print(graph[0])  # Output: [1, 4]
+
+# Checking if an edge exists:
+def has_edge(graph, u, v):
+  return v in graph.get(u, [])
+
+print(has_edge(graph, 0, 1)) # Output: True
+print(has_edge(graph, 0, 2)) # Output: False
+```
+
+Using a list of lists (less flexible, but potentially faster in some cases):
+
+```python
+graph = [
+    [1, 4],
+    [2],
+    [3],
+    [1],
+    [0]
+]
+
+# Accessing neighbors of vertex 0 (remember 0-based indexing):
+print(graph[0])  # Output: [1, 4]
+```
+
+
+**C++:**
+
+Using `vector` of `vector`s:
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  vector<vector<int>> graph = {
+    {1, 4},
+    {2},
+    {3},
+    {1},
+    {0}
+  };
+
+  // Accessing neighbors of vertex 0:
+  for (int neighbor : graph[0]) {
+    cout << neighbor << " ";
+  }
+  cout << endl; // Output: 1 4
+
+  return 0;
+}
+```
+
+**Weighted Graphs:**
+
+For weighted graphs, you can modify the adjacency list to store edge weights.  For example, in Python using a dictionary:
+
+```python
+graph = {
+    0: {1: 5, 4: 2},  # Edge 0->1 has weight 5, 0->4 has weight 2
+    1: {2: 3},
+    2: {3: 1},
+    3: {1: 4},
+    4: {0: 1}
+}
+
+print(graph[0][1]) # Output: 5 (weight of edge 0->1)
+```
+
+**Undirected Graphs:**
+
+In an undirected graph, an edge between `u` and `v` is represented in both `u`'s and `v`'s adjacency lists.
+
+
+**Advantages of Adjacency Lists:**
+
+* **Efficient for sparse graphs:**  Memory usage is proportional to the number of edges, making it space-efficient for graphs with few edges.
+* **Efficient for finding neighbors:**  Finding all neighbors of a vertex takes O(degree(v)) time, where degree(v) is the number of edges incident to vertex v.
+* **Simple implementation:**  Relatively easy to implement and understand.
+
+**Disadvantages of Adjacency Lists:**
+
+* **Less efficient for dense graphs:**  Memory usage can become high for dense graphs (many edges).
+* **Slower for checking edge existence:** Checking if an edge exists between two arbitrary vertices can take O(degree(v)) time. (This is faster than adjacency matrix for sparse graphs, but slower for dense graphs)
+
+
+Choosing between an adjacency list and an adjacency matrix depends on the characteristics of your graph and your specific needs. For sparse graphs, adjacency lists are generally preferred due to their memory efficiency.  For dense graphs, an adjacency matrix might be more suitable.
+
