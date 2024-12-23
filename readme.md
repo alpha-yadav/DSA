@@ -199,3 +199,65 @@ This version uses a `map` function to transform the range of numbers (1...n) int
 
 For simple cases, the basic implementation is perfectly fine. The improved version is generally preferred for its readability and efficiency. The functional approach is more advanced and showcases a different programming paradigm, making it useful for learning but potentially less readable for beginners.  Choose the approach that best suits your understanding and the context of your project.  Remember to consider readability and maintainability when selecting your implementation.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (like time and space) an algorithm consumes as the input size grows.  It's crucial for understanding an algorithm's efficiency and scalability.  We typically analyze complexity using **Big O notation**, which describes the upper bound of an algorithm's growth rate.
+
+Here's a breakdown of key aspects:
+
+**1. Time Complexity:** This measures how the runtime of an algorithm increases with the size of the input.
+
+* **Common Time Complexities (from best to worst):**
+
+    * **O(1) - Constant Time:** The runtime remains the same regardless of input size.  Example: Accessing an element in an array using its index.
+    * **O(log n) - Logarithmic Time:** The runtime increases logarithmically with input size.  Example: Binary search in a sorted array.
+    * **O(n) - Linear Time:** The runtime increases linearly with input size. Example: Searching an unsorted array for a specific element.
+    * **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+    * **O(n²) - Quadratic Time:** The runtime increases quadratically with input size. Example: Nested loops iterating over the same input.
+    * **O(2ⁿ) - Exponential Time:** The runtime doubles with each increase in input size. Example: Finding all subsets of a set.
+    * **O(n!) - Factorial Time:** The runtime grows factorially with input size. Example: Finding all permutations of a set.
+
+* **Analyzing Time Complexity:**  We analyze the dominant operations within an algorithm.  Constant factors and lower-order terms are usually ignored in Big O notation because they become insignificant as the input size grows.
+
+**2. Space Complexity:** This measures how much memory an algorithm uses as the input size grows.  Similar to time complexity, it's expressed using Big O notation.
+
+* **Common Space Complexities:**  Similar notations as time complexity (O(1), O(n), O(n²), etc.) are used.  Space complexity considers the auxiliary space used by the algorithm (excluding input data).
+
+* **Analyzing Space Complexity:**  We consider the amount of extra memory needed beyond the input size.  For example, recursive algorithms can have significant space complexity due to the call stack.
+
+
+**3. Best, Average, and Worst Case:**  Complexity analysis often considers different scenarios:
+
+* **Best Case:**  The most favorable input that leads to the fastest execution.
+* **Average Case:** The expected runtime for a typical input.  Often difficult to calculate precisely.
+* **Worst Case:** The input that leads to the slowest execution.  Often used for guaranteeing performance bounds.
+
+
+**4. Big Omega (Ω) and Big Theta (Θ):**  While Big O describes the upper bound, other notations provide a more complete picture:
+
+* **Big Omega (Ω):** Describes the lower bound of an algorithm's growth rate.  It represents the best-case scenario.
+* **Big Theta (Θ):** Describes both the upper and lower bounds, providing a tight bound on the algorithm's growth rate.
+
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Time Complexity:**
+    * Best Case: O(1) (target is the first element)
+    * Average Case: O(n)
+    * Worst Case: O(n) (target is not in the array or at the end)
+* **Space Complexity:** O(1) (constant extra space used)
+
+
+**In Summary:**
+
+Understanding algorithm complexity is essential for choosing efficient algorithms for various tasks. By analyzing time and space complexity, you can predict how an algorithm will perform with larger inputs, helping you make informed decisions about algorithm selection and optimization. Remember that Big O notation focuses on the growth rate, ignoring constant factors and lower-order terms for simplicity and clarity.
+
