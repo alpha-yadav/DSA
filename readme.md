@@ -2217,3 +2217,106 @@ The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest nod
 
 The recursive approach is generally preferred due to its clarity and efficiency.  The iterative approach may be considered if you have specific constraints related to recursion depth or stack overflow concerns. Remember to adapt the code to your specific tree node implementation.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (specifically a binary tree or a general tree) is a classic computer science problem.  The approach varies depending on the type of tree and whether you have parent pointers or not.
+
+Here's a breakdown of common approaches:
+
+**1.  Using Parent Pointers (Simplest Case):**
+
+If each node in the tree has a pointer to its parent, finding the LCA is straightforward:
+
+* **Algorithm:**
+    1. Trace upwards from each node, storing the path to the root for both nodes.
+    2. Iterate through the paths from the root towards the leaves.  The last common node in both paths is the LCA.
+
+* **Example (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent(node1, node2):
+    path1 = []
+    path2 = []
+
+    while node1:
+        path1.append(node1)
+        node1 = node1.parent
+    while node2:
+        path2.append(node2)
+        node2 = node2.parent
+
+    lca = None
+    i = len(path1) - 1
+    j = len(path2) - 1
+    while i >= 0 and j >= 0 and path1[i] == path2[j]:
+        lca = path1[i]
+        i -= 1
+        j -= 1
+    return lca.data
+
+# Example usage (you'd need to create your tree structure first)
+# Assuming you have nodes 'nodeA' and 'nodeB'
+# result = lca_with_parent(nodeA, nodeB)
+# print(f"LCA: {result}")
+```
+
+**2.  Binary Tree without Parent Pointers (Recursive Approach):**
+
+This is a more common scenario.  We typically use a recursive approach:
+
+* **Algorithm:**
+    1. If the current node is `None`, return `None`.
+    2. If the current node is either `node1` or `node2`, return the current node.
+    3. Recursively search the left and right subtrees.
+    4. If both left and right subtrees return a non-`None` value, the current node is the LCA.
+    5. Otherwise, return the non-`None` result from the left or right subtree.
+
+* **Example (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node1, node2):
+    if root is None:
+        return None
+    if root.data == node1.data or root.data == node2.data:
+        return root
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+# Assuming you have a root node 'root', and nodes 'nodeA' and 'nodeB'
+# result = lca_recursive(root, nodeA, nodeB)
+# print(f"LCA: {result.data}")
+
+```
+
+**3.  General Tree without Parent Pointers (More Complex):**
+
+For general trees (trees where a node can have more than two children), the recursive approach needs modification to handle multiple children.  You'd recursively search each child subtree and combine the results similarly to the binary tree approach.
+
+
+**Important Considerations:**
+
+* **Error Handling:**  You should add error handling to check if `node1` and `node2` actually exist in the tree.
+* **Efficiency:** The recursive approach for binary trees is generally efficient (O(h), where h is the height of the tree).  The parent-pointer approach is also efficient if paths are already stored.
+* **Tree Structure:**  Make sure you correctly represent your tree using nodes and pointers (or other appropriate data structures).
+
+
+Remember to adapt the code examples to your specific tree implementation and data structures.  Choose the method that best suits the structure of your tree and the information available (parent pointers or not).
+
