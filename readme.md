@@ -2599,3 +2599,81 @@ for neighbor, weight in graph['A']:
 
 In summary, adjacency lists provide a space-efficient and often faster way to represent and work with graphs, especially when dealing with sparse graphs. The choice between adjacency list and adjacency matrix depends largely on the characteristics of your graph and the operations you need to perform frequently.
 
+#  Topological Sort 
+A topological sort is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's an ordering where you can't go backwards along any edge.  If a graph has cycles, a topological sort is impossible.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):**  Topological sorts only work on DAGs.  The presence of cycles prevents a valid ordering.
+* **Linear Ordering:** The result is a sequence of nodes, not a tree or other complex structure.
+* **Dependency Ordering:** The order respects the dependencies between nodes.  If A depends on B (there's an edge from B to A), B must come before A in the sorted list.
+* **Multiple Solutions:**  A DAG can have multiple valid topological sorts.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue (or similar FIFO structure) and keeps track of in-degrees (the number of incoming edges) for each node.
+
+   * **Initialization:** Calculate the in-degree for each node.  Add all nodes with an in-degree of 0 to the queue.
+   * **Iteration:** While the queue is not empty:
+     * Remove a node `n` from the queue.
+     * Add `n` to the sorted list.
+     * For each neighbor `m` of `n`:
+       * Decrement the in-degree of `m`.
+       * If the in-degree of `m` becomes 0, add `m` to the queue.
+   * **Result:** If the sorted list contains all nodes, it's a valid topological sort.  Otherwise, the graph contains a cycle.
+
+
+2. **Depth-First Search (DFS) with Post-Order Traversal:**
+
+   This algorithm uses DFS to recursively explore the graph.  It adds nodes to the sorted list in post-order (after all descendants have been visited).
+
+   * **Initialization:**  Mark all nodes as unvisited.
+   * **Recursive DFS:** For each unvisited node:
+     * Mark the node as visited.
+     * Recursively call DFS on all its unvisited neighbors.
+     * Add the node to the beginning of the sorted list (post-order).
+   * **Result:** The sorted list, built in reverse order during the DFS, represents a valid topological sort.
+
+
+**Example (Kahn's Algorithm):**
+
+Consider a DAG with nodes A, B, C, D, and E, and edges:
+
+* A -> C
+* B -> C
+* B -> D
+* C -> E
+* D -> E
+
+1. **In-degrees:** A: 0, B: 0, C: 2, D: 1, E: 2
+2. **Queue:** A, B (in-degree 0)
+3. **Iteration:**
+   * Remove A: Sorted list = [A], in-degree(C) = 1
+   * Remove B: Sorted list = [A, B], in-degree(C) = 1, in-degree(D) = 0, add D to queue
+   * Remove D: Sorted list = [A, B, D], in-degree(E) = 1, add E to queue
+   * Remove E: Sorted list = [A, B, D, E], in-degree(C) = 0, add C to queue
+   * Remove C: Sorted list = [A, B, D, E, C]
+4. **Result:** A valid topological sort is [A, B, D, E, C] (Other valid sorts exist)
+
+
+**Applications:**
+
+Topological sorting has numerous applications, including:
+
+* **Course Scheduling:** Ordering courses based on prerequisites.
+* **Dependency Resolution:**  Software build systems, makefiles, etc.
+* **Data Serialization:**  Determining the order to write data to a file.
+* **Spreadsheet Calculation:**  Determining the order to calculate cell values.
+
+
+**Detecting Cycles:**
+
+Both algorithms can detect cycles.  In Kahn's algorithm, if the final sorted list doesn't contain all nodes, a cycle exists. In DFS, encountering a visited node during traversal indicates a cycle.
+
+
+Choosing between Kahn's algorithm and DFS depends on the specific application and data structures used.  Kahn's algorithm is generally easier to understand and implement for many cases, while DFS can be more efficient in some situations.
+
