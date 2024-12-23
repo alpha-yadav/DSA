@@ -2727,3 +2727,104 @@ print(topological_sort(graph_with_cycle)) #Output: None
 
 Remember that multiple valid topological sorts might exist for a given DAG.  The algorithms will usually produce one of them.  The choice between Kahn's algorithm and DFS depends on the specific application and implementation preferences.  Kahn's algorithm is often preferred for its simplicity and efficiency in many cases.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) is a common algorithm.  Here's how it works, along with explanations and code examples (Python):
+
+**Concept:**
+
+The core idea is to use a `visited` array to track visited nodes and a `recursionStack` array to track nodes currently in the recursion stack (nodes being explored).  A cycle exists if we encounter a node that's already in the `recursionStack`.  This means we've found a back edge – an edge pointing to an ancestor in the DFS tree.
+
+
+**Algorithm:**
+
+1. **Initialization:** Create a `visited` array (boolean) and a `recursionStack` array (boolean), both of size equal to the number of nodes in the graph.  Initialize all elements to `False`.
+
+2. **DFS:** For each node in the graph, if it's not visited, call a recursive `DFSVisit` function.
+
+3. **DFSVisit(node):**
+   - Mark the current `node` as visited (`visited[node] = True`) and add it to the `recursionStack` (`recursionStack[node] = True`).
+   - Iterate through the neighbors (adjacent nodes) of the current node:
+     - If a neighbor is not visited, recursively call `DFSVisit` on the neighbor.
+     - If a neighbor is already in `recursionStack`, a cycle is detected. Return `True` immediately.
+   - Remove the current `node` from the `recursionStack` (`recursionStack[node] = False`).  This is crucial – it allows detection of cycles that involve other parts of the graph and prevents false positives.
+   - Return `False` (no cycle detected in this branch).
+
+4. **Cycle Detection:** If any call to `DFSVisit` returns `True`, a cycle exists in the graph.
+
+
+**Python Code:**
+
+```python
+def detect_cycle_in_directed_graph(graph):
+    """
+    Detects cycles in a directed graph using Depth First Traversal.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and 
+               values are lists of their neighbors (adjacent nodes).
+
+    Returns:
+        True if a cycle is detected, False otherwise.
+    """
+    num_nodes = len(graph)
+    visited = [False] * num_nodes
+    recursion_stack = [False] * num_nodes
+
+    def dfs_visit(node):
+        visited[node] = True
+        recursion_stack[node] = True
+
+        for neighbor in graph.get(node, []):  # Handle nodes with no outgoing edges
+            if not visited[neighbor]:
+                if dfs_visit(neighbor):
+                    return True
+            elif recursion_stack[neighbor]:
+                return True
+
+        recursion_stack[node] = False
+        return False
+
+    for node in graph:
+        if not visited[node]:
+            if dfs_visit(node):
+                return True
+
+    return False
+
+
+# Example graph (adjacency list representation):
+graph = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: [3]  # Self-loop creates a cycle
+}
+
+if detect_cycle_in_directed_graph(graph):
+    print("Cycle detected in the graph.")
+else:
+    print("No cycle detected in the graph.")
+
+
+graph2 = {
+    0: [1,2],
+    1: [2],
+    2: [3],
+    3: []
+}
+
+if detect_cycle_in_directed_graph(graph2):
+    print("Cycle detected in the graph.")
+else:
+    print("No cycle detected in the graph.")
+```
+
+**Explanation of the Example:**
+
+* `graph`: Represents a directed graph.  `0 -> 1 -> 2 -> 0` forms a cycle, and `3 -> 3` is a self-loop (also a cycle).
+* `detect_cycle_in_directed_graph`: The main function that orchestrates the DFS.
+* `dfs_visit`: The recursive helper function that performs the depth-first search and cycle detection.  The crucial part is checking `recursion_stack[neighbor]` to identify back edges.
+
+
+Remember that the `graph` needs to be represented as an adjacency list (as shown in the example).  You can adapt this code to work with other graph representations (e.g., adjacency matrix) but you will need to adjust how you access neighbors.
+
