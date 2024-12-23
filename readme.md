@@ -2763,3 +2763,49 @@ else:
 
 This implementation efficiently detects cycles in a directed graph using Depth First Traversal and the concept of back edges.  The time complexity is O(V+E), where V is the number of vertices and E is the number of edges.  The space complexity is O(V) due to the `visited` and `recursionStack` arrays. Remember that this algorithm only works for directed graphs; a different approach is needed for undirected graphs.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a breakthrough in the field of graph algorithms, specifically concerning the construction of approximate distance oracles.  It achieves nearly-linear time complexity for building a data structure that can answer approximate shortest path queries very quickly.  Here's a breakdown of its key aspects:
+
+**What it does:**
+
+Thorup's algorithm (and its variations) constructs a *distance oracle* for a weighted, undirected graph. A distance oracle is a data structure that allows you to efficiently answer queries of the form: "What is the distance (shortest path length) between nodes *u* and *v*?".
+
+The key feature of Thorup's algorithm is its ability to provide *approximate* shortest paths, meaning the reported distance might be slightly longer than the true shortest path, but within a guaranteed multiplicative factor.  This trade-off allows for significantly faster query times and construction compared to algorithms that compute exact shortest paths.
+
+**Key Features:**
+
+* **Approximation:** It doesn't find the exact shortest path but provides a distance within a factor (typically 2 or 3) of the true shortest path.
+* **Near-linear Time Complexity:** The time required to build the distance oracle is nearly linear in the size of the graph (number of vertices and edges). This is a major improvement over many exact shortest path algorithms.
+* **Fast Query Time:** Once the oracle is built, queries for approximate distances between any two nodes can be answered extremely quickly (typically in constant or near-constant time).
+* **Weighted Graphs:** It handles graphs with non-negative edge weights.
+
+**How it works (high-level):**
+
+The algorithm's intricacies are quite complex, but here's a high-level overview:
+
+1. **Clustering:** The graph is hierarchically clustered into smaller components.  This clustering is done in a clever way to ensure that the clusters are well-connected and have certain properties related to shortest paths.
+
+2. **Building the Oracle:**  The algorithm constructs a data structure that efficiently represents the shortest paths within and between clusters.  This data structure allows for fast lookups to find approximate shortest paths.  It often involves pre-computing shortest paths between certain key nodes and maintaining information about cluster connectivity.
+
+3. **Querying:** To answer a distance query between two nodes *u* and *v*, the oracle uses the cluster structure to efficiently find a path that's guaranteed to be within the approximation factor of the true shortest path.
+
+**Variations and Improvements:**
+
+There are several variations and improvements to the original Thorup algorithm, often focusing on:
+
+* **Improving the approximation factor:**  Reducing the multiplicative factor by which the approximate distance can deviate from the true shortest path.
+* **Handling different graph types:**  Extending the algorithm to work with directed graphs or graphs with special properties.
+* **Simplifying the implementation:**  Making the algorithm easier to implement and understand.
+
+**Applications:**
+
+Thorup's algorithm and similar approximate distance oracles have numerous applications in areas where fast shortest path queries are crucial, but exact solutions are not strictly necessary.  These include:
+
+* **Network routing:** Finding approximate shortest routes in large networks.
+* **Geographic information systems (GIS):**  Computing distances between locations on a map.
+* **Social network analysis:**  Determining distances between users in a social network.
+* **Bioinformatics:** Analyzing distances between nodes in biological networks.
+
+
+In summary, Thorup's algorithm represents a significant advance in the field of graph algorithms.  Its ability to provide approximate shortest paths in near-linear time with very fast query times makes it a powerful tool for a wide range of applications dealing with large graphs.  However, understanding the full details of its implementation requires a solid background in graph algorithms and data structures.
+
