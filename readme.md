@@ -596,3 +596,79 @@ int main() {
 
 All these examples print the numbers 0 through 4.  The choice of which loop to use depends on the specific problem and the programmer's preference, but `for` loops are generally preferred when the number of iterations is known beforehand, while `while` loops are better suited for situations where the termination condition depends on something other than a simple counter.  `do-while` is useful when you need to ensure the code runs at least once.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a way to iterate through multiple dimensions of data or perform operations that require repeated iterations within iterations.
+
+Here's a breakdown:
+
+**Structure:**
+
+The general structure looks like this:
+
+```python
+for outer_variable in outer_iterable:
+    for inner_variable in inner_iterable:
+        # Code to be executed in the inner loop
+    # Code to be executed after each inner loop completes (but still within the outer loop)
+# Code to be executed after the outer loop completes
+```
+
+**Example in Python:**
+
+Let's say you want to print a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # Print the product with a tab separator
+    print()  # Newline after each row
+```
+
+This code will produce a 10x10 multiplication table.  The outer loop iterates through the rows (1 to 10), and for each row, the inner loop iterates through the columns (1 to 10), calculating and printing the product.
+
+
+**Example in JavaScript:**
+
+The same multiplication table in JavaScript:
+
+```javascript
+for (let i = 1; i <= 10; i++) { // Outer loop
+  for (let j = 1; j <= 10; j++) { // Inner loop
+    console.log(i * j);
+  }
+}
+```
+
+
+**Use Cases:**
+
+Nested loops are commonly used for:
+
+* **Processing matrices or 2D arrays:**  Iterating through rows and columns of data.
+* **Generating patterns:**  Creating visual patterns like stars or other shapes.
+* **Combinatorial problems:**  Exploring all possible combinations of items from multiple sets.
+* **Nested data structures:**  Traversing through nested lists, dictionaries, or JSON objects.
+
+
+**Efficiency Considerations:**
+
+Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly as the number of nested loops and the size of the iterables grow.  For large datasets, consider using more efficient algorithms or data structures.  For example, you may want to explore vectorized operations using libraries like NumPy in Python for significantly faster matrix operations compared to nested loops.
+
+
+**Example with a nested list:**
+
+Let's say you have a nested list (a list of lists):
+
+```python
+nested_list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+for row in nested_list:  # Outer loop iterates through the rows (lists)
+    for item in row:  # Inner loop iterates through the items in each row
+        print(item)
+```
+
+This will print all the numbers in the nested list.
+
+
+In summary, nested loops are a powerful tool for iterating through multi-dimensional data or situations requiring repeated iterations within iterations. However, be mindful of their computational cost, especially when dealing with large datasets.  Consider alternative approaches like vectorization for improved performance where possible.
+
