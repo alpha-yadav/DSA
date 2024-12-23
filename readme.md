@@ -945,3 +945,78 @@ Output: [0,1]
 
 This is a classic algorithmic problem with multiple solutions, ranging from brute-force (O(n^2) time complexity) to optimized solutions using hash tables (O(n) time complexity).  The choice of algorithm will significantly impact the performance for larger input arrays.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then adding some refinements:
+
+**Basic Implementation:**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* It checks divisibility by 15 first (to handle both 3 and 5).
+* Then it checks divisibility by 3.
+* Then it checks divisibility by 5.
+* If none of the above are true, it prints the number itself.
+
+
+**Improved Implementation (using string concatenation):**
+
+This version is more concise and avoids nested `if` statements:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This approach builds the output string incrementally.  If the string is empty after checking divisibility by 3 and 5, it prints the number; otherwise, it prints the built-up "Fizz", "Buzz", or "FizzBuzz" string.
+
+
+**Further Refinements (using a map):**
+
+For a more functional approach, you can use Swift's `map` function:
+
+```swift
+func fizzBuzzMap(n: Int) -> [String] {
+    return (1...n).map { i in
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        return output.isEmpty ? "\(i)" : output
+    }
+}
+
+let results = fizzBuzzMap(n: 15)
+print(results) // Prints the results as an array
+```
+
+This version uses `map` to transform the range of numbers (1...n) into an array of strings, each representing the FizzBuzz output for the corresponding number.  This is generally considered a more elegant and potentially more efficient approach for larger input values.
+
+Remember to choose the implementation that best suits your needs and coding style.  For simple cases, the basic implementation is perfectly adequate. For larger datasets or a more functional approach, the `map` version might be preferred.
+
