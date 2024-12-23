@@ -63,3 +63,60 @@ Don't try to memorize algorithms.  Instead, focus on understanding the underlyin
 
 Remember to be patient and persistent.  Learning algorithms takes time and effort, but the rewards are significant.  Start with the basics, practice consistently, and gradually work your way up to more advanced concepts.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, along with explanations of what makes them interesting algorithmically:
+
+
+**Problem 1: Two Sum** (Easy)
+
+**Problem Statement:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+`Output: [0,1]` because `nums[0] + nums[1] == 9`
+
+**Algorithmic Considerations:** This problem highlights the trade-off between time and space complexity.  A brute-force approach (checking every pair) is O(n²) time complexity.  A more efficient approach uses a hash table (dictionary in Python) to achieve O(n) time complexity by storing seen numbers and their indices.
+
+
+**Problem 2:  Reverse a Linked List** (Medium)
+
+**Problem Statement:** Reverse a singly linked list.
+
+**Example:**
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+
+**Algorithmic Considerations:** This problem tests understanding of linked list manipulation.  Iterative and recursive solutions exist.  The iterative approach is generally preferred for its space efficiency (O(1) extra space).  Recursive solutions are elegant but can have higher space complexity due to the call stack (O(n) in the worst case).
+
+
+**Problem 3:  Longest Palindromic Substring** (Medium/Hard)
+
+**Problem Statement:** Given a string `s`, find the longest palindromic substring in `s`.
+
+**Example:**
+
+`s = "babad"`
+`Output: "bab" or "aba"` (both are valid answers)
+
+**Algorithmic Considerations:**  This problem demonstrates dynamic programming or a clever expansion around the center of potential palindromes.  The dynamic programming approach systematically builds a table indicating whether substrings are palindromes, achieving O(n²) time complexity.  The expansion-around-center approach can be optimized to also be O(n²) but is often considered more intuitive.
+
+
+**Problem 4:  Graph Traversal (e.g., Breadth-First Search or Depth-First Search)** (Medium)
+
+**Problem Statement:** Given a graph (represented as an adjacency list or matrix), perform a Breadth-First Search (BFS) or Depth-First Search (DFS) traversal and return the visited nodes in order.
+
+**Example:**  (For BFS on an undirected graph)
+
+Graph represented as an adjacency list:
+`graph = {0: [1, 2], 1: [0, 3], 2: [0], 3: [1]}`
+Starting node: 0
+Output: `[0, 1, 2, 3]` (or a similar ordering depending on implementation)
+
+**Algorithmic Considerations:**  This problem showcases fundamental graph algorithms. BFS uses a queue, exploring nodes level by level, while DFS uses a stack (implicitly or explicitly), exploring as deeply as possible along each branch before backtracking.  Understanding the differences in their behavior and applications is crucial.
+
+
+
+These problems represent a range of difficulty and highlight different algorithmic techniques.  Choosing the right algorithm depends heavily on factors like the size of the input and the desired time and space complexity.  Attempting to solve these problems (and many others you can find online) will significantly improve your algorithmic problem-solving skills.
+
