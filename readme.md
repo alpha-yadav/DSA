@@ -176,3 +176,86 @@ print(longest_palindrome("cbbd"))  # Output: bb
 
 These examples demonstrate different levels of complexity and require different algorithmic approaches.  Remember that the "best" solution often involves considering time and space complexity.  For harder problems, optimizing for efficiency is crucial.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more efficient version:
+
+**Version 1: Basic Implementation**
+
+This version is straightforward and easy to understand. It uses a `for` loop to iterate through the numbers and uses `if-else if-else` statements to check the divisibility conditions.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+**Version 2: Slightly More Efficient**
+
+This version is slightly more efficient because it avoids redundant checks.  We check for divisibility by 15 first, then 3, and finally 5. This order prevents unnecessary checks if a number is already divisible by 15 (which implies it's also divisible by 3 and 5).
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzEfficient(n: 15) // Example usage
+```
+
+**Explanation of Version 2:**
+
+* We initialize an empty string `output`.
+* We check for divisibility by 3 and append "Fizz" if true.
+* We check for divisibility by 5 and append "Buzz" if true.
+* Finally, we print either the number itself (if `output` is still empty) or the accumulated `output` string.
+
+**Choosing the Right Version:**
+
+For small values of `n`, the difference in performance between these two versions is negligible.  Version 1 is arguably more readable for beginners. Version 2 is slightly more efficient for larger values of `n` because it reduces the number of conditional checks.
+
+
+**Running the Code:**
+
+You can copy and paste either of these functions into a Swift playground or a Swift file in Xcode.  Run the file, and the output will be printed to the console.  For `n=15`, the output will be:
+
+```
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+```
+
+
+This provides a solid foundation for understanding and implementing the FizzBuzz algorithm in Swift.  Remember to adjust the `n` value in the `fizzBuzz` or `fizzBuzzEfficient` function call to test with different ranges.
+
