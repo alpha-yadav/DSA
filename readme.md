@@ -455,3 +455,45 @@ This inequality holds for all `n ≥ 1`. Thus, we've shown that `f(n) = Ω(n²)`
 
 **In summary:** Big-Omega notation helps us understand the minimum resource requirements of an algorithm. It's a valuable tool for evaluating algorithm efficiency and making informed decisions about choosing the right algorithm for a specific task.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used to describe the limiting behavior of a function when the argument tends towards a particular value or infinity.  In computer science, it's used to classify algorithms according to how their runtime or space requirements grow as the input size grows.  It focuses on the *dominant* factors affecting performance, ignoring constant factors and smaller terms.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Worst-case scenario:** Big O typically describes the *worst-case* time or space complexity of an algorithm.  This means it represents the upper bound on how much time or space the algorithm might require.
+* **Asymptotic behavior:** Big O describes how the runtime or space usage scales as the input size (n) approaches infinity.  It's less concerned with the exact runtime for small inputs and more concerned with how the runtime grows with larger inputs.
+* **Order of growth:**  It focuses on the *order* of growth, not the precise number of operations.  For instance, an algorithm with a runtime of 5n² + 10n + 3 is considered O(n²), because the n² term dominates as n gets large.
+
+**Common Big O Notations:**
+
+* **O(1) - Constant time:** The runtime remains the same regardless of the input size.  Examples include accessing an array element by index or performing a single arithmetic operation.
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  Examples include binary search in a sorted array.
+* **O(n) - Linear time:** The runtime increases linearly with the input size.  Examples include searching an unsorted array or iterating through a list once.
+* **O(n log n) - Linearithmic time:** The runtime is a combination of linear and logarithmic growth.  Examples include efficient sorting algorithms like merge sort and heapsort.
+* **O(n²) - Quadratic time:** The runtime increases proportionally to the square of the input size.  Examples include nested loops iterating over the input data.
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size.  Examples include finding all subsets of a set.
+* **O(n!) - Factorial time:** The runtime grows factorially with the input size.  Examples include the traveling salesman problem using brute force.
+
+
+**Example:**
+
+Let's say we have an algorithm that searches for a specific element in an unsorted array.  In the worst case, we might have to check every element in the array.  If the array has 'n' elements, the algorithm will perform approximately 'n' comparisons.  Therefore, the time complexity of this algorithm is O(n).
+
+**Why Big O Matters:**
+
+* **Algorithm comparison:**  Big O provides a standardized way to compare the efficiency of different algorithms.
+* **Scalability prediction:** It helps predict how an algorithm will perform with larger datasets.
+* **Performance optimization:**  It guides developers in choosing the most efficient algorithms for their applications.
+
+
+**Limitations:**
+
+* **Worst-case focus:**  Big O doesn't always reflect average-case or best-case performance.
+* **Constant factors ignored:**  Big O ignores constant factors, which can be significant in practice.  An O(n) algorithm with a large constant factor might be slower than an O(n log n) algorithm for small input sizes.
+* **Input data characteristics:**  The performance of an algorithm can depend on the characteristics of the input data (e.g., sorted vs. unsorted). Big O doesn't always capture these nuances.
+
+
+Despite its limitations, Big O notation is an invaluable tool for understanding and comparing the efficiency of algorithms, and it's a fundamental concept in computer science.
+
