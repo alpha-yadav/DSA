@@ -1020,3 +1020,72 @@ This version uses `map` to transform the range of numbers (1...n) into an array 
 
 Remember to choose the implementation that best suits your needs and coding style.  For simple cases, the basic implementation is perfectly adequate. For larger datasets or a more functional approach, the `map` version might be preferred.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm consumes as the input size grows.  It's crucial for understanding how an algorithm's performance scales with larger datasets.  We typically analyze complexity using Big O notation.
+
+Here's a breakdown:
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm increases as the input size (usually denoted as 'n') increases.
+
+* **Big O Notation (O):**  Describes the upper bound of an algorithm's growth rate.  It focuses on the dominant terms and ignores constant factors.  We're interested in the *order* of growth, not the precise execution time.
+
+* **Common Time Complexities (from best to worst):**
+
+    * **O(1) - Constant Time:** The runtime remains constant regardless of input size.  Example: Accessing an element in an array using its index.
+    * **O(log n) - Logarithmic Time:** The runtime increases logarithmically with input size.  Example: Binary search in a sorted array.
+    * **O(n) - Linear Time:** The runtime increases linearly with input size. Example: Searching for an element in an unsorted array.
+    * **O(n log n) - Linearithmic Time:**  Common in efficient sorting algorithms like merge sort and heapsort.
+    * **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Nested loops iterating over the entire input.
+    * **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+    * **O(n!) - Factorial Time:**  The runtime grows factorially with the input size.  Example: Generating all permutations of a sequence.
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm increases as the input size grows.  Similar to time complexity, it's often expressed using Big O notation.
+
+* **Common Space Complexities:**  Similar categories to time complexity exist, such as O(1), O(n), O(n²), etc.
+
+* **In-place Algorithms:** Algorithms that use a constant amount of extra space (O(1)) regardless of input size are called in-place algorithms.
+
+
+**Analyzing Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime (e.g., comparisons, assignments, arithmetic operations).
+
+2. **Count the number of operations:** Express the number of operations as a function of the input size 'n'.
+
+3. **Identify the dominant terms:**  Focus on the terms that grow fastest as 'n' increases.  Ignore constant factors and lower-order terms.
+
+4. **Express the complexity using Big O notation:** This provides a concise representation of the algorithm's scaling behavior.
+
+
+**Example:**
+
+Consider a function that searches for a number in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Basic operation:** Comparison (`arr[i] == target`)
+* **Number of operations:** In the worst case (target not found), the comparison happens `n` times (where `n` is the length of the array).
+* **Dominant term:** `n`
+* **Big O notation:** O(n) - Linear time complexity
+
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity is crucial for:
+
+* **Choosing efficient algorithms:** Selecting algorithms that scale well with increasing data size.
+* **Optimizing code:** Identifying performance bottlenecks and improving the efficiency of algorithms.
+* **Predicting performance:** Estimating how long an algorithm will take to run for a given input size.
+
+
+Analyzing algorithm complexity is a fundamental skill for any computer scientist or software engineer.  The choice of algorithm can dramatically impact the performance of a program, especially when dealing with large datasets.
+
