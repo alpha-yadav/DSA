@@ -299,3 +299,57 @@ Therefore, since we've found c₁, c₂, and n₀ satisfying the definition, we 
 
 In summary, Big-Theta notation is a powerful tool for precisely characterizing the asymptotic complexity of algorithms, providing a more informative analysis than Big-O alone.  It allows for a more complete understanding of the algorithm's efficiency as the input size grows.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input approaches infinity.  They're crucial in algorithm analysis for comparing the efficiency of different algorithms.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Example:** If an algorithm has a time complexity of O(n²), it means its runtime grows no faster than the square of the input size.  It could be faster, but it won't be significantly slower.
+* **Focus:** Worst-case performance.  Ignores constant factors and lower-order terms.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (or a lower bound on the performance in all cases). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm has a time complexity of Ω(n), it means its runtime grows at least linearly with the input size.  It could be faster, but it won't be asymptotically slower than linear.
+* **Focus:** Best-case or lower bound performance. Ignores constant factors and lower-order terms.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function. It means the function grows at the *same rate* as another function, both in the upper and lower bounds.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm has a time complexity of Θ(n log n), its runtime grows proportionally to n log n.
+* **Focus:** Precise asymptotic behavior.  Provides both upper and lower bounds.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.
+* **Example:**  f(n) = o(n²) means f(n) grows slower than n².  It could be O(n), O(log n), or any other function that doesn't grow as fast as n².
+* **Focus:**  Strict upper bound; emphasizes a significant difference in growth rate.
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.
+* **Example:** f(n) = ω(n) means f(n) grows faster than n. It could be Ω(n²), Ω(2ⁿ), or any function that grows faster than n.
+* **Focus:** Strict lower bound; emphasizes a significant difference in growth rate.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Example           | Focus                                  |
+|----------|---------------------------------------|--------------------|------------------------------------------|
+| O        | Upper bound                           | O(n²)              | Worst-case performance                 |
+| Ω        | Lower bound                           | Ω(n)               | Best-case or lower bound performance     |
+| Θ        | Tight bound                           | Θ(n log n)         | Precise asymptotic behavior              |
+| o        | Strictly slower growth                | o(n²)              | Significant difference in growth rate (upper)|
+| ω        | Strictly faster growth                | ω(n)               | Significant difference in growth rate (lower)|
+
+
+**Important Considerations:**
+
+* **Constant Factors:** Asymptotic notations ignore constant factors.  O(2n) and O(n) are considered the same because the dominant factor (n) is the same.
+* **Lower-Order Terms:**  Lower-order terms are also ignored. O(n² + n) simplifies to O(n²) because n² dominates for large n.
+* **Asymptotic Behavior:** These notations describe behavior as input size approaches infinity.  For small input sizes, the actual runtime might differ significantly.
+
+
+Understanding these notations is essential for analyzing and comparing algorithms effectively.  They provide a powerful framework for evaluating algorithm efficiency independent of specific hardware or implementation details.
+
