@@ -2212,3 +2212,105 @@ print(f"LCA of 2 and 3 is: {lca.data}")  # Output: LCA of 2 and 3 is: 1
 
 Remember to adapt the code to your specific tree structure and node representation.  The method using parent pointers is significantly faster for larger trees, but requires modifying your tree structure to include parent pointers.  If you can't modify the tree structure, the recursive method without parent pointers is your only option.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (or more specifically, a rooted tree) is a classic computer science problem.  There are several approaches, with their efficiency varying depending on the type of tree and whether you have additional information available (like parent pointers).
+
+Here's a breakdown of common methods:
+
+**1. Recursive Approach (for binary trees with parent pointers):**
+
+This is a simple and intuitive approach if your tree nodes have pointers to their parents.  It works by traversing up from each node until a common ancestor is found.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent(node1, node2):
+    ancestors1 = set()
+    current = node1
+    while current:
+        ancestors1.add(current)
+        current = current.parent
+
+    current = node2
+    while current:
+        if current in ancestors1:
+            return current
+        current = current.parent
+
+    return None  # No common ancestor (shouldn't happen in a proper tree)
+
+
+# Example usage:
+root = Node('A')
+B = Node('B'); B.parent = root
+C = Node('C'); C.parent = root
+D = Node('D'); D.parent = B
+E = Node('E'); E.parent = B
+F = Node('F'); F.parent = C
+
+print(lca_with_parent(D, E).data)  # Output: B
+print(lca_with_parent(D, F).data)  # Output: A
+```
+
+**2. Recursive Approach (for binary trees without parent pointers):**
+
+If you don't have parent pointers, you need to search the tree recursively. This approach is generally more efficient than the iterative approach below for balanced trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node1, node2):
+    if not root or root.data == node1.data or root.data == node2.data:
+        return root
+
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+#Example Usage (needs a tree built first)
+# ... build your tree ...
+#result = lca_recursive(root, node1, node2)
+#print(result.data)
+
+```
+
+**3. Iterative Approach (for binary trees without parent pointers):**
+
+This approach uses a stack or queue for a breadth-first search to find the LCA.  It can be less efficient than the recursive approach for balanced trees, but can handle unbalanced trees better in some cases.
+
+```python
+from collections import deque
+
+def lca_iterative(root, node1, node2):
+  # Implement iterative solution using BFS (more complex, omitted for brevity)
+  # This would involve using a queue and tracking paths to node1 and node2.
+  pass
+```
+
+**4. Using Depth-First Search (DFS) and path reconstruction:**
+
+This method finds the paths from the root to each of the two nodes and then determines the LCA by finding the last common node in these paths.  This is less efficient than the direct recursive approach but offers a different perspective.
+
+**Choosing the Right Method:**
+
+* **Parent pointers available:** Use the first recursive method. It's simple and efficient.
+* **Binary tree, no parent pointers, balanced tree:** The recursive method (method 2) is generally preferred.
+* **Binary tree, no parent pointers, unbalanced tree:** Consider the iterative approach (method 3) or carefully assess the performance of the recursive one.
+* **General tree (not necessarily binary):**  You'd need to adapt the recursive or iterative approaches to handle multiple children per node.
+
+
+Remember that for all of these methods, you need to handle cases where one or both nodes are not present in the tree.  The examples above are simplified and might require error handling for real-world applications.  The iterative BFS approach is more complex to implement correctly and is often less efficient for balanced trees than the recursive approach.  Choose the method that best suits your specific needs and tree structure.
+
