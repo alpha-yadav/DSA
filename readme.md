@@ -1089,3 +1089,41 @@ Understanding algorithm complexity is crucial for:
 
 Analyzing algorithm complexity is a fundamental skill for any computer scientist or software engineer.  The choice of algorithm can dramatically impact the performance of a program, especially when dealing with large datasets.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate, meaning it provides both an upper and a lower bound that are asymptotically proportional.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*), if and only if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.  In simpler terms:  *f(n)* grows at the same rate as *g(n)*.
+
+**Key Differences from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  *f(n) = O(g(n))* means that *f(n)* grows no faster than *g(n)*.  It's a "worst-case" scenario.
+
+* **Big-Ω (Ω):** Provides a *lower bound*.  *f(n) = Ω(g(n))* means that *f(n)* grows no slower than *g(n)*. It's a "best-case" scenario (in a sense).
+
+* **Big-Θ (Θ):** Provides a *tight bound*, combining both Big-O and Big-Ω.  *f(n) = Θ(g(n))* means that *f(n)* grows at the *same rate* as *g(n)*.  It's both an upper and lower bound.
+
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1**
+
+   *f(n) = Θ(n²)*.  We can find constants to satisfy the definition:  For sufficiently large *n*, 2n² dominates the other terms.
+
+* **f(n) = 5n log n**
+
+   *f(n) = Θ(n log n)*.  The n log n term dominates.
+
+* **f(n) = 7** (a constant function)
+
+   *f(n) = Θ(1)*. Constant functions have a constant growth rate.
+
+**Importance in Algorithm Analysis:**
+
+Big-Theta notation is crucial in algorithm analysis because it allows us to precisely characterize the time or space complexity of an algorithm.  Knowing the Θ-complexity helps us compare the efficiency of different algorithms and understand how their resource consumption scales with the input size.  It's more precise than just using Big-O, as Big-O only provides an upper bound and doesn't tell the whole story about the algorithm's growth rate.  For example, an algorithm that is O(n²) could be actually Θ(n) or Θ(n log n), indicating significantly better performance.
+
