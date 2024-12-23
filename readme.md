@@ -129,3 +129,77 @@ This problem is a good example because it demonstrates several important algorit
 
 This problem is relatively easy to understand but allows for exploration of different algorithmic approaches and complexity analysis, making it a good learning tool.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple, clear version and then showing some variations:
+
+**Version 1: Basic Implementation**
+
+This version directly translates the FizzBuzz rules into Swift code:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both Fizz and Buzz), then 3, then 5.  If none of these conditions are met, it prints the number itself.
+
+
+**Version 2:  Slightly More Concise**
+
+We can make the code a bit shorter by using the ternary conditional operator:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : "\(i)"
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This version nests ternary operators to achieve the same result in fewer lines.  However, excessively nested ternaries can reduce readability, so the first version might be preferred for clarity.
+
+
+**Version 3:  Using String Interpolation and a Function**
+
+This version improves readability by separating the logic for determining the output:
+
+```swift
+func fizzBuzzOutput(number: Int) -> String {
+    var output = ""
+    if number % 3 == 0 { output += "Fizz" }
+    if number % 5 == 0 { output += "Buzz" }
+    return output.isEmpty ? "\(number)" : output
+}
+
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        print(fizzBuzzOutput(number: i))
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This version uses a helper function `fizzBuzzOutput` to determine the string to print for each number. This makes the main loop cleaner and easier to understand.
+
+
+**Choosing the Best Version:**
+
+For beginners, **Version 1** is recommended because its logic is the most straightforward and easy to follow.  **Version 3** offers better structure and organization for larger or more complex problems.  **Version 2** is concise but might be harder to read for those unfamiliar with nested ternary operators.  Choose the version that best suits your understanding and the context of your project. Remember to always prioritize readability and maintainability.
+
