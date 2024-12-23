@@ -176,3 +176,59 @@ This version avoids nested `if-else if` statements.  It builds the output string
 
 For the FizzBuzz challenge, both versions are perfectly acceptable.  The improved version is slightly more efficient and arguably more elegant.  However, the simple version is easier to understand for beginners.  Choose the version that best suits your understanding and the context of your project.  The key takeaway is understanding the core logic of checking for divisibility by 3 and 5.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources of primary interest are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We usually analyze complexity using *Big O notation* (and related notations like Big Omega and Big Theta), which describes the growth rate of the algorithm's resource consumption as the input size grows arbitrarily large.  We ignore constant factors and lower-order terms because we're interested in the dominant behavior for large inputs.
+
+Here's a breakdown:
+
+**Big O Notation (O):**  Provides an upper bound on the growth rate.  It represents the worst-case scenario.  For example, O(n²) means the algorithm's runtime grows at most quadratically with the input size (n).
+
+**Big Omega Notation (Ω):** Provides a lower bound on the growth rate. It represents the best-case scenario.  Ω(n) means the algorithm's runtime grows at least linearly with the input size.
+
+**Big Theta Notation (Θ):** Provides both an upper and lower bound on the growth rate.  It represents the tight bound, meaning the algorithm's runtime grows proportionally to the given function.  Θ(n log n) means the runtime grows proportionally to n log n.
+
+
+**Common Complexity Classes:**
+
+* **O(1) - Constant time:** The algorithm's runtime is independent of the input size.  Accessing an element in an array by index is O(1).
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  Binary search is O(log n).
+* **O(n) - Linear time:** The runtime increases linearly with the input size.  Searching an unsorted array is O(n).
+* **O(n log n) - Linearithmic time:**  Common in efficient sorting algorithms like merge sort and heapsort.
+* **O(n²) - Quadratic time:** The runtime increases quadratically with the input size.  Nested loops iterating through the input are often O(n²).  Bubble sort is O(n²).
+* **O(n³) - Cubic time:**  Three nested loops.
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size.  This is very slow for large inputs.  Finding all subsets of a set is O(2ⁿ).
+* **O(n!) - Factorial time:** The runtime is the factorial of the input size.  Extremely slow for even moderately sized inputs.  Finding all permutations of a set is O(n!).
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Express the function using Big O notation:** Ignore constant factors and lower-order terms to determine the dominant growth rate.
+
+
+**Example:**
+
+Consider a function that finds the maximum element in an unsorted array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for num in arr:
+    if num > max_val:
+      max_val = num
+  return max_val
+```
+
+The basic operation is the comparison (`num > max_val`).  This operation is performed n times (where n is the length of the array). Therefore, the time complexity is O(n).  The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance for different input sizes.  It helps to avoid performance bottlenecks and write optimized code.
+
