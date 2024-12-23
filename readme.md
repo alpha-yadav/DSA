@@ -67,3 +67,57 @@ else:
 
 Remember to be patient and persistent.  Learning algorithms takes time and effort. Focus on understanding the underlying concepts, and practice consistently to build your skills.  Start small, build a solid foundation, and gradually increase the complexity of the problems you tackle.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Find the maximum element in an array of integers.
+
+**Input:** An array of integers, e.g., `[3, 1, 4, 1, 5, 9, 2, 6, 5, 3]`
+
+**Output:** The maximum element, e.g., `9`
+
+**Algorithm (simple approach):** Iterate through the array, keeping track of the largest element seen so far.
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+
+**Output:** `[0,1]`  because `nums[0] + nums[1] == 9`
+
+
+**Algorithm (common approach):** Use a hash table (dictionary in Python) to store numbers and their indices.  Iterate through the array, checking if `target - current_number` exists in the hash table.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string, e.g., "babad"
+
+**Output:** The longest palindromic substring, e.g., "bab" (or "aba", both are valid)
+
+
+**Algorithm (one approach – dynamic programming):** Create a table to store whether substrings are palindromes.  Iterate through the string, building up the table.  The longest palindrome's length can be found by examining the table.
+
+
+**How to solve these:**
+
+1. **Understand the problem:** Clearly define the input and expected output.  What are the constraints (e.g., size of the input, data types)?
+2. **Develop an algorithm:** Design a step-by-step procedure to solve the problem.  Consider different approaches (brute force, divide and conquer, dynamic programming, greedy algorithms, etc.).
+3. **Implement the algorithm:** Write code to implement your algorithm.  Choose an appropriate programming language.
+4. **Test your solution:**  Test your code with various inputs, including edge cases and boundary conditions.
+
+
+These examples illustrate the range of algorithmic problems.  You can find many more on platforms like LeetCode, HackerRank, and Codewars. Remember to practice regularly to improve your problem-solving skills!
+
