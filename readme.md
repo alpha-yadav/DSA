@@ -2314,3 +2314,20 @@ This method finds the paths from the root to each of the two nodes and then dete
 
 Remember that for all of these methods, you need to handle cases where one or both nodes are not present in the tree.  The examples above are simplified and might require error handling for real-world applications.  The iterative BFS approach is more complex to implement correctly and is often less efficient for balanced trees than the recursive approach.  Choose the method that best suits your specific needs and tree structure.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need the information to create the graph for you.  For example, you could give me:
+
+* **A list of points:**  (x1, y1), (x2, y2), (x3, y3)...
+* **An equation:** y = mx + b  (or something more complex)
+* **A description of the data:**  "A line starting at (1,2) with a slope of 3"
+* **A table of values:**
+
+| X | Y |
+|---|---|
+| 1 | 2 |
+| 2 | 4 |
+| 3 | 6 |
+
+
+Once you provide the data, I can tell you how to graph it or, if you'd like,  I can try to generate a textual representation of the graph (though it will be limited).  I cannot create visual graphs directly.
+
