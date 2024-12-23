@@ -897,3 +897,72 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Both methods achieve the same result. Choose the recursive approach for its clarity and conciseness unless you have concerns about potential stack overflow issues with very deep trees.  In that case, the iterative approach using queues is a good alternative. Remember to handle the `None` cases carefully in both methods to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing data in a sorted order.  They offer efficient searching, insertion, and deletion operations, making them suitable for various applications.
+
+Here's a breakdown of BSTs:
+
+**Key Properties:**
+
+* **Binary Tree:**  A BST is a *binary* tree, meaning each node has at most two children, referred to as the *left child* and the *right child*.
+* **Ordered Property:** For every node in a BST:
+    * All nodes in its *left subtree* have keys *less than* the node's key.
+    * All nodes in its *right subtree* have keys *greater than* the node's key.
+
+**Operations:**
+
+* **Search:**  To search for a specific key, start at the root. If the key is equal to the root's key, the search is successful. If the key is less than the root's key, recursively search the left subtree; otherwise, recursively search the right subtree.  The time complexity is O(h), where h is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes.  In a worst-case scenario (a skewed tree), h can be n, resulting in O(n) time complexity.
+
+* **Insertion:** To insert a new node, follow the search algorithm.  When you reach a leaf node (a node with no children), insert the new node as a child of that leaf node, maintaining the ordered property.  The time complexity is also O(h).
+
+* **Deletion:** Deleting a node is more complex and has several cases to consider:
+    * **Leaf Node:** Simply remove the node.
+    * **Node with One Child:** Replace the node with its child.
+    * **Node with Two Children:**  There are two common approaches:
+        * **In-order successor:** Find the smallest node in the right subtree (the in-order successor) and replace the node to be deleted with it.  Then delete the in-order successor from its original position.
+        * **In-order predecessor:** Find the largest node in the left subtree (the in-order predecessor) and replace the node to be deleted with it. Then delete the in-order predecessor from its original position.
+    The time complexity is O(h).
+
+**Time Complexity (Average Case):**
+
+* **Search:** O(log₂n)
+* **Insertion:** O(log₂n)
+* **Deletion:** O(log₂n)
+
+**Time Complexity (Worst Case - Skewed Tree):**
+
+* **Search:** O(n)
+* **Insertion:** O(n)
+* **Deletion:** O(n)
+
+**Space Complexity:** O(n)  (to store all the nodes)
+
+**Advantages:**
+
+* Efficient search, insertion, and deletion in the average case.
+* Simple implementation.
+* Data is stored in a sorted order.
+
+**Disadvantages:**
+
+* Performance degrades significantly in the worst-case scenario (a skewed tree).  This can be mitigated by using self-balancing BSTs (like AVL trees or red-black trees).
+* Not ideal for situations requiring frequent updates in the middle of the tree.
+
+
+**Self-Balancing BSTs:**
+
+To overcome the worst-case scenario of skewed trees, self-balancing BSTs are used. These automatically restructure themselves during insertion and deletion to maintain a balanced structure, ensuring logarithmic time complexity for all operations.  Examples include AVL trees and red-black trees.  These are more complex to implement but offer guaranteed performance.
+
+
+**Applications:**
+
+BSTs are used in various applications, including:
+
+* **Symbol tables:** Storing and retrieving data associated with keys.
+* **Indexing:**  Building indexes in databases.
+* **Sorting:**  Used as a basis for sorting algorithms.
+* **Implementation of other data structures:**  Used as building blocks for more complex data structures.
+
+
+In summary, BSTs are a powerful and versatile data structure, but understanding their limitations and considering self-balancing variants is crucial for optimal performance in real-world applications.
+
