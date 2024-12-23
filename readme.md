@@ -1630,3 +1630,105 @@ print(f"Is the tree a BST (Recursive)? {is_bst_recursive(root2)}") # False
 
 Both algorithms have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(N) for the in-order traversal method (due to the list) and O(H) for the recursive method (due to the recursion stack), where H is the height of the tree (O(log N) for a balanced BST, O(N) for a skewed tree).  The recursive method is generally preferred because it avoids the overhead of creating and managing a separate list.  However, the in-order traversal approach can be easier to understand for beginners.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree adheres to the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* The value of the left subtree's nodes are less than the node's value.
+* The value of the right subtree's nodes are greater than the node's value.
+
+
+Here are two common approaches, one recursive and one iterative:
+
+**1. Recursive Approach:**
+
+This approach uses a recursive helper function to traverse the tree.  It's generally more concise and easier to understand for smaller trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a given tree is a BST.
+
+    Args:
+        node: The root node of the tree.
+        min_val: Minimum allowed value in the subtree (inclusive).
+        max_val: Maximum allowed value in the subtree (inclusive).
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+
+# Example Usage
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.left = Node(3)
+root2.left.right = Node(7)
+root2.right.right = Node(20) #This violates BST property
+
+
+print(f"Is the second tree a BST? {is_bst_recursive(root2)}")  # Output: False
+
+```
+
+**2. Iterative Approach (using Inorder Traversal):**
+
+This approach uses an inorder traversal (left, node, right).  The inorder traversal of a BST will always produce a sorted sequence.  This is generally more efficient for very large trees, as it avoids recursive function calls.
+
+```python
+def is_bst_iterative(root):
+    """
+    Iteratively checks if a given tree is a BST using inorder traversal.
+
+    Args:
+        root: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    stack = []
+    prev = -float('inf')  # Initialize with negative infinity
+
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+
+        root = stack.pop()
+        if root.data <= prev:
+            return False
+        prev = root.data
+        root = root.right
+
+    return True
+
+#Example usage (same trees as above)
+print(f"Is the tree a BST (iterative)? {is_bst_iterative(root)}")  # Output: True
+print(f"Is the second tree a BST (iterative)? {is_bst_iterative(root2)}")  # Output: False
+```
+
+Both methods achieve the same result. Choose the recursive approach for readability and simplicity unless you're dealing with extremely large trees where the iterative approach might offer performance benefits due to avoiding the overhead of recursive function calls. Remember to handle edge cases like empty trees appropriately.
+
