@@ -1247,3 +1247,47 @@ This problem highlights several important algorithmic concepts:
 
 This is a good example because it's relatively simple to understand but allows for exploration of different algorithmic approaches and their efficiency.  It's also a frequently asked interview question.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate.  Unlike Big O notation, which provides an upper bound, and Big Omega notation (Ω), which provides a lower bound, Big Theta provides *both* an upper and a lower bound simultaneously.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*), if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that *f(n)* is bounded both above and below by *g(n)*, within constant factors, for sufficiently large *n*.  The function *g(n)* represents the growth rate of *f(n)*.
+
+**In simpler terms:**
+
+*f(n) = Θ(g(n))* means that *f(n)* grows at the *same rate* as *g(n)*.  The constant factors and smaller terms are ignored.  The function essentially behaves proportionally to *g(n)* for large inputs.
+
+**Examples:**
+
+* **f(n) = 2n + 5:**  f(n) = Θ(n).  We can choose c₁ = 1, c₂ = 3, and n₀ = 5.  For n ≥ 5,  n ≤ 2n + 5 ≤ 3n.
+
+* **f(n) = n² + 10n + 100:** f(n) = Θ(n²). The dominant term (n²) dictates the growth rate.  Lower-order terms and constants become insignificant as n gets large.
+
+* **f(n) = 5n log n:** f(n) = Θ(n log n)
+
+* **f(n) = 2ⁿ:** f(n) = Θ(2ⁿ)
+
+**What Big Theta Doesn't Tell You:**
+
+* **Exact runtime:** Big Theta only provides asymptotic behavior; it doesn't give you the exact runtime for a specific input size.  It's about the *trend* of growth.
+
+* **Small input sizes:** The definition holds only for sufficiently large *n*.  For small values of *n*, the relationship might not hold.
+
+* **Constant factors:**  It ignores constant factors, meaning a Θ(n) algorithm might be slower than a Θ(n²) algorithm for small n, due to the hidden constants.
+
+
+**Relationship to Big O and Big Omega:**
+
+* If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).  Big Theta implies both Big O and Big Omega.
+* However,  f(n) = O(g(n)) and f(n) = Ω(g(n)) do *not* necessarily imply f(n) = Θ(g(n)).  For example, f(n) = n and g(n) = n²: f(n) = O(n²) and f(n) = Ω(1), but f(n) is not Θ(n²).
+
+
+Big Theta is a powerful tool for analyzing algorithm efficiency.  It gives a precise characterization of the growth rate, which allows for meaningful comparisons between different algorithms.
+
