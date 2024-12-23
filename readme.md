@@ -394,3 +394,62 @@ Let's say we have an algorithm with time complexity *f(n) = n² + 3n + 1*.  We c
 
 In summary, Big-Omega notation is a valuable tool for analyzing the lower bounds of algorithm complexity and understanding the best-case performance of algorithms.  It complements Big-O and Big-Theta notations to provide a complete picture of algorithm efficiency.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *worst-case scenario* of an algorithm's runtime as the input size grows.  It doesn't tell you the exact runtime, but rather how the runtime *scales* with the input size.  We ignore constant factors and focus on the dominant terms as the input size approaches infinity.
+
+Here's a breakdown of key concepts:
+
+**What Big O Describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases as the input size (n) grows.
+* **Space Complexity:** How the memory usage of an algorithm increases as the input size (n) grows.
+
+We'll primarily focus on time complexity here, as it's more commonly discussed.
+
+**Common Big O Notations:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Examples include accessing an element in an array by its index or performing a single arithmetic operation.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient.  Examples include binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Examples include searching an unsorted array or iterating through a list once.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic.  This is common in efficient sorting algorithms like merge sort and heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Examples include nested loops iterating through the input data.  This can become slow for large inputs.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  This is very inefficient for large inputs.  Examples include some recursive algorithms that explore all possible combinations.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  This is extremely inefficient and usually impractical for anything beyond very small inputs.  Examples include finding all permutations of a set.
+
+
+**Visualizing Big O:**
+
+Imagine a graph with input size (n) on the x-axis and runtime on the y-axis.  Each Big O notation represents a different curve:
+
+* O(1) is a horizontal line.
+* O(log n) is a slowly increasing curve.
+* O(n) is a straight diagonal line.
+* O(n log n) is slightly steeper than O(n).
+* O(n²) is a rapidly increasing curve.
+* O(2ⁿ) and O(n!) curves shoot upwards extremely quickly.
+
+
+**Example:**
+
+Let's say you have an algorithm that searches for a specific element in an array.
+
+* **Unsorted array:**  You might need to check every element, resulting in O(n) time complexity (linear).
+* **Sorted array:** You could use binary search, resulting in O(log n) time complexity (logarithmic).
+
+
+**Important Considerations:**
+
+* **Worst-Case Scenario:** Big O describes the *worst-case* scenario.  The actual runtime might be better in some cases, but Big O gives you an upper bound.
+* **Asymptotic Analysis:** Big O is concerned with the behavior of the algorithm as the input size approaches infinity.  Small input sizes might not show the true Big O complexity.
+* **Dominant Terms:**  When expressing Big O, we usually only include the dominant term (the one that grows fastest).  For example, O(n² + n + 1) is simplified to O(n²).
+* **Space Complexity:**  Big O can also be used to describe space complexity (memory usage), using the same notations.
+
+
+Big O notation is a crucial tool for analyzing and comparing the efficiency of algorithms.  Understanding it allows developers to choose the most appropriate algorithm for a given task, especially when dealing with large datasets.
+
