@@ -1526,3 +1526,107 @@ else:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The recursive approach might use more stack space in deeply unbalanced trees, while the iterative approach generally uses less space.  Choose the method that best suits your needs and coding style. Remember to define the `Node` class as shown in the first example before running the code.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Algorithm 1: In-order Traversal**
+
+This algorithm leverages the property that an in-order traversal of a BST will produce a sorted sequence of nodes.
+
+1. **Perform an in-order traversal:**  Recursively visit the left subtree, then the current node, then the right subtree.  Store the values of the nodes visited in a list or array.
+
+2. **Check for sorted order:** After the traversal, check if the list is sorted in ascending order.  If it is, the tree is a BST; otherwise, it is not.
+
+**Python Code (Algorithm 1):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    """Checks if a binary tree is a BST using in-order traversal."""
+    if root is None:
+        return True
+
+    inorder_list = []
+    _inorder_traversal(root, inorder_list)
+
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+
+    return True
+
+def _inorder_traversal(node, inorder_list):
+    if node:
+        _inorder_traversal(node.left, inorder_list)
+        inorder_list.append(node.data)
+        _inorder_traversal(node.right, inorder_list)
+
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(f"Is the tree a BST (Inorder Traversal)? {is_bst_inorder(root)}") # True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) # Invalid BST: 8 should be in the right subtree of 7
+
+
+print(f"Is the tree a BST (Inorder Traversal)? {is_bst_inorder(root2)}") # False
+
+```
+
+**Algorithm 2: Recursive Check with Minimum and Maximum Values**
+
+This algorithm recursively checks each subtree, ensuring that all nodes in the left subtree are less than the current node, and all nodes in the right subtree are greater than the current node.
+
+1. **Base Case:** If the node is `None`, it's a valid BST (subtree).
+
+2. **Recursive Step:**
+   - Check if the current node's value is within the allowed range (`min_val` and `max_val`).
+   - Recursively check the left subtree with `max_val` set to the current node's value minus 1.
+   - Recursively check the right subtree with `min_val` set to the current node's value plus 1.
+
+**Python Code (Algorithm 2):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """Checks if a binary tree is a BST recursively."""
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data - 1) and
+            is_bst_recursive(node.right, node.data + 1, max_val))
+
+# Example usage (same trees as before):
+print(f"Is the tree a BST (Recursive)? {is_bst_recursive(root)}")  # True
+print(f"Is the tree a BST (Recursive)? {is_bst_recursive(root2)}") # False
+```
+
+**Which Algorithm to Choose?**
+
+Both algorithms have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(N) for the in-order traversal method (due to the list) and O(H) for the recursive method (due to the recursion stack), where H is the height of the tree (O(log N) for a balanced BST, O(N) for a skewed tree).  The recursive method is generally preferred because it avoids the overhead of creating and managing a separate list.  However, the in-order traversal approach can be easier to understand for beginners.
+
