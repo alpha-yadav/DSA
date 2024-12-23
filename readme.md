@@ -1029,3 +1029,148 @@ BSTs are used in various applications, including:
 
 In summary, Binary Search Trees are a powerful and versatile data structure, but their efficiency relies heavily on maintaining a relatively balanced structure.  Understanding their properties and limitations is crucial for choosing the right data structure for a given task.
 
+#  Binary Search Tree - Insertion (Python) 
+Several implementations of binary search tree (BST) insertion in Python are possible, each with slightly different trade-offs. Here are a few, ranging from a simple recursive approach to a slightly more robust iterative one:
+
+
+**1. Recursive Insertion:**
+
+This is a concise and elegant approach, but might hit recursion depth limits for very deep trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        self.root = self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        else:
+            node.right = self._insert_recursive(node.right, data)
+        return node
+
+# Example usage:
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+
+# (You would need a traversal function to print the tree, which is not included here for brevity)
+
+```
+
+
+**2. Iterative Insertion:**
+
+This avoids recursion, making it safer for very large trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+# Example usage (same as above, just replace insert_recursive with insert_iterative)
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+```
+
+
+**3.  Insertion with Duplicate Handling:**
+
+The above examples don't handle duplicate data.  Here's a version that allows you to specify how to handle duplicates (ignore them, or increment a count):
+
+```python
+class Node:
+    def __init__(self, data, count=1):  # Added count for duplicates
+        self.data = data
+        self.count = count
+        self.left = None
+        self.right = None
+
+class BST:
+    # ... (rest of the class is similar to iterative version, but modified insert function)
+
+    def insert_with_duplicates(self, data, allow_duplicates=False): # added allow_duplicates flag
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data == current.data:
+                if allow_duplicates:
+                    current.count += 1  # Increment count if duplicates allowed
+                break #otherwise do nothing
+            elif data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+```
+
+Remember to add a function to traverse and print the tree to verify the insertion.  A simple inorder traversal would print the nodes in sorted order.  For example:
+
+
+```python
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ") #Or print node.data, node.count if you are handling duplicates
+        inorder_traversal(node.right)
+```
+
+Choose the implementation that best suits your needs and remember to handle potential edge cases (like empty trees).  The iterative version is generally preferred for its robustness. Remember to call `inorder_traversal(bst.root)` to see the result after insertion.
+
