@@ -617,3 +617,30 @@ public class NestedLoopExample {
 
 Nested loops are a fundamental programming concept with many applications. Understanding how they work and their potential performance implications is essential for writing efficient and effective code.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They only require a number of steps proportional to the logarithm of the input size. This means the time it takes to solve the problem increases very slowly as the input size grows.  This is achievable because the algorithm typically divides the problem size in half (or some other constant fraction) with each step.
+
+Here are some common types of algorithms exhibiting O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential O(log n) algorithm.  It works on a sorted array (or other sorted data structure) by repeatedly dividing the search interval in half.  If the target value is not present, it finds this out in O(log n) time.
+
+* **Binary Tree Traversal (balanced tree):**  If you have a balanced binary search tree (like an AVL tree or a red-black tree), operations like finding, inserting, or deleting a node take O(log n) time on average.  This is because the height of a balanced binary tree is logarithmic with respect to the number of nodes.  (If it's unbalanced, it could degrade to O(n)).
+
+* **Efficient Heap Operations:**  Heaps (like min-heaps or max-heaps) support efficient `insert`, `extract-min` (or `extract-max`), and `find-min` (or `find-max`) operations all in O(log n) time.  These are crucial for priority queue implementations.
+
+* **Exponentiation by Squaring:** Calculating a^b (a raised to the power of b) can be done in O(log b) time using this technique.  It involves repeatedly squaring the base and adjusting the exponent.
+
+* **Finding the Kth smallest element using Quickselect (average case):** While the worst-case time complexity is O(n),  Quickselect on average performs in O(n) for finding the k-th smallest and O(log n) for finding the median in an array.
+
+
+**Key Characteristics Leading to O(log n) Complexity:**
+
+The common thread in these algorithms is the ability to repeatedly reduce the problem size by a constant factor in each step.  This typically involves:
+
+* **Divide and conquer:** Breaking the problem into smaller subproblems.
+* **Halving the search space:**  As seen in binary search.
+* **Using efficient data structures:**  Like balanced binary search trees or heaps, which maintain a logarithmic structure.
+
+
+**Important Note:**  The O(log n) complexity is often *average-case* or *best-case* complexity.  For some algorithms (like Quickselect), the worst-case scenario could be O(n).  Always be mindful of the specific context and assumptions made when analyzing the time complexity of an algorithm.
+
