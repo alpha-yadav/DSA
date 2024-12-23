@@ -156,3 +156,39 @@ print(longest_palindrome("cbbd"))  # Output: bb
 
 These examples demonstrate different levels of complexity and require different algorithmic approaches.  Remember to consider time and space complexity when designing your solutions.  There are many more algorithmic problems out there – exploring websites like LeetCode, HackerRank, and Codewars is a great way to practice.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is used in computer science and mathematics to describe the asymptotic behavior of a function.  Specifically, it provides a tight bound on the growth rate of a function, indicating that the function's growth is bounded both above and below by the same function (up to constant factors).
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always sandwiched between *c₁ * g(n)* and *c₂ * g(n)*.  In other words, *f(n)* grows at the same rate as *g(n)*, ignoring constant factors.
+
+**Intuitive Explanation:**
+
+Imagine you have two algorithms that solve the same problem.  If the runtime of one algorithm is Θ(n²) and the runtime of the other is Θ(n²),  this means they both have quadratic time complexity. While they might have different constant factors (one might be slightly faster due to better implementation), their runtime scales similarly as the input size (*n*) increases.
+
+**Contrast with Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  *f(n) = O(g(n))* means *f(n)* grows no faster than *g(n)*.  It's a "worst-case" scenario.
+
+* **Big-Ω (Ω):** Provides a *lower bound*.  *f(n) = Ω(g(n))* means *f(n)* grows at least as fast as *g(n)*. It's a "best-case" scenario (though often used to describe lower bounds on problem complexity).
+
+* **Big-Θ (Θ):** Provides a *tight bound*, combining both upper and lower bounds.  It means *f(n)* grows at the *same rate* as *g(n)*.  This is a much stronger statement than just having O and Ω separately.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1:**  f(n) = Θ(n²)  (The dominant term is n², and constants are ignored.)
+
+* **f(n) = 5n log n:** f(n) = Θ(n log n)
+
+* **f(n) = 10:** f(n) = Θ(1)  (Constant time complexity)
+
+
+**Why is Big-Theta important?**
+
+Big-Theta gives a precise and concise way to describe the efficiency of an algorithm.  Knowing the Θ complexity of an algorithm allows for direct comparisons of its performance with other algorithms for the same problem, regardless of implementation details or machine specifics.  It helps in choosing the most efficient algorithm for a given task, especially when dealing with large datasets.
+
