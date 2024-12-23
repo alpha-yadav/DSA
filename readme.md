@@ -3199,3 +3199,79 @@ Output:  The nodes visited in BFS or DFS order.
 
 The best problem for you will depend on your current skill level.  Start with "Two Sum" if you're new to algorithms.  Work your way up to the more challenging problems as you gain experience.  Remember to practice!  Solving algorithmic problems regularly is key to improving your problem-solving abilities.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple version and then adding improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses a `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5.  If none of these conditions are met, it prints the number itself.
+
+
+**Version 2:  Slightly More Concise**
+
+This version uses a ternary operator to make the code a bit more compact:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzz(n: 15)
+```
+
+This achieves the same result but is slightly less readable for beginners.
+
+
+**Version 3: Using a `switch` statement (More Advanced)**
+
+While less efficient than the previous versions, a `switch` statement can provide a different way to approach the problem:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        switch (i % 3, i % 5) {
+        case (0, 0):
+            print("FizzBuzz")
+        case (0, _):
+            print("Fizz")
+        case (_, 0):
+            print("Buzz")
+        default:
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15)
+```
+
+This version uses a tuple in the `switch` statement to check the remainders simultaneously, offering a more structured approach.  However, for FizzBuzz, the previous versions are generally preferred for clarity and efficiency.
+
+
+**Choosing the Best Version:**
+
+For beginners, **Version 1** is the most recommended due to its readability and easy understanding of the logic.  Version 2 is slightly more concise but might be harder to grasp initially. Version 3 is useful for demonstrating `switch` statements but isn't the most efficient or readable for this specific problem.  Remember that readability and maintainability are often more important than extreme brevity in code.  Choose the version that best suits your understanding and the context of your learning.
+
