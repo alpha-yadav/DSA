@@ -120,3 +120,59 @@ Output: `[0, 1, 2, 3]` (or a similar ordering depending on implementation)
 
 These problems represent a range of difficulty and highlight different algorithmic techniques.  Choosing the right algorithm depends heavily on factors like the size of the input and the desired time and space complexity.  Attempting to solve these problems (and many others you can find online) will significantly improve your algorithmic problem-solving skills.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more refined version:
+
+**Simple Version:**
+
+This version uses a straightforward `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the desired upper limit
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz") and then by 5 ("Buzz").
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Slightly More Refined Version (using string interpolation):**
+
+This version is more concise and uses string interpolation to build the output string:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? i : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function
+```
+
+This version avoids nested `if-else if` statements.  It builds the output string (`output`) incrementally. If `output` remains empty after checking for divisibility by 3 and 5, it prints the number; otherwise, it prints the accumulated string.  This approach is generally considered more efficient and readable for larger numbers.
+
+
+**Choosing the Best Version:**
+
+For the FizzBuzz challenge, both versions are perfectly acceptable.  The improved version is slightly more efficient and arguably more elegant.  However, the simple version is easier to understand for beginners.  Choose the version that best suits your understanding and the context of your project.  The key takeaway is understanding the core logic of checking for divisibility by 3 and 5.
+
