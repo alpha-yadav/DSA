@@ -2503,3 +2503,118 @@ Graph theory has wide-ranging applications in many fields, including:
 
 This introduction provides a basic overview.  Further exploration would delve into specific algorithms (e.g., Dijkstra's algorithm for shortest paths, breadth-first search, depth-first search), graph representations (adjacency matrices, adjacency lists), and more advanced concepts.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and often efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementations and considerations:
+
+**Core Idea:**
+
+An adjacency list represents a graph as an array (or other data structure like a hash map/dictionary) of lists.  Each index in the array corresponds to a vertex in the graph.  The list at that index contains all the vertices that are adjacent (directly connected) to the vertex represented by the index.
+
+**Implementation Examples:**
+
+Let's illustrate with a simple undirected graph:  Vertices {A, B, C, D} with edges (A, B), (A, C), (B, C), (C, D).
+
+**1. Using Python Lists:**
+
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'C'],
+    'C': ['A', 'B', 'D'],
+    'D': ['C']
+}
+
+# Accessing neighbors of vertex 'C':
+neighbors_of_C = graph['C']  # ['A', 'B', 'D']
+```
+
+This uses a dictionary where keys are vertices (strings) and values are lists of their neighbors.
+
+**2. Using Python Lists of Lists (More compact):**
+
+If vertices are numbered 0, 1, 2... then we can use a list of lists:
+
+
+```python
+# Assuming vertices are numbered 0, 1, 2, 3
+graph = [
+    [1, 2],  # Neighbors of vertex 0 (A)
+    [0, 2],  # Neighbors of vertex 1 (B)
+    [0, 1, 3], # Neighbors of vertex 2 (C)
+    [2]    # Neighbors of vertex 3 (D)
+]
+
+# Accessing neighbors of vertex 2 (C):
+neighbors_of_C = graph[2] # [0, 1, 3]
+```
+
+This is more space-efficient if your vertices are already numbered sequentially.
+
+**3. Using Objects (for more complex scenarios):**
+
+For graphs with weighted edges or additional vertex properties, you'll likely use objects:
+
+```python
+class Vertex:
+    def __init__(self, name):
+        self.name = name
+        self.neighbors = []
+
+class Graph:
+    def __init__(self):
+        self.vertices = {}
+
+    def add_vertex(self, vertex):
+        self.vertices[vertex.name] = vertex
+
+    def add_edge(self, u, v, weight=1): #weight is optional, default is 1
+        self.vertices[u].neighbors.append((v, weight)) #Store (neighbor, weight)
+        self.vertices[v].neighbors.append((u, weight)) # For undirected graph
+
+
+# Example usage
+graph = Graph()
+a = Vertex('A')
+b = Vertex('B')
+c = Vertex('C')
+d = Vertex('D')
+
+graph.add_vertex(a)
+graph.add_vertex(b)
+graph.add_vertex(c)
+graph.add_vertex(d)
+
+graph.add_edge('A', 'B')
+graph.add_edge('A', 'C')
+graph.add_edge('B', 'C', weight=5) #Weighted edge
+graph.add_edge('C', 'D')
+
+# Access neighbors of 'C' with weights
+for neighbor, weight in graph.vertices['C'].neighbors:
+    print(f"Neighbor of C: {neighbor}, Weight: {weight}")
+```
+
+This approach is more flexible and allows you to store additional information associated with vertices and edges.
+
+
+**Choosing the Right Implementation:**
+
+* **Simple graphs without weights:** Python dictionaries or lists of lists are perfectly adequate.
+* **Graphs with weights or vertex properties:** Using classes provides better organization and maintainability.
+* **Very large graphs:**  Consider more advanced data structures or libraries optimized for graph processing (like NetworkX in Python).
+
+
+**Advantages of Adjacency Lists:**
+
+* **Efficient for sparse graphs:** Space complexity is O(V + E), where V is the number of vertices and E is the number of edges.  This is much better than the O(V^2) space required by an adjacency matrix for sparse graphs.
+* **Easy to find neighbors:**  Finding all neighbors of a vertex is very fast (O(degree(v)), where degree(v) is the number of neighbors of vertex v).
+* **Adding/Removing edges is relatively easy**.
+
+**Disadvantages of Adjacency Lists:**
+
+* **Checking for edge existence can be slower** (O(degree(v)) in the worst case) compared to adjacency matrices (O(1)).
+* **Can be less space-efficient for dense graphs** (graphs with many edges).
+
+
+Remember to choose the implementation that best suits your specific needs and the characteristics of your graphs.
+
