@@ -359,3 +359,52 @@ Therefore, since we've found appropriate c₁, c₂, and n₀, we can say that `
 
 In essence, Θ(g(n)) implies both O(g(n)) and Ω(g(n)).  Big-Theta gives a much stronger and more informative statement about an algorithm's complexity than Big-O alone.  However, it's often harder to prove a tight bound than an upper bound.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of functions, particularly used in computer science to analyze algorithm efficiency.  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Upper bound.  `f(n) = O(g(n))` means there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  In simpler terms, *g(n)* grows at least as fast as *f(n)*.  It describes the *worst-case* scenario.
+* **Example:**  If an algorithm takes `5n² + 3n + 2` operations, we can say its time complexity is O(n²), because the quadratic term dominates as *n* grows large.  We ignore constant factors and lower-order terms.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Lower bound. `f(n) = Ω(g(n))` means there exist positive constants *c* and *n₀* such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.  *g(n)* grows no faster than *f(n)*. It describes the *best-case* scenario (though not always strictly the best case, but a lower bound).
+* **Example:**  If an algorithm takes `5n² + 3n + 2` operations, its time complexity is Ω(n²).  It's at least as fast as a quadratic function.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Tight bound. `f(n) = Θ(g(n))` means `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  *f(n)* and *g(n)* grow at the same rate.  It provides both upper and lower bounds.
+* **Example:**  `5n² + 3n + 2 = Θ(n²)`, indicating the algorithm's time complexity is precisely quadratic.
+
+**4. Little o Notation (o):**
+
+* **Meaning:** Strict upper bound. `f(n) = o(g(n))` means for every positive constant *c*, there exists a constant *n₀* such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  *g(n)* grows *strictly* faster than *f(n)*.
+* **Example:** `n = o(n²)`, because n² grows faster than n.
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Strict lower bound. `f(n) = ω(g(n))` means for every positive constant *c*, there exists a constant *n₀* such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`.  *f(n)* grows *strictly* faster than *g(n)*.
+* **Example:** `n² = ω(n)`, because n² grows faster than n.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                     | Relationship between f(n) and g(n) |
+|----------|---------------------------------------------|--------------------------------------|
+| O(g(n))  | Upper bound                                  | f(n) ≤ c * g(n)                      |
+| Ω(g(n))  | Lower bound                                  | c * g(n) ≤ f(n)                      |
+| Θ(g(n))  | Tight bound (both upper and lower)          | c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)          |
+| o(g(n))  | Strict upper bound                          | f(n) < c * g(n) for all c > 0       |
+| ω(g(n))  | Strict lower bound                          | c * g(n) < f(n) for all c > 0       |
+
+
+**Key Differences:**
+
+* **Big O vs. Little o:** Big O allows for the possibility that *f(n)* and *g(n)* grow at the same rate, while little o explicitly states that *g(n)* grows strictly faster.
+* **Big Omega vs. Little omega:** Similar to the above, Big Omega permits the same growth rate, while little omega demands strictly faster growth of *f(n)*.
+* **Big O and Big Omega don't imply Big Theta:**  A function can be O(n²) and Ω(n) but not Θ(n²) (e.g., an algorithm that's sometimes fast and sometimes slow).  Θ signifies a precise growth rate.
+
+
+Understanding these notations is crucial for comparing the efficiency of different algorithms and making informed choices when designing software.  They help abstract away from specific hardware and implementation details, focusing on the fundamental scaling properties of algorithms as the input size grows.
+
