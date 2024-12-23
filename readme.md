@@ -1829,3 +1829,118 @@ iterative_inorder_traversal(root) # Output: 4 2 5 1 3
 
 Remember to adapt these code examples to your specific tree structure and data type.  The core logic of the recursive and iterative approaches remains the same.  Iterative versions are generally more memory-efficient for very large trees, while recursive versions are often considered more readable.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first traversal, visits all nodes at the same level before moving to the next level.  Here are implementations in Python and Java, along with explanations:
+
+
+**Python Implementation using a queue:**
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])  # Use deque for efficient queue operations
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+**Explanation:**
+
+1. **Node Class:** Defines a simple binary tree node with `data`, `left`, and `right` attributes.
+2. **`levelOrder` Function:**
+   - It takes the root node as input.
+   - It handles the base case where the root is `None`.
+   - A `deque` (double-ended queue) from the `collections` module is used as a queue.  This is more efficient for queue operations than a list.
+   - The root node is added to the queue.
+   - The `while` loop continues as long as the queue is not empty.
+   - In each iteration:
+     - The first node (`curr`) is removed from the queue using `popleft()`.
+     - The data of the current node is printed.
+     - If the current node has a left child, it's added to the queue.
+     - If the current node has a right child, it's added to the queue.
+
+
+**Java Implementation using a queue:**
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int item) {
+        data = item;
+        left = right = null;
+    }
+}
+
+class BinaryTree {
+    void printLevelOrder(Node root) {
+        if (root == null)
+            return;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root); // Add root to the queue
+
+        while (!queue.isEmpty()) {
+            Node node = queue.poll(); // Remove from front
+            System.out.print(node.data + " ");
+
+            if (node.left != null)
+                queue.offer(node.left);
+
+            if (node.right != null)
+                queue.offer(node.right);
+        }
+    }
+
+    public static void main(String args[]) {
+        BinaryTree tree = new BinaryTree();
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+
+        System.out.println("Level order traversal of binary tree is -");
+        tree.printLevelOrder(root); // Output: 1 2 3 4 5
+    }
+}
+```
+
+**Java Explanation:**
+
+The Java code follows the same logic as the Python code: it uses a `Queue` (specifically, a `LinkedList` which implements `Queue`) to store nodes for processing level by level.  The `offer()` method adds nodes to the queue, and `poll()` removes them.
+
+
+Both implementations provide a clear and efficient way to perform a level order traversal of a binary tree.  Remember to handle the case where the input tree is empty (or the root is `null`).
+
