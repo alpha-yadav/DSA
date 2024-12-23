@@ -959,3 +959,73 @@ print(f"Root1 and Root3 are same (iterative): {are_trees_same_iterative(root1, r
 
 Both methods achieve the same result. Choose the one that best suits your coding style and potential constraints (recursion depth limits in very deep trees).  The recursive method is generally preferred for its readability and conciseness. Remember to handle the `None` cases carefully in both implementations.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They're a special type of binary tree where the nodes are arranged in a specific order.  This order allows for fast searching, insertion, and deletion operations.
+
+Here's a breakdown of BSTs:
+
+**Key Properties:**
+
+* **Binary Tree:** Each node has at most two children, referred to as the left child and the right child.
+* **Ordered Property:** For every node:
+    * All nodes in the left subtree have values *less than* the node's value.
+    * All nodes in the right subtree have values *greater than* the node's value.
+
+**Basic Operations:**
+
+* **Search:**  Given a value, find if it exists in the tree.  This is done recursively or iteratively by comparing the value with the current node and traversing to the left or right subtree accordingly.  The worst-case time complexity is O(h), where h is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes, resulting in O(log n) time complexity.  In a skewed tree, h can be n, resulting in O(n) time complexity.
+
+* **Insertion:** Add a new node with a given value to the tree while maintaining the ordered property.  The process is similar to searching: traverse the tree until you find the appropriate location to insert the new node.  The time complexity is also O(h).
+
+* **Deletion:** Remove a node with a given value from the tree while preserving the ordered property. This is the most complex operation, as it requires considering three cases:
+    * Node with no children: Simply remove the node.
+    * Node with one child: Replace the node with its child.
+    * Node with two children:  Find the inorder predecessor (largest node in the left subtree) or inorder successor (smallest node in the right subtree), replace the node's value with the predecessor/successor's value, and then delete the predecessor/successor node (which will now have at most one child).  The time complexity is O(h).
+
+
+**Time Complexity (Average Case):**
+
+* **Search:** O(log n)
+* **Insertion:** O(log n)
+* **Deletion:** O(log n)
+
+
+**Time Complexity (Worst Case):**
+
+* **Search, Insertion, Deletion:** O(n)  This occurs when the tree becomes highly unbalanced (e.g., a skewed tree resembling a linked list).
+
+**Space Complexity:**
+
+* O(n), as the space used is proportional to the number of nodes in the tree.
+
+
+**Advantages of BSTs:**
+
+* Efficient searching, insertion, and deletion (in a balanced tree).
+* Simple implementation.
+* Provides an ordered sequence of data.
+
+
+**Disadvantages of BSTs:**
+
+* Performance degrades significantly in a skewed tree.
+* Self-balancing BSTs (like AVL trees or red-black trees) are needed to guarantee logarithmic time complexity in all cases, but these are more complex to implement.
+
+
+**Balanced BSTs:**
+
+To mitigate the worst-case scenario of an unbalanced tree, self-balancing BSTs are used.  These trees use rotations and other techniques to ensure that the height remains relatively small, thus maintaining the logarithmic time complexity for all operations.  Examples include AVL trees and red-black trees.
+
+
+**Applications:**
+
+BSTs are used in various applications, including:
+
+* **Databases:** Indexing and storing data.
+* **Symbol tables:** In compilers and interpreters.
+* **Implementation of sets and maps:**  Providing efficient set operations.
+* **Sorting algorithms:**  Used as a basis for some sorting algorithms.
+
+
+In summary, Binary Search Trees are a powerful and versatile data structure, but their efficiency relies heavily on maintaining a relatively balanced structure.  Understanding their properties and limitations is crucial for choosing the right data structure for a given task.
+
