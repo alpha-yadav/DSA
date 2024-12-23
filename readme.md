@@ -2320,3 +2320,12 @@ For general trees (trees where a node can have more than two children), the recu
 
 Remember to adapt the code examples to your specific tree implementation and data structures.  Choose the method that best suits the structure of your tree and the information available (parent pointers or not).
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **Type of graph:**  Bar graph, line graph, scatter plot, pie chart, etc.
+* **Data:**  A table of x and y values, a set of data points, or an equation (e.g., y = 2x + 1).
+* **Labels:**  What should the x and y axes represent?  What's the title of the graph?
+
+Once I have this information, I can help you graph it.  I can't create visual graphs directly, but I can give you the data in a format that's easy to copy and paste into a graphing program like Excel, Google Sheets, or Desmos.
+
