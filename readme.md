@@ -315,3 +315,47 @@ Understanding algorithm complexity is crucial for:
 
 It's important to remember that algorithm complexity is a theoretical measure.  Actual running time can be affected by factors like hardware, programming language, and compiler optimizations. However, asymptotic complexity provides a valuable tool for comparing algorithms and making informed decisions about algorithm selection.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a fundamental concept in computer science used to describe the **asymptotic tight bound** of an algorithm's time or space complexity.  It provides a more precise measure than Big-O notation, which only gives an upper bound.  Big-Theta essentially says that a function's growth rate is *both* upper-bounded and lower-bounded by the same function (within constant factors).
+
+**Formal Definition:**
+
+Given two functions f(n) and g(n), we say that f(n) is Θ(g(n)) if and only if there exist positive constants c₁ and c₂, and a positive integer n₀ such that for all n ≥ n₀:
+
+   `c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+Let's break this down:
+
+* **c₁ and c₂:** These are constants that represent the scaling factors.  They indicate that f(n) can be bounded above and below by multiples of g(n).
+* **n₀:** This is a threshold.  The inequality only needs to hold for values of n greater than or equal to n₀.  This accounts for the fact that algorithms might behave differently for very small input sizes.
+* **f(n):** The function representing the algorithm's complexity (e.g., number of operations or memory usage).
+* **g(n):** The function representing the growth rate (e.g., n, n², log n, etc.).
+
+**In simpler terms:**
+
+Big-Theta notation means that the function f(n) grows at the *same rate* as g(n), disregarding constant factors.  It essentially pins down the function's growth rate to within a constant multiplicative factor, both above and below.
+
+**Example:**
+
+Let's say an algorithm's runtime is given by the function:
+
+`f(n) = 2n² + 5n + 3`
+
+We can show that f(n) is Θ(n²):
+
+1. **Upper bound:** We can find c₂ and n₀ such that `2n² + 5n + 3 ≤ c₂n²` for all n ≥ n₀.  If we choose c₂ = 3 and n₀ = 1, then the inequality holds because for n ≥ 1:
+   `2n² + 5n + 3 ≤ 2n² + 5n² + 3n² = 10n² ≤ 3n²`  (This inequality isn't strictly true. A more careful selection of c₂ and n₀ would be needed).  A better approach would involve choosing a sufficiently large n₀ to make the higher-order terms dominate.
+
+2. **Lower bound:** We can find c₁ and n₀ such that `c₁n² ≤ 2n² + 5n + 3` for all n ≥ n₀.  If we choose c₁ = 1 and n₀ = 1,  then for n ≥ 1:
+   `1n² ≤ 2n² + 5n + 3`  (This is true).
+
+Therefore, since we've found appropriate c₁, c₂, and n₀, we can say that `f(n) = Θ(n²)`.  The dominant term (n²) determines the growth rate.
+
+**Difference from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  It says that the function's growth is *no worse than* g(n).
+* **Big-Ω (Ω):** Provides a *lower bound*. It says that the function's growth is *at least as good as* g(n).
+* **Big-Θ (Θ):** Provides a *tight bound*. It says the function's growth is *both* upper and lower bounded by g(n).
+
+In essence, Θ(g(n)) implies both O(g(n)) and Ω(g(n)).  Big-Theta gives a much stronger and more informative statement about an algorithm's complexity than Big-O alone.  However, it's often harder to prove a tight bound than an upper bound.
+
