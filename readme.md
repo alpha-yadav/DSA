@@ -259,3 +259,59 @@ FizzBuzz
 
 This provides a solid foundation for understanding and implementing the FizzBuzz algorithm in Swift.  Remember to adjust the `n` value in the `fizzBuzz` or `fizzBuzzEfficient` function call to test with different ranges.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm requires to solve a problem as a function of the input size.  It's a crucial aspect of algorithm design and analysis, helping us understand how an algorithm's performance scales with larger inputs.  We typically focus on *asymptotic complexity*, which describes the behavior as the input size approaches infinity.
+
+Here's a breakdown of key concepts:
+
+**1. Time Complexity:**  Measures the time an algorithm takes to run as a function of the input size.
+
+* **Big O Notation (O):**  Describes the *upper bound* of the time complexity.  It represents the worst-case scenario.  We're interested in the dominant terms as the input size grows large, ignoring constant factors and lower-order terms.  Common notations include:
+    * O(1): Constant time – the time taken doesn't depend on the input size.
+    * O(log n): Logarithmic time – the time increases logarithmically with the input size (e.g., binary search).
+    * O(n): Linear time – the time increases linearly with the input size.
+    * O(n log n): Linearithmic time – common in efficient sorting algorithms (e.g., merge sort).
+    * O(n²): Quadratic time – the time increases quadratically with the input size (e.g., nested loops).
+    * O(2ⁿ): Exponential time – the time doubles with each addition to the input size (e.g., brute-force solutions to many problems).
+    * O(n!): Factorial time – the time grows factorially with the input size (extremely slow for larger inputs).
+
+* **Big Omega Notation (Ω):** Describes the *lower bound* of the time complexity. It represents the best-case scenario.
+
+* **Big Theta Notation (Θ):** Describes the *tight bound* of the time complexity.  It means the algorithm's time complexity is both O(f(n)) and Ω(f(n)), indicating that the growth rate is precisely f(n).
+
+**2. Space Complexity:** Measures the amount of memory an algorithm uses as a function of the input size.  The notation is similar to time complexity (O, Ω, Θ).  We consider both the space used by the input and the auxiliary space (extra space used by the algorithm).
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically follow these steps:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the running time.
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Identify the dominant term:**  Determine the term that grows fastest as n increases.
+4. **Express the complexity using Big O notation:**  Discard constant factors and lower-order terms, focusing on the dominant term.
+
+**Example:**
+
+Consider a simple algorithm that iterates through an array of size `n` and prints each element:
+
+```python
+def print_array(arr):
+  for i in range(len(arr)):
+    print(arr[i])
+```
+
+The basic operation is the `print` statement, which is executed `n` times.  Therefore, the time complexity is O(n) – linear time. The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity is crucial for:
+
+* **Choosing the right algorithm:**  Selecting an algorithm with better complexity can drastically improve performance, especially for large datasets.
+* **Predicting performance:**  Knowing the complexity helps estimate how long an algorithm will take to run for a given input size.
+* **Optimizing algorithms:**  Identifying bottlenecks and areas for improvement.
+
+
+It's important to remember that algorithm complexity is a theoretical measure.  Actual running time can be affected by factors like hardware, programming language, and compiler optimizations. However, asymptotic complexity provides a valuable tool for comparing algorithms and making informed decisions about algorithm selection.
+
