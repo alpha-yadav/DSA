@@ -444,3 +444,68 @@ The runtime of this function depends on where the target element is located. In 
 
 Big O notation is a crucial tool for comparing the efficiency of different algorithms and making informed decisions about which algorithm to use for a given task.  It allows you to abstract away from implementation details and focus on the fundamental scalability of the algorithm.
 
+#  A Simple Loop 
+The simplest loop in most programming languages is a `while` loop.  It repeatedly executes a block of code as long as a condition is true.  Here are examples in a few common languages:
+
+**Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This loop prints the numbers 0 through 4.  The condition `count < 5` is checked before each iteration.  Once `count` reaches 5, the loop terminates.
+
+
+**JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+This is functionally identical to the Python example.
+
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+This C++ example also does the same thing, but includes the necessary header for input/output and the `return 0;` statement to indicate successful execution.
+
+
+**Java:**
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+This Java example requires a class and `main` method.
+
+
+These are all examples of a `while` loop performing a simple counting task.  The core concept remains the same across different programming languages: a condition is checked, and if true, a block of code is executed repeatedly until the condition becomes false.  Other types of loops, like `for` loops, offer more concise ways to achieve similar results, especially when iterating a known number of times.
+
