@@ -203,3 +203,57 @@ This version uses a helper function `fizzBuzzOutput` to determine the string to 
 
 For beginners, **Version 1** is recommended because its logic is the most straightforward and easy to follow.  **Version 3** offers better structure and organization for larger or more complex problems.  **Version 2** is concise but might be harder to read for those unfamiliar with nested ternary operators.  Choose the version that best suits your understanding and the context of your project. Remember to always prioritize readability and maintainability.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long the algorithm takes to run) and space (how much memory the algorithm needs).  We usually analyze complexity in terms of the *size of the input* to the algorithm.  This allows us to understand how the algorithm's resource consumption scales as the input grows larger.
+
+There are several ways to express algorithm complexity:
+
+**1. Big O Notation (O):**  This describes the *upper bound* of an algorithm's growth rate.  It focuses on the dominant terms as the input size approaches infinity, ignoring constant factors and lower-order terms.  Big O notation tells us the *worst-case scenario*.
+
+* **O(1):** Constant time. The algorithm's runtime doesn't depend on the input size.  Example: Accessing an element in an array by its index.
+* **O(log n):** Logarithmic time. The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n):** Linear time. The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n):** Linearithmic time.  Common in efficient sorting algorithms like merge sort and heapsort.
+* **O(n²):** Quadratic time. The runtime increases proportionally to the square of the input size. Example: Bubble sort, selection sort.
+* **O(2ⁿ):** Exponential time. The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!):** Factorial time.  The runtime grows factorially with the input size. Example: Traveling salesman problem (brute-force approach).
+
+
+**2. Big Omega Notation (Ω):** This describes the *lower bound* of an algorithm's growth rate.  It represents the best-case scenario.  It's less frequently used than Big O.
+
+**3. Big Theta Notation (Θ):** This describes the *tight bound* of an algorithm's growth rate.  It means the algorithm's growth rate is both O(f(n)) and Ω(f(n)), indicating that the upper and lower bounds are the same.  This provides a precise characterization of the algorithm's complexity.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the algorithm's runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Simplify the function:** Use Big O notation to express the dominant terms and ignore constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Basic operation:** Comparison (`arr[i] == target`)
+* **Number of operations:** In the worst case (target not found), the comparison is performed `n` times, where `n` is the length of the array.
+* **Complexity:** O(n) - linear time.
+
+
+**Space Complexity:**
+
+Space complexity measures the amount of memory an algorithm uses as a function of the input size.  It's analyzed similarly to time complexity using Big O notation.  It considers memory used for variables, data structures, and function calls.
+
+
+In summary, understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance for different input sizes.  Big O notation provides a concise and widely understood way to express this complexity.
+
