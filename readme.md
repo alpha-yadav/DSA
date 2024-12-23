@@ -509,3 +509,79 @@ This Java example requires a class and `main` method.
 
 These are all examples of a `while` loop performing a simple counting task.  The core concept remains the same across different programming languages: a condition is checked, and if true, a block of code is executed repeatedly until the condition becomes false.  Other types of loops, like `for` loops, offer more concise ways to achieve similar results, especially when iterating a known number of times.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows for processing data in a multi-dimensional way, often used to iterate through matrices, tables, or perform combinations of elements.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed in the inner loop
+        pass  # Placeholder; replace with your logic
+```
+
+**Examples:**
+
+**1. Printing a multiplication table:**
+
+```python
+# Print a 10x10 multiplication table
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+**2. Iterating through a matrix (list of lists):**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop: iterates through rows
+    for element in row:  # Inner loop: iterates through elements in each row
+        print(element, end=" ")
+    print() # Newline after each row
+```
+
+**3. Finding all pairs in a list:**
+
+```python
+my_list = [1, 2, 3, 4]
+
+for i in range(len(my_list)):
+    for j in range(i + 1, len(my_list)): # Start j from i+1 to avoid duplicates and self-pairs
+        print(f"Pair: ({my_list[i]}, {my_list[j]})")
+```
+
+**4.  Nested loops with different iterables:**
+
+```python
+names = ["Alice", "Bob", "Charlie"]
+ages = [25, 30, 28]
+
+for name in names:
+    for age in ages:
+        print(f"{name} might be {age} years old.") #Note: this example isn't logically connected, it just demonstrates different iterables.
+```
+
+
+**Time Complexity:**
+
+The time complexity of nested loops is generally the product of the time complexities of the individual loops.  For example, if both the outer and inner loops iterate `n` times, the overall time complexity is O(n²), which is quadratic.  This means the execution time increases proportionally to the square of the input size.  This can become computationally expensive for large datasets.
+
+
+**Important Considerations:**
+
+* **Efficiency:**  Nested loops can be computationally expensive.  Consider optimizing your code if you're dealing with large datasets.  Alternative algorithms (like using libraries designed for matrix operations) might be more efficient.
+* **Clarity:**  Excessive nesting can make your code harder to read and understand.  Try to keep your loops as clear and concise as possible.  Consider breaking down complex logic into smaller, more manageable functions.
+
+
+Nested loops are a powerful tool, but it's crucial to use them judiciously and be aware of their potential performance implications.  Always strive for clarity and efficiency in your code.
+
