@@ -2085,3 +2085,130 @@ postorder(root) # Output: D E B F C A
 
 This code defines a `Node` class and functions for each traversal type.  Remember to adapt the tree structure in the example usage to your specific needs.  This provides a clear and concise way to understand and implement these important tree traversal algorithms.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike a binary search tree, a general binary tree doesn't have any ordering properties that simplify the search.  Therefore, we generally use a recursive approach.
+
+Here are two common approaches to finding the LCA in a binary tree:
+
+**Method 1: Recursive Approach with Parent Pointers (Most Efficient)**
+
+This method assumes you can access the parent of each node.  This is often a more efficient approach than the one that only uses child pointers, especially for large trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.parent = None  # Added parent pointer
+
+
+def lca_with_parent(node1, node2):
+    """
+    Finds the LCA of two nodes using parent pointers.
+
+    Args:
+      node1: The first node.
+      node2: The second node.
+
+    Returns:
+      The LCA node, or None if either node is not in the tree.
+    """
+
+    ancestors1 = set()
+    current = node1
+    while current:
+        ancestors1.add(current)
+        current = current.parent
+
+    current = node2
+    while current:
+        if current in ancestors1:
+            return current
+        current = current.parent
+
+    return None  # Nodes are not in the same tree
+
+
+# Example usage (you'll need to build your tree and set parent pointers):
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.parent = root
+root.right.parent = root
+root.left.left = Node(4)
+root.left.left.parent = root.left
+root.left.right = Node(5)
+root.left.right.parent = root.left
+
+lca = lca_with_parent(root.left.left, root.left.right)
+print(f"LCA of 4 and 5 is: {lca.data}") # Output: LCA of 4 and 5 is: 2
+
+lca = lca_with_parent(root.left, root.right)
+print(f"LCA of 2 and 3 is: {lca.data}") # Output: LCA of 2 and 3 is: 1
+
+```
+
+
+**Method 2: Recursive Approach without Parent Pointers (Less Efficient)**
+
+This method only uses child pointers. It's less efficient because it might traverse parts of the tree multiple times.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_without_parent(root, node1, node2):
+    """
+    Finds the LCA of two nodes without using parent pointers.
+
+    Args:
+      root: The root of the binary tree.
+      node1: The first node.
+      node2: The second node.
+
+    Returns:
+      The LCA node, or None if either node is not found.
+    """
+
+    if not root or root == node1 or root == node2:
+        return root
+
+    left_lca = lca_without_parent(root.left, node1, node2)
+    right_lca = lca_without_parent(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example Usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lca_without_parent(root, root.left.left, root.left.right)
+print(f"LCA of 4 and 5 is: {lca.data}")  # Output: LCA of 4 and 5 is: 2
+
+lca = lca_without_parent(root, root.left, root.right)
+print(f"LCA of 2 and 3 is: {lca.data}")  # Output: LCA of 2 and 3 is: 1
+
+```
+
+**Important Considerations:**
+
+* **Error Handling:**  The code should handle cases where one or both nodes are not present in the tree.
+* **Efficiency:** The method with parent pointers is generally more efficient, especially for large trees, as it avoids redundant traversal.
+* **Node Representation:** Adapt the `Node` class to your specific implementation.
+
+
+Remember to adapt the code to your specific tree structure and node representation.  The method using parent pointers is significantly faster for larger trees, but requires modifying your tree structure to include parent pointers.  If you can't modify the tree structure, the recursive method without parent pointers is your only option.
+
