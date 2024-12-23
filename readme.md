@@ -366,3 +366,57 @@ Let's say we have an algorithm with runtime *f(n) = n² + 2n + 1*.
 
 In summary, Big-Omega notation is a crucial tool for rigorously analyzing the lower bounds of algorithm complexity and providing valuable insights into algorithm efficiency. Remember that it focuses on the *best-case* or a general lower bound, in contrast to Big-O which focuses on the *worst-case*.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of a function, usually representing the time or space resources required by an algorithm as the input size grows.  It focuses on the dominant terms and ignores constant factors, providing a high-level understanding of how an algorithm scales.
+
+Here's a breakdown of key aspects:
+
+**What Big O describes:**
+
+* **Worst-case scenario:** Big O typically describes the worst-case runtime or space complexity of an algorithm.  This means it represents the upper bound – the algorithm will *never* perform worse than this, although it might perform better in some cases.
+* **Asymptotic behavior:** Big O describes how the algorithm scales as the input size (n) approaches infinity.  It's less concerned with the performance for small inputs and more interested in how the algorithm behaves for very large datasets.
+* **Order of growth:**  It focuses on the order of growth, not the precise runtime.  For example, an algorithm with a runtime of 5n² + 10n + 3 is said to have a time complexity of O(n²), because the n² term dominates as n becomes large.  The constants (5, 10, 3) and lower-order terms (10n) are insignificant in the long run.
+
+**Common Big O notations:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating through the input data.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: The traveling salesman problem using brute force.
+
+
+**How to analyze Big O:**
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the runtime.
+2. **Count the operations:** Count how many times these operations are executed as a function of the input size (n).
+3. **Express as a function:** Write the number of operations as a function of n.
+4. **Simplify using Big O rules:**  Drop constants and lower-order terms to get the Big O notation.
+
+
+**Example:**
+
+Consider a function that iterates through an array and prints each element:
+
+```python
+def print_array(arr):
+    for item in arr:
+        print(item)
+```
+
+* The basic operation is printing an element.
+* This operation is executed `n` times (where `n` is the length of the array).
+* The runtime is therefore O(n) – linear time.
+
+
+**Big O vs. Big Omega (Ω) and Big Theta (Θ):**
+
+* **Big O (O):**  Upper bound – the algorithm will *never* perform worse than this.
+* **Big Omega (Ω):** Lower bound – the algorithm will *never* perform better than this.
+* **Big Theta (Θ):** Tight bound – the algorithm's performance is both bounded above and below by the same function.  Θ(f(n)) means the algorithm's runtime is both O(f(n)) and Ω(f(n)).
+
+
+Big O notation is crucial for comparing the efficiency of different algorithms and making informed decisions about which algorithm to use for a given task.  Understanding Big O allows developers to write more efficient and scalable code.
+
