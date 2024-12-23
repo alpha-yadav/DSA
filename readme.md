@@ -2878,3 +2878,109 @@ The best traversal algorithm depends on the specific problem and the characteris
 
 Understanding graph traversals is fundamental for many graph algorithms and applications in computer science.  Remember to consider the specific needs of your problem to choose the most efficient and appropriate method.
 
+#  Depth First Search traversal function 
+There are several ways to implement a Depth-First Search (DFS) traversal function, depending on the data structure used to represent the graph.  Here are implementations for both adjacency lists and adjacency matrices:
+
+
+**1. DFS using an Adjacency List:**
+
+This approach is generally preferred for sparse graphs (graphs with relatively few edges).
+
+```python
+def dfs_adjacency_list(graph, start_node):
+    """
+    Performs a Depth-First Search traversal of a graph represented as an adjacency list.
+
+    Args:
+        graph: A dictionary where keys are nodes and values are lists of their neighbors.
+        start_node: The node to start the traversal from.
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    visited = set()
+    traversal_order = []
+
+    def dfs_recursive(node):
+        visited.add(node)
+        traversal_order.append(node)
+        for neighbor in graph.get(node, []):  # Handle nodes with no outgoing edges
+            if neighbor not in visited:
+                dfs_recursive(neighbor)
+
+    dfs_recursive(start_node)
+    return traversal_order
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+traversal = dfs_adjacency_list(graph, 'A')
+print(f"DFS traversal (adjacency list): {traversal}")  # Output will vary slightly depending on the order of neighbours
+```
+
+
+**2. DFS using an Adjacency Matrix:**
+
+This approach is more suitable for dense graphs (graphs with many edges).  It's less memory-efficient for sparse graphs.
+
+```python
+def dfs_adjacency_matrix(graph, start_node):
+    """
+    Performs a Depth-First Search traversal of a graph represented as an adjacency matrix.
+
+    Args:
+        graph: A list of lists representing the adjacency matrix.
+        start_node: The index of the starting node.
+
+    Returns:
+        A list of node indices visited in DFS order.
+    """
+    num_nodes = len(graph)
+    visited = [False] * num_nodes
+    traversal_order = []
+
+    def dfs_recursive(node):
+        visited[node] = True
+        traversal_order.append(node)
+        for neighbor in range(num_nodes):
+            if graph[node][neighbor] == 1 and not visited[neighbor]:
+                dfs_recursive(neighbor)
+
+    dfs_recursive(start_node)
+    return traversal_order
+
+
+# Example usage:
+graph_matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0]   # F
+]
+
+traversal = dfs_adjacency_matrix(graph_matrix, 0) #Start at node 0 (A)
+print(f"DFS traversal (adjacency matrix): {traversal}") # Output will vary slightly depending on the order of neighbours
+
+```
+
+**Key Differences and Considerations:**
+
+* **Graph Representation:**  The choice between adjacency list and adjacency matrix depends on the graph's structure. Adjacency lists are generally more efficient for sparse graphs, while adjacency matrices are better for dense graphs.
+
+* **Recursive vs. Iterative:**  The examples above use recursion.  You can also implement DFS iteratively using a stack.  An iterative approach avoids potential stack overflow errors for very deep graphs.
+
+* **Handling Disconnected Graphs:**  These functions only traverse the component of the graph reachable from the `start_node`.  For a disconnected graph, you'd need to iterate through all nodes and call DFS for each node that hasn't been visited yet.
+
+
+Remember to adapt these functions to your specific needs, such as adding functionality to handle weighted graphs or to find specific paths.
+
