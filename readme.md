@@ -551,3 +551,68 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The `for` loop is generally preferred when you know the exact number of iterations beforehand, while the `while` loop is better when the number of iterations depends on a condition that might change during the loop's execution.  There are other types of loops (like `do-while` loops which execute at least once) but these are the most fundamental.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a structure where the inner loop's actions are repeated multiple times, dependent on the outer loop's iterations.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+outer_loop:
+  for outer_variable in outer_range:
+    inner_loop:
+      for inner_variable in inner_range:
+        # Code to be executed for each inner loop iteration
+      # Code executed once per outer loop iteration after inner loop completes
+  # Code executed once per outer loop after both inner and outer loops complete
+```
+
+**Example (Python):**
+
+This code prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+This will output:
+
+```
+1	2	3	4	5	6	7	8	9	10	
+2	4	6	8	10	12	14	16	18	20	
+3	6	9	12	15	18	21	24	27	30	
+...and so on
+```
+
+**Explanation:**
+
+* The outer loop iterates through numbers 1 to 10 (rows).
+* For each row (outer loop iteration), the inner loop iterates through numbers 1 to 10 (columns).
+* Inside the inner loop, the product `i * j` is calculated and printed.
+* `end="\t"` prevents a newline after each number, keeping them on the same line.
+* `print()` at the end of the outer loop creates a newline, moving to the next row.
+
+
+**Common Uses:**
+
+Nested loops are frequently used for:
+
+* **Processing matrices or 2D arrays:**  Iterating through rows and columns.
+* **Generating patterns:**  Creating visual output like stars or other shapes.
+* **Combinatorial problems:**  Exploring all possible combinations of items.
+* **Searching within nested data structures:**  Finding elements within lists of lists or similar structures.
+
+
+**Efficiency:**
+
+Nested loops can be computationally expensive, especially with large ranges.  The number of iterations grows exponentially with the number of nested loops.  For example, two nested loops each iterating 100 times will perform 10,000 iterations.  Consider algorithmic optimization techniques if performance becomes a concern.
+
+
+**Alternative Approaches:**
+
+In some cases, list comprehensions or other techniques might provide more efficient or readable solutions than explicitly using nested loops.  For instance, the multiplication table example could be implemented using list comprehensions in a more concise way.  However, nested loops remain a fundamental concept for many programming tasks.
+
