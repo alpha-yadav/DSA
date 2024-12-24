@@ -5541,3 +5541,84 @@ For directed graphs, the adjacency list remains conceptually the same, but the e
 
 Choosing between an adjacency list and an adjacency matrix depends on the characteristics of your graph and the operations you intend to perform on it.  For most real-world applications involving sparse graphs, adjacency lists are preferred for their efficiency in space and time for common graph operations.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so that you can always follow the arrows without ever going backward.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):**  Topological sorting only works on DAGs.  A cycle in the graph prevents a linear ordering that satisfies the condition.
+* **Multiple Solutions:**  A DAG can have multiple valid topological orderings.
+* **Uniqueness (in some cases):** If the DAG is a total order (meaning there's only one path between any two nodes), then the topological sort is unique.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue to process nodes with no incoming edges.
+
+   * **Initialization:**
+     * Find all nodes with an in-degree of 0 (no incoming edges). Add these nodes to a queue.
+     * Create a list to store the sorted nodes.
+   * **Iteration:**
+     * While the queue is not empty:
+       * Remove a node from the queue.
+       * Add the node to the sorted list.
+       * For each outgoing edge from the removed node:
+         * Decrement the in-degree of the destination node.
+         * If the in-degree of the destination node becomes 0, add it to the queue.
+   * **Cycle Detection:**
+     * If the number of nodes in the sorted list is not equal to the total number of nodes in the graph, then the graph contains a cycle, and a topological sort is impossible.
+
+
+2. **Depth-First Search (DFS) Algorithm:**
+
+   This algorithm uses DFS to recursively visit nodes.  The topological ordering is built by adding nodes to the result in reverse post-order (when the recursive call for a node finishes).
+
+   * **Initialization:**
+     * Create a list to store the sorted nodes.
+     * Create a set to track visited nodes.
+   * **DFS function:**
+     * Mark the current node as visited.
+     * Recursively call DFS on all unvisited neighbors.
+     * Add the current node to the beginning of the sorted list (post-order).
+   * **Cycle Detection:**
+     * If you detect a cycle during DFS (visiting a node that's already been visited in the current recursion path), then the graph has a cycle.
+
+
+**Example (Kahn's Algorithm):**
+
+Consider this DAG:
+
+```
+A --> B
+A --> C
+B --> D
+C --> D
+```
+
+1. **Initialization:** Queue = {A}, Sorted = {}
+2. **Iteration:**
+   * Remove A: Sorted = {A}, Queue = {}, update in-degree of B and C to 1.
+   * Add B and C to queue since their in-degree is now 0: Queue = {B, C}
+   * Remove B: Sorted = {A, B}, Queue = {C}, update in-degree of D to 1.
+   * Remove C: Sorted = {A, B, C}, Queue = {}, update in-degree of D to 0.
+   * Add D to queue: Queue = {D}
+   * Remove D: Sorted = {A, B, C, D}, Queue = {}.
+3. **Result:** The topological sort is A, B, C, D (or other valid orderings may exist).
+
+
+**Applications:**
+
+Topological sorting has many applications, including:
+
+* **Course scheduling:**  Determining the order to take courses based on prerequisites.
+* **Build systems (like Make):**  Determining the order to compile files based on dependencies.
+* **Dependency resolution:**  Resolving dependencies in software projects.
+* **Data serialization:**  Ordering data for efficient processing.
+
+
+
+Choosing between Kahn's algorithm and DFS depends on the specific application and data structures used. Kahn's algorithm is often preferred for its simplicity and explicit cycle detection.  DFS can be more efficient in some cases, but cycle detection is slightly less explicit.  Both are correct algorithms for finding a topological sort in a DAG.
+
