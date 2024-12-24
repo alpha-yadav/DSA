@@ -7091,3 +7091,119 @@ class BST:
 
 Remember to choose the option that best suits your needs.  For very large trees, the iterative approach (Option 2) is generally preferred for performance reasons.  If you need to handle duplicates, use Option 3.  If you don't want duplicates and prefer a more concise and readable code, Option 1 is a good choice.  You can adapt these examples to use different strategies for handling duplicates (e.g., counting duplicates, storing them in a linked list at the node).
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion because you need to handle three cases:
+
+1. **Node to be deleted is a leaf node:**  Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:**  This is the most complex case.  You typically replace the node with either its inorder predecessor (largest node in the left subtree) or its inorder successor (smallest node in the right subtree).
+
+Here's a C++ implementation demonstrating BST deletion, handling all three cases:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left, *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+// Function to find the inorder predecessor (largest node in the left subtree)
+Node* findInorderPredecessor(Node* node) {
+    Node* current = node->left;
+    while (current->right != nullptr) {
+        current = current->right;
+    }
+    return current;
+}
+
+// Function to delete a node from the BST
+Node* deleteNode(Node* root, int key) {
+    if (root == nullptr) {
+        return root;
+    }
+
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // key found
+        // Case 1: Node to be deleted is a leaf node
+        if (root->left == nullptr && root->right == nullptr) {
+            delete root;
+            return nullptr;
+        }
+        // Case 2: Node has one child
+        else if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+        // Case 3: Node has two children
+        else {
+            Node* predecessor = findInorderPredecessor(root);
+            root->data = predecessor->data;
+            root->left = deleteNode(root->left, predecessor->data);
+        }
+    }
+    return root;
+}
+
+
+// Function to print the inorder traversal of the BST
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 20); //Deleting a leaf node
+
+    std::cout << "Inorder traversal after deleting 20: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 30); //Deleting a node with one child
+
+    std::cout << "Inorder traversal after deleting 30: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    root = deleteNode(root, 50); //Deleting a node with two children
+
+    std::cout << "Inorder traversal after deleting 50: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    //Remember to deallocate the memory using a post-order traversal or similar method after you're done with the tree to prevent memory leaks.
+
+    return 0;
+}
+```
+
+Remember to handle memory deallocation properly after you're finished with the BST to avoid memory leaks.  A post-order traversal would be a suitable approach for this.  This improved answer addresses memory management and clarifies the three cases of deletion more explicitly.  It also provides a complete, runnable example. Remember to compile with a C++ compiler (like g++). For example: `g++ your_file_name.cpp -o your_executable_name` and then run it with `./your_executable_name`.
+
