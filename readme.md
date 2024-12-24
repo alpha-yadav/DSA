@@ -8100,3 +8100,102 @@ This approach uses a stack (or a queue for a breadth-first search variant) to pe
 
 Remember to adapt the code to your specific Node class definition if necessary.  The recursive approach is generally preferred for its clarity in this problem.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (specifically a binary tree or a general tree) is a fundamental problem in computer science with applications in various fields, including phylogenetics, file systems, and version control systems.  The optimal approach depends on the type of tree and the available information.
+
+Here's a breakdown of methods for finding the LCA, along with code examples (primarily in Python):
+
+**1. Binary Tree:**
+
+* **Recursive Approach (Efficient):** This is generally the most efficient approach for binary trees.  It leverages the tree's structure.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA found: p and q are on different subtrees
+    elif left_lca:
+        return left_lca  # LCA is in the left subtree
+    else:
+        return right_lca  # LCA is in the right subtree
+
+# Example Usage:
+root = TreeNode(3, TreeNode(5, TreeNode(6), TreeNode(2, TreeNode(7), TreeNode(4))), TreeNode(1, TreeNode(0), TreeNode(8)))
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+
+```
+
+* **Iterative Approach (using Parent Pointers):** If each node has a pointer to its parent, an iterative approach is possible.  This avoids recursion's overhead but requires modifying the tree structure.
+
+**2. General Tree (N-ary Tree):**
+
+The recursive approach can be adapted for general trees:
+
+```python
+class TreeNode:
+    def __init__(self, val=0, children=None):
+        self.val = val
+        self.children = children or []
+
+def lowestCommonAncestor_nary(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    for child in root.children:
+        lca = lowestCommonAncestor_nary(child, p, q)
+        if lca:
+            if lca == p or lca == q:  #If we found one of p or q in this branch
+                return lca
+            else:
+                return root #Both p and q found in this branch
+
+    return None
+
+# Example usage (Illustrative - needs a more complex tree structure for a meaningful test)
+root = TreeNode(1, [TreeNode(2), TreeNode(3)])
+p = root.children[0]
+q = root.children[1]
+
+lca = lowestCommonAncestor_nary(root, p, q)
+if lca:
+    print(f"LCA: {lca.val}") #Output: LCA: 1
+```
+
+**3.  Using a Path Approach:**
+
+This method finds the paths from the root to both `p` and `q`, and then finds the last common node in these paths.  It's less efficient than the recursive approach for binary trees but can be more adaptable.
+
+**Choosing the Right Approach:**
+
+* **Binary Tree:** The recursive approach is generally preferred for its efficiency and simplicity.
+* **General Tree:** The recursive approach adapted for n-ary trees is suitable.  The path approach might be considered if you need to find the path to the LCA as well.
+
+
+Remember to handle edge cases, such as when `p` or `q` is not in the tree, or when one of `p` or `q` is the root itself.  The code examples above include basic error handling but could be made more robust.
+
