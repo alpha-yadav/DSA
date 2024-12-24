@@ -6437,3 +6437,105 @@ def linear_search(arr, target):
 
 Big O notation is a powerful tool for analyzing algorithm efficiency, and understanding it is essential for any serious programmer. While it doesn't give the exact runtime, it provides a valuable high-level understanding of how an algorithm scales.
 
+#  A Simple Loop 
+The concept of a "simple loop" is broad, depending on the programming language.  Here are examples of simple loops in a few popular languages:
+
+**1. Python:**
+
+This example uses a `for` loop to iterate through a range of numbers:
+
+```python
+for i in range(5):  # Iterates 5 times (0, 1, 2, 3, 4)
+    print(i)
+```
+
+This example uses a `while` loop:
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+
+**2. JavaScript:**
+
+A `for` loop example:
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+A `while` loop example:
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+**3. C++:**
+
+A `for` loop example:
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+A `while` loop example:
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+**4. Java:**
+
+A `for` loop example:
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+A `while` loop example:
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples all do the same thing: print the numbers 0 through 4.  They demonstrate the basic structure of a simple loop using both `for` and `while` loop constructs.  The specific syntax varies slightly between languages, but the core concept remains the same.  To make it even simpler, you could reduce the code to just print a single statement multiple times, but that would defeat the purpose of demonstrating looping constructs.
+
