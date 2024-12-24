@@ -7734,3 +7734,103 @@ The **recursive approach (`is_bst_recursive`) is generally preferred**. While th
 
 Remember to handle edge cases like empty trees and trees with only one node appropriately in your chosen implementation.  The provided examples include this handling.
 
+#  Binary Tree traversals 
+Binary tree traversals are methods for visiting (processing) each node in a binary tree exactly once.  There are several standard traversal methods, each producing a different order of node visits:
+
+**1. Pre-order Traversal:**
+
+* **Rule:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+* **Order:** Root, Left, Right
+* **Example:** For a tree with root 'A', left subtree 'B' and right subtree 'C', the pre-order traversal would be A, B, C.  If B has a left child 'D' and a right child 'E', the traversal would be A, B, D, E, C.
+* **Use Cases:**  Creating a prefix expression (Polish notation) from an expression tree. Copying the tree structure.
+
+
+**2. In-order Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree.
+* **Order:** Left, Root, Right
+* **Example:** For the same tree as above, the in-order traversal would be B, D, E, A, C.
+* **Use Cases:**  For a binary search tree (BST), in-order traversal produces a sorted sequence of the nodes' values.
+
+
+**3. Post-order Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node.
+* **Order:** Left, Right, Root
+* **Example:** For the same tree as above, the post-order traversal would be D, E, B, C, A.
+* **Use Cases:**  Evaluating an expression tree, deleting a tree (deallocation of memory).
+
+
+**4. Level-order Traversal (Breadth-First Search):**
+
+* **Rule:** Visit nodes level by level, from left to right.  This requires a queue data structure.
+* **Order:** Level by level, left to right.
+* **Example:** For the same tree as above, the level-order traversal would be A, B, C, D, E.
+* **Use Cases:**  Finding the shortest path in a tree, displaying the tree in a visual way (like a level-order diagram).
+
+
+**Implementation (Python):**
+
+These examples use a simple Node class:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+from collections import deque
+
+def levelorder(node):
+    if node is None:
+        return
+
+    queue = deque([node])
+    while(len(queue) > 0):
+        curr = queue.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            queue.append(curr.left)
+
+        if curr.right is not None:
+            queue.append(curr.right)
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Preorder traversal:")
+preorder(root) # Output: A B D E C
+print("\nInorder traversal:")
+inorder(root)  # Output: D B E A C
+print("\nPostorder traversal:")
+postorder(root) # Output: D E B C A
+print("\nLevelorder traversal:")
+levelorder(root) # Output: A B C D E
+```
+
+This code provides a basic implementation of all four traversal methods.  Remember to adapt the `print` statements if you need to do something other than simply printing the node's data.  For larger trees, you might need to consider iterative approaches to avoid stack overflow issues with recursive functions.
+
