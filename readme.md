@@ -67,3 +67,62 @@ Let's say you want to find the largest number in an array.  Here's a simple algo
 
 Remember to start slowly, focus on understanding the core concepts, and practice consistently.  Learning algorithms is a journey, not a sprint.  Good luck!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, along with explanations to get you started:
+
+
+**Problem 1: Two Sum (Easy)**
+
+**Description:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+**Output:** `[0,1]`  (Because nums[0] + nums[1] == 9)
+
+**Solution Hint:**  Use a hash map (dictionary in Python) to store numbers and their indices.  Iterate through the array, and for each number, check if the complement (`target - number`) exists in the hash map.
+
+
+**Problem 2: Reverse a Linked List (Medium)**
+
+**Description:** Reverse a singly linked list.
+
+**Example:**
+
+**Input:** 1->2->3->4->5->NULL
+**Output:** 5->4->3->2->1->NULL
+
+**Solution Hint:** This can be solved iteratively or recursively.  The iterative approach involves using three pointers: `prev`, `curr`, and `next` to keep track of the nodes while reversing the links.
+
+
+**Problem 3: Longest Palindromic Substring (Hard)**
+
+**Description:** Given a string `s`, find the longest palindromic substring in `s`.
+
+**Example:**
+
+`s = "babad"`
+**Output:** `"bab"` or `"aba"` (both are valid answers)
+
+**Solution Hint:**  This problem has several approaches, including dynamic programming, expanding around the center, and Manacher's algorithm.  The expanding around the center approach is relatively straightforward to understand and implement.
+
+
+**Problem 4:  Merge k Sorted Lists (Hard)**
+
+**Description:** You are given an array of `k` linked-lists, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.
+
+**Example:**
+
+`lists = [[1,4,5],[1,3,4],[2,6]]`
+**Output:** `[1,1,2,3,4,4,5,6]`
+
+
+**Solution Hint:**  Use a priority queue (heap) to efficiently manage the smallest element from each list.
+
+
+These problems demonstrate a range of difficulty and techniques.  Choosing one to work on will depend on your current skill level.  Remember to try to solve them on your own before looking up solutions – that's the best way to learn!  Let me know if you'd like more details or hints on any of these problems.
+
