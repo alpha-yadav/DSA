@@ -167,3 +167,73 @@ def reverse_linked_list(head):
 
 These problems demonstrate a range of algorithmic concepts.  The "Two Sum" problem illustrates the use of brute force versus optimized approaches (hash tables).  The "Reverse Linked List" problem focuses on manipulating data structures. The "Median of Two Sorted Arrays" problem is a classic interview question that tests your understanding of more advanced algorithms.  Start with the easier problems and gradually work your way up to the harder ones. Remember to focus on understanding the algorithm's logic and efficiency.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing some improvements:
+
+**Basic Implementation:**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz").
+* Then it checks divisibility by 5 ("Buzz").
+* If none of the above are true, it prints the number itself.
+
+
+**Improved Implementation (using string concatenation):**
+
+This version is slightly more concise and efficient by building the output string:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This approach avoids nested `if-else if` structures.  It builds the `output` string incrementally. If the string remains empty after checking for divisibility by 3 and 5, it prints the number; otherwise, it prints the built string.
+
+**Even More Concise (using ternary operator):**
+
+This version uses the ternary operator for a more compact representation (though perhaps slightly less readable for beginners):
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print((i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")  == "" ? String(i) : (i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : ""))
+    }
+}
+fizzBuzzConcise(n: 15) //Example usage
+```
+
+This uses nested ternary operators to achieve the same result in a single `print` statement.  However,  this version's readability suffers, so the improved version above is generally preferred for clarity.
+
+
+Remember to choose the version that best suits your understanding and coding style.  The improved version offers a good balance between readability and efficiency.  The concise version demonstrates a more advanced Swift technique but might be harder to understand initially.  The basic version is excellent for learning the fundamental concepts.
+
