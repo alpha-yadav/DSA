@@ -87,3 +87,83 @@ else:
 
 Remember to start slowly, focus on understanding the concepts, and gradually increase the complexity of the algorithms you tackle.  Persistence is key!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, with explanations to help you understand the concepts involved:
+
+**Problem 1: Two Sum**
+
+**Description:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Algorithm (Brute Force):**  This approach checks every pair of numbers in the array.
+
+```python
+def two_sum_brute_force(nums, target):
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums[i] + nums[j] == target:
+                return [i, j]
+    return []  # No solution found
+```
+
+**Algorithm (Hash Table):** This is a more efficient approach using a dictionary (hash table) to store numbers and their indices.
+
+```python
+def two_sum_hash_table(nums, target):
+    num_map = {}  # Dictionary to store number and its index
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    return []  # No solution found
+```
+
+
+**Problem 2: Reverse a Linked List**
+
+**Description:** Reverse a singly linked list.
+
+**Example:**
+
+```
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+```
+
+**Algorithm (Iterative):**
+
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def reverse_linked_list(head):
+    prev = None
+    curr = head
+    while curr:
+        next_node = curr.next  # Store the next node
+        curr.next = prev       # Reverse the current node's pointer
+        prev = curr            # Move 'prev' one step forward
+        curr = next_node       # Move 'curr' one step forward
+    return prev  # 'prev' is now the new head
+```
+
+**Problem 3:  Find the Median of Two Sorted Arrays**
+
+**Description:** Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively, return the median of the two sorted arrays.  The overall run time complexity should be O(log (m+n)).
+
+**This problem is significantly harder** and requires a more sophisticated algorithm (often involving binary search).  It's a great challenge to try after mastering the previous two.
+
+
+These problems demonstrate a range of algorithmic concepts.  The "Two Sum" problem illustrates the use of brute force versus optimized approaches (hash tables).  The "Reverse Linked List" problem focuses on manipulating data structures. The "Median of Two Sorted Arrays" problem is a classic interview question that tests your understanding of more advanced algorithms.  Start with the easier problems and gradually work your way up to the harder ones. Remember to focus on understanding the algorithm's logic and efficiency.
+
