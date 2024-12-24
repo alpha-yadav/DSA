@@ -577,3 +577,46 @@ Nested loops are commonly used for:
 
 **Efficiency:**  Nested loops can be computationally expensive, especially with large datasets.  The time complexity often increases quadratically (O(n²)) or even higher depending on the depth of nesting.  Consider using more efficient algorithms if performance is critical.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They indicate that the time it takes to complete the algorithm increases logarithmically with the input size (n).  This means the time increases much slower than the input size.  Here are some common types and examples:
+
+**1. Binary Search:**
+
+* **Description:**  Efficiently searches a *sorted* list for a target value by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.
+* **Example:** Finding a word in a dictionary, searching a sorted array.
+
+**2. Tree Traversal (Balanced Trees):**
+
+* **Description:**  Traversing a balanced binary search tree (BST), AVL tree, red-black tree, etc., to find a specific node or perform an operation on all nodes. Because the tree is balanced, the height of the tree is proportional to log n, where n is the number of nodes.  Operations like finding a minimum, maximum, or performing an inorder traversal take logarithmic time.
+* **Example:**  Implementing a symbol table, efficient set operations.
+
+**3. Exponentiation by Squaring:**
+
+* **Description:**  Calculates a<sup>b</sup> (a raised to the power of b) efficiently in logarithmic time.  It uses the property that a<sup>b</sup> = (a<sup>b/2</sup>)<sup>2</sup> if b is even.
+* **Example:** Cryptographic algorithms often use this for modular exponentiation.
+
+
+**4. Algorithms using efficient data structures:**
+
+Many algorithms achieve O(log n) time complexity by leveraging data structures that inherently support logarithmic-time operations:
+
+* **Heaps (Binary Heaps):**  `insert`, `extract-min` (or `extract-max`) operations take O(log n) time. Used in priority queues, heapsort.
+* **Balanced Search Trees:**  As mentioned above, operations like search, insert, and delete are O(log n) in balanced trees.
+
+**5. Logarithmic Iteration:**
+
+Some algorithms repeatedly halve or otherwise significantly reduce the problem size in each step until a base case is reached.
+
+* **Example:** A simple iterative algorithm to find the highest power of 2 less than or equal to a given number 'n'.
+
+
+**Key Characteristics leading to O(log n):**
+
+* **Divide and Conquer:** The problem is repeatedly broken down into smaller subproblems.
+* **Balanced Structures:** Using data structures like balanced trees ensures that the depth of the search or traversal remains logarithmic.
+* **Halving or Significant Reduction of Problem Size:** Each iteration reduces the problem size by a significant factor.
+
+
+
+It's important to remember that O(log n) complexity only applies when the input data is structured appropriately (e.g., sorted for binary search, balanced for tree operations).  If the input isn't structured, the algorithm might not achieve logarithmic time complexity.
+
