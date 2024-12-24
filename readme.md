@@ -194,3 +194,69 @@ This method avoids redundant checks.  It only appends "Fizz" if divisible by 3 a
 
 For beginners, **Method 1** is recommended for its clarity.  Method 3 offers a slight performance improvement for very large `n`, but the difference is negligible for most practical purposes. Method 2 is concise but can be harder to read and understand.  Choose the method that best suits your understanding and the context of your project.  Readability is often more important than minor performance gains, especially in a simple algorithm like FizzBuzz.
 
+#  Algorithm Complexity 
+Algorithm complexity is a crucial concept in computer science that describes how the runtime or space requirements of an algorithm grow as the input size increases.  It's not about measuring the exact time an algorithm takes on a specific machine (which depends on factors like processor speed and memory), but about analyzing its *scalability*.  We want to know how the algorithm will perform with increasingly larger inputs.
+
+There are two main aspects of algorithm complexity:
+
+**1. Time Complexity:** This analyzes how the runtime of an algorithm changes with the input size (often denoted as 'n').
+
+**2. Space Complexity:** This analyzes how the memory usage of an algorithm changes with the input size.
+
+**Big O Notation:**
+
+Big O notation (O) is the most common way to express algorithm complexity. It provides an upper bound on the growth rate of the algorithm's resource consumption.  It focuses on the dominant terms as the input size becomes very large, ignoring constant factors and lower-order terms.
+
+Here are some common Big O notations and their general meaning:
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating through the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**Best, Average, and Worst Case:**
+
+Algorithm complexity can be categorized into best-case, average-case, and worst-case scenarios:
+
+* **Best-case:** The most efficient scenario for the algorithm.
+* **Average-case:** The expected performance of the algorithm over many inputs.
+* **Worst-case:** The least efficient scenario for the algorithm.
+
+Often, the worst-case complexity is most important because it guarantees a certain level of performance, even in the least favorable situations.
+
+**Space Complexity:**
+
+Space complexity uses similar notation (Big O) to describe the memory usage.  It can include:
+
+* **Auxiliary Space:** The extra space used by the algorithm beyond the input itself.
+* **Total Space:**  The total space used, including the input.
+
+**Example:**
+
+Consider searching for a number in an array:
+
+* **Unsorted array:**  Worst-case time complexity is O(n) (linear search).  Space complexity is O(1) (constant).
+* **Sorted array:** Worst-case time complexity is O(log n) (binary search). Space complexity is O(1).
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity helps you:
+
+* **Choose the right algorithm:**  Select algorithms that scale well with increasing input sizes.
+* **Optimize existing code:** Identify performance bottlenecks and improve efficiency.
+* **Predict performance:** Estimate how much time and memory an algorithm will require for a given input size.
+* **Compare algorithms:**  Make informed decisions about which algorithm is better suited for a particular task.
+
+
+In summary, algorithm complexity is a fundamental aspect of algorithm analysis, providing valuable insights into an algorithm's efficiency and scalability.  Mastering Big O notation is essential for any computer scientist or software developer.
+
