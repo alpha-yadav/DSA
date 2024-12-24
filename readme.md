@@ -6369,3 +6369,71 @@ Let's consider an algorithm that searches for an element in a sorted array.
 
 Big-Omega notation provides a valuable tool for analyzing the lower bound of an algorithm's running time.  Understanding this notation allows you to determine the minimum amount of time an algorithm will take to complete, providing insights into its efficiency and performance characteristics.  It's important to use Big-Omega in conjunction with Big-O to get a complete picture of an algorithm's time complexity.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  It focuses on how the runtime or space requirements of an algorithm grow as the input size grows, ignoring constant factors and smaller terms.  In essence, it provides an upper bound on the growth rate.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases with the size of the input.  This is the most common use of Big O.
+* **Space Complexity:** How the amount of memory (or storage) used by an algorithm increases with the size of the input.
+
+**Key Concepts:**
+
+* **Input Size (n):**  This represents the size of the input data the algorithm works on.  For example, the number of elements in an array, the number of nodes in a graph, or the length of a string.
+
+* **Growth Rate:** Big O describes the *rate* at which the runtime or space usage grows, not the exact runtime or space usage.  We're interested in the dominant factors as `n` becomes very large.
+
+* **Ignoring Constants and Smaller Terms:**  Big O simplifies analysis by ignoring constant factors and lower-order terms. For example, `O(2n + 5)` simplifies to `O(n)` because as `n` gets large, the `2` and `5` become insignificant compared to `n`.
+
+**Common Big O Notations and Their Meanings:**
+
+| Notation | Description                                     | Example                               |
+|----------|-------------------------------------------------|---------------------------------------|
+| O(1)     | Constant time. Runtime is independent of input size. | Accessing an element in an array by index |
+| O(log n) | Logarithmic time. Runtime increases logarithmically with input size. | Binary search in a sorted array       |
+| O(n)     | Linear time. Runtime increases linearly with input size. | Searching an unsorted array           |
+| O(n log n) | Linearithmic time.  Common in efficient sorting algorithms. | Merge sort, heap sort                 |
+| O(n²)    | Quadratic time. Runtime increases quadratically with input size. | Nested loops iterating over the input |
+| O(2ⁿ)    | Exponential time. Runtime doubles with each addition to the input size. | Finding all subsets of a set          |
+| O(n!)    | Factorial time. Extremely slow for even moderately sized inputs. | Generating all permutations of a set   |
+
+
+**How to Analyze an Algorithm's Big O:**
+
+1. **Identify the basic operation:** Determine the operation that contributes most to the runtime (e.g., comparisons, assignments, arithmetic operations).
+
+2. **Count the number of times the basic operation is executed:** Express this count as a function of the input size `n`.
+
+3. **Identify the dominant term:**  As `n` grows large, some terms become insignificant. Keep only the dominant term (the term with the highest growth rate).
+
+4. **Drop constant factors:**  Remove any constant factors multiplying the dominant term.
+
+**Example:**
+
+Consider this code snippet that searches for a value in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Basic operation:** Comparison (`arr[i] == target`)
+* **Count:** The comparison is executed at most `n` times (where `n` is the length of `arr`).
+* **Dominant term:** `n`
+* **Big O:** O(n)  (Linear time complexity)
+
+
+**Importance of Big O:**
+
+* **Algorithm Comparison:** Big O allows you to compare the efficiency of different algorithms, even without knowing the exact hardware or implementation details.
+* **Scalability:** It helps predict how an algorithm will perform with larger inputs, crucial for designing scalable systems.
+* **Optimization:**  It guides optimization efforts by highlighting the parts of an algorithm that contribute most to its runtime.
+
+
+Big O notation is a powerful tool for analyzing algorithm efficiency, and understanding it is essential for any serious programmer. While it doesn't give the exact runtime, it provides a valuable high-level understanding of how an algorithm scales.
+
