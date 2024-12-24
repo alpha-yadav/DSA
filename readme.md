@@ -3960,3 +3960,124 @@ print(bst.search(7))  # Output: None
 
 This is a basic example; a full implementation would include deletion and potentially more sophisticated features.  Remember that for optimal performance in real-world applications, consider using self-balancing BST variants.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement insertion into a Binary Search Tree (BST) in Python.  Here are a few, starting with a recursive approach and then showing an iterative one.  Both versions include error handling for duplicate values.
+
+**Recursive Implementation:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(data, self.root)
+
+    def _insert_recursive(self, data, node):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(data, node.left)
+        elif data > node.data:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(data, node.right)
+        else:
+            print(f"Duplicate value ({data}) not inserted.") # Handle duplicates
+
+    def inorder_traversal(self): # For testing/verification
+        result = []
+        self._inorder_traversal(self.root, result)
+        return result
+
+    def _inorder_traversal(self, node, result):
+        if node:
+            self._inorder_traversal(node.left, result)
+            result.append(node.data)
+            self._inorder_traversal(node.right, result)
+
+
+# Example usage:
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+bst.insert_recursive(4)
+bst.insert_recursive(7)
+bst.insert_recursive(13)
+bst.insert_recursive(8) #Duplicate
+
+print("Inorder traversal:", bst.inorder_traversal()) #Should be sorted
+```
+
+**Iterative Implementation:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            elif data > current.data:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+            else:
+                print(f"Duplicate value ({data}) not inserted.")  # Handle duplicates
+                break
+
+    # inorder_traversal remains the same as in the recursive version
+
+# Example usage (same as before, but using insert_iterative):
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+bst.insert_iterative(4)
+bst.insert_iterative(7)
+bst.insert_iterative(13)
+bst.insert_iterative(8) #Duplicate
+
+print("Inorder traversal:", bst.inorder_traversal()) #Should be sorted
+
+```
+
+Both versions achieve the same result. The iterative approach might be slightly more efficient in some cases because it avoids the overhead of recursive function calls, but the recursive version is often considered more readable and easier to understand. Choose the implementation that best suits your needs and coding style.  Remember to include an `inorder_traversal` (or similar tree traversal) method for testing purposes to verify that your insertion is working correctly.
+
