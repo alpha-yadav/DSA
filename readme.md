@@ -334,3 +334,57 @@ Big-Theta notation is crucial for analyzing the efficiency of algorithms. It all
 
 **Note:**  While Big-O is widely used to express upper bounds, even when a tight bound might be possible with Big-Theta, using Big-Theta is preferred when a tight bound is known.  It gives a more complete picture of the algorithm's performance.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used in computer science to describe the performance or complexity of algorithms.  They focus on how the runtime or space requirements of an algorithm grow as the input size (often denoted as 'n') approaches infinity.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:**  If an algorithm has a time complexity of O(n²), it means its runtime grows no faster than the square of the input size in the worst case.
+* **Focus:** Worst-case scenario; upper bound.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (or a lower bound on the growth in all cases). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm has a time complexity of Ω(n), it means its runtime grows at least linearly with the input size, even in the best-case scenario.
+* **Focus:** Best-case scenario; lower bound.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows at the *same rate* as another function, both upper and lower bounded.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm has a time complexity of Θ(n log n), its runtime grows proportionally to n log n.
+* **Focus:** Tight bound; both upper and lower bound.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  The inequality is strict.
+* **Example:**  n = o(n²)  (linear growth is strictly slower than quadratic growth).
+* **Focus:**  Strictly slower growth.
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀. The inequality is strict.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+* **Focus:** Strictly faster growth.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Example        | Focus                       |
+|---------|---------------------------------------|----------------|-----------------------------|
+| O(g(n)) | Upper bound                          | O(n²)          | Worst-case; upper bound      |
+| Ω(g(n)) | Lower bound                          | Ω(n)           | Best-case; lower bound       |
+| Θ(g(n)) | Tight bound (both upper and lower)   | Θ(n log n)     | Tight bound; both upper/lower |
+| o(g(n)) | Strictly slower growth                | n = o(n²)      | Strictly slower growth       |
+| ω(g(n)) | Strictly faster growth                | n² = ω(n)      | Strictly faster growth       |
+
+
+**Important Considerations:**
+
+* Asymptotic notations ignore constant factors and lower-order terms.  For example, O(2n + 5) is simplified to O(n).
+* They describe the *growth rate*, not the absolute runtime.  An O(n²) algorithm might be faster than an O(n) algorithm for small input sizes due to constant factors.
+* They are crucial for comparing the scalability of algorithms as input size increases.
+
+
+Understanding these notations is fundamental to analyzing and comparing the efficiency of algorithms in computer science.
+
