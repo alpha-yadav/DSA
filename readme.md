@@ -237,3 +237,61 @@ This uses nested ternary operators to achieve the same result in a single `print
 
 Remember to choose the version that best suits your understanding and coding style.  The improved version offers a good balance between readability and efficiency.  The concise version demonstrates a more advanced Swift technique but might be harder to understand initially.  The basic version is excellent for learning the fundamental concepts.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm consumes as the input size grows.  It's a crucial aspect of algorithm analysis, helping us understand how efficiently an algorithm performs and scale with larger datasets.  We typically express complexity using Big O notation.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:** Measures how the runtime of an algorithm increases as the input size (n) increases.
+* **Space Complexity:** Measures how the memory usage of an algorithm increases as the input size (n) increases.
+
+**Big O Notation:**
+
+Big O notation describes the upper bound of an algorithm's complexity. It simplifies the analysis by focusing on the dominant factors as the input size becomes very large, ignoring constant factors and lower-order terms.  Here are some common complexities:
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Nested loops iterating over the input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime is the factorial of the input size. Example: Finding all permutations of a set.
+
+**Analyzing Complexity:**
+
+Analyzing the complexity of an algorithm involves identifying the dominant operations and expressing their frequency in terms of the input size (n).  Here's a simplified approach:
+
+1. **Identify the basic operations:**  Determine the operations that contribute most significantly to the runtime.
+2. **Express the frequency of operations:** Count how many times these basic operations are executed as a function of n.
+3. **Determine the dominant term:**  Identify the term with the highest growth rate in the frequency expression.
+4. **Express in Big O notation:**  Drop constant factors and lower-order terms, and express the dominant term using Big O notation.
+
+**Example:**
+
+Consider a simple function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+* **Basic operation:** The comparison `x > max_val`.
+* **Frequency:** This operation is executed `n` times (once for each element in the array).
+* **Dominant term:** `n`
+* **Big O notation:** O(n) - Linear time complexity.
+
+**Best Case, Worst Case, and Average Case:**
+
+Complexity analysis often considers:
+
+* **Best Case:** The most favorable scenario for the algorithm.
+* **Worst Case:** The least favorable scenario.  Often the most important to consider for performance guarantees.
+* **Average Case:** The expected runtime over many inputs.  Can be more complex to analyze.
+
+
+Understanding algorithm complexity is vital for selecting appropriate algorithms for different tasks and predicting how they will perform with larger datasets.  Choosing an algorithm with a lower complexity often translates to better performance and scalability.
+
