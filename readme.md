@@ -3609,3 +3609,68 @@ O(log n) algorithms are characterized by halving (or similarly reducing) the pro
 
 In summary, algorithms with O(log n) time complexity are highly efficient for searching and manipulating sorted data or data structures with logarithmic properties.  They are a cornerstone of efficient algorithms and data structures in computer science.
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process is repeated until the target value is found or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+
+```
+
+**Why it's O(log n):**
+
+With each comparison, the search space is halved.  This means the number of comparisons required is proportional to the logarithm (base 2) of the array's size (n).  Therefore, the time complexity is O(log n).
+
+
+**Other O(log n) Examples:**
+
+While binary search is the most common example, other algorithms exhibit logarithmic time complexity, including:
+
+* **Tree traversals (balanced trees):**  Searching, insertion, and deletion in balanced binary search trees (like AVL trees or red-black trees) have O(log n) time complexity on average.
+* **Efficient exponentiation:** Algorithms like exponentiation by squaring compute a<sup>b</sup> in O(log b) time.
+* **Finding the kth smallest element using quickselect (average case):**  Although the worst-case is O(n), the average-case time complexity is O(log n).
+
+
+It's important to remember that the O(log n) complexity is only achieved under specific conditions, like the array being sorted in binary search or using a balanced tree structure.  If these conditions aren't met, the complexity can be much worse (e.g., O(n) for a linear search).
+
