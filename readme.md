@@ -6933,3 +6933,46 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Both methods achieve the same result. Choose the recursive method for its simplicity if you're not concerned about potential stack overflow issues with very deep trees.  The iterative method is generally preferred for larger trees to avoid recursion depth limitations. Remember to handle `None` appropriately for child nodes in both approaches.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They're a special type of binary tree where each node has at most two children, referred to as the left child and the right child, and they satisfy the following crucial property:
+
+**The BST Property:**  For every node in the tree:
+
+* The value of the node's left subtree is less than the node's value.
+* The value of the node's right subtree is greater than the node's value.
+
+This property allows for efficient searching, insertion, and deletion of nodes.
+
+**Key Operations:**
+
+* **Search:**  Searching for a specific value in a BST is significantly faster than in a linear list. You start at the root and compare the target value to the current node's value. If they're equal, you've found it. If the target is less, you recursively search the left subtree; if it's greater, you search the right subtree.  In a balanced BST, this takes O(log n) time, where n is the number of nodes.  In a worst-case scenario (a completely skewed tree), it becomes O(n).
+
+* **Insertion:** To insert a new node, you follow the same search procedure. When you reach a leaf node (a node with no children) where the insertion should occur, you create a new node there.  This also takes O(log n) time in a balanced tree and O(n) in a worst-case scenario.
+
+* **Deletion:** Deleting a node is more complex.  There are three cases:
+    * **Leaf node:** Simply remove the node.
+    * **Node with one child:** Replace the node with its child.
+    * **Node with two children:**  This is the most complicated case.  The common approach is to find the inorder predecessor (the largest node in the left subtree) or the inorder successor (the smallest node in the right subtree), replace the node's value with the predecessor's or successor's value, and then delete the predecessor or successor (which will now be either a leaf node or a node with one child, making deletion simpler).  Deletion, like insertion, has a time complexity of O(log n) in a balanced tree and O(n) in the worst case.
+
+* **Minimum and Maximum:** Finding the minimum and maximum values in a BST is straightforward. The minimum value is the leftmost node, and the maximum value is the rightmost node. Both operations take O(h) time, where h is the height of the tree (h is log n in a balanced tree and n in a worst-case scenario).
+
+* **Traversal:**  BSTs can be traversed in various ways, including:
+    * **Inorder traversal:** Visits nodes in ascending order of their values.
+    * **Preorder traversal:** Visits the root, then the left subtree, then the right subtree.
+    * **Postorder traversal:** Visits the left subtree, then the right subtree, then the root.
+
+**Advantages of BSTs:**
+
+* **Efficient search, insertion, and deletion (in balanced trees).**
+* **Simple implementation.**
+* **Natural ordering of elements.**
+
+
+**Disadvantages of BSTs:**
+
+* **Performance degrades to O(n) in unbalanced trees.**  This is a significant drawback.  To mitigate this, self-balancing BSTs like AVL trees and red-black trees are used.  These trees maintain a certain balance to ensure logarithmic time complexity for operations.
+* **Not suitable for all applications.**  For example, if you need to perform frequent range queries, other data structures like balanced trees or tries might be more efficient.
+
+
+**In summary:** BSTs are a powerful and versatile data structure, but their efficiency relies heavily on maintaining a balanced structure.  If you anticipate frequent insertions and deletions, or need guaranteed logarithmic time complexity, consider using self-balancing BSTs.
+
