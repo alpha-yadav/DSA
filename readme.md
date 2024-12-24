@@ -6976,3 +6976,118 @@ This property allows for efficient searching, insertion, and deletion of nodes.
 
 **In summary:** BSTs are a powerful and versatile data structure, but their efficiency relies heavily on maintaining a balanced structure.  If you anticipate frequent insertions and deletions, or need guaranteed logarithmic time complexity, consider using self-balancing BSTs.
 
+#  Binary Search Tree - Insertion (Python) 
+Several implementations of binary search tree (BST) insertion in Python are possible, depending on how you want to handle duplicates and whether you want to use recursion or iteration. Here are a few options:
+
+
+**Option 1: Recursive Insertion (No Duplicates)**
+
+This version uses recursion and doesn't allow duplicate values.  If a duplicate is encountered, it's ignored.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        elif data > node.data:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+        # Ignore duplicates
+```
+
+
+**Option 2: Iterative Insertion (No Duplicates)**
+
+This version uses iteration and also ignores duplicates.  It's generally considered more efficient than recursion for large trees because it avoids the overhead of function calls.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    return
+                else:
+                    current = current.left
+            elif data > current.data:
+                if current.right is None:
+                    current.right = Node(data)
+                    return
+                else:
+                    current = current.right
+            else: # Duplicate - ignore
+                return
+
+```
+
+**Option 3: Recursive Insertion (Allows Duplicates)**
+
+This version allows duplicate values.  When a duplicate is encountered, it's added to the right subtree (you could also choose the left).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data <= node.data:  # Allow duplicates to the right
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+```
+
+Remember to choose the option that best suits your needs.  For very large trees, the iterative approach (Option 2) is generally preferred for performance reasons.  If you need to handle duplicates, use Option 3.  If you don't want duplicates and prefer a more concise and readable code, Option 1 is a good choice.  You can adapt these examples to use different strategies for handling duplicates (e.g., counting duplicates, storing them in a linked list at the node).
+
