@@ -5833,3 +5833,123 @@ Graph traversals are algorithms used to systematically visit every node in a gra
 
 Choosing the right traversal algorithm depends on the specific problem and the characteristics of the graph.  Consider factors like whether the graph is weighted, whether you need the shortest path, and the size of the graph.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and whether you need to explore all paths or just find a path.  Below are a few implementations in Python, demonstrating common approaches.
+
+
+**1. DFS using an adjacency list (recursive):**  This is a concise and common way to implement DFS. It's recursive and well-suited for exploring all paths.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+        path: A list to store the traversal path (optional, defaults to an empty list).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print(dfs_recursive(graph, 'A'))  # Output will vary slightly depending on the order of neighbors, but will cover all nodes.  Example: ['A', 'B', 'D', 'E', 'F', 'C']
+```
+
+**2. DFS using an adjacency list (iterative):** This iterative approach uses a stack and avoids recursion, potentially handling very large graphs more efficiently.
+
+```python
+def dfs_iterative(graph, start_node):
+    """
+    Performs a Depth-First Search traversal iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        start_node: The starting node for the traversal.
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    visited = set()
+    stack = [start_node]
+    path = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            path.append(node)
+            stack.extend(neighbor for neighbor in reversed(graph.get(node, [])) if neighbor not in visited) #reversed for proper DFS
+
+    return path
+
+#Example usage (same graph as above):
+print(dfs_iterative(graph,'A')) #Output will be similar to recursive version, but order might differ.
+```
+
+**3. DFS for finding a path (recursive):** This version stops searching once it finds the target node.
+
+```python
+def dfs_find_path(graph, start, end, visited=None, path=None):
+    """
+    Finds a path between two nodes using DFS.
+
+    Args:
+        graph: The graph represented as a dictionary.
+        start: The starting node.
+        end: The target node.
+        visited: A set to track visited nodes (optional).
+        path: The current path (optional).
+
+    Returns:
+        A list representing the path from start to end, or None if no path exists.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(start)
+    path.append(start)
+
+    if start == end:
+        return path
+
+    for neighbor in graph.get(start, []):
+        if neighbor not in visited:
+            result = dfs_find_path(graph, neighbor, end, visited, path)
+            if result:
+                return result
+
+    return None
+
+#Example usage:
+print(dfs_find_path(graph, 'A', 'F')) #Example output: ['A', 'C', 'F'] or a similar path
+```
+
+Remember to adapt these functions to your specific graph representation (e.g., adjacency matrix) if needed.  The choice between recursive and iterative approaches depends on the size of your graph and the risk of stack overflow errors with recursion.  The recursive versions are generally easier to read and understand, while the iterative versions can be more efficient for very large graphs.
+
