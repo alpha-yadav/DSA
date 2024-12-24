@@ -6108,3 +6108,74 @@ The best problem for you will depend on your current skill level.  Start with th
 
 These are just examples; there are countless other algorithmic problems out there.  Websites like LeetCode, HackerRank, and Codewars offer a vast collection of problems with varying difficulty levels.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's deceptively simple to understand but serves as a good introduction to control flow (if/else statements and loops) in any programming language.  Here's how to implement it in Swift, starting with a straightforward approach and then exploring a more concise option:
+
+**Method 1:  Straightforward Approach**
+
+This approach uses a `for` loop and nested `if/else if/else` statements for clear readability.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks divisibility by 15 first (to handle cases divisible by both 3 and 5).
+* Then it checks divisibility by 3.
+* Then it checks divisibility by 5.
+* If none of the above are true, it prints the number itself.
+
+
+**Method 2:  More Concise Approach (using ternary operator)**
+
+This version uses the ternary operator (`condition ? value1 : value2`) for a more compact, albeit potentially less readable, solution.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print((i % 15 == 0 ? "FizzBuzz" : (i % 3 == 0 ? "Fizz" : (i % 5 == 0 ? "Buzz" : "\(i)"))) )
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+This nested ternary operator achieves the same result as the `if/else if/else` chain but in a single line within the `print` statement.  It's more compact but can be harder to understand for beginners.
+
+**Method 3:  Even More Concise (using string interpolation and array)**
+
+
+```swift
+func fizzBuzzArray(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzArray(n: 15)
+```
+
+This method uses string interpolation and an empty string to build the output more efficiently.
+
+**Choosing the Best Method:**
+
+For beginners, **Method 1** is recommended for its clarity and ease of understanding.  As you become more comfortable with Swift, you might appreciate the conciseness of **Method 2 or 3**, but readability should always be a priority.  Choose the method that best suits your current skill level and the context of your project.  Remember to always write comments to explain your code if it's not immediately obvious.
+
