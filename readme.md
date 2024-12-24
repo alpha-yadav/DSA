@@ -8199,3 +8199,12 @@ This method finds the paths from the root to both `p` and `q`, and then finds th
 
 Remember to handle edge cases, such as when `p` or `q` is not in the tree, or when one of `p` or `q` is the root itself.  The code examples above include basic error handling but could be made more robust.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **Equation:**  (e.g., y = x^2, y = sin(x), y = 2x + 1)
+* **Data points:** (e.g.,  (1,2), (3,4), (5,6))  List them as ordered pairs (x,y).
+* **Type of graph:** (e.g., line graph, scatter plot, bar chart, pie chart)  If you don't specify, I'll assume a line graph or scatter plot depending on the data.
+
+Once you give me the information, I can't *draw* a graph here, but I can describe it to you, or help you find a tool to create one.
+
