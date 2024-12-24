@@ -126,3 +126,71 @@ You can return the answer in any order.
 
 These problems demonstrate a range of difficulty and techniques.  Choosing one to work on will depend on your current skill level.  Remember to try to solve them on your own before looking up solutions – that's the best way to learn!  Let me know if you'd like more details or hints on any of these problems.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's deceptively simple, but a good way to test basic understanding of control flow and modulo operations. Here's how to implement it in Swift, starting with a straightforward approach and then showing some more advanced options.
+
+
+**Method 1: Basic Approach with `if-else if-else`**
+
+This is the most readable and easily understandable version:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5. If none of these conditions are met, it prints the number itself.
+
+
+**Method 2: Using a Ternary Operator (More Concise)**
+
+This version uses nested ternary operators to make the code more compact, but it can be less readable for beginners:
+
+```swift
+func fizzBuzzTernary(n: Int) {
+    for i in 1...n {
+        print(i % 15 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzzTernary(n: 15)
+```
+
+
+**Method 3:  More Efficient with String Concatenation (Slightly Advanced)**
+
+This approach builds the output string more efficiently by only appending "Fizz" or "Buzz" as needed:
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzEfficient(n: 15)
+```
+
+This method avoids redundant checks.  It only appends "Fizz" if divisible by 3 and "Buzz" if divisible by 5.  If both conditions are true, both strings are added. If neither is true, it prints the number.
+
+
+**Choosing the Best Method**
+
+For beginners, **Method 1** is recommended for its clarity.  Method 3 offers a slight performance improvement for very large `n`, but the difference is negligible for most practical purposes. Method 2 is concise but can be harder to read and understand.  Choose the method that best suits your understanding and the context of your project.  Readability is often more important than minor performance gains, especially in a simple algorithm like FizzBuzz.
+
