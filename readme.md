@@ -3095,3 +3095,76 @@ Remember that when approaching an algorithmic problem, you should consider:
 
 These examples provide a starting point.  Many more complex and interesting algorithmic problems exist, often involving data structures like trees, graphs, heaps, etc.  Resources like LeetCode, HackerRank, and Codewars offer a wide variety of problems to practice with.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple version and then progressing to more advanced approaches:
+
+**Simple Version (using `for` loop and `if/else if/else`)**
+
+This version is straightforward and easy to understand:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5.  If none of these conditions are met, it prints the number itself.
+
+
+**Slightly More Concise Version (using `if/else if` chaining and a ternary operator)**
+
+We can make it a bit shorter by combining the print statements:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : "\(i)"
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This uses nested ternary operators to select the output string.  It's more compact but might be slightly harder to read for beginners.
+
+
+**Functional Approach (using `map` and a closure)**
+
+For a more functional style, we can use the `map` function:
+
+```swift
+func fizzBuzzFunctional(n: Int) -> [String] {
+    return (1...n).map { i in
+        (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : "\(i)"
+    }
+}
+
+let results = fizzBuzzFunctional(n: 15)
+print(results) // Prints the array of strings
+```
+
+This version creates an array of strings, making it potentially more versatile for further processing.
+
+
+**Choosing the Best Approach:**
+
+* For beginners, the **simple version** is recommended for its clarity.
+* The **concise version** is good for showing off more advanced Swift syntax but might be less readable.
+* The **functional approach** is elegant but requires a bit more understanding of functional programming concepts.
+
+
+Remember to choose the approach that best suits your needs and understanding.  The simple version is perfectly acceptable for most FizzBuzz implementations.  The other versions illustrate different programming styles and techniques which are valuable to learn as you progress.
+
