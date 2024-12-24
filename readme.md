@@ -310,3 +310,55 @@ Big-Theta notation is crucial for:
 
 In summary, Big-Theta notation provides a precise and powerful way to characterize the growth rate of functions, making it an indispensable tool in the analysis of algorithms and data structures.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used to describe the behavior of functions as their input grows very large. They're crucial in algorithm analysis for comparing the efficiency of different algorithms.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O)**
+
+* **Meaning:**  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  In simpler terms:  *f(n)* grows no faster than *g(n)*.  It provides an *upper bound* on the growth rate.
+* **Focus:** Worst-case scenario.  It describes the upper limit of how much an algorithm's runtime or space usage can grow.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its time complexity is O(n²). We ignore the lower-order terms (5n and 1) and constant factors (2).
+
+**2. Big Omega Notation (Ω)**
+
+* **Meaning:** `f(n) = Ω(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`. In simpler terms: *f(n)* grows at least as fast as *g(n)*. It provides a *lower bound* on the growth rate.
+* **Focus:** Best-case scenario (sometimes). It gives a lower limit on how fast an algorithm can grow.  Note that it doesn't necessarily represent the best-case performance, only a lower bound on its growth.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its time complexity is Ω(n²).
+
+**3. Big Theta Notation (Θ)**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that there exist positive constants *c₁*, *c₂*, and *n₀* such that `0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)` for all `n ≥ n₀`.  In simpler terms: *f(n)* grows at the same rate as *g(n)*. It provides both an *upper and lower bound* on the growth rate.
+* **Focus:** Tight bound. It precisely characterizes the growth rate of an algorithm.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its time complexity is Θ(n²).
+
+**4. Little o Notation (o)**
+
+* **Meaning:** `f(n) = o(g(n))` means that for every positive constant *c*, there exists a constant *n₀* such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  In simpler terms: *f(n)* grows strictly slower than *g(n)*.
+* **Example:** `n = o(n²)` because `n` grows significantly slower than `n²`.
+
+**5. Little omega Notation (ω)**
+
+* **Meaning:** `f(n) = ω(g(n))` means that for every positive constant *c*, there exists a constant *n₀* such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`. In simpler terms: *f(n)* grows strictly faster than *g(n)*.
+* **Example:** `n² = ω(n)` because `n²` grows significantly faster than `n`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                    | Bound Type |
+|----------|--------------------------------------------|-------------|
+| O        | f(n) grows no faster than g(n)             | Upper       |
+| Ω        | f(n) grows at least as fast as g(n)        | Lower       |
+| Θ        | f(n) grows at the same rate as g(n)       | Tight       |
+| o        | f(n) grows strictly slower than g(n)       | Upper       |
+| ω        | f(n) grows strictly faster than g(n)       | Lower       |
+
+
+**Relationships:**
+
+* `f(n) = Θ(g(n))` implies `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+* `f(n) = o(g(n))` implies `f(n) = O(g(n))`, but not vice-versa.
+* `f(n) = ω(g(n))` implies `f(n) = Ω(g(n))`, but not vice-versa.
+
+
+Understanding these notations is essential for effectively analyzing and comparing the efficiency of algorithms.  Remember that they describe *asymptotic* behavior – how things behave as input size approaches infinity.  For small input sizes, the actual runtime might differ significantly.
+
