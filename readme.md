@@ -3495,3 +3495,79 @@ public class SimpleLoop {
 
 These examples all demonstrate a simple loop that iterates five times, printing the current iteration number each time.  The `for` loop is generally preferred when you know the number of iterations in advance, while the `while` loop is more suitable when the number of iterations depends on a condition.  Remember to choose the loop that best suits your specific needs.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to perform operations on all combinations of elements from two or more sets of data.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_variable in outer_sequence:
+    for inner_variable in inner_sequence:
+        # Code to be executed for each inner and outer loop combination
+        print(f"Outer: {outer_variable}, Inner: {inner_variable}")
+```
+
+**Examples:**
+
+**1. Printing a multiplication table:**
+
+```python
+rows = 5
+cols = 10
+
+for i in range(1, rows + 1):
+    for j in range(1, cols + 1):
+        print(f"{i} x {j} = {i * j}", end="\t")  # \t adds a tab for better formatting
+    print()  # New line after each row
+```
+
+This code will print a multiplication table from 1x1 to 5x10. The outer loop iterates through the rows, and the inner loop iterates through the columns for each row.
+
+
+**2. Iterating through a matrix (list of lists):**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:
+    for element in row:
+        print(element, end=" ")
+    print()
+```
+
+This example iterates through a 3x3 matrix. The outer loop goes through each row (list), and the inner loop iterates through each element within that row.
+
+
+**3. Finding pairs in a list:**
+
+```python
+my_list = [1, 2, 3, 4, 5]
+
+for i in range(len(my_list)):
+    for j in range(i + 1, len(my_list)):  # Start j from i+1 to avoid duplicate pairs and self-pairs
+        print(f"Pair: ({my_list[i]}, {my_list[j]})")
+```
+
+This finds all unique pairs of numbers from the list.  The `j` loop starts from `i + 1` to avoid redundant pairs (e.g., (1,2) and (2,1) are considered the same).
+
+
+**Time Complexity:**
+
+Nested loops significantly increase the time complexity of your code.  If both loops iterate `n` times, the total number of operations becomes proportional to `n * n = n²` (quadratic time complexity).  This means the execution time grows much faster as the input size increases.  For very large datasets, nested loops can become very slow.  Consider optimizing your code using more efficient algorithms if nested loops lead to performance problems.
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can be computationally expensive, especially with large datasets.  Consider alternative approaches if performance is critical.
+* **Readability:**  Proper indentation and clear variable names are crucial for readability when working with nested loops.
+* **Infinite loops:** Ensure your loop conditions are correctly defined to prevent infinite loops.
+
+
+Understanding nested loops is fundamental in programming, but always be mindful of their computational cost.  They are powerful but should be used judiciously.
+
