@@ -6179,3 +6179,63 @@ This method uses string interpolation and an empty string to build the output mo
 
 For beginners, **Method 1** is recommended for its clarity and ease of understanding.  As you become more comfortable with Swift, you might appreciate the conciseness of **Method 2 or 3**, but readability should always be a priority.  Choose the method that best suits your current skill level and the context of your project.  Remember to always write comments to explain your code if it's not immediately obvious.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources of primary interest are:
+
+* **Time complexity:** How long does the algorithm take to run as a function of the input size?
+* **Space complexity:** How much memory does the algorithm require as a function of the input size?
+
+We usually analyze complexity using *asymptotic notation*, which describes the behavior of an algorithm as the input size grows very large.  This allows us to focus on the dominant factors affecting performance and ignore constant factors and smaller-order terms.  The most common notations are:
+
+* **Big O (O):**  Represents the *upper bound* of the growth rate.  It describes the worst-case scenario.  We say an algorithm has O(f(n)) time complexity if its runtime is at most a constant multiple of f(n) for sufficiently large n (where n is the input size).
+
+* **Big Omega (Ω):** Represents the *lower bound* of the growth rate. It describes the best-case scenario. An algorithm has Ω(f(n)) time complexity if its runtime is at least a constant multiple of f(n) for sufficiently large n.
+
+* **Big Theta (Θ):** Represents the *tight bound*. It means the algorithm's runtime is both O(f(n)) and Ω(f(n)).  This indicates that the growth rate is precisely f(n).
+
+
+**Common Complexity Classes:**
+
+Here are some common time complexities, ordered from most efficient to least efficient:
+
+* **O(1) - Constant time:** The runtime is independent of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic time:** The runtime increases quadratically with the input size. Example: Bubble sort, selection sort.
+
+* **O(n³) - Cubic time:** The runtime increases cubically with the input size. Example: Some naive matrix multiplication algorithms.
+
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial time:** The runtime grows factorially with the input size. Example: Finding all permutations of a sequence.
+
+
+**Space Complexity:**
+
+Space complexity analysis is similar to time complexity.  We use the same asymptotic notations (O, Ω, Θ) to describe the amount of memory used by an algorithm as a function of the input size.  Common space complexity classes include O(1), O(n), O(log n), etc.  Algorithms can also have exponential or factorial space complexity.
+
+**Factors Affecting Complexity:**
+
+Several factors can influence an algorithm's complexity:
+
+* **Algorithm design:** Choosing a more efficient algorithm drastically reduces complexity.
+* **Data structures:** Using appropriate data structures can significantly improve performance.
+* **Input data:** The distribution and characteristics of the input data can affect the runtime.  Worst-case, average-case, and best-case scenarios can differ.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze an algorithm's complexity, you usually perform these steps:
+
+1. **Identify the basic operations:** Determine the fundamental operations that contribute most to the runtime.
+2. **Express the number of operations as a function of the input size:** Count how many times the basic operations are executed.
+3. **Use asymptotic notation to describe the growth rate:** Determine the dominant term in the function and express the complexity using Big O, Big Omega, or Big Theta notation.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task and predicting its performance for large inputs.  It's a fundamental concept in computer science and software engineering.
+
