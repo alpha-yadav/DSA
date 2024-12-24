@@ -525,3 +525,55 @@ These examples all do the same thing: they print the numbers 0 through 4 to the 
 
 There are other types of loops (like `while` loops and `do-while` loops), but the `for` loop is often the most straightforward for a simple, fixed number of iterations.  The choice of language only affects the syntax, not the underlying concept.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times, based on the number of iterations of the outer loop.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop runs first.  It controls the overall number of times the inner loop will execute completely.
+* **Inner Loop:** This loop is nested inside the outer loop.  It executes multiple times for *each* iteration of the outer loop.
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # New line after each row
+```
+
+**Output:**
+
+```
+1	2	3	4	5	6	7	8	9	10	
+2	4	6	8	10	12	14	16	18	20	
+3	6	9	12	15	18	21	24	27	30	
+4	8	12	16	20	24	28	32	36	40	
+5	10	15	20	25	30	35	40	45	50	
+6	12	18	24	30	36	42	48	54	60	
+7	14	21	28	35	42	49	56	63	70	
+8	16	24	32	40	48	56	64	72	80	
+9	18	27	36	45	54	63	72	81	90	
+10	20	30	40	50	60	70	80	90	100	
+```
+
+**Explanation:**
+
+The outer loop iterates from 1 to 10 (rows).  For each row, the inner loop iterates from 1 to 10 (columns), calculating and printing the product `i * j`.  The `end="\t"` prevents a newline after each product, keeping the numbers on the same line, and `print()` adds a newline after each row is complete.
+
+
+**Uses of Nested Loops:**
+
+Nested loops are commonly used for:
+
+* **Processing multi-dimensional data:**  Working with matrices, tables, or other grid-like structures.
+* **Generating patterns:**  Creating output like the multiplication table above, or other geometric shapes.
+* **Searching and sorting algorithms:** Some algorithms use nested loops for comparisons and swaps.
+
+
+**Efficiency:**  Nested loops can be computationally expensive, especially with large datasets.  The time complexity often increases quadratically (O(n²)) or even higher depending on the depth of nesting.  Consider using more efficient algorithms if performance is critical.
+
