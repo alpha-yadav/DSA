@@ -8761,3 +8761,126 @@ bfs(graph, 'A') # Output: A B C D E F
 
 Choosing between DFS and BFS depends on the specific problem and its requirements.  If you need the shortest path in an unweighted graph, BFS is the better choice.  If you need to detect cycles or perform topological sorting, DFS might be more suitable.  Both are fundamental algorithms in graph theory with wide-ranging applications.
 
+#  Depth First Search traversal function 
+The implementation of a Depth-First Search (DFS) traversal function depends on the data structure representing the graph.  Here are implementations for both adjacency lists and adjacency matrices:
+
+**1. Using an Adjacency List:**
+
+This is generally preferred for sparse graphs (graphs with relatively few edges).
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Recursive Depth-First Search traversal using an adjacency list.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, for recursive calls).
+        path: A list to store the traversal path (optional, for recursive calls).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+
+def dfs_iterative(graph, start_node):
+    """
+    Iterative Depth-First Search traversal using an adjacency list.
+
+    Args:
+      graph: A dictionary representing the graph.
+      start_node: The starting node.
+
+    Returns:
+      A list representing the DFS traversal path.
+    """
+    visited = set()
+    stack = [start_node]
+    path = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            path.append(node)
+            stack.extend(neighbor for neighbor in reversed(graph.get(node, [])) if neighbor not in visited) #reversed for proper DFS order
+
+    return path
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("Recursive DFS:", dfs_recursive(graph, 'A'))
+print("Iterative DFS:", dfs_iterative(graph, 'A'))
+```
+
+
+**2. Using an Adjacency Matrix:**
+
+This is more suitable for dense graphs (graphs with many edges).  Note that this example assumes a square matrix where the indices represent nodes.
+
+```python
+def dfs_matrix(graph, start_node):
+    """
+    Depth-First Search traversal using an adjacency matrix.
+
+    Args:
+        graph: A list of lists representing the adjacency matrix.
+        start_node: The starting node (index).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    num_nodes = len(graph)
+    visited = [False] * num_nodes
+    stack = [start_node]
+    path = []
+
+    while stack:
+        node = stack.pop()
+        if not visited[node]:
+            visited[node] = True
+            path.append(node)
+            for neighbor in range(num_nodes):
+                if graph[node][neighbor] == 1 and not visited[neighbor]:  # Check for edge and unvisited neighbor
+                    stack.append(neighbor)
+
+    return path
+
+
+# Example usage:
+graph_matrix = [
+    [0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0]
+]
+
+print("DFS (Matrix):", dfs_matrix(graph_matrix, 0)) #Start at node 0
+```
+
+Remember to adapt the node representation (e.g., using integers or strings) to match your specific needs.  The iterative approach is generally preferred for its efficiency and avoidance of potential stack overflow issues in very deep graphs.  Choose the implementation (adjacency list or matrix) based on the characteristics of your graph.
+
