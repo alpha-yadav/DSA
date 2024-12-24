@@ -3418,3 +3418,80 @@ As the input size grows, the difference between O(n) and O(log n) becomes enormo
 
 **In summary:** Big O notation is a crucial tool for comparing the efficiency of algorithms and making informed decisions about which algorithm to use for a given task, especially when dealing with large datasets.  Understanding Big O helps developers write more efficient and scalable code.
 
+#  A Simple Loop 
+The concept of a "simple loop" is broad, depending on the programming language.  Here are examples of simple loops in a few common languages:
+
+**1. Python:**
+
+```python
+# Using a `for` loop to iterate 5 times
+for i in range(5):
+  print(i)
+
+# Using a `while` loop to iterate 5 times
+i = 0
+while i < 5:
+  print(i)
+  i += 1
+```
+
+**2. JavaScript:**
+
+```javascript
+// Using a `for` loop to iterate 5 times
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+// Using a `while` loop to iterate 5 times
+let i = 0;
+while (i < 5) {
+  console.log(i);
+  i++;
+}
+```
+
+**3. C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  // Using a `for` loop to iterate 5 times
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+
+  // Using a `while` loop to iterate 5 times
+  int i = 0;
+  while (i < 5) {
+    std::cout << i << std::endl;
+    i++;
+  }
+  return 0;
+}
+```
+
+**4. Java:**
+
+```java
+public class SimpleLoop {
+    public static void main(String[] args) {
+        // Using a `for` loop to iterate 5 times
+        for (int i = 0; i < 5; i++) {
+            System.out.println(i);
+        }
+
+        // Using a `while` loop to iterate 5 times
+        int i = 0;
+        while (i < 5) {
+            System.out.println(i);
+            i++;
+        }
+    }
+}
+```
+
+
+These examples all demonstrate a simple loop that iterates five times, printing the current iteration number each time.  The `for` loop is generally preferred when you know the number of iterations in advance, while the `while` loop is more suitable when the number of iterations depends on a condition.  Remember to choose the loop that best suits your specific needs.
+
