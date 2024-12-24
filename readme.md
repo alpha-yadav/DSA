@@ -5263,3 +5263,104 @@ Please provide me with the data or equation I need to graph.  I need information
 
 Once you give me this information, I can help you graph it.  I can't create a graph without the data.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using adjacency matrices is a common technique, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, its advantages and disadvantages, and considerations for implementation:
+
+**How it Works:**
+
+An adjacency matrix is a 2D array (or a list of lists) where each element `matrix[i][j]` represents the connection between vertex (or node) `i` and vertex `j`.  The value of `matrix[i][j]` typically indicates:
+
+* **0 (or False):** No edge exists between vertex `i` and vertex `j`.
+* **1 (or True):** An edge exists between vertex `i` and vertex `j` (for unweighted graphs).
+* **Weight:** The weight of the edge connecting vertex `i` and vertex `j` (for weighted graphs).  This could be any numerical value.
+
+**Example:**
+
+Consider an undirected, unweighted graph with 4 vertices:
+
+```
+     A
+    / \
+   /   \
+  B     C
+   \   /
+    \ /
+     D
+```
+
+Its adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  1  0  0  1
+C  1  0  0  1
+D  0  1  1  0
+```
+
+Notice that the matrix is symmetric for undirected graphs (because if there's an edge from A to B, there's also one from B to A). For directed graphs, the matrix would not be symmetric.
+
+**Implementation (Python):**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.matrix = [[0] * num_vertices for _ in range(num_vertices)]
+
+    def add_edge(self, u, v, weight=1):  # weight defaults to 1 for unweighted graphs
+        self.matrix[u][v] = weight
+        if not self.is_directed(): # Add reverse edge for undirected graphs
+            self.matrix[v][u] = weight
+
+    def is_directed(self):
+        return False # set to True for directed graphs
+
+    def print_matrix(self):
+        for row in self.matrix:
+            print(row)
+
+
+# Example usage:
+graph = Graph(4)  # Create a graph with 4 vertices
+graph.add_edge(0, 1)  # Add edge between vertex 0 and 1
+graph.add_edge(0, 2)
+graph.add_edge(1, 3)
+graph.add_edge(2, 3)
+graph.print_matrix()
+
+graph_weighted = Graph(4)
+graph_weighted.add_edge(0, 1, 5)
+graph_weighted.add_edge(1, 2, 2)
+print("\nWeighted graph:")
+graph_weighted.print_matrix()
+
+
+directed_graph = Graph(4)
+directed_graph.is_directed = lambda : True # override is_directed
+directed_graph.add_edge(0,1)
+print("\nDirected Graph:")
+directed_graph.print_matrix()
+
+```
+
+**Advantages:**
+
+* **Simple to implement:**  Easy to understand and code.
+* **Fast edge lookups:** Checking for the existence of an edge between two vertices is O(1) (constant time).
+* **Suitable for dense graphs:**  Performance is relatively good for graphs with many edges.
+
+**Disadvantages:**
+
+* **Space complexity:** Requires O(V²) space, where V is the number of vertices. This can be very inefficient for large sparse graphs (graphs with relatively few edges).
+* **Adding/Deleting vertices:**  Adding or deleting a vertex requires resizing the entire matrix, which can be expensive.
+
+
+**When to use Adjacency Matrices:**
+
+* Dense graphs: When the number of edges is close to the maximum possible (V*(V-1)/2 for undirected, V*(V-1) for directed).
+* When you need fast edge existence checks.
+* When the graph is relatively small.
+
+For sparse graphs (graphs with many fewer edges than the maximum possible), consider using adjacency lists, which are generally more memory-efficient.
+
