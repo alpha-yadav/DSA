@@ -4728,3 +4728,96 @@ print(f"Is the tree a BST? {is_bst_recursive_minmax(root2)}") # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach, where H is the height of the tree (in the worst case, O(N) for a skewed tree, and O(log N) for a balanced tree).  The iterative approach would have O(1) space complexity.  Choose the method that best suits your needs and coding style.  The min-max method might be slightly more efficient in some cases because it can prune subtrees earlier if a violation is found.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can visit each node in a binary tree exactly once.  There are three main traversal methods:
+
+* **Inorder Traversal:**  Left subtree -> Root -> Right subtree
+* **Preorder Traversal:** Root -> Left subtree -> Right subtree
+* **Postorder Traversal:** Left subtree -> Right subtree -> Root
+
+Let's break down each, including their applications and example code (Python):
+
+**1. Inorder Traversal**
+
+* **Process:**  Visit the left subtree, then the root node, then the right subtree.  This is recursive.
+* **Application:**  For binary *search* trees (BSTs), inorder traversal yields the nodes in *ascending* order of their values. This is crucial for many BST operations.
+* **Example (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3
+```
+
+* **Example (Iterative):**  Using a stack to mimic recursion.
+
+```python
+def inorder_traversal_iterative(root):
+    stack = []
+    current = root
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.data, end=" ")
+        current = current.right
+```
+
+
+**2. Preorder Traversal**
+
+* **Process:** Visit the root node, then the left subtree, then the right subtree.  Also recursive.
+* **Application:** Creating a copy of the tree, evaluating an expression tree (root is the operator, left and right are operands).
+* **Example (Recursive):**
+
+```python
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+print("\nPreorder traversal:")
+preorder_traversal(root)  # Output: 1 2 4 5 3
+```
+
+**3. Postorder Traversal**
+
+* **Process:** Visit the left subtree, then the right subtree, then the root node.  Recursive.
+* **Application:** Deleting a tree (delete children before parent), evaluating an expression tree in reverse Polish notation.
+* **Example (Recursive):**
+
+```python
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+print("\nPostorder traversal:")
+postorder_traversal(root)  # Output: 4 5 2 3 1
+```
+
+**Choosing the Right Traversal**
+
+The choice of traversal depends entirely on the specific application.  Understanding the order in which nodes are visited is key to using them effectively.  Remember that iterative approaches are generally more memory-efficient for very large trees, avoiding potential stack overflow errors associated with deep recursion.
+
