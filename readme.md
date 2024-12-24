@@ -5622,3 +5622,98 @@ Topological sorting has many applications, including:
 
 Choosing between Kahn's algorithm and DFS depends on the specific application and data structures used. Kahn's algorithm is often preferred for its simplicity and explicit cycle detection.  DFS can be more efficient in some cases, but cycle detection is slightly less explicit.  Both are correct algorithms for finding a topological sort in a DAG.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) involves tracking the state of each node during the traversal.  We use three states:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (in the recursion stack).
+* **Visited:** The node has been fully explored.
+
+A cycle exists if, during the traversal, we encounter a node that's already in the "Visiting" state. This indicates that we've encountered a back edge, meaning we've found a path back to a node that's already being processed, thus forming a cycle.
+
+Here's how to implement cycle detection using DFT in Python:
+
+```python
+def has_cycle(graph):
+    """
+    Detects cycles in a directed graph using Depth First Traversal.
+
+    Args:
+        graph: A dictionary representing the directed graph where keys are nodes and 
+               values are lists of their neighbors.
+
+    Returns:
+        True if the graph contains a cycle, False otherwise.
+    """
+
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: Unvisited, 1: Visiting, 2: Visited
+    recursion_stack = [0] * num_nodes #Tracks nodes currently in the recursion stack
+
+    def dfs(node):
+        visited[node] = 1  # Mark as Visiting
+        recursion_stack[node] = 1
+
+        for neighbor in graph.get(node, []):
+            if visited[neighbor] == 0:  # Unvisited
+                if dfs(neighbor):
+                    return True
+            elif recursion_stack[neighbor] == 1:  #Visiting (cycle detected)
+                return True
+
+        visited[node] = 2  # Mark as Visited
+        recursion_stack[node] = 0 # Remove from recursion stack
+        return False
+
+    for node in graph:
+        if visited[node] == 0:
+            if dfs(node):
+                return True
+    return False
+
+
+# Example usage:
+graph1 = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: []
+}
+
+graph2 = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [0]
+}
+
+graph3 = {
+    0: [1],
+    1: [2],
+    2: [3],
+    3: []
+}
+
+
+print(f"Graph 1 has cycle: {has_cycle(graph1)}")  # Output: True
+print(f"Graph 2 has cycle: {has_cycle(graph2)}")  # Output: True
+print(f"Graph 3 has cycle: {has_cycle(graph3)}")  # Output: False
+
+```
+
+**Explanation:**
+
+1. **Initialization:**  `visited` and `recursion_stack` lists keep track of node states.  They're initialized to 0 (Unvisited).
+
+2. **`dfs(node)` function:** This performs Depth First Search recursively.
+   - It marks the current node as `Visiting` (visited[node] = 1) and adds it to the `recursion_stack`.
+   - It iterates through the neighbors.
+   - If a neighbor is `Unvisited`, it recursively calls `dfs` on it. If the recursive call returns `True` (cycle detected), the current call also returns `True`.
+   - If a neighbor is `Visiting`, a cycle is detected, and `True` is returned.
+   - After exploring all neighbors, the node is marked as `Visited` (visited[node] = 2) and removed from the `recursion_stack`.
+
+3. **Main loop:** The main loop iterates through all nodes in the graph. If a node is `Unvisited`, it starts a DFS from that node. If any DFS call returns `True`, the graph has a cycle.
+
+
+This implementation efficiently detects cycles in directed graphs using the properties of DFS and the concept of back edges.  The use of `recursion_stack` is crucial for accurately identifying cycles.  Without it, you might mistakenly identify a cycle where one doesn't exist if you have a different path to a node that's already visited but not in the current path of the recursion.
+
