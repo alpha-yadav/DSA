@@ -388,3 +388,45 @@ Asymptotic notations are used in computer science to describe the performance or
 
 Understanding these notations is fundamental to analyzing and comparing the efficiency of algorithms in computer science.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the *lower bound* of a function's growth rate.  In simpler terms, it provides a guarantee about the minimum amount of resources (like time or space) an algorithm will *always* require, regardless of the input.  It's the counterpart to Big-O notation (which describes the upper bound).
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that *f(n)* = Ω(*g(n)*) if and only if there exist positive constants *c* and *n₀* such that for all *n ≥ n₀*,  0 ≤ *c* *g(n)* ≤ *f(n)*.
+
+Let's unpack this:
+
+* **f(n):** The function representing the algorithm's resource usage (e.g., runtime).  `n` typically represents the input size.
+* **g(n):** A simpler function that represents the growth rate we're comparing against (e.g., n, n², log n).
+* **c:** A positive constant.  It scales *g(n)*.  The exact value isn't critical; we only need to show that such a constant exists.
+* **n₀:** A positive integer.  This signifies a threshold; the inequality holds for all input sizes larger than or equal to *n₀*.  It's used to ignore small input sizes where the function's behavior might be erratic.
+
+**Intuitive Explanation:**
+
+Imagine you're plotting *f(n)* and *c* *g(n)* on a graph.  Big-Omega means that for sufficiently large *n* (*n ≥ n₀*), the graph of *f(n)* will always stay above the graph of *c* *g(n)*.  In other words, *f(n)* grows at least as fast as *g(n)*.
+
+**Example:**
+
+Let's say an algorithm has a runtime of *f(n) = 2n² + 3n + 1*.  We can say that:
+
+* *f(n) = Ω(n²)*.  This is because we can choose *c = 1* and *n₀ = 1*.  For all *n ≥ 1*,  *n² ≤ 2n² + 3n + 1*.
+
+We could also say:
+
+* *f(n) = Ω(n)*. (A looser lower bound)
+* *f(n) = Ω(1)*. (A very loose lower bound, always true for any function that's always positive)
+
+
+**Important Notes:**
+
+* **Ω(g(n)) describes a set of functions:**  Many functions could satisfy the definition of Ω(g(n)).  It's a *family* of functions with at least the growth rate of g(n).
+* **Tight vs. Loose Bounds:**  A *tight* Ω bound is one where the actual growth rate of *f(n)* is as close as possible to *g(n)* from below.  Loose bounds are also valid, but they don't convey as much information.
+* **Relationship to Big-O and Big-Theta:**
+    * **Big-O (O):** Describes the *upper* bound of a function's growth.
+    * **Big-Theta (Θ):** Describes both the *upper* and *lower* bounds—it means a function grows at the *same* rate as another function. If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+Big-Omega is crucial for understanding the *best-case* scenario of an algorithm's performance.  While Big-O tells us the worst-case, Big-Omega provides a floor—a guarantee of minimum efficiency.  Together with Big-O, it gives a more complete picture of an algorithm's performance characteristics.
+
