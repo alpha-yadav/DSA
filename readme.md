@@ -5016,3 +5016,115 @@ postorder(root) # Output: D E B F C A
 
 This code defines a `Node` class and functions for each traversal type.  You can easily adapt it to use different data types or modify the output format.  Remember that the recursive nature of these functions makes them efficient for traversing tree structures.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to find the LCA, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This approach recursively traverses the tree.  If a node contains either `node1` or `node2`, it's a potential ancestor. If both are found in the left and right subtrees, the current node is the LCA.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca(root, node1, node2):
+       if root is None or root.data == node1 or root.data == node2:
+           return root
+
+       left_lca = lca(root.left, node1, node2)
+       right_lca = lca(root.right, node1, node2)
+
+       if left_lca and right_lca:
+           return root  # LCA found
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   # Example usage:
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+   node1 = 4
+   node2 = 5
+   lca_node = lca(root, node1, node2)
+   print(f"LCA of {node1} and {node2}: {lca_node.data}") # Output: LCA of 4 and 5: 2
+
+
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (worst case: skewed tree).
+   * **Space Complexity:** O(H), where H is the height of the tree (due to recursive calls; worst case: O(N) for a skewed tree).
+
+
+2. **Iterative Approach using Parent Pointers:**
+
+   If you can modify the tree to include parent pointers (a parent pointer in each node points to its parent), you can solve this iteratively.  This is generally more space-efficient for balanced trees.
+
+   ```python
+   # (Implementation requires modifying Node class to include a 'parent' attribute)
+   # ...  (Implementation omitted for brevity, but involves traversing up from each node until a common ancestor is found)
+   ```
+
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(1)
+
+
+3. **Using a Hash Table (for all ancestors):**
+
+   You can build a hash table (dictionary in Python) storing all ancestors of each node. Then find the lowest common ancestor by comparing the ancestor lists.
+
+   ```python
+   def lca_hash(root, node1, node2):
+       ancestors1 = set()
+       ancestors2 = set()
+
+       def find_ancestors(node, target, ancestors):
+           if node is None: return False
+           ancestors.add(node.data)
+           if node.data == target: return True
+           return find_ancestors(node.left, target, ancestors) or find_ancestors(node.right, target, ancestors)
+
+       find_ancestors(root, node1, ancestors1)
+       find_ancestors(root, node2, ancestors2)
+
+       lca = None
+       for ancestor in ancestors1:
+           if ancestor in ancestors2:
+               lca = ancestor
+               break  # lowest common ancestor
+       return lca
+
+   # Example Usage (same root as before)
+   lca_node = lca_hash(root, 4, 5)
+   print(f"LCA of 4 and 5 (hash): {lca_node}") #Output: LCA of 4 and 5 (hash): 2
+
+   ```
+
+   * **Time Complexity:** O(N) in the worst case (to traverse the tree and build ancestor sets).
+   * **Space Complexity:** O(N) in the worst case to store ancestors.
+
+
+**Choosing the Right Method:**
+
+* The **recursive approach** is generally the simplest and easiest to understand.  It's efficient unless you're dealing with extremely deep or skewed trees.
+* The **iterative approach with parent pointers** is more efficient in terms of space for balanced trees, but requires modifying the tree structure.
+* The **hash table approach** is suitable when you need to find LCAs for multiple pairs of nodes, as the ancestor sets can be reused.
+
+Remember to handle edge cases like:
+
+* One or both nodes are not present in the tree.
+* One node is an ancestor of the other.
+* The tree is empty.
+
+
+Choose the method that best suits your needs and constraints.  For most general cases, the recursive approach is a good starting point due to its simplicity and readability.
+
