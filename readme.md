@@ -2595,3 +2595,73 @@ The choice of data structure within the adjacency list (e.g., `List`, `vector`, 
 
 Remember to handle edge cases, such as empty graphs or graphs with isolated vertices.  Always choose data structures and algorithms that best suit your specific graph characteristics and performance requirements.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so that you can follow the arrows without ever going backward.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):** Topological sorting only works on DAGs.  If the graph contains cycles, a topological ordering is impossible.
+* **Linear Ordering:** The result is a sequence of nodes, not a tree or other complex structure.
+* **Precedence:** The order respects the dependencies defined by the directed edges.
+
+**Applications:**
+
+Topological sorting has numerous applications in various fields, including:
+
+* **Dependency Resolution:**  Software build systems (like Make), package managers (like npm or pip), and build processes often rely on topological sorting to determine the correct order to compile or install components.  One module might depend on another, and topological sorting ensures that dependencies are resolved before the dependent modules are processed.
+* **Course Scheduling:**  In university course scheduling, prerequisites create a DAG where courses are nodes and prerequisites are edges. Topological sorting helps create a valid sequence of courses to take.
+* **Instruction Scheduling:** In compiler optimization, instructions can have dependencies (e.g., one instruction's output is the input of another). Topological sorting helps determine the optimal execution order.
+* **Data Serialization:**  In data serialization (like saving a complex object structure to a file), topological sorting can ensure that objects are saved in an order consistent with their references.
+
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue to process nodes.
+
+   * **Initialization:** Find all nodes with in-degree 0 (nodes with no incoming edges). Add these nodes to a queue.
+   * **Iteration:** While the queue is not empty:
+     * Remove a node from the queue and add it to the sorted list.
+     * For each outgoing edge from the removed node:
+       * Decrement the in-degree of the destination node.
+       * If the in-degree of the destination node becomes 0, add it to the queue.
+   * **Cycle Detection:** If, after the iteration, there are still nodes with a non-zero in-degree, the graph contains a cycle and a topological sort is not possible.
+
+
+2. **Depth-First Search (DFS):**
+
+   This algorithm uses recursion (or a stack) to traverse the graph.
+
+   * **Initialization:**  Initialize a list to store the sorted nodes (initially empty).  Mark all nodes as unvisited.
+   * **DFS function:** For each node:
+     * If the node is unvisited:
+       * Mark the node as visited.
+       * Recursively call DFS on all its neighbors.
+       * Add the node to the *beginning* of the sorted list (this is crucial for the correct order).
+   * **Cycle Detection:** If you encounter a visited node during DFS, there's a cycle.
+
+**Example (Kahn's Algorithm):**
+
+Let's say we have a DAG with nodes A, B, C, D, and edges A->C, B->C, C->D.
+
+1. In-degree: A(0), B(0), C(2), D(1)
+2. Queue: [A, B]
+3. Remove A: Sorted list = [A], Queue = [B], decrement C's in-degree to 1.
+4. Remove B: Sorted list = [A, B], Queue = [], decrement C's in-degree to 0.
+5. Add C to queue: Queue = [C]
+6. Remove C: Sorted list = [A, B, C], Queue = [], decrement D's in-degree to 0.
+7. Add D to queue: Queue = [D]
+8. Remove D: Sorted list = [A, B, C, D], Queue = [].
+9. Final sorted list: [A, B, C, D]
+
+
+**Choosing an Algorithm:**
+
+Kahn's algorithm is generally preferred for its simplicity and efficiency in many cases. DFS can be slightly more complex to implement but can be more efficient in certain graph structures.  Both algorithms have a time complexity of O(V + E), where V is the number of vertices and E is the number of edges.
+
+
+Remember that a topological sort isn't unique; there might be multiple valid orderings for a given DAG.
+
