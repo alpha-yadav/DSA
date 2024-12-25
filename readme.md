@@ -1579,3 +1579,133 @@ print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}")  #Fals
 
 Both methods achieve the same result. The recursive approach with range is often preferred for its efficiency, especially with large trees, as it avoids the creation of an intermediate list.  Choose the method that best suits your needs and understanding. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Inorder Traversal and Verification**
+
+This method leverages the property that an inorder traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    """
+    Checks if a binary tree is a BST using inorder traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.data)
+            inorder(node.right)
+
+    inorder(root)
+
+    # Check if the inorder list is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(is_bst_inorder(root))  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) #Violation: 8 > 5 (not in left subtree)
+root2.right.left = Node(6)
+root2.right.right = Node(9)
+
+
+print(is_bst_inorder(root2))  # Output: False
+
+```
+
+**Method 2: Recursive Check with Range**
+
+This method recursively checks if each subtree satisfies the BST property within a given range.
+
+```python
+import sys
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+    """
+    Checks if a binary tree is a BST recursively.
+
+    Args:
+        node: The current node being checked.
+        min_val: The minimum allowed value for the node.
+        max_val: The maximum allowed value for the node.
+
+    Returns:
+        True if the subtree rooted at node is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False  # Node value outside allowed range
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+# Example usage (same trees as above):
+
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(is_bst_recursive(root))  # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8)
+root2.right.left = Node(6)
+root2.right.right = Node(9)
+
+print(is_bst_recursive(root2))  # Output: False
+```
+
+**Choosing a Method:**
+
+* **Inorder Traversal:** Simpler to understand and implement.  Has O(n) space complexity due to the list.
+* **Recursive Check:**  Generally more efficient in terms of space complexity (O(h) where h is the height of the tree, which is O(log n) for a balanced tree) because it avoids creating a large list.  It might be slightly more complex to grasp initially.
+
+
+Both methods have a time complexity of O(n) because they visit each node in the tree once.  Choose the method that best suits your understanding and needs.  The recursive approach is often preferred for its better space efficiency in many cases.
+
