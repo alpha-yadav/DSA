@@ -1351,3 +1351,129 @@ print(lca) #Output: None
 
 This algorithm is efficient because it avoids unnecessary traversal of the entire tree.  It directly navigates towards the LCA based on the values of the nodes being compared.  Remember to handle the case where one or both nodes are not present in the BST.  The code above includes such a check implicitly (if a node is not found, the recursion will eventually hit a `None` root and return `None`).
 
+#  Binary Search Tree - Python 
+The following code implements a Binary Search Tree (BST) in Python.  It includes methods for insertion, search, deletion, minimum and maximum value finding, inorder traversal, and printing the tree (although the printing is a simple representation, not a visual one).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    def search(self, data):
+        return self._search_recursive(self.root, data)
+
+    def _search_recursive(self, node, data):
+        if node is None or node.data == data:
+            return node
+        if data < node.data:
+            return self._search_recursive(node.left, data)
+        return self._search_recursive(node.right, data)
+
+    def delete(self, data):
+        self.root = self._delete_recursive(self.root, data)
+
+    def _delete_recursive(self, node, data):
+        if node is None:
+            return node
+
+        if data < node.data:
+            node.left = self._delete_recursive(node.left, data)
+        elif data > node.data:
+            node.right = self._delete_recursive(node.right, data)
+        else:  # data == node.data
+            if node.left is None:
+                return node.right
+            elif node.right is None:
+                return node.left
+            else:  # Node with two children
+                temp = self._find_min(node.right)
+                node.data = temp.data
+                node.right = self._delete_recursive(node.right, temp.data)
+        return node
+
+
+    def _find_min(self, node):
+        while node.left:
+            node = node.left
+        return node
+
+    def find_min(self):
+        if self.root is None:
+            return None
+        return self._find_min(self.root).data
+
+    def find_max(self):
+        if self.root is None:
+            return None
+        node = self.root
+        while node.right:
+            node = node.right
+        return node.data
+
+    def inorder_traversal(self):
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_recursive(node.right, result)
+
+    def print_tree(self):  # Simple, non-visual representation
+        print("Inorder Traversal:", self.inorder_traversal())
+
+
+# Example usage:
+bst = BinarySearchTree()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+
+bst.print_tree()  # Output: Inorder Traversal: [1, 3, 4, 6, 7, 8, 10, 13, 14]
+print("Min:", bst.find_min()) # Output: Min: 1
+print("Max:", bst.find_max()) # Output: Max: 14
+
+print("Search for 6:", bst.search(6).data) #Output: Search for 6: 6
+print("Search for 15:", bst.search(15)) #Output: Search for 15: None
+
+bst.delete(8)
+bst.print_tree() # Output will show the tree after deleting 8.  The exact order might vary slightly depending on the implementation of delete.
+
+```
+
+Remember that this `print_tree` function provides a basic textual representation. For a visual representation, you would need to implement a more sophisticated tree-printing algorithm (often involving recursion and string manipulation to create a visually appealing tree structure).  There are many examples of such algorithms available online if you need a visual representation.
+
