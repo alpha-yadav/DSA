@@ -397,3 +397,149 @@ Big O can also be used to describe the *space complexity* of an algorithm—the 
 
 Big O notation is a crucial tool for comparing the efficiency of different algorithms and making informed decisions about which algorithm is best suited for a given task, especially as the input size becomes large.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  Here are examples in several popular programming languages:
+
+**1. While Loop (General Purpose)**
+
+A `while` loop continues as long as a condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+
+**2. For Loop (Iteration over a sequence)**
+
+A `for` loop is often used to iterate over a sequence (like a list or array) or a range of numbers.
+
+* **Python:**
+
+```python
+for i in range(5):
+  print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**3. Do-While Loop (Execute at least once)**
+
+A `do-while` loop executes the code block at least once, and then repeats as long as the condition is true.  This loop type is less common than `while` and `for` loops.  (Note:  Not available in all languages in exactly this form, Python doesn't have a direct equivalent).
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+do {
+  console.log(count);
+  count++;
+} while (count < 5);
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  do {
+    std::cout << count << std::endl;
+    count++;
+  } while (count < 5);
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    do {
+      System.out.println(count);
+      count++;
+    } while (count < 5);
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  Remember to choose the loop type that best suits your needs.  `while` loops are good for general conditions, `for` loops are ideal for iterating over sequences, and `do-while` loops guarantee at least one execution.
+
