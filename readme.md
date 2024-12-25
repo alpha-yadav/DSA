@@ -3598,3 +3598,49 @@ Nested loops are frequently used for:
 
 **Important Note:**  Be cautious when using nested loops, as the time complexity can increase significantly.  If the inner loop's iterations depend on the outer loop's counter, the number of iterations will grow rapidly.  For example, two nested loops iterating `n` times each will have a time complexity of O(n²).  Consider more efficient algorithms if performance is critical for large datasets.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to solve problems by repeatedly dividing the problem size in half (or by some constant factor).  This halving characteristic is what leads to the logarithmic time complexity.  Here are some common types and examples:
+
+**1. Binary Search:**
+
+* **Description:**  This is the quintessential O(log n) algorithm.  It works on sorted data.  To find a target value, it repeatedly divides the search interval in half. If the target is in the upper half, it discards the lower half; otherwise, it discards the upper half. This continues until the target is found or the interval is empty.
+* **Example:** Searching for a name in a phone book, looking up a word in a dictionary.
+
+**2. Binary Search Tree (BST) Operations (Search, Insertion, Deletion):**
+
+* **Description:**  A BST is a tree data structure where the left subtree contains nodes with smaller keys than the root, and the right subtree contains nodes with larger keys.  Searching, inserting, or deleting a node typically involves traversing a path from the root to the target node, with each comparison eliminating roughly half of the remaining tree.  In a balanced BST (like an AVL tree or a red-black tree), these operations are O(log n) on average.  In a worst-case scenario (highly unbalanced tree), it can degenerate to O(n).
+* **Example:**  Efficiently storing and retrieving data where quick lookups are needed.
+
+
+**3. Efficient exponentiation (exponentiation by squaring):**
+
+* **Description:**  Calculates a<sup>b</sup> in O(log b) time. It uses the observation that a<sup>b</sup> = (a<sup>b/2</sup>)<sup>2</sup> if b is even, and a<sup>b</sup> = a * a<sup>(b-1)</sup> if b is odd.  This recursive approach drastically reduces the number of multiplications needed.
+* **Example:**  Cryptography, modular arithmetic.
+
+
+**4. Finding the kth smallest element in a sorted array:**
+
+* **Description:** You can directly access the kth smallest element in a sorted array in O(1) time, but if the array is unsorted, using a selection algorithm (like quickselect) can find the kth smallest element in O(n) *on average*, but with clever pivoting strategies, can have a worst case of O(n^2)
+
+
+**5. Heap operations (insertion, deletion, finding min/max):**
+
+* **Description:**  Heaps (min-heaps and max-heaps) are tree-based data structures that satisfy the heap property (e.g., in a min-heap, the parent node is always smaller than its children).  Inserting, deleting, or finding the minimum/maximum element takes O(log n) time because maintaining the heap property might require adjustments along a path from the leaf to the root (or vice versa).
+* **Example:**  Priority queues, heapsort algorithm.
+
+
+**6. Merge Sort (part of the algorithm):**
+
+* **Description:** While the overall Merge Sort algorithm is O(n log n), the merging step itself is O(n). The recursive decomposition into subarrays is what gives the logarithmic factor. Each recursive step halves the size of the problem.
+* **Example:**  Efficiently sorting large datasets.
+
+
+**Key Characteristics Leading to O(log n):**
+
+* **Divide and Conquer:**  The problem is repeatedly divided into smaller subproblems.
+* **Halving (or similar constant-factor reduction):**  At each step, the size of the problem is reduced by a constant factor.
+* **Self-Similarity:** The algorithm often exhibits a recursive structure where the same operation is performed on smaller instances of the problem.
+
+
+It's important to note that the base of the logarithm (e.g., base 2, base 10) doesn't affect the big O notation; it only affects the constant factor hidden within the O notation.  Therefore, O(log₂ n) and O(log₁₀ n) are both considered O(log n).
+
