@@ -3052,3 +3052,107 @@ else:
 
 Remember to be patient and persistent. Learning algorithms takes time and effort, but the rewards are significant.  Start small, focus on understanding the fundamentals, and practice regularly.  You'll gradually build your skills and confidence.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, along with explanations:
+
+**1. Two Sum (Easy):**
+
+* **Problem:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+* **Example:**
+    `nums = [2,7,11,15], target = 9`
+    Output: `[0,1]` because `nums[0] + nums[1] == 9`
+
+* **Algorithm Idea:**  Use a hash map (dictionary in Python) to store each number and its index. Iterate through the array, and for each number, check if `target - number` exists in the hash map. If it does, you've found your pair.
+
+* **Python Code (efficient):**
+
+```python
+def two_sum(nums, target):
+    num_map = {}  # Create a hash map
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i  # Add the number and its index to the map
+    return None  # No solution found
+
+```
+
+
+**2. Reverse a Linked List (Medium):**
+
+* **Problem:** Reverse a singly linked list.
+
+* **Example:**
+    Input: `1->2->3->4->5`
+    Output: `5->4->3->2->1`
+
+* **Algorithm Idea:**  Iterative approach is most efficient.  Maintain three pointers: `prev`, `curr`, and `next`.  Iterate through the list, changing `curr`'s `next` pointer to point to `prev`, then updating `prev` and `curr` to move forward.
+
+* **Python Code (iterative):**
+
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def reverse_linked_list(head):
+    prev = None
+    curr = head
+    while curr:
+        next_node = curr.next  # Store the next node
+        curr.next = prev       # Reverse the pointer
+        prev = curr            # Move prev forward
+        curr = next_node      # Move curr forward
+    return prev  # prev is now the new head
+
+```
+
+
+**3.  Longest Palindromic Substring (Hard):**
+
+* **Problem:** Given a string `s`, find the longest palindromic substring in `s`.
+
+* **Example:**
+    Input: `babad`
+    Output: `bab` or `aba` (both are valid)
+
+* **Algorithm Idea:**  Many approaches exist (dynamic programming, Manacher's algorithm).  A relatively simple approach is to expand around the center.  For each character (and between each pair of characters), check for palindromes expanding outwards.
+
+* **Python Code (expand around center):**
+
+```python
+def longest_palindrome(s):
+    if not s:
+        return ""
+
+    n = len(s)
+    start = 0
+    max_len = 1
+
+    for i in range(n):
+        # Odd length palindromes
+        l, r = i, i
+        while l >= 0 and r < n and s[l] == s[r]:
+            if r - l + 1 > max_len:
+                max_len = r - l + 1
+                start = l
+            l -= 1
+            r += 1
+
+        # Even length palindromes
+        l, r = i, i + 1
+        while l >= 0 and r < n and s[l] == s[r]:
+            if r - l + 1 > max_len:
+                max_len = r - l + 1
+                start = l
+            l -= 1
+            r += 1
+
+    return s[start:start + max_len]
+```
+
+These examples illustrate different problem types and complexities.  Remember to consider time and space complexity when designing your algorithms.  Choose the problem that best suits your current skill level and desired challenge.
+
