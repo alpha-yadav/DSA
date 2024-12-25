@@ -2289,3 +2289,12 @@ For a general tree (not necessarily binary), the approach is similar to the recu
 
 Remember to handle edge cases like when one or both nodes are not present in the tree.  The code examples provide a basic framework; you may need to adapt them based on your specific tree structure and requirements.
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need information about the function or points to create a graph for you.  For example, you could give me:
+
+* **A list of points:**  (1,2), (3,4), (5,6)
+* **An equation:** y = 2x + 1
+* **A description of the data:**  "A bar graph showing the number of apples sold each day of the week: Monday 10, Tuesday 15, Wednesday 12, etc."
+
+Once you provide the information, I can help you graph it.
+
