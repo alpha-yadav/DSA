@@ -3230,3 +3230,55 @@ This approach builds the output string incrementally, adding "Fizz" and/or "Buzz
 
 The "simple version" is generally preferred for readability, especially for beginners. The other versions demonstrate more advanced Swift features but might sacrifice some readability for conciseness. Choose the version that best suits your understanding and coding style.  Remember that readability and maintainability are often more important than brevity in the long run.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The most common resources considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We typically express complexity using **Big O notation**, which describes the upper bound of the growth rate of the algorithm's resource consumption as the input size grows very large.  Other notations, like Big Ω (Omega) for lower bound and Big Θ (Theta) for tight bound, are also used, but Big O is the most common.
+
+**Common Time Complexities (from best to worst):**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient.  Examples: Binary search in a sorted array, finding an element in a balanced binary search tree.
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** A combination of linear and logarithmic time.  Examples: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  Examples: Bubble sort, selection sort, nested loops iterating over the same input.
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  This is very inefficient for large inputs.  Examples: Finding all subsets of a set, certain recursive algorithms without memoization.
+* **O(n!) - Factorial Time:**  The execution time grows factorially with the input size.  This is extremely inefficient, even for moderately sized inputs.  Examples: Traveling salesman problem (brute-force approach).
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, we typically:
+
+1. **Identify the basic operation:**  This is the operation that contributes most to the algorithm's runtime.
+2. **Count the number of times the basic operation is executed:** This count will usually be a function of the input size (n).
+3. **Express the count using Big O notation:**  Ignore constant factors and lower-order terms.  Focus on the dominant term as n grows large.
+
+**Example:**
+
+Let's consider a simple function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for i in range(1, len(arr)):
+    if arr[i] > max_val:
+      max_val = arr[i]
+  return max_val
+```
+
+The basic operation is the comparison (`arr[i] > max_val`). This comparison is executed `n-1` times, where `n` is the length of the array.  Therefore, the time complexity is O(n) – linear time.  The space complexity is O(1) – constant space, because the algorithm uses a fixed amount of extra memory regardless of the input size.
+
+
+**Space Complexity:**
+
+Space complexity analysis focuses on the amount of memory used by an algorithm.  It can be categorized similarly using Big O notation.  Factors to consider include:
+
+* **Input size:** The amount of memory needed to store the input.
+* **Auxiliary space:** The extra memory used by the algorithm beyond the input.
+
+**In summary:** Understanding algorithm complexity is crucial for choosing efficient algorithms, especially when dealing with large datasets.  Big O notation provides a standardized way to compare and analyze the performance of different algorithms.
+
