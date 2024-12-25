@@ -3282,3 +3282,51 @@ Space complexity analysis focuses on the amount of memory used by an algorithm. 
 
 **In summary:** Understanding algorithm complexity is crucial for choosing efficient algorithms, especially when dealing with large datasets.  Big O notation provides a standardized way to compare and analyze the performance of different algorithms.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science and mathematics to describe the asymptotic behavior of functions.  It provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds within a constant factor.  In simpler terms, it tells us that a function's growth is roughly proportional to another function, ignoring constant factors and smaller terms.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that f(n) = Θ(g(n)) if and only if there exist positive constants c₁ and c₂, and a positive integer n₀ such that for all n ≥ n₀:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+This means that for sufficiently large values of `n` (n ≥ n₀), the function `f(n)` is always bounded above and below by constant multiples of `g(n)`.
+
+**Explanation:**
+
+* **f(n):** The function whose growth rate we're analyzing (often the runtime or space complexity of an algorithm).
+* **g(n):** A simpler function that represents the dominant growth term of `f(n)`.  This is usually a simple function like n, n², log n, 2<sup>n</sup>, etc.
+* **c₁ and c₂:** Positive constants.  These constants allow for flexibility; they account for constant factors that don't affect the overall growth rate.
+* **n₀:** A positive integer. This represents the threshold beyond which the inequality holds true. For values of `n` smaller than `n₀`, the inequality might not hold, but we're concerned with the asymptotic behavior (behavior as `n` approaches infinity).
+
+
+**Example:**
+
+Let's say we have a function `f(n) = 2n² + 3n + 5`.  We can show that `f(n) = Θ(n²)`.
+
+1. **Find the dominant term:** The dominant term in `f(n)` is `2n²`.
+
+2. **Find c₁ and c₂:**  We need to find constants such that:
+   `c₁ * n² ≤ 2n² + 3n + 5 ≤ c₂ * n²` for sufficiently large `n`.
+
+3. **Choose c₁ and c₂:**  Let's choose `c₁ = 1` and `c₂ = 3`.  For sufficiently large `n`, the following will hold:
+
+   `n² ≤ 2n² + 3n + 5 ≤ 3n²`
+
+   This inequality holds true for `n` larger than some threshold `n₀` (you could find a specific `n₀` through algebraic manipulation, but it's not necessary for demonstrating the Θ bound).
+
+
+**Difference from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  f(n) = O(g(n)) means f(n) grows *no faster* than g(n).
+* **Big-Ω (Ω):** Provides a *lower bound*. f(n) = Ω(g(n)) means f(n) grows *at least as fast* as g(n).
+* **Big-Θ (Θ):** Provides both an upper and lower bound, meaning f(n) grows *at the same rate* as g(n).  It's a tighter bound than O and Ω individually.
+
+
+In essence, Θ notation gives a precise characterization of the growth rate, while O and Ω provide only one-sided bounds.  Θ is preferred whenever possible because it provides the most complete picture of the asymptotic behavior.
+
