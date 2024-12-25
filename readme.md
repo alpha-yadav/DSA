@@ -3156,3 +3156,77 @@ def longest_palindrome(s):
 
 These examples illustrate different problem types and complexities.  Remember to consider time and space complexity when designing your algorithms.  Choose the problem that best suits your current skill level and desired challenge.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing a more refined version:
+
+**Simple Version:**
+
+This version uses a straightforward `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz") and 5 ("Buzz").
+* If none of the above conditions are met, it prints the number itself.
+
+
+**More Concise Version (using the ternary operator):**
+
+We can make the code more compact using Swift's ternary operator (`condition ? value1 : value2`):
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This version nests ternary operators to achieve the same result in fewer lines.  While shorter, it might be slightly less readable for beginners.
+
+
+**Even More Concise Version (using string interpolation and optional binding):**
+
+This version leverages optional binding for even more conciseness:
+
+```swift
+func fizzBuzzElegant(n: Int) {
+  for i in 1...n {
+    var output = ""
+    if i % 3 == 0 { output += "Fizz" }
+    if i % 5 == 0 { output += "Buzz" }
+    print(output.isEmpty ? "\(i)" : output)
+  }
+}
+
+fizzBuzzElegant(n: 15)
+```
+
+This approach builds the output string incrementally, adding "Fizz" and/or "Buzz" as needed. If the string remains empty, it prints the number.
+
+
+**Choosing the Best Version:**
+
+The "simple version" is generally preferred for readability, especially for beginners. The other versions demonstrate more advanced Swift features but might sacrifice some readability for conciseness. Choose the version that best suits your understanding and coding style.  Remember that readability and maintainability are often more important than brevity in the long run.
+
