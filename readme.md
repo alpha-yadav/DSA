@@ -979,3 +979,61 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Remember to handle the cases where one tree is empty and the other is not, and where the data in corresponding nodes doesn't match.  The provided code handles these cases correctly.  Choose the method that best suits your needs and coding style.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing data in a sorted way.  They offer efficient searching, insertion, and deletion operations, making them valuable in various applications.
+
+Here's a breakdown of BSTs:
+
+**Key Properties:**
+
+* **Binary:** Each node has at most two children, referred to as the left child and the right child.
+* **Search Tree:**  The values within the tree are organized according to a specific ordering property:
+    * For every node, all values in its left subtree are *less than* the node's value.
+    * For every node, all values in its right subtree are *greater than* the node's value.
+
+
+**Basic Operations:**
+
+* **Search:**  Given a value, find if it exists in the tree.  The search process efficiently traverses the tree, moving left or right depending on whether the target value is less than or greater than the current node's value.  In a balanced BST, this takes O(log n) time on average, where n is the number of nodes.  In a worst-case scenario (a skewed tree resembling a linked list), it can take O(n) time.
+
+* **Insertion:**  Add a new value to the tree while maintaining the BST property.  The insertion process starts at the root and follows a path similar to searching. The new node is added as a leaf node.
+
+* **Deletion:** Removing a node from the tree while preserving the BST property is more complex than insertion.  There are different cases to consider:
+    * **Leaf Node:** Simply remove the node.
+    * **Node with One Child:** Replace the node with its child.
+    * **Node with Two Children:**  This is the most complex case. Common approaches include:
+        * **Inorder Successor:** Find the smallest node in the right subtree (inorder successor) and replace the node to be deleted with it.
+        * **Inorder Predecessor:** Find the largest node in the left subtree (inorder predecessor) and replace the node to be deleted with it.
+
+* **Minimum/Maximum:** Finding the minimum or maximum value in a BST is straightforward.  The minimum value is always the leftmost node, and the maximum value is always the rightmost node.  This takes O(h) time, where h is the height of the tree.
+
+* **Traversal:**  Visiting all nodes in a specific order:
+    * **Inorder Traversal:** Visits nodes in ascending order (left subtree, root, right subtree). This produces a sorted sequence of the tree's values.
+    * **Preorder Traversal:** Visits the root, then the left subtree, then the right subtree.
+    * **Postorder Traversal:** Visits the left subtree, then the right subtree, then the root.
+
+
+**Advantages:**
+
+* **Efficient Search, Insertion, and Deletion (in a balanced tree):** O(log n) on average.
+* **Simple Implementation:**  Relatively easy to understand and implement.
+* **Sorted Data:** Provides a sorted representation of the data.
+
+
+**Disadvantages:**
+
+* **Performance Degradation with Unbalanced Trees:** In a worst-case scenario (a highly unbalanced tree), the performance can degrade to O(n) for all operations.
+* **No Efficient Range Queries:** Finding all elements within a specific range is not as efficient as in other data structures like balanced search trees or specialized range trees.
+
+
+**Self-Balancing BSTs:**
+
+To avoid the performance degradation caused by unbalanced trees, self-balancing BSTs are used.  These include:
+
+* **AVL Trees:**  Maintain balance by ensuring that the height difference between the left and right subtrees of every node is at most 1.
+* **Red-Black Trees:**  Use a color-based system to maintain balance.
+* **B-Trees:**  Optimized for disk-based storage.
+
+
+In summary, BSTs are a powerful and versatile data structure, but their efficiency depends heavily on maintaining a reasonable level of balance.  For applications requiring guaranteed logarithmic time complexity, self-balancing BSTs are preferred.
+
