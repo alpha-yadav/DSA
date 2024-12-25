@@ -46,3 +46,50 @@ Getting started with algorithms can feel daunting, but it's a rewarding journey.
 
 Start with the basics, gradually increasing the complexity of the problems you tackle. Don't be afraid to struggle; it's part of the learning process.  Consistency and persistence are key.  Focus on understanding the underlying principles rather than just memorizing code. Remember to break down complex problems into smaller, more manageable subproblems.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem samples, ranging in difficulty:
+
+**1. Easy:  Finding the Largest Number in an Array**
+
+* **Problem:** Given an array of integers, find the largest number in the array.
+* **Input:** An array of integers (e.g., `[1, 5, 2, 8, 3]`)
+* **Output:** The largest integer in the array (e.g., `8`)
+* **Algorithm:** Iterate through the array, keeping track of the largest number seen so far.
+
+**2. Medium:  Two Sum**
+
+* **Problem:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+* **Input:** `nums = [2,7,11,15], target = 9`
+* **Output:** `[0,1]`  (because `nums[0] + nums[1] == 9`)
+* **Algorithm:**  You could use a brute-force approach (nested loops), but a more efficient solution uses a hash table (dictionary in Python) to store seen numbers and their indices.
+
+
+**3. Hard:  Longest Palindromic Substring**
+
+* **Problem:** Given a string `s`, find the longest palindromic substring in `s`.
+* **Input:** `"babad"`
+* **Output:** `"bab"` or `"aba"` (both are valid answers)
+* **Algorithm:**  Several approaches exist, including dynamic programming, expanding around the center, or using Manacher's algorithm.  Dynamic programming is a relatively straightforward, though potentially less efficient, solution.
+
+
+**Example Code (Python - Two Sum):**
+
+```python
+def two_sum(nums, target):
+    num_map = {}  # Use a dictionary to store numbers and their indices
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    return None  # No solution found
+
+
+nums = [2, 7, 11, 15]
+target = 9
+result = two_sum(nums, target)
+print(result)  # Output: [0, 1]
+```
+
+These examples demonstrate different levels of complexity and require different algorithmic approaches.  Choosing the right algorithm is key to solving these problems efficiently. Remember to consider time and space complexity when designing your solution.
+
