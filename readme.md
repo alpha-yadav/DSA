@@ -352,3 +352,48 @@ Why?  Because we can find constants *c* and *n₀* that satisfy the definition. 
 
 In essence, Big-Omega provides valuable information about the *minimum* performance guarantee of an algorithm, complementing the upper bound information provided by Big-O.  Together, they give a more comprehensive understanding of an algorithm's efficiency.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of a function as its input size grows.  It's focused on how the runtime or space requirements scale with increasing input, not on the exact runtime for a specific input size.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Worst-Case Scenario:** Big O typically describes the *worst-case* time or space complexity. It gives you an upper limit on how much resources an algorithm might consume.
+* **Asymptotic Behavior:** It's concerned with how the algorithm scales as the input size approaches infinity.  Minor efficiencies for small input sizes are ignored.
+* **Growth Rate:**  Big O focuses on the *rate* of growth, not the exact number of operations.  For example, an algorithm with O(n) complexity might be faster than an algorithm with O(log n) complexity for small inputs, but the O(log n) algorithm will eventually become significantly faster as the input size increases.
+* **Order of Magnitude:**  Big O categorizes algorithms into different complexity classes based on their growth rate (e.g., logarithmic, linear, quadratic, exponential).
+
+**Common Big O Notations:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array by its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Nested loops iterating over the input data.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example:  Traveling salesman problem (brute-force approach).
+
+
+**Example:**
+
+Consider two functions that find a specific element in an array:
+
+* **Linear Search (O(n)):**  This algorithm checks each element one by one.  In the worst case (element not found), it has to examine all `n` elements.
+* **Binary Search (O(log n)):**  This algorithm only works on *sorted* arrays. It repeatedly divides the search interval in half.  The number of steps is proportional to the logarithm of the input size.
+
+
+**Space Complexity:**
+
+Big O can also be used to describe the *space complexity* of an algorithm—the amount of memory it uses as a function of the input size.  The same notations (O(1), O(n), O(n²), etc.) apply.
+
+
+**Important Considerations:**
+
+* **Dropping Constants and Lower-Order Terms:**  In Big O notation, constant factors and lower-order terms are dropped because they become insignificant as the input size grows large.  For example, O(2n + 5) is simplified to O(n).
+* **Worst-Case vs. Average-Case vs. Best-Case:** Big O usually focuses on the worst-case scenario, but sometimes average-case or best-case complexities are also analyzed.
+* **It's an Upper Bound:** Big O provides an upper bound on the growth rate.  An algorithm with O(n) complexity might actually run faster in practice than an algorithm with O(log n) complexity for small inputs, but the O(n) algorithm's runtime will eventually grow much faster.
+
+
+Big O notation is a crucial tool for comparing the efficiency of different algorithms and making informed decisions about which algorithm is best suited for a given task, especially as the input size becomes large.
+
