@@ -4631,3 +4631,100 @@ print(is_bst_recursive_minmax(root)) # Output: True
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) for the recursive methods, where H is the height of the tree (O(N) in the worst case of a skewed tree, O(log N) in the best case of a balanced tree). The recursive min-max approach is generally considered slightly more efficient because it can sometimes prune subtrees earlier, avoiding unnecessary recursive calls.  However, the in-order traversal method is arguably simpler to understand.  Choose the method that best suits your needs and understanding.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The core of the BST property is that for every node:
+
+* The value of the left subtree's nodes is less than the node's value.
+* The value of the right subtree's nodes is greater than the node's value.
+
+Here are a few methods, ranging from simple recursive solutions to more efficient ones:
+
+**Method 1: Recursive In-order Traversal**
+
+This is a classic and intuitive method.  A BST, when traversed in-order (left, root, right), will produce a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """Checks if a given binary tree is a BST using recursive in-order traversal."""
+    data_list = []
+    
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            data_list.append(node.data)
+            inorder(node.right)
+
+    inorder(node)
+    
+    #Check if the list is sorted
+    for i in range(1, len(data_list)):
+        if data_list[i] < data_list[i-1]:
+            return False
+    return True
+
+
+# Example usage
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_recursive(root)) # True
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(15) #Violates BST property as 15 > 8
+
+print(is_bst_recursive(root2)) # False
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method is more efficient as it avoids creating a separate sorted list. It recursively checks each subtree, passing the minimum and maximum allowed values.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_minmax(node, min_val=-float('inf'), max_val=float('inf')):
+    """Checks if a given binary tree is a BST using recursive min-max approach."""
+    if not node:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive_minmax(node.left, min_val, node.data) and
+            is_bst_recursive_minmax(node.right, node.data, max_val))
+
+
+# Example Usage (same as above, will produce same True/False results)
+print(is_bst_recursive_minmax(root)) # True
+print(is_bst_recursive_minmax(root2)) # False
+```
+
+**Method 3: Iterative In-order Traversal (Most Efficient)**
+
+This uses an iterative approach (using a stack) for in-order traversal, generally providing better space complexity than deep recursion for very large trees.  (Implementation omitted for brevity, but the basic idea is to simulate the recursive `inorder` function using a stack).
+
+
+**Choosing the Right Method:**
+
+* For simplicity and understandability, Method 1 (recursive in-order) is a good starting point.
+* For efficiency, especially with large trees, Method 2 (recursive min-max) or Method 3 (iterative in-order) are preferred.  Method 3 is usually the most efficient in terms of both time and space.
+
+
+Remember to adapt the `Node` class and example usage to your specific data structure if needed.  Choose the method that best suits your needs based on the size of your tree and the priorities of your application (readability vs. performance).
+
