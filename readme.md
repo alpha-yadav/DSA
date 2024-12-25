@@ -3330,3 +3330,49 @@ Let's say we have a function `f(n) = 2n² + 3n + 5`.  We can show that `f(n) = �
 
 In essence, Θ notation gives a precise characterization of the growth rate, while O and Ω provide only one-sided bounds.  Θ is preferred whenever possible because it provides the most complete picture of the asymptotic behavior.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly useful in analyzing the efficiency of algorithms.  The most common are Big O (O), Big Omega (Ω), and Big Theta (Θ).  Here's a comparison:
+
+**1. Big O Notation (O): Upper Bound**
+
+* **Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Meaning:**  f(n) grows no faster than g(n).  It provides an *upper bound* on the growth rate of f(n).  We only care about the dominant term as n approaches infinity; constant factors are ignored.
+* **Example:**  If f(n) = 2n² + 5n + 1, then f(n) = O(n²).  We ignore the lower-order terms (5n and 1) and the constant factor (2).
+
+**2. Big Omega Notation (Ω): Lower Bound**
+
+* **Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Meaning:** f(n) grows at least as fast as g(n). It provides a *lower bound* on the growth rate of f(n). Again, constant factors are ignored.
+* **Example:** If f(n) = 2n² + 5n + 1, then f(n) = Ω(n²).
+
+**3. Big Theta Notation (Θ): Tight Bound**
+
+* **Definition:** f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Meaning:** f(n) grows at the *same rate* as g(n).  It provides both an upper and a lower bound on the growth rate.  This is the strongest statement we can make about asymptotic growth.
+* **Example:** If f(n) = 2n² + 5n + 1, then f(n) = Θ(n²).
+
+
+**Comparison Table:**
+
+| Notation | Meaning                               | Provides                               | Example (f(n) = 2n² + 5n + 1) |
+|----------|---------------------------------------|----------------------------------------|-----------------------------|
+| O(g(n))  | f(n) grows no faster than g(n)       | Upper bound                             | O(n²)                       |
+| Ω(g(n))  | f(n) grows at least as fast as g(n)   | Lower bound                             | Ω(n²)                       |
+| Θ(g(n))  | f(n) grows at the same rate as g(n) | Tight bound (both upper and lower) | Θ(n²)                       |
+
+
+**Other notations (less common but useful):**
+
+* **Little o (o):** f(n) = o(g(n)) means f(n) grows strictly slower than g(n).  Lim (n→∞) f(n)/g(n) = 0.
+* **Little omega (ω):** f(n) = ω(g(n)) means f(n) grows strictly faster than g(n). Lim (n→∞) f(n)/g(n) = ∞.
+
+
+**Important Considerations:**
+
+* **Asymptotic analysis focuses on the behavior as *n* approaches infinity.**  It doesn't tell you anything about the performance for small values of *n*.
+* **Constant factors are ignored.**  The focus is on the dominant terms that determine the growth rate.
+* **These notations describe the *growth rate*, not the *absolute running time*.**  An O(n²) algorithm might be faster than an O(n) algorithm for small inputs due to constant factors and overhead.
+
+
+Understanding these notations is crucial for comparing the efficiency of different algorithms and making informed decisions about which algorithm to use for a given problem.
+
