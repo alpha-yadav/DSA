@@ -256,3 +256,53 @@ Thus, the quadratic term (n²) dominates the growth, and the linear and constant
 
 **In summary:** Big-Theta notation gives a precise characterization of a function's growth rate, making it crucial for analyzing the efficiency of algorithms. It tells us how the runtime or space requirements of an algorithm scale with the input size.  If an algorithm has a time complexity of Θ(n²), for instance, we know its runtime will grow quadratically with the input size.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input grows arbitrarily large.  They're crucial in computer science for analyzing algorithm efficiency. Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It states that the function's growth is *no worse than* some other function.
+* **Formal Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm has a time complexity of O(n²), it means its runtime grows no faster than the square of the input size.  The actual runtime might be smaller (e.g., O(n) in some cases), but it's guaranteed to be no worse than O(n²).
+* **Focus:** Worst-case scenario.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function.  It states that the function's growth is *no better than* some other function.
+* **Formal Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm has a time complexity of Ω(n log n), it means its runtime grows at least as fast as n log n.  The actual runtime might be larger (e.g., O(n²) in some cases), but it's guaranteed to be no better than Ω(n log n).
+* **Focus:** Best-case scenario (sometimes, but more generally it describes a lower bound on the growth rate regardless of input).
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function's growth is *both* an upper and lower bound.
+* **Formal Definition:** f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm has a time complexity of Θ(n), it means its runtime grows linearly with the input size.  This is a precise characterization of the algorithm's growth.
+* **Focus:** Average-case scenario (often, but it signifies a precise asymptotic relationship).
+
+**4. Little o Notation (o):**
+
+* **Meaning:** Indicates that a function grows *strictly slower* than another function.
+* **Formal Definition:** f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Example:**  n = o(n²) because n grows strictly slower than n².
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function.
+* **Formal Definition:** f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) because n² grows strictly faster than n.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Relationship          |
+|----------|---------------------------------------|-----------------------|
+| O(g(n))  | Upper bound                            | f(n) ≤ c * g(n)       |
+| Ω(g(n))  | Lower bound                            | c * g(n) ≤ f(n)       |
+| Θ(g(n))  | Tight bound (both upper and lower)     | c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) |
+| o(g(n))  | Strictly slower growth                 | f(n) < c * g(n)       |
+| ω(g(n))  | Strictly faster growth                | c * g(n) < f(n)       |
+
+
+**Important Note:** Asymptotic notations only describe the behavior of functions as *n* approaches infinity.  They don't provide information about the actual runtime for small input sizes.  Constant factors and lower-order terms are ignored.
+
