@@ -3543,3 +3543,58 @@ Java's structure is quite similar to C++.
 
 These examples all demonstrate simple loops that iterate a fixed number of times.  More complex loops might involve nested loops, conditional statements within the loop, or loops that continue until a specific condition is met (other than a simple counter reaching a limit).  But these examples capture the essence of a "simple loop".
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop completes all its iterations for each single iteration of the outer loop.  This creates a structure where the inner loop's code runs repeatedly for every cycle of the outer loop.
+
+Here's a breakdown:
+
+**Structure:**
+
+```java
+for (int i = 0; i < outerLoopCount; i++) { // Outer loop
+    for (int j = 0; j < innerLoopCount; j++) { // Inner loop
+        // Code to be executed repeatedly
+    }
+}
+```
+
+This example uses `for` loops, but nested loops can be created with `while` or `do-while` loops as well.
+
+**How it works:**
+
+1. **Outer loop starts:** The outer loop begins its first iteration ( `i = 0` in the example).
+2. **Inner loop executes:** The inner loop then runs completely.  It will iterate `innerLoopCount` times.
+3. **Inner loop finishes:** Once the inner loop finishes all its iterations, the control returns to the outer loop.
+4. **Outer loop continues:** The outer loop increments its counter (`i` increments to 1).
+5. **Inner loop repeats:** Steps 2 and 3 repeat. This process continues until the outer loop completes all its iterations.
+
+**Example (Printing a multiplication table):**
+
+```java
+public class NestedLoopExample {
+    public static void main(String[] args) {
+        int size = 5; //Size of multiplication table
+
+        for (int i = 1; i <= size; i++) { //Outer loop (rows)
+            for (int j = 1; j <= size; j++) { //Inner loop (columns)
+                System.out.print(i * j + "\t"); // \t adds a tab for formatting
+            }
+            System.out.println(); // New line after each row
+        }
+    }
+}
+```
+
+This code will print a 5x5 multiplication table. The outer loop controls the rows, and the inner loop controls the columns. For each row, the inner loop calculates and prints the product of the row number and column number.
+
+**Common Uses:**
+
+Nested loops are frequently used for:
+
+* **Processing multi-dimensional arrays:** Accessing and manipulating elements in matrices or tables.
+* **Generating patterns:**  Creating visual patterns like triangles, squares, or other shapes.
+* **Nested iterations:** When you need to iterate through combinations of items, such as comparing each element in a list to every other element.
+* **Implementing algorithms:**  Many algorithms, such as sorting and searching, utilize nested loops.
+
+**Important Note:**  Be cautious when using nested loops, as the time complexity can increase significantly.  If the inner loop's iterations depend on the outer loop's counter, the number of iterations will grow rapidly.  For example, two nested loops iterating `n` times each will have a time complexity of O(n²).  Consider more efficient algorithms if performance is critical for large datasets.
+
