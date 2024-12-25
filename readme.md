@@ -3420,3 +3420,42 @@ Big-Omega notation is crucial for:
 
 In short, Big-Omega provides a valuable perspective on algorithm efficiency by establishing a guaranteed minimum performance level.  Used in conjunction with Big-O, it gives a comprehensive understanding of an algorithm's behavior.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of the algorithm's runtime or space requirements as the input size grows.  It focuses on how the runtime or space scales, not on the exact runtime for a specific input.
+
+Here's a breakdown of key concepts:
+
+**What Big O describes:**
+
+* **Worst-case scenario:** Big O typically represents the *worst-case* time or space complexity.  It tells you the *maximum* amount of resources an algorithm might need.
+* **Asymptotic behavior:** Big O describes the behavior of the algorithm as the input size (n) approaches infinity.  We're interested in the dominant factors that affect runtime as n gets very large, ignoring constant factors and smaller terms.
+* **Growth rate:** It focuses on the *rate* at which the runtime or space grows, not the absolute runtime.  An algorithm with O(n²) will eventually be slower than an algorithm with O(n) as the input size increases, even if the O(n²) algorithm is faster for small inputs.
+
+**Common Big O notations and their meanings:**
+
+* **O(1) - Constant time:** The runtime is independent of the input size.  Examples: Accessing an element in an array by index, returning the first element of a linked list.
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  Examples: Binary search in a sorted array, finding an element in a balanced binary search tree.
+* **O(n) - Linear time:** The runtime increases linearly with the input size.  Examples: Searching an unsorted array, printing all elements of an array.
+* **O(n log n) - Linearithmic time:**  A combination of linear and logarithmic growth.  Examples: Merge sort, heap sort.
+* **O(n²) - Quadratic time:** The runtime increases quadratically with the input size.  Examples: Bubble sort, selection sort, nested loops iterating over the same array.
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size.  Examples: Finding all subsets of a set, recursive algorithms without memoization for problems like the Fibonacci sequence (naive approach).
+* **O(n!) - Factorial time:** The runtime grows factorially with the input size.  Examples: Finding all permutations of a sequence.
+
+
+**Important Considerations:**
+
+* **Space Complexity:** Big O can also describe space complexity (memory usage) in the same way.
+* **Best-case and Average-case:** While Big O usually focuses on the worst-case, sometimes best-case and average-case complexities are also analyzed using other notations (e.g., Big Omega (Ω) for best-case and Big Theta (Θ) for average-case).
+* **Constant Factors and Lower-Order Terms:** Big O ignores constant factors and lower-order terms because they become insignificant as the input size grows very large.  For example, O(2n + 5) is simplified to O(n).
+* **Practical Implications:** While Big O provides a valuable theoretical framework, it's important to remember that it's an *asymptotic* analysis. For small input sizes, the actual runtime might differ significantly from what Big O predicts.
+
+
+**Example:**
+
+Consider searching for an element in an array.
+
+* **Unsorted array:**  You might need to check every element in the worst case, resulting in O(n) time complexity.
+* **Sorted array (using binary search):** You can eliminate half the remaining elements with each comparison, resulting in O(log n) time complexity.
+
+In summary, Big O notation is a crucial tool for understanding and comparing the efficiency of algorithms, allowing developers to make informed choices about which algorithms to use for different tasks and input sizes.  It allows for a high-level comparison of algorithms without getting bogged down in the minutiae of specific implementations or hardware.
+
