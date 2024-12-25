@@ -5749,3 +5749,25 @@ else:
 
 This implementation efficiently detects cycles in a directed graph using Depth First Traversal and the concept of recursion stack.  The use of `recStack` is crucial for identifying cycles;  simply using `visited` alone wouldn't suffice for directed graphs. Remember that a self-loop (a node pointing to itself) is also considered a cycle.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focusing on efficient graph algorithms.  While he's contributed to many areas, his work is particularly renowned for its breakthroughs in:
+
+* **Near-linear time algorithms for single-source shortest paths (SSSP):**  Before Thorup's work, finding shortest paths in graphs often involved algorithms with complexities significantly higher than linear. Thorup developed algorithms that achieve near-linear time complexity (often expressed as O(m log log n), where 'm' is the number of edges and 'n' is the number of nodes) for various graph types, significantly improving the efficiency of shortest path computations.  These algorithms often leverage sophisticated data structures and techniques.
+
+* **Dynamic graph algorithms:**  Thorup also made substantial contributions to algorithms that handle dynamic graphs (graphs where edges can be inserted or deleted).  These algorithms aim to maintain shortest path information efficiently as the graph structure changes.  Again, his work focused on achieving near-linear time complexity for update operations.
+
+* **Approximate algorithms:** In some cases, Thorup's algorithms provide approximate solutions to graph problems, sacrificing some accuracy for a substantial gain in speed.  This is a common trade-off in large-scale graph processing.
+
+
+**Key characteristics of Thorup's algorithms often include:**
+
+* **Randomization:** Many of his algorithms use randomization, which introduces probabilistic elements.  This means the running time isn't guaranteed to be exactly within the stated bounds, but it holds with high probability.
+
+* **Sophisticated data structures:** Thorup often utilizes or develops novel data structures tailored to the specific graph problem, enabling the achievement of near-linear time complexities.  Examples include specialized hash tables and other advanced data structures.
+
+* **Complexity analysis:** Rigorous mathematical analysis is crucial to understanding the performance guarantees of Thorup's algorithms.  The analysis often involves probability theory and techniques from algorithm analysis.
+
+**It's important to note that there isn't *one* "Thorup's algorithm."**  His work encompasses a collection of algorithms addressing different problems within graph theory, all sharing the common thread of striving for efficient, near-linear time solutions.  To understand a specific algorithm, you'd need to refer to the relevant publication.  Many papers are available online through academic databases like ACM Digital Library or IEEE Xplore.
+
+To get a more precise understanding, you need to specify which particular problem within graph theory you're interested in (e.g., SSSP, minimum spanning tree, dynamic connectivity, etc.) and then search for Thorup's work on that specific topic.
+
