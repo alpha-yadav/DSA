@@ -4839,3 +4839,103 @@ levelOrder(root) # Output: 1 2 3 4 5
 
 Remember to adapt these code examples to your specific needs and data structures.  The core concepts of the traversal algorithms remain the same regardless of the programming language.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes of a tree level by level.  Here are implementations in Python and JavaScript using a queue data structure:
+
+
+**Python Implementation:**
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root) # Output: 1 2 3 4 5
+```
+
+**JavaScript Implementation:**
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) {
+    return;
+  }
+
+  const queue = [root];
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    console.log(curr.data, " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+
+// Example usage:
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1 2 3 4 5
+```
+
+**Explanation:**
+
+Both implementations follow these steps:
+
+1. **Initialization:**  A queue (`nodes` in Python, `queue` in JavaScript) is created and the root node is added to it.
+
+2. **Iteration:**  A `while` loop continues as long as the queue is not empty.
+
+3. **Dequeue:** In each iteration, the node at the front of the queue is dequeued (removed) using `popleft()` (Python) or `shift()` (JavaScript).  This node's data is printed.
+
+4. **Enqueue:** If the dequeued node has left and/or right children, these children are enqueued (added to the back of the queue). This ensures that nodes at the same level are processed together.
+
+5. **Termination:** The loop terminates when the queue becomes empty, indicating that all nodes have been visited.
+
+
+These implementations provide a basic level-order traversal.  You can extend them to handle more complex scenarios (e.g., different data structures in the nodes, handling of different tree types) as needed.  Remember to install the `collections` library if you're using the Python version.  For JavaScript, no extra libraries are necessary.
+
