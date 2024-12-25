@@ -2095,3 +2095,73 @@ class Node:
 
 Remember to replace `node.data` with the appropriate way to access the value stored in each node of your specific tree implementation.  The `end=" "` in the `print` statements prevents adding a newline after each node, keeping the output on a single line.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  This means that both nodes are found in the subtrees rooted at the LCA.  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach:** This is a common and relatively intuitive approach.
+
+   * **Algorithm:**
+     1. If the current node is `NULL`, return `NULL`.
+     2. If the current node is equal to either `node1` or `node2`, return the current node (as one of the nodes has been found).
+     3. Recursively search the left and right subtrees.
+     4. If both recursive calls return non-`NULL` values, then the current node is the LCA.  Return the current node.
+     5. Otherwise, return the non-`NULL` result from the recursive calls (the node found in one of the subtrees).
+
+   * **Code (Python):**
+
+     ```python
+     class TreeNode:
+         def __init__(self, val=0, left=None, right=None):
+             self.val = val
+             self.left = left
+             self.right = right
+
+     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+         if not root or root == p or root == q:
+             return root
+
+         left = self.lowestCommonAncestor(root.left, p, q)
+         right = self.lowestCommonAncestor(root.right, p, q)
+
+         if left and right:
+             return root
+         elif left:
+             return left
+         else:
+             return right
+     ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, we might traverse the entire tree.
+   * **Space Complexity:** O(H), where H is the height of the tree. This is due to the recursive call stack.  In the worst case (a skewed tree), this could be O(N).
+
+
+2. **Iterative Approach (using a parent pointer):**  This approach requires modifying the tree to include parent pointers.  Each node would have a reference to its parent.
+
+   * **Algorithm:**
+     1. Find the paths from the root to `node1` and `node2`.
+     2. Traverse both paths simultaneously until a common ancestor is found.
+   * **Time Complexity:** O(N) in the worst case.
+   * **Space Complexity:** O(N) in the worst case (if the tree is very deep).  However, space used is directly related to tree depth rather than number of nodes
+
+
+3. **Using a HashMap (for parent pointers):**  A variation of the iterative approach avoids modifying the tree itself by using a hash map to store parent-child relationships.
+
+   * **Algorithm:**
+     1. Perform Depth-First Search (DFS) to create a HashMap that maps each node to its parent.
+     2. Find the path from `node1` to the root by backtracking using the parent map.
+     3. Find the path from `node2` to the root similarly.
+     4. Iterate both paths from the root until they differ.  The node where they diverge is the LCA.
+
+   * **Time Complexity:** O(N)
+   * **Space Complexity:** O(N) to store the parent map.
+
+
+**Choosing the Best Approach:**
+
+* The **recursive approach** is generally preferred for its simplicity and readability.  It doesn't require modifications to the tree structure.
+* The iterative approach with parent pointers or a HashMap might be beneficial if you're performing many LCA queries on the same tree, as constructing the parent map only needs to be done once.
+
+Remember to handle edge cases such as `p` or `q` not being present in the tree or `p` and `q` being the same node.  The code provided above implicitly handles some of these, but more robust error checking might be needed depending on your application.
+
