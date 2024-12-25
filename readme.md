@@ -543,3 +543,87 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  Remember to choose the loop type that best suits your needs.  `while` loops are good for general conditions, `for` loops are ideal for iterating over sequences, and `do-while` loops guarantee at least one execution.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop. This allows for processing data in a multi-dimensional way, often used to iterate over matrices, tables, or perform combinations of items.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+for (initialization1; condition1; increment1) {
+  // Outer loop code
+  for (initialization2; condition2; increment2) {
+    // Inner loop code
+  }
+  // More outer loop code
+}
+```
+
+**How it works:**
+
+1. **Outer Loop Initialization:** `initialization1` is executed once at the beginning of the outer loop.
+
+2. **Outer Loop Condition:** `condition1` is checked. If it's true, the outer loop continues; otherwise, the outer loop terminates.
+
+3. **Inner Loop Execution:** If `condition1` is true, the inner loop begins.  `initialization2` is executed once.
+
+4. **Inner Loop Condition:** `condition2` is checked repeatedly.  If true, the inner loop body is executed.  If false, the inner loop terminates.
+
+5. **Inner Loop Increment:** `increment2` is executed after each iteration of the inner loop.
+
+6. **Outer Loop Increment:** After the inner loop completes, `increment1` is executed.
+
+7. **Repeat:** Steps 2-6 are repeated until `condition1` becomes false.
+
+
+**Examples:**
+
+**Example 1: Printing a multiplication table:**
+
+```java
+for (int i = 1; i <= 10; i++) { // Outer loop: rows
+  for (int j = 1; j <= 10; j++) { // Inner loop: columns
+    System.out.print(i * j + "\t");
+  }
+  System.out.println(); // Newline after each row
+}
+```
+
+This code will print a 10x10 multiplication table.  The outer loop iterates through the rows, and the inner loop iterates through the columns for each row.
+
+
+**Example 2:  Processing a 2D array:**
+
+```python
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+for row in matrix:  # Outer loop iterates through rows
+  for element in row: # Inner loop iterates through elements in each row
+    print(element)
+```
+
+This code iterates through a 2D array (list of lists) and prints each element.
+
+
+**Example 3: Finding all pairs in a list:**
+
+```python
+my_list = [1, 2, 3, 4]
+
+for i in range(len(my_list)):
+  for j in range(i + 1, len(my_list)):  #Start j from i+1 to avoid duplicates and self-pairs
+    print(f"Pair: ({my_list[i]}, {my_list[j]})")
+```
+
+This code finds all unique pairs of numbers in the list.
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can lead to significant performance overhead, especially with large datasets. The time complexity increases multiplicatively (e.g., O(n*m) for two loops iterating n and m times).  Consider optimizing your algorithms if performance becomes an issue.
+* **Readability:**  Use clear variable names and comments to enhance the readability of nested loops, especially when dealing with complex logic.
+
+
+Nested loops are a powerful tool, but use them judiciously, considering their potential impact on performance and code complexity.  In many cases, more efficient algorithms exist to achieve the same results.
+
