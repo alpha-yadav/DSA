@@ -5241,3 +5241,17 @@ For a general tree (not necessarily binary),  a more complex algorithm might be 
 
 Remember to handle edge cases like one or both nodes not being present in the tree.  The code examples above implicitly handle some cases (returning `None`), but you might want to add explicit error checks in a production environment.  The choice of algorithm depends on the specific tree structure and constraints.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about the x and y values (or a function) to create a graph.  For example, you could give me:
+
+* **A set of points:**  (1,2), (3,4), (5,6)
+* **A function:** y = x^2
+* **A table of data:**
+  | x | y |
+  |---|---|
+  | 0 | 1 |
+  | 1 | 3 |
+  | 2 | 5 |
+
+Once you provide the data, I can help you create a graph.
+
