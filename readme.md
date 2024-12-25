@@ -1897,3 +1897,99 @@ postorder_traversal(root) # Output: D E B F C A
 
 Understanding binary tree traversals is fundamental to working with tree data structures in computer science.  The choice of traversal depends on the specific task you're trying to accomplish.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes at the same level before moving to the next level.  Here are implementations in Python and C++ using a queue:
+
+**Python**
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])  # Use deque for efficient append and popleft
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+
+**C++**
+
+```cpp
+#include <iostream>
+#include <queue>
+
+struct Node {
+    int data;
+    Node *left, *right;
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+void levelOrder(Node *root) {
+    if (root == nullptr) return;
+
+    std::queue<Node*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Node *curr = q.front();
+        q.pop();
+        std::cout << curr->data << " ";
+
+        if (curr->left != nullptr) q.push(curr->left);
+        if (curr->right != nullptr) q.push(curr->right);
+    }
+}
+
+int main() {
+    Node *root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+
+    std::cout << "Level Order traversal of binary tree is -\n";
+    levelOrder(root); // Output: 1 2 3 4 5
+
+    //Remember to deallocate memory in a real application to avoid memory leaks.
+    //This example omits memory deallocation for brevity.
+
+    return 0;
+}
+```
+
+Both implementations follow the same basic algorithm:
+
+1. **Initialization:** Create a queue and add the root node.
+2. **Iteration:** While the queue is not empty:
+   - Dequeue a node (remove from the front).
+   - Process the node's data (print in this case).
+   - Enqueue the node's left and right children (if they exist).
+
+
+Remember that in C++, you need to manually manage memory (using `new` and `delete`) to avoid memory leaks, which is omitted in the example for brevity but crucial in production code.  The Python example uses garbage collection, so memory management is handled automatically.  Choose the implementation that best suits your needs and programming language proficiency.
+
