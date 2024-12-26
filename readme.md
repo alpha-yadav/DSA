@@ -6227,3 +6227,57 @@ In simpler terms:
 
 Big-Theta notation provides a precise and powerful way to express the efficiency of algorithms and data structures. It allows for a more rigorous analysis of algorithm performance compared to using only Big-O notation. While Big-O focuses on the *upper bound*, Big-Theta captures the *exact growth rate* within constant factors. Using Big-Theta is preferred when a tight bound is needed.  However, often a Big-O analysis is sufficient and easier to obtain.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly useful in analyzing the efficiency of algorithms.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Upper bound on the growth rate of a function.  It states that the function's growth is *no worse than* a given function.  Formally,  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Focus:** Worst-case scenario.  It tells us the maximum amount of resources (time or space) an algorithm might consume.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than the square of the input size.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Lower bound on the growth rate of a function. It states that the function's growth is *no better than* a given function. Formally, f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Focus:** Best-case or lower bound on performance. It provides a guarantee on the minimum resources an algorithm will use.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Tight bound on the growth rate of a function. It means the function's growth is *both* upper and lower bounded by the given function. Formally, f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Focus:** Precise description of asymptotic behavior.  It indicates that the algorithm's resource usage is proportional to the given function.
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Strictly upper bound.  It means the function grows *strictly slower* than the given function. Formally, f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Focus:**  Indicates a significant difference in growth rates.
+* **Example:** n = o(n²) because n grows significantly slower than n².
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Strictly lower bound. It means the function grows *strictly faster* than the given function. Formally, f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Focus:** Indicates a significant difference in growth rates.
+* **Example:** n² = ω(n) because n² grows significantly faster than n.
+
+
+**Relationships:**
+
+* Θ(g(n)) implies both O(g(n)) and Ω(g(n)).
+* o(g(n)) is a stronger statement than O(g(n)).
+* ω(g(n)) is a stronger statement than Ω(g(n)).
+
+
+**In Summary:**
+
+| Notation | Meaning                               | Focus                                     |
+|----------|---------------------------------------|------------------------------------------|
+| O(g(n))  | Upper bound                           | Worst-case performance                   |
+| Ω(g(n))  | Lower bound                           | Best-case or lower bound on performance |
+| Θ(g(n))  | Tight bound (both upper and lower)     | Precise asymptotic behavior              |
+| o(g(n))  | Strictly upper bound                  | Significant difference in growth rates     |
+| ω(g(n))  | Strictly lower bound                  | Significant difference in growth rates     |
+
+
+These notations are crucial for comparing the efficiency of different algorithms, allowing us to choose the most suitable algorithm for a given task based on its scalability and resource consumption. Remember that they describe *asymptotic* behavior – the behavior as the input size approaches infinity.  For small input sizes, the actual runtime might differ.
+
