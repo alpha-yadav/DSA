@@ -9290,3 +9290,63 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The `while` loop checks the condition before each iteration, while the `for` loop is designed for a predetermined number of iterations.  Choose the loop type that best suits your needs.  Remember to always have a way to exit the loop (like incrementing a counter) to avoid infinite loops.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times based on the number of iterations of the outer loop.
+
+Here's a breakdown:
+
+**Structure:**
+
+```java
+for (int i = 0; i < outerLoopCount; i++) { // Outer loop
+    for (int j = 0; j < innerLoopCount; j++) { // Inner loop
+        // Code to be executed in the inner loop
+    }
+    // Code to be executed after each inner loop completes, but within the outer loop
+}
+// Code to be executed after the outer loop completes
+```
+
+This can be replicated in other programming languages (Python, C++, JavaScript, etc.) with similar syntax, though the specifics might vary slightly.
+
+**Example (Java):**
+
+This code prints a multiplication table:
+
+```java
+public class NestedLoopExample {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 10; i++) { // Outer loop (rows)
+            for (int j = 1; j <= 10; j++) { // Inner loop (columns)
+                System.out.print(i * j + "\t"); // Print the product with a tab for spacing
+            }
+            System.out.println(); // New line after each row
+        }
+    }
+}
+```
+
+**Explanation:**
+
+* The outer loop iterates from `i = 1` to `i = 10`.  This represents the rows of the multiplication table.
+* The inner loop iterates from `j = 1` to `j = 10` for *each* value of `i`.  This represents the columns.
+* `System.out.print(i * j + "\t");` calculates and prints the product of `i` and `j`, followed by a tab for formatting.
+* `System.out.println();` moves the cursor to the next line after each row is complete.
+
+**Time Complexity:**
+
+The time complexity of nested loops is generally the product of the number of iterations of each loop.  In the example above, it's O(n*m), where 'n' is the number of iterations of the outer loop and 'm' is the number of iterations of the inner loop.  This means the execution time increases proportionally to the product of these two values.  If both loops iterate `n` times, it becomes O(n²), which is a common scenario and leads to slower execution for large values of 'n'.
+
+
+**Uses:**
+
+Nested loops are frequently used for:
+
+* **Processing multi-dimensional arrays (matrices):** Iterating through rows and columns.
+* **Generating patterns:** Creating visual output like triangles, squares, etc.
+* **Implementing algorithms:**  Many algorithms (e.g., sorting, searching) rely on nested loops.
+* **Combinatorial problems:** Finding all possible combinations or permutations.
+
+
+Nested loops are a powerful but potentially inefficient tool.  If you're dealing with large datasets, consider alternative approaches (like using more efficient algorithms or data structures) to avoid excessive computation time.
+
