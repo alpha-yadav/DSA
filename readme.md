@@ -6840,3 +6840,63 @@ else:
 
 Both methods achieve the same result. Choose the recursive approach for its simplicity and readability unless you anticipate very large trees where stack overflow could be a concern.  In that case, the iterative method using queues is a safer alternative. Remember to handle the `None` cases carefully in both approaches to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They're particularly useful when you need to perform searches, insertions, and deletions quickly.  Here's a breakdown of their key features and characteristics:
+
+**Key Properties:**
+
+* **Ordered Structure:** The core principle is that for every node in the tree:
+    * All nodes in its *left subtree* have values *less than* the node's value.
+    * All nodes in its *right subtree* have values *greater than* the node's value.
+* **Unique Keys:**  Typically, BSTs don't allow duplicate keys (values).  If you need to handle duplicates, you might need a modified structure or use a different approach like a balanced tree with counts.
+* **Hierarchical Structure:** The data is organized hierarchically, with a root node at the top and branches leading to child nodes.  Each node can have at most two children (left and right).
+
+
+**Basic Operations:**
+
+* **Search:**  Finding a specific node with a given key. The search algorithm efficiently traverses the tree, going left if the key is smaller and right if it's larger.  The time complexity in a balanced tree is O(log n), where n is the number of nodes.  In a worst-case scenario (e.g., a skewed tree resembling a linked list), it becomes O(n).
+
+* **Insertion:** Adding a new node to the tree while maintaining the BST property.  The process involves searching for the appropriate location to insert the new node, ensuring it's placed correctly to preserve the ordering. Time complexity is O(log n) for a balanced tree and O(n) for a skewed tree.
+
+* **Deletion:** Removing a node from the tree while preserving the BST property.  This is the most complex operation, as it involves several cases depending on whether the node being deleted has zero, one, or two children.  Time complexity is O(log n) for a balanced tree and O(n) for a skewed tree.
+
+* **Minimum/Maximum:** Finding the minimum or maximum value in the tree.  These operations are efficient because the minimum is always the leftmost node, and the maximum is always the rightmost node.  Time complexity is O(h), where h is the height of the tree (O(log n) for a balanced tree, O(n) for a skewed tree).
+
+* **Traversal:** Visiting all nodes in the tree in a systematic order:
+    * **Inorder Traversal:** Visits nodes in ascending order of their keys.
+    * **Preorder Traversal:** Visits the root node first, then the left subtree, then the right subtree.
+    * **Postorder Traversal:** Visits the left subtree, then the right subtree, then the root node.  These traversals are useful for various applications, such as generating different representations of the tree.
+
+
+**Advantages of BSTs:**
+
+* **Efficient Search, Insertion, and Deletion (in balanced trees):**  O(log n) time complexity makes them suitable for large datasets.
+* **Simple Implementation:** Relatively easy to understand and implement compared to other more complex tree structures.
+* **Ordered Data:**  Provides naturally ordered data for efficient retrieval.
+
+
+**Disadvantages of BSTs:**
+
+* **Worst-Case Performance:**  In a skewed tree, the performance degrades to O(n) for search, insertion, and deletion.
+* **Not Self-Balancing:**  Simple BST insertions can lead to unbalanced trees, which negatively impact performance.  Self-balancing BSTs (like AVL trees or red-black trees) address this issue but are more complex to implement.
+
+
+**When to Use BSTs:**
+
+BSTs are a good choice when:
+
+* You need efficient search, insertion, and deletion operations.
+* The data is naturally ordered or can be easily ordered.
+* You're comfortable with the potential for unbalanced trees (or willing to use a self-balancing variant).
+
+
+**Self-Balancing BSTs:**
+
+To mitigate the problem of unbalanced trees, self-balancing BSTs are used. These trees automatically adjust their structure during insertions and deletions to maintain a relatively balanced shape, ensuring that the height of the tree remains logarithmic in the number of nodes.  Examples include:
+
+* **AVL Trees:**  Maintain a balance factor for each node to ensure that the height difference between the left and right subtrees is at most 1.
+* **Red-Black Trees:**  Use a coloring scheme to ensure that the tree remains relatively balanced.
+
+
+In summary, BSTs are a valuable data structure, but understanding their limitations and considering the use of self-balancing variants is crucial for optimal performance in real-world applications.
+
