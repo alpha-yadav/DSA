@@ -6143,3 +6143,42 @@ This version builds the output string piece by piece.  If a number is divisible 
 
 Both versions achieve the same result.  Version 1 is easier to read and understand for beginners. Version 2 is slightly more concise and might be preferred by experienced programmers who value brevity.  Choose the version that best suits your understanding and coding style.  For learning purposes, starting with Version 1 is highly recommended. Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most commonly considered are:
+
+* **Time complexity:** How the runtime of an algorithm scales with the input size.
+* **Space complexity:** How the memory usage of an algorithm scales with the input size.
+
+We typically analyze complexity using **Big O notation**, which describes the upper bound of the growth rate of a function.  It focuses on the dominant terms as the input size approaches infinity, ignoring constant factors and lower-order terms.  This allows us to compare the efficiency of algorithms regardless of specific hardware or implementation details.
+
+Here's a breakdown of common complexities:
+
+**Time Complexity:**
+
+* **O(1) - Constant time:** The runtime is independent of the input size.  Example: Accessing an element in an array by index.
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear time:** The runtime increases linearly with the input size.  Example: Searching an unsorted array for a specific element.
+* **O(n log n) - Linearithmic time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+* **O(n²) - Quadratic time:** The runtime increases quadratically with the input size.  Example: Bubble sort, selection sort, nested loops iterating over the input.
+* **O(n³) - Cubic time:** The runtime increases cubically with the input size. Example: Some matrix multiplication algorithms (naive approach).
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial time:** The runtime grows factorially with the input size. Example:  Traveling salesman problem (brute-force approach).
+
+
+**Space Complexity:**  Similar notations are used:
+
+* **O(1) - Constant space:** The memory usage is independent of the input size.
+* **O(n) - Linear space:** The memory usage increases linearly with the input size.
+* **O(log n) - Logarithmic space:** The memory usage increases logarithmically with the input size.
+* **O(n²) - Quadratic space:**  The memory usage increases quadratically with the input size.
+* and so on...
+
+**Important Considerations:**
+
+* **Best-case, average-case, worst-case:**  The complexity of an algorithm can vary depending on the input data.  We often analyze these three cases separately.  For example, a linear search has a best-case complexity of O(1) (if the element is found at the beginning), an average-case complexity of O(n), and a worst-case complexity of O(n) (if the element is at the end or not present).
+* **Amortized analysis:** This technique averages the time complexity over a sequence of operations, even if individual operations have different complexities.  For example, adding elements to a dynamically resizing array might have occasional O(n) operations for resizing, but the amortized complexity is O(1).
+* **Big Omega (Ω) and Big Theta (Θ):**  Big O provides an upper bound. Big Omega (Ω) provides a lower bound, and Big Theta (Θ) provides both an upper and lower bound (tight bound).
+
+
+Understanding algorithm complexity is crucial for selecting efficient algorithms for specific tasks and for optimizing the performance of existing code.  Choosing an algorithm with a lower complexity often leads to significant improvements in runtime and memory usage, especially for large input sizes.
+
