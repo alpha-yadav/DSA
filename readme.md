@@ -8886,3 +8886,77 @@ Here are a few algorithmic problems with varying difficulty, from beginner to in
 
 These are just examples, and many variations and extensions are possible.  The key is to understand the problem, devise an algorithm to solve it efficiently, and then implement that algorithm in code. Remember to consider time and space complexity when choosing an algorithm.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's deceptively simple, but a good way to test basic understanding of loops and conditional statements.  Here's how to implement it in Swift, starting with the most straightforward approach and then showing some more advanced variations:
+
+**Basic Implementation:**
+
+This uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5. If none of those conditions are met, it prints the number itself.
+
+**Slightly Improved Implementation (using else if more efficiently):**
+
+This version is functionally equivalent but slightly more efficient because it avoids unnecessary checks:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This version builds the output string. If the string is empty after checking for divisibility by 3 and 5, it means the number is not divisible by either, so it prints the number itself.
+
+**More Advanced Implementation (using a tuple and switch):**
+
+This is a more concise and arguably more readable approach, though it might be considered slightly less beginner-friendly:
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+    for i in 1...n {
+        let (fizz, buzz) = (i % 3 == 0, i % 5 == 0)
+        switch (fizz, buzz) {
+        case (true, true): print("FizzBuzz")
+        case (true, false): print("Fizz")
+        case (false, true): print("Buzz")
+        case (false, false): print(" \(i)") // Note the space before i for consistent output
+        }
+    }
+}
+
+fizzBuzzAdvanced(n: 15)
+
+```
+
+This uses a tuple to store the boolean results of the divisibility checks and then uses a `switch` statement to handle the different cases.
+
+
+**Choosing the Best Implementation:**
+
+For beginners, the first or second implementation is probably easiest to understand. The advanced version demonstrates more advanced Swift features, but readability might suffer for someone new to the language.  Choose the version that best suits your current skill level and the context of where you're using this code (e.g., an interview, a personal project, etc.). Remember to choose clarity over cleverness, especially when starting out.
+
