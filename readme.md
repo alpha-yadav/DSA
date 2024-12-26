@@ -6084,3 +6084,62 @@ You can return the answer in any order.
 
 Remember to try solving these problems yourself before looking up solutions.  The process of struggling and learning is crucial for improving your algorithmic thinking.  Many online resources (like LeetCode, HackerRank, etc.) offer these problems and more, along with tools to test your code.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple, easy-to-understand version, and then showing a slightly more advanced approach:
+
+
+**Version 1: Basic Approach**
+
+This version uses a series of `if-else if-else` statements to handle each condition:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks if it's divisible by 3. If so, it prints "Fizz".
+* Otherwise, it checks if it's divisible by 5. If so, it prints "Buzz".
+* Otherwise, it prints the number itself.
+
+
+**Version 2: Slightly More Concise Approach**
+
+This version uses string concatenation and the ternary operator (`condition ? value1 : value2`) to make the code a bit more compact:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+
+```
+
+This version builds the output string piece by piece.  If a number is divisible by 3, "Fizz" is added; if divisible by 5, "Buzz" is added.  If the `output` string is empty after these checks, it means the number is not divisible by 3 or 5, so the number itself is printed.
+
+
+**Choosing the Best Version:**
+
+Both versions achieve the same result.  Version 1 is easier to read and understand for beginners. Version 2 is slightly more concise and might be preferred by experienced programmers who value brevity.  Choose the version that best suits your understanding and coding style.  For learning purposes, starting with Version 1 is highly recommended. Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).
+
