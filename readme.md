@@ -10521,3 +10521,106 @@ def postorder_traversal(node):
 
 Remember to choose the traversal method that best suits the specific task you're performing on the binary tree.  The choice often depends on the order in which you need to access the nodes.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS) for trees, visits all nodes level by level.  Here are implementations in Python and JavaScript, along with explanations:
+
+**Python Implementation:**
+
+This implementation uses a queue to achieve level-order traversal.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])  # Use deque for efficient queue operations
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+**Explanation:**
+
+1. **`Node` Class:** Defines a node in the binary tree with `data`, `left`, and `right` child pointers.
+2. **`levelOrder` Function:**
+   - Takes the root node as input.
+   - Handles the case of an empty tree.
+   - Initializes a `deque` (double-ended queue) to act as a queue for BFS.  The root is added to the queue.
+   - Uses a `while` loop to process the queue until it's empty.
+   - In each iteration:
+     - It removes the first element (`popleft()`) from the queue (this is the node to visit).
+     - It prints the node's data.
+     - If the node has left and/or right children, it adds them to the queue.
+
+
+**JavaScript Implementation:**
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) return;
+
+  let queue = [root]; // Use an array as a queue
+  while (queue.length > 0) {
+    let curr = queue.shift(); // Remove the first element
+    console.log(curr.data + " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+
+// Example usage:
+let root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1 2 3 4 5
+```
+
+**Explanation (JavaScript):**
+
+The JavaScript implementation is very similar to the Python version.  The main difference is that JavaScript uses an array as a queue (using `shift()` to remove from the front and `push()` to add to the back).  Python's `collections.deque` is generally more efficient for queue operations than using a JavaScript array in this way.
+
+
+Both implementations achieve the same result: a level-order traversal of the binary tree, printing the node values level by level.  Choose the implementation that best suits your programming language preference. Remember to handle potential errors like null or undefined input.
+
