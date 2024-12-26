@@ -9350,3 +9350,27 @@ Nested loops are frequently used for:
 
 Nested loops are a powerful but potentially inefficient tool.  If you're dealing with large datasets, consider alternative approaches (like using more efficient algorithms or data structures) to avoid excessive computation time.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to reduce the problem size by a constant factor with each step.  This typically involves dividing the problem in half (or some other constant fraction) repeatedly until a base case is reached.  Here are some common types of algorithms exhibiting O(log n) time complexity:
+
+**1. Binary Search:** This is the quintessential O(log n) algorithm.  It works on a *sorted* list or array.  To find a target element, it repeatedly divides the search interval in half. If the target is in the middle element, it's found. Otherwise, the search continues recursively in either the left or right half.
+
+**2. Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  Balanced binary search trees (like AVL trees or red-black trees) maintain a roughly balanced structure.  Operations like searching, inserting, and deleting nodes typically take O(log n) time because the height of the tree is proportional to log₂n, where n is the number of nodes.  Unbalanced trees can degenerate to O(n) in the worst case.
+
+**3. Efficient Set/Map Operations (in balanced tree-based implementations):**  Many implementations of sets and maps (like those found in standard libraries) use balanced tree structures (or hash tables, which can be O(1) on average but O(n) in the worst case).  Operations like `find`, `insert`, and `delete` usually have O(log n) time complexity.
+
+**4. Exponentiation by Squaring:**  This algorithm efficiently calculates aⁿ (a raised to the power of n) in O(log n) time.  It relies on the observation that aⁿ = (a²/²)² if n is even, and aⁿ = a * aⁿ⁻¹ if n is odd.  This allows for a recursive approach that halves the exponent in each step.
+
+**5. Finding the kth smallest element using QuickSelect (average case):** QuickSelect is a randomized algorithm that finds the kth smallest element in an unsorted array. While its worst-case complexity is O(n²), its average-case complexity is O(n).  If you're specifically searching for the median (k = n/2), it becomes a O(log n) algorithm in its average case.  However, this is not a strict O(log n) algorithm.  Median finding algorithms with guaranteed O(n) exist, too.
+
+**6. Some Graph Algorithms (depending on structure):** Certain graph algorithms might exhibit O(log n) complexity under specific circumstances, such as searching in a balanced tree representation of the graph or performing operations on specific graph structures with logarithmic properties.  This is not a common scenario, though.
+
+**Key Characteristics of O(log n) Algorithms:**
+
+* **Divide and Conquer:** They repeatedly break down the problem into smaller subproblems.
+* **Sorted Data (often):**  Many O(log n) algorithms require or benefit significantly from sorted input data (e.g., binary search).
+* **Balanced Structures:**  Algorithms operating on balanced trees or other balanced data structures often achieve O(log n) performance.
+
+
+It's important to note that the base of the logarithm (e.g., base 2, base 10) doesn't affect the overall time complexity classification; it's just a constant factor.  The crucial point is that the runtime grows logarithmically with the input size.
+
