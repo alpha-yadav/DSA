@@ -6182,3 +6182,48 @@ Here's a breakdown of common complexities:
 
 Understanding algorithm complexity is crucial for selecting efficient algorithms for specific tasks and for optimizing the performance of existing code.  Choosing an algorithm with a lower complexity often leads to significant improvements in runtime and memory usage, especially for large input sizes.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the *tight bound* of a function's growth rate.  Unlike Big-O notation, which provides an upper bound, and Big-Omega notation (Ω), which provides a lower bound, Big-Theta provides both an upper and a lower bound simultaneously.
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) if there exist positive constants c₁ and c₂, and a positive integer n₀, such that for all n ≥ n₀:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+In simpler terms:
+
+* For sufficiently large inputs (n ≥ n₀), the function f(n) is always bounded above and below by constant multiples of g(n).
+*  f(n) grows at the same rate as g(n), ignoring constant factors.
+
+**What this means:**
+
+Θ notation tells us that the function f(n) is neither significantly faster nor significantly slower than g(n) as n approaches infinity.  The growth rates are essentially the same.  The constant factors (c₁ and c₂) and smaller input values (n < n₀) are disregarded because we're interested in the dominant behavior for large inputs.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1 is Θ(n²)**
+
+   We can find constants:  c₁ = 1, c₂ = 4, and n₀ = 1 such that for n ≥ 1:
+
+   `1 * n² ≤ 2n² + 3n + 1 ≤ 4 * n²`
+
+   This holds because for sufficiently large n, the n² term dominates.
+
+* **f(n) = 5n + 10 is Θ(n)**
+
+   The dominant term is 'n'.  We can choose appropriate constants to satisfy the definition.
+
+* **f(n) = log₂(n) + 5 is Θ(log₂(n))**
+
+   The constant term '5' is insignificant compared to the logarithmic term as n grows large.
+
+* **f(n) = n² is NOT Θ(n)**
+
+   While f(n) is O(n²) and Ω(n), it's not Θ(n) because there's no constant that can bound n² from above by a constant multiple of n for large n.
+
+
+**In summary:**
+
+Big-Theta notation provides a precise and powerful way to express the efficiency of algorithms and data structures. It allows for a more rigorous analysis of algorithm performance compared to using only Big-O notation. While Big-O focuses on the *upper bound*, Big-Theta captures the *exact growth rate* within constant factors. Using Big-Theta is preferred when a tight bound is needed.  However, often a Big-O analysis is sufficient and easier to obtain.
+
