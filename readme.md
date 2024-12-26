@@ -8826,3 +8826,63 @@ Begin with fundamental algorithm types:
 
 By following these steps and dedicating time to consistent learning and practice, you'll steadily build your understanding and skills in the fascinating world of algorithms. Remember to start with the basics, build a strong foundation, and gradually work your way up to more complex topics.  Good luck!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems with varying difficulty, from beginner to intermediate:
+
+
+**Beginner:**
+
+**Problem:**  Find the largest number in an unsorted array.
+
+**Input:** An array of integers (e.g., `[3, 1, 4, 1, 5, 9, 2, 6]`).
+
+**Output:** The largest number in the array (e.g., `9`).
+
+**Algorithm (simple approach):**
+
+1. Initialize a variable `max_num` to the first element of the array.
+2. Iterate through the array.
+3. For each element, if it's greater than `max_num`, update `max_num` to that element.
+4. After iterating through the entire array, `max_num` will hold the largest number.
+
+
+**Intermediate:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers (e.g., `[2, 7, 11, 15]`) and a target integer (e.g., `9`).
+
+**Output:** Indices of the two numbers such that they add up to the target.  Return `null` or an appropriate error message if no two numbers add up to the target. (e.g., `[0, 1]` because 2 + 7 = 9).
+
+**Algorithm (using a hash map/dictionary):**
+
+1. Create a hash map (dictionary) to store numbers and their indices.
+2. Iterate through the array:
+   - For each number `num`, calculate the complement `complement = target - num`.
+   - Check if the `complement` exists in the hash map.
+     - If it does, return the indices of `num` and `complement`.
+     - If it doesn't, add `num` and its index to the hash map.
+3. If the loop completes without finding a pair, return `null` or an appropriate error message.
+
+
+**Intermediate/Advanced:**
+
+**Problem:**  Reverse a Linked List
+
+**Input:** A singly linked list.
+
+**Output:** The same linked list with its nodes reversed.
+
+**Algorithm (iterative approach):**
+
+1. Initialize three pointers: `prev`, `curr`, and `next`.  `prev` starts as `null`, `curr` starts as the head of the list, and `next` is initially `null`.
+2. Iterate through the list:
+   - Set `next` to `curr.next`.
+   - Set `curr.next` to `prev`.
+   - Update `prev` to `curr`.
+   - Update `curr` to `next`.
+3. After the loop, `prev` will point to the new head of the reversed list.
+
+
+These are just examples, and many variations and extensions are possible.  The key is to understand the problem, devise an algorithm to solve it efficiently, and then implement that algorithm in code. Remember to consider time and space complexity when choosing an algorithm.
+
