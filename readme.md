@@ -10418,3 +10418,106 @@ else:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach (H being the height of the tree - worst case O(N) for a skewed tree) and O(H)  for the iterative approach (again, worst-case O(N) for a skewed tree).  The iterative method generally offers better performance and avoids the risk of stack overflow for very deep trees.  Choose the method that best suits your needs and coding style.  Remember to adapt the Node class definition if your node structure differs.
 
+#  Binary Tree traversals 
+Binary tree traversals are methods for visiting (processing) each node in a binary tree exactly once.  There are three main types of traversals:
+
+* **Inorder Traversal:**  Visit the left subtree, then the root node, then the right subtree.  For a binary *search* tree, this yields a sorted sequence of the nodes' values.
+
+* **Preorder Traversal:** Visit the root node, then the left subtree, then the right subtree.
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root node.
+
+
+Let's illustrate with a sample binary tree:
+
+```
+     A
+    / \
+   B   C
+  / \   \
+ D   E   F
+```
+
+**Inorder Traversal:**  D B E A C F
+* Start at A.
+* Go left to B.
+* Go left to D.  Process D.
+* Go back up to B.
+* Go right to E. Process E.
+* Go back up to B. Process B.
+* Go back up to A.
+* Go right to C.
+* Go right to F. Process F.
+* Go back up to C. Process C.
+* Go back up to A. Process A.
+
+
+**Preorder Traversal:** A B D E C F
+* Start at A. Process A.
+* Go left to B. Process B.
+* Go left to D. Process D.
+* Go back up to B.
+* Go right to E. Process E.
+* Go back up to B.
+* Go back up to A.
+* Go right to C. Process C.
+* Go right to F. Process F.
+
+
+**Postorder Traversal:** D E B F C A
+* Start at A.
+* Go left to B.
+* Go left to D. Process D.
+* Go right to E. Process E.
+* Go back up to B. Process B.
+* Go back up to A.
+* Go right to C.
+* Go right to F. Process F.
+* Go back up to C. Process C.
+* Go back up to A. Process A.
+
+
+**Recursive Implementations (Python):**
+
+These implementations assume a node structure like this:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+```python
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+```
+
+**Iterative Implementations:**  Iterative approaches use stacks to avoid recursion, which can be more efficient for very large trees and prevent stack overflow errors.  They are slightly more complex but offer performance advantages.
+
+
+**Applications:**
+
+* **Inorder Traversal:**  Sorting (for BSTs), expression evaluation (infix notation).
+* **Preorder Traversal:**  Creating a copy of the tree, representing the tree structure.
+* **Postorder Traversal:**  Deleting a tree (deleting nodes from leaves up), expression evaluation (postfix notation).
+
+
+Remember to choose the traversal method that best suits the specific task you're performing on the binary tree.  The choice often depends on the order in which you need to access the nodes.
+
