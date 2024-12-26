@@ -10972,3 +10972,13 @@ def lca_parent_pointers(p, q):
 
 Remember to adapt these algorithms to handle edge cases like when one or both nodes are not in the tree.  You might need to add error handling to your functions.
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need that information to create the graph for you.  For example, tell me:
+
+* **A set of points:**  (x1, y1), (x2, y2), (x3, y3)...
+* **An equation:**  y = mx + b  (or a more complex equation)
+* **A table of data:** with x and y values.
+* **The type of graph:** (e.g., line graph, scatter plot, bar chart, etc.)
+
+Once you give me this information, I can help you.
+
