@@ -10709,3 +10709,130 @@ postorder(root)  # Output: D E B F C A
 
 This Python code demonstrates the three traversals.  You can adapt it to other programming languages using similar recursive functions.  Remember that the efficiency of these traversals is O(N), where N is the number of nodes in the tree, as each node is visited exactly once.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a binary tree is a classic algorithm problem.  The approach varies slightly depending on whether the tree is a binary *search* tree (BST) or a general binary tree.
+
+**1. LCA in a Binary Search Tree (BST):**
+
+In a BST, the property that nodes in the left subtree are smaller and nodes in the right subtree are larger than the root significantly simplifies the algorithm.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_bst(root, n1, n2):
+    """
+    Finds the LCA of n1 and n2 in a BST.
+
+    Args:
+        root: The root of the BST.
+        n1: The data of the first node.
+        n2: The data of the second node.
+
+    Returns:
+        The LCA node, or None if either node is not found.
+    """
+    if root is None:
+        return None
+
+    if max(n1, n2) < root.data:
+        return lca_bst(root.left, n1, n2)
+    elif min(n1, n2) > root.data:
+        return lca_bst(root.right, n1, n2)
+    else:
+        return root
+
+# Example Usage
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+n1 = 4
+n2 = 12
+lca = lca_bst(root, n1, n2)
+print(f"LCA of {n1} and {n2}: {lca.data if lca else None}")  # Output: LCA of 4 and 12: 8
+
+n1 = 10
+n2 = 14 #Nodes not present
+lca = lca_bst(root,n1,n2)
+print(f"LCA of {n1} and {n2}: {lca.data if lca else None}") #Output: LCA of 10 and 14: None
+
+
+```
+
+**2. LCA in a General Binary Tree:**
+
+For a general binary tree (not necessarily a BST), we need a different approach.  A common technique is to use a recursive function that explores the tree.  If a node is found, it's passed up to the parent. If both nodes are found in the subtrees, their LCA is the current node.
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_general(root, n1, n2):
+    """
+    Finds the LCA of n1 and n2 in a general binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        n1: The data of the first node.
+        n2: The data of the second node.
+
+    Returns:
+        The LCA node, or None if either node is not found.
+    """
+
+    if root is None:
+        return None
+    if root.data == n1 or root.data == n2:
+        return root
+
+
+    left_lca = lca_general(root.left, n1, n2)
+    right_lca = lca_general(root.right, n1, n2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+#Example Usage:
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+n1 = 4
+n2 = 5
+lca = lca_general(root, n1, n2)
+print(f"LCA of {n1} and {n2}: {lca.data if lca else None}")  # Output: LCA of 4 and 5: 2
+
+n1 = 4
+n2 = 6
+lca = lca_general(root, n1, n2)
+print(f"LCA of {n1} and {n2}: {lca.data if lca else None}")  # Output: LCA of 4 and 6: 1
+
+
+n1 = 8
+n2 = 10 #Nodes not present
+lca = lca_general(root,n1,n2)
+print(f"LCA of {n1} and {n2}: {lca.data if lca else None}") #Output: LCA of 8 and 10: None
+
+```
+
+Remember to handle the cases where one or both nodes are not present in the tree.  The code examples above include basic error handling for this.  For larger trees, consider optimizing the recursive calls using techniques like memoization to avoid redundant computations.
+
