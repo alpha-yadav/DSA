@@ -7441,3 +7441,116 @@ print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}")  # Fal
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(N) for the inorder traversal method in the worst case (a skewed tree), and O(H) for the recursive method, where H is the height of the tree (O(log N) for a balanced tree, O(N) for a skewed tree).  The recursive method is generally preferred for its slightly better space complexity in the average case.  Choose the method that best suits your needs and understanding.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.data)
+            inorder(node.right)
+    
+    inorder(root)
+    
+    #Check if inorder list is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}") #Should print True
+
+root2 = Node(10)
+root2.left = Node(15)  #Violation here
+root2.right = Node(20)
+
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") #Should print False
+
+```
+
+**Method 2: Recursive with Min and Max Bounds**
+
+This approach is more efficient because it avoids creating an entire sorted list.  It recursively checks each subtree, maintaining minimum and maximum allowed values for the nodes within that subtree.
+
+```python
+import sys
+
+def is_bst_recursive_minmax(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+    """
+    Checks if a binary tree is a BST using recursion and min/max bounds.
+
+    Args:
+        node: The current node being checked.
+        min_val: The minimum allowed value for this subtree.
+        max_val: The maximum allowed value for this subtree.
+
+    Returns:
+        True if the subtree rooted at node is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive_minmax(node.left, min_val, node.data) and
+            is_bst_recursive_minmax(node.right, node.data, max_val))
+
+# Example Usage (same trees as before):
+
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root)}")  # Should print True
+
+root2 = Node(10)
+root2.left = Node(15)  # Violation here
+root2.right = Node(20)
+
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root2)}")  # Should print False
+```
+
+**Choosing the Right Method:**
+
+* **Method 1 (In-order traversal):** Simpler to understand, but less efficient as it requires traversing the entire tree and creating a list.  Space complexity is O(N) where N is the number of nodes.
+
+* **Method 2 (Min/Max bounds):** More efficient as it avoids creating a list.  It performs better for larger trees. Its space complexity is O(h) where h is the height of the tree (in the worst case, this could be O(N) for a skewed tree, but it's typically better than O(N)).  This is generally the preferred method.
+
+
+Remember to handle edge cases like empty trees appropriately in your implementation.  Both methods provided above include such handling.
+
