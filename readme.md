@@ -7554,3 +7554,104 @@ print(f"Is the tree a BST? {is_bst_recursive_minmax(root2)}")  # Should print Fa
 
 Remember to handle edge cases like empty trees appropriately in your implementation.  Both methods provided above include such handling.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The core idea is to recursively check that for every node:
+
+* All nodes in its left subtree have values less than the node's value.
+* All nodes in its right subtree have values greater than the node's value.
+
+Here are a few methods, with varying levels of efficiency:
+
+**Method 1: Recursive In-Order Traversal**
+
+This is arguably the most elegant and efficient approach.  A BST, when traversed in-order (left, root, right), will produce a sorted sequence.  If the in-order traversal doesn't yield a sorted sequence, it's not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    """Checks if a tree is a BST using in-order traversal."""
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    for i in range(1, len(result)):
+        if result[i] < result[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)  #This makes it NOT a BST
+root.right.right = Node(6)
+
+print(is_bst_inorder(root))  # Output: False
+
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+print(is_bst_inorder(root2)) # Output: True
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each node, passing down the minimum and maximum allowed values for that subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val, max_val):
+    """Checks if a tree is a BST recursively."""
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+
+# Example usage (same trees as above):
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+print(is_bst_recursive(root, float('-inf'), float('inf')))  # Output: False
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+print(is_bst_recursive(root2, float('-inf'), float('inf')))  # Output: True
+```
+
+**Method 3: Iterative Approach (Using a Stack)**
+
+This method uses a stack to perform a depth-first traversal, similar to the recursive approach, but avoids recursion's potential stack overflow issues for very deep trees.  The implementation is slightly more complex but offers better performance for extremely large trees. (Implementation omitted for brevity, as it's longer but conceptually similar to the recursive method).
+
+
+**Which Method to Choose?**
+
+* **In-order traversal (Method 1):**  Simplest and often fastest for reasonably sized trees.  Its elegance makes it easy to understand and debug.
+* **Recursive Min/Max (Method 2):**  Good balance of readability and efficiency.  Handles larger trees well without the complexity of an iterative approach.
+* **Iterative Approach (Method 3):**  Best for extremely large trees where recursion might cause stack overflow errors.  However, it's more complex to implement and understand.
+
+
+For most cases, the in-order traversal or the recursive min/max method will suffice. Choose the method that best suits your needs based on the size of the trees you expect to process and your comfort level with different programming paradigms. Remember to handle edge cases such as empty trees appropriately.
+
