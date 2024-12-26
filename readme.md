@@ -8960,3 +8960,51 @@ This uses a tuple to store the boolean results of the divisibility checks and th
 
 For beginners, the first or second implementation is probably easiest to understand. The advanced version demonstrates more advanced Swift features, but readability might suffer for someone new to the language.  Choose the version that best suits your current skill level and the context of where you're using this code (e.g., an interview, a personal project, etc.). Remember to choose clarity over cleverness, especially when starting out.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm consumes as the input size grows.  It's a crucial concept in computer science because it helps us understand how an algorithm's performance scales with larger inputs, allowing us to choose the most efficient solution for a given problem.
+
+We analyze complexity using **Big O notation**, which describes the upper bound of the growth rate.  It focuses on the dominant terms as the input size (usually denoted as 'n') approaches infinity, ignoring constant factors and lower-order terms.
+
+Here's a breakdown of common complexities:
+
+**Time Complexity (How long an algorithm takes):**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient. Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  This can become slow for large inputs. Example: Bubble sort, selection sort, nested loops iterating over the same input.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  These algorithms become impractical for even moderately sized inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  Extremely inefficient for all but the smallest inputs. Example: Finding all permutations of a set.
+
+
+**Space Complexity (How much memory an algorithm uses):**
+
+Space complexity is analyzed similarly to time complexity, using Big O notation.  It describes the amount of memory an algorithm needs as a function of the input size.
+
+* **O(1) - Constant Space:** The algorithm uses a constant amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The algorithm's memory usage grows linearly with the input size. Example: Creating a copy of an array.
+
+* **O(log n) - Logarithmic Space:** The algorithm's memory usage grows logarithmically with the input size.  (Less common than linear or constant).
+
+* **O(n²) - Quadratic Space:** and beyond... similar to time complexity.
+
+
+**Important Considerations:**
+
+* **Best-case, Average-case, Worst-case:**  Big O notation typically describes the *worst-case* scenario.  The best-case might be significantly faster, and the average-case can fall somewhere in between.
+
+* **Asymptotic Analysis:** Big O notation focuses on the behavior as the input size approaches infinity.  For small inputs, the constant factors can be significant, and a less efficient algorithm might be faster in practice.
+
+* **Amortized Analysis:** This considers the average time complexity over a sequence of operations, even if some individual operations are expensive.
+
+
+Understanding algorithm complexity is crucial for writing efficient and scalable programs. Choosing an algorithm with a lower complexity often dramatically improves performance, especially when dealing with large datasets.
+
