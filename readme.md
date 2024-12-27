@@ -12194,3 +12194,81 @@ int main() {
 
 These examples all print the numbers 0 through 4.  The choice of which loop to use depends on the specific requirements of your program.  `while` loops are best when the number of iterations isn't known in advance, `for` loops are ideal for iterating a known number of times, and `do-while` loops ensure at least one execution.  Remember to always be mindful of infinite loops (loops that never end) by ensuring your loop condition eventually becomes false.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a situation where the inner loop's code runs many more times than the outer loop.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed in the inner loop
+    # Code to be executed after the inner loop completes for a single outer loop iteration
+# Code to be executed after the outer loop completes
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop iterates from 1 to 10
+    for j in range(1, 11):  # Inner loop iterates from 1 to 10
+        print(i * j, end="\t")  # Prints the product with a tab
+    print()  # Newline after each row
+```
+
+This will output:
+
+```
+1       2       3       4       5       6       7       8       9       10      
+2       4       6       8       10      12      14      16      18      20      
+3       6       9       12      15      18      21      24      27      30      
+...and so on...
+```
+
+**Explanation:**
+
+1. **Outer Loop:** The outer loop iterates through numbers 1 to 10 (represented by `i`).
+2. **Inner Loop:** For *each* value of `i`, the inner loop iterates through numbers 1 to 10 (represented by `j`).
+3. **Inner Loop Body:** Inside the inner loop, the product `i * j` is calculated and printed.  `end="\t"` ensures the output is tab-separated.
+4. **Outer Loop's Post-Inner-Loop Code:**  `print()` after the inner loop creates a newline, moving to the next row of the multiplication table.
+
+
+**Other Programming Languages:**
+
+The concept of nested loops is the same across most programming languages.  The syntax might vary slightly, but the fundamental structure remains consistent.  For instance, here's a similar example in C++:
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 1; i <= 10; i++) {
+    for (int j = 1; j <= 10; j++) {
+      std::cout << i * j << "\t";
+    }
+    std::cout << std::endl;
+  }
+  return 0;
+}
+```
+
+**Time Complexity:**
+
+Nested loops significantly increase the time complexity of your algorithm. If both loops iterate `n` times, the total number of iterations becomes `n * n = n²`, resulting in a time complexity of O(n²).  This is called quadratic time complexity, and it means the execution time grows proportionally to the square of the input size.  This is important to keep in mind when dealing with large datasets, as nested loops can become very slow.
+
+
+**Uses:**
+
+Nested loops are commonly used for tasks like:
+
+* **Processing matrices/2D arrays:** Iterating through rows and columns.
+* **Generating patterns:**  Creating shapes or visual output.
+* **Combinatorics:** Exploring all possible combinations or permutations.
+* **Searching and sorting (some algorithms):**  Though often less efficient than optimized algorithms for large datasets.
+
+
+Understanding nested loops is crucial for many programming tasks, but it's essential to be mindful of their potential performance implications when working with substantial amounts of data.
+
