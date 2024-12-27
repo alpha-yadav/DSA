@@ -14504,3 +14504,99 @@ The choice between BFS and DFS depends on the specific problem:
 
 Understanding graph traversals is fundamental to many graph algorithms and applications in computer science.  The choice of algorithm depends heavily on the specific problem and the properties of the graph.
 
+#  Depth First Search traversal function 
+There are several ways to implement a Depth-First Search (DFS) traversal function, depending on the data structure used to represent the graph (adjacency matrix, adjacency list) and whether you want to perform iterative or recursive DFS.  Below are examples using both approaches and an adjacency list, which is generally preferred for sparse graphs (graphs with relatively few edges).
+
+
+**1. Recursive DFS (Adjacency List)**
+
+This approach is often considered more elegant and easier to understand for beginners.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+        path: A list to store the traversal path (optional, defaults to an empty list).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+traversal_path = dfs_recursive(graph, 'A')
+print(f"DFS Traversal (Recursive): {traversal_path}")  # Output will vary slightly depending on order of neighbors
+```
+
+
+**2. Iterative DFS (Adjacency List)**
+
+This approach uses a stack to simulate the recursion, making it potentially more efficient for very deep graphs, and avoiding the risk of stack overflow errors in extremely deep graphs.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        node: The starting node for the traversal.
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    visited = set()
+    stack = [node]
+    path = []
+
+    while stack:
+        current_node = stack.pop()
+        if current_node not in visited:
+            visited.add(current_node)
+            path.append(current_node)
+            stack.extend(neighbor for neighbor in graph.get(current_node, []) if neighbor not in visited)
+
+    return path
+
+# Example usage (same graph as before):
+traversal_path = dfs_iterative(graph, 'A')
+print(f"DFS Traversal (Iterative): {traversal_path}") # Output will vary slightly depending on order of neighbors
+
+```
+
+**Important Considerations:**
+
+* **Graph Representation:**  The choice of adjacency list or matrix significantly impacts the efficiency of DFS. Adjacency lists are generally better for sparse graphs.
+* **Starting Node:** DFS traversal depends on the starting node. Different starting nodes will produce different traversal orders.
+* **Visited Set:** The `visited` set is crucial to prevent cycles and ensure that each node is visited only once.
+* **Order of Neighbors:**  The order in which neighbors are processed can affect the specific path produced by DFS, though all nodes reachable from the starting node will always be visited.
+
+
+Remember to adapt these functions to your specific needs and the representation of your graph.  If you are using a different data structure (e.g., an adjacency matrix), you'll need to modify the code accordingly to access neighbors appropriately.
+
