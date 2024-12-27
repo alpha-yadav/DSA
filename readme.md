@@ -14720,3 +14720,72 @@ Output: `[1,1,2,3,4,4,5,6]`
 
 These problems showcase different levels of difficulty and require different algorithmic techniques. Choosing the right data structure and algorithm is key to solving them efficiently.  Remember to consider time and space complexity when designing your solution.  You can find many more problems and their solutions on platforms like LeetCode, HackerRank, and Codewars.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if/else if/else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This works correctly, but we can make it more concise and efficient.
+
+**Version 2: Improved with Ternary Operator**
+
+We can use Swift's ternary operator (`condition ? value1 : value2`) to make the code more compact:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : "\(i)"
+        print(output)
+    }
+}
+
+fizzBuzz(n: 15)
+```
+
+This version achieves the same result with fewer lines of code.  However, deeply nested ternary operators can become hard to read for more complex logic.
+
+
+**Version 3:  Using String Interpolation and a Single `if` statement (More Efficient)**
+
+This version is slightly more efficient because it avoids unnecessary modulo operations:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzz(n: 15)
+```
+
+This approach checks for divisibility by 3 and 5 separately. If neither condition is met, an empty string is appended, and the ternary operator elegantly handles printing either the number or the combined "Fizz" and/or "Buzz".  This is often considered the most efficient and readable approach.
+
+
+**Choosing the Best Version:**
+
+While all three versions work correctly, Version 3 is generally preferred for its readability and efficiency.  Version 1 is the easiest to understand for beginners, while Version 2 is more concise but can become less readable with more complex conditions. Choose the version that best suits your understanding and the context of your project.  For a simple FizzBuzz, the differences in performance are negligible, but good coding practices are important to learn early.
+
