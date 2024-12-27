@@ -11845,3 +11845,54 @@ This version builds the output string incrementally.  If neither "Fizz" nor "Buz
 
 For a simple FizzBuzz implementation, Version 1 is perfectly acceptable. Version 3 is generally preferred for larger projects or more complex scenarios because it's easier to extend and maintain.  Version 2 is a middle ground, and its readability can be subjective. Choose the version that best fits your coding style and the context of your project.  Remember that the most important thing is writing clear, understandable code.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  This is usually expressed as a function of the input size (often denoted as 'n').  The two most important aspects of algorithm complexity are:
+
+* **Time Complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space Complexity:** How much memory the algorithm uses as a function of the input size.
+
+We typically analyze complexity using **Big O notation**, which describes the upper bound of the growth rate of a function.  It focuses on the dominant terms and ignores constant factors, providing a high-level understanding of how the algorithm scales with increasing input size.
+
+Here's a breakdown of common complexities, ordered from best to worst:
+
+**Time Complexity:**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains the same regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A combination of linear and logarithmic time.  Very common in efficient sorting algorithms. Example: Merge sort, heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  This becomes slow quickly with larger inputs. Example: Bubble sort, selection sort.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  These algorithms are only practical for very small inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  Extremely slow for even moderately sized inputs. Example: Traveling salesperson problem (brute-force approach).
+
+
+**Space Complexity:**  This follows a similar notation to time complexity.  Examples include:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The algorithm's memory usage grows linearly with the input size.
+
+* **O(log n) - Logarithmic Space:** The algorithm's memory usage grows logarithmically with the input size.
+
+* **O(n²) - Quadratic Space:** The algorithm's memory usage grows quadratically with the input size.
+
+
+**Important Considerations:**
+
+* **Best, Average, and Worst Case:**  Big O notation often describes the *worst-case* scenario.  An algorithm might perform better on average or in the best case, but the worst-case is crucial for understanding its limitations.
+
+* **Amortized Analysis:**  This analyzes the average time complexity of a sequence of operations, even if some individual operations are expensive.
+
+* **Input Data:** The complexity can depend on the structure of the input data (e.g., sorted vs. unsorted).
+
+* **Practicality:** While asymptotic analysis (Big O) is vital, it's important to consider practical performance on real-world data and hardware.  A theoretically faster algorithm might be slower in practice due to constant factors or implementation details.
+
+
+Understanding algorithm complexity is essential for choosing the right algorithm for a given task, especially when dealing with large datasets.  Choosing an algorithm with lower complexity can significantly improve performance and efficiency.
+
