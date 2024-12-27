@@ -12272,3 +12272,47 @@ Nested loops are commonly used for tasks like:
 
 Understanding nested loops is crucial for many programming tasks, but it's essential to be mindful of their potential performance implications when working with substantial amounts of data.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  Their runtime increases very slowly as the input size (n) grows.  This usually implies a "divide and conquer" strategy is being used.  Here are some common types and examples:
+
+**1. Binary Search:**
+
+* **Type:** Divide and Conquer
+* **Description:**  Repeatedly divides the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This continues until the target value is found or the interval is empty.
+* **Example:** Finding a specific number in a sorted array.
+
+**2. Balanced Binary Search Trees (BSTs) operations (e.g., search, insertion, deletion):**
+
+* **Type:** Tree Traversal
+* **Description:**  These data structures maintain a balanced tree structure, ensuring that the height of the tree remains logarithmic with respect to the number of nodes. Operations like search, insertion, and deletion typically involve traversing a path from the root to a leaf node, which takes O(log n) time in a balanced tree.
+* **Examples:**  AVL trees, Red-black trees.  These are commonly used in databases and other applications that require fast lookups, insertions, and deletions.
+
+**3. Heap operations (e.g., insertion, deletion of min/max element):**
+
+* **Type:** Heap Data Structure
+* **Description:** Heaps are tree-based data structures that satisfy the heap property (e.g., in a min-heap, the parent node is always smaller than its children). Operations like inserting or deleting the minimum (or maximum) element take O(log n) time because the heap structure needs to be re-balanced after the operation.
+* **Example:**  Priority queues, heapsort algorithm.
+
+**4. Exponentiation by Squaring:**
+
+* **Type:** Divide and Conquer
+* **Description:** Calculates a^n efficiently in O(log n) time.  It works by repeatedly squaring the base and reducing the exponent.
+* **Example:** Calculating large powers of a number.
+
+
+**5. Finding the kth smallest element using Quickselect (average case):**
+
+* **Type:** Randomized Divide and Conquer
+* **Description:**  A randomized algorithm that finds the kth smallest element in an unsorted array.  In the average case, its runtime is O(n) but if you use it recursively on smaller subarrays to find the kth element, then the overall runtime will be O(log n) on average.
+* **Example:** Finding the median of an array.
+
+
+**Key Characteristics of O(log n) Algorithms:**
+
+* **Divide and Conquer:**  They repeatedly break down the problem into smaller subproblems.
+* **Efficient Use of Data Structures:**  Often leverage efficient data structures like balanced trees or heaps.
+* **Halving the Problem Size:** At each step, the algorithm typically reduces the problem size by a constant factor (often by half).
+
+
+It's crucial to remember that O(log n) refers to the *order of growth* of the runtime.  The actual runtime will also depend on factors like the specific implementation, hardware, and input data.  Also, some algorithms are O(log n) only in the *average* or *best* case, while their worst-case performance might be worse (e.g., Quickselect).
+
