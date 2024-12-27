@@ -13965,3 +13965,14 @@ Similar to the recursive approach but uses an iterative method (stack-based) ins
 
 Remember to handle edge cases, such as when one or both nodes are not in the tree.  The code examples include basic error handling but you might want to add more robust checks based on your specific requirements.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **For a scatter plot:**  A set of (x, y) coordinate pairs.  For example:  (1, 2), (3, 5), (4, 1)
+* **For a line graph:** A set of data points over time or another continuous variable.
+* **For a bar chart:** Categories and their corresponding values.
+* **For a function:** An equation, such as y = x^2 or y = sin(x).  Also specify the range of x values you'd like to plot.
+
+
+Once you give me the data, I can tell you how to graph it (e.g., using a graphing calculator, software like Desmos or GeoGebra, or even by hand).
+
