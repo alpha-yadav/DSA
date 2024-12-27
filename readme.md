@@ -13840,3 +13840,128 @@ def lowestCommonAncestorIterative(root, p, q):
 
 Remember to choose the method that best suits your needs and coding style. The recursive solution is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some specific situations.  For most practical purposes, the difference is negligible.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (specifically a binary tree or a general tree) is a common problem in computer science.  The approach depends on the type of tree and whether you have parent pointers.
+
+Here are a few common methods:
+
+**1. Using Parent Pointers (Simple Approach):**
+
+This method is efficient if each node in the tree already stores a pointer to its parent.
+
+* **Algorithm:**
+    1. Trace upwards from node `A` and store its ancestors in a `set`.
+    2. Trace upwards from node `B` and check if each ancestor is present in the `set` of `A's` ancestors.
+    3. The first ancestor found in the `set` is the LCA.
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent_pointers(node_a, node_b):
+    ancestors_a = set()
+    current = node_a
+    while current:
+        ancestors_a.add(current)
+        current = current.parent
+
+    current = node_b
+    while current:
+        if current in ancestors_a:
+            return current
+        current = current.parent
+
+    return None  # Nodes are not related
+
+
+# Example usage:
+root = Node('A')
+b = Node('B')
+c = Node('C')
+d = Node('D')
+e = Node('E')
+f = Node('F')
+
+root.parent = None
+b.parent = root
+c.parent = root
+d.parent = b
+e.parent = b
+f.parent = c
+
+print(lca_with_parent_pointers(d,e).data) #Output: B
+print(lca_with_parent_pointers(d,f).data) #Output: A
+
+```
+
+**2. Recursive Approach (Binary Tree, without parent pointers):**
+
+This method works for binary trees and doesn't require parent pointers. It's a classic divide-and-conquer approach.
+
+* **Algorithm:**
+    1. If the current node is `None`, return `None`.
+    2. If the current node is either `A` or `B`, return the current node.
+    3. Recursively search the left and right subtrees.
+    4. If both subtrees return non-`None` values, the current node is the LCA.
+    5. Otherwise, return the non-`None` result (or `None` if both are `None`).
+
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node_a, node_b):
+    if root is None:
+        return None
+    if root.data == node_a.data or root.data == node_b.data:
+        return root
+
+    left_lca = lca_recursive(root.left, node_a, node_b)
+    right_lca = lca_recursive(root.right, node_a, node_b)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+#Example
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node_a = root.left.left #node 4
+node_b = root.left.right #node 5
+
+print(lca_recursive(root, node_a, node_b).data) #Output: 2
+
+```
+
+
+**3. Iterative Approach (Binary Tree, without parent pointers):**
+
+Similar to the recursive approach but uses an iterative method (stack-based) instead of recursion which can be more efficient for very deep trees.  The basic idea remains the same - explore the tree to find if both nodes are in the subtrees.
+
+(Implementation of the iterative approach is more complex and left as an exercise.  It involves using stacks to simulate recursion).
+
+
+**Choosing the Right Method:**
+
+* If you have parent pointers, the first method is the most efficient (linear time).
+* For binary trees without parent pointers, the recursive or iterative methods are generally used.  Recursion is often more concise and readable, while iteration can be more efficient for very large or unbalanced trees due to avoiding potential stack overflow issues.  For general trees, more complex algorithms might be necessary.
+
+
+Remember to handle edge cases, such as when one or both nodes are not in the tree.  The code examples include basic error handling but you might want to add more robust checks based on your specific requirements.
+
