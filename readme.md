@@ -13734,3 +13734,109 @@ postorder(root) # Output: D E B F C A
 
 Remember to adapt the printing to your specific needs (e.g., storing the results in a list instead of printing directly).  This implementation uses recursion; iterative versions are also possible but are generally more complex.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary *search* tree, a general binary tree doesn't have a guaranteed ordering, making the solution more complex.
+
+Here are a couple of approaches to finding the LCA in a binary tree:
+
+**Method 1: Recursive Approach**
+
+This is a classic and efficient approach. The idea is:
+
+1. **Base Cases:**
+   - If the current node is `NULL`, return `NULL`.
+   - If the current node is either `p` or `q`, return the current node (we've found one of the targets).
+
+2. **Recursive Calls:**
+   - Recursively search for `p` and `q` in the left and right subtrees.
+
+3. **Combining Results:**
+   - If both recursive calls return non-`NULL` values, it means `p` and `q` are in different subtrees, and the current node is their LCA.  Return the current node.
+   - Otherwise, return the non-`NULL` result (if one exists); otherwise return `NULL` (neither `p` nor `q` was found).
+
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node, or None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+```
+
+**Method 2: Iterative Approach (using a stack)**
+
+This approach uses a stack to simulate the recursion, potentially offering better performance in scenarios where the recursion depth is very large (although the difference might be negligible in practice for many trees).
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    if not root:
+        return None
+
+    stack = [root]
+    parent = {root: None}  # Dictionary to track parent nodes
+
+    while stack:
+        node = stack.pop()
+
+        if node.left:
+            stack.append(node.left)
+            parent[node.left] = node
+        if node.right:
+            stack.append(node.right)
+            parent[node.right] = node
+
+        if node == p or node == q:
+            break
+
+    path_p = set()
+    curr = p
+    while curr:
+        path_p.add(curr)
+        curr = parent.get(curr)
+
+    curr = q
+    while curr:
+        if curr in path_p:
+            return curr
+        curr = parent.get(curr)
+
+    return None #Should not happen if p and q exist in the tree.
+
+```
+
+
+**Important Considerations:**
+
+* **Node Existence:**  Both methods assume `p` and `q` exist in the tree. You might want to add checks to handle cases where one or both nodes are not found.
+* **Error Handling:**  Robust code would include error handling for invalid inputs (e.g., `root` is `None`).
+* **Time and Space Complexity:**  The recursive approach generally has O(N) time complexity in the worst case (N being the number of nodes) and O(H) space complexity (H being the height of the tree due to recursive calls). The iterative approach also has O(N) time complexity but uses O(W) space where W is the maximum width of the tree (due to the stack).
+
+
+Remember to choose the method that best suits your needs and coding style. The recursive solution is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some specific situations.  For most practical purposes, the difference is negligible.
+
