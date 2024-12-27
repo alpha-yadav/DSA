@@ -14396,3 +14396,40 @@ else:
 
 This code efficiently detects cycles in a directed graph using Depth First Traversal and its recursive nature.  The use of `recStack` is crucial for identifying the back edges indicative of cycles. Remember that a self-loop (a node with an edge to itself) is considered a cycle.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a groundbreaking algorithm for finding minimum spanning trees (MSTs) in undirected graphs.  Its significance lies in its extremely fast runtime, achieving near-linear time complexity.  Unlike many MST algorithms (like Prim's or Kruskal's), which rely on sorting or priority queues, Thorup's algorithm uses sophisticated techniques to achieve its speed.  However, this speed comes at the cost of increased complexity.
+
+Here's a breakdown of key aspects:
+
+**Key Features and Innovations:**
+
+* **Near-linear Time Complexity:**  The algorithm achieves a runtime of O(m α(m, n)), where:
+    * `m` is the number of edges in the graph.
+    * `n` is the number of vertices in the graph.
+    * `α(m, n)` is the inverse Ackermann function, which grows incredibly slowly.  For all practical purposes, α(m, n) can be considered a constant.  This makes the runtime essentially linear in the number of edges.
+
+* **Use of Borůvka's Algorithm:** Thorup's algorithm builds upon Borůvka's algorithm, which iteratively finds a maximal set of edges that don't create cycles.  Borůvka's algorithm provides a good starting point for achieving near-linear time.
+
+* **Advanced Data Structures and Techniques:**  The algorithm's speed is heavily reliant on intricate data structures and techniques, including:
+    * **Linear-time connectivity queries:**  Efficiently determining whether two vertices are connected in a graph.
+    * **Union-find data structure:**  A data structure for managing disjoint sets, crucial for tracking connected components.
+    * **Randomization:**  Thorup's algorithm uses randomization to achieve its expected near-linear runtime.  The worst-case time complexity is higher, but the probability of encountering the worst case is extremely low in practice.
+
+* **Handling of Weighted Edges:** The original algorithm handles integer weights; extensions exist for handling real-valued weights, but these usually come with a slight increase in complexity.
+
+**High-Level Overview (Simplified):**
+
+1. **Initialization:**  The algorithm starts with a graph where each vertex is its own connected component.
+
+2. **Iterative Contraction:**  The algorithm iteratively merges connected components by identifying and adding "safe" edges – edges that don't create cycles and are part of the MST.  This process involves sophisticated techniques to quickly find safe edges.
+
+3. **Component Merging:**  Uses a union-find data structure to efficiently track the merging of connected components.
+
+4. **Termination:**  The algorithm terminates when a single connected component (spanning tree) remains.
+
+**Why is it complex?**
+
+The algorithm's complexity stems from the sophisticated data structures and techniques used to achieve near-linear time.  Understanding the details requires a strong background in algorithms and data structures, particularly in the areas of randomized algorithms and advanced graph algorithms.  The implementation itself is also quite challenging.
+
+**In summary:** Thorup's algorithm represents a significant theoretical advancement in MST algorithms. While incredibly efficient in practice, its complexity makes it less practical for everyday use compared to simpler algorithms like Prim's or Kruskal's, unless dealing with extremely large graphs where the near-linear time complexity becomes crucial.  It's primarily of theoretical and research interest, showcasing what's achievable in terms of algorithmic efficiency.
+
