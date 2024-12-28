@@ -20848,3 +20848,54 @@ Here's how this version works:
 
 Both versions achieve the same result.  Version 1 is easier to read and understand for beginners. Version 2 is more concise but might be slightly harder to grasp initially.  Choose the version that best suits your understanding and coding style.  For learning purposes, the first version is often recommended for its clarity. Remember to compile and run this code in a Swift environment (like Xcode's playground).
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  This is usually expressed as a function of the input size, *n*.  The most common resources considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We're primarily interested in how these complexities *scale* with increasing input size.  Small differences in implementation might affect the runtime for small inputs, but the scaling behavior (as *n* becomes large) is what truly distinguishes efficient algorithms from inefficient ones.
+
+**Big O Notation:**
+
+Big O notation (O-notation) is used to describe the upper bound of an algorithm's complexity.  It focuses on the dominant terms as the input size grows infinitely large, ignoring constant factors and lower-order terms.  This gives a concise and useful way to compare algorithms.  Some common Big O complexities are:
+
+* **O(1) – Constant time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array by index.
+* **O(log n) – Logarithmic time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) – Linear time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) – Linearithmic time:**  The runtime is a product of linear and logarithmic factors. Example: Merge sort, heap sort.
+* **O(n²) – Quadratic time:** The runtime increases quadratically with the input size. Example: Bubble sort, selection sort, nested loops iterating over the input.
+* **O(2ⁿ) – Exponential time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) – Factorial time:** The runtime grows factorially with the input size. Example: Generating all permutations of a sequence.
+
+
+**Other Notation:**
+
+Besides Big O, other notations provide a more complete picture of complexity:
+
+* **Big Omega (Ω):** Describes the lower bound of an algorithm's complexity.  It represents the best-case scenario.
+* **Big Theta (Θ):** Describes the tight bound of an algorithm's complexity.  It represents both the upper and lower bounds, indicating that the algorithm's performance is within a constant factor of the given function.
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity of an algorithm typically involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most to the runtime.
+2. **Counting the number of operations:** Express the number of operations as a function of the input size (*n*).
+3. **Simplifying the function:** Use Big O notation to express the dominant term(s) and ignore constant factors and lower-order terms.
+
+**Example:**
+
+Consider a simple algorithm that iterates through an array of size *n* and prints each element:
+
+```python
+def print_array(arr):
+  for i in range(len(arr)):
+    print(arr[i])
+```
+
+The basic operation is the `print` statement within the loop. This operation is executed *n* times. Therefore, the time complexity is O(n) – linear time.  The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and optimizing code.  For large datasets, the difference between an O(n) algorithm and an O(n²) algorithm can be enormous.
+
