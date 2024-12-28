@@ -20733,3 +20733,56 @@ Don't jump into complex algorithms immediately. Begin with these fundamental con
 
 Remember to start slowly, build a strong foundation, and be patient.  Learning algorithms takes time and effort, but the rewards are well worth it.  Focus on understanding the concepts before moving on to more advanced topics.
 
+#  A sample algorithmic problem 
+## Algorithmic Problem: Two Sum
+
+**Problem Statement:**
+
+Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+
+**Example 1:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Example 2:**
+
+```
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+```
+
+**Example 3:**
+
+```
+Input: nums = [3,3], target = 6
+Output: [0,1]
+```
+
+
+**Constraints:**
+
+* `2 <= nums.length <= 104`
+* `-109 <= nums[i] <= 109`
+* `-109 <= target <= 109`
+* **Only one valid answer exists.**
+
+
+**Solution Considerations:**
+
+This problem can be solved using different approaches, each with varying time and space complexities:
+
+* **Brute Force:** Iterate through all possible pairs of numbers in the array.  This has a time complexity of O(n²).
+* **Hash Table (Dictionary):** Use a hash table (dictionary in Python) to store each number and its index.  Iterate through the array, and for each number, check if the complement (`target - num`) exists in the hash table. This has a time complexity of O(n) and a space complexity of O(n).
+
+
+This is a classic algorithmic problem that highlights the importance of choosing efficient data structures and algorithms.  Trying to solve it using different approaches helps in understanding the trade-offs between time and space complexity.
+
