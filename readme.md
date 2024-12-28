@@ -21231,3 +21231,25 @@ The outer loop iterates through numbers 1 to 10.  For each number `i`, the inner
 
 **Important Note on Efficiency:**  Nested loops can lead to significantly increased computation time, especially with large datasets.  The time complexity of nested loops is often O(n*m) where 'n' and 'm' are the number of iterations of the outer and inner loops respectively.  Consider optimizing your code if you're dealing with massive datasets to avoid performance issues.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They only require the number of operations to increase logarithmically with the size of the input (n). This means that as the input grows larger, the increase in computation time is significantly smaller.  This efficiency typically stems from repeatedly dividing the problem size in half (or by some other constant factor).
+
+Here are some common types of algorithms exhibiting O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  Binary search works on a sorted array (or similar sorted data structure). It repeatedly divides the search interval in half. If the target value is in the interval, it will be found in at most log₂(n) steps, where n is the number of elements in the array.
+
+* **Efficient Searching in Balanced Binary Search Trees (BSTs):**  Operations like search, insertion, and deletion in a balanced BST (like AVL trees or red-black trees) have a time complexity of O(log n) on average and in the worst case. The balancing ensures that the tree doesn't become skewed, preventing worst-case scenarios that lead to linear time complexity.
+
+* **Tree Traversals (in balanced trees):**  If the tree is balanced, traversing it (e.g., pre-order, in-order, post-order) will take O(log n) time because the height of a balanced tree is proportional to log₂(n).  However, on unbalanced trees, this can degrade to O(n).
+
+* **Heap Operations (e.g., insertion, deletion of min/max element):**  Heaps are tree-based data structures used in priority queues.  Operations on a heap (in a min-heap, finding the minimum element is O(1), inserting or deleting the min element is O(log n)) maintain the heap property (e.g., min-heap where the root is the smallest element) with logarithmic time complexity.
+
+* **Exponentiation by Squaring:** This algorithm efficiently computes a<sup>b</sup> (a raised to the power of b) in O(log b) time. It cleverly uses repeated squaring and multiplication to avoid performing b-1 multiplications.
+
+* **Finding the kth smallest element using Quickselect (average case):**  While Quickselect's worst-case time complexity is O(n²), its average-case performance is O(n).  However, finding the kth smallest element in a specific range can sometimes leverage binary search-like strategies within Quickselect to achieve O(log n) time complexity in specific, carefully constrained scenarios.  This isn't always the case, however.
+
+**Important Note:**  The base of the logarithm (e.g., base 2, base 10) in O(log n) notation is usually omitted because changing the base only affects the algorithm's runtime by a constant factor, which is insignificant in Big O notation.
+
+
+It's crucial to remember that O(log n) time complexity is only achieved under specific conditions, often requiring sorted data or balanced tree structures.  If these conditions aren't met, the algorithm's performance might degrade to O(n) or worse.
+
