@@ -16842,3 +16842,91 @@ While the recursive approaches are elegant and easy to understand, they can lead
 
 These examples demonstrate the basic principles of pre-order, in-order, and post-order traversals.  The choice of which traversal to use depends on the specific application. For example, in-order traversal is particularly useful for BSTs, while post-order traversal is often used for deleting nodes in a tree or evaluating expressions represented as trees.
 
+#  Lowest common ancestor of a Binary Tree 
+The lowest common ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary search tree, you can't use efficient traversal techniques based on node values in a general binary tree.  Therefore, a common approach is a recursive solution.
+
+**Recursive Approach**
+
+This approach leverages the tree's structure:
+
+1. **Base Cases:**
+   - If the current node is `None` (empty subtree), return `None`.
+   - If the current node is either `p` or `q`, return the current node (one of the targets has been found).
+
+2. **Recursive Calls:**
+   - Recursively search for the LCA in the left and right subtrees.
+   - Let `left_lca` be the LCA found in the left subtree and `right_lca` in the right subtree.
+
+3. **Combining Results:**
+   - If both `left_lca` and `right_lca` are not `None`, it means `p` and `q` are in different subtrees, and the current node is their LCA.  Return the current node.
+   - Otherwise, return whichever of `left_lca` and `right_lca` is not `None` (LCA found in one subtree).
+
+
+**Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowest_common_ancestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root node of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node, or None if either p or q is not found.
+    """
+
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowest_common_ancestor(root.left, p, q)
+    right_lca = lowest_common_ancestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+p = root.left  # Node with data 2
+q = root.right.left # Node with data 6
+
+lca = lowest_common_ancestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data if lca else None}") # Output: LCA of 2 and 6: 1
+
+
+p = root.left.left # Node with data 4
+q = root.left.right # Node with data 5
+
+lca = lowest_common_ancestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data if lca else None}") # Output: LCA of 4 and 5: 2
+
+```
+
+**Time and Space Complexity:**
+
+- **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, the algorithm visits all nodes.
+- **Space Complexity:** O(H), where H is the height of the tree.  This is due to the recursive call stack.  In the worst case (a skewed tree), H can be equal to N.
+
+
+This recursive solution is generally preferred for its clarity and simplicity.  Iterative solutions exist but are often more complex to implement and understand.  Remember to handle the case where one or both of `p` and `q` are not present in the tree.
+
