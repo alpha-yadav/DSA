@@ -16557,3 +16557,103 @@ This method involves performing an in-order traversal to get a sorted list and t
 
 Remember to adapt the code to your specific `Node` class definition if it differs from the example provided.  Always thoroughly test your chosen implementation.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit (or "traverse") all nodes in a binary tree.  There are several common types, each producing a different ordering of the nodes:
+
+**1. Depth-First Traversals:** These prioritize going as deep as possible down one branch before backtracking.  There are three main types:
+
+* **Pre-order Traversal:**  Visit the root node first, then recursively traverse the left subtree, and finally the right subtree.  The order is:  `Root -> Left -> Right`
+
+   * **Example:** For a tree with root `A`, left child `B`, and right child `C`, the pre-order traversal would be: `A B C`.
+
+* **In-order Traversal:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. The order is: `Left -> Root -> Right`
+
+   * **Example:**  For the same tree, the in-order traversal would be: `B A C`.  This is particularly useful for binary *search* trees, as it produces a sorted sequence of the nodes' values.
+
+* **Post-order Traversal:** Recursively traverse the left subtree, then the right subtree, and finally visit the root node. The order is: `Left -> Right -> Root`
+
+   * **Example:** For the same tree, the post-order traversal would be: `B C A`.  This is often used to perform operations like deleting a tree – you process the children before the parent.
+
+
+**2. Breadth-First Traversal (Level-Order Traversal):** This visits nodes level by level, starting from the root and proceeding to the next level.  It typically uses a queue data structure.
+
+   * **Example:** For the same tree, the level-order traversal would be: `A B C`.
+
+
+**Code Examples (Python):**
+
+Let's consider a simple binary tree structure:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+```
+
+**Traversal functions:**
+
+```python
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+from collections import deque
+def levelorder(node):
+    if node is None:
+        return
+
+    queue = deque([node])
+    while(len(queue) > 0):
+        curr = queue.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            queue.append(curr.left)
+
+        if curr.right is not None:
+            queue.append(curr.right)
+
+print("Pre-order:", end=" ")
+preorder(root)
+print("\nIn-order:", end=" ")
+inorder(root)
+print("\nPost-order:", end=" ")
+postorder(root)
+print("\nLevel-order:", end=" ")
+levelorder(root)
+print()
+```
+
+This code will output:
+
+```
+Pre-order: A B D E C 
+In-order: D B E A C 
+Post-order: D E B C A 
+Level-order: A B C D E 
+```
+
+Remember to adapt the node structure and traversal functions to match your specific needs and data representation.  For larger trees, iterative approaches (using stacks or queues) can be more efficient than purely recursive solutions to avoid stack overflow errors.
+
