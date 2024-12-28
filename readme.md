@@ -16466,3 +16466,94 @@ print(f"Is the tree a BST? {is_bst_minmax(root2)}") # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach, where H is the height of the tree (O(log N) for a balanced tree, O(N) for a skewed tree).  An iterative approach using a stack could reduce space complexity to O(W), where W is the maximum width of the tree.  Choose the method that best suits your needs and coding style.  The in-order traversal method is generally considered more intuitive.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* The value of the left subtree's nodes is less than the node's value.
+* The value of the right subtree's nodes is greater than the node's value.
+
+Here are three common approaches, with varying levels of efficiency:
+
+**1. Recursive Approach (In-order traversal):**
+
+This is perhaps the most elegant and efficient approach. A BST, when traversed in-order (left, node, right), will produce a sorted sequence.  We can exploit this fact.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a tree is a BST.
+
+    Args:
+      node: The root node of the subtree being checked.
+      min_val: The minimum allowed value for nodes in this subtree.
+      max_val: The maximum allowed value for nodes in this subtree.
+
+    Returns:
+      True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_recursive(root))  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5)
+print(is_bst_recursive(root2))  #Output: False
+
+```
+
+**2. Iterative Approach (In-order traversal):**
+
+This approach achieves the same result as the recursive method but iteratively using a stack.  This can be advantageous for very deep trees to avoid stack overflow errors that might occur with the recursive approach.
+
+```python
+def is_bst_iterative(root):
+    stack = []
+    prev = -float('inf')  # Initialize with negative infinity
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+        root = stack.pop()
+        if root.data <= prev:
+            return False  #Violation of BST property
+        prev = root.data
+        root = root.right
+    return True
+```
+
+**3. Using a Set (Less Efficient):**
+
+This method involves performing an in-order traversal to get a sorted list and then checking if the list is sorted. It's less efficient than the previous two because it requires extra space to store the list and involves more operations.
+
+
+**Choosing the Right Approach:**
+
+* For most cases, the **recursive approach** is preferred for its clarity and efficiency.  It's often faster than the iterative approach due to the overhead of stack management.
+* The **iterative approach** is a good alternative if you're concerned about potential stack overflow errors with very deep trees.
+* Avoid the **set-based approach** unless you have a specific reason for needing a sorted list of nodes.  The recursive and iterative in-order traversal methods are more direct and efficient for determining if a tree is a BST.
+
+
+Remember to adapt the code to your specific `Node` class definition if it differs from the example provided.  Always thoroughly test your chosen implementation.
+
