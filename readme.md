@@ -17783,3 +17783,91 @@ Several algorithms can solve this problem:
 
 This problem showcases many key aspects of algorithm design:  problem representation, algorithm choice, efficiency analysis, and data structure selection.  It's a fundamental problem with many applications in various fields like navigation, network routing, and resource allocation.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple version and then adding some enhancements:
+
+
+**Basic FizzBuzz in Swift:**
+
+This version uses a simple `for` loop and conditional statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* If it's divisible by both 3 and 5 (meaning divisible by 15), it prints "FizzBuzz".
+* If it's divisible by 3, it prints "Fizz".
+* If it's divisible by 5, it prints "Buzz".
+* Otherwise, it prints the number itself.
+
+
+**Improved FizzBuzz with a Function Return:**
+
+This version returns an array of strings, making it more reusable:
+
+```swift
+func fizzBuzzArray(n: Int) -> [String] {
+    var result: [String] = []
+    for i in 1...n {
+        if i % 15 == 0 {
+            result.append("FizzBuzz")
+        } else if i % 3 == 0 {
+            result.append("Fizz")
+        } else if i % 5 == 0 {
+            result.append("Buzz")
+        } else {
+            result.append(String(i))
+        }
+    }
+    return result
+}
+
+let fizzBuzzResult = fizzBuzzArray(n: 15)
+print(fizzBuzzResult) //Prints the array of strings
+```
+
+This is better because it doesn't rely on side effects (printing directly).  You can now use the returned array in other parts of your code.
+
+
+**Even More Concise FizzBuzz (using ternary operator):**
+
+This version uses the ternary operator for a more compact, though arguably less readable, solution:
+
+
+```swift
+func fizzBuzzConcise(n: Int) -> [String] {
+    return (1...n).map { num in
+        (num % 15 == 0 ? "FizzBuzz" : (num % 3 == 0 ? "Fizz" : (num % 5 == 0 ? "Buzz" : String(num))))
+    }
+}
+
+print(fizzBuzzConcise(n: 15))
+```
+
+This uses the `map` function to apply a closure to each number in the range 1...n. The closure uses nested ternary operators to determine the output string.
+
+
+**Choosing the Best Version:**
+
+* For beginners, the first version (`fizzBuzz`) is the easiest to understand.
+* The second version (`fizzBuzzArray`) is generally preferred for its reusability and cleaner design.
+* The third version (`fizzBuzzConcise`) is the most compact but can be harder to read if you're not familiar with the ternary operator and functional programming concepts.
+
+Remember to choose the version that best suits your needs and understanding.  Start with the simplest and gradually explore the more advanced techniques as you gain confidence.
+
