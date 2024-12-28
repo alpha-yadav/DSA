@@ -20549,3 +20549,127 @@ bfs(graph, 'A') # Output: A B C D E F (order is consistent regardless of adjacen
 
 The choice between DFS and BFS depends on the specific application and the properties of the graph.  For finding the shortest path in an unweighted graph, BFS is preferred.  For tasks like topological sorting or detecting cycles, DFS is often more suitable.  Both are fundamental algorithms in graph theory and computer science.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used to represent the graph (adjacency matrix, adjacency list) and whether you're tracking visited nodes. Here are a few implementations in Python:
+
+**1. DFS using Adjacency List (Recursive):**  This is a common and often preferred approach for its elegance and readability.
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional).
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    if visited is None:
+        visited = set()
+
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might have no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+    return list(visited)
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Start DFS from node 'A'
+print("\nVisited nodes:", dfs_recursive(graph, 'A'))
+
+```
+
+**2. DFS using Adjacency List (Iterative):** This version uses a stack instead of recursion.  It's useful for very deep graphs to avoid stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal of a graph iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    visited = set()
+    stack = [node]
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            print(vertex, end=" ")
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)
+
+    return list(visited)
+
+
+print("\n\nDFS traversal (iterative):")
+dfs_iterative(graph, 'A')
+print("\nVisited nodes:", dfs_iterative(graph, 'A'))
+```
+
+
+**3. DFS using Adjacency Matrix:**  This approach works with a graph represented as an adjacency matrix (a 2D array).
+
+```python
+def dfs_matrix(matrix, node, visited, num_nodes):
+    """
+    DFS using an adjacency matrix.
+
+    Args:
+      matrix: Adjacency matrix representing the graph.
+      node: The starting node (index).
+      visited: Set to keep track of visited nodes.
+      num_nodes: Total number of nodes in the graph.
+
+    Returns:
+      List of visited nodes.
+    """
+    visited.add(node)
+    print(node, end=" ")
+
+    for neighbor in range(num_nodes):
+        if matrix[node][neighbor] == 1 and neighbor not in visited:
+            dfs_matrix(matrix, neighbor, visited, num_nodes)
+    return list(visited)
+
+
+#Example Adjacency Matrix:
+matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0]   # F
+]
+num_nodes = len(matrix)
+print("\n\nDFS traversal (matrix):")
+visited = set()
+dfs_matrix(matrix, 0, visited, num_nodes) #Node A is at index 0
+print("\nVisited nodes:", dfs_matrix(matrix,0,set(), num_nodes))
+
+```
+
+Remember that the starting node and the graph representation will influence the order in which nodes are visited.  Choose the implementation that best suits your graph representation and needs.  The iterative approach is generally preferred for larger graphs to prevent stack overflow issues.
+
