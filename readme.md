@@ -21253,3 +21253,67 @@ Here are some common types of algorithms exhibiting O(log n) time complexity:
 
 It's crucial to remember that O(log n) time complexity is only achieved under specific conditions, often requiring sorted data or balanced tree structures.  If these conditions aren't met, the algorithm's performance might degrade to O(n) or worse.
 
+#  An O(log n) example 
+The most common O(log n) example is **binary search** on a sorted array.
+
+**Binary Search Algorithm:**
+
+Binary search works by repeatedly dividing the search interval in half. If the value you're looking for is in the middle element, you're done.  If it's less than the middle element, you search the left half. If it's greater, you search the right half.  You repeat this process until you find the value or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+
+```
+
+**Why it's O(log n):**
+
+With each comparison, we eliminate roughly half of the remaining search space.  This is the defining characteristic of logarithmic time complexity.  The number of times you can halve `n` before getting down to 1 is approximately log₂(n).  Therefore, the number of operations required grows logarithmically with the size of the input.
+
+
+Other examples of O(log n) algorithms include:
+
+* **Finding an element in a balanced binary search tree:** Similar to binary search, each comparison allows you to eliminate half the remaining tree.
+* **Efficient exponentiation:** Algorithms like exponentiation by squaring calculate a<sup>b</sup> in O(log b) time.
+* **Some tree traversal algorithms:**  Depending on the tree structure, certain traversals can exhibit logarithmic time complexity.
+
+
+It's crucial to remember that O(log n) signifies that the time taken increases proportionally to the logarithm of the input size, making it very efficient for large inputs compared to linear (O(n)) or quadratic (O(n²)) algorithms.  The base of the logarithm (e.g., 2 in binary search) doesn't affect the big O notation.
+
