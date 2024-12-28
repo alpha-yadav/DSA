@@ -20212,3 +20212,105 @@ graph.print_graph()
 
 The best choice between adjacency lists and adjacency matrices depends on the specific application and the characteristics of the graph.  For most real-world applications involving sparse graphs, adjacency lists are preferred.
 
+#  Topological Sort 
+A topological sort is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so you can follow all the arrows without ever going backwards.
+
+**Key Characteristics:**
+
+* **Directed Acyclic Graph (DAG):** Topological sorts are only possible for DAGs.  A cycle (a path that leads back to its starting node) prevents a topological ordering because you'd have to place a node both before and after another.
+* **Multiple Valid Orderings:**  For many DAGs, there's more than one valid topological sort.
+* **Applications:** Topological sorting is crucial in various applications, including:
+    * **Dependency Resolution:**  Managing dependencies in software builds (e.g., makefiles), scheduling tasks, resolving package installations.
+    * **Course Scheduling:**  Determining the order to take courses when prerequisites exist.
+    * **Data Serialization:**  Ordering data elements that have dependencies.
+    * **Instruction Scheduling in Compilers:**  Optimizing the order of instructions in compiled code.
+
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue.
+
+   1. **Find sources:**  Identify nodes with no incoming edges (in-degree = 0). Add these to the queue.
+   2. **Process queue:**  While the queue is not empty:
+      * Remove a node from the queue and add it to the sorted list.
+      * For each outgoing edge from the removed node:
+         * Decrement the in-degree of the destination node.
+         * If the in-degree of the destination node becomes 0, add it to the queue.
+   3. **Check for cycles:**  If the sorted list has fewer nodes than the total number of nodes in the graph, there's a cycle (and no topological sort is possible).
+
+   ```python
+   from collections import defaultdict
+
+   def topological_sort_kahn(graph):
+       in_degree = defaultdict(int)
+       for node in graph:
+           for neighbor in graph[node]:
+               in_degree[neighbor] += 1
+
+       queue = [node for node in graph if in_degree[node] == 0]
+       sorted_list = []
+
+       while queue:
+           node = queue.pop(0)
+           sorted_list.append(node)
+           for neighbor in graph[node]:
+               in_degree[neighbor] -= 1
+               if in_degree[neighbor] == 0:
+                   queue.append(neighbor)
+
+       if len(sorted_list) != len(graph):
+           return None  # Cycle detected
+
+       return sorted_list
+
+   # Example usage:
+   graph = {
+       'A': ['C'],
+       'B': ['C', 'D'],
+       'C': ['E'],
+       'D': ['F'],
+       'E': ['H'],
+       'F': ['H'],
+       'G': ['H'],
+       'H': []
+   }
+   print(topological_sort_kahn(graph)) # Possible output: ['A', 'B', 'G', 'C', 'D', 'E', 'F', 'H'] (order may vary)
+
+   ```
+
+2. **Depth-First Search (DFS) Algorithm:**
+
+   This algorithm uses recursion or a stack.
+
+   1. **Visit nodes:**  Perform a depth-first search on the graph.
+   2. **Post-order traversal:**  Add nodes to the sorted list in post-order (after all their descendants have been visited).  This ensures that dependencies are satisfied.
+
+   ```python
+   def topological_sort_dfs(graph):
+       visited = set()
+       sorted_list = []
+
+       def dfs(node):
+           visited.add(node)
+           for neighbor in graph.get(node, []):
+               if neighbor not in visited:
+                   dfs(neighbor)
+           sorted_list.insert(0, node) #Prepend to get reverse post-order
+
+       for node in graph:
+           if node not in visited:
+               dfs(node)
+
+       return sorted_list
+
+   #Example Usage (same graph as above)
+   print(topological_sort_dfs(graph)) # Possible output: ['A', 'B', 'G', 'C', 'D', 'E', 'F', 'H'] (order may vary)
+   ```
+
+
+Both algorithms correctly find a topological sort if one exists.  Kahn's algorithm is generally considered more efficient for larger graphs, while DFS might be easier to understand for some.  The choice depends on the specific application and context.  Remember to handle the case where a cycle is detected.
+
