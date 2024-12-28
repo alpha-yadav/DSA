@@ -14846,3 +14846,34 @@ Once you've learned some basic algorithms, try applying them to small projects. 
 
 Remember to be patient and persistent.  Learning algorithms takes time and effort, but the rewards are significant in terms of problem-solving skills and career opportunities.
 
+#  A sample algorithmic problem 
+Here are a few sample algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+* **Problem:** Given an array of integers, find the sum of all the even numbers in the array.
+* **Input:** An array of integers (e.g., `[1, 2, 3, 4, 5, 6]`)
+* **Output:** The sum of the even numbers (e.g., `12`)
+
+**Medium:**
+
+* **Problem:** Given a sorted array of integers, find the index of a specific integer using binary search.  If the integer is not found, return -1.
+* **Input:** A sorted array of integers (e.g., `[2, 5, 7, 8, 11, 12]`) and a target integer (e.g., `11`).
+* **Output:** The index of the target integer (e.g., `4`) or -1 if not found.
+
+**Hard:**
+
+* **Problem:** Implement Dijkstra's algorithm to find the shortest path between two nodes in a weighted graph.
+* **Input:** A graph represented as an adjacency matrix or adjacency list, and two node indices representing the source and destination nodes.  Weights on the edges represent distances.
+* **Output:** The shortest distance between the source and destination nodes, and the path taken.
+
+
+**Bonus - More Complex (Suitable for advanced practice):**
+
+* **Problem:**  Implement a solution to the Traveling Salesperson Problem (TSP) using a heuristic approach like simulated annealing or genetic algorithms.  Find an approximate solution, as finding the optimal solution is NP-hard.
+* **Input:** A graph representing cities and distances between them.
+* **Output:** A sequence of cities representing a tour that visits all cities and returns to the starting city, with a total distance (hopefully close to optimal).
+
+
+These problems showcase different aspects of algorithmic thinking:  iteration, recursion, searching, graph traversal, and optimization.  Remember that a complete solution involves not only the correct algorithm but also considerations of efficiency (time and space complexity) and clear, well-documented code.
+
