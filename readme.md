@@ -21088,3 +21088,101 @@ Big O notation can also describe space complexity, which refers to the amount of
 
 **In summary:** Big O notation is a crucial tool for analyzing algorithms. It allows developers to compare the efficiency of different algorithms and make informed decisions about which algorithm is best suited for a particular task, especially when dealing with large datasets. Understanding Big O is essential for writing efficient and scalable code.
 
+#  A Simple Loop 
+A simple loop repeats a block of code a certain number of times or until a condition is met.  Here are examples in a few common programming languages:
+
+**1. For Loop (counting loop):**  This is best when you know the number of iterations in advance.
+
+* **Python:**
+
+```python
+for i in range(5):  # Repeats 5 times (i will be 0, 1, 2, 3, 4)
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {  // Repeats 5 times (i will be 0, 1, 2, 3, 4)
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) { // Repeats 5 times (i will be 0, 1, 2, 3, 4)
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) { // Repeats 5 times (i will be 0, 1, 2, 3, 4)
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. While Loop (conditional loop):** This is best when you don't know the exact number of iterations beforehand; it continues as long as a condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These are just basic examples. Loops can be much more complex, involving nested loops (loops within loops), `break` statements (to exit a loop prematurely), and `continue` statements (to skip to the next iteration).  The best type of loop to use depends on the specific task.
+
