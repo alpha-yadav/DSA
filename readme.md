@@ -15317,3 +15317,60 @@ These `while` loop examples produce the same output as the `for` loop examples. 
 
 Use a `for` loop when you know the number of iterations beforehand. Use a `while` loop when the number of iterations depends on a condition that might change during the loop's execution.  Often, a `for` loop can be rewritten as a `while` loop and vice-versa, but choosing the right loop type makes your code clearer and easier to understand.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop completes all its iterations for each single iteration of the outer loop.  This creates a sort of "grid" or "matrix" pattern of execution.  They are commonly used for tasks involving multiple dimensions or iterating over combinations of elements from multiple sets.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+  # Outer loop code (may include other code besides the inner loop)
+  for inner_loop_variable in inner_loop_iterable:
+    # Inner loop code (operates on both outer and inner loop variables)
+  # More outer loop code
+```
+
+**Example: Printing a Multiplication Table:**
+
+Let's say we want to print a 5x5 multiplication table.  We'll use nested loops:
+
+```python
+for i in range(1, 6):  # Outer loop iterates through rows (1 to 5)
+  for j in range(1, 6):  # Inner loop iterates through columns (1 to 5)
+    print(i * j, end="\t")  # Print the product, \t adds a tab for spacing
+  print()  # Newline after each row
+```
+
+This will output:
+
+```
+1	2	3	4	5	
+2	4	6	8	10	
+3	6	9	12	15	
+4	8	12	16	20	
+5	10	15	20	25	
+```
+
+**Explanation:**
+
+1. **Outer loop:** The outer loop (controlled by `i`) iterates from 1 to 5, representing the rows of the table.
+2. **Inner loop:** The inner loop (controlled by `j`) iterates from 1 to 5 for *each* value of `i`, representing the columns.
+3. **Product:** Inside the inner loop, `i * j` calculates the product of the row and column numbers.
+4. **Tab and Newline:** `end="\t"` prevents a newline after each product, keeping them on the same line. `print()` at the end of the outer loop creates a newline after each row is complete.
+
+
+**Other Uses:**
+
+Nested loops are useful for:
+
+* **Processing matrices or 2D arrays:**  Iterating through rows and columns.
+* **Generating combinations:**  Iterating through all possible pairs or combinations of elements from multiple lists or sets.
+* **Searching through nested data structures:**  Like lists of lists or dictionaries within dictionaries.
+
+
+**Efficiency Considerations:**
+
+Nested loops can be computationally expensive, especially with large iterables.  The time complexity increases significantly as the size of the iterables grows (often quadratically or even cubically depending on the number of nested loops).  For very large datasets, consider more efficient algorithms or data structures.  For example, using vectorized operations in libraries like NumPy can offer substantial performance improvements over nested loops in Python.
+
