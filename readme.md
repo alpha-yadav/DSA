@@ -16930,3 +16930,107 @@ print(f"LCA of {p.data} and {q.data}: {lca.data if lca else None}") # Output: LC
 
 This recursive solution is generally preferred for its clarity and simplicity.  Iterative solutions exist but are often more complex to implement and understand.  Remember to handle the case where one or both of `p` and `q` are not present in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree is a fundamental problem in computer science with applications in file systems, version control systems, and phylogenetic analysis.  There are several ways to solve it, depending on the type of tree (binary, general tree) and the information available (parent pointers, tree structure).
+
+Here's a breakdown of common approaches:
+
+**1. Using Parent Pointers:**
+
+This approach is efficient if each node in the tree stores a pointer to its parent.
+
+* **Algorithm:**
+    1. Traverse upwards from node `a` and store all its ancestors in a set `ancestors_a`.
+    2. Traverse upwards from node `b` and check if each ancestor of `b` is present in `ancestors_a`.
+    3. The first ancestor of `b` found in `ancestors_a` is the LCA.
+
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_parent_pointers(node_a, node_b):
+    ancestors_a = set()
+    current = node_a
+    while current:
+        ancestors_a.add(current)
+        current = current.parent
+
+    current = node_b
+    while current:
+        if current in ancestors_a:
+            return current
+        current = current.parent
+
+    return None # Nodes are not related
+
+# Example Usage:
+root = Node('A')
+B = Node('B'); B.parent = root
+C = Node('C'); C.parent = root
+D = Node('D'); D.parent = B
+E = Node('E'); E.parent = B
+F = Node('F'); F.parent = C
+
+print(lca_parent_pointers(D, E).data) # Output: B
+print(lca_parent_pointers(D, F).data) # Output: A
+print(lca_parent_pointers(root,F).data) # Output: A
+```
+
+**2. Using a Recursive Approach (Binary Tree):**
+
+This approach works well for binary trees and doesn't require parent pointers. It leverages the tree structure.
+
+* **Algorithm:**
+    1. If the current node is `None`, return `None`.
+    2. If the current node is either `node_a` or `node_b`, return the current node.
+    3. Recursively search the left and right subtrees.
+    4. If both recursive calls return non-`None` values, the current node is the LCA.
+    5. Otherwise, return the non-`None` result from the recursive calls (or `None` if both are `None`).
+
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node_a, node_b):
+    if root is None:
+        return None
+    if root == node_a or root == node_b:
+        return root
+
+    left_lca = lca_recursive(root.left, node_a, node_b)
+    right_lca = lca_recursive(root.right, node_a, node_b)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+#Example usage
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print(lca_recursive(root, root.left.left, root.left.right).data) #Output: B
+```
+
+
+**3.  Using Depth-First Search (DFS) (General Tree):**
+
+This approach is suitable for general trees (trees where a node can have multiple children).  It uses DFS to find paths from the root to each node and then finds the LCA based on the common prefix of these paths.
+
+
+These are the most common methods. The best approach depends on the specific constraints of your problem (tree type, available information, performance requirements).  If you have parent pointers, the parent pointer method is generally the fastest.  For binary trees, the recursive approach is elegant and efficient.  For general trees, DFS is a robust solution. Remember to handle edge cases like when one or both nodes are not in the tree.
+
