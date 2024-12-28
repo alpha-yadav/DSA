@@ -19347,3 +19347,119 @@ print(isBST(root3)) # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity depends on the height of the tree.  For a balanced tree, it's O(log N) (recursive calls on the stack), and for a skewed tree, it can be O(N).  The second method is generally considered slightly more efficient because it avoids the need to create and sort the `in_order` list.  Choose the method that you find more readable and understandable.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* The value of the left subtree's nodes is less than the node's value.
+* The value of the right subtree's nodes is greater than the node's value.
+
+Here are three common approaches:
+
+**1. Recursive Approach:**
+
+This is a clean and efficient method.  It recursively checks the BST property for each subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a tree is a BST.
+
+    Args:
+        node: The root node of the subtree.
+        min_val: Minimum allowed value for nodes in the subtree.
+        max_val: Maximum allowed value for nodes in the subtree.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+
+root = Node(20)
+root.left = Node(10)
+root.right = Node(30)
+root.left.right = Node(35) #This violates the BST property
+
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: False
+
+```
+
+**2. Inorder Traversal Approach:**
+
+A BST, when traversed in inorder (left, root, right), will produce a sorted sequence. This approach leverages that property.
+
+```python
+def is_bst_inorder(node):
+    """
+    Checks if a tree is a BST using inorder traversal.
+
+    Args:
+        node: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.data)
+            inorder(node.right)
+    inorder(node)
+    for i in range(1, len(result)):
+        if result[i] <= result[i-1]:
+            return False
+    return True
+
+# Example usage (same trees as above):
+print(f"Is the tree a BST? {is_bst_inorder(root)}")  # Output: False (for the second tree example)
+
+
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+print(f"Is the tree a BST? {is_bst_inorder(root)}") # Output: True
+
+```
+
+**3. Iterative Approach (using a stack):**
+
+This approach avoids recursion, which can be advantageous for very deep trees to avoid stack overflow errors.  It's a bit more complex than the recursive method.  The implementation would be similar in spirit to the recursive approach, but use a stack to manage the traversal instead of recursive calls.
+
+
+**Choosing the best approach:**
+
+* **Recursive approach:**  Generally preferred for its clarity and readability.  It's efficient unless you anticipate extremely deep trees.
+
+* **Inorder traversal:**  Simple and elegant if you only need a boolean result and don't need to know *where* the violation occurs.
+
+* **Iterative approach:** Necessary for very deep trees to avoid stack overflow issues, but adds complexity.
+
+
+Remember to adapt the `Node` class definition and example trees to match your specific input format. Choose the approach that best suits your needs in terms of readability, efficiency, and the potential for very deep trees.
+
