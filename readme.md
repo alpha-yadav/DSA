@@ -17939,3 +17939,54 @@ The number of print operations is directly proportional to the size of the array
 
 Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets. An algorithm with a lower complexity will generally perform better than one with a higher complexity as the input size grows.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science and mathematics to describe the asymptotic behavior of a function. Specifically, it provides a tight bound on the growth rate of a function, indicating that the function's growth is bounded both above and below by the same function (within constant factors).  It essentially says a function grows *at the same rate* as another function.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) if there exist positive constants c₁ and c₂ and a positive integer n₀ such that for all n ≥ n₀:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+In simpler terms:
+
+* **f(n) is bounded above by g(n):**  There's a constant c₂ that can multiply g(n) to always be greater than or equal to f(n), for sufficiently large n.
+* **f(n) is bounded below by g(n):** There's a constant c₁ that can multiply g(n) to always be less than or equal to f(n), for sufficiently large n.
+
+This means f(n) and g(n) grow at the same rate, ignoring constant factors.  The constants c₁ and c₂ essentially account for differences in implementation details or machine-specific factors that don't affect the fundamental growth rate.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1 is Θ(n²)**
+
+   We can find constants:
+
+   * Let c₁ = 1.  For sufficiently large n, 2n² + 3n + 1 > n² (ignoring lower-order terms).
+   * Let c₂ = 3. For sufficiently large n, 2n² + 3n + 1 < 3n² (the dominant term dominates).
+
+   Therefore, the condition c₁ * n² ≤ 2n² + 3n + 1 ≤ c₂ * n² holds true for sufficiently large n.
+
+* **f(n) = 5n log₂(n) is Θ(n log n)**
+
+   The base of the logarithm doesn't affect the Big-Theta classification, as it's just a constant factor.  We can easily find suitable c₁ and c₂ to satisfy the definition.
+
+* **f(n) = 2ⁿ is not Θ(n²)**
+
+   An exponential function (2ⁿ) grows much faster than a polynomial function (n²). You cannot find constants c₁ and c₂ to satisfy the definition for all sufficiently large n.
+
+
+**Comparison with Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an upper bound.  f(n) = O(g(n)) means f(n) grows *no faster* than g(n).
+* **Big-Ω (Ω):** Provides a lower bound. f(n) = Ω(g(n)) means f(n) grows *at least as fast* as g(n).
+* **Big-Θ (Θ):** Provides a *tight* bound, combining both Big-O and Big-Ω.  f(n) = Θ(g(n)) means f(n) grows *at the same rate* as g(n).
+
+In essence, if f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).  However, the reverse isn't always true.  A function can be O(g(n)) and Ω(g(n)) without being Θ(g(n)).
+
+
+Big-Theta notation is crucial for analyzing algorithm efficiency. It allows us to compare the performance of different algorithms in a precise and meaningful way, focusing on their scalability as input size increases.
+
