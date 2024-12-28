@@ -21186,3 +21186,48 @@ public class Main {
 
 These are just basic examples. Loops can be much more complex, involving nested loops (loops within loops), `break` statements (to exit a loop prematurely), and `continue` statements (to skip to the next iteration).  The best type of loop to use depends on the specific task.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This is a fundamental concept in programming used to process multi-dimensional data structures or perform repetitive tasks that require iterating through multiple levels of data.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop controls the primary iteration.  It runs a certain number of times (or until a condition is met).
+* **Inner Loop:** This loop is executed within each iteration of the outer loop.  Its execution depends on the current state of the outer loop's iteration.
+
+**Example (Python):**
+
+This example prints a multiplication table using nested loops:
+
+```python
+for i in range(1, 11):  # Outer loop: iterates from 1 to 10
+    for j in range(1, 11):  # Inner loop: iterates from 1 to 10 for each 'i'
+        print(f"{i} x {j} = {i * j}", end="\t")  # Print the multiplication result
+    print()  # Newline after each row
+```
+
+**Output:**
+
+```
+1 x 1 = 1	1 x 2 = 2	1 x 3 = 3	1 x 4 = 4	1 x 5 = 5	1 x 6 = 6	1 x 7 = 7	1 x 8 = 8	1 x 9 = 9	1 x 10 = 10
+2 x 1 = 2	2 x 2 = 4	2 x 3 = 6	2 x 4 = 8	2 x 5 = 10	2 x 6 = 12	2 x 7 = 14	2 x 8 = 16	2 x 9 = 18	2 x 10 = 20
+3 x 1 = 3	3 x 2 = 6	3 x 3 = 9	3 x 4 = 12	3 x 5 = 15	3 x 6 = 18	3 x 7 = 21	3 x 8 = 24	3 x 9 = 27	3 x 10 = 30
+...and so on...
+```
+
+**Explanation:**
+
+The outer loop iterates through numbers 1 to 10.  For each number `i`, the inner loop iterates from 1 to 10 again.  Inside the inner loop, the multiplication `i * j` is calculated and printed.  After the inner loop completes for a single `i`, a newline is printed to move to the next row of the multiplication table.
+
+
+**Other uses of nested loops:**
+
+* **Matrix operations:** Processing rows and columns of a matrix.
+* **Graph traversal:** Exploring nodes and edges in a graph.
+* **Searching and sorting algorithms:**  Implementing algorithms like bubble sort or searching within nested data structures.
+* **Generating patterns:** Creating various text or graphical patterns.
+
+
+**Important Note on Efficiency:**  Nested loops can lead to significantly increased computation time, especially with large datasets.  The time complexity of nested loops is often O(n*m) where 'n' and 'm' are the number of iterations of the outer and inner loops respectively.  Consider optimizing your code if you're dealing with massive datasets to avoid performance issues.
+
