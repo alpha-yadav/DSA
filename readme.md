@@ -16362,3 +16362,107 @@ print(f"Is the tree a BST (min/max)? {is_bst_minmax_wrapper(root2)}")  # Output:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the recursive approach, where H is the height of the tree (O(log N) for a balanced tree, O(N) for a skewed tree).  An iterative approach could reduce space complexity to O(1) for a balanced tree, but would still be O(N) in the worst case.  Choose the method you find more readable and maintainable; they are both equally efficient in the average case.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Recursively checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    _inorder_traversal(root, inorder_list)
+
+    # Check if the inorder traversal is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i].data <= inorder_list[i-1].data:
+            return False
+    return True
+
+def _inorder_traversal(node, inorder_list):
+    """Helper function for recursive in-order traversal."""
+    if node:
+        _inorder_traversal(node.left, inorder_list)
+        inorder_list.append(node)
+        _inorder_traversal(node.right, inorder_list)
+
+# Example usage
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) #Violation - 8 should be in the right subtree of 7.
+root2.right.left = Node(6)
+root2.right.right = Node(4) #Violation - 4 should be in the left subtree of 7
+
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}")  # Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each subtree, passing down the minimum and maximum allowed values for that subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(root):
+    """
+    Recursively checks if a binary tree is a BST using min and max values.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    return _is_bst_util(root, float('-inf'), float('inf'))
+
+def _is_bst_util(node, min_val, max_val):
+    """Helper function for recursive min-max check."""
+    if node is None:
+        return True
+    if node.data <= min_val or node.data >= max_val:
+        return False
+    return (_is_bst_util(node.left, min_val, node.data) and
+            _is_bst_util(node.right, node.data, max_val))
+
+# Example usage (same trees as above, you can copy and paste to test)
+print(f"Is the tree a BST? {is_bst_minmax(root)}")  # Output: True
+print(f"Is the tree a BST? {is_bst_minmax(root2)}") # Output: False
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach, where H is the height of the tree (O(log N) for a balanced tree, O(N) for a skewed tree).  An iterative approach using a stack could reduce space complexity to O(W), where W is the maximum width of the tree.  Choose the method that best suits your needs and coding style.  The in-order traversal method is generally considered more intuitive.
+
