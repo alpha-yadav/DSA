@@ -19877,3 +19877,68 @@ def lowestCommonAncestorIterative(root, p, q):
 
 Remember to handle cases where `p` or `q` are not in the tree (returning `None`).  Also, consider edge cases like an empty tree or when `p` and `q` are the same node.  The provided code addresses these cases.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree or graph is a classic computer science problem.  The approach depends on the type of tree (binary tree, general tree) and whether the tree is rooted or unrooted.  Here's a breakdown of common methods:
+
+**1. Binary Trees (Rooted):**
+
+* **Recursive Approach (Most Common):** This is an efficient and elegant solution.  The idea is to recursively traverse the tree.  If the current node is one of the target nodes, return it.  Otherwise, recursively search the left and right subtrees.  If both subtrees return a node (meaning both targets were found in the subtrees), the current node is the LCA.  If only one subtree returns a node, that node is the LCA.  If neither subtree returns a node, then the LCA is not in that subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(lowestCommonAncestor(root, root.left, root.right).data)  # Output: 1
+print(lowestCommonAncestor(root, root.left, root.left.right).data) # Output: 2
+```
+
+* **Iterative Approach (Using Parent Pointers):** If each node has a pointer to its parent, you can efficiently find the LCA iteratively.  Traverse upwards from both `p` and `q` simultaneously, storing the path from the root to each node.  Then, find the last common node in both paths.
+
+**2. General Trees (Rooted):**
+
+The recursive approach can be adapted to work for general trees, but you'll need to iterate through all children instead of just left and right.
+
+**3. Unrooted Trees:**
+
+Finding the LCA in an unrooted tree is more complex.  You often need to root the tree first, which requires choosing a root node arbitrarily.
+
+**4. Graphs:**
+
+Finding the LCA in a graph is even more challenging because there can be multiple paths between two nodes.  Algorithms like Tarjan's off-line LCA algorithm or the lowest common ancestor using binary lifting are often used for efficiency.  These algorithms are more advanced and beyond the scope of a brief explanation.
+
+
+**Choosing the Right Method:**
+
+The best method depends on the specific problem constraints:
+
+* **Type of tree:** Binary tree or general tree.
+* **Rooted or unrooted:**  Does the tree have a designated root?
+* **Parent pointers:** Are parent pointers available in the node structure?
+* **Performance requirements:** For large trees, efficient algorithms like Tarjan's are necessary.
+
+The recursive approach for binary trees is generally the easiest to understand and implement, while iterative approaches or more advanced algorithms offer better performance for larger datasets or more complex graph structures. Remember to handle edge cases such as one or both nodes not being present in the tree.
+
