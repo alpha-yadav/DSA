@@ -14957,3 +14957,54 @@ This maps each number to its FizzBuzz representation and then prints each result
 
 Start with the version that best suits your understanding and gradually explore the more advanced techniques as you gain experience. Remember to choose the version that prioritizes readability and maintainability for your specific needs.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources of primary interest are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We typically analyze complexity using **Big O notation**, which describes the growth rate of the algorithm's resource consumption as the input size grows very large.  It focuses on the dominant terms and ignores constant factors.
+
+Here's a breakdown of common complexities, ordered from best to worst:
+
+**Time Complexity:**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Examples include accessing an element in an array by index or performing a single arithmetic operation.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size. This is very efficient.  Examples include binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Examples include searching an unsorted array or iterating through a list once.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases proportionally to the square of the input size.  This is often seen in nested loops iterating through the input data.  Examples include bubble sort or selection sort.
+
+* **O(n³) - Cubic Time:** The execution time increases proportionally to the cube of the input size.  Often seen in algorithms with three nested loops.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  This is very inefficient for large inputs.  Examples include some recursive algorithms that explore all possible subsets.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size. This is extremely inefficient and only practical for very small input sizes.  Examples include finding all permutations of a set.
+
+
+**Space Complexity:**  Similar notations are used, but we analyze the memory usage instead of time.
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The algorithm's memory usage grows linearly with the input size.  This is often the case when creating a copy of the input data.
+
+* **O(log n) - Logarithmic Space:** The algorithm's memory usage grows logarithmically with the input size.  This is often seen in recursive algorithms that use a stack.
+
+* **O(n²) - Quadratic Space:**  The algorithm's memory usage grows proportionally to the square of the input size.
+
+
+**Important Considerations:**
+
+* **Best, Average, and Worst Case:**  Big O notation often describes the *worst-case* scenario.  An algorithm might have different complexities depending on the input data.  For example, a simple search in an array has O(n) worst-case complexity but O(1) best-case complexity if the element is found at the beginning.
+
+* **Amortized Analysis:**  This analyzes the average time complexity over a sequence of operations, even if some individual operations are expensive.
+
+* **Practicality:**  While Big O notation is crucial for understanding scalability, it doesn't tell the whole story.  A O(n²) algorithm might be faster than a O(n log n) algorithm for small inputs due to constant factors ignored in the notation.
+
+
+Understanding algorithm complexity is vital for choosing the right algorithm for a given task, especially when dealing with large datasets.  Choosing an algorithm with a lower time and space complexity is essential for efficient and scalable solutions.
+
