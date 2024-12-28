@@ -18449,3 +18449,14 @@ std::vector<std::pair<int, int>> edges; // (parent_node_index, child_node_index)
 
 The choice of representation often depends on the operations you'll be performing most frequently on the tree.  For example, if you need frequent parent lookups, you might add a parent pointer to one of the above structures. If you're doing a lot of breadth-first traversal, a level-order representation might be advantageous (though this isn't fundamentally different from the others).  The list of children representation is often a good general-purpose choice for its flexibility.
 
+#  Introduction 
+Please provide me with context!  An introduction to *what*?  I need more information to write an introduction.  For example, tell me:
+
+* **What is the topic?** (e.g., the history of coffee, the benefits of exercise, quantum physics)
+* **Who is the audience?** (e.g., experts, general public, children)
+* **What is the purpose?** (e.g., to inform, persuade, entertain)
+* **What is the overall tone?** (e.g., formal, informal, humorous)
+
+
+Once I have this information, I can write a compelling introduction for you.
+
