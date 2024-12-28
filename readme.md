@@ -18142,3 +18142,75 @@ Big O notation can also describe *space complexity*, which represents the amount
 
 **Important Note:** Big O is an *asymptotic* analysis.  It doesn't tell the whole story for small input sizes.  Constant factors and lower-order terms can be significant in practice, especially for smaller datasets.  However, for large-scale applications, Big O provides crucial insights into an algorithm's efficiency.
 
+#  A Simple Loop 
+A simple loop repeats a block of code multiple times.  The specifics depend on the programming language, but the general structure is the same.  Here are examples in a few common languages:
+
+**1. `for` loop (iterating a specific number of times):**
+
+* **Python:**
+
+```python
+for i in range(5):  # Loop 5 times (i will be 0, 1, 2, 3, 4)
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) { // Loop 5 times (i will be 0, 1, 2, 3, 4)
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) { // Loop 5 times (i will be 0, 1, 2, 3, 4)
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+
+**2. `while` loop (repeating until a condition is false):**
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+These examples all achieve the same basic outcome: printing the numbers 0 through 4.  The `for` loop is generally preferred when you know the number of iterations in advance, while the `while` loop is better when the number of iterations depends on a condition that might change during the loop's execution.  Remember to always include a way to terminate the loop to prevent infinite loops.
+
