@@ -25266,3 +25266,135 @@ Please provide me with the topic or subject you'd like an introduction for.  I n
 
 Once I have this information, I can write a compelling introduction for you.
 
+#  To check if two Binary trees are same or not 
+Several approaches can be used to check if two binary trees are the same. Here are three common methods, implemented in Python:
+
+**Method 1: Recursive Approach**
+
+This is the most intuitive and often the most efficient approach.  It recursively compares the nodes of the two trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def areIdentical(root1, root2):
+    # Base Case: If both trees are empty
+    if root1 is None and root2 is None:
+        return True
+
+    # If one is empty and the other is not
+    if root1 is None or root2 is None:
+        return False
+
+    # Compare the data and recursively check left and right subtrees
+    return (root1.data == root2.data and
+            areIdentical(root1.left, root2.left) and
+            areIdentical(root1.right, root2.right))
+
+# Example usage:
+root1 = Node(1)
+root1.left = Node(2)
+root1.right = Node(3)
+root1.left.left = Node(4)
+root1.left.right = Node(5)
+
+root2 = Node(1)
+root2.left = Node(2)
+root2.right = Node(3)
+root2.left.left = Node(4)
+root2.left.right = Node(5)
+
+if areIdentical(root1, root2):
+    print("Both trees are identical")
+else:
+    print("Trees are not identical")
+
+
+root3 = Node(1)
+root3.left = Node(2)
+root3.right = Node(3)
+root3.left.left = Node(4)
+root3.left.right = Node(6) #Changed this node to make trees different
+
+if areIdentical(root1, root3):
+    print("Both trees are identical")
+else:
+    print("Trees are not identical")
+```
+
+**Method 2: Iterative Approach using Queues**
+
+This method uses Breadth-First Search (BFS) with queues to compare the trees level by level.
+
+```python
+from collections import deque
+
+def areIdenticalIterative(root1, root2):
+    if root1 is None and root2 is None:
+        return True
+    if root1 is None or root2 is None:
+        return False
+
+    queue1 = deque([root1])
+    queue2 = deque([root2])
+
+    while queue1 and queue2:
+        node1 = queue1.popleft()
+        node2 = queue2.popleft()
+
+        if node1.data != node2.data:
+            return False
+
+        if (node1.left is None and node2.left is not None) or \
+           (node1.left is not None and node2.left is None) or \
+           (node1.right is None and node2.right is not None) or \
+           (node1.right is not None and node2.right is None):
+            return False
+
+
+        if node1.left:
+            queue1.append(node1.left)
+        if node2.left:
+            queue2.append(node2.left)
+        if node1.right:
+            queue1.append(node1.right)
+        if node2.right:
+            queue2.append(node2.right)
+
+    return len(queue1) == len(queue2) # Check if both queues are empty
+
+
+# Example usage (same trees as before, you can test with root3 as well)
+if areIdenticalIterative(root1, root2):
+    print("Both trees are identical (Iterative)")
+else:
+    print("Trees are not identical (Iterative)")
+
+```
+
+**Method 3:  Using String Representation (Less Efficient)**
+
+This method converts each tree into a string representation and compares the strings. It's generally less efficient than the recursive or iterative approaches, especially for large trees.
+
+```python
+def treeToString(node):
+    if node is None:
+        return ""
+    return str(node.data) + "," + treeToString(node.left) + "," + treeToString(node.right)
+
+def areIdenticalString(root1, root2):
+    return treeToString(root1) == treeToString(root2)
+
+
+# Example usage
+if areIdenticalString(root1, root2):
+    print("Both trees are identical (String)")
+else:
+    print("Trees are not identical (String)")
+```
+
+The recursive approach is generally preferred for its clarity and often better performance for balanced trees. The iterative approach is useful if you're concerned about potential stack overflow issues with very deep recursive calls.  Avoid the string-based approach unless you have a specific reason for it, as it's less efficient. Remember to adapt the `Node` class definition if your tree nodes have additional attributes.
+
