@@ -22107,3 +22107,57 @@ public class Main {
 
 These examples demonstrate the basic structure of simple loops.  The specific syntax may vary slightly depending on the programming language, but the core concept remains the same:  repeated execution of a code block based on a condition.  Remember to always have a way to exit the loop to prevent infinite loops.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's code runs multiple times for a single iteration of the outer loop.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    # Outer loop code (executed once per outer iteration)
+    for inner_loop_variable in inner_loop_iterable:
+        # Inner loop code (executed multiple times per outer iteration)
+    # More outer loop code (executed once per outer iteration)
+```
+
+**Example (Python):**
+
+This code prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop iterates from 1 to 10
+    for j in range(1, 11):  # Inner loop iterates from 1 to 10 for each i
+        print(f"{i} x {j} = {i * j}", end="\t") # end="\t" adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This will output:
+
+```
+1 x 1 = 1	1 x 2 = 2	1 x 3 = 3	1 x 4 = 4	1 x 5 = 5	1 x 6 = 6	1 x 7 = 7	1 x 8 = 8	1 x 9 = 9	1 x 10 = 10	
+2 x 1 = 2	2 x 2 = 4	2 x 3 = 6	2 x 4 = 8	2 x 5 = 10	2 x 6 = 12	2 x 7 = 14	2 x 8 = 16	2 x 9 = 18	2 x 10 = 20	
+...and so on...
+```
+
+
+**Uses:**
+
+Nested loops are commonly used for:
+
+* **Processing two-dimensional data:**  Working with matrices, tables, or images.
+* **Generating patterns:** Creating visual patterns like stars or other shapes in the console.
+* **Iterating through combinations:** Finding all possible combinations of items from two or more sets.
+* **Nested structures:** Traversing nested data structures like lists of lists or dictionaries within dictionaries.
+
+
+**Complexity:**
+
+Nested loops increase the time complexity of your algorithm.  If both outer and inner loops iterate `n` times, the overall time complexity becomes O(n²), which can be significant for large values of `n`.  Always consider the efficiency of nested loops, especially when dealing with large datasets.  Optimization techniques might be necessary to avoid performance bottlenecks.
+
+
+**Other Programming Languages:**
+
+The concept of nested loops applies to all major programming languages (C, C++, Java, JavaScript, etc.) with minor syntactic differences.  The basic structure remains the same.
+
