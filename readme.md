@@ -24672,3 +24672,66 @@ This version builds the output string incrementally, making it slightly more eff
 
 For beginners, the first (`fizzBuzz`) version is recommended for its clarity.  The others demonstrate more advanced Swift features, but readability should always be a priority, especially when learning.  Choose the version that best suits your understanding and coding style.  Remember to always test your code thoroughly!
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The most common resources considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We usually express complexity using Big O notation (O), which describes the upper bound of the growth rate of the algorithm's resource consumption as the input size approaches infinity.  This focuses on the dominant terms and ignores constant factors, as these become less significant with large inputs.
+
+Here's a breakdown of common complexity classes, ordered from best to worst:
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time grows logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time grows linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** A common complexity for efficient sorting algorithms.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The execution time grows proportionally to the square of the input size.  This becomes slow quickly with larger inputs.  Example: Bubble sort, selection sort, nested loops iterating over the same input.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  These algorithms become impractical very quickly for even moderately sized inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  This is extremely slow and only practical for very small inputs.  Example: Finding all permutations of a set.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, we typically follow these steps:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the algorithm's running time.
+
+2. **Express the number of operations as a function of the input size (n):**  Count how many times these basic operations are executed as a function of `n`.
+
+3. **Use Big O notation to express the dominant term:** Ignore constant factors and lower-order terms.  Focus on the term that grows fastest as `n` increases.
+
+
+**Example:**
+
+Let's consider a simple function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+1. **Basic operation:** The comparison `x > max_val` is the dominant operation.
+
+2. **Number of operations:** This comparison is executed `n` times (where `n` is the length of the array).
+
+3. **Big O notation:** The time complexity is O(n) – linear time.
+
+
+**Space Complexity:**
+
+Space complexity analysis is similar, but instead of counting operations, we count the amount of memory used. This includes the input data, auxiliary variables, and any data structures used by the algorithm.  The same Big O notation applies.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance for different input sizes.  It's a fundamental concept in computer science.
+
