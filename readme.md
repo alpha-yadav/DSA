@@ -30276,3 +30276,36 @@ else:
 
 This algorithm has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges, because each vertex and edge is visited at most once.  The space complexity is O(V) due to the `visited` and `recStack` arrays.  This is a standard and efficient way to detect cycles in directed graphs.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a groundbreaking algorithm for finding single-source shortest paths (SSSP) in directed graphs with non-negative edge weights.  Its significance lies in achieving *linear time* complexity, O(m), where 'm' is the number of edges in the graph.  This is asymptotically optimal, as reading the input graph itself requires at least O(m) time.
+
+However, it's crucial to understand the nuances:
+
+* **Linearity is in expectation:** The algorithm's O(m) time complexity holds *in expectation* under a reasonable assumption of the input graph's randomness.  It doesn't guarantee O(m) time for *every* input graph.  The worst-case complexity is higher, although the probability of encountering such worst-case scenarios is extremely low.
+
+* **Word RAM model:**  Thorup's algorithm operates within the Word RAM model of computation. This model assumes that basic arithmetic operations on words (typically machine words of size log n bits) take constant time.  This is a reasonable assumption for practical purposes, but it's important to be aware of this underlying model.
+
+* **Simplicity is sacrificed for speed:** Unlike Dijkstra's algorithm or Bellman-Ford, Thorup's algorithm is significantly more complex.  Its implementation is intricate and often considered challenging even for experienced algorithm designers.
+
+
+**Key Ideas Behind Thorup's Algorithm:**
+
+Thorup's algorithm builds upon several clever techniques, most notably:
+
+* **Random sampling and bucketing:**  The algorithm employs randomized sampling to partition the edges into different buckets based on their weights.  This cleverly reduces the problem's complexity.
+
+* **Hierarchical decomposition:** The algorithm uses a hierarchical approach, progressively refining the shortest path estimates by considering different levels of edge weight ranges.
+
+* **Data structures:**  The use of efficient data structures plays a vital role in achieving linear time complexity. These structures allow for quick lookups and updates during the algorithm's execution.
+
+* **Analysis based on probabilistic methods:** The algorithm's analysis relies heavily on probabilistic techniques to demonstrate its expected linear time complexity.
+
+
+**Comparison with Dijkstra's Algorithm:**
+
+While Dijkstra's algorithm is widely known and simpler to implement, it has a time complexity of O(m log n) using a priority queue (Fibonacci heap can improve this slightly but is still not linear), where 'n' is the number of vertices.  Thorup's algorithm, though more complex, achieves a significant improvement in terms of asymptotic complexity, making it superior for extremely large graphs.
+
+
+
+**In summary:** Thorup's algorithm offers a remarkable theoretical achievement, providing a linear-time SSSP solution for directed graphs with non-negative edge weights.  However, its practical applicability might be limited by its complexity and reliance on the Word RAM model.  Dijkstra's algorithm remains a more practical choice for many scenarios due to its simplicity and good performance in most cases.
+
