@@ -24359,3 +24359,115 @@ While DFS and BFS are the most common, other traversal algorithms exist, often t
 
 The choice of traversal algorithm depends heavily on the specific problem and the properties of the graph.  Understanding the strengths and weaknesses of each approach is crucial for efficient and effective graph processing.
 
+#  Depth First Search traversal function 
+There are several ways to implement a Depth-First Search (DFS) traversal function, depending on the data structure representing the graph (adjacency matrix, adjacency list) and whether you want to use recursion or iteration.  Here are a few examples:
+
+**1. Recursive DFS (Adjacency List):** This is generally considered the most elegant and intuitive approach for DFS using an adjacency list.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (default: None).
+        path: A list to store the traversal path (default: None).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+traversal_path = dfs_recursive(graph, 'A')
+print(f"DFS traversal path: {traversal_path}")  # Output will vary slightly depending on the order of neighbors
+```
+
+**2. Iterative DFS (Adjacency List):**  Uses a stack to simulate recursion.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal iteratively.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        node: The starting node for the traversal.
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    visited = set()
+    stack = [node]
+    path = []
+
+    while stack:
+        current_node = stack.pop()
+        if current_node not in visited:
+            visited.add(current_node)
+            path.append(current_node)
+            stack.extend(neighbor for neighbor in reversed(graph.get(current_node, [])) if neighbor not in visited) #Reversed for correct DFS order
+
+    return path
+
+# Example usage (same graph as above):
+traversal_path = dfs_iterative(graph, 'A')
+print(f"DFS traversal path: {traversal_path}")
+```
+
+**3.  Recursive DFS (Adjacency Matrix):**  Less common for DFS, but possible.  Requires a different approach to accessing neighbors.
+
+```python
+def dfs_recursive_matrix(graph, node, visited, path, num_nodes):
+    visited[node] = True
+    path.append(node)
+
+    for neighbor in range(num_nodes):
+        if graph[node][neighbor] == 1 and not visited[neighbor]:
+            dfs_recursive_matrix(graph, neighbor, visited, path, num_nodes)
+    return path
+
+
+# Example usage:
+graph_matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0]   # F
+]
+num_nodes = len(graph_matrix)
+visited = [False] * num_nodes
+path = []
+traversal_path = dfs_recursive_matrix(graph_matrix, 0, visited, path, num_nodes) #Start at node 0 (A)
+print(f"DFS traversal path (matrix): {traversal_path}")
+
+```
+
+Remember to adapt the code to your specific graph representation and needs.  The adjacency list representation is generally preferred for its efficiency in representing sparse graphs (graphs with relatively few edges).  The choice between recursive and iterative DFS depends on factors like stack overflow concerns (recursion has a recursion depth limit) and personal preference; iterative DFS avoids this risk.
+
