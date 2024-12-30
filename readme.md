@@ -22373,3 +22373,13 @@ The best representation depends on the operations you intend to perform on the n
 
 Often, the best choice involves a compromise balancing these trade-offs.
 
+#  Introduction 
+Please provide me with context!  I need to know what you want an introduction *to*.  An introduction to what topic, subject, person, or thing?  For example, you could ask for:
+
+* "An introduction to the history of the Roman Empire"
+* "An introduction to quantum physics"
+* "An introduction to Jane Austen's novels"
+* "An introduction to my new product"
+
+Give me some more information so I can write a helpful introduction for you.
+
