@@ -21834,3 +21834,57 @@ If f(n) = Θ(g(n)), then it also implies f(n) = O(g(n)) and f(n) = Ω(g(n)).  Ho
 
 Big-Theta notation provides a precise and concise way to characterize the growth rate of algorithms and functions, which is essential for comparing their efficiency and scalability.  It focuses on the dominant term's behavior as the input size becomes very large, ignoring constant factors and lower-order terms.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used in computer science to describe the performance or complexity of algorithms. They focus on the growth rate of a function as its input size approaches infinity, ignoring constant factors and smaller-order terms.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Big O notation provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than the square of the input size.  It could be faster, but it won't be significantly slower.
+* **Focus:** Worst-case performance.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Big Omega notation provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (though not always strictly the best case, more of a guarantee of at least that speed).  We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size.
+* **Focus:** Best-case performance (or a guaranteed minimum performance).
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Big Theta notation provides a *tight bound* on the growth rate of a function. It means the function grows at the *same rate* as another function, both upper and lower bounded.  We say f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+* **Focus:** Precise characterization of growth rate.
+
+**4. Little o Notation (o):**
+
+* **Meaning:** Little o notation indicates that a function grows *strictly slower* than another function.  We say f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.
+* **Example:**  f(n) = o(n²) means f(n) grows slower than n².  This is a stronger statement than O(n²).
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Little omega notation indicates that a function grows *strictly faster* than another function. We say f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.
+* **Example:** f(n) = ω(n) means f(n) grows faster than n. This is a stronger statement than Ω(n).
+
+
+**Summary Table:**
+
+| Notation | Meaning                                    | Example                  |
+|----------|--------------------------------------------|---------------------------|
+| O(g(n))  | Upper bound: f(n) grows no faster than g(n) | f(n) = O(n²)             |
+| Ω(g(n))  | Lower bound: f(n) grows at least as fast as g(n) | f(n) = Ω(n)              |
+| Θ(g(n))  | Tight bound: f(n) grows proportionally to g(n) | f(n) = Θ(n log n)        |
+| o(g(n))  | f(n) grows strictly slower than g(n)       | f(n) = o(n²)             |
+| ω(g(n))  | f(n) grows strictly faster than g(n)       | f(n) = ω(n)              |
+
+
+**Relationships:**
+
+* Θ(g(n)) implies both O(g(n)) and Ω(g(n)).
+* O(g(n)) does *not* imply Ω(g(n)) (unless it's Θ(g(n))).
+* Ω(g(n)) does *not* imply O(g(n)) (unless it's Θ(g(n))).
+* o(g(n)) is a stronger statement than O(g(n)).
+* ω(g(n)) is a stronger statement than Ω(g(n)).
+
+
+These notations are crucial for comparing the efficiency of algorithms and making informed decisions about which algorithm to use for a given problem.  They allow us to abstract away from specific hardware and focus on the inherent scalability of the algorithm.
+
