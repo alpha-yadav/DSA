@@ -25398,3 +25398,48 @@ else:
 
 The recursive approach is generally preferred for its clarity and often better performance for balanced trees. The iterative approach is useful if you're concerned about potential stack overflow issues with very deep recursive calls.  Avoid the string-based approach unless you have a specific reason for it, as it's less efficient. Remember to adapt the `Node` class definition if your tree nodes have additional attributes.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They're tree-like structures where each node has at most two children, referred to as the left child and the right child.  The key property that defines a BST is the *search property*:
+
+* **For every node in the tree:**  All nodes in the *left subtree* have keys *less than* the node's key, and all nodes in the *right subtree* have keys *greater than* the node's key.  (In some implementations, "less than or equal to" and "greater than or equal to" are used instead, which can lead to slight variations in behavior.)
+
+This property makes BSTs incredibly efficient for searching, insertion, and deletion of data.
+
+**Key Operations:**
+
+* **Search:**  To search for a specific key, you start at the root node. If the key matches the root's key, you're done. If the key is less than the root's key, you recursively search the left subtree; otherwise, you search the right subtree.  This process continues until the key is found or you reach a leaf node (a node with no children), indicating the key is not present.  The time complexity of search in a *balanced* BST is O(log n), where n is the number of nodes.  In a worst-case scenario (e.g., a skewed tree resembling a linked list), it becomes O(n).
+
+* **Insertion:** To insert a new node, you perform a search for the key. If the key is not found, you insert the new node at the leaf node where the search ended.  The time complexity is similar to search: O(log n) for a balanced tree and O(n) for a skewed tree.
+
+* **Deletion:** Deleting a node is more complex than insertion and involves three cases:
+    * **Leaf Node:** Simply remove the node.
+    * **Node with One Child:** Replace the node with its child.
+    * **Node with Two Children:** This is the most complex case.  Common strategies include:
+        * **Replacing the node with its inorder successor (the smallest node in the right subtree) or inorder predecessor (the largest node in the left subtree).** This maintains the BST property.
+The time complexity is again O(log n) for a balanced tree and O(n) for a skewed tree.
+
+**Advantages of BSTs:**
+
+* **Efficient Search, Insertion, and Deletion (in balanced trees):**  O(log n) time complexity for these operations makes them suitable for many applications.
+* **Ordered Data:**  BSTs inherently maintain the data in sorted order, allowing for easy retrieval of minimum, maximum, and range queries.
+* **Flexible:** They can handle a dynamic number of elements.
+
+
+**Disadvantages of BSTs:**
+
+* **Performance depends on balance:**  A highly skewed tree can degrade performance to O(n) for all operations, making it equivalent to a linked list.
+* **Worst-case scenarios:**  Operations can take linear time if the tree is unbalanced.
+* **Implementation Complexity:** Deletion, especially for nodes with two children, can be relatively complex to implement correctly.
+
+
+**Balancing BSTs:**
+
+To avoid the performance issues associated with unbalanced trees, self-balancing BSTs are used.  These include:
+
+* **AVL Trees:**  Maintain a balance factor for each node to ensure the height difference between the left and right subtrees is at most 1.
+* **Red-Black Trees:** Use color properties (red and black) to ensure a roughly balanced structure.
+* **B-Trees:**  Optimized for disk-based storage.
+
+
+In summary, Binary Search Trees are a powerful data structure, but their efficiency hinges on maintaining a balanced structure.  For applications requiring guaranteed performance, self-balancing BSTs are essential.
+
