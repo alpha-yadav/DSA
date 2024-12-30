@@ -26784,3 +26784,13 @@ print(lca_recursive(root, root.left.left, root.left.right).data) # Output: 2
 
 Remember to adapt the code to handle cases where one or both nodes are not present in the tree.  You should also consider edge cases like an empty tree or a tree with only one node.  The iterative approach usually offers slightly better performance in some scenarios, especially when dealing with deep trees because it avoids recursive function call overhead.  Choose the method that best suits your needs and tree structure.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **Equation:**  For example, y = 2x + 1,  y = x²,  sin(x), etc.
+* **Data points:** A set of x and y values (e.g., (1,2), (2,4), (3,6)).
+* **Type of graph:**  Do you want a line graph, scatter plot, bar chart, etc.?
+* **Range:** What range of x and y values should be included in the graph?
+
+Once you give me this information, I can help you create a graph.  I can't create visual graphs directly, but I can describe the graph or give you the data points needed to create it using graphing software or a spreadsheet program.
+
