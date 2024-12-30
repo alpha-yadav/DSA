@@ -21986,3 +21986,124 @@ While Big O describes the worst-case upper bound, other notations exist:
 
 Understanding Big O notation is crucial for analyzing and comparing the efficiency of algorithms, making informed decisions about which algorithm to use for a given task.  Choosing an algorithm with a lower Big O complexity often leads to significantly better performance, especially when dealing with large datasets.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  There are several types of loops, but the most common are `for` and `while` loops.
+
+Here are examples in a few popular programming languages:
+
+**Python:**
+
+**`for` loop (iterating through a sequence):**
+
+```python
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+  print(fruit)
+```
+
+**`for` loop (using `range` for a specific number of iterations):**
+
+```python
+for i in range(5):  # Iterates 5 times (0, 1, 2, 3, 4)
+  print(i)
+```
+
+**`while` loop (repeats as long as a condition is true):**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+
+**JavaScript:**
+
+**`for` loop (similar to Python's `range` based loop):**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+**`for...of` loop (iterating through an array):**
+
+```javascript
+const fruits = ["apple", "banana", "cherry"];
+for (const fruit of fruits) {
+  console.log(fruit);
+}
+```
+
+**`while` loop:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+**C++:**
+
+**`for` loop:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+**`while` loop:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+**Java:**
+
+**`for` loop:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+**`while` loop:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples demonstrate the basic structure of simple loops.  The specific syntax may vary slightly depending on the programming language, but the core concept remains the same:  repeated execution of a code block based on a condition.  Remember to always have a way to exit the loop to prevent infinite loops.
+
