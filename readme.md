@@ -22188,3 +22188,33 @@ Here are some common types of algorithms with O(log n) time complexity:
 
 In summary, O(log n) algorithms are highly efficient for large datasets because the growth rate of their execution time is very slow.  They are often used in situations where fast searching, sorting, or other operations are crucial.
 
+#  An O(log n) example 
+The most common O(log n) example is **binary search**.
+
+Let's say you have a sorted array of `n` elements and you want to find a specific element within that array.  A linear search would check each element one by one, resulting in O(n) time complexity.  However, binary search works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process is repeated until the target value is found or the search interval is empty.
+
+**Here's how the logarithmic complexity arises:**
+
+With each comparison, you eliminate roughly half of the remaining search space. This is equivalent to repeatedly dividing `n` by 2.  The number of times you can divide `n` by 2 before you reach 1 is approximately log₂(n) (log base 2 of n).
+
+**Example:**
+
+Let's say you have an array with 16 elements.
+
+1. You start by checking the middle element (index 7).
+2. If your target is smaller, you'll only need to search in the lower half (elements 0-6).
+3. If your target is larger, you'll search in the upper half (elements 8-15).
+4. You repeat this process, halving the search space with each step.
+
+In this case, you'll perform at most 4 comparisons (log₂(16) = 4).  This is significantly faster than a linear search, which could require up to 16 comparisons in the worst case.
+
+
+**Other O(log n) examples:**
+
+* **Tree traversal in a balanced binary search tree:** Finding a specific node in a balanced binary search tree takes O(log n) time because you effectively halve the search space with each comparison.
+* **Efficient algorithms using divide and conquer techniques:**  Many algorithms that recursively divide a problem into smaller subproblems can achieve O(log n) complexity if the subproblems are roughly equal in size.
+* **Certain exponentiation algorithms:**  Efficient algorithms for calculating xⁿ can achieve O(log n) time complexity by repeatedly squaring the base.
+
+
+The key characteristic of O(log n) algorithms is that the amount of work done decreases significantly with each step, resulting in a much faster runtime than linear algorithms for large inputs.
+
