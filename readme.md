@@ -27931,3 +27931,57 @@ If `f(n) = Θ(g(n))`, then `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
 
 **In summary:** Big-Omega notation helps us understand the best-case or minimum complexity of an algorithm. It provides a valuable piece of information alongside Big-O, helping us get a complete picture of an algorithm's performance characteristics.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of a function, usually representing the runtime or space requirements of an algorithm as the input size grows.  It focuses on the dominant terms and ignores constant factors, providing a high-level understanding of scalability.
+
+Here's a breakdown of key concepts:
+
+**What Big O Describes:**
+
+* **Worst-case scenario:** Big O typically describes the worst-case runtime or space complexity. This means it represents the upper limit of how much time or space the algorithm might consume for a given input size.
+* **Growth rate, not exact time:** Big O doesn't tell you the exact runtime in seconds. Instead, it describes how the runtime *scales* as the input size increases.  An algorithm with O(n) complexity will generally take longer to run than one with O(log n) complexity as the input (n) gets larger, regardless of the exact execution time on a specific machine.
+* **Asymptotic behavior:** Big O describes the behavior of the algorithm as the input size approaches infinity.  Minor inefficiencies for small input sizes are ignored.
+
+**Common Big O Notations and Their Meaning:**
+
+* **O(1) - Constant time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic time:** The runtime increases proportionally to the square of the input size. Example: Bubble sort, selection sort (nested loops).
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial time:** The runtime grows factorially with the input size.  Example: Finding all permutations of a sequence.
+
+
+**How to Analyze Algorithm Complexity:**
+
+1. **Identify the basic operations:** Determine which operations contribute most significantly to the algorithm's runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Identify the dominant term:** As n grows large, some terms in the function will become insignificant compared to others.  Focus on the term that grows most rapidly.
+4. **Drop constant factors:** Constant multipliers (like 2, 10, etc.) are ignored in Big O notation.
+5. **Express the complexity using Big O notation:**  Use the dominant term to express the algorithm's Big O complexity.
+
+
+**Example:**
+
+Consider a simple function that finds the maximum value in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+This algorithm iterates through the array once. The number of comparisons is directly proportional to the size of the array (n). Therefore, the time complexity is O(n).
+
+
+**Big Omega (Ω) and Big Theta (Θ):**
+
+While Big O describes the *upper bound*, Big Omega (Ω) describes the *lower bound* of an algorithm's runtime, and Big Theta (Θ) describes both the upper and lower bounds (tight bound).  Big O is most commonly used because it provides a guarantee of the worst-case performance.
+
+
+Understanding Big O notation is crucial for writing efficient and scalable algorithms. By analyzing the complexity of different algorithms, you can choose the most appropriate one for a given task and avoid performance bottlenecks as the input size grows.
+
