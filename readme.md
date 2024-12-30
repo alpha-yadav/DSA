@@ -27625,3 +27625,75 @@ You can return the answer in any order.
 
 These problems are a good starting point to practice your algorithmic thinking.  Remember to focus on clarity, efficiency, and correctness in your solutions.  There are many resources online (like LeetCode, HackerRank, etc.) where you can find more problems and solutions.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's designed to test basic programming concepts like loops and conditional statements. Here's how to implement it in Swift, starting with a simple version and then progressing to more advanced options:
+
+**Simple Version (using a `for` loop):**
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This version iterates from 1 to `n` and checks for divisibility by 3 and 5 using the modulo operator (`%`).  If a number is divisible by both, it prints "FizzBuzz"; if only by 3, "Fizz"; if only by 5, "Buzz"; otherwise, it prints the number itself.
+
+
+**Slightly More Efficient Version:**
+
+This version avoids redundant checks by checking for divisibility by 15 first:
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzzEfficient(n: 15)
+```
+
+The difference in efficiency is negligible for small `n`, but becomes more apparent with larger inputs.
+
+
+**Version using String Interpolation and a Ternary Operator (for compactness):**
+
+This version demonstrates more advanced Swift features, making the code more concise:
+
+```swift
+func fizzBuzzCompact(n: Int) {
+    for i in 1...n {
+        print("\(i % 15 == 0 ? "FizzBuzz" : (i % 3 == 0 ? "Fizz" : (i % 5 == 0 ? "Buzz" : "\(i)"))) ")
+    }
+}
+
+fizzBuzzCompact(n: 15)
+```
+
+This uses nested ternary operators to achieve the same result in a single line within the `print` statement.  While compact, it might be less readable for beginners.
+
+
+**Choosing the Best Version:**
+
+For learning purposes, the first or second version is recommended for readability and understanding.  The compact version is useful for demonstrating Swift's concise syntax but might sacrifice readability for brevity.  The key is to choose the version that best balances readability and efficiency for your needs.  Remember to always prioritize clear and maintainable code.
+
