@@ -26426,3 +26426,138 @@ Both implementations follow these steps:
 
 These examples use a simple `print` or `console.log` to process the node data.  You can easily modify this to perform other actions on the nodes as needed (e.g., storing the data in an array).  Remember to handle the case where the root is `null` or `None` to avoid errors.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversal refers to the process of visiting (processing) each node in a tree data structure exactly once.  There are three main ways to traverse a binary tree: preorder, inorder, and postorder. These traversals are defined recursively.
+
+
+**1. Preorder Traversal:**
+
+* **Rule:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+
+* **Algorithm (Recursive):**
+
+```python
+def preorder(node):
+  if node:
+    print(node.data, end=" ")  # Visit the root
+    preorder(node.left)       # Traverse left subtree
+    preorder(node.right)      # Traverse right subtree
+
+#Example Node class (assuming you have one):
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+#Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Preorder traversal:")
+preorder(root)  # Output: 1 2 4 5 3
+```
+
+* **Algorithm (Iterative - using stack):**
+
+```python
+def preorder_iterative(root):
+    if root is None:
+        return
+    stack = [root]
+    while(len(stack) > 0):
+        node = stack.pop()
+        print(node.data, end=" ")
+        if node.right is not None:
+            stack.append(node.right)
+        if node.left is not None:
+            stack.append(node.left)
+
+print("\nPreorder traversal (iterative):")
+preorder_iterative(root) # Output: 1 2 4 5 3
+
+```
+
+
+**2. Inorder Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, visit the root node, and then recursively traverse the right subtree.
+
+* **Algorithm (Recursive):**
+
+```python
+def inorder(node):
+  if node:
+    inorder(node.left)       # Traverse left subtree
+    print(node.data, end=" ")  # Visit the root
+    inorder(node.right)      # Traverse right subtree
+
+print("\nInorder traversal:")
+inorder(root)  # Output: 4 2 5 1 3
+```
+
+* **Algorithm (Iterative - using stack):**
+
+```python
+def inorder_iterative(root):
+    if root is None:
+        return
+    stack = []
+    curr = root
+    while(curr is not None or len(stack) > 0):
+        while(curr is not None):
+            stack.append(curr)
+            curr = curr.left
+        curr = stack.pop()
+        print(curr.data, end=" ")
+        curr = curr.right
+print("\nInorder traversal (iterative):")
+inorder_iterative(root) # Output: 4 2 5 1 3
+```
+
+
+**3. Postorder Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, recursively traverse the right subtree, and then visit the root node.
+
+* **Algorithm (Recursive):**
+
+```python
+def postorder(node):
+  if node:
+    postorder(node.left)       # Traverse left subtree
+    postorder(node.right)      # Traverse right subtree
+    print(node.data, end=" ")  # Visit the root
+
+print("\nPostorder traversal:")
+postorder(root)  # Output: 4 5 2 3 1
+```
+
+* **Algorithm (Iterative - using two stacks):**  A bit more complex iteratively.  One common approach uses two stacks.
+
+```python
+def postorder_iterative(root):
+    if root is None:
+        return
+    s1 = []
+    s2 = []
+    s1.append(root)
+    while(len(s1) > 0):
+        node = s1.pop()
+        s2.append(node)
+        if node.left is not None:
+            s1.append(node.left)
+        if node.right is not None:
+            s1.append(node.right)
+    while(len(s2) > 0):
+        print(s2.pop().data, end=" ")
+
+print("\nPostorder traversal (iterative):")
+postorder_iterative(root) #Output: 4 5 2 3 1
+```
+
+Remember that the output of these traversals depends on the structure of your binary tree.  These examples assume a basic binary tree structure.  You'll need to adapt the `Node` class if you have a more complex tree (e.g., one with parent pointers).  The iterative approaches are generally more memory-efficient for very large trees, but recursive approaches are often simpler to understand and implement.
+
