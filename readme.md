@@ -23693,3 +23693,86 @@ The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest nod
 
 Remember to handle edge cases like empty trees, nodes not found in the tree, and one node being an ancestor of the other.  The recursive code above incorporates these checks implicitly.  You might need to add explicit checks depending on your implementation.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic computer science problem.  The optimal approach depends on the type of tree and the information available.
+
+**Methods:**
+
+**1.  Recursive Approach (Binary Tree):**
+
+This is a common and efficient method for binary trees.  It works by recursively traversing the tree.
+
+* **Base Cases:**
+    * If the current node is `NULL`, return `NULL`.
+    * If the current node is equal to either `p` or `q` (the target nodes), return the current node.
+
+* **Recursive Step:**
+    * Recursively search the left and right subtrees.
+    * If both subtrees return a non-`NULL` node (meaning `p` and `q` are found in different subtrees), then the current node is the LCA.
+    * Otherwise, return the non-`NULL` result (the one that's closer to `p` or `q`).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right)  # LCA of D and E
+print(f"LCA of D and E is: {lca.data}") # Output: LCA of D and E is: B
+
+lca = lowestCommonAncestor(root, root.left, root.right) # LCA of B and C
+print(f"LCA of B and C is: {lca.data}") # Output: LCA of B and C is: A
+```
+
+**2.  Iterative Approach (Binary Tree):**
+
+This approach uses a stack or queue instead of recursion, which can be beneficial for very deep trees to avoid stack overflow errors.  It's conceptually similar to the recursive approach but uses explicit stack management.
+
+**3.  Using Parent Pointers (Binary Tree or General Tree):**
+
+If each node has a pointer to its parent, you can efficiently find the LCA:
+
+1. Find the paths from the root to `p` and `q`.
+2. Iterate through the paths simultaneously, until the nodes differ.  The last common node is the LCA.
+
+**4.  Binary Lifting (Binary Tree):**
+
+This is an advanced technique that preprocesses the tree to allow for very fast LCA queries (constant time complexity after preprocessing).  It uses a table to store ancestors at different levels of the tree.
+
+**5.  Euler Tour Technique (General Tree):**
+
+This method uses a depth-first traversal to create an Euler tour of the tree.  By representing the tour as an array, finding the LCA becomes a Range Minimum Query (RMQ) problem, which can be solved efficiently using techniques like sparse tables or segment trees.
+
+
+**Choosing the Right Method:**
+
+* For small binary trees, the recursive approach is simple and often sufficient.
+* For very large binary trees, the iterative approach or binary lifting might be preferable to avoid stack overflow.
+* If parent pointers are readily available, that method is very efficient.
+* For general trees or for many LCA queries, the Euler tour technique might be the best option.
+
+
+Remember to adapt the code to the specific structure of your tree (e.g., whether it's a binary tree or a general tree, whether it has parent pointers, etc.).  The complexity of the algorithm also depends on the tree's structure and the chosen method.  The recursive approach, for example, has a time complexity of O(N) in the worst case (N being the number of nodes), while binary lifting achieves O(1) query time after O(N log N) preprocessing.
+
