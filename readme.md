@@ -23619,3 +23619,77 @@ postorder(root)  # Output: 4 5 2 3 1
 
 Remember to handle the `None` case (empty subtree) in your recursive functions to prevent errors.  The example above demonstrates a basic binary tree; these traversal methods work for any binary tree structure.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with varying time and space complexity.
+
+**Methods:**
+
+1. **Recursive Approach (Efficient):** This is generally the most efficient approach.
+
+   * **Idea:**  Recursively traverse the tree.  If a node is found, return it. If both nodes are in the left subtree, recursively search the left subtree. If both are in the right subtree, recursively search the right subtree. Otherwise, the current node is the LCA.
+
+   * **Python Code:**
+
+     ```python
+     class Node:
+         def __init__(self, data):
+             self.data = data
+             self.left = None
+             self.right = None
+
+     def lca(root, n1, n2):
+         if root is None:
+             return None
+
+         if root.data == n1 or root.data == n2:
+             return root
+
+         left_lca = lca(root.left, n1, n2)
+         right_lca = lca(root.right, n1, n2)
+
+         if left_lca and right_lca:
+             return root
+         elif left_lca:
+             return left_lca
+         else:
+             return right_lca
+
+     # Example usage:
+     root = Node(1)
+     root.left = Node(2)
+     root.right = Node(3)
+     root.left.left = Node(4)
+     root.left.right = Node(5)
+
+     n1 = 4
+     n2 = 5
+     lca_node = lca(root, n1, n2)
+     print(f"LCA of {n1} and {n2}: {lca_node.data}")  # Output: LCA of 4 and 5: 2
+
+     n1 = 4
+     n2 = 3
+     lca_node = lca(root, n1, n2)
+     print(f"LCA of {n1} and {n2}: {lca_node.data}")  # Output: LCA of 4 and 3: 1
+
+     ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, we visit all nodes).
+   * **Space Complexity:** O(H), where H is the height of the tree (due to the recursive call stack).  In the worst case (a skewed tree), this becomes O(N).
+
+
+2. **Iterative Approach (Using a Stack):** This approach uses a stack to simulate the recursion, potentially offering slight performance advantages in some cases.
+
+3. **Using Parent Pointers (If Available):** If each node has a pointer to its parent, you can efficiently find the LCA by traversing upwards from each node until you find a common ancestor.
+
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(1)
+
+
+**Choosing the Right Method:**
+
+* The **recursive approach** is generally preferred for its simplicity and readability.  It's efficient for most cases.
+* The **iterative approach** might be slightly more efficient in certain scenarios, especially with very deep trees where recursion might hit stack limits.
+* The **parent pointer method** is the most efficient if parent pointers are readily available in your tree structure.
+
+Remember to handle edge cases like empty trees, nodes not found in the tree, and one node being an ancestor of the other.  The recursive code above incorporates these checks implicitly.  You might need to add explicit checks depending on your implementation.
+
