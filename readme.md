@@ -26676,3 +26676,111 @@ print(f"LCA of {p.val} and {q.val}: {lca.val}") #Output: LCA of 5 and 1: 3
 
 Remember to handle edge cases such as empty trees, one or both nodes not being present in the tree, and nodes being the same.  The provided code examples address these considerations to some degree.  You may want to add more robust error handling depending on your requirements.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic computer science problem.  The approach depends on the type of tree and whether you have parent pointers or not.
+
+Here's a breakdown of common approaches and their complexities:
+
+**1. Using Parent Pointers (Efficient for General Trees):**
+
+If each node in the tree has a pointer to its parent, finding the LCA is straightforward:
+
+1. **Traverse up:**  For each of the two input nodes, traverse upwards towards the root, storing the path from each node to the root in a separate list (or using a stack).
+2. **Find the common prefix:** Compare the two paths from step 1. The longest common prefix represents the path to the LCA.  The last node in this common prefix is the LCA.
+
+* **Time Complexity:** O(h), where h is the height of the tree.  This is optimal since you might have to traverse to the root in the worst case.
+* **Space Complexity:** O(h) to store the paths.
+
+**Python Code (Parent Pointers):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+
+def lca_with_parent_pointers(node1, node2):
+    path1 = []
+    path2 = []
+
+    curr = node1
+    while curr:
+        path1.append(curr)
+        curr = curr.parent
+
+    curr = node2
+    while curr:
+        path2.append(curr)
+        curr = curr.parent
+
+    lca = None
+    i = 0
+    while i < len(path1) and i < len(path2) and path1[len(path1) - 1 - i] == path2[len(path2) - 1 - i]:
+        lca = path1[len(path1) - 1 - i]
+        i += 1
+
+    return lca
+
+
+# Example usage (you'll need to construct your tree with parent pointers)
+root = Node('A')
+b = Node('B'); b.parent = root
+c = Node('C'); c.parent = root
+d = Node('D'); d.parent = b
+e = Node('E'); e.parent = b
+
+print(lca_with_parent_pointers(d, e).data)  # Output: B
+print(lca_with_parent_pointers(d, c).data)  # Output: A
+```
+
+
+**2. Without Parent Pointers (Binary Trees):**
+
+For binary trees without parent pointers, you have a couple of options:
+
+* **Recursive Approach:** This is a very common and elegant solution.  The algorithm checks if the node is a common ancestor of both `p` and `q`. If not, it recursively searches in the left and right subtrees.
+
+* **Iterative Approach using a stack (or DFS):**  Similar to the recursive approach, but uses stacks to avoid recursion overhead.  It essentially simulates depth-first search.
+
+
+**Python Code (Recursive, Binary Tree, no parent pointers):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lca_recursive(root.left, p, q)
+    right_lca = lca_recursive(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+
+# Example usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+
+print(lca_recursive(root, root.left, root.right).data)  # Output: 1
+print(lca_recursive(root, root.left.left, root.left.right).data) # Output: 2
+```
+
+* **Time Complexity (Recursive & Iterative):** O(n) in the worst case (a skewed tree).  O(h) on average (h is the height of the tree)
+* **Space Complexity (Recursive):** O(h) due to the recursive call stack. O(n) in the worst case (skewed tree).  O(w) on average, where w is the width of the tree.  Space complexity for Iterative: O(w).
+
+Remember to adapt the code to handle cases where one or both nodes are not present in the tree.  You should also consider edge cases like an empty tree or a tree with only one node.  The iterative approach usually offers slightly better performance in some scenarios, especially when dealing with deep trees because it avoids recursive function call overhead.  Choose the method that best suits your needs and tree structure.
+
