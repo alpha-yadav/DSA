@@ -26930,3 +26930,161 @@ This is a very basic introduction.  Further study would involve exploring variou
 
 This introduction provides a foundation for understanding the fundamental concepts of graph theory.  The power of graph theory lies in its ability to represent and analyze relationships between objects, making it a crucial tool in many areas of study and application.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and often efficient approach, particularly for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementation options in several programming languages:
+
+**The Concept**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each index in the array represents a vertex in the graph. The list at that index contains all the vertices that are directly connected (adjacent) to the vertex represented by the index.
+
+**Example:**
+
+Consider an undirected graph with vertices {0, 1, 2, 3} and edges {(0, 1), (0, 2), (1, 2), (2, 3)}.  Its adjacency list representation would look like this:
+
+```
+0: [1, 2]
+1: [0, 2]
+2: [0, 1, 3]
+3: [2]
+```
+
+This means:
+
+* Vertex 0 is connected to vertices 1 and 2.
+* Vertex 1 is connected to vertices 0 and 2.
+* Vertex 2 is connected to vertices 0, 1, and 3.
+* Vertex 3 is connected to vertex 2.
+
+
+**Implementations**
+
+Here are examples in several popular programming languages:
+
+**Python:**
+
+Using a dictionary for efficient lookup:
+
+```python
+graph = {
+    0: [1, 2],
+    1: [0, 2],
+    2: [0, 1, 3],
+    3: [2]
+}
+
+# Accessing neighbors of vertex 2:
+neighbors_of_2 = graph[2]  # neighbors_of_2 will be [0, 1, 3]
+
+# Checking if an edge exists:
+def has_edge(graph, u, v):
+  return v in graph.get(u, [])
+
+print(has_edge(graph, 0, 1)) # True
+print(has_edge(graph, 0, 3)) # False
+
+
+#Adding an edge:
+def add_edge(graph, u, v):
+    graph.setdefault(u, []).append(v)
+    if not graph.get(v,[]): # only add if it's an undirected graph
+        graph.setdefault(v, []).append(u)
+
+
+add_edge(graph, 0,3)
+print(graph)
+```
+
+Using a list of lists (less efficient for large graphs):
+
+```python
+graph = [
+    [1, 2],
+    [0, 2],
+    [0, 1, 3],
+    [2]
+]
+
+# Accessing neighbors of vertex 2:
+neighbors_of_2 = graph[2] # neighbors_of_2 will be [0, 1, 3]
+
+```
+
+**C++:**
+
+Using `vector` of `vector`s:
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  vector<vector<int>> graph = {
+    {1, 2},
+    {0, 2},
+    {0, 1, 3},
+    {2}
+  };
+
+  // Accessing neighbors of vertex 2:
+  for (int neighbor : graph[2]) {
+    cout << neighbor << " ";
+  }
+  cout << endl; // Output: 0 1 3
+
+  return 0;
+}
+```
+
+**Java:**
+
+Using `ArrayList` of `ArrayList`s:
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class AdjacencyList {
+    public static void main(String[] args) {
+        List<List<Integer>> graph = new ArrayList<>();
+        graph.add(List.of(1, 2));
+        graph.add(List.of(0, 2));
+        graph.add(List.of(0, 1, 3));
+        graph.add(List.of(2));
+
+        // Accessing neighbors of vertex 2:
+        for (int neighbor : graph.get(2)) {
+            System.out.print(neighbor + " ");
+        }
+        System.out.println(); // Output: 0 1 3
+    }
+}
+```
+
+**JavaScript:**
+
+Using an array of arrays:
+
+```javascript
+const graph = [
+  [1, 2],
+  [0, 2],
+  [0, 1, 3],
+  [2]
+];
+
+// Accessing neighbors of vertex 2:
+const neighborsOf2 = graph[2]; // neighborsOf2 will be [0, 1, 3]
+console.log(neighborsOf2);
+```
+
+
+**Choosing the Right Implementation**
+
+* **Dictionaries/Maps (Python, Java, C++ `unordered_map`)**:  Provide faster lookups (O(1) on average) compared to lists when searching for neighbors of a specific vertex.  This is highly beneficial for large graphs and frequent neighbor searches.
+
+* **Lists/Arrays (Python lists, C++ `vector`, Java `ArrayList`)**: Simpler to implement, but neighbor lookups are less efficient (O(n) in the worst case, where n is the number of vertices).  Suitable for smaller graphs or when neighbor lookups aren't a performance bottleneck.
+
+Remember to adjust the implementations based on whether your graph is directed or undirected.  For directed graphs, the adjacency list only reflects the outgoing edges from each vertex.  For undirected graphs, as shown in the examples above, you need to represent both directions of an edge.  Weighted graphs would require storing edge weights along with the vertex in the adjacency lists (e.g., using pairs or tuples).
+
