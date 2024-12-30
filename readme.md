@@ -21745,3 +21745,53 @@ This uses nested ternary operators to achieve the same result in a single `print
 
 The "improved" version offers a good balance of readability and conciseness.  The basic version is easier to understand for beginners, while the concise version demonstrates a more advanced Swift technique but might be harder to maintain.  Choose the approach that best suits your needs and coding style.  Prioritize readability, especially in team projects. Remember to always consider maintainability and clarity over extreme conciseness.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most often considered are:
+
+* **Time complexity:**  How the runtime of an algorithm scales with the input size (n).
+* **Space complexity:** How the memory usage of an algorithm scales with the input size (n).
+
+We typically analyze complexity using **Big O notation**, which describes the upper bound of an algorithm's growth rate.  It focuses on the dominant factors as the input size becomes very large, ignoring constant factors and smaller terms.
+
+Here's a breakdown of common complexities:
+
+**Time Complexity:**
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array by index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching an unsorted array for a specific element.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Common in efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating through the entire input.  Can become slow for large inputs.
+
+* **O(n³) - Cubic Time:**  The runtime increases cubically with the input size.  Example:  Three nested loops iterating through the entire input.  Even slower than quadratic for large inputs.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  This is very inefficient for larger inputs and often indicates a brute-force approach.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Extremely inefficient, often used in problems involving permutations. Example:  Traveling Salesperson Problem using brute force.
+
+
+**Space Complexity:**  Similar notation is used, but it refers to memory usage instead of runtime.
+
+* **O(1) - Constant Space:** The memory used remains constant regardless of input size.
+
+* **O(n) - Linear Space:** The memory used increases linearly with input size.  Example:  Storing an array of the input elements.
+
+* **O(log n) - Logarithmic Space:** Memory usage increases logarithmically.  Example:  Recursive algorithms that use a stack with a depth proportional to log n.
+
+* **O(n²) - Quadratic Space:** Memory usage increases quadratically.  Example:  Storing an n x n matrix.
+
+**Important Considerations:**
+
+* **Best-case, Average-case, Worst-case:**  Big O notation often describes the *worst-case* scenario.  The best-case and average-case complexities can be different.
+
+* **Amortized Analysis:**  This considers the average time complexity over a sequence of operations, not just a single operation.  For example, adding elements to a dynamically resizing array.
+
+* **Practical Implications:** While Big O notation is crucial for understanding scalability, it doesn't tell the whole story.  Constant factors and smaller terms can be significant for smaller input sizes.  Profiling and benchmarking are often necessary to understand real-world performance.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task and for optimizing existing algorithms.  By analyzing complexity, you can predict how an algorithm will perform as the input size grows, allowing you to make informed decisions about its suitability for a specific application.
+
