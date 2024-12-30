@@ -28419,3 +28419,91 @@ print(are_identical_iterative(root1, None))  # Output: False
 
 The recursive approach (`are_identical`) is generally preferred for its clarity and readability.  The iterative approach (`are_identical_iterative`) might be slightly faster for extremely large trees, but the performance difference is usually negligible unless dealing with exceptionally deep trees where recursion depth could become a problem.  For most scenarios, the recursive solution is sufficient and easier to understand. Remember to handle the `None` cases carefully in both methods to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They're particularly useful when you need to perform searches, insertions, and deletions quickly.  Here's a breakdown of their key features and properties:
+
+**Key Properties:**
+
+* **Ordered Structure:** The core principle is that for every node in the tree:
+    * All nodes in its *left subtree* have values *less than* the node's value.
+    * All nodes in its *right subtree* have values *greater than* the node's value.
+* **No Duplicates (Generally):**  Most implementations don't allow duplicate values. If duplicates are needed, variations are used (like adding a count to each node).
+* **Hierarchical Structure:**  Nodes are organized hierarchically with a root node at the top, and each node can have at most two children (left and right).
+
+
+**Operations:**
+
+* **Search:**  The most efficient operation.  Starting at the root, you compare the target value with the current node's value. If they match, you've found it. If the target is less, you recursively search the left subtree; if it's greater, you search the right subtree.  In a balanced BST, the search time complexity is O(log n), where n is the number of nodes.
+
+* **Insertion:**  Find the correct location using a search-like process.  When you reach a leaf node (a node with no children) or a node where the value doesn't match, you insert the new node as a child of that node, maintaining the BST property.  Time complexity is also O(log n) for a balanced tree.
+
+* **Deletion:**  The most complex operation.  There are three cases to consider:
+    * **Leaf Node:** Simply remove the node.
+    * **Node with One Child:**  Replace the node with its child.
+    * **Node with Two Children:**  This is the most involved case.  The most common approach is to find the *inorder successor* (the smallest node in the right subtree) or the *inorder predecessor* (the largest node in the left subtree), replace the node's value with the successor/predecessor's value, and then delete the successor/predecessor (which will be one of the simpler cases above).  Time complexity is O(log n) for a balanced tree.
+
+* **Minimum/Maximum:**  Finding the minimum value is done by traversing the left subtree until a leaf node is reached.  Finding the maximum value involves traversing the right subtree.  O(log n) for a balanced tree.
+
+* **Traversal:**  Visiting all nodes in a specific order:
+    * **Inorder Traversal:**  Left subtree, root, right subtree (produces a sorted sequence of values).
+    * **Preorder Traversal:**  Root, left subtree, right subtree.
+    * **Postorder Traversal:**  Left subtree, right subtree, root.
+
+
+**Balanced vs. Unbalanced BSTs:**
+
+The efficiency of BST operations (O(log n)) holds true only for *balanced* BSTs.  If the tree becomes unbalanced (e.g., all nodes are added in sorted order, resulting in a skewed tree resembling a linked list), the performance degrades to O(n) for worst-case scenarios, negating the benefits of a BST.
+
+To address this, self-balancing BSTs are used, such as:
+
+* **AVL Trees:**  Maintain balance by ensuring the height difference between the left and right subtrees of any node is at most 1.
+* **Red-Black Trees:**  Use a coloring scheme to ensure balance, allowing for a slightly less strict balance constraint than AVL trees.  They're often preferred in practice because they tend to have better performance in average cases.
+
+
+**Applications:**
+
+BSTs are used in various applications where efficient searching, insertion, and deletion are required, including:
+
+* **Symbol tables:**  Storing and retrieving data based on keys.
+* **Databases:**  Indexing and querying data.
+* **Implementation of other data structures:**  Used as a building block for more complex structures.
+
+
+**Example (Python):**
+
+A simple (unbalanced) BST implementation:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    # ... (search, delete, and traversal methods would go here)
+```
+
+This is a basic example; a complete implementation would include search, delete, and traversal methods, along with error handling.  Remember that for production use, consider using self-balancing BSTs for better performance.  Many programming languages provide efficient implementations of balanced BSTs in their standard libraries.
+
