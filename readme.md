@@ -28134,3 +28134,25 @@ Nested loops are crucial for tasks like:
 
 The time complexity of nested loops is generally the product of the complexities of the individual loops. For example, two nested loops each iterating `n` times have a time complexity of O(n²).  This is because the inner loop runs `n` times for each of the `n` iterations of the outer loop.  This can quickly become computationally expensive for large datasets.  Therefore, optimizing nested loops or finding alternative algorithms is often essential for performance reasons.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They imply that the time it takes to solve a problem grows logarithmically with the input size (n).  This means that adding more input only increases the runtime slightly.  This efficiency is usually achieved by repeatedly halving or dividing the problem size.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+**1. Binary Search:** This is the quintessential O(log n) algorithm.  It works on a *sorted* list or array.  To find a target value, it repeatedly divides the search interval in half. If the target is in the middle element, it's found.  If the target is less than the middle, the search continues in the lower half; otherwise, in the upper half. This continues until the target is found or the interval is empty.
+
+**2. Balanced Binary Search Trees (BSTs) Operations:** Operations like searching, insertion, and deletion in a *balanced* BST (e.g., AVL trees, red-black trees) typically have O(log n) time complexity.  The balance ensures that the tree's height remains logarithmic with the number of nodes.  Unbalanced BSTs can degenerate into a linked list, resulting in O(n) time complexity for these operations.
+
+
+**3. Heap Operations (e.g., Min-Heap, Max-Heap):**  In a heap data structure, operations like finding the minimum (or maximum) element, insertion, and deletion of the minimum (or maximum) element all take O(log n) time. This is because maintaining the heap property (e.g., parent node is smaller than its children in a min-heap) involves adjusting elements along a path from a leaf to the root (or vice-versa), which has logarithmic length.
+
+
+**4. Exponentiation by Squaring:** This technique efficiently calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time. It relies on repeatedly squaring the base and adjusting the exponent. For example, to calculate 2<sup>10</sup>, it would calculate 2<sup>1</sup>, 2<sup>2</sup>, 2<sup>4</sup>, 2<sup>8</sup>, then multiply 2<sup>8</sup> and 2<sup>2</sup>.
+
+**5. Efficient algorithms using divide and conquer:**  Many algorithms that use a divide-and-conquer approach can achieve O(log n) complexity if they can effectively reduce the problem size by a constant factor at each step.  The key is the recursive nature where each step solves a smaller subproblem. However, not all divide and conquer algorithms are O(log n); the complexity depends heavily on the specific algorithm and how it divides the problem.
+
+
+**Important Note:** The O(log n) complexity only applies when the *base* of the logarithm is a constant greater than 1.  The base itself doesn't affect the overall *order* of growth, but it can affect the constant factors hidden within the Big O notation.  For example,  log₂ n and log₁₀ n are both O(log n).
+
+These are some of the prominent examples.  The common thread is that these algorithms effectively reduce the problem size by a constant factor in each step, leading to logarithmic time complexity.
+
