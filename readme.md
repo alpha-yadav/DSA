@@ -22161,3 +22161,30 @@ Nested loops increase the time complexity of your algorithm.  If both outer and 
 
 The concept of nested loops applies to all major programming languages (C, C++, Java, JavaScript, etc.) with minor syntactic differences.  The basic structure remains the same.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They only require a number of steps proportional to the logarithm of the input size.  This means that as the input size grows, the number of steps required increases much more slowly.  This is achievable because these algorithms typically work by repeatedly dividing the problem size in half (or some other constant factor).
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  Binary search works on a *sorted* array (or other sorted data structure) by repeatedly dividing the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This continues until the target is found or the search interval is empty.
+
+* **Binary Tree Operations (finding, insertion, deletion - under ideal conditions):**  In a balanced binary search tree, finding a specific node, inserting a new node, or deleting a node all take O(log n) time on average. The height of a balanced binary tree is proportional to log₂(n), where n is the number of nodes.  However, in the worst-case (e.g., a completely unbalanced tree that resembles a linked list), these operations can become O(n).
+
+* **Efficient exponentiation (e.g., using exponentiation by squaring):** Calculating a<sup>b</sup> (a raised to the power of b) naively takes O(b) time. However, using exponentiation by squaring, it can be computed in O(log b) time.  This technique cleverly reduces the number of multiplications required.
+
+* **Searching in a Trie (Prefix tree):**  A Trie is a tree-like data structure used for efficient string searching.  Searching for a string in a Trie takes O(log n) time in the average case, where n is the length of the string. The time complexity is proportional to the string length, not the size of the Trie. However, a Trie may have a worse time complexity for operations like insertion depending on implementation details.
+
+* **Heap operations (insertion, deletion of the root, finding the minimum/maximum):** A heap (min-heap or max-heap) is a tree-based data structure that satisfies the heap property (parent nodes are always less than/greater than their children).  Inserting an element, deleting the root (minimum or maximum), or finding the minimum/maximum element all take O(log n) time.
+
+
+**Important Considerations:**
+
+* **Base of the logarithm:**  The base of the logarithm (e.g., base 2, base 10, base e) is usually ignored in Big O notation because it only affects the constant factor.  O(log₂ n) is equivalent to O(log₁₀ n) and O(ln n) (natural logarithm).
+
+* **Balanced Data Structures:** Many O(log n) algorithms rely on balanced data structures (like balanced binary search trees or heaps). If the data structure becomes unbalanced, the time complexity can degrade significantly to O(n) in the worst case.
+
+* **Average vs. Worst Case:** Some algorithms have an average time complexity of O(log n) but a worst-case time complexity of O(n). Binary search is always O(log n), but unbalanced tree operations can hit O(n).
+
+
+In summary, O(log n) algorithms are highly efficient for large datasets because the growth rate of their execution time is very slow.  They are often used in situations where fast searching, sorting, or other operations are crucial.
+
