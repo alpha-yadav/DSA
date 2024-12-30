@@ -21927,3 +21927,62 @@ However, it would be *incorrect* to say f(n) = Ω(n³), because n³ grows faster
 
 **In summary:** Big-Omega notation is a crucial tool for analyzing algorithms, providing a valuable lower bound on their runtime complexity.  It complements Big-O notation to give a more complete picture of an algorithm's performance characteristics.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of the algorithm's runtime or space requirements as the input size grows.  It focuses on how the runtime or space scales, not on the exact runtime for a specific input.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Growth Rate:** Big O doesn't tell you the *exact* time an algorithm takes. Instead, it tells you how the runtime or space used *grows* as the input size (usually denoted as 'n') increases.  For example, an algorithm with O(n) complexity will take roughly twice as long to process twice the amount of data.
+
+* **Worst-Case Scenario:** Big O typically describes the *worst-case* scenario.  It represents the upper bound of the algorithm's performance.  The algorithm might perform better in some cases, but Big O guarantees it won't be *worse* than the specified complexity.
+
+* **Asymptotic Behavior:** Big O describes the behavior of the algorithm as the input size approaches infinity.  Minor optimizations or constant factors are ignored because they become insignificant as 'n' grows very large.
+
+**Common Big O Notations:**
+
+These are listed in order of increasing complexity (from best to worst):
+
+* **O(1) - Constant Time:** The runtime remains the same regardless of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size. Example: Nested loops iterating through the input data.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime is the factorial of the input size. Example: Traveling salesman problem (brute-force approach).
+
+
+**Example:**
+
+Consider two algorithms to find a specific number in an array:
+
+* **Linear Search (O(n)):**  Checks each element one by one.  If the array has 10 elements, it might check up to 10 elements. If it has 1000 elements, it might check up to 1000. The runtime increases linearly with the input size.
+
+* **Binary Search (O(log n)):** Works only on *sorted* arrays. It repeatedly divides the search interval in half.  If the array has 1000 elements, it would take approximately 10 comparisons (log₂1000 ≈ 10). The runtime increases logarithmically.
+
+
+**Ignoring Constants and Lower-Order Terms:**
+
+Big O notation simplifies analysis by ignoring:
+
+* **Constants:**  O(2n) is simplified to O(n) because the constant factor becomes insignificant as 'n' grows large.
+* **Lower-Order Terms:** O(n² + n) is simplified to O(n²) because the n term becomes insignificant compared to n² as 'n' grows.
+
+
+**Beyond Big O:**
+
+While Big O describes the worst-case upper bound, other notations exist:
+
+* **Big Omega (Ω):** Describes the *lower bound* of an algorithm's runtime.
+* **Big Theta (Θ):** Describes both the upper and lower bounds, providing a *tight bound* on the algorithm's performance.
+
+
+Understanding Big O notation is crucial for analyzing and comparing the efficiency of algorithms, making informed decisions about which algorithm to use for a given task.  Choosing an algorithm with a lower Big O complexity often leads to significantly better performance, especially when dealing with large datasets.
+
