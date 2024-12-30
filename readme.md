@@ -25009,3 +25009,64 @@ These examples all demonstrate the basic structure of a simple loop:
 
 Remember to choose the loop type that best suits your needs.  `for` loops are generally preferred when you know the number of iterations in advance, while `while` loops are better when the number of iterations depends on a condition that might not be known beforehand.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to process data in a multi-dimensional way, commonly used for things like iterating through matrices, generating combinations, or traversing tree-like structures.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed in the inner loop
+        # Access both outer_loop_variable and inner_loop_variable here
+    # Code to be executed after the inner loop completes for a single iteration of the outer loop
+```
+
+**Examples:**
+
+**1. Printing a multiplication table:**
+
+```python
+# Print a 5x5 multiplication table
+for i in range(1, 6):  # Outer loop: rows
+    for j in range(1, 6):  # Inner loop: columns
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+**2. Iterating through a matrix (list of lists):**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop: iterates through rows
+    for element in row:  # Inner loop: iterates through elements in each row
+        print(element, end=" ")
+    print()  # Newline after each row
+```
+
+**3. Finding all pairs in a list:**
+
+```python
+my_list = [1, 2, 3, 4]
+
+for i in range(len(my_list)):
+    for j in range(i + 1, len(my_list)):  # Start from i+1 to avoid duplicates and self-pairs
+        print(f"Pair: ({my_list[i]}, {my_list[j]})")
+```
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops significantly increase the time complexity of your code.  If the outer loop iterates `m` times and the inner loop iterates `n` times, the total number of iterations will be `m * n`.  This can lead to slow performance for large datasets.  Consider more efficient algorithms if performance is critical.
+* **Readability:**  Nested loops can become difficult to read and understand if they are deeply nested or complex.  Use clear variable names and comments to improve readability.
+* **Alternatives:**  For some tasks, nested loops might not be the most efficient approach.  Consider using list comprehensions, NumPy arrays (for numerical computations), or other data structures and algorithms that can improve performance and readability.
+
+
+Nested loops are a powerful tool, but use them judiciously, mindful of their potential impact on performance and code clarity.  Always consider if there's a more efficient alternative available.
+
