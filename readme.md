@@ -27088,3 +27088,108 @@ console.log(neighborsOf2);
 
 Remember to adjust the implementations based on whether your graph is directed or undirected.  For directed graphs, the adjacency list only reflects the outgoing edges from each vertex.  For undirected graphs, as shown in the examples above, you need to represent both directions of an edge.  Weighted graphs would require storing edge weights along with the vertex in the adjacency lists (e.g., using pairs or tuples).
 
+#  Topological Sort 
+A topological sort is a linear ordering of the nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's an ordering where you can only go "forward" along the edges – you never have to backtrack.  If a graph contains cycles, a topological sort is impossible.
+
+**Key Concepts:**
+
+* **Directed Acyclic Graph (DAG):** A graph where all edges have a direction (A -> B) and there are no cycles (no paths that lead back to the starting node).  Topological sorts are only defined for DAGs.
+* **In-degree:** The number of incoming edges to a node.
+* **Out-degree:** The number of outgoing edges from a node.
+
+**Algorithms:**
+
+There are two common algorithms for topological sorting:
+
+**1. Kahn's Algorithm:**
+
+This algorithm uses a queue to process nodes.
+
+1. **Initialization:** Find all nodes with an in-degree of 0 (nodes with no incoming edges).  Add these nodes to a queue.
+2. **Iteration:** While the queue is not empty:
+   - Remove a node from the queue and add it to the sorted list.
+   - For each neighbor (node pointed to by an outgoing edge) of the removed node:
+     - Decrement its in-degree by 1.
+     - If the neighbor's in-degree becomes 0, add it to the queue.
+3. **Cycle Check:** If the final sorted list contains fewer nodes than the total number of nodes in the graph, a cycle is present, and topological sorting is impossible.
+
+**Python code (Kahn's Algorithm):**
+
+```python
+from collections import defaultdict
+
+def topological_sort(graph):
+    in_degree = defaultdict(int)
+    for node in graph:
+        for neighbor in graph[node]:
+            in_degree[neighbor] += 1
+
+    queue = [node for node in graph if in_degree[node] == 0]
+    sorted_list = []
+
+    while queue:
+        node = queue.pop(0)
+        sorted_list.append(node)
+        for neighbor in graph[node]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    if len(sorted_list) != len(graph):
+        return "Cycle detected: Topological sort not possible"
+    else:
+        return sorted_list
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['C'],
+    'B': ['C', 'D'],
+    'C': ['E'],
+    'D': ['F'],
+    'E': ['F'],
+    'F': []
+}
+
+result = topological_sort(graph)
+print(result)  # Possible output: ['A', 'B', 'C', 'D', 'E', 'F'] (order may vary)
+
+# Example with cycle
+graph_cycle = {
+    'A': ['B'],
+    'B': ['C'],
+    'C': ['A']
+}
+
+result = topological_sort(graph_cycle)
+print(result) # Output: Cycle detected: Topological sort not possible
+
+```
+
+**2. Depth-First Search (DFS) Algorithm:**
+
+This algorithm uses DFS to recursively explore the graph and adds nodes to the sorted list in reverse post-order.  It's slightly more complex to understand but can be equally efficient.
+
+1. **Initialization:** Create a list `visited` to track visited nodes, a list `stack` to store the sorted list (initially empty), and a list `recursion_stack` to detect cycles (initially empty).
+2. **DFS function:**
+   - Mark the current node as visited (add to `visited`).
+   - Add it to `recursion_stack`.
+   - Recursively call DFS on all unvisited neighbors.
+   - Remove the current node from `recursion_stack`.
+   - Push the current node onto `stack` (this is the reverse post-order).
+3. **Cycle Check:** If you encounter a node already in `recursion_stack`, you have a cycle.
+4. **Reverse Stack:** After processing all nodes, reverse the `stack`.
+
+
+**Applications:**
+
+Topological sorting has many applications, including:
+
+* **Course scheduling:**  Ordering courses based on prerequisites.
+* **Build systems (like Make):** Determining the order to compile files.
+* **Dependency resolution:**  In software engineering, resolving dependencies between modules or packages.
+* **Data serialization:**  Ensuring data is written or processed in the correct order.
+
+
+Choosing between Kahn's algorithm and DFS depends on your preference and the specific characteristics of your graph.  Kahn's algorithm is often considered more intuitive and easier to implement, while DFS can be slightly more efficient in some cases. Remember both only work for DAGs.
+
