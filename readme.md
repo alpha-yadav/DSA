@@ -24215,3 +24215,39 @@ else:
 
 This implementation efficiently detects cycles in a directed graph using Depth First Traversal and the concept of back edges.  The use of `visited` and `stack` arrays ensures that the algorithm correctly identifies cycles even in complex graph structures. Remember that a self-loop (like `3,3` in the example) is also considered a cycle.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focusing on efficient graph algorithms.  The most famous among these is his algorithm for finding minimum spanning trees (MSTs) in nearly linear time.  There are other significant algorithms he's developed, but the MST algorithm is usually what people mean when referring to "Thorup's algorithm."
+
+Here's a breakdown:
+
+**Thorup's Nearly Linear-Time Minimum Spanning Tree Algorithm:**
+
+This algorithm achieves a runtime of O(m α(m, n)), where:
+
+* **m** is the number of edges in the graph.
+* **n** is the number of vertices in the graph.
+* **α(m, n)** is the inverse Ackermann function, which grows incredibly slowly.  For all practical purposes, α(m, n) can be considered a constant.
+
+This makes the runtime essentially linear, a significant improvement over the previously best-known algorithms which were O(m log log n).
+
+**Key Ideas Behind the Algorithm:**
+
+Thorup's algorithm is quite complex and relies on several sophisticated techniques.  A simplified high-level overview includes:
+
+* **Partitioning:** The graph is cleverly partitioned into smaller subgraphs.
+* **Contraction:**  These subgraphs are then contracted (merged into single nodes) to simplify the problem.
+* **Recursive Approach:** The algorithm recursively finds MSTs on these smaller subgraphs.
+* **Sophisticated Data Structures:**  Thorup utilizes intricate data structures, often based on advanced techniques from combinatorial optimization and low-level bit manipulation, to achieve the near-linear time complexity.  These often involve handling graph connectivity in intricate ways.
+* **Randomization (in some variants):**  Some versions of Thorup's algorithm incorporate randomization to improve performance or simplify the analysis.
+
+**Comparison to Other MST Algorithms:**
+
+* **Prim's Algorithm and Kruskal's Algorithm:** These classic algorithms have complexities of O(m log n) and O(m log m) respectively, making them slower for large graphs.
+* **Borůvka's Algorithm:** This algorithm achieves O(m log n) complexity, also slower than Thorup's for large graphs.
+
+**Practical Implications:**
+
+While theoretically groundbreaking, Thorup's algorithm's practical performance isn't always superior to simpler algorithms like Prim's or Kruskal's for smaller graphs due to the large constant factors hidden in the big-O notation.  The overhead from the sophisticated data structures and recursive calls can outweigh the benefit of the better asymptotic complexity.  Its advantage becomes more significant when dealing with extremely large graphs.
+
+**In summary:** Thorup's algorithm, particularly the MST algorithm, is a landmark achievement in graph algorithms, demonstrating the possibility of near-linear-time solutions for fundamental graph problems.  However, its practical application requires considering the trade-off between theoretical efficiency and implementation complexity.
+
