@@ -29740,3 +29740,104 @@ print(f"LCA of {n1.data} and {n2.data}: {lca_node}")  # Output: 2
 
 The recursive approach is generally easier to understand and implement, but the iterative approach with parent pointers can be more efficient for very large trees.  Remember that the iterative method requires modification of the tree structure to include parent pointers, whereas the recursive method does not.  Choose the method that best suits your needs and constraints.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a common problem in computer science.  The approach varies depending on the type of tree and whether you have parent pointers.
+
+**Methods:**
+
+1. **Using Parent Pointers (if available):**
+
+   If each node has a pointer to its parent, the LCA can be efficiently found.  The algorithm involves traversing upwards from each node until a common ancestor is found.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.parent = None
+
+   def lca_with_parent(node1, node2):
+       ancestors1 = set()
+       current = node1
+       while current:
+           ancestors1.add(current)
+           current = current.parent
+
+       current = node2
+       while current:
+           if current in ancestors1:
+               return current
+           current = current.parent
+
+       return None # Nodes are not related
+
+   # Example Usage (Assuming a tree structure is already built with parent pointers):
+   root = Node("A")
+   nodeB = Node("B")
+   nodeC = Node("C")
+   nodeD = Node("D")
+   nodeE = Node("E")
+
+   nodeB.parent = root
+   nodeC.parent = root
+   nodeD.parent = nodeB
+   nodeE.parent = nodeB
+
+   print(lca_with_parent(nodeD, nodeE).data) # Output: B
+   print(lca_with_parent(nodeC, nodeD).data) # Output: A
+   ```
+
+2. **Recursive Approach (Binary Tree, without parent pointers):**
+
+   This method recursively searches the tree.  If the node is found in the left or right subtree, it recursively continues the search. If both nodes are found in different subtrees, the current node is the LCA.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca_recursive(root, node1, node2):
+       if not root or root.data == node1 or root.data == node2:
+           return root
+
+       left_lca = lca_recursive(root.left, node1, node2)
+       right_lca = lca_recursive(root.right, node1, node2)
+
+       if left_lca and right_lca:
+           return root
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   # Example Usage:
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+
+   print(lca_recursive(root, 4, 5).data)  # Output: 2
+   print(lca_recursive(root, 4, 3).data)  # Output: 1
+   ```
+
+3. **Iterative Approach (Binary Tree, without parent pointers):**
+
+   A non-recursive version of the above, using a stack to simulate the recursion.  It's often slightly more efficient than the recursive approach due to avoiding function call overhead.  The logic is very similar to the recursive version.
+
+
+4. **Using Depth-First Search (DFS) or Breadth-First Search (BFS):**
+
+   For general trees (not necessarily binary), you can use DFS or BFS to find paths from the root to each of the two nodes. Then, compare the paths to find the LCA. This is less efficient than the parent pointer method or the recursive methods for binary trees.
+
+
+**Choosing the Right Method:**
+
+* **Parent pointers:** If you have parent pointers, use the parent pointer method; it's the most efficient.
+* **Binary trees without parent pointers:** The recursive or iterative methods are generally preferred for their efficiency.
+* **General trees:** DFS or BFS is necessary.
+
+Remember to handle edge cases such as one or both nodes not being present in the tree.  The provided code snippets handle the case where the nodes are not in the tree by returning `None`.  You might want to adapt error handling to your specific needs.
+
