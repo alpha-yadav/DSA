@@ -28507,3 +28507,120 @@ class BST:
 
 This is a basic example; a complete implementation would include search, delete, and traversal methods, along with error handling.  Remember that for production use, consider using self-balancing BSTs for better performance.  Many programming languages provide efficient implementations of balanced BSTs in their standard libraries.
 
+#  Binary Search Tree - Insertion (Python) 
+There are several ways to implement insertion into a Binary Search Tree (BST) in Python. Here are a couple of approaches, one iterative and one recursive:
+
+**Iterative Approach:**
+
+This approach uses a `while` loop to traverse the tree and find the correct position for the new node.  It's generally considered slightly more efficient than the recursive approach due to avoiding function call overhead.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    return
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    return
+                else:
+                    current = current.right
+
+
+    def inorder_traversal(self):  #Helper function to visualize the tree
+        result = []
+        self._inorder_traversal_recursive(self.root, result)
+        return result
+
+    def _inorder_traversal_recursive(self, node, result):
+        if node:
+            self._inorder_traversal_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_traversal_recursive(node.right, result)
+
+
+# Example usage:
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+
+print("Inorder traversal:", bst.inorder_traversal()) # Output should be a sorted list
+```
+
+
+**Recursive Approach:**
+
+This approach uses recursion to traverse the tree. It's often considered more elegant but can be less efficient for very deep trees due to function call overhead.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self.insert_recursive(node.left, data)
+        else:
+            node.right = self.insert_recursive(node.right, data)
+        return node
+
+    def insert(self, data): #Wrapper function for easier use
+        self.root = self.insert_recursive(self.root, data)
+
+    def inorder_traversal(self):  #Helper function to visualize the tree
+        result = []
+        self._inorder_traversal_recursive(self.root, result)
+        return result
+
+    def _inorder_traversal_recursive(self, node, result):
+        if node:
+            self._inorder_traversal_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_traversal_recursive(node.right, result)
+
+
+# Example usage:
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+
+print("Inorder traversal:", bst.inorder_traversal()) # Output should be a sorted list
+```
+
+Both examples include an `inorder_traversal` method to verify the correct insertion.  Remember that inorder traversal of a BST always produces a sorted list.  Choose the iterative or recursive approach based on your performance needs and coding style preference.  For most cases, the iterative approach is slightly better in terms of performance.
+
