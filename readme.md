@@ -31985,3 +31985,92 @@ bst.inorder_traversal()
 
 Remember that the efficiency of BST operations (insertion, search, deletion) is O(log n) on average for balanced trees, but it can degrade to O(n) in the worst case (e.g., a skewed tree).  Self-balancing BSTs (like AVL trees or red-black trees) are used to mitigate this worst-case scenario.  This implementation is a basic BST and does not include self-balancing.
 
+#  Check if a tree is BST or not 
+Several approaches can be used to check if a given binary tree is a Binary Search Tree (BST). Here are two common methods:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.  We perform an in-order traversal, keeping track of the previously visited node.  If the current node's value is less than the previous node's value, the tree is not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBST(node):
+    prev = [-float('inf')]  # Initialize with negative infinity
+
+    def inorder(node):
+        if node:
+            if not inorder(node.left):
+                return False
+            if node.data <= prev[0]:
+                return False
+            prev[0] = node.data
+            if not inorder(node.right):
+                return False
+        return True
+
+    return inorder(node)
+
+
+# Example usage:
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.right = Node(20)
+
+
+if isBST(root):
+    print("Is BST")
+else:
+    print("Not a BST") #This will print "Not a BST" because of the 20 node
+
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.left = Node(3)
+root2.left.right = Node(7)
+
+
+if isBST(root2):
+    print("Is BST") #This will print "Is BST"
+else:
+    print("Not a BST")
+```
+
+**Method 2: Recursive Check with Range**
+
+This approach recursively checks if a subtree is a BST within a given range.  The root's value must fall within the range, and the left subtree must be within the range (minimum, root.data) and the right subtree within the range (root.data, maximum).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, minVal, maxVal):
+    if node is None:
+        return True
+    if node.data < minVal or node.data > maxVal:
+        return False
+    return (isBSTUtil(node.left, minVal, node.data - 1) and
+            isBSTUtil(node.right, node.data + 1, maxVal))
+
+def isBST(node):
+    return isBSTUtil(node, -float('inf'), float('inf'))
+
+
+# Example Usage (same as before, you can copy and paste the example trees from the previous method to test)
+```
+
+**Choosing a Method:**
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is also O(N) in the worst case (due to the recursive call stack). The in-order traversal method might be slightly more efficient in practice because it avoids the repeated range checks of the second method.  However, both are perfectly valid and understandable solutions.  Choose the method you find more intuitive or that better suits your coding style. Remember to handle edge cases like empty trees appropriately.
+
