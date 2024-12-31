@@ -30568,3 +30568,59 @@ print(f"Target found at index: {index}") # Output: Target found at index: 3
 
 This is a very basic example. As you progress, you'll tackle more complex problems and algorithms.  Remember to break down problems into smaller, manageable steps.  Don't be afraid to look up solutions or hints, but always try to understand the underlying logic before moving on.  Good luck!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Find the largest number in an unsorted array.
+
+**Input:** An array of integers.
+
+**Output:** The largest integer in the array.
+
+**Example:**
+
+Input: `[3, 1, 4, 1, 5, 9, 2, 6]`
+Output: `9`
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+**Example:**
+
+Input: `nums = [2,7,11,15], target = 9`
+Output: `[0,1]`
+Explanation: Because `nums[0] + nums[1] == 9`, we return `[0, 1]`.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+Input: "babad"
+Output: "bab"
+(Note: "aba" is also a valid answer.)
+
+Input: "cbbd"
+Output: "bb"
+
+
+These problems demonstrate different aspects of algorithm design.  The "easy" problem focuses on simple iteration.  The "medium" problem requires a bit more thought about data structures (a hashmap could be helpful) and algorithmic efficiency.  The "hard" problem involves dynamic programming or a clever approach to find the optimal solution efficiently.  Each problem also clearly defines the input and expected output, which is crucial for any algorithmic problem.
+
