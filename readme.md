@@ -30624,3 +30624,63 @@ Output: "bb"
 
 These problems demonstrate different aspects of algorithm design.  The "easy" problem focuses on simple iteration.  The "medium" problem requires a bit more thought about data structures (a hashmap could be helpful) and algorithmic efficiency.  The "hard" problem involves dynamic programming or a clever approach to find the optimal solution efficiently.  Each problem also clearly defines the input and expected output, which is crucial for any algorithmic problem.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+**Simple Version (using `if-else if-else`)**
+
+This version is easy to understand and directly translates the FizzBuzz rules:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz") and then by 5 ("Buzz").
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Slightly More Advanced Version (using string concatenation and ternary operator)**
+
+This version is more concise and uses the ternary operator (`condition ? value1 : value2`) for a more compact representation:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function
+```
+
+This version builds the output string piece by piece:
+
+* It initializes an empty string `output`.
+* It uses the ternary operator to add "Fizz" if `i` is divisible by 3 and "Buzz" if it's divisible by 5.
+* Finally, it prints either the built `output` string or the number itself if `output` remains empty.
+
+
+**Choosing the Right Version:**
+
+The simple version is easier to read and understand for beginners. The concise version is more efficient and demonstrates a more advanced Swift coding style, but might be harder to grasp initially.  Choose the version that best suits your current skill level and the context of your project.  For learning purposes, the first version is often recommended as it makes the logic clearer. Remember to always test your code thoroughly!
+
