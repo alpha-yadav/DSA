@@ -31426,3 +31426,114 @@ print(f"Root1 and Root3 are identical (string): {are_identical_string(root1, roo
 
 The recursive and iterative methods are generally preferred for their efficiency, especially when dealing with large binary trees.  The string representation method is mainly useful for its simplicity in understanding the concept.  Choose the method that best suits your needs and understanding. Remember to handle the `None` cases appropriately to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used to store data in a sorted manner.  Their key characteristic is that for every node in the tree:
+
+* **Left Subtree Property:** All nodes in the left subtree have values *less than* the node's value.
+* **Right Subtree Property:** All nodes in the right subtree have values *greater than* the node's value.
+
+This property allows for efficient searching, insertion, and deletion of nodes.
+
+Here's a breakdown of key aspects of BSTs:
+
+**1. Basic Operations:**
+
+* **Search:**  To search for a value, start at the root. If the target value is less than the current node's value, go to the left subtree; otherwise, go to the right subtree. Continue recursively until the value is found or a leaf node is reached.  The time complexity of a search is O(h), where h is the height of the tree.  In a balanced tree, h is log₂(n), where n is the number of nodes, resulting in O(log n) search time.  In a skewed tree, h can be n, leading to O(n) search time.
+
+* **Insertion:** To insert a new value, follow the search procedure. When a leaf node is reached (or a null pointer is encountered), insert the new node at that position, maintaining the BST properties. Insertion also has a time complexity of O(h), which is O(log n) for balanced trees and O(n) for skewed trees.
+
+* **Deletion:** Deleting a node is more complex and involves three cases:
+    * **Leaf Node:** Simply remove the node.
+    * **Node with One Child:** Replace the node with its child.
+    * **Node with Two Children:**  There are two common approaches:
+        * **Inorder Successor:** Find the smallest node in the right subtree (inorder successor) and replace the node to be deleted with its value. Then, delete the inorder successor node (which will now be a node with at most one child).
+        * **Inorder Predecessor:** Find the largest node in the left subtree (inorder predecessor) and replace the node to be deleted with its value. Then, delete the inorder predecessor node.
+    Deletion, like insertion and search, has a time complexity of O(h), which is O(log n) for balanced trees and O(n) for skewed trees.
+
+**2. Advantages of BSTs:**
+
+* **Efficient Search, Insertion, and Deletion:**  O(log n) in average and best cases (balanced tree).
+* **Sorted Data:**  Data is implicitly sorted, allowing for easy traversal in sorted order (inorder traversal).
+
+**3. Disadvantages of BSTs:**
+
+* **Worst-Case Performance:**  If the tree becomes skewed (e.g., all nodes are inserted in ascending or descending order), the performance degrades to O(n) for all operations.
+* **Not Suitable for all Applications:**  BSTs are not ideal for applications requiring frequent updates or insertions/deletions of large numbers of nodes, or when guaranteed performance is critical.  Other data structures might be more appropriate.
+
+**4. Self-Balancing BSTs:**
+
+To mitigate the problem of skewed trees, self-balancing BSTs have been developed. These include:
+
+* **AVL Trees:**  Maintain a balance factor for each node to ensure that the height difference between the left and right subtrees is at most 1.
+* **Red-Black Trees:** Use "color" properties (red or black) to maintain balance and guarantee logarithmic time complexity for operations.
+* **B-Trees:**  Optimized for disk-based storage, with nodes containing multiple keys and children.
+
+These self-balancing BSTs offer guaranteed O(log n) performance for all operations, even in the worst case.
+
+**5. Traversal Methods:**
+
+There are three main ways to traverse a BST and visit all its nodes:
+
+* **Inorder Traversal:** Visit the left subtree, then the current node, then the right subtree. This produces a sorted sequence of values.
+* **Preorder Traversal:** Visit the current node, then the left subtree, then the right subtree.
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the current node.
+
+
+**Example (Python):**
+
+A simple (unbalanced) BST implementation:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    def search(self, data):
+        return self._search_recursive(self.root, data)
+
+    def _search_recursive(self, node, data):
+        if node is None or node.data == data:
+            return node
+        if data < node.data:
+            return self._search_recursive(node.left, data)
+        return self._search_recursive(node.right, data)
+
+# Example usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+
+print(bst.search(6).data)  # Output: 6
+print(bst.search(7))  # Output: None
+```
+
+This is a basic introduction.  More advanced topics include deletion algorithms, self-balancing techniques, and applications of BSTs in various algorithms and data structures.
+
