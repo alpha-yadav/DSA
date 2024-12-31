@@ -31646,3 +31646,120 @@ bst.inorder_traversal(bst.root) #Output: 1 3 6 8 10 14
 
 Both methods achieve the same result: inserting a new node into the BST while maintaining the BST property (left subtree < node < right subtree). The iterative approach is generally preferred for its efficiency, especially when dealing with large datasets.  Choose the method that best suits your understanding and performance needs.  Remember to handle potential `data` duplicates based on your specific requirements (e.g., ignore, replace, or count).
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node (has no children):** Simply remove the node.
+
+2. **Node to be deleted has one child:** Replace the node with its child.
+
+3. **Node to be deleted has two children:** This is the most complex case.  There are two common approaches:
+
+   * **Inorder predecessor:** Find the inorder predecessor (the largest node in the left subtree) or the inorder successor (the smallest node in the right subtree). Replace the node to be deleted with its inorder predecessor (or successor), then recursively delete the predecessor (or successor) from its original location.  This maintains the BST property.
+
+   * **Copying the value:** Copy the value of the inorder predecessor (or successor) to the node to be deleted, and then delete the inorder predecessor (or successor) node.
+
+
+Here's a C++ implementation using the inorder predecessor method:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left, *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+Node* minValueNode(Node* node) {
+    Node* current = node;
+    while (current->left != nullptr)
+        current = current->left;
+    return current;
+}
+
+Node* deleteNode(Node* root, int key) {
+    // base case
+    if (root == nullptr) return root;
+
+    // If the key to be deleted is smaller than the root's key,
+    // then it lies in left subtree
+    if (key < root->data)
+        root->left = deleteNode(root->left, key);
+
+    // If the key to be deleted is greater than the root's key,
+    // then it lies in right subtree
+    else if (key > root->data)
+        root->right = deleteNode(root->right, key);
+
+    // if key is same as root's key, then This is the node
+    // to be deleted
+    else {
+        // node with only one child or no child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // node with two children: Get the inorder successor (smallest
+        // in the right subtree)
+        Node* temp = minValueNode(root->right);
+
+        // Copy the inorder successor's content to this node
+        root->data = temp->data;
+
+        // Delete the inorder successor
+        root->right = deleteNode(root->right, temp->data);
+    }
+    return root;
+}
+
+
+void inorder(Node* root) {
+    if (root != nullptr) {
+        inorder(root->left);
+        std::cout << root->data << " ";
+        inorder(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+
+    std::cout << "Inorder traversal of the given tree\n";
+    inorder(root);
+    std::cout << std::endl;
+
+    int key = 20;
+    std::cout << "\nDelete " << key << "\n";
+    root = deleteNode(root, key);
+    std::cout << "Inorder traversal of the modified tree\n";
+    inorder(root);
+    std::cout << std::endl;
+
+
+    key = 30;
+    std::cout << "\nDelete " << key << "\n";
+    root = deleteNode(root, key);
+    std::cout << "Inorder traversal of the modified tree\n";
+    inorder(root);
+    std::cout << std::endl;
+
+    //Remember to deallocate memory to prevent memory leaks, especially in larger applications.  This example omits that for brevity.
+
+    return 0;
+}
+```
+
+This code provides a complete example showing BST deletion, including handling all three cases. Remember to handle memory deallocation properly in a production environment to avoid memory leaks, especially when deleting multiple nodes.  The `main` function demonstrates the deletion of nodes with different numbers of children.  The `inorder` function is used for verifying the BST structure after deletion. Remember to compile with a C++ compiler (like g++).
+
