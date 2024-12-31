@@ -30738,3 +30738,47 @@ Consider a simple linear search algorithm that iterates through an array to find
 
 Understanding algorithm complexity is essential for efficient software development. Choosing an algorithm with better complexity significantly improves performance, especially when dealing with large datasets.  This knowledge helps in making informed decisions about which algorithm to use for a particular problem.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate.  Unlike Big-O notation (which provides an upper bound), Θ notation provides both an upper and a lower bound, meaning the function's growth rate is bounded both above and below by the same function (within constant factors).
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) if there exist positive constants c₁ and c₂, and a positive integer n₀, such that for all n ≥ n₀:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+This means that for sufficiently large n (n ≥ n₀), f(n) is always sandwiched between c₁*g(n) and c₂*g(n).  The constants c₁ and c₂ represent the proportionality factors, and they absorb any constant differences between the function's actual values and the bounding function g(n).
+
+**What it Means:**
+
+Θ(g(n)) indicates that the function f(n) grows at the *same rate* as g(n).  The function's growth isn't just less than or equal to g(n) (like with Big-O), it's proportionally equal to it.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1 is Θ(n²)**
+
+   To show this, we need to find c₁, c₂, and n₀.  Let's choose n₀ = 1.  For n ≥ 1:
+
+   * We can say that 2n² ≤ 2n² + 3n + 1  (c₁ = 1)
+   * For n ≥ 1, 2n² + 3n + 1 ≤ 6n² (c₂ = 6). You can derive this by seeing that for large n, the 3n and 1 are dwarfed by the n² term.  You could also prove this rigorously using calculus or algebraic manipulation.
+
+   Therefore, the condition 1 * n² ≤ 2n² + 3n + 1 ≤ 6 * n² is satisfied for n ≥ 1.
+
+* **f(n) = 5n + 10 is Θ(n)**  (Linear growth)
+
+* **f(n) = log₂(n) is Θ(log n)** (Logarithmic growth)  (The base of the logarithm doesn't matter for big-theta)
+
+
+**Difference from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an upper bound.  f(n) = O(g(n)) means f(n) grows *no faster* than g(n).
+* **Big-Ω (Ω):** Provides a lower bound.  f(n) = Ω(g(n)) means f(n) grows *at least as fast* as g(n).
+* **Big-Θ (Θ):** Provides both an upper and a lower bound.  f(n) = Θ(g(n)) means f(n) grows at the *same rate* as g(n).
+
+
+**In Summary:**
+
+Big-Theta notation is crucial for analyzing algorithms because it gives a precise description of an algorithm's time or space complexity, allowing for accurate comparisons of the efficiency of different algorithms.  It tells you exactly how the resource consumption scales with the input size.
+
