@@ -33287,3 +33287,78 @@ Mikkel Thorup has made significant contributions to various other areas of algor
 
 In summary, Thorup's algorithm (specifically referring to the linear-time MST algorithm) is a remarkable achievement in the field of algorithm design, showcasing the power of sophisticated techniques in achieving optimal time complexity for a fundamental graph problem.  It's crucial to remember its reliance on integer weights and the complexity of its implementation.
 
+#  Graph Traversals 
+Graph traversals are algorithms used to systematically visit every node in a graph.  The order in which nodes are visited differs depending on the traversal method used.  Two primary methods are Breadth-First Search (BFS) and Depth-First Search (DFS).  Let's explore both:
+
+**1. Breadth-First Search (BFS)**
+
+* **Concept:** BFS explores the graph level by level. It starts at a root node and visits all its neighbors before moving to their neighbors.  Think of it as expanding outwards in concentric circles.
+
+* **Data Structure:** A queue is typically used to manage the order of node visits.
+
+* **Algorithm:**
+
+    1. Start at the root node and mark it as visited.
+    2. Add the root node to the queue.
+    3. While the queue is not empty:
+        a. Dequeue a node from the queue.
+        b. For each of its unvisited neighbors:
+            i. Mark the neighbor as visited.
+            ii. Add the neighbor to the queue.
+
+* **Example:**  Imagine a graph where node A is connected to B and C, B is connected to D and E, and C is connected to F.  A BFS starting at A would visit nodes in the order: A, B, C, D, E, F.
+
+
+* **Applications:**
+    * Finding the shortest path between two nodes (in unweighted graphs).
+    * Networking protocols (e.g., finding all reachable nodes in a network).
+    * Crawling websites.
+    * Social network analysis.
+
+
+**2. Depth-First Search (DFS)**
+
+* **Concept:** DFS explores the graph by going as deep as possible along each branch before backtracking.
+
+* **Data Structure:** A stack (or recursion) is typically used.  Recursion implicitly uses the call stack.
+
+* **Algorithm (Recursive):**
+
+    1. Mark the current node as visited.
+    2. For each unvisited neighbor of the current node:
+        a. Recursively call DFS on that neighbor.
+
+* **Algorithm (Iterative using a stack):**
+
+    1. Push the starting node onto the stack.
+    2. While the stack is not empty:
+        a. Pop a node from the stack.
+        b. If the node is not visited:
+            i. Mark the node as visited.
+            ii. Push its unvisited neighbors onto the stack (in some order, often reverse order of adjacency list).
+
+* **Example:** Using the same graph as above, a DFS starting at A might visit nodes in the order: A, B, D, E, C, F (the exact order can vary depending on how neighbors are processed).
+
+
+* **Applications:**
+    * Detecting cycles in a graph.
+    * Topological sorting (ordering nodes in a directed acyclic graph).
+    * Finding connected components.
+    * Solving puzzles like mazes.
+    * Garbage collection in some programming languages.
+
+
+**Key Differences:**
+
+| Feature        | BFS                         | DFS                         |
+|----------------|-----------------------------|-----------------------------|
+| Data Structure | Queue                       | Stack (or recursion)       |
+| Exploration    | Level by level              | Depth first                  |
+| Shortest Path  | Finds shortest path (unweighted)| Doesn't guarantee shortest path |
+| Memory Usage   | Can be higher for wide graphs| Can be higher for deep graphs |
+
+
+**Choosing between BFS and DFS:**
+
+The best choice depends on the specific problem.  If you need to find the shortest path in an unweighted graph, BFS is generally preferred.  If you need to detect cycles or perform topological sorting, DFS is often a better choice.  Consider the structure of your graph (wide vs. deep) and the specific task when making your decision.
+
