@@ -30881,3 +30881,51 @@ If *f(n) = Θ(g(n))*, then *f(n) = O(g(n)) and f(n) = Ω(g(n))*.
 
 In summary, Big-Omega notation is a crucial tool for understanding and comparing the efficiency of algorithms by providing a lower bound on their growth rate.  It complements Big-O analysis to give a more comprehensive understanding of algorithm performance.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of the algorithm's runtime or space requirements as the input size grows.  It doesn't tell you the *exact* runtime, but rather how the runtime scales with the input size.  This is crucial for comparing algorithms and predicting how they'll perform on large datasets.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases as the input size (n) increases.
+* **Space Complexity:** How the memory usage of an algorithm increases as the input size (n) increases.
+
+**Common Big O Notations and Their Growth Rates:**
+
+The following list shows common Big O notations in increasing order of growth rate (from fastest to slowest):
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  This becomes slow quickly as the input size grows.  Example: Bubble sort, selection sort, nested loops iterating over the same input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  This is very inefficient for even moderately sized inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  This is extremely inefficient and only practical for very small inputs.  Example: Generating all permutations of a sequence.
+
+
+**Important Considerations:**
+
+* **Worst-Case, Average-Case, Best-Case:** Big O typically describes the *worst-case* scenario.  However, you can also analyze average-case and best-case complexities.
+
+* **Dominant Terms:** When expressing complexity, we only consider the dominant term.  For example, O(n³ + 5n² + 10n + 100) simplifies to O(n³).  As n gets large, the other terms become insignificant.
+
+* **Constants are Ignored:** Constant factors are dropped because they don't significantly affect the growth rate as n becomes very large.  For example, O(2n) simplifies to O(n).
+
+* **Big O is an Upper Bound:** It provides an upper limit on the growth rate.  The actual runtime could be better, but it won't be worse than the Big O notation indicates.
+
+* **Asymptotic Analysis:** Big O describes the behavior of the algorithm as the input size approaches infinity.  It's less useful for small input sizes.
+
+
+**Example:**
+
+Let's say you have an algorithm that iterates through an array of size `n` once.  Its time complexity is O(n) because the runtime is directly proportional to the input size.  If you have nested loops, each iterating through the array, the time complexity becomes O(n²).
+
+Big O notation is a fundamental concept in algorithm design and analysis.  Understanding it allows you to choose the most efficient algorithms for your specific needs, especially when dealing with large datasets.
+
