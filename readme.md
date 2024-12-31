@@ -32074,3 +32074,108 @@ def isBST(node):
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is also O(N) in the worst case (due to the recursive call stack). The in-order traversal method might be slightly more efficient in practice because it avoids the repeated range checks of the second method.  However, both are perfectly valid and understandable solutions.  Choose the method you find more intuitive or that better suits your coding style. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.  We perform an in-order traversal and track the previously visited node.  If the current node's value is less than the previous node's value, it violates the BST property.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    prev = [-float('inf')]  # Use a list to allow modification within the function
+
+    def inorder(node):
+        if node:
+            if not inorder(node.left):
+                return False
+            if node.data <= prev[0]:
+                return False
+            prev[0] = node.data
+            if not inorder(node.right):
+                return False
+        return True
+
+    return inorder(root)
+
+
+# Example usage:
+root = Node(2)
+root.left = Node(1)
+root.right = Node(3)
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+
+root = Node(5)
+root.left = Node(1)
+root.right = Node(4)
+root.right.left = Node(3)
+root.right.right = Node(6)
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: False (because 4 > 5 is violated)
+
+root = Node(5)
+root.left = Node(1)
+root.right = Node(8)
+root.left.right = Node(3)
+print(f"Is the tree a BST? {is_bst_recursive(root)}") # Output: False (because 3 is in left subtree of 5, but greater than 1)
+
+
+```
+
+**Method 2:  Recursive Check with Min and Max Values**
+
+This approach recursively checks each subtree, ensuring that all nodes in the left subtree are less than the current node's value, and all nodes in the right subtree are greater.  We pass min and max bounds to each recursive call.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(node, min_val, max_val):
+    """
+    Checks if a binary tree is a BST using recursive min/max bounds.
+
+    Args:
+      node: The current node being checked.
+      min_val: The minimum allowed value for this subtree.
+      max_val: The maximum allowed value for this subtree.
+
+    Returns:
+      True if the subtree rooted at 'node' is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if node.data <= min_val or node.data >= max_val:
+        return False  # Violates BST property
+
+    return (is_bst_minmax(node.left, min_val, node.data) and
+            is_bst_minmax(node.right, node.data, max_val))
+
+
+# Example usage (same as before, you can use the same examples from Method 1)
+root = Node(2)
+root.left = Node(1)
+root.right = Node(3)
+print(f"Is the tree a BST? {is_bst_minmax(root, float('-inf'), float('inf'))}")  # Output: True
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the recursive approach, where H is the height of the tree (O(log N) for a balanced tree, O(N) for a skewed tree).  The iterative approach (not shown here, but possible) would have O(1) space complexity. Choose the method that you find more readable and maintainable.  The min-max approach might be slightly easier to understand conceptually for some.
+
