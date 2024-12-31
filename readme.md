@@ -32302,3 +32302,105 @@ print(is_bst_minmax(root2, float('-inf'), float('inf')))  # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The recursive min-max approach might be slightly less efficient due to the overhead of function calls, but the difference is usually negligible.  Choose the method that you find more readable and easier to understand.  The in-order traversal method is generally preferred for its clarity.
 
+#  Binary Tree traversals 
+Binary tree traversals are methods for systematically visiting each node in a binary tree exactly once.  There are three primary ways to traverse a binary tree:
+
+* **Inorder Traversal:**  Visit the left subtree, then the root node, then the right subtree.  This is commonly used for binary *search* trees because it produces a sorted list of the nodes' values.
+
+* **Preorder Traversal:** Visit the root node, then the left subtree, then the right subtree. This traversal is useful for creating a copy of the tree or expressing the tree's structure.
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root node.  This is commonly used for deleting nodes in a tree or evaluating expressions represented by the tree.
+
+
+Let's illustrate with an example tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+**Inorder Traversal:**  The order would be 4, 2, 5, 1, 3.
+
+**Preorder Traversal:** The order would be 1, 2, 4, 5, 3.
+
+**Postorder Traversal:** The order would be 4, 5, 2, 3, 1.
+
+
+**Recursive Implementations (Python):**
+
+These are the most common and straightforward implementations:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder:", end=" ")
+inorder_traversal(root)
+print("\nPreorder:", end=" ")
+preorder_traversal(root)
+print("\nPostorder:", end=" ")
+postorder_traversal(root)
+```
+
+**Iterative Implementations:**
+
+Iterative approaches use stacks to avoid recursion.  This can be beneficial for very deep trees to prevent stack overflow errors.  Here's an example of an iterative inorder traversal:
+
+```python
+def iterative_inorder_traversal(node):
+    stack = []
+    current = node
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.data, end=" ")
+        current = current.right
+```
+
+You can similarly implement iterative versions of preorder and postorder traversals using stacks.  For postorder, you might need a slightly more sophisticated approach involving a flag to track whether a node's children have been visited.
+
+
+**Applications:**
+
+* **Binary Search Trees (BSTs):** Inorder traversal of a BST yields a sorted sequence of elements.
+* **Expression Evaluation:** Postorder traversal is used to evaluate arithmetic expressions represented as trees.
+* **Tree Copying:** Preorder traversal is used for creating a copy of a tree.
+* **Tree Deletion:** Postorder traversal helps in deleting nodes from a tree systematically.
+* **XML/HTML Parsing:**  Tree traversals are fundamental to parsing and manipulating XML and HTML documents.
+
+
+Remember to choose the traversal method that best suits your specific needs based on the type of binary tree and the task you're performing.  The recursive versions are often simpler to understand and implement, while iterative versions can offer performance advantages for large trees.
+
