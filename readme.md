@@ -31281,3 +31281,12 @@ The best representation depends on your needs:
 
 Remember to consider the operations you'll be performing most frequently when selecting a representation. For example, if you need frequent parent lookups, you might add a parent pointer to your chosen structure.
 
+#  Introduction 
+Please provide me with some context!  To write an introduction, I need to know:
+
+* **What is the topic?**  What are you writing about? (e.g., a research paper on climate change, a short story about a lost dog, a presentation on marketing strategies)
+* **Who is the audience?** Who are you writing for? (e.g., experts in the field, general public, potential investors)
+* **What is the purpose?** What do you want the reader to take away from this piece of writing? (e.g., to inform, to persuade, to entertain)
+
+Once I have this information, I can help you write a compelling introduction.
+
