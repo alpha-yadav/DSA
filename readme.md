@@ -33594,3 +33594,89 @@ Here are a few sample algorithmic problems, ranging in difficulty:
 
 The best problem for you to solve will depend on your current skill level.  Start with the easy problem to build confidence, then move on to the medium and hard problems as you improve.  Remember to focus on understanding the problem statement clearly before attempting a solution.  You can find many more algorithmic problems on platforms like LeetCode, HackerRank, and Codewars.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses nested `if` statements.  It's straightforward but can become less readable with more complex rules.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) //Example usage
+```
+
+**Version 2: Using a Ternary Operator (More Concise)**
+
+This version uses nested ternary operators to achieve a more compact solution.  While concise, it can be harder to read for beginners.
+
+```swift
+func fizzBuzzTernary(n: Int) {
+    for i in 1...n {
+        print(i % 15 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzzTernary(n: 15) //Example usage
+```
+
+
+**Version 3:  Improved Readability with String Concatenation**
+
+This version builds the output string incrementally, improving readability and making it easier to extend with more rules.
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) //Example usage
+```
+
+**Explanation of Version 3:**
+
+* The `output` string starts empty.
+* We check for divisibility by 3 and 5 independently.  If divisible, we append "Fizz" or "Buzz" to `output`.
+* Finally, we print either the `output` string (if it's not empty) or the number itself (if `output` remained empty).
+
+**Version 4:  Functional Approach (More Advanced)**
+
+This utilizes Swift's functional capabilities for a more concise and potentially performant solution (though performance differences might be negligible for smaller `n` values).
+
+```swift
+func fizzBuzzFunctional(n: Int) {
+    (1...n).forEach { i in
+        let output = (i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzFunctional(n: 15) // Example usage
+```
+
+This version uses `forEach` to iterate and string concatenation similar to Version 3 but in a more functional style.
+
+Choose the version that best suits your understanding and coding style.  Version 3 is generally recommended for readability and ease of extension.  Version 4 showcases a more advanced Swift style. Remember to compile and run this code in a Swift environment (like Xcode's playground or a Swift REPL).
+
