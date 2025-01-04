@@ -35541,3 +35541,91 @@ postorder(root) # Output: D E B C A
 
 These traversals are fundamental algorithms in computer science and are applied extensively in various data structures and algorithms.  Understanding them is crucial for working with trees effectively.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several approaches to finding the LCA, each with different complexities.  Here are two common methods:
+
+**Method 1: Recursive Approach (Most Common and Efficient)**
+
+This method uses recursion to traverse the tree.  The core idea is:
+
+1. **Base Cases:**
+   - If the current node is `NULL`, return `NULL`.
+   - If the current node is equal to either `node1` or `node2`, return the current node.
+
+2. **Recursive Steps:**
+   - Recursively search for `node1` and `node2` in the left and right subtrees.
+   - If `node1` and `node2` are found in *different* subtrees (one in the left and one in the right), the current node is the LCA.
+   - Otherwise, the LCA is found in the subtree where both nodes exist (either left or right).
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, node1, node2):
+    """
+    Finds the lowest common ancestor of node1 and node2 in a binary tree.
+
+    Args:
+      root: The root of the binary tree.
+      node1: The first node.
+      node2: The second node.
+
+    Returns:
+      The lowest common ancestor node, or None if either node is not found.
+    """
+    if root is None:
+        return None
+
+    if root == node1 or root == node2:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, node1, node2)
+    right_lca = lowestCommonAncestor(root.right, node1, node2)
+
+    if left_lca and right_lca:  # Node1 and Node2 found in different subtrees
+        return root
+    elif left_lca:             # Both nodes in left subtree
+        return left_lca
+    elif right_lca:            # Both nodes in right subtree
+        return right_lca
+    else:
+        return None  # Neither node found
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.left.right # Node with data 5
+
+lca = lowestCommonAncestor(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca.data if lca else 'Not Found'}") # Output: LCA of 4 and 5: 2
+
+
+node3 = root.left  #Node with data 2
+node4 = root.right #Node with data 3
+
+lca2 = lowestCommonAncestor(root, node3, node4)
+print(f"LCA of {node3.data} and {node4.data}: {lca2.data if lca2 else 'Not Found'}") # Output: LCA of 2 and 3: 1
+
+node5 = root.left.left #Node with data 4
+node6 = root.right.right #Node with data that doesn't exist
+
+lca3 = lowestCommonAncestor(root, node5, node6)
+print(f"LCA of {node5.data} and {node6.data}: {lca3.data if lca3 else 'Not Found'}") # Output: LCA of 4 and None: Not Found
+```
+
+**Method 2: Iterative Approach (Using a Stack or Queue)**
+
+While less intuitive than the recursive approach, an iterative solution is possible using a stack (for depth-first search) or a queue (for breadth-first search).  It avoids the potential for stack overflow issues associated with very deep trees that the recursive approach might face. However, the recursive method is generally preferred for its simplicity and readability.
+
+
+The choice of method depends on factors like the size of the tree and whether you prioritize code readability or the avoidance of potential stack overflow errors.  For most cases, the recursive solution is the more elegant and practical choice. Remember to handle edge cases like null nodes and nodes that aren't present in the tree.
+
