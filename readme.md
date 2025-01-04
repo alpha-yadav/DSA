@@ -35043,3 +35043,98 @@ print(f"Is the tree a BST? {is_bst_recursive(root2)}") # Output: False
 
 Both methods achieve the same result. The inorder traversal method is generally simpler to understand, but the recursive range-checking method can be slightly more efficient in some cases because it might terminate early if a violation is found. Choose the method that best suits your understanding and needs.  Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    """Checks if a binary tree is a BST using in-order traversal."""
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.data)
+            inorder(node.right)
+
+    inorder(root)
+    for i in range(1, len(result)):
+        if result[i] <= result[i-1]:
+            return False  # Not sorted, therefore not a BST
+    return True
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST (in-order method)? {is_bst_inorder(root)}") #True
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(20) #This is not a BST because 15 > 10
+print(f"Is the tree a BST (in-order method)? {is_bst_inorder(root2)}") #False
+
+
+```
+
+**Method 2: Recursive Check with Range**
+
+This method recursively checks each subtree to ensure that its nodes fall within a valid range defined by the parent node.
+
+```python
+import sys
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+    """Checks if a binary tree is a BST using recursion and range."""
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False  # Node value out of range
+
+    # Recursively check left and right subtrees
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+# Example usage (same trees as above):
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root)}") #True
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(20) #This is not a BST because 15 > 10
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}") #False
+```
+
+**Comparison:**
+
+* **In-order traversal:** Simpler to understand, but requires extra space for the `result` list (O(N) space complexity).
+* **Recursive range check:** More efficient in space (O(h) space complexity where h is the height of the tree), as it doesn't require a separate list to store nodes.  It might be slightly harder to grasp initially.
+
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  Choose the method that best suits your understanding and needs.  The recursive method is generally preferred for its better space complexity, especially for very large, balanced trees.
+
