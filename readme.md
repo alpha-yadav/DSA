@@ -33948,3 +33948,68 @@ This algorithm has a time complexity of O(n) because in the worst case (the targ
 
 Big O notation is crucial for comparing the efficiency of different algorithms and making informed decisions about which algorithm to use for a particular problem, especially when dealing with large datasets.  Understanding Big O allows developers to write more efficient and scalable code.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  Here are examples in a few popular programming languages:
+
+**1. While Loop (Python):**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This loop prints the numbers 0 through 4.  The condition `count < 5` is checked before each iteration.  The loop continues as long as the condition is true.
+
+**2. For Loop (Python):**
+
+```python
+for i in range(5):
+  print(i)
+```
+
+This loop also prints 0 through 4.  `range(5)` generates a sequence of numbers from 0 up to (but not including) 5.  The loop iterates through each number in the sequence.
+
+**3. While Loop (JavaScript):**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+Similar to the Python while loop, this prints 0 through 4.
+
+**4. For Loop (JavaScript):**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+This is the JavaScript equivalent of the Python `for` loop example, also printing 0 through 4.  The loop has three parts: initialization (`let i = 0`), condition (`i < 5`), and increment (`i++`).
+
+**5. Do-While Loop (C++):**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  do {
+    std::cout << count << std::endl;
+    count++;
+  } while (count < 5);
+  return 0;
+}
+```
+
+A `do-while` loop executes the code block at least once, then checks the condition.  This also prints 0 through 4.
+
+
+These are just basic examples. Loops can be much more complex, incorporating nested loops, break statements (to exit the loop prematurely), and continue statements (to skip to the next iteration).  The best type of loop to use depends on the specific task.
+
