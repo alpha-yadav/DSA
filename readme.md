@@ -33547,3 +33547,50 @@ Getting started with algorithms can feel daunting, but it's a rewarding journey.
 
 By following these steps and consistently practicing, you'll build a strong foundation in algorithms and data structures.  Remember that it's a journey, not a race.  Enjoy the process of learning!
 
+#  A sample algorithmic problem 
+Here are a few sample algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string, e.g., "hello"
+
+**Output:** The reversed string, e.g., "olleh"
+
+**Solution Idea:**  Iterate through the string from the end to the beginning and build a new string.  Alternatively, use string slicing in Python (e.g., `string[::-1]`).
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return indices of the two numbers such that they add up to `target`.  You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+
+**Output:** `[0, 1]`  (because `nums[0] + nums[1] == 9`)
+
+
+**Solution Idea:** Use a hashmap (dictionary in Python) to store the numbers and their indices. Iterate through the array, and for each number, check if the complement (`target - number`) exists in the hashmap.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string, e.g., "babad"
+
+**Output:** The longest palindromic substring, e.g., "bab" or "aba" (both are valid).
+
+**Solution Idea:** This problem has several solutions, ranging from brute force (checking all substrings) to dynamic programming or Manacher's algorithm (a linear time solution).  The dynamic programming approach is a common and relatively understandable solution.  It involves creating a table to store whether a substring is a palindrome.
+
+
+**Choosing a Problem to Solve:**
+
+The best problem for you to solve will depend on your current skill level.  Start with the easy problem to build confidence, then move on to the medium and hard problems as you improve.  Remember to focus on understanding the problem statement clearly before attempting a solution.  You can find many more algorithmic problems on platforms like LeetCode, HackerRank, and Codewars.
+
