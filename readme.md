@@ -35629,3 +35629,101 @@ While less intuitive than the recursive approach, an iterative solution is possi
 
 The choice of method depends on factors like the size of the tree and whether you prioritize code readability or the avoidance of potential stack overflow errors.  For most cases, the recursive solution is the more elegant and practical choice. Remember to handle edge cases like null nodes and nodes that aren't present in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic computer science problem.  There are several ways to solve it, each with different time and space complexities.  Here's a breakdown of common approaches:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a simple and elegant approach for binary trees.  It works by recursively traversing the tree.
+
+* **Base Cases:**
+    * If the current node is `NULL`, return `NULL`.
+    * If the current node is equal to either `p` or `q` (the two nodes we're looking for the LCA of), return the current node.
+
+* **Recursive Step:**
+    * Recursively search for `p` and `q` in the left and right subtrees.
+    * If both `p` and `q` are found in different subtrees (one in the left, one in the right), then the current node is the LCA.
+    * Otherwise, return the result from the subtree where both `p` and `q` were found (or `NULL` if neither was found).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lowestCommonAncestor(root, root.left, root.right)  # LCA of 2 and 3 is 1
+print(f"LCA of 2 and 3: {lca.data}")
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right) #LCA of 4 and 5 is 2
+print(f"LCA of 4 and 5: {lca.data}")
+```
+
+**2. Iterative Approach (for Binary Trees):**
+
+This approach uses a stack (or parent pointers) to avoid recursion, potentially improving performance for very deep trees.  It's essentially a non-recursive version of the above.
+
+**3. Using Parent Pointers (for any Tree):**
+
+If your tree nodes have parent pointers (a `parent` attribute pointing to the parent node), you can efficiently find the LCA by traversing upwards from each node (`p` and `q`) and storing their ancestors in sets.  The LCA is the last common ancestor in those sets.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None  # Added parent pointer
+        self.children = []
+
+def lowestCommonAncestor_parent_pointers(p, q):
+    ancestors_p = set()
+    curr = p
+    while curr:
+        ancestors_p.add(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        if curr in ancestors_p:
+            return curr
+        curr = curr.parent
+    return None #Should not happen if p and q are actually in the tree
+
+#Example usage (requires building a tree with parent pointers)
+```
+
+**4.  Binary Lifting (for Binary Trees):**
+
+This is an advanced technique that preprocesses the tree to allow for very fast LCA queries (O(log n) time per query).  It involves building a table that allows you to jump up the tree by powers of 2.
+
+
+**Choosing the Right Approach:**
+
+* **Recursive (Binary Trees):**  Simple, easy to understand, good for smaller trees.
+* **Iterative (Binary Trees):** Avoids recursion stack overflow issues for very deep trees.
+* **Parent Pointers (Any Tree):**  Efficient if parent pointers are already available.
+* **Binary Lifting (Binary Trees):**  Most efficient for many repeated LCA queries on the same tree.
+
+
+Remember to handle edge cases, such as when one or both nodes are not present in the tree, or when one node is an ancestor of the other.  The provided code snippets handle some of these, but you might need to add further checks depending on your specific requirements.
+
