@@ -36199,3 +36199,47 @@ else:
 
 This implementation efficiently detects cycles in a directed graph using DFS. The use of `recStack` is crucial for identifying the back edges that signify cycles.  The time complexity is O(V+E), where V is the number of vertices and E is the number of edges, which is the same as a standard DFS traversal.  The space complexity is O(V) due to the `visited` and `recStack` arrays.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a groundbreaking algorithm for finding minimum spanning trees (MSTs) in undirected graphs.  Its significance lies in its near-linear time complexity, a significant improvement over previous algorithms.  There are actually several algorithms developed by Mikkel Thorup, each offering different trade-offs in terms of complexity and practicality.  Let's focus on the most prominent ones:
+
+**1. Thorup's 1999 Algorithm (Linear Time MST Algorithm for Undirected Graphs with Integer Edge Weights):**
+
+* **Context:** This algorithm is specifically designed for graphs with integer edge weights.  Its crucial innovation is the use of sophisticated techniques to handle edge weights efficiently.
+
+* **Time Complexity:**  *O(m α(m, n))* where:
+    * `m` is the number of edges.
+    * `n` is the number of vertices.
+    * `α(m, n)` is the inverse Ackermann function, which grows incredibly slowly.  For all practical purposes, α(m, n) can be considered a constant.  This effectively makes the runtime linear in the number of edges.
+
+* **Key Ideas:** The algorithm cleverly uses sophisticated data structures and techniques including:
+    * **Partitioning:** Dividing the graph into smaller components.
+    * **Contraction:**  Merging components to simplify the problem.
+    * **Borůvka's algorithm:** Integrating Borůvka's algorithm as a subroutine to find a significant portion of the MST quickly.
+
+* **Practicality:** While theoretically linear, the large constant factors hidden in the Big O notation make this algorithm less practical than simpler algorithms like Prim's or Kruskal's for smaller graphs.  Its advantage becomes apparent only for extremely large graphs with integer weights.
+
+
+**2. Thorup's Later Algorithms (Extensions and Refinements):**
+
+Thorup and subsequent researchers have developed variations and extensions of the 1999 algorithm, addressing aspects like:
+
+* **Handling of Real-Weighted Graphs:**  Extensions handle graphs with real-weighted edges, albeit often with slightly higher complexities.
+
+* **Improved Constant Factors:** Ongoing research strives to reduce the constant factors in the runtime, making the algorithm more practical for larger graphs.
+
+* **Parallel Implementations:**  Explorations of parallelizing Thorup's algorithm for even faster execution on multi-core processors.
+
+**Comparison with Other MST Algorithms:**
+
+| Algorithm        | Time Complexity       | Edge Weights   | Practicality |
+|-----------------|-----------------------|-----------------|---------------|
+| Prim's           | O(E log V) or O(V² ) | Any              | High           |
+| Kruskal's        | O(E log E)           | Any              | High           |
+| Borůvka's        | O(E log V)           | Any              | Moderate       |
+| Thorup's (1999) | O(m α(m, n)) ~ O(m)   | Integer          | High for massive graphs, lower for smaller graphs|
+
+
+**In Summary:**
+
+Thorup's algorithms represent a significant theoretical breakthrough in minimum spanning tree computation.  While the 1999 algorithm achieves a remarkable linear time complexity for integer edge weights, its practicality is largely confined to extremely large graphs.  Continued research focuses on improving the constant factors and extending the algorithm's applicability to real-weighted graphs and parallel computing environments.  For most practical purposes, Prim's or Kruskal's algorithm remain the preferred choices for their simplicity and efficiency on commonly encountered graph sizes.
+
