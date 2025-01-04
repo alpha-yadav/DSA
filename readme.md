@@ -34410,3 +34410,86 @@ else:
 
 Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues with very deep trees). Choose the method that best suits your needs and coding style.  Remember to handle the `None` cases carefully in both methods to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used to store data in a sorted manner.  Their key property is that for every node in the tree:
+
+* **Left Subtree Property:** All nodes in the left subtree have keys less than the node's key.
+* **Right Subtree Property:** All nodes in the right subtree have keys greater than the node's key.
+
+This organization allows for efficient searching, insertion, and deletion of elements.
+
+**Key Operations:**
+
+* **Search:**  Finding a specific node with a given key.  This is done recursively (or iteratively) by comparing the key to the current node's key. If the key is less, search the left subtree; if greater, search the right subtree. The time complexity is O(h), where h is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes, making search O(log₂(n)). In a skewed tree, h can be n, resulting in O(n) time complexity.
+
+* **Insertion:** Adding a new node with a given key. The algorithm is similar to search: traverse the tree until an appropriate location (either a leaf node or a node with a missing child) is found, and insert the new node there.  Time complexity is also O(h), similar to search.
+
+* **Deletion:** Removing a node with a given key.  This is the most complex operation.  There are three cases:
+    * **Node is a leaf:** Simply remove the node.
+    * **Node has one child:** Replace the node with its child.
+    * **Node has two children:**  Find the inorder predecessor (largest node in the left subtree) or inorder successor (smallest node in the right subtree), replace the node's key with the predecessor/successor's key, and then delete the predecessor/successor node (which will now have at most one child).  Time complexity is O(h).
+
+* **Minimum/Maximum:** Finding the smallest or largest key in the tree.  These operations are efficient because the minimum is always the leftmost node, and the maximum is always the rightmost node.  Time complexity is O(h).
+
+* **Successor/Predecessor:** Finding the next larger or smaller key in the sorted order.
+
+**Advantages of BSTs:**
+
+* **Efficient search, insertion, and deletion (on average):**  O(log₂(n)) for balanced trees.
+* **Sorted data:**  Elements are implicitly sorted.
+* **Relatively simple implementation:**  The basic algorithms are straightforward.
+
+**Disadvantages of BSTs:**
+
+* **Performance depends on tree balance:**  In a skewed tree (where all nodes are on one side), the performance degrades to O(n), which is equivalent to a linked list.
+* **No inherent mechanism for balancing:**  Insertion and deletion can lead to unbalanced trees over time.
+
+
+**Self-Balancing BSTs:**
+
+To mitigate the problem of unbalanced trees, self-balancing BSTs are used.  These trees use algorithms (like AVL trees, red-black trees, B-trees) to automatically rebalance the tree after insertions and deletions, ensuring that the height remains logarithmic.  These offer guaranteed O(log₂(n)) time complexity for all operations.
+
+**Example (Python):**
+
+A simplified example of a node and insertion in a BST:
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        if self.root is None:
+            self.root = Node(key)
+        else:
+            self._insert_recursive(self.root, key)
+
+    def _insert_recursive(self, node, key):
+        if key < node.key:
+            if node.left is None:
+                node.left = Node(key)
+            else:
+                self._insert_recursive(node.left, key)
+        else:
+            if node.right is None:
+                node.right = Node(key)
+            else:
+                self._insert_recursive(node.right, key)
+
+# Example usage:
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+```
+
+This is a basic example and lacks features like search and deletion, but it demonstrates the core concept of insertion into a BST.  For a complete implementation, including search and deletion, you would need more elaborate code. Remember to consider self-balancing techniques for production-level applications.
+
