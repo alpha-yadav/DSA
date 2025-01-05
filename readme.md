@@ -36602,3 +36602,77 @@ The largest rectangle is shown in the red area, which has an area = 10 units.
 
 These are just examples; many other algorithmic problems exist, ranging from simple sorting and searching to complex graph algorithms and dynamic programming.  The difficulty level and required techniques vary greatly.  Choose a problem based on your current skill level and focus on understanding the underlying concepts and different solution approaches.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It involves iterating through a sequence of numbers and printing different outputs based on whether the number is divisible by 3, 5, or both.
+
+Here's how to implement a simple FizzBuzz algorithm in Swift, along with explanations:
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This is straightforward and easy to understand.  It checks for divisibility by 15 first (to handle both 3 and 5) before checking for divisibility by 3 and 5 individually.
+
+
+**Version 2: Using String Interpolation and Ternary Operator (More Concise)**
+
+This version utilizes string interpolation and the ternary operator for a more compact solution:
+
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let fizz = (i % 3 == 0) ? "Fizz" : ""
+        let buzz = (i % 5 == 0) ? "Buzz" : ""
+        print(fizz + buzz == "" ? "\(i)" : fizz + buzz)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This version is shorter but might be slightly less readable for beginners.  It uses the ternary operator to conditionally assign "Fizz" or "Buzz" to strings, and then concatenates them. If both are empty, it prints the number itself.
+
+
+**Version 3:  Functional Approach (More Advanced)**
+
+This uses a map function for a functional approach:
+
+```swift
+func fizzBuzzFunctional(n: Int) {
+    (1...n).map { i -> String in
+        var result = ""
+        if i % 3 == 0 { result += "Fizz" }
+        if i % 5 == 0 { result += "Buzz" }
+        return result.isEmpty ? "\(i)" : result
+    }.forEach { print($0) }
+}
+
+fizzBuzzFunctional(n: 15)
+```
+
+This version uses higher-order functions (`map` and `forEach`), which is a more functional style of programming.  It's more concise and arguably more elegant, but requires a deeper understanding of Swift's functional capabilities.
+
+
+**Choosing the Right Version:**
+
+For beginners, **Version 1** is the easiest to understand and debug.  **Version 2** offers a more compact solution while still being relatively readable. **Version 3** is the most advanced and demonstrates a different programming paradigm, ideal for those familiar with functional programming concepts.  Choose the version that best suits your skill level and coding style.  Remember to always prioritize readability and maintainability.
+
