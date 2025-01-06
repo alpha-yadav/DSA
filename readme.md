@@ -360,3 +360,37 @@ Asymptotic notations describe the behavior of functions as their input grows arb
 
 Understanding these notations is fundamental for comparing the efficiency of different algorithms and making informed choices when selecting the best approach for a given problem.  They allow for a high-level analysis without getting bogged down in the specifics of machine architecture or implementation details.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is a mathematical notation used in computer science to describe the lower bound of an algorithm's runtime or space complexity.  It essentially provides a guarantee about the *minimum* amount of resources an algorithm will use, regardless of the input.  In other words, it tells us that the algorithm's performance will *at least* be as good as some function of the input size.
+
+Here's a breakdown of what Big-Omega notation means:
+
+* **Formal Definition:**  A function f(n) is said to be Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+
+Let's dissect this definition:
+
+* **f(n):** Represents the actual runtime or space complexity of the algorithm as a function of the input size 'n'.
+* **g(n):** Represents a simpler function that describes the lower bound of f(n).  This is often a well-known function like n, n², log n, etc.
+* **c:** A positive constant.  It's a scaling factor that allows us to ignore constant differences between f(n) and g(n).
+* **n₀:** A positive integer. This represents a threshold input size. The inequality only needs to hold for input sizes greater than or equal to n₀. This allows us to ignore the behavior of the algorithm for small inputs.
+
+
+**What does it mean practically?**
+
+If an algorithm's runtime is Ω(n), it means that the runtime grows at least linearly with the input size.  The runtime could be linear (like O(n)), or it could be super-linear (like O(n²)), but it won't be *better* than linear.  It establishes a *lower bound*.
+
+**Key Differences from Big-O Notation:**
+
+* **Big-O (O):** Describes the *upper bound* of an algorithm's runtime.  It tells us the *maximum* amount of resources the algorithm will use.
+* **Big-Omega (Ω):** Describes the *lower bound*.  It tells us the *minimum* amount of resources the algorithm will use.
+* **Big-Theta (Θ):** Describes both the upper and lower bounds.  It means the algorithm's runtime is *tightly bound*.  If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+**Example:**
+
+Consider a linear search algorithm. In the worst case, it needs to examine every element in an array of size 'n' before finding the target.  Therefore, its worst-case runtime is O(n).  However, in the best case, the target is the first element, and it takes only one comparison.  Therefore, its best-case runtime is Ω(1) (constant time).  Its average-case runtime is often also expressed as Θ(n).
+
+
+**In Summary:**
+
+Big-Omega notation provides a valuable tool for analyzing algorithms by giving a guarantee on their minimum performance.  It complements Big-O notation, providing a more complete picture of the algorithm's complexity.  Used together with Big-O and Big-Theta, they offer a comprehensive understanding of an algorithm's efficiency.
+
