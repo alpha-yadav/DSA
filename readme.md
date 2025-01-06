@@ -1253,3 +1253,48 @@ We can say:
 
 Understanding these notations is crucial for analyzing the efficiency of algorithms and comparing their performance as the input size scales.  They allow us to focus on the dominant factors affecting runtime and space usage without getting bogged down in implementation details.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the lower bound of an algorithm's running time or space complexity.  In simpler terms, it provides a guarantee about the *minimum* amount of resources an algorithm will *always* require, regardless of the input.
+
+Here's a breakdown of its key aspects:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be in Ω(*g(n)*) if there exist positive constants *c* and *n₀* such that:
+
+`0 ≤ c * g(n) ≤ f(n)` for all *n* ≥ *n₀*
+
+Let's dissect this:
+
+* **f(n):** Represents the actual time or space complexity of the algorithm.
+* **g(n):** Represents a simpler function that describes the lower bound of the algorithm's complexity (e.g., n, n², log n).
+* **c:**  A positive constant.  It scales the function *g(n)*.  This accounts for variations in different implementations or hardware.
+* **n₀:** A positive constant representing a threshold. The inequality only needs to hold for input sizes greater than or equal to *n₀*. This handles the complexities of smaller inputs, where the dominant terms in the complexity might not yet be apparent.
+
+**Intuitive Explanation:**
+
+Ω(*g(n)*) means that the algorithm's running time (or space usage) will *always* be at least proportional to *g(n)* for sufficiently large inputs.  The algorithm might sometimes run faster, but it will never run significantly slower than *c* times *g(n)*.
+
+**Example:**
+
+Let's say an algorithm's running time is described by the function:
+
+`f(n) = 5n² + 10n + 2`
+
+We can say that this algorithm is in Ω(n²).  To prove this, we need to find constants *c* and *n₀* that satisfy the definition.  Let's choose *c = 1* and *n₀ = 10*:
+
+For *n* ≥ 10, we have:
+
+`0 ≤ 1 * n² ≤ 5n² + 10n + 2`
+
+This inequality holds true for all *n* ≥ 10 because the n² term dominates the other terms as *n* grows.  Therefore, *f(n)* is in Ω(n²).
+
+
+**Difference from Big-O (O) and Big-Theta (Θ):**
+
+* **Big-O (O):** Describes the *upper bound* of an algorithm's complexity.  It indicates the worst-case scenario.
+* **Big-Omega (Ω):** Describes the *lower bound*. It indicates the best-case scenario (or a guarantee of minimum resource usage).
+* **Big-Theta (Θ):** Describes both the *upper* and *lower bounds*. It signifies a tight bound, where the algorithm's complexity is proportional to the given function.
+
+In summary, Big-Omega notation provides a valuable tool for analyzing algorithms by establishing a lower limit on their resource consumption.  Combined with Big-O, it gives a comprehensive understanding of an algorithm's efficiency.
+
