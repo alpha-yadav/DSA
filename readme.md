@@ -3123,3 +3123,126 @@ The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest nod
 
 Remember to handle edge cases like empty trees, one node being an ancestor of the other, or the nodes not being present in the tree.  The provided recursive example includes basic error handling (returning `None` if either `p` or `q` isn't found), but more robust error checking might be necessary depending on the application.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (specifically a binary tree or a general tree) is a classic computer science problem.  There are several approaches, each with different time and space complexities. Here's a breakdown of common methods:
+
+**1. Recursive Approach (Binary Tree):**
+
+This is a straightforward and efficient approach for binary trees.  It works by recursively traversing the tree.  If the target nodes are found in different subtrees of a node, that node is the LCA.  If both are in the left subtree, recursively search the left subtree.  Similarly, if both are in the right subtree, search the right subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, n1, n2):
+    """
+    Finds the LCA of n1 and n2 in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        n1: The first node.
+        n2: The second node.
+
+    Returns:
+        The LCA node, or None if either n1 or n2 is not found.
+    """
+    if root is None:
+        return None
+
+    if root.data == n1 or root.data == n2:
+        return root
+
+    left_lca = lca(root.left, n1, n2)
+    right_lca = lca(root.right, n1, n2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca_node = lca(root, 4, 5)
+if lca_node:
+    print(f"LCA of 4 and 5 is: {lca_node.data}")  # Output: LCA of 4 and 5 is: 2
+else:
+    print("Nodes not found")
+
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, we might traverse the entire tree).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive call stack).  In the worst case (a skewed tree), this could be O(N).
+
+
+**2. Iterative Approach (Binary Tree):**
+
+This approach uses a stack or queue instead of recursion to avoid stack overflow issues with very deep trees.  It's functionally similar to the recursive approach.
+
+
+**3. Using Parent Pointers (Binary Tree or General Tree):**
+
+If each node in the tree has a pointer to its parent, finding the LCA becomes much simpler.  You can traverse upwards from each node until you find a common ancestor.
+
+```python
+class Node:
+    def __init__(self, data, parent=None):
+        self.data = data
+        self.parent = parent
+        self.children = [] #For general tree
+
+def lca_with_parent(node1, node2):
+    ancestors1 = set()
+    current = node1
+    while current:
+        ancestors1.add(current)
+        current = current.parent
+
+    current = node2
+    while current:
+        if current in ancestors1:
+            return current
+        current = current.parent
+
+    return None #No common ancestor
+
+
+#Example Usage (requires building a tree with parent pointers)
+#... (tree construction with parent pointers omitted for brevity)...
+```
+
+**Time Complexity:** O(H), where H is the height of the tree.
+**Space Complexity:** O(H) in the worst case (due to the set of ancestors).
+
+
+**4. Lowest Common Ancestor in a General Tree:**
+
+The recursive approach can be adapted to general trees (trees where a node can have more than two children).  However, you need to check all children recursively.
+
+**5. Lowest Common Ancestor in a Graph:**
+
+Finding the LCA in a general graph is more complex and often involves graph traversal algorithms like Depth-First Search (DFS) or Breadth-First Search (BFS), potentially with additional data structures to track paths.
+
+
+**Choosing the Right Approach:**
+
+* For binary trees without parent pointers, the recursive approach is often the most concise and efficient.
+* For very deep binary trees, consider the iterative approach to avoid stack overflow.
+* If you have parent pointers, the parent-pointer approach is the most efficient.
+* For general trees, adapt the recursive approach to handle multiple children.
+* For graphs, you'll need more sophisticated graph algorithms.
+
+
+Remember to adapt the code to your specific tree structure (binary tree, general tree, graph) and data representation.  The efficiency of the method depends largely on the structure of the tree and the available information (e.g., parent pointers).
+
