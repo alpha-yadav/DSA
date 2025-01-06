@@ -38564,3 +38564,98 @@ The choice of traversal depends on the application:
 
 The examples above show recursive implementations.  It's also possible (and sometimes preferable for efficiency or to avoid stack overflow issues with very deep trees) to implement these traversals iteratively using stacks (for depth-first) or queues (for breadth-first).  Iterative versions often use a stack to mimic the function call stack of recursion.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes of a tree level by level.  Here are implementations in Python and JavaScript, demonstrating both iterative and recursive approaches (where applicable).
+
+**Python**
+
+**Iterative Approach (using a queue):** This is the most common and efficient way to perform level order traversal.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root) # Output: 1 2 3 4 5
+```
+
+**Recursive Approach (less efficient, generally not recommended for level order):**  While possible, a recursive approach for level order traversal is less efficient than the iterative approach because it doesn't inherently utilize the level-by-level structure. It would require tracking levels explicitly, adding complexity.  Therefore, it's generally avoided.
+
+**JavaScript**
+
+**Iterative Approach (using a queue):**
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) return;
+
+  const queue = [root];
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    console.log(curr.data, " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+// Example usage:
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1 2 3 4 5
+```
+
+
+**Key Concepts:**
+
+* **Queue:**  A FIFO (First-In, First-Out) data structure is crucial for level order traversal.  The queue holds nodes that need to be processed.
+* **Iterative Approach:** Uses a `while` loop to process nodes from the queue until it's empty.
+* **Recursive Approach (not recommended for level order):**  While conceptually possible, it's generally less efficient and more complex than the iterative method for level order traversal.
+
+
+Remember to handle the case where the root is `null` (or `None` in Python) to avoid errors.  The examples show a simple binary tree; the algorithms work for any tree structure where you can access children (left and right children in the case of binary trees).
+
