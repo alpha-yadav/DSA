@@ -38143,3 +38143,123 @@ This improved implementation includes:
 
 Remember that the efficiency of BST operations (insertion, deletion, search) is O(h), where h is the height of the tree. In a balanced BST, h is approximately log₂(n), where n is the number of nodes. However, in a skewed tree, h can be as bad as n, leading to linear time complexity.  Self-balancing BSTs (like AVL trees or red-black trees) address this issue by maintaining a balanced structure during insertions and deletions.  For very large datasets, consider using a self-balancing tree implementation for guaranteed logarithmic time complexity.
 
+#  Check if a tree is BST or not 
+Several approaches can check if a given binary tree is a Binary Search Tree (BST). Here are two common methods:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        root: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    _inorder_traversal(root, inorder_list)
+
+    # Check if the inorder traversal is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+def _inorder_traversal(node, inorder_list):
+    """Helper function for recursive in-order traversal."""
+    if node:
+        _inorder_traversal(node.left, inorder_list)
+        inorder_list.append(node.data)
+        _inorder_traversal(node.right, inorder_list)
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_recursive(root))  # Output: True (if the tree is properly structured)
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(15) # This makes it NOT a BST as 15 > 8
+root2.left.right.left = Node(12)
+
+print(is_bst_recursive(root2)) # Output: False
+
+
+```
+
+**Method 2: Recursive Check with Min and Max Bounds**
+
+This method recursively checks each subtree, ensuring that all nodes in the left subtree are less than the current node, and all nodes in the right subtree are greater.  This is generally more efficient than the in-order traversal method, as it avoids creating a list.
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_minmax(node):
+    """
+    Checks if a binary tree is a BST using recursive min/max bounds.
+
+    Args:
+        node: The root node of the subtree being checked.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.  Returns (True, min, max) for the subtree
+    """
+    if node is None:
+        return True, float('-inf'), float('inf')
+
+    is_left_bst, left_min, left_max = is_bst_recursive_minmax(node.left)
+    is_right_bst, right_min, right_max = is_bst_recursive_minmax(node.right)
+
+    if not is_left_bst or not is_right_bst or left_max > node.data or right_min < node.data:
+        return False, float('-inf'), float('inf')  # Indicate failure and return arbitrary min/max
+
+    return True, min(node.data, left_min), max(node.data, right_max)
+
+
+# Example Usage (same trees as before):
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+is_bst, _, _ = is_bst_recursive_minmax(root)
+print(is_bst)  # Output: True
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(15)  # This makes it NOT a BST
+root2.left.right.left = Node(12)
+
+is_bst2, _, _ = is_bst_recursive_minmax(root2)
+print(is_bst2)  # Output: False
+
+```
+
+Both methods achieve the same result. The min/max approach is generally preferred for its efficiency because it avoids the overhead of creating and sorting an entire inorder traversal list.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
+
