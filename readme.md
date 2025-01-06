@@ -36808,3 +36808,75 @@ Output: [0,1]
 
 This is a classic algorithmic problem that tests your understanding of basic data structures and time complexity analysis.  Try solving it!  Let me know if you'd like hints or a solution in a specific programming language.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing a more refined version:
+
+
+**Simple Version:**
+
+This version is straightforward and easy to understand.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5. If none of these conditions are met, it prints the number itself.
+
+
+**More Efficient Version (using ternary operator):**
+
+This version is slightly more concise using Swift's ternary operator:
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzEfficient(n: 15) // Call the function to test
+
+```
+
+This achieves the same result but with less branching.  The ternary operator efficiently assigns the appropriate string to the `output` variable based on the divisibility rules.
+
+
+**Even More Concise Version (using string interpolation and optional binding):**
+
+This version leverages optional binding for a more functional approach. It's more advanced but showcases a different style.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+  for i in 1...n {
+    var output = ""
+    if i % 3 == 0 { output += "Fizz" }
+    if i % 5 == 0 { output += "Buzz" }
+    print(output.isEmpty ? "\(i)" : output)
+  }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This version builds the output string incrementally.  If the string is empty after checking for divisibility by 3 and 5, it defaults to the number itself.
+
+
+**Choosing the Right Version:**
+
+For beginners, the first version is recommended for its clarity. As you become more comfortable with Swift, the more concise versions demonstrate more advanced techniques.  The key is to understand the logic and choose the style that best suits your understanding and coding preferences.  The efficiency differences between these versions are negligible for most practical input sizes.
+
