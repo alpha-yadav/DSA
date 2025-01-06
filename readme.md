@@ -3257,3 +3257,107 @@ Please provide me with the data or equation you want me to graph.  I need the in
 
 Once you provide this, I can help you.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common technique, especially suitable for dense graphs (graphs with many edges).  Here's a breakdown of how it works, its advantages and disadvantages, and considerations for implementation:
+
+**How it works:**
+
+An adjacency matrix represents a graph as a two-dimensional array (or matrix) where each element `matrix[i][j]` indicates the presence or weight of an edge between vertex `i` and vertex `j`.
+
+* **Unweighted graph:**  `matrix[i][j] = 1` if there's an edge from vertex `i` to vertex `j`, and `matrix[i][j] = 0` otherwise.
+* **Weighted graph:** `matrix[i][j]` stores the weight of the edge between vertex `i` and vertex `j`.  If there's no edge, a special value (like `-1`, `Infinity`, or `0` depending on your application) is used.
+* **Directed graph:** The matrix is not necessarily symmetric.  `matrix[i][j]` represents an edge from `i` to `j`, and `matrix[j][i]` represents an edge from `j` to `i`.  These can be different or one might be 0 if the edge is unidirectional.
+* **Undirected graph:** The matrix is symmetric. `matrix[i][j] = matrix[j][i]`.
+
+**Example (Unweighted, Undirected Graph):**
+
+Consider a graph with 4 vertices:
+
+```
+     A
+    / \
+   B   C
+    \ /
+     D
+```
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  1  0  1  1
+C  1  1  0  1
+D  0  1  1  0
+```
+
+
+**Example (Weighted, Directed Graph):**
+
+```
+     A --5--> B
+     |     ^
+     |3    |2
+     V     |
+     C --1--> D
+```
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  5  3  0
+B  0  0  0  0
+C  0  0  0  1
+D  2  0  0  0
+```
+
+**Advantages:**
+
+* **Easy to check for edge existence:**  Checking if there's an edge between two vertices is O(1) – just access the corresponding matrix element.
+* **Simple implementation:** Relatively straightforward to implement.
+
+
+**Disadvantages:**
+
+* **Space complexity:**  Requires O(V²) space, where V is the number of vertices. This is inefficient for sparse graphs (graphs with relatively few edges) because it wastes a lot of space storing zeros.
+* **Adding/deleting vertices:**  Adding or deleting a vertex requires resizing the entire matrix, which can be computationally expensive.
+* **Adding/deleting edges:** Adding or deleting an edge is O(1) as it's a simple matrix element update.
+
+
+**Implementation Considerations:**
+
+* **Data type:** Choose an appropriate data type for the matrix elements (e.g., `int`, `float`, custom class for weighted edges).
+* **Sparse graphs:** For sparse graphs, consider alternative representations like adjacency lists, which are more space-efficient.
+* **Language:**  The implementation will vary slightly depending on the programming language.  Most languages offer built-in support for arrays or matrix-like structures.
+
+
+**Example in Python:**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.matrix = [[0] * num_vertices for _ in range(num_vertices)]
+
+    def add_edge(self, u, v, weight=1): # u and v are indices of vertices.
+        self.matrix[u][v] = weight
+        # For undirected graphs:
+        # self.matrix[v][u] = weight
+
+    def print_matrix(self):
+        for row in self.matrix:
+            print(row)
+
+# Example usage:
+graph = Graph(4)
+graph.add_edge(0, 1)
+graph.add_edge(0, 2)
+graph.add_edge(1, 2)
+graph.add_edge(1, 3)
+graph.add_edge(2, 3)
+graph.print_matrix()
+```
+
+Remember to adapt the implementation based on whether you're working with a weighted or unweighted, directed or undirected graph.  Choose the graph representation (adjacency matrix or adjacency list) based on the characteristics of your specific graph.
+
