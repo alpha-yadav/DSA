@@ -195,3 +195,69 @@ This version checks if `n` is positive before proceeding. If not, it prints an e
 
 Remember to choose the version that best suits your needs and understanding. The concise version is generally preferred for its readability and efficiency, while the first version might be easier to understand for beginners.  The error-handling version is best for production-level code.  Choose the one that fits your current skill level and the context of your project.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources of primary interest are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+Complexity is usually expressed using **Big O notation**, which describes the growth rate of the algorithm's resource usage as the input size approaches infinity.  It focuses on the dominant terms and ignores constant factors.  This gives a high-level understanding of how the algorithm scales with larger inputs.
+
+Here's a breakdown of common complexities:
+
+**Time Complexity:**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms.  Example: Merge sort, heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  Can become slow for large inputs.  Example: Bubble sort, selection sort, nested loops iterating over the same input.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  Very inefficient for larger inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:**  The execution time grows factorially with the input size. Extremely inefficient for even moderately sized inputs.  Example: Finding all permutations of a set.
+
+
+**Space Complexity:**  Similar notation is used, but it describes memory usage instead of time.
+
+* **O(1) - Constant Space:** The algorithm uses a constant amount of memory regardless of input size.
+
+* **O(n) - Linear Space:** The memory usage grows linearly with the input size.
+
+* **O(log n) - Logarithmic Space:** Memory usage grows logarithmically with input size.
+
+* **O(n²) - Quadratic Space:** Memory usage grows quadratically with input size.  And so on...
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine which operations contribute most to the algorithm's runtime or space usage.
+
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+
+3. **Determine the dominant term:** Identify the term that grows fastest as n increases.  This term determines the Big O notation.
+
+4. **Ignore constant factors and lower-order terms:** Big O notation simplifies the complexity by focusing only on the dominant growth rate.
+
+
+**Example:**
+
+Consider a function that iterates through an array and prints each element:
+
+```python
+def print_array(arr):
+  for element in arr:
+    print(element)
+```
+
+The number of print operations is directly proportional to the length of the array (n).  Therefore, the time complexity is O(n) and the space complexity is O(1) (assuming the print function doesn't consume significant additional memory).
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance with different input sizes.  Choosing an algorithm with a lower complexity can significantly improve performance, especially when dealing with large datasets.
+
