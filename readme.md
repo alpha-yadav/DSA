@@ -746,3 +746,12 @@ Each node holds:
 
 Remember to consider the specific operations you'll be performing on the n-ary tree when choosing a representation.  For example, if you'll be doing frequent searches, you might want to consider more sophisticated structures like a tree augmented with additional data structures to speed up searches.
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need more information to write an introduction.  For example, tell me:
+
+* **What is the subject of your writing?** (e.g., the history of the Roman Empire, the benefits of exercise, the dangers of climate change)
+* **What is the purpose of your writing?** (e.g., to inform, to persuade, to entertain)
+* **Who is your target audience?** (e.g., academics, general public, children)
+
+Once I have this information, I can write a compelling introduction.
+
