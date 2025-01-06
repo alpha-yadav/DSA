@@ -119,3 +119,79 @@ Here are a few algorithmic problem examples, ranging in difficulty:
 
 These examples provide a starting point. You can find many more algorithmic problems on websites like LeetCode, HackerRank, and Codewars.  Remember to focus on understanding the underlying concepts and improving your problem-solving skills.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's a great way to practice basic programming concepts like loops and conditional statements. Here's how to implement it in Swift, starting with a simple version and then adding some enhancements:
+
+
+**Simple Version:**
+
+This version uses a `for` loop and `if/else if/else` statements to check the divisibility of each number:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if the number is divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks if the number is divisible by 3. If so, it prints "Fizz".
+* Otherwise, it checks if the number is divisible by 5. If so, it prints "Buzz".
+* Otherwise, it prints the number itself.
+
+
+**More Concise Version (using string interpolation):**
+
+This version achieves the same result with a more concise approach using string interpolation:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+This version builds the output string (`output`) incrementally. If `output` is empty after checking for divisibility by 3 and 5, it prints the number; otherwise, it prints the built string.  This avoids the nested `if/else if/else` structure.
+
+
+**Handling Errors (Optional):**
+
+For more robust code, you might add error handling to ensure the input is valid:
+
+```swift
+func fizzBuzzWithInputValidation(n: Int) {
+    guard n > 0 else {
+        print("Input must be a positive integer.")
+        return
+    }
+    // ... rest of the fizzBuzzConcise or fizzBuzz function ...
+}
+
+fizzBuzzWithInputValidation(n: 15)
+fizzBuzzWithInputValidation(n: -5) // Test with invalid input
+```
+
+This version checks if `n` is positive before proceeding. If not, it prints an error message and exits.
+
+
+Remember to choose the version that best suits your needs and understanding. The concise version is generally preferred for its readability and efficiency, while the first version might be easier to understand for beginners.  The error-handling version is best for production-level code.  Choose the one that fits your current skill level and the context of your project.
+
