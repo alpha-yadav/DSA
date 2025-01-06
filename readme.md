@@ -36957,3 +36957,44 @@ The complexity of an algorithm can vary depending on the input data.  We often a
 
 Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a higher complexity will become significantly slower as the input size grows compared to an algorithm with lower complexity.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate, meaning it provides both an upper and a lower bound that are asymptotically proportional.  In simpler terms, it tells us that a function grows at roughly the same rate as another function, ignoring constant factors and smaller-order terms.
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) if there exist positive constants c₁ and c₂, and a positive integer n₀, such that for all n ≥ n₀:
+
+`c₁g(n) ≤ f(n) ≤ c₂g(n)`
+
+This means that for sufficiently large values of n (n ≥ n₀), f(n) is always bounded above and below by constant multiples of g(n).
+
+**What this means:**
+
+* **Tight Bound:** Unlike Big O notation (which only provides an upper bound) and Big Omega notation (which only provides a lower bound), Big Theta provides both, indicating a precise growth rate.
+* **Asymptotic Behavior:**  We're interested in the behavior of the function as *n* approaches infinity.  Constant factors and lower-order terms are insignificant in the long run.
+* **Proportional Growth:** f(n) and g(n) grow proportionally to each other.  If one doubles, the other roughly doubles; if one increases by a factor of 10, the other roughly increases by a factor of 10.
+
+
+**Examples:**
+
+* **Θ(n):**  Linear time complexity.  Examples include searching an unsorted array or iterating through a list once.  Functions like `f(n) = 2n + 5` and `g(n) = n/2` are both Θ(n).  We can find constants that satisfy the definition.
+
+* **Θ(n²):** Quadratic time complexity.  Examples include nested loops iterating through an array of size n.  `f(n) = 3n² + 10n + 2` is Θ(n²).
+
+* **Θ(log n):** Logarithmic time complexity.  Examples include binary search in a sorted array.
+
+* **Θ(1):** Constant time complexity.  The time taken is independent of the input size.  Examples include accessing an element in an array by its index.
+
+* **Θ(2ⁿ):** Exponential time complexity.  Often associated with algorithms that are computationally expensive and impractical for large input sizes.
+
+
+
+**Relationship to Big O and Big Omega:**
+
+* If f(n) is Θ(g(n)), then it is also O(g(n)) and Ω(g(n)).  Big Theta implies both Big O and Big Omega.
+* However, the reverse isn't always true.  A function can be O(g(n)) and Ω(g(n)) without being Θ(g(n)).  For example, f(n) = n + n sin(n) is O(n) and Ω(n) but not Θ(n) because of the oscillations introduced by the sine function.
+
+
+
+In summary, Big Theta notation is a powerful tool for analyzing the efficiency of algorithms by precisely characterizing their growth rate as the input size increases.  It provides a more precise and complete picture than Big O notation alone.
+
