@@ -3417,3 +3417,145 @@ This is just a basic introduction.  Further study would delve into topics like:
 
 Graph theory provides powerful tools for modeling and solving problems in numerous areas.  Its fundamental concepts are relatively straightforward, but its applications are incredibly broad and continue to expand.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and often efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of possible edges).  Here's a breakdown of how it works, along with various implementations and considerations:
+
+**Concept:**
+
+An adjacency list represents a graph as a collection of lists.  For each vertex (node) in the graph, you have a list containing all the vertices that are directly connected to it (its neighbors).
+
+**Implementation Details:**
+
+The specific implementation depends on the programming language you're using. Here are examples using Python and C++:
+
+**Python:**
+
+Using a dictionary:
+
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+
+# Accessing neighbors of vertex 'B':
+print(graph['B'])  # Output: ['A', 'D', 'E']
+
+#Checking if an edge exists:
+def has_edge(graph, u, v):
+  return v in graph.get(u, [])
+
+print(has_edge(graph, 'B', 'E')) #Output: True
+print(has_edge(graph, 'B', 'C')) #Output: False
+
+
+#Adding an edge
+def add_edge(graph, u, v):
+    graph.setdefault(u, []).append(v)
+    graph.setdefault(v, []).append(u) #for undirected graphs
+
+add_edge(graph,'A','D')
+print(graph)
+
+
+```
+
+Using a list of lists (less readable but potentially slightly faster for very large graphs):
+
+```python
+graph = [
+    ['B', 'C'],  # Neighbors of vertex 0 (assuming A is 0)
+    ['A', 'D', 'E'],
+    ['A', 'F'],
+    ['B'],
+    ['B', 'F'],
+    ['C', 'E']
+]
+
+# Accessing neighbors of vertex 1 (B):
+print(graph[1])  # Output: ['A', 'D', 'E']
+
+# Note:  You need a separate way to map vertex indices to names (e.g., a list of names) if you use this approach.
+```
+
+**C++:**
+
+Using `std::vector` and `std::list` (or `std::vector` of `std::vector`s for a simpler but potentially less efficient representation for large graphs):
+
+```c++
+#include <iostream>
+#include <vector>
+#include <list>
+#include <map>
+
+using namespace std;
+
+int main() {
+  //Using map for vertex labels and list for adjacency
+  map<char, list<char>> graph;
+  graph['A'] = {'B', 'C'};
+  graph['B'] = {'A', 'D', 'E'};
+  graph['C'] = {'A', 'F'};
+  graph['D'] = {'B'};
+  graph['E'] = {'B', 'F'};
+  graph['F'] = {'C', 'E'};
+
+  // Accessing neighbors of vertex 'B':
+  for (char neighbor : graph['B']) {
+    cout << neighbor << " ";
+  }
+  cout << endl; // Output: A D E
+
+
+    //Using vector of vectors:  Simpler, might be less efficient for very large sparse graphs.
+
+    vector<vector<int>> graph2(6); //Assumes 6 vertices, numbered 0-5
+    graph2[0] = {1,2};
+    graph2[1] = {0,3,4};
+    //and so on...
+
+  return 0;
+}
+```
+
+**Weighted Graphs:**
+
+For weighted graphs (graphs where edges have associated weights), you can modify the adjacency list to store pairs of (neighbor, weight):
+
+**Python (weighted):**
+
+```python
+graph = {
+    'A': [('B', 4), ('C', 2)],
+    'B': [('A', 4), ('D', 5), ('E', 1)],
+    'C': [('A', 2), ('F', 3)],
+    'D': [('B', 5)],
+    'E': [('B', 1), ('F', 6)],
+    'F': [('C', 3), ('E', 6)]
+}
+
+# Accessing neighbors and weights of 'B':
+for neighbor, weight in graph['B']:
+    print(f"Neighbor: {neighbor}, Weight: {weight}")
+```
+
+
+**Advantages of Adjacency Lists:**
+
+* **Efficient for sparse graphs:**  Memory usage is proportional to the number of edges, not the number of possible edges (like an adjacency matrix).
+* **Easy to find neighbors:**  Finding all neighbors of a vertex is very fast (O(degree of vertex)).
+* **Easy to add/remove edges:**  Adding or removing edges is relatively straightforward.
+
+
+**Disadvantages of Adjacency Lists:**
+
+* **Checking for edge existence is slower than with an adjacency matrix** (O(degree of vertex)).
+* **Can be less efficient for dense graphs:** For dense graphs (many edges), an adjacency matrix might be preferable.
+
+
+Choosing between adjacency lists and adjacency matrices depends on the characteristics of your graph and the operations you'll be performing most frequently.  For most real-world applications involving large graphs, adjacency lists are a superior choice due to their efficiency in memory usage for sparse graphs.
+
