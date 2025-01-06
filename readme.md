@@ -38474,3 +38474,93 @@ print(f"Is the tree a BST (inorder): {is_bst_inorder(root2)}")  # False
 
 Remember to adapt the `Node` class if your tree implementation uses a different structure.  Both methods efficiently determine whether a given tree is a valid BST.  Choose the method best suited to your needs based on potential tree depth and performance considerations.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can visit (or "traverse") each node in a binary tree exactly once.  There are three main types of traversals, and variations on them:
+
+**1. Depth-First Traversals:** These traversals prioritize going as deep as possible down one branch before backtracking.
+
+* **Pre-order Traversal:**  Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The order is: Root, Left, Right.
+
+   ```
+   Algorithm:
+   Preorder(node)
+     if node != NULL then
+       visit node
+       Preorder(node.left)
+       Preorder(node.right)
+   ```
+
+* **In-order Traversal:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. The order is: Left, Root, Right.  For a Binary Search Tree (BST), this traversal yields the nodes in ascending order.
+
+   ```
+   Algorithm:
+   Inorder(node)
+     if node != NULL then
+       Inorder(node.left)
+       visit node
+       Inorder(node.right)
+   ```
+
+* **Post-order Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node. The order is: Left, Right, Root.
+
+   ```
+   Algorithm:
+   Postorder(node)
+     if node != NULL then
+       Postorder(node.left)
+       Postorder(node.right)
+       visit node
+   ```
+
+
+**2. Breadth-First Traversal (Level-Order Traversal):** This traversal visits all nodes at the same level before moving to the next level.  It's typically implemented using a queue.
+
+   ```
+   Algorithm:
+   LevelOrder(root)
+     queue Q
+     Q.enqueue(root)
+     while Q is not empty do
+       node = Q.dequeue()
+       visit node
+       if node.left != NULL then
+         Q.enqueue(node.left)
+       if node.right != NULL then
+         Q.enqueue(node.right)
+   ```
+
+
+**Example:**
+
+Consider the following binary tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+The traversals would produce the following sequences:
+
+* **Pre-order:** 1 2 4 5 3
+* **In-order:** 4 2 5 1 3
+* **Post-order:** 4 5 2 3 1
+* **Level-order:** 1 2 3 4 5
+
+
+**Applications:**
+
+The choice of traversal depends on the application:
+
+* **Pre-order:**  Creating a copy of the tree, expressing the tree as an algebraic expression.
+* **In-order:**  Sorting in a BST, obtaining a sorted sequence from a BST.
+* **Post-order:**  Deleting nodes in a tree, evaluating an algebraic expression represented by the tree.
+* **Level-order:**  Printing the tree level by level (useful for visualization), certain graph algorithms.
+
+
+**Iterative vs. Recursive Implementations:**
+
+The examples above show recursive implementations.  It's also possible (and sometimes preferable for efficiency or to avoid stack overflow issues with very deep trees) to implement these traversals iteratively using stacks (for depth-first) or queues (for breadth-first).  Iterative versions often use a stack to mimic the function call stack of recursion.
+
