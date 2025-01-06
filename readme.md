@@ -2702,3 +2702,115 @@ print(is_bst_minmax(root3, float('-inf'), float('inf'))) #True
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) for the recursive method, where H is the height of the tree (O(N) in the worst case of a skewed tree, O(log N) in the best case of a balanced tree).  The iterative in-order traversal approach would have O(N) space complexity in the worst case due to the `values` list.  Choose the method that best suits your needs and coding style.  The recursive min/max approach might be slightly easier to understand conceptually. Remember to handle the case of an empty tree.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can visit (or "traverse") all the nodes in a binary tree.  The order in which you visit the nodes is what distinguishes the different traversal methods. The three most common traversals are:
+
+* **Inorder Traversal:**  Visit the left subtree, then the root, then the right subtree.  For a binary *search* tree (BST), inorder traversal yields the nodes in ascending order.
+
+* **Preorder Traversal:** Visit the root, then the left subtree, then the right subtree.
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root.
+
+
+Let's illustrate with a simple example:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+**Inorder Traversal:**  4, 2, 5, 1, 3
+**Preorder Traversal:** 1, 2, 4, 5, 3
+**Postorder Traversal:** 4, 5, 2, 3, 1
+
+
+**Recursive Implementations (Python):**
+
+These are generally the most straightforward and elegant ways to implement tree traversals:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3
+print("\nPreorder traversal:")
+preorder_traversal(root)  # Output: 1 2 4 5 3
+print("\nPostorder traversal:")
+postorder_traversal(root) # Output: 4 5 2 3 1
+```
+
+**Iterative Implementations:**
+
+Iterative traversals generally use stacks (for preorder and inorder) or stacks and queues (for level order).  They are less elegant but can be more efficient in some cases, particularly when dealing with very deep trees to avoid stack overflow issues associated with recursion.  Here's an example of an iterative inorder traversal:
+
+
+```python
+def iterative_inorder_traversal(node):
+    stack = []
+    current = node
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.data, end=" ")
+        current = current.right
+```
+
+**Level Order Traversal (Breadth-First Search):**
+
+This traversal visits nodes level by level, starting from the root. It typically uses a queue.
+
+```python
+from collections import deque
+
+def level_order_traversal(node):
+    if not node:
+        return
+
+    queue = deque([node])
+    while queue:
+        current = queue.popleft()
+        print(current.data, end=" ")
+        if current.left:
+            queue.append(current.left)
+        if current.right:
+            queue.append(current.right)
+
+```
+
+Choosing the right traversal depends on the specific application.  Inorder traversal is crucial for BSTs, preorder is often used for tree serialization, and postorder is useful for tasks like expression evaluation. Level order is good for visualizing the tree structure or finding the maximum level. Remember to handle edge cases like empty trees in your implementations.
+
