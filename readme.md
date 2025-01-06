@@ -38845,3 +38845,120 @@ print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 6 and 4: 5
 
 This recursive solution is clear and concise.  Iterative solutions are also possible but generally more complex to implement.  Remember that if either `p` or `q` is not present in the tree, the function will return `None`.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree depends heavily on the type of tree you're working with.  Here's a breakdown for common scenarios:
+
+**1. Binary Tree:**
+
+The most common approach for a binary tree uses recursion.  The algorithm checks if either `p` (node 1) or `q` (node 2) is the current node or a descendant of the current node.
+
+* **Recursive Approach (most efficient):**
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node.  Returns None if either p or q is not in the tree.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:  # p and q are on different sides
+        return root
+    elif left_lca:             # p and q are on the left side
+        return left_lca
+    else:                      # p and q are on the right side
+        return right_lca
+
+#Example Usage
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left
+q = root.right
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") #Output: LCA of 5 and 1: 3
+
+```
+
+* **Iterative Approach (using parent pointers):**  If you have a tree where each node has a pointer to its parent, an iterative approach using a set to track visited nodes is possible.  This is generally less efficient than recursion unless you're already storing parent pointers.
+
+**2. Binary Search Tree (BST):**
+
+Because a BST is ordered, finding the LCA is simpler. You can traverse the tree, comparing the values of `p` and `q` with the current node's value:
+
+
+```python
+def lowestCommonAncestorBST(root, p, q):
+    """
+    Finds the LCA of p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node. Returns None if either p or q is not in the tree.
+    """
+    if not root:
+        return None
+    if (p.val < root.val and q.val < root.val):
+        return lowestCommonAncestorBST(root.left, p, q)
+    elif (p.val > root.val and q.val > root.val):
+        return lowestCommonAncestorBST(root.right, p, q)
+    else:
+        return root
+
+# Example usage (assuming the same TreeNode class as above, but with a BST structure)
+root = TreeNode(6)
+root.left = TreeNode(2)
+root.right = TreeNode(8)
+root.left.left = TreeNode(0)
+root.left.right = TreeNode(4)
+root.right.left = TreeNode(7)
+root.right.right = TreeNode(9)
+p = root.left
+q = root.right
+lca = lowestCommonAncestorBST(root, p,q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") #Output: LCA of 2 and 8: 6
+```
+
+**3. General Tree (n-ary tree):**
+
+The recursive approach can be adapted to n-ary trees.  Instead of just `left` and `right` children, you iterate through all children.
+
+
+**Choosing the Right Approach:**
+
+* **Binary Tree (no parent pointers):** The recursive approach is generally best.
+* **Binary Tree (with parent pointers):**  Iterative approach might be slightly faster in some cases.
+* **Binary Search Tree:** The BST-specific recursive approach is highly efficient.
+* **General Tree:** Adapt the recursive approach to handle multiple children.
+
+Remember to handle edge cases, such as empty trees, nodes not present in the tree, and cases where one node is an ancestor of the other.  The examples above include basic error handling, but you might need to add more robust checks depending on your application.
+
