@@ -36880,3 +36880,80 @@ This version builds the output string incrementally.  If the string is empty aft
 
 For beginners, the first version is recommended for its clarity. As you become more comfortable with Swift, the more concise versions demonstrate more advanced techniques.  The key is to understand the logic and choose the style that best suits your understanding and coding preferences.  The efficiency differences between these versions are negligible for most practical input sizes.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  Resources can include time (how long it takes to run) and space (how much memory it uses).  We typically analyze complexity using Big O notation, which describes the growth rate of the resource usage as the input size increases.  Let's break it down:
+
+**Key Concepts:**
+
+* **Input Size (n):**  The size of the input data the algorithm works on.  This could be the number of elements in an array, the number of vertices in a graph, the number of digits in a number, etc.
+
+* **Time Complexity:**  How the runtime of the algorithm scales with the input size.
+
+* **Space Complexity:** How the memory usage of the algorithm scales with the input size.
+
+* **Big O Notation (O()):**  A mathematical notation used to classify algorithms based on their growth rates.  It focuses on the dominant terms and ignores constant factors.  We only care about the order of magnitude.
+
+**Common Big O Notations and Their Meanings:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  This is very inefficient for large inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime is the factorial of the input size.  This is extremely inefficient for even moderately sized inputs.  Example: Generating all permutations of a sequence.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, we typically follow these steps:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime (e.g., comparisons, assignments, arithmetic operations).
+
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+
+3. **Identify the dominant terms:**  Focus on the terms that grow fastest as n increases.  Ignore constant factors and lower-order terms.
+
+4. **Express the complexity using Big O notation:**  Write the complexity as O(f(n)), where f(n) is the dominant term.
+
+
+**Example:**
+
+Consider a simple algorithm that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+* **Basic operation:** Comparison (`x > max_val`)
+* **Number of operations:** The comparison is performed n times (where n is the length of the array).
+* **Dominant term:** n
+* **Big O notation:** O(n) - Linear time complexity
+
+
+**Space Complexity:**
+
+Space complexity analysis is similar to time complexity analysis, but instead of counting operations, we count the amount of memory used by the algorithm as a function of the input size.  This includes variables, data structures, and function call stacks.
+
+**Best, Average, and Worst-Case Complexity:**
+
+The complexity of an algorithm can vary depending on the input data.  We often analyze:
+
+* **Best-case:** The most favorable input resulting in the lowest complexity.
+* **Average-case:** The average complexity over all possible inputs.
+* **Worst-case:** The least favorable input resulting in the highest complexity.  This is often the most important complexity to consider.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a higher complexity will become significantly slower as the input size grows compared to an algorithm with lower complexity.
+
