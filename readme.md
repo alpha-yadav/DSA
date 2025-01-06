@@ -38977,3 +38977,73 @@ For example, you could say:
 
 Once you provide the necessary information, I can help you graph it.  I can't create visual graphs directly, but I can guide you on how to create one using a graphing tool or describe the graph's characteristics.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using adjacency matrices is a common approach, particularly useful for dense graphs (graphs with many edges).  Here's a breakdown of how it works, including advantages and disadvantages:
+
+**Concept:**
+
+An adjacency matrix is a 2D array (or matrix) where each element represents the presence or weight of an edge between two vertices.  If the graph has `n` vertices, the matrix will be of size `n x n`.
+
+* `matrix[i][j] = 1` (or a weight value) indicates an edge exists from vertex `i` to vertex `j`.
+* `matrix[i][j] = 0` indicates no edge exists from vertex `i` to vertex `j`.
+
+**Implementation (Example in Python):**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.matrix = [[0] * num_vertices for _ in range(num_vertices)]
+
+    def add_edge(self, u, v, weight=1):  # weight defaults to 1 for unweighted graphs
+        self.matrix[u][v] = weight  #Directed graph
+
+    def add_undirected_edge(self, u, v, weight=1):
+        self.matrix[u][v] = weight
+        self.matrix[v][u] = weight #For undirected graphs
+
+    def print_matrix(self):
+        for row in self.matrix:
+            print(row)
+
+
+# Example usage:
+graph = Graph(4)
+graph.add_edge(0, 1, 5)  #Add directed edge from 0 to 1 with weight 5
+graph.add_undirected_edge(1, 2, 2) #Add undirected edge between 1 and 2 with weight 2
+graph.add_edge(2,3,1)
+graph.print_matrix()
+'''
+Output:
+[0, 5, 0, 0]
+[0, 0, 2, 0]
+[0, 2, 0, 1]
+[0, 0, 0, 0]
+'''
+```
+
+**Advantages:**
+
+* **Easy to check for edge existence:**  Checking if an edge exists between vertices `u` and `v` is an O(1) operation – just access `matrix[u][v]`.
+* **Simple implementation:**  Relatively straightforward to implement and understand.
+* **Suitable for dense graphs:**  Efficient for graphs with many edges because the space complexity is O(V^2), where V is the number of vertices.  This is better than adjacency lists for dense graphs.
+
+
+**Disadvantages:**
+
+* **Space complexity:**  O(V^2) space complexity.  This can be very inefficient for sparse graphs (graphs with relatively few edges) because it wastes a lot of space storing zeros.
+* **Adding and deleting vertices:**  Adding or deleting a vertex requires resizing the entire matrix, which can be computationally expensive.
+* **Adding and deleting edges:** Adding or deleting an edge is an O(1) operation,  but for large graphs with many zero entries, the space efficiency is poor.
+
+
+**When to use Adjacency Matrices:**
+
+* Dense graphs (graphs with many edges)
+* When edge weight is important and needs to be quickly accessed
+* When you need fast edge existence checking
+
+
+**Alternatives:**
+
+For sparse graphs, **adjacency lists** are generally preferred because they are more space-efficient.  Other representations like incidence matrices also exist but are less commonly used.
+
