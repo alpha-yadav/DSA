@@ -1009,3 +1009,79 @@ Output: Nodes visited in BFS order.
 
 These examples demonstrate a range of algorithmic problems and complexity.  The difficulty depends on your familiarity with data structures and algorithms.  Remember to consider time and space complexity when choosing a solution.  Try implementing these problems yourself to solidify your understanding.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing improvements:
+
+
+**Version 1: Basic Implementation**
+
+This version uses a straightforward `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`, checking for divisibility by 15, 3, and 5 in that order.  This order is important for accuracy; if you check for 3 before 15, numbers divisible by 15 will incorrectly only print "Fizz".
+
+
+**Version 2:  Slightly More Efficient**
+
+This version improves slightly on the conditional logic:
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzEfficient(n: 15) // Example usage
+```
+
+Here, we build the output string incrementally.  If neither 3 nor 5 divides `i`, the `output` string remains empty, and the number itself is printed.  This avoids nested `if-else if` chains.
+
+
+**Version 3: Using a Ternary Operator (More Concise)**
+
+This version utilizes the ternary operator for a more compact representation:
+
+
+```swift
+func fizzBuzzTernary(n: Int) {
+    for i in 1...n {
+        let output = (i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzTernary(n: 15) // Example usage
+```
+
+The ternary operator `condition ? value1 : value2` is used to conditionally append "Fizz" and "Buzz" to the `output` string.  This results in more concise code but might be slightly less readable for those unfamiliar with the ternary operator.
+
+
+**Choosing the Best Version:**
+
+All three versions achieve the same result. Version 2 and 3 are slightly more efficient because they avoid the nested `if-else if` structure.  Version 1 is the most readable for beginners. Choose the version that best suits your readability and coding style preferences.  For most purposes, the differences in efficiency are negligible unless you're dealing with extremely large values of `n`.
+
