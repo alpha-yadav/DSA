@@ -2481,3 +2481,107 @@ print(f"Is the tree a BST (iterative): {is_bst_iterative(root2)}")  # Output: Fa
 
 Both methods provide accurate checks for whether a given binary tree is a BST. Choose the method that best suits your understanding and the potential size of the input trees.  The iterative approach is usually preferred for its better space efficiency in practice.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.val)
+            inorder(node.right)
+
+    inorder(root)
+    return all(result[i] < result[i+1] for i in range(len(result)-1))
+
+# Example usage:
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(3)
+print(f"Is BST (recursive): {is_bst_recursive(root)}")  # Output: True
+
+root = TreeNode(5)
+root.left = TreeNode(1)
+root.right = TreeNode(4)
+root.right.left = TreeNode(3)
+root.right.right = TreeNode(6)
+print(f"Is BST (recursive): {is_bst_recursive(root)}")  # Output: False
+
+root = None
+print(f"Is BST (recursive): {is_bst_recursive(root)}")  # Output: True (Empty tree is a BST)
+```
+
+**Method 2: Recursive with Range Check**
+
+This method is generally more efficient because it avoids creating a separate sorted list. It recursively checks if each subtree satisfies the BST property within a given range.
+
+```python
+import sys
+
+def is_bst_recursive_range(root, min_val=-sys.maxsize, max_val=sys.maxsize):
+    """
+    Checks if a binary tree is a BST using recursive range checking.
+
+    Args:
+        root: The root node of the binary tree.
+        min_val: Minimum allowed value in the subtree.
+        max_val: Maximum allowed value in the subtree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if root is None:
+        return True
+
+    if not (min_val < root.val < max_val):
+        return False
+
+    return (is_bst_recursive_range(root.left, min_val, root.val) and
+            is_bst_recursive_range(root.right, root.val, max_val))
+
+# Example usage (same as before, but using the range-checking function):
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(3)
+print(f"Is BST (recursive range): {is_bst_recursive_range(root)}")  # Output: True
+
+root = TreeNode(5)
+root.left = TreeNode(1)
+root.right = TreeNode(4)
+root.right.left = TreeNode(3)
+root.right.right = TreeNode(6)
+print(f"Is BST (recursive range): {is_bst_recursive_range(root)}")  # Output: False
+
+root = None
+print(f"Is BST (recursive range): {is_bst_recursive_range(root)}")  # Output: True
+```
+
+**Comparison:**
+
+* **Recursive In-order Traversal:** Simpler to understand, but less efficient due to the extra space used for the sorted list and the need to traverse the entire tree.  Time complexity is O(N), Space complexity is O(N) in worst case (skewed tree).
+
+* **Recursive with Range Check:** More efficient as it avoids creating a separate list and potentially stops early if a violation is found. Time complexity is O(N), Space complexity is O(H) where H is the height of the tree (best case O(log N) for balanced tree, worst case O(N) for skewed tree).
+
+The recursive range check method is generally preferred for its better space complexity in many cases.  Choose the method that best suits your needs and understanding. Remember to handle the edge case of an empty tree (which is considered a valid BST).
+
