@@ -2814,3 +2814,135 @@ def level_order_traversal(node):
 
 Choosing the right traversal depends on the specific application.  Inorder traversal is crucial for BSTs, preorder is often used for tree serialization, and postorder is useful for tasks like expression evaluation. Level order is good for visualizing the tree structure or finding the maximum level. Remember to handle edge cases like empty trees in your implementations.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first traversal, visits all nodes at the same level before moving to the next level.  This requires a queue data structure. Here are implementations in Python and C++, demonstrating different approaches to handle the queue.
+
+
+**Python Implementation (using `collections.deque`)**
+
+This version uses `collections.deque`, which is optimized for append and pop operations from both ends, making it efficient for queue implementation.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+
+**Python Implementation (using `list` as a queue)**
+
+This demonstrates using a simple list as a queue, though `collections.deque` is generally preferred for performance.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = [root]
+    while(len(nodes) > 0):
+        curr = nodes.pop(0) #pop from the beginning (FIFO)
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+# Example usage (same as above)
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+
+**C++ Implementation (using `queue` from STL)**
+
+C++ utilizes its standard template library's `queue` container.
+
+```cpp
+#include <iostream>
+#include <queue>
+
+struct Node {
+    int data;
+    Node *left, *right;
+    Node(int data) {
+        this->data = data;
+        left = right = nullptr;
+    }
+};
+
+void levelOrder(Node* root) {
+    if (root == nullptr) return;
+
+    std::queue<Node*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Node* current = q.front();
+        q.pop();
+        std::cout << current->data << " ";
+
+        if (current->left != nullptr) q.push(current->left);
+        if (current->right != nullptr) q.push(current->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+
+    std::cout << "Level Order traversal of binary tree is -\n";
+    levelOrder(root); // Output: 1 2 3 4 5
+    std::cout << std::endl;
+    return 0;
+}
+```
+
+Remember to handle potential `NULL` or `nullptr` checks for robustness in your code.  These examples provide a foundation for understanding and implementing level order traversal.  You can extend them to handle more complex scenarios, such as printing level by level or handling different data types.
+
