@@ -37096,3 +37096,50 @@ This means the algorithm's runtime grows at least as fast as n².  It could be f
 
 Big-Omega notation is a crucial tool for analyzing the efficiency of algorithms. It provides a valuable guarantee on the minimum amount of resources an algorithm will use as the input size increases, providing a pessimistic (but important) perspective on performance.  It complements Big-O and Big-Theta in providing a complete picture of an algorithm's asymptotic behavior.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used to describe the performance or complexity of an algorithm.  Specifically, it describes the *worst-case* scenario of how the runtime or space requirements of an algorithm grow as the input size grows.  It focuses on the dominant factors affecting performance as the input size becomes very large, ignoring constant factors and smaller terms.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Time Complexity:** How the runtime of an algorithm scales with the input size (n).  This is the most common use of Big O.
+* **Space Complexity:** How the memory usage of an algorithm scales with the input size (n). This refers to the auxiliary space used – the extra space needed beyond the input itself.
+
+**Key Big O Notations and Their Meaning:**
+
+These represent how the runtime or space grows relative to the input size (n):
+
+* **O(1) - Constant Time:** The runtime stays the same regardless of the input size.  Accessing an element in an array by index is O(1).
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Binary search in a sorted array is O(log n).
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Searching an unsorted array for a specific element is O(n).
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Efficient sorting algorithms like merge sort and heapsort are O(n log n).
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Nested loops iterating over the input are often O(n²).  Bubble sort and selection sort are examples.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  This is very slow for larger inputs.  Finding all subsets of a set is an example.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  This is extremely slow and impractical for even moderately sized inputs.  Generating all permutations of a set is an example.
+
+
+**Important Considerations:**
+
+* **Worst-case scenario:** Big O describes the upper bound of an algorithm's performance.  The algorithm might perform better in some cases, but Big O guarantees it won't be worse than the specified growth rate.
+
+* **Asymptotic analysis:** Big O focuses on the behavior of the algorithm as the input size approaches infinity.  It ignores constant factors and lower-order terms because they become insignificant as n becomes very large.  For example, O(2n + 5) is simplified to O(n).
+
+* **Dominant terms:**  When multiple terms exist, only the dominant term (the one that grows fastest) is considered. For instance, in O(n³ + n² + n), the dominant term is n³, so it's simplified to O(n³).
+
+* **Not a precise measure:** Big O provides a general idea of scalability. It doesn't tell you the exact runtime for a specific input size.
+
+**Example:**
+
+Let's say you have a function that searches for a value in an unsorted array.  In the worst case, you might have to check every element.  This makes the runtime proportional to the size of the array (n). Therefore, the time complexity is O(n).
+
+**In Summary:**
+
+Big O notation is a crucial tool for comparing the efficiency of algorithms.  Understanding it helps you choose the most appropriate algorithm for a given task, especially when dealing with large datasets where performance differences become significant.  Focusing on Big O allows you to efficiently analyze the scalability of your algorithms without getting bogged down in minor details.
+
