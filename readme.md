@@ -1085,3 +1085,75 @@ The ternary operator `condition ? value1 : value2` is used to conditionally appe
 
 All three versions achieve the same result. Version 2 and 3 are slightly more efficient because they avoid the nested `if-else if` structure.  Version 1 is the most readable for beginners. Choose the version that best suits your readability and coding style preferences.  For most purposes, the differences in efficiency are negligible unless you're dealing with extremely large values of `n`.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most commonly considered are:
+
+* **Time complexity:**  How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We usually express complexity using Big O notation (O), which describes the upper bound of the growth rate of the algorithm's resource consumption as the input size approaches infinity.  It ignores constant factors and lower-order terms, focusing on the dominant behavior.
+
+Here's a breakdown of common complexities:
+
+**Time Complexity (O):**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The execution time is a combination of linear and logarithmic growth.  This is commonly seen in efficient sorting algorithms.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  This becomes slow quickly as the input size grows.  Example: Bubble sort, selection sort, nested loops iterating through the entire input.
+
+* **O(n³) - Cubic Time:** The execution time increases cubically with the input size.  Even slower than quadratic.  Example: Some naive matrix multiplication algorithms.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  This becomes impractical for even moderately sized inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  Extremely slow; only suitable for very small inputs.  Example:  Trying all permutations of a set.
+
+
+**Space Complexity (O):**
+
+Space complexity follows similar notation. It measures the amount of memory used by the algorithm.
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The algorithm's memory usage grows linearly with the input size.  Example: Creating a copy of an array.
+
+* **O(log n) - Logarithmic Space:** Memory usage grows logarithmically with input size (e.g., recursive algorithms with logarithmic depth).
+
+* **O(n²) - Quadratic Space:**  Memory usage grows quadratically with input size.
+
+
+**Factors Affecting Complexity:**
+
+* **Input size:** The primary factor influencing complexity.
+* **Algorithm design:**  Different algorithms for the same problem can have vastly different complexities.
+* **Data structures:**  The choice of data structure significantly impacts performance.
+* **Hardware:**  Processor speed and memory capacity affect runtime, but complexity analysis focuses on the algorithm's inherent scalability.
+
+
+**Analyzing Complexity:**
+
+Complexity analysis involves identifying the dominant operations within an algorithm and expressing their frequency as a function of the input size.  This often involves analyzing loops and recursive calls.
+
+**Example:**
+
+Consider a simple function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+This algorithm has a time complexity of O(n) because it iterates through the array once (linear time).  Its space complexity is O(1) because it uses a constant amount of extra memory regardless of the array size.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task and for predicting how the algorithm's performance will scale with increasing input size.  It's a fundamental concept in computer science.
+
