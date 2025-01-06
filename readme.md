@@ -2136,3 +2136,98 @@ int main() {
 
 Remember that this code uses recursion.  For very large trees, iterative solutions might be more efficient to avoid potential stack overflow issues.  Also,  the `main` function's cleanup is simplified; a robust solution would include a recursive function to completely deallocate the tree's memory to prevent memory leaks.  Consider adding error handling (e.g., checking if the key exists before attempting deletion).
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where a node is considered a descendant of itself).  There are several ways to find the LCA in a BST, all leveraging the BST property that nodes smaller than a given node are in its left subtree, and nodes larger are in its right subtree.
+
+Here are two common approaches:
+
+**Method 1: Recursive Approach**
+
+This is a concise and efficient approach.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not in the tree.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    if p.val < root.val and q.val < root.val:
+        return lowestCommonAncestor(root.left, p, q)
+    elif p.val > root.val and q.val > root.val:
+        return lowestCommonAncestor(root.right, p, q)
+    else:
+        return root
+
+# Example usage:
+root = TreeNode(6)
+root.left = TreeNode(2)
+root.right = TreeNode(8)
+root.left.left = TreeNode(0)
+root.left.right = TreeNode(4)
+root.right.left = TreeNode(7)
+root.right.right = TreeNode(9)
+p = root.left  # Node with value 2
+q = root.right # Node with value 8
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 2 and 8: 6
+
+
+```
+
+**Explanation:**
+
+1. **Base Case:** If the root is `None`, or if the root is either `p` or `q`, then the root is the LCA.
+2. **Recursive Steps:**
+   - If both `p` and `q` are smaller than the root, the LCA must be in the left subtree.
+   - If both `p` and `q` are larger than the root, the LCA must be in the right subtree.
+   - Otherwise, the root itself is the LCA (because one node is smaller and one is larger than the root).
+
+
+**Method 2: Iterative Approach**
+
+This approach uses a while loop instead of recursion.  It's generally slightly more efficient in terms of memory usage, especially for very deep trees.
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a BST iteratively.
+    """
+    while root:
+        if p.val < root.val and q.val < root.val:
+            root = root.left
+        elif p.val > root.val and q.val > root.val:
+            root = root.right
+        else:
+            return root
+    return None #Should not happen if p and q are in the tree
+
+#Example usage (same root, p, q as before):
+lca_iterative = lowestCommonAncestorIterative(root,p,q)
+print(f"LCA of {p.val} and {q.val} (iterative): {lca_iterative.val}") # Output: LCA of 2 and 8 (iterative): 6
+```
+
+**Explanation:**
+
+The iterative approach simply mimics the logic of the recursive approach using a `while` loop.  It continues traversing the tree until it finds the LCA.
+
+
+Both methods have a time complexity of O(H), where H is the height of the BST. In a balanced BST, H is log(N), where N is the number of nodes.  In a skewed BST, H could be N in the worst case.  The space complexity is O(H) for the recursive approach (due to the recursive call stack) and O(1) for the iterative approach.  Therefore, the iterative approach is generally preferred for its better space efficiency.  Choose the method that best suits your needs and coding style. Remember to handle edge cases like `p` or `q` not being present in the tree.
+
