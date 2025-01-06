@@ -944,3 +944,68 @@ else:
 
 Remember to start small, focus on understanding the underlying concepts, and practice consistently.  It's a journey, not a sprint!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, with explanations:
+
+**Problem 1: Two Sum (Easy)**
+
+**Problem Statement:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Solution Approach:**  A brute-force approach would be to check every pair of numbers. A more efficient approach uses a hash map (dictionary in Python) to store numbers and their indices.  As you iterate through the array, check if the complement (`target - current_number`) exists in the hash map.
+
+**Problem 2: Reverse a Linked List (Medium)**
+
+**Problem Statement:** Reverse a singly linked list.
+
+**Example:**
+
+```
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+```
+
+**Solution Approach:** This problem requires understanding linked list manipulation.  You can solve it iteratively (using three pointers) or recursively.  The iterative approach is generally preferred for its efficiency.
+
+**Problem 3:  Longest Palindromic Substring (Medium)**
+
+**Problem Statement:** Given a string `s`, find the longest palindromic substring in `s`.
+
+**Example:**
+
+```
+Input: s = "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+```
+
+**Solution Approach:**  Several approaches exist, including:
+
+* **Brute Force:** Check every substring for palindrome property.  Inefficient for large strings.
+* **Dynamic Programming:** Build a table to store whether substrings are palindromes.  More efficient.
+* **Expand Around Center:**  Start from each character (or between characters) and expand outwards, checking for palindromes.  Generally considered the most efficient approach.
+
+
+**Problem 4:  Graph Traversal (Medium/Hard - depending on specifics)**
+
+**Problem Statement:** Given a graph (represented as an adjacency list or matrix), perform a breadth-first search (BFS) or depth-first search (DFS) traversal.  Often, this is combined with other tasks, such as finding the shortest path or detecting cycles.
+
+**Example:**  (BFS on an undirected graph)
+
+```
+Input: Graph represented as an adjacency list.
+Output: Nodes visited in BFS order.
+```
+
+**Solution Approach:**  BFS uses a queue, while DFS uses a stack (or recursion).  Understanding the properties of these searches is crucial.  Variations of this problem often involve weighted graphs and algorithms like Dijkstra's algorithm (shortest path) or topological sort.
+
+
+These examples demonstrate a range of algorithmic problems and complexity.  The difficulty depends on your familiarity with data structures and algorithms.  Remember to consider time and space complexity when choosing a solution.  Try implementing these problems yourself to solidify your understanding.
+
