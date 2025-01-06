@@ -394,3 +394,49 @@ Consider a linear search algorithm. In the worst case, it needs to examine every
 
 Big-Omega notation provides a valuable tool for analyzing algorithms by giving a guarantee on their minimum performance.  It complements Big-O notation, providing a more complete picture of the algorithm's complexity.  Used together with Big-O and Big-Theta, they offer a comprehensive understanding of an algorithm's efficiency.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of a function, usually representing the runtime or space requirements of an algorithm as the input size grows.  It focuses on the dominant factors influencing the growth, ignoring constant factors and smaller terms.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Worst-Case Scenario:** Big O typically describes the *worst-case* runtime or space complexity. This means it provides an upper bound on how much time or space an algorithm might consume, even if in many cases it performs better.
+* **Asymptotic Behavior:** Big O describes the behavior of an algorithm as the input size (usually denoted by 'n') approaches infinity.  It's less concerned with the performance on small inputs and more focused on how the algorithm scales with larger inputs.
+* **Order of Growth:**  It categorizes algorithms based on the rate at which their resource consumption grows with increasing input size.
+
+**Common Big O Notations:**
+
+These are listed in ascending order of complexity (meaning the algorithm with O(n!) is significantly slower than O(log n) for large inputs):
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Examples include accessing an element in an array by its index or performing a single arithmetic operation.
+
+* **O(log n) - Logarithmic Time:** The runtime grows logarithmically with the input size. This is very efficient.  Examples include binary search in a sorted array or searching a balanced binary search tree.
+
+* **O(n) - Linear Time:** The runtime grows linearly with the input size.  Examples include iterating through an array once or searching an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A combination of linear and logarithmic time.  Common in efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime grows proportionally to the square of the input size.  Examples include nested loops iterating through an array (e.g., bubble sort, selection sort).
+
+* **O(n³) - Cubic Time:** The runtime grows proportionally to the cube of the input size.  Examples include algorithms involving three nested loops.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  This indicates very inefficient algorithms.  Examples include some recursive algorithms that explore all possible solutions.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  This is extremely inefficient and typically only used for very small input sizes.  Examples include algorithms that need to try all permutations of the input.
+
+
+**Important Considerations:**
+
+* **Space Complexity:** Big O can also be used to describe space complexity (memory usage) of an algorithm.
+* **Average Case:** While Big O usually focuses on worst-case, sometimes average-case complexity (average runtime over many inputs) is also analyzed.
+* **Best Case:**  Best-case complexity (the best possible runtime) is less commonly used because it's not always representative of real-world performance.
+* **Dominant Terms:** When analyzing an algorithm, only the dominant term is considered in Big O notation. For example, O(n² + n + 1) simplifies to O(n²). Constant factors are also dropped.
+
+**Example:**
+
+Let's say we have an algorithm that iterates through an array of size `n` and performs a constant-time operation on each element.  The runtime would be proportional to `n`, so the Big O notation would be O(n).
+
+
+Understanding Big O notation is crucial for selecting efficient algorithms and making informed decisions about software design and performance optimization. It allows you to compare the scalability and efficiency of different algorithms without getting bogged down in implementation details.
+
