@@ -37143,3 +37143,87 @@ Let's say you have a function that searches for a value in an unsorted array.  I
 
 Big O notation is a crucial tool for comparing the efficiency of algorithms.  Understanding it helps you choose the most appropriate algorithm for a given task, especially when dealing with large datasets where performance differences become significant.  Focusing on Big O allows you to efficiently analyze the scalability of your algorithms without getting bogged down in minor details.
 
+#  A Simple Loop 
+The simplest loop is a `while` loop that continues as long as a condition is true.  Here are examples in several popular programming languages:
+
+**Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This loop prints the numbers 0 through 4.  The condition `count < 5` is checked before each iteration. When `count` becomes 5, the condition is false, and the loop terminates.
+
+
+**JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+This is functionally identical to the Python example.
+
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+This C++ example uses `std::cout` for output and `std::endl` to add a newline after each number.
+
+
+**Java:**
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+Java requires a class and a `main` method.
+
+
+**Go:**
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	count := 0
+	for count < 5 {
+		fmt.Println(count)
+		count++
+	}
+}
+```
+
+Go uses the `for` keyword for all looping constructs, even those that resemble `while` loops in other languages.
+
+
+These are all examples of a simple `while` loop.  There are other types of loops like `for` loops (which can be used similarly to `while` loops or for iterating over collections) and `do-while` loops (which guarantee at least one execution), but this shows the fundamental concept of a simple loop.
+
