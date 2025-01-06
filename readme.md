@@ -3882,3 +3882,125 @@ Both DFS and BFS have many applications in computer science, including:
 
 The choice between DFS and BFS depends on the specific problem and the properties of the graph.  If you need to find a path quickly, or if the graph is very wide, BFS might be better. If you need to explore deeply or are looking for something like topological order, DFS is a better choice.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency list, adjacency matrix) and the specific goals (e.g., finding a path, topological sorting). Here are a few implementations in Python, covering common scenarios:
+
+**1. DFS using Adjacency List (recursive):** This is generally the most efficient and readable approach for graphs represented using an adjacency list.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal on a graph represented as an adjacency list.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (used for recursion).
+        path: A list to store the traversal path (optional).
+
+    Returns:
+        A list representing the DFS traversal path.  Returns None if the node is not in the graph.
+    """
+    if node not in graph:
+        return None
+
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print(dfs_recursive(graph, 'A'))  # Output will vary slightly depending on neighbor order, but will cover all nodes. Example: ['A', 'B', 'D', 'E', 'F', 'C']
+```
+
+
+**2. DFS using Adjacency List (iterative):** This version uses a stack instead of recursion, avoiding potential stack overflow issues for very deep graphs.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal on a graph represented as an adjacency list (iterative).
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list representing the DFS traversal path. Returns None if the node is not in the graph.
+    """
+    if node not in graph:
+        return None
+
+    visited = set()
+    stack = [node]
+    path = []
+
+    while stack:
+        current_node = stack.pop()
+        if current_node not in visited:
+            visited.add(current_node)
+            path.append(current_node)
+            stack.extend(neighbor for neighbor in reversed(graph.get(current_node, [])) if neighbor not in visited) #reversed for proper DFS order
+
+    return path
+
+#Example Usage (same graph as above):
+print(dfs_iterative(graph, 'A')) # Output similar to recursive version, but order might differ slightly.
+```
+
+**3. DFS for finding a path between two nodes:** This modification returns a path from the starting node to a target node if it exists.
+
+```python
+def dfs_path(graph, start, target):
+    """
+    Finds a path between two nodes using DFS.
+
+    Args:
+        graph: A dictionary representing the graph.
+        start: The starting node.
+        target: The target node.
+
+    Returns:
+        A list representing the path from start to target, or None if no path exists.
+    """
+    stack = [(start, [start])]  # Stack of (node, path_so_far) tuples
+    visited = set()
+
+    while stack:
+        (vertex, path) = stack.pop()
+        visited.add(vertex)
+
+        if vertex == target:
+            return path
+
+        for neighbor in graph.get(vertex, []):
+            if neighbor not in visited:
+                stack.append((neighbor, path + [neighbor]))
+
+    return None
+
+# Example Usage:
+print(dfs_path(graph, 'A', 'F')) # Example output: ['A', 'C', 'F'] or ['A', 'B', 'E', 'F'] (depending on order)
+```
+
+Remember to choose the implementation that best suits your needs and the representation of your graph.  The adjacency list representation is generally preferred for its efficiency, especially in sparse graphs.  If you have a different graph representation (e.g., adjacency matrix), the algorithm will need to be adapted accordingly.
+
