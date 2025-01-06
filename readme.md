@@ -2585,3 +2585,120 @@ print(f"Is BST (recursive range): {is_bst_recursive_range(root)}")  # Output: Tr
 
 The recursive range check method is generally preferred for its better space complexity in many cases.  Choose the method that best suits your needs and understanding. Remember to handle the edge case of an empty tree (which is considered a valid BST).
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The core idea is to recursively check if, for every node:
+
+* All nodes in its left subtree have keys less than the node's key.
+* All nodes in its right subtree have keys greater than the node's key.
+
+Here are two common methods:
+
+**Method 1: Recursive In-order Traversal**
+
+The most efficient method leverages the property that an in-order traversal of a BST produces a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a given binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        root: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    values = []
+    
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            values.append(node.data)
+            inorder(node.right)
+
+    inorder(root)
+    for i in range(1, len(values)):
+        if values[i] <= values[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+print(is_bst_recursive(root)) #False (because 1 is in the wrong place)
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+
+print(is_bst_recursive(root2)) #True
+
+root3 = None #Empty tree
+print(is_bst_recursive(root3)) #True (An empty tree is considered a BST)
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each subtree, passing along the minimum and maximum allowed values for that subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(node, min_val, max_val):
+    """
+    Checks if a given binary tree is a BST using recursive min/max checks.
+
+    Args:
+      node: The current node being checked.
+      min_val: The minimum allowed value for this subtree.
+      max_val: The maximum allowed value for this subtree.
+
+    Returns:
+      True if the subtree rooted at node is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_minmax(node.left, min_val, node.data) and
+            is_bst_minmax(node.right, node.data, max_val))
+
+
+#Example Usage (same as above, just replace the function call)
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+print(is_bst_minmax(root, float('-inf'), float('inf'))) #False
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+
+print(is_bst_minmax(root2, float('-inf'), float('inf'))) #True
+
+root3 = None #Empty tree
+print(is_bst_minmax(root3, float('-inf'), float('inf'))) #True
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) for the recursive method, where H is the height of the tree (O(N) in the worst case of a skewed tree, O(log N) in the best case of a balanced tree).  The iterative in-order traversal approach would have O(N) space complexity in the worst case due to the `values` list.  Choose the method that best suits your needs and coding style.  The recursive min/max approach might be slightly easier to understand conceptually. Remember to handle the case of an empty tree.
+
