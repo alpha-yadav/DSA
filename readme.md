@@ -39207,3 +39207,75 @@ The choice of data structure for the adjacency list depends on the programming l
 
 Remember to choose the implementation that best suits your specific needs in terms of language, graph density, and the types of operations you'll be performing on the graph.  For many applications, particularly those involving sparse graphs, adjacency lists are the preferred method.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so that you can follow the arrows without ever going backward.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):** Topological sorting only works on DAGs.  A cycle in the graph would make a topological ordering impossible because you'd never be able to completely order nodes involved in the cycle.
+* **Linear Ordering:** The output is a sequence (list, array) of nodes.
+* **Precedence Respecting:** The order respects the dependencies defined by the edges. If there's an edge from A to B, A must come before B in the sorted order.
+* **Multiple Solutions:**  A DAG can have multiple valid topological orderings.
+
+
+**Algorithms:**
+
+Two common algorithms are used for topological sorting:
+
+1. **Kahn's Algorithm (using in-degree):**
+
+   This algorithm iteratively adds nodes with an in-degree of 0 (nodes with no incoming edges) to the sorted list.  The in-degree of a node is the number of edges pointing to it.
+
+   * **Steps:**
+      1. Calculate the in-degree of each node.
+      2. Add all nodes with an in-degree of 0 to a queue (or similar data structure).
+      3. While the queue is not empty:
+         * Dequeue a node and add it to the sorted list.
+         * For each neighbor (outgoing edge) of the dequeued node:
+            * Decrement its in-degree.
+            * If its in-degree becomes 0, add it to the queue.
+      4. If the sorted list has the same size as the number of nodes in the graph, a topological ordering was successfully found. Otherwise, the graph contains a cycle.
+
+2. **Depth-First Search (DFS) with Post-Order Traversal:**
+
+   This algorithm uses depth-first search to traverse the graph.  The nodes are added to the sorted list in *reverse post-order*.  Post-order means that a node is added to the sorted list *after* all of its descendants have been visited.  Because of the recursive nature of DFS, this automatically ensures that dependencies are respected.
+
+   * **Steps:**
+      1. Create a sorted list (initially empty).
+      2. Perform a DFS traversal of the graph.
+      3. When a node's DFS recursion completes (all its descendants have been visited), add the node to the *beginning* of the sorted list.
+      4. The final sorted list will be a valid topological ordering (in reverse order from how it was built).
+
+
+**Example (Kahn's Algorithm):**
+
+Consider a DAG with nodes A, B, C, D, and edges: A->C, B->C, C->D.
+
+1. In-degrees: A=0, B=0, C=2, D=1
+2. Queue: [A, B]
+3. Dequeue A, add to sorted list: [A]  Update in-degrees: C=1
+4. Dequeue B, add to sorted list: [A, B] Update in-degrees: C=1
+5. Add C to queue because its in-degree is now 0.
+6. Dequeue C, add to sorted list: [A, B, C] Update in-degrees: D=0
+7. Add D to queue.
+8. Dequeue D, add to sorted list: [A, B, C, D]
+9. Queue is empty.  Sorted list: [A, B, C, D] is a valid topological ordering.
+
+
+**Applications:**
+
+Topological sorting is used in various applications, including:
+
+* **Dependency resolution:**  Managing build systems (like Make), resolving dependencies between software modules or tasks.
+* **Course scheduling:** Determining the order in which courses must be taken based on prerequisites.
+* **Data serialization:** Ordering data elements in a database or a data stream.
+* **Instruction scheduling in compilers:** Ordering instructions in assembly code.
+
+
+**Detecting Cycles:**
+
+Both algorithms can detect cycles. In Kahn's algorithm, if the final sorted list doesn't contain all nodes, there's a cycle. In DFS, a cycle is detected if you encounter a visited node during the DFS traversal (before the recursion for that node completes).
+
+
+Choosing between Kahn's algorithm and DFS depends on the specific application and data structures used. Kahn's algorithm is often easier to understand and implement, while DFS can be more efficient in some cases.
+
