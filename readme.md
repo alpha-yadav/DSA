@@ -6855,3 +6855,118 @@ While DFS and BFS are the most common, other graph traversals exist, often tailo
 
 The best traversal algorithm depends on the specific problem you're trying to solve.  If you need to find the shortest path in an unweighted graph, BFS is the natural choice.  If you need to find a path or detect cycles, DFS is often suitable.  For weighted graphs, Dijkstra's or A* might be more appropriate.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and whether you need to track visited nodes. Here are a few implementations:
+
+**1. DFS using Adjacency List (Recursive):**  This is generally the most concise and commonly used approach for graph traversal.
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and 
+               values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+    return visited
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Start DFS from node 'A'
+print()
+
+
+```
+
+
+**2. DFS using Adjacency List (Iterative):** This uses a stack to mimic the recursive calls, avoiding potential stack overflow issues for very deep graphs.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [node]
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            print(node, end=" ")
+            stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+    return visited
+
+print("DFS traversal (iterative):")
+dfs_iterative(graph, 'A')
+print()
+```
+
+**3. DFS using Adjacency Matrix:**  Less common due to the adjacency list's efficiency, but here's an example:
+
+```python
+def dfs_matrix(graph, node, visited):
+    """
+    DFS using an adjacency matrix.  Note: Assumes nodes are numbered 0 to n-1.
+    """
+    num_nodes = len(graph)
+    visited[node] = True
+    print(node, end=" ")
+
+    for neighbor in range(num_nodes):
+        if graph[node][neighbor] == 1 and not visited[neighbor]:
+            dfs_matrix(graph, neighbor, visited)
+
+
+# Example graph as an adjacency matrix
+graph_matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0]   # F
+]
+
+print("DFS traversal (matrix):")
+visited_matrix = [False] * len(graph_matrix)
+dfs_matrix(graph_matrix, 0, visited_matrix) #Start at node 0 (A)
+print()
+```
+
+Remember to adapt these functions to your specific needs.  You might want to modify how nodes are processed (instead of just printing them) or handle different graph representations (e.g., using objects instead of dictionaries).  The choice between recursive and iterative versions depends on factors like the depth of your graph and the risk of stack overflow.  The adjacency list representation is generally preferred for its efficiency.
+
