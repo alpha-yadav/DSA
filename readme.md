@@ -9531,3 +9531,107 @@ bst.inorder_traversal(bst.root) # Call after insertions
 
 Choose the implementation that best suits your needs and remember to handle potential edge cases (empty tree, duplicates) appropriately.  The iterative approach is generally recommended for its efficiency and avoidance of stack overflow issues.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node (has no children):** Simply remove the node.
+
+2. **Node to be deleted has one child:** Replace the node with its child.
+
+3. **Node to be deleted has two children:** This is the most complex case.  There are two common approaches:
+
+    * **In-order predecessor (or successor):** Find the in-order predecessor (the largest node in the left subtree) or the in-order successor (the smallest node in the right subtree).  Replace the node to be deleted with its predecessor/successor, and then delete the predecessor/successor (which will now be either a leaf node or a node with one child, simplifying the deletion).
+
+    * **Copy and Paste:** Copy the value of the in-order predecessor (or successor) into the node to be deleted, and then delete the predecessor/successor.
+
+
+Here's a C++ implementation using the in-order predecessor approach:
+
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left, *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+Node* findMin(Node* node) {
+    while (node->left != nullptr) {
+        node = node->left;
+    }
+    return node;
+}
+
+Node* deleteNode(Node* root, int key) {
+    if (root == nullptr) {
+        return root; 
+    }
+
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // key == root->data (node found)
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        } else { // Node has two children
+            Node* temp = findMin(root->right); // Find inorder successor
+            root->data = temp->data;           // Copy successor's data
+            root->right = deleteNode(root->right, temp->data); //Delete inorder successor
+        }
+    }
+    return root;
+}
+
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+    std::cout << "Inorder traversal before deletion:\n";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 20); // Delete a leaf node
+
+    std::cout << "Inorder traversal after deleting 20:\n";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 50); //Delete a node with two children
+
+    std::cout << "Inorder traversal after deleting 50:\n";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    //Remember to deallocate the memory to avoid memory leaks.  A more robust solution would include a destructor for the Node class and potentially a function to recursively delete the entire tree.
+    // ... (Memory deallocation code would go here) ...
+
+    return 0;
+}
+```
+
+Remember that this code lacks proper memory management for a complete, production-ready solution.  In a real-world application, you'd need to add code to handle memory deallocation to prevent memory leaks, ideally using destructors and smart pointers.  This example prioritizes clarity of the deletion algorithm.  Consider using `std::unique_ptr` or `std::shared_ptr` for safer memory management in a larger project.
+
