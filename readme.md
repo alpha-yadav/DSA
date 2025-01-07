@@ -7241,3 +7241,48 @@ The basic operation is the comparison `arr[i] == target`. This operation is perf
 
 Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  Algorithms with lower complexity generally perform better for larger inputs.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate.  This means it provides both an upper and lower bound, indicating that the function grows at roughly the same rate as another function.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) (read as "f of n is theta of g of n") if and only if there exist positive constants c₁ and c₂, and a positive integer n₀ such that for all n ≥ n₀:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+In simpler terms:
+
+* **g(n)** represents a known function (like n, n², log n, etc.).
+* **f(n)** is the function we're analyzing.
+* **c₁ and c₂** are constants that scale g(n).  They essentially allow for a constant factor difference between f(n) and g(n).
+* **n₀** is a threshold value.  The inequality only needs to hold for values of n greater than or equal to n₀.  This accounts for the fact that functions might behave differently for small inputs.
+
+**What it means:**
+
+The definition implies that f(n) grows proportionally to g(n) as n approaches infinity.  The growth rates are essentially the same, ignoring constant factors and smaller-order terms.
+
+**Contrast with Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  f(n) = O(g(n)) means that f(n) grows no faster than g(n).  It's a "worst-case" scenario.
+* **Big-Ω (Ω):** Provides a *lower bound*. f(n) = Ω(g(n)) means that f(n) grows at least as fast as g(n).  It's a "best-case" scenario.
+* **Big-Θ (Θ):** Provides both an *upper and lower bound*, implying that f(n) grows at the *same rate* as g(n).  It's a "tight bound."
+
+
+**Example:**
+
+Let's say f(n) = 2n² + 3n + 1.  We can show that f(n) is Θ(n²):
+
+1. **Find c₁ and n₀:** We need to find c₁ such that c₁n² ≤ 2n² + 3n + 1 for sufficiently large n. If we choose c₁ = 1, then we need to show 1n² ≤ 2n² + 3n + 1.  This is true for n ≥ 1 (we can choose n₀ = 1).
+
+2. **Find c₂ and n₀:** We need to find c₂ such that 2n² + 3n + 1 ≤ c₂n² for sufficiently large n.  If we choose c₂ = 4, we can say 2n² + 3n + 1 ≤ 4n² for n ≥ 1 (after some algebraic manipulation and ignoring smaller terms for large n).
+
+
+Therefore, because we found constants c₁ = 1, c₂ = 4, and n₀ = 1 that satisfy the definition, we can say that f(n) = Θ(n²).  The dominant term (n²) determines the big-Theta complexity.
+
+
+**Uses in Computer Science:**
+
+Big-Theta notation is crucial for analyzing the efficiency of algorithms.  It allows us to compare the performance of different algorithms regardless of the specific hardware or programming language used.  By expressing the time or space complexity of an algorithm using big-Theta, we can get a clear understanding of how the algorithm's resource requirements scale with the input size.
+
