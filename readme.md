@@ -4510,3 +4510,78 @@ These examples all show a basic `while` loop.  Other loop types, like `for` loop
 
 Remember to always have a way to exit a `while` loop to prevent infinite loops.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to perform operations on all combinations of elements from two or more collections (or iterations based on a condition).
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed for each combination of outer and inner loop variables
+```
+
+**Example in Python:**
+
+This code prints all possible combinations of letters from two strings:
+
+```python
+letters1 = "AB"
+letters2 = "CD"
+
+for letter1 in letters1:
+    for letter2 in letters2:
+        print(letter1 + letter2)
+```
+
+Output:
+
+```
+AC
+AD
+BC
+BD
+```
+
+**Explanation:**
+
+1. **Outer loop:** The outer loop iterates through each letter in `letters1` ("A" and "B").
+2. **Inner loop:** For each letter in `letters1`, the inner loop iterates through each letter in `letters2` ("C" and "D").
+3. **Inner loop execution:** The `print` statement executes for every combination: "A" with "C", "A" with "D", "B" with "C", and "B" with "D".
+
+**Another Example (Matrix Multiplication):**
+
+Nested loops are frequently used in matrix operations.  Consider multiplying two 2x2 matrices:
+
+```python
+matrix1 = [[1, 2], [3, 4]]
+matrix2 = [[5, 6], [7, 8]]
+result = [[0, 0], [0, 0]]
+
+for i in range(2):  # Rows of matrix1
+    for j in range(2):  # Columns of matrix2
+        for k in range(2):  # Inner product calculation
+            result[i][j] += matrix1[i][k] * matrix2[k][j]
+
+print(result)  # Output: [[19, 22], [43, 50]]
+```
+
+**Time Complexity:**
+
+The time complexity of nested loops is multiplicative. If the outer loop runs `m` times and the inner loop runs `n` times for each iteration of the outer loop, the total number of iterations is `m * n`. This means that nested loops can significantly increase the runtime of your code, especially when dealing with large datasets.  It's O(m*n) complexity.
+
+
+**Use Cases:**
+
+Nested loops are used in a variety of situations, including:
+
+* **Iterating over multi-dimensional arrays or matrices:**  Processing rows and columns of data.
+* **Generating combinations or permutations:**  Finding all possible pairings or arrangements of elements.
+* **Searching for patterns in data:**  Examining all possible sub-sequences or sub-structures.
+* **Implementing algorithms:** Many algorithms, like sorting algorithms, rely on nested loops.
+
+
+Understanding nested loops is crucial for programming effectively, especially when working with multi-dimensional data or implementing complex algorithms.  However, always be mindful of their potential impact on performance, especially with large datasets, and consider optimization techniques when necessary.
+
