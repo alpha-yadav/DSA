@@ -6269,3 +6269,144 @@ Please provide me with the data or equation you want me to graph.  I need inform
 
 Once you provide this information, I can help you graph it.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, especially when dealing with dense graphs (graphs with many edges relative to the number of vertices).  Here's a breakdown of how it works, along with considerations for different data types and programming languages:
+
+**The Basics:**
+
+An adjacency matrix is a 2D array (or matrix) where each element `matrix[i][j]` represents the connection between vertex `i` and vertex `j`.
+
+* **Value Representation:** The value of `matrix[i][j]` can represent different things:
+    * **0 (or False):** No edge exists between vertex `i` and vertex `j`.
+    * **1 (or True):** An edge exists between vertex `i` and vertex `j` (for unweighted graphs).
+    * **Weight:** The weight of the edge between vertex `i` and vertex `j` (for weighted graphs).  This could be an integer, float, or even a custom data type.
+    * **Infinity (∞):** Often used in shortest path algorithms to represent unreachable vertices.
+
+* **Matrix Dimensions:** The matrix is always square, with dimensions `n x n`, where `n` is the number of vertices in the graph.
+
+
+**Example (Unweighted Graph):**
+
+Consider a graph with 4 vertices (A, B, C, D) and the following edges: A-B, A-C, B-D.
+
+The adjacency matrix would look like this:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  1  0  0  1
+C  1  0  0  0
+D  0  1  0  0
+```
+
+**Example (Weighted Graph):**
+
+Same graph, but now with edge weights: A-B (weight 2), A-C (weight 5), B-D (weight 1).
+
+```
+   A  B  C  D
+A  0  2  5  ∞
+B  2  0  ∞  1
+C  5  ∞  0  ∞
+D  ∞  1  ∞  0
+```
+
+
+**Implementation in Different Languages:**
+
+The implementation varies slightly depending on the programming language, but the core concept remains the same:
+
+**Python:**
+
+```python
+import numpy as np  # Using NumPy for efficient matrix operations
+
+def create_adjacency_matrix(num_vertices, edges, weighted=False):
+    """Creates an adjacency matrix for a graph.
+
+    Args:
+        num_vertices: The number of vertices in the graph.
+        edges: A list of tuples representing edges.  For weighted graphs,
+               each tuple should be (source, destination, weight).  For
+               unweighted graphs, each tuple should be (source, destination).
+        weighted: Boolean indicating whether the graph is weighted.
+
+    Returns:
+        A NumPy array representing the adjacency matrix.
+    """
+
+    matrix = np.full((num_vertices, num_vertices), 0) #Initialize with 0 or infinity
+
+    if weighted:
+        for source, destination, weight in edges:
+            matrix[source][destination] = weight
+            matrix[destination][source] = weight  # Assuming an undirected graph. For directed, remove this line.
+
+    else:
+        for source, destination in edges:
+            matrix[source][destination] = 1
+            matrix[destination][source] = 1  # Assuming an undirected graph. For directed, remove this line.
+
+    return matrix
+
+# Example usage (unweighted):
+edges = [(0, 1), (0, 2), (1, 3)]
+matrix = create_adjacency_matrix(4, edges)
+print(matrix)
+
+# Example usage (weighted):
+weighted_edges = [(0, 1, 2), (0, 2, 5), (1, 3, 1)]
+weighted_matrix = create_adjacency_matrix(4, weighted_edges, weighted=True)
+print(weighted_matrix)
+
+
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  int num_vertices = 4;
+  vector<tuple<int, int, int>> edges = {{0, 1, 2}, {0, 2, 5}, {1, 3, 1}}; //Weighted graph
+
+  vector<vector<int>> adjacency_matrix(num_vertices, vector<int>(num_vertices, 0)); // Initialize with 0
+
+  for (const auto& edge : edges) {
+    int u, v, weight;
+    tie(u, v, weight) = edge;
+    adjacency_matrix[u][v] = weight;
+    adjacency_matrix[v][u] = weight; //For undirected graph. Remove for directed.
+  }
+
+  // Print the adjacency matrix:
+  for (int i = 0; i < num_vertices; ++i) {
+    for (int j = 0; j < num_vertices; ++j) {
+      cout << adjacency_matrix[i][j] << " ";
+    }
+    cout << endl;
+  }
+
+  return 0;
+}
+```
+
+**Advantages of Adjacency Matrix:**
+
+* **Simple to implement:** Easy to understand and code.
+* **Fast to check for edge existence:**  `O(1)` time complexity.
+* **Suitable for dense graphs:**  More efficient than adjacency lists for dense graphs.
+
+
+**Disadvantages of Adjacency Matrix:**
+
+* **High space complexity:** `O(V^2)` space complexity, where V is the number of vertices.  This becomes very inefficient for large sparse graphs (graphs with few edges).
+* **Inefficient for sparse graphs:**  Wastes space storing many zeros for non-existent edges.
+
+
+In summary, the choice between an adjacency matrix and an adjacency list depends on the characteristics of your graph.  For dense graphs, an adjacency matrix is often a good choice; for sparse graphs, an adjacency list is generally preferred.  Remember to consider the trade-offs between space complexity and efficiency of operations when choosing a representation.
+
