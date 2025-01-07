@@ -7286,3 +7286,58 @@ Therefore, because we found constants c₁ = 1, c₂ = 4, and n₀ = 1 that sati
 
 Big-Theta notation is crucial for analyzing the efficiency of algorithms.  It allows us to compare the performance of different algorithms regardless of the specific hardware or programming language used.  By expressing the time or space complexity of an algorithm using big-Theta, we can get a clear understanding of how the algorithm's resource requirements scale with the input size.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input approaches infinity.  They're crucial in algorithm analysis for comparing the efficiency of different algorithms. Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  Essentially, *g(n)* is an upper bound on *f(n)* for sufficiently large *n*.  It describes the *worst-case* scenario.
+* **Focus:** Upper bound.  It tells us how *at most* the function grows.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say it's O(n²), because the quadratic term dominates as *n* grows large.  The constants (2, 5, 1) are ignored.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** `f(n) = Ω(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.  *g(n)* is a lower bound on *f(n)* for sufficiently large *n*. It describes the *best-case* scenario (though often used for lower bounds in general).
+* **Focus:** Lower bound. It tells us how *at least* the function grows.
+* **Example:**  For the same `f(n) = 2n² + 5n + 1`, it's Ω(n²). The function grows at least as fast as a quadratic function.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that *f(n)* is both O(g(n)) and Ω(g(n)).  In simpler terms, *g(n)* is both an upper and lower bound for *f(n)*.  This indicates a *tight bound*.
+* **Focus:** Tight bound.  It precisely describes the growth rate.
+* **Example:** `f(n) = 2n² + 5n + 1` is Θ(n²).  Its growth rate is exactly quadratic.
+
+**4. Little o Notation (o):**
+
+* **Meaning:** `f(n) = o(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  This means *f(n)* grows *strictly slower* than *g(n)*.
+* **Focus:**  Strictly smaller upper bound.
+* **Example:**  `n = o(n²)`,  `log n = o(n)`.
+
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** `f(n) = ω(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`.  This means *f(n)* grows *strictly faster* than *g(n)*.
+* **Focus:** Strictly larger lower bound.
+* **Example:** `n² = ω(n)`, `2ⁿ = ω(n²)`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Focus           | Example                    |
+|----------|----------------------------------------------|-------------------|-----------------------------|
+| O        | Upper bound                                  | Worst-case      | 2n² + 5n + 1 = O(n²)       |
+| Ω        | Lower bound                                  | Best-case/Lower bound | 2n² + 5n + 1 = Ω(n²)       |
+| Θ        | Tight bound (both upper and lower)          | Precise growth   | 2n² + 5n + 1 = Θ(n²)       |
+| o        | Strictly smaller upper bound                 | Growth rate     | n = o(n²)                   |
+| ω        | Strictly larger lower bound                  | Growth rate     | n² = ω(n)                   |
+
+
+**Important Considerations:**
+
+* **Constants are ignored:** Asymptotic notations focus on the dominant terms as *n* approaches infinity.
+* **Base of logarithms is irrelevant:**  log₂n, log₁₀n, and ln n are all considered Θ(log n).
+* **These are asymptotic bounds:** They only describe the behavior for large *n*; they don't say anything about small *n*.
+
+
+Understanding these notations is fundamental to comparing the efficiency and scalability of algorithms.  When choosing an algorithm, you'll often want one with the lowest possible asymptotic complexity.
+
