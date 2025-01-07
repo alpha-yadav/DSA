@@ -6147,3 +6147,116 @@ While this approach avoids recursion, it requires modifying the tree structure, 
 
 The recursive approach is generally preferred due to its simplicity and clarity, unless there are specific constraints preventing its use (e.g., extremely deep trees where the recursive call stack might overflow).  If you have a very deep tree you may have to implement an iterative solution using a stack, to avoid the stack overflow issue of recursion.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (or graph) is a fundamental problem in computer science with applications in various areas like file systems, version control systems (like Git), and phylogenetic trees.  There are several ways to solve this, depending on the type of tree and the available information.
+
+Here's a breakdown of common approaches:
+
+**1. Tree with Parent Pointers:**
+
+This is the simplest case.  Each node in the tree stores a pointer to its parent.
+
+* **Algorithm:**
+    1. Traverse upwards from each node (let's call them `node1` and `node2`) until you reach the root.
+    2. Store the path from each node to the root in separate lists (e.g., `path1`, `path2`).
+    3. Iterate through both paths simultaneously.  The last node that appears in both paths is the LCA.
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_parent_pointers(node1, node2):
+    path1 = []
+    path2 = []
+
+    while node1:
+        path1.append(node1)
+        node1 = node1.parent
+    while node2:
+        path2.append(node2)
+        node2 = node2.parent
+
+    lca = None
+    i = len(path1) - 1
+    j = len(path2) - 1
+    while i >= 0 and j >= 0 and path1[i] == path2[j]:
+        lca = path1[i]
+        i -= 1
+        j -= 1
+    return lca.data
+
+# Example usage:
+root = Node('A')
+B = Node('B')
+C = Node('C')
+D = Node('D')
+E = Node('E')
+F = Node('F')
+
+root.parent = None
+B.parent = root
+C.parent = root
+D.parent = B
+E.parent = B
+F.parent = C
+
+print(f"LCA of D and E: {lca_parent_pointers(D, E)}") # Output: B
+print(f"LCA of D and F: {lca_parent_pointers(D, F)}") # Output: A
+```
+
+
+**2. Binary Tree (without parent pointers):**
+
+This is more challenging. You'll need to recursively search the tree.
+
+* **Algorithm:**
+    1. If the node is `None`, return `None`.
+    2. If the node is `node1` or `node2`, return the node.
+    3. Recursively search the left and right subtrees.
+    4. If both subtrees return a node (meaning `node1` and `node2` are found in different subtrees), the current node is the LCA.
+    5. Otherwise, return the non-`None` result from the recursive calls.
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_binary_tree(root, node1, node2):
+    if root is None or root.data == node1 or root.data == node2:
+        return root
+
+    left_lca = lca_binary_tree(root.left, node1, node2)
+    right_lca = lca_binary_tree(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print(f"LCA of D and E: {lca_binary_tree(root, 'D', 'E').data}") # Output: B
+print(f"LCA of D and C: {lca_binary_tree(root, 'D', 'C').data}") # Output: A
+```
+
+**3. General Tree (without parent pointers):**
+
+This is the most general case and often requires more sophisticated algorithms, potentially using depth-first search (DFS) or breadth-first search (BFS) to find paths and then comparing them as in the parent-pointer method.
+
+The choice of algorithm depends on the specific tree structure and constraints. If you have parent pointers, the first method is the most efficient.  For binary trees, the recursive approach is common.  For general trees without parent pointers, a more complex DFS or BFS-based solution is needed.  Consider also the possibility of using a hash table to speed up the path comparison in the case where parent pointers are not available.
+
