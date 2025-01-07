@@ -6759,3 +6759,31 @@ else:
 
 This improved version efficiently detects cycles in a directed graph using Depth First Search and avoids unnecessary iterations.  The `recStack` array is crucial for detecting cycles by identifying back edges. Remember that this algorithm has a time complexity of O(V+E), where V is the number of vertices and E is the number of edges.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focusing on efficient graph algorithms.  While there isn't *one* single "Thorup's algorithm," his contributions are most known for their speed and often surprisingly simple approaches.  Some of his most impactful algorithms include:
+
+* **Near-linear time single-source shortest paths (SSSP) in undirected graphs:** This is arguably his most famous contribution.  Prior to his work, algorithms for finding shortest paths in undirected graphs with non-negative edge weights generally had complexities significantly higher than linear. Thorup's algorithm achieves near-linear time complexity, meaning the runtime is proportional to *m log log n*, where *n* is the number of vertices and *m* is the number of edges.  This is a huge improvement over previous algorithms and is remarkably close to linear time.  The algorithm uses clever techniques involving graph decomposition and randomized data structures.
+
+* **Linear time construction of approximate distance oracles:** These oracles allow for efficient querying of approximate distances between pairs of nodes in a graph.  This has applications in various fields, such as routing and network analysis. The approximation factor is typically small, making the results still useful in many practical scenarios.
+
+* **Linear-work parallel algorithms:** Thorup also contributed significantly to the area of parallel graph algorithms, developing algorithms that achieve linear work (total computation) while maintaining good parallelism.
+
+**Key Characteristics of Thorup's Algorithms:**
+
+* **Randomization:** Many of Thorup's algorithms employ randomization.  This allows for efficient solutions that would be difficult or impossible to achieve deterministically.  The algorithms are usually shown to work correctly with high probability.
+
+* **Simplicity (relative):**  While the underlying mathematical concepts can be complex, the algorithms themselves often have a relatively simple structure compared to other algorithms with similar performance guarantees.  This makes them easier to understand and implement.
+
+* **Near-linear time complexity:** A common goal in his algorithms is achieving near-linear time complexity, which is highly desirable for large graphs.
+
+**Limitations:**
+
+* **Randomization:** The reliance on randomization means that there's a small probability that the algorithm might fail to produce the correct result.  However, this probability is usually very small and can be controlled.
+
+* **Constants:** While the asymptotic complexity is excellent, the hidden constants in the runtime can sometimes be significant.  This means that for small graphs, other algorithms might be faster in practice.
+
+* **Specific graph types:** Some of his algorithms are specifically designed for undirected graphs or graphs with particular properties.  They might not be directly applicable to directed graphs or graphs with negative edge weights.
+
+
+In summary, Thorup's algorithms represent a significant advance in the field of graph algorithms, providing efficient and often surprisingly simple solutions to fundamental problems.  They are frequently used in practice and continue to inspire further research in algorithm design.  To understand the specifics of any particular algorithm, you'd need to refer to the relevant research papers by Mikkel Thorup.
+
