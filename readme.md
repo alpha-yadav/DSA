@@ -8475,3 +8475,61 @@ else:
 
 Remember to start small, focus on understanding the fundamentals, and practice consistently.  It's a journey, not a race.  Enjoy the process of learning!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems with varying difficulty levels:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string `s`.
+
+**Output:** The reversed string `s`.
+
+**Example:**
+
+Input: "hello"
+Output: "olleh"
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have ***exactly one solution***, and you may not use the *same* element twice.  You can return the answer in any order.
+
+
+**Example:**
+
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+
+
+**Hard:**
+
+**Problem:** Longest Palindromic Substring
+
+**Input:** A string `s`.
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+Input: "babad"
+Output: "bab" or "aba" (both are valid answers)
+
+
+**Expert (more challenging):**
+
+**Problem:**  Graph Traversal (finding shortest path)
+
+**Input:**  A graph represented as an adjacency list or matrix, a starting node, and an ending node.
+
+**Output:** The shortest path from the starting node to the ending node.  (Consider using Breadth-First Search or Dijkstra's algorithm).
+
+
+These problems cover a range of complexities and concepts, from basic string manipulation to graph algorithms.  Remember that the solution to these problems involves not just the code, but also understanding the underlying algorithms and data structures that optimize the solution's efficiency.  For the harder problems, consider the time and space complexity of your approach.
+
