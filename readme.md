@@ -11054,3 +11054,128 @@ print(f"Topological Sort: {sorted_nodes}")
 
 This provides a comprehensive overview of topological sorting.  Remember that choosing between Kahn's algorithm and DFS depends on the specific context and performance requirements.  Kahn's algorithm is generally considered more efficient for larger graphs.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) is a classic graph algorithm.  The key is to track the state of each node during the traversal.  We use three states:
+
+* **Unvisited:** The node hasn't been visited yet.
+* **Visiting:** The node is currently being visited (in the recursion stack).
+* **Visited:** The node has been completely visited (recursion finished for that branch).
+
+A cycle exists if we encounter a node that is currently `Visiting` while traversing.  This indicates a back edge – an edge leading to an ancestor in the DFS tree.
+
+Here's how the algorithm works, along with code examples in Python and C++:
+
+
+**Python Implementation:**
+
+```python
+def has_cycle(graph):
+    """
+    Detects cycles in a directed graph using Depth First Traversal.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and 
+               values are lists of their neighbors.
+
+    Returns:
+        True if a cycle exists, False otherwise.
+    """
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: Unvisited, 1: Visiting, 2: Visited
+
+    def dfs(node):
+        visited[node] = 1  # Mark as Visiting
+        for neighbor in graph.get(node, []):
+            if visited[neighbor] == 1:  # Cycle detected
+                return True
+            if visited[neighbor] == 0 and dfs(neighbor):
+                return True
+        visited[node] = 2  # Mark as Visited
+        return False
+
+    for node in graph:
+        if visited[node] == 0:
+            if dfs(node):
+                return True
+    return False
+
+# Example usage:
+graph = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: []
+}
+print(f"Graph has cycle: {has_cycle(graph)}")  # Output: True
+
+
+graph2 = {
+    0: [1, 2],
+    1: [3],
+    2: [3],
+    3: []
+}
+print(f"Graph has cycle: {has_cycle(graph2)}")  # Output: False
+
+```
+
+
+**C++ Implementation:**
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+bool hasCycle(map<int, vector<int>>& graph) {
+    int numNodes = graph.size();
+    vector<int> visited(numNodes, 0); // 0: Unvisited, 1: Visiting, 2: Visited
+
+    function<bool(int)> dfs = [&](int node) {
+        visited[node] = 1; // Mark as Visiting
+        for (int neighbor : graph[node]) {
+            if (visited[neighbor] == 1) { // Cycle detected
+                return true;
+            }
+            if (visited[neighbor] == 0 && dfs(neighbor)) {
+                return true;
+            }
+        }
+        visited[node] = 2; // Mark as Visited
+        return false;
+    };
+
+    for (auto const& [node, _] : graph) {
+        if (visited[node] == 0) {
+            if (dfs(node)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+int main() {
+    map<int, vector<int>> graph = {
+        {0, {1, 2}},
+        {1, {2}},
+        {2, {0, 3}},
+        {3, {}}
+    };
+    cout << "Graph has cycle: " << hasCycle(graph) << endl; // Output: 1 (True)
+
+    map<int, vector<int>> graph2 = {
+        {0, {1, 2}},
+        {1, {3}},
+        {2, {3}},
+        {3, {}}
+    };
+    cout << "Graph has cycle: " << hasCycle(graph2) << endl; // Output: 0 (False)
+    return 0;
+}
+```
+
+Both implementations achieve the same result.  Remember to adapt the graph representation (dictionary in Python, `map` in C++) to your specific needs.  The core logic of using the `visited` array and the three states remains consistent.  The use of a lambda function for `dfs` in C++ is optional but improves readability.
+
