@@ -10078,3 +10078,128 @@ The min-max bounds approach (Algorithm 2) is generally preferred because:
 
 The inorder traversal method is simpler to understand but less efficient for larger trees.  Choose the algorithm that best suits your needs based on factors like code readability and performance requirements. Remember to handle edge cases (empty trees, single-node trees) appropriately in your implementation.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* The value of the node in the left subtree is less than the node's value.
+* The value of the node in the right subtree is greater than the node's value.
+
+Here are three common approaches, with increasing efficiency:
+
+**1. Recursive Approach:**
+
+This approach recursively checks the BST property for each subtree.  It's relatively straightforward but can be less efficient for deeply nested trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """Recursively checks if a tree is a BST."""
+    if node is None:
+        return True
+
+    # Check if left subtree is less than node value
+    if node.left and max_value(node.left) >= node.data:
+        return False
+
+    # Check if right subtree is greater than node value
+    if node.right and min_value(node.right) <= node.data:
+        return False
+
+    # Recursively check left and right subtrees
+    return is_bst_recursive(node.left) and is_bst_recursive(node.right)
+
+
+def max_value(node):
+    """Finds the maximum value in a subtree."""
+    if node is None:
+        return float('-inf')
+    max_val = node.data
+    max_val = max(max_val, max_value(node.left))
+    max_val = max(max_val, max_value(node.right))
+    return max_val
+
+
+def min_value(node):
+    """Finds the minimum value in a subtree."""
+    if node is None:
+        return float('inf')
+    min_val = node.data
+    min_val = min(min_val, min_value(node.left))
+    min_val = min(min_val, min_value(node.right))
+    return min_val
+
+
+# Example Usage
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+
+print(is_bst_recursive(root))  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(15)  #Violation
+root2.right = Node(5)   #Violation
+
+print(is_bst_recursive(root2))  #Output: False
+
+```
+
+
+**2. Iterative Approach (In-order Traversal):**
+
+A more efficient approach leverages the property that an in-order traversal of a BST will produce a sorted sequence.
+
+```python
+def is_bst_iterative(root):
+    """Iteratively checks if a tree is a BST using in-order traversal."""
+    stack = []
+    prev = float('-inf')  # Initialize with negative infinity
+
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+
+        root = stack.pop()
+        if root.data <= prev:
+            return False
+        prev = root.data
+        root = root.right
+
+    return True
+
+#Example Usage (Same root and root2 as above)
+print(is_bst_iterative(root)) #True
+print(is_bst_iterative(root2)) #False
+```
+
+**3. Optimized Recursive Approach (with range):**
+
+This recursive approach is generally the most efficient because it avoids redundant calculations by passing along the valid range of values for each subtree.
+
+```python
+def is_bst_optimized(node, min_val, max_val):
+    if node is None:
+        return True
+    if node.data <= min_val or node.data >= max_val:
+        return False
+    return (is_bst_optimized(node.left, min_val, node.data) and
+            is_bst_optimized(node.right, node.data, max_val))
+
+
+# Example Usage
+print(is_bst_optimized(root, float('-inf'), float('inf')))  # True
+print(is_bst_optimized(root2, float('-inf'), float('inf'))) # False
+
+```
+
+The iterative and optimized recursive approaches are generally preferred for their efficiency, especially with larger trees.  Choose the approach that best suits your needs and understanding. Remember to define your `Node` class as shown in the examples.
+
