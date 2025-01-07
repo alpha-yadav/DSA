@@ -8954,3 +8954,65 @@ int main() {
 
 These examples demonstrate the basic structure of simple loops.  More complex loops might involve nested loops (loops within loops), `break` statements (to exit a loop prematurely), or `continue` statements (to skip to the next iteration).  The choice between `for` and `while` loops depends on the specific task; `for` loops are generally preferred when the number of iterations is known in advance, while `while` loops are better suited for situations where the loop continues until a certain condition is met.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times based on the outer loop's iterations.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop runs first and controls the overall number of times the inner loop will execute.
+* **Inner Loop:** This loop is executed for each iteration of the outer loop.  Its iterations are completely nested within the scope of a single iteration of the outer loop.
+
+**Example (Python):**
+
+```python
+for i in range(3):  # Outer loop iterates 3 times
+    print(f"Outer loop iteration: {i}")
+    for j in range(2):  # Inner loop iterates 2 times for each outer loop iteration
+        print(f"  Inner loop iteration: {j}")
+```
+
+This code will produce the following output:
+
+```
+Outer loop iteration: 0
+  Inner loop iteration: 0
+  Inner loop iteration: 1
+Outer loop iteration: 1
+  Inner loop iteration: 0
+  Inner loop iteration: 1
+Outer loop iteration: 2
+  Inner loop iteration: 0
+  Inner loop iteration: 1
+```
+
+**Common Uses:**
+
+Nested loops are frequently used for tasks involving:
+
+* **Processing multi-dimensional data:**  Iterating through rows and columns of a matrix or table.
+* **Generating patterns:** Creating output like multiplication tables or specific shapes.
+* **Combinatorial problems:** Exploring all possible combinations of items from multiple sets.
+* **Searching and comparing:**  Finding matches or relationships between elements in different data structures.
+
+
+**Example (Generating a Multiplication Table):**
+
+```python
+rows = 5
+cols = 5
+
+for i in range(1, rows + 1):
+    for j in range(1, cols + 1):
+        print(i * j, end="\t")  # \t adds a tab for better formatting
+    print()  # Newline after each row
+```
+
+This will generate a 5x5 multiplication table.
+
+
+**Efficiency Considerations:**
+
+Nested loops can lead to a significant increase in execution time, especially when dealing with large datasets.  The time complexity often grows quadratically (O(n²)) or even higher depending on the number of nested loops.  Consider the efficiency implications and explore alternative approaches (e.g., using more optimized algorithms or data structures) if performance becomes an issue.
+
