@@ -8533,3 +8533,76 @@ Output: "bab" or "aba" (both are valid answers)
 
 These problems cover a range of complexities and concepts, from basic string manipulation to graph algorithms.  Remember that the solution to these problems involves not just the code, but also understanding the underlying algorithms and data structures that optimize the solution's efficiency.  For the harder problems, consider the time and space complexity of your approach.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing some improvements:
+
+
+**Basic Implementation:**
+
+This version uses nested `if` statements and is easy to understand:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz") and then by 5 ("Buzz").
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Improved Implementation (using ternary operator):**
+
+This version uses the ternary operator (`condition ? value1 : value2`) to make the code more concise:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+
+**Even More Concise (using String Interpolation and a single `if`):**
+
+This version is the most compact and efficient:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This approach builds the output string incrementally.  If both `if` conditions are false,  `output` remains empty, and the number is printed.
+
+
+**Choosing the Best Approach:**
+
+The "basic" version is easiest to read and understand for beginners.  The more concise versions are efficient but might be slightly harder to grasp initially.  For most practical purposes, the improved or concise versions offer better code style.  Choose the version that best suits your understanding and coding style.  Remember that readability is crucial, even in simple problems like FizzBuzz.
+
