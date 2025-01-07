@@ -4376,3 +4376,65 @@ However, we *cannot* say *f(n) = Ω(n³)* because *n³* grows faster than *n² +
 
 In summary, Big-Omega notation helps us understand the best-case or lower bound of an algorithm's complexity, providing valuable information for analyzing its efficiency.  It's often used in conjunction with Big-O to get a complete picture of an algorithm's performance characteristics.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used to describe the limiting behavior of a function when the argument tends towards a particular value or infinity.  In computer science, it's used to classify algorithms according to how their runtime or space requirements grow as the input size grows.  It focuses on the dominant factors affecting performance as the input size becomes very large, ignoring constant factors and smaller terms.
+
+Here's a breakdown of key concepts:
+
+**What Big O Describes:**
+
+* **Worst-case scenario:** Big O notation typically describes the *worst-case* runtime or space complexity of an algorithm.  It represents the upper bound on how much resources the algorithm will consume.  While an algorithm might perform better in some cases, Big O tells you the absolute maximum you can expect.
+
+* **Growth rate, not absolute time:** Big O doesn't tell you the exact runtime in milliseconds or seconds. It describes the *rate* at which the runtime or space usage grows as the input size increases.  An O(n) algorithm might be faster than an O(log n) algorithm for small inputs, but the O(log n) algorithm will eventually become significantly faster as the input size gets larger.
+
+* **Asymptotic analysis:** Big O notation is a form of asymptotic analysis, meaning it analyzes the behavior of the algorithm as the input size approaches infinity.  We're less concerned with the performance for small inputs.
+
+**Common Big O Notations:**
+
+* **O(1) - Constant time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic time:** The runtime grows logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear time:** The runtime grows linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic time:**  The runtime grows proportionally to n multiplied by the logarithm of n.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic time:** The runtime grows proportionally to the square of the input size.  Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial time:** The runtime grows factorially with the input size. Example: Traveling Salesperson Problem (brute-force approach).
+
+
+**How to Analyze Big O:**
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime.
+
+2. **Count the operations:** Count how many times these basic operations are executed as a function of the input size (n).
+
+3. **Ignore constant factors and smaller terms:**  Focus on the dominant term as n grows large.  For example, O(2n² + 5n + 10) simplifies to O(n²).
+
+**Example:**
+
+Let's analyze the following code snippet:
+
+```python
+def find_element(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return True
+    return False
+```
+
+This function iterates through the array `arr` once.  The number of iterations is directly proportional to the length of the array (n). Therefore, the time complexity is O(n).
+
+
+**Space Complexity:**
+
+Big O notation can also be used to analyze the space complexity of an algorithm—how much memory it uses as a function of the input size.  The analysis is similar to time complexity analysis.
+
+
+**In Summary:**
+
+Big O notation provides a standardized way to compare the efficiency of algorithms, enabling developers to make informed decisions about which algorithm to use for a given task, particularly when dealing with large datasets.  Understanding Big O is crucial for writing efficient and scalable code.
+
