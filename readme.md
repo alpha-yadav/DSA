@@ -7936,3 +7936,135 @@ To avoid the problem of skewed trees, self-balancing BSTs have been developed, s
 
 In summary, BSTs are a powerful and versatile data structure, but their effectiveness relies on maintaining a relatively balanced structure to avoid worst-case scenarios.  For applications demanding consistent performance under heavy modifications, balanced BST variations are often preferred.
 
+#  Binary Search Tree - Insertion (Python) 
+Several implementations of binary search tree (BST) insertion in Python are possible, each with slightly different strengths and weaknesses. Here are a few, ranging from a basic recursive approach to one that handles duplicates:
+
+**1. Basic Recursive Insertion:**
+
+This is a straightforward recursive approach.  It's concise but doesn't handle duplicate values.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+# Example usage:
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+```
+
+**2. Iterative Insertion:**
+
+This version uses iteration instead of recursion, which can be more efficient for very deep trees and avoids potential stack overflow issues.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+#Example Usage (same as above)
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+```
+
+**3. Handling Duplicate Values:**
+
+These examples don't handle duplicate values.  Here's a modification of the iterative version to handle duplicates by simply not inserting them:
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data == current.data:  # Check for duplicates
+                return  # Don't insert if duplicate
+            elif data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+```
+
+Remember to choose the implementation that best suits your needs. If you need to handle duplicates in a different way (e.g., incrementing a count for each duplicate), you'll need to modify the code accordingly.  You might also want to add methods to search, delete, and traverse the tree.
+
