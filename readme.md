@@ -7105,3 +7105,77 @@ Output: "bab"
 
 These problems showcase a range of algorithmic concepts and difficulty levels.  Choosing the right algorithm and data structure is crucial for solving them efficiently.  Remember to consider time and space complexity when designing your solutions.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing some improvements:
+
+**Basic Implementation:**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks for divisibility by 15 first (to handle "FizzBuzz" correctly).
+* Then it checks for divisibility by 3 ("Fizz").
+* Then it checks for divisibility by 5 ("Buzz").
+* If none of the above are true, it prints the number itself.
+
+
+**Improved Implementation (using string concatenation):**
+
+This version is more concise and efficient:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) //Call the function
+```
+
+This version builds the output string (`output`) incrementally.  If the string is empty after checking divisibility by 3 and 5, it means the number is not divisible by either, so the number itself is printed.
+
+
+**Even More Concise (using ternary operator):**
+
+This leverages Swift's ternary operator for a very compact solution:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print((i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function
+```
+
+While concise, this version might be slightly less readable for beginners.
+
+
+**Choosing the Best Version:**
+
+The "improved" version offers a good balance of readability and efficiency.  The concise version is impressive but sacrifices some readability.  The basic version is easiest to understand for those just learning.  Choose the version that best suits your needs and understanding.  Remember to choose meaningful variable names and add comments to improve readability if needed.
+
