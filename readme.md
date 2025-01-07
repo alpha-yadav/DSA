@@ -11179,3 +11179,42 @@ int main() {
 
 Both implementations achieve the same result.  Remember to adapt the graph representation (dictionary in Python, `map` in C++) to your specific needs.  The core logic of using the `visited` array and the three states remains consistent.  The use of a lambda function for `dfs` in C++ is optional but improves readability.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of efficient algorithms for solving graph problems, primarily focusing on finding shortest paths and related problems.  While there isn't one single "Thorup's algorithm," the name is most strongly associated with Mikkel Thorup's groundbreaking work on designing extremely fast algorithms for these problems, often achieving near-linear time complexity.
+
+Here's a breakdown of the key aspects and common themes in Thorup's algorithmic contributions:
+
+**Key characteristics of Thorup's algorithms:**
+
+* **Near-linear time complexity:**  A major goal is to achieve a running time close to O(m), where 'm' is the number of edges in the graph. This is significantly faster than many classical algorithms, which often have complexities like O(n^2) or O(m log n) (where 'n' is the number of vertices).
+
+* **Randomization:** Many of Thorup's algorithms utilize randomization, meaning their performance depends on random choices made during execution.  They typically provide high probability of correctness (e.g., a 1-ε probability of finding the correct shortest paths).
+
+* **Sophisticated data structures:**  The algorithms often employ intricate and cleverly designed data structures to achieve their speed.  These data structures enable efficient lookups, updates, and traversals within the graph.
+
+* **Focus on sparse graphs:** The algorithms are often particularly efficient for sparse graphs (graphs where the number of edges is significantly smaller than the square of the number of vertices).
+
+**Common problem areas addressed:**
+
+* **Single-source shortest paths (SSSP):**  Finding the shortest paths from a single starting node to all other nodes in a graph, often with non-negative edge weights.
+
+* **All-pairs shortest paths (APSP):** Finding the shortest paths between all pairs of nodes in a graph.
+
+* **Dynamic graph algorithms:** Algorithms that efficiently handle updates to the graph (e.g., adding or deleting edges).
+
+**Specific examples of Thorup's algorithms (or algorithms strongly influenced by his work):**
+
+* **Linear-time SSSP algorithms for undirected graphs:** Thorup significantly improved the speed of SSSP algorithms for undirected graphs with non-negative weights, pushing the complexity toward linear time.  These algorithms are often based on sophisticated techniques like randomized sampling and hierarchical decomposition of the graph.
+
+* **Near-linear time APSP algorithms:**  Thorup contributed to the development of algorithms for APSP that have near-linear time complexity for certain classes of graphs (e.g., planar graphs or graphs with bounded treewidth).
+
+* **Algorithms for dynamic shortest paths:**  His work also explores how to efficiently maintain shortest paths as the graph undergoes updates.
+
+**Limitations:**
+
+* **Randomization:** The reliance on randomization introduces a small probability of error, though this is usually very low and can be controlled.
+* **Assumptions about the graph:** Some of the algorithms might have restrictions on the type of graphs they efficiently handle (e.g., sparse graphs, undirected graphs, graphs with non-negative weights).
+* **Implementation complexity:**  The algorithms are often highly intricate and can be challenging to implement correctly.
+
+In summary, Thorup's algorithms represent a significant advancement in the field of graph algorithms, pushing the boundaries of what's achievable in terms of speed and efficiency for various shortest-path problems. They are a testament to the power of combining clever data structures with randomized techniques to solve fundamental graph problems.  To understand the specifics of any particular algorithm, you'd need to refer to the relevant research papers by Mikkel Thorup and his collaborators.
+
