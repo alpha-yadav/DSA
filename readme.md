@@ -7609,3 +7609,34 @@ Nested loops are used extensively in:
 
 Nested loops can be efficient for certain tasks but can also lead to performance issues if not carefully designed, especially when dealing with large datasets.  Consider algorithmic optimizations if performance becomes a concern.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  Their runtime increases logarithmically with the input size (n).  This means the time it takes to solve the problem increases slowly even as the input size grows significantly.  This efficiency stems from repeatedly dividing the problem size.
+
+Here are some common algorithmic approaches that often result in O(log n) time complexity:
+
+**1. Binary Search:** This classic algorithm is used to efficiently search for a target value within a *sorted* array or list.  It works by repeatedly dividing the search interval in half.  If the target value is not in the current interval, it's discarded, and the search continues in the remaining half.
+
+   * **Example:**  Finding a specific word in a dictionary.  You don't linearly check every word; you open the dictionary roughly in the middle, and based on whether your target is before or after the middle word, you continue searching in the appropriate half.
+
+**2. Binary Tree Operations (in balanced trees):**  Many operations on balanced binary search trees (like AVL trees or red-black trees), such as searching, insertion, and deletion, have a time complexity of O(log n).  The balance ensures that the height of the tree remains logarithmic with the number of nodes.
+
+   * **Example:**  Searching for a specific employee record in a database organized as a balanced binary search tree, based on employee ID.
+
+**3. Efficient exponentiation:** Algorithms for calculating a<sup>b</sup> (a raised to the power of b) can be optimized to run in O(log b) time using techniques like exponentiation by squaring.  This avoids performing b multiplications directly.
+
+   * **Example:**  Cryptographic operations often utilize fast exponentiation.
+
+**4. Change-making problem (using greedy approach):** In certain cases, finding the minimum number of coins to make up a given amount can be done in O(log n) time using a greedy approach (though this isn't guaranteed for all coin denominations).
+
+**5. Some graph algorithms:**  Depending on the graph structure and specific algorithm, some graph operations can have logarithmic time complexity.  Examples might include finding the lowest common ancestor (LCA) in specific tree-like graph structures using advanced techniques.
+
+
+**Important Considerations:**
+
+* **Base of the logarithm:** The base of the logarithm (e.g., log₂n, log₁₀n) doesn't affect the overall time complexity classification (it only changes the constant factor).  We usually just write O(log n) to represent logarithmic time complexity.
+* **Balanced data structures:**  Achieving O(log n) complexity often relies on using balanced data structures (like balanced binary search trees).  If the data structure is unbalanced, the time complexity can degrade to O(n) in the worst case.
+* **Worst-case vs. average-case:**  While the average case for algorithms like binary search is O(log n), the worst-case scenario might be O(n) (e.g., if the target value is not found, or the tree is heavily unbalanced).
+
+
+In summary, O(log n) algorithms are very efficient for large datasets because the increase in runtime is relatively small as the input size grows. They are frequently used in various applications where fast searching and data manipulation are crucial.
+
