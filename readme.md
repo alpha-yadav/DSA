@@ -6787,3 +6787,71 @@ Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, 
 
 In summary, Thorup's algorithms represent a significant advance in the field of graph algorithms, providing efficient and often surprisingly simple solutions to fundamental problems.  They are frequently used in practice and continue to inspire further research in algorithm design.  To understand the specifics of any particular algorithm, you'd need to refer to the relevant research papers by Mikkel Thorup.
 
+#  Graph Traversals 
+Graph traversals are algorithms that systematically visit all the vertices (nodes) of a graph.  There are several ways to do this, each with its own properties and applications. The most common are Depth-First Search (DFS) and Breadth-First Search (BFS).
+
+**1. Depth-First Search (DFS)**
+
+* **Concept:**  DFS explores a graph by going as deep as possible along each branch before backtracking.  Imagine you're exploring a maze; you'd follow one path as far as you can before turning back and trying another.
+
+* **Algorithm:**
+    1. Start at a root node (or any arbitrary node).
+    2. Mark the current node as visited.
+    3. Recursively visit all unvisited neighbors of the current node.
+    4. Once all neighbors have been visited, backtrack to the previous node.
+
+* **Implementation (recursive):**  Often implemented recursively, making it elegant but potentially prone to stack overflow issues for very deep graphs.
+
+* **Implementation (iterative):** Can also be implemented iteratively using a stack to mimic the recursion. This avoids stack overflow problems.
+
+* **Applications:**
+    * Finding connected components.
+    * Topological sorting (for Directed Acyclic Graphs - DAGs).
+    * Detecting cycles in a graph.
+    * Finding paths in a graph (e.g., finding a path between two nodes).
+
+
+**2. Breadth-First Search (BFS)**
+
+* **Concept:** BFS explores a graph level by level.  It visits all the neighbors of the starting node before moving on to their neighbors.  Imagine ripples in a pond; they expand outwards uniformly.
+
+* **Algorithm:**
+    1. Start at a root node (or any arbitrary node).
+    2. Mark the current node as visited.
+    3. Enqueue (add to the back) all unvisited neighbors of the current node to a queue.
+    4. Dequeue (remove from the front) the next node from the queue and repeat steps 2 and 3 until the queue is empty.
+
+* **Implementation:**  Typically implemented iteratively using a queue.
+
+* **Applications:**
+    * Finding the shortest path in an unweighted graph.
+    * Finding the shortest path between two nodes (using a distance tracker).
+    * Social network analysis (finding connections).
+    * Crawling websites (exploring links).
+
+
+
+**Comparison:**
+
+| Feature        | DFS                               | BFS                                 |
+|----------------|------------------------------------|-------------------------------------|
+| Exploration    | Depth-first                         | Breadth-first                       |
+| Data Structure | Stack (recursive or iterative)      | Queue                               |
+| Shortest Path | Not guaranteed (unless modified)     | Guaranteed in unweighted graphs      |
+| Memory Usage   | Can be less (if graph is deep and narrow) | Can be more (if graph is wide and shallow)|
+| Time Complexity| O(V + E)                            | O(V + E)                             |
+
+
+**Other Traversals:**
+
+While DFS and BFS are the most common, other graph traversals exist, often tailored to specific graph types or problem domains.  Examples include:
+
+* **Dijkstra's Algorithm:** Finds the shortest path in a weighted graph with non-negative edge weights.
+* **A* Search:**  A more efficient shortest path algorithm that uses heuristics.
+* **Bellman-Ford Algorithm:** Finds the shortest path in a weighted graph, even with negative edge weights (but detects negative cycles).
+
+
+**Choosing the Right Traversal:**
+
+The best traversal algorithm depends on the specific problem you're trying to solve.  If you need to find the shortest path in an unweighted graph, BFS is the natural choice.  If you need to find a path or detect cycles, DFS is often suitable.  For weighted graphs, Dijkstra's or A* might be more appropriate.
+
