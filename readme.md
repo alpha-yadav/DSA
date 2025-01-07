@@ -7050,3 +7050,58 @@ print(f"Target found at index: {index}")
 
 Remember to start slowly, focus on understanding the concepts, and practice regularly.  With dedication, you'll build a strong foundation in algorithms.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, with explanations:
+
+**Problem 1: Two Sum** (Easy)
+
+**Problem Statement:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+**Example:**
+
+Input: `nums = [2,7,11,15], target = 9`
+Output: `[0,1]`
+Explanation: Because `nums[0] + nums[1] == 9`, we return `[0, 1]`.
+
+**Solution Approach:**  The most straightforward solution involves nested loops (brute force), checking every pair of numbers.  A more efficient solution uses a hash map (dictionary in Python) to store numbers and their indices.  This allows you to check if the complement (target - current number) exists in the map in O(1) time.
+
+**Problem 2: Reverse a Linked List** (Medium)
+
+**Problem Statement:** Reverse a singly linked list.
+
+**Example:**
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+
+**Solution Approach:** This problem can be solved iteratively or recursively.  The iterative approach involves using three pointers: `prev`, `curr`, and `next` to traverse the list and reverse the links.  The recursive approach involves recursively reversing the rest of the list and then attaching the current node to the end of the reversed list.
+
+**Problem 3:  Longest Palindromic Substring** (Medium/Hard)
+
+**Problem Statement:** Given a string `s`, find the longest palindromic substring in `s`.
+
+**Example:**
+
+Input: "babad"
+Output: "bab"
+(Note: "aba" is also a valid answer.)
+
+**Solution Approach:**  Several approaches exist, including:
+
+* **Brute Force:** Check all possible substrings for palindromicity.  Inefficient.
+* **Expand Around Center:**  For each character (or pair of characters), expand outwards to check for palindromes. More efficient.
+* **Dynamic Programming:** Create a table to store whether substrings are palindromes.  Most efficient for large strings.
+
+**Problem 4:  Graph Traversal (DFS/BFS)** (Medium)
+
+**Problem Statement:** Given a graph represented as an adjacency list or matrix, perform a Depth-First Search (DFS) or Breadth-First Search (BFS) traversal and return the visited nodes in the order they were visited.
+
+
+**Solution Approach:** DFS uses a stack (implicitly through recursion or explicitly) to explore a branch as deeply as possible before backtracking. BFS uses a queue to explore nodes level by level.
+
+These problems showcase a range of algorithmic concepts and difficulty levels.  Choosing the right algorithm and data structure is crucial for solving them efficiently.  Remember to consider time and space complexity when designing your solutions.
+
