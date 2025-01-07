@@ -11333,3 +11333,97 @@ The choice between BFS and DFS depends on the specific problem:
 
 These are fundamental graph traversal algorithms.  Many other graph algorithms build upon them.  Understanding BFS and DFS is crucial for mastering more advanced graph algorithms.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used to represent the graph (adjacency matrix, adjacency list) and whether you need to handle cycles or directed/undirected graphs. Here are a few examples:
+
+**1. DFS using Adjacency List (Recursive):**  This is a common and generally efficient approach for graphs represented as adjacency lists.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal on a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+        path: A list to store the traversal path (optional, defaults to an empty list).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph.get(node, []):  # Handle nodes with no neighbors gracefully
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+traversal_path = dfs_recursive(graph, 'A')
+print(f"DFS traversal path (recursive): {traversal_path}") #Example Output: ['A', 'B', 'D', 'E', 'F', 'C'] (order may vary slightly)
+
+```
+
+**2. DFS using Adjacency List (Iterative):** This version uses a stack instead of recursion.  It can be beneficial for very deep graphs to avoid stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal on a graph iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    visited = set()
+    stack = [node]
+    path = []
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            path.append(vertex)
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)
+
+    return path
+
+# Example usage (same graph as above):
+traversal_path = dfs_iterative(graph, 'A')
+print(f"DFS traversal path (iterative): {traversal_path}") #Example Output: ['A', 'C', 'F', 'B', 'E', 'D'] (order may vary slightly)
+```
+
+**Choosing between Recursive and Iterative:**
+
+* **Recursive:** Often more concise and easier to read, but susceptible to stack overflow errors for very deep graphs.
+* **Iterative:**  Avoids stack overflow issues, but can be slightly less readable.
+
+**Important Considerations:**
+
+* **Handling Cycles:**  The above examples don't explicitly handle cycles.  If your graph has cycles, you might need to add a mechanism to prevent infinite loops (e.g., keeping track of nodes currently in the stack in the iterative version).
+* **Directed vs. Undirected Graphs:** The provided examples work for both directed and undirected graphs.  For directed graphs, the traversal will only follow the direction of the edges.
+* **Adjacency Matrix:**  If your graph is represented using an adjacency matrix, you'll need to adapt the code accordingly.  The basic logic of DFS remains the same, but the neighbor retrieval will be different.
+
+
+Remember to adapt these examples to your specific needs and graph representation.  For extremely large graphs, consider more advanced algorithms and data structures for better performance.
+
