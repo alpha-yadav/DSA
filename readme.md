@@ -10203,3 +10203,97 @@ print(is_bst_optimized(root2, float('-inf'), float('inf'))) # False
 
 The iterative and optimized recursive approaches are generally preferred for their efficiency, especially with larger trees.  Choose the approach that best suits your needs and understanding. Remember to define your `Node` class as shown in the examples.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit (or "traverse") all the nodes in a binary tree.  There are several common methods, each resulting in a different ordering of the nodes visited:
+
+**1. Pre-order Traversal:**
+
+* **Order:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+* **Mnemonic:**  Root, Left, Right (**R**LR)
+* **Example:** For a tree with root A, left child B, and right child C, the pre-order traversal would be: A, B, C.  If B had children D and E, it would be A, B, D, E, C.
+
+**2. In-order Traversal:**
+
+* **Order:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree.
+* **Mnemonic:** Left, Root, Right (L**R**R)
+* **Example:**  For the same tree above, the in-order traversal would be: B, D, E, A, C.  This is particularly useful for Binary Search Trees (BSTs), as it yields the nodes in sorted order.
+
+**3. Post-order Traversal:**
+
+* **Order:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node.
+* **Mnemonic:** Left, Right, Root (LR**R**)
+* **Example:** For the same tree above, the post-order traversal would be: D, E, B, C, A.  This is often used for evaluating expressions represented as trees.
+
+
+**4. Level-order Traversal (Breadth-First Search):**
+
+* **Order:** Visits nodes level by level, starting from the root and going left to right within each level.  This requires a queue data structure.
+* **Mnemonic:** Level by Level
+* **Example:** For the same tree above, the level-order traversal would be: A, B, C, D, E.
+
+
+**Code Examples (Python):**
+
+These examples assume a basic node structure:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+from collections import deque
+
+def levelorder(node):
+    if node is None:
+        return
+
+    nodes = deque([node])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Preorder traversal:")
+preorder(root)  # Output: A B D E C
+print("\nInorder traversal:")
+inorder(root)   # Output: D B E A C
+print("\nPostorder traversal:")
+postorder(root) # Output: D E B C A
+print("\nLevelorder traversal:")
+levelorder(root) # Output: A B C D E
+```
+
+These traversals have different applications depending on the task.  For example, in-order traversal is crucial for BSTs, while post-order is useful for expression evaluation and memory deallocation.  Level-order traversal is used in algorithms that need to process nodes level by level, such as searching for the shortest path in a tree.
+
