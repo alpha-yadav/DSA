@@ -9016,3 +9016,35 @@ This will generate a 5x5 multiplication table.
 
 Nested loops can lead to a significant increase in execution time, especially when dealing with large datasets.  The time complexity often grows quadratically (O(n²)) or even higher depending on the number of nested loops.  Consider the efficiency implications and explore alternative approaches (e.g., using more optimized algorithms or data structures) if performance becomes an issue.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They mean the time it takes to solve a problem grows logarithmically with the input size (n).  This is significantly faster than linear time (O(n)) or quadratic time (O(n²)).  The base of the logarithm usually doesn't matter in Big O notation because it's a constant factor.
+
+Here are some common types and examples of algorithms with O(log n) time complexity:
+
+**1. Binary Search:** This is the quintessential O(log n) algorithm.  It works by repeatedly dividing the search interval in half.  If the target value is not found in the first half, it only searches the second half, and vice versa.  This continues until the target is found or the interval is empty.
+
+* **Example:** Searching a sorted array for a specific element.
+
+**2. Algorithms based on Binary Trees/Heaps:**  Many operations on balanced binary search trees (like AVL trees, red-black trees) and heaps take logarithmic time.
+
+* **Example:** Searching, insertion, and deletion in a balanced binary search tree. Finding the minimum or maximum element in a min-heap or max-heap.
+
+**3. Efficient exponentiation (exponentiation by squaring):** This technique calculates a<sup>b</sup> in O(log b) time, significantly faster than a naive iterative approach.  It relies on the property that a<sup>b</sup> = (a<sup>b/2</sup>)<sup>2</sup> if b is even.
+
+* **Example:** Calculating large powers of a number quickly (cryptography).
+
+**4. Change-making problem (with specific constraints):**  While the general change-making problem is NP-hard, certain versions (like making change with a limited set of denominations) can be solved efficiently using dynamic programming in O(log n) time under certain conditions.
+
+
+**5. Finding the kth smallest/largest element using Quickselect:**  While the average case is O(n), a well-implemented Quickselect (a variation of Quicksort) can achieve O(log n) in the best and average cases for finding the kth smallest/largest element. The worst-case is O(n²), however.
+
+
+**Important Considerations:**
+
+* **Sorted Data:** Many O(log n) algorithms require the input data to be sorted (e.g., binary search).  The sorting process itself usually takes at least O(n log n) time.
+* **Balanced Trees:** The logarithmic time complexity of tree operations relies on the tree being balanced.  Unbalanced trees can degrade performance to O(n) in the worst case.
+* **Average vs. Worst Case:**  Some algorithms, like Quickselect, have an average-case complexity of O(log n) but a worst-case complexity of O(n²).
+
+
+In summary, O(log n) algorithms are highly efficient for large input sizes because the time required increases very slowly as the input grows.  They are frequently used in applications where speed is crucial.
+
