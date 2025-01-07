@@ -5517,3 +5517,109 @@ print(f"Is the tree a BST (Recursive method)? {is_bst_recursive(root2)}")  # Fal
 
 Both methods achieve the same result. The recursive approach might be slightly more efficient in some cases as it avoids creating an extra list, but the in-order traversal method is arguably easier to understand.  Choose the method that best suits your understanding and needs.  Remember to handle the edge case of an empty tree ( `root is None`).
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Algorithm 1: Recursive In-order Traversal**
+
+This algorithm leverages the property that an in-order traversal of a BST yields a sorted sequence.
+
+1. **In-order Traversal:** Perform an in-order traversal of the binary tree.  In-order traversal visits the left subtree, then the root, then the right subtree.
+
+2. **Check Sorted Sequence:** As you traverse, store the visited nodes' values in a list or array. After the traversal is complete, check if this list is sorted in ascending order. If it is, the tree is a BST; otherwise, it's not.
+
+**Python Code (Recursive In-order Traversal):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    inorder_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+# Example usage
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(is_bst_recursive(root))  # Output: True
+
+
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(6) #This makes it not a BST
+root.right.right = Node(4)
+
+
+print(is_bst_recursive(root))  # Output: False
+
+
+```
+
+**Algorithm 2: Recursive Check with Range**
+
+This algorithm is more efficient because it avoids the creation of an extra list.  It recursively checks if each subtree satisfies the BST property within a given range.
+
+1. **Base Case:** If the node is `None`, it's a valid BST within any range.
+
+2. **Recursive Step:** For each node:
+   - Check if the node's value is within the allowed range (min_val, max_val).
+   - Recursively check the left subtree with the range (min_val, node.data).
+   - Recursively check the right subtree with the range (node.data, max_val).
+
+**Python Code (Recursive Check with Range):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_range(node, min_val=-float('inf'), max_val=float('inf')):
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive_range(node.left, min_val, node.data) and
+            is_bst_recursive_range(node.right, node.data, max_val))
+
+
+# Example usage (same as before, will produce the same output)
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(is_bst_recursive_range(root))  # Output: True
+
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(4)
+
+print(is_bst_recursive_range(root))  # Output: False
+```
+
+**Which Algorithm to Choose?**
+
+The recursive check with range (Algorithm 2) is generally preferred because it's more efficient.  It has a time complexity of O(N), where N is the number of nodes, and a space complexity of O(H), where H is the height of the tree (O(log N) for a balanced tree, O(N) for a skewed tree). The in-order traversal approach also has O(N) time complexity but requires O(N) space for storing the in-order traversal.  Therefore, Algorithm 2 is generally more space-efficient, especially for deep trees.
+
