@@ -4111,3 +4111,70 @@ Here are a few algorithmic problems with varying difficulty, ranging from beginn
 
 These are just examples.  The best way to learn about algorithmic problems is to practice!  Websites like LeetCode, HackerRank, and Codewars offer many problems with varying difficulty levels and solutions from other users.  Remember to focus on understanding the problem, choosing the right data structures and algorithms, and writing clean, efficient code.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to get started with it in Swift, progressing from a basic implementation to a more refined version:
+
+**Basic Implementation:**
+
+This version uses nested `if` statements, which is straightforward but can become less readable with more complex rules.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+**Improved Implementation (using a ternary operator and string interpolation):**
+
+This version is more concise and efficient. It uses the ternary operator (`condition ? value1 : value2`) and string interpolation to build the output string.
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function to test
+```
+
+
+**Explanation:**
+
+* **`func fizzBuzz(n: Int)` (or `fizzBuzzImproved`)**: This defines a function named `fizzBuzz` that takes an integer `n` as input.  This `n` represents the upper limit of the range.
+
+* **`for i in 1...n`**: This loop iterates through numbers from 1 to `n` (inclusive).
+
+* **`i % 3 == 0` and `i % 5 == 0`**: The modulo operator (`%`) gives the remainder of a division.  If the remainder is 0, the number is divisible by 3 or 5 respectively.
+
+* **Ternary Operator:**  The improved version efficiently checks for divisibility by 3 and 5 and appends "Fizz" and/or "Buzz" to the `output` string.
+
+* **String Interpolation:** `String(i)` converts the integer `i` to a string.  The `\(variable)` syntax within strings allows embedding variables directly into the string.
+
+* **`print()`**: This function displays the output to the console.
+
+
+**Running the Code:**
+
+1. **Create a new Swift file:** In Xcode, create a new playground or Swift file.
+2. **Paste the code:** Copy either version of the `fizzBuzz` function and paste it into your file.
+3. **Call the function:** Add a line like `fizzBuzz(n: 15)` or `fizzBuzzImproved(n: 15)` to call the function and see the output.
+
+
+This should give you a solid understanding of how to implement the FizzBuzz algorithm in Swift.  Remember to experiment and try modifying the code to handle different conditions or extend the functionality.
+
