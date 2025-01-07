@@ -5932,3 +5932,130 @@ Both implementations follow these steps:
 
 Python's `collections.deque` is optimized for queue operations (adding and removing from both ends), making it slightly more efficient than using a standard Python list for this purpose.  In JavaScript, using an array as a queue is perfectly acceptable for most cases, as the performance difference is usually negligible for moderately sized trees.  For extremely large trees, you might consider a more sophisticated queue implementation in JavaScript.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversal refers to the process of visiting (checking or updating) each node in a tree data structure exactly once.  There are several ways to do this, the most common being preorder, inorder, and postorder traversal. These traversals are defined recursively.
+
+
+**1. Preorder Traversal:**
+
+* **Definition:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The acronym is **Root, Left, Right (R, L, R)**.
+
+* **Algorithm (recursive):**
+
+```python
+def preorder(node):
+  """
+  Performs a preorder traversal of a binary tree.
+
+  Args:
+    node: The root node of the subtree to traverse.
+  """
+  if node:
+    print(node.data, end=" ")  # Visit the root
+    preorder(node.left)      # Traverse left subtree
+    preorder(node.right)     # Traverse right subtree
+
+#Example Node Class (assuming you have one)
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+#Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Preorder traversal:")
+preorder(root) #Output: 1 2 4 5 3 
+```
+
+* **Iterative approach (using a stack):**  A stack can be used to simulate the recursion.
+
+```python
+def preorder_iterative(node):
+    if node is None:
+        return
+
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        print(current.data, end=" ")
+
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+
+
+print("\nPreorder iterative traversal:")
+preorder_iterative(root) #Output: 1 2 4 5 3
+```
+
+
+**2. Inorder Traversal:**
+
+* **Definition:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. The acronym is **Left, Root, Right (L, R, R)**.
+
+* **Algorithm (recursive):**
+
+```python
+def inorder(node):
+  if node:
+    inorder(node.left)     # Traverse left subtree
+    print(node.data, end=" ")  # Visit the root
+    inorder(node.right)    # Traverse right subtree
+
+print("\nInorder traversal:")
+inorder(root) #Output: 4 2 5 1 3
+```
+
+* **Iterative Approach (using a stack):**
+
+```python
+def inorder_iterative(node):
+    if node is None:
+        return
+
+    stack = []
+    current = node
+    while True:
+        if current:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.data, end=" ")
+            current = current.right
+        else:
+            break
+
+print("\nInorder iterative traversal:")
+inorder_iterative(root) #Output: 4 2 5 1 3
+```
+
+**3. Postorder Traversal:**
+
+* **Definition:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node. The acronym is **Left, Right, Root (L, R, R)**.
+
+* **Algorithm (recursive):**
+
+```python
+def postorder(node):
+  if node:
+    postorder(node.left)     # Traverse left subtree
+    postorder(node.right)    # Traverse right subtree
+    print(node.data, end=" ")  # Visit the root
+
+print("\nPostorder traversal:")
+postorder(root) #Output: 4 5 2 3 1
+```
+
+* **Iterative Approach (using two stacks):**  Postorder iterative traversal is a bit more complex and often requires two stacks.  (Implementation omitted for brevity, but readily available online if needed).
+
+
+**Important Note:**  The order of traversal significantly affects the output.  Inorder traversal is particularly important for binary search trees because it produces a sorted sequence of the node values.  The choice of traversal method depends on the specific application.
+
