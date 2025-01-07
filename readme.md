@@ -9983,3 +9983,98 @@ print(f"Is the tree a BST (minmax)? {is_bst_minmax_wrapper(root2)}") # Output: F
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  Choose the method that you find more readable and easier to understand.  The recursive in-order traversal is often considered slightly more elegant. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Algorithm 1: Recursive Approach with Inorder Traversal**
+
+This algorithm leverages the property that an inorder traversal of a BST yields a sorted sequence of nodes.
+
+1. **Inorder Traversal:** Perform an inorder traversal of the binary tree, storing the visited nodes in a list or array.
+
+2. **Sorted Check:** Check if the resulting list is sorted in ascending order.  If it is, the tree is a BST; otherwise, it's not.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node, result):
+    if node:
+        inorder_traversal(node.left, result)
+        result.append(node.data)
+        inorder_traversal(node.right, result)
+
+def is_bst_inorder(root):
+    result = []
+    inorder_traversal(root, result)
+    for i in range(1, len(result)):
+        if result[i] < result[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(2)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(is_bst_inorder(root))  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(2)
+root2.left.right = Node(8) #Violation here! 8 should be in the right subtree of 7
+root2.right.left = Node(6)
+root2.right.right = Node(4) #Violation here! 4 should be in the left subtree of 7
+
+
+print(is_bst_inorder(root2))  # Output: False
+
+```
+
+**Algorithm 2: Recursive Approach with Min-Max Bounds**
+
+This algorithm is generally more efficient because it doesn't require creating an extra list. It recursively checks if each node's value falls within the allowed range defined by its ancestors.
+
+1. **Base Case:**  An empty subtree is a BST.
+
+2. **Recursive Step:** For each node:
+   - Check if the node's value is within the allowed range (min < node.data < max).
+   - Recursively check the left subtree with the range (min, node.data).
+   - Recursively check the right subtree with the range (node.data, max).
+
+```python
+import sys
+
+def is_bst_minmax(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_minmax(node.left, min_val, node.data) and
+            is_bst_minmax(node.right, node.data, max_val))
+
+# Example usage (using the same trees as above):
+print(is_bst_minmax(root))  # Output: True
+print(is_bst_minmax(root2)) # Output: False
+```
+
+**Choosing the Right Algorithm:**
+
+The min-max bounds approach (Algorithm 2) is generally preferred because:
+
+* **Efficiency:** It avoids the overhead of creating and sorting a list.  Its time complexity is O(N), where N is the number of nodes, which is the same as inorder traversal but often faster in practice due to less memory allocation.
+* **Space Complexity:**  It uses less space as it doesn't store the entire inorder traversal.  Its space complexity is O(H) where H is the height of the tree (worst case O(N) for skewed trees, best case O(log N) for balanced trees).
+
+The inorder traversal method is simpler to understand but less efficient for larger trees.  Choose the algorithm that best suits your needs based on factors like code readability and performance requirements. Remember to handle edge cases (empty trees, single-node trees) appropriately in your implementation.
+
