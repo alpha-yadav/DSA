@@ -4178,3 +4178,67 @@ fizzBuzzImproved(n: 15) // Call the function to test
 
 This should give you a solid understanding of how to implement the FizzBuzz algorithm in Swift.  Remember to experiment and try modifying the code to handle different conditions or extend the functionality.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The most common resources considered are:
+
+* **Time complexity:** How the runtime of an algorithm scales with the input size.
+* **Space complexity:** How the memory usage of an algorithm scales with the input size.
+
+We typically analyze complexity using **Big O notation**, which describes the upper bound of an algorithm's growth rate as the input size approaches infinity.  It focuses on the dominant factors affecting runtime and ignores constant factors and lower-order terms.  This allows for a general comparison of algorithms regardless of specific hardware or implementation details.
+
+Here's a breakdown of common complexities:
+
+**Time Complexity (Big O Notation):**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array by index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching an unsorted array for a specific element.
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Bubble sort, selection sort, nested loops iterating over the input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime is the factorial of the input size.  Example: Finding all permutations of a set.
+
+
+**Space Complexity (Big O Notation):**  This uses the same notation as time complexity but describes memory usage instead of runtime.  Examples:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+* **O(n) - Linear Space:** The memory usage increases linearly with the input size.
+* **O(log n) - Logarithmic Space:**  The memory usage increases logarithmically with the input size (less common).
+* **O(n²) - Quadratic Space:** The memory usage increases quadratically with the input size (e.g., storing an n x n matrix).
+
+
+**Analyzing Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime or memory usage.
+2. **Express the number of operations in terms of the input size:**  Count how many times these basic operations are executed as a function of the input size (n).
+3. **Use Big O notation to express the dominant term:** Simplify the expression, ignoring constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple function that sums the elements of an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for num in arr:
+    total += num
+  return total
+```
+
+The basic operation is the addition (`total += num`).  This operation is executed `n` times (where `n` is the length of the array).  Therefore, the time complexity is O(n) (linear time).  The space complexity is O(1) (constant space) because it only uses a few variables regardless of the array size.
+
+
+**Importance of Complexity Analysis:**
+
+Understanding algorithm complexity is crucial for:
+
+* **Choosing the right algorithm:**  For large datasets, an algorithm with a lower complexity will significantly outperform one with a higher complexity.
+* **Optimizing code:** Identifying performance bottlenecks and improving efficiency.
+* **Predicting scalability:**  Estimating how well an algorithm will handle larger inputs.
+
+
+It's important to note that Big O notation provides an *asymptotic* analysis – it describes behavior as the input size grows very large.  For small input sizes, the actual runtime might not perfectly reflect the Big O complexity.
+
