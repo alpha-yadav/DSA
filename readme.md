@@ -7875,3 +7875,64 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Both methods achieve the same result. The recursive approach is often considered more elegant and potentially slightly more efficient for balanced trees, while the iterative approach might be preferable for very deep or unbalanced trees to avoid potential stack overflow issues.  Choose the method that best suits your needs and coding style. Remember to handle the `None` cases carefully in both methods to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They offer a balance between the speed of access provided by arrays and the flexibility offered by linked lists.  Here's a breakdown of their key characteristics and functionalities:
+
+**Core Properties:**
+
+* **Ordered Structure:**  The key property of a BST is that for every node:
+    * The value of all nodes in its *left subtree* are *less than* the node's value.
+    * The value of all nodes in its *right subtree* are *greater than* the node's value.
+
+* **Node Structure:** Each node in a BST typically contains:
+    * `key`:  The data being stored (e.g., an integer, string, etc.).
+    * `left`: A pointer/reference to the left child node.
+    * `right`: A pointer/reference to the right child node.
+
+
+**Basic Operations:**
+
+* **Search:**  Finding a specific key within the tree.  The search algorithm efficiently traverses the tree, going left if the target key is smaller and right if it's larger.  The time complexity is O(h), where h is the height of the tree (in a balanced tree, h is approximately log₂n, where n is the number of nodes).
+
+* **Insertion:** Adding a new node with a key into the tree while maintaining the BST properties.  The new node is placed in the appropriate position based on its key value relative to existing nodes.  The time complexity is also O(h).
+
+* **Deletion:** Removing a node from the tree while maintaining the BST properties. This is the most complex operation because it requires handling several cases depending on whether the node to be deleted has zero, one, or two children.  Time complexity is O(h).
+
+* **Minimum/Maximum:** Finding the smallest or largest key in the tree.  This involves traversing the leftmost or rightmost branches, respectively.  Time complexity is O(h).
+
+* **Successor/Predecessor:** Finding the next larger or next smaller key in the tree.  These operations are important for inorder traversal and are relatively efficient.  Time complexity is O(h).
+
+* **Traversal:**  Visiting all nodes in the tree in a systematic way.  Common traversal methods include:
+    * **Inorder Traversal:** Visits nodes in ascending order of their keys.
+    * **Preorder Traversal:** Visits the root node first, then the left subtree, then the right subtree.
+    * **Postorder Traversal:** Visits the left subtree, then the right subtree, then the root node.  Often used for expression evaluation.
+
+
+**Time Complexity:**
+
+The time complexity of the operations mentioned above is typically O(h), where h is the height of the tree.  In a *balanced* BST, h is approximately log₂n, resulting in efficient logarithmic time complexity.  However, in a *degenerate* (or skewed) BST, where the tree resembles a linked list (all nodes are on one side), h becomes n, leading to linear time complexity—which negates the advantages of a BST.
+
+
+**Balanced BSTs:**
+
+To avoid the problem of skewed trees, self-balancing BSTs have been developed, such as:
+
+* **AVL Trees:**  Maintain balance by ensuring that for every node, the height difference between its left and right subtrees is at most 1.
+* **Red-Black Trees:**  Use a color-coding scheme to maintain approximate balance.
+* **B-Trees:** Used extensively in databases and file systems, they are optimized for disk access.
+
+
+**Advantages of BSTs:**
+
+* Efficient search, insertion, and deletion in a balanced tree.
+* Simple implementation.
+* Useful for sorted data representation and processing.
+
+**Disadvantages of BSTs:**
+
+* Performance degrades significantly in an unbalanced tree.
+* Not suitable for all applications (e.g., when frequent insertions and deletions are needed without the overhead of balancing).
+
+
+In summary, BSTs are a powerful and versatile data structure, but their effectiveness relies on maintaining a relatively balanced structure to avoid worst-case scenarios.  For applications demanding consistent performance under heavy modifications, balanced BST variations are often preferred.
+
