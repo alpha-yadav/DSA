@@ -7443,3 +7443,101 @@ In contrast, if the array were sorted, we could use a binary search (O(log n)) w
 
 Big O notation is a crucial tool for comparing the efficiency of different algorithms and making informed decisions about which algorithm to use in a particular situation.  Understanding it is essential for any computer scientist or software engineer.
 
+#  A Simple Loop 
+A "simple loop" can refer to several basic loop structures in programming.  Here are examples in a few common languages:
+
+**1. `for` loop (iterating a specific number of times):**
+
+* **Python:**
+
+```python
+for i in range(5):  # Loops 5 times (i = 0, 1, 2, 3, 4)
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. `while` loop (iterating until a condition is false):**
+
+* **Python:**
+
+```python
+i = 0
+while i < 5:
+    print(i)
+    i += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let i = 0;
+while (i < 5) {
+  console.log(i);
+  i++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int i = 0;
+  while (i < 5) {
+    std::cout << i << std::endl;
+    i++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int i = 0;
+    while (i < 5) {
+      System.out.println(i);
+      i++;
+    }
+  }
+}
+```
+
+These examples all do the same thing: print the numbers 0 through 4.  The choice between `for` and `while` depends on the specific problem.  `for` loops are generally preferred when you know the number of iterations in advance, while `while` loops are better when the number of iterations depends on a condition.  Remember to be cautious of infinite loops when using `while` loops –  ensure your condition eventually becomes false.
+
