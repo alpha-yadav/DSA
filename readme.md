@@ -8606,3 +8606,71 @@ This approach builds the output string incrementally.  If both `if` conditions a
 
 The "basic" version is easiest to read and understand for beginners.  The more concise versions are efficient but might be slightly harder to grasp initially.  For most practical purposes, the improved or concise versions offer better code style.  Choose the version that best suits your understanding and coding style.  Remember that readability is crucial, even in simple problems like FizzBuzz.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm consumes as the input size grows.  It's a crucial concept in computer science because it helps us predict how an algorithm will perform with different inputs and choose the most efficient algorithm for a given task.  We usually express complexity using Big O notation.
+
+Here's a breakdown of key aspects:
+
+**1. Big O Notation:**
+
+Big O notation describes the upper bound of an algorithm's growth rate. It focuses on the dominant terms as the input size (often denoted as 'n') approaches infinity, ignoring constant factors and lower-order terms.  It provides a high-level understanding of how the algorithm scales.
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient. Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size. This becomes slow quickly as 'n' grows. Example: Bubble sort, selection sort, nested loops iterating over the same data.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  These algorithms become impractical for even moderately large inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  Extremely slow for any reasonably sized input. Example: Traveling salesperson problem (brute-force approach).
+
+
+**2. Time Complexity:**
+
+This measures the time an algorithm takes to run as a function of the input size.  It's usually expressed using Big O notation.  Analyzing time complexity involves considering:
+
+* **Best-case scenario:** The most efficient execution path.
+* **Average-case scenario:** The expected execution time.
+* **Worst-case scenario:** The least efficient execution path.  Often the most important to consider.
+
+
+**3. Space Complexity:**
+
+This measures the amount of memory an algorithm uses as a function of the input size. It's also expressed using Big O notation.  Space complexity considers:
+
+* **Auxiliary space:** The extra space used beyond the input data.
+* **Total space:** The sum of auxiliary space and the input data size.
+
+
+**4. Analyzing Algorithm Complexity:**
+
+Analyzing complexity involves:
+
+* **Identifying the basic operations:** Determine the fundamental operations that contribute most to the algorithm's runtime.
+* **Counting the number of operations:** Express the number of operations as a function of the input size 'n'.
+* **Applying Big O notation:** Identify the dominant terms and express the complexity using Big O notation.
+
+
+**Example:**
+
+Let's consider a simple function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for i in range(1, len(arr)):
+    if arr[i] > max_val:
+      max_val = arr[i]
+  return max_val
+```
+
+This algorithm iterates through the array once.  Therefore, its time complexity is O(n), where n is the length of the array.  Its space complexity is O(1) because it uses a constant amount of extra space regardless of the array's size.
+
+
+In summary, understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance for different input sizes.  Big O notation provides a standardized way to express and compare the scalability of algorithms.
+
