@@ -13792,3 +13792,45 @@ g.print_matrix()
 
 Remember to adapt the implementation based on whether your graph is directed, weighted, or unweighted.  For large or sparse graphs, consider using a more appropriate data structure.
 
+#  Introduction To Graph Theory 
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph consists of:
+
+* **Vertices (or nodes):** These represent the objects in the system being modeled.  Think of them as points or dots.
+* **Edges (or arcs):** These represent the connections or relationships between the vertices.  Think of them as lines connecting the vertices.
+
+Edges can be:
+
+* **Directed:**  An arrow indicating a one-way relationship (e.g., A points to B, but B doesn't necessarily point to A).  These are used in directed graphs (or digraphs).
+* **Undirected:** A line indicating a two-way relationship (A is connected to B, and B is connected to A).  These are used in undirected graphs.
+* **Weighted:**  A number associated with each edge representing the "strength" or "cost" of the connection (e.g., distance, weight, cost).
+
+**Key Concepts:**
+
+* **Path:** A sequence of vertices connected by edges.
+* **Cycle:** A path that starts and ends at the same vertex, without repeating any other vertices.
+* **Connected Graph:** A graph where there's a path between any two vertices.
+* **Disconnected Graph:** A graph that is not connected.
+* **Tree:** A connected graph with no cycles.  Trees are fundamental in many algorithms.
+* **Subgraph:** A graph formed by a subset of the vertices and edges of a larger graph.
+* **Complete Graph:** A graph where every pair of vertices is connected by an edge.
+* **Bipartite Graph:** A graph whose vertices can be divided into two disjoint sets such that every edge connects a vertex in one set to a vertex in the other set.
+* **Planar Graph:** A graph that can be drawn on a plane without any edges crossing.
+
+**Applications of Graph Theory:**
+
+Graph theory has a wide range of applications in various fields, including:
+
+* **Computer Science:**  Network routing, data structures, algorithm design, social network analysis.
+* **Engineering:**  Network design, transportation planning, circuit design.
+* **Biology:**  Modeling biological networks (e.g., gene regulatory networks, protein-protein interaction networks).
+* **Social Sciences:**  Modeling social networks, analyzing relationships between individuals or groups.
+* **Chemistry:**  Representing molecular structures.
+* **Operations Research:**  Optimizing network flows.
+
+
+**Example:**
+
+Consider a map of cities and roads connecting them. Each city would be a vertex, and each road would be an edge.  This is an example of an undirected graph. If you add directions to the roads (one-way streets), it becomes a directed graph.  If you add distances to the roads, it becomes a weighted graph.
+
+This introduction provides a basic overview.  The field of graph theory is vast and deep, encompassing many advanced concepts and algorithms.  Further exploration would delve into specific graph types, algorithms for graph traversal (e.g., breadth-first search, depth-first search), shortest path algorithms (e.g., Dijkstra's algorithm, Bellman-Ford algorithm), and much more.
+
