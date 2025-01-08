@@ -11592,3 +11592,90 @@ def longest_palindrome(s):
 
 These examples demonstrate different levels of complexity and require different algorithmic approaches.  Remember that there are often multiple ways to solve an algorithmic problem, and the best solution often depends on factors like time and space complexity.  Consider looking up the time and space complexity of each solution if you're familiar with those concepts.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's designed to test basic programming concepts like loops and conditional statements.  Here's how to implement it in Swift, broken down into different levels of sophistication:
+
+**Level 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This is straightforward and easy to understand.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5, and finally prints the number if none of the conditions are met.
+
+**Level 2:  Slightly Improved Readability**
+
+This version uses a ternary operator to make the code a bit more concise:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        let fizz = i % 3 == 0 ? "Fizz" : ""
+        let buzz = i % 5 == 0 ? "Buzz" : ""
+        print(fizz + buzz == "" ? "\(i)" : fizz + buzz)
+    }
+}
+
+fizzBuzz(n: 15)
+```
+
+This version is more compact but might be slightly harder to read for beginners. It cleverly combines the "Fizz" and "Buzz" strings.  If both are empty, it prints the number; otherwise, it prints the combined string.
+
+
+**Level 3:  Using String Interpolation for Clarity**
+
+This version enhances readability further by using string interpolation directly within the print statement:
+
+```swift
+func fizzBuzz(n: Int) {
+  for i in 1...n {
+    var output = ""
+    if i % 3 == 0 { output += "Fizz" }
+    if i % 5 == 0 { output += "Buzz" }
+    print(output.isEmpty ? "\(i)" : output)
+  }
+}
+
+fizzBuzz(n: 15)
+```
+
+This approach avoids nested ternary operators, making the logic clearer.  It builds the output string incrementally, adding "Fizz" and/or "Buzz" as needed.
+
+
+**Level 4: Functional Approach (More Advanced)**
+
+This version uses a more functional approach with `map`:
+
+```swift
+func fizzBuzz(n: Int) -> [String] {
+    return (1...n).map { i in
+        let fizz = i % 3 == 0 ? "Fizz" : ""
+        let buzz = i % 5 == 0 ? "Buzz" : ""
+        return fizz + buzz != "" ? fizz + buzz : "\(i)"
+    }
+}
+
+print(fizzBuzz(n: 15).joined(separator: "\n")) //Print each element on a new line
+```
+
+This version returns an array of strings instead of printing directly. The `map` function applies a transformation to each element of the range (1...n).  `joined(separator: "\n")` neatly formats the output.
+
+
+Choose the version that best suits your understanding and the context of your project.  The first two are excellent starting points for learning basic Swift programming, while the later versions demonstrate more advanced techniques. Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).
+
