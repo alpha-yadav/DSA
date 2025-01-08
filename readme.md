@@ -13515,3 +13515,85 @@ postorder(root)
 
 This complete example demonstrates how to create a simple binary tree and perform all three traversals.  Remember that the output depends entirely on the structure of your binary tree.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+This is a generally efficient and easy-to-understand approach.  It recursively traverses the tree.  The core logic is:
+
+* **Base Cases:**
+    * If the current node is `null`, return `null`.
+    * If the current node is either `p` or `q`, return the current node (we've found one of the targets).
+
+* **Recursive Step:**
+    * Recursively search the left and right subtrees.
+    * If both left and right subtrees return a non-`null` value, it means `p` and `q` are on different subtrees, so the current node is their LCA.  Return the current node.
+    * Otherwise, return the non-`null` result from either the left or right subtree (the LCA is in that subtree).
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    else:
+        return right
+
+#Example Usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left
+q = root.right
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val} is: {lca.val}") # Output: 3
+
+
+p = root.left
+q = root.left.right.right
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val} is: {lca.val}") # Output: 5
+```
+
+2. **Iterative Approach (Using Parent Pointers):**
+
+This approach is less common but can be useful in situations where recursion is not preferred (e.g., due to stack overflow concerns with very deep trees).  It requires modifying the tree to include parent pointers.
+
+* Traverse the tree to find the nodes `p` and `q`, storing their paths from the root.
+* Iterate up the paths from `p` and `q` simultaneously until you find a common ancestor.  The last common ancestor encountered is the LCA.
+
+
+3. **Using a Hash Table (for storing paths):**
+
+Similar to the iterative method with parent pointers, but instead of modifying the tree, you can store the paths to `p` and `q` in hash tables. The space complexity could be higher.
+
+**Time and Space Complexity:**
+
+* **Recursive Approach:**  O(N) time complexity in the worst case (entire tree traversal), O(H) space complexity in the worst case (due to recursive call stack depth, where H is the height of the tree).
+* **Iterative Approach:** O(N) time complexity, O(H) space complexity (for path storage).
+* **Hash Table Approach:** O(N) time, potentially O(N) space (depending on tree structure and paths length).
+
+The recursive approach is generally preferred for its simplicity and clarity, unless there are concerns about stack overflow with extremely deep trees.  The iterative approach with parent pointers offers a space-efficient alternative in such cases, although it requires modifying the tree structure. The hash table based approach is less commonly used unless you need to store path information for other purposes. Remember to handle edge cases such as empty trees, one node being an ancestor of the other, or nodes not being present in the tree.
+
