@@ -13690,3 +13690,14 @@ The best method depends on your needs:
 
 Remember to handle edge cases like one or both nodes not being present in the tree.  Always carefully consider the space and time complexities when choosing a method.
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need information such as:
+
+* **Equation:**  e.g., y = x^2, y = sin(x), y = 2x + 1
+* **Data points:**  e.g., (1,2), (3,4), (5,6)  (provide x and y coordinates)
+* **Type of graph:**  (e.g., line graph, scatter plot, bar chart, etc.  If you don't specify, I'll choose what seems most appropriate based on the data)
+* **Range of x and y values:** (optional, but helpful for specifying the scale of the graph)
+
+
+Once you give me this information, I can help you create a graph.  I can't create visual graphs directly, but I can describe the graph or give you the coordinates to plot yourself.
+
