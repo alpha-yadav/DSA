@@ -11785,3 +11785,57 @@ Imagine you have two functions representing the runtime of two algorithms. If f(
 
 Big-Theta notation is crucial for analyzing the efficiency of algorithms. It allows us to precisely compare the runtime or space complexity of different algorithms, focusing on how they scale with increasing input size, ignoring constant factors that become insignificant for large inputs.  It provides a more precise understanding than Big-O alone, showing not just an upper bound, but the actual growth rate of the function.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the growth rate of functions, particularly useful in analyzing the efficiency of algorithms.  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  An upper bound on the growth rate of a function.  `f(n) = O(g(n))` means there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c*g(n)` for all `n ≥ n₀`.  It describes the *worst-case* scenario.
+* **Focus:**  How fast the function grows at most.
+* **Example:** If an algorithm has a time complexity of O(n²), it means its runtime grows no faster than the square of the input size.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** A lower bound on the growth rate of a function. `f(n) = Ω(g(n))` means there exist positive constants *c* and *n₀* such that `0 ≤ c*g(n) ≤ f(n)` for all `n ≥ n₀`. It describes the *best-case* scenario (though not necessarily the actual best case, but a lower bound on how good it *could* be).
+* **Focus:** How fast the function grows at least.
+* **Example:** If an algorithm has a time complexity of Ω(n), it means its runtime grows at least linearly with the input size.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** A tight bound on the growth rate of a function. `f(n) = Θ(g(n))` means there exist positive constants *c₁*, *c₂*, and *n₀* such that `0 ≤ c₁*g(n) ≤ f(n) ≤ c₂*g(n)` for all `n ≥ n₀`.  It means the function grows *proportionally* to g(n).
+* **Focus:** Precise characterization of the growth rate.
+* **Example:** If an algorithm has a time complexity of Θ(n log n), its runtime grows proportionally to n log n.  This is a very precise statement about the algorithm's efficiency.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  A strict upper bound on the growth rate of a function. `f(n) = o(g(n))` means for *every* positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ f(n) < c*g(n)` for all `n ≥ n₀`.  This implies that f(n) grows *significantly slower* than g(n).
+* **Focus:**  f(n) is dominated by g(n) as n approaches infinity.
+* **Example:** `n = o(n²)`, because n grows significantly slower than n².
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** A strict lower bound on the growth rate of a function. `f(n) = ω(g(n))` means for *every* positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ c*g(n) < f(n)` for all `n ≥ n₀`. This implies that f(n) grows *significantly faster* than g(n).
+* **Focus:** g(n) is dominated by f(n) as n approaches infinity.
+* **Example:** `n² = ω(n)`, because n² grows significantly faster than n.
+
+
+**Relationships:**
+
+* `f(n) = Θ(g(n))` implies `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+* `f(n) = o(g(n))` implies `f(n) = O(g(n))`, but not vice-versa.
+* `f(n) = ω(g(n))` implies `f(n) = Ω(g(n))`, but not vice-versa.
+
+
+**In Summary:**
+
+| Notation | Meaning                                      | Strength |
+|---------|----------------------------------------------|----------|
+| O       | Upper bound                                   | Weak     |
+| Ω       | Lower bound                                   | Weak     |
+| Θ       | Tight bound                                   | Strong   |
+| o       | Strict upper bound                            | Strong   |
+| ω       | Strict lower bound                            | Strong   |
+
+
+Big O is the most commonly used notation because it provides a useful upper bound on the worst-case performance of an algorithm.  However, understanding the other notations gives a more complete picture of an algorithm's behavior.
+
