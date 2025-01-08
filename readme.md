@@ -14122,3 +14122,31 @@ else:
 
 This improved version handles self-loops (edges from a node to itself) and correctly identifies cycles involving them.  The use of `recursionStack` is crucial for efficiently detecting cycles; simply using `visited` alone is insufficient for directed graphs. Remember that this algorithm has a time complexity of O(V+E), where V is the number of vertices and E is the number of edges.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focusing on efficient graph algorithms.  The most famous among these is his algorithm for finding minimum spanning trees (MSTs) in linear time.  However, he's also made significant contributions to other graph problems.  Let's break down the key aspects:
+
+**1. Linear-Time Minimum Spanning Tree (MST) Algorithm:**
+
+This is arguably Thorup's most impactful contribution.  Before his work, the best known deterministic algorithms for finding MSTs had a time complexity slightly better than O(m log log n), where 'm' is the number of edges and 'n' is the number of vertices in the graph.  Thorup's algorithm achieves a true linear time complexity, O(m), in the word RAM model.  This is a significant improvement.
+
+* **Key Idea:**  The algorithm cleverly uses sophisticated data structures and techniques, including:
+    * **Randomization:**  While not inherently probabilistic, the algorithm leverages randomization in certain steps to achieve the linear time bound.
+    * **Advanced Data Structures:**  Thorup employs intricate data structures optimized for efficient searches and updates within the graph.
+    * **Partitioning and Contraction:** The algorithm efficiently partitions the graph into smaller subgraphs, finds MSTs within those subgraphs, and then merges them.
+
+* **Word RAM Model:** It's crucial to understand that the linear time complexity holds in the word RAM model, which assumes that arithmetic operations on words of size log n bits can be performed in constant time.  This assumption is reasonable for many practical scenarios.
+
+* **Practicality:** While theoretically brilliant, the constant factors hidden within the O(m) notation might be quite large. This means that for smaller graphs, simpler algorithms like Prim's or Kruskal's might be faster in practice.  However, for massive graphs, Thorup's algorithm theoretically offers significant advantages.
+
+
+**2. Other Contributions:**
+
+Thorup has also made notable contributions to other graph algorithms, including but not limited to:
+
+* **Dynamic Graph Algorithms:** Algorithms that efficiently maintain graph properties (like connectivity, shortest paths, etc.) as edges are added or removed.
+* **Approximate Algorithms:**  Algorithms that provide solutions that are close to optimal but run significantly faster than exact algorithms.
+* **Graph Representation and Data Structures:**  He's contributed to the design and analysis of efficient data structures for representing and manipulating graphs.
+
+
+**In summary:**  Thorup's algorithms, particularly his linear-time MST algorithm, represent a significant advancement in the field of graph algorithms.  While some of his algorithms might be complex and challenging to implement, they provide theoretical benchmarks for the efficiency of graph computations and offer significant practical potential for processing extremely large graphs.  The exact details of the algorithms are quite intricate and involve advanced techniques from data structures and algorithm design.
+
