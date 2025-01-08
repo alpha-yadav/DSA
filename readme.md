@@ -13701,3 +13701,94 @@ Please provide me with the data or equation you would like me to graph.  I need 
 
 Once you give me this information, I can help you create a graph.  I can't create visual graphs directly, but I can describe the graph or give you the coordinates to plot yourself.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, particularly suitable for dense graphs (graphs with many edges). Here's a breakdown of how it works, its advantages and disadvantages, and considerations for implementation:
+
+**How it Works:**
+
+An adjacency matrix represents a graph as a two-dimensional array (typically a square matrix).  The rows and columns represent the vertices (nodes) of the graph.  The element at `matrix[i][j]` indicates the connection between vertex `i` and vertex `j`.
+
+* **Unweighted Graph:**  `matrix[i][j] = 1` if there's an edge between vertex `i` and vertex `j`; otherwise, `matrix[i][j] = 0`.
+
+* **Weighted Graph:** `matrix[i][j]` holds the weight of the edge between vertex `i` and vertex `j`.  If there's no edge, `matrix[i][j]` is typically set to a special value like `infinity` (∞) or `-1` (depending on your application and how you handle pathfinding algorithms).
+
+
+**Example:**
+
+Consider an unweighted, undirected graph with 4 vertices (A, B, C, D):
+
+```
+A -- B
+|   /
+|  /
+D -- C
+```
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  1  0  1
+B  1  0  1  0
+C  0  1  0  1
+D  1  0  1  0
+```
+
+For a directed graph, the matrix would be asymmetric.  For example, if the edge from A to B exists but the edge from B to A doesn't:
+
+```
+   A  B  C  D
+A  0  1  0  1
+B  0  0  1  0
+C  0  0  0  1
+D  1  0  0  0
+```
+
+
+**Advantages:**
+
+* **Fast edge lookup:**  Checking if an edge exists between two vertices is very fast – O(1) time complexity.
+* **Simple implementation:**  Relatively easy to understand and implement.
+* **Efficient for dense graphs:**  When the number of edges is close to the square of the number of vertices, the space usage isn't significantly worse than other representations.
+
+
+**Disadvantages:**
+
+* **Space complexity:**  The space complexity is O(V²), where V is the number of vertices. This becomes inefficient for large sparse graphs (graphs with relatively few edges).
+* **Memory waste for sparse graphs:**  A large portion of the matrix will be filled with zeros for sparse graphs, leading to wasted memory.
+* **Adding/Removing vertices:**  Adding or removing a vertex requires resizing the entire matrix, which can be computationally expensive.
+
+
+**Implementation Considerations:**
+
+* **Data type:** Choose an appropriate data type for the matrix elements. For unweighted graphs, `bool` or `int` works well. For weighted graphs, you might need `int`, `float`, `double`, or even a custom structure to represent different types of weights.
+* **Memory management:** For very large graphs, consider using dynamic memory allocation to avoid stack overflow.  Libraries like Eigen (C++) provide efficient matrix operations.
+* **Sparse matrix representations:** If dealing with a sparse graph, consider alternative representations like adjacency lists which are much more space-efficient.
+
+
+**Example in Python:**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.adj_matrix = [[0] * num_vertices for _ in range(num_vertices)]
+
+    def add_edge(self, u, v, weight=1):
+        self.adj_matrix[u][v] = weight  #For undirected, add self.adj_matrix[v][u] = weight as well.
+
+    def print_matrix(self):
+        for row in self.adj_matrix:
+            print(row)
+
+# Example usage:
+g = Graph(4)
+g.add_edge(0, 1)
+g.add_edge(0, 3)
+g.add_edge(1, 2)
+g.add_edge(2, 3)
+g.print_matrix()
+```
+
+Remember to adapt the implementation based on whether your graph is directed, weighted, or unweighted.  For large or sparse graphs, consider using a more appropriate data structure.
+
