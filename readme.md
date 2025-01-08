@@ -12124,3 +12124,67 @@ The logarithmic growth means that adding a large number of elements to the input
 
 **Important Note:**  The O(log n) time complexity is usually *average-case* or *best-case* complexity for many algorithms.  Worst-case scenarios (like a highly unbalanced BST) can lead to O(n) time complexity.  Always consider the context and potential worst-case scenarios when analyzing algorithm performance.
 
+#  An O(log n) example 
+The most common example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a target value within a *sorted* array.  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process is repeated until the target value is found or the search interval is empty.
+
+**Why it's O(log n):**
+
+With each comparison, we eliminate roughly half of the remaining search space.  Therefore, the number of comparisons required to find the target value is proportional to the logarithm (base 2) of the size of the array (n).
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+In this example, if the array has `n` elements, the maximum number of iterations of the `while` loop is approximately log₂(n).  This is because we halve the search space with each iteration.  Therefore, the time complexity is O(log n).
+
+
+Other examples of O(log n) algorithms include:
+
+* **Finding an element in a balanced binary search tree:**  Similar to binary search, each comparison eliminates roughly half of the remaining tree.
+* **Efficient exponentiation (e.g., using exponentiation by squaring):**  This technique reduces the number of multiplications needed to compute a power.
+* **Some divide-and-conquer algorithms:**  Algorithms that recursively break a problem into smaller subproblems of roughly half the size.
+
+
+It's important to note that the base of the logarithm (usually 2, but it can be another constant) doesn't affect the Big O notation, as it's just a constant factor.  We simply say O(log n).
+
