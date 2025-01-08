@@ -11930,3 +11930,102 @@ The runtime of this function is directly proportional to the size of the array. 
 
 In summary, Big O notation provides a standardized way to analyze and compare the efficiency of algorithms, allowing developers to choose the most appropriate algorithm for a given task based on its scalability.  Understanding Big O is crucial for writing efficient and performant code, especially when dealing with large datasets.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  Here are examples in several common programming languages:
+
+**1. While Loop (Python):**
+
+This loop continues as long as the condition `count < 5` is true.
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+**2. For Loop (Python) iterating through a sequence:**
+
+This loop iterates through each item in the `my_list`
+
+```python
+my_list = ["apple", "banana", "cherry"]
+for item in my_list:
+  print(item)
+```
+
+**3. For Loop (Python) with range:**
+
+This loop iterates 5 times, from 0 to 4.
+
+```python
+for i in range(5):
+  print(i)
+```
+
+
+**4. While Loop (JavaScript):**
+
+Similar to the Python `while` loop.
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+**5. For Loop (JavaScript):**
+
+Iterates from 0 to 4.
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+**6. For Loop (C++):**
+
+Similar to the JavaScript `for` loop.
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+**7. While Loop (Java):**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+**8. For Loop (Java):**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+These examples demonstrate the basic structure of simple loops.  More complex loops can involve nested loops, `break` and `continue` statements for more control flow, and iteration over more complex data structures.  The choice between `while` and `for` loops often depends on the specific task and the programmer's preference, but `for` loops are generally preferred when the number of iterations is known in advance.
+
