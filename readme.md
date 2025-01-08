@@ -12097,3 +12097,30 @@ This will print each element of the `matrix` array.
 
 In summary, nested loops are a powerful tool for iterating over multiple dimensions of data, but their increased time complexity should be considered when dealing with large datasets.  Always strive for efficient and readable code.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They mean the time it takes to solve a problem grows logarithmically with the input size (n).  This is incredibly fast because the time increases very slowly as the input size grows.  The base of the logarithm (e.g., base 2, base 10) doesn't affect the Big O notation, as it's just a constant factor.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+**1. Binary Search:** This is the quintessential O(log n) algorithm.  It works on a *sorted* data set.  To find a target value, the algorithm repeatedly divides the search interval in half.  If the target is in the middle element, it's found. Otherwise, the search continues in either the left or right half, depending on whether the target is smaller or larger than the middle element.
+
+**2. Algorithms using efficient data structures:**  Several data structures support logarithmic time complexity for certain operations.  Examples include:
+
+* **Binary Search Trees (BSTs):**  Searching, insertion, and deletion in a balanced BST have an average time complexity of O(log n).  However, in a worst-case scenario (e.g., a skewed tree), it can degrade to O(n).  Self-balancing BSTs (like AVL trees or red-black trees) guarantee O(log n) for these operations in all cases.
+* **Heaps (e.g., min-heap, max-heap):**  Finding the minimum (or maximum) element, insertion, and deletion of the minimum (or maximum) element all take O(log n) time.
+* **Hash tables (with good hash function):**  Average-case time complexity for insertion, deletion, and search is O(1) (constant time). However, in the worst case (e.g., many collisions), it can degrade to O(n).  But a well-designed hash table with a good hash function will generally exhibit near-constant-time performance.  It's important to remember this distinction.
+
+
+**3. Divide and Conquer Algorithms (under certain conditions):**  Some divide-and-conquer algorithms can achieve O(log n) time complexity.  The key is that the problem size needs to be reduced by a constant factor at each step.  Binary search is a prime example.  Other algorithms might exhibit this behavior if they efficiently split the problem into smaller subproblems.
+
+
+**4. Exponentiation by Squaring:** This algorithm efficiently calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time.  It repeatedly squares the base and adjusts the exponent.
+
+
+**Why Logarithmic Time is Fast:**
+
+The logarithmic growth means that adding a large number of elements to the input only increases the runtime relatively slightly.  For example, if an algorithm takes 1 step for n=1, 2 steps for n=2, 3 steps for n=4, 4 steps for n=8, and so on, it's exhibiting logarithmic growth.  Doubling the input size only adds one step to the runtime. This characteristic makes logarithmic algorithms exceptionally efficient for large datasets.
+
+
+**Important Note:**  The O(log n) time complexity is usually *average-case* or *best-case* complexity for many algorithms.  Worst-case scenarios (like a highly unbalanced BST) can lead to O(n) time complexity.  Always consider the context and potential worst-case scenarios when analyzing algorithm performance.
+
