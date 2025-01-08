@@ -11679,3 +11679,63 @@ This version returns an array of strings instead of printing directly. The `map`
 
 Choose the version that best suits your understanding and the context of your project.  The first two are excellent starting points for learning basic Swift programming, while the later versions demonstrate more advanced techniques. Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  This is usually expressed as a function of the input size (often denoted as 'n'). The most common resources considered are:
+
+* **Time complexity:**  Measures how the runtime of an algorithm scales with the input size.
+* **Space complexity:** Measures how the memory usage of an algorithm scales with the input size.
+
+We typically focus on *asymptotic* complexity, which describes the behavior of the algorithm as the input size grows very large. This allows us to ignore constant factors and smaller-order terms that become insignificant for large inputs.
+
+**Notations used to express complexity:**
+
+* **Big O (O):**  Represents the *upper bound* of the algorithm's growth rate.  It describes the worst-case scenario.  We say an algorithm is O(f(n)) if its runtime is at most a constant multiple of f(n) for sufficiently large n.
+
+* **Big Omega (Ω):** Represents the *lower bound* of the algorithm's growth rate.  It describes the best-case scenario (though often less useful than Big O). We say an algorithm is Ω(f(n)) if its runtime is at least a constant multiple of f(n) for sufficiently large n.
+
+* **Big Theta (Θ):** Represents the *tight bound*.  It means the algorithm's growth rate is both O(f(n)) and Ω(f(n)).  This indicates a precise characterization of the algorithm's growth.
+
+**Common Complexity Classes:**
+
+Algorithms are often categorized by their time complexity:
+
+* **O(1) - Constant time:** The runtime is independent of the input size.  Example: Accessing an element in an array by index.
+
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear time:** The runtime increases linearly with the input size. Example: Searching an unsorted array.
+
+* **O(n log n) - Linearithmic time:**  The runtime is a product of linear and logarithmic terms. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic time:** The runtime increases quadratically with the input size. Example: Bubble sort, selection sort.
+
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial time:** The runtime grows factorially with the input size. Example: Traveling salesperson problem (brute-force approach).
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity involves examining the algorithm's steps and identifying the dominant operations as the input size grows.  This often involves:
+
+* **Counting operations:**  Count the number of basic operations (e.g., comparisons, assignments, arithmetic operations) performed as a function of the input size.
+* **Identifying the dominant operations:**  Focus on the operations that contribute most to the runtime as n becomes large. Ignore constant factors and lower-order terms.
+* **Expressing complexity using Big O notation:**  Express the dominant operations' growth rate using Big O notation.
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The number of comparisons (the dominant operation) is proportional to the length of the array (`n`).  Therefore, the time complexity of linear search is O(n).  In the best case (target is the first element), it's O(1), but in the worst case (target is not present or at the end), it's O(n).  The Big O notation typically focuses on the worst-case scenario.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance for different input sizes.  An algorithm with a lower complexity will generally perform better for larger inputs.
+
