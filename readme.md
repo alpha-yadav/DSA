@@ -13210,3 +13210,91 @@ else:
 
 Remember to define the `Node` class appropriately before using either function. Choose the method that best suits your needs and the expected size of the input trees.  The iterative approach is generally preferred for its robustness against stack overflow.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit (process) each node in a binary tree exactly once.  There are several common traversal methods, each yielding a different order of node visits.  They're categorized primarily by the order in which they visit the root node relative to its left and right subtrees.
+
+Here's a breakdown of the most important traversal methods:
+
+**1. Depth-First Traversals:** These traversals prioritize going as deep as possible down one branch before backtracking.
+
+* **Pre-order Traversal:**  Visit the root node first, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The order is: Root, Left, Right.
+
+   ```
+   Pre-order(node)
+       if node is not NULL
+           print(node->data)
+           Pre-order(node->left)
+           Pre-order(node->right)
+   ```
+
+* **In-order Traversal:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. The order is: Left, Root, Right.  For a Binary *Search* Tree (BST), this traversal yields the nodes in ascending order of their keys.
+
+   ```
+   In-order(node)
+       if node is not NULL
+           In-order(node->left)
+           print(node->data)
+           In-order(node->right)
+   ```
+
+* **Post-order Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node. The order is: Left, Right, Root.  This traversal is often used to delete nodes in a tree or evaluate expressions represented by the tree.
+
+   ```
+   Post-order(node)
+       if node is not NULL
+           Post-order(node->left)
+           Post-order(node->right)
+           print(node->data)
+   ```
+
+
+**2. Breadth-First Traversal (Level-order Traversal):** This traversal visits nodes level by level, starting from the root and proceeding to the next level. It typically uses a queue data structure.
+
+```
+Level-order(root)
+  queue q;
+  q.enqueue(root);
+
+  while (!q.isEmpty()) {
+    node current = q.dequeue();
+    print(current->data);
+    if (current->left != NULL)
+      q.enqueue(current->left);
+    if (current->right != NULL)
+      q.enqueue(current->right);
+  }
+```
+
+
+**Example:**
+
+Consider this binary tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+The traversals would produce the following sequences:
+
+* **Pre-order:** 1 2 4 5 3
+* **In-order:** 4 2 5 1 3
+* **Post-order:** 4 5 2 3 1
+* **Level-order:** 1 2 3 4 5
+
+
+**Applications:**
+
+Different traversals are useful for different tasks:
+
+* **Pre-order:** Creating a copy of the tree, evaluating an expression tree.
+* **In-order:**  Sorting data in a BST, printing data in sorted order.
+* **Post-order:** Deleting a tree, evaluating an expression tree (post-fix notation).
+* **Level-order:** Displaying a tree visually, implementing a breadth-first search algorithm.
+
+
+These traversals are fundamental concepts in working with binary trees and are crucial for understanding various tree algorithms.  Remember that the specific implementation might vary slightly depending on the programming language and data structures used, but the core logic remains consistent.
+
