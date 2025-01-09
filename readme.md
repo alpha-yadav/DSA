@@ -15452,3 +15452,120 @@ bst.insert(13)
 
 Remember to choose the version that best suits your needs and understanding.  The iterative version might be slightly more efficient for extremely large trees, but the recursive version is often considered more readable.  For most practical purposes, the difference in performance will be negligible unless you're dealing with truly massive datasets.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion because you need to handle three cases:
+
+1. **Node to be deleted is a leaf node:** Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:**  This is the most complex case.  You typically replace the node with either its inorder predecessor (largest node in the left subtree) or its inorder successor (smallest node in the right subtree).  Both approaches work; the code below uses the inorder successor.
+
+
+Here's a C++ implementation of BST deletion, including error handling for when the key isn't found:
+
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left, *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+Node* minValueNode(Node* node) {
+    Node* current = node;
+    while (current->left != nullptr) {
+        current = current->left;
+    }
+    return current;
+}
+
+Node* deleteNode(Node* root, int key) {
+    // Base Case: If the tree is empty
+    if (root == nullptr) {
+        return root;
+    }
+
+    // If the key to be deleted is smaller than the root's key, then it lies in left subtree
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    }
+    // If the key to be deleted is greater than the root's key, then it lies in right subtree
+    else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    }
+    // if key is same as root's key, then This is the node to be deleted
+    else {
+        // Node with only one child or no child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Node with two children: Get the inorder successor (smallest in the right subtree)
+        Node* temp = minValueNode(root->right);
+
+        // Copy the inorder successor's content to this node
+        root->data = temp->data;
+
+        // Delete the inorder successor
+        root->right = deleteNode(root->right, temp->data);
+    }
+    return root;
+}
+
+
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    int keyToDelete = 20;
+    root = deleteNode(root, keyToDelete);
+
+    std::cout << "Inorder traversal after deletion of " << keyToDelete << ": ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    keyToDelete = 50; //Deleting the root node
+    root = deleteNode(root,keyToDelete);
+
+    std::cout << "Inorder traversal after deletion of " << keyToDelete << ": ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    //Clean up memory (important to avoid leaks!)  Add similar cleanup after other deletions if needed.
+     //This is a simplified cleanup; a more robust solution might use a recursive post-order traversal.
+    // ... (Add code to recursively delete all nodes) ...
+
+
+    return 0;
+}
+```
+
+Remember to compile with a C++ compiler (like g++) and run the executable.  The output will show the inorder traversal of the BST before and after deletion, demonstrating the correct functioning of the `deleteNode` function.  **Crucially,  add proper memory management (deallocation of nodes) to avoid memory leaks, especially in a larger application.**  The example provides a basic outline—a full memory cleanup would require a recursive post-order traversal to delete all nodes after you're finished with the tree.
+
