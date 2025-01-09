@@ -14486,3 +14486,54 @@ print(f"The maximum value is: {max_num}")  # Output: The maximum value is: 8
 
 Remember that learning algorithms is an iterative process. Be patient, persistent, and enjoy the challenge!  Start small, build a strong foundation, and gradually work your way up to more complex algorithms.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string `s`.
+**Output:** The string `s` reversed.
+
+**Example:**
+Input: "hello"
+Output: "olleh"
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  You may assume that each input would have ***exactly* one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`.
+**Output:** The longest palindromic substring in `s`.  If multiple palindromes of the same length exist, return any of them.
+
+**Example:**
+Input: s = "babad"
+Output: "bab"
+Explanation: "aba" is also a valid answer.
+
+
+**Tips for Solving:**
+
+* **Understand the problem statement:** Make sure you fully understand what the input and output should be.  Consider edge cases (e.g., empty input, null values).
+* **Develop an algorithm:**  Choose an appropriate approach (e.g., brute force, dynamic programming, greedy algorithm). Consider the time and space complexity of your approach.
+* **Write the code:** Implement your algorithm in your chosen programming language.
+* **Test your code:** Thoroughly test your code with various inputs, including edge cases.
+
+
+These are just examples.  There are countless algorithmic problems out there, varying in complexity and application.  Websites like LeetCode, HackerRank, and Codewars provide many more problems to practice with.
+
