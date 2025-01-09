@@ -17174,3 +17174,121 @@ print(is_bst_recursive_minmax(root3)) # Output: True
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity depends on the height of the tree; it's O(H) for the recursive approaches in the worst case (a skewed tree) and O(N) in the worst case for the first method (due to the list).  The second recursive method generally has better space complexity because it doesn't build a list.  Choose the method that best suits your needs and coding style.  The min/max bound approach is generally preferred for its efficiency.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The core idea is to recursively check that for every node:
+
+* All nodes in its left subtree have values less than the node's value.
+* All nodes in its right subtree have values greater than the node's value.
+
+
+Here are two common methods:
+
+**Method 1: Recursive Approach**
+
+This is a straightforward and efficient method. It recursively checks the BST property for each subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a given binary tree is a BST.
+
+    Args:
+        node: The root node of the tree.
+        min_val: The minimum allowed value in the subtree (inclusive).
+        max_val: The maximum allowed value in the subtree (inclusive).
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_recursive(root))  # Output: True
+
+root = Node(10)
+root.left = Node(15)
+root.right = Node(5)  #Invalid BST
+print(is_bst_recursive(root)) # Output: False
+
+```
+
+**Method 2: Inorder Traversal**
+
+A BST's inorder traversal will always produce a sorted sequence of its nodes. This property can be used for validation.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(node):
+    """
+    Checks if a binary tree is a BST using inorder traversal.
+
+    Args:
+        node: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.data)
+            inorder(node.right)
+
+    inorder(node)
+
+    for i in range(len(inorder_list)-1):
+        if inorder_list[i] >= inorder_list[i+1]:
+            return False
+    return True
+
+# Example Usage (same as above, will produce the same output)
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_inorder(root))  # Output: True
+
+root = Node(10)
+root.left = Node(15)
+root.right = Node(5) 
+print(is_bst_inorder(root)) # Output: False
+
+```
+
+**Choosing a Method:**
+
+* **Recursive Approach:** Generally more efficient in terms of time complexity (O(N), where N is the number of nodes) because it can prune branches early if a violation is found.
+
+* **Inorder Traversal:**  Simpler to understand conceptually, but may be slightly less efficient because it always traverses the entire tree (O(N) time complexity), even if a violation is found early.  It also requires extra space for the `inorder_list`.
+
+Both methods have the same time complexity but the recursive approach often performs better in practice because of the early termination possibility.  Choose the method that you find easier to understand and maintain, unless performance is a critical concern. Remember to handle edge cases like empty trees appropriately.
+
