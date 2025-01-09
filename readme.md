@@ -14864,3 +14864,102 @@ Java requires a class structure.  This example shows a complete, runnable Java p
 
 These are all basic examples.  More complex loops can involve nested loops, `for` loops (which are often preferred for iterating a known number of times), `do-while` loops (which execute at least once), and `break` and `continue` statements to control loop execution.  But this illustrates the core concept of a simple loop.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or combinations of data.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+  # Outer loop code
+  for inner_loop_variable in inner_loop_iterable:
+    # Inner loop code
+  # More outer loop code (optional)
+```
+
+
+**Examples:**
+
+**1. Printing a multiplication table:**
+
+```python
+# Print a 5x5 multiplication table
+
+for i in range(1, 6):  # Outer loop: rows
+  for j in range(1, 6):  # Inner loop: columns
+    print(i * j, end="\t") # end="\t" adds a tab for better formatting
+  print() # Newline after each row
+```
+
+This will output:
+
+```
+1	2	3	4	5	
+2	4	6	8	10	
+3	6	9	12	15	
+4	8	12	16	20	
+5	10	15	20	25
+```
+
+
+**2. Iterating through a matrix (list of lists):**
+
+```python
+matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+
+for row in matrix: # Outer loop iterates through rows
+  for element in row: # Inner loop iterates through elements in each row
+    print(element, end=" ")
+  print() # Newline after each row
+```
+
+This outputs:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+
+**3. Finding pairs in a list:**
+
+```python
+numbers = [1, 2, 3, 4, 5]
+
+for i in range(len(numbers)):
+  for j in range(i + 1, len(numbers)): #Start j from i+1 to avoid duplicates and self-pairs
+    print(f"Pair: ({numbers[i]}, {numbers[j]})")
+```
+
+This will output all unique pairs from the list:
+
+```
+Pair: (1, 2)
+Pair: (1, 3)
+Pair: (1, 4)
+Pair: (1, 5)
+Pair: (2, 3)
+Pair: (2, 4)
+Pair: (2, 5)
+Pair: (3, 4)
+Pair: (3, 5)
+Pair: (4, 5)
+```
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly (often quadratically or even higher).  Consider alternative algorithms if performance becomes an issue.
+* **Readability:**  Proper indentation and clear variable names are crucial for understanding nested loops.
+* **Infinite Loops:**  Ensure your loop conditions are correct to prevent infinite loops.  Carefully examine the termination conditions of both the inner and outer loops.
+
+
+Nested loops are a fundamental programming concept used in many algorithms and data structures. Understanding them is essential for writing effective and efficient code.
+
