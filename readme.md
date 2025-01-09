@@ -14797,3 +14797,70 @@ Let's say you have an algorithm that searches for a specific number in an unsort
 
 Understanding Big O notation is fundamental for any computer scientist or software engineer. It allows for informed decisions about algorithm selection and optimization, leading to more efficient and scalable software.
 
+#  A Simple Loop 
+The simplest loop in most programming languages is a `while` loop.  It continues to execute a block of code as long as a specified condition is true.
+
+Here are examples in a few popular languages:
+
+**Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This will print the numbers 0 through 4.  The loop continues as long as `count` is less than 5.  `count += 1` increments `count` by 1 in each iteration.
+
+
+**JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+This is functionally identical to the Python example.
+
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+This C++ example does the same thing, using `std::cout` for output and `std::endl` for a newline.
+
+
+**Java:**
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+Java requires a class structure.  This example shows a complete, runnable Java program.
+
+
+These are all basic examples.  More complex loops can involve nested loops, `for` loops (which are often preferred for iterating a known number of times), `do-while` loops (which execute at least once), and `break` and `continue` statements to control loop execution.  But this illustrates the core concept of a simple loop.
+
