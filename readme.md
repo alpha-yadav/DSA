@@ -15791,3 +15791,60 @@ This nests ternary operators to achieve the same result in a single `print` stat
 
 For beginners, the first (`fizzBuzz`) or second (`fizzBuzzImproved`) approach is recommended for readability and maintainability.  The concise version is good for demonstrating Swift's expressive power but may sacrifice readability for brevity.  Choose the version that best suits your understanding and the context of your project. Remember to always prioritize code clarity, especially when working on a team.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The most common resources considered are:
+
+* **Time complexity:** How long an algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory an algorithm requires as a function of the input size.
+
+We typically analyze complexity using **Big O notation**, which describes the upper bound of an algorithm's growth rate.  It focuses on the dominant terms as the input size (often denoted as 'n') approaches infinity, ignoring constant factors and lower-order terms.
+
+Here's a breakdown of common Big O complexities, from most efficient to least efficient:
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient. Examples include binary search in a sorted array and finding an element in a balanced binary search tree.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A combination of linear and logarithmic time.  This is commonly seen in efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases proportionally to the square of the input size.  This indicates a nested loop structure. Examples include bubble sort, insertion sort, and selection sort.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size. This is extremely inefficient for large inputs and often indicates a brute-force approach.  Examples include finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size. This is incredibly inefficient and rarely practical for anything beyond very small input sizes.  Examples include finding all permutations of a set.
+
+
+**Space Complexity:** Similar to time complexity, space complexity uses Big O notation to describe the amount of memory used by an algorithm as a function of the input size.  Common space complexities follow similar patterns to time complexities (O(1), O(n), O(n²), etc.).  However, space complexity also considers auxiliary space (extra space used beyond the input).
+
+
+**Analyzing Complexity:**
+
+Analyzing the complexity of an algorithm often involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most significantly to the algorithm's runtime.
+
+2. **Counting the number of operations:** Express the number of operations as a function of the input size.
+
+3. **Applying Big O notation:**  Simplify the function by dropping constant factors and lower-order terms, focusing on the dominant term as 'n' approaches infinity.
+
+**Example:**
+
+Consider this code snippet that searches for a value in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Basic operation:** Comparing `arr[i]` with `target`.
+* **Number of operations:** In the worst case, the loop iterates through all `n` elements. Therefore, the number of comparisons is proportional to `n`.
+* **Big O notation:** The time complexity is O(n).  The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting the performance of your programs, especially when dealing with large datasets.  Choosing an algorithm with a lower Big O complexity generally leads to better performance.
+
