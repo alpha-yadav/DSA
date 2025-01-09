@@ -17582,3 +17582,102 @@ postorder(root) # Output: D E B F C A
 
 These examples demonstrate the basic principles of pre-order, in-order, and post-order traversals.  Remember to handle the `None` cases (when a node has no left or right child) to prevent errors in your code.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a binary tree is a classic algorithm problem.  There are several approaches, with varying complexities depending on whether the tree is a binary search tree (BST) or a general binary tree.
+
+**1. General Binary Tree (No assumptions about the tree structure):**
+
+This approach uses a recursive strategy.  The idea is to traverse the tree and check if each node is an ancestor of both `node1` and `node2`.  If a node has both `node1` and `node2` in its left and right subtrees, then that node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def findLCA(root, node1, node2):
+    """
+    Finds the Lowest Common Ancestor (LCA) of node1 and node2 in a general binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        node1: The first node.
+        node2: The second node.
+
+    Returns:
+        The LCA node, or None if either node1 or node2 is not found.
+    """
+
+    if root is None:
+        return None
+
+    if root == node1 or root == node2:
+        return root
+
+    left_lca = findLCA(root.left, node1, node2)
+    right_lca = findLCA(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example Usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.left.right # Node with data 5
+
+lca = findLCA(root, node1, node2)
+if lca:
+    print(f"LCA of {node1.data} and {node2.data}: {lca.data}")
+else:
+    print("One or both nodes not found.")
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, we might visit all nodes).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive calls; in the worst case, H could be N).
+
+
+**2. Binary Search Tree (BST):**
+
+In a BST, we can leverage the property that all nodes smaller than a node are in its left subtree, and all nodes larger are in its right subtree. This leads to a more efficient algorithm.
+
+```python
+def findLCA_BST(root, node1, node2):
+    """
+    Finds the LCA of node1 and node2 in a Binary Search Tree (BST).
+    """
+    if root is None:
+        return None
+
+    if node1.data < root.data and node2.data < root.data:
+        return findLCA_BST(root.left, node1, node2)
+    elif node1.data > root.data and node2.data > root.data:
+        return findLCA_BST(root.right, node1, node2)
+    else:
+        return root
+
+```
+
+**Time Complexity:** O(H), where H is the height of the BST.  In a balanced BST, H is log(N).
+**Space Complexity:** O(H) due to recursive calls.
+
+
+**Choosing the Right Algorithm:**
+
+* If you know you're working with a BST, use the `findLCA_BST` function for better performance.
+* For a general binary tree, use the `findLCA` function.  Note that you could also implement an iterative solution using a stack to avoid recursion and potentially improve space complexity in some cases.  However, the recursive approach is often considered more readable.
+
+
+Remember to handle edge cases, such as when one or both nodes are not present in the tree.  The provided code includes basic error handling for this.
+
