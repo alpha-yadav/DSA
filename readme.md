@@ -16474,3 +16474,64 @@ def are_trees_same_iterative(root1, root2):
 
 Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues with very deep trees).  Choose the method that best suits your understanding and coding style. Remember to handle the `None` cases carefully to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They're a type of tree data structure with a specific ordering property that makes searching, insertion, and deletion efficient (in the average case).
+
+**Key Properties of a BST:**
+
+* **Each node contains a key (and optionally, associated data).**
+* **The left subtree of a node contains only nodes with keys *less than* the node's key.**
+* **The right subtree of a node contains only nodes with keys *greater than* the node's key.**
+* **There are no duplicate keys.**  (Some implementations allow duplicates, but they often require special handling.)
+
+**Illustration:**
+
+A simple example:
+
+```
+       8
+      / \
+     3   10
+    / \    \
+   1   6    14
+      / \   /
+     4   7 13
+```
+
+In this BST:
+
+* All nodes in the left subtree of 8 (3, 1, 6, 4, 7) are less than 8.
+* All nodes in the right subtree of 8 (10, 14, 13) are greater than 8.
+* The same property holds recursively for every node in the tree.
+
+**Operations on BSTs:**
+
+The efficiency of BSTs stems from their ordered nature.  Common operations include:
+
+* **Search:** Finding a node with a specific key.  The average time complexity is O(log n), where n is the number of nodes (in a balanced tree).  Worst-case is O(n) (for a skewed tree).
+* **Insertion:** Adding a new node to the tree while maintaining the BST property.  Average time complexity is O(log n), worst-case is O(n).
+* **Deletion:** Removing a node from the tree while maintaining the BST property. This is the most complex operation and involves several cases (leaf node, node with one child, node with two children). Average and worst-case time complexities are both O(log n) and O(n), respectively, depending on tree balance.
+* **Minimum/Maximum:** Finding the smallest or largest key in the tree.  This can be done efficiently by traversing the leftmost (minimum) or rightmost (maximum) path, which is O(log n) on average and O(n) in the worst case.
+* **Successor/Predecessor:** Finding the next largest or next smallest key after a given key.  These operations also leverage the tree structure for efficient execution (O(log n) on average and O(n) in the worst case).
+* **Traversal:** Visiting all nodes in a specific order (e.g., in-order, pre-order, post-order).  These are all O(n) operations.
+
+**In-order Traversal:**  Visiting nodes in ascending order of their keys. This is particularly useful for sorting data.
+
+**Balance:**
+
+The efficiency of BST operations heavily depends on the tree's balance.  A perfectly balanced BST has a depth of log₂(n), leading to the optimal logarithmic time complexity. However, if insertions and deletions lead to a skewed tree (a long, thin chain), the performance degrades to linear time.
+
+To mitigate this, self-balancing BSTs such as AVL trees and red-black trees are used.  These trees employ various techniques to ensure that the tree remains relatively balanced, guaranteeing logarithmic time complexity for most operations even in the worst case.
+
+**Applications:**
+
+BSTs are used in numerous applications, including:
+
+* **Symbol tables:** Storing and retrieving data associated with keys.
+* **Databases:** Indexing and searching data efficiently.
+* **Sorting algorithms:** Implementing efficient sorting methods.
+* **Expression evaluation:** Representing and evaluating arithmetic expressions.
+
+
+In summary, Binary Search Trees are a versatile and powerful data structure, but their efficiency relies on maintaining a relatively balanced tree.  When dealing with large datasets or frequent insertions/deletions, self-balancing BSTs are preferred to guarantee consistent performance.
+
