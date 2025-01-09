@@ -18641,3 +18641,77 @@ Output: "bab" (or "aba")
 
 These problems demonstrate the range of algorithmic challenges.  They require different data structures and algorithmic techniques to solve efficiently. Remember to consider time and space complexity when designing your solution.  Choosing the right algorithm and data structure is key to solving these problems effectively.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then improving it:
+
+**Version 1: Basic Implementation**
+
+This version uses nested `if` statements. It's straightforward but can become less readable for larger ranges or more complex rules.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+**Version 2:  Using the Ternary Operator (More Concise)**
+
+This version uses the ternary operator (`condition ? value1 : value2`) to make the code more compact.  It's still relatively easy to understand.
+
+```swift
+func fizzBuzzTernary(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzTernary(n: 15) // Example usage
+```
+
+
+**Version 3:  Improved Readability with a Helper Function (More Maintainable)**
+
+This version separates the FizzBuzz logic into a helper function, making it easier to read and modify if you need to add more rules later.
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        print(fizzBuzzString(i))
+    }
+}
+
+func fizzBuzzString(_ n: Int) -> String {
+    var result = ""
+    if n % 3 == 0 { result += "Fizz" }
+    if n % 5 == 0 { result += "Buzz" }
+    return result.isEmpty ? String(n) : result
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+**Explanation of Version 3:**
+
+* The `fizzBuzzImproved` function iterates through the numbers.
+* The `fizzBuzzString` helper function does the actual FizzBuzz logic:
+    * It starts with an empty string `result`.
+    * It appends "Fizz" if the number is divisible by 3.
+    * It appends "Buzz" if the number is divisible by 5.
+    * If `result` is still empty after checking divisibility, it means the number is neither divisible by 3 nor 5, so it converts the number to a string.
+    * Finally, it returns the `result` string.
+
+This last version is generally preferred for its clarity and maintainability, especially as the complexity of the problem increases.  Choose the version that best suits your understanding and the context of your project.  Remember to always prioritize readability and maintainability in your code.
+
