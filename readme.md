@@ -17403,3 +17403,105 @@ postorder_traversal(root) # Output: 4 5 2 3 1
 
 Remember to adapt these code snippets to your specific Node class definition if it differs from the example shown.  You'll also need to handle the case where the input `node` is `None` (an empty tree).
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes of a tree level by level.  Here are implementations in Python and JavaScript, along with explanations:
+
+**Python Implementation:**
+
+This uses a queue data structure for efficient level-order traversal.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+
+**JavaScript Implementation:**
+
+Similar to the Python version, this uses a queue.
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) {
+    return;
+  }
+
+  const queue = [root];
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    console.log(curr.data, " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+
+// Example usage:
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1  2  3  4  5
+```
+
+**Explanation:**
+
+Both implementations follow these steps:
+
+1. **Initialization:**  A queue is created and the root node is added to it.
+2. **Iteration:** While the queue is not empty:
+   - Dequeue (remove from the front) the current node.
+   - Process the current node's data (print it in this case).
+   - Enqueue (add to the rear) the left and right children of the current node, if they exist.
+3. **Termination:** The loop continues until the queue is empty, signifying that all nodes have been visited.
+
+
+This ensures that nodes at the same level are processed before moving to the next level, achieving the level order traversal.  Remember to handle the case of an empty tree (where the root is `null` or `None`).
+
