@@ -16112,3 +16112,68 @@ Go uses a `for` loop that acts similarly to a `while` loop in other languages.
 
 These are all basic examples.  Loops can be much more complex, incorporating `break` and `continue` statements to control the flow of execution, and using different loop types (like `for` loops with iterators).  But these examples demonstrate the fundamental concept of a simple loop.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a way to iterate through multiple dimensions of data or perform repetitive actions in a structured way.
+
+Here's a breakdown:
+
+**Syntax (example in Python):**
+
+```python
+for i in range(outer_loop_iterations):  # Outer loop
+    # Code executed once per outer loop iteration
+    for j in range(inner_loop_iterations):  # Inner loop
+        # Code executed once per inner loop iteration
+        # This code is dependent on both i and j
+    # Code executed after the inner loop completes for a single outer loop iteration
+```
+
+**How it Works:**
+
+Let's say `outer_loop_iterations` is 3 and `inner_loop_iterations` is 2.  The execution flow would be:
+
+1. **Outer loop (i=0):**
+   - **Inner loop (j=0):** Inner loop code executes.
+   - **Inner loop (j=1):** Inner loop code executes.
+   - Outer loop code after the inner loop executes.
+
+2. **Outer loop (i=1):**
+   - **Inner loop (j=0):** Inner loop code executes.
+   - **Inner loop (j=1):** Inner loop code executes.
+   - Outer loop code after the inner loop executes.
+
+3. **Outer loop (i=2):**
+   - **Inner loop (j=0):** Inner loop code executes.
+   - **Inner loop (j=1):** Inner loop code executes.
+   - Outer loop code after the inner loop executes.
+
+
+**Common Use Cases:**
+
+* **Processing 2D arrays (matrices):** Accessing each element of a matrix requires nested loops—one loop for rows and one for columns.
+* **Generating patterns:** Creating patterns like squares, triangles, or other shapes often involves nested loops to control the placement of characters or elements.
+* **Combinatorial problems:** Exploring all possible combinations of items often uses nested loops to iterate through all selections.
+* **Iterating through nested data structures:**  Processing data stored in nested lists, dictionaries, or other complex data structures.
+
+
+**Example (Printing a multiplication table):**
+
+```python
+rows = 5
+cols = 5
+
+for i in range(1, rows + 1):  # Outer loop for rows
+    for j in range(1, cols + 1):  # Inner loop for columns
+        print(i * j, end="\t")  # Print the product with a tab separator
+    print()  # Newline after each row
+```
+
+This code will print a 5x5 multiplication table.
+
+**Efficiency Considerations:**
+
+Nested loops can lead to significantly increased execution time, especially with large numbers of iterations. The time complexity is often O(n*m), where 'n' and 'm' are the number of iterations in the outer and inner loops, respectively.  For very large datasets, consider optimizing your code using techniques like vectorization (if applicable) or more efficient algorithms.
+
+
+Nested loops are a fundamental programming concept, but understanding their potential performance implications is crucial for writing efficient code.
+
