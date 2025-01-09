@@ -17292,3 +17292,114 @@ print(is_bst_inorder(root)) # Output: False
 
 Both methods have the same time complexity but the recursive approach often performs better in practice because of the early termination possibility.  Choose the method that you find easier to understand and maintain, unless performance is a critical concern. Remember to handle edge cases like empty trees appropriately.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can visit (or "traverse") all the nodes in a binary tree.  The order in which you visit the nodes impacts the output sequence.  There are three primary traversal methods, each with variations:
+
+**1. Inorder Traversal:**
+
+* **Order:** Left subtree -> Root -> Right subtree
+* **Result:** For a Binary Search Tree (BST), inorder traversal yields a sorted sequence of nodes (ascending order).
+* **Algorithm (Recursive):**
+
+```python
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")  # Process the node (e.g., print its data)
+        inorder_traversal(node.right)
+
+```
+
+* **Algorithm (Iterative):**  Uses a stack to mimic recursion.
+
+```python
+def inorder_traversal_iterative(node):
+    stack = []
+    current = node
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.data, end=" ")
+        current = current.right
+```
+
+
+**2. Preorder Traversal:**
+
+* **Order:** Root -> Left subtree -> Right subtree
+* **Result:**  Useful for creating a copy of the tree or generating a prefix expression (Polish notation).
+* **Algorithm (Recursive):**
+
+```python
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+```
+
+* **Algorithm (Iterative):** Uses a stack.
+
+```python
+def preorder_traversal_iterative(node):
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if current:
+            print(current.data, end=" ")
+            stack.append(current.right)
+            stack.append(current.left)
+```
+
+**3. Postorder Traversal:**
+
+* **Order:** Left subtree -> Right subtree -> Root
+* **Result:** Useful for deleting a tree or generating a postfix expression (Reverse Polish Notation).  Often used in expression evaluation.
+* **Algorithm (Recursive):**
+
+```python
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+```
+
+* **Algorithm (Iterative):**  More complex than inorder and preorder iterative versions; requires two stacks or a more sophisticated approach using a single stack and tracking visited nodes.
+
+
+**Example (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder:", end=" ")
+inorder_traversal(root)  # Output: 4 2 5 1 3
+print("\nPreorder:", end=" ")
+preorder_traversal(root) # Output: 1 2 4 5 3
+print("\nPostorder:", end=" ")
+postorder_traversal(root) # Output: 4 5 2 3 1
+
+```
+
+**Key Considerations:**
+
+* **Recursive vs. Iterative:** Recursive implementations are often more concise and easier to understand, but they can lead to stack overflow errors for very deep trees. Iterative approaches are generally more memory-efficient for large trees.
+* **Applications:** The choice of traversal method depends on the specific task.  Inorder is ideal for sorted output from a BST, while preorder and postorder have applications in expression evaluation and tree manipulation.
+* **Node Processing:** The `print(node.data, end=" ")` part in the examples shows how to process each node.  You can replace this with any other operation you need to perform on each node (e.g., adding to a list, modifying its data).
+
+
+Remember to adapt these code snippets to your specific Node class definition if it differs from the example shown.  You'll also need to handle the case where the input `node` is `None` (an empty tree).
+
