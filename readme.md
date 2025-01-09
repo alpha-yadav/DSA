@@ -17959,3 +17959,120 @@ Graph theory finds applications in numerous fields, including:
 
 This introduction provides a basic overview.  Further study delves into more advanced concepts like graph coloring, planarity, graph isomorphism, and various graph algorithms.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and efficient approach, especially for sparse graphs (graphs with relatively few edges compared to the number of nodes).  Here's a breakdown of how it works, along with different implementations and considerations:
+
+**The Concept**
+
+An adjacency list represents a graph as a collection of lists.  For each node (vertex) in the graph, you have a list containing all the nodes directly connected to it (its neighbors).
+
+**Example:**
+
+Consider an undirected graph with nodes A, B, C, and D, and edges: A-B, A-C, B-D.
+
+* **Adjacency List Representation:**
+
+   * A: [B, C]
+   * B: [A, D]
+   * C: [A]
+   * D: [B]
+
+**Implementations**
+
+The specific implementation depends on the programming language you're using. Here are examples in Python and C++:
+
+**Python:**
+
+```python
+# Using a dictionary
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D'],
+    'C': ['A'],
+    'D': ['B']
+}
+
+# Accessing neighbors of node 'A'
+neighbors_of_A = graph['A']  # ['B', 'C']
+
+# Checking if an edge exists between 'A' and 'C'
+if 'C' in graph['A']:
+    print("Edge exists between A and C")
+
+
+# Using a list of lists (less readable but potentially faster for some operations):
+graph2 = [
+    ['B', 'C'], # Node 0 neighbors
+    ['A', 'D'], # Node 1 neighbors
+    ['A'],      # Node 2 neighbors
+    ['B']       # Node 3 neighbors
+]
+#Accessing neighbors is less intuitive:
+neighbors_of_A2 = graph2[0] #['B', 'C'] - requires you to know the index mapping
+
+
+#For weighted graphs:
+graph_weighted = {
+    'A': { 'B': 5, 'C': 2}, # A to B has weight 5, A to C has weight 2
+    'B': { 'A': 5, 'D': 3},
+    'C': { 'A': 2},
+    'D': { 'B': 3}
+}
+
+#Accessing weights:
+weight_AB = graph_weighted['A']['B'] # 5
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+int main() {
+    // Using a map (similar to Python's dictionary)
+    map<char, vector<char>> graph;
+    graph['A'] = {'B', 'C'};
+    graph['B'] = {'A', 'D'};
+    graph['C'] = {'A'};
+    graph['D'] = {'B'};
+
+    // Accessing neighbors of node 'A'
+    for (char neighbor : graph['A']) {
+        cout << neighbor << " "; // Output: B C
+    }
+    cout << endl;
+
+    //Using vector of vectors (similar to Python's list of lists)
+    vector<vector<int>> graph2 = {
+        {1, 2}, // Node 0 neighbors
+        {0, 3}, // Node 1 neighbors
+        {0},      // Node 2 neighbors
+        {1}       // Node 3 neighbors
+    };
+
+    // Accessing neighbors - again, index mapping needed.
+    for(int neighbor : graph2[0]){
+        cout << neighbor << " "; // 1 2
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+**Considerations:**
+
+* **Space Complexity:**  The space used is proportional to `V + E`, where `V` is the number of vertices and `E` is the number of edges.  This is efficient for sparse graphs. Dense graphs (many edges) might be better represented with an adjacency matrix.
+* **Time Complexity:**
+    * Adding an edge: O(1) on average (amortized) if using a dynamic array/list for neighbors.
+    * Checking for an edge: O(degree(v)), where `degree(v)` is the number of neighbors of vertex `v`.  This can be improved to O(1) with a `set` or `unordered_set` for neighbors in Python or `unordered_set` in C++.
+    * Traversing all neighbors: O(degree(v)).
+* **Directed vs. Undirected Graphs:**  For directed graphs, the adjacency list is still a list of neighbors, but the directionality is implicit (an edge from A to B only appears in A's list).
+* **Weighted Graphs:**  For weighted graphs, you can store weights along with neighbors.  (See the `graph_weighted` examples above).  This can be tuples, pairs, or custom classes.
+
+Remember to choose the implementation that best suits your needs and the characteristics of your graphs (sparse vs. dense, weighted vs. unweighted, directed vs. undirected).  The Python dictionary approach offers good readability, while the C++ `map` provides similar functionality with better performance characteristics than using vectors of vectors for certain operations.  In high-performance situations carefully consider the data structures used for efficient lookups.
+
