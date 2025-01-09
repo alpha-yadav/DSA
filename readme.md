@@ -18814,3 +18814,50 @@ Therefore, we've found constants that demonstrate f(n) is bounded both above and
 
 Big-Theta notation is crucial for characterizing the efficiency of algorithms.  It gives a precise description of an algorithm's time or space complexity, providing a more accurate picture than Big-O alone.  If an algorithm's complexity is Θ(n²), for example, we know its runtime will grow quadratically with the input size, not just that it grows *no faster* than quadratically (which is what Big-O would tell us).
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the growth rate of functions, particularly useful in analyzing the efficiency of algorithms.  Here's a comparison:
+
+**1. Big O Notation (O): Upper Bound**
+
+* **Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Meaning:**  f(n) grows *no faster* than g(n).  It provides an upper bound on the growth rate.  We often ignore constant factors and lower-order terms.
+* **Example:**  If f(n) = 2n² + 5n + 1, then f(n) = O(n²).  We only care about the dominant term (n²) as n gets large.
+
+**2. Big Omega Notation (Ω): Lower Bound**
+
+* **Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Meaning:** f(n) grows *at least as fast* as g(n). It provides a lower bound on the growth rate.
+* **Example:** If f(n) = 2n² + 5n + 1, then f(n) = Ω(n²).
+
+**3. Big Theta Notation (Θ): Tight Bound**
+
+* **Definition:** f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Meaning:** f(n) grows *at the same rate* as g(n).  It provides both an upper and lower bound, indicating a tight bound on the growth rate.
+* **Example:** If f(n) = 2n² + 5n + 1, then f(n) = Θ(n²).
+
+**4. Little o Notation (o): Strict Upper Bound**
+
+* **Definition:** f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Meaning:** f(n) grows *strictly slower* than g(n).  The inequality is strict; f(n) is dominated by g(n).
+* **Example:** n = o(n²)
+
+**5. Little omega Notation (ω): Strict Lower Bound**
+
+* **Definition:** f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Meaning:** f(n) grows *strictly faster* than g(n).
+* **Example:** n² = ω(n)
+
+
+**Summary Table:**
+
+| Notation | Meaning                                     | Relationship                               | Example       |
+|----------|---------------------------------------------|-------------------------------------------|----------------|
+| O(g(n))  | f(n) grows no faster than g(n)             | Upper bound                               | 2n² + 5n + 1 = O(n²) |
+| Ω(g(n))  | f(n) grows at least as fast as g(n)         | Lower bound                               | 2n² + 5n + 1 = Ω(n²) |
+| Θ(g(n))  | f(n) grows at the same rate as g(n)         | Tight bound                               | 2n² + 5n + 1 = Θ(n²) |
+| o(g(n))  | f(n) grows strictly slower than g(n)        | Strict upper bound                        | n = o(n²)      |
+| ω(g(n))  | f(n) grows strictly faster than g(n)        | Strict lower bound                        | n² = ω(n)      |
+
+
+**Important Note:**  Asymptotic notations focus on the *growth rate* as the input size (n) approaches infinity.  They don't tell you the exact execution time for a specific input size, only how the time scales with increasing input.  Constant factors are typically ignored because they become insignificant compared to the dominant terms as n becomes very large.
+
