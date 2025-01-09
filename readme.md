@@ -14963,3 +14963,28 @@ Pair: (4, 5)
 
 Nested loops are a fundamental programming concept used in many algorithms and data structures. Understanding them is essential for writing effective and efficient code.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They imply that the time it takes to complete the algorithm increases logarithmically with the size of the input (n).  This means the time doesn't grow linearly; instead, it grows much slower.  A doubling of the input size only adds a constant amount to the runtime.
+
+Here are some common types of algorithms exhibiting O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  Binary search works on a *sorted* dataset.  It repeatedly divides the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This continues until the target is found or the interval is empty.
+
+* **Efficient Searching in Balanced Binary Search Trees (BSTs):**  Operations like searching, insertion, and deletion in a balanced BST (e.g., AVL trees, red-black trees) have an average and best-case time complexity of O(log n).  The balance ensures that the tree doesn't become skewed, preventing worst-case scenarios where the search degenerates to O(n).
+
+* **Heap Operations (e.g., heapify, insert, extract-min/max):**  Heaps are tree-based data structures that satisfy the heap property (e.g., in a min-heap, the parent node is always smaller than its children).  Operations on heaps often involve traversing a path from the root to a leaf (or vice versa), which takes O(log n) time in a balanced heap.
+
+* **Exponentiation by Squaring:** This technique efficiently computes a<sup>b</sup> (a raised to the power of b) in O(log b) time. It cleverly uses the fact that a<sup>b</sup> = (a<sup>b/2</sup>)<sup>2</sup> if b is even, and a<sup>b</sup> = a * a<sup>(b-1)</sup> if b is odd.
+
+* **Finding the kth smallest/largest element using Quickselect (average case):** While Quickselect's worst-case time complexity is O(n²), its average-case complexity is O(n).  However, variations and optimizations can lead to algorithms that find the kth element within a specific range in O(log n) time under certain conditions or using specific data structures.
+
+
+**Key Characteristics Leading to O(log n) Complexity:**
+
+* **Repeated Halving or Division:** The algorithm repeatedly reduces the problem size by a constant factor (usually half).
+* **Efficient Data Structures:** The use of balanced trees or heaps is crucial for achieving logarithmic time complexity in many cases.  Unbalanced structures can lead to worst-case O(n) performance.
+* **Sorted Input (often):** Many O(log n) algorithms, like binary search, require the input data to be sorted beforehand.  The sorting process itself might take O(n log n) time.
+
+
+It's important to note that the O(log n) complexity only applies to the *best-case* or *average-case* scenarios for some algorithms.  Worst-case scenarios can degrade to O(n) if the underlying data structure or algorithm choices aren't optimal (as seen with Quickselect).  The base of the logarithm (e.g., base 2, base 10) doesn't affect the big O notation because it's just a constant factor.
+
