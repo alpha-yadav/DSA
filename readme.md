@@ -19037,3 +19037,71 @@ These examples also print 0 through 4. The `while` loop continues as long as `co
 
 These are basic examples.  Loops can be much more complex, incorporating nested loops, `break` statements (to exit a loop prematurely), and `continue` statements (to skip to the next iteration).  The specific syntax might vary slightly depending on the programming language, but the core concepts remain the same.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This is a powerful technique used for processing multi-dimensional data structures or performing repetitive tasks where the number of repetitions depends on another repetitive process.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_variable in outer_iterable:
+    for inner_variable in inner_iterable:
+        # Code to be executed in the inner loop
+    # Code to be executed after the inner loop completes for each outer iteration
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(f"{i * j:4}", end="") # :4 ensures a consistent width for each number
+    print() # Newline after each row
+```
+
+This will output a 10x10 multiplication table.  For each row (outer loop), the inner loop iterates 10 times, calculating and printing the product of `i` and `j`.
+
+**Another Example (Python):  Processing a 2D list (matrix):**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print() # Newline after each row
+```
+
+This will print:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+**Time Complexity:**
+
+The time complexity of nested loops depends on the number of iterations of each loop.  If both loops iterate `n` times, the total number of iterations will be `n * n = n²`, resulting in a time complexity of O(n²).  This is considered quadratic time complexity and can be computationally expensive for large values of `n`.
+
+**Variations:**
+
+Nested loops can be used with different types of loops (e.g., `while` loops) and iterables (lists, arrays, tuples, etc.).  The specific implementation depends on the task at hand.
+
+**Common Uses:**
+
+* **Matrix operations:** Processing rows and columns of matrices.
+* **Graph traversal:** Exploring nodes and edges in graphs.
+* **Generating patterns:** Creating geometric patterns or text-based art.
+* **Searching and sorting:** Implementing algorithms like bubble sort or selection sort.
+
+
+Nested loops are a fundamental programming concept, and understanding them is crucial for solving a wide range of problems involving iterative processes.  However, be mindful of their potential for performance issues with large datasets due to their quadratic time complexity.  Optimization techniques might be necessary in those cases.
+
