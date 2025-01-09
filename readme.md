@@ -14732,3 +14732,25 @@ Asymptotic notations describe the limiting behavior of functions, particularly u
 
 Understanding these notations is crucial for comparing algorithm efficiency and making informed decisions about which algorithm to use for a given problem.  They allow us to focus on the dominant terms in the runtime as the input size becomes very large, ignoring constant factors and lower-order terms.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the lower bound of the growth rate of a function, usually representing the best-case or minimum time complexity of an algorithm.  In simpler terms, it tells us that the runtime of an algorithm will *at least* be as fast as the function described by Ω.
+
+Here's a breakdown of what Big-Omega notation means:
+
+* **Formal Definition:**  A function *f(n)* is said to be Big-Omega of *g(n)*, written as *f(n) = Ω(g(n))*, if there exist positive constants *c* and *n₀* such that for all *n ≥ n₀*,  *0 ≤ c * g(n) ≤ f(n)*.
+
+* **What it means:** This definition states that eventually (for all *n* greater than or equal to some *n₀*), the function *f(n)* is always greater than or equal to some constant multiple (*c*) of *g(n)*.  The constant *c* is crucial; it allows us to ignore constant factors in the analysis.  We're only concerned with the growth rate as *n* approaches infinity.
+
+* **Example:** Let's say an algorithm's runtime is described by the function *f(n) = 2n² + 5n + 1*.  We can say that *f(n) = Ω(n²)*.
+
+    * To prove this, we need to find constants *c* and *n₀* that satisfy the definition.  Let's choose *c = 1*. Then we need to find *n₀* such that *n² ≤ 2n² + 5n + 1* for all *n ≥ n₀*. This inequality clearly holds for sufficiently large *n*.  In fact, *n² ≤ 2n² + 5n + 1* is true for all *n ≥ 1* (*n₀* could be 1).
+
+* **Contrast with Big-O:** Big-O (O) notation describes the *upper bound* of a function's growth rate (worst-case complexity), while Big-Omega (Ω) describes the *lower bound* (best-case complexity).  Big-Theta (Θ) describes both upper and lower bounds simultaneously (tight bound).
+
+* **Importance:**  Big-Omega notation helps us understand the best-case performance of an algorithm. Knowing the lower bound is important because it provides a guarantee: the algorithm will *never* perform worse than this lower bound (in the best-case scenario).  However, it doesn't tell us anything about the average or worst-case behavior.
+
+* **Limitations:** Like Big-O, Big-Omega considers only the dominant terms of the function and ignores constant factors. It's an asymptotic analysis, meaning it only considers the behavior as the input size (*n*) grows arbitrarily large.
+
+
+In summary, Big-Omega notation provides a valuable tool for analyzing the best-case time complexity of algorithms, helping us understand their fundamental limitations and efficiency in ideal scenarios.  It's often used in conjunction with Big-O and Big-Theta for a complete analysis of algorithm performance.
+
