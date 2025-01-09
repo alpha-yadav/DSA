@@ -18715,3 +18715,57 @@ fizzBuzzImproved(n: 15) // Example usage
 
 This last version is generally preferred for its clarity and maintainability, especially as the complexity of the problem increases.  Choose the version that best suits your understanding and the context of your project.  Remember to always prioritize readability and maintainability in your code.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  This is typically expressed as a function of the input size (usually denoted as 'n').  The resources of primary interest are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We often use Big O notation (O), Big Omega notation (Ω), and Big Theta notation (Θ) to describe complexity.  These notations focus on the dominant factors as the input size grows very large, ignoring constant factors and lower-order terms.
+
+**Big O Notation (O):**  Represents the *upper bound* of the algorithm's complexity.  It provides a worst-case scenario.  For example, O(n²) means the algorithm's runtime grows no faster than the square of the input size.
+
+**Big Omega Notation (Ω):** Represents the *lower bound* of the algorithm's complexity. It provides a best-case scenario. For example, Ω(n) means the algorithm's runtime grows no slower than the input size.
+
+**Big Theta Notation (Θ):** Represents the *tight bound* of the algorithm's complexity.  It indicates that the algorithm's runtime grows proportionally to a given function.  If an algorithm is Θ(n), its runtime grows linearly with the input size.  This means both its upper and lower bounds are the same.
+
+
+**Common Complexity Classes:**
+
+These are listed in increasing order of complexity (i.e., O(1) is faster than O(log n), and so on):
+
+* **O(1) - Constant Time:** The algorithm's runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heapsort.
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Bubble sort, selection sort.
+* **O(n³) - Cubic Time:** The runtime increases proportionally to the cube of the input size.  Example: Some naive matrix multiplication algorithms.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime increases factorially with the input size.  Example: Finding all permutations of a sequence.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine which operations contribute most to the algorithm's runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size.
+3. **Use Big O notation:** Simplify the function using Big O notation to describe the algorithm's time complexity.  Similar steps are followed for space complexity.
+
+**Example:**
+
+Consider a simple function that sums all elements in an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for i in range(len(arr)):
+    total += arr[i]
+  return total
+```
+
+The basic operation is the addition within the loop.  The loop runs `n` times (where `n` is the length of the array). Therefore, the time complexity is O(n) – linear time. The space complexity is O(1) because it uses a constant amount of extra space regardless of the array size.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms, especially when dealing with large datasets.  An algorithm with a higher complexity will become significantly slower than one with a lower complexity as the input size grows.
+
