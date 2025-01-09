@@ -16028,3 +16028,87 @@ Let's say we have two algorithms to search for a number in a list:
 
 Understanding Big O notation is essential for any programmer aiming to write efficient and scalable code.  While it simplifies complexities by ignoring constant factors, it provides a powerful tool for analyzing and comparing algorithms.
 
+#  A Simple Loop 
+The simplest loop is a `while` loop that continues as long as a condition is true.  Here are examples in several common programming languages:
+
+**Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This loop prints the numbers 0 through 4.  The condition `count < 5` is checked before each iteration.  Once `count` reaches 5, the loop terminates.
+
+
+**JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+This is functionally identical to the Python example.
+
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+This C++ example does the same thing, but requires including the `<iostream>` header for input/output operations.
+
+
+**Java:**
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+Java requires a class structure.
+
+
+**Go:**
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	count := 0
+	for count < 5 {
+		fmt.Println(count)
+		count++
+	}
+}
+```
+
+Go uses a `for` loop that acts similarly to a `while` loop in other languages.
+
+
+These are all basic examples.  Loops can be much more complex, incorporating `break` and `continue` statements to control the flow of execution, and using different loop types (like `for` loops with iterators).  But these examples demonstrate the fundamental concept of a simple loop.
+
