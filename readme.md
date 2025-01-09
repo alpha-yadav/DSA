@@ -14593,3 +14593,58 @@ fizzBuzzConcise(n: 15)
 
 This version achieves the same result in a single `print` statement using nested ternary operators.  However, some might find this less readable than the more explicit `if-else if-else` structure.  Choose the version that you find clearer and easier to maintain.  Readability is key, especially in collaborative projects.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources of primary interest are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We usually analyze complexity using **Big O notation**, which describes the upper bound of the growth rate of the algorithm's resource usage as the input size approaches infinity.  It focuses on the dominant terms and ignores constant factors.  Other notations used include:
+
+* **Big Omega (Ω):** Describes the lower bound of the growth rate.
+* **Big Theta (Θ):** Describes the tight bound, meaning both the upper and lower bounds are the same.
+
+Here's a breakdown of common complexities, from best to worst:
+
+**Time Complexity:**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The execution time is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  Example: Bubble sort, selection sort, nested loops iterating through the input.
+
+* **O(n³) - Cubic Time:** The execution time increases cubically with the input size.  Example: Some algorithms involving three nested loops.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  This becomes impractical very quickly for larger inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  This is extremely slow and only practical for very small inputs.  Example: Traveling salesman problem (brute force approach).
+
+
+**Space Complexity:**  Similar notations apply as with time complexity.  Space complexity describes the amount of memory used, including:
+
+* **Input data:** The size of the input.
+* **Auxiliary space:**  The extra space used by the algorithm beyond the input data.
+
+
+**Factors Affecting Complexity:**
+
+* **Algorithm design:** Different algorithms can solve the same problem with vastly different complexities.
+* **Input data:** The specific characteristics of the input data can affect the actual runtime, even for the same algorithm.  For example, a sorting algorithm might run faster on nearly sorted data.
+* **Hardware:** The speed of the processor, memory, and other hardware components will affect the actual runtime.
+
+**Analyzing Complexity:**
+
+Analyzing the complexity of an algorithm typically involves:
+
+1. **Identifying the basic operations:**  Determine the operations that contribute most to the runtime.
+2. **Counting the number of basic operations:** Express the number of operations as a function of the input size.
+3. **Identifying the dominant terms:**  Focus on the terms that grow fastest as the input size increases.
+4. **Applying Big O notation:**  Express the complexity using Big O notation.
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance for different input sizes.  It's a fundamental concept in computer science.
+
