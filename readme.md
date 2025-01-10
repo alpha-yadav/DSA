@@ -24752,3 +24752,67 @@ The space complexity of an adjacency list is O(V + E), where V is the number of 
 
 Remember to choose the data structure and implementation that best suits your programming language and the specific characteristics of your graph.  The examples provided give you a good starting point for building your own graph representations.
 
+#  Topological Sort 
+A topological sort is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so that you can follow all the arrows without ever going backward.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):**  Topological sorts only work on DAGs.  A cycle in the graph prevents a topological sort from being possible.  If a cycle exists, you'd get stuck in an infinite loop trying to arrange the nodes.
+* **Linear Ordering:** The output is a sequence, not a tree or other complex structure.
+* **Dependency Ordering:** The order reflects the dependencies between nodes.  If A depends on B (there's an edge from B to A), B will come before A in the sorted order.
+* **Multiple Solutions:**  For many DAGs, there's more than one valid topological sort.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   * **Idea:**  Iteratively removes nodes with no incoming edges, adding them to the sorted list.
+   * **Steps:**
+     1. Find all nodes with an in-degree of 0 (no incoming edges).  Put them in a queue.
+     2. While the queue is not empty:
+        * Remove a node from the queue and add it to the sorted list.
+        * For each of its outgoing edges, decrement the in-degree of the target node.
+        * If the in-degree of a target node becomes 0, add it to the queue.
+     3. If the number of nodes in the sorted list equals the total number of nodes in the graph, the sort is successful. Otherwise, a cycle exists.
+
+2. **Depth-First Search (DFS):**
+
+   * **Idea:**  Recursively traverse the graph using DFS.  Add nodes to the sorted list in post-order (after all their descendants have been processed).
+   * **Steps:**
+     1. Initialize a stack or list to store the sorted order.
+     2. For each node in the graph that hasn't been visited:
+        * Perform a DFS on that node.
+     3. The DFS function:
+        * Marks the node as visited.
+        * Recursively calls DFS on all its unvisited neighbors.
+        * After all recursive calls return, adds the node to the stack/list.
+     4. Reverse the stack/list to get the topological order.
+
+**Example (Kahn's Algorithm):**
+
+Consider a graph with nodes A, B, C, D, and edges: A->C, B->C, C->D.
+
+1. In-degrees: A=0, B=0, C=2, D=1.
+2. Queue: A, B.
+3. Remove A, add to sorted list: [A].  Decrement C's in-degree to 1.
+4. Remove B, add to sorted list: [A, B]. Decrement C's in-degree to 0.
+5. Add C to queue.
+6. Remove C, add to sorted list: [A, B, C]. Decrement D's in-degree to 0.
+7. Add D to queue.
+8. Remove D, add to sorted list: [A, B, C, D].
+9. Queue is empty.  Topological sort: [A, B, C, D].
+
+**Applications:**
+
+Topological sorting is used in various applications, including:
+
+* **Course Scheduling:** Ordering courses based on prerequisites.
+* **Dependency Resolution:**  Installing software packages with dependencies.
+* **Compilation Order:** Determining the order to compile source code files.
+* **Data Serialization:**  Processing data in a specific order.
+
+
+Choosing between Kahn's algorithm and DFS depends on the specific application and implementation constraints. Kahn's algorithm is often considered simpler to understand and implement, while DFS might be more efficient in certain situations.  Both algorithms correctly produce a topological sort if one exists.
+
