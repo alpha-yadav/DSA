@@ -23466,3 +23466,121 @@ int main() {
 
 Remember to always handle memory management properly (using `delete` to free allocated memory) to prevent memory leaks, especially after deleting nodes.  The provided `main` function lacks complete cleanup;  a recursive function to deallocate the entire tree after the deletions would be a more robust solution for larger trees.  Consider adding such a function for production-level code.  This example demonstrates the core deletion logic clearly.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where a node is considered a descendant of itself).  There are several ways to find the LCA in a BST, leveraging the BST property (left subtree < node < right subtree).
+
+**Method 1: Iterative Approach**
+
+This approach is generally more efficient than recursion because it avoids the overhead of function calls.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_bst_iterative(root, n1, n2):
+    """
+    Finds the LCA of n1 and n2 in a BST iteratively.
+
+    Args:
+      root: The root of the BST.
+      n1: The first node.
+      n2: The second node.
+
+    Returns:
+      The LCA node, or None if either n1 or n2 is not found.
+    """
+    while root:
+        if n1.data < root.data and n2.data < root.data:
+            root = root.left
+        elif n1.data > root.data and n2.data > root.data:
+            root = root.right
+        else:
+            return root  # LCA found
+    return None  # Either n1 or n2 not found in the BST
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+n1 = Node(10)
+n2 = Node(14)
+
+lca = lca_bst_iterative(root, n1, n2)
+if lca:
+    print(f"LCA of {n1.data} and {n2.data} is: {lca.data}")
+else:
+    print("One or both nodes not found in the BST")
+
+```
+
+
+**Method 2: Recursive Approach**
+
+This approach is more concise but might be slightly less efficient for very deep trees due to recursive function call overhead.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_bst_recursive(root, n1, n2):
+    """
+    Finds the LCA of n1 and n2 in a BST recursively.
+
+    Args:
+      root: The root of the BST.
+      n1: The first node.
+      n2: The second node.
+
+    Returns:
+      The LCA node, or None if either n1 or n2 is not found.
+    """
+    if root is None:
+        return None
+    if n1.data < root.data and n2.data < root.data:
+        return lca_bst_recursive(root.left, n1, n2)
+    elif n1.data > root.data and n2.data > root.data:
+        return lca_bst_recursive(root.right, n1, n2)
+    else:
+        return root
+
+
+# Example usage (same as iterative example, just change the function call)
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+n1 = Node(10)
+n2 = Node(14)
+
+lca = lca_bst_recursive(root, n1, n2)
+if lca:
+    print(f"LCA of {n1.data} and {n2.data} is: {lca.data}")
+else:
+    print("One or both nodes not found in the BST")
+```
+
+**Important Considerations:**
+
+* **Node Existence:**  Both methods assume `n1` and `n2` exist in the BST.  Robust code should include checks to handle cases where one or both nodes are not present.
+* **Efficiency:** The iterative approach is generally preferred for its better performance in terms of space and time complexity, especially for large trees.  Recursive solutions can lead to stack overflow errors for extremely deep trees.
+* **Data Structure:** These solutions work specifically because the input is a *Binary Search Tree*.  Finding the LCA in a general binary tree requires a different algorithm.
+
+
+Remember to adapt the `Node` class and example usage to your specific needs.  Choose the iterative or recursive method based on your performance requirements and coding style preferences.  The iterative version is generally recommended for production code due to its efficiency and avoidance of potential stack overflow issues.
+
