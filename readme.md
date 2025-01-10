@@ -19442,3 +19442,56 @@ else:
 
 Remember to break down problems into smaller, manageable parts.  Start slow, focus on understanding the fundamentals, and gradually build your skills.  Persistence is key!
 
+#  A sample algorithmic problem 
+## Algorithmic Problem: Two Sum
+
+**Problem Statement:**
+
+Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+
+**Example 1:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Example 2:**
+
+```
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+```
+
+**Example 3:**
+
+```
+Input: nums = [3,3], target = 6
+Output: [0,1]
+```
+
+
+**Constraints:**
+
+* `2 <= nums.length <= 104`
+* `-109 <= nums[i] <= 109`
+* `-109 <= target <= 109`
+* **Only one valid answer exists.**
+
+
+**Solution Considerations:**
+
+This problem can be solved using several approaches, each with different time and space complexity:
+
+* **Brute Force:**  Nested loops to check all pairs of numbers.  Time complexity: O(n²), Space complexity: O(1).
+* **Hash Table (Dictionary):** Iterate through the array once, storing each number and its index in a hash table. For each number, check if the complement (target - number) exists in the hash table. Time complexity: O(n), Space complexity: O(n).
+
+
+This problem is a classic example of an algorithmic problem that highlights the importance of choosing the right data structure and algorithm to achieve optimal performance.  The hash table approach is significantly more efficient for larger input arrays.
+
