@@ -24340,3 +24340,74 @@ postorder(root)  # Output: D E B F C A
 
 Remember to handle the case of an empty tree (where the root node is `None`) appropriately in your traversal functions to avoid errors.  The provided Python code includes this handling.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the Lowest Common Ancestor (LCA) in a binary tree is a classic problem.  Unlike a binary *search* tree, a general binary tree doesn't have any ordering guarantees, making the solution slightly more complex.  Here's a breakdown of the problem and different approaches:
+
+**Problem Statement:**
+
+Given a binary tree and two nodes, `node1` and `node2`, find the lowest common ancestor (LCA) of these two nodes.  The LCA is the lowest node in the tree that has both `node1` and `node2` as descendants.  If either node is not present in the tree, or if one is an ancestor of the other, you'll need to handle those edge cases appropriately.
+
+
+**Approaches:**
+
+1. **Recursive Approach:** This is a common and efficient solution. The idea is:
+
+   * **Base Cases:**
+     * If the current node is `null`, return `null`.
+     * If the current node is either `node1` or `node2`, return the current node.
+
+   * **Recursive Steps:**
+     * Recursively search for `node1` and `node2` in the left and right subtrees.
+     * If both left and right subtrees return non-`null` values, it means that `node1` and `node2` are on different branches, and the current node is their LCA.  Return the current node.
+     * Otherwise, return the non-`null` result (either from the left or right subtree).
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca(root, node1, node2):
+       if root is None or root.data == node1 or root.data == node2:
+           return root
+
+       left_lca = lca(root.left, node1, node2)
+       right_lca = lca(root.right, node1, node2)
+
+       if left_lca and right_lca:
+           return root
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+
+   # Example usage:
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+   lca_node = lca(root, 4, 5)
+   if lca_node:
+       print(f"LCA of 4 and 5 is: {lca_node.data}")  # Output: LCA of 4 and 5 is: 2
+   else:
+       print("Nodes not found")
+   ```
+
+2. **Iterative Approach (using a stack or queue):**  You can achieve the same result iteratively using a stack (depth-first search) or a queue (breadth-first search).  This is generally less elegant than the recursive approach but can be more memory-efficient in some cases (avoiding deep recursion calls).  (Implementation is more complex and left as an exercise for brevity.)
+
+
+**Edge Cases to Consider:**
+
+* **One node is the ancestor of the other:** The ancestor node should be returned as the LCA.
+* **One or both nodes are not in the tree:**  The function should return `None` or handle this case appropriately, indicating that the LCA cannot be found.
+* **Empty Tree:** If the tree is empty (`root` is `None`),  return `None`.
+
+
+**Choosing the Best Approach:**
+
+The recursive approach is generally preferred for its clarity and conciseness. The iterative approach can be beneficial when dealing with extremely large trees to avoid potential stack overflow issues.  For most situations, the recursive solution is sufficient and easier to understand.
+
