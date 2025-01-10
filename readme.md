@@ -22891,3 +22891,30 @@ Nested loops are frequently used for:
 
 **Important Note:**  Deeply nested loops can lead to significant performance issues if not carefully designed.  The computational complexity increases exponentially with the number of nested loops.  Always consider the efficiency of your nested loop structures, especially when dealing with large datasets.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They mean the time it takes to solve a problem grows logarithmically with the input size (n).  This is significantly faster than linear time (O(n)) or quadratic time (O(n²)), especially for large inputs.  The base of the logarithm usually doesn't matter in Big O notation, as it's just a constant factor.
+
+Here are some common types of algorithms exhibiting O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  It works on a *sorted* list or array.  The algorithm repeatedly divides the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This halving process continues until the target value is found or the search interval is empty.
+
+* **Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  In a balanced binary search tree (like an AVL tree or a red-black tree), the height of the tree is proportional to log₂(n), where n is the number of nodes.  Searching, inserting, and deleting nodes involve traversing down the tree, which takes logarithmic time in the average and worst cases (for balanced trees).  Unbalanced trees can degrade to O(n) in the worst case.
+
+* **Efficient exponentiation (exponentiation by squaring):** This technique calculates a<sup>b</sup> in O(log b) time by repeatedly squaring the base and adjusting the exponent.
+
+* **Finding an element in a heap:** Heaps (min-heaps or max-heaps) are tree-based data structures that satisfy the heap property (e.g., in a min-heap, the value of each node is less than or equal to the value of its children). Finding the minimum (or maximum) element is O(1), and other operations like finding an arbitrary element can be done in O(log n) because of the tree structure.
+
+* **Change-making algorithms using dynamic programming (in certain cases):** Some versions of dynamic programming algorithms for optimal change-making have logarithmic-time solutions under specific constraints.
+
+* **Algorithms based on divide-and-conquer that recursively halve the problem size:**  Many divide-and-conquer algorithms can achieve logarithmic time complexity if each recursive call reduces the problem size by a constant factor (like halving it).
+
+**Key Characteristics Leading to O(log n):**
+
+Algorithms with O(log n) complexity typically share these features:
+
+* **Repeated halving (or reduction by a constant factor) of the problem size:**  This is the core idea behind the logarithmic growth.  Each step significantly reduces the amount of work remaining.
+* **Sorted data or a balanced tree-like structure:**  Many O(log n) algorithms require the input data to be sorted or utilize a data structure that maintains a balanced tree structure.
+
+
+It's important to remember that O(log n) time complexity is only achieved under ideal conditions.  For instance,  a binary search only works on sorted data;  unbalanced binary trees can lead to O(n) time complexity.  The efficiency of these algorithms is highly dependent on maintaining certain properties within the data or the data structure used.
+
