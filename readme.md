@@ -22498,3 +22498,68 @@ The "best" version depends on your priorities:
 
 Start with Version 1 to understand the core logic, then explore the other versions to see different ways to achieve the same result. Remember to compile and run this code in a Swift environment (like Xcode's playground) to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm consumes as its input size grows.  It's a crucial aspect of algorithm analysis, allowing us to compare the efficiency of different approaches to solving the same problem.  We typically express complexity using Big O notation.
+
+**Big O Notation (and related notations):**
+
+Big O notation describes the upper bound of an algorithm's growth rate.  It focuses on the dominant factors influencing runtime as the input size (often denoted as 'n') becomes very large, ignoring constant factors and smaller terms.  We use it to characterize the worst-case scenario.
+
+Other notations include:
+
+* **Big Omega (Ω):** Describes the lower bound of an algorithm's growth rate – the best-case scenario.
+* **Big Theta (Θ):** Describes the tight bound, meaning both the upper and lower bounds are the same order of magnitude.  This indicates the average-case performance.
+
+**Common Complexity Classes:**
+
+These are ordered from most efficient to least efficient:
+
+* **O(1) – Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) – Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) – Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) – Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) – Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Bubble sort, selection sort, insertion sort (nested loops).
+
+* **O(2ⁿ) – Exponential Time:** The runtime doubles with each addition to the input size.  This becomes extremely slow very quickly.  Example: Finding all subsets of a set.
+
+* **O(n!) – Factorial Time:** The runtime grows factorially with the input size.  This is extremely slow for even moderately sized inputs.  Example: Traveling salesman problem (brute-force approach).
+
+
+**Factors Affecting Complexity:**
+
+* **Input Size (n):** The primary factor influencing complexity.
+* **Algorithm Design:**  Different algorithms solving the same problem can have drastically different complexities.
+* **Data Structures:** The choice of data structure can significantly impact an algorithm's performance.
+* **Hardware:** While complexity analysis focuses on algorithmic aspects, the underlying hardware can influence the actual runtime.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze an algorithm's complexity, we typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the algorithm's runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Express the complexity using Big O notation:**  Identify the dominant term in the function and drop constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple function that sums the elements of an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for num in arr:
+    total += num
+  return total
+```
+
+This algorithm iterates through the array once, performing a constant number of operations (addition and assignment) for each element.  Therefore, its time complexity is O(n), where n is the length of the array.
+
+
+Understanding algorithm complexity is critical for choosing the most efficient algorithm for a given task, especially when dealing with large datasets where even small differences in complexity can lead to significant performance gains or losses.
+
