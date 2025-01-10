@@ -21761,3 +21761,102 @@ Beyond the basics, graph theory delves into more complex topics like:
 
 This introduction provides a foundation for understanding graph theory.  Exploring each concept further, along with working through examples and problems, will solidify your understanding. Many online resources, textbooks, and courses are available to delve deeper into this fascinating field.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient technique, particularly when dealing with sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementation choices and considerations:
+
+**Concept:**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each element in the array represents a vertex, and its associated list contains the vertices adjacent to it (i.e., the vertices it's connected to by an edge).
+
+**Implementation:**
+
+Several data structures can implement adjacency lists:
+
+* **Using Arrays of Lists (Dynamic Arrays):**  This is a common approach.  Each entry in the array is a list (like a `std::vector` in C++, a `List` in Python, or an `ArrayList` in Java) that stores the neighbors of the vertex.
+
+   ```c++
+   #include <vector>
+   #include <list>
+
+   using namespace std;
+
+   int main() {
+       int numVertices = 5;
+       vector<list<int>> adjList(numVertices); // Adjacency list representation
+
+       // Add edges: (0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)
+       adjList[0].push_back(1);
+       adjList[0].push_back(4);
+       adjList[1].push_back(0);
+       adjList[1].push_back(2);
+       adjList[1].push_back(3);
+       adjList[1].push_back(4);
+       adjList[2].push_back(1);
+       adjList[2].push_back(3);
+       adjList[3].push_back(1);
+       adjList[3].push_back(2);
+       adjList[3].push_back(4);
+       adjList[4].push_back(0);
+       adjList[4].push_back(1);
+       adjList[4].push_back(3);
+
+       // Accessing neighbors of vertex 1:
+       for (int neighbor : adjList[1]) {
+           cout << neighbor << " "; // Output: 0 2 3 4
+       }
+       cout << endl;
+
+       return 0;
+   }
+   ```
+
+* **Using Arrays of Vectors:**  Similar to arrays of lists, but using dynamically sized arrays (vectors) instead.  This might offer slightly better performance in some cases.
+
+* **Using Dictionaries/Hash Maps:**  In languages with built-in hash map support (like Python's dictionaries or Java's `HashMap`), you can use a dictionary where keys are vertex indices (or vertex objects) and values are lists of their neighbors. This provides faster lookup of neighbors if you're frequently searching for specific neighbors.
+
+   ```python
+   adj_list = {
+       0: [1, 4],
+       1: [0, 2, 3, 4],
+       2: [1, 3],
+       3: [1, 2, 4],
+       4: [0, 1, 3]
+   }
+
+   print(adj_list[1])  # Output: [0, 2, 3, 4]
+   ```
+
+**Weighted Graphs:**
+
+For weighted graphs, you need to store the weight along with each edge.  You can do this by:
+
+* **Using pairs or tuples:**  Store pairs (neighbor, weight) in the adjacency list.
+
+   ```c++
+   vector<list<pair<int, int>>> adjList(numVertices); // (neighbor, weight)
+   adjList[0].push_back({1, 5}); // Edge from 0 to 1 with weight 5
+   ```
+
+* **Custom edge class:** Create a class to encapsulate neighbor and weight information.
+
+**Directed vs. Undirected Graphs:**
+
+* **Undirected:**  When adding an edge between vertices `u` and `v`, you need to add `v` to `u`'s list and `u` to `v`'s list.
+
+* **Directed:** Only add `v` to `u`'s list if the edge is directed from `u` to `v`.
+
+
+**Advantages of Adjacency Lists:**
+
+* **Efficient for sparse graphs:** Storage space is proportional to the number of edges, not the number of possible edges.
+* **Easy to find neighbors:**  Finding all neighbors of a vertex is straightforward.
+* **Good for algorithms:**  Many graph algorithms (like breadth-first search and depth-first search) work well with adjacency lists.
+
+**Disadvantages of Adjacency Lists:**
+
+* **Less efficient for dense graphs:**  In dense graphs (many edges), the adjacency matrix might be more space-efficient.
+* **Checking for edge existence:**  Checking if an edge exists between two specific vertices might require searching a list.
+
+
+Choose the implementation that best suits your specific needs and the programming language you're using.  Consider the size and density of your graph, and the types of operations you'll be performing most frequently.
+
