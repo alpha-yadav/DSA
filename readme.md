@@ -19495,3 +19495,77 @@ This problem can be solved using several approaches, each with different time an
 
 This problem is a classic example of an algorithmic problem that highlights the importance of choosing the right data structure and algorithm to achieve optimal performance.  The hash table approach is significantly more efficient for larger input arrays.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing ways to improve it:
+
+
+**Basic Approach:**
+
+This version uses a straightforward `for` loop and `if/else if/else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks divisibility by 15 first (to handle both 3 and 5 multiples correctly).
+* Then it checks divisibility by 3 and 5.
+* If none of the above are true, it prints the number itself.
+
+
+**Improved Approach (using String Interpolation):**
+
+This version is slightly more concise and readable using string interpolation:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function
+```
+
+This approach builds the output string incrementally. If the string is empty after checking divisibility by 3 and 5, it prints the number; otherwise, it prints the accumulated "Fizz" and/or "Buzz" string.
+
+
+**Even More Concise (using ternary operator):**
+
+For those who like extremely concise code (though perhaps at the cost of readability for beginners):
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print((i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")  == "" ? "\(i)" : (i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : ""))
+    }
+}
+
+fizzBuzzConcise(n: 15) //Call the function
+```
+
+This version uses nested ternary operators to achieve the same result in a single `print` statement.  However, it's less readable than the previous examples.
+
+
+**Choosing the Right Approach:**
+
+For beginners, the first or second approach is recommended for clarity. The concise version is primarily for demonstrating different Swift syntax; prioritize readability, especially when starting out.  Remember to choose the version that best balances conciseness and understandability for your needs and audience.
+
