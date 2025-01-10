@@ -19569,3 +19569,54 @@ This version uses nested ternary operators to achieve the same result in a singl
 
 For beginners, the first or second approach is recommended for clarity. The concise version is primarily for demonstrating different Swift syntax; prioritize readability, especially when starting out.  Remember to choose the version that best balances conciseness and understandability for your needs and audience.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (typically time and space) an algorithm requires to solve a problem as a function of the input size.  It's a crucial aspect of algorithm analysis, allowing us to compare the efficiency of different algorithms and predict their performance on larger datasets.
+
+There are two main types of complexity analysis:
+
+**1. Time Complexity:** This analyzes how the runtime of an algorithm grows as the input size increases.
+
+* **Big O Notation (O):**  Describes the upper bound of the algorithm's runtime.  It focuses on the dominant operations as the input size approaches infinity, ignoring constant factors and smaller terms.  Common notations include:
+    * **O(1):** Constant time. The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+    * **O(log n):** Logarithmic time. The runtime increases logarithmically with the input size. Example: Binary search.
+    * **O(n):** Linear time. The runtime increases linearly with the input size. Example: Searching an unsorted array.
+    * **O(n log n):** Linearithmic time.  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+    * **O(n²):** Quadratic time. The runtime increases proportionally to the square of the input size. Example: Bubble sort, selection sort.
+    * **O(2ⁿ):** Exponential time. The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+    * **O(n!):** Factorial time. The runtime grows factorially with the input size. Example: Traveling salesperson problem (brute-force approach).
+
+
+* **Big Omega Notation (Ω):** Describes the lower bound of the algorithm's runtime.  It represents the best-case scenario.
+
+* **Big Theta Notation (Θ):** Describes both the upper and lower bounds of the algorithm's runtime. It indicates a tight bound, meaning the algorithm's runtime grows at a specific rate.
+
+
+**2. Space Complexity:** This analyzes how the memory usage of an algorithm grows as the input size increases.  Similar notation (Big O, Big Omega, Big Theta) is used as with time complexity.  Space complexity can include:
+
+* **Auxiliary Space:** The extra space used by the algorithm beyond the input itself (e.g., space for temporary variables, data structures).
+* **Total Space:** The sum of auxiliary space and the space used to store the input.
+
+
+**Factors Affecting Complexity:**
+
+* **Input Size:** The primary factor influencing complexity.  This could be the number of elements in an array, the number of nodes in a graph, or the length of a string.
+* **Data Structure:** The choice of data structure significantly impacts both time and space complexity.
+* **Algorithm Design:**  Different algorithms can solve the same problem with varying complexities.
+* **Hardware:**  The underlying hardware affects the actual runtime, but complexity analysis focuses on the algorithm's inherent properties.
+
+
+**Analyzing Complexity:**
+
+Complexity analysis typically involves:
+
+1. **Identifying the basic operations:** Determine the operations that dominate the runtime.
+2. **Expressing the number of operations as a function of the input size:**  Count how many times these operations are performed as a function of the input size (n).
+3. **Simplifying the function using Big O notation:** Ignore constant factors and lower-order terms.
+
+**Example:**
+
+Consider a simple linear search algorithm that searches for a value in an unsorted array. In the worst case, the algorithm has to iterate through all `n` elements. Therefore, its time complexity is O(n).
+
+
+Understanding algorithm complexity is critical for choosing the right algorithm for a given problem, especially when dealing with large datasets where efficiency is paramount.  An algorithm with a lower complexity will generally perform better than one with a higher complexity for large inputs.
+
