@@ -21598,3 +21598,111 @@ Please provide me with the data or equation you want me to graph.  I need inform
 
 Once you give me this information, I can help you graph it.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using adjacency matrices is a common approach, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, its advantages, disadvantages, and considerations for implementation:
+
+**How it Works:**
+
+An adjacency matrix is a 2D array (or a matrix) where each element `matrix[i][j]` represents the weight of the edge between vertex `i` and vertex `j`.
+
+* **Weighted Graphs:**  `matrix[i][j]` contains the weight of the edge from vertex `i` to vertex `j`. If there's no edge, a special value is used (e.g., `infinity`, `-1`, or `0` depending on your application and algorithm).
+
+* **Unweighted Graphs:** `matrix[i][j]` is typically `1` if there's an edge from vertex `i` to vertex `j`, and `0` otherwise.
+
+* **Directed Graphs:** The matrix is not necessarily symmetric. `matrix[i][j]` might be different from `matrix[j][i]`.
+
+* **Undirected Graphs:** The matrix is symmetric ( `matrix[i][j] == matrix[j][i]` ).  You only need to store the upper or lower triangle of the matrix to save space.
+
+
+**Example (Weighted, Directed Graph):**
+
+Consider a directed graph with 3 vertices:
+
+* Edge from vertex 0 to vertex 1 with weight 2
+* Edge from vertex 1 to vertex 2 with weight 5
+* Edge from vertex 2 to vertex 0 with weight 3
+
+
+The adjacency matrix would be:
+
+```
+     0  1  2
+   ---------
+0 | 0  2  0
+1 | 0  0  5
+2 | 3  0  0
+```
+
+
+**Implementation (Python):**
+
+```python
+import sys
+
+def create_adjacency_matrix(num_vertices, edges):
+    """Creates an adjacency matrix for a graph.
+
+    Args:
+        num_vertices: The number of vertices in the graph.
+        edges: A list of tuples, where each tuple represents an edge (source, destination, weight).
+
+    Returns:
+        A 2D list representing the adjacency matrix.  Returns None if invalid input.
+    """
+    if num_vertices <= 0 or not isinstance(edges,list):
+        return None
+
+    matrix = [[float('inf')] * num_vertices for _ in range(num_vertices)]  # Initialize with infinity
+
+    for u, v, w in edges:
+        if 0 <= u < num_vertices and 0 <= v < num_vertices:
+            matrix[u][v] = w  # Assign weight
+        else:
+            return None #Invalid Edge
+
+    for i in range(num_vertices):
+        matrix[i][i] = 0 #Self loop weight is zero.
+
+    return matrix
+
+
+# Example usage:
+edges = [(0, 1, 2), (1, 2, 5), (2, 0, 3)]
+num_vertices = 3
+adj_matrix = create_adjacency_matrix(num_vertices, edges)
+
+if adj_matrix:
+    for row in adj_matrix:
+        print(row)
+else:
+    print("Invalid graph parameters.")
+
+```
+
+**Advantages:**
+
+* **Simple implementation:** Relatively straightforward to create and manipulate.
+* **Fast edge existence check:** Checking if an edge exists between two vertices is O(1) (constant time).
+* **Efficient for dense graphs:**  Performance is better than adjacency lists for dense graphs (graphs with many edges).
+
+**Disadvantages:**
+
+* **Space inefficiency for sparse graphs:**  Requires O(V^2) space, where V is the number of vertices. This is wasteful for sparse graphs (graphs with relatively few edges).
+* **Slow addition/deletion of vertices:** Adding or deleting vertices requires resizing the entire matrix, which can be computationally expensive.
+
+
+**When to Use Adjacency Matrices:**
+
+* Dense graphs
+* Algorithms that require frequent edge existence checks (e.g., finding all neighbors of a vertex).
+* When the graph size is relatively small and known in advance.
+
+
+**When to Use Adjacency Lists (an alternative):**
+
+* Sparse graphs
+* Frequent addition/deletion of vertices and edges.
+* Algorithms that focus on traversing the graph (e.g., breadth-first search, depth-first search).
+
+Remember to choose the data structure that best suits your specific graph and the algorithms you'll be using.  For very large graphs, consider more advanced graph database solutions.
+
