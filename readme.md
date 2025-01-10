@@ -20002,3 +20002,66 @@ Here are some common examples of algorithms with O(log n) time complexity:
 
 In summary, O(log n) algorithms are highly efficient, especially for large datasets, because the growth of the runtime is much slower than linear growth (O(n)).  They are frequently used in situations where fast searching or accessing data is crucial.
 
+#  An O(log n) example 
+A classic O(log n) example is **binary search**.
+
+**Binary Search Algorithm:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array (or list).  It works by repeatedly dividing the search interval in half. If the search key is less than the item in the middle of the interval, the search continues in the lower half. Otherwise, the search continues in the upper half.  This process is repeated until the key is found or the interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The element to search for.
+
+  Returns:
+    The index of the target element if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid  # Target found
+    elif arr[mid] < target:
+      low = mid + 1  # Search in the upper half
+    else:
+      high = mid - 1  # Search in the lower half
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_element = 11
+
+index = binary_search(sorted_array, target_element)
+
+if index != -1:
+  print(f"Element {target_element} found at index {index}")
+else:
+  print(f"Element {target_element} not found in the array")
+
+```
+
+**Why O(log n)?**
+
+Each time we perform a comparison in binary search, we effectively halve the size of the search space.  This means that the number of comparisons required is proportional to the logarithm (base 2) of the input size (n).  More specifically, the maximum number of comparisons is ⌈log₂(n+1)⌉, where ⌈x⌉ denotes the ceiling function (rounding up to the nearest integer).  This logarithmic relationship is what gives binary search its O(log n) time complexity.  This makes it significantly faster than linear search (O(n)) for large arrays.
+
+
+Other examples of O(log n) algorithms include:
+
+* **Tree Traversal (balanced trees like AVL or Red-Black trees):**  Finding a node in a balanced binary search tree takes O(log n) time because the tree's height is logarithmic with respect to the number of nodes.
+* **Efficient exponentiation:** Calculating a<sup>b</sup>  (a raised to the power b) can be done in O(log b) time using exponentiation by squaring.
+
+
+The key characteristic of O(log n) algorithms is their ability to reduce the problem size by a constant factor with each step.
+
