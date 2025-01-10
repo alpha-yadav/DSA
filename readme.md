@@ -23822,3 +23822,124 @@ print(f"Is the tree a BST? {is_bst_recursive_minmax(root2)}") # Output: False
 
 Both methods achieve the same result.  The min-max approach might be slightly more efficient in some cases because it can prune branches early if a violation is detected, avoiding unnecessary traversals.  The in-order traversal method is arguably more intuitive and easier to understand. Choose the method that best suits your needs and understanding. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        node: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.data)
+            inorder(node.right)
+
+    inorder(node)
+    for i in range(len(inorder_list)-1):
+        if inorder_list[i] >= inorder_list[i+1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(is_bst_recursive(root))  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(6) # This violates BST property
+
+print(is_bst_recursive(root2)) #Output: False
+
+```
+
+
+**Method 2:  Recursive Check with Min and Max**
+
+This method recursively checks each subtree, maintaining the minimum and maximum allowed values for the current node.  This avoids the need for a separate in-order traversal.
+
+```python
+import sys
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+    """
+    Checks if a binary tree is a BST using recursive min-max checking.
+
+    Args:
+        node: The root node of the subtree being checked.
+        min_val: The minimum allowed value for the node's data.
+        max_val: The maximum allowed value for the node's data.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if node.data <= min_val or node.data >= max_val:
+        return False
+
+    return (is_bst_minmax(node.left, min_val, node.data) and
+            is_bst_minmax(node.right, node.data, max_val))
+
+
+# Example usage (same trees as before):
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(is_bst_minmax(root))  # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(6)
+
+print(is_bst_minmax(root2))  # Output: False
+
+```
+
+**Which method is better?**
+
+* **Method 1 (In-order traversal):** Simpler to understand, but requires extra space for the `inorder_list`. Its time complexity is O(N) where N is the number of nodes, and space complexity is also O(N) in the worst case (skewed tree).
+
+* **Method 2 (Min-Max):** More efficient in terms of space complexity because it's done recursively without storing a list. Its time and space complexity are both O(N) in the worst case.
+
+
+For most cases, both methods are acceptable.  If space is a major concern and you're dealing with potentially very large trees, Method 2 might be slightly preferable.  However, the readability and simplicity of Method 1 often make it a good choice.
+
