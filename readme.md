@@ -20792,3 +20792,100 @@ print("Inorder traversal after deleting 8:", bst.inorder_traversal()) # Output w
 
 This improved version includes error handling for searching a non-existent node and uses recursive helper functions for cleaner code. Remember that the deletion method handles the case of a node with two children by finding the inorder successor.  The example usage demonstrates the basic functionality.  You can extend this further by adding methods for things like finding the minimum/maximum value, tree height, etc.
 
+#  Check if a tree is BST or not 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Inorder Traversal**
+
+This method leverages the property that an inorder traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(node, arr):
+    if node:
+        inorder(node.left, arr)
+        arr.append(node.data)
+        inorder(node.right, arr)
+
+def isBST(root):
+    arr = []
+    inorder(root, arr)
+    for i in range(1, len(arr)):
+        if arr[i] <= arr[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+
+print(isBST(root))  # Output: False (because 1 is out of order)
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(8)
+root2.left.left = Node(1)
+root2.left.right = Node(4)
+root2.right.left = Node(7)
+root2.right.right = Node(10)
+
+print(isBST(root2)) # Output: True
+
+```
+
+**Method 2: Recursive Check with Range**
+
+This approach recursively checks if each subtree satisfies the BST property within a given range.  It's generally more efficient than inorder traversal, especially for large trees, because it avoids creating an intermediate array.
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, min_val, max_val):
+    if node is None:
+        return True
+    if node.data < min_val or node.data > max_val:
+        return False
+    return (isBSTUtil(node.left, min_val, node.data - 1) and
+            isBSTUtil(node.right, node.data + 1, max_val))
+
+
+def isBST(node):
+    return isBSTUtil(node, float('-inf'), float('inf'))
+
+# Example usage (same trees as above)
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+print(isBST(root))  # Output: False
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(8)
+root2.left.left = Node(1)
+root2.left.right = Node(4)
+root2.right.left = Node(7)
+root2.right.right = Node(10)
+
+print(isBST(root2))  # Output: True
+```
+
+Both methods achieve the same result.  The recursive range check method is generally preferred for its efficiency, particularly in scenarios where memory usage is a concern (avoiding the creation of the `arr` list).  Choose the method that best suits your needs and coding style.  Remember to handle edge cases (empty trees) appropriately.
+
