@@ -22422,3 +22422,79 @@ Here are a few algorithmic problems of varying difficulty, with explanations to 
 
 Remember to consider time and space complexity when designing your algorithms.  These problems offer a range of difficulty and introduce several common algorithmic concepts.  Try to solve them, and search for solutions online if you get stuck!  Understanding the different approaches and their trade-offs is crucial for becoming a better algorithm designer.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if/else if/else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This works correctly, but we can make it more concise and efficient.
+
+**Version 2: More Concise Implementation**
+
+This version uses the ternary conditional operator (`?:`) to make the code more compact:
+
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+While shorter, this version might be slightly harder to read for beginners.  The choice depends on your preference for readability versus brevity.
+
+
+**Version 3:  Using String Interpolation (for better readability)**
+
+This version uses string interpolation for slightly improved readability compared to version 2.
+
+```swift
+func fizzBuzzInterpolation(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzInterpolation(n: 15) //Call the function to test
+```
+
+This avoids the nested ternary operator and makes the logic clearer by separating the Fizz and Buzz checks.
+
+
+**Choosing the Best Version:**
+
+The "best" version depends on your priorities:
+
+* **Version 1:** Easiest to understand for beginners, good for learning basic `if/else` logic.
+* **Version 2:** Most concise, but can be harder to read if you're not familiar with the ternary operator.
+* **Version 3:** Good balance of readability and conciseness, using a more structured approach to building the output string.
+
+Start with Version 1 to understand the core logic, then explore the other versions to see different ways to achieve the same result. Remember to compile and run this code in a Swift environment (like Xcode's playground) to see the output.
+
