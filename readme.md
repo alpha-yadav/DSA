@@ -21400,3 +21400,72 @@ postorder(root) # Output: D E B F C A
 
 This code defines a `Node` class and functions for each traversal type.  Remember to adapt the code to your specific tree structure and data.  You could also implement iterative versions of these traversals using stacks, but the recursive versions are generally easier to understand and implement.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike a binary *search* tree, a general binary tree doesn't have any ordering guarantees, making the LCA problem slightly more complex.
+
+Here are a few approaches to find the LCA in a binary tree:
+
+**1. Recursive Approach (Most Common & Efficient):**
+
+This approach utilizes recursion to traverse the tree.  The core idea is:
+
+* **Base Cases:**
+    * If the current node is `null`, return `null`.
+    * If the current node is either `p` or `q`, return the current node (we've found one of the target nodes).
+
+* **Recursive Step:**
+    * Recursively search the left and right subtrees.
+    * If both left and right subtrees return non-`null` values, it means `p` and `q` are in different subtrees, and the current node is their LCA.  Return the current node.
+    * Otherwise, return whichever subtree returned a non-`null` value (or `null` if both returned `null`).
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    else:
+        return right
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+
+```
+
+**2. Iterative Approach (Using a Stack or Queue):**
+
+While recursion is elegant, an iterative approach using a stack or queue can be beneficial for very deep trees to avoid potential stack overflow errors.  This approach generally involves a depth-first search (DFS) using a stack or a breadth-first search (BFS) using a queue.  It's more complex to implement than the recursive approach but offers better memory management for extremely deep trees.  I'll omit the detailed iterative code here due to its length and complexity, but the core logic involves tracking paths from the root to `p` and `q` and finding the last common node in those paths.
+
+
+**Important Considerations:**
+
+* **Error Handling:**  The code should handle cases where `p` or `q` are not present in the tree.  You might want to add checks and return an appropriate value (e.g., `None`) in such scenarios.
+* **Node Value Uniqueness:** The provided solutions assume that node values are unique. If not, you need to adjust the comparison logic accordingly (perhaps comparing node objects directly instead of just values).
+* **Efficiency:** The recursive approach has a time complexity of O(N), where N is the number of nodes in the tree (in the worst case, it might traverse the entire tree). The space complexity is O(H) in the recursive approach due to the recursion stack, where H is the height of the tree.  The iterative approach can have a space complexity of O(N) in the worst case (for a skewed tree) if using a stack or queue.
+
+
+Remember to choose the approach that best suits your needs and the constraints of your environment. For most cases, the recursive approach is simple, clear, and efficient enough.  Only consider the iterative approach if you anticipate dealing with exceptionally deep trees.
+
