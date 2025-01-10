@@ -21589,3 +21589,12 @@ For general trees, you might need a different approach, often involving depth-fi
 
 Remember to handle edge cases such as empty trees, nodes not being present in the tree, and the case where one node is the ancestor of the other.  Always thoroughly test your LCA algorithm with various test cases.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **A set of points (x, y):**  For example, (1, 2), (3, 4), (5, 6)
+* **An equation:** For example, y = 2x + 1, or y = x^2
+* **A description of the type of graph:**  For example, a bar graph, a scatter plot, a line graph, etc.  And what the data represents.
+
+Once you give me this information, I can help you graph it.
+
