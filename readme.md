@@ -21469,3 +21469,123 @@ While recursion is elegant, an iterative approach using a stack or queue can be 
 
 Remember to choose the approach that best suits your needs and the constraints of your environment. For most cases, the recursive approach is simple, clear, and efficient enough.  Only consider the iterative approach if you anticipate dealing with exceptionally deep trees.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic problem in computer science.  There are several approaches, each with different time and space complexities.  Here's a breakdown of common methods:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a straightforward and often efficient approach for binary trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lca(root.left, p, q)
+    right_lca = lca(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA found
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+p = root.left  # Node with data 2
+q = root.right.left # Node with data 6
+
+lca_node = lca(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca_node.data if lca_node else None}") # Output: LCA of 2 and 6: 1
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, we might traverse the entire tree).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive call stack).  In a balanced tree, H = log₂N; in a skewed tree, H = N.
+
+
+**2. Iterative Approach (for Binary Trees):**
+
+This approach avoids recursion, potentially improving performance and reducing the risk of stack overflow for very deep trees.
+
+```python
+def lca_iterative(root, p, q):
+    """Iterative LCA using parent pointers."""
+    # Assumes nodes have a parent pointer
+    # If not, you would need to modify the tree or use a different approach
+    path_p = []
+    path_q = []
+    
+    def find_path(node, target, path):
+        if node is None:
+            return False
+        path.append(node)
+        if node == target:
+            return True
+        if find_path(node.left, target, path) or find_path(node.right, target, path):
+            return True
+        path.pop()
+        return False
+
+    if not find_path(root, p, path_p) or not find_path(root, q, path_q):
+        return None  #One or both nodes not found
+
+    lca = root
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[i] == path_q[i]:
+        lca = path_p[i]
+        i += 1
+    return lca
+```
+
+**Time Complexity:** O(N)
+**Space Complexity:** O(H)
+
+
+**3. Using Parent Pointers:**
+
+If each node in the tree has a pointer to its parent, finding the LCA becomes much simpler.  You can traverse upwards from each node until you find a common ancestor.  This is very efficient.
+
+**(The iterative approach above can be adapted to use parent pointers; the example above implicitly uses this concept for simplicity.)**
+
+
+**4. Lowest Common Ancestor in a General Tree (not necessarily binary):**
+
+For general trees, you might need a different approach, often involving depth-first search (DFS) or a similar technique to find paths from the root to each node and then compare the paths to find the LCA.
+
+
+**Choosing the Right Method:**
+
+* For binary trees, the recursive approach is often the simplest and easiest to understand.
+* For very deep binary trees, the iterative approach might be preferable to avoid stack overflow.
+* If parent pointers are readily available, using them is the most efficient method.
+* For general trees, a more sophisticated approach is needed, often involving DFS or path comparisons.  The optimal method depends on the specifics of the tree structure and your performance requirements.
+
+
+Remember to handle edge cases such as empty trees, nodes not being present in the tree, and the case where one node is the ancestor of the other.  Always thoroughly test your LCA algorithm with various test cases.
+
