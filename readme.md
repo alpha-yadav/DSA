@@ -24411,3 +24411,72 @@ Given a binary tree and two nodes, `node1` and `node2`, find the lowest common a
 
 The recursive approach is generally preferred for its clarity and conciseness. The iterative approach can be beneficial when dealing with extremely large trees to avoid potential stack overflow issues.  For most situations, the recursive solution is sufficient and easier to understand.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a fundamental problem in computer science with applications in various areas like file systems, version control systems (like Git), and phylogenetic trees.  There are several approaches to solving this problem, each with its own time and space complexity trade-offs.
+
+**Methods for finding the LCA:**
+
+1. **Brute-Force Approach (Traversal):**
+
+   * **Idea:** Traverse the tree (e.g., using depth-first search or breadth-first search). For each node, check if both target nodes are present in its subtree. The first node that satisfies this condition is the LCA.
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  This is because in the worst case, you might have to visit all nodes.
+   * **Space Complexity:** O(N) for recursion stack in DFS or O(N) for a queue in BFS.
+   * **Suitable for:** Small trees or when no other information is available about the tree structure.
+
+2. **Recursive Approach (Binary Tree):**
+
+   * **Idea:**  This is a highly efficient method for binary trees. The algorithm recursively explores the tree. If a node is the same as one of the target nodes, return that node.  If the target nodes are in different subtrees, the current node is the LCA. Otherwise, recursively search in the left or right subtree.
+   * **Time Complexity:** O(H), where H is the height of the binary tree (which is O(log N) for a balanced tree and O(N) for a skewed tree).
+   * **Space Complexity:** O(H) due to the recursion stack.
+   * **Code Example (Python):**
+
+     ```python
+     class Node:
+         def __init__(self, data):
+             self.data = data
+             self.left = None
+             self.right = None
+
+     def lca(root, p, q):
+         if root is None or root == p or root == q:
+             return root
+
+         left_lca = lca(root.left, p, q)
+         right_lca = lca(root.right, p, q)
+
+         if left_lca and right_lca:
+             return root
+         return left_lca if left_lca else right_lca
+
+     # Example Usage:
+     root = Node(1)
+     root.left = Node(2)
+     root.right = Node(3)
+     root.left.left = Node(4)
+     root.left.right = Node(5)
+     print(lca(root, root.left.left, root.left.right).data)  # Output: 2
+     ```
+
+3. **Using Parent Pointers (General Tree):**
+
+   * **Idea:** If you can augment your tree to include parent pointers (each node knows its parent), you can efficiently find the LCA.  Traverse upwards from both nodes, storing the path to the root for each. Then find the last common node in both paths.
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(H) to store the paths.
+   * **Suitable for:** Situations where modifying the tree structure is acceptable.
+
+
+4. **Using Depth-First Search and Lowest Depth (General Tree):**
+
+   * **Idea:** Use DFS to find the depths of both target nodes. Then, start from the node with the greater depth and traverse upwards until you encounter the other node or reach the root. The node where the paths meet is the LCA.
+
+**Choosing the right method:**
+
+The best method depends on the specific context:
+
+* For binary trees, the recursive approach is generally preferred due to its efficiency.
+* For general trees, if modifying the tree structure is acceptable, using parent pointers is efficient. Otherwise, the DFS-based approach might be a good choice.
+* The brute-force method is only suitable for small trees or when other methods aren't feasible.
+
+
+Remember to handle edge cases such as one or both nodes not being present in the tree.  Also consider whether the tree is balanced or skewed when analyzing time complexity.
+
