@@ -21106,3 +21106,94 @@ print(is_bst_recursive_minmax(root2))  # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once. The recursive min/max approach might be slightly less efficient due to the function call overhead, but the difference is usually negligible for most trees.  Choose the method you find more readable and maintainable.  The in-order traversal is generally preferred for its clarity. Remember to adapt the Node class and function calls to your specific data structures if needed.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit (or "traverse") all the nodes in a binary tree. There are three main types of traversals, based on the order in which you visit the root, left subtree, and right subtree:
+
+* **Pre-order Traversal:**  Visit the root node first, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The order is: Root, Left, Right.
+
+* **In-order Traversal:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. The order is: Left, Root, Right.  For a binary *search* tree (BST), an in-order traversal yields the nodes in ascending order.
+
+* **Post-order Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node. The order is: Left, Right, Root.
+
+
+**Illustrative Example:**
+
+Let's consider this binary tree:
+
+```
+     A
+    / \
+   B   C
+  / \   \
+ D   E   F
+```
+
+**Traversals:**
+
+* **Pre-order:** A B D E C F
+* **In-order:** D B E A C F
+* **Post-order:** D E B F C A
+
+
+**Code Examples (Python):**
+
+These examples use recursive functions.  Iterative approaches are also possible (and often preferred for very large trees to avoid stack overflow issues).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+root.right.right = Node('F')
+
+print("Pre-order traversal:")
+preorder(root)  # Output: A B D E C F
+print("\nIn-order traversal:")
+inorder(root)   # Output: D B E A C F
+print("\nPost-order traversal:")
+postorder(root) # Output: D E B F C A
+```
+
+**Applications:**
+
+* **Expression Evaluation:** Post-order traversal is particularly useful for evaluating arithmetic expressions represented as binary trees.
+* **Serialization/Deserialization:**  These traversals can be used to represent a tree's structure in a linear format for storage or transmission.  Pre-order and post-order traversals, along with additional information, can be used to reconstruct the tree.
+* **Tree Copying/Cloning:**  Pre-order or other traversals can be used to create a deep copy of a binary tree.
+* **Algorithm Design:** Understanding traversals is fundamental to many other tree algorithms.
+
+
+**Beyond the Basics:**
+
+* **Level-order Traversal (Breadth-First Search):** Visits nodes level by level, starting from the root.  This typically requires a queue data structure.
+* **Iterative Traversals:**  Using stacks or queues to avoid recursion, which is important for handling very large trees to prevent stack overflow.
+* **Traversal Variations:** There are other less common traversal orders depending on the specific application.
+
+
+This comprehensive explanation should give you a solid understanding of binary tree traversals. Remember that the choice of traversal depends heavily on the specific task you're trying to accomplish.
+
