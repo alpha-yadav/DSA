@@ -19884,3 +19884,95 @@ Java requires a class structure.
 
 These examples all demonstrate the basic structure of a `while` loop:  a condition is tested, and the code within the loop is executed repeatedly as long as the condition remains true.  Remember to always ensure your loop condition will eventually become false to prevent infinite loops.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to perform operations on all combinations of elements from two or more data structures.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+  for inner_loop_variable in inner_loop_iterable:
+    # Code to execute for each combination of outer and inner loop variables
+```
+
+**Example 1: Printing a multiplication table:**
+
+This example shows a nested loop creating a multiplication table. The outer loop iterates through rows, and the inner loop iterates through columns.
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+  for j in range(1, 11):  # Inner loop (columns)
+    print(i * j, end="\t")  # \t adds a tab for spacing
+  print()  # New line after each row
+```
+
+**Output:**
+
+```
+1	2	3	4	5	6	7	8	9	10	
+2	4	6	8	10	12	14	16	18	20	
+3	6	9	12	15	18	21	24	27	30	
+4	8	12	16	20	24	28	32	36	40	
+5	10	15	20	25	30	35	40	45	50	
+6	12	18	24	30	36	42	48	54	60	
+7	14	21	28	35	42	49	56	63	70	
+8	16	24	32	40	48	56	64	72	80	
+9	18	27	36	45	54	63	72	81	90	
+10	20	30	40	50	60	70	80	90	100	
+```
+
+**Example 2: Iterating through a matrix (list of lists):**
+
+This shows how to access elements in a 2D array using nested loops.
+
+```python
+matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+  for element in row:  # Inner loop iterates through elements in each row
+    print(element, end=" ")
+  print() # Newline after each row
+```
+
+**Output:**
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+**Example 3: Finding the largest number in a matrix:**
+
+```python
+matrix = [
+  [1, 5, 3],
+  [4, 2, 6],
+  [7, 8, 9]
+]
+
+largest_number = matrix[0][0] # Initialize with the first element
+
+for row in matrix:
+  for element in row:
+    if element > largest_number:
+      largest_number = element
+
+print("The largest number is:", largest_number)
+```
+
+**Output:**
+
+```
+The largest number is: 9
+```
+
+
+These examples illustrate the versatility of nested loops.  Remember that deeply nested loops can lead to performance issues for very large datasets, so consider alternatives like list comprehensions or vectorized operations (using libraries like NumPy) for improved efficiency when dealing with large amounts of data.
+
