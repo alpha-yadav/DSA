@@ -20154,3 +20154,15 @@ Represents the tree as a list of edges, where each edge is a tuple (parent_node_
 
 The choice of representation depends heavily on your specific needs. If you need frequent parent access, the list-of-children approach with added parent pointers might be best.  For complete trees with a known maximum number of children, the array representation is very efficient.  For most general-purpose n-ary tree applications, the list of children or child-sibling are often preferred due to their balance of simplicity and flexibility.
 
+#  Introduction 
+Please provide me with context!  I need to know what you want an introduction *to*.  For example:
+
+* **An introduction to a story?**  Tell me the genre and a brief summary.
+* **An introduction to a research paper?**  Give me the topic and your thesis statement.
+* **An introduction to a presentation?**  Tell me the subject and your main points.
+* **An introduction to a person?**  Tell me about the person.
+* **An introduction to a concept?**  Tell me the concept.
+
+
+Once I have this information, I can write a suitable introduction.
+
