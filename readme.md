@@ -27489,3 +27489,152 @@ Graph theory has a wide range of applications in various fields, including:
 
 This introduction provides a basic overview of graph theory.  More advanced topics include graph coloring, planarity, graph traversal algorithms (like Depth-First Search and Breadth-First Search), network flows, and many more.  Understanding these fundamental concepts is crucial for exploring the vast and fascinating world of graph theory and its numerous applications.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and efficient technique, particularly when the graph is sparse (meaning it has relatively few edges compared to the maximum possible number of edges).  Here's a breakdown of how it works, along with examples in different programming languages:
+
+**The Concept**
+
+An adjacency list represents a graph as an array of lists. Each index in the array corresponds to a vertex (node) in the graph.  The list at that index contains the vertices adjacent to the vertex represented by the index.  In other words, it lists all the vertices that share an edge with the current vertex.
+
+**Example:**
+
+Consider an undirected graph with 5 vertices (0, 1, 2, 3, 4) and the following edges:
+
+* 0 -- 1
+* 0 -- 4
+* 1 -- 2
+* 1 -- 3
+* 2 -- 3
+* 3 -- 4
+
+The adjacency list representation would look like this:
+
+```
+0: [1, 4]
+1: [0, 2, 3]
+2: [1, 3]
+3: [1, 2, 4]
+4: [0, 3]
+```
+
+**Implementation in Different Languages**
+
+**Python:**
+
+Using a dictionary for efficient lookups:
+
+```python
+graph = {
+    0: [1, 4],
+    1: [0, 2, 3],
+    2: [1, 3],
+    3: [1, 2, 4],
+    4: [0, 3]
+}
+
+# Accessing neighbors of vertex 1:
+print(graph[1])  # Output: [0, 2, 3]
+
+#Checking if an edge exists:
+def has_edge(graph, u, v):
+  return v in graph.get(u, [])
+
+print(has_edge(graph, 0, 1)) # Output: True
+print(has_edge(graph, 0, 2)) # Output: False
+
+#Adding an edge:
+def add_edge(graph, u, v):
+  graph.setdefault(u, []).append(v)
+  graph.setdefault(v, []).append(u) #For undirected graph
+
+add_edge(graph, 0, 2)
+print(graph)
+```
+
+Using a list of lists (less efficient for large graphs):
+
+```python
+graph = [
+    [1, 4],
+    [0, 2, 3],
+    [1, 3],
+    [1, 2, 4],
+    [0, 3]
+]
+
+# Accessing neighbors of vertex 1 (remembering 0-based indexing):
+print(graph[1])  # Output: [0, 2, 3]
+```
+
+**Java:**
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class AdjacencyList {
+
+    public static void main(String[] args) {
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        addEdge(graph, 0, 1);
+        addEdge(graph, 0, 4);
+        addEdge(graph, 1, 2);
+        addEdge(graph, 1, 3);
+        addEdge(graph, 2, 3);
+        addEdge(graph, 3, 4);
+
+        System.out.println(graph); //Output: [[1, 4], [0, 2, 3], [1, 3], [1, 2, 4], [0, 3]]
+
+
+        // Accessing neighbors of vertex 1
+        System.out.println(graph.get(1)); // Output: [0, 2, 3]
+
+    }
+
+    static void addEdge(List<List<Integer>> graph, int u, int v) {
+        graph.get(u).add(v);
+        graph.get(v).add(u); //For undirected graph
+    }
+}
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    vector<vector<int>> graph(5); // Initialize a 5x0 vector
+
+    graph[0].push_back(1);
+    graph[0].push_back(4);
+    graph[1].push_back(0);
+    graph[1].push_back(2);
+    graph[1].push_back(3);
+    graph[2].push_back(1);
+    graph[2].push_back(3);
+    graph[3].push_back(1);
+    graph[3].push_back(2);
+    graph[3].push_back(4);
+    graph[4].push_back(0);
+    graph[4].push_back(3);
+
+    // Accessing neighbors of vertex 1
+    for (int neighbor : graph[1]) {
+        cout << neighbor << " "; // Output: 0 2 3
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+These examples show the basic structure.  You'll need to adapt them based on your specific needs (directed vs. undirected graphs, weighted edges, etc.).  For weighted graphs, you might use a list of pairs (vertex, weight) instead of just a list of vertices.  Remember to handle edge cases like empty graphs or graphs with isolated vertices.  The choice of Python's dictionary or Java's `ArrayList` of `ArrayLists` offers superior performance over the list-of-lists approach, especially for large graphs.
+
