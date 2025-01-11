@@ -25338,3 +25338,62 @@ This uses nested ternary operators. While compact,  it can reduce readability if
 
 Choose the version that best suits your understanding and coding style.  The first version is generally recommended for beginners due to its clarity.  Remember to run this code in a Swift playground or a Swift project to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm consumes as a function of the input size.  It's crucial for understanding how an algorithm's performance scales with larger datasets.  We typically analyze complexity using Big O notation.
+
+**Big O Notation:**  Big O notation describes the upper bound of an algorithm's growth rate. It focuses on the dominant terms as the input size (n) approaches infinity, ignoring constant factors and smaller terms.  It provides a high-level overview of how the algorithm's resource usage increases with input size.
+
+**Common Complexity Classes (in ascending order of growth):**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array by index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size. This is very efficient. Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** A common complexity for efficient sorting algorithms. Example: Merge sort, heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size. This can become slow for large inputs. Example: Bubble sort, selection sort, nested loops iterating through the entire input.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  These algorithms become impractical very quickly for even moderately sized inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  Extremely slow for even small inputs. Example: Finding all permutations of a set.
+
+
+**Space Complexity:** This refers to the amount of memory an algorithm uses as a function of the input size.  It's analyzed similarly to time complexity using Big O notation.
+
+**Analyzing Complexity:**
+
+To analyze the complexity of an algorithm, you need to identify the dominant operations within the algorithm.  These are the operations that are executed most frequently and contribute most significantly to the overall runtime.  Consider the following:
+
+* **Loops:** Nested loops generally indicate higher complexity (e.g., O(n²)).
+* **Recursive calls:**  The depth of recursion and the number of recursive calls influence complexity.
+* **Data structures:** The choice of data structure impacts the time complexity of operations (e.g., searching in a sorted array vs. an unsorted array).
+
+
+**Example:**
+
+Consider the following code snippet (Python):
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+
+```
+
+This function performs a linear search.  The loop iterates through the array once (at most), so the time complexity is O(n), where n is the length of the array. The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+**Best Case, Worst Case, Average Case:**
+
+Complexity analysis often considers three scenarios:
+
+* **Best Case:** The most favorable input that leads to the fastest execution time.
+* **Worst Case:** The least favorable input that leads to the slowest execution time.  Big O notation usually describes the worst-case complexity.
+* **Average Case:** The average execution time over all possible inputs. This can be more complex to analyze.
+
+Understanding algorithm complexity is crucial for selecting the right algorithm for a given task, especially when dealing with large datasets.  Choosing an algorithm with a lower complexity can dramatically improve performance and efficiency.
+
