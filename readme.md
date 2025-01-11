@@ -27986,3 +27986,123 @@ The choice depends on the specific problem:
 
 Remember that these are just the basic traversal algorithms.  There are variations and optimizations depending on the specific needs of the application (e.g., iterative deepening DFS to handle very large graphs).
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix or adjacency list) and whether you need to track visited nodes.  Here are a few implementations in Python:
+
+**1. DFS using Adjacency List (Recursive):** This is a common and elegant approach.
+
+```python
+def dfs_recursive(graph, start, visited=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        start: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(start, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+    return visited
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Start from node 'A'
+print()
+```
+
+
+**2. DFS using Adjacency List (Iterative):**  This version uses a stack instead of recursion.
+
+```python
+def dfs_iterative(graph, start):
+    """
+    Performs a Depth-First Search traversal iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        start: The starting node.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [start]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            print(vertex, end=" ")
+            stack.extend(neighbor for neighbor in reversed(graph.get(vertex, [])) if neighbor not in visited) #add neighbors in reversed order to maintain DFS order
+
+    return visited
+
+print("DFS traversal (iterative):")
+dfs_iterative(graph, 'A')
+print()
+```
+
+**3. DFS using Adjacency Matrix:**  Less common for DFS, as adjacency lists are generally more efficient for sparse graphs.
+
+```python
+def dfs_adjacency_matrix(graph, start):
+    """
+    Performs DFS on a graph represented as an adjacency matrix.  Assumes 0-based indexing.
+
+    Args:
+      graph: A list of lists representing the adjacency matrix.
+      start: The starting node index.
+
+    Returns:
+      A list of visited node indices.
+    """
+    num_nodes = len(graph)
+    visited = [False] * num_nodes
+    stack = [start]
+    visited_nodes = []
+
+    while stack:
+        node = stack.pop()
+        if not visited[node]:
+            visited[node] = True
+            visited_nodes.append(node)
+            for neighbor in range(num_nodes):
+                if graph[node][neighbor] == 1 and not visited[neighbor]:
+                    stack.append(neighbor)
+    return visited_nodes
+
+#Example Adjacency Matrix
+graph_matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0]   # F
+]
+
+print("DFS traversal (adjacency matrix):")
+print(dfs_adjacency_matrix(graph_matrix, 0)) #Start from node 0 (A)
+```
+
+Remember to adapt these functions to your specific needs.  You might need to modify how nodes are processed (instead of just printing them)  or how the graph is represented.  For very large graphs, the iterative approach is generally preferred to avoid potential stack overflow errors with recursion.  Choose the implementation that best suits your graph representation and performance requirements.
+
