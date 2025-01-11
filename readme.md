@@ -25397,3 +25397,41 @@ Complexity analysis often considers three scenarios:
 
 Understanding algorithm complexity is crucial for selecting the right algorithm for a given task, especially when dealing with large datasets.  Choosing an algorithm with a lower complexity can dramatically improve performance and efficiency.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate.  This means it provides both an upper and lower bound on the function's growth, unlike Big-O (O) which only provides an upper bound.
+
+Here's a breakdown of what Big-Theta means:
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) if there exist positive constants c₁ and c₂, and a positive integer n₀, such that for all n ≥ n₀:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of n (n ≥ n₀), the function f(n) is always bounded above and below by constant multiples of g(n).  g(n) represents the function that describes the growth rate.
+
+**In simpler terms:**
+
+f(n) = Θ(g(n)) means that f(n) grows at the *same rate* as g(n).  The function f(n) is neither significantly faster nor significantly slower than g(n) as n approaches infinity.  It's essentially saying that f(n) and g(n) are asymptotically equivalent.
+
+**Example:**
+
+Let's say f(n) = 2n² + 3n + 1.  We can say that:
+
+f(n) = Θ(n²)
+
+Why? Because we can find constants c₁, c₂, and n₀ that satisfy the definition:
+
+* We can choose c₁ = 1.  For sufficiently large n, 2n² + 3n + 1 will always be greater than or equal to n².
+* We can choose c₂ = 3.  For sufficiently large n, 2n² + 3n + 1 will always be less than or equal to 3n².  (The higher-order term, n², dominates the others).
+* We can find an n₀ (a relatively small number) such that the inequality holds for all n ≥ n₀.
+
+**Relationship to other notations:**
+
+* **Big-O (O):**  If f(n) = Θ(g(n)), then f(n) = O(g(n)).  Θ is a stronger statement than O. O only provides an upper bound; Θ provides both an upper and a lower bound.
+* **Big-Omega (Ω):** If f(n) = Θ(g(n)), then f(n) = Ω(g(n)). Ω only provides a lower bound; Θ provides both.
+
+**In practice:**
+
+Big-Theta notation is crucial for analyzing the efficiency of algorithms.  It allows us to compare algorithms in terms of their time and space complexity, ignoring constant factors and lower-order terms which become insignificant as the input size grows.  Saying an algorithm has a time complexity of Θ(n²) is far more informative than saying it has a time complexity of O(n²) because it tells us that the algorithm will always scale quadratically with the input size, neither better nor worse asymptotically.
+
