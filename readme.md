@@ -25765,3 +25765,69 @@ Here are some common types of algorithms with O(log n) time complexity:
 
 It's crucial to remember that the O(log n) complexity only applies to the *average case* or *best case* for some algorithms (like interpolation search).  The *worst-case* complexity might be higher (e.g., O(n) for interpolation search if the data isn't uniformly distributed).  Always consider the context and potential worst-case scenarios when analyzing algorithm complexity.
 
+#  An O(log n) example 
+A classic O(log n) example is **binary search** in a sorted array.
+
+**The Algorithm:**
+
+Binary search works by repeatedly dividing the search interval in half.  If the value you're looking for is in the middle element, you're done. If it's less than the middle element, you search the left half. If it's greater, you search the right half.  You repeat this process until you find the value or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+    """
+    Performs a binary search on a sorted array.
+
+    Args:
+        arr: The sorted array to search.
+        target: The value to search for.
+
+    Returns:
+        The index of the target if found, otherwise -1.
+    """
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+
+        if arr[mid] == target:
+            return mid  # Found it!
+        elif arr[mid] < target:
+            low = mid + 1  # Search the right half
+        else:
+            high = mid - 1  # Search the left half
+
+    return -1  # Not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+```
+
+**Why it's O(log n):**
+
+With each comparison, you effectively halve the size of the search space.  This means the number of comparisons needed grows logarithmically with the size of the input array.  Specifically, the maximum number of comparisons is approximately log₂(n) (base-2 logarithm of n).
+
+* **n = 8:**  At most 3 comparisons (log₂(8) = 3).
+* **n = 16:** At most 4 comparisons (log₂(16) = 4).
+* **n = 1024:** At most 10 comparisons (log₂(1024) = 10).
+
+
+Other O(log n) algorithms include:
+
+* **Tree Traversal (balanced trees like AVL trees or red-black trees):**  Finding a node in a balanced binary search tree takes logarithmic time.
+* **Efficient exponentiation:** Calculating a<sup>b</sup> (a raised to the power of b) can be done in logarithmic time using repeated squaring.
+
+
+The key characteristic of O(log n) algorithms is their ability to drastically reduce the search space with each step, leading to significantly faster performance for large input sizes compared to linear O(n) algorithms.
+
