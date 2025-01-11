@@ -25592,3 +25592,103 @@ Let's say we have two algorithms to search a list:
 
 Big O notation is a crucial tool for analyzing and comparing the efficiency of algorithms.  Understanding it allows you to choose the most appropriate algorithm for a given task, especially when dealing with large datasets.  While it doesn't provide exact runtimes, it provides valuable insights into how an algorithm's performance scales with the size of the input.
 
+#  A Simple Loop 
+The term "a simple loop" is very broad.  To give you a helpful example, I need more context.  What programming language are you interested in?  What is the loop supposed to *do*?
+
+Here are examples of simple loops in a few common languages:
+
+**1.  Printing numbers 1 to 10 (using a `for` loop):**
+
+* **Python:**
+
+```python
+for i in range(1, 11):  # range(1, 11) generates numbers from 1 to 10 (inclusive)
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 1; i <= 10; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 1; i <= 10; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    for (int i = 1; i <= 10; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. Printing numbers 1 to 10 (using a `while` loop):**
+
+* **Python:**
+
+```python
+i = 1
+while i <= 10:
+    print(i)
+    i += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let i = 1;
+while (i <= 10) {
+  console.log(i);
+  i++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int i = 1;
+  while (i <= 10) {
+    std::cout << i << std::endl;
+    i++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    int i = 1;
+    while (i <= 10) {
+      System.out.println(i);
+      i++;
+    }
+  }
+}
+```
+
+These examples show basic `for` and `while` loops.  Tell me what you want your loop to accomplish, and I can provide a more specific and tailored example.
+
