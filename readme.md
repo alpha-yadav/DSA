@@ -27059,3 +27059,83 @@ int main() {
 
 These examples all demonstrate the basic principle of level order traversal:  using a queue to process nodes level by level.  Remember to handle the case where the root is `null` (or `nullptr` in C++).  For very large trees, you might need to consider memory management more carefully.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals are ways to systematically visit each node in a binary tree exactly once.  Pre-order, in-order, and post-order traversals differ in the order they visit the root node relative to its left and right subtrees.
+
+**Binary Tree Representation:**
+
+We'll represent a binary tree node using a simple class (Python):
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+**Traversal Algorithms:**
+
+1. **Pre-order Traversal:**  (Root, Left, Right)
+
+   The root node is visited *before* its left and right subtrees.
+
+   ```python
+   def preorder(node):
+       if node:
+           print(node.data, end=" ")  # Visit the root
+           preorder(node.left)       # Recursively traverse the left subtree
+           preorder(node.right)      # Recursively traverse the right subtree
+   ```
+
+2. **In-order Traversal:** (Left, Root, Right)
+
+   The left subtree is visited, then the root node, then the right subtree.  For a Binary *Search* Tree (BST), this produces a sorted sequence of the nodes' data.
+
+   ```python
+   def inorder(node):
+       if node:
+           inorder(node.left)        # Recursively traverse the left subtree
+           print(node.data, end=" ")  # Visit the root
+           inorder(node.right)       # Recursively traverse the right subtree
+   ```
+
+3. **Post-order Traversal:** (Left, Right, Root)
+
+   The left and right subtrees are visited *before* the root node.  This is often used to delete nodes in a tree (delete children before the parent).
+
+   ```python
+   def postorder(node):
+       if node:
+           postorder(node.left)      # Recursively traverse the left subtree
+           postorder(node.right)     # Recursively traverse the right subtree
+           print(node.data, end=" ")  # Visit the root
+   ```
+
+**Example Usage:**
+
+Let's create a sample binary tree and perform the traversals:
+
+```python
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+
+print("Pre-order traversal:")
+preorder(root)  # Output: 1 2 4 5 3
+print("\nIn-order traversal:")
+inorder(root)   # Output: 4 2 5 1 3
+print("\nPost-order traversal:")
+postorder(root) # Output: 4 5 2 3 1
+```
+
+**Non-Recursive Approaches:**
+
+While recursive solutions are elegant and easy to understand, iterative (non-recursive) solutions using stacks are also possible.  These are often more memory-efficient for very deep trees, avoiding potential stack overflow errors.  These iterative versions are more complex but are an important consideration for production code.  They generally use stacks to simulate the recursive calls.
+
+
+Remember to adapt the `Node` class and traversal functions if you're using a different programming language or a more complex node structure (e.g., adding a parent pointer).
+
