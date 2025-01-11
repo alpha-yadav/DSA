@@ -27442,3 +27442,50 @@ print(weighted_adjacency_matrix)
 
 In summary, the choice of graph representation depends heavily on the specific characteristics of your graph and the operations you'll be performing on it.  For sparse graphs, consider using an adjacency list instead.
 
+#  Introduction To Graph Theory 
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph consists of:
+
+* **Vertices (or nodes):** These represent the objects in the system being modeled.  Think of them as points or dots.
+
+* **Edges (or arcs):** These represent the relationships between the vertices.  They are lines connecting pairs of vertices.  Edges can be:
+
+    * **Directed:**  An arrow indicates a one-way relationship (e.g., A points to B, but B doesn't necessarily point to A).  These are used in directed graphs (digraphs).
+    * **Undirected:** A line without an arrow indicates a two-way relationship (e.g., A and B are connected). These are used in undirected graphs.
+    * **Weighted:**  A number (weight) associated with an edge represents the strength or cost of the relationship (e.g., the distance between two cities).
+
+**Types of Graphs:**
+
+* **Undirected Graph:**  Edges have no direction.
+* **Directed Graph (Digraph):** Edges have a direction.
+* **Weighted Graph:** Edges have associated weights.
+* **Simple Graph:** Contains no loops (edges connecting a vertex to itself) or multiple edges (more than one edge between the same pair of vertices).
+* **Complete Graph:** Every pair of distinct vertices is connected by a unique edge.
+* **Connected Graph:** There is a path between any two vertices.
+* **Disconnected Graph:** Not all vertices are connected.
+* **Tree:** A connected graph with no cycles (a cycle is a path that starts and ends at the same vertex without repeating any other vertex).
+* **Bipartite Graph:** Vertices can be divided into two disjoint sets such that every edge connects a vertex in one set to a vertex in the other set.
+
+
+**Basic Concepts:**
+
+* **Path:** A sequence of vertices connected by edges.
+* **Cycle:** A path that starts and ends at the same vertex.
+* **Degree (of a vertex):** The number of edges connected to a vertex.  In a directed graph, we distinguish between in-degree (incoming edges) and out-degree (outgoing edges).
+* **Connectivity:**  The degree to which vertices are connected in a graph.
+* **Subgraph:** A graph whose vertices and edges are subsets of the original graph.
+* **Isomorphism:** Two graphs are isomorphic if they have the same structure, even if the vertices are labeled differently.
+
+
+**Applications of Graph Theory:**
+
+Graph theory has a wide range of applications in various fields, including:
+
+* **Computer Science:** Network routing, data structures, algorithm design, social networks.
+* **Engineering:**  Network optimization, transportation planning, circuit design.
+* **Biology:**  Modeling biological networks, phylogenetic trees.
+* **Social Sciences:**  Social network analysis.
+* **Chemistry:**  Modeling molecular structures.
+
+
+This introduction provides a basic overview of graph theory.  More advanced topics include graph coloring, planarity, graph traversal algorithms (like Depth-First Search and Breadth-First Search), network flows, and many more.  Understanding these fundamental concepts is crucial for exploring the vast and fascinating world of graph theory and its numerous applications.
+
