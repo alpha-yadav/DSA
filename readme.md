@@ -25214,3 +25214,55 @@ The best way to learn algorithms is to solve problems.  Start with simple proble
 
 Remember to break down problems into smaller, manageable steps.  Don't be afraid to experiment, make mistakes, and learn from them.  Consistent effort and practice are key to mastering algorithms.
 
+#  A sample algorithmic problem 
+## Algorithmic Problem: Two Sum
+
+**Problem Statement:**
+
+Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+
+**Example 1:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Example 2:**
+
+```
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+```
+
+**Example 3:**
+
+```
+Input: nums = [3,3], target = 6
+Output: [0,1]
+```
+
+
+**Constraints:**
+
+* `2 <= nums.length <= 104`
+* `-109 <= nums[i] <= 109`
+* `-109 <= target <= 109`
+* **Only one valid answer exists.**
+
+
+**This problem challenges you to:**
+
+* Design an efficient algorithm.  A brute-force approach (checking all pairs) is possible, but inefficient for large input arrays.
+* Consider data structures that can improve search time.
+* Write clean, readable code that solves the problem within the given constraints.
+
+
+This is a classic algorithmic problem that's frequently used in interviews.  Different approaches (e.g., using a hash map) will lead to significant differences in time complexity.  Try solving it and see how you do!
+
