@@ -25920,3 +25920,15 @@ for child in root.children:
 
 The best representation depends on your application's needs.  If you need frequent parent-child lookups, you might add parent pointers to any of these structures.  If you need efficient storage, and your tree is relatively dense and has a known maximum number of children, the array representation might be a good option. For more flexibility and easier addition/removal of children, the list of children approach is often preferred.
 
+#  Introduction 
+Please provide me with some context!  An introduction to *what*?  To tell you a good introduction, I need to know the topic.  For example, are you looking for an introduction to:
+
+* **A specific subject?** (e.g., the history of the Roman Empire, the science of climate change, the works of Shakespeare)
+* **A story?** (e.g., a fictional tale, a personal anecdote)
+* **An essay or report?** (e.g., on the impact of social media, on the benefits of exercise)
+* **A presentation?** (e.g., about a new product, about research findings)
+* **A person?** (e.g., a biographical sketch)
+* **Something else entirely?**
+
+Once you tell me what you need an introduction *for*, I can help you craft one.
+
