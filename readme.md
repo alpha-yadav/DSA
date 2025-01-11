@@ -25692,3 +25692,53 @@ public class SimpleLoop {
 
 These examples show basic `for` and `while` loops.  Tell me what you want your loop to accomplish, and I can provide a more specific and tailored example.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a structure where the inner loop's iterations are repeated multiple times, based on the number of iterations of the outer loop.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop controls the overall number of times the inner loop will run.  It iterates first.
+* **Inner Loop:** This loop executes entirely within a single iteration of the outer loop.  Its iterations are nested within the outer loop's iterations.
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # Print the product, '\t' adds a tab for formatting
+    print()  # Newline after each row
+```
+
+**Explanation:**
+
+1. The outer loop iterates from 1 to 10 (inclusive).  Each iteration represents a row in the multiplication table.
+2. The inner loop also iterates from 1 to 10 (inclusive).  Each iteration represents a column in the multiplication table.
+3. Inside the inner loop, `i * j` calculates the product of the row and column numbers, which is then printed.  `end="\t"` ensures that the output is tab-separated for better readability.
+4. After the inner loop completes for a given row (outer loop iteration), `print()` adds a newline to move to the next row.
+
+**Output:**
+
+The code above would produce a 10x10 multiplication table.
+
+**Common Uses:**
+
+Nested loops are frequently used for tasks involving:
+
+* **Matrix operations:** Processing two-dimensional arrays (matrices).
+* **Generating patterns:** Creating various text or graphical patterns.
+* **Combinations and permutations:** Iterating through all possible combinations or permutations of a set of items.
+* **Searching and sorting:**  Certain algorithms (though often less efficient than optimized algorithms).
+
+
+**Important Considerations:**
+
+* **Computational Complexity:** Nested loops can significantly increase the execution time of a program.  The complexity is often proportional to the product of the number of iterations in each loop (e.g., two loops iterating `n` times each have O(n²) complexity).
+* **Readability:**  Deeply nested loops (more than 3 or 4 levels) can reduce code readability.  Consider refactoring complex nested loops into more modular functions if necessary.
+
+
+In summary, nested loops are a powerful tool for processing data structures with multiple dimensions or generating repetitive patterns, but their use should be mindful of performance implications and code clarity.
+
