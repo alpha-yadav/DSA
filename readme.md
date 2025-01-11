@@ -25535,3 +25535,60 @@ This shows that the algorithm's runtime grows at least as fast as n².  The cons
 
 In summary, Big-Omega notation is a vital tool in algorithm analysis, providing valuable insights into the lower bounds of algorithmic performance and contributing to a more complete understanding of an algorithm's efficiency.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used to describe the limiting behavior of a function when the argument tends towards a particular value or infinity.  In computer science, it's used to classify algorithms according to how their runtime or space requirements grow as the input size grows.  It focuses on the dominant factors affecting performance, ignoring constant factors and smaller terms.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+Big O notation describes the *upper bound* of an algorithm's complexity.  It provides a worst-case scenario estimate of how the runtime or space used will scale with the input size (usually denoted as 'n').  It doesn't tell you the exact runtime, but how the runtime *grows* relative to the input.
+
+**Key Concepts:**
+
+* **Input Size (n):**  This usually represents the number of elements in an array, the number of nodes in a graph, or the number of digits in a number – essentially, the size of the problem the algorithm is solving.
+
+* **Growth Rate:** Big O focuses on how the runtime or space usage *grows* as 'n' increases.  A small increase in 'n' might lead to a small increase in runtime for some algorithms, while a small increase in 'n' might lead to a massive increase in runtime for others.
+
+* **Ignoring Constants:** Big O notation ignores constant factors.  For example, an algorithm with a runtime of 5n and an algorithm with a runtime of 100n are both considered O(n) because the linear growth dominates.
+
+* **Ignoring Smaller Terms:** Big O notation ignores smaller terms.  For example, an algorithm with a runtime of n² + 10n + 100 is considered O(n²) because the n² term dominates as 'n' gets large.
+
+
+**Common Big O Notations:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching an unsorted array for a specific element.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Bubble sort, selection sort.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime increases factorially with the input size.  Example: Finding all permutations of a set.
+
+
+**Example:**
+
+Let's say we have two algorithms to search a list:
+
+* **Linear Search (O(n)):**  It checks each element one by one.  The worst-case scenario is that the element is at the end, or not present at all.  The runtime grows linearly with the list size.
+
+* **Binary Search (O(log n)):**  This works only on *sorted* lists. It repeatedly divides the search interval in half.  The runtime grows logarithmically, making it much faster for large lists.
+
+
+**Big Omega (Ω) and Big Theta (Θ):**
+
+* **Big Omega (Ω):** Describes the *lower bound* of an algorithm's complexity.  It represents the best-case scenario.
+
+* **Big Theta (Θ):** Describes the *tight bound*.  It means the algorithm's complexity is both O(f(n)) and Ω(f(n)), indicating that the growth rate is precisely f(n).
+
+
+**In Summary:**
+
+Big O notation is a crucial tool for analyzing and comparing the efficiency of algorithms.  Understanding it allows you to choose the most appropriate algorithm for a given task, especially when dealing with large datasets.  While it doesn't provide exact runtimes, it provides valuable insights into how an algorithm's performance scales with the size of the input.
+
