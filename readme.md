@@ -31116,3 +31116,30 @@ This code finds the largest number in a 2D list. The nested loops iterate throug
 
 Nested loops can significantly increase the computational cost of your code.  If the outer loop iterates `m` times and the inner loop iterates `n` times, the total number of iterations will be `m * n`. This means that the execution time increases quadratically with the size of the input.  Therefore, efficient algorithms are crucial when dealing with large datasets and nested loops.  Consider alternative approaches like vectorization (using libraries like NumPy) whenever possible to improve performance.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to reduce the problem size by a constant factor with each operation.  This typically involves dividing the problem in half (or some other constant fraction) repeatedly until a base case is reached.  This leads to logarithmic time complexity because the number of operations grows logarithmically with the input size.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential O(log n) algorithm.  It works on a sorted array (or list) by repeatedly dividing the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This continues until the target is found or the interval is empty.
+
+* **Binary Tree Operations (Search, Insertion, Deletion - under ideal conditions):**  In a balanced binary search tree, finding, inserting, or deleting a node takes O(log n) time on average.  This is because the height of a balanced binary tree is proportional to log₂n, where n is the number of nodes.  In worst-case scenarios (e.g., a severely unbalanced tree), these operations can degrade to O(n).
+
+* **Efficient Set/Map Operations (using balanced trees):** Data structures like balanced binary search trees (e.g., AVL trees, red-black trees) are often used to implement sets and maps.  Operations like searching, insertion, and deletion have an average time complexity of O(log n).
+
+* **Exponential Search:**  This algorithm is used to find an element in a sorted, unbounded array.  It first finds a range where the element might be located by repeatedly doubling the search interval. Then, it performs a binary search within that range.
+
+* **Some Divide and Conquer Algorithms:**  Algorithms that recursively divide a problem into smaller subproblems of roughly equal size can exhibit logarithmic time complexity if the number of subproblems remains relatively constant.  A classic example (though not always strictly O(log n) depending on the implementation) is finding the minimum or maximum element in a sorted array using divide and conquer.
+
+
+**Important Considerations:**
+
+* **Base of the Logarithm:**  The base of the logarithm (e.g., base 2, base 10, base e) doesn't affect the overall time complexity classification.  O(log₂n) is the same as O(log₁₀n) or O(ln n) – they are all considered O(log n).
+
+* **Balanced Structures:** The O(log n) time complexity for tree operations often assumes a balanced tree.  In unbalanced trees, the worst-case complexity can become O(n).
+
+* **Average vs. Worst Case:**  While many O(log n) algorithms have an average-case time complexity of O(log n), their worst-case complexity might be O(n) (e.g., in unbalanced trees or with specific input patterns).
+
+
+In summary, O(log n) algorithms are highly efficient because the time taken to solve a problem doesn't increase linearly with the input size; instead, it increases much more slowly. This makes them suitable for handling large datasets where linear-time algorithms would be impractical.
+
