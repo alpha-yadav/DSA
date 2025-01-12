@@ -28384,3 +28384,38 @@ Understanding algorithm complexity is crucial for:
 
 In summary, algorithm complexity analysis is a fundamental tool for evaluating and comparing the efficiency of algorithms, enabling developers to make informed decisions about software design and optimization.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is used in computer science to describe the asymptotic behavior of a function.  Specifically, it provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds.  Unlike Big-O notation (which only provides an upper bound) and Big-Omega notation (which only provides a lower bound), Big-Theta provides a more precise characterization of a function's growth.
+
+**Formal Definition:**
+
+We say that *f(n) = Θ(g(n))* if and only if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+   *c₁g(n) ≤ f(n) ≤ c₂g(n)*
+
+This means that for sufficiently large *n* (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.  In simpler terms:  *f(n)* grows at the same rate as *g(n)*.
+
+**Key points:**
+
+* **Tight Bound:** Θ provides a tight bound, meaning it specifies both the upper and lower bounds of the function's growth.
+* **Asymptotic Behavior:**  It focuses on the behavior of the function as *n* approaches infinity.  The behavior for small values of *n* is irrelevant.
+* **Constants are Ignored:** The constants *c₁* and *c₂* are crucial for the definition but are ignored when expressing the complexity. We are interested in the dominant term's growth rate.
+* **Order of Growth:** It classifies functions based on their order of growth (e.g., linear, quadratic, logarithmic, etc.).
+
+**Examples:**
+
+* **f(n) = 2n + 5  is Θ(n):**  We can choose *c₁ = 1*, *c₂ = 3*, and *n₀ = 5*. For all *n ≥ 5*,  *n ≤ 2n + 5 ≤ 3n*.  The function grows linearly.
+* **f(n) = n² + 10n + 100 is Θ(n²):** The dominant term is *n²*. We can find appropriate constants *c₁*, *c₂*, and *n₀* to satisfy the definition. The function grows quadratically.
+* **f(n) = 2ⁿ is Θ(2ⁿ):** The exponential function grows at its own rate.
+* **f(n) = log₂n is Θ(log n):** The base of the logarithm doesn't matter in Big-Theta notation (it only affects the constant factors).
+
+**Contrast with Big-O and Big-Ω:**
+
+* **Big-O (O):**  Provides an *upper bound*.  *f(n) = O(g(n))* means *f(n)* grows no faster than *g(n)*.
+* **Big-Omega (Ω):** Provides a *lower bound*.  *f(n) = Ω(g(n))* means *f(n)* grows at least as fast as *g(n)*.
+
+If *f(n) = Θ(g(n))*, then it's also true that *f(n) = O(g(n))* and *f(n) = Ω(g(n))*.  However, the reverse is not always true.  A function can have an upper and lower bound without having a *tight* bound.  Θ provides that tighter characterization.
+
+
+Big-Theta notation is fundamental to algorithm analysis, allowing us to compare the efficiency of different algorithms in a meaningful way, focusing on their scalability as the input size grows.
+
