@@ -32162,3 +32162,103 @@ print(f"Is the tree a BST? {is_bst_minmax(root2)}") #False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the average case (where H is the height of the tree) due to the recursive call stack.  In the worst case (a skewed tree), the space complexity becomes O(N).  Choose either method; they are both efficient and correct.  The `is_bst_minmax` method might be slightly easier to understand conceptually for some people.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given tree follows the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* The value of the left subtree's nodes is less than the node's value.
+* The value of the right subtree's nodes is greater than the node's value.
+
+Here are three common methods:
+
+**Method 1: Recursive Approach (In-Order Traversal)**
+
+This is arguably the most efficient and elegant approach.  A BST, when traversed in-order (left, root, right), will produce a sorted sequence of its nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Recursively checks if a tree is a BST using in-order traversal.
+
+    Args:
+        root: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    in_order_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            in_order_list.append(node.data)
+            inorder(node.right)
+    inorder(root)
+
+    # Check if the in-order list is sorted
+    return all(in_order_list[i] <= in_order_list[i+1] for i in range(len(in_order_list)-1))
+
+
+# Example Usage
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(is_bst_recursive(root))  # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) #Violation
+
+print(is_bst_recursive(root2)) # Output: False
+```
+
+**Method 2: Recursive Approach with Min and Max Limits**
+
+This method recursively checks each subtree, passing down minimum and maximum allowed values.  This avoids the need to create and sort a list, making it slightly more efficient in terms of space complexity.
+
+```python
+def is_bst_recursive_minmax(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a tree is a BST using min/max limits.
+
+    Args:
+        node: The current node being checked.
+        min_val: The minimum allowed value for this subtree.
+        max_val: The maximum allowed value for this subtree.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive_minmax(node.left, min_val, node.data) and
+            is_bst_recursive_minmax(node.right, node.data, max_val))
+```
+
+**Method 3: Iterative Approach (In-Order Traversal with Stack)**
+
+This approach mimics the recursive in-order traversal but uses a stack to avoid recursion, useful for very deep trees where recursion might lead to stack overflow.  The logic for checking the sorted order remains the same.  (Implementation left as an exercise, as it's slightly more complex than the recursive versions but follows similar principles.)
+
+
+**Choosing the Best Method:**
+
+* For most cases, the **recursive min-max approach (Method 2)** offers a good balance of readability and efficiency.
+* The **recursive in-order approach (Method 1)** is also easy to understand and is often preferred for its clarity.
+* Use the **iterative approach (Method 3)** only if you suspect extremely deep trees or have concerns about stack overflow.  It's less readable but avoids potential recursion depth issues.  Remember to handle the stack appropriately to ensure correct in-order traversal.
+
+
+Remember to adapt these code examples to your specific Node class definition and tree structure.  Choose the method that best suits your needs and coding style.  The core principle remains consistent: verify that the in-order traversal yields a sorted sequence or that each node's value fits within the min/max constraints of its subtree.
+
