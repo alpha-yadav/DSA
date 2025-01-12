@@ -28669,3 +28669,67 @@ public class SimpleLoop {
 
 These examples all demonstrate the basic structure of a simple loop:  an initialization, a condition, and an increment (or decrement).  The loop continues to execute as long as the condition is true.  The specific syntax varies slightly between languages, but the fundamental concept remains consistent.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows for processing data in a multi-dimensional way, often used for tasks like iterating over rows and columns of a matrix or processing nested data structures like lists of lists.
+
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+outer_loop:
+  for outer_variable in outer_iterable:
+    inner_loop:
+      for inner_variable in inner_iterable:
+        # Code to be executed for each inner loop iteration
+      # Code executed after each inner loop completes
+  # Code executed after each outer loop completes
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+This will output a 10x10 multiplication table.  The outer loop iterates through the rows (1 to 10), and for each row, the inner loop iterates through the columns (1 to 10), calculating and printing the product.
+
+
+**Another Example (Python - processing a list of lists):**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows (lists)
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()  # Newline after each row
+```
+
+This will print:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+
+**Important Considerations:**
+
+* **Complexity:** Nested loops can significantly increase the time complexity of your algorithm.  If the outer loop iterates `m` times and the inner loop iterates `n` times, the total number of iterations is `m * n`.  This can lead to very long execution times for large datasets.  Consider optimizing your code if performance becomes an issue.
+* **Readability:**  Deeply nested loops can become difficult to read and understand.  Try to keep your loops as shallow as possible and use meaningful variable names to improve readability.
+
+
+In summary, nested loops are a powerful tool for processing multi-dimensional data, but it's crucial to be aware of their potential performance implications and strive for clear, maintainable code.
+
