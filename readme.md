@@ -28565,3 +28565,107 @@ While Big O describes the *upper bound*, other notations exist:
 
 Big O notation is a fundamental concept in computer science that helps us reason about the efficiency and scalability of algorithms. Understanding it is crucial for writing efficient and effective programs.
 
+#  A Simple Loop 
+The concept of a "simple loop" is relative, depending on the programming language.  However, the core idea is the same:  repeatedly execute a block of code until a condition is met.  Here are examples in a few common languages:
+
+**1. Python:**
+
+This loop prints numbers 0 through 9:
+
+```python
+for i in range(10):
+  print(i)
+```
+
+This equivalent loop uses a `while` statement:
+
+```python
+i = 0
+while i < 10:
+  print(i)
+  i += 1
+```
+
+
+**2. JavaScript:**
+
+This loop prints numbers 0 through 9:
+
+```javascript
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
+```
+
+This equivalent loop uses a `while` statement:
+
+```javascript
+let i = 0;
+while (i < 10) {
+  console.log(i);
+  i++;
+}
+```
+
+
+**3. C++:**
+
+This loop prints numbers 0 through 9:
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 10; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+This equivalent loop uses a `while` statement:
+
+```c++
+#include <iostream>
+
+int main() {
+  int i = 0;
+  while (i < 10) {
+    std::cout << i << std::endl;
+    i++;
+  }
+  return 0;
+}
+```
+
+
+**4. Java:**
+
+This loop prints numbers 0 through 9:
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    for (int i = 0; i < 10; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+This equivalent loop uses a `while` statement:
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    int i = 0;
+    while (i < 10) {
+      System.out.println(i);
+      i++;
+    }
+  }
+}
+```
+
+These examples all demonstrate the basic structure of a simple loop:  an initialization, a condition, and an increment (or decrement).  The loop continues to execute as long as the condition is true.  The specific syntax varies slightly between languages, but the fundamental concept remains consistent.
+
