@@ -32262,3 +32262,97 @@ This approach mimics the recursive in-order traversal but uses a stack to avoid 
 
 Remember to adapt these code examples to your specific Node class definition and tree structure.  Choose the method that best suits your needs and coding style.  The core principle remains consistent: verify that the in-order traversal yields a sorted sequence or that each node's value fits within the min/max constraints of its subtree.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can visit (access) each node in a binary tree exactly once.  There are three main types of traversals, categorized by the order in which you visit the root node relative to its left and right subtrees:
+
+* **Inorder Traversal:**  Left Subtree -> Root -> Right Subtree
+* **Preorder Traversal:** Root -> Left Subtree -> Right Subtree
+* **Postorder Traversal:** Left Subtree -> Right Subtree -> Root
+
+Let's break down each one with examples and their common uses:
+
+
+**1. Inorder Traversal:**
+
+* **Order:** Visit the left subtree, then the root, then the right subtree.
+* **Example:**  Consider the following binary tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+The inorder traversal would be: 4 2 5 1 3
+
+* **Use Cases:**  Inorder traversal is particularly useful for binary *search trees* (BSTs).  An inorder traversal of a BST will output the nodes in ascending order (based on the key value).
+
+
+**2. Preorder Traversal:**
+
+* **Order:** Visit the root, then the left subtree, then the right subtree.
+* **Example:** Using the same tree as above:
+
+The preorder traversal would be: 1 2 4 5 3
+
+* **Use Cases:**  Preorder traversal is often used for creating a *copy* of a binary tree.  It's also used in the creation of arithmetic expressions from a binary expression tree.
+
+
+**3. Postorder Traversal:**
+
+* **Order:** Visit the left subtree, then the right subtree, then the root.
+* **Example:** Using the same tree as above:
+
+The postorder traversal would be: 4 5 2 3 1
+
+* **Use Cases:** Postorder traversal is commonly used to perform operations like *deleting a tree* or evaluating an arithmetic expression represented as a binary tree.  It's also useful for determining the order in which to deallocate memory for nodes in a tree.
+
+
+**Implementation (Python):**
+
+These traversals can be implemented recursively or iteratively. Here's a recursive Python implementation:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder(root)
+print("\nPreorder traversal:")
+preorder(root)
+print("\nPostorder traversal:")
+postorder(root)
+```
+
+This code demonstrates the recursive approach.  Iterative approaches typically use stacks to mimic the recursion.  Choose the implementation that best suits your needs and understanding.  Remember to handle the case where the input `node` is `None` to avoid errors.
+
