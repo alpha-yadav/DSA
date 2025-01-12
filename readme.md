@@ -32560,3 +32560,60 @@ postorder(root) # Output: D E B F C A
 
 Remember to handle the case of an empty tree (where the root node is `None`) in your implementations to prevent errors.  The provided Python code does this implicitly with the `if node:` checks.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants (where we allow a node to be a descendant of itself).  Finding the LCA is a fundamental problem in tree algorithms.  There are several approaches to solving this, with varying time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This is a highly efficient approach.  It recursively traverses the tree.  The base cases are:
+
+   * **If the current node is `null`:**  Return `null`.
+   * **If the current node is either `p` or `q`:** Return the current node (it's one of the targets).
+   * **If `p` and `q` are on different subtrees:** The current node is the LCA.
+   * **Otherwise:** Recursively search the left and right subtrees. If one subtree returns a node, that's the LCA; otherwise, it's `null`.
+
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+
+   ```
+
+2. **Iterative Approach (Using a Stack or Queue):**
+
+   An iterative approach can be implemented using a stack (similar to depth-first search) or a queue (similar to breadth-first search).  It's generally less concise than the recursive approach but can be advantageous in scenarios where recursion depth might be a concern.  It typically involves keeping track of the parent nodes.
+
+3. **Using Parent Pointers:**
+
+   If the tree nodes already have parent pointers (a pointer to their parent node), finding the LCA becomes simpler. You can traverse upwards from both `p` and `q`, storing their ancestors in sets. The LCA is the lowest node common to both sets.
+
+**Time and Space Complexity:**
+
+* **Recursive Approach:** Time complexity is O(N), where N is the number of nodes in the tree (in the worst case, it visits all nodes). Space complexity is O(H), where H is the height of the tree (due to the recursive call stack).  In a balanced tree, H is log(N).  In a skewed tree, H is N.
+* **Iterative Approach:**  Time complexity is O(N), space complexity is O(W), where W is the maximum width of the tree (for BFS).  For DFS, space complexity is O(H).
+* **Parent Pointers Approach:** Time complexity is O(H), where H is the height of the tree (to traverse upwards from `p` and `q`). Space complexity is O(H) in the worst case (to store the ancestor sets).
+
+
+**Choosing the Right Approach:**
+
+The recursive approach is generally preferred for its clarity and efficiency in most cases. The iterative approach is useful when recursion depth is a concern. The parent pointer approach is only feasible if the tree structure already includes parent pointers.  For most interview scenarios, the recursive approach is perfectly acceptable and often expected. Remember to handle edge cases like `p` or `q` not being in the tree.
+
