@@ -32728,3 +32728,18 @@ For general trees (not necessarily binary), you might need to adapt a depth-firs
 
 Remember to handle edge cases, such as when one or both nodes are not found in the tree.  The choice of the best method depends on the specific constraints of your problem (tree structure, availability of parent pointers, performance requirements).
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about the x and y values (or a function) to create a graph.  For example, you could give me:
+
+* **A list of points:**  (1,2), (3,4), (5,6)
+* **A function:** y = x²
+* **A table of data:**  
+    | x | y |
+    |---|---|
+    | 0 | 1 |
+    | 1 | 3 |
+    | 2 | 5 |
+
+
+Once you provide the data, I can tell you how to graph it or, if you'd like, I can try to generate a textual representation of the graph.  I cannot create a visual graph image directly.
+
