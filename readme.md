@@ -28312,3 +28312,75 @@ The "best" version depends on your priorities.
 
 Remember to choose the version that best suits your understanding and coding style.  All three versions achieve the same result – solving the FizzBuzz problem.  Start with the version you find easiest to understand and gradually explore more concise approaches as your Swift skills improve.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time and space (memory).  Analyzing complexity helps us understand how an algorithm's performance scales as the input size grows.  We generally express complexity using Big O notation.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:** Measures how the runtime of an algorithm grows as the input size increases.
+* **Space Complexity:** Measures how the memory usage of an algorithm grows as the input size increases.
+* **Big O Notation:** A mathematical notation used to describe the upper bound of an algorithm's complexity.  It focuses on the dominant terms as the input size approaches infinity, ignoring constant factors.
+
+**Common Big O Notations and Their Meaning:**
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime grows logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime grows linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** The runtime grows proportionally to n multiplied by the logarithm of n.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime grows proportionally to the square of the input size.  Example: Nested loops iterating over the input data.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Finding all permutations of a set.
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing complexity involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most significantly to the algorithm's runtime.
+2. **Counting the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Expressing the complexity using Big O notation:** Simplify the function by dropping constant factors and lower-order terms, focusing on the dominant term as n grows large.
+
+**Example:**
+
+Consider a simple algorithm that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for num in arr:
+    if num > max_val:
+      max_val = num
+  return max_val
+```
+
+* **Basic operation:** The comparison `if num > max_val`
+* **Number of operations:** This operation is executed n times (where n is the length of the array).
+* **Big O notation:** O(n) – Linear time complexity.
+
+
+**Best, Worst, and Average Case:**
+
+Complexity analysis often considers three cases:
+
+* **Best Case:** The most favorable scenario for the algorithm.
+* **Worst Case:** The least favorable scenario for the algorithm.
+* **Average Case:** The expected runtime over many inputs.
+
+For example, a linear search algorithm has:
+
+* Best Case: O(1) (element found at the beginning)
+* Worst Case: O(n) (element found at the end or not present)
+* Average Case: O(n)
+
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity is crucial for:
+
+* **Choosing the right algorithm:**  Selecting an algorithm that scales well with the expected input size.
+* **Optimizing existing algorithms:** Identifying bottlenecks and improving performance.
+* **Predicting performance:** Estimating the runtime and memory usage of an algorithm for different input sizes.
+
+
+In summary, algorithm complexity analysis is a fundamental tool for evaluating and comparing the efficiency of algorithms, enabling developers to make informed decisions about software design and optimization.
+
