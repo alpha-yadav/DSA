@@ -30230,3 +30230,120 @@ An iterative solution can be implemented using a stack or a queue for a breadth-
 
 The recursive approach is generally preferred for its simplicity and readability, unless you have concerns about stack overflow in extremely deep trees, in which case an iterative solution would be more suitable.  Choose the method that best suits your needs and coding style.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (specifically, a binary tree or a general tree) is a classic algorithm problem.  The approach depends on the type of tree and whether you have parent pointers.
+
+**Methods:**
+
+**1. Recursive Approach (Binary Tree, no parent pointers):**
+
+This is a common and efficient method for binary trees where you don't have access to parent pointers (only child pointers).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lca(root.left, p, q)
+    right_lca = lca(root.right, p, q)
+
+    if left_lca and right_lca:  # p and q are on different sides
+        return root
+    elif left_lca:             # p and q are on the left side
+        return left_lca
+    else:                       # p and q are on the right side
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+p = root.left  # Node with data 2
+q = root.left.right # Node with data 5
+
+lca_node = lca(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca_node.data}")  # Output: LCA of 2 and 5: 2
+
+```
+
+
+**2. Iterative Approach (Binary Tree, no parent pointers):**
+
+This approach avoids recursion, which can be beneficial for very deep trees to prevent stack overflow.  It's generally less readable than the recursive version.
+
+**(Implementation left as an exercise - it involves using a stack or queue to mimic the recursive calls.)**
+
+
+**3. Using Parent Pointers:**
+
+If each node has a pointer to its parent, the LCA can be found more efficiently.  You can simply traverse upwards from both nodes until you find a common ancestor.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.parent = None  # Add parent pointer
+
+def lca_parent_pointers(p, q):
+    """
+    Finds the LCA of nodes p and q using parent pointers.
+    """
+    ancestors_p = set()
+    curr = p
+    while curr:
+        ancestors_p.add(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        if curr in ancestors_p:
+            return curr
+        curr = curr.parent
+
+    return None  # Should not happen if p and q are in the tree
+
+
+#Example (requires setting parent pointers when building the tree)
+# ... (tree construction with parent pointers set) ...
+
+lca_node = lca_parent_pointers(p,q)
+print(f"LCA of {p.data} and {q.data}: {lca_node.data}")
+```
+
+
+**4. General Tree (no parent pointers):**
+
+Finding the LCA in a general tree (not necessarily binary) without parent pointers is more complex. One approach involves using a depth-first search (DFS) to find paths from the root to both nodes, then comparing the paths to find the LCA.
+
+
+**Choosing the Right Method:**
+
+* **Binary tree, no parent pointers:** The recursive approach is usually preferred for its clarity and efficiency.
+* **Binary tree, with parent pointers:** The parent pointer method is the most efficient.
+* **General tree:** A DFS-based approach is necessary.
+
+Remember to handle edge cases like null trees, nodes not present in the tree, and the case where one node is an ancestor of the other.  The provided code includes some basic error handling but might need further refinement depending on your specific requirements.
+
