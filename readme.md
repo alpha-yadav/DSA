@@ -30639,3 +30639,74 @@ You can return the answer in any order.
 
 These problems demonstrate a range of algorithmic concepts and difficulty levels.  Choosing the right data structures and algorithms is key to solving them efficiently. Remember to consider time and space complexity when designing your solutions.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's simple in concept but helps assess basic programming skills. Here's how to implement it in Swift, starting with a basic version and then adding improvements:
+
+**Basic Version:**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* If it's divisible by both 3 and 5 (15), it prints "FizzBuzz".
+* If it's divisible by 3, it prints "Fizz".
+* If it's divisible by 5, it prints "Buzz".
+* Otherwise, it prints the number itself.
+
+
+**Improved Version (using the ternary conditional operator):**
+
+This version uses the ternary conditional operator (`condition ? value1 : value2`) for slightly more concise code:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This version achieves the same result with fewer lines, but it can become less readable for more complex conditions.
+
+
+**Even More Improved Version (using String Interpolation and a Tuple):**
+
+This version prioritizes readability and maintainability for larger projects:
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+    for i in 1...n {
+        let (fizz, buzz) = (i % 3 == 0, i % 5 == 0)
+        let output = "\(fizz ? "Fizz" : "")\(buzz ? "Buzz" : "")"
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzAdvanced(n: 15)
+```
+
+This version uses a tuple to store the results of divisibility checks and string interpolation to construct the output string.  It's more efficient by only performing the modulo operations once.  The final `print` statement handles the case where neither Fizz nor Buzz is applicable.
+
+Choose the version that best suits your needs and coding style.  The basic version is easiest to understand, while the advanced version is more efficient and scalable.  Remember to always prioritize readability and maintainability, especially in larger projects.
+
