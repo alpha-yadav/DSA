@@ -33003,3 +33003,92 @@ The space complexity of an adjacency list is O(V + E), where V is the number of 
 
 Choosing between an adjacency list and an adjacency matrix depends on the specific application and the characteristics of the graph (sparse vs. dense).  Adjacency lists are generally preferred for sparse graphs due to their superior space efficiency.  For dense graphs, the adjacency matrix may be a better choice, though the difference often isn't significant in practice unless you're working with extremely large graphs.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange nodes in a graph so that you always follow the arrows.  If you have a cycle in your graph, a topological sort is impossible.
+
+Here's a breakdown of topological sort:
+
+**Key Concepts:**
+
+* **Directed Acyclic Graph (DAG):** A graph where edges have a direction (indicated by arrows) and there are no cycles (paths that start and end at the same node).  Topological sorting only works on DAGs.
+* **In-degree:** The number of incoming edges to a node.
+* **Out-degree:** The number of outgoing edges from a node.
+* **Source Node:** A node with an in-degree of 0 (no incoming edges).
+
+
+**Algorithms:**
+
+There are two primary algorithms for topological sorting:
+
+1. **Kahn's Algorithm:** This is a breadth-first search (BFS)-like approach.
+
+   * **Steps:**
+      1. Find all nodes with an in-degree of 0 (source nodes). Add them to a queue (or list).
+      2. While the queue is not empty:
+         * Remove a node from the queue and add it to the sorted list.
+         * For each neighbor of the removed node:
+            * Decrement its in-degree by 1.
+            * If its in-degree becomes 0, add it to the queue.
+      3. If the sorted list contains all nodes, the topological sort is successful. Otherwise, there's a cycle in the graph.
+
+
+2. **Depth-First Search (DFS) Algorithm:** This is a recursive approach.
+
+   * **Steps:**
+      1. Maintain a list `visited` to track visited nodes and a list `sorted` to store the sorted nodes (in reverse order).
+      2. For each node, if it's not visited:
+         * Call a recursive `dfs` function.
+      3. The `dfs` function:
+         * Marks the current node as visited.
+         * Recursively calls itself for all unvisited neighbors.
+         * After all recursive calls return, adds the current node to the `sorted` list.
+      4. Reverse the `sorted` list to get the final topological order.
+
+
+**Example (Kahn's Algorithm):**
+
+Let's say we have a graph represented by the following adjacency list:
+
+```
+graph = {
+  'A': ['C'],
+  'B': ['C', 'D'],
+  'C': ['E'],
+  'D': ['F'],
+  'E': ['H'],
+  'F': ['H'],
+  'G': ['H'],
+  'H': []
+}
+```
+
+1. **Find source nodes:** A, B, G have in-degree 0.  Add them to the queue.
+2. **Process the queue:**
+   * Remove A, add it to the sorted list (sorted = ['A']).  Decrement C's in-degree to 1.
+   * Remove B, add it to the sorted list (sorted = ['A', 'B']). Decrement C's in-degree to 0 and D's in-degree to 0. Add C and D to the queue.
+   * Remove C, add it to the sorted list (sorted = ['A', 'B', 'C']). Decrement E's in-degree to 0. Add E to the queue.
+   * Remove D, add it to the sorted list (sorted = ['A', 'B', 'C', 'D']). Decrement F's in-degree to 0. Add F to the queue.
+   * Remove E, add it to the sorted list (sorted = ['A', 'B', 'C', 'D', 'E']). Add H to the queue.
+   * Remove F, add it to the sorted list (sorted = ['A', 'B', 'C', 'D', 'E', 'F']). Add H to the queue.
+   * Remove G, add it to the sorted list (sorted = ['A', 'B', 'C', 'D', 'E', 'F', 'G']). Add H to the queue.
+   * Remove H, add it to the sorted list (sorted = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']).
+3. The sorted list ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] is a topological ordering.
+
+
+**Applications:**
+
+Topological sorting is used in various applications, including:
+
+* **Course scheduling:** Ordering courses based on prerequisites.
+* **Build systems (like Make):** Determining the order to compile files.
+* **Data serialization:** Ordering data dependencies.
+* **Dependency resolution in software projects.**
+
+
+**Detecting Cycles:**
+
+If either algorithm fails to add all nodes to the sorted list, it indicates the presence of a cycle in the graph, making a topological sort impossible.
+
+
+This comprehensive explanation should give you a solid understanding of topological sorting.  Remember to choose the algorithm that best suits your needs and data structure.  Kahn's algorithm is generally preferred for its efficiency, especially in sparse graphs.
+
