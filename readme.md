@@ -30710,3 +30710,54 @@ This version uses a tuple to store the results of divisibility checks and string
 
 Choose the version that best suits your needs and coding style.  The basic version is easiest to understand, while the advanced version is more efficient and scalable.  Remember to always prioritize readability and maintainability, especially in larger projects.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (such as time and space) an algorithm consumes as a function of the input size.  It's crucial for understanding how an algorithm's performance scales with larger inputs.  We generally focus on *asymptotic* complexity, meaning how the resource usage behaves as the input size approaches infinity.  This allows us to compare algorithms independently of specific hardware or implementation details.
+
+There are two main aspects of algorithm complexity:
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm grows with the input size.
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm grows with the input size.
+
+
+**Analyzing Complexity:**
+
+We use Big O notation (O), Big Omega notation (Ω), and Big Theta notation (Θ) to express complexity.  These notations describe upper, lower, and tight bounds, respectively.
+
+* **Big O Notation (O):** Represents the *upper bound* on the growth rate of an algorithm's resource usage.  It describes the worst-case scenario.  We say an algorithm has a time complexity of O(n) if its runtime grows at most linearly with the input size n.
+
+* **Big Omega Notation (Ω):** Represents the *lower bound* on the growth rate. It describes the best-case scenario.  An algorithm with a time complexity of Ω(n) has a runtime that grows at least linearly with the input size n.
+
+* **Big Theta Notation (Θ):** Represents the *tight bound*, meaning both the upper and lower bounds are the same.  If an algorithm has a time complexity of Θ(n), its runtime grows linearly with the input size n, regardless of the input.
+
+
+**Common Complexity Classes (Time Complexity):**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Bubble sort, selection sort.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Finding all permutations of a set.
+
+
+**Space Complexity:**  Similar notations (O, Ω, Θ) are used for space complexity.  Common space complexity classes mirror those of time complexity, but also include:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of input size.
+
+* **O(n) - Linear Space:** The memory usage grows linearly with the input size.
+
+* **In-place algorithms:** Algorithms that use constant extra space, often modifying the input array directly.
+
+
+**Choosing the Right Algorithm:**
+
+When choosing an algorithm, consider both its time and space complexity.  An algorithm with better time complexity might use more memory, and vice versa.  The optimal choice depends on the specific application and the relative importance of time and space efficiency.  Understanding algorithm complexity is essential for writing efficient and scalable software.
+
