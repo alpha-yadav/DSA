@@ -33326,3 +33326,118 @@ bfs(graph, 'A')  # Output: A B C D E F (order may vary slightly depending on que
 
 This provides a foundational understanding of graph traversals.  Remember that the specific implementation details might vary depending on the data structure used to represent the graph (adjacency matrix, adjacency list) and the programming language.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used and whether you're working with a graph or a tree. Here are a few implementations in Python, covering common scenarios:
+
+**1. DFS for a Graph (using adjacency list):**
+
+This version uses an adjacency list to represent the graph and a recursive approach for traversal.
+
+```python
+def dfs_graph(graph, start, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        start: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, for recursive calls).
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    if visited is None:
+        visited = set()
+
+    visited.add(start)
+    print(start, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(start, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_graph(graph, neighbor, visited)
+
+    return list(visited)
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal starting from A:")
+dfs_graph(graph, 'A')  # Output: A B D E F C (order may vary slightly depending on dictionary iteration)
+print("\nVisited nodes:", dfs_graph(graph, 'A'))
+
+```
+
+**2. DFS for a Tree (using a tree node class):**
+
+This version assumes you have a tree represented using a node class.
+
+```python
+class TreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+def dfs_tree(node):
+    """
+    Performs a Depth-First Search traversal of a tree.
+
+    Args:
+        node: The root node of the tree.
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    visited = []
+    stack = [node]
+
+    while stack:
+        current = stack.pop()
+        visited.append(current.data)
+        stack.extend(current.children)  # Add children to the stack in reverse order for pre-order
+
+    return visited
+
+
+# Example usage:
+root = TreeNode('A')
+root.children = [TreeNode('B'), TreeNode('C')]
+root.children[0].children = [TreeNode('D'), TreeNode('E')]
+root.children[1].children = [TreeNode('F')]
+
+print("\nDFS traversal of tree:", dfs_tree(root)) # Output: ['A', 'C', 'F', 'B', 'E', 'D'] (order depends on child order)
+
+```
+
+**3. Iterative DFS for a Graph (using a stack):**
+
+This version uses a stack for an iterative approach, avoiding recursion.
+
+```python
+def iterative_dfs_graph(graph, start):
+  visited = set()
+  stack = [start]
+
+  while stack:
+    vertex = stack.pop()
+    if vertex not in visited:
+      visited.add(vertex)
+      print(vertex, end=" ")
+      stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)
+
+  return list(visited)
+
+# Example usage (same graph as before):
+print("\nIterative DFS traversal starting from A:")
+iterative_dfs_graph(graph, 'A')
+```
+
+Remember to adapt these examples to your specific data structure and needs.  The order of nodes visited might vary slightly depending on the implementation and the order of elements in your adjacency list or the order of children in your tree nodes.  Consider which order (pre-order, in-order, post-order) is most appropriate for your application if you are working with trees.
+
