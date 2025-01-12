@@ -28733,3 +28733,28 @@ This will print:
 
 In summary, nested loops are a powerful tool for processing multi-dimensional data, but it's crucial to be aware of their potential performance implications and strive for clear, maintainable code.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They mean the time it takes to solve a problem grows logarithmically with the input size (n).  This is much faster than linear time (O(n)), quadratic time (O(n²)), etc.  This efficiency usually comes from halving (or similarly reducing) the problem size at each step.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  It works on sorted data.  You repeatedly divide the search interval in half.  If the target value is in the middle element, you're done.  Otherwise, you recursively search either the left or right half.  Each step eliminates half the remaining data.
+
+* **Binary Tree Operations (Search, Insertion, Deletion - under ideal conditions):**  In a balanced binary search tree (BST),  finding, adding, or removing a node involves traversing a path down the tree.  The height of a balanced binary tree is proportional to log₂(n), where n is the number of nodes.  If the tree is unbalanced (e.g., skewed), the time complexity can degrade to O(n).
+
+* **Efficient Sorting Algorithms (part of the process):** While algorithms like merge sort and heapsort have an overall time complexity of O(n log n),  parts of their processes involve logarithmic time operations.  For example,  building a heap (in heapsort) can be done in O(n) time, but operations on the heap (like extracting the maximum) take O(log n).
+
+* **Exponentiation by Squaring:** This technique efficiently calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time. It cleverly uses the property that a<sup>b</sup> = (a<sup>b/2</sup>)² if b is even.
+
+* **Finding the kth smallest element using Quickselect (on average):**  Quickselect is a selection algorithm related to quicksort.  While its worst-case time complexity is O(n²), its average-case complexity is O(n).  However,  finding a pivot in some implementations of Quickselect can involve logarithmic operations.
+
+
+**Key Characteristics Leading to O(log n) Complexity:**
+
+* **Divide and Conquer:** The problem is repeatedly divided into smaller subproblems.
+* **Halving the Problem Size:**  Each step significantly reduces the size of the problem to be solved.
+* **Sorted or Structured Data:** Often, these algorithms require the input data to be sorted or to have a specific structure (like a balanced tree) to achieve logarithmic performance.
+
+
+It's crucial to remember that the "log" in O(log n) is usually base 2 (log₂(n)), but the base doesn't matter in Big O notation because it only affects the constant factor.  O(log₂ n), O(log₁₀ n), and O(ln n) are all considered O(log n).
+
