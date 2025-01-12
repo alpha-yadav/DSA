@@ -33092,3 +33092,116 @@ If either algorithm fails to add all nodes to the sorted list, it indicates the 
 
 This comprehensive explanation should give you a solid understanding of topological sorting.  Remember to choose the algorithm that best suits your needs and data structure.  Kahn's algorithm is generally preferred for its efficiency, especially in sparse graphs.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on tracking the state of each node during the traversal.  We use three states:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (in the recursion stack).
+* **Visited:** The node has been completely explored.
+
+A cycle is detected when we encounter a node that's currently "Visiting" during the traversal. This means we've reached a node already on the recursion stack, indicating a back edge and hence a cycle.
+
+Here's how it works in detail, along with code examples in Python:
+
+
+**Algorithm:**
+
+1. **Initialization:** Assign all nodes to the `Unvisited` state.
+2. **Recursive DFS:** For each unvisited node, call a recursive DFS function.
+3. **DFS Function:**
+   - Mark the current node as `Visiting`.
+   - Iterate through its neighbors:
+     - If a neighbor is `Unvisited`, recursively call DFS on that neighbor.
+     - If a neighbor is `Visiting`, a cycle is detected.  Return `True` immediately.
+   - Mark the current node as `Visited`.
+   - Return `False` (no cycle detected from this branch).
+4. **Cycle Detection:** If the main DFS loop finds any cycle (`True` returned from recursive call), the graph contains a cycle.
+
+
+**Python Code (Adjacency List Representation):**
+
+```python
+def has_cycle(graph):
+    """
+    Detects cycles in a directed graph using DFS.
+
+    Args:
+      graph: A dictionary representing the graph as an adjacency list. 
+             e.g., {'A': ['B', 'C'], 'B': ['D'], 'C': ['E'], 'D': ['F'], 'E': ['F'], 'F': []}
+
+    Returns:
+      True if the graph contains a cycle, False otherwise.
+    """
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: Unvisited, 1: Visiting, 2: Visited
+    
+    def dfs(node):
+        visited[node] = 1  # Mark as Visiting
+        for neighbor in graph.get(chr(ord('A') + node), []):  # Get neighbors, handle missing keys
+            neighbor_index = ord(neighbor) - ord('A')
+            if visited[neighbor_index] == 1:  # Cycle detected
+                return True
+            if visited[neighbor_index] == 0 and dfs(neighbor_index):
+                return True
+        visited[node] = 2  # Mark as Visited
+        return False
+
+    for node in range(num_nodes):
+        if visited[node] == 0 and dfs(node):
+            return True
+    return False
+
+# Example usage:
+graph = {'A': ['B', 'C'], 'B': ['D'], 'C': ['E'], 'D': ['F'], 'E': ['F'], 'F': []}  # No cycle
+print(f"Graph has cycle: {has_cycle(graph)}")  # Output: False
+
+graph2 = {'A': ['B'], 'B': ['C'], 'C': ['A']} # Cycle
+print(f"Graph has cycle: {has_cycle(graph2)}")  # Output: True
+
+graph3 = {'A': ['B', 'C'], 'B': ['D', 'A'], 'C': ['E'], 'D': ['F'], 'E': ['F'], 'F': []} # Cycle
+print(f"Graph has cycle: {has_cycle(graph3)}") # Output: True
+
+
+```
+
+**Python Code (Adjacency Matrix Representation):**
+
+The adjacency matrix approach is similar. The main difference is how you access neighbors:
+
+```python
+def has_cycle_matrix(graph):
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: Unvisited, 1: Visiting, 2: Visited
+
+    def dfs(node):
+        visited[node] = 1
+        for neighbor in range(num_nodes):
+            if graph[node][neighbor] == 1:  # Check for edge
+                if visited[neighbor] == 1:
+                    return True
+                if visited[neighbor] == 0 and dfs(neighbor):
+                    return True
+        visited[node] = 2
+        return False
+
+    for node in range(num_nodes):
+        if visited[node] == 0 and dfs(node):
+            return True
+    return False
+
+#Example Usage (Adjacency Matrix)
+graph_matrix = [[0, 1, 1, 0, 0, 0],
+                 [0, 0, 0, 1, 0, 0],
+                 [0, 0, 0, 0, 1, 0],
+                 [0, 0, 0, 0, 0, 1],
+                 [0, 0, 0, 0, 0, 1],
+                 [0, 0, 0, 0, 0, 0]] #No Cycle
+
+print(f"Graph has cycle (matrix): {has_cycle_matrix(graph_matrix)}") #Output: False
+
+graph_matrix2 = [[0,1,0],[0,0,1],[1,0,0]] #Cycle
+print(f"Graph has cycle (matrix): {has_cycle_matrix(graph_matrix2)}") # Output: True
+```
+
+Remember to adapt the node indexing (e.g., using dictionaries or numerical indices) to match your specific graph representation.  The core logic of using the `Visiting` state to detect cycles remains the same.
+
