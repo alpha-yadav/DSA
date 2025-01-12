@@ -32617,3 +32617,114 @@ The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest nod
 
 The recursive approach is generally preferred for its clarity and efficiency in most cases. The iterative approach is useful when recursion depth is a concern. The parent pointer approach is only feasible if the tree structure already includes parent pointers.  For most interview scenarios, the recursive approach is perfectly acceptable and often expected. Remember to handle edge cases like `p` or `q` not being in the tree.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic computer science problem.  The approach depends on the type of tree and whether you have parent pointers or not.
+
+**Methods:**
+
+**1. Using Parent Pointers:**
+
+If each node has a pointer to its parent, finding the LCA is relatively straightforward.
+
+* **Algorithm:**
+    1. Trace upwards from node `a` storing its ancestors in a `set`.
+    2. Trace upwards from node `b` checking if each ancestor is present in the set from step 1.
+    3. The first ancestor of `b` found in the set is the LCA.
+
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_parent_pointers(node_a, node_b):
+    ancestors_a = set()
+    current = node_a
+    while current:
+        ancestors_a.add(current)
+        current = current.parent
+
+    current = node_b
+    while current:
+        if current in ancestors_a:
+            return current
+        current = current.parent
+
+    return None  # nodes are not in the same tree
+
+
+# Example usage:
+root = Node('A')
+b = Node('B'); b.parent = root
+c = Node('C'); c.parent = root
+d = Node('D'); d.parent = b
+e = Node('E'); e.parent = b
+f = Node('F'); f.parent = c
+
+print(lca_parent_pointers(d, e).data)  # Output: B
+print(lca_parent_pointers(d, f).data)  # Output: A
+print(lca_parent_pointers(d, root).data) # Output: A
+
+```
+
+**2. Without Parent Pointers (Binary Tree):**
+
+If you don't have parent pointers, the algorithm is more complex and typically uses recursion.
+
+* **Algorithm:**
+    1. If the node is `None`, return `None`.
+    2. If the node is `a` or `b`, return the node.
+    3. Recursively search the left and right subtrees.
+    4. If both subtrees return a node (meaning `a` and `b` are in different subtrees), the current node is the LCA.
+    5. Otherwise, return the node returned by the subtree that isn't `None`.
+
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_no_parent_pointers(root, a, b):
+    if root is None:
+        return None
+    if root.data == a.data or root.data == b.data:
+        return root
+
+    left_lca = lca_no_parent_pointers(root.left, a, b)
+    right_lca = lca_no_parent_pointers(root.right, a, b)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+a = root.left.left  #Node D
+b = root.left.right # Node E
+print(lca_no_parent_pointers(root, a, b).data) # Output: B
+
+a = root.left.left # Node D
+b = root.right     # Node C
+print(lca_no_parent_pointers(root, a, b).data) # Output: A
+```
+
+**3. Without Parent Pointers (General Tree):**
+
+For general trees (not necessarily binary), you might need to adapt a depth-first search (DFS) or breadth-first search (BFS) approach to find paths from the root to each node and then find the longest common prefix of those paths.
+
+
+Remember to handle edge cases, such as when one or both nodes are not found in the tree.  The choice of the best method depends on the specific constraints of your problem (tree structure, availability of parent pointers, performance requirements).
+
