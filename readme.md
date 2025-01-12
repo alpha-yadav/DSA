@@ -29819,3 +29819,131 @@ print(is_bst_iterative(root_invalid)) # Output: False
 
 Both methods achieve the same result.  Choose the method that best suits your understanding and the constraints of your application (e.g., tree size, memory limitations). Remember to adapt the `Node` class definition to match your specific implementation if needed.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit all nodes in a binary tree.  There are several common traversal methods, each resulting in a different node visitation order:
+
+**1. Depth-First Traversals:** These traversals prioritize going deeper into the tree before exploring siblings.  There are three main types:
+
+* **Pre-order Traversal:**  Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The order is: `Root, Left, Right`.
+
+   ```
+   1
+  / \
+ 2   3
+/ \ / \
+4  5 6  7
+
+Pre-order: 1 2 4 5 3 6 7
+   ```
+
+* **In-order Traversal:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. The order is: `Left, Root, Right`.  For a Binary *Search* Tree (BST), this traversal yields the nodes in ascending order.
+
+   ```
+   1
+  / \
+ 2   3
+/ \ / \
+4  5 6  7
+
+In-order: 4 2 5 1 6 3 7
+   ```
+
+* **Post-order Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node. The order is: `Left, Right, Root`.
+
+   ```
+   1
+  / \
+ 2   3
+/ \ / \
+4  5 6  7
+
+Post-order: 4 5 2 6 7 3 1
+   ```
+
+
+**2. Breadth-First Traversal (Level-order Traversal):** This traversal visits nodes level by level, starting from the root and moving down. It typically uses a queue data structure.
+
+   ```
+   1
+  / \
+ 2   3
+/ \ / \
+4  5 6  7
+
+Level-order: 1 2 3 4 5 6 7
+   ```
+
+
+**Implementation Examples (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def pre_order(node):
+    if node:
+        print(node.data, end=" ")
+        pre_order(node.left)
+        pre_order(node.right)
+
+def in_order(node):
+    if node:
+        in_order(node.left)
+        print(node.data, end=" ")
+        in_order(node.right)
+
+def post_order(node):
+    if node:
+        post_order(node.left)
+        post_order(node.right)
+        print(node.data, end=" ")
+
+def level_order(node):
+    if node is None:
+        return
+
+    queue = [node]
+    while(len(queue) > 0):
+        print(queue[0].data, end=" ")
+        node = queue.pop(0)
+
+        if node.left is not None:
+            queue.append(node.left)
+
+        if node.right is not None:
+            queue.append(node.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+print("Pre-order traversal:")
+pre_order(root) # Output: 1 2 4 5 3 6 7
+print("\nIn-order traversal:")
+in_order(root)  # Output: 4 2 5 1 6 3 7
+print("\nPost-order traversal:")
+post_order(root) # Output: 4 5 2 6 7 3 1
+print("\nLevel-order traversal:")
+level_order(root) # Output: 1 2 3 4 5 6 7
+print()
+```
+
+These traversals have various applications:
+
+* **Pre-order:** Creating a copy of the tree, evaluating expressions represented by the tree.
+* **In-order:**  Sorting elements in a BST, displaying elements in sorted order.
+* **Post-order:** Deleting a tree, evaluating expressions in postfix notation.
+* **Level-order:**  Used in algorithms like Huffman coding, displaying the tree level by level.
+
+
+Remember to handle the `None` case (empty subtree) in your recursive traversal functions to avoid errors.  The level-order traversal uses an iterative approach with a queue for efficiency.
+
