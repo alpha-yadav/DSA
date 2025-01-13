@@ -41399,3 +41399,130 @@ The choice of traversal method depends on the application.
 
 Remember that these traversals are recursive;  they elegantly handle the tree's hierarchical structure.  Iterative versions are also possible but generally more complex to implement.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike a Binary Search Tree, a general binary tree doesn't have any ordering properties, making the LCA problem slightly more complex.
+
+Here are two common approaches to finding the LCA in a binary tree:
+
+**Method 1: Recursive Approach**
+
+This approach recursively traverses the tree.  If a node is found, it's returned.  If both nodes are found in different subtrees of a node, that node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, n1, n2):
+    """
+    Finds the Lowest Common Ancestor (LCA) of n1 and n2 in a binary tree.
+
+    Args:
+      root: The root of the binary tree.
+      n1: The first node.
+      n2: The second node.
+
+    Returns:
+      The LCA node, or None if either n1 or n2 is not found.
+    """
+
+    if root is None:
+        return None
+
+    if root.data == n1 or root.data == n2:
+        return root
+
+    left_lca = lca(root.left, n1, n2)
+    right_lca = lca(root.right, n1, n2)
+
+    if left_lca and right_lca:
+        return root  # LCA found
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+n1 = 4
+n2 = 5
+lca_node = lca(root, n1, n2)
+if lca_node:
+    print(f"LCA of {n1} and {n2} is: {lca_node.data}")
+else:
+    print(f"One or both nodes ({n1}, {n2}) not found.")
+
+
+n1 = 4
+n2 = 6
+lca_node = lca(root, n1, n2)
+if lca_node:
+    print(f"LCA of {n1} and {n2} is: {lca_node.data}")
+else:
+    print(f"One or both nodes ({n1}, {n2}) not found.")
+
+```
+
+**Method 2: Using Path Traversal**
+
+This method finds the paths from the root to each of the two nodes, and then finds the last common node in those paths.
+
+```python
+def find_path(root, node, path):
+    """Finds the path from root to a given node."""
+    if root is None:
+        return False
+
+    path.append(root.data)
+
+    if root.data == node:
+        return True
+
+    if find_path(root.left, node, path) or find_path(root.right, node, path):
+        return True
+
+    path.pop()  # Backtrack if node not found in subtree
+    return False
+
+
+def lca_path(root, n1, n2):
+    """Finds LCA using path traversal."""
+    path1 = []
+    path2 = []
+
+    if not find_path(root, n1, path1) or not find_path(root, n2, path2):
+        return None  # Node not found
+
+    i = 0
+    while i < len(path1) and i < len(path2) and path1[i] == path2[i]:
+        i += 1
+
+    return path1[i - 1]  # The last common node
+
+
+# Example usage (same tree as before):
+lca_node = lca_path(root, 4, 5)
+if lca_node:
+    print(f"LCA of 4 and 5 is: {lca_node}")
+else:
+    print("One or both nodes not found.")
+
+lca_node = lca_path(root, 4, 6)
+if lca_node:
+    print(f"LCA of 4 and 6 is: {lca_node}")
+else:
+    print("One or both nodes not found.")
+```
+
+The recursive approach is generally more efficient than the path traversal method, especially for large trees, because it avoids the overhead of building and comparing paths.  Choose the method that best suits your needs and understanding. Remember to handle cases where one or both nodes are not found in the tree.
+
