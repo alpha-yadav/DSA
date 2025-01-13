@@ -39580,3 +39580,49 @@ This algorithm iterates through the array once.  Therefore, the number of compar
 
 Understanding algorithm complexity is fundamental to writing efficient and scalable code.  Choosing the right algorithm can significantly impact the performance of your application, especially when dealing with large datasets.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a fundamental concept in computer science and mathematics used to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, indicating that the function's growth is neither faster nor slower than a particular function, but rather proportionally equivalent.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means:
+
+* **Lower Bound:**  *f(n)* is bounded below by *g(n)* (multiplied by a constant *c₁*).  It doesn't grow slower than *g(n)*.
+* **Upper Bound:** *f(n)* is bounded above by *g(n)* (multiplied by a constant *c₂*). It doesn't grow faster than *g(n)*.
+
+Essentially, for sufficiently large *n* (*n ≥ n₀*), *f(n)* is sandwiched between two multiples of *g(n)*.  This signifies that *f(n)* and *g(n)* grow at the same rate.
+
+
+**Difference from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  *f(n) = O(g(n))* means *f(n)* grows no faster than *g(n)*.  It doesn't rule out the possibility that *f(n)* grows significantly slower.
+* **Big-Ω (Ω):** Provides a *lower bound*. *f(n) = Ω(g(n))* means *f(n)* grows no slower than *g(n)*.  It doesn't rule out the possibility that *f(n)* grows significantly faster.
+* **Big-Θ (Θ):** Provides both an upper and lower bound, meaning it's a *tight bound*.  It describes the exact rate of growth.
+
+**Example:**
+
+Let's consider the function *f(n) = 2n² + 3n + 1*.
+
+We can say:
+
+* *f(n) = O(n²)* (f(n) grows no faster than n²)
+* *f(n) = Ω(n²)* (f(n) grows no slower than n²)
+* *f(n) = Θ(n²)* (f(n) grows proportionally to n²)
+
+To prove the Θ(n²) part, we need to find *c₁*, *c₂*, and *n₀*.  Let's choose *n₀ = 1*:
+
+* For *c₁ = 1*:  1 * n² ≤ 2n² + 3n + 1  (This holds true for n ≥ 1)
+* For *c₂ = 6*: 2n² + 3n + 1 ≤ 6n² (This holds true for n ≥ 1)
+
+
+Therefore, we've shown that *f(n) = Θ(n²)*.  The dominant term (n²) determines the Big-Theta complexity.
+
+
+**Importance in Algorithm Analysis:**
+
+Big-Theta notation is crucial in algorithm analysis because it allows us to precisely characterize the time or space complexity of an algorithm.  Knowing the Θ complexity helps us compare the efficiency of different algorithms and choose the most suitable one for a given problem.  For example, an algorithm with a Θ(n log n) complexity is generally considered more efficient than one with a Θ(n²) complexity for large input sizes.
+
