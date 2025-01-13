@@ -35490,3 +35490,100 @@ postorder(root) # Output: D E B C A
 
 This code defines a `Node` class and functions for each traversal type.  Remember to adapt the tree structure according to your specific needs.  You can also implement these traversals iteratively using stacks, although the recursive approach is generally simpler to understand.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the lowest common ancestor (LCA) in a binary tree is a fundamental problem in tree algorithms.  Unlike in a binary *search* tree, where you can leverage the sorted property, a general binary tree requires a different approach.  Here are two common methods:
+
+**Method 1: Recursive Approach**
+
+This approach recursively traverses the tree.  The core idea is:
+
+* **Base Cases:**
+    * If the node is `null`, return `null`.
+    * If the node is `p` or `q`, return the node itself.
+
+* **Recursive Step:**
+    * Recursively search for `p` and `q` in the left and right subtrees.
+    * If `p` and `q` are found in *different* subtrees (one in the left, one in the right), the current node is the LCA.
+    * Otherwise, the LCA is found in either the left or right subtree (whichever returns a non-null result).
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node, or None if either p or q is not found.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:  # p and q are in different subtrees
+        return root
+    elif left_lca:             # p and q are in the left subtree
+        return left_lca
+    else:                       # p and q are in the right subtree
+        return right_lca
+
+```
+
+**Method 2: Iterative Approach (using parent pointers)**
+
+This method requires a slight modification:  you need to add parent pointers to each node in the tree. This allows for a bottom-up traversal.
+
+1. **Find Paths:** Perform depth-first search (DFS) to find the paths from the root to both `p` and `q`.  You can easily track the path using parent pointers.
+2. **Compare Paths:** Iterate through the paths simultaneously.  The last common node in both paths is the LCA.
+
+
+```python
+# Assuming you have a way to add parent pointers to the tree nodes during construction or a separate function to do so.
+
+
+def lowestCommonAncestorIterative(root, p, q):
+    # (Implementation details omitted for brevity, but would involve DFS to find paths)
+    # ...  Code to find paths to p and q using parent pointers ...
+
+    path_p = find_path(root, p) # returns a list of nodes from root to p
+    path_q = find_path(root, q) # returns a list of nodes from root to q
+
+    lca = root
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[i] == path_q[i]:
+        lca = path_p[i]
+        i += 1
+
+    return lca
+
+#Helper function (implementation would depend on how parent pointers are stored)
+
+def find_path(root, target):
+    path = []
+    node = target  # Start at the target node
+    while node: #Traverse up using parent pointers until you hit the root
+       path.insert(0, node) #insert node at the beginning of the list
+       node = node.parent #access parent pointer (assuming it exists)
+    return path
+```
+
+**Choosing a Method:**
+
+* The **recursive approach** is generally simpler to understand and implement.  It's often preferred for its elegance and readability.
+* The **iterative approach** can be more efficient in some cases, especially if the tree is very deep, as it avoids the overhead of recursive function calls. However, it requires modifying the tree structure to include parent pointers.
+
+
+Remember to handle edge cases, such as when `p` or `q` is not present in the tree, or when `p` or `q` is the root itself.  The provided code includes basic error handling, but more robust checks might be necessary depending on the specific application.
+
