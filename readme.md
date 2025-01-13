@@ -38444,3 +38444,99 @@ postorder(root)  # Output: D E B F C A
 
 This Python code demonstrates the three traversals.  Remember to adapt the `Node` class and the tree construction if you're using different data structures or ways to represent your binary tree.  The core recursive logic remains the same.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the lowest common ancestor (LCA) of two nodes in a binary tree is a common problem in computer science.  The approach differs slightly depending on whether the tree is a binary *search* tree (BST) or just a general binary tree.
+
+**1. General Binary Tree:**
+
+The most straightforward method for a general binary tree involves a recursive approach.  The algorithm checks if either `node1` or `node2` is found in the left or right subtree.  If both are found in the same subtree, the LCA must lie in that subtree. If they are found in different subtrees, the current node is the LCA.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node.  Returns None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:  # p and q are in different subtrees
+        return root
+    elif left:          # p and q are in the left subtree
+        return left
+    else:              # p and q are in the right subtree
+        return right
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+
+
+```
+
+**2. Binary Search Tree (BST):**
+
+In a BST, the algorithm can be more efficient.  We leverage the property that all nodes smaller than a given node are in its left subtree, and all larger nodes are in its right subtree.
+
+```python
+def lowestCommonAncestorBST(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary search tree.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node.
+    """
+    if p.val < root.val and q.val < root.val:
+        return lowestCommonAncestorBST(root.left, p, q)
+    elif p.val > root.val and q.val > root.val:
+        return lowestCommonAncestorBST(root.right, p, q)
+    else:
+        return root
+
+# Example usage (same tree as above, but assuming it's a BST):
+
+lca_bst = lowestCommonAncestorBST(root, p, q)
+print(f"LCA of {p.val} and {q.val} (BST): {lca_bst.val}") # Output: LCA of 5 and 1 (BST): 3
+
+```
+
+**Important Considerations:**
+
+* **Error Handling:** The code examples above assume `p` and `q` exist in the tree.  Robust code should include checks to handle cases where one or both nodes are not found.
+* **Iterative Solutions:** While recursion is often elegant for LCA problems, iterative solutions using stacks or queues are also possible and can be beneficial for very deep trees to avoid stack overflow errors.
+* **Node Values:**  The examples assume unique node values.  Modifications would be needed if node values could be duplicated.
+
+
+The choice between the general binary tree approach and the BST approach depends entirely on the type of tree you're working with.  The BST approach is significantly faster when applicable because it avoids exploring unnecessary parts of the tree.
+
