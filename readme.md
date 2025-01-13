@@ -42234,3 +42234,117 @@ Graph traversals are algorithms used to visit all the vertices (nodes) in a grap
 
 The choice between BFS and DFS depends on the specific problem.  If you need to find the shortest path in an unweighted graph, BFS is usually the better choice. If you need to detect cycles or perform topological sorting, DFS is often more suitable.  For weighted graphs, Dijkstra's or Bellman-Ford algorithms are necessary.  A* search provides an efficient solution when a heuristic function can be effectively defined.
 
+#  Depth First Search traversal function 
+Several versions of a Depth-First Search (DFS) traversal function are possible, depending on the data structure used to represent the graph and the desired output.  Here are a few examples:
+
+**1. DFS using an adjacency list (recursive):** This is a common and elegant approach.  It uses recursion to explore as deeply as possible along each branch before backtracking.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal of a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, for avoiding cycles).
+        path: A list to store the traversal path (optional).
+
+    Returns:
+        A list representing the DFS traversal path.  Returns None if the node is not in the graph.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    if node not in graph:
+        return None
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print(dfs_recursive(graph, 'A'))  # Possible output: ['A', 'B', 'D', 'E', 'F', 'C'] (order may vary)
+
+```
+
+**2. DFS using an adjacency list (iterative):**  This version avoids recursion using a stack, making it suitable for very deep graphs where recursion might hit stack overflow limits.
+
+
+```python
+def dfs_iterative(graph, start_node):
+    """
+    Performs a Depth-First Search traversal of a graph iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        start_node: The starting node.
+
+    Returns:
+        A list representing the DFS traversal path. Returns None if start_node is not in the graph.
+    """
+    if start_node not in graph:
+        return None
+
+    visited = set()
+    stack = [start_node]
+    path = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            path.append(node)
+            stack.extend(neighbor for neighbor in reversed(graph.get(node, [])) if neighbor not in visited) #reversed for proper DFS order
+
+    return path
+
+# Example usage (same graph as above):
+print(dfs_iterative(graph, 'A')) # Possible output: ['A', 'C', 'F', 'B', 'E', 'D'] (order may vary slightly from recursive version)
+
+```
+
+**3. DFS for a tree (recursive):** If you're working with a tree (a graph with no cycles), the implementation simplifies slightly.  You don't need to explicitly track visited nodes as you won't encounter cycles.
+
+```python
+def dfs_tree(tree, node, path=None):
+    """DFS for a tree."""
+    if path is None:
+        path = []
+    path.append(node)
+    for child in tree.get(node, []):
+        dfs_tree(tree, child, path)
+    return path
+
+
+# Example tree:
+tree = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': [],
+    'F': []
+}
+print(dfs_tree(tree,'A')) # Output: ['A', 'B', 'D', 'E', 'C', 'F']
+```
+
+Remember to choose the version that best suits your needs and the structure of your graph.  The iterative version is generally preferred for its robustness in handling large graphs, while the recursive version is often more concise and readable for smaller graphs.  The tree version is the simplest if you know you have a tree structure.  The order of nodes in the output might vary slightly depending on the implementation and the order of neighbors in the adjacency list.
+
