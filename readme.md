@@ -36487,3 +36487,72 @@ print(f"The sum of even numbers is: {result}")  # Output: 12
 
 Remember that the "difficulty" is subjective and depends on your programming experience and familiarity with algorithms and data structures.  Choose a problem that challenges you but is still within your reach to solve.  Focus on understanding the problem statement, designing a solution, writing clean code, and testing thoroughly.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+
+**Simple Version (using nested `if` statements):**
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This version iterates from 1 to `n`.  It uses nested `if` statements to check for divisibility by 15 (FizzBuzz), 3 (Fizz), and 5 (Buzz). If none of these conditions are met, it prints the number itself.
+
+
+**Slightly More Advanced Version (using string concatenation and ternary operator):**
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzAdvanced(n: 15) // Example usage
+```
+
+This version is more concise.  It uses the ternary operator (`condition ? value1 : value2`) to conditionally add "Fizz" and "Buzz" to the `output` string. If `output` remains empty after these checks, it means the number is not divisible by 3 or 5, so it prints the number itself.
+
+
+**Even More Advanced (functional approach):**
+
+```swift
+func fizzBuzzFunctional(n: Int) {
+    (1...n).forEach { i in
+        let output = [(i % 3 == 0, "Fizz"), (i % 5 == 0, "Buzz")].compactMap { $0.0 ? $0.1 : nil }.joined(separator: "")
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzFunctional(n: 15)
+```
+
+This version leverages functional programming concepts. It uses `compactMap` to filter out nil values (when the number isn't divisible by 3 or 5) and `joined` to create the final output string.
+
+
+**Choosing the Best Version:**
+
+* The **simple version** is easiest to understand for beginners.
+* The **advanced version** is more concise and efficient.
+* The **functional version** is the most compact, demonstrating a more advanced Swift style but might be harder to grasp initially.
+
+Start with the simple version to grasp the core logic, then gradually explore the more advanced options as you become more comfortable with Swift.  Remember to choose the version that best suits your understanding and project requirements.
+
