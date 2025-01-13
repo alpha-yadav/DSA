@@ -35069,3 +35069,111 @@ else:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) for the recursive approach, where H is the height of the tree (O(N) in the worst case of a skewed tree, and O(log N) in the average case of a balanced tree). The iterative in-order traversal approach could achieve O(1) space complexity if implemented iteratively using a stack.  Choose the method that best suits your needs and coding style.  The second method (min/max) is often considered slightly more intuitive for understanding the BST property.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree adheres to the Binary Search Tree (BST) property.  The core idea is to recursively check if, for every node:
+
+1. **All nodes in the left subtree are less than the current node.**
+2. **All nodes in the right subtree are greater than the current node.**
+
+Here are three common methods:
+
+**Method 1: Recursive In-Order Traversal**
+
+This is arguably the most efficient approach. A BST, when traversed in-order (left, root, right), will produce a sorted sequence of its nodes.  Therefore, we perform an in-order traversal and check if the resulting sequence is sorted.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    """Checks if a tree is a BST using in-order traversal."""
+    values = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            values.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    for i in range(1, len(values)):
+        if values[i] < values[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_inorder(root))  # True
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5)
+print(is_bst_inorder(root2)) #False (because 15 > 10)
+
+```
+
+
+**Method 2: Recursive Check with Min and Max Values**
+
+This recursive approach efficiently checks the BST property by passing down minimum and maximum allowed values for each subtree.
+
+```python
+import sys
+
+def is_bst_recursive(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+    """Checks if a tree is a BST recursively."""
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+# Example usage (same trees as above)
+print(is_bst_recursive(root))  # True
+print(is_bst_recursive(root2)) # False
+```
+
+**Method 3: Iterative Approach (using a stack)**
+
+While less elegant than the recursive methods, an iterative approach avoids the risk of stack overflow errors with very deep trees.  It's based on a modified in-order traversal using a stack.
+
+
+```python
+def is_bst_iterative(root):
+    """Checks if a tree is a BST iteratively."""
+    stack = []
+    prev = -sys.maxsize
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+        root = stack.pop()
+        if root.data <= prev:
+            return False
+        prev = root.data
+        root = root.right
+    return True
+
+
+# Example usage (same trees as above)
+print(is_bst_iterative(root))  # True
+print(is_bst_iterative(root2)) # False
+```
+
+**Choosing a Method:**
+
+* **In-order traversal (Method 1):**  Simple and efficient for most cases.  Its space complexity is O(n) in the worst case (completely skewed tree).
+
+* **Recursive min/max (Method 2):**  Generally efficient and avoids the need to explicitly sort the entire tree. Space complexity is O(h), where h is the height of the tree (better than O(n) for balanced trees).
+
+* **Iterative approach (Method 3):**  Useful for very deep trees where recursion might lead to stack overflow.  Space complexity is O(h).
+
+For most scenarios, either Method 1 or Method 2 is a good choice.  Method 3 is a valuable option when dealing with potentially very deep trees. Remember to adapt the Node class definition to match your specific tree implementation.
+
