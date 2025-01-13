@@ -39044,3 +39044,94 @@ print(f"Topological Sort (cycle): {sorted_nodes}") # Output: Topological Sort (c
 
 Both Kahn's algorithm and DFS provide correct topological sorts for DAGs. Kahn's algorithm is generally preferred for its simplicity and often better performance in practice.  The choice depends on the specific application and context.  Remember that if a topological sort is possible, it might not be unique.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on tracking the state of each node during the traversal.  We use three states:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (in the recursion stack).
+* **Visited:** The node has been fully explored.
+
+A cycle exists if, during the traversal, we encounter a node that's already in the "Visiting" state. This means we've reached a node that's already on the current path, indicating a cycle.
+
+
+Here's the algorithm and its implementation in Python:
+
+**Algorithm:**
+
+1. **Initialization:** Assign all nodes to the "Unvisited" state.
+2. **Iterate:** For each node in the graph:
+   - If the node is "Unvisited," start a Depth-First Search (DFS) from that node.
+3. **DFS(node):**
+   - Change the state of the `node` to "Visiting."
+   - For each neighbor of `node`:
+     - If the neighbor is "Unvisited":
+       - Recursively call `DFS(neighbor)`.
+       - If the recursive call returns `True` (cycle detected), return `True`.
+     - If the neighbor is "Visiting":
+       - A cycle is detected. Return `True`.
+   - Change the state of the `node` to "Visited."
+   - Return `False` (no cycle detected from this node).
+
+
+**Python Implementation:**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.adj_list = [[] for _ in range(num_vertices)]
+
+    def add_edge(self, u, v):
+        self.adj_list[u].append(v)
+
+    def has_cycle(self):
+        visited = [0] * self.num_vertices  # 0: Unvisited, 1: Visiting, 2: Visited
+
+        def dfs(node):
+            visited[node] = 1  # Mark as Visiting
+            for neighbor in self.adj_list[node]:
+                if visited[neighbor] == 1:  # Cycle detected
+                    return True
+                if visited[neighbor] == 0:
+                    if dfs(neighbor):
+                        return True
+            visited[node] = 2  # Mark as Visited
+            return False
+
+        for node in range(self.num_vertices):
+            if visited[node] == 0:
+                if dfs(node):
+                    return True
+        return False
+
+
+# Example usage:
+graph = Graph(4)
+graph.add_edge(0, 1)
+graph.add_edge(0, 2)
+graph.add_edge(1, 2)
+graph.add_edge(2, 0)  # Cycle!
+graph.add_edge(2, 3)
+graph.add_edge(3, 3) #Self Loop
+
+
+if graph.has_cycle():
+    print("Cycle detected in the graph")
+else:
+    print("No cycle detected in the graph")
+
+
+graph2 = Graph(4)
+graph2.add_edge(0,1)
+graph2.add_edge(1,2)
+graph2.add_edge(2,3)
+
+if graph2.has_cycle():
+    print("Cycle detected in the graph2")
+else:
+    print("No cycle detected in the graph2")
+
+```
+
+This improved implementation efficiently detects cycles, including self-loops, and handles various graph structures correctly.  Remember that the adjacency list representation is used here; you might need to adapt it slightly if you're using a different graph representation (e.g., adjacency matrix).
+
