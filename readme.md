@@ -40819,3 +40819,117 @@ print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}") # Fals
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity depends on the method; the inorder traversal method uses O(N) space in the worst case (if the tree is a skewed tree), while the recursive method uses O(H) space in the worst case (H is the height of the tree).  For balanced trees, both have O(log N) space complexity.  The recursive approach is generally preferred for its clarity and slightly better space complexity in most cases.  Choose the method that best suits your needs and coding style.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST).  Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Recursively checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+        node: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.data)
+            inorder(node.right)
+
+    inorder(node)
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}") # True
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+root2.right.left = Node(6) #Violation
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") # False
+
+```
+
+**Method 2: Recursive with Range Check**
+
+This method is more efficient as it avoids creating an entire sorted list.  It recursively checks if each subtree satisfies the BST property within a given range.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_range(node, min_val, max_val):
+    """
+    Recursively checks if a binary tree is a BST using range checking.
+
+    Args:
+        node: The root node of the subtree being checked.
+        min_val: The minimum allowed value in the subtree.
+        max_val: The maximum allowed value in the subtree.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive_range(node.left, min_val, node.data) and
+            is_bst_recursive_range(node.right, node.data, max_val))
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(f"Is the tree a BST? {is_bst_recursive_range(root, float('-inf'), float('inf'))}") # True
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+root2.right.left = Node(6) #Violation
+
+print(f"Is the tree a BST? {is_bst_recursive_range(root2, float('-inf'), float('inf'))}") # False
+```
+
+**Choosing a Method:**
+
+* The **in-order traversal method** is simpler to understand but has a space complexity of O(N) due to the list creation, where N is the number of nodes.
+* The **range checking method** is generally preferred for its better space complexity of O(h), where h is the height of the tree (which can be log N for a balanced tree).  This method is also more efficient because it stops checking as soon as a violation is detected.
+
+
+Remember to handle the `float('-inf')` and `float('inf')` appropriately for the initial call to `is_bst_recursive_range`.  These represent negative and positive infinity, setting the initial bounds for the root node.
+
