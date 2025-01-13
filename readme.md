@@ -36243,3 +36243,120 @@ The best traversal algorithm depends on the specific problem:
 
 Remember that the efficiency of graph traversals depends on the graph's representation (adjacency matrix vs. adjacency list) and its properties (dense vs. sparse, directed vs. undirected).  The choice of data structure (queue for BFS, stack for DFS) also impacts performance.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and whether you're looking for a specific node or just traversing the entire graph.  Here are a few implementations in Python:
+
+**1. DFS using Adjacency List (Recursive):**  This is generally the most concise and easiest to understand implementation for graphs represented using adjacency lists.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal of a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+        path: A list to store the traversal path (optional, defaults to an empty list).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print(dfs_recursive(graph, 'A'))  # Possible output: ['A', 'B', 'D', 'E', 'F', 'C'] (order may vary)
+
+```
+
+
+**2. DFS using Adjacency List (Iterative):** This uses a stack instead of recursion, which can be beneficial for very deep graphs to avoid stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal of a graph iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    visited = set()
+    stack = [node]
+    path = []
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            path.append(vertex)
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)
+
+    return path
+
+#Example usage (same graph as above):
+print(dfs_iterative(graph, 'A')) # Possible output: ['A', 'C', 'F', 'B', 'E', 'D'] (order may vary)
+```
+
+**3. DFS for finding a specific node:**  This modification stops the search once the target node is found.
+
+
+```python
+def dfs_find_node(graph, start, target):
+    """
+    Performs DFS to find a specific node.
+
+    Args:
+        graph: The graph represented as an adjacency list.
+        start: The starting node.
+        target: The node to search for.
+
+    Returns:
+        True if the target node is found, False otherwise.  Also prints the path if found.
+    """
+    visited = set()
+    stack = [(start, [start])] # Stack of (node, path_so_far) tuples
+
+    while stack:
+        (vertex, path) = stack.pop()
+        if vertex == target:
+            print(f"Path to {target}: {path}")
+            return True
+        if vertex not in visited:
+            visited.add(vertex)
+            for neighbor in graph.get(vertex, []):
+                if neighbor not in visited:
+                    stack.append((neighbor, path + [neighbor]))
+    return False
+
+#Example usage
+print(dfs_find_node(graph, 'A', 'F')) # Output: Path to F: ['A', 'B', 'E', 'F'] (or a similar path)
+
+```
+
+Remember to adapt these functions to your specific graph representation and needs.  The order of nodes visited in DFS might vary slightly depending on the implementation and the order of neighbors in the adjacency list.  If you need a specific order (e.g., lexicographical), you'll need to adjust the code accordingly.
+
