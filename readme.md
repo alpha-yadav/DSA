@@ -40400,3 +40400,113 @@ print(bst.inorder_traversal()) # Output will be the sorted list of inserted numb
 
 Remember to choose the method that best suits your needs and coding style.  The recursive version is often considered more readable, while the iterative version can be slightly more performant in certain scenarios.  Both achieve the same functionality of inserting a node into a BST maintaining the BST property.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node (no children):** Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:**  This is the most complex case.  We typically replace the node with either its inorder predecessor (largest node in the left subtree) or its inorder successor (smallest node in the right subtree).  Both approaches work; here, we'll use the inorder successor.
+
+Here's a C++ implementation of BST deletion, along with explanations:
+
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left, *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+Node* minValueNode(Node* node) {
+    Node* current = node;
+    while (current->left != nullptr) {
+        current = current->left;
+    }
+    return current;
+}
+
+Node* deleteNode(Node* root, int key) {
+    // Base Case: If the tree is empty
+    if (root == nullptr) {
+        return root;
+    }
+
+    // Recursive calls to find the node to delete
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // key == root->data (Node found)
+
+        // Case 1: Node with 0 or 1 child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Case 2: Node with two children
+        Node* temp = minValueNode(root->right); // Find inorder successor
+
+        root->data = temp->data; // Copy the inorder successor's data to the node being deleted
+
+        // Delete the inorder successor
+        root->right = deleteNode(root->right, temp->data);
+    }
+    return root;
+}
+
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+
+    std::cout << "Inorder traversal before deletion:\n";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    root = deleteNode(root, 20); // Deleting a leaf node
+
+    std::cout << "Inorder traversal after deleting 20:\n";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 50); // Deleting a node with two children
+
+    std::cout << "Inorder traversal after deleting 50:\n";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    //Clean up memory (important to avoid leaks!):
+    //  A proper cleanup would require a recursive function to delete the entire tree.  This is left as an exercise.
+    //  For simplicity in this example, we'll just leave memory management as is.
+
+
+    return 0;
+}
+```
+
+Remember that this code doesn't include complete memory management (it lacks a function to recursively delete the entire tree after you're finished with it).  Adding such a function is crucial to prevent memory leaks in a real-world application.  The `main` function demonstrates deletion of a leaf and a node with two children.  Try deleting other nodes to test the functionality. Remember to compile with a C++ compiler (like g++).  For example: `g++ your_file_name.cpp -o your_executable_name` and then run it with `./your_executable_name`.
+
