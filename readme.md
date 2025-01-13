@@ -41667,3 +41667,12 @@ def lca_path(root, node1, node2):
 
 Remember to handle edge cases, such as when one or both nodes are not present in the tree, or when one node is the ancestor of the other.  The examples above have basic error handling; more robust error checking might be needed in production code.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about the function or data points to create a graph.  For example, you could give me:
+
+* **A list of points:**  e.g., (1,2), (2,4), (3,6)
+* **An equation:** e.g., y = 2x + 1,  y = x^2
+* **A description of the type of graph:** e.g., "a bar chart showing sales for each month"  (You would then need to provide the sales data for each month).
+
+Once you give me this information, I can help you create a graph.
+
