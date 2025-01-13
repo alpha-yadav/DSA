@@ -34231,3 +34231,12 @@ The best representation will depend on factors like:
 
 In many cases, the **list of children** or **child-sibling representation** strikes a good balance between simplicity and efficiency.  However, always consider the specific needs of your application.
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need more information to write an introduction.  For example, tell me:
+
+* **What is the subject of the writing?** (e.g., a research paper on climate change, a story about a lost dog, a presentation on marketing strategies)
+* **What is the purpose of the writing?** (e.g., to inform, persuade, entertain)
+* **Who is the intended audience?** (e.g., experts, general public, children)
+
+Once I have this information, I can write a compelling introduction.
+
