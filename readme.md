@@ -33867,3 +33867,122 @@ This function searches an unsorted array for a target element.  Its runtime is p
 
 Big O notation is a crucial tool for any computer scientist or software engineer to understand and apply.  While it simplifies the analysis, it provides valuable insights into the efficiency and scalability of algorithms.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  The most common types are `for` loops and `while` loops.  Here are examples in a few popular programming languages:
+
+**Python:**
+
+**`for` loop (iterating over a sequence):**
+
+```python
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+  print(fruit)
+```
+
+**`for` loop (using `range` for numerical iteration):**
+
+```python
+for i in range(5):  # Prints numbers 0 to 4
+  print(i)
+```
+
+**`while` loop:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+
+**JavaScript:**
+
+**`for` loop (numerical iteration):**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+**`for...of` loop (iterating over an array):**
+
+```javascript
+const fruits = ["apple", "banana", "cherry"];
+for (const fruit of fruits) {
+  console.log(fruit);
+}
+```
+
+**`while` loop:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+**C++:**
+
+**`for` loop (numerical iteration):**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+**`while` loop:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+**Java:**
+
+**`for` loop (numerical iteration):**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+**`while` loop:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These are just basic examples. Loops can be much more complex, incorporating nested loops, `break` and `continue` statements for controlling loop flow, and other advanced features.  The specific syntax will vary depending on the programming language you're using.
+
