@@ -41526,3 +41526,144 @@ else:
 
 The recursive approach is generally more efficient than the path traversal method, especially for large trees, because it avoids the overhead of building and comparing paths.  Choose the method that best suits your needs and understanding. Remember to handle cases where one or both nodes are not found in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic computer science problem.  There are several approaches, each with varying time and space complexities.  Here's a breakdown of common methods:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a straightforward and efficient approach for binary trees.  The core idea is to recursively traverse the tree.  If the current node is one of the target nodes, return the node.  Otherwise, recursively check the left and right subtrees. If both subtrees return a node (meaning each target node was found in a different subtree), the current node is the LCA.  If only one subtree returns a node, that node is the LCA. If neither subtree returns a node, return null (indicating the LCA isn't in this subtree).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node1, node2):
+    if root is None or root.data == node1 or root.data == node2:
+        return root
+
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+#Example Usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(lca_recursive(root, 4, 5).data)  # Output: 2
+print(lca_recursive(root, 4, 3).data)  # Output: 1
+print(lca_recursive(root, 5,3).data) # Output: 1
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, you traverse the entire tree).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive call stack).  In a balanced binary tree, H is log₂N; in a skewed tree, H is N.
+
+
+**2. Iterative Approach (for Binary Trees):**
+
+This approach uses a stack (or could use parent pointers) to avoid recursion. It's functionally equivalent to the recursive approach but might offer slightly better performance in some cases due to avoiding the overhead of recursive function calls.
+
+```python
+def lca_iterative(root, node1, node2):
+    stack = [root]
+    parent = {root: None}  #Store parent of each node
+
+    while stack:
+        node = stack.pop()
+        if node.left:
+            stack.append(node.left)
+            parent[node.left] = node
+        if node.right:
+            stack.append(node.right)
+            parent[node.right] = node
+
+    path1 = []
+    curr = node1
+    while curr:
+        path1.append(curr)
+        curr = parent.get(curr)
+
+    path2 = []
+    curr = node2
+    while curr:
+        path2.append(curr)
+        curr = parent.get(curr)
+
+    lca = None
+    i = 0
+    while i < len(path1) and i < len(path2) and path1[len(path1)-1-i] == path2[len(path2)-1-i]:
+        lca = path1[len(path1)-1-i]
+        i += 1
+    return lca
+
+
+# Example Usage (same tree as above)
+print(lca_iterative(root,4,5).data) # Output: 2
+
+```
+
+**Time Complexity:** O(N)
+**Space Complexity:** O(N) in the worst case (for a skewed tree)  because the parent dictionary and paths could potentially store all nodes.
+
+
+**3. Lowest Common Ancestor using Path (for any tree):**
+
+This method works for any tree structure, not just binary trees. It first finds the paths from the root to each target node and then iterates through the paths to find the last common node.
+
+```python
+def find_path(root, node, path):
+    if root is None:
+        return False
+
+    path.append(root)
+    if root.data == node.data:
+        return True
+
+    if find_path(root.left, node, path) or find_path(root.right, node, path):
+        return True
+
+    path.pop()
+    return False
+
+
+def lca_path(root, node1, node2):
+    path1 = []
+    path2 = []
+
+    find_path(root, node1, path1)
+    find_path(root, node2, path2)
+
+    i = 0
+    while i < len(path1) and i < len(path2) and path1[i] == path2[i]:
+        i += 1
+
+    return path1[i-1] if i > 0 else None # Handle case where nodes aren't found.
+
+
+```
+
+**Time Complexity:** O(N) in the worst case
+**Space Complexity:** O(N) in the worst case
+
+
+**Choosing the right method:**
+
+* For binary trees, the recursive approach is often the most concise and efficient.
+* The iterative approach can be advantageous if you're concerned about potential stack overflow issues with very deep trees.
+* The path-based approach is the most general and works for any tree structure but might be slightly less efficient than the binary tree-specific methods.  Consider using this if you're dealing with non-binary trees.
+
+
+Remember to handle edge cases, such as when one or both nodes are not present in the tree, or when one node is the ancestor of the other.  The examples above have basic error handling; more robust error checking might be needed in production code.
+
