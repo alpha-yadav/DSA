@@ -36717,3 +36717,42 @@ Asymptotic notations describe the limiting behavior of functions, particularly u
 
 Choosing the right notation depends on the context.  Often, Big O is used to describe the worst-case time complexity of an algorithm, but using Big Theta is preferred when a tight bound can be established.  Big Omega can be useful when analyzing lower bounds on problem complexity.
 
+#  Big-Omega Notation 
+Big-Omega (Ω) notation is used in computer science to describe the lower bound of an algorithm's runtime or space complexity.  In simpler terms, it provides a guarantee about the *minimum* amount of resources an algorithm will require, regardless of the input.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that f(n) = Ω(g(n)) if and only if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+
+Let's break this down:
+
+* **f(n):** Represents the actual runtime or space complexity of the algorithm.
+* **g(n):** Represents a simpler function that describes the growth rate of f(n).  This is usually a well-known function like n, n², log n, etc.
+* **c:** A positive constant.  It scales g(n) to fit within f(n).  It doesn't affect the overall growth rate.
+* **n₀:** A positive integer.  It represents a threshold.  The inequality holds true for all input sizes *greater than or equal to* n₀. This allows us to ignore small input sizes where the algorithm's behavior might be irregular.
+
+**What Ω(g(n)) Means:**
+
+The statement f(n) = Ω(g(n)) means that the function f(n) grows at least as fast as g(n).  The algorithm's runtime or space usage will *never* be significantly smaller than g(n) for sufficiently large inputs.  It provides a lower bound on the growth rate.
+
+**Example:**
+
+Let's say we have an algorithm with a runtime of f(n) = 2n² + 5n + 1.  We can say that:
+
+f(n) = Ω(n²)
+
+This is because we can find constants c and n₀ that satisfy the definition. For instance, we could choose c = 1 and n₀ = 1.  Then, for all n ≥ 1,  1 * n² ≤ 2n² + 5n + 1.
+
+**Difference between Big-O and Big-Omega:**
+
+* **Big-O (O):** Describes the *upper bound* of an algorithm's runtime. It gives a worst-case scenario.
+* **Big-Omega (Ω):** Describes the *lower bound* of an algorithm's runtime. It gives a best-case (or sometimes average-case) scenario, guaranteeing a minimum resource usage.
+* **Big-Theta (Θ):** Describes both the upper and lower bounds, meaning the algorithm's growth rate is precisely characterized.  f(n) = Θ(g(n)) implies f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+
+**In Summary:**
+
+Big-Omega notation is a crucial tool for analyzing algorithms.  While Big-O focuses on the worst-case, Big-Omega provides a guarantee on the minimum resources an algorithm will consume, offering a more complete picture of its efficiency.  Often, using both Big-O and Big-Ω (or Big-Theta) gives the most comprehensive analysis of an algorithm's performance.
+
