@@ -38540,3 +38540,140 @@ print(f"LCA of {p.val} and {q.val} (BST): {lca_bst.val}") # Output: LCA of 5 and
 
 The choice between the general binary tree approach and the BST approach depends entirely on the type of tree you're working with.  The BST approach is significantly faster when applicable because it avoids exploring unnecessary parts of the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (or more specifically, a rooted tree) is a classic computer science problem.  There are several ways to solve it, each with varying time and space complexities.  The best approach depends on the structure of your tree and the constraints of your problem.
+
+Here's a breakdown of common methods:
+
+**1. Brute-Force Approach (Simple, but Inefficient):**
+
+* **Idea:**  Traverse from each node upwards towards the root, keeping track of the visited nodes for each.  Find the deepest node that's present in both paths.
+* **Time Complexity:** O(N), where N is the number of nodes in the tree (worst case:  both nodes are far apart and paths are long).
+* **Space Complexity:** O(N) in the worst case (to store the ancestor lists).
+* **Code (Python - using a recursive helper function):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+def find_path(root, node, path):
+    if root is None:
+        return False
+    path.append(root)
+    if root == node:
+        return True
+    for child in root.children:
+        if find_path(child, node, path):
+            return True
+    path.pop()
+    return False
+
+def lca_bruteforce(root, node1, node2):
+    path1 = []
+    path2 = []
+    find_path(root, node1, path1)
+    find_path(root, node2, path2)
+    
+    lca = None
+    i = 0
+    while i < len(path1) and i < len(path2) and path1[i] == path2[i]:
+        lca = path1[i]
+        i += 1
+    return lca
+
+#Example usage:
+root = Node(1)
+root.children = [Node(2), Node(3)]
+root.children[0].children = [Node(4), Node(5)]
+root.children[1].children = [Node(6)]
+
+print(lca_bruteforce(root, root.children[0].children[0], root.children[1].children[0]).data)  #Output: 1
+```
+
+**2. Using a Parent Pointer:**
+
+* **Idea:** If each node stores a pointer to its parent, you can efficiently traverse upwards from both nodes simultaneously.  The first common node encountered is the LCA.
+* **Time Complexity:** O(H), where H is the height of the tree. This is significantly faster than the brute-force approach for tall, unbalanced trees.
+* **Space Complexity:** O(1)
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+        self.parent = None  # Add parent pointer
+
+def lca_parent_pointer(node1, node2):
+    ancestors1 = set()
+    curr = node1
+    while curr:
+        ancestors1.add(curr)
+        curr = curr.parent
+    curr = node2
+    while curr:
+        if curr in ancestors1:
+            return curr
+        curr = curr.parent
+    return None #Should not happen if both nodes are in the tree
+
+#Example (Requires setting parent pointers during tree construction):
+root = Node(1)
+root.children = [Node(2), Node(3)]
+root.children[0].parent = root
+root.children[0].children = [Node(4), Node(5)]
+root.children[0].children[0].parent = root.children[0]
+root.children[0].children[1].parent = root.children[0]
+root.children[1].parent = root
+root.children[1].children = [Node(6)]
+root.children[1].children[0].parent = root.children[1]
+
+print(lca_parent_pointer(root.children[0].children[0], root.children[1].children[0]).data) #Output: 1
+
+```
+
+**3. Recursive Approach (Efficient for Binary Trees):**
+
+* **Idea:**  Recursively check if `node1` and `node2` are in the left and/or right subtrees of the current node.  If both are in the same subtree, the LCA is in that subtree. If they are in different subtrees, the current node is the LCA.
+* **Time Complexity:** O(N) in the worst case (skewed tree), but often much faster in practice.
+* **Space Complexity:** O(H) due to recursive call stack (H is the height of the tree).
+* **Code (Python - for Binary Trees):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node1, node2):
+    if root is None or root == node1 or root == node2:
+        return root
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+# Example Usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(lca_recursive(root, root.left.left, root.left.right).data) #Output: 2
+
+```
+
+**Choosing the Right Method:**
+
+* For general trees with no parent pointers and no specific structure, the brute-force method is straightforward but inefficient.
+* If you can add parent pointers during tree construction, the parent pointer method is highly efficient.
+* For binary trees, the recursive approach is a good balance between efficiency and code simplicity.
+
+
+Remember to adapt the code to your specific tree structure (e.g., binary tree, n-ary tree) and data representation.  Consider adding error handling (e.g., checking if `node1` and `node2` actually exist in the tree).
+
