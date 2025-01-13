@@ -39381,3 +39381,57 @@ Choose a programming language you're comfortable with.  Python is often recommen
 
 Remember to break down problems into smaller, manageable steps. Don't be afraid to experiment, make mistakes, and learn from them.  Consistency and persistence are key to mastering algorithms.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string, e.g., "hello"
+
+**Output:** The reversed string, e.g., "olleh"
+
+**Solution Approach:**  Iterate through the string from the last character to the first and append each character to a new string.  Alternatively, use string slicing (in Python, for example: `string[::-1]`).
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  You may assume that each input would have *exactly* one solution, and you may not use the *same* element twice.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+
+**Output:** `[0, 1]` because `nums[0] + nums[1] == 9`
+
+**Solution Approach:**  Use a hash map (dictionary in Python) to store numbers and their indices. Iterate through the array, checking if `target - current_number` exists in the hash map.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+`s = "babad"`
+
+**Output:**  `"bab"` or `"aba"` (both are valid)
+
+
+**Solution Approach:**  This problem has several solutions, including:
+
+* **Expand Around Center:**  Iterate through each character (and between each character) as a potential center of a palindrome. Expand outwards to find the longest palindrome centered at that point.
+* **Dynamic Programming:**  Create a table where `dp[i][j]` is true if the substring from `i` to `j` is a palindrome.  Fill the table using the recursive relation: `dp[i][j] = (s[i] == s[j]) and dp[i+1][j-1]`.
+
+
+These are just examples, and many variations and extensions are possible for each.  The choice of solution approach often depends on factors like time and space complexity requirements.  Remember to consider edge cases and optimize your solution for efficiency.
+
