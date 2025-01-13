@@ -41178,3 +41178,117 @@ print()
 
 This code demonstrates the four traversal methods.  Remember to adapt it based on your specific needs and data structures.  The choice of traversal depends on the application; for example, inorder traversal is crucial for BST operations.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes of a tree level by level, from left to right.  Here are implementations in Python and JavaScript, along with explanations:
+
+
+**Python Implementation**
+
+This uses a queue (`collections.deque`) for efficiency:
+
+```python
+import collections
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return []
+
+    nodes = collections.deque([root])
+    result = []
+
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        result.append(curr.data)
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+    return result
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(levelOrder(root))  # Output: [1, 2, 3, 4, 5]
+
+```
+
+**Explanation:**
+
+1. **`Node` class:** Defines a node in the binary tree with `data`, `left` child, and `right` child.
+2. **`levelOrder` function:**
+   - Handles the base case of an empty tree.
+   - Initializes a deque (`nodes`) with the root node.  A deque is used because it provides efficient `append` and `popleft` operations, crucial for BFS.
+   - Initializes an empty list `result` to store the level order traversal.
+   - The `while` loop continues as long as the queue is not empty.
+   - In each iteration:
+     - It removes the first element (`curr`) from the queue using `popleft()`.
+     - Appends the data of `curr` to the `result` list.
+     - If `curr` has a left child, it appends the left child to the queue.
+     - If `curr` has a right child, it appends the right child to the queue.
+   - Finally, it returns the `result` list.
+
+
+**JavaScript Implementation**
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) {
+    return [];
+  }
+
+  const queue = [root];
+  const result = [];
+
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    result.push(curr.data);
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+
+  return result;
+}
+
+// Example usage:
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log(levelOrder(root)); // Output: [1, 2, 3, 4, 5]
+```
+
+**Explanation (JavaScript):**
+
+The JavaScript implementation is very similar to the Python version.  The main difference is the use of `Array.prototype.shift()` instead of `collections.deque.popleft()`.  `shift()` removes and returns the first element of an array, which is less efficient than `popleft()` for large queues, but sufficient for most cases.
+
+
+Remember to adapt the `Node` class if you need to store additional information in your tree nodes.  These implementations provide a clear and efficient way to perform level order traversal.
+
