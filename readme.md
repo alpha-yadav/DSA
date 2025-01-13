@@ -36430,3 +36430,60 @@ print(f"The maximum element is: {max_value}")  # Output: The maximum element is:
 
 Remember to be patient and persistent. Learning algorithms takes time and effort, but the skills you gain will be invaluable in your programming journey.  Focus on understanding the underlying concepts rather than just memorizing code.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+* **Problem:**  Find the sum of all even numbers in a given list of integers.
+* **Input:** A list of integers (e.g., `[1, 2, 3, 4, 5, 6]`)
+* **Output:** The sum of the even numbers in the list (e.g., 12)
+
+**Medium:**
+
+* **Problem:** Implement a function that reverses a string.  Handle edge cases like empty strings and strings with special characters.
+* **Input:** A string (e.g., "hello world!")
+* **Output:** The reversed string (e.g., "!dlrow olleh")
+
+* **Problem:**  Given a sorted array of integers, find a specific integer using binary search.
+* **Input:** A sorted array of integers and a target integer.
+* **Output:** The index of the target integer in the array if found, otherwise -1.
+
+
+**Hard:**
+
+* **Problem:** Implement Dijkstra's algorithm to find the shortest path between two nodes in a graph.
+* **Input:** A graph represented as an adjacency matrix or list, and two node identifiers.
+* **Output:** The shortest distance and the path between the two nodes.
+
+* **Problem:** Given a set of tasks with dependencies (e.g., Task A must be completed before Task B), find an optimal order to execute the tasks. This is a topological sort problem.
+* **Input:** A graph representing the tasks and their dependencies.
+* **Output:** A valid order of task execution.
+
+
+**Example Solution (Easy Problem):**
+
+```python
+def sum_even_numbers(numbers):
+  """Finds the sum of all even numbers in a list.
+
+  Args:
+    numbers: A list of integers.
+
+  Returns:
+    The sum of the even numbers in the list.
+  """
+  sum_of_evens = 0
+  for number in numbers:
+    if number % 2 == 0:
+      sum_of_evens += number
+  return sum_of_evens
+
+# Example usage
+numbers = [1, 2, 3, 4, 5, 6]
+result = sum_even_numbers(numbers)
+print(f"The sum of even numbers is: {result}")  # Output: 12
+```
+
+Remember that the "difficulty" is subjective and depends on your programming experience and familiarity with algorithms and data structures.  Choose a problem that challenges you but is still within your reach to solve.  Focus on understanding the problem statement, designing a solution, writing clean code, and testing thoroughly.
+
