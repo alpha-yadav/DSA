@@ -35587,3 +35587,65 @@ def find_path(root, target):
 
 Remember to handle edge cases, such as when `p` or `q` is not present in the tree, or when `p` or `q` is the root itself.  The provided code includes basic error handling, but more robust checks might be necessary depending on the specific application.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic computer science problem.  There are several approaches, each with different time and space complexities.  The optimal approach depends on the type of tree and whether you have pre-processing capabilities.
+
+**Methods:**
+
+1. **Brute-force approach (for general trees):**
+
+   * **Algorithm:** Traverse the tree from the root. For each node, check if both nodes are present in its subtree.  If both are found, return the node. Otherwise, continue the traversal.
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, you might have to visit every node.
+   * **Space Complexity:** O(H) in the worst case (due to recursive calls), where H is the height of the tree.
+
+2. **Recursive approach (for binary trees):**
+
+   * **Algorithm:**  A recursive function checks if `p` (node p) or `q` (node q) is the current node, or if they're both in the left subtree or both in the right subtree. If they are in different subtrees, the current node is the LCA. Otherwise, recursively search the appropriate subtree.
+   * **Time Complexity:** O(N) in the worst case (skewed tree).  On average, it's better.
+   * **Space Complexity:** O(H) due to recursive calls.
+
+   ```python
+   def lowestCommonAncestor(root, p, q):
+       if not root or root == p or root == q:
+           return root
+
+       left = lowestCommonAncestor(root.left, p, q)
+       right = lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       return left if left else right
+   ```
+
+3. **Iterative approach (for binary trees):**
+
+   * **Algorithm:** Uses a stack or queue to simulate the recursion.  It's generally less readable than the recursive version but can sometimes be slightly more efficient in terms of memory management.
+   * **Time Complexity:** O(N) in the worst case.
+   * **Space Complexity:** O(W), where W is the maximum width of the tree (in the worst case, this could be O(N)).
+
+4. **Using Parent Pointers (for any tree):**
+
+   * **Algorithm:** If each node has a pointer to its parent, you can trace the path from `p` to the root and the path from `q` to the root.  The LCA is the last common node in both paths.
+   * **Time Complexity:** O(H), where H is the height of the tree.  This is significantly faster than the previous methods if the tree is balanced.
+   * **Space Complexity:** O(H) to store the paths.
+
+5. **Using Depth-First Search (DFS) and a Hash Table (for any tree):**
+
+    * **Algorithm:** Perform a DFS to record the paths from the root to each node (`p` and `q`). Store these paths in a hash table (or dictionary). Then, compare the paths to find the last common ancestor.
+    * **Time Complexity:** O(N)
+    * **Space Complexity:** O(N)
+
+
+6. **Preprocessing for efficient LCA queries (for static trees):**
+
+    * **Algorithm:**  Methods like the Euler Tour Technique or the Binary Lifting technique allow for pre-processing the tree to answer LCA queries in O(1) time after the initial preprocessing.  These methods are more complex but highly efficient if you'll be performing many LCA queries.
+
+**Choosing the right method:**
+
+* **For a single LCA query on a balanced binary tree:** The recursive approach is often the easiest to implement and understand.
+* **For a single LCA query on a skewed binary tree or a general tree:** The brute-force approach is simple but may be slow.  The DFS with a hash table could be a good option.
+* **For many LCA queries on a static tree:** Preprocessing techniques are the best choice for optimal query time.
+
+
+Remember to adapt the code examples to your specific tree implementation (e.g., using a Node class with `left`, `right`, and potentially `parent` pointers).  Choose the method that best suits your needs considering factors such as tree structure, number of queries, and desired complexity.
+
