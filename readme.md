@@ -36556,3 +36556,65 @@ This version leverages functional programming concepts. It uses `compactMap` to 
 
 Start with the simple version to grasp the core logic, then gradually explore the more advanced options as you become more comfortable with Swift.  Remember to choose the version that best suits your understanding and project requirements.
 
+#  Algorithm Complexity 
+Algorithm complexity describes how the runtime or space requirements of an algorithm grow as the input size grows.  It's a crucial aspect of algorithm analysis, allowing us to compare different algorithms and predict their performance on large datasets.  We typically focus on *asymptotic complexity*, which describes the behavior as the input size approaches infinity.
+
+There are several key aspects to understanding algorithm complexity:
+
+**1. Time Complexity:** This refers to how the runtime of an algorithm scales with the input size.
+
+* **Big O Notation (O):**  Describes the upper bound of the growth rate.  It represents the worst-case scenario.  We're interested in the dominant terms as the input size (n) becomes very large.  For example:
+    * O(1): Constant time – the runtime is independent of the input size.  (e.g., accessing an element in an array by index)
+    * O(log n): Logarithmic time – the runtime increases logarithmically with the input size. (e.g., binary search)
+    * O(n): Linear time – the runtime increases linearly with the input size. (e.g., searching an unsorted array)
+    * O(n log n): Linearithmic time – common in efficient sorting algorithms like merge sort and heapsort.
+    * O(n²): Quadratic time – the runtime increases quadratically with the input size. (e.g., nested loops iterating through an array)
+    * O(2ⁿ): Exponential time – the runtime doubles with each addition to the input size. (e.g., brute-force solutions to the traveling salesman problem)
+    * O(n!): Factorial time – the runtime grows factorially with the input size.  (e.g., some permutation problems)
+
+
+* **Big Omega Notation (Ω):** Describes the lower bound of the growth rate.  It represents the best-case scenario.
+
+* **Big Theta Notation (Θ):** Describes the tight bound of the growth rate.  It means both the upper and lower bounds are the same order of magnitude.  This provides a more precise description of the algorithm's complexity.
+
+
+**2. Space Complexity:** This refers to how the memory usage of an algorithm scales with the input size.  It's analyzed similarly using Big O, Big Omega, and Big Theta notation.  Space complexity can include:
+
+* **Auxiliary Space:** The extra space used by the algorithm beyond the input itself (e.g., space used for temporary variables, data structures).
+* **Total Space:** The total space used by the algorithm, including the input and auxiliary space.
+
+
+**3. Analyzing Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+* **Identify the basic operations:**  These are the operations that contribute most significantly to the runtime.
+* **Count the number of times these operations are executed:**  This is often expressed as a function of the input size (n).
+* **Determine the dominant terms:**  As n gets large, some terms become insignificant compared to others.  We focus on the dominant terms to simplify the complexity expression.
+
+
+**Example:**
+
+Consider a function that finds the maximum element in an unsorted array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+The basic operation is the comparison (`x > max_val`). This operation is executed n times (where n is the length of the array). Therefore, the time complexity is O(n) – linear time.  The space complexity is O(1) – constant space, because it uses a fixed amount of extra memory regardless of the array size.
+
+
+**Important Considerations:**
+
+* **Average-Case Complexity:**  While Big O gives the worst-case, average-case complexity considers the average runtime over all possible inputs.
+* **Best-Case Complexity:** Big Omega provides the best-case scenario, which may not be representative of typical performance.
+* **Constant Factors:** Big O notation ignores constant factors.  An algorithm with O(2n) is still considered linear, even though it's twice as slow as an O(n) algorithm.  The focus is on the *growth rate*.
+
+
+Understanding algorithm complexity is essential for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better as the input size increases.
+
