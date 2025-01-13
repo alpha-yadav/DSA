@@ -37696,3 +37696,110 @@ def lca_bst_iterative(root, node1, node2):
 
 Remember to choose the method that best suits your needs and coding style.  The iterative approach might be preferable in scenarios where you need to minimize the risk of stack overflow for extremely deep trees.  However, the recursive approach is often considered more readable and easier to understand.
 
+#  Binary Search Tree - Python 
+Here's a Python implementation of a Binary Search Tree (BST), along with explanations and examples:
+
+**Core Structure (Node and Tree Classes):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    def search(self, data):
+        return self._search_recursive(self.root, data)
+
+    def _search_recursive(self, node, data):
+        if node is None or node.data == data:
+            return node  # Return the node if found, or None if not
+        if data < node.data:
+            return self._search_recursive(node.left, data)
+        else:
+            return self._search_recursive(node.right, data)
+
+    def inorder_traversal(self):
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_recursive(node.right, result)
+
+    # Add other methods like deletion, min, max, etc. here...
+```
+
+**Explanation:**
+
+* **`Node` class:** Represents a single node in the BST.  It stores the `data` and pointers to the `left` and `right` children.
+* **`BST` class:** Represents the entire BST.
+    * `insert(data)`: Inserts a new node with the given `data` into the tree, maintaining the BST property (left subtree < node < right subtree).  It uses a recursive helper function `_insert_recursive`.
+    * `search(data)`: Searches for a node with the given `data`. Returns the node if found, otherwise `None`.  Uses a recursive helper function `_search_recursive`.
+    * `inorder_traversal()`: Performs an inorder traversal of the tree, returning a list of the nodes' data in ascending order.  This is a recursive helper function `_inorder_recursive`.  Inorder traversal visits the left subtree, then the node, then the right subtree.
+
+
+**Example Usage:**
+
+```python
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+
+print("Inorder traversal:", bst.inorder_traversal())  # Output: [1, 3, 6, 8, 10, 14]
+
+node = bst.search(6)
+if node:
+    print("Found node with data:", node.data)  # Output: Found node with data: 6
+else:
+    print("Node not found")
+
+node = bst.search(15)
+if node:
+    print("Found node with data:", node.data)
+else:
+    print("Node not found") # Output: Node not found
+
+```
+
+**Adding More Functionality:**
+
+You can extend this `BST` class to include other common operations, such as:
+
+* **Deletion:**  Removing a node from the tree (more complex than insertion).  There are several algorithms for deletion, handling cases where the node has 0, 1, or 2 children.
+* **Minimum/Maximum:** Finding the minimum or maximum value in the tree (easily done by traversing to the leftmost or rightmost node).
+* **Height/Depth:** Calculating the height or depth of the tree.
+* **Tree balancing:**  Algorithms like AVL trees or red-black trees ensure the tree remains balanced to improve search performance (avoiding worst-case O(n) search time for skewed trees).
+
+
+Remember that the efficiency of BST operations (insertion, search, deletion) is O(log n) on average for balanced trees, but can degrade to O(n) in the worst case (highly skewed tree).  Tree balancing algorithms address this worst-case scenario.
+
