@@ -37142,3 +37142,13 @@ The best representation depends on the specific application:
 
 For most scenarios, the **List of Children** approach is a solid and relatively easy-to-implement choice unless you have specific constraints (e.g., the memory usage of the child-sibling approach may be more efficient for extremely large and very wide trees).
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need more information to write an introduction.  For example, tell me:
+
+* **What is the topic?** (e.g., the history of coffee, the benefits of exercise, the plot of Hamlet)
+* **What is the purpose of the introduction?** (e.g., to inform, to persuade, to entertain)
+* **Who is the intended audience?** (e.g., experts, general public, children)
+* **What is the overall tone?** (e.g., formal, informal, humorous)
+
+Once I have this information, I can write a compelling introduction for you.
+
