@@ -33546,3 +33546,82 @@ Here are a few algorithmic problem examples, ranging in difficulty:
 
 These examples demonstrate a range of complexity.  The "easy" problem is suitable for beginners, while the "hard" problem requires a good understanding of graph algorithms and data structures.  The "medium" problem sits in between.  You can find many more problems and their solutions online on platforms like LeetCode, HackerRank, and Codewars. Remember to choose problems appropriate to your skill level.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's a great way to learn about basic control flow (loops and conditionals). Here's how to implement it in Swift, starting with a simple version and then showing some improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses a `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz").
+* Then, it checks divisibility by 5 ("Buzz").
+* If none of the above are true, it prints the number itself.
+
+
+**Version 2: Slightly More Concise**
+
+We can make the code a bit shorter by using the ternary conditional operator (`?:`):
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This version achieves the same result with fewer lines, but it can become less readable for more complex conditions.
+
+**Version 3: Using String Interpolation and a `where` clause (Swift 5.7+)**
+
+Swift 5.7 introduced a `where` clause that can be used with `for` loops for more concise code:
+
+```swift
+func fizzBuzzWhere(n: Int) {
+    for i in 1...n where i % 3 == 0 || i % 5 == 0 {
+        let fizz = i % 3 == 0 ? "Fizz" : ""
+        let buzz = i % 5 == 0 ? "Buzz" : ""
+        print("\(fizz)\(buzz)")
+    }
+}
+
+fizzBuzzWhere(n: 15)
+```
+
+This version focuses only on numbers divisible by 3 or 5, making it even more efficient.  The String interpolation `\(fizz)\(buzz)` elegantly handles the combinations.
+
+**Choosing the Best Version**
+
+The "best" version depends on your priorities:
+
+* **Version 1:** Most readable and easiest to understand for beginners.
+* **Version 2:** More concise, but readability might suffer with more complex logic.
+* **Version 3:** Most efficient if you only need to process numbers divisible by 3 or 5 (in other words, the most "FizzBuzz-focused" version)  and leverages newer Swift features.
+
+
+Remember to choose the version that best suits your understanding and the context of your project.  For learning purposes, Version 1 is excellent.  As you become more comfortable with Swift, explore the other options.
+
