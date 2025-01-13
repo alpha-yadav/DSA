@@ -33671,3 +33671,39 @@ Consider a simple algorithm that searches for a specific element in an unsorted 
 
 Understanding algorithm complexity is essential for designing efficient and scalable software.  Choosing an algorithm with a lower complexity can dramatically improve performance, especially when dealing with large datasets.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, indicating that the function's growth rate is both asymptotically upper-bounded and asymptotically lower-bounded by the same function.
+
+**Formal Definition:**
+
+We say that *f(n)* = Θ(*g(n)*) if and only if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+  `c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always sandwiched between *c₁ * g(n)* and *c₂ * g(n)*.  In simpler terms, *f(n)* grows at the same rate as *g(n)*, ignoring constant factors.
+
+**Intuitive Understanding:**
+
+Imagine you have two algorithms that solve the same problem.  If the runtime of algorithm A is *f(n)* and the runtime of algorithm B is *g(n)*, and *f(n)* = Θ(*g(n)*), then both algorithms have essentially the same efficiency in terms of their scaling behavior with input size *n*.  The difference in their runtimes would only be a constant factor (e.g., Algorithm A might consistently take twice as long as Algorithm B, but both still grow at the same rate).
+
+**Contrast with Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  *f(n) = O(g(n))* means that *f(n)* grows no faster than *g(n)*.  It's a "worst-case" scenario.
+
+* **Big-Ω (Ω):** Provides a *lower bound*.  *f(n) = Ω(g(n))* means that *f(n)* grows at least as fast as *g(n)*. It's a "best-case" scenario (or a lower bound on the algorithm's complexity).
+
+* **Big-Θ (Θ):** Provides a *tight bound*.  It combines both Big-O and Big-Ω.  *f(n) = Θ(g(n))* means that *f(n)* grows at the *same rate* as *g(n)*.  This is the strongest statement you can make about the asymptotic relationship between two functions.
+
+
+**Examples:**
+
+* **f(n) = 2n + 5; g(n) = n:**  f(n) = Θ(n).  You can find constants *c₁* and *c₂* to satisfy the definition.
+
+* **f(n) = n² + 10n + 100; g(n) = n²:** f(n) = Θ(n²).  The lower-order terms become insignificant as *n* grows large.
+
+* **f(n) = n; g(n) = n²:**  f(n) ≠ Θ(n²).  While f(n) = O(n²), it's not Θ(n²) because *f(n)* grows significantly slower than *n²*.
+
+**Importance in Algorithm Analysis:**
+
+Big-Theta notation is crucial in algorithm analysis because it allows us to compare the efficiency of different algorithms in a meaningful way.  It focuses on how the runtime or space requirements scale with the input size, allowing us to disregard constant factors and focus on the dominant growth terms.  This helps in making informed decisions about which algorithm is best suited for a particular problem.
+
