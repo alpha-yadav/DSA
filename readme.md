@@ -45636,3 +45636,98 @@ Topological sorting has various applications, including:
 
 Choosing between Kahn's algorithm and the DFS-based algorithm often depends on personal preference and the specific application.  Kahn's algorithm is generally considered easier to understand and implement, while the DFS approach can be more efficient in some cases.  Both correctly solve the topological sorting problem if the input graph is a DAG.  If there's a cycle, both algorithms will detect it (although the way they do so differs).
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) involves tracking the state of each node during the traversal.  We use three states:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (on the recursion stack).
+* **Visited:** The node has been fully explored.
+
+A cycle is detected if we encounter a node that's currently "Visiting" while exploring its neighbors. This indicates a back edge, which is a defining characteristic of a cycle in a directed graph.
+
+Here's how it works in detail, along with code examples in Python:
+
+**Algorithm:**
+
+1. **Initialization:**  Assign all nodes to the "Unvisited" state.
+2. **DFS Traversal:** Perform a Depth-First Search starting from each unvisited node.
+3. **State Tracking:**  For each node:
+   - Mark the node as "Visiting".
+   - Recursively explore its neighbors.  If a neighbor is "Visiting", a cycle is detected.
+   - If all neighbors have been explored, mark the node as "Visited".
+4. **Cycle Detection:** If a "Visiting" neighbor is encountered during the recursive call, immediately return `True` (cycle detected).  If the entire graph is traversed without finding a "Visiting" neighbor, return `False` (no cycle).
+
+
+**Python Code:**
+
+```python
+from collections import defaultdict
+
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.graph = defaultdict(list)  # Adjacency list representation
+
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+
+    def is_cyclic_util(self, v, visited, recursion_stack):
+        visited[v] = True
+        recursion_stack[v] = True
+
+        for neighbor in self.graph[v]:
+            if not visited[neighbor]:
+                if self.is_cyclic_util(neighbor, visited, recursion_stack):
+                    return True
+            elif recursion_stack[neighbor]:
+                return True
+
+        recursion_stack[v] = False
+        return False
+
+    def is_cyclic(self):
+        visited = [False] * self.V
+        recursion_stack = [False] * self.V
+        for node in range(self.V):
+            if not visited[node]:
+                if self.is_cyclic_util(node, visited, recursion_stack):
+                    return True
+        return False
+
+
+# Example usage:
+g = Graph(4)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(1, 2)
+g.add_edge(2, 0)
+g.add_edge(2, 3)
+g.add_edge(3, 3)  # Self-loop, a type of cycle
+
+if g.is_cyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+
+
+g2 = Graph(4)
+g2.add_edge(0, 1)
+g2.add_edge(1, 2)
+g2.add_edge(2, 3)
+
+if g2.is_cyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+```
+
+**Explanation of the Code:**
+
+* `Graph` class: Represents the directed graph using an adjacency list.
+* `add_edge`: Adds a directed edge to the graph.
+* `is_cyclic_util`:  This is the recursive helper function for Depth First Search.  `visited` keeps track of visited nodes, and `recursion_stack` indicates nodes currently in the recursion stack.
+* `is_cyclic`:  The main function that iterates through all nodes and calls `is_cyclic_util` to check for cycles.
+
+
+This approach efficiently detects cycles in a directed graph using the Depth First Search algorithm and has a time complexity of O(V+E), where V is the number of vertices and E is the number of edges.  The space complexity is O(V) due to the `visited` and `recursion_stack` arrays. Remember that this code detects any type of cycle including self-loops.
+
