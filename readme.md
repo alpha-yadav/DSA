@@ -45215,3 +45215,85 @@ This method requires modifying the tree to include parent pointers for each node
 
 Choose the approach that best suits your needs and constraints.  For most cases, the recursive solution offers a good balance of readability and efficiency.  If memory usage is a critical concern for extremely large and deep trees, consider the iterative approach with parent pointers.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a common problem in computer science.  There are several ways to solve it, each with different time and space complexities.  Here's a breakdown of common approaches:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a simple and intuitive approach, particularly efficient for binary trees.
+
+* **Algorithm:**
+    1. If the current node is `null`, return `null`.
+    2. If the current node is either `p` or `q`, return the current node.
+    3. Recursively search for `p` and `q` in the left and right subtrees.
+    4. If `p` and `q` are found in different subtrees, the current node is the LCA.
+    5. Otherwise, the LCA is in the subtree where both `p` and `q` were found.
+
+* **Code (Python):**
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+#Example Usage:
+root = TreeNode(3, TreeNode(5, TreeNode(6), TreeNode(2, TreeNode(7), TreeNode(4))), TreeNode(1, TreeNode(0), TreeNode(8)))
+p = root.left
+q = root.right
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
+```
+
+* **Time Complexity:** O(N), where N is the number of nodes in the tree (worst case: skewed tree).
+* **Space Complexity:** O(H), where H is the height of the tree (due to recursive calls; worst case: O(N) for a skewed tree).
+
+
+**2. Iterative Approach (using Parent Pointers):**
+
+This approach is efficient if you already have parent pointers in your tree nodes.
+
+* **Algorithm:**
+    1. Traverse upwards from `p` and `q` storing their paths.
+    2. Find the last common node in both paths.
+
+* **Time Complexity:** O(H), where H is the height of the tree.
+* **Space Complexity:** O(H)  in the worst case (to store the paths).
+
+
+**3. Lowest Common Ancestor in a General Tree:**
+
+For general trees (not necessarily binary), you can adapt the recursive approach by iterating through all children instead of just left and right.  Alternatively, you could use a parent pointer approach similar to the iterative method.
+
+**4. Using a Hash Table (for General Trees):**
+
+1. Perform a Depth-First Search (DFS) or Breadth-First Search (BFS) to store the path from the root to each node in a hash table (key: node, value: path).
+2. Find the paths for `p` and `q` from the hash table.
+3. Iterate through the paths and find the last common node.
+
+This approach has a time complexity of O(N) for the traversal and O(N) space complexity for the hash table, where N is the number of nodes.  It's useful for general trees and situations where you frequently need to find LCAs.
+
+
+**Choosing the right approach:**
+
+* For binary trees, the recursive approach is often the simplest and most efficient.
+* If you have parent pointers, the iterative approach is faster.
+* For general trees, the recursive adaptation or hash table method works well.
+
+Remember to handle edge cases like when one or both nodes are not present in the tree, or when either `p` or `q` is the root.  The code examples above only show a basic implementation; robust solutions need error handling.
+
