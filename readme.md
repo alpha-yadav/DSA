@@ -44835,3 +44835,109 @@ print(is_bst_inorder(root2)) #Output: False
 
 The **recursive approach** (`is_bst`) is generally preferred because it's more efficient (O(N) time complexity, where N is the number of nodes) and directly checks the BST property without needing extra space for sorting. The inorder traversal method also has O(N) time complexity but requires extra space for the list.  Therefore, the recursive approach is usually the best choice.  However, the inorder method can be useful for understanding the BST property conceptually. Remember to handle edge cases like empty trees appropriately in your implementation.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit (or "traverse") all the nodes in a binary tree.  There are three main types:
+
+* **Inorder Traversal:**  Visit the left subtree, then the root, then the right subtree.  For a binary *search* tree, this produces a sorted list of the nodes' values.
+
+* **Preorder Traversal:** Visit the root, then the left subtree, then the right subtree.
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root.
+
+
+Let's illustrate with an example tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+**Inorder Traversal:**  The order would be: 4, 2, 5, 1, 3
+
+**Preorder Traversal:** The order would be: 1, 2, 4, 5, 3
+
+**Postorder Traversal:** The order would be: 4, 5, 2, 3, 1
+
+
+**Recursive Implementations (Python):**
+
+These are the most common and easiest-to-understand implementations:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3
+print("\nPreorder traversal:")
+preorder_traversal(root) # Output: 1 2 4 5 3
+print("\nPostorder traversal:")
+postorder_traversal(root) # Output: 4 5 2 3 1
+```
+
+**Iterative Implementations:**
+
+Iterative traversals use stacks to mimic the recursion.  They are generally more memory-efficient for very deep trees, avoiding potential stack overflow errors.  Here's an example of iterative inorder traversal:
+
+
+```python
+def iterative_inorder(root):
+    stack = []
+    current = root
+    while True:
+        if current:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.data, end=" ")
+            current = current.right
+        else:
+            break
+```
+
+You can adapt this pattern to create iterative versions of preorder and postorder traversals as well.  The key is managing the stack appropriately to simulate the recursive calls.
+
+**Applications:**
+
+Binary tree traversals are fundamental to many tree-related algorithms and data structures.  Applications include:
+
+* **Serialization/Deserialization:**  Storing and reconstructing tree structures.
+* **Expression Evaluation:**  Evaluating arithmetic expressions represented as trees.
+* **Tree Sorting:**  (Inorder traversal of a BST)
+* **Graph algorithms (if represented as trees):**  Depth-first search is closely related to preorder and postorder traversals.
+
+
+Choosing the right traversal depends on the specific task.  Inorder traversal is particularly useful for BSTs, while preorder and postorder have applications in other areas. Remember that these are just the basic three; there are other less common traversals as well (e.g., level-order traversal).
+
