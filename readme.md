@@ -45575,3 +45575,64 @@ The best implementation depends on factors such as:
 
 Remember to consider memory usage and performance characteristics when making your choice.  For very large graphs, advanced techniques like compressed sparse row (CSR) or compressed sparse column (CSC) formats are used for efficient storage.
 
+#  Topological Sort 
+A topological sort is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's an ordering where you can follow all the arrows without ever going backwards.  If a graph has a cycle, a topological sort is impossible.
+
+**Key Concepts:**
+
+* **Directed Acyclic Graph (DAG):** A graph where edges have a direction (A → B is different from B → A) and there are no cycles (you can't follow a path that leads back to where you started).
+* **In-degree:** The number of incoming edges to a node.
+* **Out-degree:** The number of outgoing edges from a node.
+
+**Algorithms for Topological Sort:**
+
+There are two primary algorithms for performing a topological sort:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm is generally preferred for its efficiency and simplicity.  It works as follows:
+
+   1. **Find nodes with in-degree 0:** Start by identifying all nodes with an in-degree of 0 (nodes with no incoming edges). These are the nodes that can be placed first in the sorted order.  Put these nodes into a queue.
+
+   2. **Process nodes:** While the queue is not empty:
+      * Remove a node from the queue and add it to the sorted list.
+      * For each outgoing edge from the removed node, decrement the in-degree of the destination node.
+      * If the in-degree of a destination node becomes 0, add it to the queue.
+
+   3. **Check for cycles:** If, after processing all nodes, the sorted list does not contain all the nodes in the graph, then the graph contains a cycle, and a topological sort is impossible.
+
+2. **Depth-First Search (DFS) based algorithm:**
+
+   This algorithm uses DFS to traverse the graph.  It adds nodes to the sorted list in reverse post-order of the DFS traversal.  This means a node is added to the result only after all its descendants have been added.
+
+   1. **Perform DFS:** Perform a depth-first search on the graph.
+   2. **Add to sorted list:** Add each node to the sorted list when it finishes its DFS traversal (its recursion call completes).  The sorted list will be in reverse post-order.  This list will be in reverse topological order, so it needs to be reversed.
+
+**Example (Kahn's Algorithm):**
+
+Consider a graph with nodes A, B, C, D, and E, and edges: A → C, B → C, C → D, D → E.
+
+1. **In-degree 0:** A and B have in-degree 0.  They are added to the queue.
+2. **Process A:** Remove A, add it to the sorted list (A), decrement C's in-degree to 1.
+3. **Process B:** Remove B, add it to the sorted list (A, B), decrement C's in-degree to 0.
+4. **Add C to queue:** C's in-degree is now 0, so it's added to the queue.
+5. **Process C:** Remove C, add it to the sorted list (A, B, C), decrement D's in-degree to 0.
+6. **Add D to queue:** D's in-degree is 0, so it's added to the queue.
+7. **Process D:** Remove D, add it to the sorted list (A, B, C, D), decrement E's in-degree to 0.
+8. **Add E to queue:** E's in-degree is 0, so it's added to the queue.
+9. **Process E:** Remove E, add it to the sorted list (A, B, C, D, E).
+10. **Queue is empty:** The sorted list (A, B, C, D, E) is a topological sort.
+
+
+**Applications:**
+
+Topological sorting has various applications, including:
+
+* **Course scheduling:** Ordering courses based on prerequisites.
+* **Build systems (Make):** Determining the order to compile files.
+* **Data serialization:** Ordering data dependencies.
+* **Dependency resolution in software packages.**
+
+
+Choosing between Kahn's algorithm and the DFS-based algorithm often depends on personal preference and the specific application.  Kahn's algorithm is generally considered easier to understand and implement, while the DFS approach can be more efficient in some cases.  Both correctly solve the topological sorting problem if the input graph is a DAG.  If there's a cycle, both algorithms will detect it (although the way they do so differs).
+
