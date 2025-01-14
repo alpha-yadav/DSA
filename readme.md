@@ -46449,3 +46449,152 @@ This function has a time complexity of O(n) because, in the worst case (the targ
 
 Big O notation is a powerful tool for comparing the efficiency of algorithms, particularly as the input size becomes very large. It allows developers to choose the most suitable algorithm for a given task based on its scalability and performance characteristics.  Understanding Big O is essential for writing efficient and scalable code.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  Here are examples in a few popular programming languages:
+
+**1. While Loop (Python)**
+
+This loop continues as long as the condition is true.
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This will print:
+
+```
+0
+1
+2
+3
+4
+```
+
+**2. For Loop (Python) - iterating through a range**
+
+This loop iterates a specific number of times.
+
+```python
+for i in range(5):
+  print(i)
+```
+
+This will also print:
+
+```
+0
+1
+2
+3
+4
+```
+
+**3. For Loop (Python) - iterating through a list**
+
+This loop iterates through each item in a list.
+
+```python
+my_list = ["apple", "banana", "cherry"]
+for fruit in my_list:
+  print(fruit)
+```
+
+This will print:
+
+```
+apple
+banana
+cherry
+```
+
+**4. While Loop (JavaScript)**
+
+Similar to Python's while loop.
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+This will print (in the console):
+
+```
+0
+1
+2
+3
+4
+```
+
+**5. For Loop (JavaScript) - iterating with a counter**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+This will also print (in the console):
+
+```
+0
+1
+2
+3
+4
+```
+
+**6. For Loop (JavaScript) - iterating through an array**
+
+```javascript
+let myArray = ["apple", "banana", "cherry"];
+for (let i = 0; i < myArray.length; i++) {
+  console.log(myArray[i]);
+}
+```
+
+This will also print (in the console):
+
+
+```
+apple
+banana
+cherry
+```
+
+**7. Do-While Loop (C++)**
+
+This loop executes the code block at least once, and then repeats as long as the condition is true.
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  do {
+    std::cout << count << std::endl;
+    count++;
+  } while (count < 5);
+  return 0;
+}
+```
+
+This will print:
+
+```
+0
+1
+2
+3
+4
+```
+
+
+These are just basic examples. Loops can be much more complex and can be nested (loops within loops) to achieve more sophisticated tasks.  Remember to always ensure your loop condition will eventually become false to prevent infinite loops.
+
