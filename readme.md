@@ -48810,3 +48810,95 @@ print(sorted_nodes) # Output: None
 
 Remember to choose the algorithm that best suits your needs and coding style.  Kahn's algorithm is generally considered more efficient for larger graphs.  The DFS approach can be easier to understand for some.  Both correctly identify cycles.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth-First Traversal (DFT) is a common graph algorithm.  Here's how it works, along with explanations and code examples in Python:
+
+**The Idea**
+
+The core concept relies on tracking the state of each node during the DFS:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (on the recursion stack).
+* **Visited:** The node has been fully explored (recursion has returned from it).
+
+A cycle exists if, during the DFS, we encounter a node that is currently "Visiting". This means we've reached a node that's already on the path we're currently traversing, indicating a cycle.
+
+**Algorithm**
+
+1. **Initialization:** Create a `visited` array (or dictionary) to track the state of each node, initially all set to `Unvisited`.  You might also need a `recursion_stack` (a set or list) to keep track of nodes currently in the recursion stack.
+
+2. **DFS function:**  Recursively explore the graph. For each node:
+   - If the node is `Unvisited`, mark it as `Visiting` and add it to the `recursion_stack`.
+   - If the node is `Visiting`, a cycle is detected. Return `True`.
+   - If the node is `Visited`, continue to the next neighbor.
+   - Recursively call the DFS function on all unvisited neighbors.
+   - After exploring all neighbors, mark the node as `Visited` and remove it from the `recursion_stack`.
+
+3. **Main function:** Iterate through all nodes in the graph. If any node is `Unvisited`, start a DFS from that node. If the DFS returns `True` (cycle detected), the entire graph has a cycle.
+
+**Python Code**
+
+```python
+from collections import defaultdict
+
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.graph = defaultdict(list)
+
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+
+    def isCyclicUtil(self, v, visited, recursionStack):
+        visited[v] = True
+        recursionStack[v] = True
+
+        for neighbor in self.graph[v]:
+            if not visited[neighbor]:
+                if self.isCyclicUtil(neighbor, visited, recursionStack):
+                    return True
+            elif recursionStack[neighbor]:
+                return True
+
+        recursionStack[v] = False
+        return False
+
+    def isCyclic(self):
+        visited = [False] * self.V
+        recursionStack = [False] * self.V
+        for node in range(self.V):
+            if not visited[node]:
+                if self.isCyclicUtil(node, visited, recursionStack):
+                    return True
+        return False
+
+# Example usage:
+g = Graph(4)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(1, 2)
+g.add_edge(2, 0)
+g.add_edge(2, 3)
+g.add_edge(3, 3)  # Self-loop, creates a cycle
+
+if g.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+
+
+g2 = Graph(4)
+g2.add_edge(0, 1)
+g2.add_edge(0, 2)
+g2.add_edge(1, 2)
+g2.add_edge(2, 3)
+
+if g2.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+
+```
+
+This code efficiently detects cycles in directed graphs.  The `recursionStack` is crucial for identifying cycles;  it tracks nodes currently being explored within the recursive calls.  The use of `defaultdict` simplifies graph representation.  Remember that a self-loop (a node pointing to itself) is also considered a cycle.
+
