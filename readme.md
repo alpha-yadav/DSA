@@ -42522,3 +42522,77 @@ def longest_palindrome(s):
 
 These examples showcase different levels of complexity and require different algorithmic approaches.  Remember to consider time and space complexity when designing your solutions.  The "Hard" problem, for instance, has solutions with O(n^2) time complexity, but more advanced techniques can achieve O(n) time.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing ways to improve it:
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This works correctly but can be improved for readability and efficiency.
+
+**Version 2: Improved Readability with Ternary Operator**
+
+We can make the code more concise using the ternary operator:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This version is shorter but might be slightly harder to read for beginners.  The nested ternary operators can become complex if you add more conditions.
+
+
+**Version 3:  More Robust and Readable**
+
+This version prioritizes readability and avoids nested ternary operators:
+
+```swift
+func fizzBuzzReadable(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzReadable(n: 15) // Example Usage
+```
+
+This approach is generally preferred for its clarity. It checks for divisibility by 3 and 5 independently and concatenates the results. If neither condition is met, it prints the number itself.
+
+
+**Choosing the Right Version:**
+
+* **Version 1:** Best for beginners to understand the fundamental logic.
+* **Version 2:** More concise but can reduce readability with complex conditions.
+* **Version 3:**  Generally preferred for its balance of readability and efficiency, especially as the number of conditions grows.
+
+
+Remember to run this code in a Swift playground or a Swift project to see the output.  You can change the `n` value to test with different ranges.
+
