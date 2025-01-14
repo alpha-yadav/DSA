@@ -42348,3 +42348,76 @@ print(dfs_tree(tree,'A')) # Output: ['A', 'B', 'D', 'E', 'C', 'F']
 
 Remember to choose the version that best suits your needs and the structure of your graph.  The iterative version is generally preferred for its robustness in handling large graphs, while the recursive version is often more concise and readable for smaller graphs.  The tree version is the simplest if you know you have a tree structure.  The order of nodes in the output might vary slightly depending on the implementation and the order of neighbors in the adjacency list.
 
+#  Getting started with algorithms 
+Getting started with algorithms can feel daunting, but it's a rewarding journey. Here's a structured approach to help you begin:
+
+**1. Understand the Fundamentals:**
+
+* **What is an algorithm?**  An algorithm is a step-by-step procedure or formula for solving a specific problem.  Think of it as a recipe for solving a computational task. It's not just the code itself, but the underlying logic and process.
+
+* **Basic Concepts:**  Familiarize yourself with these core ideas:
+    * **Variables:**  Containers for storing data (numbers, text, etc.).
+    * **Data Structures:** Ways to organize and store data (arrays, lists, trees, graphs, etc.).  You'll learn more about these as you progress.
+    * **Control Flow:**  How the execution of your algorithm flows (using `if`, `else`, `for`, `while` statements).
+    * **Functions/Procedures/Methods:** Blocks of code that perform specific tasks.  They help break down complex problems into smaller, manageable parts.
+    * **Time and Space Complexity:**  How efficient your algorithm is in terms of time (how many operations it takes) and space (how much memory it uses).  This is crucial for evaluating different algorithmic approaches.  (Big O notation is commonly used to describe this).
+
+**2. Choose a Programming Language:**
+
+While the algorithms themselves are language-agnostic, you'll need a language to implement them.  Popular choices for beginners include:
+
+* **Python:**  Known for its readability and extensive libraries.  Great for learning algorithms because you can focus on the logic without getting bogged down in syntax.
+* **JavaScript:**  Widely used for web development, but also suitable for learning algorithmic concepts.
+* **Java:**  A powerful, object-oriented language, good for learning more advanced concepts later on.
+* **C++:**  Often used for performance-critical applications, but can be more complex for beginners.
+
+Pick one language and stick with it initially.  You can always explore others later.
+
+**3. Start with Simple Algorithms:**
+
+Begin with easy-to-understand algorithms.  Some excellent starting points include:
+
+* **Searching Algorithms:**
+    * **Linear Search:**  Iterating through a list to find a specific element.
+    * **Binary Search:**  Efficiently searching a *sorted* list.
+* **Sorting Algorithms:**
+    * **Bubble Sort:**  Simple but inefficient.  Great for understanding the basic concept of sorting.
+    * **Insertion Sort:**  Another relatively simple sorting algorithm.
+    * **Selection Sort:**  Similar in simplicity to Bubble and Insertion sort.
+* **Basic Math Algorithms:**
+    * **Finding the factorial of a number.**
+    * **Calculating the greatest common divisor (GCD).**
+    * **Fibonacci sequence generation.**
+
+**4. Practice, Practice, Practice:**
+
+The key to mastering algorithms is consistent practice.  Solve problems on platforms like:
+
+* **LeetCode:**  A popular platform with a vast collection of coding challenges.
+* **HackerRank:**  Similar to LeetCode, with a wide range of problems across different domains.
+* **Codewars:**  Offers coding challenges (katas) of varying difficulty.
+* **Project Euler:**  Focuses on mathematical and computational problems.
+
+Start with the easy problems and gradually work your way up to more challenging ones.  Don't be afraid to look up solutions if you get stuck, but try to understand the logic behind them before moving on.
+
+**5. Learn Data Structures:**
+
+As you progress, you'll need to understand different data structures.  Start with the basics:
+
+* **Arrays:**  Ordered collections of elements.
+* **Linked Lists:**  Collections of elements linked together.
+* **Stacks:**  LIFO (Last-In, First-Out) data structure.
+* **Queues:**  FIFO (First-In, First-Out) data structure.
+* **Trees:**  Hierarchical data structures (binary trees, binary search trees).
+* **Graphs:**  Representations of relationships between nodes.
+
+
+**6. Resources:**
+
+* **Online Courses:** Coursera, edX, Udacity, and Khan Academy offer excellent courses on algorithms and data structures.
+* **Books:**  "Introduction to Algorithms" (CLRS) is a classic, though quite advanced.  There are many other introductory books available for different skill levels.
+* **YouTube Channels:**  Many channels provide tutorials and explanations of algorithms.
+
+
+Remember to be patient and persistent. Learning algorithms takes time and effort.  Focus on understanding the underlying concepts, practice regularly, and you'll steadily improve your skills.
+
