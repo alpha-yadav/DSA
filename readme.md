@@ -48902,3 +48902,37 @@ else:
 
 This code efficiently detects cycles in directed graphs.  The `recursionStack` is crucial for identifying cycles;  it tracks nodes currently being explored within the recursive calls.  The use of `defaultdict` simplifies graph representation.  Remember that a self-loop (a node pointing to itself) is also considered a cycle.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a groundbreaking algorithm for finding minimum spanning trees (MSTs) in undirected graphs with integer edge weights.  Its significance lies in its incredibly fast runtime, achieving near-linear time complexity.  However, it's also quite complex and not as widely used in practice as simpler algorithms like Prim's or Kruskal's, especially for graphs with non-integer weights.
+
+Here's a breakdown of key aspects of Thorup's algorithm:
+
+**Core Idea:**  The algorithm cleverly combines several techniques to achieve its speed.  At its heart, it relies on a sophisticated randomized approach that cleverly partitions the graph and handles edges of different weights in different ways.  It exploits the properties of specific graph structures and uses advanced data structures for efficiency.
+
+**Key Components and Steps (high-level):**
+
+1. **Weight Partitioning:** The algorithm partitions the edges into groups based on their weights.  This is crucial for its efficiency.  Edges with significantly different weights are handled differently.
+
+2. **Contraction and Sampling:**  Heavier edges are handled by a process that involves contracting parts of the graph. This simplifies the problem for the heavier edges.  Sampling techniques are used to select a representative subset of edges to work with, reducing the amount of data the algorithm processes.
+
+3. **Borůvka's Algorithm and other MST algorithms:** The algorithm uses a variation or combination of Borůvka's algorithm and potentially other MST algorithms on the simplified or partitioned graph structures. Borůvka's algorithm helps to quickly find a significant portion of the MST.
+
+4. **Linear-time data structures:** Thorup's algorithm heavily utilizes sophisticated data structures, many of which are designed to achieve linear-time or near-linear-time operations, critical to its overall speed.  These data structures often involve advanced techniques from graph theory and algorithm design.
+
+**Time Complexity:**  Thorup's algorithm achieves a time complexity of *O(m α(m, n))*, where:
+
+* `m` is the number of edges in the graph.
+* `n` is the number of vertices in the graph.
+* `α(m, n)` is the inverse Ackermann function, which grows incredibly slowly.  For all practical purposes, α(m, n) can be considered a constant.
+
+This effectively makes the runtime almost linear, *O(m)*, in the number of edges, a significant improvement over many other MST algorithms.
+
+**Limitations:**
+
+* **Complexity:** The algorithm is extremely complex to implement and understand.  Its intricate workings make it challenging to debug and maintain.
+* **Integer Weights:** The original algorithm was designed for graphs with integer edge weights. Extensions to handle real-valued weights exist but might lose some of the performance advantage.
+* **Practicality:** Despite its theoretical brilliance, Thorup's algorithm is not always the most practical choice for real-world applications.  Simpler algorithms like Prim's or Kruskal's are often preferred due to their simpler implementation and adequate performance for many scenarios.  The overhead of implementing Thorup's algorithm might outweigh its theoretical speed advantage for smaller graphs.
+
+
+**In summary:** Thorup's algorithm represents a remarkable achievement in algorithm design, demonstrating the possibility of near-linear time MST computation.  However, its practical applicability is limited by its complexity, making it a topic of theoretical interest and advanced algorithmic study rather than a widely used practical solution for most MST problems.
+
