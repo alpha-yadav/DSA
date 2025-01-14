@@ -49000,3 +49000,122 @@ While BFS and DFS are the most common, other methods exist:
 
 The choice of which traversal algorithm to use depends heavily on the specific problem and the properties of the graph.  Understanding the strengths and weaknesses of each algorithm is crucial for efficient graph processing.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and the desired output (pre-order, post-order, etc.).  Here are a few implementations in Python:
+
+**1. DFS using an adjacency list (recursive):**  This is generally the most concise and efficient approach for graph traversal.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal of a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+        path: A list to store the traversal path (optional, defaults to an empty list).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph.get(node, []):  # Handle nodes with no neighbors gracefully
+        if neighbor not in visited:
+            path = dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+dfs_path = dfs_recursive(graph, 'A')
+print(f"DFS traversal path (recursive): {dfs_path}")  # Output will vary slightly depending on order of neighbors
+```
+
+**2. DFS using an adjacency list (iterative):** This uses a stack to avoid recursion, which can be beneficial for very deep graphs to prevent stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal of a graph iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    visited = set()
+    stack = [node]
+    path = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            path.append(node)
+            stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+    return path
+
+#Example usage (same graph as above):
+dfs_path = dfs_iterative(graph, 'A')
+print(f"DFS traversal path (iterative): {dfs_path}") # Output will vary slightly depending on order of neighbors
+```
+
+
+**3. DFS for a tree (preorder traversal):** If your graph is a tree (no cycles),  preorder traversal is a type of DFS.
+
+```python
+def dfs_tree_preorder(tree, node, path=None):
+  """
+  Performs a pre-order traversal (DFS) of a tree.
+
+  Args:
+    tree: A dictionary representing the tree (key is node, value is list of children).
+    node: The root node.
+    path: A list to store the traversal path.
+
+  Returns:
+    A list representing the pre-order traversal path.
+  """
+  if path is None:
+    path = []
+
+  path.append(node)
+  for child in tree.get(node,[]):
+    path = dfs_tree_preorder(tree, child, path)
+  return path
+
+# Example Usage:
+tree = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': [],
+    'F': []
+}
+
+preorder_path = dfs_tree_preorder(tree,'A')
+print(f"Preorder traversal: {preorder_path}")
+```
+
+Remember to adapt these functions based on your specific graph representation and needs (e.g., handling weighted edges, finding shortest paths).  The choice between recursive and iterative approaches depends on the size of your graph and potential for stack overflow.  For most cases, the recursive version is cleaner and easier to read.
+
