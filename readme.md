@@ -43058,3 +43058,43 @@ O(log n) algorithms are characterized by their ability to solve a problem by rep
 
 In summary, O(log n) algorithms are incredibly efficient for larger datasets because the time required to solve the problem grows very slowly as the input size increases.  They're crucial in many areas of computer science where efficiency is paramount.
 
+#  An O(log n) example 
+The quintessential O(log n) example is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array or list.  Its efficiency stems from repeatedly dividing the search interval in half.  If the target element is not found in the current interval, half of the interval is eliminated from further consideration.
+
+**How it works (example):**
+
+Let's say we have a sorted array:  `[2, 5, 7, 11, 15, 20, 25]` and we want to search for the number `15`.
+
+1. **Start:** We examine the middle element: `11`.  15 > 11, so we discard the lower half (`[2, 5, 7, 11]`).
+
+2. **Next Iteration:** The remaining interval is `[15, 20, 25]`.  The middle element is `20`. 15 < 20, so we discard the upper half (`[20, 25]`).
+
+3. **Found:** The remaining interval is `[15]`.  We've found our target.
+
+**Why O(log n)?**
+
+With each comparison, we effectively halve the size of the search space. This is a logarithmic reduction.  If the array has 'n' elements, the maximum number of steps required is approximately log₂(n) (base 2 logarithm).  This is because:
+
+* 1 comparison: n/2 elements remain
+* 2 comparisons: n/4 elements remain
+* 3 comparisons: n/8 elements remain
+* ...and so on.
+
+Eventually, the remaining portion is so small that the element is found or it is determined the element is not present.
+
+
+**Other O(log n) examples:**
+
+While binary search is the most common, other algorithms and operations exhibit O(log n) time complexity, including:
+
+* **Tree Traversal (balanced trees):**  Finding a node in a balanced binary search tree (like an AVL tree or red-black tree) takes O(log n) time.
+* **Efficient Set Operations (using balanced trees):**  Operations like insertion, deletion, and lookup in balanced tree-based sets (like `std::set` in C++) have logarithmic time complexity.
+* **Exponentiation by squaring:**  This algorithm computes a<sup>b</sup> (a raised to the power of b) in O(log b) time.
+
+
+It's crucial to remember that O(log n) performance is only guaranteed for algorithms operating on sorted data or using balanced data structures.  Unsorted data will usually require linear O(n) algorithms for searching.
+
