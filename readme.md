@@ -42945,3 +42945,85 @@ public class Main {
 
 These examples show the most basic type of loop.  Loops can be much more complex, using nested loops, `break` and `continue` statements for control flow, and iterating over collections of data (like lists or arrays).  But these demonstrate the fundamental structure of a simple loop.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions of data or perform repetitive tasks with varying parameters.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed in the inner loop
+        # Accesses both outer_loop_variable and inner_loop_variable
+    # Code to be executed after the inner loop completes for one iteration of the outer loop
+```
+
+**Examples:**
+
+**1. Printing a multiplication table:**
+
+```python
+# Multiplication table up to 10 x 10
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+**2. Iterating through a 2D list (matrix):**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()
+```
+
+**3. Finding the largest number in a 2D array:**
+
+```python
+matrix = [
+    [1, 5, 2],
+    [8, 3, 9],
+    [4, 7, 6]
+]
+
+largest_number = matrix[0][0]  # Initialize with the first element
+
+for row in matrix:
+    for element in row:
+        if element > largest_number:
+            largest_number = element
+
+print("Largest number:", largest_number)
+```
+
+**4.  Nested loops with different iterables:**
+
+```python
+names = ["Alice", "Bob", "Charlie"]
+numbers = [1, 2, 3]
+
+for name in names:
+    for number in numbers:
+        print(f"{name} has number {number}")
+```
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the runtime of your code.  The time complexity is often O(n*m) where 'n' and 'm' are the sizes of the outer and inner loops respectively.  For very large datasets, this can become computationally expensive.  Consider optimizing your algorithms if performance is a concern.
+* **Readability:**  Carefully structure your nested loops with proper indentation to improve code readability and maintainability.  Use meaningful variable names.
+* **Infinite Loops:**  Make sure your loop conditions are correct to avoid infinite loops.  A common mistake is forgetting to update a counter variable correctly in the inner loop.
+
+
+Nested loops are a fundamental programming construct with many applications, but be mindful of their potential performance implications.  Use them judiciously and always strive for efficient and readable code.
+
