@@ -45047,3 +45047,94 @@ Both implementations use a queue (`deque` in Python, `LinkedList` in Java) to st
 
 These examples demonstrate a basic level order traversal.  More sophisticated versions might handle different node data types or include features like handling null nodes more explicitly.  Remember to handle edge cases like an empty tree (as shown in the code).
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals (pre-order, in-order, and post-order) are ways to systematically visit all nodes in a binary tree.  They differ in the order they visit the root node relative to its left and right subtrees.
+
+**1. Binary Tree Representation:**
+
+First, let's represent a binary tree. We'll use a node-based structure:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+**2. Traversal Algorithms:**
+
+Here are the three traversal algorithms in Python:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    """
+    Pre-order traversal: Root, Left, Right
+    """
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    """
+    In-order traversal: Left, Root, Right
+    """
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    """
+    Post-order traversal: Left, Right, Root
+    """
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Pre-order traversal:")
+preorder(root)  # Output: 1 2 4 5 3
+print("\nIn-order traversal:")
+inorder(root)   # Output: 4 2 5 1 3
+print("\nPost-order traversal:")
+postorder(root) # Output: 4 5 2 3 1
+```
+
+**3. Explanation of Traversal Orders:**
+
+* **Pre-order:**  The root node is visited *before* its left and right subtrees.  This is useful for creating a copy of the tree or for generating an expression from an expression tree.
+
+* **In-order:** The left subtree is visited, then the root, then the right subtree. For a Binary Search Tree (BST), an in-order traversal yields the nodes in ascending order of their values.
+
+* **Post-order:** The left and right subtrees are visited *before* the root node. This is often used to delete a tree or to evaluate an expression tree.
+
+
+**4.  Illustrative Example Tree:**
+
+The example code above uses this tree structure:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+The output of each traversal demonstrates the order in which the nodes are visited according to the algorithm's definition.  Remember that the specific output depends on how you build your binary tree.
+
