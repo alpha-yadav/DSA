@@ -48350,3 +48350,68 @@ else:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, in the worst case.  The recursive approach generally uses less space, especially for balanced trees, while the path-finding approach might use more space in the case of very deep, unbalanced trees due to path storage. Choose the method that best suits your needs and coding style. Remember to handle edge cases like empty trees or nodes not present in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science with applications in various areas like file systems, phylogenetic trees, and version control systems.  There are several ways to solve this problem, each with its own trade-offs.
+
+**Methods for Finding LCA:**
+
+1. **Brute-Force Approach (for general trees):**
+
+   - This approach involves traversing the tree from both nodes upwards towards the root simultaneously.  For each node, we check if it's an ancestor of the other node.  This is inefficient, having a time complexity of O(N), where N is the number of nodes in the tree.  It's simple to implement but not practical for large trees.
+
+2. **Recursive Approach (for binary trees):**
+
+   - This is a classic and efficient recursive solution. The algorithm works as follows:
+     - If the current node is `null`, return `null`.
+     - If the current node is either `p` or `q`, return the current node.
+     - Recursively search the left and right subtrees.
+     - If both recursive calls return non-`null` values, the current node is the LCA.
+     - Otherwise, return the non-`null` result (if any).
+
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(self, root, p, q):
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+   ```
+
+   This recursive approach has a time complexity of O(N) in the worst case (a skewed tree), but it's generally efficient for balanced trees.
+
+3. **Iterative Approach (for binary trees):**
+
+   - This approach uses a stack or queue to simulate the recursive calls, avoiding the overhead of function calls.  It achieves the same time complexity as the recursive approach.  This can be slightly more efficient in some cases due to avoiding function call overhead.
+
+4. **Using Parent Pointers (for any tree):**
+
+   - If each node in the tree has a pointer to its parent, finding the LCA becomes much simpler.  Traverse upwards from both nodes `p` and `q`, storing the path to the root for each.  The LCA is the last common node in both paths.  This approach has a time complexity proportional to the depth of the tree, which is typically much smaller than O(N).
+
+5. **Binary Lifting (for binary trees):**
+
+   - This is an advanced technique that preprocesses the tree to allow for efficient LCA queries in O(log N) time per query after a preprocessing step that takes O(N log N) time.  It's significantly faster for many LCA queries on the same tree.  It's more complex to implement but provides substantial performance benefits if you need to find many LCAs.
+
+
+**Choosing the Right Approach:**
+
+- For simple cases and small trees, the recursive approach is usually sufficient and easy to understand.
+- For larger trees or many LCA queries, consider the iterative approach or, ideally, binary lifting for optimal performance.
+- If parent pointers are readily available, utilize that method for its simplicity and efficiency.
+
+
+Remember to handle edge cases like empty trees, nodes not present in the tree, or one node being an ancestor of the other.  The examples provided focus on the core algorithms.  Always adapt them to your specific needs and input constraints.
+
