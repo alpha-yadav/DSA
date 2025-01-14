@@ -46718,3 +46718,37 @@ int main() {
 
 These examples demonstrate the basic structure.  The complexity can increase significantly depending on the specific task you are trying to accomplish.  Remember to consider the efficiency of nested loops, as they can become computationally expensive with very large datasets.  In such cases, consider alternative algorithms or data structures for optimization.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to solve problems by repeatedly dividing the input size in half (or by some constant factor).  This means the time it takes to solve the problem grows logarithmically with the input size.  Here are some common types and examples:
+
+**1. Binary Search:** This is the quintessential O(log n) algorithm. It works on a sorted list (or array) by repeatedly dividing the search interval in half.  If the target value is not in the middle element, it recursively searches either the left or right half.
+
+   * **Example:** Finding a specific word in a dictionary.
+
+**2. Binary Tree Operations (Search, Insertion, Deletion):**  A balanced binary search tree (like an AVL tree or red-black tree) ensures that basic operations take O(log n) time on average, where n is the number of nodes.  Unbalanced trees can degrade to O(n) in the worst case.
+
+   * **Example:**  Storing and retrieving data in a database index.
+
+**3. Heap Operations (Insertion, Deletion, Finding Min/Max):**  Heaps (min-heaps or max-heaps) maintain a sorted order (or partially sorted in the case of a heap), allowing efficient insertion and deletion of elements in O(log n) time.
+
+   * **Example:** Implementing a priority queue.
+
+**4. Exponentiation by Squaring:**  This algorithm efficiently computes large powers of a number (a<sup>b</sup>) in logarithmic time with respect to the exponent (b). It achieves this by repeatedly squaring the base and adjusting the exponent.
+
+   * **Example:** Cryptographic algorithms.
+
+**5. Finding the kth smallest/largest element using Quickselect (average case):**  While Quickselect's worst-case runtime is O(n), its average-case runtime is O(n).  Variants using median-of-medians can guarantee O(n) worst-case.  However, if you're specifically finding a kth smallest element where k is small relative to n, the process resembles a binary search and can often perform in O(log n) *average* time for these specific cases.
+
+**6. Some Graph Algorithms (depending on graph structure):**  Algorithms on specific types of graphs, such as balanced trees or graphs with a particular structure (e.g., perfectly balanced binary trees), might exhibit O(log n) behavior for certain operations.  However, most graph algorithms are not typically O(log n).
+
+
+
+**Key Characteristics Leading to O(log n) Complexity:**
+
+* **Divide and conquer:** The algorithm repeatedly divides the problem into smaller subproblems.
+* **Sorted or structured data:**  Often, the input data must be sorted or have a specific structure (like a tree or heap) to allow for efficient logarithmic-time operations.
+* **Eliminating a constant fraction of the search space:** In each step, a constant fraction of the remaining data is eliminated (e.g., half in binary search).
+
+
+It's crucial to remember that the O(log n) complexity refers to the *time complexity* of the algorithm.  The base of the logarithm (e.g., base 2, base 10) doesn't change the overall complexity class; it only affects the constant factor, which is generally ignored in Big O notation.
+
