@@ -42869,3 +42869,79 @@ This function performs a linear search.  The loop iterates at most `n` times (wh
 
 Big O notation is a crucial tool for evaluating the efficiency of algorithms.  Understanding it helps developers choose the most appropriate algorithms for different tasks and avoid performance bottlenecks, especially when dealing with large datasets.
 
+#  A Simple Loop 
+A simple loop repeats a block of code multiple times.  The specifics depend on the programming language, but the core concept is the same.  Here are examples in a few popular languages:
+
+**Python:**
+
+```python
+# Using a `for` loop to iterate 5 times
+for i in range(5):
+  print(i)  # Prints 0, 1, 2, 3, 4
+
+# Using a `while` loop to iterate until a condition is met
+count = 0
+while count < 5:
+  print(count)
+  count += 1  # Increment count; otherwise, it's an infinite loop!
+```
+
+**JavaScript:**
+
+```javascript
+// Using a `for` loop
+for (let i = 0; i < 5; i++) {
+  console.log(i); // Prints 0, 1, 2, 3, 4
+}
+
+// Using a `while` loop
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  // Using a `for` loop
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl; // Prints 0, 1, 2, 3, 4
+  }
+
+  // Using a `while` loop
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+**Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    // Using a `for` loop
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i); // Prints 0, 1, 2, 3, 4
+    }
+
+    // Using a `while` loop
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples show the most basic type of loop.  Loops can be much more complex, using nested loops, `break` and `continue` statements for control flow, and iterating over collections of data (like lists or arrays).  But these demonstrate the fundamental structure of a simple loop.
+
