@@ -42596,3 +42596,75 @@ This approach is generally preferred for its clarity. It checks for divisibility
 
 Remember to run this code in a Swift playground or a Swift project to see the output.  You can change the `n` value to test with different ranges.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The most common resources considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We typically analyze complexity using **Big O notation**, which describes the upper bound of the growth rate of the resource consumption as the input size approaches infinity.  Big O notation ignores constant factors and lower-order terms, focusing on the dominant term that dictates the overall growth.
+
+Here's a breakdown:
+
+**Common Big O Notations and Their Meanings:**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Accessing an element in an array by its index is an example.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  Binary search is a classic example.  This is very efficient.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Searching for an element in an unsorted array is an example.
+
+* **O(n log n) - Linearithmic Time:** The execution time is a combination of linear and logarithmic growth.  Efficient sorting algorithms like merge sort and heap sort fall into this category.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  Nested loops iterating over the input are common culprits.  Bubble sort and selection sort are examples.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  This is generally very inefficient for larger inputs.  Finding all subsets of a set is an example.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  This is extremely inefficient and usually only encountered in problems involving permutations.  The traveling salesman problem (brute-force approach) is an example.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the time complexity of an algorithm, you typically follow these steps:
+
+1. **Identify the basic operation:** Determine the operation that contributes most to the algorithm's running time.
+
+2. **Count the number of times the basic operation is executed:** Express this count as a function of the input size (n).
+
+3. **Express the function using Big O notation:**  Identify the dominant term and drop constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Basic operation:** Comparison (`arr[i] == target`)
+* **Number of comparisons:** In the worst case, the algorithm iterates through the entire array (n elements), so the basic operation is executed n times.
+* **Big O notation:** O(n) - Linear time complexity.
+
+
+**Space Complexity:**
+
+Space complexity analysis follows similar principles, focusing on the amount of memory used:
+
+* **O(1):** Constant space.  The algorithm uses a fixed amount of memory regardless of the input size.
+* **O(n):** Linear space. The memory used grows linearly with the input size.  Storing an array of n elements is an example.
+* **O(log n):** Logarithmic space (less common).
+* and so on...
+
+
+**Best, Average, and Worst Case:**
+
+Complexity analysis often considers best-case, average-case, and worst-case scenarios.  The worst-case is typically reported because it provides an upper bound on the algorithm's performance.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and optimizing code.  When dealing with large datasets, the difference between, say, O(n) and O(n²) can be substantial.
+
