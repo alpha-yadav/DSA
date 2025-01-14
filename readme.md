@@ -46196,3 +46196,68 @@ This uses nested ternary operators to achieve the same result in a single line w
 
 For beginners, the first ("Basic Implementation") is the easiest to understand and maintain.  The second ("Improved Implementation") offers a good balance between readability and efficiency. The third ("Concise Implementation") is the most compact but may sacrifice readability.  Choose the version that best suits your needs and understanding.  Remember that readability and maintainability are often more important than extreme conciseness in larger projects.
 
+#  Algorithm Complexity 
+Algorithm complexity describes how the runtime or space requirements of an algorithm grow as the input size grows.  It's crucial for understanding an algorithm's efficiency and scalability.  We typically analyze complexity using **Big O notation**, which focuses on the dominant terms and ignores constant factors.
+
+Here's a breakdown of key aspects:
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm increases with the input size (n).
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size. Example: Bubble sort, selection sort, nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm increases with the input size (n).  The same Big O notation applies.  Examples:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The memory usage increases linearly with the input size.  Example:  Storing the input in an array.
+
+* **O(log n) - Logarithmic Space:** The memory usage increases logarithmically. Example: Recursive algorithms that use a stack with logarithmic depth.
+
+
+**3. Big O Notation and its limitations:**
+
+* **Asymptotic Analysis:** Big O describes the *growth rate* as n approaches infinity. It doesn't tell you the exact runtime for a specific input size.
+* **Worst-Case, Average-Case, Best-Case:** Big O often refers to the worst-case scenario.  Average-case and best-case analyses can also be performed but are often more complex.
+* **Other Notations:**  Besides Big O, we have Big Omega (Ω) for lower bounds and Big Theta (Θ) for tight bounds.
+
+
+**4. Analyzing Algorithm Complexity:**
+
+To analyze an algorithm's complexity:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the runtime (e.g., comparisons, assignments, arithmetic operations).
+2. **Count the operations:**  Express the number of operations as a function of the input size (n).
+3. **Identify the dominant terms:**  Ignore constant factors and lower-order terms.  This gives you the Big O notation.
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* The basic operation is the comparison (`arr[i] == target`).
+* The number of comparisons in the worst case is equal to the length of the array (n).
+* Therefore, the time complexity is O(n).
+
+
+Understanding algorithm complexity is essential for choosing efficient algorithms for various tasks.  When dealing with large datasets, the difference between an O(n) algorithm and an O(n²) algorithm can be dramatic.
+
