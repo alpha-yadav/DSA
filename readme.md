@@ -48236,3 +48236,117 @@ postorder(root) # Output: D E B F C A
 
 These traversal methods are fundamental in many binary tree algorithms, including expression evaluation, code generation, and tree copying.  The choice of which traversal to use depends on the specific application. Remember to handle the case where the node is `None` (empty subtree) to prevent errors in your recursive functions.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  This means that both nodes are in the subtree rooted at the LCA.  Note that this is different from the LCA in a binary *search* tree, where the definition simplifies significantly.
+
+There are several ways to find the LCA in a binary tree. Here are two common approaches:
+
+**Method 1: Recursive Approach**
+
+This approach recursively traverses the tree.  If a node is found, it's marked.  If both nodes are found in the left subtree or both are found in the right subtree, then the LCA is recursively found in that subtree. If one node is in the left subtree and the other is in the right subtree, then the current node is the LCA.
+
+```python
+class TreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, node1, node2):
+    """
+    Finds the Lowest Common Ancestor of node1 and node2 in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        node1: The first node.
+        node2: The second node.
+
+    Returns:
+        The LCA node, or None if either node1 or node2 is not found.
+    """
+    if root is None:
+        return None
+
+    if root == node1 or root == node2:
+        return root
+
+    left_lca = lca(root.left, node1, node2)
+    right_lca = lca(root.right, node1, node2)
+
+    if left_lca and right_lca:  # Node1 and node2 are in different subtrees
+        return root
+    elif left_lca:            # Both nodes are in the left subtree
+        return left_lca
+    elif right_lca:           # Both nodes are in the right subtree
+        return right_lca
+    else:
+        return None # Neither node is found in the tree rooted at this node
+
+
+# Example usage:
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+root.right.left = TreeNode(6)
+root.right.right = TreeNode(7)
+
+node1 = root.left.left  # Node 4
+node2 = root.right.right # Node 7
+
+lca_node = lca(root, node1, node2)
+if lca_node:
+    print(f"LCA of {node1.data} and {node2.data} is: {lca_node.data}")
+else:
+    print("One or both nodes not found in the tree.")
+
+```
+
+
+**Method 2: Path Finding Approach**
+
+This method first finds the paths from the root to each of the nodes (`node1` and `node2`).  Then, it iterates through both paths simultaneously, finding the last common node.  This is the LCA.
+
+```python
+def find_path(root, node, path):
+    """Finds the path from the root to a given node."""
+    if root is None:
+        return False
+
+    path.append(root)
+
+    if root == node:
+        return True
+
+    if find_path(root.left, node, path) or find_path(root.right, node, path):
+        return True
+
+    path.pop()
+    return False
+
+def lca_path(root, node1, node2):
+  """Finds LCA using path finding."""
+  path1 = []
+  path2 = []
+
+  if not find_path(root, node1, path1) or not find_path(root, node2, path2):
+    return None
+
+  i = 0
+  while i < len(path1) and i < len(path2) and path1[i] == path2[i]:
+    i += 1
+
+  return path1[i-1] #The LCA is the last common node
+
+#Example Usage (same tree as before):
+lca_node_path = lca_path(root, node1, node2)
+if lca_node_path:
+    print(f"LCA of {node1.data} and {node2.data} is: {lca_node_path.data}")
+else:
+    print("One or both nodes not found in the tree.")
+
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, in the worst case.  The recursive approach generally uses less space, especially for balanced trees, while the path-finding approach might use more space in the case of very deep, unbalanced trees due to path storage. Choose the method that best suits your needs and coding style. Remember to handle edge cases like empty trees or nodes not present in the tree.
+
