@@ -45731,3 +45731,35 @@ else:
 
 This approach efficiently detects cycles in a directed graph using the Depth First Search algorithm and has a time complexity of O(V+E), where V is the number of vertices and E is the number of edges.  The space complexity is O(V) due to the `visited` and `recursion_stack` arrays. Remember that this code detects any type of cycle including self-loops.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focusing on efficient graph algorithms, particularly for finding shortest paths.  The most famous among these is his algorithm for finding single-source shortest paths in undirected graphs with integer weights.  It's notable for its near-linear time complexity.
+
+Here's a breakdown of key aspects:
+
+**Key Features and Significance:**
+
+* **Near-linear time complexity:**  Thorup's algorithm achieves a running time very close to linear, O(m + n log log n), where 'n' is the number of nodes and 'm' is the number of edges in the graph.  This is a significant improvement over Dijkstra's algorithm (O(m log n) using Fibonacci heaps) for graphs with a relatively small number of edges compared to the number of nodes squared (sparse graphs).
+
+* **Undirected graphs with integer weights:** The original and most impactful version of the algorithm is tailored for undirected graphs where edge weights are integers.
+
+* **Randomization:**  The algorithm uses randomization.  This means the running time is a probabilistic guarantee – it holds with high probability (meaning the chance of failure is extremely low), not with absolute certainty.
+
+* **Sophisticated techniques:**  Thorup's algorithm utilizes several advanced techniques to achieve its efficiency, including:
+    * **Routing tables:**  A clever data structure to navigate the graph quickly.
+    * **Random sampling:** Selecting a subset of edges for efficient preprocessing.
+    * **Hierarchical decomposition:** Breaking down the graph into smaller subgraphs.
+
+**Comparison to Dijkstra's Algorithm:**
+
+While Dijkstra's algorithm is widely known and used, Thorup's algorithm offers a significant speedup, particularly for large, sparse graphs with integer weights. Dijkstra's algorithm is deterministic, whereas Thorup's algorithm is randomized.  The choice of algorithm depends on the specific needs of the application; deterministic guarantees may be crucial in some situations.
+
+
+**Limitations:**
+
+* **Integer weights:** The original algorithm is specifically designed for integer weights.  Extensions to handle real-valued weights exist, but they often lose the near-linear time complexity.
+* **Undirected graphs:** The original algorithm focuses on undirected graphs.  Adapting it to directed graphs adds complexity.
+* **Randomization:** The probabilistic nature might be unacceptable in certain applications requiring absolute guarantees.
+
+
+**In summary:** Thorup's algorithm provides a groundbreaking approach to single-source shortest paths in undirected graphs with integer weights. Its near-linear time complexity makes it highly efficient for large-scale applications, although the use of randomization and its restriction to integer weights should be considered when choosing an algorithm.  It's a significant advancement in algorithmic graph theory.
+
