@@ -51243,3 +51243,108 @@ While recursion is often cleaner, an iterative approach can be beneficial for ve
 
 The recursive approach is generally preferred for its clarity and readability, unless you're concerned about exceptionally deep trees where stack overflow might be a problem.  In that case, an iterative approach would be necessary.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic algorithm problem.  There are several approaches, each with different trade-offs in terms of time and space complexity.
+
+**Methods:**
+
+1. **Recursive Approach (Binary Tree):**  This is a straightforward and efficient approach for binary trees.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lowestCommonAncestor(root, p, q):
+       if not root or root == p or root == q:
+           return root
+
+       left_lca = lowestCommonAncestor(root.left, p, q)
+       right_lca = lowestCommonAncestor(root.right, p, q)
+
+       if left_lca and right_lca:
+           return root
+       return left_lca if left_lca else right_lca
+
+   # Example usage:
+   root = Node(3)
+   root.left = Node(5)
+   root.right = Node(1)
+   root.left.left = Node(6)
+   root.left.right = Node(2)
+   root.right.left = Node(0)
+   root.right.right = Node(8)
+
+   lca = lowestCommonAncestor(root, root.left, root.right)
+   print(f"LCA of 5 and 1 is: {lca.data}")  # Output: 3
+
+   lca = lowestCommonAncestor(root, root.left.right, root.right.left)
+   print(f"LCA of 2 and 0 is: {lca.data}")  # Output: 3
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, we might traverse the entire tree.
+   * **Space Complexity:** O(H), where H is the height of the tree (due to recursive calls).  In the worst case (a skewed tree), this becomes O(N).
+
+
+2. **Iterative Approach (Binary Tree):** This approach avoids recursion, potentially improving performance for very deep trees and reducing the risk of stack overflow.
+
+   ```python
+   def lowestCommonAncestorIterative(root, p, q):
+       while root:
+           if p.data > root.data and q.data > root.data:
+               root = root.right
+           elif p.data < root.data and q.data < root.data:
+               root = root.left
+           else:
+               return root
+       return None # p and q are not in the tree
+   ```
+   This iterative version assumes a *Binary Search Tree (BST)*.  It's much less efficient for a general binary tree.
+
+
+3. **Using Parent Pointers (General Tree):** If each node in the tree stores a pointer to its parent, we can use a more efficient approach.  We find the paths from each node (p and q) to the root, then find the deepest common node in those paths.
+
+   ```python
+   # Assume each node has a 'parent' attribute
+   def lowestCommonAncestorParentPointers(p, q):
+       path_p = []
+       curr = p
+       while curr:
+           path_p.append(curr)
+           curr = curr.parent
+
+       path_q = []
+       curr = q
+       while curr:
+           path_q.append(curr)
+           curr = curr.parent
+
+       lca = None
+       i = len(path_p) - 1
+       j = len(path_q) - 1
+       while i >= 0 and j >= 0 and path_p[i] == path_q[j]:
+           lca = path_p[i]
+           i -= 1
+           j -= 1
+       return lca
+   ```
+
+   * **Time Complexity:** O(D), where D is the depth of the tree (the maximum distance from the root to a leaf).  This can be significantly better than O(N) for balanced trees.
+   * **Space Complexity:** O(D)
+
+
+4. **Tarjan's Off-line Lowest Common Ancestor Algorithm:** This advanced algorithm is highly efficient for finding the LCA of multiple pairs of nodes in a single pass. It's suitable when you need to find LCAs for many node pairs.  It's more complex to implement.
+
+
+**Choosing the Right Method:**
+
+* For binary trees, the recursive approach is often the simplest and most readable.
+* For BSTs, the iterative approach is faster.
+* For general trees with parent pointers, the parent pointer method is efficient.
+* For many LCA queries on the same tree, Tarjan's algorithm is the most efficient.
+
+
+Remember to adapt the code to your specific tree structure (e.g., adding parent pointers if needed).  The choice of the best method depends heavily on the characteristics of your tree and the number of LCA queries you need to perform.
+
