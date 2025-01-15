@@ -51743,3 +51743,93 @@ print(topological_sort(graph_with_cycle)) # Output: Cycle detected!
 
 Remember that if the graph has cycles, a topological sort is not possible.  The algorithms will typically detect this situation.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on tracking the state of each node during the traversal.  We use three states:
+
+* **Unvisited:** The node hasn't been encountered yet.
+* **Visiting:** The node is currently being visited (on the recursion stack).
+* **Visited:** The node has been fully explored (recursion finished for that branch).
+
+A cycle exists if, during the traversal, we encounter a node that's already in the "Visiting" state. This indicates a back edge – an edge pointing to an ancestor in the DFS tree.
+
+Here's how the algorithm works, illustrated with Python code:
+
+```python
+from collections import defaultdict
+
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.graph = defaultdict(list)
+
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+
+    def isCyclicUtil(self, v, visited, recursionStack):
+        visited[v] = True
+        recursionStack[v] = True
+
+        for neighbour in self.graph[v]:
+            if not visited[neighbour]:
+                if self.isCyclicUtil(neighbour, visited, recursionStack):
+                    return True
+            elif recursionStack[neighbour]:
+                return True
+
+        recursionStack[v] = False
+        return False
+
+    def isCyclic(self):
+        visited = [False] * self.V
+        recursionStack = [False] * self.V
+        for node in range(self.V):
+            if not visited[node]:
+                if self.isCyclicUtil(node, visited, recursionStack):
+                    return True
+        return False
+
+# Example usage:
+g = Graph(4)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(1, 2)
+g.add_edge(2, 0)
+g.add_edge(2, 3)
+g.add_edge(3, 3)
+
+
+if g.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+
+
+g2 = Graph(3)
+g2.add_edge(0,1)
+g2.add_edge(1,2)
+
+if g2.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+```
+
+**Explanation:**
+
+1. **`__init__(self, vertices)`:** Initializes the graph with a given number of vertices.
+2. **`add_edge(self, u, v)`:** Adds a directed edge from vertex `u` to vertex `v`.
+3. **`isCyclicUtil(self, v, visited, recursionStack)`:** This is the recursive helper function.
+   - It marks the current node `v` as `visited` and adds it to the `recursionStack`.
+   - It recursively explores all neighbors.
+   - If a neighbor is already `visited` and is also in `recursionStack`, a cycle is detected.
+   - After exploring all neighbors, the current node is removed from `recursionStack`.
+4. **`isCyclic(self)`:** This function initializes the `visited` and `recursionStack` arrays and calls `isCyclicUtil` for each unvisited node.  If any call to `isCyclicUtil` returns `True`, the graph contains a cycle.
+
+**Time and Space Complexity:**
+
+* **Time Complexity:** O(V + E), where V is the number of vertices and E is the number of edges.  This is because each vertex and edge is visited at most once.
+* **Space Complexity:** O(V) due to the `visited` and `recursionStack` arrays.  The recursion stack also contributes to the space complexity, which is proportional to the maximum depth of the recursion, which can be O(V) in the worst case (a very deep graph).
+
+
+This improved answer provides a complete, runnable code example with clear explanations and addresses time and space complexity.  Remember that this algorithm detects cycles in *directed* graphs.  For undirected graphs, a different approach is needed.
+
