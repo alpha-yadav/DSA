@@ -49291,3 +49291,58 @@ While all three versions work correctly, the **improved version** strikes a good
 
 Remember to compile and run this code in a Swift environment (like Xcode's playground or a Swift REPL).  You'll see the FizzBuzz output for numbers 1 through 15.  You can change the `n` value to test with a different range.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (typically time and space) an algorithm consumes as the input size grows.  It's a crucial aspect of algorithm design and analysis, helping us understand how efficiently an algorithm will perform for different input sizes.  We typically describe complexity using Big O notation.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:** Measures how the runtime of an algorithm scales with the size of the input.  It's often expressed as a function of the input size (n).
+* **Space Complexity:** Measures how the memory usage of an algorithm scales with the size of the input.  Similar to time complexity, it's often expressed as a function of the input size (n).
+* **Big O Notation (O):**  A mathematical notation used to describe the upper bound of an algorithm's complexity. It focuses on the dominant terms and ignores constant factors.  It gives a high-level understanding of how the runtime/space grows.  For example:
+    * O(1): Constant time – the runtime doesn't depend on the input size.
+    * O(log n): Logarithmic time – the runtime increases logarithmically with the input size (e.g., binary search).
+    * O(n): Linear time – the runtime increases linearly with the input size (e.g., searching an unsorted array).
+    * O(n log n): Linearithmic time – a common complexity for efficient sorting algorithms (e.g., merge sort).
+    * O(n²): Quadratic time – the runtime increases quadratically with the input size (e.g., bubble sort).
+    * O(2ⁿ): Exponential time – the runtime doubles with each addition to the input size (e.g., finding all subsets of a set).
+    * O(n!): Factorial time – the runtime grows factorially with the input size (e.g., traveling salesman problem using brute force).
+
+* **Big Omega Notation (Ω):**  Describes the lower bound of an algorithm's complexity.  It provides a best-case scenario.
+* **Big Theta Notation (Θ):** Describes both the upper and lower bounds of an algorithm's complexity.  It provides a tight bound, meaning the algorithm's performance is within these bounds.
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity of an algorithm usually involves:
+
+1. **Identifying the basic operations:** Determine the fundamental operations that contribute most to the algorithm's runtime or space usage.
+2. **Counting the operations:**  Estimate the number of times these basic operations are executed as a function of the input size (n).
+3. **Expressing the complexity using Big O notation:**  Identify the dominant terms and express the complexity using Big O notation.  Focus on the growth rate as 'n' becomes very large.
+
+**Example:**
+
+Consider a simple linear search algorithm that searches for a value in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Basic operation:** Comparing `arr[i]` with `target`.
+* **Operation count:** In the worst case, the algorithm iterates through the entire array (n elements).  Therefore, the comparison is performed n times.
+* **Time complexity:** O(n) – linear time.
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity is crucial for:
+
+* **Choosing the right algorithm:** Selecting the most efficient algorithm for a given task.
+* **Optimizing existing algorithms:** Improving the performance of existing algorithms.
+* **Predicting performance:** Estimating the runtime and space usage of an algorithm for different input sizes.
+* **Scaling applications:** Ensuring applications can handle increasing amounts of data efficiently.
+
+
+By analyzing the complexity of algorithms, developers can make informed decisions about which algorithms to use and how to optimize their performance to meet specific needs.
+
