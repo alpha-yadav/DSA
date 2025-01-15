@@ -55579,3 +55579,23 @@ Nested loops are commonly used for:
 
 **Important Note on Efficiency:**  Nested loops can significantly increase the runtime of your code, especially with large datasets. The time complexity often grows quadratically (O(n^2)) or even higher depending on the number of nested loops. Consider optimization techniques if dealing with extensive data.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They only require a number of steps proportional to the logarithm of the input size (n).  This means the time taken increases very slowly as the input size grows.  This is usually achieved by repeatedly dividing the problem size in half.
+
+Here are some common types of algorithms exhibiting O(log n) time complexity:
+
+**1. Binary Search:** This is the quintessential example.  In a sorted array or list, it repeatedly divides the search interval in half. If the target value is not in the interval, the algorithm stops.  Otherwise, the algorithm continues recursively on the appropriate half until the target value is found or the interval is empty.
+
+**2. Efficient Tree Traversal (Balanced Trees):** Operations like searching, insertion, and deletion in balanced binary search trees (like AVL trees or red-black trees) have O(log n) time complexity.  The balanced structure ensures that the height of the tree remains logarithmic with respect to the number of nodes.
+
+**3. Exponentiation by Squaring:** This algorithm calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time. It leverages the property that a<sup>b</sup> = (a<sup>b/2</sup>)<sup>2</sup> if b is even, and a<sup>b</sup> = a * a<sup>(b-1)</sup> if b is odd.  It recursively reduces the exponent, halving it at each step.
+
+**4. Finding the kth smallest element using QuickSelect (average case):** While the worst-case time complexity of QuickSelect is O(n<sup>2</sup>), its average-case time complexity is O(n).  However, finding the *k*th smallest element using techniques based on median-of-medians can achieve a guaranteed O(n) time complexity. While not strictly O(log n), it's worth mentioning in the context of efficient searching.
+
+**5. Logarithmic Time Heaps (e.g., Min-Heap, Max-Heap) operations:**  Operations like `extract-min`, `insert`, and `find-min` (or their max-heap equivalents) in a binary heap take O(log n) time.  This is because maintaining the heap property (e.g., the minimum element is at the root) may require traversing a path from a leaf node to the root (or vice-versa), and the height of a balanced binary heap is log<sub>2</sub>n.
+
+**6. Some Graph Algorithms:** Certain algorithms on special types of graphs might have logarithmic time complexity for specific operations.  For example, finding the depth of a node in a balanced tree-like graph structure could be O(log n).
+
+
+**Important Note:**  O(log n) complexity always implies that the base of the logarithm is a constant greater than 1.  The exact base doesn't affect the overall classification as O(log n) because changing the base only introduces a constant factor, which is ignored in Big O notation.  However, the *constant hidden* in the Big O notation can still have practical implications in the actual runtime performance.
+
