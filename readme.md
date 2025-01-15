@@ -54079,3 +54079,94 @@ These traversals are fundamental to many binary tree algorithms. For example:
 
 Remember that the specific output depends entirely on the structure of your binary tree.  These examples show the general principles.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike a binary *search* tree, a general binary tree doesn't have an inherent ordering, making the LCA problem slightly more complex.
+
+There are several approaches to finding the LCA in a binary tree:
+
+**1. Recursive Approach (Most Common):**
+
+This approach recursively traverses the tree.  The core idea is:
+
+* **Base Cases:**
+    * If the current node is `null`, return `null`.
+    * If the current node is either `p` or `q`, return the current node.
+
+* **Recursive Step:**
+    * Recursively search for `p` and `q` in the left and right subtrees.
+    * If both `p` and `q` are found in different subtrees (one in the left and one in the right), the current node is the LCA.
+    * Otherwise, the LCA is in the subtree where both `p` and `q` were found (return the result from that subtree).
+
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+      root: The root of the binary tree.
+      p: The first node.
+      q: The second node.
+
+    Returns:
+      The LCA node, or None if p or q are not found.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # p and q are in different subtrees
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example Usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left
+q = root.right
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
+
+
+p = root.left.right
+q = root.left.right.right
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") #Output: LCA of 2 and 4: 2
+```
+
+**2. Iterative Approach (Using Parent Pointers):**
+
+If you can modify the tree to include parent pointers (each node knows its parent), you can solve it iteratively.  This involves finding the paths from the root to `p` and `q`, then iterating up those paths until you find the first common ancestor.  This is generally more efficient in space than recursion, but requires modifying the tree structure.
+
+
+**3. Using a Hash Table (for path tracking):**
+
+This method is similar to the iterative approach with parent pointers, but uses a hash table to track the paths to `p` and `q`.  You trace the paths from `p` and `q` back to the root using parent pointers (if available or by traversing upward yourself) and use the hash table to quickly compare these paths to find the LCA.
+
+**Choosing the Right Approach:**
+
+* The **recursive approach** is generally preferred for its simplicity and clarity, especially if modifying the tree structure is undesirable.
+* The **iterative approach** or the **hash table approach** might be more efficient in terms of space complexity for very large trees or when space is a critical constraint.  However, they add complexity to the implementation.  Remember you need either parent pointers or to use backtracking (which has its own space costs).
+
+Remember to handle edge cases such as `p` or `q` not being present in the tree.  The provided recursive solution gracefully handles these cases by returning `None` if either node isn't found.
+
