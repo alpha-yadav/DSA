@@ -55895,3 +55895,113 @@ To mitigate the risk of unbalanced trees, various self-balancing tree structures
 
 Self-balancing BSTs offer guaranteed logarithmic time complexity for all operations, even in the worst case.  However, they come with increased implementation complexity compared to standard BSTs.  The choice between a standard BST and a self-balancing BST depends on the specific application's requirements and trade-offs between performance and implementation complexity.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement binary search tree (BST) insertion in Python. Here are a few, ranging from a simple recursive approach to a more iterative one, along with explanations and considerations:
+
+**Method 1: Recursive Insertion**
+
+This is often considered the most elegant and readable approach.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        """Inserts a new node with the given data recursively."""
+        self.root = self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        else:
+            node.right = self._insert_recursive(node.right, data)
+        return node
+
+# Example usage
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+
+
+#Helper function to print the tree (inorder traversal) -  not strictly part of insertion.
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+print("Inorder traversal:", end=" ")
+inorder_traversal(bst.root) # Output: Inorder traversal: 1 3 6 8 10 14 
+```
+
+**Method 2: Iterative Insertion**
+
+This approach avoids recursion, potentially offering better performance for very deep trees (though the difference might be negligible in many cases).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        """Inserts a new node with the given data iteratively."""
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+# Example Usage (same output as recursive example)
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+
+print("\nInorder traversal (iterative):", end=" ")
+inorder_traversal(bst.root) # Output: Inorder traversal (iterative): 1 3 6 8 10 14 
+```
+
+**Choosing a Method:**
+
+* **Readability:** The recursive method is generally easier to understand and write.
+* **Performance:** For most practical applications, the performance difference will be insignificant.  The iterative method might be slightly faster for extremely deep trees due to avoiding the overhead of recursive function calls, but this is often a micro-optimization.
+* **Space Complexity:**  The recursive method uses space on the call stack, which can be a concern for extremely deep trees. The iterative approach has a constant space complexity.
+
+
+Remember to handle potential errors, such as duplicate data insertion (decide whether to allow duplicates or not and implement accordingly).  The examples above do not explicitly handle duplicates; they simply overwrite existing nodes with the same data if encountered.  You might want to add a check for that depending on the desired behavior.
+
