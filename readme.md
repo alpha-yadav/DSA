@@ -51155,3 +51155,91 @@ These traversals are fundamental in many algorithms related to trees:
 
 Remember that the output of these traversals depends entirely on the structure of your binary tree.  If you have a different tree, the traversal sequences will be different.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  This differs from the LCA in a binary *search* tree, where the algorithm is simpler.  In a general binary tree, we can't rely on ordering properties.
+
+Here are a few approaches to finding the LCA in a binary tree:
+
+**1. Recursive Approach (Most Common & Efficient):**
+
+This approach uses recursion to traverse the tree.  If a node is found, the recursion continues to check if its children also contain the target nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, n1, n2):
+    """
+    Finds the Lowest Common Ancestor of n1 and n2 in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        n1: The first node.
+        n2: The second node.
+
+    Returns:
+        The LCA node, or None if either n1 or n2 is not found.
+    """
+
+    if root is None:
+        return None
+
+    if root.data == n1 or root.data == n2:
+        return root
+
+    left_lca = lca(root.left, n1, n2)
+    right_lca = lca(root.right, n1, n2)
+
+    if left_lca and right_lca:
+        return root  # Found n1 and n2 in different subtrees
+    elif left_lca:
+        return left_lca
+    elif right_lca:
+        return right_lca
+    else:
+        return None
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+n1 = 4
+n2 = 5
+lca_node = lca(root, n1, n2)
+print(f"LCA of {n1} and {n2} is: {lca_node.data if lca_node else None}")  # Output: 2
+
+n1 = 4
+n2 = 6
+lca_node = lca(root, n1, n2)
+print(f"LCA of {n1} and {n2} is: {lca_node.data if lca_node else None}") # Output: 1
+
+n1 = 4
+n2 = 10 #10 is not in the tree
+lca_node = lca(root, n1, n2)
+print(f"LCA of {n1} and {n2} is: {lca_node.data if lca_node else None}") # Output: None
+
+```
+
+**2. Iterative Approach (Using a Stack/Queue):**
+
+While recursion is often cleaner, an iterative approach can be beneficial for very deep trees to avoid stack overflow errors.  This usually involves using a stack (for depth-first traversal) or a queue (for breadth-first traversal) to keep track of the nodes being visited.  The implementation is more complex than the recursive method.  (I'll omit the iterative code here for brevity, but it's a valid alternative.)
+
+
+**Important Considerations:**
+
+* **Node Existence:** The `lca` function should handle cases where one or both of the input nodes (`n1`, `n2`) are not present in the tree.  The example code above includes this handling.
+* **Error Handling:**  Consider adding error handling (e.g., raising exceptions) for invalid input (e.g., `root` is `None`).
+* **Efficiency:** The recursive approach has a time complexity of O(N), where N is the number of nodes in the tree (in the worst case, we might traverse the entire tree).  Space complexity is also O(H) in the worst case due to the recursive call stack (H is the height of the tree).
+
+
+The recursive approach is generally preferred for its clarity and readability, unless you're concerned about exceptionally deep trees where stack overflow might be a problem.  In that case, an iterative approach would be necessary.
+
