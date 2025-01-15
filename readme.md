@@ -56005,3 +56005,119 @@ inorder_traversal(bst.root) # Output: Inorder traversal (iterative): 1 3 6 8 10 
 
 Remember to handle potential errors, such as duplicate data insertion (decide whether to allow duplicates or not and implement accordingly).  The examples above do not explicitly handle duplicates; they simply overwrite existing nodes with the same data if encountered.  You might want to add a check for that depending on the desired behavior.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node:**  Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:** This is the most complex case.  We typically replace the node with its inorder predecessor (largest node in the left subtree) or inorder successor (smallest node in the right subtree).
+
+Here's a C++ implementation demonstrating BST deletion, handling all three cases:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left, *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+// Function to find the inorder predecessor (largest in the left subtree)
+Node* findPredecessor(Node* root) {
+    Node* current = root->left;
+    while (current->right != nullptr) {
+        current = current->right;
+    }
+    return current;
+}
+
+
+Node* deleteNode(Node* root, int key) {
+    if (root == nullptr) {
+        return root; // Key not found
+    }
+
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // Key found
+        // Case 1: Leaf node
+        if (root->left == nullptr && root->right == nullptr) {
+            delete root;
+            return nullptr;
+        }
+        // Case 2: One child
+        else if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+        // Case 3: Two children
+        else {
+            Node* pred = findPredecessor(root); //Using Inorder Predecessor
+            root->data = pred->data;
+            root->left = deleteNode(root->left, pred->data);
+        }
+    }
+    return root;
+}
+
+//Inorder traversal for printing the BST
+void inorder(Node* root) {
+    if (root != nullptr) {
+        inorder(root->left);
+        std::cout << root->data << " ";
+        inorder(root->right);
+    }
+}
+
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorder(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 20); //Deleting a leaf node
+
+    std::cout << "Inorder traversal after deleting 20: ";
+    inorder(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 30); //Deleting a node with one child
+
+    std::cout << "Inorder traversal after deleting 30: ";
+    inorder(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 50); //Deleting a node with two children
+
+    std::cout << "Inorder traversal after deleting 50: ";
+    inorder(root);
+    std::cout << std::endl;
+
+    //Clean up memory (Important to prevent leaks) -  Add similar delete calls for other nodes as needed.
+    //This is a simplified example; a robust solution would require a more sophisticated cleanup strategy.
+    delete root;
+
+    return 0;
+}
+```
+
+Remember that this code uses the inorder predecessor to handle the two-children case. You could equally well use the inorder successor – the choice is largely arbitrary.  Also crucial is the memory management:  While this example shows basic deletion,  in a larger application, you would need more sophisticated memory management (possibly smart pointers) to prevent memory leaks.  Always ensure that you deallocate memory appropriately after deleting nodes.
+
