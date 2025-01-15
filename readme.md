@@ -55113,3 +55113,97 @@ These examples demonstrate different aspects of algorithmic problem-solving:
 
 Remember to consider not just the solution, but also its efficiency and correctness.  Testing your solution with various inputs is essential to ensure it works as intended.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing ways to improve it:
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This will print:
+
+```
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+```
+
+**Version 2: Slightly Improved with String Interpolation**
+
+This version uses string interpolation for slightly cleaner output:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzz(n: 15)
+```
+
+This version is more concise because it avoids nested `if-else if` statements.  It checks for divisibility by 3 and 5 separately and concatenates the strings. If both conditions are false, `output` remains empty, and the number itself is printed.
+
+
+**Version 3:  Functional Approach (more advanced)**
+
+This uses a more functional approach with the `map` function:
+
+```swift
+func fizzBuzz(n: Int) -> [String] {
+    return (1...n).map { i in
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        return output.isEmpty ? "\(i)" : output
+    }
+}
+
+print(fizzBuzz(n: 15).joined(separator: "\n")) // Prints the result, each on a new line
+```
+
+This version returns an array of strings, making it more reusable.  The `joined(separator: "\n")` method joins the array elements with newline characters for formatted output.
+
+
+**Choosing the Right Version:**
+
+* **Version 1:**  Easiest to understand for beginners.
+* **Version 2:** More concise and efficient than Version 1.
+* **Version 3:**  Demonstrates functional programming concepts and is more reusable.  It's best suited for programmers with some experience in Swift.
+
+
+Remember to choose the version that best suits your current skill level and the context of your project.  Start with the basics and gradually progress to more advanced techniques as you become more comfortable with Swift.
+
