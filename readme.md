@@ -49597,3 +49597,72 @@ A do-while loop executes the code block at least once, then checks the condition
 
 These are just basic examples.  Loops can be much more complex, incorporating nested loops, break and continue statements for more control flow, and iterating over various data structures.  The best type of loop to use depends on the specific task.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a structure where you iterate through combinations of elements from different sets.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed for each combination of outer and inner loop variables
+```
+
+**Examples:**
+
+**1. Printing a multiplication table:**
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(f"{i * j}\t", end="") # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+This code will print a 10x10 multiplication table.  The outer loop iterates through rows (1 to 10), and the inner loop iterates through columns (1 to 10) for each row.
+
+
+**2. Iterating through a matrix (2D list):**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()
+```
+
+This code will print each element of the `matrix`.
+
+
+**3. Finding pairs of numbers that add up to a target sum:**
+
+```python
+numbers = [1, 2, 3, 4, 5]
+target_sum = 7
+
+for i in range(len(numbers)):
+    for j in range(i + 1, len(numbers)):  # Start j from i+1 to avoid duplicates and self-pairs
+        if numbers[i] + numbers[j] == target_sum:
+            print(f"Pair found: ({numbers[i]}, {numbers[j]})")
+```
+
+This code finds all pairs of numbers in the `numbers` list that add up to `target_sum`.  Note the `j` loop starts from `i+1` to avoid redundant pairs (e.g., (1,2) and (2,1)).
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can be computationally expensive, especially with large datasets. The time complexity increases significantly as the size of the iterables grows (often O(n^2) or higher).  Consider using more efficient algorithms if performance is critical.
+* **Readability:** Properly indent your code to clearly show the nesting structure.  Using meaningful variable names also improves readability.
+* **Infinite Loops:** Be cautious not to create infinite loops by accidentally setting up conditions that never terminate.
+
+
+Nested loops are a fundamental programming concept used in many algorithms, from simple tasks to complex computations.  Understanding how they work is crucial for writing effective and efficient programs.
+
