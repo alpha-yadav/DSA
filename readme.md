@@ -54392,3 +54392,131 @@ Graph theory has a vast array of applications in various fields, including:
 
 This introduction provides a foundational understanding of graph theory.  Further exploration can delve into specific algorithms (like Dijkstra's algorithm for shortest paths, breadth-first search, depth-first search), different types of graphs (planar graphs, bipartite graphs), and more advanced topics.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient technique, especially for sparse graphs (graphs with relatively few edges compared to the number of possible edges).  Here's a breakdown of how it works, along with different implementation details and considerations:
+
+**The Core Idea:**
+
+An adjacency list represents a graph as an array (or a hash table/dictionary) of lists.  Each element in the array corresponds to a vertex (node) in the graph.  The list at the index representing a vertex contains the vertices that are adjacent to it (i.e., connected by an edge).
+
+**Implementation Details:**
+
+Several ways exist to implement adjacency lists, varying in data structures used and whether the graph is directed or undirected:
+
+* **Undirected Graph:**  If an edge exists between vertices `u` and `v`, both `v` will be in `u`'s list, and `u` will be in `v`'s list.
+
+* **Directed Graph:** If an edge exists from vertex `u` to vertex `v`, then `v` will be in `u`'s list, but `u` won't necessarily be in `v`'s list.
+
+* **Weighted Graph:**  The adjacency list can store tuples or custom objects containing the adjacent vertex and the weight of the edge.  For example: `[(v1, weight1), (v2, weight2), ...]`
+
+* **Data Structures:**
+
+    * **Arrays of Lists:**  The simplest approach.  The array indices directly correspond to vertex indices (0, 1, 2, ...).  Each element of the array is a list or vector.
+
+    * **Dictionaries/Hash Tables:**  Using dictionaries (like Python's `dict`) allows for more flexible vertex labeling (not necessarily integers 0, 1, 2...).  Keys are vertex labels, and values are lists of adjacent vertices. This is particularly beneficial for large graphs with non-sequential vertex identifiers.
+
+**Example Implementations:**
+
+**Python (using dictionaries):**
+
+```python
+# Directed graph using a dictionary
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D'],
+    'C': ['E'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+# Accessing neighbors of vertex 'A':
+print(graph['A'])  # Output: ['B', 'C']
+
+# Weighted graph (using tuples)
+weighted_graph = {
+    'A': [('B', 5), ('C', 2)],
+    'B': [('D', 3)],
+    'C': [('E', 1)],
+    'D': [],
+    'E': [('F', 4)],
+    'F': []
+}
+
+# Accessing neighbors and weights of vertex 'A':
+print(weighted_graph['A']) # Output: [('B', 5), ('C', 2)]
+
+```
+
+**Python (using lists - Undirected Graph):**
+
+```python
+num_vertices = 6  #Number of Vertices
+graph = [[] for _ in range(num_vertices)]
+
+#Adding edges:  (u, v) represents an edge between u and v
+def add_edge(u, v):
+    graph[u].append(v)
+    graph[v].append(u) #undirected so add in both directions
+
+add_edge(0,1)
+add_edge(0,2)
+add_edge(1,3)
+add_edge(2,4)
+add_edge(4,5)
+
+print(graph) #output will be list of lists representing adjacency list of graph
+```
+
+
+
+**C++ (using vectors):**
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int num_vertices = 6;
+    vector<vector<int>> graph(num_vertices);
+
+    // Add edges (directed)
+    graph[0].push_back(1);
+    graph[0].push_back(2);
+    graph[1].push_back(3);
+    graph[2].push_back(4);
+    graph[4].push_back(5);
+
+    // Print the adjacency list
+    for (int i = 0; i < num_vertices; ++i) {
+        cout << i << ": ";
+        for (int neighbor : graph[i]) {
+            cout << neighbor << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+```
+
+**Advantages of Adjacency Lists:**
+
+* **Efficient for sparse graphs:**  Space complexity is proportional to the number of edges plus vertices (O(V+E)).  This is much better than an adjacency matrix for sparse graphs (O(V^2)).
+
+* **Easy to implement:** Relatively straightforward to code and understand.
+
+* **Efficient to find neighbors:**  Finding the neighbors of a vertex takes O(degree(v)) time, where degree(v) is the number of edges connected to vertex v.
+
+
+**Disadvantages of Adjacency Lists:**
+
+* **Less efficient for dense graphs:** For dense graphs (many edges), an adjacency matrix might be more efficient.
+
+* **Checking for edge existence can be slower:**  To check if an edge exists between two vertices, you need to iterate through the adjacency list of one of the vertices (O(degree(v))).  An adjacency matrix allows for O(1) edge existence checking.
+
+
+Choosing between adjacency lists and matrices depends on the specific characteristics of your graph (density) and the operations you'll be performing most frequently.  Adjacency lists are generally preferred for sparse graphs due to their better space efficiency.
+
