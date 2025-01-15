@@ -54520,3 +54520,101 @@ int main() {
 
 Choosing between adjacency lists and matrices depends on the specific characteristics of your graph (density) and the operations you'll be performing most frequently.  Adjacency lists are generally preferred for sparse graphs due to their better space efficiency.
 
+#  Topological Sort 
+A topological sort is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's an arrangement of nodes where you can follow the arrows without ever going backward.  This is only possible if the graph is acyclic (contains no cycles).
+
+**Why is it useful?**
+
+Topological sorting is crucial in various applications where dependencies exist between tasks or elements.  Some examples include:
+
+* **Course scheduling:**  If course A is a prerequisite for course B, A must come before B in the schedule.
+* **Software compilation:**  Modules in a software project may depend on each other; compilation must follow the dependency order.
+* **Build systems (like Make):** Determining the order to compile files based on their dependencies.
+* **Data serialization:**  Representing data structures that have dependencies in a linear format.
+
+
+**Algorithms for Topological Sorting:**
+
+Two common algorithms are used:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue to process nodes with no incoming edges.
+
+   * **Initialization:**
+     * Find all nodes with an in-degree of 0 (no incoming edges). Add these to a queue.
+     * Create an array to store the in-degree of each node.
+
+   * **Iteration:**
+     * While the queue is not empty:
+       * Remove a node from the queue.  Add this node to the sorted list.
+       * For each outgoing edge from the removed node:
+         * Decrement the in-degree of the neighbor node.
+         * If the in-degree of the neighbor becomes 0, add it to the queue.
+
+   * **Cycle Detection:**
+     * If the final sorted list doesn't contain all nodes, the graph contains a cycle.
+
+   **Python Code (Kahn's Algorithm):**
+
+   ```python
+   from collections import deque
+
+   def topological_sort(graph):
+       in_degree = {node: 0 for node in graph}
+       for node in graph:
+           for neighbor in graph[node]:
+               in_degree[neighbor] += 1
+
+       queue = deque([node for node in in_degree if in_degree[node] == 0])
+       sorted_nodes = []
+
+       while queue:
+           node = queue.popleft()
+           sorted_nodes.append(node)
+           for neighbor in graph[node]:
+               in_degree[neighbor] -= 1
+               if in_degree[neighbor] == 0:
+                   queue.append(neighbor)
+
+       if len(sorted_nodes) != len(graph):
+           return "Cycle detected"  # Graph is not a DAG
+
+       return sorted_nodes
+
+   # Example usage:
+   graph = {
+       'A': ['C'],
+       'B': ['C', 'D'],
+       'C': ['E'],
+       'D': ['F'],
+       'E': ['F'],
+       'F': []
+   }
+
+   print(topological_sort(graph))  # Possible output: ['A', 'B', 'C', 'D', 'E', 'F'] (order may vary)
+
+   ```
+
+2. **Depth-First Search (DFS) with Post-order Traversal:**
+
+   This algorithm uses DFS to recursively explore the graph.  The nodes are added to the sorted list in post-order (after all descendants have been visited).  If a back edge is encountered during DFS, the graph has a cycle.
+
+   * **Initialization:**  Create a stack to store the sorted nodes and a set to keep track of visited nodes.
+
+   * **DFS Function:**
+     * Mark the current node as visited.
+     * Recursively visit all unvisited neighbors.
+     * Add the current node to the stack (post-order).
+
+   * **Cycle Detection:**  If DFS encounters a visited node that is not a parent (back edge), a cycle exists.
+
+
+**Choosing an Algorithm:**
+
+* Kahn's algorithm is generally considered more efficient for larger graphs, especially sparse ones.  Its time complexity is O(V + E), where V is the number of vertices and E is the number of edges.
+* DFS is often simpler to implement but can have a slightly higher time complexity in some cases.  Its time complexity is also O(V + E).
+
+
+Remember that topological sorts are not unique for a given DAG; multiple valid orderings may exist.  Both algorithms will produce a valid topological sort if the input graph is acyclic.
+
