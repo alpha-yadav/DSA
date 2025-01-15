@@ -54716,3 +54716,25 @@ else:
 
 This algorithm efficiently detects cycles in a directed graph using Depth-First Search.  The time complexity is O(V+E), where V is the number of vertices and E is the number of edges, which is linear in the size of the graph. The space complexity is O(V) due to the `visited` and `recStack` arrays.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of efficient algorithms for solving graph problems, primarily focusing on finding shortest paths and related tasks.  While there isn't one single "Thorup's algorithm," the name is associated with Mikkel Thorup's significant contributions to the field, particularly his work on linear-time algorithms for various graph problems.  His algorithms often achieve near-linear time complexity, which is exceptionally fast for such problems.
+
+Here's a breakdown of what's typically included under the umbrella of "Thorup's algorithm":
+
+* **Linear-time single-source shortest paths (SSSP) in undirected graphs with non-negative weights:**  This is probably the most well-known contribution.  Thorup's algorithm achieves a time complexity of O(m), where 'm' is the number of edges in the graph.  This is asymptotically optimal, meaning it's as fast as you can possibly get in terms of the number of edges.  It's based on sophisticated techniques, including advanced data structures and randomization.  The randomization makes it a Las Vegas algorithm – it always returns the correct result but its running time is probabilistic.
+
+* **Near-linear-time algorithms for other graph problems:**  Thorup's work extends beyond SSSP. He has developed near-linear time algorithms for various other graph problems, often building upon techniques used in his SSSP algorithm.  Examples include:
+    * **All-pairs shortest paths (APSP):**  Finding the shortest paths between all pairs of vertices in a graph.
+    * **Minimum spanning trees (MST):**  Finding a tree connecting all vertices with minimum total edge weight.
+    * **Approximate distance oracles:**  Data structures that can quickly answer queries about approximate distances between pairs of vertices.
+
+**Key Characteristics of Thorup's Algorithms:**
+
+* **Linear or near-linear time complexity:**  This is the hallmark of his algorithms.  They are remarkably efficient.
+* **Randomization:**  Many of his algorithms use randomization, leading to probabilistic running times.  However, they usually have high success probability and are considered practical.
+* **Sophisticated data structures:**  He often employs advanced data structures, making the algorithms quite complex to implement.
+* **Practical considerations:** While theoretically optimal, the large constant factors hidden in the "O" notation can sometimes make them less practical than simpler algorithms for smaller graphs.
+
+
+**In summary:**  "Thorup's algorithm" isn't a single algorithm but a body of work focusing on highly efficient, near-linear time algorithms for various fundamental graph problems.  His contributions have significantly advanced the field of graph algorithms and continue to be studied and improved upon.  If you're interested in the details, you should search for specific papers by Mikkel Thorup on the problems mentioned above.  The algorithms are quite intricate and require a strong background in algorithms and data structures to fully understand.
+
