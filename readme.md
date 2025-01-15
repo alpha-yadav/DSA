@@ -54170,3 +54170,91 @@ This method is similar to the iterative approach with parent pointers, but uses 
 
 Remember to handle edge cases such as `p` or `q` not being present in the tree.  The provided recursive solution gracefully handles these cases by returning `None` if either node isn't found.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science.  There are several approaches, with varying complexities depending on the tree structure and whether you have parent pointers or not.
+
+**Methods:**
+
+* **Recursive Approach (Binary Tree, Parent Pointers Not Required):** This is a common and elegant solution for binary trees.  It works by recursively traversing the tree.  If both nodes are in the left subtree, recursively search the left subtree. If both are in the right subtree, recursively search the right subtree. Otherwise, the current node is the LCA.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    else:
+        return right
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val} is: {lca.val}") # Output: LCA of 5 and 1 is: 3
+```
+
+* **Iterative Approach (Binary Tree, Parent Pointers Not Required):**  A similar logic can be implemented iteratively using a stack or queue, avoiding recursion. This can improve performance for very deep trees and prevent stack overflow errors.
+
+
+* **Using Parent Pointers:** If each node in the tree stores a pointer to its parent, finding the LCA becomes much simpler. You can traverse upwards from each node `p` and `q`, storing their ancestors in sets (or lists). The LCA is the last common ancestor in these sets.
+
+```python
+class TreeNodeWithParent:
+    def __init__(self, val=0, left=None, right=None, parent=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.parent = parent
+
+def lowestCommonAncestorWithParent(p, q):
+    ancestors_p = set()
+    curr = p
+    while curr:
+        ancestors_p.add(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        if curr in ancestors_p:
+            return curr
+        curr = curr.parent
+    return None #Should not happen if p and q are in the same tree.
+
+#Example (requires building the tree with parent pointers)
+```
+
+* **General Tree (Parent Pointers Required):**  The parent pointer method extends naturally to general trees (trees where a node can have more than two children).
+
+* **Binary Lifting (Binary Tree, Parent Pointers Not Required):** This advanced technique preprocesses the tree to allow for very fast LCA queries (O(log n) time). It involves calculating a jump table for each node, enabling efficient upward traversal.  This is particularly useful for multiple LCA queries on the same tree.
+
+
+**Choosing the Right Method:**
+
+* For simple binary trees and a single LCA query, the recursive approach is often the easiest to understand and implement.
+* For deep trees or many queries, the iterative approach or binary lifting may be more efficient.
+* If parent pointers are readily available, using them simplifies the problem significantly.
+* For general trees, parent pointers are usually necessary.
+
+
+Remember to handle edge cases like empty trees, one node being an ancestor of the other, or nodes not being present in the tree.  Always consider the specifics of your problem (tree structure, query frequency, space constraints) when choosing the most suitable algorithm.
+
