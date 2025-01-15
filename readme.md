@@ -52183,3 +52183,73 @@ Here are a few algorithmic problem examples, ranging in difficulty:
 
 These examples illustrate the progression of difficulty in algorithmic problems.  As you progress, you'll encounter more complex problems requiring more advanced data structures and algorithms.  Websites like LeetCode, HackerRank, and Codewars offer many more algorithmic problems for practice.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple, easy-to-understand version and then progressing to a slightly more concise approach:
+
+**Version 1:  Simple and Readable**
+
+This version uses a straightforward `if-else if-else` structure for clarity:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number, it checks divisibility by 15 (FizzBuzz), 3 (Fizz), and 5 (Buzz) in that order.  The order is important because a number divisible by 15 is also divisible by 3 and 5.
+
+**Version 2: Slightly More Concise**
+
+This version uses a ternary operator and string concatenation for a slightly more compact solution:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+This version builds the output string conditionally. If the string is empty after checking for "Fizz" and "Buzz", it prints the number itself.
+
+
+**Version 3:  Using a Map (More Advanced)**
+
+This version utilizes Swift's `map` function for a functional approach:  (This is generally less readable for beginners, but demonstrates a more advanced technique).
+
+```swift
+func fizzBuzzMap(n: Int) {
+    (1...n).map { i in
+        let fizz = i % 3 == 0 ? "Fizz" : ""
+        let buzz = i % 5 == 0 ? "Buzz" : ""
+        print(fizz + buzz == "" ? String(i) : fizz + buzz)
+    }
+}
+
+fizzBuzzMap(n: 15) // Call the function to test
+```
+
+This version uses a closure within the `map` function to achieve the same result.
+
+
+**Choosing the Right Version:**
+
+For beginners, **Version 1** is recommended for its clarity and ease of understanding.  Version 2 offers a slightly more compact solution, while Version 3 showcases a more functional style, but might be less intuitive initially.  Choose the version that best suits your current skill level and understanding.  Remember to compile and run the code in a Swift playground or a Swift project to see the output.
+
