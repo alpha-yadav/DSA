@@ -55402,3 +55402,59 @@ If `f(n) = Θ(g(n))`, then `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
 
 Big-Omega notation is a crucial tool for understanding the efficiency of algorithms and comparing different algorithms. It helps provide a guarantee about the minimum performance you can expect from an algorithm, even in the best-case scenarios.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used to describe the limiting behavior of a function when the argument tends towards a particular value or infinity.  In computer science, it's used to classify algorithms according to how their runtime or space requirements grow as the input size grows.  It focuses on the dominant factors affecting performance, ignoring constant factors and smaller terms.  This allows us to compare the efficiency of different algorithms regardless of the specific hardware or implementation details.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Worst-case scenario:** Big O typically describes the *worst-case* runtime or space complexity of an algorithm.  This means it represents the upper bound on how much time or space an algorithm will require.  While an algorithm might perform better in some cases, Big O gives us a guarantee of its maximum resource consumption.
+
+* **Asymptotic behavior:** Big O focuses on how the resource usage scales as the input size (usually denoted by 'n') approaches infinity.  We're not concerned with the exact runtime for small inputs, but rather how the runtime grows as 'n' gets very large.
+
+* **Order of growth:**  Big O describes the *order of growth* of the resource usage, not the exact amount.  It categorizes algorithms into classes based on their growth rate (e.g., linear, quadratic, logarithmic).
+
+**Common Big O Notations:**
+
+These are listed in increasing order of growth rate (meaning they become progressively slower as the input size increases):
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example:  Iterating through an array once.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, quicksort (average case).
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating over an array.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example:  Generating all permutations of a sequence.
+
+
+**Example:**
+
+Let's say we have an algorithm that searches for an element in an unsorted array.  In the worst case, we might have to check every element, making the runtime proportional to the size of the array (n).  Therefore, the Big O notation for this algorithm is O(n).
+
+
+**Other Notations:**
+
+Besides Big O, there are other notations used to describe algorithm complexity:
+
+* **Big Omega (Ω):** Describes the *lower bound* on the runtime or space complexity.  It represents the best-case scenario.
+
+* **Big Theta (Θ):** Describes both the *upper and lower bounds*.  It indicates that the runtime or space complexity grows at a specific rate.
+
+**Important Considerations:**
+
+* Big O is a simplification.  It doesn't capture all aspects of performance.  Constant factors and lower-order terms can be significant in practice, especially for smaller input sizes.
+
+* The choice of algorithm depends on the specific application and the relative importance of factors like runtime, memory usage, and code readability.
+
+* Understanding Big O notation is crucial for designing efficient and scalable algorithms.
+
+
+In summary, Big O notation is a powerful tool for analyzing and comparing the efficiency of algorithms, allowing developers to make informed decisions about which algorithms to use in different situations.
+
