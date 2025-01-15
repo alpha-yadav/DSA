@@ -52990,3 +52990,69 @@ print(f"Are root1 and root3 the same (iterative)? {are_trees_same_iterative(root
 
 Both methods achieve the same result.  Choose the recursive approach for its simplicity and readability unless you anticipate dealing with extremely deep trees where stack overflow might be a concern.  In that case, the iterative approach is safer.  Remember to handle the `None` cases carefully in both methods to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing data in a way that allows for efficient searching, insertion, and deletion of elements.  The key property that defines a BST is the *search tree property*:
+
+**Search Tree Property:**  For every node in the tree:
+
+* All nodes in the left subtree have a key value *less than* the node's key value.
+* All nodes in the right subtree have a key value *greater than* the node's key value.
+* There are no duplicate nodes (in most implementations).
+
+**Visual Representation:**
+
+Imagine a tree structure where each node contains a key (and potentially other data).  The tree is organized such that traversing the tree from the root to any leaf node always results in a sorted sequence of keys.
+
+
+**Example:**
+
+A BST containing the keys {8, 3, 10, 1, 6, 14, 4, 7, 13} might look like this:
+
+```
+      8
+     / \
+    3   10
+   / \     \
+  1   6     14
+     / \    /
+    4   7  13
+```
+
+**Key Operations:**
+
+* **Search:** Finding a node with a specific key value. This operation has an average time complexity of O(log n) and a worst-case complexity of O(n) (in a skewed tree).
+
+* **Insertion:** Adding a new node with a specific key value to the tree while maintaining the BST property.  Average time complexity is O(log n), worst-case O(n).
+
+* **Deletion:** Removing a node with a specific key value from the tree while maintaining the BST property.  This is the most complex operation and involves handling three cases: nodes with zero children, one child, or two children.  Average time complexity is O(log n), worst-case O(n).
+
+* **Minimum/Maximum:** Finding the smallest or largest key value in the tree.  These operations are O(log n) on average and can be O(n) in worst-case scenarios.
+
+* **Successor/Predecessor:** Finding the next larger or next smaller key value in the tree.  These are efficient operations within a BST.
+
+* **Inorder Traversal:** Visiting all nodes in a sorted order (left subtree, node, right subtree).  This results in a sorted sequence of the key values.
+
+
+**Advantages of BSTs:**
+
+* **Efficient search, insertion, and deletion:** O(log n) on average, which is much faster than linear search in unsorted data.
+* **Simple implementation:** Relatively easy to understand and implement compared to more complex data structures like AVL trees or red-black trees.
+* **Supports ordered data:** Provides a natural way to store and retrieve sorted data.
+
+
+**Disadvantages of BSTs:**
+
+* **Worst-case performance:**  If the tree becomes unbalanced (e.g., a linked list), the performance degrades to O(n).
+* **Not suitable for all applications:**  If frequent updates (insertions and deletions) are expected and balance is critical, self-balancing BSTs (like AVL trees or red-black trees) are preferred.
+
+
+**Self-Balancing BSTs:**
+
+To mitigate the risk of unbalanced trees and maintain O(log n) performance even in the worst case, self-balancing BSTs automatically adjust their structure during insertions and deletions. Examples include:
+
+* **AVL Trees:**  Maintain a balance factor for each node to ensure the height difference between the left and right subtrees is at most 1.
+* **Red-Black Trees:**  Use coloring of nodes to maintain a balanced structure.
+
+
+In summary, BSTs are a valuable data structure offering efficient operations for sorted data.  However, understanding their limitations and the potential for unbalanced trees is crucial for choosing the right data structure for a specific application.  When balance and guaranteed performance are critical, self-balancing BSTs are a better choice.
+
