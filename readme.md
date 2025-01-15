@@ -55274,3 +55274,38 @@ The best-case time complexity is O(1) (if the target is the first element).  The
 
 Understanding algorithm complexity is vital for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better for large inputs.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a fundamental concept in computer science used to describe the asymptotic behavior of functions, specifically how the runtime or space requirements of an algorithm scale with the input size.  It provides a tight bound, indicating that a function grows at the *same rate* as another function, within constant factors, as the input size approaches infinity.
+
+**Formal Definition:**
+
+Given two functions f(n) and g(n), we say that f(n) is Θ(g(n)) if there exist positive constants c₁ and c₂, and a positive integer n₀ such that for all n ≥ n₀:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+This means that f(n) is bounded both above and below by constant multiples of g(n) for sufficiently large n.  In other words, f(n) grows proportionally to g(n).
+
+**Intuitive Explanation:**
+
+Imagine plotting f(n) and g(n) on a graph.  For sufficiently large n (beyond n₀), the graph of f(n) will lie between two scaled versions of g(n): one scaled up by c₂ and one scaled down by c₁.  The functions essentially follow the same curve, differing only by constant factors.
+
+
+**Key Differences from Big O and Big Omega:**
+
+* **Big O (O):**  Provides an *upper bound*.  f(n) = O(g(n)) means f(n) grows *no faster* than g(n).  It's a "worst-case" scenario.
+* **Big Omega (Ω):** Provides a *lower bound*. f(n) = Ω(g(n)) means f(n) grows *no slower* than g(n). It's a "best-case" scenario (though not always the actual best case, just a lower bound on growth).
+* **Big Theta (Θ):** Provides a *tight bound*. It combines both Big O and Big Omega, indicating that f(n) grows at the *same rate* as g(n).
+
+
+**Examples:**
+
+* **f(n) = 2n + 5; g(n) = n:**  f(n) is Θ(n).  We can find c₁ and c₂ such that c₁n ≤ 2n + 5 ≤ c₂n for sufficiently large n (e.g., c₁ = 1, c₂ = 3, and n₀ = 5).
+* **f(n) = n² + 3n; g(n) = n²:** f(n) is Θ(n²).  The higher-order term dominates.
+* **f(n) = 2ⁿ; g(n) = n²:**  f(n) is *not* Θ(g(n)) because exponential growth is much faster than polynomial growth.  f(n) = O(2ⁿ) and g(n) = O(n²), but their growth rates are fundamentally different.
+
+**Why is Big Theta important?**
+
+Big Theta notation is crucial because it provides a precise description of an algorithm's efficiency. It allows us to compare algorithms accurately, focusing on their scalability rather than getting bogged down in constant factors that might vary with implementation details or hardware.  Knowing the Θ complexity of an algorithm helps in choosing the most efficient solution for large inputs.
+
