@@ -49346,3 +49346,40 @@ Understanding algorithm complexity is crucial for:
 
 By analyzing the complexity of algorithms, developers can make informed decisions about which algorithms to use and how to optimize their performance to meet specific needs.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a powerful tool in computer science and mathematics used to describe the asymptotic behavior of functions, particularly the runtime complexity of algorithms.  Unlike Big-O notation, which provides an upper bound, or Big-Ω notation, which provides a lower bound, Big-Theta notation provides a *tight bound*.  It signifies that a function's growth rate is bounded both above and below by the same function, within constant factors.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+This means that for sufficiently large inputs (*n ≥ n₀*), the function *f(n)* is always sandwiched between *c₁* *g(n)* and *c₂* *g(n)*.  The constants *c₁* and *c₂* account for variations in implementation or hardware, while *n₀* signifies that the relationship only holds for inputs beyond a certain threshold.
+
+**Intuitive Explanation:**
+
+Imagine two curves representing the runtime of two algorithms. If both curves are always within a constant factor of each other (no matter how far out you zoom), then their runtimes are Θ of each other.  They grow at essentially the same rate.
+
+**Example:**
+
+Let's consider the function *f(n) = 2n² + 3n + 1*. We can show that *f(n)* is Θ(*n²*):
+
+1. **Upper Bound:** We can choose *c₂ = 3* and *n₀ = 1*. For *n ≥ 1*,  *2n² + 3n + 1 ≤ 3n²*. (The higher-order term dominates.)
+
+2. **Lower Bound:** We can choose *c₁ = 1* and *n₀ = 1*. For *n ≥ 1*, *2n² + 3n + 1 ≥ n²*. (Again, the higher-order term dominates.)
+
+Therefore, *f(n) = Θ(n²)*.  This means the runtime grows quadratically with the input size.
+
+**Contrast with Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  *f(n) = O(g(n))* means *f(n)* grows no faster than *g(n)*.  It's like saying "the runtime is at *most* this much".
+
+* **Big-Ω (Ω):** Provides a *lower bound*. *f(n) = Ω(g(n))* means *f(n)* grows no slower than *g(n)*. It's like saying "the runtime is at *least* this much".
+
+* **Big-Θ (Θ):** Provides a *tight bound*.  *f(n) = Θ(g(n))* means *f(n)* grows at the *same rate* as *g(n)*. It's a precise description of the growth rate.
+
+**In summary:** Big-Theta provides the most precise and informative description of asymptotic growth. If you can prove a function is Θ(*g(n)*), you know its growth rate very accurately.  However, it's often harder to prove than Big-O, as it requires establishing both upper and lower bounds.  Big-O is frequently used because it's sufficient in many cases (especially for analyzing worst-case performance).
+
