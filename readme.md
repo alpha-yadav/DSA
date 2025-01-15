@@ -49666,3 +49666,29 @@ This code finds all pairs of numbers in the `numbers` list that add up to `targe
 
 Nested loops are a fundamental programming concept used in many algorithms, from simple tasks to complex computations.  Understanding how they work is crucial for writing effective and efficient programs.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to halve (or reduce by some constant factor) the problem size with each step.  This means the time it takes to solve the problem increases logarithmically with the input size.  This is incredibly efficient for large datasets.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  Given a sorted array, you repeatedly divide the search interval in half. If the target value is in the interval, it's either in the left or right half.  You discard the half that doesn't contain it and repeat until you find the target or the interval is empty.
+
+* **Binary Tree Operations (search, insertion, deletion in a balanced tree):**  In a balanced binary search tree (like an AVL tree or red-black tree), each comparison eliminates approximately half of the remaining nodes.  Finding a specific node, inserting a new node, or deleting a node all have a time complexity of O(log n) because of this halving property. Note:  unbalanced trees can degrade to O(n) in the worst case.
+
+* **Efficient algorithms on heaps:** Similar to balanced binary trees, heap-based operations (like insertion, deletion of the minimum/maximum, finding the minimum/maximum element) typically take O(log n) time. Heaps are used in priority queues, for example.
+
+* **Exponential Search:**  A variation of binary search, useful when the data is unbounded or the target value is far into the dataset.  It first performs an exponential search to find a range containing the target, and then uses binary search within that range.
+
+* **Finding the kth smallest/largest element using Quickselect (average case):** While Quickselect has a worst-case time complexity of O(n²), its average-case performance is O(n).  However, finding the kth smallest/largest element often uses a variation of Quickselect that has O(log n) average-case complexity in many cases depending on implementation and specifics.
+
+
+
+**Key characteristics leading to O(log n) complexity:**
+
+* **Divide and conquer:** The problem is repeatedly divided into smaller subproblems.
+* **Halving (or similar reduction):** With each step, the size of the problem is reduced by a constant factor.
+* **Sorted or structured data:**  Often, algorithms with O(log n) complexity require the input data to be sorted or organized in a specific way (like in a balanced binary tree).
+
+
+It's important to remember that the base of the logarithm (e.g., base 2, base 10) doesn't affect the big O notation; it's still considered O(log n).  The base only affects the constant factor which is ignored in Big O notation.
+
