@@ -51357,3 +51357,124 @@ Please provide me with the data or equation you want me to graph.  I need inform
 
 Once you give me the data, I can help you graph it.  I can't create visual graphs directly, but I can describe the graph or give you the coordinates to plot yourself.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, along with considerations for different data types and scenarios:
+
+**How it works:**
+
+An adjacency matrix is a square matrix where each element `matrix[i][j]` represents the connection between vertex (or node) `i` and vertex `j`.
+
+* **Value Representation:** The value in `matrix[i][j]` can represent different things:
+    * **0 or 1 (Boolean):**  `1` indicates an edge exists between vertex `i` and `j`; `0` indicates no edge.  This is suitable for unweighted graphs.
+    * **Weight (Integer or Float):**  The value represents the weight of the edge between `i` and `j`. This is used for weighted graphs (e.g., representing distances in a road network).
+    * **Infinity (∞):**  Can be used to represent the absence of an edge in weighted graphs (instead of 0, which might be a valid weight).
+    * **-1 or other special value:** Can be used to represent absence of an edge or other special cases as needed.
+
+* **Directed vs. Undirected Graphs:**
+    * **Undirected:** The matrix is symmetric ( `matrix[i][j] == matrix[j][i]` ).  An edge from `i` to `j` implies an edge from `j` to `i`.
+    * **Directed:** The matrix is not necessarily symmetric.  `matrix[i][j]` represents an edge from `i` to `j`, which is independent of `matrix[j][i]`.
+
+**Example (Unweighted, Undirected Graph):**
+
+Consider a graph with 4 vertices (A, B, C, D) and the following edges: A-B, A-C, B-D, C-D.
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  1  0  0  1
+C  1  0  0  1
+D  0  1  1  0
+```
+
+
+**Example (Weighted, Directed Graph):**
+
+Same vertices, but now with weighted directed edges:
+
+* A -> B (weight 5)
+* A -> C (weight 2)
+* B -> D (weight 7)
+* C -> D (weight 3)
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  5  2  0
+B  0  0  0  7
+C  0  0  0  3
+D  0  0  0  0
+```
+
+**Code Example (Python):**
+
+```python
+import numpy as np
+
+def create_adjacency_matrix(num_vertices, edges, weighted=False, directed=False):
+    """Creates an adjacency matrix for a graph.
+
+    Args:
+        num_vertices: The number of vertices in the graph.
+        edges: A list of tuples representing edges.  For weighted graphs, each tuple should be (u, v, weight).
+                For unweighted graphs, each tuple should be (u, v).
+        weighted: True if the graph is weighted, False otherwise.
+        directed: True if the graph is directed, False otherwise.
+
+    Returns:
+        A NumPy array representing the adjacency matrix.  Returns None if input is invalid.
+
+    """
+    if weighted and not all(len(edge) == 3 for edge in edges):
+      print("Error: For weighted graphs, edges must be tuples of (u, v, weight).")
+      return None
+    if not weighted and not all(len(edge) == 2 for edge in edges):
+      print("Error: For unweighted graphs, edges must be tuples of (u, v).")
+      return None
+
+    matrix = np.zeros((num_vertices, num_vertices), dtype=float) #Use float to accomodate weights and infinity
+
+    for edge in edges:
+        u, v = edge[0], edge[1]
+        if weighted:
+            weight = edge[2]
+            matrix[u][v] = weight
+            if not directed:
+                matrix[v][u] = weight #For undirected graphs
+        else:
+            matrix[u][v] = 1
+            if not directed:
+                matrix[v][u] = 1
+
+    return matrix
+
+
+#Example usage (unweighted, undirected):
+edges = [(0, 1), (0, 2), (1, 3), (2, 3)]
+matrix = create_adjacency_matrix(4, edges)
+print(matrix)
+
+# Example usage (weighted, directed):
+weighted_edges = [(0, 1, 5), (0, 2, 2), (1, 3, 7), (2, 3, 3)]
+weighted_matrix = create_adjacency_matrix(4, weighted_edges, weighted=True, directed=True)
+print(weighted_matrix)
+
+```
+
+
+**Advantages of Adjacency Matrix:**
+
+* Simple to implement and understand.
+* Efficient for checking if an edge exists between two vertices (O(1) time).
+* Suitable for dense graphs.
+
+**Disadvantages of Adjacency Matrix:**
+
+* Uses a lot of memory for sparse graphs (graphs with few edges).  The space complexity is O(V^2), where V is the number of vertices.
+* Adding or deleting vertices can be inefficient (requires matrix resizing).
+
+
+For sparse graphs, adjacency lists are generally a more efficient data structure.  The choice between adjacency matrix and adjacency list depends on the characteristics of your graph (density, operations you'll perform frequently, etc.).
+
