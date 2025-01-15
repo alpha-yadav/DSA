@@ -52253,3 +52253,74 @@ This version uses a closure within the `map` function to achieve the same result
 
 For beginners, **Version 1** is recommended for its clarity and ease of understanding.  Version 2 offers a slightly more compact solution, while Version 3 showcases a more functional style, but might be less intuitive initially.  Choose the version that best suits your current skill level and understanding.  Remember to compile and run the code in a Swift playground or a Swift project to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm consumes as the input size grows.  It's a crucial aspect of algorithm design and analysis, as it helps us understand how an algorithm will perform with large datasets.  We don't measure the exact runtime in seconds, but rather how the runtime scales with the input size.
+
+There are two main types of complexity analysis:
+
+**1. Time Complexity:** This analyzes how the runtime of an algorithm changes as the input size (usually denoted by 'n') increases.
+
+**2. Space Complexity:** This analyzes how the memory usage of an algorithm changes as the input size increases.
+
+
+**Expressing Complexity:**
+
+We use Big O notation (O), Big Omega notation (Ω), and Big Theta notation (Θ) to describe complexity.  These notations focus on the dominant factors as n approaches infinity, ignoring constant factors and lower-order terms.
+
+* **Big O Notation (O):** Represents the *upper bound* of an algorithm's growth rate.  It gives the worst-case scenario.  We say an algorithm is O(f(n)) if its runtime is at most a constant multiple of f(n) for sufficiently large n.
+
+* **Big Omega Notation (Ω):** Represents the *lower bound* of an algorithm's growth rate.  It gives the best-case scenario.  We say an algorithm is Ω(f(n)) if its runtime is at least a constant multiple of f(n) for sufficiently large n.
+
+* **Big Theta Notation (Θ):** Represents the *tight bound*, meaning both the upper and lower bounds are the same.  We say an algorithm is Θ(f(n)) if its runtime is both O(f(n)) and Ω(f(n)).
+
+
+**Common Complexity Classes:**
+
+These are listed in increasing order of growth rate (meaning worse performance):
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching an unsorted array for a specific element.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating over the input.  Bubble sort, selection sort.
+
+* **O(n³) - Cubic Time:** The runtime increases cubically with the input size.  Example: Some matrix operations.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**Analyzing Algorithms:**
+
+To analyze an algorithm's complexity, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime.
+
+2. **Count the number of basic operations:** Express the number of operations as a function of the input size 'n'.
+
+3. **Identify the dominant terms:** Ignore constant factors and lower-order terms.
+
+4. **Express the complexity using Big O notation:**  This gives the upper bound on the runtime.  You might also analyze best-case (Ω) and average-case (often also expressed using Big O).
+
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The basic operation is the comparison (`arr[i] == target`). In the worst case (target is not found), this operation is performed 'n' times (where n is the length of the array).  Therefore, the time complexity is O(n).
+
+Understanding algorithm complexity is essential for choosing the right algorithm for a given problem and for optimizing existing algorithms.  An algorithm with a lower complexity will generally perform better with larger input sizes.
+
