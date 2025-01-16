@@ -68407,3 +68407,128 @@ The best traversal algorithm depends on the specific problem:
 
 Remember that the time complexity of both DFS and BFS is O(V + E), where V is the number of vertices (nodes) and E is the number of edges.  The space complexity also depends on the size of the graph, and in the worst case, it can be O(V).  However, in practice, the space usage can vary based on the graph's structure and the algorithm's implementation.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used to represent the graph (adjacency matrix, adjacency list) and whether you need to handle cycles or not. Here are a few implementations in Python:
+
+**1. DFS using Adjacency List (Recursive):** This is a common and concise approach for graphs represented as adjacency lists.
+
+```python
+def dfs_recursive(graph, start, visited=None):
+    """
+    Performs Depth-First Search recursively on a graph represented as an adjacency list.
+
+    Args:
+      graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+      start: The starting node for the DFS traversal.
+      visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+
+    Returns:
+      A list of nodes visited in DFS order.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(start, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+    return visited
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Output: A B D E F C  (Order may slightly vary depending on dictionary iteration)
+print("\nVisited nodes:", dfs_recursive(graph, 'A')) # Output: Visited nodes: {'A', 'B', 'D', 'E', 'F', 'C'}
+
+```
+
+
+**2. DFS using Adjacency List (Iterative):** This uses a stack to mimic the recursion, avoiding potential stack overflow issues for very deep graphs.
+
+```python
+def dfs_iterative(graph, start):
+    """
+    Performs Depth-First Search iteratively on a graph represented as an adjacency list.
+
+    Args:
+      graph: A dictionary representing the graph.
+      start: The starting node.
+
+    Returns:
+      A list of nodes visited in DFS order.
+    """
+    visited = set()
+    stack = [start]
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            print(vertex, end=" ")
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)  # Add unvisited neighbors
+
+    return visited
+
+
+# Example usage (same graph as above):
+print("\n\nDFS traversal (iterative):")
+dfs_iterative(graph, 'A') # Output: A C F E B D (Order may slightly vary)
+print("\nVisited nodes:", dfs_iterative(graph, 'A')) #Output: Visited nodes: {'A', 'C', 'F', 'E', 'B', 'D'}
+
+```
+
+**3.  DFS with Handling Cycles (using a visited and recursion stack):**  To avoid infinite loops in graphs with cycles, keep track of nodes currently in the recursion stack.
+
+```python
+def dfs_with_cycle_detection(graph, start, visited=None, recursion_stack=None):
+    if visited is None:
+        visited = set()
+    if recursion_stack is None:
+        recursion_stack = set()
+    
+    visited.add(start)
+    recursion_stack.add(start)
+    print(start, end=" ")
+
+    for neighbor in graph.get(start, []):
+        if neighbor not in visited:
+            if not dfs_with_cycle_detection(graph, neighbor, visited, recursion_stack):
+                return False # Cycle detected
+        elif neighbor in recursion_stack:
+            return False # Cycle detected
+
+    recursion_stack.remove(start)
+    return True # No cycle detected
+
+
+# Example usage with a cycle:
+graph_with_cycle = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F', 'A'], # Cycle: C -> A
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("\n\nDFS with cycle detection:")
+if dfs_with_cycle_detection(graph_with_cycle, 'A'):
+    print("\nNo cycle detected.")
+else:
+    print("\nCycle detected!")
+
+
+```
+
+Remember to choose the implementation that best suits your needs and the way your graph is represented.  The iterative approach is generally preferred for its robustness against stack overflow errors in large graphs.  The cycle detection version is crucial if you're working with graphs that might contain cycles.  And the recursive version is often the most readable and concise for smaller, acyclic graphs.
+
