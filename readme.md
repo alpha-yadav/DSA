@@ -65860,3 +65860,48 @@ Consider a simple linear search algorithm that searches for a value in an unsort
 
 Understanding algorithm complexity is essential for choosing the right algorithm for a given task, especially when dealing with large datasets where efficiency is crucial.  Poorly chosen algorithms can lead to significant performance bottlenecks.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a notation used in computer science to describe the asymptotic behavior of functions, particularly the time or space complexity of algorithms.  It provides a tight bound, meaning it describes both the upper and lower bounds of a function's growth rate.
+
+**Formal Definition:**
+
+We say that f(n) = Θ(g(n)) if and only if there exist positive constants c₁ and c₂, and a positive integer n₀ such that for all n ≥ n₀:
+
+```
+c₁g(n) ≤ f(n) ≤ c₂g(n)
+```
+
+This means that for sufficiently large values of n (n ≥ n₀), the function f(n) is bounded both above and below by constant multiples of g(n).  In simpler terms, f(n) grows at the same rate as g(n).  The constants c₁ and c₂ represent scaling factors, and n₀ represents a threshold beyond which the inequality holds.
+
+**Key Characteristics:**
+
+* **Tight Bound:**  Unlike Big O notation (which provides only an upper bound) and Big Ω notation (which provides only a lower bound), Θ provides a tight bound.  It accurately reflects the function's growth rate within constant factors.
+
+* **Asymptotic Behavior:** Θ focuses on the behavior of the function as the input size (n) approaches infinity.  Small variations for small values of n are ignored.
+
+* **Focus on Growth Rate:**  The exact values of the function are less important; the primary focus is on how the function's value scales as the input size increases.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1:**  f(n) = Θ(n²) because for sufficiently large n, the n² term dominates, and we can find constants c₁ and c₂ such that c₁n² ≤ 2n² + 3n + 1 ≤ c₂n².
+
+* **f(n) = 5n log n:**  f(n) = Θ(n log n)
+
+* **f(n) = 7:** f(n) = Θ(1)  (Constant time complexity)
+
+* **f(n) = 2ⁿ:** f(n) = Θ(2ⁿ) (Exponential time complexity)
+
+**Contrast with Big O and Big Ω:**
+
+* **Big O (O):** Provides an upper bound.  f(n) = O(g(n)) means f(n) grows *no faster* than g(n).
+
+* **Big Ω (Ω):** Provides a lower bound. f(n) = Ω(g(n)) means f(n) grows *at least as fast* as g(n).
+
+* **Big Θ (Θ):** Provides a tight bound. f(n) = Θ(g(n)) means f(n) grows *at the same rate* as g(n).
+
+
+If f(n) = Θ(g(n)), then it's also true that f(n) = O(g(n)) and f(n) = Ω(g(n)). However, the converse is not always true.  You can have f(n) = O(g(n)) and f(n) = Ω(g(n)) without f(n) = Θ(g(n)).  This happens when the upper and lower bounds don't match tightly.
+
+
+In essence, Big-Theta notation provides the most precise description of the asymptotic growth rate of a function when available.  It's crucial for analyzing algorithm efficiency and comparing the performance of different algorithms.
+
