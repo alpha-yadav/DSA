@@ -61698,3 +61698,121 @@ While less elegant than the recursive approach, an iterative approach can be ben
 
 The recursive approach is generally preferred for its clarity and efficiency in most cases when dealing with binary trees.  The iterative approach might be considered only if you have concerns about potential stack overflow issues with very deep trees.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic algorithm problem.  The approach depends on the type of tree and whether you have parent pointers.  Here's a breakdown of common methods:
+
+**1. Binary Tree with Parent Pointers:**
+
+If each node has a pointer to its parent, finding the LCA is straightforward:
+
+* **Algorithm:**
+    1. Traverse upwards from node `A` and store all its ancestors in a set `ancestorsA`.
+    2. Traverse upwards from node `B`, checking if each ancestor is present in `ancestorsA`.
+    3. The first ancestor of `B` found in `ancestorsA` is the LCA.
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent(nodeA, nodeB):
+    ancestorsA = set()
+    curr = nodeA
+    while curr:
+        ancestorsA.add(curr)
+        curr = curr.parent
+
+    curr = nodeB
+    while curr:
+        if curr in ancestorsA:
+            return curr
+        curr = curr.parent
+
+    return None  # Nodes are not related
+
+
+# Example Usage:
+root = Node(1)
+node2 = Node(2)
+node3 = Node(3)
+node4 = Node(4)
+node5 = Node(5)
+
+root.parent = None
+node2.parent = root
+node3.parent = root
+node4.parent = node2
+node5.parent = node2
+
+print(f"LCA of node 4 and node 5: {lca_with_parent(node4, node5).data}") # Output: 2
+print(f"LCA of node 3 and node 4: {lca_with_parent(node3, node4).data}") # Output: 1
+
+```
+
+**2. Binary Tree without Parent Pointers:**
+
+This is more challenging.  The most common approach is a recursive algorithm:
+
+* **Algorithm:**
+    1. If the current node is `None`, return `None`.
+    2. If the current node is either `A` or `B`, return the current node.
+    3. Recursively search the left and right subtrees.
+    4. If both subtrees return a node (meaning `A` and `B` are in different subtrees), the current node is the LCA.
+    5. Otherwise, return the node returned by the subtree that contains at least one of `A` or `B`.
+
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_without_parent(root, nodeA, nodeB):
+    if root is None:
+        return None
+
+    if root == nodeA or root == nodeB:
+        return root
+
+    left_lca = lca_without_parent(root.left, nodeA, nodeB)
+    right_lca = lca_without_parent(root.right, nodeA, nodeB)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+#Example Usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(f"LCA of node 4 and node 5: {lca_without_parent(root, root.left.left, root.left.right).data}") #Output: 2
+print(f"LCA of node 4 and node 3: {lca_without_parent(root, root.left.left, root.right).data}") #Output: 1
+
+```
+
+**3. General Tree:**
+
+For general trees (not necessarily binary), you can adapt the recursive approach, but you'll need to iterate through all children instead of just left and right.  Alternatively, you can use a depth-first search (DFS) to find paths from the root to each node and then find the longest common prefix of those paths.
+
+
+Remember to handle edge cases such as:
+
+* One or both nodes are not in the tree.
+* One node is an ancestor of the other.
+
+
+Choose the appropriate method based on the specifics of your tree structure and whether parent pointers are available.  The recursive method for binary trees without parent pointers is generally efficient (O(N) time complexity in the worst case, where N is the number of nodes).  The method using parent pointers is usually faster (O(h) where h is the height of the tree).
+
