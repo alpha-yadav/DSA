@@ -67719,3 +67719,82 @@ The iterative approach would involve:
 
 Remember to handle edge cases, such as when one or both nodes are not found in the tree.  The provided recursive solution includes this error handling.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science with applications in various areas, including file systems, version control systems, and phylogenetic analysis.  There are several approaches to solving this problem, each with its own trade-offs in terms of time and space complexity.
+
+**Methods for Finding LCA:**
+
+1. **Brute-Force Approach (Recursive):**
+
+   * This method recursively traverses the tree from the root.
+   * For each node, it checks if both nodes are present in its left and right subtrees.
+   * If both nodes are found in the subtrees, the current node is the LCA.  If only one node is found, the LCA lies in that subtree.  If neither is found, the LCA is not in that branch.
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (worst-case scenario, you traverse the entire tree).
+   * **Space Complexity:** O(H), where H is the height of the tree (due to recursive calls).  This becomes O(N) for skewed trees.
+
+
+2. **Using Parent Pointers (Efficient for some cases):**
+
+   * If each node stores a pointer to its parent, finding the LCA becomes much more efficient.
+   * You trace upwards from each node until you find a common ancestor. The first common ancestor encountered is the LCA.
+
+   * **Time Complexity:** O(H), where H is the height of the tree.  This is much better than the brute-force approach for balanced trees.
+   * **Space Complexity:** O(1)
+
+
+3. **Binary Tree LCA (Optimized for Binary Trees):**
+
+   * This approach leverages the binary tree structure.
+   * If both nodes are in the left subtree, recursively search the left subtree.
+   * If both nodes are in the right subtree, recursively search the right subtree.
+   * Otherwise, the current node is the LCA.
+
+   * **Time Complexity:** O(H), where H is the height of the tree.  Better than brute-force, especially for balanced trees.
+   * **Space Complexity:** O(H) due to recursion.
+
+
+4. **Using a Hash Table (for general trees):**
+
+   * For general trees (not necessarily binary), this method can be efficient.
+   * Perform Depth First Search (DFS) on the tree, storing the path from the root to each node in a hash table (using node as key and path as value).
+   * Find the paths for the two target nodes.
+   * Iterate through the paths, finding the last common node.  This node is the LCA.
+
+   * **Time Complexity:** O(N), where N is the number of nodes.  DFS takes O(N) and path comparison takes O(H) on average.
+   * **Space Complexity:** O(N), to store the paths in the hash table.
+
+
+**Example (Binary Tree LCA - Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+# Example Usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lowestCommonAncestor(root, root.left, root.left.right)
+print(f"LCA of 2 and 5: {lca.data}") # Output: 2
+```
+
+The best method depends on the specific tree structure (binary or general), the availability of parent pointers, and the constraints on space and time complexity.  For balanced binary trees, the optimized recursive approach or the parent pointer method are usually preferred due to their better time complexity. For general trees or when memory is a concern, the brute-force method might be acceptable, or a hash table approach might be more suitable.
+
