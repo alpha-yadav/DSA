@@ -58604,3 +58604,78 @@ class Node:
 
 Remember to replace the example `root` node with your actual binary tree.  The output order will depend on the structure of your tree.  Inorder traversal is particularly useful because for Binary Search Trees (BSTs), it produces a sorted sequence of the node values.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a binary tree is a classic problem in computer science.  There are several approaches, with varying complexities depending on whether the tree is a binary search tree (BST) or a general binary tree.
+
+**Methods:**
+
+**1. General Binary Tree (Non-BST):**
+
+* **Approach using parent pointers:**  If each node has a pointer to its parent, finding the LCA is relatively straightforward.  Traverse upwards from both nodes simultaneously.  The last common ancestor encountered is the LCA.  This method has a time complexity of O(h), where h is the height of the tree.  Space complexity is O(1).
+
+* **Recursive Approach:** This method recursively searches the tree.  The base cases are:
+    * If the current node is `null`, return `null`.
+    * If the current node is either `node1` or `node2`, return the current node.
+    * Recursively search the left and right subtrees.
+    * If both recursive calls return non-`null`, the current node is the LCA.
+    * Otherwise, return the non-`null` result (the node found in one subtree).
+
+    ```java
+    public Node lowestCommonAncestor(Node root, Node node1, Node node2) {
+        if (root == null || root == node1 || root == node2) {
+            return root;
+        }
+
+        Node left = lowestCommonAncestor(root.left, node1, node2);
+        Node right = lowestCommonAncestor(root.right, node1, node2);
+
+        if (left != null && right != null) {
+            return root; // LCA found
+        } else if (left != null) {
+            return left;
+        } else {
+            return right;
+        }
+    }
+    ```
+    This approach also has a time complexity of O(N) in the worst case (skewed tree) and space complexity of O(h) due to the recursive calls (where h is the height of the tree).
+
+
+**2. Binary Search Tree (BST):**
+
+In a BST, we can leverage the property that all nodes smaller than a given node are in its left subtree, and all nodes larger are in its right subtree.
+
+* **Iterative Approach:**  Traverse the tree. If both `node1` and `node2` are smaller than the current node, move to the left subtree. If both are larger, move to the right subtree. Otherwise, the current node is the LCA. This is efficient, with O(h) time complexity and O(1) space complexity.
+
+* **Recursive Approach (similar to the general tree recursive approach, but simpler in understanding):** This is simpler to understand, but functionally the same as the iterative approach.
+
+
+**Example (Java - Recursive Approach for General Binary Tree):**
+
+```java
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int d) {
+        data = d;
+        left = right = null;
+    }
+}
+
+class Solution {
+    public Node lowestCommonAncestor(Node root, Node node1, Node node2) {
+        // ... (recursive code from above) ...
+    }
+}
+```
+
+**Choosing the Right Method:**
+
+* If you have parent pointers, use the parent pointer method for efficiency.
+* For a general binary tree without parent pointers, the recursive approach is relatively easy to implement.  Consider iterative solutions for potentially better performance in very large trees.
+* For a BST, the iterative approach is generally preferred for its efficiency.
+
+
+Remember to handle edge cases such as one or both nodes not being present in the tree.  Also, consider adding error handling for invalid inputs.
+
