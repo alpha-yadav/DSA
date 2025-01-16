@@ -66144,3 +66144,83 @@ public class Main {
 
 These examples all perform the same basic task: printing the numbers 0 through 4.  The choice between `for` and `while` depends on whether you know the number of iterations in advance.  `for` is generally preferred when the number of iterations is known, while `while` is better when the loop continues until a specific condition is met.  Remember to avoid infinite loops by ensuring your loop's condition eventually becomes false.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a structure that allows you to iterate over multiple dimensions or nested data structures.
+
+Here's a breakdown of how they work and examples in several programming languages:
+
+**How Nested Loops Work:**
+
+The outer loop controls the major iteration, while the inner loop handles the finer-grained iteration within each step of the outer loop.  The inner loop completes all its iterations before the outer loop moves to its next iteration.
+
+**Example:  Printing a Multiplication Table (Python)**
+
+This classic example demonstrates the use of nested loops to generate a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This code will produce a 10x10 multiplication table. The outer loop iterates through the rows (1 to 10), and for each row, the inner loop iterates through the columns (1 to 10), calculating and printing the product.
+
+**Example:  Iterating Through a Matrix (C++)**
+
+Nested loops are frequently used to process two-dimensional arrays (matrices):
+
+```c++
+#include <iostream>
+
+int main() {
+  int matrix[3][4] = {
+    {1, 2, 3, 4},
+    {5, 6, 7, 8},
+    {9, 10, 11, 12}
+  };
+
+  for (int i = 0; i < 3; i++) { // Outer loop: rows
+    for (int j = 0; j < 4; j++) { // Inner loop: columns
+      std::cout << matrix[i][j] << " ";
+    }
+    std::cout << std::endl; // Newline after each row
+  }
+  return 0;
+}
+```
+
+This code iterates through a 3x4 matrix, printing each element.
+
+**Example:  Nested Loops in JavaScript**
+
+JavaScript also supports nested loops:
+
+```javascript
+for (let i = 1; i <= 5; i++) {
+  for (let j = 1; j <= i; j++) {
+    document.write("*");
+  }
+  document.write("<br>");
+}
+```
+
+This will print a triangle pattern of asterisks:
+
+```
+*
+**
+***
+****
+*****
+```
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the time complexity of your code.  If the outer loop iterates `m` times and the inner loop iterates `n` times, the total number of iterations will be `m * n`.  This can become computationally expensive for large values of `m` and `n`.  Consider optimizing your code if performance becomes an issue.
+* **Readability:**  Deeply nested loops (more than 3 or 4 levels) can quickly become difficult to read and understand.  Try to refactor your code to improve readability if necessary, perhaps using functions to break down complex logic.
+
+
+Nested loops are a fundamental programming concept used in many algorithms and data structures. Understanding how they work is crucial for writing efficient and effective code.
+
