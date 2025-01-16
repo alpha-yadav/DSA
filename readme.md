@@ -67102,3 +67102,101 @@ print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}") #False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) for the recursive method (where H is the height of the tree), and O(N) in the worst case for the in-order traversal method (if the tree is a skewed tree).  In most cases, the recursive method is preferred for its clarity and potential for earlier termination if a violation is detected.  However, the in-order method might be slightly more efficient in some scenarios. Choose the method that best suits your needs and understanding.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST).  Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.val)
+            inorder(node.right)
+
+    inorder(root)
+
+    # Check if the in-order traversal is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] <= inorder_list[i-1]:
+            return False
+    return True
+
+# Example Usage
+root = TreeNode(2, TreeNode(1), TreeNode(3))  # BST
+print(f"Is BST (recursive): {is_bst_recursive(root)}")  # Output: True
+
+root = TreeNode(5, TreeNode(1), TreeNode(4, TreeNode(3), TreeNode(6))) # Not a BST
+print(f"Is BST (recursive): {is_bst_recursive(root)}")  # Output: False
+
+root = None #Empty Tree
+print(f"Is BST (recursive): {is_bst_recursive(root)}") # Output: True
+
+```
+
+**Method 2: Recursive with Range Check**
+
+This method is more efficient because it avoids the need to create an entire sorted list.  It recursively checks if each subtree satisfies the BST property within a given range.
+
+```python
+def is_bst_recursive_range(root, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Checks if a binary tree is a BST using recursive range checking.
+
+    Args:
+        root: The root node of the binary tree.
+        min_val: The minimum allowed value in the subtree.
+        max_val: The maximum allowed value in the subtree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if not root:
+        return True
+
+    if not (min_val < root.val < max_val):
+        return False
+
+    return (is_bst_recursive_range(root.left, min_val, root.val) and
+            is_bst_recursive_range(root.right, root.val, max_val))
+
+# Example Usage (same as above, will produce identical output)
+root = TreeNode(2, TreeNode(1), TreeNode(3))  # BST
+print(f"Is BST (recursive range): {is_bst_recursive_range(root)}")  # Output: True
+
+root = TreeNode(5, TreeNode(1), TreeNode(4, TreeNode(3), TreeNode(6))) # Not a BST
+print(f"Is BST (recursive range): {is_bst_recursive_range(root)}")  # Output: False
+
+root = None #Empty Tree
+print(f"Is BST (recursive range): {is_bst_recursive_range(root)}") # Output: True
+```
+
+**Choosing a Method:**
+
+* The **recursive range check** method is generally preferred because it's more efficient in terms of space complexity.  The in-order traversal method requires extra space proportional to the number of nodes in the tree to store the `inorder_list`.  The range check method's space complexity is O(h), where h is the height of the tree (due to the recursive call stack), which is better for balanced trees. For highly unbalanced trees, the space complexity can become O(n) in the worst case.
+
+* The **in-order traversal** method is simpler to understand and implement, making it a good choice if efficiency isn't the primary concern.
+
+
+Remember to handle the case of an empty tree (`root is None`) appropriately in your chosen method. Both examples above include this handling.
+
