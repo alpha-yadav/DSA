@@ -56989,3 +56989,77 @@ int main() {
 
 These examples demonstrate the basic structure of simple loops.  More complex loops can involve nested loops, `break` and `continue` statements for controlling loop execution, and more sophisticated iteration techniques.  The choice of loop type depends on the specific task and the nature of the iteration required.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or perform operations that require repeated iterations within iterations.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for i in range(outer_loop_iterations):  # Outer loop
+    # Code executed once per outer loop iteration
+    for j in range(inner_loop_iterations): # Inner loop
+        # Code executed repeatedly for each outer loop iteration
+        # ... operations using i and j ...
+    # Code executed after the inner loop completes for each outer loop iteration
+```
+
+**Example: Printing a multiplication table**
+
+This example demonstrates a nested loop creating a multiplication table. The outer loop iterates through the rows, and the inner loop iterates through the columns.
+
+```python
+rows = 10
+cols = 10
+
+for i in range(1, rows + 1):
+    for j in range(1, cols + 1):
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+**Output:**
+
+```
+1	2	3	4	5	6	7	8	9	10	
+2	4	6	8	10	12	14	16	18	20	
+3	6	9	12	15	18	21	24	27	30	
+4	8	12	16	20	24	28	32	36	40	
+5	10	15	20	25	30	35	40	45	50	
+6	12	18	24	30	36	42	48	54	60	
+7	14	21	28	35	42	49	56	63	70	
+8	16	24	32	40	48	56	64	72	80	
+9	18	27	36	45	54	63	72	81	90	
+10	20	30	40	50	60	70	80	90	100
+```
+
+
+**Example: Processing a 2D array**
+
+Nested loops are commonly used to process two-dimensional arrays (matrices).
+
+```python
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+for row in matrix:
+    for element in row:
+        print(element, end=" ")
+    print()
+```
+
+**Output:**
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+**Efficiency Considerations:**
+
+Nested loops can significantly increase the execution time of a program, especially with large datasets.  The time complexity often grows quadratically (O(n^2)) or even higher depending on the number of nested loops and the size of the data being processed.  Consider using more efficient algorithms or data structures if performance becomes a bottleneck.
+
+
+These examples illustrate the basic use of nested loops.  They are a fundamental tool for iterating over multi-dimensional data and performing repetitive tasks in programming.  The specific implementation will vary depending on the programming language and the task at hand.
+
