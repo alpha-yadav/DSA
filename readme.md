@@ -59667,3 +59667,51 @@ print(fizzBuzzResults) // Prints the array of results
 
 Remember to choose the version that best suits your needs and understanding.  For most cases, Version 3 or 4 offer a good balance of readability and efficiency.  The performance differences between these versions are negligible unless you're dealing with extremely large values of `n`.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most often considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We typically analyze complexity using **Big O notation**, which describes the upper bound of the growth rate of a function as the input size approaches infinity.  Big O notation ignores constant factors and lower-order terms, focusing on the dominant factor that determines the growth rate.
+
+Here's a breakdown of common complexities:
+
+**Time Complexity:**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient. Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The execution time is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  This can become slow for large inputs. Example: Bubble sort, selection sort, nested loops iterating over the same input.
+
+* **O(n³) - Cubic Time:** The execution time increases cubically with the input size.  Example: Some naive matrix multiplication algorithms.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  These algorithms become impractical for even moderately sized inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  These are extremely computationally expensive algorithms. Example: The traveling salesman problem (using brute force).
+
+
+**Space Complexity:**  This is analyzed similarly using Big O notation, but refers to memory usage instead of execution time.  Examples include:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of input size.
+
+* **O(n) - Linear Space:** The memory usage grows linearly with the input size.  Example: Storing an array of the input elements.
+
+* **O(log n) - Logarithmic Space:**  Memory usage grows logarithmically.  Example:  Recursive algorithms that use a stack whose size is logarithmic in the input size.
+
+* **O(n²) - Quadratic Space:** Memory usage grows quadratically. Example:  Storing an adjacency matrix for a graph.
+
+
+**Choosing the Right Algorithm:**
+
+The choice of algorithm depends on the specific problem and the constraints on time and space.  For large datasets, algorithms with lower time complexity are crucial for performance.  However, sometimes a less efficient algorithm might be preferable if it has significantly lower space complexity or is simpler to implement.
+
+**Analyzing Complexity:**
+
+Analyzing the complexity of an algorithm often involves identifying the dominant operations within the algorithm and expressing their frequency as a function of the input size.  Tools like profiling can help measure the actual performance of an algorithm in practice.  However, Big O notation provides a valuable theoretical framework for comparing the scalability of different algorithms.
+
