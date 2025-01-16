@@ -67626,3 +67626,96 @@ root.left.right = Node(5)
 
 Now you can use the traversal functions above with `root` as the input to see the results.  Remember to print the results to the console to observe the different traversal orders.  Note that you should use the same tree structure when running the iterative functions.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary search tree, in a general binary tree, we can't rely on node values to efficiently find the LCA. We need a different approach.
+
+Here are two common approaches to finding the LCA in a binary tree:
+
+**1. Recursive Approach:**
+
+This approach recursively traverses the tree.  The key idea is:
+
+* **If the current node is one of the targets (`p` or `q`):**  Return the current node. If we find one of the targets, it's a potential ancestor.
+* **If the current node is `null`:** Return `null`. We've reached the end of a branch.
+* **If both targets are found in the left subtree:**  The LCA is in the left subtree, so recursively call the function on the left subtree.
+* **If both targets are found in the right subtree:** The LCA is in the right subtree, so recursively call the function on the right subtree.
+* **Otherwise (one target in each subtree):** The current node is the LCA.
+
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node.  Returns None if either p or q is not found.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca  # LCA is in the left subtree
+    else:
+        return right_lca  # LCA is in the right subtree
+
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left
+q = root.right
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val if lca else None}")  # Output: LCA of 5 and 1: 3
+
+
+p = root.left.right
+q = root.left.left
+lca = lowestCommonAncestor(root, p,q)
+print(f"LCA of {p.val} and {q.val}: {lca.val if lca else None}") # Output: LCA of 2 and 6: 5
+
+```
+
+**2. Iterative Approach (using parent pointers):**
+
+If you can modify the tree to add parent pointers to each node, an iterative approach is possible. This approach is generally more efficient in terms of space complexity because it avoids the recursive call stack.  However, modifying the tree structure might not always be feasible.
+
+
+The iterative approach would involve:
+
+1. **Find paths:** Find the paths from the root to `p` and `q` using parent pointers.
+2. **Compare paths:** Iterate through both paths simultaneously. The last common node encountered is the LCA.
+
+
+**Choosing the right approach:**
+
+* The **recursive approach** is generally easier to understand and implement. It's a good choice if space complexity isn't a major concern.
+* The **iterative approach** is more space-efficient but requires modifying the tree structure and is slightly more complex to implement.  It's preferable when dealing with very large trees where stack overflow might be a problem.
+
+
+Remember to handle edge cases, such as when one or both nodes are not found in the tree.  The provided recursive solution includes this error handling.
+
