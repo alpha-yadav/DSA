@@ -58774,3 +58774,96 @@ Remember to adapt the code to your specific needs and the structure of your tree
 #  Graph 
 Please provide me with the data or equation you would like me to graph.  I need information about the x and y values or a function to create a graph for you.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using adjacency matrices is a common technique, particularly useful when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, along with its advantages and disadvantages:
+
+**How it works:**
+
+An adjacency matrix is a 2D array (or matrix) where each element `matrix[i][j]` represents the connection between vertex (node) `i` and vertex `j`.
+
+* **`matrix[i][j] = 1` (or true):**  There's an edge between vertex `i` and vertex `j`.
+* **`matrix[i][j] = 0` (or false):** There's no edge between vertex `i` and vertex `j`.
+
+For weighted graphs (graphs where edges have associated weights), the value of `matrix[i][j]` would represent the weight of the edge between `i` and `j`.  If there's no edge, a special value like `infinity` or `-1` might be used.
+
+**Example:**
+
+Consider a graph with 4 vertices (A, B, C, D) and the following edges:
+
+* A -> B
+* A -> C
+* B -> D
+* C -> D
+
+The adjacency matrix would look like this:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  0  0  0  1
+C  0  0  0  1
+D  0  0  0  0
+```
+
+**Data Structures:**
+
+The adjacency matrix is typically implemented using a 2D array:
+
+* **Python:**  A list of lists
+* **C++:** A 2D vector
+* **Java:** A 2D array
+
+**Code Example (Python):**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.adj_matrix = [[0] * num_vertices for _ in range(num_vertices)]
+
+    def add_edge(self, u, v, weight=1): #for unweighted graphs weight defaults to 1
+        self.adj_matrix[u][v] = weight  #Directed Graph
+        #self.adj_matrix[v][u] = weight #For Undirected Graph
+
+    def print_matrix(self):
+        for row in self.adj_matrix:
+            print(row)
+
+# Example usage:
+g = Graph(4)  # Graph with 4 vertices
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(1, 3)
+g.add_edge(2, 3)
+g.print_matrix()
+```
+
+**Advantages:**
+
+* **Simple implementation:** Easy to understand and implement.
+* **Fast edge checking:** Checking for an edge between two vertices is very fast (O(1) time complexity).
+* **Suitable for dense graphs:**  More efficient than adjacency lists for dense graphs because the space complexity is O(V^2) where V is the number of vertices, regardless of edge density.
+
+**Disadvantages:**
+
+* **Space complexity:**  O(V^2) space complexity, which can be very high for large sparse graphs (graphs with relatively few edges).  A lot of space is wasted representing the absence of edges.
+* **Adding/deleting vertices:**  Adding or deleting vertices requires resizing the matrix, which can be computationally expensive.
+* **Adding/deleting edges:** Adding or deleting edges is O(1) but involves updating the matrix.
+
+
+**When to use Adjacency Matrices:**
+
+* Dense graphs where space is less of a concern
+* When frequent edge existence checks are needed
+* When simplicity of implementation is prioritized over space efficiency
+
+
+**When to use Adjacency Lists (alternative):**
+
+* Sparse graphs where space efficiency is critical
+* When adding/deleting vertices and edges frequently
+* When you need to efficiently iterate over neighbors of a vertex
+
+
+In summary, the choice between adjacency matrices and adjacency lists depends on the specific characteristics of your graph and the operations you'll be performing on it.  For very large, sparse graphs, adjacency lists are generally preferred.  For smaller, dense graphs, adjacency matrices can be a simpler and more efficient choice.
+
