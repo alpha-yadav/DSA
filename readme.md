@@ -64643,3 +64643,137 @@ The different traversal orders have different applications:
 
 Remember to handle the case where the input `node` is `None` (empty subtree) in your recursive functions to prevent errors.  You can also implement these traversals iteratively using stacks, which can be more memory-efficient for very large trees.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary *search* tree, there's no efficient shortcut leveraging sorted order. We need to explore the tree.
+
+Here are two common approaches to finding the LCA in a binary tree:
+
+**1. Recursive Approach:**
+
+This approach recursively traverses the tree.  If a node contains either `node1` or `node2`, it's a potential ancestor.  If both `node1` and `node2` are found in the left and right subtrees respectively, the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, node1, node2):
+    """
+    Finds the LCA of node1 and node2 in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        node1: The first node.
+        node2: The second node.
+
+    Returns:
+        The LCA node, or None if either node1 or node2 is not found.
+    """
+
+    if root is None:
+        return None
+
+    if root.data == node1.data or root.data == node2.data:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, node1, node2)
+    right_lca = lowestCommonAncestor(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root  # LCA found
+    elif left_lca:
+        return left_lca
+    elif right_lca:
+        return right_lca
+    else:
+        return None #Neither node found in this subtree
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.right.right # Node with data 7
+
+lca = lowestCommonAncestor(root, node1, node2)
+if lca:
+    print(f"LCA of {node1.data} and {node2.data}: {lca.data}")
+else:
+    print("One or both nodes not found in the tree.")
+
+```
+
+**2. Iterative Approach using Parent Pointers:**
+
+This method requires modifying the tree to include parent pointers for each node.  It then traverses upwards from each node until it finds a common ancestor.  This can be more efficient in terms of space complexity than deep recursion, especially for very large and unbalanced trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.parent = None #Added parent pointer
+
+
+def lowestCommonAncestor_iterative(node1, node2):
+    """
+    Finds the LCA iteratively using parent pointers.  Assumes nodes are in the tree.
+
+    Args:
+      node1: The first node.
+      node2: The second node.
+    Returns:
+      The LCA node
+    """
+    path1 = []
+    path2 = []
+
+    # Create paths from root to each node (requires parent pointers)
+    while node1:
+        path1.append(node1)
+        node1 = node1.parent
+    while node2:
+        path2.append(node2)
+        node2 = node2.parent
+
+
+    # Find the LCA
+    lca = None
+    i = len(path1) -1
+    j = len(path2) -1
+    while i >=0 and j >=0 and path1[i] == path2[j]:
+        lca = path1[i]
+        i -=1
+        j -= 1
+
+    return lca
+
+#Example Usage (Requires setting parent pointers during tree construction)
+root = Node(1)
+root.left = Node(2); root.left.parent = root
+root.right = Node(3); root.right.parent = root
+root.left.left = Node(4); root.left.left.parent = root.left
+root.left.right = Node(5); root.left.right.parent = root.left
+root.right.left = Node(6); root.right.left.parent = root.right
+root.right.right = Node(7); root.right.right.parent = root.right
+
+node1 = root.left.left  # Node with data 4
+node2 = root.right.right # Node with data 7
+
+lca = lowestCommonAncestor_iterative(node1, node2)
+if lca:
+    print(f"LCA (iterative) of {node1.data} and {node2.data}: {lca.data}")
+
+```
+
+Remember that the iterative approach requires pre-processing to add parent pointers to your tree nodes. The recursive approach is generally simpler to implement, but the iterative one can be more space-efficient for very deep trees, avoiding potential stack overflow issues. Choose the method best suited for your specific needs and constraints.
+
