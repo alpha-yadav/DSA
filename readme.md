@@ -60602,3 +60602,123 @@ bst.insert_iterative(14)
 
 Choose the method (recursive or iterative) that you find more readable and maintainable.  Both accomplish the same task. Remember to add a traversal method to visually inspect the results of your insertions.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion because you need to handle three cases:
+
+1. **Node to be deleted is a leaf node:**  Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:**  This is the most complex case.  You typically replace the node with either its inorder predecessor (the largest node in its left subtree) or its inorder successor (the smallest node in its right subtree).  Both approaches work equally well.
+
+Here's a C++ implementation showing the deletion of a node from a BST.  It uses the inorder predecessor approach for the two-children case:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left, *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+// Helper function to find the inorder predecessor
+Node* findInorderPredecessor(Node* node) {
+    Node* current = node->left;
+    while (current->right != nullptr) {
+        current = current->right;
+    }
+    return current;
+}
+
+
+Node* deleteNode(Node* root, int key) {
+    // Base Case: Empty tree
+    if (root == nullptr) {
+        return root;
+    }
+
+    // Recursive calls to find the node to delete
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // key == root->data (Node found)
+
+        // Case 1: Node to be deleted is a leaf node
+        if (root->left == nullptr && root->right == nullptr) {
+            delete root;
+            return nullptr;
+        }
+
+        // Case 2: Node has one child
+        else if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Case 3: Node has two children
+        else {
+            Node* pred = findInorderPredecessor(root);
+            root->data = pred->data;
+            root->left = deleteNode(root->left, pred->data);
+        }
+    }
+    return root;
+}
+
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 20); //Deleting a leaf node
+
+    std::cout << "Inorder traversal after deleting 20: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    root = deleteNode(root, 30); // Deleting a node with one child
+
+    std::cout << "Inorder traversal after deleting 30: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 50); // Deleting a node with two children
+
+    std::cout << "Inorder traversal after deleting 50: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    // Clean up memory (important to avoid leaks!) -  Add a function to recursively delete the entire tree.
+    // ... (Implementation of tree cleanup omitted for brevity, but crucial in real-world applications) ...
+
+
+    return 0;
+}
+```
+
+Remember to add a function to properly deallocate all the memory used by the tree to prevent memory leaks after you are finished with it (this is omitted for brevity in the example above).  A recursive post-order traversal is a good way to do this.  The `main` function should include a call to this cleanup function before it exits.  This is a critical step in robust code.
+
