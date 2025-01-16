@@ -58771,3 +58771,6 @@ Finding the LCA in a graph is more complex than in a tree because there might be
 
 Remember to adapt the code to your specific needs and the structure of your tree or graph.  For more advanced scenarios (graphs, large datasets), researching specialized LCA algorithms will be necessary.
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need information about the x and y values or a function to create a graph for you.
+
