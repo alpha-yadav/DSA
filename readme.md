@@ -59757,3 +59757,51 @@ Big-Theta notation is crucial for:
 
 In summary, Big-Theta notation is a powerful tool for analyzing and comparing the efficiency of algorithms. Understanding it is fundamental to any serious study of algorithms and data structures.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used to describe the behavior of functions, particularly the runtime or space complexity of algorithms, as their input size grows to infinity.  The most common notations are:
+
+* **O(Big O):**  Upper bound.  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c*g(n)` for all `n ≥ n₀`.  It describes the *worst-case* scenario.  We only care about the dominant term and ignore constant factors.
+
+* **Ω(Big Omega):** Lower bound. `f(n) = Ω(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ c*g(n) ≤ f(n)` for all `n ≥ n₀`. It describes the *best-case* scenario (or a lower bound on the growth rate).
+
+* **Θ(Big Theta):** Tight bound. `f(n) = Θ(g(n))` means that `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  It means that `f(n)` grows at the same rate as `g(n)`.  This is the strongest statement we can make about the asymptotic behavior.
+
+* **o(Little o):**  Strictly upper bound. `f(n) = o(g(n))` means that for any positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ f(n) < c*g(n)` for all `n ≥ n₀`.  This implies that `f(n)` grows *strictly slower* than `g(n)`.
+
+* **ω(Little omega):** Strictly lower bound. `f(n) = ω(g(n))` means that for any positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ c*g(n) < f(n)` for all `n ≥ n₀`. This implies that `f(n)` grows *strictly faster* than `g(n)`.
+
+
+**Comparison Table:**
+
+| Notation | Meaning                                     | Example: f(n) = 10n + 5; g(n) = n       |
+|-----------|---------------------------------------------|-------------------------------------------|
+| O(g(n))   | Upper bound (worst-case)                   | f(n) = O(n)                               |
+| Ω(g(n))   | Lower bound (best-case)                     | f(n) = Ω(n)                               |
+| Θ(g(n))   | Tight bound (average-case)                  | f(n) = Θ(n)                               |
+| o(g(n))   | Strictly upper bound                       | 5log(n) = o(n)                            |
+| ω(g(n))   | Strictly lower bound                        | n² = ω(n)                                 |
+
+
+**Relationships:**
+
+* If `f(n) = Θ(g(n))`, then `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+* If `f(n) = o(g(n))`, then `f(n) = O(g(n))`, but not vice-versa.
+* If `f(n) = ω(g(n))`, then `f(n) = Ω(g(n))`, but not vice-versa.
+
+
+**Common Growth Rates (from slowest to fastest):**
+
+* O(1): Constant time
+* O(log n): Logarithmic time
+* O(n): Linear time
+* O(n log n): Linearithmic time
+* O(n²): Quadratic time
+* O(n³): Cubic time
+* O(2ⁿ): Exponential time
+* O(n!): Factorial time
+
+
+**In Summary:**
+
+Asymptotic notations provide a way to compare the efficiency of algorithms independently of specific hardware or implementation details. They focus on how the runtime or space requirements scale with the input size, allowing us to make informed decisions about algorithm selection for large datasets.  Understanding the nuances of Big O, Big Omega, Big Theta, and the little notations is crucial for any serious computer scientist or software engineer.
+
