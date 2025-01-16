@@ -61613,3 +61613,88 @@ postorder(root) # Output: Postorder traversal: 4 5 2 3 1
 
 **Iterative Approaches:**  While recursion is elegant for these traversals, iterative solutions using stacks are also possible and are often preferred for very large trees to avoid stack overflow errors.  These iterative versions are a bit more complex but are essential for production-level code.  They typically involve pushing nodes onto a stack and carefully managing the traversal based on whether a node's left or right child has been visited.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants (where we allow a node to be a descendant of itself).  Finding the LCA is a common problem in tree algorithms.
+
+Here are a few approaches to finding the LCA in a binary tree:
+
+**1. Recursive Approach (Most Common and Efficient):**
+
+This approach leverages recursion to traverse the tree.  If both nodes are found in the left or right subtree, the LCA is recursively found in that subtree. If one node is found in the left subtree and the other in the right, the current node is the LCA. If neither node is found, it means the LCA is not in this subtree, and `None` (or a similar null value) is returned.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowest_common_ancestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowest_common_ancestor(root.left, p, q)
+    right_lca = lowest_common_ancestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example Usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+p = root.left  # Node with data 2
+q = root.right # Node with data 3
+
+lca = lowest_common_ancestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 2 and 3: 1
+
+
+p = root.left.left # Node with data 4
+q = root.left.right # Node with data 5
+
+lca = lowest_common_ancestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 4 and 5: 2
+
+p = root.left.left #Node with data 4
+q = root.right.right #Node with data 7
+
+lca = lowest_common_ancestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 4 and 7: 1
+
+```
+
+**2. Iterative Approach (using a stack or queue):**
+
+While less elegant than the recursive approach, an iterative approach can be beneficial in languages where deep recursion can cause stack overflow issues.  This would involve using a stack or queue to manage the nodes to visit, keeping track of parent-child relationships to trace back to the LCA.  This is more complex to implement and generally less efficient than the recursive approach.
+
+**Important Considerations:**
+
+* **Node Existence:**  The algorithms above assume that both `p` and `q` exist in the tree.  You might want to add error handling (e.g., raising an exception or returning a special value) if either node is not found.
+* **Binary Tree vs. Binary Search Tree:** The recursive solution works for any binary tree, not just binary search trees.  For binary search trees, you can leverage the sorted property for a potentially more efficient solution.
+* **Space Complexity:** The recursive approach has a space complexity proportional to the height of the tree (due to the recursive call stack). The iterative approach's space complexity depends on the size of the stack/queue used, which can also be related to the tree's height in the worst case.
+
+
+The recursive approach is generally preferred for its clarity and efficiency in most cases when dealing with binary trees.  The iterative approach might be considered only if you have concerns about potential stack overflow issues with very deep trees.
+
