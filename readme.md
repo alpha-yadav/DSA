@@ -64137,3 +64137,103 @@ print(f"Is the tree a BST (Recursive method)? {is_bst_recursive(root2)}")
 
 Both methods are valid and achieve the same result.  The inorder traversal method is generally preferred for its simplicity unless you have a strong reason to believe the recursive method might offer performance advantages in your specific use case (e.g., if you often deal with highly unbalanced trees). Remember to handle edge cases like empty trees appropriately in your implementation.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-Order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    in_order_list = []
+    _in_order_traversal(root, in_order_list)
+
+    # Check if the in-order list is sorted
+    for i in range(1, len(in_order_list)):
+        if in_order_list[i].data < in_order_list[i-1].data:
+            return False
+    return True
+
+def _in_order_traversal(node, in_order_list):
+    """Performs in-order traversal and appends nodes to the list."""
+    if node:
+        _in_order_traversal(node.left, in_order_list)
+        in_order_list.append(node)
+        _in_order_traversal(node.right, in_order_list)
+
+
+# Example Usage
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}") # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) # Violation: 8 > 5
+root2.right.left = Node(6)
+root2.right.right = Node(9)
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") # Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max Values**
+
+This approach recursively checks each node, ensuring that its left subtree contains only values less than the node's data and its right subtree contains only values greater than the node's data.  This method is generally more efficient than the in-order traversal because it avoids the creation of an extra list.
+
+
+```python
+def is_bst_recursive_minmax(root):
+    """
+    Checks if a binary tree is a BST using recursive min-max bounds.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    return _is_bst_util(root, float('-inf'), float('inf'))
+
+def _is_bst_util(node, min_val, max_val):
+    """Recursive helper function."""
+    if node is None:
+        return True
+    if node.data < min_val or node.data > max_val:
+        return False
+    return ( _is_bst_util(node.left, min_val, node.data - 1) and
+             _is_bst_util(node.right, node.data + 1, max_val) )
+
+#Example usage (same as above, will produce identical output)
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root)}") # Output: True
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root2)}") # Output: False
+
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach where H is the height of the tree (in the worst case, O(N) for a skewed tree, O(log N) for a balanced tree). The in-order traversal method has an additional O(N) space complexity due to the list.  Therefore, the min-max approach is generally preferred for its slightly better space efficiency.  Choose the method that you find more readable and easier to understand.
+
