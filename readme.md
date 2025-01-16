@@ -62105,3 +62105,82 @@ graph = {
 
 In summary, adjacency lists are a powerful and widely used way to represent graphs, particularly when dealing with sparse graphs where space efficiency is important.  The best choice between adjacency lists and adjacency matrices depends on the characteristics of the graph and the operations that will be performed on it.
 
+#  Topological Sort 
+A topological sort is a linear ordering of the nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's arranging nodes in a way that respects the dependencies between them.  If you have a task that depends on another task completing first, the dependent task will always come after the task it depends on in the topological sort.
+
+**Key Characteristics:**
+
+* **Directed Acyclic Graph (DAG):**  Topological sorting only works on DAGs.  A cycle (a path that starts and ends at the same node) would make a topological sort impossible because you can't place a node before and after itself simultaneously.
+
+* **Linear Ordering:** The result is a sequence, not a tree or other complex structure.
+
+* **Dependency Preservation:** The order respects the dependencies defined by the edges.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:** This algorithm is based on finding nodes with no incoming edges (in-degree 0).  It iteratively removes these nodes, updating the in-degrees of their neighbors.
+
+   * **Steps:**
+      1. Find all nodes with an in-degree of 0.  Add these to a queue (or similar data structure).
+      2. While the queue is not empty:
+         * Remove a node from the queue and add it to the sorted list.
+         * For each neighbor of the removed node:
+            * Decrement its in-degree.
+            * If its in-degree becomes 0, add it to the queue.
+      3. If the sorted list has the same number of nodes as the original graph, the sort was successful. Otherwise, there's a cycle in the graph.
+
+
+2. **Depth-First Search (DFS) based Algorithm:** This algorithm utilizes a depth-first search traversal of the graph. It uses a stack to maintain the order of nodes.
+
+   * **Steps:**
+      1. Perform a DFS traversal of the graph.
+      2. During the DFS, when you finish processing a node (all its descendants have been visited), push it onto a stack.
+      3. After the DFS is complete, pop the nodes from the stack. The order they are popped will be a topological sort.
+
+
+**Example (Kahn's Algorithm):**
+
+Let's say we have a graph representing course prerequisites:
+
+* A -> B (B requires A)
+* A -> C (C requires A)
+* B -> D (D requires B)
+* C -> D (D requires C)
+
+
+1. **In-degree calculation:**
+   * A: 0
+   * B: 1
+   * C: 1
+   * D: 2
+
+2. **Queue initialization:**  A (in-degree 0) is added to the queue.
+
+3. **Iteration:**
+   * Remove A from the queue, add it to the sorted list: `[A]`
+   * Decrement in-degree of B and C: B (0), C (0). Add B and C to the queue.
+   * Remove B from the queue, add it to the sorted list: `[A, B]`
+   * Decrement in-degree of D: D (1)
+   * Remove C from the queue, add it to the sorted list: `[A, B, C]`
+   * Decrement in-degree of D: D (0). Add D to the queue.
+   * Remove D from the queue, add it to the sorted list: `[A, B, C, D]`
+
+The topological sort is: `A, B, C, D`.
+
+
+**Applications:**
+
+Topological sorting has various applications, including:
+
+* **Course scheduling:**  Determining the order of courses to take based on prerequisites.
+* **Dependency resolution in software builds:**  Building software components in the correct order.
+* **Task scheduling:**  Ordering tasks based on their dependencies.
+* **Data serialization:**  Determining the order of data writes to ensure data consistency.
+
+
+**Detecting Cycles:**
+
+If either algorithm fails to process all nodes (i.e., the queue is empty but the sorted list is not complete in Kahn's algorithm, or there are still unvisited nodes in the DFS algorithm), it indicates a cycle exists in the graph, and a topological sort is not possible.
+
