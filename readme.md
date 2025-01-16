@@ -58469,3 +58469,138 @@ int main() {
 
 These implementations all use a queue data structure to achieve the level-order traversal.  They add nodes to the queue level by level, processing each node before adding its children.  Remember to handle the case of an empty tree (root == NULL or root is None).  Choose the implementation that best suits your preferred language and project requirements.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversal refers to the process of visiting (checking or updating) each node in a tree data structure exactly once.  There are several ways to traverse a binary tree, the most common being preorder, inorder, and postorder.  These are all *depth-first* traversals, meaning they explore as far as possible along each branch before backtracking.
+
+**1. Preorder Traversal:**
+
+* **Rule:** Visit the root node first, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+
+* **Algorithm (Recursive):**
+
+```python
+def preorder_traversal(node):
+  """Performs a preorder traversal of a binary tree.
+
+  Args:
+    node: The root node of the subtree to traverse.
+  """
+  if node:
+    print(node.data, end=" ")  # Visit the root
+    preorder_traversal(node.left)  # Traverse left subtree
+    preorder_traversal(node.right) # Traverse right subtree
+
+# Example usage (assuming you have a Node class with data, left, and right attributes):
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Preorder traversal:")
+preorder_traversal(root)  # Output: 1 2 4 5 3
+```
+
+* **Algorithm (Iterative):**  Uses a stack.
+
+```python
+def preorder_traversal_iterative(node):
+    if node is None:
+        return
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        print(current.data, end=" ")
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+
+```
+
+
+**2. Inorder Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree.
+
+* **Algorithm (Recursive):**
+
+```python
+def inorder_traversal(node):
+  if node:
+    inorder_traversal(node.left)
+    print(node.data, end=" ")
+    inorder_traversal(node.right)
+
+print("\nInorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3 (for the example tree above)
+```
+
+* **Algorithm (Iterative):** Uses a stack.  More complex than preorder iterative.
+
+```python
+def inorder_traversal_iterative(node):
+    stack = []
+    current = node
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.data, end=" ")
+        current = current.right
+
+```
+
+
+**3. Postorder Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node.
+
+* **Algorithm (Recursive):**
+
+```python
+def postorder_traversal(node):
+  if node:
+    postorder_traversal(node.left)
+    postorder_traversal(node.right)
+    print(node.data, end=" ")
+
+print("\nPostorder traversal:")
+postorder_traversal(root)  # Output: 4 5 2 3 1 (for the example tree above)
+```
+
+* **Algorithm (Iterative):**  Uses two stacks (or a stack and a list to mimic a second stack). This is the most complex iterative traversal to implement.
+
+```python
+def postorder_traversal_iterative(node):
+    if node is None:
+        return
+    s1 = [node]
+    s2 = []
+    while s1:
+        current = s1.pop()
+        s2.append(current)
+        if current.left:
+            s1.append(current.left)
+        if current.right:
+            s1.append(current.right)
+    while s2:
+        print(s2.pop().data, end=" ")
+```
+
+
+**Example Node Class (Python):**
+
+To run these examples, you'll need a simple `Node` class:
+
+```python
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.left = None
+    self.right = None
+```
+
+Remember to replace the example `root` node with your actual binary tree.  The output order will depend on the structure of your tree.  Inorder traversal is particularly useful because for Binary Search Trees (BSTs), it produces a sorted sequence of the node values.
+
