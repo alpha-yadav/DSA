@@ -58679,3 +58679,95 @@ class Solution {
 
 Remember to handle edge cases such as one or both nodes not being present in the tree.  Also, consider adding error handling for invalid inputs.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree or graph is a fundamental problem in computer science.  The approach varies depending on the type of tree (binary tree, general tree) and whether the tree is rooted or unrooted.  Here's a breakdown of common methods:
+
+**1.  Binary Trees:**
+
+* **Recursive Approach (Most Common):** This is a highly efficient and elegant solution for binary trees.  It leverages the recursive nature of the tree structure.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca(root, n1, n2):
+       if root is None:
+           return None
+
+       if root.data == n1 or root.data == n2:
+           return root
+
+       left_lca = lca(root.left, n1, n2)
+       right_lca = lca(root.right, n1, n2)
+
+       if left_lca and right_lca:
+           return root  # LCA found
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   # Example Usage:
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+   lca_node = lca(root, 4, 5)
+   if lca_node:
+       print(f"LCA of 4 and 5 is: {lca_node.data}")  # Output: LCA of 4 and 5 is: 2
+   else:
+       print("Nodes not found")
+   ```
+
+* **Iterative Approach:**  While less common, an iterative approach using a stack or queue can also be implemented.  It's generally less concise than the recursive method but can be slightly more efficient in some cases due to avoiding recursive function call overhead.
+
+
+**2. General Trees (N-ary Trees):**
+
+The recursive approach can be adapted for general trees, but the logic needs to iterate through all children instead of just left and right.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+def lca_general_tree(root, n1, n2):
+    if root is None:
+        return None
+    if root.data == n1 or root.data == n2:
+        return root
+
+    for child in root.children:
+        lca_child = lca_general_tree(child, n1, n2)
+        if lca_child:
+            return lca_child if lca_child.data != n1 and lca_child.data != n2 else root
+    return None
+
+#Example
+root = Node(1)
+root.children = [Node(2), Node(3)]
+root.children[0].children = [Node(4), Node(5)]
+result = lca_general_tree(root, 4,5)
+print(result.data) # Output: 2
+```
+
+**3.  Graphs (Unrooted & Rooted):**
+
+Finding the LCA in a graph is more complex than in a tree because there might be multiple paths between two nodes.  Algorithms like Tarjan's off-line LCA algorithm or techniques involving Depth-First Search (DFS) and Lowest Common Ancestor matrixes are used.  These are more advanced and involve concepts beyond the scope of a simple explanation here.  The choice of algorithm depends on the specifics of the graph (directed/undirected, weighted/unweighted) and whether you need to compute the LCA for many pairs of nodes.
+
+
+**Important Considerations:**
+
+* **Node Existence:**  Your LCA function should handle cases where one or both nodes (`n1`, `n2`) are not present in the tree.
+* **Efficiency:**  The recursive approach for binary trees is generally O(N) in the worst case (N being the number of nodes), but it can be significantly faster on average.  For graphs, the efficiency depends on the chosen algorithm.
+* **Data Structures:** Choosing appropriate data structures (like parent pointers for faster traversal in some cases) can improve performance.
+
+
+Remember to adapt the code to your specific needs and the structure of your tree or graph.  For more advanced scenarios (graphs, large datasets), researching specialized LCA algorithms will be necessary.
+
