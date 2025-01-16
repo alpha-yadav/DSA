@@ -62675,3 +62675,91 @@ Output: [1,1,2,3,4,4,5,6]
 
 These problems demonstrate a range of difficulty and common algorithmic techniques.  Choosing a problem to solve depends on your current skill level.  Remember to focus on understanding the problem statement, devising an efficient algorithm, and writing clean, well-commented code.  Trying to solve these problems will improve your understanding of algorithms and data structures.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's deceptively simple, but a good way to test basic programming concepts.  Here's how to implement it in Swift, starting with the simplest approach and then showing some improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if/else if/else` statements.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This works correctly but can be slightly improved for readability and efficiency.
+
+**Version 2: Improved Readability with Ternary Operator**
+
+We can make the code a bit more concise using the ternary operator (`?:`).  This isn't drastically faster, but it can make the code easier to read for those familiar with the ternary operator.
+
+```swift
+func fizzBuzzTernary(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzTernary(n: 15) // Call the function
+```
+
+**Version 3:  More Efficient with String Interpolation**
+
+
+This version builds the output string more efficiently, avoiding unnecessary string concatenations.
+
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzEfficient(n: 15)
+```
+
+This version is generally preferred because it's efficient and easy to understand.  It avoids nested `if` statements and handles the case where neither 3 nor 5 divides `i` cleanly.
+
+**Choosing the Best Version:**
+
+For a simple FizzBuzz, the differences in performance are negligible.  Choose the version that you find most readable and maintainable.  Version 3 is generally recommended for its balance of efficiency and clarity.
+
+
+Remember to run this code in a Swift playground or a Swift project to see the output.  Each version should produce the same result:
+
+```
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+```
+
