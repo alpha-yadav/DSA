@@ -56629,3 +56629,58 @@ Fizz
 FizzBuzz
 ```
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm consumes as a function of the input size.  It's a crucial aspect of algorithm analysis, helping us understand how an algorithm's performance scales with increasing input. We typically analyze complexity using Big O notation.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:**  How long an algorithm takes to run as a function of the input size (n). This is often the primary focus of complexity analysis.
+* **Space Complexity:** How much memory an algorithm uses as a function of the input size (n).  This includes both the space used for the input itself and any auxiliary space used by the algorithm.
+* **Big O Notation (Asymptotic Notation):**  A mathematical notation used to describe the upper bound of an algorithm's complexity. It focuses on the dominant terms and ignores constant factors as the input size grows very large.  Common Big O notations include:
+
+    * **O(1): Constant time.** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array by index.
+    * **O(log n): Logarithmic time.** The runtime grows logarithmically with the input size. Example: Binary search in a sorted array.
+    * **O(n): Linear time.** The runtime grows linearly with the input size. Example: Searching an unsorted array.
+    * **O(n log n): Linearithmic time.**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+    * **O(n²): Quadratic time.** The runtime grows proportionally to the square of the input size. Example: Bubble sort, insertion sort (nested loops).
+    * **O(2ⁿ): Exponential time.** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+    * **O(n!): Factorial time.** The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+* **Big Omega (Ω) Notation:** Describes the lower bound of an algorithm's complexity.  It represents the best-case scenario.
+* **Big Theta (Θ) Notation:** Describes the tight bound of an algorithm's complexity.  It represents both the upper and lower bounds, indicating that the algorithm's runtime is proportional to the given function.
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most significantly to the runtime.
+2. **Expressing the number of operations:**  Count the number of basic operations as a function of the input size (n).
+3. **Using Big O notation:**  Simplify the expression using Big O notation, focusing on the dominant term and ignoring constant factors.
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Basic operation:** Comparison (`arr[i] == target`).
+* **Number of operations:** In the worst case (target not found), the comparison is performed `n` times, where `n` is the length of the array.
+* **Big O notation:** The time complexity is O(n) – linear time.
+
+
+**Why is Algorithm Complexity Important?**
+
+* **Performance prediction:** Helps estimate how an algorithm will perform with different input sizes.
+* **Algorithm comparison:** Allows for comparing the efficiency of different algorithms for the same problem.
+* **Scalability assessment:**  Determines how well an algorithm will scale as the input size grows.
+* **Optimization:**  Guides the design and optimization of efficient algorithms.
+
+
+Understanding algorithm complexity is essential for any programmer or computer scientist to write efficient and scalable code.  Choosing the right algorithm can significantly impact the performance of an application, especially when dealing with large datasets.
+
