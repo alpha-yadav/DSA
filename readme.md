@@ -61240,3 +61240,151 @@ print(is_bst_inorder(root2)) # Output: False
 
 For most cases, the recursive approach is preferred unless you have a specific need for the sorted list produced by the inorder traversal.  Both methods achieve the same result – determining if a tree is a valid BST. Remember to handle edge cases like empty trees appropriately in your implementation.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit (or "traverse") every node in a binary tree.  There are three main types of traversal, all recursive in their simplest form:
+
+* **Inorder Traversal:**  Left subtree → Root → Right subtree
+* **Preorder Traversal:** Root → Left subtree → Right subtree
+* **Postorder Traversal:** Left subtree → Right subtree → Root
+
+Let's break down each with examples and code (using Python):
+
+
+**1. Inorder Traversal**
+
+* **Order:** Visits nodes in ascending order for a Binary Search Tree (BST).
+* **Use Case:**  Useful for BSTs because it produces a sorted sequence of the nodes' values.
+* **Example:**  For the tree:
+
+```
+      4
+     / \
+    2   5
+   / \
+  1   3
+```
+
+Inorder traversal would yield: 1 2 3 4 5
+
+* **Python Code (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+# Example usage:
+root = Node(4)
+root.left = Node(2)
+root.right = Node(5)
+root.left.left = Node(1)
+root.left.right = Node(3)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 1 2 3 4 5
+```
+
+* **Python Code (Iterative):**  Using a stack to mimic recursion.
+
+```python
+def inorder_traversal_iterative(node):
+    stack = []
+    current = node
+    while True:
+        if current:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.data, end=" ")
+            current = current.right
+        else:
+            break
+```
+
+
+**2. Preorder Traversal**
+
+* **Order:** Root is visited before its subtrees.
+* **Use Case:** Creating a copy of the tree, evaluating arithmetic expressions represented by the tree.
+* **Example:** For the same tree as above:
+
+Preorder traversal would yield: 4 2 1 3 5
+
+* **Python Code (Recursive):**
+
+```python
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+print("\nPreorder traversal:")
+preorder_traversal(root)  # Output: 4 2 1 3 5
+```
+
+* **Python Code (Iterative):**
+
+```python
+def preorder_traversal_iterative(node):
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if current:
+            print(current.data, end=" ")
+            stack.append(current.right)  #Right before left to maintain order
+            stack.append(current.left)
+```
+
+
+**3. Postorder Traversal**
+
+* **Order:** Subtrees are visited before the root.
+* **Use Case:** Deleting a tree (freeing memory), evaluating expressions (postfix notation).
+* **Example:** For the same tree as above:
+
+Postorder traversal would yield: 1 3 2 5 4
+
+* **Python Code (Recursive):**
+
+```python
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+print("\nPostorder traversal:")
+postorder_traversal(root)  # Output: 1 3 2 5 4
+```
+
+* **Python Code (Iterative):**  Requires two stacks or a more complex single-stack approach.  The two-stack method is generally simpler to understand.
+
+```python
+def postorder_traversal_iterative(node):
+    stack1 = [node]
+    stack2 = []  #For storing results in reverse order.
+
+    while stack1:
+        current = stack1.pop()
+        stack2.append(current)
+
+        if current.left:
+            stack1.append(current.left)
+        if current.right:
+            stack1.append(current.right)
+    while stack2:
+        print(stack2.pop().data,end=" ")
+```
+
+Remember to handle the case where the input `node` might be `None` (an empty tree) in your functions to avoid errors.  The iterative approaches, while more complex to initially grasp, can be more efficient in some cases due to avoiding the overhead of recursive function calls. Choose the traversal method and implementation best suited to your needs and understanding.
+
