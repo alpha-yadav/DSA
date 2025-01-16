@@ -62421,3 +62421,117 @@ bfs(graph, 'A') #Output will be consistent regardless of neighbor order
 
 Choosing between DFS and BFS depends on the specific application and the properties of the graph.  For finding shortest paths in unweighted graphs, BFS is preferred.  For tasks like topological sorting or detecting cycles, DFS is often more suitable.  Both are fundamental algorithms with numerous applications in computer science.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used to represent the graph and the specific application.  Here are a few examples in Python:
+
+**1. DFS using Adjacency List (Recursive)**
+
+This is a common and elegant approach, particularly suitable for understanding the core DFS algorithm.
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    """
+    Performs a Depth-First Search traversal on a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and 
+               values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, for preventing cycles).
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+    return visited
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Output will vary slightly depending on dictionary order
+print()
+
+
+```
+
+**2. DFS using Adjacency List (Iterative)**
+
+This iterative version uses a stack, making it potentially more efficient for very deep graphs and avoids potential recursion depth limits.
+
+```python
+def dfs_iterative(graph, node):
+  """
+  Performs a Depth-First Search traversal on a graph iteratively using a stack.
+
+  Args:
+    graph: A dictionary representing the graph.
+    node: The starting node.
+
+  Returns:
+    A list of nodes visited in DFS order.
+  """
+  visited = set()
+  stack = [node]
+  while stack:
+    node = stack.pop()
+    if node not in visited:
+      visited.add(node)
+      print(node, end=" ")
+      stack.extend(neighbor for neighbor in reversed(graph.get(node, [])) if neighbor not in visited) #reversed for proper DFS order
+  return visited
+
+print("DFS traversal (iterative):")
+dfs_iterative(graph, 'A')
+print()
+
+```
+
+**3. DFS using Adjacency Matrix**
+
+If your graph is represented as an adjacency matrix, you'll need to adapt the code slightly.  This example assumes a 0/1 adjacency matrix where `matrix[i][j] == 1` indicates an edge from node `i` to node `j`.
+
+```python
+def dfs_matrix(matrix, node, visited, num_nodes):
+    """Performs DFS on a graph represented by an adjacency matrix."""
+    visited[node] = True
+    print(node, end=" ")
+
+    for neighbor in range(num_nodes):
+        if matrix[node][neighbor] == 1 and not visited[neighbor]:
+            dfs_matrix(matrix, neighbor, visited, num_nodes)
+
+
+#Example usage with adjacency matrix:
+num_nodes = 6
+matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0],  # F
+]
+visited = [False] * num_nodes
+print("DFS traversal (matrix):")
+dfs_matrix(matrix, 0, visited, num_nodes) #Start at node 0 (A)
+print()
+```
+
+Remember to choose the implementation that best suits your graph representation.  The recursive version is often easier to understand, while the iterative version avoids potential stack overflow issues.  The adjacency matrix version is tailored for that specific data structure.  All examples include basic error handling for nodes without neighbors. Remember to adapt the `print` statement to your specific needs if you want to do something other than print the visited nodes.
+
