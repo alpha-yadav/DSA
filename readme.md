@@ -77966,3 +77966,56 @@ Big-Theta notation is crucial for analyzing the efficiency of algorithms.  We us
 
 In summary, Big-Theta notation is a powerful tool for precisely characterizing the growth rate of functions, providing a clear and concise way to compare the efficiency of different algorithms and data structures.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly useful in analyzing the efficiency of algorithms.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It states that the function's growth is *no worse than* a certain function.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Focus:** Worst-case scenario.  It's the most commonly used notation for analyzing algorithm complexity.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than the square of the input size.  The actual runtime might be less, but it won't be significantly worse.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function.  It states that the function's growth is *no better than* a certain function. We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Focus:** Best-case scenario (sometimes).  It's less frequently used than Big O but important for understanding lower bounds on problem complexity.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function's growth is *both* upper and lower bounded by the same function.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Focus:** Precise characterization of growth rate.  It indicates that the algorithm's runtime scales proportionally to the given function.
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that the growth rate of f(n) is *strictly less than* the growth rate of g(n).  Formally, f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Focus:** Asymptotically smaller growth.
+* **Example:**  n = o(n²) (linear growth is strictly smaller than quadratic growth).
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Indicates that the growth rate of f(n) is *strictly greater than* the growth rate of g(n).  Formally, f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Focus:** Asymptotically larger growth.
+* **Example:** n² = ω(n) (quadratic growth is strictly greater than linear growth).
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Focus                         |
+|----------|---------------------------------------|---------------------------------|
+| O        | Upper bound                           | Worst-case (most common)      |
+| Ω        | Lower bound                           | Best-case (sometimes)          |
+| Θ        | Tight bound (both upper and lower)   | Precise growth rate            |
+| o        | Strictly smaller growth               | Asymptotically smaller growth |
+| ω        | Strictly greater growth              | Asymptotically larger growth  |
+
+
+**Key Differences and Relationships:**
+
+* `Θ` implies both `O` and `Ω`.
+* `o` is a stronger statement than `O`.
+* `ω` is a stronger statement than `Ω`.
+
+Understanding these notations is crucial for comparing the efficiency of different algorithms and choosing the best one for a given task.  They allow us to ignore constant factors and lower-order terms, focusing on the dominant behavior as the input size grows large.
+
