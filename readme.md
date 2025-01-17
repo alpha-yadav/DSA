@@ -68884,3 +68884,68 @@ The 3n and 1 terms are insignificant compared to 2n² as n becomes large.  There
 
 In short, Θ notation is a powerful tool for analyzing the efficiency of algorithms and data structures, providing a more precise description of their time and space complexity than Big-O alone.  It helps in comparing algorithms and choosing the most efficient one for a given task.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input approaches infinity.  They're crucial in computer science for analyzing algorithm efficiency. Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist constants c > 0 and n₀ ≥ 0 such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than a quadratic function of the input size n.  It could be faster, but it won't be significantly worse than n².
+* **Focus:** Worst-case complexity.  Doesn't provide information about the best-case or average-case performance.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (in a sense). We say f(n) = Ω(g(n)) if there exist constants c > 0 and n₀ ≥ 0 such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least as fast as a linear function of the input size n.
+* **Focus:** Best-case complexity.  Doesn't guarantee the worst-case performance.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows both no faster and no slower than the specified function.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+* **Focus:**  Provides a precise characterization of the growth rate.
+
+**4. Little O Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for every constant c > 0, there exists a constant n₀ ≥ 0 such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  The difference is that in Big O, f(n) could be equal to c * g(n) for some c, while in little o it always remains strictly smaller.
+* **Example:**  f(n) = n and g(n) = n².  Then f(n) = o(g(n)) because n grows significantly slower than n².
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) if for every constant c > 0, there exists a constant n₀ ≥ 0 such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Example:** f(n) = n² and g(n) = n. Then f(n) = ω(g(n)) because n² grows significantly faster than n.
+
+
+**Relationships:**
+
+* Θ(g(n)) ⊂ O(g(n))
+* Θ(g(n)) ⊂ Ω(g(n))
+* o(g(n)) ⊂ O(g(n))
+* ω(g(n)) ⊂ Ω(g(n))
+
+
+**Common Growth Rates (from slowest to fastest):**
+
+* O(1): Constant time
+* O(log n): Logarithmic time
+* O(n): Linear time
+* O(n log n): Linearithmic time
+* O(n²): Quadratic time
+* O(n³): Cubic time
+* O(2ⁿ): Exponential time
+* O(n!): Factorial time
+
+
+This table summarizes the key differences:
+
+| Notation | Meaning                               | Type of Bound | Focus                      |
+|----------|---------------------------------------|----------------|---------------------------|
+| O        | Upper bound                           | Asymptotic     | Worst-case                 |
+| Ω        | Lower bound                           | Asymptotic     | Best-case                  |
+| Θ        | Tight bound (upper and lower)         | Asymptotic     | Both worst and best-case   |
+| o        | Strictly smaller upper bound           | Asymptotic     | Worst-case (strictly slower)|
+| ω        | Strictly larger lower bound           | Asymptotic     | Best-case (strictly faster) |
+
+
+Understanding these notations is crucial for comparing the efficiency of different algorithms and making informed decisions about which algorithm to use for a given problem. Remember that asymptotic analysis focuses on the behavior as the input size becomes very large;  it doesn't necessarily reflect the performance for small input sizes.
+
