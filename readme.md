@@ -70355,3 +70355,108 @@ print(f"Is the tree a BST (iterative)? {is_bst_iterative(root2)}") # False
 
 Choose the method that best suits your needs and coding style.  The recursive in-order traversal (Method 1) is often preferred for its clarity and elegance.  The recursive bounds checking (Method 2) might be slightly faster in certain scenarios, though the difference is usually minor unless dealing with extremely large trees.  The iterative approach (Method 3) avoids recursion's potential for stack overflow issues with very deep trees. Remember to handle potential `None` values for `left` and `right` children appropriately in all methods.
 
+#  Binary Tree traversals 
+Binary tree traversals are methods for systematically visiting all nodes in a binary tree.  There are several common traversal methods, each resulting in a different ordering of node visits:
+
+**1. Depth-First Traversals:**  These prioritize going deep into one branch before exploring other branches.
+
+* **Inorder Traversal:**  Visit the left subtree, then the root node, then the right subtree.  For a Binary Search Tree (BST), this yields nodes in ascending order.
+
+    * **Algorithm (Recursive):**
+      ```python
+      def inorder(node):
+          if node:
+              inorder(node.left)
+              print(node.data, end=" ")  # Process the node
+              inorder(node.right)
+      ```
+
+    * **Algorithm (Iterative):**  Uses a stack to mimic recursion.
+      ```python
+      def inorder_iterative(root):
+          stack = []
+          current = root
+          while current or stack:
+              while current:
+                  stack.append(current)
+                  current = current.left
+              current = stack.pop()
+              print(current.data, end=" ")
+              current = current.right
+      ```
+
+* **Preorder Traversal:** Visit the root node, then the left subtree, then the right subtree.  This is often used to create a copy of the tree.
+
+    * **Algorithm (Recursive):**
+      ```python
+      def preorder(node):
+          if node:
+              print(node.data, end=" ")
+              preorder(node.left)
+              preorder(node.right)
+      ```
+
+    * **Algorithm (Iterative):** Uses a stack.
+      ```python
+      def preorder_iterative(root):
+          stack = [root]
+          while stack:
+              node = stack.pop()
+              if node:
+                  print(node.data, end=" ")
+                  stack.append(node.right)
+                  stack.append(node.left)
+      ```
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root node.  This is often used to delete a tree or evaluate an expression tree.
+
+    * **Algorithm (Recursive):**
+      ```python
+      def postorder(node):
+          if node:
+              postorder(node.left)
+              postorder(node.right)
+              print(node.data, end=" ")
+      ```
+
+    * **Algorithm (Iterative):** More complex than inorder/preorder iterative; often involves two stacks or a more sophisticated stack manipulation technique.
+
+
+**2. Breadth-First Traversal (Level Order Traversal):** Visits nodes level by level, from left to right.  Uses a queue.
+
+    * **Algorithm:**
+      ```python
+      from collections import deque
+
+      def levelorder(root):
+          if root is None:
+              return
+          queue = deque([root])
+          while queue:
+              node = queue.popleft()
+              print(node.data, end=" ")
+              if node.left:
+                  queue.append(node.left)
+              if node.right:
+                  queue.append(node.right)
+      ```
+
+
+**Example Tree Structure (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+```
+
+Remember to adapt the `print(node.data, end=" ")` line to whatever processing you need to do on each node (e.g., storing the data in a list).  The iterative algorithms are generally more efficient in terms of memory usage (avoiding recursive call stack overhead) but can be more complex to understand.  Choose the traversal method that best suits your specific needs.
+
