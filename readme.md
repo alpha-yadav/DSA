@@ -71827,3 +71827,61 @@ This version uses a `forEach` loop and nested ternary operators to achieve the s
 
 For beginners, **Version 1** is the most recommended due to its clarity and readability.  It's easier to understand the logic step-by-step.  As you become more comfortable with Swift, you can explore the more concise versions (**Version 2** and **Version 3**).  The key is to write code that's both correct and understandable.  Choose the approach that best suits your current skill level and the context of your project. Remember to always prioritize readability and maintainability.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm consumes as a function of the size of its input.  It's crucial for evaluating the efficiency and scalability of algorithms.  We typically analyze complexity using Big O notation.
+
+Here's a breakdown of key aspects:
+
+**1. Big O Notation:**
+
+Big O notation describes the upper bound of an algorithm's growth rate. It focuses on the dominant factors affecting runtime or space as the input size (n) becomes very large, ignoring constant factors and smaller-order terms.
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:**  A combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Bubble sort, selection sort, nested loops iterating over the same input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Generating all permutations of a set.
+
+**From best to worst, in terms of efficiency:** O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ) < O(n!)
+
+**2. Types of Complexity Analysis:**
+
+* **Time Complexity:**  Analyzes the algorithm's runtime as a function of the input size.  This is often the most important aspect.
+* **Space Complexity:** Analyzes the amount of memory (space) the algorithm uses as a function of the input size.  This includes both auxiliary space (temporary space used during execution) and space for the input itself.
+
+**3. Best, Average, and Worst-Case Scenarios:**
+
+The complexity of an algorithm can vary depending on the input data.  We often analyze:
+
+* **Best-Case:** The most favorable input that leads to the fastest execution.
+* **Average-Case:** The expected runtime for a random input.  This is often the most relevant measure in practice.
+* **Worst-Case:** The input that leads to the slowest execution.  This is often used for guaranteed performance bounds.
+
+**4. Analyzing Algorithm Complexity:**
+
+Analyzing the complexity usually involves:
+
+* **Identifying the basic operations:** Determine which operations are dominant in the algorithm's runtime.
+* **Counting the number of operations:** Express the number of operations as a function of the input size (n).
+* **Using Big O notation:** Simplify the function using Big O notation to represent the growth rate.
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Best-Case:** O(1) - The target is found at the beginning of the array.
+* **Average-Case:** O(n) - The target is somewhere in the middle of the array, on average.
+* **Worst-Case:** O(n) - The target is at the end or not present in the array.
+
+In summary, understanding algorithm complexity is essential for choosing the right algorithm for a given task, especially when dealing with large datasets.  Analyzing complexity helps predict the performance and scalability of algorithms and allows for informed decision-making in software development.
+
