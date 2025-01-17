@@ -79234,3 +79234,98 @@ print(is_bst_minmax_wrapper(root2)) # Output: False
 
 The min-max approach is generally preferred because it's more efficient (O(N) time complexity) and avoids the extra space used to store the in-order traversal list.  Both methods have O(N) time complexity in the worst case (where N is the number of nodes), but the min-max method avoids the space overhead of the in-order traversal list. Choose the method that best suits your needs and coding style. Remember to handle edge cases appropriately (empty trees, etc.).
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given tree adheres to the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* The value of the left subtree's nodes are all less than the node's value.
+* The value of the right subtree's nodes are all greater than the node's value.
+
+Here are a few methods, with varying levels of efficiency:
+
+**Method 1: Recursive In-Order Traversal**
+
+This is arguably the most efficient and elegant approach.  A BST, when traversed in-order (left, node, right), will produce a sorted sequence.  If the in-order traversal doesn't produce a sorted sequence, it's not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """Checks if a tree is a BST using recursive in-order traversal."""
+    inorder_list = []
+    _inorder_traversal(root, inorder_list)
+
+    # Check if the in-order traversal is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+def _inorder_traversal(node, inorder_list):
+  if node:
+    _inorder_traversal(node.left, inorder_list)
+    inorder_list.append(node.data)
+    _inorder_traversal(node.right, inorder_list)
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}") # Output: True
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(12)
+root2.left.right.left = Node(10)
+root2.left.right.right = Node(15) #Invalid BST - 15 should be in the right subtree of 22
+root2.right.left = Node(21)
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") # Output: False
+
+```
+
+
+**Method 2: Recursive Check with Min and Max**
+
+This recursive approach verifies the BST property at each node by tracking the minimum and maximum allowed values for the subtree rooted at that node.
+
+```python
+import sys
+
+def is_bst_recursive_minmax(root):
+    """Checks if a tree is a BST using recursion and min/max values."""
+    return _is_bst_util(root, -sys.maxsize, sys.maxsize)
+
+def _is_bst_util(node, min_val, max_val):
+    if node is None:
+        return True
+
+    if node.data < min_val or node.data > max_val:
+        return False
+
+    return (_is_bst_util(node.left, min_val, node.data - 1) and
+            _is_bst_util(node.right, node.data + 1, max_val))
+
+#Example usage (same as above, will produce identical output)
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root)}") # Output: True
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root2)}") # Output: False
+```
+
+**Method 3: Iterative In-Order Traversal (Less efficient)**
+
+While possible, an iterative approach using a stack to perform in-order traversal is less elegant than the recursive methods but achieves the same result.  It's generally less preferred because of increased complexity.
+
+Remember to choose the method that best suits your needs and coding style. The recursive in-order traversal (`is_bst_recursive`) provides a good balance of clarity and efficiency.  The recursive min/max method (`is_bst_recursive_minmax`) is slightly more efficient in terms of space complexity in some cases because it avoids building an extra list.  The iterative method is generally avoided unless there's a specific reason to avoid recursion.
+
