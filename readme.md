@@ -68714,3 +68714,62 @@ print(longest_palindrome("cbbd"))   # Output: bb
 
 These examples demonstrate a range of complexity.  Remember to consider time and space complexity when designing your solutions.  For harder problems, often multiple approaches exist, each with different tradeoffs.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's simple to understand but highlights important programming concepts.  Here's how to get started with a Swift implementation:
+
+**Basic FizzBuzz in Swift**
+
+This version uses a `for` loop and `if`/`else if`/`else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+**Explanation:**
+
+* **`func fizzBuzz(n: Int)`:** This defines a function named `fizzBuzz` that takes an integer `n` as input, representing the upper limit of the range.
+* **`for i in 1...n`:** This loop iterates through numbers from 1 to `n` (inclusive).
+* **`if i % 15 == 0`:** This checks if the number is divisible by both 3 and 5 (hence, divisible by 15).  If true, it prints "FizzBuzz".  We check for divisibility by 15 *first* to avoid printing "Fizz" and "Buzz" separately when the number is a multiple of 15.
+* **`else if i % 3 == 0`:** Checks if the number is divisible by 3. If true, it prints "Fizz".
+* **`else if i % 5 == 0`:** Checks if the number is divisible by 5. If true, it prints "Buzz".
+* **`else`:** If none of the above conditions are met, it prints the number itself.
+
+**More Concise Version using String Interpolation**
+
+This version is slightly more compact and uses string interpolation:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+**Explanation of Concise Version:**
+
+* It initializes an empty string `output`.
+* It appends "Fizz" if divisible by 3 and "Buzz" if divisible by 5.  Note that both can be appended if the number is divisible by both.
+* Finally, it prints either the `output` string (if not empty) or the number itself (if `output` remained empty).  The ternary operator `? :` makes this concise.
+
+Both versions achieve the same result. Choose the one that you find more readable and understandable.  The concise version might be slightly more efficient as it avoids multiple `if/else if` checks.  However, readability is often prioritized in code.  Remember to compile and run this code in a Swift environment (like Xcode's playground).
+
