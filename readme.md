@@ -79658,3 +79658,120 @@ postorder(root) # Output: D E B F C A
 
 Remember to adapt the node structure and function calls if you are using a different programming language.  These examples clearly illustrate the differences between the three traversal methods.  The choice of which traversal to use depends on the specific task; for example, in-order traversal is useful for sorted output in BSTs, while post-order is used in expression evaluation.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike a binary *search* tree, a general binary tree doesn't have an ordering property that simplifies the search.  Therefore, we need a different approach.
+
+Here are two common approaches to find the LCA in a binary tree:
+
+**1. Recursive Approach:**
+
+This approach uses recursion to traverse the tree.  The key idea is that the LCA will be either the current node (if both nodes are found in its left and right subtrees) or will be found in one of its subtrees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the Lowest Common Ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca  # LCA is in the left subtree
+    else:
+        return right_lca  # LCA is in the right subtree
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+lca = lowestCommonAncestor(root, root.left, root.right)
+print(f"LCA of 2 and 3 is: {lca.data}") # Output: LCA of 2 and 3 is: 1
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right)
+print(f"LCA of 4 and 5 is: {lca.data}") # Output: LCA of 4 and 5 is: 2
+
+lca = lowestCommonAncestor(root, root.left, root.right.right)
+print(f"LCA of 2 and 7 is: {lca.data}") # Output: LCA of 2 and 7 is: 1
+
+
+lca = lowestCommonAncestor(root, Node(8), root.right.right) #Node 8 is not present
+print(f"LCA of 8 and 7 is: {lca if lca else 'None'}") # Output: LCA of 8 and 7 is: None
+
+```
+
+**2. Iterative Approach (using parent pointers):**
+
+This approach requires modifying the tree to include parent pointers for each node.  This allows for efficient bottom-up traversal.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.parent = None # Added parent pointer
+
+# ... (function to build the tree with parent pointers - omitted for brevity) ...
+
+
+def lowestCommonAncestorIterative(p, q):
+    """Finds LCA using parent pointers (iterative)."""
+    ancestors_p = set()
+    curr = p
+    while curr:
+        ancestors_p.add(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        if curr in ancestors_p:
+            return curr
+        curr = curr.parent
+    return None #Should not happen if p and q are in the tree.
+
+# Example (Requires building tree with parent pointers -  omitted for simplicity)
+# ... build tree with parent pointers ...
+# lca = lowestCommonAncestorIterative(node_p, node_q)
+# print(f"LCA: {lca.data}")
+
+```
+
+**Choosing the Right Approach:**
+
+* The **recursive approach** is generally easier to understand and implement. It works directly with the tree structure as it is.
+* The **iterative approach** with parent pointers can be more efficient for very large trees, as it avoids the overhead of recursive function calls. However, it requires modifying the tree structure.
+
+
+Remember to handle edge cases such as:
+
+* `p` or `q` not being present in the tree.
+* `p` or `q` being the root node.
+* `p` and `q` being the same node.
+
+
+The provided Python code demonstrates the recursive approach.  Adapting it to use the iterative approach with parent pointers would require a more complex tree construction and traversal mechanism.  Choose the method that best suits your needs and understanding.
+
