@@ -70032,3 +70032,105 @@ This improved implementation includes:
 
 Remember that the efficiency of a BST depends heavily on its balance.  For very large datasets, consider using self-balancing BSTs like AVL trees or red-black trees to guarantee logarithmic time complexity for most operations.  Standard BSTs can degenerate into linked lists in the worst case, resulting in linear time complexity.
 
+#  Check if a tree is BST or not 
+Several approaches can be used to check if a given binary tree is a Binary Search Tree (BST). Here are two common methods:
+
+**Method 1: In-order Traversal and Sorted Array**
+
+This method leverages the property of BSTs that an in-order traversal yields a sorted sequence of nodes.
+
+1. **Perform In-order Traversal:**  Traverse the tree in-order (left, root, right).  Store the visited node values in an array.
+
+2. **Check for Sorted Order:** Iterate through the array and check if the elements are in strictly increasing order (or non-decreasing if duplicates are allowed). If you find any element that is not greater than or equal to its predecessor, the tree is not a BST.
+
+
+**Python Code (Method 1):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    """Checks if a tree is a BST using in-order traversal."""
+    if root is None:
+        return True
+
+    inorder_list = []
+    _inorder_traversal(root, inorder_list)
+
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+
+def _inorder_traversal(node, inorder_list):
+    """Performs in-order traversal and appends node values to the list."""
+    if node:
+        _inorder_traversal(node.left, inorder_list)
+        inorder_list.append(node.data)
+        _inorder_traversal(node.right, inorder_list)
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+#root.left.right.left = Node(10) # Uncomment to make it NOT a BST
+#root.left.right.right = Node(14)
+
+print(f"Is the tree a BST? {is_bst_inorder(root)}") # Output: True (or False if you uncomment the lines above)
+
+```
+
+**Method 2: Recursive Check with Min and Max Bounds**
+
+This method recursively checks each subtree, maintaining minimum and maximum bounds for the node values.
+
+1. **Base Case:** An empty subtree is a BST.
+
+2. **Recursive Step:** For each node:
+   - Check if the node's value is within the allowed range (min < node.data < max).
+   - Recursively check the left subtree with the range (min, node.data).
+   - Recursively check the right subtree with the range (node.data, max).
+
+**Python Code (Method 2):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """Checks if a tree is a BST recursively."""
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+
+#Example usage (same tree as above)
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+#root.left.right.left = Node(10) # Uncomment to make it NOT a BST
+#root.left.right.right = Node(14)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}") # Output: True (or False if you uncomment the lines above)
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  Method 2 (recursive) might use slightly more space due to the recursive call stack, but in practice, the difference is often negligible. Choose the method you find more readable and easier to understand.  Method 2 is generally considered more efficient in terms of space if implemented iteratively using a stack instead of recursion.
+
