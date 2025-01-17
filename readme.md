@@ -75385,3 +75385,67 @@ Here are some common types of algorithms that exhibit O(log n) time complexity:
 
 In summary, O(log n) algorithms are extremely efficient for large inputs, making them highly desirable in many applications where performance is critical.
 
+#  An O(log n) example 
+The classic O(log n) example is **binary search**.
+
+**Binary Search Algorithm:**
+
+Binary search is an algorithm used to efficiently find a target value within a *sorted* array.  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process is repeated until the target value is found or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target value {target_value} found at index {index}")
+else:
+  print(f"Target value {target_value} not found in the array")
+
+```
+
+**Why it's O(log n):**
+
+With each comparison in binary search, we effectively halve the size of the search space.  This leads to a logarithmic time complexity.  The number of times we can halve `n` before reaching 1 is approximately log₂(n).  Therefore, the algorithm's runtime grows logarithmically with the input size `n`.
+
+
+**Other O(log n) examples:**
+
+* **Tree traversal (balanced trees):**  Searching, insertion, and deletion in balanced binary search trees (like AVL trees or red-black trees) have O(log n) time complexity.
+* **Efficient exponentiation:** Algorithms like exponentiation by squaring compute a<sup>b</sup> in O(log b) time.
+* **Finding an element in a sorted linked list with jump pointers:** Adding jump pointers to skip elements can reduce the search to log n operations.
+
+
+It's important to note that O(log n) algorithms are very efficient for large datasets because the growth rate is slow.  However, they require the input data to be sorted or structured in a specific way (like a balanced tree), which can add overhead in some situations.
+
