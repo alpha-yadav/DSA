@@ -70247,3 +70247,111 @@ def isBST_iterative(root):
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive method (where H is the height of the tree – worst case O(N) for a skewed tree) and O(H) for the iterative method (also worst case O(N) for a skewed tree).  The iterative method is generally preferred for its avoidance of potential stack overflow issues.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* All nodes in its left subtree have keys less than the node's key.
+* All nodes in its right subtree have keys greater than the node's key.
+
+
+Here are three common methods:
+
+**Method 1: Recursive In-Order Traversal**
+
+This is the most efficient and elegant method.  A BST, when traversed in-order (left, root, right), will produce a sorted sequence of its nodes' keys.
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Recursively checks if a tree is a BST using in-order traversal.
+    """
+    inorder_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.key)
+            inorder(node.right)
+    inorder(node)
+
+    #Check if inorder traversal is sorted.  Handle duplicates gracefully
+    for i in range(1,len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+
+# Example Usage
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.left.left = Node(0)
+root.left.right = Node(2)
+root.right.right = Node(6)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}") # True
+
+
+root2 = Node(5)
+root2.left = Node(1)
+root2.right = Node(4)
+root2.right.left = Node(3)
+root2.right.right = Node(6)
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") #False (4's left child 3 violates BST property)
+
+```
+
+**Method 2: Recursive Check with Bounds**
+
+This method recursively checks each node against minimum and maximum bounds.  The root has no bounds, but its left child is bounded above by the root's key and its right child is bounded below by the root's key.
+
+
+```python
+def is_bst_recursive_bounds(node, min_val=-float('inf'), max_val=float('inf')):
+    if not node:
+        return True
+    if not (min_val < node.key < max_val):
+        return False
+    return (is_bst_recursive_bounds(node.left, min_val, node.key) and
+            is_bst_recursive_bounds(node.right, node.key, max_val))
+
+# Example usage (same trees as above)
+print(f"Is the tree a BST (bounds method)? {is_bst_recursive_bounds(root)}")  # True
+print(f"Is the tree a BST (bounds method)? {is_bst_recursive_bounds(root2)}") # False
+
+```
+
+
+**Method 3: Iterative In-Order Traversal (Using a Stack)**
+
+This is an iterative version of method 1, avoiding recursion.  It's generally less readable but can be slightly more efficient in some cases due to avoiding recursive function calls.
+
+```python
+def is_bst_iterative(node):
+    stack = []
+    prev = -float('inf') # Initialize previous node to negative infinity
+    while stack or node:
+        while node:
+            stack.append(node)
+            node = node.left
+        node = stack.pop()
+        if node.key < prev:
+            return False
+        prev = node.key
+        node = node.right
+    return True
+
+#Example usage (same trees as above)
+print(f"Is the tree a BST (iterative)? {is_bst_iterative(root)}")  # True
+print(f"Is the tree a BST (iterative)? {is_bst_iterative(root2)}") # False
+
+```
+
+Choose the method that best suits your needs and coding style.  The recursive in-order traversal (Method 1) is often preferred for its clarity and elegance.  The recursive bounds checking (Method 2) might be slightly faster in certain scenarios, though the difference is usually minor unless dealing with extremely large trees.  The iterative approach (Method 3) avoids recursion's potential for stack overflow issues with very deep trees. Remember to handle potential `None` values for `left` and `right` children appropriately in all methods.
+
