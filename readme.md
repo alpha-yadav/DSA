@@ -77299,3 +77299,71 @@ The space complexity of an adjacency list is O(V + E), where V is the number of 
 
 Remember to choose the implementation that best suits your specific needs and the characteristics of your graphs (sparse vs. dense, weighted vs. unweighted, directed vs. undirected).
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's arranging nodes such that you can follow all the arrows without ever going backward.
+
+**Key Characteristics:**
+
+* **Directed Acyclic Graph (DAG):**  Topological sorting only works on DAGs.  If the graph has cycles, a topological ordering is impossible.
+* **Linear Ordering:** The output is a sequence of nodes, not a tree or other structure.
+* **Preservation of Dependencies:**  The order respects the dependencies defined by the edges.  If A points to B, A must come before B in the sorted list.
+* **Multiple Valid Orderings:**  For many DAGs, there are multiple valid topological orderings.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   * **Idea:**  This algorithm iteratively removes nodes with no incoming edges.  These nodes can be placed at the beginning of the sorted list.  The process repeats until all nodes are processed.
+
+   * **Steps:**
+      1. Find all nodes with zero in-degree (no incoming edges).  Add these to a queue (or similar data structure).
+      2. While the queue is not empty:
+         * Remove a node from the queue and add it to the sorted list.
+         * For each outgoing edge from the removed node, decrement the in-degree of the destination node.
+         * If the in-degree of a destination node becomes zero, add it to the queue.
+      3. If the number of nodes in the sorted list equals the total number of nodes in the graph, a topological ordering has been found. Otherwise, the graph contains a cycle.
+
+
+2. **Depth-First Search (DFS):**
+
+   * **Idea:**  DFS recursively explores the graph.  Nodes are added to the sorted list in post-order (after all their descendants have been processed).
+
+   * **Steps:**
+      1. Perform a DFS traversal of the graph.
+      2. As each node is finished processing (its recursive call returns), add it to the *beginning* of the sorted list.  (This is crucial for post-order).
+      3. If a cycle is detected during DFS (visiting a node already in the current recursion stack), the graph is not a DAG, and topological sorting is not possible.
+
+
+**Example (Kahn's Algorithm):**
+
+Consider a graph with nodes A, B, C, D, and edges: A -> C, B -> C, C -> D.
+
+1. Initially, A and B have in-degree 0.  They are added to the queue.
+2. A is removed, added to the sorted list (A), and C's in-degree is decremented to 1.
+3. B is removed, added to the sorted list (A, B), and C's in-degree is decremented to 0.
+4. C is added to the queue.
+5. C is removed, added to the sorted list (A, B, C), and D's in-degree is decremented to 0.
+6. D is added to the queue.
+7. D is removed, added to the sorted list (A, B, C, D).
+8. The queue is empty.  The topological sort is A, B, C, D.
+
+
+**Applications:**
+
+Topological sorting has numerous applications in areas like:
+
+* **Dependency Resolution:**  Installing software packages (dependencies must be installed first).
+* **Course Scheduling:**  Ordering courses based on prerequisites.
+* **Build Systems (like Make):**  Determining the order to compile files.
+* **Data Serialization:**  Ordering operations in a data pipeline.
+* **Instruction Scheduling in Compilers:**  Optimizing instruction execution order.
+
+
+**Cycle Detection:**
+
+The absence of cycles is a prerequisite for topological sorting. Both Kahn's and DFS algorithms can detect cycles.  In Kahn's algorithm, a cycle is indicated if not all nodes are added to the sorted list. In DFS, a cycle is detected when you encounter a node that's already in the recursion stack.
+
+Choosing between Kahn's and DFS depends on the specific implementation and performance considerations.  Kahn's algorithm is often slightly easier to understand and implement, while DFS might be more efficient in some cases.
+
