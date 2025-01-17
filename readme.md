@@ -68836,3 +68836,51 @@ This algorithm iterates through the array once (linear time), so its time comple
 
 Understanding algorithm complexity is vital for choosing the most efficient algorithm for a given task, especially when dealing with large datasets where efficiency differences can be significant.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science and mathematics to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate.  This means it provides both an upper and lower bound, unlike Big-O (O) which only provides an upper bound.
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that for all n ≥ n₀:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of n (n ≥ n₀), the function f(n) is always bounded both above and below by constant multiples of g(n).  g(n) represents the growth rate of f(n).
+
+
+**What it Means:**
+
+* **Tight Bound:** Θ notation provides a tight bound, meaning that the function's growth rate is similar to g(n).  It doesn't just say that f(n) grows *no faster* than g(n) (like Big-O), but also that it doesn't grow *significantly slower* either.
+
+* **Asymptotic Behavior:** Θ notation focuses on the behavior of the function as n approaches infinity.  Minor differences in the function for small values of n are ignored.
+
+* **Growth Rate:** The focus is on the dominant term in the function's expression, ignoring constant factors and lower-order terms.
+
+**Example:**
+
+Let's say we have the function:
+
+`f(n) = 2n² + 3n + 1`
+
+We can say that:
+
+`f(n) = Θ(n²)`
+
+This is because we can find constants c₁, c₂, and n₀ that satisfy the definition:
+
+* We can choose c₁ = 1.  For sufficiently large n, 2n² will always be greater than or equal to 2n² + 3n + 1 - 3n -1 = n². This proves that there exists c1.
+* We can choose c₂ = 3. For sufficiently large n,  2n² + 3n + 1 will always be less than or equal to 3n². This proves that there exists c2.
+*  We can find an n₀ (e.g., n₀ = 1) such that the inequality holds for all n ≥ n₀.
+
+The 3n and 1 terms are insignificant compared to 2n² as n becomes large.  Therefore, the dominant term, n², determines the Big-Theta complexity.
+
+**Difference from Big-O and Big-Ω:**
+
+* **Big-O (O):**  Provides an upper bound.  f(n) = O(g(n)) means f(n) grows no faster than g(n).  It's a one-sided bound.
+
+* **Big-Ω (Ω):** Provides a lower bound. f(n) = Ω(g(n)) means f(n) grows at least as fast as g(n).  It's also a one-sided bound.
+
+* **Big-Θ (Θ):** Provides both an upper and lower bound, giving a precise characterization of the function's growth rate.  It combines the information from Big-O and Big-Ω.
+
+In short, Θ notation is a powerful tool for analyzing the efficiency of algorithms and data structures, providing a more precise description of their time and space complexity than Big-O alone.  It helps in comparing algorithms and choosing the most efficient one for a given task.
+
