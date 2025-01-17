@@ -72486,3 +72486,12 @@ The best representation depends on the specific application and the expected cha
 
 The child-sibling and vector-based (class/structure) representations are often the most versatile and preferred choices for their balance of efficiency and flexibility.
 
+#  Introduction 
+Please provide me with some context!  To write a good introduction, I need to know what the topic is.  Tell me:
+
+* **What is the subject of your writing?** (e.g., a research paper on climate change, a story about a lost dog, a proposal for a new project)
+* **Who is your audience?** (e.g., academics, children, potential investors)
+* **What is the overall purpose of your writing?** (e.g., to inform, persuade, entertain)
+
+Once I have this information, I can help you write a compelling introduction.
+
