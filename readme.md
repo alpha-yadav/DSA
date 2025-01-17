@@ -70134,3 +70134,116 @@ print(f"Is the tree a BST? {is_bst_recursive(root)}") # Output: True (or False i
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  Method 2 (recursive) might use slightly more space due to the recursive call stack, but in practice, the difference is often negligible. Choose the method you find more readable and easier to understand.  Method 2 is generally considered more efficient in terms of space if implemented iteratively using a stack instead of recursion.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, minVal, maxVal):
+    """Recursive helper function to check if a subtree is a BST."""
+    if node is None:
+        return True
+
+    # Check if the current node's data is within the allowed range.
+    if not (minVal < node.data < maxVal):
+        return False
+
+    # Recursively check the left and right subtrees.  Adjust min/max values accordingly.
+    return (isBSTUtil(node.left, minVal, node.data) and
+            isBSTUtil(node.right, node.data, maxVal))
+
+def isBST(root):
+    """Checks if the entire tree is a BST."""
+    return isBSTUtil(root, float('-inf'), float('inf'))
+
+# Example usage:
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.right = Node(18)
+
+
+if isBST(root):
+    print("IS BST")
+else:
+    print("Not a BST")
+
+root2 = Node(20)
+root2.left = Node(10)
+root2.right = Node(30)
+root2.left.left = Node(5)
+root2.left.right = Node(15)
+root2.right.right = Node(25)
+root2.left.right.right = Node(17) #this violates BST property
+
+if isBST(root2):
+    print("IS BST")
+else:
+    print("Not a BST")
+
+```
+
+**Explanation:**
+
+1. **`Node` class:** Defines a node in the binary tree.
+2. **`isBSTUtil(node, minVal, maxVal)`:** This recursive function checks if a subtree rooted at `node` is a BST.  `minVal` and `maxVal` represent the minimum and maximum allowed values for nodes in this subtree.  Initially, these are negative and positive infinity for the root.
+3. **Base case:** If `node` is `None`, it's a valid subtree (empty).
+4. **Range check:** It verifies if the current node's `data` is within the valid range (`minVal < node.data < maxVal`). If not, it's not a BST.
+5. **Recursive calls:** It recursively checks the left subtree (with `minVal` unchanged and `maxVal` set to the current node's `data`) and the right subtree (with `minVal` set to the current node's `data` and `maxVal` unchanged).  Both must be BSTs for the current subtree to be a BST.
+6. **`isBST(root)`:**  Starts the recursive check from the root node.
+
+
+**Method 2: Iterative In-order Traversal (using stack)**
+
+This method avoids recursion, making it potentially more efficient for very deep trees and preventing stack overflow issues.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBST_iterative(root):
+    stack = []
+    prev = float('-inf') # Initialize previous node's value to negative infinity.
+    curr = root
+
+    while curr or stack:
+        while curr:
+            stack.append(curr)
+            curr = curr.left
+
+        curr = stack.pop()
+        if curr.data <= prev: #check if current node is greater than previous node
+            return False  #Violation of BST property
+        prev = curr.data #update previous node's value
+        curr = curr.right
+    return True
+
+#Example usage (same as above, just replace isBST with isBST_iterative)
+```
+
+**Explanation:**
+
+1. It uses a stack to simulate the recursive calls of in-order traversal.
+2. `prev` keeps track of the previously visited node's value.  Initially it's negative infinity.
+3. The loop continues until the stack is empty and there are no more nodes to process.
+4. It pushes nodes onto the stack while traversing left until it hits a leaf.
+5. It pops nodes from the stack (in-order), checks if the current node's value is greater than `prev`, and updates `prev`.
+6. If at any point the current node's value is not greater than `prev`, it's not a BST.
+
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive method (where H is the height of the tree – worst case O(N) for a skewed tree) and O(H) for the iterative method (also worst case O(N) for a skewed tree).  The iterative method is generally preferred for its avoidance of potential stack overflow issues.
+
