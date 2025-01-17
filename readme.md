@@ -78180,3 +78180,78 @@ int main() {
 
 These examples all perform the same basic task: printing the numbers 0 through 4.  The choice between `for` and `while` depends on whether you know the number of iterations in advance.  `for` loops are generally preferred when the number of iterations is known, while `while` loops are better when the loop continues until a certain condition is met.  Remember to be cautious about infinite loops when using `while` loops – always ensure your condition will eventually become false.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop completes all its iterations for each single iteration of the outer loop. This creates a structure where the inner loop's actions are repeated multiple times, dependent on the outer loop's control.
+
+Here's a breakdown of nested loops, including examples in Python:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    # Outer loop code (executed once per outer loop iteration)
+    for inner_loop_variable in inner_loop_iterable:
+        # Inner loop code (executed once per inner loop iteration)
+    # More outer loop code (executed once per outer loop iteration)
+```
+
+**Examples:**
+
+**1. Printing a multiplication table:**
+
+This example demonstrates a nested loop creating a multiplication table.  The outer loop iterates through the rows (multipliers), and the inner loop iterates through the columns (multiplicands).
+
+```python
+for i in range(1, 11):  # Outer loop: Rows (1 to 10)
+    for j in range(1, 11):  # Inner loop: Columns (1 to 10)
+        print(f"{i * j:4}", end="")  # Print the product, formatted for alignment
+    print()  # Newline after each row
+```
+
+**2. Iterating through a matrix (2D list):**
+
+Nested loops are commonly used to process 2D data structures like matrices or lists of lists.
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()  # Newline after each row
+```
+
+**3. Finding the largest number in a matrix:**
+
+This example finds the largest number within a 2D list using nested loops.
+
+```python
+matrix = [
+    [1, 5, 2],
+    [8, 3, 9],
+    [4, 7, 6]
+]
+
+largest_number = float('-inf')  # Initialize with negative infinity
+
+for row in matrix:
+    for element in row:
+        if element > largest_number:
+            largest_number = element
+
+print(f"The largest number in the matrix is: {largest_number}")
+```
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can lead to increased computational complexity, especially with large datasets.  The time complexity often increases multiplicatively (e.g., O(n*m) for two loops iterating n and m times).  Consider alternative algorithms if performance becomes a bottleneck.
+* **Readability:**  Proper indentation and clear variable names are crucial for maintaining readability in nested loops.  Excessive nesting can make code harder to understand and debug.  Consider refactoring complex nested loops into smaller, more manageable functions.
+
+
+Nested loops are a powerful tool, but use them judiciously to avoid performance issues and maintain code clarity.  Understanding their behavior and limitations is essential for effective programming.
+
