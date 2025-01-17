@@ -76821,3 +76821,103 @@ While recursion is often the clearest way to demonstrate these traversals, itera
 
 This complete example shows how to define the tree nodes, implement the three traversal methods, and use them to process a sample tree. Remember to adapt the `print` statements if you want to store the results in a list or array instead of printing them directly.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, with varying time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+This approach recursively traverses the tree.  If both nodes are found in the left subtree, the LCA is in the left subtree.  If both nodes are found in the right subtree, the LCA is in the right subtree. Otherwise, the current node is the LCA.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    else:
+        return right
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"Lowest Common Ancestor: {lca.val}") # Output: 3
+
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, we might traverse the entire tree.
+**Space Complexity:** O(H), where H is the height of the tree. This is due to the recursive call stack.  In the worst case (a skewed tree), H could be N.
+
+
+2. **Iterative Approach (Using Parent Pointers):**
+
+If you can modify the tree to include parent pointers (each node knows its parent), you can use an iterative approach.  Find the paths from the root to both `p` and `q`, and then find the last common node in those paths.
+
+```python
+#This requires modification to the TreeNode class to include a parent pointer.  Not shown here for brevity.
+
+def lowestCommonAncestorIterative(root, p, q):
+    path_p = find_path(root, p)  #Function to find path from root to p (needs implementation)
+    path_q = find_path(root, q)  #Function to find path from root to q (needs implementation)
+
+    lca = root
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[i] == path_q[i]:
+        lca = path_p[i]
+        i += 1
+    return lca
+
+```
+
+**Time Complexity:** O(N) in the worst case.
+**Space Complexity:** O(N) in the worst case (to store paths).
+
+
+3. **Using a Hash Table (for storing node values and paths):**
+
+
+This approach can be more space-efficient than the recursive approach in some cases, particularly if the tree is very deep.
+
+```python
+def lowestCommonAncestorHash(root, p, q):
+  #Implementation would involve traversing the tree, storing paths to p and q in a hashmap, and then comparing the paths.
+
+  pass #Implementation omitted for brevity.
+
+```
+
+**Choosing the right method:**
+
+* The **recursive approach** is generally preferred for its simplicity and clarity, unless memory usage is a major concern or parent pointers are already available.
+* The **iterative approach** with parent pointers is efficient but requires modifying the tree structure.
+* The **hash table approach** can offer some space optimization, but might add complexity for its implementation.
+
+
+Remember to handle edge cases like an empty tree, one node being an ancestor of the other, or one or both nodes not being present in the tree.  The provided recursive solution handles some of these, but thorough error handling might be needed in a production environment.
+
