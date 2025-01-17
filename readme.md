@@ -78599,3 +78599,115 @@ To mitigate the performance issues associated with unbalanced BSTs, self-balanci
 
 In summary, Binary Search Trees are a valuable data structure offering efficient search, insertion, and deletion in many scenarios.  However, understanding their limitations and considering self-balancing variants is crucial for optimal performance in real-world applications.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement insertion into a Binary Search Tree (BST) in Python. Here are a couple of approaches, one iterative and one recursive:
+
+**Iterative Approach:**
+
+This approach uses a `while` loop to traverse the tree and find the correct insertion point.  It's generally more efficient in terms of memory usage than the recursive approach, especially for very deep trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    return
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    return
+                else:
+                    current = current.right
+
+
+# Example usage:
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+
+# (You'd typically add a function to traverse and print the tree here to verify)
+```
+
+
+**Recursive Approach:**
+
+This approach uses recursion to traverse the tree. It's often considered more elegant and easier to read, but can be less efficient for very deep trees due to potential stack overflow issues.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self.insert_recursive(node.left, data)
+        else:
+            node.right = self.insert_recursive(node.right, data)
+        return node
+
+    def insert(self, data):  # Wrapper function for easier usage
+        self.root = self.insert_recursive(self.root, data)
+
+
+# Example usage:
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+
+# (Again, you'd need a traversal function to print the tree)
+```
+
+**Important Considerations:**
+
+* **Duplicate Values:**  Neither of these implementations handles duplicate values. You might want to add logic to either ignore duplicates or handle them appropriately (e.g., increment a count for each unique value).
+* **Error Handling:**  Consider adding error handling (e.g., `try...except` blocks) to deal with potential exceptions, such as invalid input data types.
+* **Traversal and Printing:** To verify the insertion, you'll need to implement a tree traversal method (e.g., inorder, preorder, postorder) and a function to print the tree's contents in a readable format.  Here's a simple inorder traversal for example:
+
+```python
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+#Example Usage (after inserting nodes)
+print("Inorder Traversal:")
+inorder_traversal(bst.root) # replace bst with your BST instance
+```
+
+Remember to choose the iterative or recursive approach based on your specific needs and performance requirements.  For most cases, the iterative approach is preferred for its efficiency.  The recursive approach is often easier to understand and implement initially.
+
