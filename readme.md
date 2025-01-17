@@ -74949,3 +74949,69 @@ This version directly concatenates the "Fizz" and "Buzz" strings based on the di
 
 For learning purposes, Version 1 is recommended as it's easier to understand.  Version 2 is useful for demonstrating more advanced Swift syntax once you have a grasp of the fundamentals.  Both versions achieve the same result.  Remember to choose the version that best suits your understanding and the context of your project.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (such as time and memory) an algorithm consumes as the input size grows.  It's crucial for understanding how efficiently an algorithm will perform, especially with large datasets. We primarily focus on *time complexity* and *space complexity*.
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm scales with the size of the input.  We typically express it using Big O notation (O), which describes the upper bound of the growth rate.  It ignores constant factors and lower-order terms, focusing on the dominant behavior as the input size approaches infinity.
+
+Common time complexities (from fastest to slowest):
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size. Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example:  Generating all permutations of a sequence.
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm scales with the input size.  It's also expressed using Big O notation.
+
+Examples of space complexities:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The memory usage increases linearly with the input size. Example: Storing the input in an array.
+
+* **O(log n) - Logarithmic Space:** The memory usage increases logarithmically with the input size (e.g., using recursion with logarithmic depth).
+
+* **O(n²) - Quadratic Space:**  The memory usage increases proportionally to the square of the input size (e.g., creating a 2D array based on the input).
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity of an algorithm involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most significantly to the runtime (e.g., comparisons, assignments, arithmetic operations).
+
+2. **Counting the number of operations:** Express the number of operations as a function of the input size (n).
+
+3. **Determining the dominant term:** Identify the term that grows fastest as n increases. This term determines the Big O notation.
+
+4. **Ignoring constant factors and lower-order terms:** Simplify the expression to its Big O representation.
+
+
+**Example:**
+
+Consider a function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_element = arr[0]
+  for element in arr:
+    if element > max_element:
+      max_element = element
+  return max_element
+```
+
+This algorithm iterates through the array once. The number of comparisons is proportional to the size of the array (n).  Therefore, its time complexity is O(n) and its space complexity is O(1) (it uses a constant amount of extra memory).
+
+
+Understanding algorithm complexity is essential for selecting the most efficient algorithm for a given task, especially when dealing with large datasets where even small differences in complexity can lead to significant performance variations.
+
