@@ -71440,3 +71440,134 @@ dfs_iterative(graph, 'A') # Output: A C F E B D (order may vary slightly dependi
 
 Choosing between BFS and DFS depends on the specific application and the properties of the graph.  For finding shortest paths in unweighted graphs, BFS is preferred.  For tasks like topological sorting or cycle detection, DFS is often more suitable.  Both algorithms have iterative and recursive implementations; recursive implementations are often more concise but can be prone to stack overflow errors for very deep graphs.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and whether you're working with a graph or a tree.  Here are a few implementations in Python:
+
+
+**1. DFS using Adjacency List (for Graphs)**
+
+This is generally the preferred approach for graphs due to its efficiency.  An adjacency list represents the graph as a dictionary where keys are nodes, and values are lists of their neighbors.
+
+```python
+def dfs_adjacency_list(graph, start_node, visited=None):
+    """
+    Performs Depth-First Search traversal on a graph represented as an adjacency list.
+
+    Args:
+        graph: A dictionary representing the graph (adjacency list).
+        start_node: The node to start the traversal from.
+        visited: A set to keep track of visited nodes (optional, for recursive calls).
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    if visited is None:
+        visited = set()
+
+    visited.add(start_node)
+    print(start_node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(start_node, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_adjacency_list(graph, neighbor, visited)
+
+    return list(visited)
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (Adjacency List):")
+dfs_adjacency_list(graph, 'A')  # Output: A B D E F C (order may vary slightly)
+print("\nVisited nodes:", dfs_adjacency_list(graph, 'A'))
+
+```
+
+**2. DFS using Adjacency Matrix (for Graphs)**
+
+An adjacency matrix represents the graph as a 2D array where `matrix[i][j] == 1` if there's an edge from node `i` to node `j`, and 0 otherwise.  This approach is less efficient for sparse graphs (graphs with relatively few edges).
+
+```python
+def dfs_adjacency_matrix(matrix, start_node, visited=None):
+    """
+    Performs Depth-First Search traversal on a graph represented as an adjacency matrix.
+
+    Args:
+        matrix: A 2D list representing the adjacency matrix.
+        start_node: The index of the starting node.
+        visited: A list to keep track of visited nodes (optional, for recursive calls).
+
+    Returns:
+        A list of node indices visited in DFS order.
+
+    """
+    num_nodes = len(matrix)
+    if visited is None:
+        visited = [False] * num_nodes
+
+    visited[start_node] = True
+    print(start_node, end=" ") # Process the node
+
+    for neighbor in range(num_nodes):
+        if matrix[start_node][neighbor] == 1 and not visited[neighbor]:
+            dfs_adjacency_matrix(matrix, neighbor, visited)
+
+    return [i for i, v in enumerate(visited) if v]
+
+
+#Example Usage
+matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0]   # F
+]
+
+print("\n\nDFS traversal (Adjacency Matrix):")
+dfs_adjacency_matrix(matrix, 0) # Output: 0 1 3 4 5 2 (order may vary slightly)
+print("\nVisited nodes:", dfs_adjacency_matrix(matrix, 0))
+```
+
+**3. DFS for Trees (using recursion)**
+
+Trees are a special case of graphs.  This example assumes a tree represented using nested dictionaries or objects where each node has a list of children.
+
+```python
+def dfs_tree(node):
+    """
+    Performs Depth-First Search traversal on a tree.
+
+    Args:
+        node: The root node of the tree (dictionary or object with 'children' attribute).
+
+    Returns:
+        None. Prints the nodes in DFS order.
+    """
+    print(node["value"], end=" ") #Process the node.  Assumes each node has a 'value' attribute.
+    for child in node.get("children", []):
+        dfs_tree(child)
+
+# Example Usage:
+tree = {
+    "value": "A",
+    "children": [
+        {"value": "B", "children": [{"value": "D"}, {"value": "E"}]},
+        {"value": "C", "children": [{"value": "F"}]}
+    ]
+}
+
+print("\n\nDFS traversal (Tree):")
+dfs_tree(tree) # Output: A B D E C F
+```
+
+Remember to adapt these examples to your specific tree/graph representation and the way you want to "process" each node (printing, adding to a list, etc.).  Choose the adjacency list implementation unless you have a specific reason to use an adjacency matrix (e.g., you already have your graph data in matrix form). For trees, the recursive approach is usually the most straightforward.
+
