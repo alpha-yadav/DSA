@@ -68773,3 +68773,66 @@ fizzBuzzConcise(n: 15) // Call the function to test
 
 Both versions achieve the same result. Choose the one that you find more readable and understandable.  The concise version might be slightly more efficient as it avoids multiple `if/else if` checks.  However, readability is often prioritized in code.  Remember to compile and run this code in a Swift environment (like Xcode's playground).
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm requires to solve a problem as a function of the input size.  It's a crucial aspect of algorithm design and analysis, allowing us to compare the efficiency of different approaches.  There are several ways to express complexity:
+
+**1. Time Complexity:** This describes how the runtime of an algorithm scales with the size of the input.  It's usually expressed using Big O notation (O), which focuses on the dominant factors as the input size grows very large, ignoring constant factors and smaller-order terms.
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Bubble sort, selection sort, nested loops iterating through the same input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**2. Space Complexity:** This describes how the amount of memory used by an algorithm scales with the input size.  It's also usually expressed using Big O notation.  It considers:
+
+* **Auxiliary Space:** The extra space used by the algorithm beyond the input itself.
+* **Total Space:** The sum of auxiliary space and the space used for input.
+
+Space complexity can also have the same notations as time complexity (O(1), O(n), O(n²), etc.).
+
+
+**Big O Notation (and related notations):**
+
+* **Big O (O):** Represents the upper bound of the growth rate.  It describes the worst-case scenario.
+* **Big Omega (Ω):** Represents the lower bound of the growth rate.  It describes the best-case scenario.
+* **Big Theta (Θ):** Represents the tight bound, meaning both the upper and lower bounds are the same.  It describes the average-case scenario (often difficult to determine precisely).
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Identify the dominant term:** Ignore constant factors and lower-order terms.
+4. **Express the complexity using Big O notation:**  This gives a concise representation of the algorithm's scaling behavior.
+
+
+**Example:**
+
+Consider a function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for i in range(1, len(arr)):
+    if arr[i] > max_val:
+      max_val = arr[i]
+  return max_val
+```
+
+This algorithm iterates through the array once (linear time), so its time complexity is O(n), where n is the length of the array.  Its space complexity is O(1) because it only uses a constant amount of extra space (the `max_val` variable).
+
+
+Understanding algorithm complexity is vital for choosing the most efficient algorithm for a given task, especially when dealing with large datasets where efficiency differences can be significant.
+
