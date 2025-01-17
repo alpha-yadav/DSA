@@ -73846,3 +73846,109 @@ Both methods have:
 
 Choose the method that best suits your needs and coding style.  The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some scenarios.  Remember to handle edge cases like `p` or `q` not being in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic algorithm problem.  The optimal approach and implementation depend on the type of tree and any constraints.
+
+Here's a breakdown of common approaches and their complexities:
+
+**1. Binary Tree:**
+
+* **Recursive Approach (Most Common):**
+
+   This approach leverages the recursive nature of a tree.  It checks if either node is found in the left or right subtree.  If one node is found in the left and the other in the right, the current node is the LCA. Otherwise, recursively search the subtree containing both nodes.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lowestCommonAncestor(root, p, q):
+       if root is None or root == p or root == q:
+           return root
+
+       left_lca = lowestCommonAncestor(root.left, p, q)
+       right_lca = lowestCommonAncestor(root.right, p, q)
+
+       if left_lca and right_lca:
+           return root
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   # Example usage:
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+   lca = lowestCommonAncestor(root, root.left, root.right)  # LCA is root (1)
+   print(f"LCA: {lca.data}")
+
+   lca = lowestCommonAncestor(root, root.left.left, root.left.right) # LCA is root.left (2)
+   print(f"LCA: {lca.data}")
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (worst-case scenario where the tree is skewed).
+   * **Space Complexity:** O(H), where H is the height of the tree (due to recursive calls).  This becomes O(N) for a skewed tree.
+
+
+* **Iterative Approach (using parent pointers):**
+
+   If each node has a pointer to its parent, you can find the LCA iteratively.  Traverse upwards from each node, storing the path to the root for both `p` and `q`. Then, find the last common node in both paths.
+
+   This approach is generally efficient but requires parent pointers which might not always be available.
+
+
+**2. General Tree (Non-Binary):**
+
+The recursive approach can be adapted for general trees, but it needs to handle multiple children.
+
+* **Recursive Approach (modified):**
+
+   Instead of just left and right children, you iterate through all children of a node.  The logic remains similar: if `p` and `q` are in different subtrees of a node, that node is the LCA; otherwise, recursively search the subtree containing both.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    for child in root.children:
+        lca = lowestCommonAncestor(child, p, q)
+        if lca:  #If LCA is found in any subtree, return it
+            return lca
+
+    return None #LCA not found in this subtree
+
+# Example usage (create your general tree here)
+
+```
+
+**3. Using a Hash Table (for pre-order traversal):**
+
+You could perform a pre-order traversal of the tree, storing the path from the root to each node in a hash table (using node as key, and path as value).  Then, for given `p` and `q`, retrieve their paths and find the longest common prefix. The last node in the common prefix is the LCA.
+
+
+**Choosing the Right Approach:**
+
+* For binary trees, the recursive approach is often the simplest and most efficient unless parent pointers are readily available.
+* For general trees, the modified recursive approach is a natural extension.
+* The hash table approach can be efficient if you need to find LCAs for multiple pairs of nodes, as the pre-order traversal is done only once.  However, it consumes more memory.
+
+
+Remember to handle edge cases like:
+
+* One or both nodes are not present in the tree.
+* One node is an ancestor of the other.
+
+
+Remember to adapt the code to your specific tree structure and data representation.  The examples above provide the core logic.
+
