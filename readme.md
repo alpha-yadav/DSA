@@ -76997,3 +76997,18 @@ Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a bin
 
 Remember to handle edge cases, such as when one or both nodes are not present in the tree, or when one node is an ancestor of the other.  The examples above provide a basic framework; you might need to adapt them to your specific needs and tree structure.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need the information to create the graph for you.  For example, you could give me:
+
+* **A list of points:**  (1,2), (3,4), (5,6)
+* **An equation:** y = 2x + 1
+* **A table of data:**  
+   | X | Y |
+   |---|---|
+   | 0 | 1 |
+   | 1 | 3 |
+   | 2 | 5 |
+
+
+Once you provide the data, I can help you graph it.
+
