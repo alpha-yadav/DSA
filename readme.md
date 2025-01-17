@@ -70767,3 +70767,125 @@ If you can modify the tree to include parent pointers (each node knows its paren
 
 Remember to handle cases where one or both nodes are not present in the tree.  The provided recursive code includes such error handling.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic computer science problem.  The approach varies depending on the type of tree and whether you have parent pointers or not.
+
+Here's a breakdown of common methods and considerations:
+
+**1. Binary Tree with Parent Pointers:**
+
+If each node has a pointer to its parent, the solution is straightforward:
+
+* **Algorithm:**
+    1. Traverse upward from node `a` to the root, storing all visited nodes in a set `setA`.
+    2. Traverse upward from node `b`, checking if each node is present in `setA`.
+    3. The first node found in `setA` during the second traversal is the LCA.
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent(node_a, node_b):
+    setA = set()
+    curr = node_a
+    while curr:
+        setA.add(curr)
+        curr = curr.parent
+
+    curr = node_b
+    while curr:
+        if curr in setA:
+            return curr
+        curr = curr.parent
+
+    return None #Should not happen if a and b are in the same tree
+
+
+#Example Usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.parent = root
+root.right.parent = root
+root.left.left = Node(4)
+root.left.left.parent = root.left
+
+
+lca = lca_with_parent(root.left, root.left.left)
+print(f"LCA of root.left and root.left.left is: {lca.data}") #Output: 2
+lca = lca_with_parent(root.left, root.right)
+print(f"LCA of root.left and root.right is: {lca.data}") #Output: 1
+
+```
+
+
+**2. Binary Tree without Parent Pointers:**
+
+This is more challenging.  Two common approaches are:
+
+* **Recursive Approach:**
+
+    1. If the current node is `None`, return `None`.
+    2. If the current node is either `node_a` or `node_b`, return the current node.
+    3. Recursively search the left and right subtrees.
+    4. If both left and right subtrees return a node (meaning `node_a` and `node_b` are in different subtrees), the current node is the LCA.
+    5. Otherwise, return the node returned by the subtree that contains at least one of `node_a` or `node_b`.
+
+* **Python Code (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node_a, node_b):
+    if root is None or root.data == node_a.data or root.data == node_b.data:
+        return root
+
+    left_lca = lca_recursive(root.left, node_a, node_b)
+    right_lca = lca_recursive(root.right, node_a, node_b)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+#Example Usage: (Same tree structure as above, but without parent pointers)
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+
+node_a = root.left
+node_b = root.left.left
+lca = lca_recursive(root, node_a, node_b)
+print(f"LCA of {node_a.data} and {node_b.data} is: {lca.data}") #Output: 2
+
+```
+
+* **Iterative Approach (using a stack):**  Similar logic to the recursive approach, but uses a stack to avoid recursion.  This can be more memory-efficient for very deep trees.
+
+
+**3. General Trees:**
+
+For general trees (not necessarily binary), the algorithms are similar in concept but require modifications to handle multiple children per node.  The recursive approach can be adapted relatively easily.
+
+
+**Important Considerations:**
+
+* **Error Handling:**  Add checks to handle cases where `node_a` or `node_b` are not in the tree.
+* **Node Duplicates:** The algorithms above assume unique node values.  If you have duplicate node values, you'll need a more sophisticated approach to uniquely identify nodes.
+* **Efficiency:** The recursive and iterative approaches for binary trees without parent pointers have a time complexity of O(N), where N is the number of nodes in the tree. The parent pointer approach is generally faster, but requires modifying the tree structure.
+
+
+Remember to choose the algorithm that best suits your tree structure and constraints.  The recursive approach is often easier to understand, while the iterative approach can offer better performance in some cases.  Using parent pointers significantly simplifies the problem.
+
