@@ -77718,3 +77718,50 @@ print(f"The maximum element is: {max_val}") # Output: The maximum element is: 9
 
 Remember, consistency and practice are key. Start slowly, build a strong foundation, and gradually tackle more challenging problems.  Don't be afraid to seek help and collaborate with others.  Good luck!
 
+#  A sample algorithmic problem 
+Here are a few sample algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string, e.g., "hello"
+
+**Output:** The reversed string, e.g., "olleh"
+
+**Solution Idea:**  Iterate through the string from the end to the beginning and build a new string.  Alternatively, use built-in string reversal functions (if allowed).
+
+
+**Medium:**
+
+**Problem:** Find the two numbers in an array that add up to a specific target.
+
+**Input:** An array of integers (e.g., `[2, 7, 11, 15]`) and a target integer (e.g., `9`).
+
+**Output:** The indices of the two numbers that add up to the target (e.g., `[0, 1]` because 2 + 7 = 9).  Return null if no such pair exists.
+
+**Solution Idea:** Use a hash table (dictionary in Python) to store seen numbers and their indices.  For each number, check if the complement (target - number) exists in the hash table.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string (e.g., "babad")
+
+**Output:** The longest palindromic substring (e.g., "bab" or "aba").  If multiple longest palindromic substrings exist, return any one of them.
+
+**Solution Idea:**  This can be solved using dynamic programming or a slightly optimized "expand around center" approach.  The dynamic programming solution builds a table to store whether substrings are palindromes.  The "expand around center" approach iterates through each character as a potential center of a palindrome and expands outwards.
+
+
+**Bonus - Graph Problem (Medium/Hard depending on approach):**
+
+**Problem:**  Find the shortest path between two nodes in a graph using Breadth-First Search (BFS).
+
+**Input:** A graph represented as an adjacency list (or adjacency matrix) and two node labels (start and end).
+
+**Output:** The shortest path (sequence of nodes) from the start node to the end node.  Return null if no path exists.
+
+
+These examples showcase different problem types and solution approaches commonly seen in algorithmic problem-solving.  Remember that the "best" solution often involves considering time and space complexity.  For example, a brute-force approach might work for small inputs but fail for large ones due to inefficiency.
+
