@@ -73747,3 +73747,102 @@ postorder(root) # Output: D E B F C A
 
 This Python code demonstrates the three traversal methods.  Remember to adapt the printing method (`print(node.data, end=" ")`) if you need to handle different data types or want to store the results in a list instead of printing them directly.
 
+#  Lowest common ancestor of a Binary Tree 
+The lowest common ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary *search* tree, where we can leverage sorted order, finding the LCA in a general binary tree requires a different approach.
+
+Here are two common methods to find the LCA in a binary tree:
+
+**Method 1: Recursive Approach**
+
+This approach recursively traverses the tree.  The core idea is:
+
+* **Base Case:** If the current node is `null`, return `null`.
+* **Node Found:** If the current node is either `p` or `q`, return the current node.
+* **Node in Different Subtrees:** If `p` is in the left subtree and `q` is in the right subtree (or vice versa), then the current node is the LCA.
+* **Recursive Calls:** Otherwise, recursively search the left and right subtrees.  If one subtree contains both `p` and `q`, return the result from that subtree.  If one subtree contains `p` and the other contains `q`, the current node is the LCA.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    else:
+        return right
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+```
+
+**Method 2: Iterative Approach (Using a Stack)**
+
+This approach uses a stack to simulate recursion, potentially improving space efficiency in certain cases (though the space complexity is still O(H) where H is the height of the tree).
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    stack = [root]
+    parent = {root: None}  # Store parent-child relationships
+
+    while p not in parent or q not in parent:
+        node = stack.pop()
+        if node.left:
+            parent[node.left] = node
+            stack.append(node.left)
+        if node.right:
+            parent[node.right] = node
+            stack.append(node.right)
+
+    ancestors_p = set()
+    while p:
+        ancestors_p.add(p)
+        p = parent[p]
+
+    while q:
+        if q in ancestors_p:
+            return q
+        q = parent[q]
+
+    return None # Should not reach here if p and q are in the tree
+
+# Example usage (same tree as above):
+lca_iterative = lowestCommonAncestorIterative(root, p, q)
+print(f"LCA of {p.val} and {q.val} (Iterative): {lca_iterative.val}")
+```
+
+
+**Time and Space Complexity:**
+
+Both methods have:
+
+* **Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, we might visit all nodes).
+* **Space Complexity:** O(H), where H is the height of the tree (for recursion, it's the implicit call stack; for iteration, it's the stack and `parent` dictionary). In a skewed tree, H could be N, resulting in O(N) space.
+
+
+Choose the method that best suits your needs and coding style.  The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some scenarios.  Remember to handle edge cases like `p` or `q` not being in the tree.
+
