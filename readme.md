@@ -71754,3 +71754,76 @@ print(longest_palindrome("babad")) # Output: bab (or aba, depending on implement
 
 These examples demonstrate different levels of complexity and require different algorithmic approaches.  Remember that the "best" solution often depends on factors like time and space complexity, and choosing the right data structures is key.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to get started with it in Swift, from a very basic approach to a more refined version:
+
+**Version 1: Basic Approach**
+
+This version is straightforward and easy to understand.  It uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz") and then by 5 ("Buzz").
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Version 2: Slightly Improved with String Interpolation**
+
+This version uses string interpolation for slightly cleaner output:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? i : output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This version is more concise.  It builds the output string ("Fizz", "Buzz", or "FizzBuzz") and only prints the number if the string remains empty.
+
+
+**Version 3:  More Functional Approach**
+
+This approach utilizes a ternary operator for even more conciseness (though potentially less readable for beginners):
+
+```swift
+func fizzBuzzFunctional(n: Int) {
+    (1...n).forEach { i in
+        print((i % 15 == 0 ? "FizzBuzz" : (i % 3 == 0 ? "Fizz" : (i % 5 == 0 ? "Buzz" : "\(i)"))) )
+    }
+}
+
+fizzBuzzFunctional(n: 15)
+```
+
+This version uses a `forEach` loop and nested ternary operators to achieve the same result in a single line within the `print` statement.  This is compact but can be harder to read, especially for those new to Swift.
+
+
+**Choosing the Best Version:**
+
+For beginners, **Version 1** is the most recommended due to its clarity and readability.  It's easier to understand the logic step-by-step.  As you become more comfortable with Swift, you can explore the more concise versions (**Version 2** and **Version 3**).  The key is to write code that's both correct and understandable.  Choose the approach that best suits your current skill level and the context of your project. Remember to always prioritize readability and maintainability.
+
