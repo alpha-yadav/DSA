@@ -69133,3 +69133,83 @@ public class SimpleLoop {
 
 These examples demonstrate the basic structure of simple loops.  Remember to always ensure your loop condition eventually becomes false to prevent infinite loops.  The choice between `while` and `for` often depends on whether you know the number of iterations beforehand.  `For` loops are generally preferred when the number of iterations is known, while `while` loops are better suited for situations where the loop continues until a certain condition is met.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This structure is useful for processing multi-dimensional data or performing operations that require repeated iterations within iterations.
+
+Here's a breakdown of nested loops, including examples in various programming languages:
+
+**How it works:**
+
+Imagine you have a grid (like a table).  The outer loop iterates through the rows of the grid, and the inner loop iterates through the columns of each row.  For every row, the inner loop completes all its iterations before moving to the next row.
+
+**Example: Printing a Multiplication Table (Python)**
+
+This classic example demonstrates the power of nested loops:
+
+```python
+# Outer loop iterates through rows (multiplicands)
+for i in range(1, 11):
+    # Inner loop iterates through columns (multipliers)
+    for j in range(1, 11):
+        # Calculate and print the product
+        product = i * j
+        print(f"{i} x {j} = {product}", end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This code will produce a multiplication table from 1x1 to 10x10.
+
+**Example: Accessing elements in a 2D array (JavaScript)**
+
+```javascript
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+for (let i = 0; i < matrix.length; i++) { // Outer loop: iterates through rows
+  for (let j = 0; j < matrix[i].length; j++) { // Inner loop: iterates through columns
+    console.log(matrix[i][j]); // Access and print each element
+  }
+}
+```
+
+This will print each element of the `matrix` array.
+
+**Example:  Finding the largest number in a 2D array (C++)**
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  vector<vector<int>> numbers = {{1, 5, 2}, {8, 3, 9}, {4, 7, 6}};
+  int largest = numbers[0][0];
+
+  for (int i = 0; i < numbers.size(); i++) {
+    for (int j = 0; j < numbers[i].size(); j++) {
+      if (numbers[i][j] > largest) {
+        largest = numbers[i][j];
+      }
+    }
+  }
+
+  cout << "Largest number: " << largest << endl;
+  return 0;
+}
+```
+
+This code finds the largest number within the `numbers` 2D array.
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the time it takes for a program to run.  The time complexity often grows quadratically (O(n²)) or even higher depending on the number of nested loops and the size of the data being processed.  This is because the inner loop executes multiple times for each iteration of the outer loop.
+* **Readability:**  Deeply nested loops can make code harder to read and understand.  Consider refactoring complex nested loops to improve clarity.  Functions can often help break down complex logic.
+
+
+Nested loops are a fundamental programming concept. Understanding how they work is crucial for processing and manipulating multi-dimensional data effectively.  However, always be mindful of their potential performance implications.
+
