@@ -71885,3 +71885,42 @@ def linear_search(arr, target):
 
 In summary, understanding algorithm complexity is essential for choosing the right algorithm for a given task, especially when dealing with large datasets.  Analyzing complexity helps predict the performance and scalability of algorithms and allows for informed decision-making in software development.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions. Specifically, it provides a tight bound on the growth rate of a function, indicating that the function grows at the same rate as a reference function, up to constant factors, both for large and small inputs.
+
+Here's a breakdown of Big-Theta notation:
+
+**Formal Definition:**
+
+A function `f(n)` is said to be Θ(g(n)) (pronounced "f of n is Theta of g of n") if and only if there exist positive constants `c₁`, `c₂`, and `n₀` such that for all `n ≥ n₀`:
+
+`c₁g(n) ≤ f(n) ≤ c₂g(n)`
+
+This means:
+
+* **Lower Bound:** `f(n)` is bounded below by `c₁g(n)`.  The function grows at least as fast as `g(n)`, ignoring constant factors.
+* **Upper Bound:** `f(n)` is bounded above by `c₂g(n)`. The function grows at most as fast as `g(n)`, ignoring constant factors.
+
+**In simpler terms:**  `f(n)` and `g(n)` grow at the *same rate*.  Any constant factors or lower-order terms are disregarded.  Both the upper and lower bounds are crucial for a tight bound.
+
+**Key Differences from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  `f(n) = O(g(n))` means `f(n)` grows *no faster* than `g(n)`. It doesn't say anything about how fast `f(n)` grows *at least*.
+* **Big-Ω (Ω):** Provides a *lower bound*. `f(n) = Ω(g(n))` means `f(n)` grows *at least as fast* as `g(n)`.  It doesn't say anything about how fast `f(n)` grows *at most*.
+* **Big-Θ (Θ):** Provides a *tight bound*, combining both Big-O and Big-Ω. It means `f(n)` grows *at the same rate* as `g(n)`.
+
+**Example:**
+
+Let's say we have a function `f(n) = 2n² + 5n + 3`.  We can say:
+
+* `f(n) = O(n²) ` (f(n) grows no faster than n²)
+* `f(n) = Ω(n²) ` (f(n) grows at least as fast as n²)
+* `f(n) = Θ(n²) ` (f(n) grows at the same rate as n²)
+
+In this example, the dominant term (n²) determines the Big-Theta complexity.  The lower-order terms (5n and 3) become insignificant as `n` gets large.
+
+
+**Why is Big-Theta important?**
+
+Big-Theta notation is crucial for analyzing algorithms because it gives a precise characterization of their time or space complexity. Knowing the Θ complexity allows you to compare the efficiency of different algorithms accurately and choose the most suitable one for a given task.  It provides a more complete picture than just using Big-O, as it captures both the upper and lower bounds of the growth rate.
+
