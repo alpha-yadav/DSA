@@ -79329,3 +79329,119 @@ While possible, an iterative approach using a stack to perform in-order traversa
 
 Remember to choose the method that best suits your needs and coding style. The recursive in-order traversal (`is_bst_recursive`) provides a good balance of clarity and efficiency.  The recursive min/max method (`is_bst_recursive_minmax`) is slightly more efficient in terms of space complexity in some cases because it avoids building an extra list.  The iterative method is generally avoided unless there's a specific reason to avoid recursion.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit (or "traverse") all the nodes in a binary tree.  There are several common types, each yielding a different node visitation order:
+
+**1. Depth-First Traversals:**  These prioritize going as deep as possible down one branch before backtracking.
+
+* **Pre-order Traversal:**  Visit the root node, then recursively traverse the left subtree, then recursively traverse the right subtree.  The order is: `Root -> Left -> Right`.
+
+  ```
+  Example:
+
+  Tree:
+       A
+      / \
+     B   C
+    / \
+   D   E
+
+  Pre-order traversal: A B D E C
+  ```
+
+* **In-order Traversal:** Recursively traverse the left subtree, then visit the root node, then recursively traverse the right subtree. The order is: `Left -> Root -> Right`.  For a Binary *Search* Tree (BST), this yields nodes in ascending order.
+
+  ```
+  Example (same tree as above):
+
+  In-order traversal: D B E A C
+  ```
+
+* **Post-order Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, then visit the root node. The order is: `Left -> Right -> Root`.
+
+  ```
+  Example (same tree as above):
+
+  Post-order traversal: D E B C A
+  ```
+
+
+**2. Breadth-First Traversal (Level-order Traversal):** This visits nodes level by level, from left to right.  It typically uses a queue data structure.
+
+```
+Example (same tree as above):
+
+Breadth-first traversal: A B C D E
+```
+
+
+**Implementation Notes:**
+
+These traversals are typically implemented recursively, although iterative solutions using stacks (for depth-first) or queues (for breadth-first) are also possible.
+
+**Recursive Implementation (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Pre-order:", end=" ")
+preorder(root)
+print("\nIn-order:", end=" ")
+inorder(root)
+print("\nPost-order:", end=" ")
+postorder(root)
+```
+
+**Iterative Implementation (Python - Breadth-First):**
+
+```python
+from collections import deque
+
+def breadth_first(node):
+    if not node:
+        return
+
+    queue = deque([node])
+    while queue:
+        current = queue.popleft()
+        print(current.data, end=" ")
+        if current.left:
+            queue.append(current.left)
+        if current.right:
+            queue.append(current.right)
+
+print("\nBreadth-first:", end=" ")
+breadth_first(root)
+```
+
+Remember to adapt these code snippets to your specific needs and programming language.  The key is understanding the order of visitation for each traversal type.  Choosing the right traversal depends on the specific task you're trying to accomplish with the binary tree.
+
