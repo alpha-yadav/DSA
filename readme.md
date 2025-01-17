@@ -79445,3 +79445,114 @@ breadth_first(root)
 
 Remember to adapt these code snippets to your specific needs and programming language.  The key is understanding the order of visitation for each traversal type.  Choosing the right traversal depends on the specific task you're trying to accomplish with the binary tree.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes of a tree level by level.  Here are implementations in Python and C++, along with explanations:
+
+**Python Implementation:**
+
+This implementation uses a queue data structure.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])  # Initialize a queue with the root node
+    while(len(nodes) > 0):
+        curr = nodes.popleft()  # Dequeue the first node
+        print(curr.data, end=" ")
+
+        # Enqueue left and right children (if they exist)
+        if curr.left is not None:
+            nodes.append(curr.left)
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+**C++ Implementation:**
+
+This uses `std::queue` from the C++ Standard Template Library.
+
+```cpp
+#include <iostream>
+#include <queue>
+
+struct Node {
+    int data;
+    Node *left, *right;
+    Node(int data) {
+        this->data = data;
+        left = right = nullptr;
+    }
+};
+
+void levelOrder(Node* root) {
+    if (root == nullptr) return;
+
+    std::queue<Node*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Node* curr = q.front();
+        q.pop();
+        std::cout << curr->data << " ";
+
+        if (curr->left != nullptr) q.push(curr->left);
+        if (curr->right != nullptr) q.push(curr->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+
+    std::cout << "Level Order traversal of binary tree is -\n";
+    levelOrder(root); // Output: 1 2 3 4 5
+
+    // Remember to deallocate memory (important for C++)
+    // ... (code to delete nodes to avoid memory leaks) ...
+
+    return 0;
+}
+```
+
+**Explanation:**
+
+Both implementations follow these steps:
+
+1. **Initialization:**  A queue is created and the root node is added to it.
+
+2. **Iteration:** While the queue is not empty:
+   - Dequeue a node from the front of the queue.
+   - Process the node's data (in this case, print it).
+   - Enqueue the node's left and right children (if they exist).
+
+**Memory Management (C++):**
+
+The C++ code allocates memory using `new`.  It's crucial to deallocate this memory using `delete` to avoid memory leaks.  You would typically add a function to recursively delete the nodes after you're finished with the tree.  (This is omitted for brevity in the example but is essential in production code.)  Python's garbage collection handles memory automatically, so this is not a concern in the Python example.
+
+
+These implementations provide a basic level order traversal.  You can extend them to handle more complex scenarios, such as printing level by level on separate lines, or handling different tree structures.
+
