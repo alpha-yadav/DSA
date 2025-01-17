@@ -68949,3 +68949,39 @@ This table summarizes the key differences:
 
 Understanding these notations is crucial for comparing the efficiency of different algorithms and making informed decisions about which algorithm to use for a given problem. Remember that asymptotic analysis focuses on the behavior as the input size becomes very large;  it doesn't necessarily reflect the performance for small input sizes.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the lower bound of an algorithm's runtime or space complexity.  In simpler terms, it provides a guarantee about the *minimum* amount of resources an algorithm will use, regardless of the input.  It's the counterpart to Big-O notation (which describes the upper bound).
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that f(n) = Ω(g(n)) if and only if there exist positive constants *c* and *n₀* such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+
+Let's break this down:
+
+* **f(n):** Represents the actual runtime or space complexity of the algorithm.
+* **g(n):** Represents a simpler function that describes the growth rate of f(n).  This is usually something like n, n², log n, etc.
+* **c:** A positive constant.  This constant allows for scaling; we're not concerned with exact values, but rather the overall growth trend.
+* **n₀:** A positive constant. This represents a threshold.  The inequality only needs to hold true for input sizes larger than n₀.  This is important because algorithms might behave differently for small inputs.
+
+
+**Intuitive Explanation:**
+
+Big-Omega notation tells us that the algorithm will *at least* take as much time or space as g(n), up to a constant factor, for sufficiently large inputs.  It provides a lower bound on the growth rate.  If an algorithm is Ω(n²), it means that for sufficiently large inputs, its runtime will grow at least as fast as n².  It could grow faster (e.g., n³), but it won't grow slower than n².
+
+
+**Example:**
+
+Consider an algorithm that searches for an element in a sorted array using binary search.  Its worst-case runtime is O(log n). This means it will *never* take longer than O(log n).  However, it might sometimes complete faster than log n (e.g., if the element is found early).  The lower bound is still Ω(1) because, in the best case, the algorithm can find the element in the first comparison (constant time).  The algorithm is also Ω(log n) because, in the worst case, it does at least log n comparisons.
+
+**Difference between Big-O and Big-Ω:**
+
+* **Big-O (O):** Describes the *upper bound*—the algorithm will *never* be slower than this (asymptotically).
+* **Big-Ω (Ω):** Describes the *lower bound*—the algorithm will *never* be faster than this (asymptotically).
+* **Big-Θ (Θ):** Describes both the upper and lower bounds—the algorithm's growth rate is *exactly* this (asymptotically).  This means that f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+**In Summary:**
+
+Big-Omega notation provides a valuable tool for understanding the minimum resource requirements of an algorithm.  Combined with Big-O notation, it gives a comprehensive picture of the algorithm's performance characteristics.  While Big-O is more commonly used, understanding Big-Ω is crucial for a complete analysis of algorithmic complexity.
+
