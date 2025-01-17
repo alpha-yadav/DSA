@@ -75057,3 +75057,54 @@ This is because we can find constants c₁, c₂, and n₀ that satisfy the defi
 
 Θ notation is the strongest of the three, providing the most precise description of a function's asymptotic behavior.  If you know the Θ of an algorithm's runtime, you know its growth rate very accurately.  However, sometimes obtaining a tight bound with Θ is difficult, making O or Ω more practical in some cases.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of a function as the input size grows towards infinity.  They're crucial for analyzing the efficiency of algorithms. Here's a comparison:
+
+**1. Big O Notation (O): Upper Bound**
+
+* **Meaning:**  `f(n) = O(g(n))` means that the growth rate of `f(n)` is *at most* the growth rate of `g(n)`.  There exists a constant `c > 0` and an integer `n₀ ≥ 1` such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.
+* **Focus:** Worst-case scenario.  It provides an upper bound on the runtime or space complexity.
+* **Example:** If an algorithm takes `5n² + 10n + 5` steps, we can say its time complexity is O(n²), because the n² term dominates as n gets large.  We ignore constant factors and lower-order terms.
+
+
+**2. Big Omega Notation (Ω): Lower Bound**
+
+* **Meaning:** `f(n) = Ω(g(n))` means that the growth rate of `f(n)` is *at least* the growth rate of `g(n)`. There exists a constant `c > 0` and an integer `n₀ ≥ 1` such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.
+* **Focus:** Best-case scenario (sometimes). Provides a lower bound on the runtime or space complexity.  It can also indicate a lower bound for the *problem* itself (not just a specific algorithm).
+* **Example:** If an algorithm takes `5n² + 10n + 5` steps, its time complexity is Ω(n²).
+
+
+**3. Big Theta Notation (Θ): Tight Bound**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that the growth rate of `f(n)` is *exactly* the growth rate of `g(n)`.  This implies both `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+* **Focus:** Provides both an upper and lower bound.  It gives a precise characterization of the asymptotic behavior.
+* **Example:** If an algorithm takes `5n² + 10n + 5` steps, its time complexity is Θ(n²).
+
+
+**4. Little o Notation (o): Strict Upper Bound**
+
+* **Meaning:** `f(n) = o(g(n))` means that the growth rate of `f(n)` is *strictly less* than the growth rate of `g(n)`.  For every constant `c > 0`, there exists an integer `n₀ ≥ 1` such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.
+* **Focus:**  A more precise upper bound than Big O.  It emphasizes that `f(n)` grows significantly slower than `g(n)`.
+* **Example:**  `n = o(n²)`, `log n = o(n)`.
+
+
+**5. Little omega Notation (ω): Strict Lower Bound**
+
+* **Meaning:** `f(n) = ω(g(n))` means that the growth rate of `f(n)` is *strictly greater* than the growth rate of `g(n)`. For every constant `c > 0`, there exists an integer `n₀ ≥ 1` such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`.
+* **Focus:** A more precise lower bound than Big Omega.  It emphasizes that `f(n)` grows significantly faster than `g(n)`.
+* **Example:** `n² = ω(n)`, `2ⁿ = ω(n²)`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                     | Relationship to g(n) |
+| -------- | ------------------------------------------- | --------------------- |
+| O(g(n))  | Upper bound                                  | f(n) ≤ g(n)          |
+| Ω(g(n))  | Lower bound                                  | f(n) ≥ g(n)          |
+| Θ(g(n))  | Tight bound (both upper and lower bound)     | f(n) = g(n)          |
+| o(g(n))  | Strict upper bound                          | f(n) < g(n)          |
+| ω(g(n))  | Strict lower bound                          | f(n) > g(n)          |
+
+
+**Important Note:**  These notations describe *asymptotic* behavior.  They only tell us about the behavior of the function as `n` approaches infinity.  For small values of `n`, the actual runtime might differ significantly from the asymptotic prediction.
+
