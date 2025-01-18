@@ -85696,3 +85696,102 @@ postorder_traversal(root)  # Output: D E B F C A
 
 Remember to adapt the `Node` class and the tree creation part to your specific data and tree structure.  The traversal functions themselves remain largely the same.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a binary tree is a common algorithmic problem.  There are several approaches, with varying levels of efficiency depending on whether the tree is a binary search tree (BST) or a general binary tree.
+
+**1. General Binary Tree (No Assumptions):**
+
+This approach requires storing the paths from the root to each of the two nodes. Then, we find the longest common prefix of these paths.  The last node in the common prefix is the LCA.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of p and q in a general binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA of p and q, or None if either p or q is not in the tree.
+    """
+
+    path_p = find_path(root, p)
+    path_q = find_path(root, q)
+
+    if not path_p or not path_q:  # Handle cases where p or q are not in the tree
+        return None
+
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[i] == path_q[i]:
+        i += 1
+
+    return path_p[i - 1] if i > 0 else None  # Return LCA, or None if no common ancestor
+
+
+def find_path(root, node):
+    """Helper function to find the path from root to node."""
+    if not root:
+        return None
+    if root == node:
+        return [root]
+    left_path = find_path(root.left, node)
+    right_path = find_path(root.right, node)
+    if left_path:
+        return [root] + left_path
+    elif right_path:
+        return [root] + right_path
+    else:
+        return None
+
+```
+
+**2. Binary Search Tree (BST):**
+
+If the tree is a BST, we can exploit the property that all nodes smaller than a given node are in its left subtree, and all nodes larger are in its right subtree.
+
+```python
+def lowestCommonAncestorBST(root, p, q):
+    """
+    Finds the LCA of p and q in a BST.  More efficient than the general case.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA of p and q.
+    """
+    if not root or p == root or q == root:
+        return root
+
+    if p.val < root.val and q.val < root.val:
+        return lowestCommonAncestorBST(root.left, p, q)
+    elif p.val > root.val and q.val > root.val:
+        return lowestCommonAncestorBST(root.right, p, q)
+    else:
+        return root # p and q are on opposite sides of root, so root is LCA
+
+```
+
+**Time and Space Complexity:**
+
+* **General Binary Tree:**
+    * Time: O(N), where N is the number of nodes in the tree (worst case, we traverse most of the tree).
+    * Space: O(H), where H is the height of the tree (due to recursion depth or path storage).  In a skewed tree, this could be O(N).
+
+* **Binary Search Tree:**
+    * Time: O(H), where H is the height of the tree.  In a balanced BST, this is O(log N).
+    * Space: O(H), due to recursion depth. In a balanced BST, this is O(log N).
+
+
+Remember to adapt the `TreeNode` class to your specific needs if you're using a different data structure.  The BST approach is significantly more efficient if applicable.  Choose the appropriate method based on whether you're dealing with a general binary tree or a BST.
+
