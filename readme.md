@@ -85981,3 +85981,41 @@ int main() {
 
 Remember to adapt the data types and edge addition logic based on whether your graph is weighted, directed, or undirected.  For large or sparse graphs, consider using an adjacency list for better performance.
 
+#  Introduction To Graph Theory 
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph consists of:
+
+* **Vertices (or nodes):** These represent the objects in the system being modeled.  Think of them as points or dots.
+* **Edges (or arcs):** These represent the relationships or connections between the vertices.  Think of them as lines connecting the vertices.
+
+Graphs can be used to represent a wide variety of things, from social networks (people and their friendships) to road maps (cities and roads connecting them) to computer networks (computers and their connections).  The power of graph theory lies in its ability to abstract away the details of the objects being modeled and focus on the relationships between them.
+
+Here are some key concepts in introductory graph theory:
+
+* **Directed vs. Undirected Graphs:**
+    * **Undirected graphs:** Edges have no direction.  If there's an edge between vertices A and B, it means A is connected to B and B is connected to A.  Think of a road connecting two cities – you can travel in either direction.
+    * **Directed graphs (or digraphs):** Edges have a direction.  If there's a directed edge from A to B, it means you can go from A to B, but not necessarily from B to A.  Think of a one-way street.
+
+* **Weighted vs. Unweighted Graphs:**
+    * **Unweighted graphs:** Edges have no associated values.  The connection simply exists or doesn't exist.
+    * **Weighted graphs:** Edges have associated values (weights), such as distance, cost, or capacity.  Think of a road map where the weights represent the distances between cities.
+
+* **Simple Graphs:**  A simple graph contains no loops (edges connecting a vertex to itself) and no multiple edges (more than one edge connecting the same pair of vertices).
+
+* **Complete Graphs:** A simple graph where every pair of distinct vertices is connected by a unique edge.
+
+* **Paths and Cycles:**
+    * **Path:** A sequence of vertices connected by edges.
+    * **Cycle:** A path that starts and ends at the same vertex, with no other vertex repeated.
+
+* **Connected Graphs:** A graph is connected if there is a path between any two vertices.  Otherwise, it's disconnected.
+
+* **Trees:** A connected graph with no cycles.  Trees are fundamental structures in computer science and many other fields.
+
+* **Subgraphs:** A graph that is a part of a larger graph.
+
+* **Graph Representations:** Graphs are often represented using adjacency matrices (a matrix showing which vertices are connected) or adjacency lists (a list of neighbors for each vertex).
+
+* **Common Graph Algorithms:** Many algorithms exist to solve problems on graphs, including searching algorithms (like Breadth-First Search and Depth-First Search), shortest path algorithms (like Dijkstra's algorithm and Bellman-Ford algorithm), minimum spanning tree algorithms (like Prim's algorithm and Kruskal's algorithm), and many more.
+
+This introduction provides a basic overview.  Graph theory is a rich and complex field with numerous applications in various areas, including computer science, operations research, social sciences, and biology.  Further exploration into specific areas will reveal its depth and versatility.
+
