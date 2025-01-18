@@ -83744,3 +83744,78 @@ print(longest_palindrome("cbbd")) # Output: bb
 
 These problems demonstrate different algorithmic concepts.  The first is simple string manipulation. The second uses a hash table for efficient lookups. The third utilizes dynamic programming for an optimized solution.  Choose the problem that best suits your current skill level.  Remember to try solving them yourself before looking at the solutions!
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It prints numbers from 1 to a given number, but with these rules:
+
+* If the number is divisible by 3, print "Fizz" instead of the number.
+* If the number is divisible by 5, print "Buzz" instead of the number.
+* If the number is divisible by both 3 and 5, print "FizzBuzz" instead of the number.
+
+Here are a few ways to implement FizzBuzz in Swift, starting with the simplest and progressing to more advanced approaches:
+
+**Method 1: Basic `if-else if-else` structure**
+
+This is the most straightforward approach, easy to understand and read:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 3 == 0 && i % 5 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+**Method 2: Using a String Interpolation and Ternary Operator**
+
+This method is more concise, utilizing Swift's features for cleaner code:
+
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) //Example Usage
+```
+
+**Method 3:  More Functional Approach (using `map`):**
+
+This approach is more advanced and showcases functional programming concepts. It's less readable for beginners but demonstrates a different style:
+
+```swift
+func fizzBuzzFunctional(n: Int) -> [String] {
+    return (1...n).map { i in
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        return output.isEmpty ? "\(i)" : output
+    }
+}
+
+print(fizzBuzzFunctional(n: 15)) // Example usage. Prints an array of strings.
+```
+
+
+**Choosing the Right Method:**
+
+* For beginners, **Method 1** is the recommended starting point due to its clarity.
+* **Method 2** demonstrates a more concise way to achieve the same result, leveraging Swift's features.
+* **Method 3** is suitable for those familiar with functional programming and looking for a more elegant, albeit less immediately understandable, solution.
+
+Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).  Choose the method that best suits your understanding and coding style.  The most important thing is to understand the logic behind the FizzBuzz algorithm.
+
