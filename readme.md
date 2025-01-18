@@ -85883,3 +85883,101 @@ Please provide me with the data or equation you want me to graph.  I need inform
 
 Once you give me this information, I can tell you how to graph it or, if you're using a specific tool like Desmos or a spreadsheet program, guide you through the process.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common technique, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, its advantages and disadvantages, and considerations for implementation:
+
+**How it works:**
+
+An adjacency matrix is a 2D array (typically a square matrix) where each row and column represents a vertex (node) in the graph.  The element `matrix[i][j]` indicates the presence and possibly the weight of an edge between vertex `i` and vertex `j`.
+
+* **Unweighted Graph:**  `matrix[i][j] = 1` if there's an edge between vertex `i` and vertex `j`, and `matrix[i][j] = 0` otherwise.
+
+* **Weighted Graph:** `matrix[i][j]` stores the weight of the edge between vertex `i` and vertex `j`.  If there's no edge, you might use a special value like `-1`, `infinity`, or `0` (depending on the context and your algorithm).
+
+* **Directed Graph:** The matrix is asymmetric.  `matrix[i][j]` represents an edge from vertex `i` to vertex `j`.  `matrix[j][i]` might be different or 0 if the edge doesn't exist in the opposite direction.
+
+* **Undirected Graph:** The matrix is symmetric.  `matrix[i][j] = matrix[j][i]`.
+
+
+**Example (Unweighted, Undirected Graph):**
+
+Consider a graph with 4 vertices (A, B, C, D) and the following edges: A-B, A-C, B-D.
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  1  0  0  1
+C  1  0  0  0
+D  0  1  0  0
+```
+
+
+**Example (Weighted, Directed Graph):**
+
+Same vertices, but now with weighted directed edges: A->B (weight 5), A->C (weight 2), B->D (weight 3).
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  5  2  0
+B  0  0  0  3
+C  0  0  0  0
+D  0  0  0  0
+```
+
+
+**Advantages:**
+
+* **Easy to check for edge existence:**  O(1) time complexity.  Just check the matrix element.
+* **Simple implementation:** Relatively straightforward to implement.
+
+**Disadvantages:**
+
+* **Space complexity:** O(V²) where V is the number of vertices.  This becomes very inefficient for large sparse graphs (graphs with relatively few edges).
+* **Adding/deleting vertices:** Requires resizing the matrix, which can be computationally expensive.  It's easier to manage in dynamically allocated arrays.
+
+
+**Implementation Considerations:**
+
+* **Data type:** Choose the appropriate data type for the matrix elements (e.g., `int`, `float`, `double`) depending on whether it's weighted and the range of weights.
+* **Memory management:** For large graphs, consider using dynamic memory allocation (e.g., `std::vector<std::vector<int>>` in C++).
+* **Sparse graphs:** For sparse graphs, consider alternative representations like adjacency lists which are much more efficient in terms of space.
+
+
+**C++ Example (Unweighted, Undirected Graph):**
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  int numVertices = 4;
+  vector<vector<int>> adjMatrix(numVertices, vector<int>(numVertices, 0));
+
+  // Add edges (unweighted, undirected)
+  adjMatrix[0][1] = 1;
+  adjMatrix[1][0] = 1;
+  adjMatrix[0][2] = 1;
+  adjMatrix[2][0] = 1;
+  adjMatrix[1][3] = 1;
+  adjMatrix[3][1] = 1;
+
+  // Print the adjacency matrix
+  for (int i = 0; i < numVertices; ++i) {
+    for (int j = 0; j < numVertices; ++j) {
+      cout << adjMatrix[i][j] << " ";
+    }
+    cout << endl;
+  }
+
+  return 0;
+}
+```
+
+Remember to adapt the data types and edge addition logic based on whether your graph is weighted, directed, or undirected.  For large or sparse graphs, consider using an adjacency list for better performance.
+
