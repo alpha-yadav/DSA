@@ -80932,3 +80932,58 @@ This shows that `f(n)` grows at the same rate as `n²`, ignoring the constant fa
 
 If `f(n)` is in Θ(`g(n)`), then it's also in O(`g(n)`) and Ω(`g(n)`).  However, the reverse isn't always true.  Big-O and Big-Ω provide looser bounds.  Big-Θ provides a much tighter, more precise, description of growth rate.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly relevant in analyzing the efficiency of algorithms.  Here's a comparison of the most common notations:
+
+**Big O (O): Upper Bound**
+
+* **Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Meaning:**  f(n) grows no faster than g(n).  It provides an upper bound on the growth rate.  We ignore constant factors and lower-order terms.
+* **Example:**  If f(n) = 2n² + 3n + 1, then f(n) = O(n²).  We focus on the dominant term (n²) and discard the rest.
+
+**Big Omega (Ω): Lower Bound**
+
+* **Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Meaning:** f(n) grows at least as fast as g(n). It provides a lower bound on the growth rate.
+* **Example:** If f(n) = 2n² + 3n + 1, then f(n) = Ω(n²).
+
+**Big Theta (Θ): Tight Bound**
+
+* **Definition:** f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Meaning:** f(n) grows at the same rate as g(n).  It provides both an upper and lower bound, indicating a tight asymptotic bound.
+* **Example:** If f(n) = 2n² + 3n + 1, then f(n) = Θ(n²).
+
+**Little o (o): Strict Upper Bound**
+
+* **Definition:** f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.
+* **Meaning:** f(n) grows strictly slower than g(n).  The inequality is strict; f(n) doesn't just grow *no faster*, it grows demonstrably slower.
+* **Example:** n = o(n²).  n grows significantly slower than n².
+
+**Little omega (ω): Strict Lower Bound**
+
+* **Definition:** f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.
+* **Meaning:** f(n) grows strictly faster than g(n).
+* **Example:** n² = ω(n).
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Example             |
+|----------|----------------------------------------------|----------------------|
+| O(g(n))  | f(n) grows no faster than g(n)             | 2n² + 3n + 1 = O(n²) |
+| Ω(g(n))  | f(n) grows at least as fast as g(n)         | 2n² + 3n + 1 = Ω(n²) |
+| Θ(g(n))  | f(n) grows at the same rate as g(n)         | 2n² + 3n + 1 = Θ(n²) |
+| o(g(n))  | f(n) grows strictly slower than g(n)         | n = o(n²)            |
+| ω(g(n))  | f(n) grows strictly faster than g(n)         | n² = ω(n)            |
+
+
+**Important Considerations:**
+
+* **Asymptotic analysis focuses on the behavior as n approaches infinity.**  The exact values of f(n) and g(n) for small n are irrelevant.
+* **Constant factors are ignored.**  O(2n²) is equivalent to O(n²).
+* **Lower-order terms are ignored.** O(n² + n) is equivalent to O(n²).
+* These notations describe *growth rates*, not the actual runtime.
+
+
+Understanding these notations is crucial for comparing the efficiency of different algorithms and choosing the best one for a given problem.  They allow us to make statements about how the runtime scales with input size, regardless of the specific hardware or implementation details.
+
