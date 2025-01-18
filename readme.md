@@ -81163,3 +81163,69 @@ while i < 5:
 
 Remember to choose the loop type that best suits your needs.  `for` loops are generally preferred for iterating a known number of times, while `while` loops are better when the number of iterations isn't known in advance and depends on a condition.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times, based on the number of iterations of the outer loop.
+
+Here's a breakdown:
+
+**How it works:**
+
+1. **Outer Loop:** This loop initiates the overall process.  It iterates a certain number of times.
+
+2. **Inner Loop:**  This loop is entirely contained within a single iteration of the outer loop. For every complete cycle of the outer loop, the inner loop runs its full course.
+
+3. **Iteration:** The number of times the inner loop executes depends on both loops' conditions.
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+This code will produce a 10x10 multiplication table.  The outer loop iterates through rows (1 to 10), and for each row, the inner loop iterates through columns (1 to 10), calculating and printing the product.
+
+**Example (JavaScript):**
+
+This example prints a pattern of asterisks:
+
+```javascript
+for (let i = 1; i <= 5; i++) { // Outer loop (rows)
+  let row = "";
+  for (let j = 1; j <= i; j++) { // Inner loop (columns)
+    row += "*";
+  }
+  console.log(row);
+}
+```
+
+This will output:
+
+```
+*
+**
+***
+****
+*****
+```
+
+Here, the outer loop controls the number of rows, and the inner loop controls the number of asterisks in each row.
+
+**Uses of Nested Loops:**
+
+Nested loops are commonly used for:
+
+* **Matrix/Array Processing:**  Working with 2D arrays (matrices) requires nested loops to access and manipulate each element.
+* **Pattern Generation:** Creating patterns like the asterisk example above.
+* **Combinations and Permutations:** Generating all possible combinations or permutations of a set of items.
+* **Searching and Sorting:**  Certain sorting algorithms (like bubble sort) utilize nested loops.
+
+
+**Efficiency Considerations:**
+
+Nested loops can be computationally expensive, especially with large numbers of iterations.  The complexity increases rapidly (often quadratically or even higher).  For very large datasets, consider alternative approaches like optimized algorithms or vectorized operations to improve performance.
+
