@@ -86357,3 +86357,113 @@ Graph traversals are algorithms used to visit all the vertices (nodes) of a grap
 
 Choosing the right traversal algorithm depends on the specific problem and the properties of the graph.  If you need the shortest path in an unweighted graph, BFS is a good choice.  If you need to detect cycles or perform topological sorting, DFS is often preferred. For weighted graphs with non-negative weights, Dijkstra's algorithm is the standard, while A* search provides further efficiency with a heuristic function.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and whether you need to handle cycles.  Here are a few examples in Python:
+
+**1. DFS using Adjacency List (recursive):** This is a common and elegant approach.  It handles cycles by keeping track of visited nodes.
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    """
+    Performs a Depth-First Search traversal on a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+    return list(visited)  # Return the list of visited nodes
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Start traversal from node 'A'
+print("\nVisited nodes:", dfs_recursive(graph, 'A'))
+
+
+```
+
+**2. DFS using Adjacency List (iterative):**  This version uses a stack instead of recursion, which can be more efficient for very deep graphs to avoid stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal on a graph iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [node]
+    visited_nodes = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            visited_nodes.append(node)
+            print(node, end=" ")
+            stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+    return visited_nodes
+
+print("\n\nDFS traversal (iterative):")
+dfs_iterative(graph, 'A')
+print("\nVisited nodes:", dfs_iterative(graph, 'A'))
+```
+
+**3. DFS using Adjacency Matrix:**  This approach is less common for DFS because adjacency lists are generally more efficient for sparse graphs (graphs with relatively few edges).
+
+```python
+def dfs_adjacency_matrix(graph, node, visited):
+    num_nodes = len(graph)
+    visited[node] = True
+    print(chr(ord('A') + node), end=" ") # Assuming nodes are represented by A, B, C...
+
+    for neighbor in range(num_nodes):
+        if graph[node][neighbor] == 1 and not visited[neighbor]:
+            dfs_adjacency_matrix(graph, neighbor, visited)
+
+
+#Example adjacency matrix
+graph_matrix = [
+    [0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0]
+]
+
+print("\n\nDFS traversal (adjacency matrix):")
+visited_matrix = [False] * len(graph_matrix)
+dfs_adjacency_matrix(graph_matrix, 0, visited_matrix) # Start at node 0 (A)
+```
+
+Remember to adapt these examples to your specific graph representation and needs.  If you have a weighted graph or need to find the shortest path, you'll need a different algorithm (like Dijkstra's or A*).  The choice between recursive and iterative DFS depends on the size of your graph and potential for stack overflow.  For most cases, the recursive version is easier to read and understand.
+
