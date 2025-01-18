@@ -82052,3 +82052,111 @@ print("Inorder Traversal after deleting 8:", bst.inorder_traversal())
 
 This improved example provides a more robust and complete implementation of a Binary Search Tree in Python.  Remember to test it thoroughly with various inputs to ensure its correctness.
 
+#  Check if a tree is BST or not 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Inorder Traversal and Sorted Array**
+
+This method leverages the property that an inorder traversal of a BST yields a sorted array.
+
+* **Algorithm:**
+    1. Perform an inorder traversal of the binary tree.  Store the visited nodes' values in an array.
+    2. Check if the array is sorted in ascending order. If it is, the tree is a BST; otherwise, it's not.
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node, arr):
+    if node:
+        inorder_traversal(node.left, arr)
+        arr.append(node.data)
+        inorder_traversal(node.right, arr)
+
+def is_bst(root):
+    arr = []
+    inorder_traversal(root, arr)
+    for i in range(1, len(arr)):
+        if arr[i] < arr[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+print(is_bst(root))  # Output: False (because 1 is in the wrong place)
+
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.left = Node(3)
+root2.left.right = Node(7)
+
+print(is_bst(root2)) #Output: True
+```
+
+
+**Method 2: Recursive Approach with Range**
+
+This method is generally more efficient than the inorder traversal method because it avoids creating an extra array.  It recursively checks if each subtree satisfies the BST property.
+
+
+* **Algorithm:**
+    1.  A node is a valid BST node if:
+        * Its left subtree contains only nodes with values less than the node's value.
+        * Its right subtree contains only nodes with values greater than the node's value.
+    2.  Recursively check the left and right subtrees, passing appropriate minimum and maximum value constraints.
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val, max_val):
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+
+# Example usage (same trees as before):
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+print(is_bst_recursive(root, float('-inf'), float('inf')))  # Output: False
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.left = Node(3)
+root2.left.right = Node(7)
+
+print(is_bst_recursive(root2, float('-inf'), float('inf'))) # Output: True
+```
+
+The recursive approach is generally preferred because it has a time complexity of O(N), where N is the number of nodes,  and a space complexity of O(H), where H is the height of the tree (which can be O(N) in the worst case of a skewed tree, but is usually much smaller for balanced trees).  The inorder traversal method also has O(N) time complexity but uses O(N) space for the array.
+
+
+Remember to choose the `float('-inf')` and `float('inf')` for the initial minimum and maximum values in the recursive approach to handle cases where there's no lower or upper bound.
+
