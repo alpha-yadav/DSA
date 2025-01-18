@@ -83131,3 +83131,88 @@ public class AdjacencyList {
 
 Choose the implementation (dictionary or list) based on your specific needs and whether you need to handle non-sequential vertex numbering.  The C++ and Java examples show how to create the adjacency list and add edges, while Python offers more concise methods.  Remember to adapt these examples to suit your particular graph and its properties (directed/undirected, weighted/unweighted).
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so that you can follow all the arrows without ever going backwards.
+
+**Why is it important?**
+
+Topological sorting is crucial in various applications where dependencies exist between tasks or events.  Examples include:
+
+* **Build systems (like Make):**  Determining the correct order to compile files, as some depend on others.
+* **Dependency resolution in software:**  Installing packages where some require others as prerequisites.
+* **Course scheduling:**  Ordering courses based on prerequisites.
+* **Instruction scheduling in compilers:**  Optimizing instruction execution order.
+* **Data serialization:**  Determining the order to write data elements to a file, avoiding circular dependencies.
+
+
+**When is it possible?**
+
+A topological sort is only possible if the graph is a Directed Acyclic Graph (DAG).  A cycle (a path that starts and ends at the same node) makes a topological sort impossible, as you'd never be able to arrange the nodes to satisfy all the dependencies without backtracking.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's algorithm:**
+
+   This algorithm uses a queue.  It starts by finding all nodes with no incoming edges (in-degree 0).  These are added to the queue.  Then, it iteratively removes nodes from the queue, adding them to the sorted list, and decrementing the in-degree of their neighbors.  Nodes whose in-degree becomes 0 are added to the queue.  The algorithm continues until the queue is empty.  If the final sorted list doesn't contain all nodes, then the graph contains a cycle.
+
+   * **Pseudocode:**
+
+     ```
+     function kahn(graph):
+       queue = all nodes with in-degree 0
+       sorted = []
+
+       while queue is not empty:
+         node = remove from queue
+         add node to sorted
+         for each neighbor of node:
+           decrement neighbor's in-degree
+           if neighbor's in-degree == 0:
+             add neighbor to queue
+
+       if |sorted| != |graph|:  //If not all nodes are in the sorted list
+         return "Cycle detected"
+       else:
+         return sorted
+     ```
+
+2. **Depth-First Search (DFS) based algorithm:**
+
+   This algorithm uses DFS to traverse the graph.  It maintains a list of visited nodes and a stack.  When a node is finished processing (all its neighbors have been visited), it's pushed onto the stack.  After DFS completes, the stack is reversed to get the topologically sorted order.  If a back edge is detected during DFS (an edge to an already visited but not yet finished node), it indicates a cycle.
+
+
+   * **Pseudocode (simplified):**
+
+     ```
+     function dfs_topological_sort(graph):
+       visited = set()
+       stack = []
+
+       function dfs(node):
+         visited.add(node)
+         for each neighbor of node:
+           if neighbor not in visited:
+             dfs(neighbor)
+           else if neighbor in visited and not finished(neighbor):
+             return "Cycle detected" //Back edge detected
+         stack.append(node)  //Node is finished
+
+
+       for each node in graph:
+         if node not in visited:
+           dfs(node)
+
+       return reversed(stack)
+     ```
+
+**Example:**
+
+Consider a graph with nodes A, B, C, D, and edges A->C, B->C, C->D.
+
+Both Kahn's and DFS algorithms would produce a topological sort like: A, B, C, D  (or B, A, C, D - order may vary).  Note that A and B can be swapped as they have no dependency on each other.  However, C must come after A and B, and D must come after C.
+
+
+Choosing between Kahn's and the DFS-based algorithm often depends on implementation details and the specific characteristics of the graph.  Kahn's algorithm is generally easier to understand and implement, while the DFS-based algorithm might be slightly more efficient in some cases.  Both correctly detect cycles.
+
