@@ -81541,3 +81541,93 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Both methods achieve the same result. The recursive approach is often considered more elegant and can be slightly more efficient in some cases due to less overhead, while the iterative approach might be preferred when dealing with extremely deep trees to avoid potential stack overflow errors.  Choose the method that best suits your needs and coding style. Remember to handle the `None` cases carefully in both methods to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They're tree-like structures where each node has at most two children, referred to as the left child and the right child.  The key property that defines a BST is the *search property*:
+
+* **For every node in the tree:**  All nodes in the left subtree have keys *less than* the node's key, and all nodes in the right subtree have keys *greater than* the node's key.
+
+This property makes searching, insertion, and deletion operations efficient, provided the tree is relatively balanced.
+
+Here's a breakdown of key aspects of BSTs:
+
+**1. Key Properties:**
+
+* **Unique Keys:**  Typically, BSTs assume unique keys.  If duplicate keys are allowed, you might need to adjust the insertion and deletion algorithms to handle them appropriately (e.g., by using a count for each key).
+* **Ordered Data:**  BSTs inherently maintain sorted order of data, making them suitable for operations that rely on ordered data (e.g., finding the minimum/maximum element, finding the next/previous element in sorted order).
+* **Efficiency (in a balanced tree):**  Search, insertion, and deletion operations have an average time complexity of O(log n), where n is the number of nodes. This is significantly faster than linear time O(n) for unsorted data structures like linked lists.  However, this logarithmic complexity is only guaranteed if the tree is relatively balanced.
+
+
+**2. Operations:**
+
+* **Search:**  Starts at the root. If the target key is equal to the current node's key, the search is successful. If the target key is less than the current node's key, recursively search the left subtree. Otherwise, recursively search the right subtree.
+
+* **Insertion:**  Similar to search, navigate down the tree until you find the appropriate place to insert the new node (either as the left or right child of a leaf node).
+
+* **Deletion:**  The most complex operation.  There are three cases to consider:
+    * **Leaf Node:** Simply remove the node.
+    * **Node with One Child:** Replace the node with its child.
+    * **Node with Two Children:**  Find the inorder predecessor (largest node in the left subtree) or inorder successor (smallest node in the right subtree), replace the node's key with the predecessor/successor's key, and then delete the predecessor/successor node (which will now be a node with at most one child, reducing it to one of the simpler cases).
+
+* **Minimum/Maximum:**  The minimum element is the leftmost node, and the maximum element is the rightmost node.  These can be found efficiently by following left/right child pointers.
+
+* **Traversal:**  There are several ways to traverse a BST and visit all its nodes:
+    * **Inorder Traversal:** Visits nodes in ascending order of their keys (left subtree, root, right subtree).
+    * **Preorder Traversal:** Visits the root node before its left and right subtrees.
+    * **Postorder Traversal:** Visits the root node after its left and right subtrees.
+
+
+**3. Balanced vs. Unbalanced BSTs:**
+
+A crucial consideration with BSTs is balance.  If data is inserted in a sorted order, the tree will become a skewed linked list, resulting in O(n) time complexity for search, insertion, and deletion.  To mitigate this, self-balancing BSTs are used:
+
+* **AVL Trees:**  Maintain a balance factor for each node to ensure that the height difference between the left and right subtrees is at most 1.
+* **Red-Black Trees:**  Use color information (red or black) to maintain a relatively balanced structure.
+* **B-Trees:**  Designed for efficient disk access, commonly used in database systems.
+
+**4. Applications:**
+
+BSTs are used in various applications where efficient searching, insertion, and deletion of ordered data are required, including:
+
+* **Symbol tables:** Storing and retrieving data associated with keys.
+* **Implementation of sets and maps:**  Providing efficient operations for set membership, union, intersection, etc.
+* **Sorting algorithms:**  BSTs can be used as a basis for sorting algorithms.
+
+
+**Example (Python):**
+
+A simple (unbalanced) BST node implementation:
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        if self.root is None:
+            self.root = Node(key)
+        else:
+            self._insert_recursive(self.root, key)
+
+    def _insert_recursive(self, node, key):
+        if key < node.key:
+            if node.left is None:
+                node.left = Node(key)
+            else:
+                self._insert_recursive(node.left, key)
+        else:
+            if node.right is None:
+                node.right = Node(key)
+            else:
+                self._insert_recursive(node.right, key)
+
+    # ... (Other methods: search, delete, min, max, traversals, etc.) ...
+```
+
+This is a basic example; a complete implementation would include the other operations mentioned above.  Remember to consider using self-balancing trees for better performance in real-world applications.
+
