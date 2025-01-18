@@ -85795,3 +85795,80 @@ def lowestCommonAncestorBST(root, p, q):
 
 Remember to adapt the `TreeNode` class to your specific needs if you're using a different data structure.  The BST approach is significantly more efficient if applicable.  Choose the appropriate method based on whether you're dealing with a general binary tree or a BST.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science with applications in various domains, including file systems, version control systems (like Git), and phylogenetic analysis.  There are several approaches to solving this problem, each with its own trade-offs.
+
+**Methods for Finding the LCA:**
+
+1. **Brute-Force Approach (Recursive):**
+
+   This method involves traversing the tree from the root. For each node, check if both nodes are present in its subtree. If they are, that node is the LCA. If not, recursively check the left and right subtrees.  This approach is simple to understand but can be inefficient (O(N) in the worst case, where N is the number of nodes).
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def findLCA_bruteforce(root, n1, n2):
+       if root is None:
+           return None
+
+       if root.data == n1 or root.data == n2:
+           return root
+
+       left_lca = findLCA_bruteforce(root.left, n1, n2)
+       right_lca = findLCA_bruteforce(root.right, n1, n2)
+
+       if left_lca and right_lca:
+           return root
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   ```
+
+2. **Using Parent Pointers:**
+
+   If each node in the tree has a pointer to its parent, finding the LCA becomes much simpler.  You can traverse upwards from each node until you reach a common ancestor. The first common ancestor encountered is the LCA. This approach is efficient (O(H), where H is the height of the tree).
+
+
+3. **Path-Based Approach:**
+
+   Find the paths from the root to each of the two nodes (`n1` and `n2`).  Then, iterate through both paths simultaneously, identifying the longest common prefix. The last node in the common prefix is the LCA. This also has a time complexity of O(H).
+
+
+4. **Optimized Recursive Approach (Binary Tree):**
+
+   This approach leverages the binary tree structure more effectively.  If both nodes are in the left subtree, recursively search the left subtree. If both are in the right subtree, recursively search the right subtree. If one node is in the left subtree and the other is in the right subtree, the current node is the LCA.
+
+   ```python
+   def findLCA_optimized(root, n1, n2):
+       if root is None:
+           return None
+       if root.data == n1 or root.data == n2:
+           return root
+
+       left = findLCA_optimized(root.left, n1, n2)
+       right = findLCA_optimized(root.right, n1, n2)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+   ```
+
+**Choosing the Right Method:**
+
+* **Parent Pointers:** If you have parent pointers readily available, this is the most efficient approach.
+* **Optimized Recursive:** For binary trees without parent pointers, this is generally preferred over the brute-force method.
+* **Path-Based:**  This method is useful if you need to find the LCA between multiple pairs of nodes efficiently, as you can reuse the paths.
+* **Brute-Force:**  Use this only if simplicity is paramount and efficiency is not a major concern.
+
+
+Remember to handle edge cases such as when one or both nodes are not present in the tree or when one node is the ancestor of the other.  The provided Python code examples can be adapted to handle these scenarios.  You would need to add error checks to ensure `n1` and `n2` exist in the tree before beginning the search.
+
