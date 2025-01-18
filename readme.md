@@ -82642,3 +82642,81 @@ postorder_traversal(root)  # Output: 4 5 2 3 1
 
 **Important Note:**  The output of these traversals depends entirely on the structure of your binary tree.  The example above uses a specific tree structure.  Change the tree, and the output will change accordingly.  Also,  you can implement these traversals iteratively using stacks, but the recursive approach is generally easier to understand and implement.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Efficient):** This is generally the most efficient and elegant solution.
+
+   * **Idea:**  The LCA lies on the path between the two nodes.  Recursively traverse the tree.  If a node contains either `p` or `q`, return the node. If `p` and `q` are on different subtrees, the current node is the LCA. Otherwise, recursively search the subtree containing both `p` and `q`.
+
+   * **Code (Python):**
+
+     ```python
+     class TreeNode:
+         def __init__(self, val=0, left=None, right=None):
+             self.val = val
+             self.left = left
+             self.right = right
+
+     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+         if not root or root == p or root == q:
+             return root
+
+         left = self.lowestCommonAncestor(root.left, p, q)
+         right = self.lowestCommonAncestor(root.right, p, q)
+
+         if left and right:
+             return root
+         return left if left else right
+     ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, we might traverse the entire tree.
+   * **Space Complexity:** O(H), where H is the height of the tree.  This is due to the recursive call stack.  In the worst case (a skewed tree), H can be N.
+
+
+2. **Iterative Approach (using a stack or queue):** This approach uses iterative traversal (like BFS or DFS) to find the LCA. It's less elegant than the recursive approach but can be useful in languages where recursion is less efficient.  The basic idea is to find the paths from the root to both `p` and `q`, and then find the last common node in these paths.
+
+   * **Time Complexity:** O(N)
+   * **Space Complexity:** O(N) in the worst case (for a skewed tree).
+
+3. **Using Parent Pointers:** If you can modify the tree to include parent pointers (each node points to its parent), you can find the LCA more efficiently.  You'd simply traverse upwards from both `p` and `q` until you find a common ancestor.
+
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(1)
+
+
+**Choosing the best approach:**
+
+For most cases, the **recursive approach** is preferred due to its clarity and relatively good performance.  The iterative approach is a viable alternative, especially if recursion is not preferred or if dealing with extremely large trees where stack overflow is a concern. The parent pointer approach is the most efficient if modifying the tree structure is acceptable.
+
+
+**Example Usage (Python):**
+
+```python
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left
+q = root.right
+
+solver = Solution()
+lca = solver.lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val} is: {lca.val}")  # Output: LCA of 5 and 1 is: 3
+
+p = root.left.right
+q = root.left.left
+lca = solver.lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val} is: {lca.val}")  # Output: LCA of 2 and 6 is: 5
+```
+
+Remember to adapt the code to your specific needs and the structure of your binary tree nodes.  If your tree is not a binary search tree, the algorithms remain the same.  The recursive approach is particularly elegant and efficient even for non-BSTs.
+
