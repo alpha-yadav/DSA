@@ -83819,3 +83819,74 @@ print(fizzBuzzFunctional(n: 15)) // Example usage. Prints an array of strings.
 
 Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).  Choose the method that best suits your understanding and coding style.  The most important thing is to understand the logic behind the FizzBuzz algorithm.
 
+#  Algorithm Complexity 
+Algorithm complexity is a crucial concept in computer science that describes how the runtime or space requirements of an algorithm grow as the input size increases.  It's not about the exact runtime on a specific machine (which depends on factors like processor speed and memory), but about the *relative* growth rate.  This allows us to compare algorithms and choose the most efficient one for a given problem, especially as the input size becomes large.
+
+We typically analyze complexity in two primary ways:
+
+**1. Time Complexity:** This measures how the runtime of an algorithm scales with the input size.
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm scales with the input size.
+
+
+**Big O Notation:**
+
+Big O notation (O) is the most common way to express algorithm complexity. It provides an upper bound on the growth rate of the algorithm's resource usage (time or space).  It focuses on the dominant terms as the input size approaches infinity, ignoring constant factors and lower-order terms.
+
+Here are some common Big O complexities, ordered from best to worst:
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Traveling salesman problem (brute-force approach).
+
+
+**Other Notations:**
+
+Besides Big O, other notations are used to provide a more complete picture of complexity:
+
+* **Big Omega (Ω):** Provides a lower bound on the growth rate.  It describes the best-case scenario.
+
+* **Big Theta (Θ):** Provides both an upper and lower bound, indicating a tight bound on the growth rate.  It describes the average-case scenario.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze an algorithm's complexity, we typically consider the following steps:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the runtime.
+
+2. **Express the number of operations as a function of the input size (n):** Count how many times these basic operations are executed.
+
+3. **Identify the dominant terms:** Focus on the terms that grow fastest as n increases.
+
+4. **Express the complexity using Big O notation:** Drop constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+This function iterates through the array once.  The number of comparisons is proportional to the size of the array (n). Therefore, the time complexity is O(n).  The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is essential for writing efficient and scalable programs.  Choosing an algorithm with a lower complexity can dramatically improve performance, especially when dealing with large datasets.
+
