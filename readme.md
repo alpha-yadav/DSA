@@ -82969,3 +82969,165 @@ Many important problems in computer science and other fields are phrased in term
 
 This introduction provides a basic overview of graph theory.  Further study involves exploring specific algorithms, theorems, and applications in greater depth.  Numerous textbooks and online resources are available for more advanced learning.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and efficient method, particularly when the graph is sparse (i.e., it has relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with examples in different programming languages:
+
+**Concept:**
+
+An adjacency list represents a graph as an array (or dictionary) of lists.  Each index in the array corresponds to a vertex in the graph.  The list at that index contains all the vertices that are adjacent (connected by an edge) to the vertex represented by the index.
+
+**Example:**
+
+Consider an undirected graph with 5 vertices (0, 1, 2, 3, 4) and the following edges:
+
+* 0 -- 1
+* 0 -- 4
+* 1 -- 2
+* 1 -- 3
+* 2 -- 3
+* 3 -- 4
+
+
+Its adjacency list representation would look like this:
+
+```
+0: [1, 4]
+1: [0, 2, 3]
+2: [1, 3]
+3: [1, 2, 4]
+4: [0, 3]
+```
+
+**Implementation in different languages:**
+
+**Python:**
+
+Using a dictionary for flexibility (handles vertices with non-sequential numbering):
+
+```python
+graph = {
+    0: [1, 4],
+    1: [0, 2, 3],
+    2: [1, 3],
+    3: [1, 2, 4],
+    4: [0, 3]
+}
+
+# Accessing neighbors of vertex 1:
+print(graph[1])  # Output: [0, 2, 3]
+
+# Checking if an edge exists between vertices 0 and 2:
+if 2 in graph[0]:
+    print("Edge exists between 0 and 2")
+else:
+    print("Edge does not exist between 0 and 2")
+```
+
+Using a list for simplicity (assumes vertices are numbered 0 to n-1):
+
+```python
+num_vertices = 5
+graph = [[] for _ in range(num_vertices)]  # Initialize adjacency list
+
+# Add edges (undirected graph - add both directions)
+graph[0].append(1)
+graph[1].append(0)
+graph[0].append(4)
+graph[4].append(0)
+graph[1].append(2)
+graph[2].append(1)
+graph[1].append(3)
+graph[3].append(1)
+graph[2].append(3)
+graph[3].append(2)
+graph[3].append(4)
+graph[4].append(3)
+
+# Accessing neighbors of vertex 1:
+print(graph[1]) # Output: [0, 2, 3]
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  int num_vertices = 5;
+  vector<vector<int>> graph(num_vertices);
+
+  // Add edges (undirected graph)
+  graph[0].push_back(1);
+  graph[1].push_back(0);
+  graph[0].push_back(4);
+  graph[4].push_back(0);
+  graph[1].push_back(2);
+  graph[2].push_back(1);
+  graph[1].push_back(3);
+  graph[3].push_back(1);
+  graph[2].push_back(3);
+  graph[3].push_back(2);
+  graph[3].push_back(4);
+  graph[4].push_back(3);
+
+  // Accessing neighbors of vertex 1:
+  for (int neighbor : graph[1]) {
+    cout << neighbor << " ";
+  }
+  cout << endl; // Output: 0 2 3
+
+  return 0;
+}
+```
+
+**Java:**
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class AdjacencyList {
+    public static void main(String[] args) {
+        int numVertices = 5;
+        List<List<Integer>> graph = new ArrayList<>(numVertices);
+        for (int i = 0; i < numVertices; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        // Add edges (undirected graph)
+        addEdge(graph, 0, 1);
+        addEdge(graph, 0, 4);
+        addEdge(graph, 1, 2);
+        addEdge(graph, 1, 3);
+        addEdge(graph, 2, 3);
+        addEdge(graph, 3, 4);
+
+
+        // Accessing neighbors of vertex 1:
+        System.out.println(graph.get(1)); // Output: [0, 2, 3]
+    }
+
+    static void addEdge(List<List<Integer>> graph, int u, int v) {
+        graph.get(u).add(v);
+        graph.get(v).add(u);
+    }
+}
+```
+
+**Advantages of Adjacency List:**
+
+* **Space efficiency for sparse graphs:**  Only stores existing edges.
+* **Efficient for finding neighbors:**  Direct access to a vertex's neighbors.
+* **Easy to implement:** Relatively straightforward data structure.
+
+**Disadvantages of Adjacency List:**
+
+* **Less space-efficient for dense graphs:**  Can use more space than an adjacency matrix for dense graphs (many edges).
+* **Slower to check for edge existence:** Requires iterating through the neighbor list.
+
+
+Choose the implementation (dictionary or list) based on your specific needs and whether you need to handle non-sequential vertex numbering.  The C++ and Java examples show how to create the adjacency list and add edges, while Python offers more concise methods.  Remember to adapt these examples to suit your particular graph and its properties (directed/undirected, weighted/unweighted).
+
