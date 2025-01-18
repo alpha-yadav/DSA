@@ -80739,3 +80739,82 @@ You can return the answer in any order.
 
 These problems demonstrate a range of complexity and algorithmic techniques.  Choosing the right data structures and algorithms is key to solving these efficiently.  Remember to consider time and space complexity when designing your solutions.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+
+**Simple Version:**
+
+This version uses a `for` loop and `if/else if/else` statements to check the divisibility of each number.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  It first checks for divisibility by 15 (to handle both 3 and 5), then 3, then 5.  If none of these conditions are met, it prints the number itself.
+
+
+**Slightly More Advanced Version (using a tuple):**
+
+This version uses a tuple to store the divisors and their corresponding strings, making it more easily extensible if you wanted to add more conditions.
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+    let fizzBuzzRules = [(3, "Fizz"), (5, "Buzz")]
+
+    for i in 1...n {
+        var output = ""
+        for rule in fizzBuzzRules {
+            if i % rule.0 == 0 {
+                output += rule.1
+            }
+        }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzAdvanced(n: 15) // Call the function
+```
+
+This version iterates through the `fizzBuzzRules` tuple. If a number is divisible by a divisor, the corresponding string is appended to the `output` string. If `output` remains empty after checking all rules, the number itself is printed.  This approach is more scalable – adding new rules (e.g., divisible by 7 prints "Bang") is straightforward.
+
+
+**Running the Code:**
+
+You can run this code in a Swift playground (Xcode) or a similar environment.  Simply paste the code and run the `fizzBuzz` or `fizzBuzzAdvanced` function call.  The output will be:
+
+```
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+```
+
+
+Remember to choose the version that best suits your needs and understanding.  The simple version is easier to grasp for beginners, while the advanced version showcases a more structured and maintainable approach.
+
