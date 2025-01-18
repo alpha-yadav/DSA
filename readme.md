@@ -82270,3 +82270,106 @@ print(f"Is the tree a BST (minmax method)? {is_bst_recursive_minmax(root2, float
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity depends on the tree's height. In the worst case (a skewed tree), it's O(N) for both methods; in the best case (a balanced tree), it's O(log N).  The recursive min-max approach might be slightly more efficient in practice because it can prune subtrees earlier if a violation is detected.  However, the in-order traversal method is often considered more straightforward and easier to understand.  Choose the method that best suits your needs and understanding.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The core of the BST property is that for every node:
+
+* All nodes in its left subtree have keys less than the node's key.
+* All nodes in its right subtree have keys greater than the node's key.
+
+Here are two common approaches:
+
+**1. Recursive Approach:**
+
+This approach is elegant and efficient.  It recursively checks the BST property for each subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a given binary tree is a BST.
+
+    Args:
+        node: The root node of the tree.
+        min_val: The minimum allowed value for the node's data (inclusive).
+        max_val: The maximum allowed value for the node's data (inclusive).
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):  #Check if node data is within range
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and  #Recursive call for left subtree
+            is_bst_recursive(node.right, node.data, max_val)) #Recursive call for right subtree
+
+
+
+# Example Usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5) #Violation of BST property. 15 > 10 and 5 < 10, but 15 is on the left.
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") # Output: False
+
+```
+
+**2. Iterative Approach (using Inorder Traversal):**
+
+A BST, when traversed in-order (left, root, right), will produce a sorted sequence of its nodes. This approach leverages this property.
+
+```python
+def is_bst_iterative(root):
+    """
+    Iteratively checks if a given binary tree is a BST using inorder traversal.
+
+    Args:
+      root: The root node of the tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    stack = []
+    prev = -float('inf') #Keeps track of the previous node during inorder traversal
+
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left  # Go to the leftmost node
+
+        root = stack.pop() #Pop the leftmost node (start of inorder traversal for that subtree)
+        if root.data <= prev: #Check the inorder property
+            return False
+        prev = root.data
+        root = root.right #Process the right subtree
+
+
+    return True
+
+
+# Example usage (same trees as above):
+print(f"Is the tree a BST (iterative)? {is_bst_iterative(root)}")  # Output: True
+print(f"Is the tree a BST (iterative)? {is_bst_iterative(root2)}")  # Output: False
+
+```
+
+**Choosing an Approach:**
+
+Both approaches have a time complexity of O(N), where N is the number of nodes in the tree.  The recursive approach is often considered more readable, while the iterative approach might be slightly more efficient in some cases due to avoiding the overhead of recursive function calls.  Choose the method that best suits your coding style and performance needs.  For most cases, the difference in performance will be negligible.
+
