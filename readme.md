@@ -83216,3 +83216,94 @@ Both Kahn's and DFS algorithms would produce a topological sort like: A, B, C, D
 
 Choosing between Kahn's and the DFS-based algorithm often depends on implementation details and the specific characteristics of the graph.  Kahn's algorithm is generally easier to understand and implement, while the DFS-based algorithm might be slightly more efficient in some cases.  Both correctly detect cycles.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on tracking the state of each node during the traversal.  We use three states:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (in the recursion stack).
+* **Visited:** The node and its descendants have been fully explored.
+
+A cycle exists if, during the traversal, we encounter a node that's already in the `Visiting` state. This indicates a back edge—an edge that points to an ancestor in the current traversal path.
+
+Here's how to implement cycle detection using DFS in Python:
+
+```python
+def has_cycle_dfs(graph):
+    """
+    Detects cycles in a directed graph using Depth First Traversal.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and 
+               values are lists of their neighbors.
+
+    Returns:
+        True if a cycle is detected, False otherwise.
+    """
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: Unvisited, 1: Visiting, 2: Visited
+
+    def dfs(node):
+        visited[node] = 1  # Mark as Visiting
+        for neighbor in graph.get(node, []):
+            if visited[neighbor] == 1:  # Cycle detected
+                return True
+            if visited[neighbor] == 0 and dfs(neighbor):
+                return True
+        visited[node] = 2  # Mark as Visited
+        return False
+
+    for node in graph:
+        if visited[node] == 0:
+            if dfs(node):
+                return True
+    return False
+
+
+# Example usage:
+graph1 = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: []
+}
+print(f"Graph 1 has cycle: {has_cycle_dfs(graph1)}")  # Output: False
+
+
+graph2 = {
+    0: [1, 2],
+    1: [2],
+    2: [0],  # Cycle 0 -> 1 -> 2 -> 0
+    3: []
+}
+print(f"Graph 2 has cycle: {has_cycle_dfs(graph2)}")  # Output: True
+
+graph3 = {
+    0: [1],
+    1: [2, 3],
+    2: [0, 3],
+    3: []
+}
+print(f"Graph 3 has cycle: {has_cycle_dfs(graph3)}") # Output: True
+
+
+graph4 = {} #empty graph
+print(f"Graph 4 has cycle: {has_cycle_dfs(graph4)}") #Output: False
+
+
+graph5 = {0: [1], 1:[2], 2:[0,3], 3:[4], 4:[2]} #more complex graph
+print(f"Graph 5 has cycle: {has_cycle_dfs(graph5)}") # Output: True
+```
+
+**Explanation:**
+
+1. **`has_cycle_dfs(graph)`:** This function initializes the `visited` array and iterates through all nodes.  If a node is unvisited, it calls the `dfs` function.
+
+2. **`dfs(node)`:** This recursive function performs the Depth First Search.
+   - It marks the current node as `Visiting` (1).
+   - It recursively explores all neighbors.  If a neighbor is already `Visiting`, a cycle is detected, and `True` is returned.
+   - If a neighbor is unvisited, the `dfs` function is called recursively on it. If the recursive call finds a cycle, `True` is returned.
+   - After exploring all neighbors, the current node is marked as `Visited` (2).
+   - If no cycle is found, `False` is returned.
+
+This approach efficiently detects cycles in directed graphs using the properties of DFS and the `Visiting` state to identify back edges.  The time complexity is O(V + E), where V is the number of vertices and E is the number of edges, which is the same as a standard DFS traversal.  Space complexity is O(V) due to the recursion stack and `visited` array.
+
