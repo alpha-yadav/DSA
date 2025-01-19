@@ -89929,3 +89929,126 @@ print(is_bst_recursive_wrapper(root2)) # Output: False
 
 The recursive approach is generally preferred because it has a time complexity of O(N), where N is the number of nodes, and a space complexity of O(H), where H is the height of the tree (which is O(log N) for a balanced tree and O(N) for a skewed tree). The inorder traversal method also has O(N) time complexity but uses O(N) space for the list.  Therefore, the recursive method is generally more space-efficient for balanced trees.  Choose the method that best suits your needs and understanding. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST).  Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    _inorder_traversal(root, inorder_list)
+
+    # Check if the in-order list is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i].data < inorder_list[i-1].data:
+            return False
+    return True
+
+
+def _inorder_traversal(node, inorder_list):
+    """Helper function for recursive in-order traversal."""
+    if node:
+        _inorder_traversal(node.left, inorder_list)
+        inorder_list.append(node)
+        _inorder_traversal(node.right, inorder_list)
+
+#Example Usage
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+print(is_bst_recursive(root)) #True
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(15) #this violates BST property, 15 should be > 8 and <20
+root2.right.right = Node(25)
+print(is_bst_recursive(root2)) #False
+
+```
+
+
+**Method 2:  Recursive with Min/Max Bounds**
+
+This approach is more efficient because it avoids creating an entire in-order list.  It recursively checks if each subtree satisfies the BST property (left subtree values < node value < right subtree values).
+
+```python
+import sys
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(node):
+    """
+    Checks if a binary tree is a BST using recursive min/max bounds.
+
+    Args:
+      node: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    return _is_bst_util(node, -sys.maxsize, sys.maxsize)
+
+
+def _is_bst_util(node, min_val, max_val):
+    """Helper function for recursive min/max bound check."""
+    if node is None:
+        return True
+
+    if node.data < min_val or node.data > max_val:
+        return False
+
+    return ( _is_bst_util(node.left, min_val, node.data - 1) and
+             _is_bst_util(node.right, node.data + 1, max_val) )
+
+# Example Usage (same trees as above)
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+print(is_bst_minmax(root)) # True
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(15)  #this violates BST property
+root2.right.right = Node(25)
+print(is_bst_minmax(root2))  # False
+
+```
+
+**Choosing a Method:**
+
+* **Method 1 (In-order traversal):** Simpler to understand, but less efficient in terms of space complexity (O(N) due to the list).
+* **Method 2 (Min/Max bounds):** More efficient in terms of space complexity (O(h), where h is the height of the tree), making it preferable for large trees.  It's also generally faster because it avoids constructing a list.
+
+
+Remember to adapt the `Node` class definition if your tree uses a different structure.  Both methods provide correct BST verification.  Method 2 is generally recommended for its better efficiency.
+
