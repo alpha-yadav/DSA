@@ -88374,3 +88374,102 @@ For more detailed explanations and iterative implementations (especially for pos
 
 Remember to replace `node.data` with the actual way you access the data within your node structure.  The algorithms assume you have a binary tree node structure with `left`, `right`, and `data` attributes.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS) for trees, visits all nodes at a given level before moving to the next level.  Here are implementations in Python and JavaScript, along with explanations:
+
+
+**Python Implementation:**
+
+This implementation uses a queue (`collections.deque`) for efficiency.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])  # Initialize queue with root node
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+
+**JavaScript Implementation:**
+
+This uses a similar approach with a queue implemented using an array.
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) {
+    return;
+  }
+
+  const queue = [root]; // Initialize queue with root node
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    console.log(curr.data, " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+// Example Usage:
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1 2 3 4 5
+```
+
+**Explanation:**
+
+Both implementations follow these steps:
+
+1. **Initialization:**  A queue is created and the root node is added to it.
+2. **Iteration:** The `while` loop continues as long as the queue is not empty.
+3. **Dequeue and Print:** In each iteration, the node at the front of the queue is dequeued (removed), and its data is printed.
+4. **Enqueue Children:** The left and right children of the dequeued node (if they exist) are added to the rear of the queue.
+5. **Repeat:** Steps 3 and 4 are repeated until the queue is empty, ensuring that all nodes are processed level by level.
+
+
+These examples demonstrate a basic level order traversal.  For larger trees, you might want to consider optimizations, especially concerning memory management for extremely large trees.  You could also modify the code to return an array instead of printing the values directly.
+
