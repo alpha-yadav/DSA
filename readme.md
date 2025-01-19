@@ -87404,3 +87404,47 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Remember to handle the base cases (empty trees, one tree empty and the other not) correctly in both approaches.  The recursive approach is generally the recommended starting point due to its simplicity and readability.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing data in a sorted manner.  They offer efficient searching, insertion, and deletion operations, making them a valuable tool in various algorithms and applications.
+
+Here's a breakdown of BSTs:
+
+**Key Properties:**
+
+* **Binary Tree:**  Each node has at most two children, referred to as the left child and the right child.
+* **Ordered Property:** For every node:
+    * All nodes in its left subtree have keys less than the node's key.
+    * All nodes in its right subtree have keys greater than the node's key.
+* **No Duplicates (Usually):**  Most implementations don't allow duplicate keys.  If duplicates are allowed, they might be handled by storing a count at each node or linking nodes with the same key in a list.
+
+**Operations:**
+
+* **Search:**  Starts at the root node. If the target key is equal to the current node's key, it's found. If the target key is less than the current node's key, search recursively in the left subtree; otherwise, search in the right subtree.  The time complexity is O(h), where h is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes (O(log n) time complexity).  In a worst-case scenario (a skewed tree resembling a linked list), h can be n, resulting in O(n) time complexity.
+
+* **Insertion:**  Similar to search, traverse the tree until an appropriate position is found.  Insert the new node as a leaf node, maintaining the ordered property.  Time complexity is O(h), which is O(log n) for a balanced tree and O(n) for a skewed tree.
+
+* **Deletion:**  More complex than insertion.  Several cases need to be handled:
+    * **Node with no children (leaf node):** Simply remove the node.
+    * **Node with one child:** Replace the node with its child.
+    * **Node with two children:**  Find the inorder successor (smallest node in the right subtree) or inorder predecessor (largest node in the left subtree), copy its value to the node being deleted, and then delete the inorder successor/predecessor (which will now have at most one child). This maintains the BST property. The time complexity is O(h), which is O(log n) for a balanced tree and O(n) for a skewed tree.
+
+* **Minimum/Maximum:** The minimum value is always found at the leftmost leaf node (by repeatedly traversing left children). The maximum value is always found at the rightmost leaf node (by repeatedly traversing right children).  Time complexity is O(h).
+
+* **Traversal:**  Various traversal methods (inorder, preorder, postorder) allow visiting all nodes systematically.  Inorder traversal yields a sorted sequence of keys. Time complexity is O(n) because all nodes need to be visited.
+
+**Advantages:**
+
+* **Efficient Search, Insertion, and Deletion (in balanced trees):**  O(log n) time complexity for most operations.
+* **Sorted Data:**  Inorder traversal provides sorted data.
+* **Relatively simple to implement.**
+
+**Disadvantages:**
+
+* **Performance degrades with unbalanced trees:**  In the worst case (a skewed tree), the time complexity becomes O(n), which is inefficient.
+* **No inherent mechanism to prevent unbalancing:**  Techniques like self-balancing BSTs (e.g., AVL trees, red-black trees) are needed to guarantee good performance in practice.
+
+
+**Self-Balancing BSTs:**  These are variations of BSTs that automatically adjust their structure during insertions and deletions to maintain a balanced state, preventing the worst-case scenarios of skewed trees.  They are more complex to implement but provide guaranteed logarithmic time complexity for operations.
+
+In summary, BSTs are a powerful data structure, especially when balanced, offering efficient operations on sorted data. However, understanding their limitations and potential for unbalancing is crucial for choosing the right data structure for a given task.
+
