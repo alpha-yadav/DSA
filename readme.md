@@ -87025,3 +87025,86 @@ int main() {
 
 All these examples print the numbers 0 through 4.  The choice of which loop to use depends on the specific needs of your program.  `While` loops are generally used when the number of iterations isn't known beforehand, while `for` loops are better suited for iterating a known number of times or over a collection of items.  `Do-while` loops guarantee at least one execution of the loop body.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to process data in a multi-dimensional way, such as iterating through rows and columns of a matrix or table.
+
+Here's a breakdown of how nested loops work, along with examples in several programming languages:
+
+**General Structure:**
+
+```
+outer_loop:
+  for outer_variable in outer_range:
+    inner_loop:
+      for inner_variable in inner_range:
+        # Code to be executed for each inner iteration
+      # Code executed after each inner loop completes
+  # Code executed after each outer loop completes
+```
+
+**Examples:**
+
+**Python:**
+
+```python
+# Print a multiplication table
+for i in range(1, 11):  # Outer loop (rows)
+  for j in range(1, 11):  # Inner loop (columns)
+    print(i * j, end="\t")  # \t adds a tab for formatting
+  print()  # Newline after each row
+```
+
+**JavaScript:**
+
+```javascript
+// Print a multiplication table
+for (let i = 1; i <= 10; i++) { // Outer loop (rows)
+  for (let j = 1; j <= 10; j++) { // Inner loop (columns)
+    console.log(i * j);
+  }
+}
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  // Print a multiplication table
+  for (int i = 1; i <= 10; i++) { // Outer loop (rows)
+    for (int j = 1; j <= 10; j++) { // Inner loop (columns)
+      std::cout << i * j << "\t";
+    }
+    std::cout << std::endl; // Newline after each row
+  }
+  return 0;
+}
+```
+
+**Java:**
+
+```java
+public class NestedLoop {
+    public static void main(String[] args) {
+        // Print a multiplication table
+        for (int i = 1; i <= 10; i++) { // Outer loop (rows)
+            for (int j = 1; j <= 10; j++) { // Inner loop (columns)
+                System.out.print(i * j + "\t");
+            }
+            System.out.println(); // Newline after each row
+        }
+    }
+}
+```
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can significantly increase the runtime of your program, especially with large datasets.  The time complexity is often multiplied (e.g., two nested loops iterating `n` times each have a complexity of O(n²)).
+* **Readability:**  Proper indentation and clear variable names are crucial for readability when using nested loops.  Overly complex nested loops can be difficult to understand and debug.
+* **Alternatives:**  Consider whether other data structures or algorithms (like vectorized operations in NumPy for Python or using appropriate library functions) might offer more efficient solutions than nested loops for certain tasks.
+
+
+These examples demonstrate the basic concept. Nested loops can be used in far more complex scenarios,  including traversing arrays, matrices, trees, and graphs.  The key is understanding how the inner loop's iterations are completely executed for every single iteration of the outer loop.
+
