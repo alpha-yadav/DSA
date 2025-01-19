@@ -90774,3 +90774,119 @@ Graph theory has a vast range of applications, including:
 
 This introduction provides a foundation for further exploration of graph theory.  More advanced topics include graph coloring, graph traversal algorithms (like Depth-First Search and Breadth-First Search), minimum spanning trees, shortest path algorithms (like Dijkstra's algorithm and Bellman-Ford algorithm), network flows, and many more.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementations and considerations:
+
+**Core Idea:**
+
+An adjacency list represents a graph as an array or a dictionary (hash table) where each index (or key) corresponds to a vertex.  The value at each index is a list of its adjacent vertices (neighbors).
+
+**Implementation Examples:**
+
+* **Python (using dictionaries):**  This is arguably the most straightforward and Pythonic way.
+
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+
+# Accessing neighbors of vertex 'B':
+neighbors_of_B = graph['B']  # ['A', 'D', 'E']
+
+# Checking if an edge exists between 'A' and 'C':
+if 'C' in graph['A']:
+    print("Edge exists between A and C")
+
+# Iterating through the graph:
+for vertex, neighbors in graph.items():
+    print(f"Vertex {vertex}: Neighbors = {neighbors}")
+```
+
+* **Python (using lists and a custom class - for weighted graphs):**  This is suitable when you need to store edge weights.
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.adj_list = [[] for _ in range(num_vertices)]
+
+    def add_edge(self, u, v, weight):
+        self.adj_list[u].append((v, weight))
+        self.adj_list[v].append((u, weight)) # For undirected graph; comment out for directed
+
+    def print_graph(self):
+        for i in range(self.num_vertices):
+            print(f"Vertex {i}: ", end="")
+            for neighbor, weight in self.adj_list[i]:
+                print(f"({neighbor}, {weight}) ", end="")
+            print()
+
+# Example usage:
+g = Graph(6)  # 6 vertices
+g.add_edge(0, 1, 4)
+g.add_edge(0, 2, 2)
+g.add_edge(1, 3, 5)
+g.add_edge(2, 3, 1)
+g.add_edge(3, 4, 3)
+g.add_edge(4, 5, 2)
+g.print_graph()
+
+```
+
+* **C++ (using vectors):**  A common implementation in C++.
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  int num_vertices = 6;
+  vector<vector<int>> adj_list(num_vertices);
+
+  adj_list[0].push_back(1);
+  adj_list[0].push_back(2);
+  adj_list[1].push_back(0);
+  adj_list[1].push_back(3);
+  // ... add more edges ...
+
+  for (int i = 0; i < num_vertices; ++i) {
+    cout << "Vertex " << i << ": ";
+    for (int neighbor : adj_list[i]) {
+      cout << neighbor << " ";
+    }
+    cout << endl;
+  }
+  return 0;
+}
+```
+
+
+**Advantages of Adjacency Lists:**
+
+* **Space efficiency for sparse graphs:** Only the existing edges are stored.  For a sparse graph, this uses significantly less memory than an adjacency matrix.
+* **Efficient to find neighbors:**  Finding the neighbors of a vertex is fast (O(degree of the vertex), where degree is the number of edges connected to that vertex).
+* **Easy to add and remove edges:**  Adding or deleting an edge is relatively simple.
+
+
+**Disadvantages of Adjacency Lists:**
+
+* **Less efficient for dense graphs:** For dense graphs (many edges), the adjacency matrix can be more efficient.
+* **Finding an edge between two specific vertices takes O(degree) time (worst case).**  While finding neighbors is fast, checking for a specific edge requires iterating through the neighbor list.
+
+
+
+**Choosing between Adjacency List and Adjacency Matrix:**
+
+* **Sparse graphs:** Use adjacency lists.
+* **Dense graphs:** Consider adjacency matrices; they might be faster for certain operations (e.g., checking for edge existence).
+* **Weighted graphs:**  Both can handle weighted graphs; you'd typically store weights as part of the adjacency list (as shown in the Python class example).  The adjacency matrix would store weights directly in the matrix.
+
+Remember to choose the data structure that best suits your specific needs and the characteristics of your graph.  For most real-world applications involving large, sparse graphs, adjacency lists are the preferred choice.
+
