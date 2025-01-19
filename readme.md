@@ -90527,3 +90527,118 @@ This approach requires a pre-processing step to add parent pointers to each node
 
 The iterative approach is generally more complex to implement but might offer performance advantages for very large trees, especially if parent pointers are readily available or can be efficiently stored. The recursive method is often preferred for its simplicity and readability.  Choose the method best suited to your needs and context. Remember to handle edge cases like `p` or `q` not being in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (or more specifically, a rooted tree) is a common problem in computer science.  There are several approaches, each with varying time and space complexities.  The optimal approach depends on the structure of the tree and whether you need to perform multiple LCA queries.
+
+Here are some common methods:
+
+**1. Recursive Approach (for binary trees):**
+
+This is a simple and intuitive method, particularly effective for binary trees.  It works by recursively traversing the tree.  If the two nodes are found in the left and right subtrees respectively, the current node is the LCA.  Otherwise, the LCA lies in either the left or right subtree, so the recursion continues.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, node1, node2):
+    if root is None or root == node1 or root == node2:
+        return root
+
+    left_lca = lca(root.left, node1, node2)
+    right_lca = lca(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.left.right # Node with data 5
+
+lca_node = lca(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca_node.data}")  # Output: LCA of 4 and 5: 2
+
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (worst case: skewed tree).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive calls).
+
+
+**2. Iterative Approach (for binary trees):**
+
+This approach uses a stack or queue to avoid recursion, potentially improving space efficiency in some cases.  It's essentially a breadth-first or depth-first search adapted for finding the LCA.
+
+```python
+def lca_iterative(root, node1, node2):
+    if not root or root == node1 or root == node2:
+      return root
+
+    stack = [root]
+    parent = {}
+    parent[root] = None
+
+    while stack:
+        node = stack.pop()
+        if node.left:
+            stack.append(node.left)
+            parent[node.left] = node
+        if node.right:
+            stack.append(node.right)
+            parent[node.right] = node
+
+    path1 = []
+    curr = node1
+    while curr:
+        path1.append(curr)
+        curr = parent[curr]
+
+    path2 = []
+    curr = node2
+    while curr:
+        path2.append(curr)
+        curr = parent[curr]
+
+    lca_node = None
+    i = 0
+    while i < len(path1) and i < len(path2) and path1[len(path1) - 1 - i] == path2[len(path2) - 1 -i]:
+        lca_node = path1[len(path1) - 1 - i]
+        i += 1
+    return lca_node
+
+```
+
+**Time Complexity:** O(N)
+**Space Complexity:** O(N) in the worst case (skewed tree), but can be better than the recursive approach in some cases.
+
+
+
+**3. Using Parent Pointers (for any tree):**
+
+If you already have parent pointers in your tree nodes (each node points to its parent), finding the LCA becomes much simpler.  You traverse upwards from each node, storing their ancestors in sets.  The LCA is the lowest node that's present in both sets.
+
+**Time Complexity:** O(H), where H is the height of the tree.
+**Space Complexity:** O(H)
+
+**4. Tarjan's Off-line LCA Algorithm (for multiple queries):**
+
+If you need to perform many LCA queries, Tarjan's algorithm is highly efficient. It uses depth-first search and union-find data structures to pre-process the tree.  After pre-processing, LCA queries can be answered in nearly constant time.
+
+**Time Complexity:** O(N + Q), where N is the number of nodes and Q is the number of queries.  Preprocessing is O(N), query time is almost O(1).
+**Space Complexity:** O(N)
+
+
+The best approach depends on your specific needs.  For a single LCA query in a binary tree, the recursive method is often the simplest.  For many queries or non-binary trees, consider Tarjan's algorithm or the parent pointer method.  The iterative approach offers a trade-off between simplicity and potential space optimization. Remember to handle edge cases like null nodes and when one or both nodes are not present in the tree.
+
