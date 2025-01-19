@@ -87135,3 +87135,58 @@ O(log n) algorithms are characterized by halving (or similarly reducing) the pro
 
 In summary, many algorithms leveraging divide-and-conquer strategies or utilizing balanced tree structures achieve logarithmic time complexity, making them efficient for handling large datasets.
 
+#  An O(log n) example 
+A classic O(log n) example is **binary search** in a sorted array.
+
+**The Algorithm:**
+
+Binary search works by repeatedly dividing the search interval in half.  If the value you're searching for is in the middle element, you're done.  If it's less than the middle element, you search the left half; if it's greater, you search the right half.  You repeat this process until you find the value or the search interval is empty.
+
+**Why it's O(log n):**
+
+Each time you perform a comparison, you effectively halve the size of the problem.  This means the number of comparisons required is approximately the number of times you can halve `n` (the size of the array) until you reach 1.  This is equivalent to finding the base-2 logarithm of `n`, which is written as log₂(n).  Therefore, the time complexity is O(log₂n), often simplified to O(log n) because the base of the logarithm doesn't affect the overall Big O notation.
+
+
+**Example in Python:**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+
+        if arr[mid] == target:
+            return mid  # Target found
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the right half
+        else:
+            high = mid - 1  # Search in the left half
+
+    return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+```
+
+In this code, the `while` loop executes at most log₂(n) times, leading to the O(log n) time complexity.  Other operations inside the loop (comparisons, assignments) are constant time and don't affect the overall logarithmic growth.
+
+
+Other examples of O(log n) algorithms include:
+
+* **Tree Traversal (balanced binary search trees):** Finding a node in a balanced BST takes logarithmic time.
+* **Efficient exponentiation:**  Algorithms like exponentiation by squaring.
+* **Some divide and conquer algorithms:**  Where the problem is repeatedly divided into smaller subproblems of roughly half the size.
+
+
+Remember that O(log n) algorithms are highly efficient, especially for large input sizes, because the growth rate is much slower than linear (O(n)) or quadratic (O(n²)) algorithms.
+
