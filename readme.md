@@ -90645,3 +90645,89 @@ The best approach depends on your specific needs.  For a single LCA query in a b
 #  Graph 
 Please provide me with the data or equation you want me to graph.  I need information about the x and y values or a function to create a graph.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using adjacency matrices is a common approach, particularly useful for certain graph algorithms and when you need quick access to information about the presence or weight of an edge between any two vertices.  Here's a breakdown of how it works, including considerations for different graph types:
+
+**The Basics:**
+
+An adjacency matrix is a 2D array (or a matrix) where each element `matrix[i][j]` represents the connection between vertex `i` and vertex `j`.
+
+* **`matrix[i][j] = 0` (or `false`):**  No edge exists between vertex `i` and vertex `j`.
+* **`matrix[i][j] = 1` (or `true`):** An edge exists between vertex `i` and vertex `j` (for unweighted graphs).
+* **`matrix[i][j] = weight`:** An edge exists between vertex `i` and vertex `j` with a weight of `weight` (for weighted graphs).
+
+
+**Implementation Examples:**
+
+**1. Unweighted, Undirected Graph:**
+
+```python
+def create_unweighted_undirected_graph(num_vertices):
+  """Creates an adjacency matrix for an unweighted, undirected graph."""
+  matrix = [[0] * num_vertices for _ in range(num_vertices)]
+  return matrix
+
+def add_edge_undirected(matrix, u, v):
+  """Adds an edge between vertices u and v (undirected)."""
+  matrix[u][v] = 1
+  matrix[v][u] = 1
+
+#Example
+graph = create_unweighted_undirected_graph(4)
+add_edge_undirected(graph, 0, 1)
+add_edge_undirected(graph, 1, 2)
+print(graph)
+# Output: [[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0]]
+```
+
+**2. Weighted, Directed Graph:**
+
+```python
+def create_weighted_directed_graph(num_vertices):
+  """Creates an adjacency matrix for a weighted, directed graph."""
+  matrix = [[float('inf')] * num_vertices for _ in range(num_vertices)]  # Initialize with infinity
+  for i in range(num_vertices):
+    matrix[i][i] = 0 #Self loop with weight 0 is common, but could be infinity too.
+  return matrix
+
+def add_edge_directed(matrix, u, v, weight):
+  """Adds a directed edge between vertices u and v with a given weight."""
+  matrix[u][v] = weight
+
+# Example
+graph = create_weighted_directed_graph(4)
+add_edge_directed(graph, 0, 1, 5)
+add_edge_directed(graph, 1, 2, 2)
+print(graph)
+# Output: [[0, 5, inf, inf], [inf, 0, 2, inf], [inf, inf, 0, inf], [inf, inf, inf, 0]]
+```
+
+**3.  Weighted, Undirected Graph:**
+
+This is similar to the weighted directed graph, but you need to set `matrix[u][v]` and `matrix[v][u]` to the same weight.
+
+
+**Advantages of Adjacency Matrices:**
+
+* **Efficient edge existence check:**  `O(1)` time complexity to check if an edge exists between two vertices.
+* **Simple implementation:**  Relatively easy to understand and implement.
+* **Suitable for dense graphs:**  Performs well when the graph has a relatively high number of edges compared to the number of vertices.
+
+
+**Disadvantages of Adjacency Matrices:**
+
+* **Space complexity:**  Requires `O(V^2)` space, where `V` is the number of vertices. This can be very inefficient for large, sparse graphs (graphs with relatively few edges).
+* **Adding/Removing vertices:**  Adding or removing a vertex requires resizing the entire matrix, which can be computationally expensive.
+* **Inefficient for sparse graphs:**  For sparse graphs, most of the matrix elements will be 0, leading to significant wasted space.
+
+
+**When to Use Adjacency Matrices:**
+
+* Dense graphs.
+* When you need fast edge existence checks.
+* When the graph's size is relatively small.
+* Algorithms that benefit from direct access to edge weights (e.g., Dijkstra's algorithm, Floyd-Warshall algorithm).
+
+
+For sparse graphs, adjacency lists are generally a more efficient way to represent the graph.  Choose the representation that best suits the characteristics of your graph and the algorithms you'll be using.
+
