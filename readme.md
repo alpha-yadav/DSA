@@ -86778,3 +86778,57 @@ This means that for sufficiently large values of *n* (*n ≥ n₀*), the functio
 
 In essence:  Θ provides the most precise and informative description of a function's growth rate when both upper and lower bounds are known and match.  Big-O is often used when only an upper bound is readily available or needed.  Big-Ω is used when focusing on a lower bound.  Θ is preferred when a tight bound is achievable and desirable.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, little o, little omega) describe the limiting behavior of a function as its input approaches a certain value (usually infinity).  They're crucial for analyzing the efficiency of algorithms. Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Upper bound.  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c*g(n)` for all `n ≥ n₀`.  Essentially,  `f(n)` grows no faster than `g(n)`.
+* **Focus:** Worst-case scenario.  It describes the upper limit on the growth rate.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its time complexity is O(n²) because the n² term dominates as n grows large.  The constants (2, 5, 1) are ignored.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Lower bound. `f(n) = Ω(g(n))` means there exist positive constants *c* and *n₀* such that `0 ≤ c*g(n) ≤ f(n)` for all `n ≥ n₀`.  `f(n)` grows at least as fast as `g(n)`.
+* **Focus:** Best-case or lower bound on growth rate.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its time complexity is Ω(n²).
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Tight bound. `f(n) = Θ(g(n))` means that `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  `f(n)` grows at the same rate as `g(n)`.
+* **Focus:** Precise characterization of growth rate.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its time complexity is Θ(n²).  This is the strongest statement we can make about its asymptotic behavior.
+
+**4. Little o Notation (o):**
+
+* **Meaning:** Strictly upper bound. `f(n) = o(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ f(n) < c*g(n)` for all `n ≥ n₀`.  `f(n)` grows strictly slower than `g(n)`.
+* **Focus:**  Showing that one function grows significantly slower than another.
+* **Example:** `n = o(n²)`, `log n = o(n)`.
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Strictly lower bound. `f(n) = ω(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ c*g(n) < f(n)` for all `n ≥ n₀`. `f(n)` grows strictly faster than `g(n)`.
+* **Focus:** Showing that one function grows significantly faster than another.
+* **Example:** `n² = ω(n)`, `2ⁿ = ω(n²)`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Example                       |
+|----------|----------------------------------------------|--------------------------------|
+| O(g(n))  | f(n) grows no faster than g(n)             | 2n² + 5n + 1 = O(n²)           |
+| Ω(g(n))  | f(n) grows at least as fast as g(n)        | 2n² + 5n + 1 = Ω(n²)           |
+| Θ(g(n))  | f(n) grows at the same rate as g(n)         | 2n² + 5n + 1 = Θ(n²)           |
+| o(g(n))  | f(n) grows strictly slower than g(n)       | n = o(n²)                      |
+| ω(g(n))  | f(n) grows strictly faster than g(n)       | n² = ω(n)                      |
+
+
+**Key Differences & Relationships:**
+
+* **O vs. o:** O gives an upper bound (possibly tight), while o indicates a strictly smaller upper bound.
+* **Ω vs. ω:** Ω gives a lower bound (possibly tight), while ω indicates a strictly larger lower bound.
+* **Θ implies O and Ω:** If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+
+Understanding these notations is vital for comparing algorithm efficiency and making informed choices when selecting the best algorithm for a given task.  Remember that asymptotic analysis focuses on the behavior as input size approaches infinity;  it doesn't necessarily tell the whole story for small input sizes.
+
