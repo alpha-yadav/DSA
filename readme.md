@@ -86551,3 +86551,58 @@ print(f"The maximum number is: {max_number}") # Output: The maximum number is: 9
 
 Remember to start small, be patient, and enjoy the learning process!  Algorithm design is a skill that develops over time with consistent effort.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Find the largest number in an unsorted array.
+
+**Input:** An array of integers.  Example: `[5, 2, 9, 1, 5, 6]`
+
+**Output:** The largest integer in the array. Example: `9`
+
+**Solution (Conceptual):**  Iterate through the array, keeping track of the largest number seen so far.  Initialize the largest number to the first element of the array.  For each subsequent element, if it's larger than the current largest, update the largest number.
+
+
+**Medium:**
+
+**Problem:**  Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  You may assume that each input would have ***exactly one solution***, and you may not use the *same* element twice.
+
+**Input Example:** `nums = [2,7,11,15], target = 9`
+**Output Example:** `[0,1]`  (Because nums[0] + nums[1] == 9)
+
+
+**Solution (Conceptual):**  You could use a brute-force approach (nested loops), but a more efficient solution involves using a hash map (dictionary in Python) to store numbers and their indices.  For each number, check if the complement (`target - number`) exists in the hash map.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`.
+
+**Output:** The longest palindromic substring in `s`.
+
+**Input Example:** `babad`
+**Output Example:**  `"bab"` or `"aba"` (both are valid)
+
+
+**Solution (Conceptual):**  Several approaches exist, including dynamic programming or expanding around the center.  The dynamic programming approach creates a table to store whether substrings are palindromes.  The expanding around the center approach considers each character (or pair of characters) as a potential center of a palindrome and expands outwards.
+
+
+**Choosing a Problem to Solve:**
+
+The best problem for you depends on your current skill level.  Start with the easy problem to build confidence and then move on to the medium and hard problems as you improve. Remember to consider:
+
+* **Data structures:**  What data structures (arrays, linked lists, trees, hash tables, etc.) are appropriate?
+* **Algorithms:** What algorithms (sorting, searching, dynamic programming, greedy algorithms, etc.) are relevant?
+* **Time and space complexity:** How efficient is your solution in terms of time and space?  Can you improve it?
+
+
+These examples provide a framework.  Many variations and extensions are possible.  Online resources like LeetCode, HackerRank, and Codewars offer a vast collection of algorithmic problems with varying difficulties.
+
