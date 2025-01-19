@@ -87281,3 +87281,13 @@ The best representation depends on the specific needs of your application:
 
 For many general-purpose n-ary trees, the **list of children** representation offers a good balance of simplicity, flexibility, and performance.  The **child-sibling** representation is also good for its simplicity, but accessing a specific child requires iteration.  The array representation is optimal for space efficiency *only* if the tree is balanced and you know the maximum branching factor in advance.
 
+#  Introduction 
+Please provide me with context!  An introduction needs a subject.  Tell me what you want an introduction *to*.  For example:
+
+* **An introduction to a research paper on the effects of climate change:**  I can write an introduction that sets the stage for a scientific discussion.
+* **An introduction to a fictional story about a talking dog:** I can write an engaging introduction that hooks the reader.
+* **An introduction to a presentation on effective communication:** I can write an introduction that outlines the key points.
+* **An introduction to a new employee at a company:** I can write a brief introduction suitable for a workplace setting.
+
+Give me the topic, and I'll write a suitable introduction.
+
