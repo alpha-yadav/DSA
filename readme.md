@@ -87448,3 +87448,129 @@ Here's a breakdown of BSTs:
 
 In summary, BSTs are a powerful data structure, especially when balanced, offering efficient operations on sorted data. However, understanding their limitations and potential for unbalancing is crucial for choosing the right data structure for a given task.
 
+#  Binary Search Tree - Insertion (Python) 
+Several implementations of binary search tree (BST) insertion in Python are possible, varying in style and efficiency. Here are a few, starting with a simple recursive version and progressing to a slightly more optimized iterative one:
+
+**1. Recursive Implementation:**
+
+This is a straightforward and easy-to-understand approach.  It recursively traverses the tree to find the correct insertion point.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        self.root = self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        else:
+            node.right = self._insert_recursive(node.right, data)
+        return node
+
+    #Methods for printing the tree (for demonstration)
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+    def preorder_traversal(self, node):
+        if node:
+            print(node.data, end=" ")
+            self.preorder_traversal(node.left)
+            self.preorder_traversal(node.right)
+
+```
+
+**2. Iterative Implementation:**
+
+This version avoids recursion, which can be more efficient for very deep trees and avoids potential stack overflow errors.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+    #Methods for printing the tree (for demonstration - same as recursive version)
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+    def preorder_traversal(self, node):
+        if node:
+            print(node.data, end=" ")
+            self.preorder_traversal(node.left)
+            self.preorder_traversal(node.right)
+
+```
+
+**Example Usage:**
+
+```python
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+print("Inorder Traversal (Recursive): ", end="")
+bst.inorder_traversal(bst.root)  # Output should be: 1 3 6 8 10 14
+print("\nPreorder Traversal (Recursive): ", end="")
+bst.preorder_traversal(bst.root) #Output will depend on the implementation of preorder Traversal
+
+bst2 = BST()
+bst2.insert_iterative(8)
+bst2.insert_iterative(3)
+bst2.insert_iterative(10)
+bst2.insert_iterative(1)
+bst2.insert_iterative(6)
+bst2.insert_iterative(14)
+print("\n\nInorder Traversal (Iterative): ", end="")
+bst2.inorder_traversal(bst2.root) # Output should be: 1 3 6 8 10 14
+print("\nPreorder Traversal (Iterative): ", end="")
+bst2.preorder_traversal(bst2.root) #Output will depend on the implementation of preorder Traversal
+
+```
+
+Remember to choose the implementation that best suits your needs. The iterative approach is generally preferred for its efficiency and avoidance of potential stack overflow issues, especially when dealing with large trees.  The recursive version is often easier to understand initially.  Both examples include `inorder_traversal` and `preorder_traversal` methods to help you visualize the tree structure.  You can adapt these to postorder traversal or other tree traversal methods as needed.
+
