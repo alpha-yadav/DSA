@@ -87108,3 +87108,30 @@ public class NestedLoop {
 
 These examples demonstrate the basic concept. Nested loops can be used in far more complex scenarios,  including traversing arrays, matrices, trees, and graphs.  The key is understanding how the inner loop's iterations are completely executed for every single iteration of the outer loop.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by halving (or similarly reducing) the problem size with each step.  This means the runtime increases logarithmically with the input size (n).  Several algorithmic approaches achieve this efficiency:
+
+**1. Binary Search:** This is the quintessential O(log n) algorithm.  It works on sorted data.  To find a specific element, you repeatedly divide the search interval in half. If the target is in the upper half, you discard the lower half; otherwise, you discard the upper half.  This continues until the target is found or the interval is empty.
+
+**2. Tree Traversal (balanced trees):**  Operations like searching, insertion, and deletion in balanced binary search trees (BSTs) like AVL trees or red-black trees have a time complexity of O(log n).  The balanced nature ensures that the tree's height remains logarithmic with the number of nodes, preventing worst-case scenarios where the tree becomes essentially a linked list (O(n) complexity).
+
+**3. Efficient Set/Map Operations (using balanced trees):**  Many implementations of sets and maps (dictionaries) in programming languages utilize balanced trees internally.  Operations like searching, insertion, and deletion in these data structures benefit from the O(log n) performance of the underlying tree structure.
+
+**4. Exponentiation by Squaring:**  Calculating large powers (a<sup>n</sup>) efficiently can be done in O(log n) time. This method uses the fact that a<sup>n</sup> = (a<sup>n/2</sup>)<sup>2</sup> if n is even, and a<sup>n</sup> = a * a<sup>(n-1)</sup> if n is odd.  The algorithm recursively reduces the exponent until it reaches the base case.
+
+**5. Finding the kth smallest element using QuickSelect (average case):**  While the worst-case time complexity of QuickSelect is O(n<sup>2</sup>), its average-case performance is O(n).  A variation that uses median-of-medians to select pivots can achieve guaranteed O(n) time complexity.  However, if you need to find the *k*th smallest element in a sorted array, you can simply access the kth element in O(1) time.
+
+**6. Merge Sort (divide-and-conquer):** Although the overall time complexity of Merge Sort is O(n log n), each recursive step involves dividing the problem into halves, which exhibits logarithmic behavior within the recursive process itself.
+
+**7. Algorithms on heaps:** Operations like insertion and deletion (finding the min or max element) in a min-heap or max-heap data structure have a time complexity of O(log n).  Heaps are often used in priority queues.
+
+
+**Important Considerations:**
+
+* **Big O notation:**  O(log n) only describes the growth rate of the algorithm's runtime as the input size increases.  The actual runtime will also depend on constant factors and the specific implementation.
+* **Base of the logarithm:** The base of the logarithm (e.g., base 2, base 10, base e) doesn't affect the Big O notation because a change of base is just a constant factor.
+* **Worst-case vs. average-case:** Some algorithms (like QuickSelect) have a different time complexity in the worst case than in the average case.
+
+
+In summary, many algorithms leveraging divide-and-conquer strategies or utilizing balanced tree structures achieve logarithmic time complexity, making them efficient for handling large datasets.
+
