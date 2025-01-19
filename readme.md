@@ -88907,3 +88907,68 @@ While Big O focuses on the upper bound, other notations exist:
 
 Understanding Big O notation is crucial for any computer scientist or software developer to write efficient and scalable code.  It's a fundamental concept in algorithm analysis and design.
 
+#  A Simple Loop 
+The simplest loop in most programming languages is a `while` loop.  It continues to execute a block of code as long as a specified condition is true. Here are examples in a few common languages:
+
+**Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This Python loop prints the numbers 0 through 4.  The condition `count < 5` is checked before each iteration.  When `count` becomes 5, the condition is false, and the loop terminates.
+
+
+**JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+This JavaScript loop does the same thing as the Python example.
+
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+This C++ loop also prints 0 through 4.  Note the inclusion of the `<iostream>` header for input/output operations.
+
+
+**Java:**
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+This Java example achieves the same result.  It requires a class definition and a `main` method.
+
+
+These are all examples of a simple `while` loop.  Other loop types, such as `for` loops, offer more concise ways to iterate, but the `while` loop demonstrates the fundamental concept of looping in a clear way.  Remember that it's crucial to ensure your loop condition will eventually become false to prevent infinite loops.
+
