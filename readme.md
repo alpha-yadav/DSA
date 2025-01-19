@@ -88261,3 +88261,116 @@ else:
 
 Remember to adapt the `Node` class definition if your input tree uses a different structure.  Both methods above assume a simple node structure with `data`, `left`, and `right` attributes.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can visit (or "traverse") all the nodes in a binary tree.  The order in which you visit the nodes matters, and different orders lead to different applications.  The most common traversal methods are:
+
+**1. Inorder Traversal:**
+
+* **Process:** Left Subtree -> Root -> Right Subtree
+* **Result:** For a Binary Search Tree (BST), inorder traversal yields a sorted sequence of nodes (ascending order).
+* **Algorithm (Recursive):**
+
+```python
+def inorder(node):
+  if node:
+    inorder(node.left)
+    print(node.data, end=" ")  # Process the node
+    inorder(node.right)
+```
+
+* **Algorithm (Iterative):**  Uses a stack to simulate recursion.
+
+```python
+def inorder_iterative(root):
+    stack = []
+    current = root
+    while True:
+        if current:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.data, end=" ")
+            current = current.right
+        else:
+            break
+
+```
+
+
+**2. Preorder Traversal:**
+
+* **Process:** Root -> Left Subtree -> Right Subtree
+* **Result:**  Useful for creating a copy of the tree or evaluating an expression tree.  The root is always visited first.
+* **Algorithm (Recursive):**
+
+```python
+def preorder(node):
+  if node:
+    print(node.data, end=" ") # Process the node
+    preorder(node.left)
+    preorder(node.right)
+```
+
+* **Algorithm (Iterative):** Uses a stack.
+
+```python
+def preorder_iterative(root):
+    stack = [root]
+    while stack:
+        node = stack.pop()
+        if node:
+            print(node.data, end=" ")
+            stack.append(node.right)
+            stack.append(node.left)
+```
+
+**3. Postorder Traversal:**
+
+* **Process:** Left Subtree -> Right Subtree -> Root
+* **Result:** Useful for deleting a tree or evaluating an expression tree (in reverse Polish notation). The root is always visited last.
+* **Algorithm (Recursive):**
+
+```python
+def postorder(node):
+  if node:
+    postorder(node.left)
+    postorder(node.right)
+    print(node.data, end=" ") # Process the node
+```
+
+* **Algorithm (Iterative):**  A bit more complex than inorder and preorder iterative versions, often using two stacks or a more sophisticated stack management approach.  (See resources below for examples).
+
+
+**Example Tree and Traversals:**
+
+Consider this tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+* **Inorder:** 4 2 5 1 3
+* **Preorder:** 1 2 4 5 3
+* **Postorder:** 4 5 2 3 1
+
+
+**Choosing a Traversal:**
+
+The choice of traversal depends on the specific task.  If you need a sorted sequence from a BST, use inorder. If you need to create a copy of the tree, preorder is a good choice.  For deletion or specific expression tree evaluations, postorder might be preferred.
+
+
+**Further Resources:**
+
+For more detailed explanations and iterative implementations (especially for postorder), you can consult resources like:
+
+* **GeeksforGeeks:**  They have numerous articles and code examples for different tree traversals.
+* **Visualgo:** Provides interactive visualizations that help you understand how the traversals work step-by-step.
+
+
+Remember to replace `node.data` with the actual way you access the data within your node structure.  The algorithms assume you have a binary tree node structure with `left`, `right`, and `data` attributes.
+
