@@ -90642,3 +90642,6 @@ If you need to perform many LCA queries, Tarjan's algorithm is highly efficient.
 
 The best approach depends on your specific needs.  For a single LCA query in a binary tree, the recursive method is often the simplest.  For many queries or non-binary trees, consider Tarjan's algorithm or the parent pointer method.  The iterative approach offers a trade-off between simplicity and potential space optimization. Remember to handle edge cases like null nodes and when one or both nodes are not present in the tree.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about the x and y values or a function to create a graph.
+
