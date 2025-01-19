@@ -91198,3 +91198,135 @@ While DFS and BFS are the most common, other techniques exist:
 
 Understanding graph traversals is fundamental to solving many graph-related problems in computer science, from pathfinding to social network analysis.  The choice of which algorithm to use depends on the specific problem and the properties of the graph.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist depending on the data structure used (adjacency matrix, adjacency list) and the desired output.  Here are a few implementations in Python:
+
+**1. DFS using Adjacency List (Recursive):**
+
+This is a common and arguably the most elegant way to implement DFS recursively. It's particularly efficient for sparse graphs (graphs with relatively few edges).
+
+```python
+def dfs_recursive(graph, start, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        start: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (used for recursion).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(start, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+    return visited
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Output: A B D E F C
+print("\nVisited nodes:", dfs_recursive(graph, 'A')) # Output: Visited nodes: {'A', 'B', 'D', 'E', 'F', 'C'}
+
+
+```
+
+**2. DFS using Adjacency List (Iterative):**
+
+This iterative version uses a stack to achieve the same effect as the recursive approach.  It can be advantageous for very deep graphs to avoid stack overflow errors.
+
+```python
+def dfs_iterative(graph, start):
+    """
+    Performs a Depth-First Search traversal of a graph iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        start: The starting node.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [start]
+    visited_order = []
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            visited_order.append(vertex)
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)
+
+    return visited_order
+
+
+# Example usage:
+print("\nDFS traversal (iterative):")
+print(dfs_iterative(graph, 'A')) # Output: ['A', 'C', 'F', 'B', 'E', 'D']
+```
+
+**3. DFS using Adjacency Matrix:**
+
+This version uses an adjacency matrix to represent the graph.  It's generally less efficient than the adjacency list approach for sparse graphs but can be more efficient for dense graphs (many edges).
+
+```python
+def dfs_matrix(graph, start):
+    """
+    Performs DFS on a graph represented as an adjacency matrix.
+
+    Args:
+      graph: A list of lists representing the adjacency matrix.
+      start: The starting node (index).
+
+    Returns:
+      A list of visited nodes.
+    """
+    num_nodes = len(graph)
+    visited = [False] * num_nodes
+    stack = [start]
+    visited_order = []
+
+    while stack:
+        node = stack.pop()
+        if not visited[node]:
+            visited[node] = True
+            visited_order.append(node)
+            for neighbor in range(num_nodes):
+                if graph[node][neighbor] == 1 and not visited[neighbor]:
+                    stack.append(neighbor)
+    return visited_order
+
+
+# Example usage (adjacency matrix representation of the same graph):
+adjacency_matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0]   # F
+]
+
+print("\nDFS traversal (matrix):")
+print(dfs_matrix(adjacency_matrix, 0)) # Output: [0, 2, 5, 1, 4, 3] (Node indices)
+
+```
+
+Remember to adapt these examples to your specific graph representation and needs.  You might need to modify the way nodes are processed (e.g., instead of printing, you might want to add them to a list, or perform some other action).  Choose the implementation that best suits your graph's structure and the constraints of your application.
+
