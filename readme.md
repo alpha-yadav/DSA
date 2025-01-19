@@ -86945,3 +86945,83 @@ def find_element(arr, target):
 
 Big O notation is a crucial tool for any computer scientist or software engineer to understand and use effectively when designing and analyzing algorithms.  While it doesn't give precise runtime values, it provides a powerful way to reason about the scalability and efficiency of algorithms.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  Here are examples in a few common programming languages:
+
+**1. While Loop (Python):**
+
+This loop continues as long as the condition `i < 5` is true.
+
+```python
+i = 0
+while i < 5:
+  print(i)
+  i += 1
+```
+
+**2. For Loop (Python):**
+
+This loop iterates through a sequence (in this case, a range of numbers).
+
+```python
+for i in range(5):
+  print(i)
+```
+
+**3. While Loop (JavaScript):**
+
+Similar to the Python `while` loop.
+
+```javascript
+let i = 0;
+while (i < 5) {
+  console.log(i);
+  i++;
+}
+```
+
+**4. For Loop (JavaScript):**
+
+JavaScript also has a `for` loop that's similar to the one in C-style languages.
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+**5. For Loop (C++):**
+
+A classic C-style `for` loop.
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+**6. Do-While Loop (C++):**
+
+This loop executes the code block at least once, then repeats as long as the condition is true.
+
+```c++
+#include <iostream>
+
+int main() {
+  int i = 0;
+  do {
+    std::cout << i << std::endl;
+    i++;
+  } while (i < 5);
+  return 0;
+}
+```
+
+
+All these examples print the numbers 0 through 4.  The choice of which loop to use depends on the specific needs of your program.  `While` loops are generally used when the number of iterations isn't known beforehand, while `for` loops are better suited for iterating a known number of times or over a collection of items.  `Do-while` loops guarantee at least one execution of the loop body.
+
