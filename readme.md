@@ -88972,3 +88972,56 @@ This Java example achieves the same result.  It requires a class definition and 
 
 These are all examples of a simple `while` loop.  Other loop types, such as `for` loops, offer more concise ways to iterate, but the `while` loop demonstrates the fundamental concept of looping in a clear way.  Remember that it's crucial to ensure your loop condition will eventually become false to prevent infinite loops.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a structure where the inner loop's actions are repeated multiple times based on the outer loop's iterations.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+outer_loop:
+  for i in range(outer_loop_iterations):
+    inner_loop:
+      for j in range(inner_loop_iterations):
+        # Code to be executed in the inner loop
+    # Code to be executed after the inner loop completes for each iteration of the outer loop
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop iterates 10 times (1 to 10)
+    for j in range(1, 11):  # Inner loop iterates 10 times for each outer loop iteration
+        print(f"{i} x {j} = {i * j}", end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row of the multiplication table
+```
+
+**How it works:**
+
+1. The outer loop starts with `i = 1`.
+2. The inner loop then iterates from `j = 1` to `j = 10`, printing each multiplication result (`i * j`).
+3. After the inner loop completes (for `i = 1`), the outer loop moves to `i = 2`.
+4. Steps 2 and 3 repeat until the outer loop completes (for `i = 10`).
+
+
+**Common Uses:**
+
+Nested loops are useful for:
+
+* **Processing two-dimensional data structures:**  Iterating through rows and columns of matrices, tables, or images.
+* **Generating combinations or permutations:** Creating all possible pairings or arrangements of items.
+* **Implementing algorithms:**  Many algorithms, such as searching and sorting, utilize nested loops.
+* **Creating patterns:**  As seen in the multiplication table example, nested loops can create visual patterns.
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can be computationally expensive, especially with large iteration counts.  The number of iterations grows rapidly (e.g., two nested loops with 10 iterations each perform 100 iterations).  Consider alternative approaches (like vectorization or using more efficient data structures) for large datasets to improve performance.
+* **Readability:**  Deeply nested loops can be hard to read and understand.  Break down complex nested loops into smaller, more manageable functions to improve code clarity.
+
+
+In summary, nested loops are a powerful tool but require careful consideration of their computational cost and the impact on code readability.  They are a fundamental part of programming and are essential for handling many common tasks involving iterative processing.
+
