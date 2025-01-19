@@ -88728,3 +88728,43 @@ def linear_search(arr, target):
 
 Understanding algorithm complexity is vital for choosing efficient algorithms, especially when dealing with large datasets.  An algorithm with a lower time complexity will generally perform faster for large inputs.  Space complexity is also important, especially when memory is a limited resource.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds.  In simpler terms, it tells us that a function's growth is *proportional* to another function, ignoring constant factors and smaller terms.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be in Θ(*g(n)*), written as *f(n) = Θ(g(n))*, if and only if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+   *c₁g(n) ≤ f(n) ≤ c₂g(n)*
+
+
+**What this means:**
+
+* **g(n)** is the simpler function that represents the dominant growth behavior of *f(n)*.  Think of it as a template for *f(n)'s* growth.
+* **c₁ and c₂** are constants that scale *g(n)*. They allow for variations in the actual values of *f(n)* because Big-Theta ignores constant factors.
+* **n₀** is a threshold value of *n*. The inequality only needs to hold for values of *n* greater than or equal to *n₀*. This is because we're concerned with the asymptotic behavior (behavior as *n* approaches infinity).
+
+**Example:**
+
+Let's say *f(n) = 2n² + 3n + 1*.  We can say that *f(n) = Θ(n²)*.  Here's why:
+
+1. **Choose g(n) = n²:** This is the dominant term in *f(n)*.
+
+2. **Find c₁ and c₂:**  We need to find constants such that *c₁n² ≤ 2n² + 3n + 1 ≤ c₂n²* for sufficiently large *n*.
+
+   * For the lower bound, we can choose *c₁ = 1*.  For large *n*, 2n² will always be greater than or equal to n².
+
+   * For the upper bound, we can choose *c₂ = 3*.  For large enough *n*, 2n² + 3n + 1 will always be less than or equal to 3n².  (The 3n and 1 become insignificant compared to n² as n grows).
+
+3. **Find n₀:** While there's some leeway, let's say *n₀ = 1*.  The inequality holds true for all *n ≥ 1*.
+
+Therefore, *f(n) = 2n² + 3n + 1 = Θ(n²)*.
+
+**Relationship to Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  *f(n) = O(g(n))* means *f(n)* grows no faster than *g(n)*.
+* **Big-Ω (Ω):** Provides a *lower bound*.  *f(n) = Ω(g(n))* means *f(n)* grows at least as fast as *g(n)*.
+* **Big-Θ (Θ):** Provides a *tight bound*.  *f(n) = Θ(g(n))* means *f(n)* grows at the same rate as *g(n)* (both upper and lower bounds).
+
+In essence, if *f(n) = Θ(g(n))*, then *f(n) = O(g(n))* and *f(n) = Ω(g(n))* are both true.  Θ gives us a much more precise description of the function's growth than O or Ω alone.  It's often the most desirable notation to use when possible, because it gives a complete picture of the asymptotic behavior.
+
