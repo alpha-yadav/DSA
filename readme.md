@@ -99607,3 +99607,106 @@ Graph theory has wide-ranging applications, including:
 
 This is a basic introduction to graph theory.  More advanced topics include graph isomorphism, planarity, matchings, and many more specialized areas.  Understanding the fundamentals described here provides a solid foundation for exploring these more complex aspects.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementation choices and considerations:
+
+**The Core Idea**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each element in the array corresponds to a vertex in the graph.  The list at index `i` contains the vertices that are adjacent to vertex `i` (i.e., the vertices connected to vertex `i` by an edge).
+
+**Implementation Options**
+
+Several data structures can be used to implement adjacency lists. The choice depends on the specific needs and performance requirements of your application:
+
+* **Arrays of Linked Lists:** This is a classic implementation. Each entry in the array is a pointer to a linked list.  Adding or removing edges is efficient because it involves manipulating linked lists.  However, accessing a specific neighbor might require traversing the linked list.
+
+* **Arrays of Dynamic Arrays (Vectors):**  Many programming languages offer dynamic arrays (like `std::vector` in C++ or `ArrayList` in Java). This offers a good balance between the ease of adding/removing edges (though slightly less efficient than linked lists for insertions in the middle) and the ability to quickly access neighbors using array indexing.
+
+* **Hash Tables (Dictionaries):**  For very large graphs, using a hash table for each vertex's adjacency list can improve lookup times, especially if you need to frequently check for the existence of an edge between two vertices.  However, the overhead of hash table management might outweigh the benefits for smaller graphs.
+
+
+**Example (Python with Lists of Lists):**
+
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+
+# Accessing neighbors of vertex 'B':
+print(graph['B'])  # Output: ['A', 'D', 'E']
+
+# Checking if an edge exists between 'A' and 'F':
+if 'F' in graph['A']:
+    print("Edge exists between A and F")
+else:
+    print("No edge between A and F")
+
+#Adding an edge:
+graph['A'].append('D')
+
+#Removing an edge:
+graph['B'].remove('E')
+```
+
+**Example (C++ with `std::vector`):**
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  int numVertices = 6;
+  vector<vector<int>> adjList(numVertices);
+
+  // Add edges (assuming vertices are numbered 0 to 5)
+  adjList[0].push_back(1);
+  adjList[0].push_back(2);
+  adjList[1].push_back(0);
+  adjList[1].push_back(3);
+  adjList[1].push_back(4);
+  // ... add more edges
+
+  // Accessing neighbors of vertex 1:
+  for (int neighbor : adjList[1]) {
+    cout << neighbor << " ";
+  }
+  cout << endl;
+
+  return 0;
+}
+```
+
+
+**Weighted Graphs:**
+
+For weighted graphs (graphs where edges have associated weights), you can modify the adjacency list to store pairs (or tuples) of (neighbor, weight).  For example, in Python:
+
+```python
+graph = {
+    'A': [('B', 5), ('C', 2)],
+    'B': [('A', 5), ('D', 8), ('E', 1)],
+    # ...
+}
+```
+
+**Directed vs. Undirected Graphs:**
+
+* **Undirected Graphs:**  In an undirected graph, if there's an edge from A to B, there's also an edge from B to A.  You only need to store one of these edges in the adjacency list.  The example above is for an undirected graph.
+
+* **Directed Graphs:**  In a directed graph (also called a digraph), edges have a direction. If there's an edge from A to B, it doesn't imply an edge from B to A.  The adjacency list structure remains the same, but you only store the directed edges.
+
+
+**Space Complexity:**
+
+The space complexity of an adjacency list is O(V + E), where V is the number of vertices and E is the number of edges.  This is more efficient than an adjacency matrix (which has O(V^2) space complexity) for sparse graphs.
+
+
+Remember to choose the implementation that best suits your specific needs and consider factors like the graph's size, density, and the types of operations you'll be performing most frequently.
+
