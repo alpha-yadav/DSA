@@ -99136,3 +99136,123 @@ Both implementations follow these steps:
 
 These examples demonstrate a basic level order traversal.  You can adapt them to perform other operations on the nodes as you visit them (e.g., summing node values, searching for a specific value).  For very large trees, consider optimizing memory usage if needed.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversal refers to the process of visiting (processing) each node in a tree data structure exactly once.  There are three main ways to traverse a binary tree: preorder, inorder, and postorder.  These are all depth-first traversals, meaning they explore as far as possible along each branch before backtracking.
+
+**1. Preorder Traversal:**
+
+* **Rule:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+
+* **Order:** Root, Left, Right
+
+* **Algorithm (Recursive):**
+
+```python
+def preorder_traversal(node):
+  """Performs preorder traversal of a binary tree.
+
+  Args:
+    node: The root node of the subtree to traverse.
+  """
+  if node:
+    print(node.data, end=" ")  # Process the node
+    preorder_traversal(node.left)  # Traverse left subtree
+    preorder_traversal(node.right) # Traverse right subtree
+
+# Example usage (assuming you have a Node class with data, left, and right attributes):
+# root = Node(1)
+# ... (build your tree) ...
+# preorder_traversal(root) 
+```
+
+* **Algorithm (Iterative):**  Uses a stack.
+
+```python
+def preorder_traversal_iterative(node):
+  """Performs preorder traversal iteratively using a stack."""
+  if node is None:
+    return
+  stack = [node]
+  while stack:
+    current = stack.pop()
+    print(current.data, end=" ")
+    if current.right:
+      stack.append(current.right)
+    if current.left:
+      stack.append(current.left)
+
+```
+
+
+**2. Inorder Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, visit the root node, and then recursively traverse the right subtree.
+
+* **Order:** Left, Root, Right
+
+* **Algorithm (Recursive):**
+
+```python
+def inorder_traversal(node):
+  """Performs inorder traversal of a binary tree."""
+  if node:
+    inorder_traversal(node.left)
+    print(node.data, end=" ")
+    inorder_traversal(node.right)
+```
+
+* **Algorithm (Iterative):** Uses a stack.  More complex than preorder's iterative version.
+
+```python
+def inorder_traversal_iterative(node):
+  """Performs inorder traversal iteratively using a stack."""
+  if node is None:
+      return
+  stack = []
+  current = node
+  while True:
+    if current is not None:
+      stack.append(current)
+      current = current.left
+    elif stack:
+      current = stack.pop()
+      print(current.data, end=" ")
+      current = current.right
+    else:
+      break
+```
+
+**3. Postorder Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, recursively traverse the right subtree, and then visit the root node.
+
+* **Order:** Left, Right, Root
+
+* **Algorithm (Recursive):**
+
+```python
+def postorder_traversal(node):
+  """Performs postorder traversal of a binary tree."""
+  if node:
+    postorder_traversal(node.left)
+    postorder_traversal(node.right)
+    print(node.data, end=" ")
+```
+
+* **Algorithm (Iterative):**  Uses two stacks (or a more clever single stack approach).  More complex than the iterative versions of preorder and inorder.  A common approach involves using one stack to store nodes and another to reverse the order of right subtree processing.
+
+
+**Example Node Class (Python):**
+
+You'll need a basic Node class to represent nodes in your binary tree:
+
+```python
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.left = None
+    self.right = None
+```
+
+Remember to build your binary tree structure before calling any of these traversal functions.  The `root` variable in the example usage would point to the root node of your tree.  The output of the traversals will depend on the structure of your tree.
+
