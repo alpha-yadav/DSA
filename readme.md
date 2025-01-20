@@ -94699,3 +94699,101 @@ Big O can also be used to describe space complexity, which refers to the amount 
 
 Understanding Big O notation is crucial for choosing efficient algorithms and writing performant code, especially when dealing with large datasets.
 
+#  A Simple Loop 
+A simple loop repeats a block of code a certain number of times or until a condition is met.  Here are examples in a few common programming languages:
+
+**1. For Loop (counting loop):**  This is best when you know the number of iterations beforehand.
+
+* **Python:**
+
+```python
+for i in range(5):  # Loop 5 times (i will be 0, 1, 2, 3, 4)
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. While Loop (conditional loop):** This continues as long as a condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on whether you know the number of iterations in advance.  `for` loops are generally preferred when you know the number of iterations, while `while` loops are better when the number of iterations depends on a condition.  Remember to always ensure your loop condition eventually becomes false to avoid infinite loops.
+
