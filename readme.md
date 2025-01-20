@@ -94060,3 +94060,36 @@ else:
 
 This implementation efficiently detects cycles in a directed graph using DFS and avoids unnecessary computations.  Remember that a self-loop (an edge from a node to itself) is considered a cycle.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a groundbreaking algorithm for finding minimum spanning trees (MSTs) in undirected graphs.  Its significance lies in its near-linear time complexity, making it significantly faster than traditional algorithms like Prim's and Kruskal's for large graphs.
+
+Here's a breakdown of the key aspects:
+
+**Key Idea:**  Thorup's algorithm cleverly exploits the power of randomized techniques and sophisticated data structures to achieve its remarkable speed.  It doesn't directly find the MST in a single pass, but instead uses a clever combination of techniques.  At a high level, it involves these steps:
+
+1. **Random Sampling:**  The algorithm starts by randomly sampling a subset of the edges.  The probability of selecting an edge is related to its weight.  Heavier edges are less likely to be sampled.
+
+2. **Building a "Skeleton" MST:** It constructs a minimum spanning tree (MST) using only the sampled edges. This is a relatively small subgraph that captures important structural information about the graph. This step is usually done using a standard MST algorithm like Kruskal's, which is efficient on smaller graphs.
+
+3. **Connecting the Components:** The remaining edges (those not sampled) are then considered. The algorithm efficiently identifies and adds the necessary edges to connect the components of the "skeleton" MST to form a complete MST of the original graph.  This is the most complex part and involves clever data structures and algorithms to ensure efficient processing.
+
+4. **Using a "Borůvka-like" Approach:**  Thorup's algorithm incorporates ideas similar to Borůvka's algorithm, focusing on quickly identifying and merging connected components.
+
+**Complexity:**
+
+* The algorithm's expected running time is remarkably close to linear:  O(m α(m, n)), where:
+    * `m` is the number of edges.
+    * `n` is the number of vertices.
+    * `α(m, n)` is the inverse Ackermann function, which grows incredibly slowly and is practically a constant for all realistic input sizes.
+
+This makes it effectively linear time for all practical purposes.  This is a significant improvement over the O(m log n) complexity of Kruskal's and Prim's algorithms.
+
+**Limitations:**
+
+* **Randomization:** The algorithm is randomized, meaning its running time is probabilistic.  While its expected running time is near-linear, there's a small probability of it taking longer.
+* **Complexity of Implementation:** The algorithm is quite complex to implement correctly, requiring a deep understanding of data structures and algorithms.
+
+**In Summary:**
+
+Thorup's algorithm is a significant achievement in algorithm design.  Its near-linear time complexity makes it a highly efficient method for finding minimum spanning trees in large graphs, although its complexity makes it less practical for smaller problems where simpler algorithms suffice.  Its theoretical importance is much greater than its practical use in many applications, as simpler algorithms often perform sufficiently well on average-sized datasets.
+
