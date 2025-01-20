@@ -100004,3 +100004,110 @@ While DFS and BFS are the most common, other methods exist for specific applicat
 
 The choice of which traversal algorithm to use depends heavily on the specific problem and the properties of the graph.  Understanding the differences between DFS and BFS is crucial for effectively solving graph-related problems.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency list, adjacency matrix) and whether you need to track visited nodes. Here are a few implementations in Python:
+
+**1. DFS using an adjacency list (recursive):**  This is a common and elegant approach.
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+    return visited
+
+
+# Example graph represented as an adjacency list:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Start DFS from node 'A'
+print("\nVisited nodes:", dfs_recursive(graph, 'A')) # shows the set of visited nodes
+
+```
+
+**2. DFS using an adjacency list (iterative):** This version uses a stack to avoid recursion.  It's generally more efficient for very deep graphs, avoiding potential stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal of a graph iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [node]
+    visited_nodes = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            visited_nodes.append(node)
+            print(node, end=" ") # Process the node
+            stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+    return visited_nodes
+
+print("\n\nDFS traversal (iterative):")
+dfs_iterative(graph, 'A')
+print("\nVisited nodes:", dfs_iterative(graph, 'A'))
+```
+
+**3. DFS using an adjacency matrix:** This approach works similarly but uses a different data structure to represent the graph.  (Less common for large graphs due to space complexity).
+
+```python
+def dfs_matrix(graph, node, visited):
+    visited[node] = True
+    print(node, end=" ")
+
+    for neighbor in range(len(graph)):
+        if graph[node][neighbor] == 1 and not visited[neighbor]:
+            dfs_matrix(graph, neighbor, visited)
+
+
+# Example graph represented as an adjacency matrix:
+graph_matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0]   # F
+]
+
+print("\n\nDFS traversal (matrix):")
+visited_matrix = [False] * len(graph_matrix)
+dfs_matrix(graph_matrix, 0, visited_matrix) #Start at node 0 (A)
+```
+
+Remember to adapt these functions to your specific needs.  You might need to modify how nodes are processed (instead of just printing them) or handle different graph representations (e.g., weighted graphs).  Choose the implementation that best suits your graph's size and the constraints of your application.  The iterative approach is generally preferred for its robustness against stack overflow errors in large graphs.
+
