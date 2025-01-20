@@ -95117,3 +95117,86 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Remember to handle the `None` cases properly in both methods to avoid errors.  The iterative approach explicitly handles cases where one subtree has a child and the other doesn't, making it more robust against such scenarios.  The recursive approach implicitly handles this through the `if root1 is None or root2 is None` checks.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They're particularly useful when you need to perform searches, insertions, and deletions quickly.  Here's a breakdown of their key features, properties, and operations:
+
+**Key Properties:**
+
+* **Ordered Structure:**  The core property of a BST is that for every node:
+    * All nodes in the left subtree have values *less than* the node's value.
+    * All nodes in the right subtree have values *greater than* the node's value.
+* **No Duplicates (Typically):** While some implementations allow duplicates, the standard BST usually only holds unique values.  If duplicates are allowed, they're usually handled by adding a count to each node.
+* **Hierarchical Structure:** The tree is organized hierarchically, with a root node at the top and branches leading to child nodes.  Each node can have at most two children (left and right).
+
+**Basic Operations:**
+
+* **Search:**  Finding a specific value in the tree.  This is done recursively or iteratively by comparing the target value with the current node's value and traversing either left or right accordingly.  The efficiency of search depends on the balance of the tree (more on that later).  In a balanced tree, search takes O(log n) time, where n is the number of nodes.  In a worst-case scenario (a completely unbalanced tree resembling a linked list), search takes O(n) time.
+
+* **Insertion:** Adding a new value to the tree.  This works similarly to search, traversing the tree until an appropriate place for the new node is found (either as a left or right child of an existing node).  Insertion also takes O(log n) time on average for a balanced tree and O(n) in the worst case.
+
+* **Deletion:** Removing a value from the tree.  This is the most complex operation.  Different cases exist depending on whether the node to be deleted:
+    * Has no children (leaf node): Simply remove it.
+    * Has one child: Replace the node with its child.
+    * Has two children:  This is more complicated.  Common strategies include:
+        * Finding the inorder predecessor (largest value in the left subtree) or inorder successor (smallest value in the right subtree).
+        * Replacing the node's value with the predecessor or successor's value and then deleting the predecessor/successor node (which now has at most one child).
+
+Deletion, like insertion, has an average time complexity of O(log n) in a balanced tree and O(n) in the worst case.
+
+**Types of BSTs:**
+
+* **Self-Balancing BSTs:**  Standard BSTs can degenerate into unbalanced trees if the input data is sorted or nearly sorted.  This leads to poor performance (O(n) for operations).  Self-balancing BSTs (like AVL trees, red-black trees, B-trees) use algorithms to maintain a relatively balanced structure, ensuring logarithmic time complexity for operations even in the worst case.
+
+* **Threaded Binary Trees:**  These optimize traversal by adding pointers to the inorder successor or predecessor of each node, eliminating the need for recursion or a stack during traversal.
+
+**Advantages of BSTs:**
+
+* **Efficient Search, Insertion, and Deletion (in balanced trees):** O(log n) on average.
+* **Simple Implementation:** Relatively straightforward to implement compared to other self-balancing tree structures.
+* **In-order traversal provides sorted data:**  A simple in-order traversal yields the data in sorted order.
+
+**Disadvantages of BSTs:**
+
+* **Worst-case performance can be O(n):**  This happens when the tree becomes unbalanced.
+* **Self-balancing BSTs are more complex to implement:**  While offering better worst-case performance, they are more complex than basic BSTs.
+
+
+**Example (Python):**
+
+A simple (unbalanced) BST implementation:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    # ... (Search and Delete methods would go here) ...
+
+```
+
+This is a basic example.  A complete implementation would include search, delete, and potentially methods for traversal (inorder, preorder, postorder).  For production-level code, using a well-tested library implementation of a self-balancing BST is generally recommended.  Python's `sortedcontainers` library provides a highly efficient implementation.
+
