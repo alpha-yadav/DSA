@@ -97815,3 +97815,26 @@ Nested loops are commonly used for:
 
 Nested loops are a fundamental programming concept, but it's crucial to understand their performance implications and strive for efficient and readable code when using them.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  Their runtime increases logarithmically with the input size (n).  This means that the time it takes to solve the problem only grows slowly as the input size gets larger.  This is achievable because the algorithm typically divides the problem size in half (or some constant fraction) with each step.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  Binary search works on a *sorted* array (or other sorted data structure).  It repeatedly divides the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This continues until the target value is found or the search interval is empty.
+
+* **Efficient Searching in Balanced Binary Search Trees (BSTs):**  Balanced BSTs, such as AVL trees or red-black trees, maintain a balanced structure, ensuring that the height of the tree is logarithmic in the number of nodes.  Searching, insertion, and deletion in these trees all have O(log n) time complexity in the average and worst cases.
+
+* **Finding the kth smallest element using Quickselect (average case):**  Quickselect is a selection algorithm that is related to quicksort.  While its worst-case complexity is O(n²), its average-case complexity is O(n). However, finding the *k*th smallest element can often be achieved in O(log n) on average if the input is already sorted or partially sorted.
+
+* **Exponentiation by Squaring:**  This algorithm calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time. It works by repeatedly squaring the base and reducing the exponent.
+
+* **Some Graph Algorithms (with specific structures):**  Certain graph algorithms, when applied to specific types of graphs (e.g., perfectly balanced trees), can achieve O(log n) complexity for certain operations.  These are less common.
+
+**Key characteristics that often lead to O(log n) algorithms:**
+
+* **Divide and conquer:** The problem is repeatedly broken down into smaller subproblems.
+* **Halving the problem size:** Each step reduces the problem size by a constant factor (often half).
+* **Sorted or structured data:**  These algorithms often rely on sorted data or data structures with specific properties (like balanced trees) that allow for efficient searching.
+
+**Important Note:** The O(log n) complexity is typically *average-case* or *best-case* for some algorithms.  Algorithms like Quickselect can have a worst-case time complexity of O(n²) if the pivot selection is consistently poor.  It's crucial to understand the context and potential worst-case scenarios for these algorithms.
+
