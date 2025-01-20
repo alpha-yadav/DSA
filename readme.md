@@ -93082,3 +93082,117 @@ print(is_bst_recursive_range(root2)) # False
 
 Both methods achieve the same result.  The range-based approach is generally preferred for its efficiency, as it avoids the overhead of creating and sorting a list.  Choose the method that best suits your understanding and coding style. Remember to handle potential errors like `None` values appropriately in your code.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways we can visit (or "traverse") all the nodes in a binary tree.  The order in which we visit the nodes matters, and different traversal orders are useful for different purposes.  There are three main types of traversals, and variations on them:
+
+**1. In-order Traversal:**
+
+* **Order:** Left subtree -> Root -> Right subtree
+* **Algorithm:**
+    1. Recursively traverse the left subtree.
+    2. Visit the root node.
+    3. Recursively traverse the right subtree.
+* **Result:** For a Binary Search Tree (BST), an in-order traversal yields a sorted sequence of the nodes' values.
+* **Example:**  If a tree has nodes A, B, C, in that order (A being the root, B its left child, C its right child), an in-order traversal would visit them as B, A, C.
+
+**2. Pre-order Traversal:**
+
+* **Order:** Root -> Left subtree -> Right subtree
+* **Algorithm:**
+    1. Visit the root node.
+    2. Recursively traverse the left subtree.
+    3. Recursively traverse the right subtree.
+* **Result:**  Useful for creating a copy of the tree or expressing the tree's structure in a prefix notation.
+* **Example:** Using the same tree (A, B, C), a pre-order traversal would visit them as A, B, C.
+
+**3. Post-order Traversal:**
+
+* **Order:** Left subtree -> Right subtree -> Root
+* **Algorithm:**
+    1. Recursively traverse the left subtree.
+    2. Recursively traverse the right subtree.
+    3. Visit the root node.
+* **Result:** Often used to delete a tree or evaluate expressions represented by the tree (postfix notation).
+* **Example:** Using the same tree (A, B, C), a post-order traversal would visit them as B, C, A.
+
+
+**Implementation (Python):**
+
+This example demonstrates all three traversals recursively:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.data, end=" ")
+        inorder(root.right)
+
+def preorder(root):
+    if root:
+        print(root.data, end=" ")
+        preorder(root.left)
+        preorder(root.right)
+
+def postorder(root):
+    if root:
+        postorder(root.left)
+        postorder(root.right)
+        print(root.data, end=" ")
+
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Inorder traversal:")
+inorder(root)  # Output: D B E A C
+print("\nPreorder traversal:")
+preorder(root) # Output: A B D E C
+print("\nPostorder traversal:")
+postorder(root) # Output: D E B C A
+```
+
+**Iterative Traversals:**
+
+While recursion is often used to explain and implement traversals, iterative approaches (using stacks or queues) are generally more efficient for very large trees, as they avoid the risk of stack overflow.  These often use stacks for pre-order and in-order, and queues for level-order (breadth-first) traversals.
+
+
+**Level-order (Breadth-First) Traversal:**
+
+This traversal visits nodes level by level, from left to right. It requires a queue data structure.
+
+**Example (Python - Level Order):**
+
+```python
+from collections import deque
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+#Using the same root node from previous example:
+print("\nLevel Order traversal:")
+levelOrder(root) # Output: A B C D E
+```
+
+Choosing the right traversal depends entirely on the application.  Understanding the order in which each traversal visits the nodes is key to effectively using them in algorithms.
+
