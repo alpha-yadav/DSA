@@ -94343,3 +94343,58 @@ This is a very basic algorithm, but it illustrates the fundamental concept of a 
 
 Remember, learning algorithms is a marathon, not a sprint. Be patient, persistent, and enjoy the process!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, with explanations:
+
+
+**Problem 1: Two Sum (Easy)**
+
+**Description:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+Output: `[0,1]` because `nums[0] + nums[1] == 9`
+
+**Solution Approach:**  A brute-force approach would check every pair of numbers. A more efficient solution uses a hash map (dictionary in Python) to store numbers and their indices.  You iterate through the array; for each number, check if the complement (`target - number`) exists in the hash map.
+
+
+**Problem 2: Reverse Linked List (Medium)**
+
+**Description:** Reverse a singly linked list.
+
+**Example:**
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+
+**Solution Approach:** This problem can be solved iteratively or recursively.  The iterative approach involves three pointers: `prev`, `curr`, and `next`. You iterate through the list, changing the `next` pointer of each node to point to the previous node.
+
+
+**Problem 3: Merge Intervals (Medium)**
+
+**Description:** Given an array of intervals where `intervals[i] = [starti, endi]`, merge all overlapping intervals, and return *an array of the non-overlapping intervals that cover all the intervals in the input*.
+
+**Example:**
+
+Input: `intervals = [[1,3],[2,6],[8,10],[15,18]]`
+Output: `[[1,6],[8,10],[15,18]]`
+Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+
+**Solution Approach:**  Sort the intervals by their start times. Then, iterate through the sorted intervals, merging overlapping intervals.
+
+
+**Problem 4: Longest Palindromic Substring (Medium)**
+
+**Description:** Given a string `s`, return the *longest palindromic substring* in `s`.
+
+**Example:**
+
+Input: "babad"
+Output: "bab" or "aba" (both are valid)
+
+**Solution Approach:**  There are several approaches, including dynamic programming, expanding around the center, and Manacher's algorithm.  Expanding around the center is a relatively straightforward approach.  You iterate through each character as a potential center of a palindrome, and expand outwards to find the longest palindrome centered at that point.
+
+
+These problems represent a range of difficulty and common algorithmic techniques.  Choosing the right data structure and algorithm is crucial for solving them efficiently.  Remember to consider time and space complexity when designing your solution.
+
