@@ -91913,3 +91913,63 @@ do {
 
 These are the most basic types of loops.  More complex loops might involve nested loops (loops within loops), loop control statements (like `break` and `continue`), or iterating over more complex data structures.  The best choice of loop depends on the specific task.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows for processing data in a multi-dimensional way.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+outer_loop:
+  for outer_variable in outer_iterable:
+    inner_loop:
+      for inner_variable in inner_iterable:
+        # Code to be executed for each inner and outer iteration
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+This code will first iterate through the outer loop with `i = 1`.  Then, the inner loop will iterate from `j = 1` to `j = 10`, printing the product `i * j` for each `j`.  Once the inner loop completes, the outer loop moves to `i = 2`, and the inner loop runs again, and so on.  The `print()` after the inner loop creates a new line for each row of the table.
+
+**Example (JavaScript):**
+
+This example iterates through a 2D array:
+
+```javascript
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+for (let i = 0; i < matrix.length; i++) { // Outer loop (rows)
+  for (let j = 0; j < matrix[i].length; j++) { // Inner loop (columns)
+    console.log(matrix[i][j]);
+  }
+}
+```
+
+This JavaScript code iterates through each row of the `matrix` array using the outer loop, and then iterates through each element within each row using the inner loop.
+
+**Common Uses:**
+
+* **Processing matrices and multi-dimensional arrays:**  As shown in the examples above.
+* **Generating patterns:**  Creating visual patterns like stars, triangles, or other shapes in the console.
+* **Combinations and permutations:**  Generating all possible combinations or permutations of elements from multiple sets.
+* **Nested searches:**  Searching for data within nested data structures.
+
+
+**Efficiency Considerations:**
+
+Nested loops can lead to a significant increase in execution time, especially with large datasets. The time complexity increases proportionally to the product of the number of iterations in each loop.  For example, two nested loops each iterating `n` times have a time complexity of O(n²).  Optimization techniques like memoization or dynamic programming might be necessary for very large datasets.
+
