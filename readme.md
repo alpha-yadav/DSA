@@ -94885,3 +94885,55 @@ Here are some common types of algorithms with O(log n) time complexity:
 
 In essence, O(log n) algorithms represent a significant efficiency improvement over linear (O(n)) or quadratic (O(n²)) algorithms, especially for large input sizes.  They are frequently used in situations where fast search and retrieval are critical.
 
+#  An O(log n) example 
+The most common O(log n) example is **binary search** in a sorted array.
+
+**Binary Search:**
+
+Binary search works by repeatedly dividing the search interval in half.  If the value you're looking for is in the middle element, you've found it. If it's less than the middle element, you search the left half; if it's greater, you search the right half. You repeat this process until you find the value or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+
+        if arr[mid] == target:
+            return mid  # Found it!
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the right half
+        else:
+            high = mid - 1  # Search in the left half
+
+    return -1  # Not found
+
+
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target value found at index: {index}")
+else:
+    print("Target value not found")
+
+```
+
+**Why is it O(log n)?**
+
+With each comparison, we effectively halve the size of the search space.  This leads to a logarithmic time complexity.  The number of times we can halve n before reaching 1 is approximately log₂(n).  Therefore, the number of operations is proportional to log n.  The base of the logarithm (2 in this case) is usually dropped in Big O notation because it's a constant factor.
+
+**Other O(log n) Examples:**
+
+* **Tree Traversal (balanced trees):**  Finding a node in a balanced binary search tree (like an AVL tree or a red-black tree) takes O(log n) time because the tree's height is logarithmic with respect to the number of nodes.
+* **Efficient exponentiation:** Calculating a<sup>b</sup> using exponentiation by squaring has a time complexity of O(log b).
+* **Finding the kth smallest element using quickselect (average case):**  Although the worst-case is O(n), the average-case complexity is O(log n).
+
+
+It's important to note that O(log n) algorithms are very efficient, especially for large datasets, as the growth rate of the logarithm function is much slower than linear growth (O(n)).
+
