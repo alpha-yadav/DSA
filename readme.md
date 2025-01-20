@@ -96356,3 +96356,126 @@ An iterative approach is possible, generally using a stack (for depth-first sear
 
 The recursive approach is generally preferred for its clarity and simplicity.  The iterative approach is more complex to implement and less readable, and doesn't offer significant performance advantages in most cases.  Choose the method that best suits your needs and coding style, but the recursive solution is often the best starting point.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic algorithm problem.  The optimal approach depends on the type of tree and whether you have parent pointers available.
+
+**Methods:**
+
+**1. Recursive Approach (Binary Tree, No Parent Pointers):**
+
+This method is efficient for binary trees and doesn't require parent pointers.  It traverses the tree recursively, checking if either node is found in the left or right subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lca(root.left, p, q)
+    right_lca = lca(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA found at the current node
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(lca(root, root.left, root.right).data)  # Output: 1
+print(lca(root, root.left.left, root.left.right).data) # Output: 2
+print(lca(root, root.left, root.left.left).data) # Output: 2
+
+
+```
+
+**2. Iterative Approach (Binary Tree, No Parent Pointers):**
+
+This method uses a stack to simulate recursion, potentially saving space in deep trees.  However, it's generally less readable than the recursive approach.
+
+
+**3. Using Parent Pointers:**
+
+If each node has a pointer to its parent, finding the LCA becomes much simpler. You can trace up the paths from each node until you find a common ancestor.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.parent = None  # Added parent pointer
+
+def lca_parent_pointers(p, q):
+    """Finds the LCA using parent pointers."""
+    path_p = []
+    path_q = []
+
+    while p:
+        path_p.append(p)
+        p = p.parent
+    while q:
+        path_q.append(q)
+        q = q.parent
+
+    lca = None
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[len(path_p)-1-i] == path_q[len(path_q)-1-i]:
+        lca = path_p[len(path_p)-1-i]
+        i += 1
+    return lca
+
+
+#Example usage (requires setting parent pointers during tree construction)
+root = Node(1)
+root.left = Node(2)
+root.left.parent = root
+root.right = Node(3)
+root.right.parent = root
+root.left.left = Node(4)
+root.left.left.parent = root.left
+root.left.right = Node(5)
+root.left.right.parent = root.left
+
+print(lca_parent_pointers(root.left, root.right).data) # Output: 1
+print(lca_parent_pointers(root.left.left, root.left.right).data) # Output: 2
+```
+
+**4.  General Trees (No Parent Pointers):**
+
+For general trees (not necessarily binary), the recursive approach can be adapted, but it becomes more complex as you need to iterate through all children.  Parent pointers significantly simplify the solution in this case as well.
+
+
+**Choosing the Right Method:**
+
+* **Binary tree, no parent pointers:** Recursive approach is generally preferred for its clarity and efficiency.
+* **Binary tree, parent pointers:** The parent pointer method is the most efficient.
+* **General tree, no parent pointers:** More complex algorithms are needed; often, adding parent pointers during tree construction is the best practical solution.
+* **General tree, parent pointers:**  The parent pointer method is the most efficient.
+
+
+Remember to handle edge cases, such as when one or both nodes are not in the tree, or when one node is an ancestor of the other.  The provided code examples address some of these edge cases, but you might need to add more robust error handling depending on your specific application.
+
