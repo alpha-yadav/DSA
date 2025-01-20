@@ -97663,3 +97663,103 @@ Let's say you have an algorithm that searches for a specific element in an array
 
 In summary, Big O notation is a crucial tool for analyzing and comparing the efficiency of algorithms.  Understanding it is essential for any computer scientist or software developer.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  Here are examples in a few popular programming languages:
+
+**1. While Loop:**  A `while` loop continues as long as a condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+
+**2. For Loop:** A `for` loop is typically used when you know the number of iterations in advance.
+
+* **Python:**
+
+```python
+for i in range(5):
+  print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+**3. Do-While Loop (only available in some languages):** A `do-while` loop executes the code block at least once, and then repeats as long as the condition is true.
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  do {
+    std::cout << count << std::endl;
+    count++;
+  } while (count < 5);
+  return 0;
+}
+```
+
+* **JavaScript (using a `while` loop to simulate `do-while`):**
+
+```javascript
+let count = 0;
+do {
+  console.log(count);
+  count++;
+} while (count < 5); //Note:  JavaScript doesn't have a direct do-while equivalent, this is just a mimic.
+
+```
+
+These examples all print the numbers 0 through 4.  Remember to choose the loop type that best suits your needs based on whether you know the number of iterations beforehand and whether you need to guarantee at least one execution.  Infinite loops (where the condition is never false) should be avoided unless you have a specific mechanism to break out of them.
+
