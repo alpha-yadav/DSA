@@ -100296,3 +100296,65 @@ print(longest_palindrome("babad")) # Output: bab or aba (depending on implementa
 
 These examples demonstrate different levels of complexity and require different algorithmic approaches.  Remember to consider time and space complexity when designing your solutions.  There are many online resources (like LeetCode, HackerRank, Codewars) where you can find and practice more algorithmic problems.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's deceptively simple, but a great way to demonstrate understanding of basic programming concepts like loops and conditional statements.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+
+**Basic FizzBuzz in Swift**
+
+This version uses a `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks for divisibility by 3 ("Fizz") and 5 ("Buzz").
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Slightly More Advanced FizzBuzz (using string concatenation):**
+
+This version is more concise and uses string concatenation:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function
+```
+
+This version builds the output string (`output`) incrementally.  If the number is divisible by 3, "Fizz" is added; if divisible by 5, "Buzz" is added.  The ternary operator (`condition ? value1 : value2`) neatly handles printing the number itself if `output` remains empty.
+
+
+**Choosing the best approach:**
+
+The first approach (using `if-else if-else`) is easier to read and understand, especially for beginners.  The second approach (using string concatenation) is more compact and potentially slightly more efficient, but might be less immediately clear to someone unfamiliar with Swift.  For a simple interview question, the readability of the first approach is often preferred.
+
+
+**Running the Code:**
+
+You can run this code in a Swift playground or within a Swift project in Xcode.  Just paste the code into a `.swift` file and run it.  The output will show the FizzBuzz sequence up to the number you specify in the `fizzBuzz(n:)` or `fizzBuzzConcise(n:)` function call.
+
