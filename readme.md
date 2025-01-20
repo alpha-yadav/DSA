@@ -96582,3 +96582,58 @@ print(adjacency_matrix)
 
 Remember to adapt this code for weighted and/or directed graphs as needed.  For large or sparse graphs, using a sparse matrix library is highly recommended for better performance and memory efficiency.
 
+#  Introduction To Graph Theory 
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph consists of:
+
+* **Vertices (or Nodes):** These represent the objects in the system being modeled.  Think of them as points or dots.
+* **Edges (or Arcs):** These represent the connections or relationships between the vertices.  Edges are typically drawn as lines connecting pairs of vertices.  An edge can be *directed* (meaning it has a direction, like a one-way street) or *undirected* (meaning it works both ways, like a two-way street).
+
+**Types of Graphs:**
+
+Several types of graphs exist, categorized by their properties:
+
+* **Directed Graph (Digraph):** Edges have a direction.  Think of a network of one-way streets.  The edge from vertex A to vertex B is different from the edge from vertex B to vertex A.
+
+* **Undirected Graph:** Edges have no direction.  Think of a network of two-way streets.  The edge between vertex A and vertex B is the same regardless of direction.
+
+* **Weighted Graph:** Edges have associated weights or values.  Think of a road network where the weights represent distances or travel times.
+
+* **Simple Graph:** A graph with no loops (edges connecting a vertex to itself) and no multiple edges between the same pair of vertices.
+
+* **Complete Graph:** Every pair of vertices is connected by a unique edge.
+
+* **Connected Graph:** There is a path between every pair of vertices.
+
+* **Disconnected Graph:** There exist at least two vertices with no path between them.
+
+* **Acyclic Graph:** A graph with no cycles (a path that starts and ends at the same vertex without repeating any vertices).  Trees are a special type of acyclic graph.
+
+* **Tree:** A connected, acyclic graph.
+
+* **Bipartite Graph:** The vertices can be divided into two disjoint sets such that every edge connects a vertex in one set to a vertex in the other set.
+
+**Key Concepts:**
+
+* **Path:** A sequence of vertices connected by edges.
+
+* **Cycle:** A path that starts and ends at the same vertex without repeating any vertices (except the starting/ending vertex).
+
+* **Degree of a Vertex:** The number of edges incident to a vertex.  For directed graphs, we distinguish between in-degree (number of incoming edges) and out-degree (number of outgoing edges).
+
+* **Connectivity:**  Describes how well-connected the vertices in a graph are.  Measures like connected components (maximal connected subgraphs) are used to quantify connectivity.
+
+* **Isomorphism:** Two graphs are isomorphic if they have the same structure, even if the vertices and edges are labeled differently.
+
+**Applications of Graph Theory:**
+
+Graph theory has incredibly diverse applications, including:
+
+* **Social Networks:** Modeling relationships between people.
+* **Computer Networks:** Representing connections between computers.
+* **Transportation Networks:** Modeling roads, railways, or flight routes.
+* **Biological Networks:** Representing interactions between genes or proteins.
+* **Algorithm Design:**  Many algorithms rely on graph structures, such as shortest path algorithms (Dijkstra's algorithm) and search algorithms (breadth-first search, depth-first search).
+* **Data Structures:** Graphs are fundamental data structures in computer science.
+
+This is a basic introduction. Graph theory is a rich and complex field with numerous advanced topics, including graph coloring, planar graphs, network flows, and more.  Further exploration will delve into these areas and their applications in greater detail.
+
