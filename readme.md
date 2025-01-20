@@ -93196,3 +93196,112 @@ levelOrder(root) # Output: A B C D E
 
 Choosing the right traversal depends entirely on the application.  Understanding the order in which each traversal visits the nodes is key to effectively using them in algorithms.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes of a tree level by level.  Here are implementations in Python and C++, along with explanations:
+
+
+**Python Implementation:**
+
+This implementation uses a queue data structure for efficient level-order traversal.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+**C++ Implementation:**
+
+This uses a `queue` from the standard template library.
+
+```cpp
+#include <iostream>
+#include <queue>
+
+struct Node {
+    int data;
+    Node *left, *right;
+    Node(int data) {
+        this->data = data;
+        left = right = nullptr;
+    }
+};
+
+void levelOrder(Node* root) {
+    if (root == nullptr) return;
+
+    std::queue<Node*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Node* curr = q.front();
+        q.pop();
+        std::cout << curr->data << " ";
+
+        if (curr->left != nullptr) q.push(curr->left);
+        if (curr->right != nullptr) q.push(curr->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+
+    std::cout << "Level Order traversal of binary tree is -\n";
+    levelOrder(root); // Output: 1 2 3 4 5
+    return 0;
+}
+```
+
+**Explanation:**
+
+Both implementations follow these steps:
+
+1. **Initialization:**  A queue (`nodes` in Python, `q` in C++) is created and the root node is added.
+2. **Iteration:** While the queue is not empty:
+   - Dequeue (remove from the front) the current node.
+   - Print the data of the current node.
+   - Enqueue (add to the rear) the left and right children of the current node, if they exist.
+3. **Termination:** The loop terminates when the queue is empty, indicating that all nodes have been visited.
+
+**Key Concepts:**
+
+* **Queue:**  A FIFO (First-In, First-Out) data structure is crucial for level-order traversal because it ensures that nodes at the same level are processed before nodes at deeper levels.
+* **Iteration:** The `while` loop iterates until all nodes have been processed.
+* **Enqueue and Dequeue:**  These operations add and remove nodes from the queue, maintaining the level-order sequence.
+
+
+Remember to handle the case where the root node is `NULL` (or `nullptr` in C++) to avoid errors.  These examples provide a basic framework; you can extend them to handle more complex scenarios (e.g., different data types, additional node attributes).
+
