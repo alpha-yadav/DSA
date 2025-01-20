@@ -99329,3 +99329,107 @@ If you can modify the tree structure to include parent pointers (each node has a
 
 The recursive approach is often preferred for its clarity and simplicity, unless you are dealing with exceptionally deep trees where iterative approaches might offer better performance and avoid stack overflow. Remember to choose the approach that best fits your specific needs and constraints.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic computer science problem.  There are several ways to solve it, each with different time and space complexities.  Here's a breakdown of common approaches:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a relatively simple and elegant solution for binary trees.  The idea is to recursively traverse the tree.  If the target nodes are found in different subtrees of a node, then that node is the LCA. If both nodes are in the left subtree, recursively search the left subtree.  If both are in the right subtree, recursively search the right subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node1, node2):
+    if root is None or root == node1 or root == node2:
+        return root
+
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.left.right # Node with data 5
+
+lca = lca_recursive(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca.data}") # Output: LCA of 4 and 5: 2
+
+node1 = root.left  # Node with data 2
+node2 = root.right # Node with data 3
+
+lca = lca_recursive(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca.data}") # Output: LCA of 2 and 3: 1
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (worst case: skewed tree).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive calls).  In the worst case (skewed tree), this becomes O(N).
+
+
+**2. Iterative Approach (using Parent Pointers):**
+
+If each node in the tree has a pointer to its parent, you can use an iterative approach.  Find the paths from the root to each target node, then find the last common node in those paths.
+
+```python
+# Assuming nodes have a 'parent' attribute
+def lca_iterative(node1, node2):
+    path1 = []
+    path2 = []
+
+    # Find path from root to node1
+    curr = node1
+    while curr:
+        path1.append(curr)
+        curr = curr.parent
+
+    # Find path from root to node2
+    curr = node2
+    while curr:
+        path2.append(curr)
+        curr = curr.parent
+
+    # Find the LCA
+    lca = None
+    i = len(path1) - 1
+    j = len(path2) - 1
+    while i >= 0 and j >= 0 and path1[i] == path2[j]:
+        lca = path1[i]
+        i -= 1
+        j -= 1
+    return lca
+```
+
+**Time Complexity:** O(H), where H is the height of the tree.
+**Space Complexity:** O(H) to store the paths.
+
+
+**3. Lowest Common Ancestor in a general Tree:**
+
+For general trees (not necessarily binary), you might need a different approach, often involving a parent pointer or a depth-first search (DFS) to reconstruct paths.  The iterative method with parent pointers would adapt easily.
+
+
+**Choosing the Right Approach:**
+
+* For binary trees without parent pointers, the recursive approach is often the simplest and easiest to understand.
+* If you have parent pointers, the iterative approach is generally more efficient.
+* For general trees, you'll need a solution that accommodates the tree's structure.  Often a DFS-based approach to build paths will be required.  If parent pointers are available, that significantly simplifies the problem.
+
+
+Remember to handle edge cases like one or both nodes not being present in the tree.  You'll need to adjust the code to return an appropriate value (e.g., `None`) in such scenarios.
+
