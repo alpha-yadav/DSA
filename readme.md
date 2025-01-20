@@ -97763,3 +97763,55 @@ do {
 
 These examples all print the numbers 0 through 4.  Remember to choose the loop type that best suits your needs based on whether you know the number of iterations beforehand and whether you need to guarantee at least one execution.  Infinite loops (where the condition is never false) should be avoided unless you have a specific mechanism to break out of them.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop completes all its iterations for each single iteration of the outer loop.  This creates a structure where the inner loop's code executes many more times than the outer loop's code.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    # Outer loop code (executed once per outer iteration)
+    for inner_loop_variable in inner_loop_iterable:
+        # Inner loop code (executed once per inner iteration, for each outer iteration)
+    # More outer loop code (executed once per outer iteration)
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # Print the product, \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+**How it works:**
+
+1. The outer loop starts with `i = 1`.
+2. The inner loop iterates from `j = 1` to `j = 10`, calculating and printing `i * j` for each value of `j`.
+3. After the inner loop completes all its iterations for `i = 1`, the outer loop increments `i` to `2`.
+4. The inner loop runs again, this time calculating and printing `2 * j` for `j = 1` to `j = 10`.
+5. This process repeats until the outer loop completes all its iterations (`i = 1` to `i = 10`).
+
+
+**Common Use Cases:**
+
+Nested loops are commonly used for:
+
+* **Processing multi-dimensional data:**  Like iterating through rows and columns of a matrix or table.
+* **Generating patterns:**  Creating shapes or designs in text or graphics.
+* **Combinatorial problems:**  Exploring all possible combinations of elements from multiple sets.
+* **Searching and sorting algorithms:**  Some algorithms, particularly brute-force approaches, use nested loops extensively.
+
+**Important Considerations:**
+
+* **Complexity:** Nested loops can significantly increase the time complexity of your code.  If the outer and inner loops both iterate `n` times, the total number of iterations is `n*n` (n-squared), which grows rapidly as `n` increases. This can lead to performance issues for large datasets.
+* **Readability:**  Deeply nested loops can make code harder to read and understand.  Consider refactoring complex nested loops to improve clarity.
+
+
+Nested loops are a fundamental programming concept, but it's crucial to understand their performance implications and strive for efficient and readable code when using them.
+
