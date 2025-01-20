@@ -96637,3 +96637,138 @@ Graph theory has incredibly diverse applications, including:
 
 This is a basic introduction. Graph theory is a rich and complex field with numerous advanced topics, including graph coloring, planar graphs, network flows, and more.  Further exploration will delve into these areas and their applications in greater detail.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and efficient approach, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementation options and their trade-offs:
+
+**The Concept:**
+
+An adjacency list represents a graph as a collection of lists.  Each list corresponds to a vertex in the graph, and the list contains the vertices that are adjacent to (connected to) that vertex.
+
+**Implementation Options:**
+
+Several data structures can implement adjacency lists. Here are a few:
+
+* **Using Dictionaries (Python):**  This is a very Pythonic and readable way.  The keys are the vertices, and the values are lists of their neighbors.
+
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+
+# Accessing neighbors of vertex 'B':
+neighbors_of_B = graph['B']  # ['A', 'D', 'E']
+```
+
+* **Using Arrays of Lists (C++, Java):**  This approach is more memory-efficient than dictionaries for very large graphs, especially when vertices are integers starting from 0.
+
+```c++
+#include <vector>
+#include <iostream>
+
+int main() {
+  std::vector<std::vector<int>> graph(6); // Graph with 6 vertices
+
+  graph[0].push_back(1); // A -> B
+  graph[0].push_back(2); // A -> C
+  graph[1].push_back(0); // B -> A
+  graph[1].push_back(3); // B -> D
+  graph[1].push_back(4); // B -> E
+  // ... add other edges ...
+
+  // Accessing neighbors of vertex 1 (B):
+  for (int neighbor : graph[1]) {
+    std::cout << neighbor << " "; // Output: 0 3 4
+  }
+  std::cout << std::endl;
+
+  return 0;
+}
+```
+
+* **Using `std::unordered_map` in C++:**  Provides a balance between readability and performance.  Similar to Python's dictionaries.
+
+```c++
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+
+int main() {
+    std::unordered_map<char, std::vector<char>> graph;
+    graph['A'] = {'B', 'C'};
+    graph['B'] = {'A', 'D', 'E'};
+    // ... add other edges ...
+
+    for (char neighbor : graph['B']) {
+        std::cout << neighbor << " "; // Output: A D E
+    }
+    std::cout << std::endl;
+    return 0;
+}
+```
+
+
+**Weighted Graphs:**
+
+For weighted graphs (graphs where edges have associated weights), you can modify the adjacency list to store weight information:
+
+* **Python (Dictionary of Dictionaries):**
+
+```python
+graph = {
+    'A': {'B': 4, 'C': 2},
+    'B': {'A': 4, 'D': 5, 'E': 1},
+    'C': {'A': 2, 'F': 3},
+    'D': {'B': 5},
+    'E': {'B': 1, 'F': 6},
+    'F': {'C': 3, 'E': 6}
+}
+
+#Weight of edge A-B
+weight_AB = graph['A']['B'] #4
+```
+
+* **C++ (Pair in vector):**
+
+```c++
+#include <iostream>
+#include <vector>
+#include <utility> //for std::pair
+
+int main() {
+    std::vector<std::vector<std::pair<int, int>>> graph(6); //6 vertices
+    graph[0].push_back({1,4}); //A->B weight 4
+    graph[0].push_back({2,2}); //A->C weight 2
+    // ... add other edges ...
+
+    for(auto& edge : graph[0]){
+        std::cout << edge.first << " " << edge.second << std::endl; // neighbor and weight
+    }
+    return 0;
+}
+```
+
+
+**Directed vs. Undirected Graphs:**
+
+* **Undirected:**  An edge from A to B implies an edge from B to A.  In the adjacency list, you need to add both entries (unless you're using a different, more space-efficient representation like an adjacency matrix).
+
+* **Directed:**  An edge from A to B doesn't necessarily imply an edge from B to A.  The adjacency list directly reflects the direction of the edges.
+
+
+**Choosing the Right Implementation:**
+
+The best implementation depends on the specific application and constraints:
+
+* **Python dictionaries:**  Excellent for readability and rapid prototyping, suitable for moderately sized graphs.
+
+* **C++ vectors of vectors:** Memory-efficient for large graphs where vertices are integers.  Potentially faster than dictionaries for certain graph operations.
+
+* **`std::unordered_map` (C++):** Offers a good balance between performance and ease of use.
+
+Remember to consider factors like the size of the graph, whether it's weighted or unweighted, directed or undirected, and the frequency of different graph operations (like adding edges, checking adjacency, traversing the graph) when selecting your implementation.
+
