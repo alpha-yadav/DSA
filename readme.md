@@ -97344,3 +97344,83 @@ Note: "aba" is also a valid answer.
 
 These problems represent a range of complexity and concepts frequently encountered in algorithmic problem-solving. Remember to consider time and space complexity when choosing your solution.  Start with the easier problems and gradually work your way up to the more challenging ones.  Practicing with these types of problems is key to improving your algorithmic skills.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing some improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This works correctly, but we can make it more concise and efficient.
+
+**Version 2: Improved using the ternary operator**
+
+This version uses nested ternary operators to reduce the number of `if-else` statements:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function to test
+```
+
+This is more compact, but can become less readable for more complex logic.
+
+
+**Version 3:  More readable with a helper function (for larger numbers of conditions)**
+
+For more complex scenarios or if you want to easily extend the rules, a helper function can improve readability:
+
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+    for i in 1...n {
+        print(getOutput(for: i))
+    }
+}
+
+
+func getOutput(for number: Int) -> String {
+    var output = ""
+    if number % 3 == 0 { output += "Fizz" }
+    if number % 5 == 0 { output += "Buzz" }
+    return output.isEmpty ? String(number) : output
+}
+
+fizzBuzzAdvanced(n: 15) // Call the function to test
+
+```
+
+This version separates the logic for determining the output, making it easier to understand and maintain, especially if you need to add more conditions (e.g., "Bang" for multiples of 7).
+
+
+**Choosing the right version:**
+
+* **Version 1:**  Easiest to understand for beginners.
+* **Version 2:** Most concise, but readability suffers with more complex conditions.
+* **Version 3:** Best for maintainability and scalability when dealing with many conditions or potential future extensions.
+
+Remember to choose the version that best suits your needs and coding style.  For a simple FizzBuzz, Version 1 or 2 is sufficient.  For more robust and expandable code, Version 3 is recommended.
+
