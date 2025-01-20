@@ -98093,3 +98093,79 @@ def are_trees_same_iterative(root1, root2):
 
 Remember to handle the base cases (empty trees and trees with different heights) carefully in both approaches to avoid errors.  The provided code includes robust handling of these scenarios.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They're based on the concept of a binary tree with a specific ordering property.  Here's a breakdown of their key features, properties, and operations:
+
+**Key Properties:**
+
+* **Binary Tree:**  Each node in a BST has at most two children, referred to as the *left child* and the *right child*.
+* **Ordered Property:**  For every node in the tree:
+    * All nodes in the *left subtree* have keys less than the node's key.
+    * All nodes in the *right subtree* have keys greater than the node's key.
+* **Uniqueness (Usually):**  BSTs often, but not always, enforce that all keys in the tree are unique.  If duplicates are allowed, they might be handled by storing counts or linked lists at each node.
+
+
+**Operations:**
+
+* **Insertion:** Adding a new node with a key into the BST while maintaining the ordered property.  The algorithm starts at the root and recursively moves down the tree, comparing the new key to the keys of the nodes it encounters.
+
+* **Search:** Finding a node with a specific key. This is highly efficient in a balanced BST.  The algorithm is similar to insertion, traversing the tree based on key comparisons.
+
+* **Deletion:** Removing a node from the BST. This is the most complex operation, as it needs to handle various cases (nodes with zero, one, or two children).  Maintaining the BST's order is crucial.  Common deletion strategies include:
+    * **Removing a leaf node:** Simply remove the node.
+    * **Removing a node with one child:** Replace the node with its child.
+    * **Removing a node with two children:**  Replace the node with either its inorder predecessor (largest node in the left subtree) or its inorder successor (smallest node in the right subtree).  Then recursively delete the replacement node.
+
+* **Minimum/Maximum:** Finding the smallest or largest key in the BST.  This involves traversing the leftmost or rightmost branches of the tree respectively.
+
+* **Successor/Predecessor:** Finding the next larger or smaller key in the BST.  This is related to in-order traversal.
+
+
+**Time Complexity (Average Case):**
+
+* **Search, Insertion, Deletion:** O(log n) – This is the case for a *balanced* BST, where the height of the tree is approximately log₂n (n being the number of nodes).
+* **Minimum/Maximum:** O(log n)
+* **Successor/Predecessor:** O(log n)
+
+**Time Complexity (Worst Case):**
+
+* **Search, Insertion, Deletion:** O(n) – This occurs when the BST becomes highly unbalanced, resembling a linked list.  This happens if the input data is already sorted or nearly sorted.
+
+**Space Complexity:**
+
+* O(n) – The space used is proportional to the number of nodes in the tree.
+
+
+**Balancing:**
+
+The efficiency of BSTs depends heavily on their balance.  Unbalanced trees lead to O(n) time complexity for many operations.  To mitigate this, self-balancing BSTs have been developed, including:
+
+* **AVL Trees:**  Maintain balance by ensuring the height difference between the left and right subtrees of every node is at most 1.
+* **Red-Black Trees:**  Use a more relaxed balancing condition (represented by color attributes) leading to slightly less strict balancing but still ensuring logarithmic time complexity.
+* **B-Trees:**  Optimized for disk-based storage and retrieval.
+
+
+**Applications:**
+
+BSTs are widely used in various applications, such as:
+
+* **Data storage and retrieval:**  Efficiently storing and accessing data based on keys.
+* **Symbol tables:**  Storing and looking up symbols in compilers and interpreters.
+* **In-order traversal for sorted output:**  Producing sorted sequences of data.
+* **Implementation of other data structures:**  Used as building blocks for other advanced data structures.
+
+
+**Example (Python):**
+
+A simple (unbalanced) BST node implementation:
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+```
+
+This is a basic structure;  a complete BST implementation would include the insertion, deletion, search, and other operations discussed above.  Libraries like `sortedcontainers` in Python provide highly optimized and balanced tree implementations.
+
