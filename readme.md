@@ -97523,3 +97523,55 @@ The Θ notation gives us the most precise information about the asymptotic growt
 
 Big-Theta notation is crucial for analyzing the efficiency of algorithms. It allows us to compare algorithms based on their growth rates, ignoring constant factors that can vary depending on implementation details or hardware.  It provides a more precise and complete picture of algorithmic complexity compared to using only Big-O or Big-Ω.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, primarily used in computer science to analyze the efficiency of algorithms.  Here's a comparison of the most common ones:
+
+**1. Big O Notation (O)**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It says that the function's growth is *no worse than* the given function.
+* **Formal Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Intuitive Understanding:**  Describes the *worst-case* scenario.  It focuses on how fast the function grows as the input size (n) gets very large.  We ignore constant factors and lower-order terms.
+* **Example:** If an algorithm takes 5n² + 3n + 10 steps, we can say its time complexity is O(n²).
+
+**2. Big Omega Notation (Ω)**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It says that the function's growth is *no better than* the given function.
+* **Formal Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Intuitive Understanding:** Describes the *best-case* scenario (though sometimes it's used to describe a lower bound on the *average* case). It focuses on how slowly the function grows as the input size gets large.
+* **Example:**  If an algorithm takes 5n² + 3n + 10 steps, we can say its time complexity is Ω(n²).
+
+**3. Big Theta Notation (Θ)**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function. It means the function grows *at the same rate* as the given function, both from above and below.
+* **Formal Definition:** f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁*g(n) ≤ f(n) ≤ c₂*g(n) for all n ≥ n₀.
+* **Intuitive Understanding:**  A precise description of the growth rate.  It implies both O and Ω.
+* **Example:** If an algorithm takes 5n² + 3n + 10 steps, we can say its time complexity is Θ(n²).
+
+**4. Little o Notation (o)**
+
+* **Meaning:** Indicates that a function grows *strictly slower* than another function.
+* **Formal Definition:** f(n) = o(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.
+* **Intuitive Understanding:**  f(n) is asymptotically negligible compared to g(n).
+* **Example:** n = o(n²)
+
+**5. Little omega Notation (ω)**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function.
+* **Formal Definition:** f(n) = ω(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.
+* **Intuitive Understanding:** g(n) is asymptotically negligible compared to f(n).
+* **Example:** n² = ω(n)
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Relationship to g(n)      |
+|----------|---------------------------------------|---------------------------|
+| O(g(n))  | Upper bound                           | f(n) grows no faster than |
+| Ω(g(n))  | Lower bound                           | f(n) grows no slower than |
+| Θ(g(n))  | Tight bound                           | f(n) grows at the same rate |
+| o(g(n))  | Strictly slower growth                | f(n) grows strictly slower |
+| ω(g(n))  | Strictly faster growth                | f(n) grows strictly faster |
+
+
+**Important Note:**  These notations describe asymptotic behavior; they don't tell you the exact runtime for a specific input size. They are useful for comparing algorithms in the long run, as the input size becomes very large.
+
