@@ -98714,3 +98714,99 @@ print(is_bst_recursive(root2))  # Output: False
 
 Both methods achieve the same result.  The recursive method is generally preferred for its efficiency, especially for larger trees, as it avoids the overhead of creating and sorting a list.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property of in-order traversal in a BST:  the nodes are visited in ascending order.  We keep track of the minimum and maximum allowed values at each node during the traversal.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, minVal, maxVal):
+    # An empty tree is BST
+    if node is None:
+        return True
+
+    # Check if the current node's value is within the allowed range
+    if node.data < minVal or node.data > maxVal:
+        return False
+
+    # Recursively check the left and right subtrees
+    return (isBSTUtil(node.left, minVal, node.data - 1) and
+            isBSTUtil(node.right, node.data + 1, maxVal))
+
+
+def isBST(root):
+    return isBSTUtil(root, float('-inf'), float('inf'))
+
+
+# Example usage:
+root = Node(4)
+root.left = Node(2)
+root.right = Node(5)
+root.left.left = Node(1)
+root.left.right = Node(3)
+
+if isBST(root):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+
+root2 = Node(4)
+root2.left = Node(2)
+root2.right = Node(5)
+root2.left.left = Node(1)
+root2.left.right = Node(6) # this violates BST property
+
+if isBST(root2):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+```
+
+**Method 2:  Using In-order traversal and array**
+
+This approach performs an in-order traversal, stores the nodes' values in an array, and then checks if the array is sorted.  It's simpler to understand but might be slightly less efficient than the recursive method for very large trees because it requires extra space for the array.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(root, arr):
+    if root:
+        inorder(root.left, arr)
+        arr.append(root.data)
+        inorder(root.right, arr)
+
+def isBST(root):
+    arr = []
+    inorder(root, arr)
+    for i in range(1, len(arr)):
+        if arr[i] < arr[i-1]:
+            return False
+    return True
+
+#Example Usage (same as above, you can copy and paste the example trees from Method 1)
+```
+
+
+**Choosing the Best Method:**
+
+* **Recursive Method (Method 1):** Generally preferred for its efficiency. It avoids the extra space overhead of creating and sorting an array.  It directly checks the BST property without needing to create an intermediate data structure.
+
+* **In-order Array Method (Method 2):** Easier to understand conceptually, but less efficient for large trees due to the space complexity of the array.
+
+
+Remember to handle edge cases like empty trees appropriately in your chosen implementation.  Both methods presented above do so.  Choose the method that best suits your understanding and the context of your problem.
+
