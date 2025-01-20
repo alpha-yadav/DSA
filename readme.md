@@ -98612,3 +98612,105 @@ print("Inorder Traversal after deleting 8:", bst.inorder_traversal())
 
 This improved version includes comprehensive error handling (though not explicitly throwing exceptions, it handles `None` gracefully) and is better structured for readability and maintainability.  Remember that the efficiency of BST operations depends on the balance of the tree.  For very large datasets, consider self-balancing BSTs like AVL trees or red-black trees for better performance.
 
+#  Check if a tree is BST or not 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    """Checks if a tree is a BST using in-order traversal."""
+    result = []
+    inorder(root, result)
+    for i in range(1, len(result)):
+        if result[i] < result[i-1]:
+            return False
+    return True
+
+def inorder(node, result):
+    """Performs in-order traversal and stores data in 'result'."""
+    if node:
+        inorder(node.left, result)
+        result.append(node.data)
+        inorder(node.right, result)
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(is_bst_inorder(root))  # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8)  # Violation: 8 > 5
+root2.right.left = Node(6)
+root2.right.right = Node(4) #Violation: 4 < 5
+
+print(is_bst_inorder(root2))  # Output: False
+
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each subtree, ensuring that all nodes in the left subtree are less than the current node, and all nodes in the right subtree are greater.  It's generally more efficient than in-order traversal because it avoids creating a list.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+  """Checks if a tree is a BST recursively."""
+  return is_bst_util(root, float('-inf'), float('inf'))
+
+def is_bst_util(node, min_val, max_val):
+    """Recursive helper function for is_bst_recursive."""
+    if node is None:
+        return True
+    if node.data <= min_val or node.data >= max_val:
+        return False
+    return (is_bst_util(node.left, min_val, node.data) and
+            is_bst_util(node.right, node.data, max_val))
+
+# Example Usage (same trees as above):
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(is_bst_recursive(root))  # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8)  # Violation
+root2.right.left = Node(6)
+root2.right.right = Node(4) #Violation
+
+print(is_bst_recursive(root2))  # Output: False
+```
+
+Both methods achieve the same result.  The recursive method is generally preferred for its efficiency, especially for larger trees, as it avoids the overhead of creating and sorting a list.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
+
