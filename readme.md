@@ -99710,3 +99710,72 @@ The space complexity of an adjacency list is O(V + E), where V is the number of 
 
 Remember to choose the implementation that best suits your specific needs and consider factors like the graph's size, density, and the types of operations you'll be performing most frequently.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so you can follow the arrows without ever going backward.
+
+**Key Characteristics:**
+
+* **Directed Acyclic Graph (DAG):**  Topological sorting only works on DAGs.  A cycle would make it impossible to create a linear ordering that respects the direction of all edges.
+* **Linear Ordering:** The result is a sequence, not a tree or other complex structure.
+* **Uniqueness (Not Always):**  While a DAG might have multiple valid topological orderings, it won't have any invalid ones.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue to process nodes with in-degree 0 (nodes with no incoming edges).
+
+   * **Initialization:** Calculate the in-degree of each node (the number of incoming edges).  Add all nodes with in-degree 0 to a queue.
+   * **Iteration:** While the queue is not empty:
+      * Dequeue a node.
+      * Add the node to the topological ordering (result list).
+      * For each neighbor (outgoing edge) of the dequeued node:
+         * Decrement its in-degree.
+         * If its in-degree becomes 0, add it to the queue.
+   * **Cycle Detection:** If, after the algorithm completes, there are still nodes with a non-zero in-degree, the graph contains a cycle, and topological sorting is impossible.
+
+2. **Depth-First Search (DFS) based Algorithm:**
+
+   This algorithm uses DFS to recursively explore the graph.  It adds nodes to the topological ordering in reverse post-order (when the DFS finishes exploring a node's subtree).
+
+   * **Initialization:** Create a visited array to track visited nodes, and an empty stack to store nodes in reverse post-order.
+   * **DFS function:**
+      * Mark the current node as visited.
+      * Recursively call DFS on all unvisited neighbors of the current node.
+      * Push the current node onto the stack.
+   * **Iteration:**  Iterate through all nodes in the graph. If a node hasn't been visited, call DFS on it.
+   * **Result:** Pop nodes from the stack; this sequence is a topological ordering.  If there's a cycle, DFS will encounter a visited node while exploring its neighbors, indicating a cycle.
+
+
+**Example (Kahn's Algorithm):**
+
+Consider a DAG with nodes A, B, C, D, and E, and edges: A->C, B->C, C->D, D->E, B->D.
+
+1. In-degrees: A=0, B=0, C=2, D=2, E=1.
+2. Queue: [A, B]
+3. Dequeue A:  Ordering = [A],  C's in-degree becomes 1.
+4. Dequeue B:  Ordering = [A, B], C's in-degree becomes 1, D's in-degree becomes 1.
+5. C's in-degree is now 1, not 0.
+6. Dequeue B: Ordering = [A, B], D's in-degree becomes 1.
+7. D's in-degree is now 1, not 0.
+8. Add C to queue once in-degree is 0. Dequeue C: Ordering = [A,B,C], D's in-degree becomes 0.
+9. Add D to queue. Dequeue D: Ordering = [A, B, C, D], E's in-degree becomes 0.
+10. Add E to queue. Dequeue E: Ordering = [A, B, C, D, E].
+
+The topological ordering is: A, B, C, D, E (or other valid orderings).
+
+
+**Applications:**
+
+Topological sorting has numerous applications, including:
+
+* **Build systems (like Make):** Determining the order to compile files.
+* **Course scheduling:**  Resolving course prerequisites.
+* **Dependency resolution:**  Installing software packages.
+* **Data serialization:**  Order of operations in a complex system.
+
+
+Choosing between Kahn's algorithm and the DFS-based algorithm often depends on personal preference and the specific characteristics of the graph.  Kahn's algorithm is often considered easier to understand and implement, while the DFS-based algorithm can be more efficient in some cases.  Both reliably detect cycles.
+
