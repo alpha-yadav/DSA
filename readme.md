@@ -100358,3 +100358,40 @@ The first approach (using `if-else if-else`) is easier to read and understand, e
 
 You can run this code in a Swift playground or within a Swift project in Xcode.  Just paste the code into a `.swift` file and run it.  The output will show the FizzBuzz sequence up to the number you specify in the `fizzBuzz(n:)` or `fizzBuzzConcise(n:)` function call.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long the algorithm takes to run) and space (how much memory the algorithm needs).  We analyze complexity to predict how the algorithm's performance will scale as the input size grows.  It's crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.
+
+Here's a breakdown of key aspects of algorithm complexity:
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm grows as the input size (often denoted as 'n') increases.  We express time complexity using Big O notation (O), which describes the upper bound of the growth rate.  It ignores constant factors and focuses on the dominant terms.
+
+* **Common Time Complexities (from best to worst):**
+
+    * **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+    * **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+    * **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+    * **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+    * **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Bubble sort, selection sort, nested loops iterating through the input.
+    * **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+    * **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Finding all permutations of a set.
+
+
+* **Analyzing Time Complexity:**  We typically analyze the worst-case, average-case, and best-case scenarios.  Worst-case is most commonly used because it provides a guarantee on performance.
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm grows as the input size increases.  Similar to time complexity, it's expressed using Big O notation.
+
+* **Common Space Complexities:**  Similar notations as time complexity apply (O(1), O(n), O(n²), etc.).
+
+* **Analyzing Space Complexity:** We consider the auxiliary space used by the algorithm (excluding the input itself).  For example, an in-place algorithm (like some sorting algorithms) has O(1) space complexity.
+
+**3. Big O Notation:**  A mathematical notation used to describe the limiting behavior of a function when the argument tends towards a particular value or infinity.  It's crucial for comparing the efficiency of algorithms.  We focus on the dominant term and ignore constants.
+
+* **Example:**  If an algorithm has a runtime of 5n² + 10n + 5, its Big O notation is O(n²).
+
+**4. Other Notations:**
+
+* **Ω (Big Omega):**  Describes the lower bound of the growth rate.
+* **Θ (Big Theta):** Describes the tight bound, meaning both upper and lower bounds are the same.
+
+**In summary:** Understanding algorithm complexity is essential for designing efficient and scalable software.  By analyzing time and space complexity, we can choose the most appropriate algorithm for a given task and anticipate its performance as the input size grows.  Big O notation provides a concise and standardized way to express these complexities.
+
