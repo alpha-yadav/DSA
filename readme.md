@@ -96479,3 +96479,18 @@ For general trees (not necessarily binary), the recursive approach can be adapte
 
 Remember to handle edge cases, such as when one or both nodes are not in the tree, or when one node is an ancestor of the other.  The provided code examples address some of these edge cases, but you might need to add more robust error handling depending on your specific application.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about the function or data points to create a graph.  For example, you could give me:
+
+* **A list of points:**  (1,2), (3,4), (5,6)
+* **An equation:** y = 2x + 1
+* **A table of values:**
+  | x | y |
+  |---|---|
+  | 0 | 1 |
+  | 1 | 3 |
+  | 2 | 5 |
+
+
+Once you provide the data, I can tell you how to graph it or, if you'd like, I can try to generate a text-based representation of the graph.  I can't create visual graphs directly.
+
