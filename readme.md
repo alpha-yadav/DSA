@@ -96943,3 +96943,31 @@ else:
 
 This algorithm efficiently detects cycles in directed graphs using Depth First Search and has a time complexity of O(V+E), where V is the number of vertices and E is the number of edges.  The space complexity is also O(V) due to the `visited` and `recursionStack` arrays.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed primarily by Mikkel Thorup, focusing on efficient graph algorithms, particularly those related to shortest paths and connectivity.  There isn't one single "Thorup's algorithm," but rather several significant contributions with different applications and complexities.  Here's a breakdown of some prominent ones:
+
+**1. Linear-time shortest paths in planar graphs:**  This is perhaps his most celebrated contribution.  Thorup, along with his collaborator, developed an algorithm that computes single-source shortest paths in planar graphs in linear time, O(n), where n is the number of vertices.  This improved significantly upon previous algorithms. The algorithm uses sophisticated techniques involving separators and hierarchical graph representations.
+
+**2. Linear-time static and dynamic connectivity algorithms:** Thorup's work also extended to efficient algorithms for determining connectivity in graphs.  He presented algorithms that can determine whether two nodes are connected in a static graph (a graph that doesn't change) or a dynamic graph (a graph that undergoes insertions and deletions of edges) in close-to-linear time.  These algorithms are often based on clever data structures and randomized techniques.
+
+**3. Approximate distance oracles:**  Thorup contributed to the development of approximate distance oracles.  These are data structures that allow for quick estimation of the shortest distance between any two nodes in a graph.  While not providing the exact shortest path, these oracles offer a trade-off between speed and accuracy, making them useful for large graphs where finding exact shortest paths is computationally expensive.
+
+
+**Key Characteristics of Thorup's Algorithms:**
+
+* **Linear or near-linear time complexity:**  A major theme is achieving very efficient time complexities, often linear or very close to linear, in contrast to slower polynomial-time algorithms.
+* **Randomization:** Many of his algorithms employ randomization, leading to expected runtime complexities rather than worst-case guarantees.  This often allows for simpler and more efficient algorithms.
+* **Sophisticated data structures:**  His algorithms frequently leverage novel and carefully designed data structures to achieve their efficiency.
+* **Focus on practical efficiency:** While theoretical analysis is important, his work often considers practical aspects and implementation considerations.
+
+
+**Limitations:**
+
+While exceptionally efficient, some of Thorup's algorithms might have:
+
+* **High constant factors:**  While asymptotically efficient, the constant factors hidden in the big-O notation might be significant, impacting practical performance on smaller graphs.
+* **Randomized nature:** The reliance on randomization means that the runtime is probabilistic, and there's a small chance of exceeding the expected runtime.
+
+
+In summary, "Thorup's algorithm" isn't a single entity but represents a body of work that has significantly advanced the field of graph algorithms by providing highly efficient solutions for fundamental graph problems.  To understand a specific algorithm, you'd need to specify the problem being addressed (e.g., shortest paths in planar graphs, dynamic connectivity).
+
