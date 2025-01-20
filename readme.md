@@ -93412,3 +93412,78 @@ postorder(root) # Output: 4 5 2 3 1
 
 Remember to replace `root` with the actual root node of your binary tree.  The output shows the order in which the nodes' data is printed for each traversal method.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with varying time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This approach recursively traverses the tree.  If a node contains either `node1` or `node2`, it's a potential ancestor.  If both nodes are found in different subtrees of the current node, the current node is the LCA.  Otherwise, the LCA is found recursively in the subtree containing both nodes.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca(root, node1, node2):
+       if root is None:
+           return None
+
+       if root.data == node1 or root.data == node2:
+           return root
+
+       left_lca = lca(root.left, node1, node2)
+       right_lca = lca(root.right, node1, node2)
+
+       if left_lca and right_lca:
+           return root
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   # Example usage:
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+   node1 = 4
+   node2 = 5
+   lca_node = lca(root, node1, node2)
+   print(f"LCA of {node1} and {node2}: {lca_node.data}") #Output: 2
+
+   node1 = 4
+   node2 = 3
+   lca_node = lca(root, node1, node2)
+   print(f"LCA of {node1} and {node2}: {lca_node.data}") #Output: 1
+
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (worst case: skewed tree).
+   * **Space Complexity:** O(H), where H is the height of the tree (due to recursive calls).  In the worst case (skewed tree), this becomes O(N).
+
+
+2. **Iterative Approach (Using a Stack or Queue):**
+
+   This approach uses an iterative method (e.g., using a stack or queue for BFS/DFS) to find the paths from the root to `node1` and `node2`. Then, it finds the last common node in those paths.  This is generally less elegant than the recursive approach but can be beneficial in cases where recursion depth might be a concern.
+
+
+3. **Using Parent Pointers:**
+
+   If each node in the binary tree has a pointer to its parent, you can efficiently find the LCA.  You can find paths to `node1` and `node2` by traversing upwards from each node, and then find the last common node in those paths. This offers better performance if parent pointers are already present.
+
+
+**Important Considerations:**
+
+* **Node Existence:**  The code should handle cases where `node1` or `node2` doesn't exist in the tree.
+* **Error Handling:** Add error handling to gracefully manage situations such as an empty tree or null input nodes.
+* **Binary Search Tree (BST):** If the tree is a BST, you can improve the efficiency.  You can traverse the tree; if both nodes are smaller than the current node, go to the left subtree; if both nodes are greater, go to the right subtree; otherwise, the current node is the LCA.  This approach has a time complexity of O(H) (height of the tree), which is better in a balanced BST.
+
+
+The recursive approach is often preferred for its simplicity and readability.  Choose the method that best suits your specific needs and constraints.  Remember to adapt the code to your specific data structures and requirements.
+
