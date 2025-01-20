@@ -95200,3 +95200,126 @@ class BST:
 
 This is a basic example.  A complete implementation would include search, delete, and potentially methods for traversal (inorder, preorder, postorder).  For production-level code, using a well-tested library implementation of a self-balancing BST is generally recommended.  Python's `sortedcontainers` library provides a highly efficient implementation.
 
+#  Binary Search Tree - Insertion (Python) 
+Several implementations of binary search tree (BST) insertion in Python are possible, each with slightly different strengths. Here are a few, starting with a simple recursive approach and then showing an iterative one for better performance in some cases:
+
+
+**1. Recursive Insertion:**
+
+This approach is often considered more elegant and easier to understand, particularly for beginners.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        self.root = self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        else:
+            node.right = self._insert_recursive(node.right, data)
+        return node
+
+    def inorder_traversal(self):  # For testing/visualization
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_recursive(node.right, result)
+
+
+# Example usage:
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:", bst.inorder_traversal()) # Should be sorted output
+```
+
+
+**2. Iterative Insertion:**
+
+This method avoids recursive calls, which can be advantageous for very deep trees to prevent stack overflow issues. It's generally more efficient in terms of space complexity.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+    def inorder_traversal(self): # For testing/visualization
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result): # Helper for inorder traversal
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_recursive(node.right, result)
+
+# Example Usage (same as before, but using iterative insert)
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:", bst.inorder_traversal()) #Should be sorted output
+
+```
+
+Remember to choose the implementation that best suits your needs and understanding.  The recursive version is often preferred for readability, while the iterative version might offer better performance for large trees.  Both achieve the same functionality of inserting a node into a binary search tree while maintaining the BST property.
+
