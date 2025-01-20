@@ -92168,3 +92168,13 @@ The best representation will depend on the specific application's requirements. 
 
 Remember to choose the representation that best suits your needs for your particular use case.
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need more information to write an introduction.  For example, tell me:
+
+* **What is the topic?** (e.g., the benefits of exercise, the history of the Roman Empire, the life cycle of a butterfly)
+* **What is the purpose of the introduction?** (e.g., to inform, to persuade, to entertain)
+* **Who is the intended audience?** (e.g., experts, general public, children)
+* **What is the overall tone?** (e.g., formal, informal, academic)
+
+Once I have this information, I can write a suitable introduction.
+
