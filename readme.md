@@ -95971,3 +95971,103 @@ print(is_bst_iterative(root2)) #False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach (where H is the height of the tree, potentially O(N) in the worst case of a skewed tree) and O(H) for the iterative approach (again, potentially O(N) for a skewed tree).  The iterative approach is generally preferred for its robustness against stack overflow errors.  Choose the method best suited to your needs and the potential size of your input trees.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit (or "traverse") all the nodes in a binary tree.  There are several common traversal methods, each producing a different node visitation order.  They are usually categorized into Depth-First Search (DFS) and Breadth-First Search (BFS) approaches.
+
+**Depth-First Search (DFS) Traversals:**  These prioritize going as deep as possible down one branch before backtracking.
+
+* **Pre-order Traversal:** Visit the root node first, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The order is: Root, Left, Right.
+
+* **In-order Traversal:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. The order is: Left, Root, Right.  For a Binary *Search* Tree (BST), this traversal yields the nodes in ascending order.
+
+* **Post-order Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node. The order is: Left, Right, Root.
+
+
+**Breadth-First Search (BFS) Traversal (Level-order Traversal):** This visits nodes level by level, starting from the root.  It requires a queue data structure.
+
+
+**Illustrative Example:**
+
+Let's consider this binary tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+**Traversal Results:**
+
+| Traversal Type | Resulting Order |
+|---|---|
+| Pre-order      | 1, 2, 4, 5, 3 |
+| In-order       | 4, 2, 5, 1, 3 |
+| Post-order     | 4, 5, 2, 3, 1 |
+| Level-order    | 1, 2, 3, 4, 5 |
+
+
+**Implementation (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+def levelorder(node):
+    if node is None:
+        return
+
+    queue = [node]
+    while(len(queue) > 0):
+        print(queue[0].data, end=" ")
+        node = queue.pop(0)
+
+        if node.left is not None:
+            queue.append(node.left)
+
+        if node.right is not None:
+            queue.append(node.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Preorder traversal:")
+preorder(root) # Output: 1 2 4 5 3
+print("\nInorder traversal:")
+inorder(root)  # Output: 4 2 5 1 3
+print("\nPostorder traversal:")
+postorder(root) # Output: 4 5 2 3 1
+print("\nLevelorder traversal:")
+levelorder(root) # Output: 1 2 3 4 5
+print()
+```
+
+These traversal methods are fundamental to many binary tree algorithms, including searching, sorting, and tree manipulation.  The choice of traversal depends on the specific task.  For example, in-order traversal is crucial for BSTs, while level-order is useful for visualizing the tree structure.
+
