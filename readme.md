@@ -96971,3 +96971,107 @@ While exceptionally efficient, some of Thorup's algorithms might have:
 
 In summary, "Thorup's algorithm" isn't a single entity but represents a body of work that has significantly advanced the field of graph algorithms by providing highly efficient solutions for fundamental graph problems.  To understand a specific algorithm, you'd need to specify the problem being addressed (e.g., shortest paths in planar graphs, dynamic connectivity).
 
+#  Graph Traversals 
+Graph traversals are algorithms that systematically visit all the vertices (nodes) of a graph.  There are several common methods, each with its own properties and use cases.  The most well-known are Depth-First Search (DFS) and Breadth-First Search (BFS).
+
+**1. Depth-First Search (DFS)**
+
+* **Concept:** DFS explores a graph by going as deep as possible along each branch before backtracking. It uses a stack (implicitly or explicitly) to keep track of the vertices to visit.
+
+* **Algorithm (Recursive):**
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+# Example graph represented as an adjacency list:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+dfs_recursive(graph, 'A')  # Output will depend on the order of neighbors, but a possible output is: A B D E F C
+```
+
+* **Algorithm (Iterative):**
+
+```python
+def dfs_iterative(graph, start):
+    visited = set()
+    stack = [start]
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            print(node, end=" ")
+            stack.extend(neighbor for neighbor in graph[node] if neighbor not in visited)
+
+dfs_iterative(graph, 'A') # Output will be the same as the recursive version, but order might vary slightly.
+```
+
+* **Applications:**
+    * Finding connected components.
+    * Topological sorting (for Directed Acyclic Graphs - DAGs).
+    * Detecting cycles in a graph.
+    * Finding paths in a graph.
+
+
+**2. Breadth-First Search (BFS)**
+
+* **Concept:** BFS explores a graph level by level. It uses a queue to keep track of the vertices to visit.
+
+* **Algorithm:**
+
+```python
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+
+    while queue:
+        node = queue.popleft()
+        print(node, end=" ")
+
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+bfs(graph, 'A') # Output: A B C D E F (Order is consistent because it's level-by-level)
+```
+
+* **Applications:**
+    * Finding the shortest path in an unweighted graph.
+    * Finding the shortest path between two nodes (using a modified version).
+    * Crawling websites.
+    * Social network analysis.
+
+
+**Key Differences:**
+
+| Feature        | DFS                               | BFS                               |
+|----------------|------------------------------------|------------------------------------|
+| Data Structure | Stack (implicit or explicit)       | Queue                              |
+| Exploration    | Depth-first                         | Breadth-first                       |
+| Path Finding   | Finds a path, but not necessarily the shortest | Finds the shortest path in an unweighted graph |
+| Memory Usage   | Can be less memory-intensive for deep graphs | Can be more memory-intensive for wide graphs |
+
+
+**Choosing between DFS and BFS:**
+
+The choice between DFS and BFS depends on the specific application.  If you need to find a path, or if the graph is very deep, DFS might be more efficient. If you need to find the shortest path in an unweighted graph, or if the graph is very wide, BFS is usually preferred.  Consider the trade-offs between memory usage and time complexity for your specific problem.  For example, in very large graphs, iterative DFS can be more space efficient than recursive DFS due to avoiding recursive function calls' memory overhead.
+
