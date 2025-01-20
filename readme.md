@@ -91973,3 +91973,40 @@ This JavaScript code iterates through each row of the `matrix` array using the o
 
 Nested loops can lead to a significant increase in execution time, especially with large datasets. The time complexity increases proportionally to the product of the number of iterations in each loop.  For example, two nested loops each iterating `n` times have a time complexity of O(n²).  Optimization techniques like memoization or dynamic programming might be necessary for very large datasets.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to reduce the problem size by a constant factor with each step.  This means the time it takes to solve the problem grows logarithmically with the input size (n).  Common examples include algorithms that employ a divide-and-conquer strategy or operate on sorted data structures. Here are some types of algorithms with O(log n) time complexity:
+
+**1. Binary Search:**
+
+* **Description:**  This is arguably the most classic O(log n) algorithm.  It works on a *sorted* array (or list) to efficiently find a target value.  It repeatedly divides the search interval in half. If the target is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.
+* **Example:** Finding a word in a dictionary (assuming it's sorted alphabetically).
+
+**2. Balanced Binary Search Tree Operations (Search, Insertion, Deletion):**
+
+* **Description:** In a balanced BST (like an AVL tree or a red-black tree), the height of the tree is logarithmic to the number of nodes.  Searching, inserting, and deleting nodes involve traversing a path down the tree, which takes O(log n) time in the average and worst cases (for balanced trees).  Unbalanced trees can degrade to O(n).
+* **Example:**  Efficiently storing and retrieving data in a database index.
+
+**3. Heap Operations (Insertion, Deletion, Finding Min/Max):**
+
+* **Description:**  Heaps (min-heaps and max-heaps) are tree-based data structures that maintain a specific order property (e.g., the root is the smallest/largest element).  Operations like insertion, deletion of the root, and finding the minimum/maximum element all take O(log n) time because they involve adjusting the heap structure along a path from the leaf to the root (or vice versa).
+* **Example:**  Implementing priority queues.
+
+**4. Exponentiation by Squaring:**
+
+* **Description:** This algorithm efficiently calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time. It uses the property that a<sup>b</sup> = (a<sup>b/2</sup>)<sup>2</sup> if b is even and a<sup>b</sup> = a * a<sup>(b-1)</sup> if b is odd.  This allows for a recursive halving of the exponent.
+* **Example:** Cryptographic algorithms often utilize this for efficient modular exponentiation.
+
+
+**5. Finding the kth smallest/largest element using QuickSelect (average case):**
+
+* **Description:** QuickSelect is a selection algorithm that, on average, finds the kth smallest or largest element in an unsorted array in O(n) time. However, if you use a randomized version of QuickSelect and focus on a specific case where k is relatively small (and significantly less than n), you will find a logarithmic dependency on k which might contribute to an overall complexity under certain conditions leaning towards O(k log n).  This is not strictly O(log n) in all cases.
+
+**Important Considerations:**
+
+* **Big O Notation:**  O(log n) describes the *upper bound* of the algorithm's growth rate. The actual time might be less, but it won't grow faster than logarithmically.
+* **Base of the Logarithm:**  The base of the logarithm (e.g., log₂ n, log₁₀ n) doesn't affect the Big O notation; it only changes the constant factor.
+* **Worst-Case vs. Average-Case:** Some algorithms, such as QuickSelect, have an O(log n) average-case complexity but a worse worst-case complexity (often O(n)).  Balanced tree operations are typically O(log n) in both average and worst cases.
+
+
+These examples show that O(log n) algorithms are highly efficient for large input sizes because the time required increases very slowly as n grows.  They are crucial in many applications where performance is critical.
+
