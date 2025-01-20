@@ -93305,3 +93305,110 @@ Both implementations follow these steps:
 
 Remember to handle the case where the root node is `NULL` (or `nullptr` in C++) to avoid errors.  These examples provide a basic framework; you can extend them to handle more complex scenarios (e.g., different data types, additional node attributes).
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals are ways to systematically visit all nodes in a binary tree.  Pre-order, in-order, and post-order traversals differ in the order they visit the root node relative to its left and right subtrees.
+
+**Binary Tree Structure (for reference):**
+
+A binary tree node has three parts:
+
+* `data`:  The value stored in the node.
+* `left`: A pointer to the left child node (or null if no left child).
+* `right`: A pointer to the right child node (or null if no right child).
+
+
+**1. Pre-order Traversal:**
+
+* **Root-Left-Right:** Visit the root node first, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+
+**Algorithm:**
+
+```python
+def preorder(node):
+  """Performs a pre-order traversal of a binary tree.
+
+  Args:
+    node: The root node of the subtree to traverse.
+  """
+  if node:
+    print(node.data, end=" ")  # Visit root
+    preorder(node.left)       # Traverse left subtree
+    preorder(node.right)      # Traverse right subtree
+
+```
+
+
+**2. In-order Traversal:**
+
+* **Left-Root-Right:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree.  In a Binary *Search* Tree (BST), an in-order traversal yields the nodes in ascending order.
+
+**Algorithm:**
+
+```python
+def inorder(node):
+  """Performs an in-order traversal of a binary tree.
+
+  Args:
+    node: The root node of the subtree to traverse.
+  """
+  if node:
+    inorder(node.left)        # Traverse left subtree
+    print(node.data, end=" ")  # Visit root
+    inorder(node.right)       # Traverse right subtree
+```
+
+**3. Post-order Traversal:**
+
+* **Left-Right-Root:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node.  This order is often used for deleting nodes in a tree (delete children before the parent).
+
+**Algorithm:**
+
+```python
+def postorder(node):
+  """Performs a post-order traversal of a binary tree.
+
+  Args:
+    node: The root node of the subtree to traverse.
+  """
+  if node:
+    postorder(node.left)      # Traverse left subtree
+    postorder(node.right)     # Traverse right subtree
+    print(node.data, end=" ")  # Visit root
+```
+
+
+**Example Usage:**
+
+Let's assume you have a binary tree like this:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+(You would need to create this tree structure in your code using Node objects.  A simple `Node` class might look like this:
+
+```python
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.left = None
+    self.right = None
+```
+
+Then, you would build the tree by creating `Node` objects and linking them appropriately.)
+
+After building the tree, calling the traversal functions:
+
+```python
+preorder(root) # Output: 1 2 4 5 3
+inorder(root)  # Output: 4 2 5 1 3
+postorder(root) # Output: 4 5 2 3 1
+```
+
+
+Remember to replace `root` with the actual root node of your binary tree.  The output shows the order in which the nodes' data is printed for each traversal method.
+
