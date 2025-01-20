@@ -93487,3 +93487,113 @@ The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest nod
 
 The recursive approach is often preferred for its simplicity and readability.  Choose the method that best suits your specific needs and constraints.  Remember to adapt the code to your specific data structures and requirements.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (or graph) is a classic computer science problem.  The optimal approach and its complexity depend on the type of tree and the information available.  Here's a breakdown of common methods:
+
+**1. Tree Structure:**  We'll assume a tree (not a graph with cycles) for most of this explanation.  Graphs require more sophisticated algorithms.
+
+**a) Binary Tree (most common case):**
+
+* **Recursive Approach (Efficient):** This is a generally preferred approach for binary trees.  It leverages the recursive nature of the tree structure.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, n1, n2):
+    """Finds the LCA of n1 and n2 in a binary tree."""
+
+    if root is None:
+        return None
+
+    if root.data == n1 or root.data == n2:
+        return root
+
+    left_lca = lca(root.left, n1, n2)
+    right_lca = lca(root.right, n1, n2)
+
+    if left_lca and right_lca:
+        return root  # LCA found – both nodes are in different subtrees
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(lca(root, 4, 5).data)  # Output: 2
+print(lca(root, 4, 3).data)  # Output: 1
+print(lca(root, 5, 3).data) #Output: 1
+
+```
+
+* **Iterative Approach (Using Parent Pointers):** If each node has a pointer to its parent, an iterative solution is possible using a stack or queue. This avoids recursion's overhead but requires extra parent pointer space.
+
+
+**b) N-ary Tree (More than two children per node):**
+
+The recursive approach can be easily adapted:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+def lca_nary(root, n1, n2):
+    if root is None or root.data == n1 or root.data == n2:
+        return root
+
+    found_n1 = False
+    found_n2 = False
+    for child in root.children:
+        child_lca = lca_nary(child, n1, n2)
+        if child_lca:
+            if child_lca.data == n1:
+                found_n1 = True
+            elif child_lca.data == n2:
+                found_n2 = True
+            if found_n1 and found_n2:
+                return root #lca found
+            return child_lca
+    return None
+
+```
+
+**2.  Graph Structure:**
+
+Finding the LCA in a general graph is more complex because of cycles.  Algorithms like Tarjan's off-line LCA algorithm or techniques using Depth-First Search (DFS) and storing information about node visits are commonly used.  These are more advanced and beyond the scope of a concise explanation.
+
+
+**Time Complexity:**
+
+* **Binary Tree (Recursive):** O(N) in the worst case (skewed tree).  O(H) on average (H is the height of the tree).
+* **Binary Tree (Iterative with parent pointers):** O(H)
+* **N-ary Tree (Recursive):** O(N) in the worst case.
+* **Graph Algorithms:** Varies depending on the specific algorithm; generally not linear.
+
+
+**Space Complexity:**
+
+* **Binary Tree (Recursive):** O(H) due to the recursive call stack.
+* **Binary Tree (Iterative):** O(H) or O(N) depending on the implementation (using a stack or queue).
+* **N-ary Tree (Recursive):** O(H) in the worst case.
+* **Graph Algorithms:**  Depends on the algorithm; can be significant for large graphs.
+
+
+Remember to handle edge cases like:
+
+* One or both nodes are not in the tree.
+* One node is the ancestor of the other.
+
+
+Choose the method best suited to your specific tree type and constraints.  For binary trees, the recursive approach is usually the simplest and most efficient.  For graphs, you'll need to employ more advanced algorithms.
+
