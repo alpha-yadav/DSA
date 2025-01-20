@@ -94398,3 +94398,76 @@ Output: "bab" or "aba" (both are valid)
 
 These problems represent a range of difficulty and common algorithmic techniques.  Choosing the right data structure and algorithm is crucial for solving them efficiently.  Remember to consider time and space complexity when designing your solution.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple, easy-to-understand version, then progressing to a slightly more sophisticated one:
+
+
+**Version 1: Basic FizzBuzz**
+
+This version uses nested `if` statements for clarity.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz") and then by 5 ("Buzz").
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Version 2: Slightly More Concise FizzBuzz**
+
+This version uses the ternary conditional operator (`condition ? value1 : value2`) to make the code a bit shorter, though perhaps slightly less readable for beginners.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Example usage
+```
+
+
+**Version 3:  Using String Interpolation for Clarity (Swift 5.7 and later)**
+
+Swift 5.7 introduced the `_` parameter for trailing closures that makes this even cleaner. This example uses string interpolation to build the output string more clearly.
+
+
+
+```swift
+func fizzBuzzStringInterpolation(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += i % 3 == 0 ? "Fizz" : ""
+        output += i % 5 == 0 ? "Buzz" : ""
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzStringInterpolation(n: 15)
+```
+
+This method builds the output string incrementally. If both `Fizz` and `Buzz` are added, it prints "FizzBuzz". If one or neither are added, the method handles that as well.  This is arguably the most readable version, especially for those new to Swift.
+
+
+Remember to choose the version that best suits your understanding and coding style.  The first version is the most straightforward and easiest to grasp, while the others offer slightly more concise code.  Version 3 offers better readability using string interpolation.  All three achieve the same result.
+
