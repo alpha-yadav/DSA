@@ -96278,3 +96278,81 @@ postorder(root) # Output: 4 5 2 3 1
 
 Remember to handle the case where the input `node` is `None` (an empty subtree) to prevent errors in the recursive calls.  This is done with the `if node:` condition at the beginning of each traversal function.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary *search* tree, there's no guaranteed ordering in a general binary tree, requiring a different approach.
+
+Here are a few ways to find the LCA in a binary tree:
+
+**Method 1: Recursive Approach (Most Common)**
+
+This method recursively traverses the tree.  If either `node1` or `node2` is found, it returns that node.  If both are found in different subtrees, the current node is the LCA.  If neither is found, it returns `null`.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if p or q are not in the tree.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # Both p and q found in different subtrees
+    elif left_lca:
+        return left_lca  # p and q found in left subtree
+    else:
+        return right_lca  # p and q found in right subtree
+
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left
+q = root.right
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
+
+p = root.left
+q = root.left.right.right
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") #Output: LCA of 5 and 4: 5
+
+```
+
+**Method 2: Iterative Approach (Using a Stack or Queue)**
+
+An iterative approach is possible, generally using a stack (for depth-first search) or a queue (for breadth-first search).  It's less elegant than the recursive solution but might be preferred in situations where recursion depth could be a concern.  (Note: This iterative solution is significantly more complex and generally less preferred than the recursive approach.)
+
+**Important Considerations:**
+
+* **Node Existence:** The algorithms assume `p` and `q` exist in the tree.  You might want to add checks to handle cases where they don't.
+* **Efficiency:**  The recursive approach has a time complexity of O(N), where N is the number of nodes in the tree, because in the worst case, it might traverse the entire tree.  Space complexity is O(H) in the worst case due to recursive call stack, where H is the height of the tree.
+
+
+The recursive approach is generally preferred for its clarity and simplicity.  The iterative approach is more complex to implement and less readable, and doesn't offer significant performance advantages in most cases.  Choose the method that best suits your needs and coding style, but the recursive solution is often the best starting point.
+
