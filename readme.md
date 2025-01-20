@@ -99433,3 +99433,13 @@ For general trees (not necessarily binary), you might need a different approach,
 
 Remember to handle edge cases like one or both nodes not being present in the tree.  You'll need to adjust the code to return an appropriate value (e.g., `None`) in such scenarios.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need the information to create the graph.  For example, tell me:
+
+* **What kind of graph?** (Line graph, bar graph, scatter plot, pie chart, etc.)
+* **What are the variables?** (X-axis and Y-axis labels)
+* **What is the data?** (A table of values, a list of points, or an equation)
+
+
+Once I have this information, I can help you.
+
