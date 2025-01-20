@@ -97424,3 +97424,58 @@ This version separates the logic for determining the output, making it easier to
 
 Remember to choose the version that best suits your needs and coding style.  For a simple FizzBuzz, Version 1 or 2 is sufficient.  For more robust and expandable code, Version 3 is recommended.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm consumes as the input size grows.  It's a crucial aspect of algorithm analysis, helping us understand how an algorithm's performance scales with larger datasets.  We primarily focus on *asymptotic* complexity, meaning we're interested in the behavior as the input size approaches infinity.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:** Measures the time an algorithm takes to execute as a function of the input size.
+* **Space Complexity:** Measures the amount of memory (space) an algorithm requires as a function of the input size.
+
+**Big O Notation:**
+
+Big O notation (O) is the most common way to express algorithm complexity.  It describes the *upper bound* of the growth rate of an algorithm's resource consumption.  It focuses on the dominant terms and ignores constant factors.  For example:
+
+* **O(1): Constant time:** The algorithm's execution time remains constant regardless of the input size.  Accessing an element in an array by index is O(1).
+* **O(log n): Logarithmic time:** The execution time increases logarithmically with the input size.  Binary search in a sorted array is O(log n).
+* **O(n): Linear time:** The execution time increases linearly with the input size.  Searching for an element in an unsorted array is O(n).
+* **O(n log n): Linearithmic time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+* **O(n²): Quadratic time:** The execution time increases quadratically with the input size.  Nested loops iterating through an array are often O(n²).
+* **O(2ⁿ): Exponential time:** The execution time doubles with each addition to the input size.  This indicates a very inefficient algorithm for large inputs.  Many brute-force approaches fall into this category.
+* **O(n!): Factorial time:** The execution time grows factorially with the input size.  This is extremely inefficient even for moderately sized inputs.  Algorithms that try all permutations fall into this category.
+
+
+**Other Notations:**
+
+Besides Big O, we also have:
+
+* **Big Omega (Ω):**  Describes the *lower bound* of the growth rate.  It represents the best-case scenario.
+* **Big Theta (Θ):** Describes the *tight bound*, meaning both the upper and lower bounds are the same.  It provides a precise description of the algorithm's growth rate.
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the algorithm's runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Identify the dominant term:** Focus on the term that grows fastest as n increases.
+4. **Apply Big O notation:** Express the complexity using Big O notation, ignoring constant factors and lower-order terms.
+
+**Example:**
+
+Consider a simple algorithm that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+This algorithm iterates through the array once (n times).  The dominant operation is the comparison (`if x > max_val`).  Therefore, its time complexity is O(n).  The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is essential for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better than one with a higher complexity as the input size grows.
+
