@@ -100496,3 +100496,73 @@ function linearSearch(array, target):
 
 This step-by-step guide provides a solid foundation. Remember to be patient and persistent. Learning algorithms takes time and effort, but the rewards are significant for any programmer.
 
+#  A sample algorithmic problem 
+Let's consider the classic **Two Sum** problem:
+
+**Problem Statement:**
+
+Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+
+**Example:**
+
+`Input: nums = [2,7,11,15], target = 9`
+`Output: [0,1]`
+`Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].`
+
+
+**Algorithm (Brute Force):**
+
+A simple, but inefficient, approach is to use brute force:
+
+1. Iterate through the array using nested loops.
+2. For each element, check if there's another element in the array that, when added to the current element, equals the target.
+3. If found, return the indices.
+
+
+**Python Code (Brute Force):**
+
+```python
+def two_sum_brute_force(nums, target):
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums[i] + nums[j] == target:
+                return [i, j]
+    return None  # No solution found
+
+```
+
+
+**Algorithm (Using a Hash Map/Dictionary):**
+
+A much more efficient approach uses a hash map (dictionary in Python):
+
+1. Create an empty dictionary.
+2. Iterate through the array.
+3. For each element `num`, calculate the complement `complement = target - num`.
+4. Check if the `complement` is in the dictionary.
+    * If it is, return the index of the current element and the index stored in the dictionary for the complement.
+    * If not, add the element and its index to the dictionary.
+
+
+**Python Code (Hash Map):**
+
+```python
+def two_sum_hashmap(nums, target):
+    num_map = {}  # Dictionary to store numbers and their indices
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    return None  # No solution found
+
+```
+
+This hash map approach has a time complexity of O(n), significantly faster than the brute force O(n^2) approach.  This example demonstrates a common algorithmic problem and showcases how different algorithmic approaches can drastically impact efficiency.  You can try running both functions with different inputs to compare their performance.
+
