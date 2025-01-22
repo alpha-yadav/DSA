@@ -100727,3 +100727,57 @@ Therefore, since we've found c₁ = 2, c₂ = 3, and n₀ = 1 satisfying the def
 
 In summary, Big-Theta notation is a precise way to describe the growth rate of an algorithm's runtime or space complexity, giving us a clear understanding of its efficiency relative to input size, focusing on the dominant factors and ignoring less significant constant terms.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input approaches infinity.  They're crucial in computer science for analyzing algorithm efficiency. Here's a comparison of the most common notations:
+
+**1. Big O (O): Upper Bound**
+
+* **Meaning:**  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  Essentially, *g(n)* is an upper bound on the growth rate of *f(n)*.  We only care about the dominant term and ignore constant factors.
+* **Focus:** Worst-case scenario.  It provides an upper limit on how much the function can grow.
+* **Example:** If `f(n) = 2n² + 3n + 1`, then `f(n) = O(n²)`.  We drop the lower-order terms (3n and 1) and the constant factor (2).
+
+**2. Big Omega (Ω): Lower Bound**
+
+* **Meaning:** `f(n) = Ω(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.  *g(n)* is a lower bound on the growth rate of *f(n)*.
+* **Focus:** Best-case scenario (sometimes). It provides a lower limit on how much the function *must* grow.  It can also be used to describe a lower bound on the complexity of a problem.
+* **Example:** If `f(n) = 2n² + 3n + 1`, then `f(n) = Ω(n²)`.
+
+**3. Big Theta (Θ): Tight Bound**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that there exist positive constants *c₁*, *c₂*, and *n₀* such that `0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)` for all `n ≥ n₀`.  This means *g(n)* is both an upper and lower bound for *f(n)*.
+* **Focus:**  Average-case scenario (often).  It provides a precise characterization of the function's growth rate.
+* **Example:** If `f(n) = 2n² + 3n + 1`, then `f(n) = Θ(n²)`.
+
+**4. Little o (o): Strict Upper Bound**
+
+* **Meaning:** `f(n) = o(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  This implies that *f(n)* grows strictly slower than *g(n)*.
+* **Focus:**  Shows a significant difference in growth rates.
+* **Example:** `n = o(n²)`,  `log n = o(n)`.
+
+**5. Little omega (ω): Strict Lower Bound**
+
+* **Meaning:** `f(n) = ω(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`. This implies that *f(n)* grows strictly faster than *g(n)*.
+* **Focus:** Shows a significant difference in growth rates.
+* **Example:** `n² = ω(n)`, `2ⁿ = ω(n²)`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Focus                     | Example                 |
+|----------|---------------------------------------|-----------------------------|--------------------------|
+| O        | Upper bound                           | Worst-case                 | 2n² + 3n + 1 = O(n²)     |
+| Ω        | Lower bound                           | Best-case (sometimes)      | 2n² + 3n + 1 = Ω(n²)     |
+| Θ        | Tight bound                           | Average-case (often)       | 2n² + 3n + 1 = Θ(n²)     |
+| o        | Strict upper bound                     | Significant growth difference | n = o(n²)                |
+| ω        | Strict lower bound                     | Significant growth difference | n² = ω(n)                |
+
+
+**Relationships:**
+
+* `f(n) = Θ(g(n))` implies `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+* `f(n) = o(g(n))` implies `f(n) = O(g(n))`, but not vice versa.
+* `f(n) = ω(g(n))` implies `f(n) = Ω(g(n))`, but not vice versa.
+
+
+Understanding these notations is essential for comparing the efficiency of different algorithms and choosing the best one for a given task.  Remember to always consider the context (worst, average, best case) when analyzing an algorithm's complexity.
+
