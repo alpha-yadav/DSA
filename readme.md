@@ -100566,3 +100566,72 @@ def two_sum_hashmap(nums, target):
 
 This hash map approach has a time complexity of O(n), significantly faster than the brute force O(n^2) approach.  This example demonstrates a common algorithmic problem and showcases how different algorithmic approaches can drastically impact efficiency.  You can try running both functions with different inputs to compare their performance.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing improvements:
+
+**Basic Implementation:**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5. If none of these conditions are met, it prints the number itself.
+
+
+**Improved Implementation (using String Interpolation):**
+
+This version uses string interpolation for a more concise and readable solution:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function to test
+```
+
+This approach is more efficient because it avoids nested `if-else if` statements. It builds the output string incrementally.  If the string is empty after checking for divisibility by 3 and 5, it means the number is neither divisible by 3 nor 5, so it prints the number itself.
+
+
+**Further Improvements (Functional Approach):**
+
+For a more advanced approach, you can leverage Swift's functional capabilities:
+
+```swift
+func fizzBuzzFunctional(n: Int) {
+    (1...n).forEach { i in
+        let fizz = i % 3 == 0
+        let buzz = i % 5 == 0
+        print(fizz ? (buzz ? "FizzBuzz" : "Fizz") : buzz ? "Buzz" : String(i))
+    }
+}
+
+fizzBuzzFunctional(n: 15) // Call the function to test
+```
+
+This uses a `forEach` loop and concise conditional statements to achieve the same result in a more compact manner.
+
+
+These examples demonstrate different approaches to solving the FizzBuzz problem in Swift.  The best approach depends on your coding style and preference, but the improved and functional versions offer better readability and potentially slightly better performance for larger input values.  Choose the version that best suits your understanding and needs. Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using Swift's REPL).
+
