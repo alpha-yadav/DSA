@@ -100635,3 +100635,57 @@ This uses a `forEach` loop and concise conditional statements to achieve the sam
 
 These examples demonstrate different approaches to solving the FizzBuzz problem in Swift.  The best approach depends on your coding style and preference, but the improved and functional versions offer better readability and potentially slightly better performance for larger input values.  Choose the version that best suits your understanding and needs. Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using Swift's REPL).
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long it takes to run) and space (how much memory it uses).  Complexity is usually expressed using Big O notation (and sometimes Big Omega and Big Theta).  Let's break down the key aspects:
+
+**1. Big O Notation (O):**
+
+Big O notation describes the *upper bound* of an algorithm's growth rate. It focuses on the dominant factors that affect runtime or space as the input size (n) grows very large.  It ignores constant factors and lower-order terms because they become insignificant as n increases.
+
+* **Examples:**
+    * **O(1):** Constant time – The algorithm's runtime doesn't depend on the input size.  Example: Accessing an element in an array by its index.
+    * **O(log n):** Logarithmic time – The runtime increases logarithmically with the input size. Example: Binary search in a sorted array.
+    * **O(n):** Linear time – The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+    * **O(n log n):** Linearithmic time –  A combination of linear and logarithmic growth. Example: Merge sort.
+    * **O(n²):** Quadratic time – The runtime increases proportionally to the square of the input size. Example: Bubble sort, selection sort.
+    * **O(2ⁿ):** Exponential time – The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+    * **O(n!):** Factorial time – The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**2. Big Omega Notation (Ω):**
+
+Big Omega notation describes the *lower bound* of an algorithm's growth rate. It represents the best-case scenario, meaning the minimum amount of time or space the algorithm will use.  It's less commonly used than Big O.
+
+**3. Big Theta Notation (Θ):**
+
+Big Theta notation describes the *tight bound* of an algorithm's growth rate. It means the algorithm's growth rate is both O(f(n)) and Ω(f(n)), providing both upper and lower bounds.  This indicates that the algorithm's performance is precisely characterized by f(n).
+
+
+**4. Time Complexity vs. Space Complexity:**
+
+* **Time Complexity:**  Measures the runtime of an algorithm as a function of the input size.  It's crucial for determining how efficiently an algorithm will perform on large datasets.
+* **Space Complexity:** Measures the amount of memory an algorithm uses as a function of the input size.  This is important for preventing memory overflows and ensuring efficient memory usage.
+
+
+**5. Analyzing Algorithm Complexity:**
+
+Analyzing algorithm complexity often involves:
+
+* **Best-case:** The scenario where the algorithm performs optimally.
+* **Average-case:** The expected performance over many inputs.
+* **Worst-case:** The scenario where the algorithm performs least efficiently.  Big O notation typically focuses on worst-case complexity.
+
+
+**Example: Analyzing Linear Search**
+
+A linear search iterates through an unsorted array to find a target element.
+
+* **Best-case:** O(1) – The target is the first element.
+* **Average-case:** O(n) – The target is somewhere in the middle.
+* **Worst-case:** O(n) – The target is at the end or not present.
+
+Therefore, the time complexity of linear search is typically expressed as O(n).
+
+
+Understanding algorithm complexity is crucial for selecting the right algorithm for a given task.  Algorithms with lower complexity are generally preferred for larger datasets, as they consume less time and memory.  However, the choice also depends on factors like the specific input data and the overall system constraints.
+
