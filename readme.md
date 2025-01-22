@@ -100689,3 +100689,41 @@ Therefore, the time complexity of linear search is typically expressed as O(n).
 
 Understanding algorithm complexity is crucial for selecting the right algorithm for a given task.  Algorithms with lower complexity are generally preferred for larger datasets, as they consume less time and memory.  However, the choice also depends on factors like the specific input data and the overall system constraints.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of a function.  Specifically, it describes the *tight bound* of a function's growth rate, meaning it provides both an upper and lower bound that are asymptotically proportional.  In simpler terms, it tells us that a function's growth is bounded both above and below by the same function, ignoring constant factors.
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) if there exist positive constants c₁ and c₂, and a positive integer n₀, such that for all n ≥ n₀:
+
+   `c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of n (n ≥ n₀), f(n) is always sandwiched between c₁*g(n) and c₂*g(n).  The constants c₁ and c₂ are crucial; they allow us to ignore constant factors in the growth rate.  The function g(n) represents the dominant part of f(n)'s growth.
+
+**Intuitive Explanation:**
+
+Imagine you're comparing two algorithms' runtimes, f(n) and g(n).  If f(n) is Θ(g(n)), it means that both algorithms have essentially the same growth rate.  While one might be slightly faster than the other (by a constant factor), their runtime increases proportionally as the input size (n) grows large.  They scale similarly.
+
+**Example:**
+
+Let's say f(n) = 2n² + 5n + 3.  We can show that f(n) is Θ(n²):
+
+1. **Upper Bound:** We can find c₂ and n₀ such that f(n) ≤ c₂n² for all n ≥ n₀.  For example, if we choose c₂ = 3 and n₀ = 1, then:
+   2n² + 5n + 3 ≤ 3n²  (This holds true for n ≥ 1)
+
+2. **Lower Bound:** We can find c₁ and n₀ such that c₁n² ≤ f(n) for all n ≥ n₀.  For example, if we choose c₁ = 2 and n₀ = 1, then:
+   2n² ≤ 2n² + 5n + 3 (This holds true for n ≥ 1)
+
+Therefore, since we've found c₁ = 2, c₂ = 3, and n₀ = 1 satisfying the definition, we can conclude that f(n) = Θ(n²).
+
+**Difference from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  f(n) = O(g(n)) means f(n) grows no faster than g(n).  It's a "less than or equal to" relationship asymptotically.
+
+* **Big-Ω (Ω):** Provides a *lower bound*. f(n) = Ω(g(n)) means f(n) grows at least as fast as g(n). It's a "greater than or equal to" relationship asymptotically.
+
+* **Big-Θ (Θ):** Provides both an upper and lower bound.  It's a tight bound, indicating that the growth rates are asymptotically the same.  It combines the information provided by both Big-O and Big-Ω.
+
+
+In summary, Big-Theta notation is a precise way to describe the growth rate of an algorithm's runtime or space complexity, giving us a clear understanding of its efficiency relative to input size, focusing on the dominant factors and ignoring less significant constant terms.
+
