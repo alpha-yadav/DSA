@@ -655,3 +655,26 @@ int main() {
 
 These examples demonstrate the basic structure. The complexity of nested loops can increase significantly depending on the task.  Remember that nested loops can lead to significant performance overhead if not carefully designed, especially with large datasets.  Consider algorithm optimization techniques if you encounter performance issues.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They mean the time it takes to solve a problem grows logarithmically with the input size (n).  This is much faster than linear time (O(n)) and even faster than algorithms with polynomial time complexity.  The key characteristic is that the problem size is repeatedly halved (or reduced by a constant factor) at each step.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  In a sorted array or list, you repeatedly divide the search interval in half. If the target value is less than the middle element, you search the left half; otherwise, you search the right half. This continues until the target is found or the interval is empty.
+
+* **Efficient Searching in Balanced Binary Search Trees (BSTs):**  Similar to binary search, searching in a balanced BST (like an AVL tree or a red-black tree) takes O(log n) time in the average and worst cases because the tree's height is logarithmic with the number of nodes.  Insertion and deletion also have this complexity in balanced BSTs.
+
+* **Finding the kth smallest element using Quickselect (average case):** While the worst-case time complexity of Quickselect is O(n²), its average-case complexity is O(n).  However, finding the kth smallest element within a *partially* sorted sub-array that is consistently reduced by a constant factor (a key concept in many Quickselect implementations) can exhibit O(log n) behavior under specific, favorable conditions of data distribution.  This isn't strictly O(log n) for the overall algorithm, but certain phases might exhibit that runtime.
+
+
+* **Binary Exponentiation (Exponentiation by Squaring):**  This technique efficiently computes a^b (a raised to the power of b) in O(log b) time.  It works by repeatedly squaring the base and adjusting the exponent.
+
+
+* **Some Divide and Conquer Algorithms:** Some divide-and-conquer algorithms can achieve O(log n) complexity when the subproblems are reduced in size by a constant factor at each step.  However, many divide-and-conquer algorithms have other time complexities depending on the specific problem and how the subproblems are handled.
+
+
+**Important Note:**  The base of the logarithm (e.g., base 2, base 10) doesn't affect the overall Big O notation because it's just a constant factor.  O(log₂ n) and O(log₁₀ n) are both considered O(log n).  However, the constant factor *can* impact the actual runtime significantly in practice.
+
+
+It's crucial to remember that O(log n) only describes the *asymptotic* behavior of the algorithm as the input size approaches infinity.  For small input sizes, the constant factors and lower-order terms can dominate the runtime.  An algorithm with O(log n) complexity might be slower than an O(n) algorithm for small n, but will always be faster for sufficiently large n.
+
