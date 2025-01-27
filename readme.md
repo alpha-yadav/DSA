@@ -1539,3 +1539,117 @@ print(f"Is the tree a BST (min/max)? {is_bst_minmax(root2)}") # False
 
 Both methods achieve the same result. The `min/max` approach is generally considered slightly more efficient because it avoids the overhead of creating and sorting the in-order traversal list.  Choose the method that you find more clear and easier to understand.  Remember to define your `Node` class appropriately for your chosen implementation.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-Order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.val)
+            inorder(node.right)
+
+    inorder(root)
+    for i in range(1, len(result)):
+        if result[i] <= result[i-1]:
+            return False
+    return True
+
+#Example Usage
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(3)
+print(is_bst_recursive(root))  # Output: True
+
+
+root = TreeNode(5)
+root.left = TreeNode(1)
+root.right = TreeNode(4)
+root.right.left = TreeNode(3)
+root.right.right = TreeNode(6)
+print(is_bst_recursive(root))  # Output: False (because 6 is not greater than 5)
+
+root = None #test for empty tree
+print(is_bst_recursive(root)) #Output: True
+
+```
+
+**Method 2: Recursive Helper Function with Range Check**
+
+This method is more efficient because it avoids creating an explicit sorted array. It recursively checks if each subtree satisfies the BST property within a given range.
+
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def is_bst_recursive_range(root, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Checks if a binary tree is a BST using recursive range checking.
+
+    Args:
+        root: The root node of the binary tree.
+        min_val: The minimum allowed value for the node.
+        max_val: The maximum allowed value for the node.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if not root:
+        return True
+
+    if not (min_val < root.val < max_val):
+        return False
+
+    return (is_bst_recursive_range(root.left, min_val, root.val) and
+            is_bst_recursive_range(root.right, root.val, max_val))
+
+#Example Usage
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(3)
+print(is_bst_recursive_range(root))  # Output: True
+
+root = TreeNode(5)
+root.left = TreeNode(1)
+root.right = TreeNode(4)
+root.right.left = TreeNode(3)
+root.right.right = TreeNode(6)
+print(is_bst_recursive_range(root))  # Output: False
+
+root = None #test for empty tree
+print(is_bst_recursive_range(root)) #Output: True
+```
+
+**Comparison:**
+
+* **Method 1 (In-order traversal):** Simpler to understand but less efficient due to the creation and traversal of a temporary array.  Space complexity is O(N) where N is the number of nodes.
+* **Method 2 (Range check):** More efficient as it avoids creating an array.  It has a space complexity of O(H) where H is the height of the tree (in the worst case, this is O(N) for a skewed tree, but O(log N) for a balanced tree). Generally preferred for its better space efficiency, especially in the case of very tall or unbalanced trees.
+
+
+Choose the method that best suits your needs and understanding. For most cases, the recursive range check method (Method 2) is recommended for its efficiency. Remember to handle the case of an empty tree (root=None) appropriately in your implementation.
+
