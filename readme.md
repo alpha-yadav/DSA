@@ -1935,3 +1935,130 @@ int main() {
 
 Remember to choose the implementation that best suits your needs and programming language preference.  The Python version is concise and easier to read, while the C++ version gives you more control over memory management but requires more careful handling.  For very large trees, consider optimizations like using more sophisticated queue implementations.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversal refers to the process of visiting (processing) each node in a tree data structure exactly once.  There are several ways to do this, and the three most common are pre-order, in-order, and post-order traversal.  These are all recursive algorithms.
+
+Let's consider a binary tree node structure:
+
+```c++
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+```
+
+**1. Pre-order Traversal:**
+
+* **Visit the root node.**
+* **Recursively traverse the left subtree.**
+* **Recursively traverse the right subtree.**
+
+**C++ code:**
+
+```c++
+void preOrder(Node* node) {
+    if (node == nullptr) {
+        return;
+    }
+    cout << node->data << " ";  // Visit the root
+    preOrder(node->left);       // Traverse left subtree
+    preOrder(node->right);      // Traverse right subtree
+}
+```
+
+**Example:**
+
+For the tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+Pre-order traversal would output: `1 2 4 5 3`
+
+
+**2. In-order Traversal:**
+
+* **Recursively traverse the left subtree.**
+* **Visit the root node.**
+* **Recursively traverse the right subtree.**
+
+**C++ code:**
+
+```c++
+void inOrder(Node* node) {
+    if (node == nullptr) {
+        return;
+    }
+    inOrder(node->left);       // Traverse left subtree
+    cout << node->data << " ";  // Visit the root
+    inOrder(node->right);      // Traverse right subtree
+}
+```
+
+**Example:**
+
+For the same tree above, in-order traversal would output: `4 2 5 1 3`  (This gives you a sorted output if the tree is a Binary Search Tree).
+
+
+**3. Post-order Traversal:**
+
+* **Recursively traverse the left subtree.**
+* **Recursively traverse the right subtree.**
+* **Visit the root node.**
+
+**C++ code:**
+
+```c++
+void postOrder(Node* node) {
+    if (node == nullptr) {
+        return;
+    }
+    postOrder(node->left);       // Traverse left subtree
+    postOrder(node->right);      // Traverse right subtree
+    cout << node->data << " ";  // Visit the root
+}
+```
+
+**Example:**
+
+For the same tree, post-order traversal would output: `4 5 2 3 1`
+
+
+**Key Differences Summarized:**
+
+| Traversal Type | Order of Operations | Example Output (for the tree above) |
+|---|---|---|
+| Pre-order       | Root, Left, Right    | 1 2 4 5 3                        |
+| In-order        | Left, Root, Right    | 4 2 5 1 3                        |
+| Post-order      | Left, Right, Root    | 4 5 2 3 1                        |
+
+
+Remember to include `<iostream>` for `cout`.  You'd need to create and populate a `Node` tree structure to actually test this code.  For example:
+
+```c++
+int main() {
+  Node* root = new Node(1);
+  root->left = new Node(2);
+  root->right = new Node(3);
+  root->left->left = new Node(4);
+  root->left->right = new Node(5);
+
+  cout << "Pre-order: "; preOrder(root); cout << endl;
+  cout << "In-order: "; inOrder(root); cout << endl;
+  cout << "Post-order: "; postOrder(root); cout << endl;
+
+  //Remember to deallocate memory to avoid memory leaks!
+  // ... (code to delete the tree nodes) ...
+
+  return 0;
+}
+```  You should add proper memory deallocation (using a recursive function or an iterative approach) to prevent memory leaks in a real-world application.
+
