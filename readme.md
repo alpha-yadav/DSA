@@ -364,3 +364,44 @@ Asymptotic notations describe the behavior of functions as their input approache
 
 Understanding these notations is fundamental to analyzing algorithms and comparing their efficiency.  They allow us to abstract away from constant factors and lower-order terms, focusing on the dominant behavior as the input size grows large.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the lower bound of an algorithm's runtime or space complexity.  It provides a way to express the best-case (or a lower bound on the) performance of an algorithm.  In simpler terms, it tells us that the algorithm will *at least* perform this well.
+
+Here's a breakdown of Big-Omega notation:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Big-Omega of *g(n)*, written as *f(n) = Ω(g(n))*, if there exist positive constants *c* and *n₀* such that:
+
+`0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`
+
+What this means:
+
+* **`f(n)`:**  Represents the actual runtime (or space complexity) of the algorithm.
+* **`g(n)`:** Represents a simpler function (e.g., n, n², log n) that describes the growth rate of the algorithm's lower bound.
+* **`c`:** A positive constant that scales `g(n)`.  It allows for a constant factor difference between `f(n)` and `g(n)`.
+* **`n₀`:** A threshold value.  The inequality only needs to hold for input sizes greater than or equal to `n₀`.  This is important because for small inputs, the behavior of an algorithm might be unpredictable.
+
+
+**In simpler terms:**
+
+Imagine you're measuring the time an algorithm takes to run for different input sizes (n).  *f(n)* represents the actual measured time.  *Ω(g(n))* says that no matter what, the time will always be *at least* proportional to *g(n)* for sufficiently large inputs (n ≥ n₀).  The constant *c* accounts for variations in hardware, implementation details, etc.  We're only interested in the general growth rate.
+
+**Examples:**
+
+* **Linear Search:**  A linear search in an unsorted array has a best-case time complexity of Ω(1). This is because if the target element is the first element, the algorithm finds it immediately (constant time).  Its worst-case and average-case are O(n).
+
+* **Binary Search:** A binary search on a sorted array has a best-case time complexity of Ω(1) (if the element is found at the root). Its worst-case and average-case are O(log n).
+
+* **Merge Sort:** Merge sort has a time complexity of Ω(n log n). This means its runtime will *always* be at least proportional to n log n, no matter how the data is arranged.
+
+
+**Relationship to Big-O and Big-Theta:**
+
+* **Big-O (O):** Describes the upper bound (worst-case) complexity.
+* **Big-Omega (Ω):** Describes the lower bound (best-case or a lower bound on the runtime) complexity.
+* **Big-Theta (Θ):** Describes both the upper and lower bounds (tight bound) complexity.  If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+
+**Key takeaway:**  Big-Omega notation provides a valuable perspective on the best-case (or a lower bound of) performance an algorithm can achieve. While Big-O is often the focus when analyzing algorithms, understanding Ω gives a more complete picture of its complexity characteristics.
+
