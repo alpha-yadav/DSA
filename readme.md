@@ -2388,3 +2388,48 @@ print(weighted_adjacency_matrix)
 
 For sparse graphs, an adjacency list is generally a more space-efficient representation.  Consider the density of your graph when choosing between the two.
 
+#  Introduction To Graph Theory 
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph consists of a set of *vertices* (also called nodes or points) and a set of *edges* (also called arcs or lines) that connect pairs of vertices.  These connections can be directed (meaning the edge goes from one vertex to another in a specific direction) or undirected (meaning the connection is bidirectional).
+
+Here's a breakdown of key introductory concepts:
+
+**1. Basic Definitions:**
+
+* **Graph:** A pair G = (V, E), where V is a finite set of vertices and E is a set of edges, where each edge connects a pair of vertices.
+* **Vertices (Nodes):** The points in a graph. Often represented as circles or dots.
+* **Edges (Arcs, Lines):** The connections between vertices.  Can be represented as lines or arrows.
+* **Directed Graph (Digraph):** A graph where edges have a direction (represented by arrows).  The order of vertices in an edge matters.
+* **Undirected Graph:** A graph where edges have no direction. The order of vertices in an edge doesn't matter.
+* **Weighted Graph:** A graph where each edge has a numerical weight associated with it (e.g., distance, cost, capacity).
+* **Simple Graph:** A graph with no loops (edges connecting a vertex to itself) and no multiple edges between the same pair of vertices.
+* **Complete Graph:** A simple graph where every pair of distinct vertices is connected by a unique edge.
+* **Path:** A sequence of vertices where consecutive vertices are connected by an edge.
+* **Cycle:** A path that starts and ends at the same vertex, with no other vertex repeated.
+* **Connected Graph:** An undirected graph where there is a path between any two vertices.
+* **Disconnected Graph:** An undirected graph that is not connected.
+* **Tree:** A connected graph with no cycles.
+* **Subgraph:** A graph whose vertices and edges are subsets of another graph.
+* **Degree (of a vertex):** The number of edges connected to a vertex. In directed graphs, we have in-degree (incoming edges) and out-degree (outgoing edges).
+
+
+**2. Representations of Graphs:**
+
+Graphs can be represented in several ways:
+
+* **Adjacency Matrix:** A square matrix where rows and columns represent vertices.  An entry (i, j) indicates whether there's an edge between vertex i and vertex j (1 for an edge, 0 for no edge).  For weighted graphs, the entry represents the weight.
+* **Adjacency List:** For each vertex, a list of its adjacent vertices (vertices connected to it by an edge) is maintained.  This is often more space-efficient than an adjacency matrix for sparse graphs (graphs with relatively few edges).
+
+
+**3. Applications of Graph Theory:**
+
+Graph theory has a wide range of applications, including:
+
+* **Computer Science:** Network routing, data structures, algorithms, social network analysis.
+* **Engineering:**  Circuit design, transportation networks, project scheduling (CPM/PERT).
+* **Biology:** Modeling biological networks (e.g., protein-protein interaction networks).
+* **Social Sciences:** Social network analysis, modeling relationships.
+* **Physics:** Modeling interactions in complex systems.
+
+
+This introduction provides a foundational understanding of graph theory.  Further study involves exploring various algorithms (like Dijkstra's algorithm for shortest paths, breadth-first search, depth-first search) and more advanced concepts like graph coloring, planarity, and network flows.
+
