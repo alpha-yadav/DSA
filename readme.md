@@ -311,3 +311,56 @@ c₁g(n) ≤ f(n) ≤ c₂g(n)
 
 Big-Theta notation is crucial for analyzing algorithm efficiency and comparing the performance of different algorithms, as it allows for a precise description of their asymptotic behavior.  It focuses on the dominant terms in the function, ignoring constant factors and lower-order terms that become insignificant as the input size grows.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input approaches infinity.  They're crucial in computer science for analyzing algorithm efficiency.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm has a time complexity of O(n²), it means the runtime grows no faster than the square of the input size.  The actual runtime might be smaller, but it won't exceed a constant multiple of n² for sufficiently large n.
+* **Focus:** Worst-case scenario.  Doesn't give information about the best or average case.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (though not necessarily the best-case runtime of a specific algorithm). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm has a time complexity of Ω(n), it means the runtime grows at least as fast as the input size.  The actual runtime might be larger, but it won't be smaller than a constant multiple of n for sufficiently large n.
+* **Focus:** Best-case scenario. Doesn't provide information about the worst or average case.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function. It means the function grows at the *same rate* as another function, both from above and below.  We say f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n ≥ n₀.  This means f(n) is both O(g(n)) and Ω(g(n)).
+* **Example:** If an algorithm has a time complexity of Θ(n log n), it means the runtime grows proportionally to n log n.
+* **Focus:** Precise description of growth rate.  Provides both upper and lower bounds.
+
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) means that for any positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Example:**  n = o(n²)  (n grows strictly slower than n²)
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) means that for any positive constant c, there exists a positive constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) (n² grows strictly faster than n)
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Upper/Lower Bound | Tight Bound? | Strict? |
+|----------|---------------------------------------|--------------------|---------------|---------|
+| O(g(n))  | Upper bound                           | Upper             | No            | No       |
+| Ω(g(n))  | Lower bound                           | Lower             | No            | No       |
+| Θ(g(n))  | Tight bound (both upper and lower)    | Both              | Yes           | No       |
+| o(g(n))  | Strictly slower growth                | Upper             | No            | Yes      |
+| ω(g(n))  | Strictly faster growth                | Lower             | No            | Yes      |
+
+
+**Relationship between notations:**
+
+* If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* If f(n) = o(g(n)), then f(n) = O(g(n)) but f(n) ≠ Θ(g(n)).
+* If f(n) = ω(g(n)), then f(n) = Ω(g(n)) but f(n) ≠ Θ(g(n)).
+
+
+Understanding these notations is fundamental to analyzing algorithms and comparing their efficiency.  They allow us to abstract away from constant factors and lower-order terms, focusing on the dominant behavior as the input size grows large.
+
