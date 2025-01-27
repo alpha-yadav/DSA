@@ -198,3 +198,75 @@ fizzBuzzFunctional(n: 15) // Call the function
 
 Remember to choose the method that best suits your understanding and the context of your project. The first method is the most beginner-friendly, while the others showcase more advanced Swift techniques.  They all achieve the same result: printing the FizzBuzz sequence.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most commonly considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We typically analyze complexity using **Big O notation**, which describes the growth rate of the resource consumption as the input size grows very large.  It focuses on the dominant factors and ignores constant factors.
+
+Here's a breakdown:
+
+**1. Time Complexity:**
+
+Time complexity is often expressed as a function of the input size, `n`. Common time complexities (from best to worst) include:
+
+* **O(1) - Constant Time:** The algorithm's execution time remains the same regardless of the input size.  Example: Accessing an element in an array by index.
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The execution time increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:**  A combination of linear and logarithmic time.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size. Example: Nested loops iterating over the input.
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  Example:  Traveling Salesperson Problem (brute force approach).
+
+
+**2. Space Complexity:**
+
+Space complexity measures the amount of memory an algorithm uses.  It's also expressed using Big O notation.  Similar classifications apply:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+* **O(n) - Linear Space:** The memory usage increases linearly with the input size.
+* **O(log n) - Logarithmic Space:** The memory usage increases logarithmically with the input size.
+* **O(n²) - Quadratic Space:** The memory usage increases quadratically with the input size.
+* and so on...
+
+
+**Analyzing Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:**  Determine the operations that contribute most significantly to the running time (e.g., comparisons, assignments, arithmetic operations).
+2. **Count the number of operations:**  Express the number of operations as a function of the input size `n`.
+3. **Identify the dominant term:**  As `n` gets very large, certain terms in the function will dominate.  Keep only the dominant term, ignoring constant factors and lower-order terms.
+4. **Express using Big O notation:**  Use Big O notation to represent the growth rate of the dominant term.
+
+
+**Example:**
+
+Consider a simple function that sums all elements of an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for num in arr:
+    total += num
+  return total
+```
+
+This function iterates through the array once.  The number of additions is directly proportional to the size of the array (`n`).  Therefore, its time complexity is O(n) and its space complexity is O(1) (it uses a constant amount of extra space).
+
+
+**Best, Worst, and Average Case:**
+
+Complexity analysis can also consider best-case, worst-case, and average-case scenarios.
+
+* **Best Case:** The most favorable input scenario.
+* **Worst Case:** The least favorable input scenario.
+* **Average Case:** The expected performance over many different inputs.
+
+Often, the worst-case complexity is the most important to consider, as it provides an upper bound on the algorithm's performance.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower time and space complexity will generally perform better.
+
