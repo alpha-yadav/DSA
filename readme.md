@@ -1833,3 +1833,105 @@ postorder_traversal(root) # Output: D E B F C A
 
 **Iterative Approaches:**  For iterative versions, you typically use a stack to mimic the recursion.  This avoids potential stack overflow problems with very deep trees.  The iterative implementations are slightly more complex but are generally preferred for production code.  You can find many examples online by searching for "iterative inorder traversal," "iterative preorder traversal," and "iterative postorder traversal."
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes at a given level before moving to the next level.  Here are implementations in Python and C++, demonstrating different approaches:
+
+
+**Python Implementation (using `collections.deque`)**
+
+This implementation uses a deque (double-ended queue) from Python's `collections` module for efficient enqueue and dequeue operations.  This is generally the preferred method in Python for BFS.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+
+**C++ Implementation (using `queue`)**
+
+This C++ implementation uses the standard `queue` data structure.
+
+```cpp
+#include <iostream>
+#include <queue>
+
+struct Node {
+    int data;
+    Node *left, *right;
+    Node(int data) {
+        this->data = data;
+        left = right = nullptr;
+    }
+};
+
+void levelOrder(Node* root) {
+    if (root == nullptr) return;
+
+    std::queue<Node*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Node* curr = q.front();
+        q.pop();
+        std::cout << curr->data << " ";
+
+        if (curr->left != nullptr) q.push(curr->left);
+        if (curr->right != nullptr) q.push(curr->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+
+    std::cout << "Level Order traversal of binary tree is -\n";
+    levelOrder(root); // Output: 1 2 3 4 5
+
+    //Remember to deallocate memory (important in C++)
+    // ... (Code to delete nodes to prevent memory leaks) ...
+
+    return 0;
+}
+```
+
+**Key Differences and Considerations:**
+
+* **Queue Data Structure:** Both implementations rely on a queue to maintain the order of nodes to be visited.  Python's `deque` is generally more efficient for this purpose than a standard list.
+* **Memory Management:**  The C++ code explicitly allocates memory using `new` and requires manual deallocation using `delete` to prevent memory leaks.  Python's garbage collector handles memory management automatically.
+* **Error Handling:**  Both implementations include a check for an empty tree (`root is None` or `root == nullptr`).  More robust error handling might be added for production code (e.g., checking for invalid input).
+
+
+Remember to choose the implementation that best suits your needs and programming language preference.  The Python version is concise and easier to read, while the C++ version gives you more control over memory management but requires more careful handling.  For very large trees, consider optimizations like using more sophisticated queue implementations.
+
