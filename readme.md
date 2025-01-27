@@ -2062,3 +2062,106 @@ int main() {
 }
 ```  You should add proper memory deallocation (using a recursive function or an iterative approach) to prevent memory leaks in a real-world application.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants (where we allow a node to be a descendant of itself).  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This is a straightforward recursive solution.  We traverse the tree. If a node is one of the target nodes, we return it. If the target nodes are in different subtrees, we've found the LCA (the current node). If both are in the same subtree, we recursively search that subtree.
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(root, p, q):
+       if not root or root == p or root == q:
+           return root
+
+       left = lowestCommonAncestor(root.left, p, q)
+       right = lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+
+   # Example Usage:
+   root = TreeNode(3)
+   root.left = TreeNode(5)
+   root.right = TreeNode(1)
+   root.left.left = TreeNode(6)
+   root.left.right = TreeNode(2)
+   root.right.left = TreeNode(0)
+   root.right.right = TreeNode(8)
+   p = root.left  # Node with value 5
+   q = root.right # Node with value 1
+
+   lca = lowestCommonAncestor(root, p, q)
+   print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, we visit all nodes.
+   * **Space Complexity:** O(H), where H is the height of the tree.  This is due to the recursive call stack.  In the worst case (a skewed tree), H can be N.
+
+
+2. **Iterative Approach (Using a Stack):**
+
+   This approach avoids recursion by using a stack to simulate the recursive calls.  It's functionally equivalent to the recursive method but can be slightly more efficient in some cases by avoiding function call overhead.
+
+   ```python
+   def lowestCommonAncestorIterative(root, p, q):
+       stack = [root]
+       parent = {root: None}  # Keep track of parent nodes
+
+       while p not in parent or q not in parent:
+           node = stack.pop()
+           if node.left:
+               parent[node.left] = node
+               stack.append(node.left)
+           if node.right:
+               parent[node.right] = node
+               stack.append(node.right)
+
+       ancestors = set()
+       while p:
+           ancestors.add(p)
+           p = parent[p]
+
+       while q:
+           if q in ancestors:
+               return q
+           q = parent[q]
+
+       return None #Should not reach here if p and q are in the tree
+
+   ```
+
+   * **Time Complexity:** O(N)
+   * **Space Complexity:** O(N) in the worst case (a skewed tree).
+
+
+3. **Using Parent Pointers (If Available):**
+
+   If the tree nodes already have parent pointers (a parent attribute), you can solve this more efficiently.  You can trace upwards from each node until you find a common ancestor.
+
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(1)
+
+
+**Choosing the Right Method:**
+
+* The **recursive approach** is generally the easiest to understand and implement.
+* The **iterative approach** can be slightly more efficient in terms of constant factors but is more complex to implement.
+* The **parent pointer method** is the most efficient if parent pointers are already available.  However, it requires modification of the tree structure.
+
+
+Remember to handle edge cases, such as when one or both nodes are not present in the tree, or when one node is the ancestor of the other.  The provided code snippets include basic error handling but could be made more robust.
+
