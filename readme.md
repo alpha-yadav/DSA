@@ -2165,3 +2165,98 @@ The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest nod
 
 Remember to handle edge cases, such as when one or both nodes are not present in the tree, or when one node is the ancestor of the other.  The provided code snippets include basic error handling but could be made more robust.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (or graph) is a fundamental problem in computer science.  The optimal approach depends on the type of tree (binary tree, general tree) and whether you have parent pointers or only child pointers.
+
+Here are common approaches:
+
+**1.  Binary Tree with Parent Pointers:**
+
+This is the simplest scenario.  If each node has a pointer to its parent, you can traverse upwards from each node until you find a common ancestor.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent_pointers(node1, node2):
+    ancestors1 = set()
+    current = node1
+    while current:
+        ancestors1.add(current)
+        current = current.parent
+
+    current = node2
+    while current:
+        if current in ancestors1:
+            return current
+        current = current.parent
+
+    return None  # No common ancestor (shouldn't happen in a proper tree)
+
+
+# Example usage (assuming you have a binary tree with parent pointers set up):
+# root = ...  # Your root node
+# node1 = ... # A node in the tree
+# node2 = ... # Another node in the tree
+# lca = lca_with_parent_pointers(node1, node2)
+# print(f"LCA of {node1.data} and {node2.data}: {lca.data}")
+
+```
+
+
+**2. Binary Tree without Parent Pointers:**
+
+This requires a recursive approach.  The idea is to search for both nodes in the left and right subtrees.  If both are found in different subtrees, the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_without_parent_pointers(root, node1, node2):
+    if not root or root == node1 or root == node2:
+        return root
+
+    left_lca = lca_without_parent_pointers(root.left, node1, node2)
+    right_lca = lca_without_parent_pointers(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example Usage:
+# root = ... #Your root node
+# node1 = ... # A node in the tree
+# node2 = ... # Another node in the tree
+# lca = lca_without_parent_pointers(root, node1, node2)
+# print(f"LCA of {node1.data} and {node2.data}: {lca.data if lca else 'Not Found'}")
+
+```
+
+**3. General Tree (with or without parent pointers):**
+
+For general trees (where a node can have more than two children), the approach is similar to the binary tree without parent pointers, but you need to iterate through all children.  Parent pointers can simplify this as well, using a similar method to the first example but adapting to multiple children.
+
+
+**4.  Optimization Considerations:**
+
+* **Path-based approach:** For very large trees,  building paths from the root to each node and then finding the longest common prefix of these paths can be efficient.
+
+* **Hashing:**  You can use hashing to store paths more efficiently.
+
+**Important Notes:**
+
+* **Error Handling:**  The code examples above assume the nodes `node1` and `node2` actually exist in the tree. You should add error handling to deal with cases where one or both nodes are not found.
+* **Duplicate Nodes:** If the tree allows duplicate node values, the LCA might not be uniquely defined.  The algorithms above will return *one* LCA.
+* **Efficiency:**  The recursive approach for binary trees has a time complexity of O(N) in the worst case (where N is the number of nodes), while the iterative approach with parent pointers is O(H), where H is the height of the tree.
+
+
+Remember to choose the algorithm that best suits the structure of your tree and the available information (parent pointers or not).  Consider the trade-offs between code complexity and performance for your specific application.
+
