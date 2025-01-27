@@ -132,3 +132,69 @@ Remember to consider:
 
 These are crucial aspects of algorithm design and analysis.  Choose a problem that matches your current skill level and work through it, focusing on both correctness and efficiency.  There are many resources online (like LeetCode, HackerRank, etc.) with solutions and discussions for these types of problems.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple, straightforward approach and then progressing to more advanced techniques:
+
+**Method 1: Basic Approach (Most Readable)**
+
+This approach uses a simple `for` loop and `if/else if/else` statements. It's easy to understand and a great starting point.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+**Method 2: Slightly More Concise (Using Ternary Operator)**
+
+This version uses the ternary operator (`condition ? value1 : value2`) to make the code a bit more compact, but it might be slightly less readable for beginners.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function
+```
+
+
+**Method 3:  Functional Approach (Using `map` and a closure)**
+
+This method uses a functional programming style with the `map` function. It's more advanced but demonstrates a different way of thinking about the problem.
+
+```swift
+func fizzBuzzFunctional(n: Int) {
+    (1...n).map { i in
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzFunctional(n: 15) // Call the function
+```
+
+**Explanation of the Code:**
+
+* **`%` (Modulo Operator):** This operator returns the remainder of a division.  For example, `10 % 3` is 1 because 10 divided by 3 is 3 with a remainder of 1.
+* **`if/else if/else`:**  This is a conditional statement that executes different blocks of code based on different conditions.
+* **Ternary Operator (`condition ? value1 : value2`):**  This is a shorthand way to write a simple `if/else` statement.  If the `condition` is true, it returns `value1`; otherwise, it returns `value2`.
+* **`map`:** This higher-order function applies a given closure to each element of a sequence (in this case, the numbers 1 through `n`) and returns a new array containing the results.  We use it here to process each number individually and print the output.
+
+
+Remember to choose the method that best suits your understanding and the context of your project. The first method is the most beginner-friendly, while the others showcase more advanced Swift techniques.  They all achieve the same result: printing the FizzBuzz sequence.
+
