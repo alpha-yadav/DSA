@@ -3111,3 +3111,80 @@ Find all reachable nodes from a starting node in a graph using BFS.
 
 These examples demonstrate a range of difficulty and common algorithmic techniques.  Remember to consider time and space complexity when designing your solutions.  You can find many more algorithmic problems on platforms like LeetCode, HackerRank, and Codewars.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then progressing to more robust approaches:
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This is straightforward and easy to understand.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5.
+
+**Version 2: Slightly More Efficient**
+
+This version uses a single `if` statement with a ternary operator for slightly better readability and potentially minor performance improvement (though the difference is negligible for small `n`):
+
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzEfficient(n: 15) // Example usage
+```
+
+This version builds the output string conditionally. If the string is empty after checking for divisibility by 3 and 5, it prints the number itself.
+
+
+**Version 3: Using a Function for better readability (and potential extensibility)**
+
+This approach separates the FizzBuzz logic into its own function for cleaner code and easier testing:
+
+
+```swift
+func fizzBuzzString(number: Int) -> String {
+    var result = ""
+    if number % 3 == 0 { result += "Fizz" }
+    if number % 5 == 0 { result += "Buzz" }
+    return result.isEmpty ? String(number) : result
+}
+
+
+func fizzBuzzFunction(n: Int){
+    for i in 1...n {
+        print(fizzBuzzString(number: i))
+    }
+}
+
+fizzBuzzFunction(n: 15)
+```
+
+This version is more modular and makes it easier to modify or extend the logic (e.g., adding "Bang" for multiples of 7).
+
+**Choosing the Best Version:**
+
+For a simple FizzBuzz implementation, Version 1 or 2 is perfectly adequate. Version 3 is preferable if you want more organized, testable, and easily expandable code, especially for more complex variations of the problem.  The performance differences between these versions are negligible for typical input values.  Choose the version that best suits your understanding and coding style. Remember to always prioritize readability and maintainability.
+
