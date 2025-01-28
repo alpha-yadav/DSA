@@ -3188,3 +3188,67 @@ This version is more modular and makes it easier to modify or extend the logic (
 
 For a simple FizzBuzz implementation, Version 1 or 2 is perfectly adequate. Version 3 is preferable if you want more organized, testable, and easily expandable code, especially for more complex variations of the problem.  The performance differences between these versions are negligible for typical input values.  Choose the version that best suits your understanding and coding style. Remember to always prioritize readability and maintainability.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm requires to solve a problem as a function of the input size.  It's crucial for understanding how an algorithm's performance scales as the input grows larger.  We generally express complexity using Big O notation.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:**  Measures how the runtime of an algorithm grows with the input size.  This is often the most important aspect.
+* **Space Complexity:** Measures how much memory (or storage) an algorithm requires as the input size grows.
+
+**Big O Notation:**
+
+Big O notation provides an upper bound on the growth rate of an algorithm's resource usage.  It simplifies the analysis by focusing on the dominant terms as the input size approaches infinity.  We ignore constant factors and lower-order terms because they become insignificant as the input size grows large.
+
+Here are some common Big O complexities:
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating through the input data.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  This is very inefficient for large inputs.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:**  The runtime grows factorially with the input size.  Extremely inefficient for even moderately sized inputs.  Example: Generating all permutations of a set.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the runtime.
+2. **Express the number of operations as a function of the input size (n):** This might involve counting loop iterations, recursive calls, or other operations.
+3. **Use Big O notation to express the dominant term:** Simplify the function, ignoring constant factors and lower-order terms.
+
+**Example:**
+
+Consider a simple function that sums all elements in an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for num in arr:
+    total += num
+  return total
+```
+
+This algorithm iterates through the array once.  The number of additions is directly proportional to the size of the array (n).  Therefore, the time complexity is O(n).
+
+
+**Best-Case, Worst-Case, and Average-Case Complexity:**
+
+For some algorithms, the runtime can vary depending on the input data.  We might consider:
+
+* **Best-case:** The most favorable input scenario.
+* **Worst-case:** The least favorable input scenario.
+* **Average-case:** The expected runtime over all possible inputs.
+
+Often, the worst-case complexity is the most important to consider, as it provides a guarantee on the algorithm's performance.
+
+
+**Space Complexity:**
+
+Space complexity is analyzed similarly to time complexity.  It considers the amount of extra memory used by the algorithm, excluding the input data itself.  The same Big O notation applies.  For example, an algorithm that uses a temporary array of size n would have a space complexity of O(n).
+
+
+Understanding algorithm complexity is essential for choosing the right algorithm for a given task and predicting its performance for different input sizes.  It helps in optimizing code and avoiding performance bottlenecks.
+
