@@ -4702,3 +4702,98 @@ This improved implementation includes:
 
 Remember that the efficiency of BST operations (insertion, search, deletion) depends on the balance of the tree.  In the worst case (a skewed tree), they can be O(n), but in the average and best cases (a balanced tree), they are O(log n).  For guaranteed O(log n) performance, consider using self-balancing BSTs like AVL trees or red-black trees.
 
+#  Check if a tree is BST or not 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.  We perform an in-order traversal and keep track of the previously visited node.  If the current node's value is less than the previous node's value, it's not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, prev):
+    # Empty tree is BST
+    if node is None:
+        return True
+
+    # Check left subtree
+    if not isBSTUtil(node.left, prev):
+        return False
+
+    # Check current node
+    if prev is not None and node.data <= prev.data:
+        return False
+
+    prev = node  # Update prev to current node
+    return isBSTUtil(node.right, prev)  # Check right subtree
+
+def isBST(root):
+    prev = None
+    return isBSTUtil(root, prev)
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+if isBST(root):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(20)
+
+
+if isBST(root2):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each subtree, passing along the minimum and maximum allowed values for that subtree.  A node is valid if its value is within the allowed range, and its left and right subtrees are also valid within their respective ranges.
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, min_val, max_val):
+    # Empty tree is BST
+    if node is None:
+        return True
+
+    # Check if node's data is within the allowed range
+    if not (min_val < node.data < max_val):
+        return False
+
+    # Check left and right subtrees recursively
+    return (isBSTUtil(node.left, min_val, node.data) and
+            isBSTUtil(node.right, node.data, max_val))
+
+def isBST(root):
+    return isBSTUtil(root, float('-inf'), float('inf'))
+
+#Example Usage (same as above,  you can copy and paste the example from method 1 and run it with this isBST function)
+
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the worst case due to the recursive call stack, where H is the height of the tree (O(N) for a skewed tree, O(log N) for a balanced tree).  The first method generally uses slightly less space because it only tracks one previous node.  Choose the method you find more readable and easier to understand. Remember to define the `Node` class before using either function.
+
