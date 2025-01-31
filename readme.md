@@ -3473,3 +3473,59 @@ Separating the divisibility check into its own function makes the main `fizzBuzz
 
 The "Improved FizzBuzz" or "FizzBuzz with a Function" versions are generally preferred for their readability and efficiency.  The basic version is perfectly acceptable for demonstrating understanding of the core concept, but the others are better for production code or more complex scenarios.  Remember to choose the approach that best suits your needs and coding style while keeping readability and maintainability in mind.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources of primary interest are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We usually express complexity using **Big O notation**, which describes the growth rate of the complexity as the input size grows infinitely large.  It focuses on the dominant terms and ignores constant factors.
+
+Here's a breakdown:
+
+**Common Time Complexities (from best to worst):**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is typically seen in algorithms that divide the problem size in half at each step (e.g., binary search).
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases proportionally to the square of the input size.  This is often seen in nested loops where the inner loop iterates through the entire input for each element in the outer loop (e.g., bubble sort, selection sort).
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  These algorithms are generally impractical for large inputs (e.g., finding all subsets of a set).
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  These algorithms are extremely slow for even moderately sized inputs (e.g., traveling salesman problem using brute force).
+
+
+**Space Complexity:**
+
+Space complexity follows a similar notation to time complexity.  It describes how much memory an algorithm uses.  Common space complexities include:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The memory used increases linearly with the input size.  Example: Storing an array of the input elements.
+
+* **O(log n) - Logarithmic Space:** The memory used increases logarithmically with the input size (e.g., recursive algorithms with logarithmic depth).
+
+* **O(n²) - Quadratic Space:** The memory used increases proportionally to the square of the input size.
+
+**Factors Affecting Complexity:**
+
+* **Algorithm design:** Different algorithms solving the same problem can have vastly different complexities.
+* **Input data:** The complexity can vary depending on the characteristics of the input data (e.g., already sorted data can make some algorithms faster).
+* **Hardware and software:** The actual execution time can be influenced by factors like processor speed and programming language.
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing algorithm complexity often involves:
+
+1. **Best-case, average-case, and worst-case scenarios:**  The complexity can differ depending on the input data.  Worst-case is usually the most important.
+2. **Asymptotic analysis:** Focusing on the growth rate as the input size approaches infinity.
+3. **Counting operations:** Analyzing the number of basic operations (comparisons, assignments, etc.) performed by the algorithm.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance for different input sizes.  It helps in making informed decisions about which algorithm is best suited for a particular task and avoiding performance bottlenecks in applications.
+
