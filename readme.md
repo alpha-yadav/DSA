@@ -4797,3 +4797,122 @@ def isBST(root):
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the worst case due to the recursive call stack, where H is the height of the tree (O(N) for a skewed tree, O(log N) for a balanced tree).  The first method generally uses slightly less space because it only tracks one previous node.  Choose the method you find more readable and easier to understand. Remember to define the `Node` class before using either function.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.  We perform an in-order traversal and keep track of the previously visited node.  If the current node's value is less than the previous node's value, it's not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, prev):
+    # traverse the tree in inorder fashion and
+    # keep track of the previous node
+    if node is not None:
+        if not isBSTUtil(node.left, prev):
+            return False
+
+        # Allows duplicate values only if there is no right child
+        if prev is not None and node.data <= prev.data:
+            return False
+
+        prev = node
+        return isBSTUtil(node.right, prev)
+
+    return True
+
+
+def isBST(root):
+    prev = None
+    return isBSTUtil(root, prev)
+
+
+# Example usage
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+if isBST(root):
+    print("Is BST")
+else:
+    print("Not a BST")  # Output: Not a BST
+
+
+root2 = Node(2)
+root2.left = Node(1)
+root2.right = Node(3)
+
+if isBST(root2):
+    print("Is BST") # Output: Is BST
+else:
+    print("Not a BST")
+
+root3 = Node(5)
+root3.left = Node(2)
+root3.right = Node(8)
+root3.left.left = Node(1)
+root3.left.right = Node(4)
+root3.right.left = Node(7)
+root3.right.right = Node(10)
+
+if isBST(root3):
+    print("Is BST") # Output: Is BST
+else:
+    print("Not a BST")
+```
+
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each subtree.  For each node, we pass down the minimum and maximum allowed values for that subtree.  If a node's value is outside this range, it's not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, minVal, maxVal):
+    # an empty tree is BST
+    if node is None:
+        return True
+
+    # false if this node violates the min/max constraint
+    if node.data < minVal or node.data > maxVal:
+        return False
+
+    # otherwise check the subtrees recursively
+    # tightening the min/max constraints
+    return (isBSTUtil(node.left, minVal, node.data -1) and
+            isBSTUtil(node.right, node.data + 1, maxVal))
+
+
+def isBST(node):
+    return isBSTUtil(node, float('-inf'), float('inf'))
+
+#Example usage (same as above, will produce the same output)
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+if isBST(root):
+    print("Is BST")
+else:
+    print("Not a BST") 
+```
+
+**Choosing a Method:**
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) in the average case for both (H is the height of the tree), and O(N) in the worst case (for a skewed tree).  The recursive min/max method might be slightly easier to understand conceptually, while the in-order traversal is often considered more efficient in practice due to less overhead.  Choose the method that best suits your needs and understanding.  Remember to handle edge cases like empty trees appropriately.
+
