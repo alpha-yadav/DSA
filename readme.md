@@ -5926,3 +5926,43 @@ else:
 
 This implementation efficiently detects cycles in directed graphs using DFS.  The use of `recStack` is crucial for identifying cycles; simply using `visited` alone won't detect cycles that are not strongly connected components.  The `recStack` array keeps track of nodes currently on the recursion path, allowing us to immediately identify a back edge (an edge that points to an ancestor in the DFS tree), indicating a cycle.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focused on efficient graph algorithms.  The most well-known among these is his algorithm for finding **single-source shortest paths (SSSP)** in undirected graphs with non-negative weights.  It achieves near-linear time complexity, a significant improvement over Dijkstra's algorithm in certain scenarios.
+
+Here's a breakdown of key aspects:
+
+**Key Features and Improvements over Dijkstra's Algorithm:**
+
+* **Near-linear time complexity:** While Dijkstra's algorithm has a time complexity of O(E log V) using a priority queue (where E is the number of edges and V is the number of vertices), Thorup's algorithm achieves a time complexity very close to O(m + n log log n), where m is the number of edges and n is the number of vertices.  This is significantly faster for sparse graphs (where m is much smaller than n²).  The exact complexity often depends on specific implementation details and assumptions about the word size of the machine.
+
+* **Randomization:** Thorup's algorithm is randomized. This means it uses random choices during its execution, guaranteeing a correct result with high probability (meaning the probability of failure can be made arbitrarily small).
+
+* **Sophisticated data structures:** The algorithm's near-linear time complexity relies on sophisticated data structures and techniques, some of which are based on advanced probability theory and combinatorial analysis.  These include techniques like:
+    * **Hopsets:**  These are sparse subgraphs that approximate distances in the original graph.
+    * **Hashing:**  Efficient hashing techniques are crucial for fast lookups and data manipulation.
+
+* **Practical Considerations:** While theoretically impressive, the practical performance of Thorup's algorithm can be less efficient than Dijkstra's for small graphs or graphs with specific structures.  The constant factors hidden in the big-O notation can be substantial, and the overhead of the complex data structures may outweigh the benefits for smaller inputs.
+
+**High-Level Idea (Simplified):**
+
+Thorup's algorithm doesn't directly compute shortest paths in the same way as Dijkstra's. Instead, it leverages the following general strategy:
+
+1. **Graph Decomposition/Preprocessing:** The input graph is preprocessed to create a "shortcut" structure or a hierarchical representation that captures important distance information.  This stage often involves randomization and sophisticated data structures.
+
+2. **Approximate Distance Queries:**  The algorithm answers approximate shortest path queries efficiently using the preprocessed structure. This means it may not find the *exact* shortest path but a path close to the optimal length.
+
+3. **Refinement (if needed):**  In some variations, a refinement step might be used to guarantee that the shortest path lengths are indeed accurate.
+
+
+**Other Thorup Algorithms:**
+
+Beyond SSSP, Mikkel Thorup has made significant contributions to other areas of graph algorithms, including:
+
+* **Minimum cut:**  Algorithms for finding minimum cuts in graphs.
+* **Dynamic graph algorithms:** Algorithms that efficiently maintain graph properties under updates (edge insertions/deletions).
+
+
+**In Summary:**
+
+Thorup's algorithm for single-source shortest paths is a remarkable achievement in algorithm design. While the theoretical speedup is impressive, it's crucial to remember the practical considerations and compare its performance against Dijkstra's algorithm for specific applications and graph sizes. The algorithm's complexity and reliance on advanced data structures make it a subject of ongoing research and refinement.
+
