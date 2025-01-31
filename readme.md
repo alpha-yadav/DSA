@@ -3575,3 +3575,42 @@ Big-Theta notation is crucial in algorithm analysis because:
 
 In summary, Big-Theta provides a powerful and precise way to characterize the growth rate of algorithms and functions, offering a more complete understanding of their efficiency than Big-O or Big-Ω alone.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used in computer science to describe the behavior of functions, especially the runtime or space complexity of algorithms, as the input size grows very large.  The most common notations are:
+
+* **Big O (O):**  Represents the *upper bound* of a function's growth.  It describes the worst-case scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.  In simpler terms, f(n) grows no faster than g(n).  Examples: O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ), O(n!), etc.
+
+* **Big Omega (Ω):** Represents the *lower bound* of a function's growth. It describes the best-case scenario (or a lower bound on the growth in any case). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.  In simpler terms, f(n) grows at least as fast as g(n).
+
+* **Big Theta (Θ):** Represents the *tight bound*. It means a function's growth is both bounded above and below by the same function.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).  This signifies that f(n) and g(n) grow at the same rate.
+
+* **Little o (o):** Represents a *strict upper bound*.  f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.  This means f(n) grows strictly slower than g(n).
+
+* **Little omega (ω):** Represents a *strict lower bound*. f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀. This means f(n) grows strictly faster than g(n).
+
+
+**Comparison Table:**
+
+| Notation | Meaning                                      | Example: f(n) = 10n + 5;  g(n) = n       |
+|----------|----------------------------------------------|-------------------------------------------|
+| O(g(n))  | Upper bound (f(n) grows no faster than g(n)) | f(n) = O(n)                               |
+| Ω(g(n))  | Lower bound (f(n) grows at least as fast as g(n)) | f(n) = Ω(n)                               |
+| Θ(g(n))  | Tight bound (f(n) grows at the same rate as g(n)) | f(n) = Θ(n)                               |
+| o(g(n))  | Strict upper bound (f(n) grows strictly slower than g(n)) | f(n) = o(n²)                              |
+| ω(g(n))  | Strict lower bound (f(n) grows strictly faster than g(n)) | f(n) = ω(1)                               |
+
+
+**Hierarchy (from slowest to fastest growing):**
+
+O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³) < ... < O(2ⁿ) < O(n!)
+
+
+**Important Notes:**
+
+* Asymptotic notations only describe the behavior of functions as *n* approaches infinity.  They don't tell us about the actual runtime for small inputs.
+* Constants are often ignored in asymptotic analysis because we're interested in the dominant growth factor.  For instance, O(5n²) is simplified to O(n²).
+* The choice of base for logarithms is irrelevant in asymptotic notation (log₂n, log₁₀n, and ln n are all considered O(log n)).
+
+
+Understanding these notations is crucial for analyzing the efficiency of algorithms and choosing the best solution for a given problem.  They allow for a high-level comparison of algorithms without getting bogged down in implementation details.
+
