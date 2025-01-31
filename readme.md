@@ -5400,3 +5400,95 @@ If you can modify the tree to include parent pointers (each node knows its paren
 
 The recursive approach is generally preferred for its simplicity and clarity unless memory or performance under extreme recursion depth is a critical concern.  The iterative approach with parent pointers is more efficient in terms of time complexity, trading off space complexity. Remember to handle edge cases like `p` or `q` not being in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a more general tree structure) is a classic algorithm problem.  There are several approaches, each with varying time and space complexities.  Here's a breakdown of common methods:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a simple and elegant approach for binary trees.  It leverages the recursive nature of tree traversal.
+
+* **Algorithm:**
+    1. If the current node is `None` (empty subtree), return `None`.
+    2. If the current node is equal to either `node1` or `node2`, return the current node.
+    3. Recursively call the function on the left and right subtrees.
+    4. If both recursive calls return a non-`None` value, the current node is the LCA. Return the current node.
+    5. Otherwise, return the non-`None` result (if any) from the recursive calls.
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, node1, node2):
+    if root is None:
+        return None
+    if root.data == node1.data or root.data == node2.data:
+        return root
+
+    left_lca = lca(root.left, node1, node2)
+    right_lca = lca(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.left.right # Node with data 5
+
+lca_node = lca(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data} is: {lca_node.data}")  # Output: 2
+
+```
+
+* **Time Complexity:** O(N), where N is the number of nodes in the tree (worst-case, traversing the entire tree).
+* **Space Complexity:** O(H), where H is the height of the tree (due to recursive calls on the call stack).  In a balanced tree, H = log₂N; in a skewed tree, H = N.
+
+
+**2. Iterative Approach (using Parent Pointers):**
+
+If each node in the tree has a pointer to its parent, you can solve this iteratively.
+
+* **Algorithm:**
+    1. Traverse up from `node1` and store its ancestors in a set.
+    2. Traverse up from `node2` and check if each ancestor is in the set from step 1.
+    3. The first ancestor of `node2` found in the set is the LCA.
+
+* **This approach is generally more efficient in terms of space complexity if the tree is highly unbalanced.**
+
+
+**3. Lowest Common Ancestor in a General Tree:**
+
+For trees that are not binary (meaning nodes can have more than two children), you can adapt the recursive approach.  Instead of just checking left and right children, you'd iterate through all children.
+
+
+**4.  Using a Lowest Common Ancestor Table (Pre-processing Required):**
+
+This approach involves pre-processing the tree to create a Lowest Common Ancestor table.  Once the table is built, querying the LCA of any two nodes becomes very fast (O(1)).  This is efficient if you need to perform many LCA queries on the same tree.  However, the pre-processing step itself takes time.
+
+
+**Choosing the Right Approach:**
+
+The best approach depends on several factors:
+
+* **Tree type:** Binary tree or general tree?
+* **Presence of parent pointers:** Are parent pointers available in the node structure?
+* **Number of LCA queries:** Will you be performing many LCA queries on the same tree?
+* **Tree balance:** Is the tree balanced or skewed?
+
+
+For most cases, the recursive approach for binary trees is a good starting point due to its simplicity and clarity.  If you have a highly unbalanced tree or need to perform many queries, consider the parent pointer or LCA table methods.  For general trees, adapt the recursive approach as described.
+
