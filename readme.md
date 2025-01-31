@@ -5650,3 +5650,99 @@ Graph theory has numerous applications in diverse fields, including:
 
 This introduction provides a foundational overview of graph theory.  Each of the concepts mentioned above can be explored in much greater depth.  Further study would involve learning about graph algorithms (like Dijkstra's algorithm, breadth-first search, depth-first search), graph properties, and advanced graph structures.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, including different implementations and considerations:
+
+**Concept:**
+
+An adjacency list represents a graph as an array or a dictionary (hash table) where each index (or key) corresponds to a vertex.  At each index, you store a list of its adjacent vertices (neighbors).
+
+**Implementation Options:**
+
+1. **Using an array of lists (Python):**
+
+   ```python
+   def create_adjacency_list(num_vertices, edges):
+       """Creates an adjacency list representation of a graph.
+
+       Args:
+           num_vertices: The number of vertices in the graph.
+           edges: A list of tuples, where each tuple represents an edge (u, v).
+
+       Returns:
+           A list of lists representing the adjacency list.
+       """
+       adjacency_list = [[] for _ in range(num_vertices)]
+       for u, v in edges:
+           adjacency_list[u].append(v)  # Add directed edge from u to v
+           adjacency_list[v].append(u)  # Add directed edge from v to u (for undirected graph)
+       return adjacency_list
+
+   # Example usage:
+   num_vertices = 5
+   edges = [(0, 1), (0, 4), (1, 2), (1, 3), (1, 4), (2, 3), (3, 4)]
+   adjacency_list = create_adjacency_list(num_vertices, edges)
+   print(adjacency_list)  # Output: [[1, 4], [0, 2, 3, 4], [1, 3], [1, 2, 4], [0, 1, 3]]
+
+   ```
+
+2. **Using a dictionary (Python):**  This is often preferred because it handles vertices with non-sequential numbering more easily.
+
+   ```python
+   def create_adjacency_list_dict(edges):
+       """Creates an adjacency list using a dictionary.
+
+       Args:
+           edges: A list of tuples representing edges (u, v).
+
+       Returns:
+           A dictionary representing the adjacency list.
+       """
+       adjacency_list = {}
+       for u, v in edges:
+           adjacency_list.setdefault(u, []).append(v)
+           adjacency_list.setdefault(v, []).append(u)  # For undirected graphs
+       return adjacency_list
+
+   # Example usage:
+   edges = [(0, 1), (0, 4), (1, 2), (1, 3), (1, 4), (2, 3), (3, 4), (5,6)]
+   adjacency_list_dict = create_adjacency_list_dict(edges)
+   print(adjacency_list_dict) # Output: {0: [1, 4], 1: [0, 2, 3, 4], 2: [1, 3], 3: [1, 2, 4], 4: [0, 1, 3], 5: [6], 6: [5]}
+   ```
+
+3. **Other Languages:**  The concepts translate directly to other languages.  In C++, you might use `std::vector<std::vector<int>>` for the array-of-lists approach or `std::map<int, std::vector<int>>` for the dictionary-based approach.  Java would use similar structures (e.g., `ArrayList<ArrayList<Integer>>` or `HashMap<Integer, ArrayList<Integer>>`).
+
+
+**Weighted Graphs:**
+
+For weighted graphs, you need to store the weight along with the adjacent vertex.  You can do this by modifying the adjacency list to store tuples or objects:
+
+```python
+# Using tuples (weight, vertex)
+def create_weighted_adjacency_list(num_vertices, weighted_edges):
+    adjacency_list = [[] for _ in range(num_vertices)]
+    for u, v, weight in weighted_edges:
+        adjacency_list[u].append((weight, v))
+        adjacency_list[v].append((weight, u)) # For undirected weighted graph
+    return adjacency_list
+
+weighted_edges = [(0,1,5),(0,4,9),(1,2,3),(1,3,2),(1,4,7),(2,3,4),(3,4,6)]
+weighted_adjacency_list = create_weighted_adjacency_list(5, weighted_edges)
+print(weighted_adjacency_list)
+
+```
+
+**Space Complexity:**
+
+The space complexity of an adjacency list is O(V + E), where V is the number of vertices and E is the number of edges. This is efficient for sparse graphs because you only store the existing edges.  For dense graphs (many edges), an adjacency matrix might be more space-efficient.
+
+
+**Time Complexity:**
+
+* **Adding an edge:** O(1) on average (for dictionary-based implementation), or O(degree(u)) in the worst case for array-based implementation (where degree(u) is the number of edges connected to vertex u).
+* **Checking for an edge:** O(degree(u))  on average.
+* **Getting neighbors of a vertex:** O(degree(u)).
+
+
+Choosing between an array of lists and a dictionary depends on the specific application and whether vertex indices are sequential or not. Dictionaries provide more flexibility with arbitrary vertex labels.  For large graphs, consider the performance characteristics of your chosen dictionary implementation (hash tables usually offer better average-case performance than tree-based dictionaries).
+
