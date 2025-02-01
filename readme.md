@@ -6252,3 +6252,74 @@ You can return the answer in any order.
 
 The best problem for you depends on your current skill level.  If you're new to algorithms, start with "Two Sum."  If you're more comfortable, try "Reverse a Linked List," and if you're looking for a challenge, try "Longest Palindromic Substring."  Remember to try to solve the problem yourself before looking up solutions – that's the best way to learn!
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's a great way to practice loops and conditional statements. Here's how to implement a simple FizzBuzz algorithm in Swift, along with explanations:
+
+**Version 1: Basic Implementation using a `for` loop**
+
+This version is straightforward and easy to understand:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  The modulo operator (`%`) checks for divisibility.  The order of the `if` statements is important: we check for divisibility by 15 first to handle cases where a number is divisible by both 3 and 5.
+
+**Version 2:  Slightly more concise using a ternary operator**
+
+This version uses the ternary operator (`condition ? value1 : value2`) to make the code slightly more compact, but might be slightly less readable for beginners:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print(i % 15 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+
+**Version 3:  Using String Interpolation and a `where` clause (Swift 5.7 and later)**
+
+This uses Swift's powerful string interpolation and `where` clause for a more elegant solution (available from Swift 5.7 onwards).
+
+
+```swift
+func fizzBuzzElegant(n: Int) {
+  for i in 1...n {
+    var output = ""
+    output += i % 3 == 0 ? "Fizz" : ""
+    output += i % 5 == 0 ? "Buzz" : ""
+    print(output.isEmpty ? "\(i)" : output)
+  }
+}
+
+fizzBuzzElegant(n: 15)
+```
+
+This version builds the output string incrementally, only adding "Fizz" or "Buzz" if the divisibility condition is met.  If `output` remains empty after checking divisibility by 3 and 5, it prints the number itself.
+
+
+**Choosing the best version:**
+
+* For beginners, **Version 1** is the clearest and easiest to understand.
+* **Version 2** is more concise but might be harder to read initially.
+* **Version 3** is the most elegant but requires a slightly more advanced understanding of Swift features.
+
+Remember to choose the version that best suits your understanding and coding style.  The most important thing is that you understand the logic behind the FizzBuzz algorithm.  You can experiment with these different approaches to improve your Swift programming skills.
+
