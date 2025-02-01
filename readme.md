@@ -8124,3 +8124,65 @@ print()
 
 **Important Note:** These recursive implementations are elegant but can lead to stack overflow errors for very deep trees. Iterative approaches using stacks are more memory-efficient for large trees.  You can find iterative versions of these traversals online if needed.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to find the LCA, each with different time and space complexities.  Here are two common approaches:
+
+**1. Recursive Approach (Efficient):**
+
+This approach leverages the recursive nature of a tree traversal.  The core idea is:
+
+* **Base Case:** If the current node is `null`, return `null`. If the current node is either `p` or `q`, return the current node.
+* **Recursive Step:** Recursively check the left and right subtrees.  If both subtrees return non-`null` values, it means `p` and `q` are in different subtrees, and the current node is their LCA.  Otherwise, return the non-`null` result (the LCA is in one of the subtrees).
+
+Here's a Python implementation:
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    else:
+        return right
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val} is: {lca.val}")  # Output: LCA of 5 and 1 is: 3
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, we might traverse the entire tree.
+**Space Complexity:** O(H), where H is the height of the tree. This is due to the recursive call stack.  In the worst case (a skewed tree), H can be equal to N.
+
+
+**2. Iterative Approach (using parent pointers):**
+
+This approach requires modifying the tree to include parent pointers for each node.  Then, we can use two sets to track the ancestors of `p` and `q`. The LCA is the lowest node common to both sets.
+
+This method is less common because it requires modifying the tree structure, which may not always be allowed.  It also adds space complexity to store parent pointers.
+
+**Which Approach to Choose?**
+
+The recursive approach is generally preferred due to its simplicity, elegance, and efficient time complexity without the need to modify the tree structure. The iterative approach with parent pointers might be considered if you already have a tree structure with parent pointers and need to perform many LCA queries.  Otherwise, the recursive method is the more practical choice.
+
