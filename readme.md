@@ -6419,3 +6419,57 @@ Imagine you have two algorithms, A and B.  If the running time of A is Θ(n²) a
 
 Big-Theta notation is essential for comparing the efficiency of different algorithms.  By determining the time or space complexity of an algorithm using Θ notation, we can accurately assess how its resource consumption scales with input size, allowing for informed decisions on algorithm selection and optimization.  It allows us to focus on the dominant factors affecting performance as the input grows large, ignoring minor variations.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used in computer science to describe the performance or complexity of algorithms. They focus on how the runtime or space requirements of an algorithm scale as the input size grows very large, ignoring constant factors and smaller terms.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Example:** If an algorithm has a runtime of 2n² + 5n + 1, we can say its time complexity is O(n²). We ignore the lower-order terms (5n and 1) and the constant factor (2).
+* **Focus:** Worst-case scenario, upper bound.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (or a lower bound on the growth for all inputs). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:**  If an algorithm's runtime is always at least n log n, we say its time complexity is Ω(n log n).
+* **Focus:** Best-case scenario, lower bound.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows at the *same rate* as another function, both from above and below.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is always proportional to n (e.g., 2n + 5), we say its time complexity is Θ(n).
+* **Focus:** Tight bound, precise description of growth.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.
+* **Example:** n = o(n²)  (n grows strictly slower than n²)
+* **Focus:**  Strictly slower growth.
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) (n² grows strictly faster than n)
+* **Focus:** Strictly faster growth.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                     | Example                      |
+|----------|---------------------------------------------|-------------------------------|
+| O(g(n))  | Upper bound                                  | 2n² + 5n + 1 = O(n²)         |
+| Ω(g(n))  | Lower bound                                  | n log n = Ω(n log n)          |
+| Θ(g(n))  | Tight bound                                 | 2n + 5 = Θ(n)                 |
+| o(g(n))  | Strictly slower growth                      | n = o(n²)                     |
+| ω(g(n))  | Strictly faster growth                      | n² = ω(n)                     |
+
+
+**Relationships:**
+
+* If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* If f(n) = o(g(n)), then f(n) = O(g(n)), but not vice versa.
+* If f(n) = ω(g(n)), then f(n) = Ω(g(n)), but not vice versa.
+
+
+These notations are crucial for analyzing algorithms and comparing their efficiency. They provide a high-level view of how runtime and space usage scale with increasing input size, allowing developers to make informed decisions about algorithm selection and optimization.
+
