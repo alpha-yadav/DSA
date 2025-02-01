@@ -8415,3 +8415,144 @@ Graph theory has numerous applications in various fields, including:
 
 This introduction provides a foundation for understanding graph theory.  Further study would delve into more advanced concepts like graph algorithms (e.g., shortest path algorithms, minimum spanning trees), graph coloring, planarity, and more.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and efficient method, particularly when dealing with sparse graphs (graphs with relatively few edges compared to the number of nodes).  Here's a breakdown of how it works, along with different implementation options and considerations:
+
+**The Concept**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each index in the array corresponds to a node in the graph.  The list at that index contains all the nodes that are adjacent (directly connected) to the node represented by the index.
+
+**Implementation Options**
+
+Several data structures can implement the adjacency list:
+
+* **Arrays of Lists (Dynamic Arrays):**  This is a common and straightforward approach.  Each element of the array is a list (e.g., a dynamically sized array like `std::vector` in C++ or `ArrayList` in Java) holding the neighbors of a node.
+
+  * **C++ Example:**
+
+  ```c++
+  #include <iostream>
+  #include <vector>
+  #include <list>
+
+  using namespace std;
+
+  int main() {
+    int numNodes = 5;
+    vector<list<int>> adjList(numNodes); // Adjacency list using vectors of lists
+
+    // Add edges (undirected graph - each edge is added twice)
+    adjList[0].push_back(1);
+    adjList[1].push_back(0);
+    adjList[0].push_back(4);
+    adjList[4].push_back(0);
+    adjList[1].push_back(2);
+    adjList[2].push_back(1);
+    adjList[2].push_back(3);
+    adjList[3].push_back(2);
+    adjList[3].push_back(4);
+    adjList[4].push_back(3);
+
+
+    // Print the adjacency list
+    for (int i = 0; i < numNodes; ++i) {
+      cout << i << ": ";
+      for (int neighbor : adjList[i]) {
+        cout << neighbor << " ";
+      }
+      cout << endl;
+    }
+    return 0;
+  }
+  ```
+
+* **Arrays of Linked Lists:** Similar to arrays of lists, but uses linked lists instead of dynamic arrays. This can be advantageous for graphs where the number of neighbors per node varies greatly, as it avoids resizing operations inherent in dynamic arrays.
+
+* **Hash Tables/Dictionaries:** If node IDs are not consecutive integers, a hash table (or dictionary) can be used to map node IDs to their adjacency lists.  This provides efficient lookup of nodes.
+
+* **Using `std::map` in C++:**  Allows for efficient storage and lookup of edges even with non-sequential node IDs. This would be better than a `vector<vector<int>>` in cases where not every node will have an entry.
+
+  * **C++ Example (using `std::map`):**
+  ```c++
+  #include <iostream>
+  #include <map>
+  #include <vector>
+
+  using namespace std;
+
+  int main() {
+      map<int, vector<int>> adjList;
+
+      // Add edges
+      adjList[0].push_back(1);
+      adjList[0].push_back(4);
+      adjList[1].push_back(0);
+      adjList[1].push_back(2);
+      adjList[2].push_back(1);
+      adjList[2].push_back(3);
+      adjList[3].push_back(2);
+      adjList[3].push_back(4);
+      adjList[4].push_back(0);
+      adjList[4].push_back(3);
+
+      // Print the adjacency list
+      for (auto const& [node, neighbors] : adjList) {
+          cout << node << ": ";
+          for (int neighbor : neighbors) {
+              cout << neighbor << " ";
+          }
+          cout << endl;
+      }
+      return 0;
+  }
+  ```
+
+
+**Directed vs. Undirected Graphs**
+
+* **Undirected Graph:**  An edge between nodes A and B is represented by B in A's adjacency list and A in B's adjacency list. (As seen in the examples above).
+
+* **Directed Graph:**  An edge from A to B is represented only by B being in A's adjacency list.  There's no guarantee of B having A in its list.
+
+
+**Weighted Graphs**
+
+For weighted graphs (where edges have associated weights), you'll need to modify the adjacency list to store the weight along with the neighbor.  You might use pairs or custom structures:
+
+* **C++ Example (Weighted, Undirected):**
+
+```c++
+#include <iostream>
+#include <vector>
+#include <list>
+#include <utility> // for pair
+
+using namespace std;
+
+int main() {
+  int numNodes = 5;
+  vector<list<pair<int, int>>> adjList(numNodes); // <neighbor, weight>
+
+  adjList[0].push_back({1, 5});
+  adjList[1].push_back({0, 5});
+  adjList[0].push_back({4, 2});
+  adjList[4].push_back({0, 2});
+  // ...add more edges...
+
+  // Print the adjacency list (weighted)
+  for (int i = 0; i < numNodes; ++i) {
+    cout << i << ": ";
+    for (auto const& edge : adjList[i]) {
+      cout << "(" << edge.first << ", " << edge.second << ") ";
+    }
+    cout << endl;
+  }
+  return 0;
+}
+```
+
+**Space Complexity:**  The space complexity of an adjacency list is O(V + E), where V is the number of vertices (nodes) and E is the number of edges.  This is efficient for sparse graphs.  For dense graphs (many edges), an adjacency matrix might be more space-efficient.
+
+
+Remember to choose the implementation that best suits your specific needs and the characteristics of your graph (sparse vs. dense, directed vs. undirected, weighted vs. unweighted).  The examples above provide a good starting point for building more complex graph implementations.
+
