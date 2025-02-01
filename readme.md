@@ -7834,3 +7834,98 @@ This approach uses a stack to mimic the recursive approach iteratively.  It is g
 
 The recursive approach (`is_bst`) is generally preferred for its clarity and efficiency unless you're dealing with exceptionally large trees where stack overflow is a concern.  The inorder traversal approach is a good alternative if you need to process the sorted values anyway.  The iterative approach is less common but useful in specific situations.  Choose the method that best suits your needs and coding style. Remember to handle edge cases (empty trees) appropriately in your implementation.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit (or "traverse") all the nodes in a binary tree.  There are three primary ways to do this:
+
+* **Inorder Traversal:**  Visit the left subtree, then the root node, then the right subtree.  This results in an ordered sequence of nodes for a Binary Search Tree (BST).
+
+* **Preorder Traversal:** Visit the root node, then the left subtree, then the right subtree.
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root node.
+
+Let's illustrate with a simple example:
+
+```
+     A
+    / \
+   B   C
+  / \
+ D   E
+```
+
+**Traversal Results:**
+
+| Traversal Type | Sequence |
+|---|---|
+| Inorder       | D B E A C |
+| Preorder      | A B D E C |
+| Postorder     | D E B C A |
+
+
+**Code Examples (Python):**
+
+These examples use recursion, which is a natural fit for tree traversals.  Iterative approaches are also possible but generally more complex.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: D B E A C
+print("\nPreorder traversal:")
+preorder_traversal(root) # Output: A B D E C
+print("\nPostorder traversal:")
+postorder_traversal(root) # Output: D E B C A
+```
+
+**Applications:**
+
+The choice of traversal depends on the application:
+
+* **Inorder traversal:**  Crucial for BSTs because it yields a sorted sequence.  Useful when you need the data in sorted order.
+
+* **Preorder traversal:** Often used for creating a copy of the tree or for expressing the tree structure in a prefix notation.
+
+* **Postorder traversal:**  Useful for deleting nodes in a tree or evaluating expressions represented as a tree (postfix notation).
+
+
+**Beyond the Basics:**
+
+* **Level-order traversal (Breadth-First Search):** Visits nodes level by level, from left to right.  Requires a queue data structure.
+
+* **Iterative Traversal:**  These use stacks or queues to avoid recursion, which can be important for very deep trees to prevent stack overflow errors.
+
+* **Morris Traversal:**  A space-optimized inorder traversal that uses threading to avoid using a stack.
+
+
+This expanded explanation should give you a solid understanding of binary tree traversals and their applications. Remember to choose the appropriate traversal based on your specific needs.
+
