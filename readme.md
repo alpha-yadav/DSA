@@ -8186,3 +8186,107 @@ This method is less common because it requires modifying the tree structure, whi
 
 The recursive approach is generally preferred due to its simplicity, elegance, and efficient time complexity without the need to modify the tree structure. The iterative approach with parent pointers might be considered if you already have a tree structure with parent pointers and need to perform many LCA queries.  Otherwise, the recursive method is the more practical choice.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic algorithm problem.  The approach varies slightly depending on the type of tree and whether you have parent pointers or only child pointers.
+
+Here's a breakdown of common approaches:
+
+**1. Using Parent Pointers:**
+
+This is the simplest approach if each node in your tree has a pointer to its parent.
+
+* **Algorithm:**
+    1. Trace upwards from node A towards the root, storing the path in a set (or list).
+    2. Trace upwards from node B towards the root.  For each node visited, check if it's present in the set from step 1.
+    3. The first node found in both sets is the LCA.
+
+* **Python Code (Binary Tree):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+        self.left = None
+        self.right = None
+
+def lca_parent_pointers(node_a, node_b):
+    path_a = set()
+    current = node_a
+    while current:
+        path_a.add(current)
+        current = current.parent
+
+    current = node_b
+    while current:
+        if current in path_a:
+            return current
+        current = current.parent
+
+    return None  # Nodes are not related
+
+
+#Example usage (you'd need to build your tree first)
+# ... (tree construction) ...
+# lca = lca_parent_pointers(node_a, node_b)
+# print(f"LCA: {lca.data}")
+
+```
+
+
+**2. Without Parent Pointers (Binary Tree):**
+
+If you only have child pointers, a recursive approach is common.  This assumes the tree is a binary tree.
+
+* **Algorithm:**
+    1. If `node_a` or `node_b` is `None`, return the other node (or `None` if both are `None`).
+    2. If `node_a` and `node_b` are in the same subtree rooted at `root`, then `root` is the LCA.
+    3. Otherwise, recursively search the left and right subtrees.  If one subtree contains both `node_a` and `node_b`, its root is the LCA; otherwise, the LCA is found in a parent node further up the tree.
+
+
+* **Python Code (Binary Tree):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node_a, node_b):
+    if not root or root == node_a or root == node_b:
+        return root
+
+    left_lca = lca_recursive(root.left, node_a, node_b)
+    right_lca = lca_recursive(root.right, node_a, node_b)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage (you'd need to build your tree first)
+# ... (tree construction) ...
+# lca = lca_recursive(root, node_a, node_b)
+# print(f"LCA: {lca.data}")
+
+```
+
+
+**3.  General Trees (Without Parent Pointers):**
+
+For general trees (where nodes can have more than two children), a slightly more complex approach is needed, often involving depth-first search (DFS) to find paths from the root to each node.  Then, compare paths to find the LCA.
+
+
+**Choosing the Right Approach:**
+
+* If you have parent pointers, the iterative approach with parent pointers is generally more efficient.
+* If you only have child pointers and it's a binary tree, the recursive approach is a common and elegant solution.
+* For general trees without parent pointers, DFS-based path comparison becomes necessary.
+
+
+Remember to handle edge cases, such as when one or both nodes are not in the tree, or when one node is an ancestor of the other.  The provided code examples include basic error handling (`return None`).  You may need to adapt them further based on your specific requirements and how you handle errors in your application.
+
