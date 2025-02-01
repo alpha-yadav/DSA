@@ -6323,3 +6323,66 @@ This version builds the output string incrementally, only adding "Fizz" or "Buzz
 
 Remember to choose the version that best suits your understanding and coding style.  The most important thing is that you understand the logic behind the FizzBuzz algorithm.  You can experiment with these different approaches to improve your Swift programming skills.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The most common resources considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We typically analyze complexity using **Big O notation**, which describes the growth rate of the resource consumption as the input size increases.  Big O notation focuses on the dominant terms and ignores constant factors, providing a high-level understanding of scalability.
+
+Here's a breakdown:
+
+**Time Complexity Examples:**
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a product of linear and logarithmic factors.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Bubble sort, selection sort, nested loops iterating over the same input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**Space Complexity Examples:**
+
+Space complexity analysis is similar, focusing on the amount of extra memory used beyond the input itself.  The same Big O notation applies.
+
+* **O(1) - Constant Space:** The algorithm uses a constant amount of extra memory regardless of the input size.
+
+* **O(n) - Linear Space:** The algorithm uses an amount of extra memory proportional to the input size.  Example: Creating a copy of an array.
+
+* **O(log n) - Logarithmic Space:** The algorithm uses a logarithmic amount of extra memory.  Example: Recursive algorithms with logarithmic depth.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm:
+
+1. **Identify the basic operation:** Determine the operation that contributes most to the runtime (e.g., comparisons in a sorting algorithm).
+
+2. **Count the number of times the basic operation is performed:** Express this count as a function of the input size (n).
+
+3. **Use Big O notation to express the dominant term:** Simplify the function by ignoring constant factors and lower-order terms.
+
+
+**Best, Average, and Worst Case:**
+
+Complexity analysis often distinguishes between:
+
+* **Best-case:** The most favorable input scenario.
+* **Average-case:** The expected runtime over many different inputs.
+* **Worst-case:** The least favorable input scenario.
+
+Worst-case complexity is often the most important, as it provides an upper bound on the runtime.
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms, especially when dealing with large datasets.  An algorithm with poor complexity can become impractically slow as the input size grows.  Choosing algorithms with better complexity can significantly improve performance and scalability.
+
