@@ -6515,3 +6515,61 @@ We *cannot* say f(n) = Ω(n³), because there's no constant c that will satisfy 
 
 **In summary:** Big-Omega notation is a crucial tool for analyzing the efficiency of algorithms, providing a valuable understanding of their minimum resource requirements as the input size increases.  It's often used in conjunction with Big-O to get a complete picture of an algorithm's performance.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of an algorithm's runtime or space requirements as the input size grows.  It focuses on the dominant factors affecting performance as the input gets very large, ignoring constant factors and smaller terms.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases as the input size (n) increases.  This is often the most common use of Big O.
+* **Space Complexity:** How the memory usage of an algorithm increases as the input size (n) increases.  This is less frequently discussed but equally important for large datasets.
+
+**Key Concepts:**
+
+* **Input Size (n):**  This represents the size of the input to the algorithm (e.g., the number of elements in an array, the number of nodes in a graph).
+* **Growth Rate:** How quickly the runtime or space usage increases as 'n' increases. This is the core focus of Big O.  We're not concerned with the exact time or space, but rather how it *scales*.
+* **Upper Bound:** Big O provides an upper bound – it gives a worst-case scenario for the algorithm's performance.  The actual runtime might be better in some cases, but it will never be significantly worse than what Big O predicts.
+* **Asymptotic Analysis:** Big O describes the behavior of the algorithm as the input size approaches infinity.  We are interested in the long-term trend, not the performance for small inputs.
+
+**Common Big O Notations:**
+
+These are listed from best (fastest growth rate) to worst (slowest growth rate):
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** A combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size. Example: Bubble sort, nested loops iterating over the same input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Finding all permutations of a set.
+
+**Example:**
+
+Consider a function that iterates through an array of size `n` and prints each element:
+
+```python
+def print_array(arr):
+  for i in range(len(arr)):
+    print(arr[i])
+```
+
+This function has a time complexity of O(n) because the number of operations (printing) is directly proportional to the size of the array.
+
+**Why Big O Matters:**
+
+* **Algorithm Comparison:** It allows us to compare the efficiency of different algorithms.
+* **Scalability Prediction:**  It helps predict how an algorithm will perform with larger datasets.
+* **Optimization Focus:** It guides optimization efforts by identifying the most performance-critical parts of an algorithm.
+
+
+**Beyond Big O:**
+
+While Big O describes the upper bound, other notations exist:
+
+* **Big Omega (Ω):** Describes the lower bound of an algorithm's runtime.
+* **Big Theta (Θ):** Describes both the upper and lower bounds, providing a tight bound on the runtime.
+
+
+Understanding Big O notation is crucial for any computer scientist or software engineer to write efficient and scalable code.  It provides a standardized way to analyze and compare the performance of algorithms.
+
