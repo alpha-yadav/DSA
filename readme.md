@@ -6643,3 +6643,69 @@ while i < 5:
 
 These examples all demonstrate the fundamental concept of a simple loop:  initialization of a counter variable, a condition to check for loop termination, and an increment or update step within the loop body.  The loop continues to execute until the condition becomes false.  More complex loops might involve nested loops, multiple conditions, or more sophisticated iteration techniques.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times, based on the number of iterations of the outer loop.
+
+Here's a breakdown:
+
+**Structure:**
+
+```java
+for (int i = 0; i < outerLoopIterations; i++) { // Outer loop
+    for (int j = 0; j < innerLoopIterations; j++) { // Inner loop
+        // Code to be executed in the inner loop
+    }
+    // Code to be executed after each inner loop completes
+}
+// Code to be executed after the outer loop completes
+```
+
+This could also be implemented using `while` loops:
+
+```java
+int i = 0;
+while (i < outerLoopIterations) {
+    int j = 0;
+    while (j < innerLoopIterations) {
+        // Code to be executed in the inner loop
+        j++;
+    }
+    i++;
+}
+```
+
+**How it works:**
+
+1. **Outer Loop Initialization:** The outer loop's counter variable (e.g., `i`) is initialized.
+2. **Outer Loop Condition:** The outer loop's condition is checked. If it's true, the loop continues; otherwise, it terminates.
+3. **Inner Loop Execution:** If the outer loop condition is true, the inner loop begins.
+4. **Inner Loop Initialization:** The inner loop's counter variable (e.g., `j`) is initialized.
+5. **Inner Loop Condition:** The inner loop's condition is checked repeatedly.  For each time the inner loop's condition is true, the inner loop body is executed.
+6. **Inner Loop Iteration:** The inner loop's counter variable is updated (e.g., `j++`).
+7. **Inner Loop Termination:** The inner loop terminates when its condition becomes false.
+8. **Outer Loop Iteration:** After the inner loop completes, the outer loop's counter variable is updated (e.g., `i++`).
+9. **Outer Loop Termination:** Steps 2-8 repeat until the outer loop's condition becomes false.
+
+
+**Example (printing a multiplication table):**
+
+```java
+public class NestedLoopExample {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 10; i++) { // Outer loop: rows
+            for (int j = 1; j <= 10; j++) { // Inner loop: columns
+                System.out.print(i * j + "\t"); // Print the product with a tab
+            }
+            System.out.println(); // New line after each row
+        }
+    }
+}
+```
+
+This code will print a 10x10 multiplication table. The outer loop iterates through the rows, and the inner loop iterates through the columns for each row.
+
+
+**Time Complexity:**
+
+Nested loops significantly increase the time complexity of an algorithm.  If the outer loop runs `m` times and the inner loop runs `n` times for each iteration of the outer loop, the total number of iterations is `m * n`.  This means the time complexity is often O(m*n), which can be quite significant for large values of `m` and `n`.  It's crucial to consider this when designing algorithms to avoid excessive runtime.
+
