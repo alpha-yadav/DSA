@@ -6709,3 +6709,34 @@ This code will print a 10x10 multiplication table. The outer loop iterates throu
 
 Nested loops significantly increase the time complexity of an algorithm.  If the outer loop runs `m` times and the inner loop runs `n` times for each iteration of the outer loop, the total number of iterations is `m * n`.  This means the time complexity is often O(m*n), which can be quite significant for large values of `m` and `n`.  It's crucial to consider this when designing algorithms to avoid excessive runtime.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to reduce the problem size by a constant factor with each step.  This typically involves dividing the problem into smaller subproblems, discarding a portion, and recursively processing the remainder.  Here are some common types of O(log n) algorithms:
+
+**1. Binary Search:**
+
+* **Mechanism:**  This is the quintessential O(log n) algorithm. It works on a sorted array (or other sorted data structure) by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.
+* **Example:** Finding a specific name in a phone book.
+
+**2. Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**
+
+* **Mechanism:**  Balanced binary search trees (like AVL trees or red-black trees) maintain a logarithmic height.  Operations that traverse the tree (searching, insertion, deletion) take O(log n) time because the height of the tree is proportional to log₂(n), where n is the number of nodes.
+* **Example:**  Efficiently storing and retrieving data in a database system.
+
+**3. Efficient exponentiation (e.g., using exponentiation by squaring):**
+
+* **Mechanism:**  This technique calculates a<sup>b</sup>  in O(log b) time by repeatedly squaring the base and adjusting the exponent.  For example, calculating 2<sup>10</sup> can be done by calculating (2<sup>5</sup>)<sup>2</sup>, and 2<sup>5</sup> can be calculated as (2<sup>2</sup>)<sup>2</sup> * 2.
+* **Example:** Cryptographic algorithms often use efficient exponentiation.
+
+**4. Certain divide and conquer algorithms:**
+
+* **Mechanism:** Some divide-and-conquer algorithms that successfully reduce the problem size by a constant factor at each step achieve logarithmic time complexity.  However, many divide-and-conquer algorithms are not O(log n);  their complexity depends on the specific problem and the way it is divided.
+* **Example:**  A carefully designed algorithm to find the kth smallest element in an unsorted array (using techniques like QuickSelect, though worst-case time complexity can be O(n)).
+
+**5. Logarithmic Time Sorting Algorithms (in some specific cases):**
+
+* **Mechanism:**  While the typical comparison-based sorting algorithms have a lower bound of O(n log n), some algorithms can achieve O(log n) time complexity *for specific tasks* within a larger sorting process, or if they make assumptions about the input data.  They often involve preprocessing or special data structures.
+* **Example:**  Radix Sort can achieve linear time (O(n)) and thus is faster than O(n log n) algorithms, but it's not technically O(log n).
+
+
+**Important Note:** The "n" in O(log n) refers to the size of the input data. The base of the logarithm (usually base 2) is often omitted because the change of base is only a constant factor, which is ignored in Big O notation.  Also, remember that O(log n) only describes the *asymptotic* behavior of the algorithm as the input size grows very large.  For small input sizes, the actual runtime might not reflect the logarithmic trend.
+
