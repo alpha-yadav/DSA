@@ -18838,3 +18838,49 @@ Analyzing the complexity of an algorithm usually involves:
 
 Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better than one with a higher complexity.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the *tight bound* of a function's growth rate.  This means it provides both an upper and lower bound that are asymptotically proportional to the function.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be in Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+   `c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.  *g(n)* represents the dominant term determining the growth rate of *f(n)*.
+
+**What it means:**
+
+* **Tight Bound:** Unlike Big-O notation (which only provides an upper bound) and Big-Ω notation (which only provides a lower bound), Big-Theta provides a tight bound. It says that the function grows *at the same rate* as the given function.
+* **Asymptotic Behavior:**  Big-Theta is concerned with the behavior of the function as *n* approaches infinity.  It ignores constant factors and lower-order terms.
+* **Growth Rate:** It's primarily used to analyze the time or space complexity of algorithms.  It allows us to compare the efficiency of different algorithms regardless of specific hardware or implementation details.
+
+**Example:**
+
+Let's say we have a function:
+
+`f(n) = 2n² + 5n + 3`
+
+We can say that:
+
+`f(n) ∈ Θ(n²)`
+
+This is because we can find constants:
+
+* `c₁ = 1`
+* `c₂ = 3`
+* `n₀ = 1`
+
+such that for all `n ≥ 1`:
+
+`1 * n² ≤ 2n² + 5n + 3 ≤ 3 * n²`
+
+We can see that as *n* grows larger, the `n²` term dominates the function, and the constant factors and lower-order terms become insignificant.
+
+**Relationship to Big-O and Big-Ω:**
+
+* If `f(n) ∈ Θ(g(n))`, then `f(n) ∈ O(g(n))` (Big-O upper bound) and `f(n) ∈ Ω(g(n))` (Big-Ω lower bound).
+* However, the reverse is not always true.  A function can be in O(g(n)) or Ω(g(n)) without being in Θ(g(n)).  Θ implies a tighter relationship.
+
+**In summary:** Big-Theta notation precisely characterizes the growth rate of a function, providing a crucial tool for analyzing algorithm efficiency and comparing the performance of different approaches.  It's a powerful concept for understanding the scalability and resource requirements of computer programs.
+
