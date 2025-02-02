@@ -10391,3 +10391,61 @@ To run this code:
 
 Remember to choose the version that best suits your understanding and coding style. The simple version is easier to read for beginners, while the concise version demonstrates a more advanced technique.  Both achieve the same result.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long it takes to run) and space (how much memory it needs).  We usually analyze complexity in terms of the *input size*, denoted by 'n'.  Instead of giving exact runtimes (which depend on factors like hardware), we focus on how the runtime/memory usage *scales* with increasing input size.  This is expressed using Big O notation.
+
+**Big O Notation:**
+
+Big O notation describes the upper bound of an algorithm's growth rate. It simplifies the analysis by focusing on the dominant terms as the input size becomes very large, ignoring constant factors and lower-order terms.  Common complexities, from best to worst, include:
+
+* **O(1) - Constant Time:** The algorithm's runtime remains the same regardless of the input size.  Examples include accessing an element in an array by index or performing a single arithmetic operation.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient.  Examples include binary search in a sorted array or finding an element in a balanced binary search tree.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Examples include searching an unsorted array for a specific element or iterating through a list once.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  This is typically the best achievable runtime for comparison-based sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  This becomes slow quickly as the input size grows.  Examples include nested loops iterating over the entire input twice (e.g., bubble sort, selection sort).
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  These algorithms are computationally expensive and become impractical for even moderately sized inputs.  Examples include finding all subsets of a set or the traveling salesperson problem (using brute force).
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  This is extremely slow and only feasible for very small inputs.  Examples include finding all permutations of a set.
+
+
+**Space Complexity:**
+
+Space complexity measures the amount of memory an algorithm uses as a function of the input size.  It's analyzed similarly using Big O notation.  Examples include:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The memory usage increases linearly with the input size (e.g., storing the input in an array).
+
+* **O(log n) - Logarithmic Space:** The memory usage increases logarithmically with the input size (e.g., using recursion with a logarithmic depth).
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing complexity typically involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most to the runtime.
+
+2. **Counting the operations:** Express the number of operations as a function of the input size 'n'.
+
+3. **Using Big O notation:** Simplify the function by ignoring constant factors and lower-order terms to obtain the Big O complexity.
+
+**Example:**
+
+Consider a function that iterates through an array of size 'n' and prints each element:
+
+```python
+def print_array(arr):
+  for element in arr:
+    print(element)
+```
+
+The loop iterates 'n' times, so the number of print operations is directly proportional to 'n'.  Therefore, the time complexity is O(n).  The space complexity is O(1) because it doesn't use extra memory proportional to the input size.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance on different input sizes.  It helps to make informed decisions about the best algorithm to use for a given problem.
+
