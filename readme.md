@@ -13362,3 +13362,43 @@ We can also say that f(n) = Ω(n) and even f(n) = Ω(1), but Ω(n²) is a *tight
 
 **In summary:**  Big-Omega notation is crucial for understanding the best-case scenario performance of an algorithm.  While often overshadowed by Big-O, knowing the lower bound is equally important for a complete analysis of an algorithm's efficiency.  It helps avoid overly optimistic assessments of performance.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of the algorithm's runtime or space requirements as the input size grows.  It doesn't describe the exact runtime, but rather how the runtime scales with the input size.  Think of it as a way to classify algorithms based on how efficiently they handle increasingly large inputs.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Worst-Case Scenario:** Big O typically focuses on the worst-case scenario.  It tells you the maximum amount of time or space an algorithm might take, providing a guarantee of performance even under the most unfavorable conditions.
+* **Asymptotic Behavior:** Big O describes the behavior of an algorithm as the input size (often denoted as 'n') approaches infinity.  We're less concerned with the performance on small inputs and more interested in how it scales with very large inputs.
+* **Order of Growth:** It's primarily concerned with the *order* of growth, not the exact constants or lower-order terms.  For example, 2n² + 5n + 10 is still considered O(n²) because the n² term dominates as n becomes large.
+
+**Common Big O Notations and Their Meanings:**
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** A combination of linear and logarithmic.  Often seen in efficient sorting algorithms like merge sort and heapsort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  This can become slow for large inputs.  Example: Nested loops iterating through an array.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  This is extremely inefficient for even moderately large inputs.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime is the factorial of the input size. This is incredibly inefficient and only practical for very small inputs.  Example: Finding all permutations of a set.
+
+
+**Example:**
+
+Let's say we have an algorithm that searches for a specific element in an unsorted array.  The worst-case scenario is that the element is at the very end (or not present at all), requiring us to check every element.  Therefore, the runtime is directly proportional to the input size (n), making it O(n).
+
+
+**Space Complexity:**
+
+Big O can also be used to describe the space complexity of an algorithm, which refers to the amount of memory the algorithm uses as the input size grows.  The same notations (O(1), O(n), O(n²), etc.) apply.
+
+**Important Considerations:**
+
+* **Big O is an upper bound:** It describes the worst-case scenario.  An algorithm might perform better in practice.
+* **It's about scaling:**  Big O is most useful for comparing the scalability of different algorithms as the input size becomes large.
+* **Other notations:**  While Big O is the most common, other notations like Big Omega (Ω) (lower bound) and Big Theta (Θ) (tight bound) provide a more complete picture of an algorithm's complexity.
+
+
+Understanding Big O notation is crucial for choosing efficient algorithms and writing performant code, especially when dealing with large datasets.
+
