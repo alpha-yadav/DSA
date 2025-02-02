@@ -16026,3 +16026,53 @@ This version uses the ternary operator (`condition ? value1 : value2`) to make t
 
 Both versions achieve the same result, but the concise version demonstrates a more advanced style of Swift coding. Choose the version that you find more readable and understandable. Remember to compile and run this code in a Swift environment (like Xcode's playground) to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  This is typically expressed as a function of the input size (often denoted as 'n').  We're primarily interested in how the resource consumption *scales* as the input size grows, rather than the exact amount for a specific input.  The two most common resources considered are:
+
+* **Time complexity:**  How long the algorithm takes to run, usually measured in the number of elementary operations performed.
+* **Space complexity:** How much memory the algorithm needs, usually measured in the number of memory units used.
+
+**Expressing Complexity:**
+
+Complexity is expressed using Big O notation (O), Big Omega notation (Ω), and Big Theta notation (Θ).  These notations describe upper, lower, and tight bounds, respectively:
+
+* **Big O Notation (O):**  Describes the *upper bound* of the algorithm's complexity. It represents the worst-case scenario.  For example, O(n²) means the algorithm's runtime grows no faster than the square of the input size.
+
+* **Big Omega Notation (Ω):** Describes the *lower bound* of the algorithm's complexity. It represents the best-case scenario. For example, Ω(n) means the algorithm's runtime grows at least as fast as the input size.
+
+* **Big Theta Notation (Θ):** Describes the *tight bound* of the algorithm's complexity.  It means the algorithm's growth rate is both upper and lower bounded by the same function. For example, Θ(n log n) means the algorithm's runtime grows proportionally to n log n.
+
+**Common Complexity Classes:**
+
+Algorithms are often categorized based on their time complexity:
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size. Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Bubble sort, selection sort.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Traveling salesman problem (brute-force approach).
+
+
+**Factors Affecting Complexity:**
+
+* **Input size:** The amount of data the algorithm processes.
+* **Algorithm design:** Different algorithms can solve the same problem with vastly different complexities.
+* **Data structures:**  The choice of data structure can significantly impact an algorithm's performance.
+* **Hardware:**  The speed of the processor and memory will affect the actual runtime, but complexity analysis focuses on the scaling behavior.
+
+
+**Analyzing Complexity:**
+
+Complexity analysis involves identifying the dominant operations within an algorithm and determining how many times they are executed as a function of the input size.  This often requires considering best-case, average-case, and worst-case scenarios.  Techniques like recursion trees and recurrence relations are used to analyze recursive algorithms.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task and for optimizing the performance of software applications.  Choosing an algorithm with lower complexity leads to significant performance improvements, especially for large inputs.
+
