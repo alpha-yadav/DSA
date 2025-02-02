@@ -9786,3 +9786,12 @@ The optimal representation depends on factors like:
 
 Often, the child-sibling or list-of-children methods provide a good balance of flexibility and efficiency for many applications.  The array representation shines when dealing with complete n-ary trees where you need fast access to children.  Consider carefully the anticipated use cases before selecting a representation.
 
+#  Introduction 
+Please provide me with context.  An introduction to *what*?  I need more information to write an introduction for you.  For example, tell me:
+
+* **What is the topic?** (e.g., a research paper on climate change, a presentation on marketing strategies, a story about a talking dog)
+* **Who is the audience?** (e.g., academics, potential investors, children)
+* **What is the purpose?** (e.g., to inform, persuade, entertain)
+
+Once I have this information, I can write a compelling introduction.
+
