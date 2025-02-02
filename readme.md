@@ -15907,3 +15907,63 @@ else:
 
 Remember to start slowly, focus on understanding the concepts, and gradually increase the difficulty of the problems you tackle.  Persistence is key!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Find the largest number in an unsorted array.
+
+**Input:** An array of integers.  Example: `[3, 1, 4, 1, 5, 9, 2, 6]`
+
+**Output:** The largest integer in the array.  Example: `9`
+
+**Solution Idea:** Iterate through the array, keeping track of the largest number seen so far.
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:** Return indices of the two numbers such that they add up to `target`.  You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+
+`Output: [0,1]` because `nums[0] + nums[1] == 9`
+
+
+**Solution Idea:**  You could use a brute-force approach (nested loops), but a more efficient solution involves using a hash map (dictionary in Python) to store numbers and their indices.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+`s = "babad"`
+
+`Output: "bab" or "aba"` (both are valid answers)
+
+
+**Solution Idea:**  This problem has several approaches, including dynamic programming or expanding around the center of potential palindromes.  Efficient solutions are crucial because brute force approaches become very slow for larger strings.
+
+
+**More challenging problems often involve:**
+
+* **Graph Algorithms:**  Shortest path, minimum spanning tree, etc.
+* **Dynamic Programming:**  Optimizing solutions to overlapping subproblems.
+* **Greedy Algorithms:**  Making locally optimal choices to find a global optimum (often, but not always).
+* **Divide and Conquer:**  Breaking down a problem into smaller subproblems.
+
+
+Remember that the key to solving algorithmic problems is not just finding *a* solution, but finding an *efficient* solution.  Consider time and space complexity (Big O notation) when evaluating your solution.
+
