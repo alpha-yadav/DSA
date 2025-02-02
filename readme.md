@@ -15310,3 +15310,90 @@ Graph theory has a wide range of applications, including:
 
 This introduction provides a foundation.  Further study would delve into specific graph algorithms (e.g., Dijkstra's algorithm for shortest paths, breadth-first search, depth-first search), graph properties (e.g., planarity, coloring), and more advanced topics.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of possible edges).  Here's a breakdown of how it works, along with different implementations and considerations:
+
+**Concept:**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each element in the array represents a vertex (node) in the graph.  The list associated with each vertex contains the vertices that are adjacent to it (i.e., connected by an edge).
+
+**Example:**
+
+Consider an undirected graph with vertices {0, 1, 2, 3} and edges {(0, 1), (0, 2), (1, 2), (2, 3)}:
+
+* **Adjacency List Representation:**
+
+```
+0: 1, 2
+1: 0, 2
+2: 0, 1, 3
+3: 2
+```
+
+This shows that:
+
+* Vertex 0 is connected to vertices 1 and 2.
+* Vertex 1 is connected to vertices 0 and 2.
+* Vertex 2 is connected to vertices 0, 1, and 3.
+* Vertex 3 is connected to vertex 2.
+
+**Implementations:**
+
+Several data structures can be used to implement an adjacency list:
+
+1. **Array of Linked Lists:**  Each element in the array is a pointer to a linked list. This is a flexible approach that handles varying degrees of connectivity efficiently.
+
+   ```python
+   class Graph:
+       def __init__(self, num_vertices):
+           self.num_vertices = num_vertices
+           self.adj_list = [[] for _ in range(num_vertices)]
+
+       def add_edge(self, u, v):
+           self.adj_list[u].append(v)
+           # For undirected graphs, add the reverse edge as well:
+           self.adj_list[v].append(u)
+
+       def print_graph(self):
+           for i in range(self.num_vertices):
+               print(f"{i}:", end=" ")
+               for vertex in self.adj_list[i]:
+                   print(vertex, end=" ")
+               print()
+
+   # Example usage:
+   g = Graph(4)
+   g.add_edge(0, 1)
+   g.add_edge(0, 2)
+   g.add_edge(1, 2)
+   g.add_edge(2, 3)
+   g.print_graph()
+   ```
+
+2. **Array of Lists (Python):** Python lists can be used directly, providing a simpler implementation.  However, inserting or deleting elements in the middle of a list might be less efficient than using linked lists.
+
+
+3. **Array of Vectors (C++):**  `std::vector` in C++ offers a similar advantage to Python lists, with potentially better performance for large graphs depending on implementation details.
+
+
+4. **Hash Table (Dictionary in Python):**  You can also use a hash table (dictionary in Python) where keys are vertices and values are lists of adjacent vertices. This approach can offer faster lookups, particularly if you need to frequently check for the existence of an edge.  However, it might consume more space than arrays for storing sequential vertices.
+
+   ```python
+   graph = {
+       0: [1, 2],
+       1: [0, 2],
+       2: [0, 1, 3],
+       3: [2]
+   }
+   ```
+
+**Considerations:**
+
+* **Directed vs. Undirected:** For directed graphs, only add the edge in one direction.  For undirected graphs, add edges in both directions to represent the bidirectional connection.
+* **Weighted Graphs:** To represent weighted graphs, you can store pairs (vertex, weight) in the adjacency lists.
+* **Space Complexity:** The space complexity of an adjacency list is O(V + E), where V is the number of vertices and E is the number of edges.  This is very efficient for sparse graphs.  For dense graphs, an adjacency matrix might be more space-efficient.
+* **Time Complexity:**  Adding an edge takes O(1) time.  Checking for the existence of an edge takes O(degree(v)) time (where degree(v) is the number of edges connected to vertex v). Traversing all neighbors of a vertex also takes O(degree(v)).
+
+
+Choose the implementation that best suits your needs and programming language, considering factors like efficiency, ease of implementation, and the characteristics of your graph (sparse vs. dense, weighted vs. unweighted, directed vs. undirected).  For most scenarios involving sparse graphs, the array of linked lists or the array of lists (in Python) offer a good balance of simplicity and efficiency.
+
