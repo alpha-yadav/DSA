@@ -19664,3 +19664,108 @@ bst.inorder_traversal(bst.root) #prints the sorted tree
 
 Choose the method (recursive or iterative) that best suits your needs and understanding.  The recursive version is generally preferred for readability, while the iterative version might be slightly more efficient in some cases. Remember to add error handling and a traversal method for complete and robust code.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node:** Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:** This is the most complex case.  We typically replace the node with its inorder predecessor (largest node in the left subtree) or inorder successor (smallest node in the right subtree).
+
+
+Here's a C++ implementation demonstrating BST deletion, handling all three cases:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+// Helper function to find the minimum value node in a tree
+Node* findMin(Node* root) {
+    while (root->left != nullptr) {
+        root = root->left;
+    }
+    return root;
+}
+
+// Function to delete a node from the BST
+Node* deleteNode(Node* root, int key) {
+    if (root == nullptr) {
+        return root; // Key not found
+    }
+
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // key found
+        // Case 1: Node with 0 or 1 child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Case 2: Node with two children
+        Node* temp = findMin(root->right); // Find inorder successor
+        root->data = temp->data;          // Copy inorder successor's data
+        root->right = deleteNode(root->right, temp->data); // Delete inorder successor
+    }
+    return root;
+}
+
+
+// Inorder traversal (for testing)
+void inorder(Node* root) {
+    if (root != nullptr) {
+        inorder(root->left);
+        std::cout << root->data << " ";
+        inorder(root->right);
+    }
+}
+
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorder(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 20); // Delete a leaf node
+    root = deleteNode(root, 30); // Delete a node with one child
+    root = deleteNode(root, 50); // Delete a node with two children
+
+
+    std::cout << "Inorder traversal after deletion: ";
+    inorder(root);
+    std::cout << std::endl;
+
+
+    //Clean up memory (important to avoid leaks!)
+    //  A proper implementation would require a recursive delete function
+    //  This is simplified for demonstration.  In a real-world scenario,
+    //  use a more robust approach to manage memory.
+    // ... (add a recursive delete function here) ...
+
+    return 0;
+}
+```
+
+Remember that this code omits proper memory management in the `main` function for brevity.  In a production environment, you **must** add a recursive function to properly deallocate all nodes after deletion to avoid memory leaks.  This would involve traversing the tree and deleting nodes post-order (after deleting their children).  The comments in `main` highlight where this crucial cleanup should be implemented.  Consider using smart pointers (e.g., `std::unique_ptr` or `std::shared_ptr`) for safer memory management in a more sophisticated implementation.
+
