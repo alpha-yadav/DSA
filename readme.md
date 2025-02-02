@@ -9352,3 +9352,43 @@ Asymptotic notations (Big O, Big Omega, Big Theta, little o, little omega) descr
 
 These notations are crucial for comparing the efficiency of different algorithms and understanding how their runtime scales with increasing input size.  They abstract away constant factors and lower-order terms, focusing on the dominant behavior as the input grows large.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is a mathematical notation used in computer science to describe the lower bound of the growth rate of a function.  In simpler terms, it tells us the *minimum* amount of time or resources an algorithm will *always* take, regardless of the input data.  It's the counterpart to Big-O notation (which describes the upper bound).
+
+Here's a breakdown:
+
+* **Formal Definition:**  A function f(n) is said to be Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+
+* **What it Means:**  This definition means that for sufficiently large inputs (n ≥ n₀), the function f(n) is always greater than or equal to a constant multiple (c) of g(n).  Essentially, f(n) grows at least as fast as g(n).
+
+* **Key Differences from Big-O:**
+
+    * **Big-O (O):** Provides an upper bound – an algorithm's runtime will *never* exceed O(g(n)) for sufficiently large inputs.  It focuses on the *worst-case* scenario.
+    * **Big-Omega (Ω):** Provides a lower bound – an algorithm's runtime will *always* be at least Ω(g(n)) for sufficiently large inputs. It focuses on the *best-case* scenario (or a lower bound across all inputs).
+    * **Big-Theta (Θ):** Provides both an upper and lower bound – an algorithm's runtime is tightly bound by Θ(g(n)).  It means the algorithm's growth rate is proportional to g(n).
+
+* **Example:**
+
+Let's say we have an algorithm with a runtime function:
+
+`f(n) = 5n² + 2n + 1`
+
+We can say:
+
+* `f(n) = O(n²) ` (Big-O: The runtime grows no faster than n²)
+* `f(n) = Ω(n²) ` (Big-Omega: The runtime grows at least as fast as n²)
+* `f(n) = Θ(n²) ` (Big-Theta: The runtime grows proportionally to n²)
+
+In this example, the dominant term (n²) determines the Big-O, Big-Omega, and Big-Theta bounds.  The lower-order terms (2n and 1) become insignificant as n grows large.
+
+* **Use Cases:**
+
+Big-Omega notation is used to:
+
+* **Guarantee minimum performance:**  It assures us that an algorithm will perform at least as well as a certain rate.
+* **Analyze algorithm efficiency:**  It helps understand the fundamental limitations of an algorithm.
+* **Compare algorithms:**  It can be used alongside Big-O to get a more complete picture of an algorithm's performance characteristics.  Knowing both the best-case and worst-case behavior is invaluable.
+
+
+**In summary:** Big-Omega notation provides a valuable tool for analyzing the lower bound of an algorithm's runtime or resource usage.  It complements Big-O notation, giving a more comprehensive understanding of algorithmic efficiency.
+
