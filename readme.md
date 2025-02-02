@@ -18654,3 +18654,55 @@ print(f"The maximum element is: {max_value}") # Output: The maximum element is: 
 
 Remember, learning algorithms is an iterative process. Be patient, persistent, and enjoy the challenge!
 
+#  A sample algorithmic problem 
+## Algorithmic Problem: Two Sum
+
+**Problem Statement:**
+
+Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+
+**Example 1:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Example 2:**
+
+```
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+```
+
+**Example 3:**
+
+```
+Input: nums = [3,3], target = 6
+Output: [0,1]
+```
+
+
+**Constraints:**
+
+* `2 <= nums.length <= 104`
+* `-109 <= nums[i] <= 109`
+* `-109 <= target <= 109`
+* **Only one valid answer exists.**
+
+
+**This problem tests your understanding of:**
+
+* **Hash Tables (or Dictionaries):**  A very efficient approach uses a hash table to store numbers and their indices.
+* **Time Complexity:**  The best solutions aim for O(n) time complexity.
+* **Space Complexity:** The best solutions aim for O(n) space complexity (due to the hash table).
+
+
+**Try to solve this problem!  Think about different approaches and their efficiency.**  Then, you can search for solutions online if you get stuck.  Understanding different approaches and their tradeoffs is key to improving your algorithmic skills.
+
