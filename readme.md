@@ -18475,3 +18475,115 @@ While BFS and DFS are the most common, other graph traversals exist, often tailo
 
 Choosing the right traversal algorithm depends on the specific problem you are trying to solve and the characteristics of the graph.  Understanding the differences between BFS and DFS is crucial for tackling many graph-related problems effectively.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix or adjacency list) and whether you need to track visited nodes.  Here are a few examples in Python:
+
+**1. DFS using Adjacency List (Recursive):** This is the most common and often easiest-to-understand implementation.
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    """
+    Performs a Depth-First Search traversal on a graph represented as an adjacency list.
+
+    Args:
+      graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+      node: The starting node for the traversal.
+      visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+
+    Returns:
+      A list of nodes visited in DFS order.
+    """
+    if visited is None:
+        visited = set()
+
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+    return visited
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Output: A B D E F C
+print("\nVisited nodes:", dfs_recursive(graph, 'A')) # Output: {'A', 'B', 'D', 'E', 'F', 'C'}
+
+```
+
+**2. DFS using Adjacency List (Iterative):** This version uses a stack instead of recursion.  It can be more memory-efficient for very deep graphs.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal on a graph represented as an adjacency list iteratively.
+
+    Args:
+      graph: A dictionary representing the graph.
+      node: The starting node.
+
+    Returns:
+      A list of nodes visited in DFS order.
+    """
+    visited = set()
+    stack = [node]
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            print(node, end=" ")
+            stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+    return visited
+
+print("\n\nDFS traversal (iterative):")
+dfs_iterative(graph, 'A') # Output: A C F E B D
+print("\nVisited nodes:", dfs_iterative(graph, 'A')) # Output: {'A', 'C', 'F', 'E', 'B', 'D'}
+
+```
+
+**3. DFS using Adjacency Matrix:**  This approach is less common because adjacency lists are generally more efficient for sparse graphs (graphs with relatively few edges).
+
+```python
+def dfs_matrix(matrix, node, visited):
+    """
+    DFS using an adjacency matrix.  Note that this is less efficient than adjacency list for sparse graphs.
+    """
+    num_nodes = len(matrix)
+    visited[node] = True
+    print(chr(ord('A') + node), end=" ") # Assuming nodes are labeled A, B, C...
+
+    for neighbor in range(num_nodes):
+        if matrix[node][neighbor] == 1 and not visited[neighbor]:
+            dfs_matrix(matrix, neighbor, visited)
+
+#Example Usage for Adjacency Matrix
+adj_matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0]   # F
+]
+print("\n\nDFS traversal (matrix):")
+visited = [False] * len(adj_matrix)
+dfs_matrix(adj_matrix, 0, visited) #Output: A B D E F C
+
+
+```
+
+Remember to adapt the node representation (e.g., using numbers instead of letters) if your graph uses different node labels.  Choose the implementation that best suits your graph representation and performance requirements.  The adjacency list recursive version is generally preferred for its readability and efficiency in many cases.
+
