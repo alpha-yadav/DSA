@@ -13681,3 +13681,13 @@ The best choice of representation depends entirely on the specific application's
 
 If you can provide details about your specific use case, I can offer more tailored advice on the best representation for your n-ary tree.
 
+#  Introduction 
+Please provide me with context!  An introduction to *what*?  I need a topic to write an introduction for.  For example, you could ask me to write an introduction to:
+
+* **A research paper on climate change:**  I'll provide an introduction outlining the problem and the paper's scope.
+* **A story about a lost dog:** I'll write an engaging introduction to hook the reader.
+* **A presentation on the history of the Roman Empire:**  I'll craft an introduction that sets the stage and outlines the key points.
+* **A tutorial on using a specific software:** I'll write an introduction explaining the purpose and prerequisites.
+
+Tell me what you'd like an introduction to, and I'll do my best!
+
