@@ -9120,3 +9120,73 @@ This problem can be solved in a few ways, with varying time and space complexiti
 
 This is a classic algorithmic problem that highlights the importance of choosing efficient data structures and algorithms.  Try to solve it using both approaches to understand the difference in performance.  The hash table approach is generally preferred for its efficiency.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing a more concise version:
+
+
+**Version 1:  Clear and Readable**
+
+This version is easy to understand, breaking down the logic step-by-step:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  It first checks for divisibility by 15 (both 3 and 5), then 3, then 5. If none of these conditions are met, it prints the number itself.
+
+
+**Version 2: More Concise (using the ternary conditional operator)**
+
+This version uses the ternary conditional operator (`condition ? value1 : value2`) to make the code slightly more compact:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+
+```
+
+This version nests ternary operators to achieve the same result in fewer lines.  While shorter, it might be slightly harder to read for beginners.
+
+
+**Version 3:  Even More Concise (using String Interpolation and a Tuple)**
+
+This version leverages Swift's features for a more advanced, but compact solution:
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+    for i in 1...n {
+        let (fizz, buzz) = (i % 3 == 0, i % 5 == 0)
+        print("\(fizz ? "Fizz" : "")\(buzz ? "Buzz" : "")\(fizz || buzz ? "" : i)")
+    }
+}
+
+fizzBuzzAdvanced(n: 15) //Call the function to test
+```
+
+This uses a tuple to store boolean results of divisibility checks.  String interpolation neatly combines the results.  This is the most concise but arguably the least readable for those unfamiliar with Swift's advanced features.
+
+
+**Choosing the Best Version:**
+
+For beginners, **Version 1** is recommended due to its clarity and ease of understanding.  As you become more comfortable with Swift, you can explore the more concise options (Versions 2 and 3). The key is to prioritize readability, especially when starting out. Remember to choose the version that best suits your needs and understanding.
+
