@@ -10449,3 +10449,45 @@ The loop iterates 'n' times, so the number of print operations is directly propo
 
 Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance on different input sizes.  It helps to make informed decisions about the best algorithm to use for a given problem.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function.  It essentially says that a function grows at the *same rate* as another function, ignoring constant factors and smaller terms.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that *f(n)* is bounded both above and below by *g(n)*, multiplied by constants, for sufficiently large values of *n*.  The inequality holds for all values of *n* greater than or equal to *n₀*.
+
+**What it Means:**
+
+* **Tight Bound:**  Unlike Big-O notation (O), which only provides an upper bound, and Big-Ω notation (Ω), which only provides a lower bound, Big-Theta provides both an upper and lower bound. This means it precisely characterizes the growth rate of the function.
+* **Asymptotic Behavior:** Big-Theta describes the behavior of the function as *n* approaches infinity.  It ignores constant factors and lower-order terms because these become insignificant as *n* grows very large.
+* **Growth Rate:**  It focuses on how the function's value increases as the input size (*n*) increases.  This is crucial for comparing the efficiency of algorithms.
+
+**Example:**
+
+Let's say we have a function *f(n) = 2n² + 5n + 3*.  We can show that *f(n) = Θ(n²)*.
+
+To prove this, we need to find constants *c₁*, *c₂*, and *n₀* that satisfy the definition:
+
+1. **Upper Bound:**  We can choose *c₂ = 3* and *n₀ = 1*. For *n ≥ 1*,  2n² + 5n + 3 ≤ 3n² (because 5n + 3 will always be less than n² for sufficiently large n).
+
+2. **Lower Bound:** We can choose *c₁ = 1* and *n₀ = 1*.  For *n ≥ 1*, 2n² + 5n + 3 ≥ n².
+
+Therefore, we have shown that 1*n² ≤ 2n² + 5n + 3 ≤ 3*n² for *n ≥ 1*.  This satisfies the definition of Big-Theta, so we can say *f(n) = Θ(n²)*.  The function grows quadratically.
+
+**In contrast:**
+
+* **O(n²)**:  *f(n)* grows *no faster than* n².  This is true, but not as precise.
+* **Ω(n²)**: *f(n)* grows *at least as fast as* n².  This is also true, but not as precise.
+* **Θ(n²)**: *f(n)* grows *at the same rate as* n². This is the most precise statement.
+
+
+**Importance in Algorithm Analysis:**
+
+Big-Theta notation is essential for comparing the efficiency of algorithms. By analyzing the time or space complexity of algorithms using Big-Theta, we can determine which algorithm is more efficient in the long run, regardless of constant factors or minor implementation details.  It allows for a concise and meaningful comparison of algorithmic performance.
+
