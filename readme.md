@@ -13238,3 +13238,36 @@ The basic operation is the comparison (`arr[i] == target`).  In the worst case, 
 
 Understanding algorithm complexity is essential for writing efficient and scalable programs.  Choosing an algorithm with a lower complexity can significantly improve performance, especially when dealing with large datasets.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  It provides a tight bound on the growth rate of a function, indicating that the function's growth is both bounded above and below by the same function (up to constant factors).  In simpler terms, it means the function grows at roughly the same rate as another function.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*), written as *f(n) = Θ(g(n))*, if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), *f(n)* is always within a constant factor of *g(n)*.  Both the upper and lower bounds are given by the same function *g(n)*, making it a "tight" bound.
+
+**What it means:**
+
+* **Asymptotic Behavior:** Θ notation focuses on the behavior of functions as input size (*n*) approaches infinity.  It ignores constant factors and lower-order terms because their impact becomes negligible as *n* grows large.
+* **Tight Bound:** Unlike Big-O (O) notation which provides only an upper bound, and Big-Ω (Ω) notation which provides only a lower bound, Θ notation provides both simultaneously, giving a more precise description of the function's growth rate.
+* **Practical Implications:** In algorithm analysis, Θ notation allows us to compare the efficiency of different algorithms.  If algorithm A has a time complexity of Θ(n²) and algorithm B has a time complexity of Θ(n log n), we can confidently say that algorithm B is asymptotically more efficient than algorithm A.
+
+**Example:**
+
+Let's consider the function *f(n) = 2n² + 3n + 1*.  We can show that *f(n) = Θ(n²)*.
+
+1. **Upper Bound:** We can find constants *c₂* and *n₀* such that *2n² + 3n + 1 ≤ c₂n²* for all *n ≥ n₀*.  For example, if we choose *c₂ = 6* and *n₀ = 1*, the inequality holds because *2n² + 3n + 1 ≤ 6n²* for all *n ≥ 1*.
+
+2. **Lower Bound:** We can find constants *c₁* and *n₀* such that *c₁n² ≤ 2n² + 3n + 1* for all *n ≥ n₀*.  For example, if we choose *c₁ = 1* and *n₀ = 1*, the inequality holds because *n² ≤ 2n² + 3n + 1* for all *n ≥ 1*.
+
+Therefore, since we've found constants that satisfy the definition, we can conclude that *f(n) = Θ(n²)*.
+
+**In Summary:**
+
+Big-Theta notation is a powerful tool for analyzing the efficiency of algorithms. It provides a precise and informative description of a function's growth rate, allowing for meaningful comparisons between different algorithms in terms of their scalability and performance.  It's crucial to understand that it only applies to sufficiently large inputs; for small input sizes, the actual runtime might differ significantly.
+
