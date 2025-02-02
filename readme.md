@@ -17759,3 +17759,92 @@ postorder_traversal(root) # Output: 4 5 2 3 1 (for the example tree above)
 
 **Iterative Approaches:**  While the recursive approaches are elegant and easy to understand, iterative approaches using stacks are also possible and can be more efficient in some cases (to avoid potential stack overflow errors with very deep trees).  These iterative versions use stacks to mimic the recursive call stack.  They are a bit more complex to implement but offer advantages in terms of memory management for very large trees.  If you need iterative solutions, let me know and I'll provide code examples for those.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common and Efficient):**
+
+   This approach uses recursion to traverse the tree.  The key idea is:
+
+   * If the current node is one of the target nodes (`p` or `q`), return the current node.
+   * If `p` and `q` are on different subtrees (one in the left subtree and one in the right subtree), then the current node is the LCA.
+   * Otherwise, recursively search the subtree containing both `p` and `q`.
+
+   ```python
+   class TreeNode:
+       def __init__(self, x):
+           self.val = x
+           self.left = None
+           self.right = None
+
+   def lowestCommonAncestor(self, root, p, q):
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, we might visit all nodes).
+   * **Space Complexity:** O(H), where H is the height of the tree (due to the recursive call stack).  In the worst case (a skewed tree), this becomes O(N).
+
+
+2. **Iterative Approach (Using a Stack):**
+
+   This approach uses an iterative method with a stack, effectively simulating the recursive calls.  It's generally less readable but can be slightly more efficient in some cases because it avoids the overhead of recursive function calls.  However, the time and space complexity remain the same.
+
+3. **Using Parent Pointers:**
+
+   If you modify the tree to include parent pointers (each node knows its parent), finding the LCA becomes significantly easier.  You can traverse upwards from both `p` and `q` until you find a common ancestor.  The first common ancestor encountered is the LCA.
+
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(1)
+
+
+**Example Usage (Recursive Approach):**
+
+```python
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+solution = Solution()
+lca = solution.lowestCommonAncestor(root, root.left, root.right)  # LCA of 5 and 1 is 3
+print(lca.val)  # Output: 3
+
+lca = solution.lowestCommonAncestor(root, root.left, root.left.right) # LCA of 5 and 2 is 5
+print(lca.val)  # Output: 5
+```
+
+
+**Choosing the Right Method:**
+
+* The **recursive approach** is generally preferred for its clarity and simplicity.  It's efficient enough for most cases.
+* The **iterative approach** might offer a slight performance advantage in some scenarios, but at the cost of readability.
+* The **parent pointer approach** is the most efficient if you can modify the tree structure, but it requires extra space to store parent pointers.  This approach is only beneficial if you need to perform multiple LCA queries.
+
+
+Remember to handle edge cases such as:
+
+* Empty tree (`root` is None).
+* One or both nodes (`p` or `q`) are not in the tree.
+* `p` or `q` is the root itself.
+
+
+Choose the method that best suits your needs and context. For most situations, the recursive approach provides a good balance of readability and efficiency.
+
