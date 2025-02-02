@@ -16076,3 +16076,43 @@ Complexity analysis involves identifying the dominant operations within an algor
 
 Understanding algorithm complexity is crucial for choosing the right algorithm for a given task and for optimizing the performance of software applications.  Choosing an algorithm with lower complexity leads to significant performance improvements, especially for large inputs.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the *tight bound* of a function's growth rate.  This means it provides both an upper and a lower bound, indicating that the function's growth is asymptotically proportional to a given function.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*,
+
+   `c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large inputs (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.  *g(n)* represents the dominant growth term of *f(n)*.
+
+**What it means intuitively:**
+
+* **Tight Bound:**  Θ notation gives a precise characterization of the growth rate.  Unlike Big O (which only provides an upper bound) or Big Omega (which only provides a lower bound), Θ gives both.  It signifies that the function grows at roughly the same rate as the reference function.
+
+* **Asymptotic Behavior:** The notation only focuses on the growth rate for large inputs.  Small values of *n* are ignored.  The constants *c₁*, *c₂*, and *n₀* are crucial because they allow for flexibility. The exact values of these constants are not important; only their existence matters.
+
+* **Ignoring Constant Factors:** Θ notation ignores constant multiplicative factors. For example, `Θ(n)` and `Θ(5n)` are considered the same because the growth rate is linearly proportional to `n` in both cases.
+
+**Examples:**
+
+* **`f(n) = 2n² + 3n + 1` is Θ(n²)**:  The dominant term is n².  We can find constants to satisfy the definition.
+
+* **`f(n) = 5n log n` is Θ(n log n)**:  The dominant term is `n log n`.
+
+* **`f(n) = 10` is Θ(1)**: This represents a constant time complexity.
+
+**Comparison with Big O and Big Omega:**
+
+* **Big O (O):** Provides an *upper bound*.  `f(n) = O(g(n))` means *f(n)* grows no faster than *g(n)*.
+
+* **Big Omega (Ω):** Provides a *lower bound*. `f(n) = Ω(g(n))` means *f(n)* grows at least as fast as *g(n)*.
+
+* **Big Theta (Θ):** Provides both an *upper and lower bound*.  `f(n) = Θ(g(n))` means *f(n)* grows at the same rate as *g(n)*.
+
+
+In essence, Θ gives a much more precise description of the function's growth rate compared to O or Ω alone.  If you can prove a function is Θ(g(n)), you know its growth behavior very well for large inputs.  It's the most informative of the three notations when you can use it.
+
