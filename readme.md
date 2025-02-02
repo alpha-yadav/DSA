@@ -9256,3 +9256,45 @@ This algorithm iterates through the array once.  The number of comparisons is di
 
 Understanding algorithm complexity is essential for choosing the most efficient algorithms for a given task, especially when dealing with large datasets where even small differences in efficiency can have a significant impact on performance.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is used in computer science to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds.  In simpler terms, it tells us that a function's growth is roughly proportional to another function, ignoring constant factors and smaller-order terms.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that *f(n) = Θ(g(n))* if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁g(n) ≤ f(n) ≤ c₂g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.
+
+**What it means:**
+
+* **Tight Bound:**  Θ notation provides a tighter bound than Big-O (O) notation.  Big-O only gives an upper bound, while Θ provides both an upper and a lower bound, indicating that the function grows at roughly the *same rate* as the bounding function.
+* **Asymptotic Behavior:**  Θ notation focuses on the behavior of functions as *n* approaches infinity.  We ignore constant factors and lower-order terms because they become insignificant as *n* grows large.
+* **Growth Rate:**  It's all about how quickly the function grows relative to another function.
+
+**Example:**
+
+Let's say we have a function `f(n) = 2n² + 3n + 1`. We can say that:
+
+`f(n) = Θ(n²) `
+
+Why?  Because we can find constants that satisfy the definition:
+
+* Choose `c₁ = 1`.  For sufficiently large *n*,  `2n² + 3n + 1 ≥ n²`.
+* Choose `c₂ = 3`. For sufficiently large *n*, `2n² + 3n + 1 ≤ 3n²`.
+
+Therefore, for a sufficiently large *n₀* (say, *n₀* = 1), the inequality `c₁n² ≤ 2n² + 3n + 1 ≤ c₂n²` holds true.  The dominant term (n²) dictates the growth rate.
+
+**Comparison with other notations:**
+
+* **Big-O (O):**  Provides an upper bound.  `f(n) = O(g(n))` means that `f(n)` grows no faster than `g(n)`.  This is a less precise statement than Θ.
+* **Big-Ω (Ω):** Provides a lower bound. `f(n) = Ω(g(n))` means that `f(n)` grows at least as fast as `g(n)`.
+* **Little-o (o):**  Provides a strict upper bound. `f(n) = o(g(n))` means that `f(n)` grows strictly slower than `g(n)`.
+* **Little-ω (ω):** Provides a strict lower bound. `f(n) = ω(g(n))` means that `f(n)` grows strictly faster than `g(n)`.
+
+
+In summary, Θ notation is a powerful tool for analyzing the efficiency of algorithms. It allows us to precisely characterize the growth rate of an algorithm's runtime or space requirements, providing a clear understanding of its scalability.  It's crucial for comparing the performance of different algorithms, especially as input size grows large.
+
