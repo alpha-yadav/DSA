@@ -13402,3 +13402,63 @@ Big O can also be used to describe the space complexity of an algorithm, which r
 
 Understanding Big O notation is crucial for choosing efficient algorithms and writing performant code, especially when dealing with large datasets.
 
+#  A Simple Loop 
+The concept of a "simple loop" depends on the programming language, but generally refers to a loop that iterates a specific number of times or until a certain condition is met.  Here are examples in a few common languages:
+
+**1. Python (using a `for` loop with `range`)**
+
+This loop iterates 5 times, printing the numbers 0 through 4:
+
+```python
+for i in range(5):
+  print(i)
+```
+
+**2. Python (using a `while` loop)**
+
+This loop iterates until the counter variable `i` reaches 5:
+
+```python
+i = 0
+while i < 5:
+  print(i)
+  i += 1
+```
+
+**3. JavaScript (using a `for` loop)**
+
+Similar to the Python `for` loop example:
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+**4. Java (using a `for` loop)**
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+**5. C++ (using a `for` loop)**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+These are all examples of simple loops.  They all perform the same basic task: iterating a fixed number of times and performing a simple action within each iteration.  More complex loops might involve nested loops, more intricate conditions, or more complex actions within the loop body.
+
