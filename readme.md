@@ -18706,3 +18706,77 @@ Output: [0,1]
 
 **Try to solve this problem!  Think about different approaches and their efficiency.**  Then, you can search for solutions online if you get stuck.  Understanding different approaches and their tradeoffs is key to improving your algorithmic skills.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing some improvements:
+
+**Basic Implementation:**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* If it's divisible by both 3 and 5 (15), it prints "FizzBuzz".
+* If it's divisible by 3, it prints "Fizz".
+* If it's divisible by 5, it prints "Buzz".
+* Otherwise, it prints the number itself.
+
+
+**Improved Implementation (using string concatenation):**
+
+This version is more concise and efficient:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This version builds the output string incrementally.  If neither "Fizz" nor "Buzz" are added, it prints the number. This avoids the nested `if-else if` structure, making the code cleaner and potentially faster.
+
+**Even More Concise (using ternary operator):**
+
+We can make it even more compact using the ternary operator:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Example usage
+```
+
+This version uses the ternary operator to conditionally add "Fizz" and "Buzz" to the `output` string.  It's very compact but might be slightly less readable for beginners.
+
+
+**Choosing the best implementation:**
+
+For clarity and ease of understanding, especially for beginners, the first or second implementation is recommended.  The concise version is good for demonstrating Swift's capabilities but might sacrifice some readability.  Choose the version that best suits your needs and understanding.  Remember to always prioritize code readability and maintainability.
+
