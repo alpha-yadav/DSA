@@ -9298,3 +9298,57 @@ Therefore, for a sufficiently large *n₀* (say, *n₀* = 1), the inequality `c�
 
 In summary, Θ notation is a powerful tool for analyzing the efficiency of algorithms. It allows us to precisely characterize the growth rate of an algorithm's runtime or space requirements, providing a clear understanding of its scalability.  It's crucial for comparing the performance of different algorithms, especially as input size grows large.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, little o, little omega) describe the limiting behavior of functions, particularly useful in computer science for analyzing algorithm efficiency.  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It says, "the function grows *no faster than* this."  It's the most commonly used notation.
+* **Formal Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:**  If an algorithm's runtime is O(n²), it means its runtime grows no faster than the square of the input size.  It could be linear, logarithmic, or even a constant, but it won't exceed quadratic growth asymptotically.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It says, "the function grows *at least as fast as* this."
+* **Formal Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means its runtime grows at least linearly with the input size. It could be quadratic, cubic, or even exponential, but it won't be slower than linear asymptotically.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function. It says, "the function grows *at the same rate as* this."  This means it's both O and Ω of the same function.
+* **Formal Definition:** f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means its runtime grows proportionally to n log n.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Provides a *strict upper bound*. It means f(n) grows *strictly slower* than g(n).
+* **Formal Definition:** f(n) = o(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  The crucial difference is that this inequality holds for *all* c, not just some c.
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Provides a *strict lower bound*. It means f(n) grows *strictly faster* than g(n).
+* **Formal Definition:** f(n) = ω(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.  Again, the inequality holds for *all* c.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Relationship                               |
+|---------|----------------------------------------------|-------------------------------------------|
+| O(g(n)) | Upper bound: f(n) grows no faster than g(n) | f(n) ≤ c * g(n)                          |
+| Ω(g(n)) | Lower bound: f(n) grows at least as fast as g(n) | c * g(n) ≤ f(n)                          |
+| Θ(g(n)) | Tight bound: f(n) grows at the same rate as g(n) | c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)             |
+| o(g(n)) | Strict upper bound: f(n) grows strictly slower than g(n) | f(n) < c * g(n) for all c > 0           |
+| ω(g(n)) | Strict lower bound: f(n) grows strictly faster than g(n) | c * g(n) < f(n) for all c > 0           |
+
+
+**Relationships:**
+
+* Θ(g(n)) implies both O(g(n)) and Ω(g(n)).
+* o(g(n)) is a *stronger* statement than O(g(n)).
+* ω(g(n)) is a *stronger* statement than Ω(g(n)).
+
+
+These notations are crucial for comparing the efficiency of different algorithms and understanding how their runtime scales with increasing input size.  They abstract away constant factors and lower-order terms, focusing on the dominant behavior as the input grows large.
+
