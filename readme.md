@@ -20870,3 +20870,12 @@ If you need to perform many LCA queries on the *same* tree, binary lifting is ex
 
 Remember to adapt the code to your specific tree structure (e.g., adding parent pointers where needed).  The choice of method depends on the constraints of your problem.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **A set of points (x, y):**  e.g., (1,2), (3,4), (5,6)
+* **An equation:** e.g., y = 2x + 1,  y = x^2,  y = sin(x)
+* **A description of the type of graph:** e.g., bar chart, pie chart, scatter plot, line graph
+
+Once you give me this information, I can help you graph it.  I can't create visual graphs directly, but I can describe what the graph would look like or provide the data in a format suitable for plotting in a graphing tool (like Excel, Desmos, or GeoGebra).
+
