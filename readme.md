@@ -15168,3 +15168,12 @@ Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binar
 
 Remember to handle edge cases such as when one or both nodes are not present in the tree.  The examples above provide a basic framework; you might need to add error handling and input validation for a production-ready implementation.
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need information about the function or data points to create a graph.  For example, tell me:
+
+* **The equation of a function:**  e.g., y = x² + 2x - 3
+* **A set of data points:** e.g., (1, 2), (2, 4), (3, 6)
+* **The type of graph:** e.g., line graph, scatter plot, bar chart, etc.
+
+Once you provide this information, I can help you graph it.
+
