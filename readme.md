@@ -12765,3 +12765,87 @@ While theoretically optimal, Thorup's linear-time MST algorithm has some practic
 
 In summary, Thorup's algorithms, particularly his linear-time MST algorithm, represent a landmark achievement in theoretical computer science, demonstrating the power of advanced algorithmic techniques. While not always the most practical choice for all situations, they have significantly influenced the field and pushed the boundaries of what's possible in graph algorithm design.
 
+#  Graph Traversals 
+Graph traversals are algorithms for visiting all the nodes (vertices) in a graph in a systematic way.  There are several common approaches, each with its own properties and applications:
+
+**1. Breadth-First Search (BFS):**
+
+* **Idea:** Explore the graph level by level.  Starts at a root node and visits all its neighbors before moving to their neighbors, and so on.  Uses a queue data structure.
+* **Algorithm:**
+    1. Start at a root node and mark it as visited.
+    2. Add the root node to a queue.
+    3. While the queue is not empty:
+        * Dequeue a node.
+        * For each of its unvisited neighbors:
+            * Mark the neighbor as visited.
+            * Enqueue the neighbor.
+* **Applications:**
+    * Finding the shortest path in an unweighted graph.
+    * Peer-to-peer networks.
+    * Crawlers (web spiders).
+    * Social networking analysis.
+* **Time Complexity:** O(V + E), where V is the number of vertices and E is the number of edges.
+
+
+**2. Depth-First Search (DFS):**
+
+* **Idea:** Explore the graph as deeply as possible along each branch before backtracking. Uses a stack (implicitly through recursion or explicitly).
+* **Algorithm (recursive):**
+    1. Mark the current node as visited.
+    2. For each unvisited neighbor of the current node:
+        * Recursively call DFS on the neighbor.
+* **Algorithm (iterative using a stack):**
+    1. Push the starting node onto the stack.
+    2. While the stack is not empty:
+        * Pop a node from the stack.
+        * If the node is not visited:
+            * Mark the node as visited.
+            * Push its unvisited neighbors onto the stack.
+* **Applications:**
+    * Detecting cycles in a graph.
+    * Topological sorting (for directed acyclic graphs).
+    * Finding strongly connected components.
+    * Maze solving.
+* **Time Complexity:** O(V + E), where V is the number of vertices and E is the number of edges.
+
+
+**3. Dijkstra's Algorithm:**
+
+* **Idea:** Finds the shortest path from a single source node to all other nodes in a weighted graph with non-negative edge weights. Uses a priority queue.
+* **Algorithm:**
+    1. Assign a tentative distance value to every node: set it to zero for our initial node and to infinity for all other nodes.
+    2. Set the initial node as current.
+    3. For the current node, consider all of its unvisited neighbors and calculate their tentative distances through the current node. Compare the newly calculated tentative distance to the current assigned value and assign the smaller one.
+    4. When we are done considering all of the unvisited neighbors of the current node, mark the current node as visited.
+    5. Select the unvisited node that is marked with the smallest tentative distance, set it as the new "current node", and go back to step 3.
+    6. Repeat steps 3 and 4 until the destination node has been marked visited (in which case the algorithm has finished) or until all nodes have been visited.
+* **Applications:**
+    * GPS navigation systems.
+    * Network routing protocols.
+    * Finding shortest paths in weighted graphs.
+* **Time Complexity:** O(E log V) using a min-priority queue, where E is the number of edges and V is the number of vertices.
+
+
+**4. A* Search Algorithm:**
+
+* **Idea:**  An informed search algorithm that finds the shortest path between a starting and goal node. It uses a heuristic function to estimate the distance to the goal.
+* **Algorithm:** Similar to Dijkstra's, but uses a priority queue ordered by  `f(n) = g(n) + h(n)`, where `g(n)` is the cost from the start node to node `n`, and `h(n)` is a heuristic estimate of the cost from `n` to the goal.
+* **Applications:**
+    * Pathfinding in games.
+    * Robotics.
+    * AI planning.
+* **Time Complexity:**  Depends on the heuristic; can be significantly faster than Dijkstra's in many cases.
+
+
+**Choosing the Right Traversal:**
+
+The best traversal algorithm depends on the specific problem and the properties of the graph:
+
+* **Unweighted graph, shortest path:** BFS
+* **Weighted graph, shortest path (non-negative weights):** Dijkstra's
+* **Weighted graph, shortest path (heuristic available):** A*
+* **Finding cycles or topological sorting:** DFS
+
+
+This overview covers the fundamental graph traversal algorithms.  There are other specialized algorithms for specific graph types and problems.  Understanding these core methods provides a strong foundation for tackling many graph-related challenges.
+
