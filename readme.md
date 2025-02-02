@@ -10326,3 +10326,68 @@ Output: [0,1]
 
 This is a classic algorithmic problem often used in interviews.  The optimal solution involves using a hash table (dictionary in Python) for O(n) time complexity.  Try solving it yourself!  Let me know if you'd like a hint or want to see a solution in a specific programming language.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's a great way to practice basic programming concepts like loops and conditional statements. Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+
+**Simple Version (using a `for` loop and `if-else if-else`):**
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This version iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5.  If none of these conditions are met, it prints the number itself.
+
+
+**Slightly More Advanced Version (using a ternary operator and string interpolation):**
+
+This version is more concise and uses a ternary operator to make the code more compact.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let fizz = i % 3 == 0 ? "Fizz" : ""
+        let buzz = i % 5 == 0 ? "Buzz" : ""
+        print(fizz + buzz == "" ? "\(i)" : fizz + buzz)
+    }
+}
+
+fizzBuzzConcise(n: 15) //Call the function to test
+```
+
+This version creates `fizz` and `buzz` strings conditionally. If both are empty, it prints the number; otherwise, it prints the combined `fizz` and `buzz` strings.
+
+
+**Explanation of Key Concepts:**
+
+* **`for` loop:** This iterates through a range of numbers (1 to `n` in this case).
+* **Modulo operator (`%`):** This gives the remainder after division.  If `i % 3 == 0`, it means `i` is divisible by 3.
+* **`if-else if-else` statement:** This allows you to check multiple conditions sequentially.
+* **Ternary operator (`condition ? value1 : value2`):** This is a concise way to write an `if-else` statement in a single line.  If the `condition` is true, it returns `value1`; otherwise, it returns `value2`.
+* **String interpolation (`"\(i)"`):** This allows you to embed variables (like `i`) directly into strings.
+
+
+To run this code:
+
+1. Open Xcode.
+2. Create a new playground.
+3. Paste the code into the playground.
+4. Run the playground.  You'll see the FizzBuzz output in the console.
+
+
+Remember to choose the version that best suits your understanding and coding style. The simple version is easier to read for beginners, while the concise version demonstrates a more advanced technique.  Both achieve the same result.
+
