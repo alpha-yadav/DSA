@@ -15967,3 +15967,62 @@ Here are a few algorithmic problem examples, ranging in difficulty:
 
 Remember that the key to solving algorithmic problems is not just finding *a* solution, but finding an *efficient* solution.  Consider time and space complexity (Big O notation) when evaluating your solution.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question. It's deceptively simple, but it's a good way to test basic understanding of loops, conditionals, and modulo operations. Here's how to implement it in Swift, starting with a basic approach and then showing a more concise version:
+
+
+**Basic Approach (with comments):**
+
+```swift
+func fizzBuzz(n: Int) {
+    // Loop through numbers from 1 to n
+    for i in 1...n {
+        // Check for divisibility by 3 and 5
+        if i % 3 == 0 && i % 5 == 0 {
+            print("FizzBuzz") // Divisible by both
+        } else if i % 3 == 0 {
+            print("Fizz") // Divisible by 3
+        } else if i % 5 == 0 {
+            print("Buzz") // Divisible by 5
+        } else {
+            print(i) // Not divisible by 3 or 5
+        }
+    }
+}
+
+// Example usage:
+fizzBuzz(n: 15)
+```
+
+This code iterates from 1 to `n`, checking each number for divisibility by 3 and 5 using the modulo operator (`%`).  The modulo operator gives the remainder of a division. If the remainder is 0, the number is divisible.
+
+
+**More Concise Approach (using string interpolation and ternary operator):**
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += i % 3 == 0 ? "Fizz" : ""
+        output += i % 5 == 0 ? "Buzz" : ""
+        print(output.isEmpty ? i : output)
+    }
+}
+
+// Example usage:
+fizzBuzzConcise(n: 15)
+```
+
+This version uses the ternary operator (`condition ? value1 : value2`) to make the code more compact.  It builds the output string ("Fizz", "Buzz", "FizzBuzz", or the number itself) conditionally.  `output.isEmpty` checks if the string is empty; if so, it prints the number directly.
+
+
+**Explanation of the Concise Version:**
+
+* `var output = ""`:  Initializes an empty string to store the output for each number.
+* `output += i % 3 == 0 ? "Fizz" : ""`: If `i` is divisible by 3, "Fizz" is appended to `output`; otherwise, nothing is appended.
+* `output += i % 5 == 0 ? "Buzz" : ""`:  Similarly, if `i` is divisible by 5, "Buzz" is appended.
+* `print(output.isEmpty ? i : output)`: This uses the ternary operator again. If `output` is empty (meaning the number wasn't divisible by 3 or 5), it prints the number `i`; otherwise, it prints the `output` string.
+
+
+Both versions achieve the same result, but the concise version demonstrates a more advanced style of Swift coding. Choose the version that you find more readable and understandable. Remember to compile and run this code in a Swift environment (like Xcode's playground) to see the output.
+
