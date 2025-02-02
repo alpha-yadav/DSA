@@ -12197,3 +12197,95 @@ This method is less common but can be more efficient in some cases, especially i
 
 Remember to choose the method that best suits your needs and the constraints of your specific application. The recursive solution is generally easier to understand and implement.  The iterative solution might offer performance advantages in certain scenarios.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree or graph is a common problem in computer science.  The approach varies depending on the type of tree (binary tree, general tree) and whether the tree is sorted or unsorted.  Here's a breakdown of common methods:
+
+**1. Binary Trees:**
+
+* **Recursive Approach (Efficient):** This is generally the most efficient approach for binary trees.  The algorithm recursively checks if the target nodes are in the left or right subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node1, node2):
+    """
+    Finds the LCA of node1 and node2 in a binary tree using recursion.
+    """
+    if root is None:
+        return None
+    if root == node1 or root == node2:
+        return root
+
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.left.right # Node with data 5
+
+lca = lca_recursive(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca.data}")  # Output: 2
+
+```
+
+* **Iterative Approach (using parent pointers):** If each node has a pointer to its parent, an iterative approach is possible.  You traverse upwards from each node until you find a common ancestor. This method is less efficient in terms of space complexity compared to the recursive solution, but it may be preferred in some scenarios depending on the tree structure.
+
+
+**2. General Trees:**
+
+For general trees (where a node can have more than two children), the recursive approach can be adapted.  However, the iterative approach using parent pointers becomes more straightforward.
+
+**3. Sorted Trees (e.g., BST):**
+
+If you have a Binary Search Tree (BST), you can leverage the sorted property:
+
+```python
+def lca_bst(root, node1, node2):
+    """
+    Finds the LCA of node1 and node2 in a BST.
+    """
+    if root is None:
+        return None
+    if (node1.data < root.data and node2.data > root.data) or \
+       (node1.data > root.data and node2.data < root.data):
+        return root
+    elif node1.data < root.data and node2.data < root.data:
+        return lca_bst(root.left, node1, node2)
+    else:
+        return lca_bst(root.right, node1, node2)
+
+
+```
+
+**4. Graphs:**
+
+Finding the LCA in a general graph is more complex and often involves graph traversal algorithms like Depth-First Search (DFS) or Breadth-First Search (BFS).  You need to find paths from each node to all other nodes and then identify the nearest common ancestor.
+
+
+**Key Considerations:**
+
+* **Error Handling:**  Add checks to handle cases where one or both nodes are not in the tree.
+* **Node Representation:** The code examples use a simple Node class. Adapt it based on your specific node structure.
+* **Efficiency:** The recursive approach is generally more efficient for binary trees in terms of space and time complexity (O(h), where h is the height of the tree).  However, for very deep trees, it might lead to stack overflow.  The iterative approach can be more memory-efficient for such cases.
+* **Graph vs. Tree:** The algorithms for graphs are significantly different and more computationally intensive.
+
+
+Remember to choose the algorithm that best suits the type of tree or graph you are working with and consider the constraints of your specific application.  The recursive approach for binary trees is often the preferred and most efficient solution for its simplicity and clarity.
+
