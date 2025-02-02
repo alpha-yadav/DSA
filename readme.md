@@ -17573,3 +17573,102 @@ postorder_traversal(root) # Output: 4 5 2 3 1
 
 Remember to adapt the `print` statements within the traversal functions to whatever operation you need to perform on each node (e.g., storing the data in a list, modifying the node's value, etc.).  The core recursive structure remains the same.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes of a tree level by level.  Here are implementations in Python and JavaScript using a queue:
+
+
+**Python:**
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+
+**JavaScript:**
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) {
+    return;
+  }
+
+  const queue = [root];
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    console.log(curr.data + " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+
+// Example usage:
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1 2 3 4 5
+```
+
+**Explanation:**
+
+Both implementations use a queue (deque in Python, array in JavaScript) to maintain the order of nodes to be visited.
+
+1. **Initialization:** The root node is added to the queue.
+2. **Iteration:** While the queue is not empty:
+   - Remove the front element (dequeue) from the queue. This is the current node.
+   - Process the current node (print its data in this case).
+   - Add the left and right children of the current node (if they exist) to the rear of the queue (enqueue).
+3. **Termination:** The loop continues until the queue is empty, indicating that all nodes have been visited.
+
+
+These implementations provide a basic level order traversal. You can easily modify them to perform other operations on the nodes during the traversal (e.g., summing node values, searching for a specific value).  Remember to handle edge cases like an empty tree.
+
