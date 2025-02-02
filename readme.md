@@ -21156,3 +21156,110 @@ graph = {
 
 In summary, adjacency lists are a powerful and widely used way to represent graphs, particularly when dealing with sparse graphs where space efficiency and the speed of finding adjacent vertices are important.  The choice of specific implementation depends on the programming language and the specific requirements of the application.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so you can follow the arrows without ever going backward.  If a graph contains cycles, a topological sort is impossible.
+
+Here's a breakdown of key aspects:
+
+**1. Directed Acyclic Graph (DAG):**
+
+* **Directed:** Edges have a direction (A → B is different from B → A).
+* **Acyclic:**  There are no cycles (no path that starts and ends at the same node).  A cycle makes topological sorting impossible because you can't order nodes consistently if you have to go back on yourself.
+
+**2. Applications:**
+
+Topological sorting has numerous applications in areas where dependencies between tasks or elements exist:
+
+* **Course Scheduling:**  Ordering courses based on prerequisites.  A course must be taken before another if it's a prerequisite.
+* **Software Compilation:**  Determining the order in which to compile different modules of a program, where some modules depend on others.
+* **Build Systems (e.g., Make):**  Deciding the execution order of build tasks based on their dependencies.
+* **Data Serialization:**  Determining the order in which to write data to a file or database when there are dependencies between data elements.
+* **Dependency Resolution (e.g., package management):** Installing software packages in the correct order, respecting their dependencies.
+
+**3. Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+* **Kahn's Algorithm:**
+
+    1. **Find in-degree:** Calculate the in-degree of each node (the number of incoming edges).
+    2. **Enqueue nodes with in-degree 0:** Add all nodes with an in-degree of 0 to a queue. These are nodes with no dependencies.
+    3. **Process queue:**  While the queue is not empty:
+        * Dequeue a node.
+        * Add the node to the sorted list.
+        * For each neighbor (outgoing edge) of the dequeued node:
+            * Decrement its in-degree by 1.
+            * If its in-degree becomes 0, add it to the queue.
+    4. **Check for cycles:** If the sorted list contains fewer nodes than the total number of nodes in the graph, a cycle exists, and topological sorting is not possible.
+
+
+* **Depth-First Search (DFS) based Algorithm:**
+
+    1. Perform a DFS traversal of the graph.
+    2. Maintain a stack.  When you finish processing a node in the DFS (i.e., all its descendants have been visited), push the node onto the stack.
+    3. After DFS completes, the nodes in the stack, popped in reverse order, will be a topologically sorted order.
+
+
+**4. Example (Kahn's Algorithm):**
+
+Consider a graph with nodes A, B, C, D, and E, and edges: A → C, B → C, C → D, B → E, E → D.
+
+1. In-degrees: A = 0, B = 0, C = 2, D = 2, E = 1.
+2. Queue: [A, B] (nodes with in-degree 0).
+3. Processing:
+   - Dequeue A, add to sorted list: [A]
+   - Decrement C's in-degree (becomes 1).
+   - Dequeue B, add to sorted list: [A, B]
+   - Decrement C's in-degree (becomes 0), add C to queue: [C]
+   - Decrement E's in-degree (becomes 0), add E to queue: [C, E]
+   - Dequeue C, add to sorted list: [A, B, C]
+   - Decrement D's in-degree (becomes 1).
+   - Dequeue E, add to sorted list: [A, B, C, E]
+   - Decrement D's in-degree (becomes 0), add D to queue: [D]
+   - Dequeue D, add to sorted list: [A, B, C, E, D].
+
+The topological sort is: A, B, C, E, D.  Note that other valid topological sorts may exist.
+
+
+**5. Python Code (Kahn's Algorithm):**
+
+```python
+from collections import defaultdict
+
+def topological_sort(graph):
+    in_degree = defaultdict(int)
+    for node in graph:
+        for neighbor in graph[node]:
+            in_degree[neighbor] += 1
+
+    queue = [node for node in graph if in_degree[node] == 0]
+    sorted_list = []
+
+    while queue:
+        node = queue.pop(0)
+        sorted_list.append(node)
+        for neighbor in graph[node]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    if len(sorted_list) != len(graph):
+        return None  # Cycle detected
+
+    return sorted_list
+
+# Example graph (adjacency list representation):
+graph = {
+    'A': ['C'],
+    'B': ['C', 'E'],
+    'C': ['D'],
+    'D': [],
+    'E': ['D']
+}
+
+sorted_nodes = topological_sort(graph)
+print(f"Topological sort: {sorted_nodes}")
+```
+
+Remember to choose the algorithm that best suits your needs and the structure of your data.  Kahn's algorithm is generally preferred for its efficiency and simplicity when dealing with larger graphs.  DFS can be easier to understand conceptually for smaller graphs.
+
