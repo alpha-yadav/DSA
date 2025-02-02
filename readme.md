@@ -18884,3 +18884,45 @@ We can see that as *n* grows larger, the `n²` term dominates the function, and 
 
 **In summary:** Big-Theta notation precisely characterizes the growth rate of a function, providing a crucial tool for analyzing algorithm efficiency and comparing the performance of different approaches.  It's a powerful concept for understanding the scalability and resource requirements of computer programs.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used in computer science to describe the performance or complexity of algorithms as the input size grows to infinity.  The most common are:
+
+* **Big O (O):**  Describes the *upper bound* of an algorithm's growth rate.  It represents the worst-case scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.  It focuses on the dominant terms and ignores constant factors.
+
+* **Big Omega (Ω):** Describes the *lower bound* of an algorithm's growth rate. It represents the best-case scenario (or a lower bound on the complexity in all cases). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+
+* **Big Theta (Θ):** Describes the *tight bound* of an algorithm's growth rate.  It means the algorithm's growth rate is both O(g(n)) and Ω(g(n)).  Essentially, it means the algorithm's growth rate is precisely g(n), ignoring constant factors. We say f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n ≥ n₀.
+
+* **Little o (o):**  Describes an *upper bound that is not tight*.  f(n) = o(g(n)) means that for *any* positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  Intuitively, f(n) grows significantly slower than g(n).
+
+* **Little omega (ω):** Describes a *lower bound that is not tight*. f(n) = ω(g(n)) means that for *any* positive constant c, there exists a positive constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.  Intuitively, f(n) grows significantly faster than g(n).
+
+
+**Comparison Table:**
+
+| Notation | Meaning                               | Tightness | Example                      |
+|----------|---------------------------------------|-----------|------------------------------|
+| O(g(n))  | Upper bound                           | Not tight | f(n) = 5n² + 2n + 1, O(n²)  |
+| Ω(g(n))  | Lower bound                           | Not tight | f(n) = 5n² + 2n + 1, Ω(n²)  |
+| Θ(g(n))  | Tight bound (both O and Ω)           | Tight     | f(n) = 5n² + 2n + 1, Θ(n²)  |
+| o(g(n))  | Upper bound, not tight (strictly less)| Not tight | f(n) = n, o(n²)             |
+| ω(g(n))  | Lower bound, not tight (strictly more)| Not tight | f(n) = n², ω(n)              |
+
+
+**Relationships:**
+
+* If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* If f(n) = o(g(n)), then f(n) = O(g(n)) but f(n) ≠ Θ(g(n)).
+* If f(n) = ω(g(n)), then f(n) = Ω(g(n)) but f(n) ≠ Θ(g(n)).
+
+
+**In essence:**
+
+* **O** gives a ceiling on growth.
+* **Ω** gives a floor on growth.
+* **Θ** gives both a ceiling and a floor, precisely describing growth.
+* **o** and **ω** indicate strictly less or greater growth, respectively.
+
+
+Understanding these notations is crucial for analyzing and comparing the efficiency of different algorithms. They allow us to focus on the long-term behavior and scalability of algorithms without getting bogged down in implementation details or constant factors.
+
