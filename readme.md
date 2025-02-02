@@ -12849,3 +12849,133 @@ The best traversal algorithm depends on the specific problem and the properties 
 
 This overview covers the fundamental graph traversal algorithms.  There are other specialized algorithms for specific graph types and problems.  Understanding these core methods provides a strong foundation for tackling many graph-related challenges.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used and whether you're dealing with a graph or a tree.  Here are a few implementations in Python:
+
+**1. DFS for a Graph (using adjacency list):**
+
+This version uses an adjacency list to represent the graph and a recursive approach for the traversal.
+
+```python
+def dfs_graph(graph, start, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.  
+               Keys are nodes, and values are lists of their neighbors.
+        start: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to None).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(start, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_graph(graph, neighbor, visited)
+    return visited
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal:")
+dfs_graph(graph, 'A')  # Output will vary slightly depending on order of neighbors
+print("\nVisited nodes:", dfs_graph(graph, 'A')) #Output shows all visited nodes in a set
+
+```
+
+**2. DFS for a Graph (using adjacency matrix):**
+
+This version uses an adjacency matrix and an iterative approach with a stack.
+
+```python
+def dfs_graph_matrix(graph, start):
+    """
+    Performs DFS on a graph represented by an adjacency matrix.
+
+    Args:
+        graph: A list of lists representing the adjacency matrix.
+        start: The starting node (index).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    num_nodes = len(graph)
+    visited = [False] * num_nodes
+    stack = [start]
+    visited_nodes = []
+
+    while stack:
+        node = stack.pop()
+        if not visited[node]:
+            visited[node] = True
+            visited_nodes.append(node)
+            for neighbor in range(num_nodes):
+                if graph[node][neighbor] == 1 and not visited[neighbor]:
+                    stack.append(neighbor)
+    return visited_nodes
+
+# Example usage:  (Note:  0-based indexing for nodes)
+graph_matrix = [
+    [0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0]
+]
+
+print("\nDFS traversal (matrix):", dfs_graph_matrix(graph_matrix, 0))
+
+```
+
+
+**3. DFS for a Tree (recursive):**
+
+This is a simpler version for trees (assuming a tree structure where each node has a list of children).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+def dfs_tree(node):
+    """
+    Performs DFS traversal on a tree.
+
+    Args:
+        node: The root node of the tree.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    print(node.data, end=" ")
+    for child in node.children:
+        dfs_tree(child)
+
+# Example usage:
+root = Node('A')
+root.children = [Node('B'), Node('C')]
+root.children[0].children = [Node('D'), Node('E')]
+root.children[1].children = [Node('F')]
+
+print("\nDFS traversal (tree):")
+dfs_tree(root)
+```
+
+Remember to adapt these examples to your specific needs.  You might need to modify how nodes are processed (the `print` statements) or how the graph/tree is represented.  For very large graphs, iterative approaches (using a stack) are often preferred to avoid potential stack overflow errors.
+
