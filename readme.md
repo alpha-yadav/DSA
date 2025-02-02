@@ -21351,3 +21351,39 @@ else:
 
 This implementation efficiently detects cycles in a directed graph using Depth First Search and avoids unnecessary computations.  The use of `recStack` is crucial for identifying cycles;  simply using `visited` alone wouldn't suffice for directed graphs. Remember that a cycle in a directed graph is a path that starts and ends at the same node.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focusing on efficient graph algorithms.  The most famous and impactful are his algorithms for finding minimum spanning trees (MSTs) and approximate distance oracles.  Let's break down the key aspects:
+
+**1. Minimum Spanning Trees (MSTs):**
+
+Thorup's MST algorithm is a randomized algorithm that achieves a remarkable *linear-time* complexity, i.e., O(m), where 'm' is the number of edges in the graph.  This is asymptotically optimal.  Prior to Thorup's work, the best-known deterministic algorithms had complexities that were slightly worse than linear.
+
+The key idea behind Thorup's linear-time MST algorithm involves:
+
+* **Random Contraction:**  The algorithm repeatedly contracts edges randomly, effectively shrinking the graph.  The probability of contraction is carefully chosen to ensure the algorithm's correctness and efficiency.
+* **Borůvka's Algorithm Integration:**  The algorithm incorporates Borůvka's algorithm, which efficiently finds a set of edges that belong to any MST.
+* **Careful Handling of Cycle Detection:**  Efficient methods are used to detect and handle cycles that might arise during the contraction process.
+
+While theoretically optimal, the constant factors hidden within the O(m) notation can make it less practical than other MST algorithms (like Prim's or Kruskal's) for smaller graphs. Its strength lies in handling extremely large graphs where the linear-time complexity becomes a significant advantage.
+
+**2. Approximate Distance Oracles:**
+
+Thorup also made significant contributions to the development of approximate distance oracles.  These data structures efficiently answer distance queries in graphs, offering a trade-off between speed and accuracy.  His algorithms guarantee that the reported distance is within a certain multiplicative factor (e.g., 2 or 3) of the true shortest path distance.
+
+These oracles are built using techniques such as:
+
+* **Graph Decomposition:** The graph is decomposed into smaller, more manageable components.
+* **Preprocessing:** Significant preprocessing is done to build the oracle, allowing for fast query times.
+* **Sampling and Sparsification:**  Techniques to reduce the graph size while preserving approximate distance information.
+
+
+**Key characteristics of Thorup's algorithms (both MST and approximate distance oracles):**
+
+* **Randomization:**  Many of his algorithms employ randomization, leading to probabilistic guarantees of correctness and efficiency.
+* **Asymptotic Optimality:**  A central focus is on achieving the best possible asymptotic time complexity.
+* **Sophisticated Data Structures:** The algorithms often use sophisticated data structures to manage the graph and its components efficiently.
+* **Theoretical Focus:**  While some implementations exist, the emphasis is often on the theoretical properties and performance bounds rather than immediate practical application in every scenario.
+
+
+In summary, Mikkel Thorup's algorithms have significantly advanced the field of graph algorithms, establishing new benchmarks for efficiency and providing valuable theoretical insights.  While not always the most practical choice for small-scale problems, they are crucial for handling massive graphs where the asymptotic performance is paramount.
+
