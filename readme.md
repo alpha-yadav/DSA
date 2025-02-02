@@ -19390,3 +19390,12 @@ The best representation depends on the specific application and the properties o
 
 For general-purpose n-ary trees, the **list of children** representation often provides a good balance of simplicity, efficiency, and flexibility.  The **child-sibling** method is a reasonable alternative if memory efficiency is a prime concern and the trees tend to be shallow with few siblings per node.  The array representation is only suitable for complete or nearly complete n-ary trees.
 
+#  Introduction 
+Please provide me with context.  An introduction to *what*?  I need more information to write an introduction.  For example, tell me:
+
+* **What is the topic?** (e.g., the history of the Roman Empire, the benefits of exercise, a new software program)
+* **Who is the audience?** (e.g., experts, general public, children)
+* **What is the purpose of the introduction?** (e.g., to inform, to persuade, to entertain)
+
+Once I have this information, I can write a suitable introduction.
+
