@@ -9519,3 +9519,77 @@ public class SimpleLoop {
 
 All these examples do the same thing: they print the numbers 0 through 4 to the console.  They demonstrate the basic structure of a loop: a condition that is checked, and a body of code that is executed repeatedly as long as the condition is true.  The counter variable (`count` or `i`) is incremented in each iteration to eventually make the condition false and terminate the loop.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or combinations of data.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed in the inner loop
+        # This code accesses both outer_loop_variable and inner_loop_variable
+    # Code to be executed after each iteration of the inner loop, but still within the outer loop
+# Code to be executed after the outer loop completes
+```
+
+**Examples:**
+
+**1. Printing a multiplication table:**
+
+```python
+# Print a 10x10 multiplication table
+
+for i in range(1, 11):  # Outer loop: Rows
+    for j in range(1, 11):  # Inner loop: Columns
+        print(f"{i * j:4}", end="")  # :4 ensures consistent spacing
+    print() # Newline after each row
+```
+
+**2. Iterating through a matrix (list of lists):**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix: # Outer loop iterates through rows
+    for element in row: # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print() # Newline after each row
+```
+
+**3. Finding all pairs in a list:**
+
+```python
+my_list = [1, 2, 3, 4]
+
+for i in range(len(my_list)):
+    for j in range(i + 1, len(my_list)): # Start j from i+1 to avoid duplicate pairs and self-pairs
+        print(f"Pair: ({my_list[i]}, {my_list[j]})")
+```
+
+**4.  Nested loops with different iterables:**
+
+```python
+names = ["Alice", "Bob", "Charlie"]
+ages = [25, 30, 28]
+
+for name, age in zip(names, ages): # zip combines iterables
+    print(f"{name} is {age} years old.")
+```
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can significantly increase the runtime of your code, especially with large datasets.  The time complexity often increases multiplicatively (e.g., two nested loops iterating `n` times each have O(n²) complexity).
+* **Readability:**  Deeply nested loops can make your code difficult to read and understand.  Try to keep them as shallow as possible and use descriptive variable names.
+* **Alternatives:**  Consider alternative approaches like list comprehensions, NumPy array operations (for numerical computations), or algorithms designed for specific tasks (e.g., searching, sorting) to improve efficiency and readability when dealing with large datasets.
+
+
+Nested loops are a powerful tool, but it's crucial to understand their implications on performance and code clarity before using them extensively.  Choose the right tool for the job, and strive for efficient and maintainable code.
+
