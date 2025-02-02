@@ -13462,3 +13462,67 @@ int main() {
 
 These are all examples of simple loops.  They all perform the same basic task: iterating a fixed number of times and performing a simple action within each iteration.  More complex loops might involve nested loops, more intricate conditions, or more complex actions within the loop body.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop. This allows you to iterate over multiple dimensions or nested data structures efficiently.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+outer_loop:
+  for outer_variable in outer_iterable:
+    inner_loop:
+      for inner_variable in inner_iterable:
+        # Code to be executed for each inner and outer iteration
+```
+
+**Example (Python):**
+
+This example prints a multiplication table using nested loops:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+  for j in range(1, 11):  # Inner loop (columns)
+    print(i * j, end="\t")  # \t adds a tab for spacing
+  print()  # Newline after each row
+```
+
+This will output a 10x10 multiplication table.  The outer loop iterates through rows (1 to 10), and for each row, the inner loop iterates through columns (1 to 10), calculating and printing the product.
+
+
+**Example (JavaScript):**
+
+This JavaScript example iterates through a 2D array:
+
+```javascript
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+for (let i = 0; i < matrix.length; i++) { // Outer loop iterates through rows
+  for (let j = 0; j < matrix[i].length; j++) { // Inner loop iterates through columns in each row
+    console.log(matrix[i][j]);
+  }
+}
+```
+
+This will print each element of the `matrix` array.
+
+
+**When to Use Nested Loops:**
+
+Nested loops are particularly useful for:
+
+* **Processing multi-dimensional arrays or matrices:**  As shown in the examples above.
+* **Generating combinations or permutations:**  For example, finding all possible pairs of elements from two lists.
+* **Iterating over nested data structures:**  Such as JSON objects with nested arrays or objects.
+* **Implementing algorithms that require multiple levels of iteration:**  Like certain graph traversal algorithms or search algorithms.
+
+
+**Performance Considerations:**
+
+Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly as the number of nested loops and the size of the iterables grow.  For very large datasets, consider optimizing your code using more efficient algorithms or data structures.  Techniques like dynamic programming can sometimes drastically reduce the runtime complexity.
+
