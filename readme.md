@@ -16839,3 +16839,125 @@ bst.inorder_traversal(bst.root) # Output should be: 1 3 4 6 7 8 10 13 14
 
 Both methods achieve the same result. Choose the one you find more readable and maintainable.  Remember to include error handling (e.g., checking for duplicate keys) if needed for a production-ready implementation.  The `inorder_traversal` function is helpful for verifying the correct insertion.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion because you need to handle three cases:
+
+1. **Node to be deleted is a leaf node:** Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:**  This is the most complex case.  The usual approach is to replace the node with its inorder predecessor (the largest node in the left subtree) or its inorder successor (the smallest node in the right subtree).
+
+Here's a C++ implementation demonstrating BST deletion, including handling all three cases:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+// Helper function to find the minimum value node in a subtree
+Node* findMin(Node* node) {
+    while (node->left != nullptr) {
+        node = node->left;
+    }
+    return node;
+}
+
+// Function to delete a node from the BST
+Node* deleteNode(Node* root, int key) {
+    if (root == nullptr) {
+        return root; // Key not found
+    }
+
+    // Recursive search for the node to delete
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else {
+        // Node with key found
+
+        // Case 1: Node is a leaf node
+        if (root->left == nullptr && root->right == nullptr) {
+            delete root;
+            return nullptr;
+        }
+
+        // Case 2: Node has one child
+        else if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Case 3: Node has two children
+        else {
+            Node* temp = findMin(root->right); // Find inorder successor
+            root->data = temp->data;          // Copy successor's data
+            root->right = deleteNode(root->right, temp->data); // Delete successor
+        }
+    }
+    return root;
+}
+
+
+// Helper function for inorder traversal (for printing)
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    root = deleteNode(root, 20); //Deleting a leaf node
+
+    std::cout << "Inorder traversal after deleting 20: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 30); //Deleting a node with one child
+
+    std::cout << "Inorder traversal after deleting 30: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 50); //Deleting a node with two children
+
+
+    std::cout << "Inorder traversal after deleting 50: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    //Remember to deallocate memory after usage.  This is a simplified example and lacks full memory management.
+    //In a production environment, you should implement proper memory deallocation to avoid memory leaks.
+
+    return 0;
+}
+```
+
+Remember to compile and run this code using a C++ compiler (like g++).  This improved version handles all deletion cases correctly and includes a `main` function for testing.  Always remember to handle memory deallocation properly in a real-world application to prevent memory leaks.  This example provides a basic framework; more robust error handling and memory management might be needed for production use.
+
