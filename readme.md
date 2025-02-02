@@ -14525,3 +14525,111 @@ print(is_bst_recursive(root2)) # Output: False
 
 The inorder traversal method is generally simpler to understand and implement.  However, the recursive method with min/max is often more efficient because it avoids the overhead of creating and sorting an array.  The recursive approach has a time complexity of O(N) where N is the number of nodes, while the space complexity depends on the tree's height (O(H) in the best and average cases, O(N) in the worst case for a skewed tree).  The inorder traversal has a time complexity of O(N) and a space complexity of O(N)  due to the array storage (though space could be O(H) with an iterative inorder traversal using a stack).  Choose the algorithm that best suits your needs and understanding.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given tree follows the Binary Search Tree (BST) property. Here are two common methods:
+
+**Method 1: Recursive In-Order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val, max_val):
+    """
+    Recursively checks if a tree is a BST.
+
+    Args:
+        node: The root node of the subtree being checked.
+        min_val: The minimum allowed value in this subtree.
+        max_val: The maximum allowed value in this subtree.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False  # Node value out of range
+
+    # Recursively check left and right subtrees
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+def is_bst(root):
+    """
+    Checks if a tree is a BST.
+
+    Args:
+        root: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    return is_bst_recursive(root, float('-inf'), float('inf'))
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+
+print(f"Is the tree a BST? {is_bst(root)}") # True
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(12)
+root2.left.right.left = Node(10)
+root2.left.right.right = Node(15) #this violates the BST property
+root2.left.right.right.right = Node(16)
+
+print(f"Is the tree a BST? {is_bst(root2)}") #False
+
+```
+
+**Method 2: Iterative In-Order Traversal** (Slightly more efficient in terms of space complexity for very deep trees)
+
+
+```python
+def is_bst_iterative(root):
+    """
+    Iteratively checks if a tree is a BST using in-order traversal.
+    """
+    stack = []
+    prev = float('-inf')
+    node = root
+
+    while stack or node:
+        while node:
+            stack.append(node)
+            node = node.left
+
+        node = stack.pop()
+        if node.data <= prev:
+            return False  # Violation of BST property
+        prev = node.data
+        node = node.right
+
+    return True
+
+# Example Usage (same trees as above -  output will be identical)
+print(f"Is the tree a BST (iterative)? {is_bst_iterative(root)}") # True
+print(f"Is the tree a BST (iterative)? {is_bst_iterative(root2)}") #False
+```
+
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The recursive version uses O(H) space in the worst case (H being the height of the tree, which can be N in a skewed tree), while the iterative approach uses O(H) space as well, but tends to use less memory in practice for very deep trees due to its iterative nature.  For balanced trees, the space complexity is O(log N).  Choose either method; they both effectively solve the problem. Remember to define the `Node` class as shown in the first example.
+
