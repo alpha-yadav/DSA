@@ -13691,3 +13691,129 @@ Please provide me with context!  An introduction to *what*?  I need a topic to w
 
 Tell me what you'd like an introduction to, and I'll do my best!
 
+#  To check if two Binary trees are same or not 
+There are several ways to check if two binary trees are the same.  Here are two common approaches, one recursive and one iterative:
+
+**1. Recursive Approach:**
+
+This approach is generally considered more elegant and easier to understand.  It uses recursion to simultaneously traverse both trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def are_trees_same(root1, root2):
+    """
+    Recursively checks if two binary trees are identical.
+
+    Args:
+        root1: The root of the first binary tree.
+        root2: The root of the second binary tree.
+
+    Returns:
+        True if the trees are identical, False otherwise.
+    """
+
+    # Base Case: Both roots are None (empty trees)
+    if root1 is None and root2 is None:
+        return True
+
+    # Base Case: One root is None and the other is not (trees are different)
+    if root1 is None or root2 is None:
+        return False
+
+    # Check if data is the same, and recursively check left and right subtrees
+    return (root1.data == root2.data and
+            are_trees_same(root1.left, root2.left) and
+            are_trees_same(root1.right, root2.right))
+
+
+# Example usage:
+root1 = Node(1)
+root1.left = Node(2)
+root1.right = Node(3)
+
+root2 = Node(1)
+root2.left = Node(2)
+root2.right = Node(3)
+
+root3 = Node(1)
+root3.left = Node(2)
+root3.right = Node(4) # Different from root1 and root2
+
+print(f"root1 and root2 are same: {are_trees_same(root1, root2)}")  # Output: True
+print(f"root1 and root3 are same: {are_trees_same(root1, root3)}")  # Output: False
+
+```
+
+**2. Iterative Approach (using Queues):**
+
+This approach uses level-order traversal (Breadth-First Search) with queues.  It's generally less elegant than the recursive solution but can be more efficient for very large trees, as it avoids the potential for stack overflow errors associated with deep recursion.
+
+```python
+from collections import deque
+
+def are_trees_same_iterative(root1, root2):
+    """
+    Iteratively checks if two binary trees are identical using level order traversal.
+
+    Args:
+        root1: The root of the first binary tree.
+        root2: The root of the second binary tree.
+
+    Returns:
+        True if the trees are identical, False otherwise.
+    """
+    if root1 is None and root2 is None:
+        return True
+    if root1 is None or root2 is None:
+        return False
+
+    queue1 = deque([root1])
+    queue2 = deque([root2])
+
+    while queue1 and queue2:
+        node1 = queue1.popleft()
+        node2 = queue2.popleft()
+
+        if node1.data != node2.data:
+            return False
+
+        # Add children to queues, handling None children appropriately.
+        if node1.left and node2.left:
+            queue1.append(node1.left)
+            queue2.append(node2.left)
+        elif node1.left or node2.left:  #One has a left child, the other doesn't
+            return False
+
+        if node1.right and node2.right:
+            queue1.append(node1.right)
+            queue2.append(node2.right)
+        elif node1.right or node2.right: #One has a right child, the other doesn't
+            return False
+
+    return len(queue1) == len(queue2) #Check if both queues are empty at the end
+
+
+# Example Usage (same as before, will produce identical output)
+root1 = Node(1)
+root1.left = Node(2)
+root1.right = Node(3)
+
+root2 = Node(1)
+root2.left = Node(2)
+root2.right = Node(3)
+
+root3 = Node(1)
+root3.left = Node(2)
+root3.right = Node(4)
+
+print(f"root1 and root2 are same (iterative): {are_trees_same_iterative(root1, root2)}")
+print(f"root1 and root3 are same (iterative): {are_trees_same_iterative(root1, root3)}")
+```
+
+Choose the method that best suits your needs.  The recursive approach is generally preferred for its readability, unless you're dealing with extremely deep trees where stack overflow might be a concern.  The iterative approach handles those cases more gracefully. Remember to handle the `None` cases carefully in both implementations to avoid errors.
+
