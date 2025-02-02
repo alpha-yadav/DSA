@@ -16550,3 +16550,12 @@ The optimal representation depends on your application.  Consider these factors:
 
 For many applications, the **list of children** representation offers a good balance of simplicity, efficiency, and flexibility.  If upward traversal is frequently needed, a parent pointer should be considered.  The array representation is suitable only when the maximum number of children is known and small.  The child-sibling representation is simple but might be less efficient for accessing specific children.
 
+#  Introduction 
+Please provide me with context!  An introduction to *what*?  I need more information to write an introduction.  For example, tell me:
+
+* **What is the topic?** (e.g., the history of the Roman Empire, the benefits of exercise, a new software program)
+* **Who is the audience?** (e.g., experts, general public, children)
+* **What is the purpose of the introduction?** (e.g., to engage the reader, to provide background information, to state a thesis)
+
+Once I have this information, I can write a suitable introduction.
+
