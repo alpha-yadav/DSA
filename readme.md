@@ -9190,3 +9190,69 @@ This uses a tuple to store boolean results of divisibility checks.  String inter
 
 For beginners, **Version 1** is recommended due to its clarity and ease of understanding.  As you become more comfortable with Swift, you can explore the more concise options (Versions 2 and 3). The key is to prioritize readability, especially when starting out. Remember to choose the version that best suits your needs and understanding.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (like time and memory) an algorithm consumes as the input size grows.  It's a crucial aspect of algorithm analysis, helping us compare the efficiency of different approaches to solving the same problem.  We typically express complexity using Big O notation.
+
+Here's a breakdown of key aspects:
+
+**1. Big O Notation:**
+
+Big O notation describes the upper bound of an algorithm's growth rate.  It focuses on the dominant terms as the input size (usually denoted by 'n') approaches infinity, ignoring constant factors and lower-order terms.  This gives a simplified, yet powerful, way to compare algorithms.
+
+Some common Big O complexities (from best to worst):
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size. Example: Nested loops iterating through an array.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:**  The execution time grows factorially with the input size.  Example:  Traveling Salesperson Problem (brute-force approach).
+
+
+**2. Types of Complexity:**
+
+* **Time Complexity:** Measures how the runtime of an algorithm scales with the input size.  This is usually the most important aspect.
+
+* **Space Complexity:** Measures how the memory usage of an algorithm scales with the input size.  This includes the space used for variables, data structures, and the call stack.
+
+**3. Best, Average, and Worst-Case Scenarios:**
+
+Big O notation often describes the *worst-case* scenario.  However, it's also helpful to consider:
+
+* **Best-case:** The most favorable input that leads to the fastest execution time.
+* **Average-case:** The expected execution time over many different inputs.  This can be harder to analyze than the worst-case.
+
+**4. Analyzing Algorithm Complexity:**
+
+Analyzing an algorithm's complexity involves:
+
+* **Identifying the basic operations:** Determine the operations that contribute most significantly to the runtime.
+* **Counting the number of operations:** Express the number of operations as a function of the input size 'n'.
+* **Determining the dominant terms:** Identify the terms that grow fastest as 'n' increases.
+* **Applying Big O notation:** Simplify the function using Big O notation, ignoring constant factors and lower-order terms.
+
+**Example:**
+
+Consider a simple algorithm that finds the maximum element in an unsorted array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+This algorithm iterates through the array once.  The number of comparisons is directly proportional to the array size ('n').  Therefore, its time complexity is O(n) (linear time).  Its space complexity is O(1) (constant space) because it uses a fixed amount of extra memory regardless of the array size.
+
+
+Understanding algorithm complexity is essential for choosing the most efficient algorithms for a given task, especially when dealing with large datasets where even small differences in efficiency can have a significant impact on performance.
+
