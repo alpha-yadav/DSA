@@ -17848,3 +17848,74 @@ Remember to handle edge cases such as:
 
 Choose the method that best suits your needs and context. For most situations, the recursive approach provides a good balance of readability and efficiency.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic computer science problem.  There are several ways to solve it, each with different time and space complexities.  The best approach depends on the type of tree and whether you have pre-processing capabilities.
+
+**Methods:**
+
+1. **Brute-Force Approach (General Trees):**
+
+   * **Idea:**  Traverse the tree from the root. For each node, check if both nodes (let's call them `node1` and `node2`) are present in its subtree.  If both are found, that node is a common ancestor.  Continue the traversal until you find a common ancestor that has no other common ancestor as a descendant.
+
+   * **Time Complexity:** O(N^2) in the worst case (a skewed tree) where N is the number of nodes.
+   * **Space Complexity:** O(H) in the worst case due to recursion, where H is the height of the tree.
+
+2. **Recursive Approach (Binary Trees):**
+
+   * **Idea:** This is a more efficient approach for binary trees.  Start at the root. If `node1` and `node2` are both in the left subtree, recursively search the left subtree.  If they are both in the right subtree, recursively search the right subtree.  If one is in the left and one is in the right, the current node is the LCA.
+
+   * **Time Complexity:** O(N) in the worst case (skewed tree).
+   * **Space Complexity:** O(H) due to recursion.
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+   ```
+
+3. **Iterative Approach (Binary Trees):**
+
+   * **Idea:** Similar to the recursive approach, but uses a stack or queue instead of recursion, making it potentially more efficient in terms of memory for very deep trees.
+
+   * **Time Complexity:** O(N)
+   * **Space Complexity:** O(W), where W is the maximum width of the tree.  Can be better than recursion in some cases.
+
+4. **Using Parent Pointers (General Trees or Binary Trees):**
+
+   * **Idea:** If you can add parent pointers to each node during tree construction, finding the LCA becomes much easier.  Traverse upwards from `node1` and `node2` simultaneously, storing the ancestors of each in a set.  The first common ancestor you find (the first common element in the sets) is the LCA.
+
+   * **Time Complexity:** O(H), where H is the height of the tree.  This is very efficient.
+   * **Space Complexity:** O(H) for storing ancestors.
+
+
+5. **Preprocessing for Efficient Queries (General Trees):**
+
+   * **Idea:** For a large number of LCA queries, it's beneficial to preprocess the tree.  Techniques like Tarjan's off-line LCA algorithm or using a Binary Lifting technique allows for very fast subsequent LCA queries (often O(1) or close to it per query after preprocessing).
+
+
+**Choosing the Right Method:**
+
+* **Small trees, no pre-processing:** The recursive approach is generally the clearest and efficient enough.
+* **Very deep trees:** The iterative approach might be preferable to avoid stack overflow issues.
+* **Many LCA queries on the same tree:** Preprocessing techniques are the most efficient.
+* **Trees with parent pointers:** The parent pointer method is incredibly fast.
+
+
+Remember to handle edge cases like one node being an ancestor of the other, or nodes not being present in the tree.  The provided recursive code example already includes some error handling.  You'll need to adapt the code depending on your specific needs and tree structure.
+
