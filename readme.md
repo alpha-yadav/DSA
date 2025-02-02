@@ -10754,3 +10754,47 @@ Nested loops are useful when you need to process data that has a two-dimensional
 
 Nested loops can lead to significant performance overhead, especially with large datasets.  The time complexity increases dramatically with the number of nested loops.  For example, two nested loops that iterate `n` times each have a time complexity of O(n²).  Consider optimizing your code if performance becomes an issue, perhaps using more efficient algorithms or data structures.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They only require a number of operations proportional to the logarithm of the input size.  This means the time it takes to solve the problem increases very slowly as the input size grows.  This is achievable because these algorithms typically work by repeatedly dividing the problem size in half (or some other constant factor).
+
+Here are some common types and examples of O(log n) algorithms:
+
+**1. Binary Search:**
+
+* **Type:** Divide and Conquer
+* **Description:**  This classic algorithm searches a *sorted* array for a target value.  It repeatedly divides the search interval in half. If the target value is less than the middle element, the search continues in the left half; otherwise, it continues in the right half.
+* **Example:** Finding a word in a dictionary.
+
+**2. Binary Tree Operations (Search, Insertion, Deletion – under balanced conditions):**
+
+* **Type:** Tree Traversal
+* **Description:**  In a balanced binary search tree (like an AVL tree or a red-black tree), searching for, inserting, or deleting a node takes logarithmic time because you effectively halve the search space with each comparison.  *Note:*  If the tree is unbalanced (e.g., a skewed tree), these operations can become O(n).
+* **Example:**  Efficiently storing and retrieving data in a database.
+
+**3. Efficient exponentiation (Exponentiation by squaring):**
+
+* **Type:**  Divide and Conquer
+* **Description:**  Calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time by repeatedly squaring the base and adjusting the exponent.
+* **Example:**  Cryptography, especially in modular exponentiation.
+
+**4. Finding the kth smallest element using Quickselect (average case):**
+
+* **Type:**  Divide and Conquer
+* **Description:**  A variation of quicksort that finds the kth smallest element in an unsorted array.  The average case runtime is O(n), but variations can achieve O(log n) in certain scenarios or with additional assumptions.
+* **Example:**  Finding the median of a dataset.
+
+**5. Logarithmic time algorithms in graph algorithms (under specific conditions):**
+
+* **Type:** Depends on the algorithm
+* **Description:** Some graph algorithms, such as finding the shortest path in a tree, can have logarithmic time complexity. This is usually linked to the tree's balanced structure or specific properties of the graph.
+* **Example:** Finding the lowest common ancestor in a binary tree.
+
+**Key Characteristics Leading to O(log n) Complexity:**
+
+* **Repeated halving (or division by a constant factor):** The problem size is reduced by a constant factor with each step.
+* **Sorted data (often):** Many O(log n) algorithms rely on the input data being sorted (like binary search).
+* **Efficient data structures:**  Balanced trees and heaps are crucial in achieving logarithmic time complexity for certain operations.
+
+
+It's important to remember that the O(log n) complexity is often an *average-case* or *best-case* scenario.  Some of these algorithms may have worse-case performance of O(n) if the data is not well-behaved (e.g., an unbalanced binary search tree).  But in many practical applications, the average-case performance is very close to O(log n), making them highly efficient.
+
