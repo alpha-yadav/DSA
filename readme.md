@@ -13561,3 +13561,54 @@ Here's a breakdown of the types and common examples of O(log n) algorithms:
 
 It's important to note that the base of the logarithm (e.g., base 2, base 10) doesn't affect the overall classification as O(log n), as different bases only differ by a constant factor.  The crucial aspect is the logarithmic relationship between the input size and the runtime.
 
+#  An O(log n) example 
+The most common example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array or list.  Instead of checking each element one by one (which would be O(n)), it repeatedly divides the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process repeats until the target value is found or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the right half
+        else:
+            high = mid - 1  # Search in the left half
+    return -1  # Target not found
+
+
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+
+```
+
+**Why it's O(log n):**
+
+With each comparison, we eliminate roughly half of the remaining search space.  This means the number of comparisons required is proportional to the logarithm (base 2) of the input size (n).  Specifically, the maximum number of comparisons is approximately log₂(n) + 1.  Since constant factors are dropped in Big O notation, this simplifies to O(log n).
+
+
+**Other O(log n) examples:**
+
+While binary search is the most common, other algorithms exhibit logarithmic time complexity, including:
+
+* **Finding an element in a balanced binary search tree:**  Similar to binary search, each comparison eliminates roughly half the remaining tree.
+* **Efficient exponentiation (e.g., using exponentiation by squaring):**  This technique reduces the number of multiplications required to calculate a^b from O(b) to O(log b).
+* **Certain tree traversal algorithms (with balanced trees):**  Traversals like inorder, preorder, and postorder can be O(n) for general trees, but on balanced trees (like AVL trees or red-black trees), they can be optimized to O(log n) for certain operations like searching, insertion, and deletion.
+
+
+It's crucial to remember that the O(log n) complexity is only achieved when the input data is structured appropriately (e.g., sorted for binary search, balanced for tree-based algorithms).  If the data isn't structured, these algorithms might not be applicable, or their performance could degrade to O(n) or worse.
+
