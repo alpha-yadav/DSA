@@ -10098,3 +10098,115 @@ inorder_traversal(bst.root) # Output should be: 1 3 6 8 10 14
 
 Remember to choose the method that best suits your needs and coding style.  The recursive version is often preferred for its readability, while the iterative version might be more efficient for very large trees.  Always include a traversal method to visually check the structure of your BST after insertion.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node (no children):**  Simply remove the node.
+
+2. **Node to be deleted has one child:** Replace the node with its child.
+
+3. **Node to be deleted has two children:** This is the most complex case.  The most common approach is to find the inorder predecessor (largest node in the left subtree) or inorder successor (smallest node in the right subtree), replace the node to be deleted with its inorder predecessor/successor, and then delete the predecessor/successor (which will be one of the simpler cases 1 or 2).
+
+
+Here's a C++ implementation demonstrating BST deletion, handling all three cases:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+Node* minValueNode(Node* node) {
+    Node* current = node;
+    while (current->left != nullptr) {
+        current = current->left;
+    }
+    return current;
+}
+
+Node* deleteNode(Node* root, int key) {
+    // Base Case: If the tree is empty
+    if (root == nullptr) {
+        return root;
+    }
+
+    // Recursive calls to find the node to be deleted
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // key == root->data (node found)
+
+        // Case 1: Node with 0 or 1 child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Case 2: Node with two children
+        Node* temp = minValueNode(root->right); // Find inorder successor
+        root->data = temp->data; // Copy the inorder successor's data to the node being deleted
+        root->right = deleteNode(root->right, temp->data); // Delete the inorder successor
+    }
+    return root;
+}
+
+
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 20); // Delete a leaf node
+
+    std::cout << "Inorder traversal after deletion of 20: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    root = deleteNode(root, 30); //Delete a node with one child
+
+    std::cout << "Inorder traversal after deletion of 30: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 50); //Delete a node with two children
+
+    std::cout << "Inorder traversal after deletion of 50: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    //Clean up memory (important to avoid leaks!)  This is a simplified example.  A more robust solution would use a destructor and smart pointers.
+    // ... (code to recursively delete the remaining nodes would go here) ...
+
+
+    return 0;
+}
+```
+
+Remember to handle memory deallocation properly to prevent memory leaks, especially after deleting nodes.  In a production environment, using smart pointers (like `std::unique_ptr` or `std::shared_ptr`) is highly recommended for automatic memory management.  The simplified cleanup is omitted here for brevity but is crucial in real-world applications.  The provided `main` function demonstrates the deletion of different node types.  Study each deletion case to understand how the algorithm handles them.
+
