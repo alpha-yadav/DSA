@@ -14948,3 +14948,110 @@ postorder(root) # Output: D E B F C A
 
 Remember to adapt the `Node` class and the traversal functions if you're working with a different data structure within your tree nodes.  The core logic of the recursive calls remains the same.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary search tree, there's no simple ordering property to exploit in a general binary tree.  Therefore, we need a different approach.
+
+Here are two common approaches to finding the LCA in a binary tree:
+
+**1. Recursive Approach:**
+
+This approach recursively traverses the tree.  If a node is found, it's returned. If a node is not found, we continue down the tree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:  # p and q are on different subtrees
+        return root
+    elif left_lca:             # p and q are on the left subtree
+        return left_lca
+    else:                       # p and q are on the right subtree
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+lca = lowestCommonAncestor(root, root.left, root.right) #LCA is 1
+print(f"LCA of 2 and 3 is: {lca.data}")  
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right) #LCA is 2
+print(f"LCA of 4 and 5 is: {lca.data}")
+
+lca = lowestCommonAncestor(root, root.left, root.right.right) #LCA is 1
+print(f"LCA of 2 and 7 is: {lca.data}")
+
+lca = lowestCommonAncestor(root, root.left.left, root.right.right) #LCA is 1
+print(f"LCA of 4 and 7 is: {lca.data}")
+
+lca = lowestCommonAncestor(root, Node(8), root.right.right) #Handles case where node is not present
+print(f"LCA of 8 and 7 is: {lca}") #Output will be None
+
+
+```
+
+**2. Iterative Approach (using a parent pointer):**
+
+This approach requires modifying the tree to include parent pointers. This isn't always possible or desirable, but if you can add parent pointers, the iterative method can be more efficient in some cases.
+
+```python
+#This requires modification of the Node class to include a parent pointer.  I'll leave that as an exercise.  
+#The algorithm below assumes you have access to a parent pointer.
+def lowestCommonAncestorIterative(p, q):
+    # Assume a parent pointer is available for each node (add this to Node class)
+    path_p = []
+    path_q = []
+
+    # Find path from root to p
+    curr = p
+    while curr is not None:
+        path_p.append(curr)
+        curr = curr.parent  #This assumes parent pointer exists
+
+    # Find path from root to q
+    curr = q
+    while curr is not None:
+        path_q.append(curr)
+        curr = curr.parent #This assumes parent pointer exists
+
+    # Find LCA using the paths
+    lca = None
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[len(path_p)-1-i] == path_q[len(path_q)-1-i]:
+        lca = path_p[len(path_p)-1-i]
+        i += 1
+
+    return lca
+```
+
+
+The recursive approach is generally simpler to understand and implement, while the iterative approach might offer performance advantages in specific scenarios if parent pointers are readily available.  Choose the method that best suits your needs and the constraints of your problem. Remember to handle edge cases, such as when one or both nodes are not present in the tree.
+
