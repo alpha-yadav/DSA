@@ -19769,3 +19769,92 @@ int main() {
 
 Remember that this code omits proper memory management in the `main` function for brevity.  In a production environment, you **must** add a recursive function to properly deallocate all nodes after deletion to avoid memory leaks.  This would involve traversing the tree and deleting nodes post-order (after deleting their children).  The comments in `main` highlight where this crucial cleanup should be implemented.  Consider using smart pointers (e.g., `std::unique_ptr` or `std::shared_ptr`) for safer memory management in a more sophisticated implementation.
 
+#  Lowest common ancestor in a BST 
+The lowest common ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node that has both nodes as descendants (where we consider a node to be a descendant of itself).  There are several ways to find the LCA in a BST, and they are generally more efficient than algorithms for finding the LCA in a general tree because of the BST's ordered property.
+
+**Methods:**
+
+1. **Recursive Approach:** This is a very elegant and efficient approach leveraging the BST property.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lowestCommonAncestor(root, p, q):
+       """
+       Finds the LCA of nodes p and q in a BST.
+
+       Args:
+           root: The root of the BST.
+           p: The first node.
+           q: The second node.
+
+       Returns:
+           The LCA node, or None if either p or q is not in the tree.
+       """
+       if not root or root == p or root == q:
+           return root
+
+       if (p.data < root.data and q.data > root.data) or \
+          (p.data > root.data and q.data < root.data):
+           return root
+
+       if p.data < root.data:
+           return lowestCommonAncestor(root.left, p, q)
+       else:
+           return lowestCommonAncestor(root.right, p, q)
+
+   # Example usage:
+   root = Node(6)
+   root.left = Node(2)
+   root.right = Node(8)
+   root.left.left = Node(0)
+   root.left.right = Node(4)
+   root.right.left = Node(7)
+   root.right.right = Node(9)
+
+   p = root.left  # Node with data 2
+   q = root.right # Node with data 8
+   lca = lowestCommonAncestor(root, p, q)
+   print(f"LCA of {p.data} and {q.data}: {lca.data}")  # Output: LCA of 2 and 8: 6
+
+
+   ```
+
+   **Explanation:**
+
+   * The base case is when the root is null, or if either `p` or `q` is found (it's the LCA).
+   * If `p` and `q` are on opposite sides of the root (one smaller, one larger), the root is the LCA.
+   * Otherwise, recursively search the left or right subtree based on the values of `p` and `q` relative to the root.
+
+
+2. **Iterative Approach:**  While recursion is often preferred for its readability, an iterative solution can be slightly more efficient in terms of memory usage, especially for very deep trees:
+
+   ```python
+   def lowestCommonAncestorIterative(root, p, q):
+       while root:
+           if p.data < root.data and q.data < root.data:
+               root = root.left
+           elif p.data > root.data and q.data > root.data:
+               root = root.right
+           else:
+               return root
+       return None #If p or q are not in the tree
+
+   ```
+
+   This approach directly iterates down the tree, making the same comparisons as the recursive method but without the function call overhead.
+
+
+**Important Considerations:**
+
+* **Node Existence:**  The functions above implicitly assume that `p` and `q` exist in the BST.  A robust solution should include checks to ensure both nodes are present before proceeding. You could add error handling for cases where a node is not found.
+* **Error Handling:**  Consider what should happen if either `p` or `q` is not found in the tree.  The examples above return `None` in this scenario.
+* **Duplicates:**  If the BST allows duplicate values, the LCA might not be uniquely defined. The provided solutions will return one possible LCA in this case.
+
+
+Choose either the recursive or iterative approach based on your preference and the specific constraints of your application. The recursive method is often easier to understand and implement, while the iterative method might offer a slight performance advantage in certain scenarios.
+
