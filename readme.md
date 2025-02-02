@@ -13526,3 +13526,38 @@ Nested loops are particularly useful for:
 
 Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly as the number of nested loops and the size of the iterables grow.  For very large datasets, consider optimizing your code using more efficient algorithms or data structures.  Techniques like dynamic programming can sometimes drastically reduce the runtime complexity.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They mean the time it takes to solve a problem grows logarithmically with the input size (n).  This is significantly faster than linear time (O(n)) and much faster than polynomial or exponential time algorithms.
+
+Here's a breakdown of the types and common examples of O(log n) algorithms:
+
+**1. Binary Search:** This is the quintessential example.  It works on a *sorted* array or list.  In each step, it eliminates half of the remaining search space.
+
+* **How it works:**  You compare your target value to the middle element. If it's less, you search the left half; if it's greater, you search the right half. You repeat this until you find the target or exhaust the search space.
+* **Example:** Finding a word in a dictionary. You don't start from the beginning; you open roughly to the middle.
+
+
+**2. Algorithms based on efficient data structures:**  Many data structures inherently support logarithmic time operations.
+
+* **Binary Search Trees (BSTs):**  Searching, insertion, and deletion in a balanced BST (like an AVL tree or red-black tree) have an average time complexity of O(log n).  However, in worst-case scenarios (e.g., a highly unbalanced tree), it can degrade to O(n).
+* **Heaps (Binary Heaps):** Operations like insertion, deletion (of the minimum/maximum element), and finding the minimum/maximum element take O(log n) time.  This makes them useful for priority queues.
+* **Hash Tables (with good hashing):** While *average-case* complexity is O(1) for search, insertion, and deletion, the worst-case scenario (e.g., many collisions) can be O(n). However, with a good hash function and proper handling of collisions, hash tables are often practically O(1) and provide extremely fast lookups.
+
+
+**3. Divide and Conquer Algorithms (with logarithmic recursion depth):** Some divide-and-conquer algorithms recursively break down the problem into smaller subproblems, but the number of recursive calls is logarithmic.
+
+* **Example:**  Certain types of tree traversals (though the overall traversal might be O(n), specific operations within the traversal could be O(log n) depending on the tree structure and the operation being performed).  The height of a balanced binary tree is log₂(n), so algorithms that traverse the tree's height will often fall into this category.
+
+
+**4. Exponentiation by Squaring:**  This is an efficient algorithm for calculating a^b (a raised to the power of b). It achieves O(log b) time complexity by repeatedly squaring the base and reducing the exponent.
+
+
+**Key characteristics of O(log n) algorithms:**
+
+* **Repeated halving (or similar reduction):** The core idea is to repeatedly reduce the problem size by a constant factor in each step.
+* **Sorted data (often):** Many O(log n) algorithms (like binary search) require the input data to be sorted.
+* **Efficient data structures:**  The use of appropriate data structures is crucial for achieving logarithmic time complexity.
+
+
+It's important to note that the base of the logarithm (e.g., base 2, base 10) doesn't affect the overall classification as O(log n), as different bases only differ by a constant factor.  The crucial aspect is the logarithmic relationship between the input size and the runtime.
+
