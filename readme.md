@@ -10798,3 +10798,65 @@ Here are some common types and examples of O(log n) algorithms:
 
 It's important to remember that the O(log n) complexity is often an *average-case* or *best-case* scenario.  Some of these algorithms may have worse-case performance of O(n) if the data is not well-behaved (e.g., an unbalanced binary search tree).  But in many practical applications, the average-case performance is very close to O(log n), making them highly efficient.
 
+#  An O(log n) example 
+The most common example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  Instead of checking each element one by one (which would be O(n)), it repeatedly divides the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This halving of the search space at each step is what gives it its logarithmic time complexity.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+**Why O(log n)?**
+
+With each comparison in binary search, we eliminate roughly half of the remaining search space.  Let's say the array has `n` elements.  The number of times we can halve `n` before we get down to 1 is approximately log₂(n) (log base 2).  This is why the time complexity is O(log n).  The base of the logarithm (2 in this case) doesn't affect the Big O notation, so we often just write O(log n).
+
+
+Other examples of O(log n) algorithms include:
+
+* **Finding an element in a balanced binary search tree:**  Similar to binary search, each comparison eliminates roughly half the remaining nodes.
+* **Efficient exponentiation (e.g., using exponentiation by squaring):**  Repeatedly squaring the base reduces the number of multiplications needed.
+* **Some tree traversal algorithms (depending on the tree structure):**  Traversing a balanced tree can be done in logarithmic time.
+
+
+It's crucial to remember that O(log n) algorithms only achieve this efficiency when the input data is structured in a way that allows for this divide-and-conquer approach (like a sorted array or a balanced tree).  If the data is unstructured, you won't be able to use these algorithms efficiently.
+
