@@ -20649,3 +20649,101 @@ class Node:
 
 Remember to replace the example `root` node in the code snippets with your actual tree's root node.  The output will depend on the structure of your specific binary tree.  These functions provide the basic recursive algorithms; iterative versions are also possible but are slightly more complex.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with varying time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This approach recursively traverses the tree.  If a node is found to be either `p` or `q`, it's returned.  If both `p` and `q` are found in the left subtree, the LCA is in the left subtree; if both are in the right subtree, the LCA is in the right subtree.  Otherwise, the current node is the LCA.
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (worst-case scenario, traversing the entire tree).
+   * **Space Complexity:** O(H), where H is the height of the tree (due to recursive call stack).  In a balanced tree, H is log(N); in a skewed tree, H is N.
+
+2. **Iterative Approach (Using a Stack):**
+
+   This approach uses a stack to simulate the recursion, avoiding the potential stack overflow issues of deep recursion.  It's similar in concept to the recursive approach but uses a stack for tracking nodes to visit.
+
+   ```python
+   def lowestCommonAncestorIterative(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       stack = [root]
+       parent = {root: None}  # To track parent-child relationships
+
+       while p not in parent or q not in parent:
+           node = stack.pop()
+           if node.left:
+               parent[node.left] = node
+               stack.append(node.left)
+           if node.right:
+               parent[node.right] = node
+               stack.append(node.right)
+
+       ancestors = set()
+       while p:
+           ancestors.add(p)
+           p = parent[p]
+       while q:
+           if q in ancestors:
+               return q
+           q = parent[q]
+       return None #should not happen if p and q are present in the tree
+
+   ```
+
+   * **Time Complexity:** O(N)
+   * **Space Complexity:** O(N) in the worst case (skewed tree), otherwise less than O(N).
+
+
+3. **Using Parent Pointers (If parent pointers are already available):**
+
+   If each node already has a pointer to its parent, the algorithm becomes simpler and more efficient.  You can trace upwards from both `p` and `q` until you find a common ancestor.
+
+   ```python
+   def lowestCommonAncestorParentPointers(p, q):
+       ancestors_p = set()
+       while p:
+           ancestors_p.add(p)
+           p = p.parent  #Assuming each node has a 'parent' attribute
+       while q:
+           if q in ancestors_p:
+               return q
+           q = q.parent
+       return None #Should not happen if p and q are present in the tree
+   ```
+
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(H)
+
+
+**Choosing the Right Method:**
+
+* The **recursive approach** is generally preferred for its simplicity and readability.
+* The **iterative approach** can be useful for very deep trees to avoid stack overflow.
+* The **parent pointer approach** is the most efficient if parent pointers are readily available.
+
+
+Remember to handle edge cases:  What if `p` or `q` is not in the tree?  What if `p` or `q` is the root? The provided code addresses these scenarios to some degree but can be further improved with more robust error handling as needed for your specific use case.
+
