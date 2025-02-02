@@ -19237,3 +19237,67 @@ Certain operations on balanced binary search trees (BSTs), AVL trees, red-black 
 
 In summary, O(log n) algorithms are highly efficient for large datasets because the time required to process the data grows very slowly as the size of the data increases.  They are commonly used in many areas of computer science, including searching, sorting, and data structure management.
 
+#  An O(log n) example 
+The quintessential O(log n) example is **binary search** in a sorted array.
+
+**Algorithm:**
+
+Binary search works by repeatedly dividing the search interval in half.  If the value you're looking for is in the middle of the interval, you've found it.  If it's less than the middle value, you search the lower half; if it's greater, you search the upper half.  You continue this process until either you find the value or the search interval is empty.
+
+**Code Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found in the array")
+```
+
+**Why it's O(log n):**
+
+With each iteration of the `while` loop, we effectively halve the size of the search space.  This means the number of iterations required is proportional to the logarithm (base 2) of the input size `n`.  Therefore, the time complexity is O(log n).
+
+**Other O(log n) examples:**
+
+Other algorithms with O(log n) time complexity include:
+
+* **Tree traversals (balanced trees):**  Operations like searching, insertion, and deletion in a balanced binary search tree (BST) or AVL tree have logarithmic time complexity because the tree's height is proportional to log n.
+* **Efficient exponentiation:** Algorithms for calculating a<sup>b</sup> (a raised to the power of b) can achieve O(log b) time complexity.
+* **Finding an element in a sorted set (using specialized data structures):**  Data structures like B-trees and skip lists provide O(log n) search times.
+
+
+It's important to note that O(log n) algorithms are very efficient, especially for large datasets, as the growth rate of the logarithm is much slower than linear growth (O(n)).
+
