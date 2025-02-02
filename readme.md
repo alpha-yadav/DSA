@@ -14422,3 +14422,106 @@ print(is_bst_recursive(root2)) #Output: True
 
 Both methods correctly determine whether a tree is a BST.  Choose the method that best suits your understanding and the specific constraints of your application.  For most cases, the recursive method is slightly preferred for its better space efficiency in average cases.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Algorithm 1: Inorder Traversal**
+
+This algorithm leverages the property that an inorder traversal of a BST will produce a sorted sequence of nodes.
+
+1. **Inorder Traversal:** Perform an inorder traversal of the binary tree.  This visits nodes in the order: left subtree, root, right subtree.
+2. **Sorted Check:** As you perform the inorder traversal, store the values in an array or list.  After the traversal is complete, check if the array is sorted in ascending order. If it is, the tree is a BST; otherwise, it's not.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node, arr):
+    if node:
+        inorder_traversal(node.left, arr)
+        arr.append(node.data)
+        inorder_traversal(node.right, arr)
+
+def is_bst_inorder(root):
+    arr = []
+    inorder_traversal(root, arr)
+    for i in range(1, len(arr)):
+        if arr[i] < arr[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(is_bst_inorder(root))  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) # This makes it not a BST
+
+print(is_bst_inorder(root2)) # Output: False
+
+```
+
+**Algorithm 2: Recursive Check with Min and Max**
+
+This algorithm recursively checks each subtree, ensuring that the values within each subtree respect the BST property.
+
+1. **Base Case:** If the node is `None`, it's a valid BST (empty subtree).
+2. **Recursive Step:** For each node:
+   - Check if the node's value is within the allowed range (greater than the `min` and less than the `max` passed from its parent).
+   - Recursively check the left subtree with updated `max` (node's value -1) and the right subtree with updated `min` (node's value + 1).
+3. **Return Value:** The function returns `True` if all subtrees are valid BSTs; otherwise, it returns `False`.
+
+```python
+import sys
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+def is_bst_recursive(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+#Example usage (same trees as before):
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(is_bst_recursive(root))  # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) # This makes it not a BST
+
+print(is_bst_recursive(root2)) # Output: False
+```
+
+**Comparison:**
+
+The inorder traversal method is generally simpler to understand and implement.  However, the recursive method with min/max is often more efficient because it avoids the overhead of creating and sorting an array.  The recursive approach has a time complexity of O(N) where N is the number of nodes, while the space complexity depends on the tree's height (O(H) in the best and average cases, O(N) in the worst case for a skewed tree).  The inorder traversal has a time complexity of O(N) and a space complexity of O(N)  due to the array storage (though space could be O(H) with an iterative inorder traversal using a stack).  Choose the algorithm that best suits your needs and understanding.
+
