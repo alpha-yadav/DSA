@@ -20985,3 +20985,57 @@ graph.print_matrix()
 
 Remember to adapt this example for weighted graphs and directed graphs by changing the values stored in the matrix accordingly.  Also consider using more advanced data structures for larger graphs to manage memory efficiently.
 
+#  Introduction To Graph Theory 
+## Introduction to Graph Theory
+
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph consists of a set of **vertices** (also called nodes or points) and a set of **edges** (also called links or lines) that connect pairs of vertices.  Think of it like a map: cities are vertices, and roads connecting them are edges.
+
+**Basic Concepts:**
+
+* **Vertices (V):**  The individual points in the graph.  Often represented by circles or dots.
+* **Edges (E):** The connections between vertices.  Represented by lines connecting the vertices.  An edge can be:
+    * **Directed:**  An edge with a direction, often represented by an arrow.  This indicates a one-way relationship.  Graphs with directed edges are called **directed graphs** or **digraphs**.
+    * **Undirected:** An edge without direction.  This indicates a two-way relationship. Graphs with undirected edges are called **undirected graphs**.
+    * **Weighted:** An edge with a numerical value associated with it (e.g., distance, cost, capacity).  These graphs are called **weighted graphs**.
+* **Adjacent Vertices:** Two vertices are adjacent if they are connected by an edge.
+* **Degree of a Vertex:** The number of edges incident to a vertex (connected to it).  In directed graphs, we have in-degree (number of incoming edges) and out-degree (number of outgoing edges).
+* **Path:** A sequence of vertices where consecutive vertices are adjacent.
+* **Cycle:** A path that starts and ends at the same vertex, with no repeated vertices (except the start/end vertex).
+* **Connected Graph:** An undirected graph where there is a path between any two vertices.
+* **Complete Graph:** An undirected graph where every pair of distinct vertices is connected by a unique edge.  A complete graph with *n* vertices is denoted as K<sub>n</sub>.
+* **Tree:** A connected undirected graph with no cycles.
+* **Subgraph:** A graph whose vertices and edges are subsets of the vertices and edges of another graph.
+
+
+**Types of Graphs:**
+
+Beyond the directed/undirected and weighted classifications, there are many other types of graphs, including:
+
+* **Bipartite Graphs:**  Graphs whose vertices can be divided into two disjoint sets such that every edge connects a vertex in one set to a vertex in the other set.
+* **Planar Graphs:** Graphs that can be drawn on a plane without any edges crossing.
+* **Complete Bipartite Graphs:** Bipartite graphs where every vertex in one set is connected to every vertex in the other set.  A complete bipartite graph with *m* vertices in one set and *n* vertices in the other set is denoted as K<sub>m,n</sub>.
+
+
+**Applications of Graph Theory:**
+
+Graph theory has a vast range of applications across many fields, including:
+
+* **Computer Science:**  Network routing, data structures, algorithm design, social networks.
+* **Operations Research:**  Transportation networks, scheduling, resource allocation.
+* **Chemistry:**  Molecular structures.
+* **Biology:**  Gene regulatory networks, phylogenetic trees.
+* **Social Sciences:**  Social networks, information diffusion.
+
+
+**Further Study:**
+
+This introduction provides a basic overview.  To delve deeper, you can explore topics like:
+
+* **Graph algorithms:**  Shortest path algorithms (Dijkstra's, Bellman-Ford), minimum spanning trees (Prim's, Kruskal's), graph traversal algorithms (DFS, BFS), etc.
+* **Graph coloring:**  Assigning colors to vertices or edges such that adjacent vertices or edges have different colors.
+* **Network flow:**  Analyzing the flow of commodities through a network.
+* **Matching theory:** Finding pairings in a graph.
+
+
+Graph theory is a rich and complex field, and this introduction only scratches the surface.  However, it provides a foundation for understanding the basic concepts and appreciating the wide-ranging applications of this powerful mathematical tool.
+
