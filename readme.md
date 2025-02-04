@@ -21981,3 +21981,114 @@ The time complexity of this function is O(n) because, in the worst case, we migh
 
 In summary, Big O notation is a crucial tool for analyzing and comparing the efficiency of algorithms, enabling informed decisions about which algorithm to choose for a given task, especially when dealing with large datasets.
 
+#  A Simple Loop 
+The concept of a "simple loop" is very broad, depending on the programming language.  Here are examples of simple loops in a few common languages:
+
+**1.  Python:**
+
+This loop prints numbers 0 through 9:
+
+```python
+for i in range(10):
+  print(i)
+```
+
+This loop does the same thing using a `while` loop:
+
+```python
+i = 0
+while i < 10:
+  print(i)
+  i += 1
+```
+
+
+**2. JavaScript:**
+
+This loop prints numbers 0 through 9:
+
+```javascript
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
+```
+
+This loop does the same thing using a `while` loop:
+
+```javascript
+let i = 0;
+while (i < 10) {
+  console.log(i);
+  i++;
+}
+```
+
+
+**3. C++:**
+
+This loop prints numbers 0 through 9:
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 10; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+This loop does the same thing using a `while` loop:
+
+```c++
+#include <iostream>
+
+int main() {
+  int i = 0;
+  while (i < 10) {
+    std::cout << i << std::endl;
+    i++;
+  }
+  return 0;
+}
+```
+
+
+**4. Java:**
+
+This loop prints numbers 0 through 9:
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    for (int i = 0; i < 10; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+This loop does the same thing using a `while` loop:
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    int i = 0;
+    while (i < 10) {
+      System.out.println(i);
+      i++;
+    }
+  }
+}
+```
+
+These are all examples of simple loops that iterate a specific number of times.  More complex loops might involve nested loops, conditional statements within the loop, or more sophisticated iteration logic.  To get a more specific and helpful answer, please provide more details about what kind of "simple loop" you need.  For example, tell me:
+
+* **What programming language are you using?**
+* **What is the loop supposed to do?** (e.g., print numbers, process an array, etc.)
+* **What is the stopping condition?** (e.g., iterate 10 times, until a certain condition is met)
+
+
+With more information, I can give you a much more tailored and useful example.
+
