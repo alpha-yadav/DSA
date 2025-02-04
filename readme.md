@@ -22777,3 +22777,93 @@ int main() {
 
 Remember that this code uses recursion.  For very large trees, you might consider an iterative approach to avoid potential stack overflow issues.  Also,  proper memory management is crucial in C++ when working with dynamically allocated nodes.  The example shows basic deletion, but a production-ready solution should incorporate more thorough memory cleanup to prevent leaks.  Consider using smart pointers (like `unique_ptr` or `shared_ptr`) for better automatic memory management in a real-world application.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where a node is considered a descendant of itself).  There are several ways to find the LCA in a BST, leveraging the BST property that all nodes in the left subtree are smaller and all nodes in the right subtree are larger than the root node.
+
+**Method 1: Recursive Approach**
+
+This is a highly efficient and elegant solution.  The core logic is:
+
+* **If both `p` and `q` are less than the root's value,** the LCA must be in the left subtree. Recursively search the left subtree.
+* **If both `p` and `q` are greater than the root's value,** the LCA must be in the right subtree. Recursively search the right subtree.
+* **Otherwise,** the root is the LCA (because one node is smaller and the other is larger than the root).
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the Lowest Common Ancestor (LCA) of nodes p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node.  Returns None if either p or q is not in the tree.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    if p.val < root.val and q.val < root.val:
+        return lowestCommonAncestor(root.left, p, q)
+    elif p.val > root.val and q.val > root.val:
+        return lowestCommonAncestor(root.right, p, q)
+    else:
+        return root
+
+# Example usage:
+root = TreeNode(6)
+root.left = TreeNode(2)
+root.right = TreeNode(8)
+root.left.left = TreeNode(0)
+root.left.right = TreeNode(4)
+root.right.left = TreeNode(7)
+root.right.right = TreeNode(9)
+
+p = root.left  # Node with value 2
+q = root.right # Node with value 8
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 2 and 8: 6
+
+
+p = root.left.right # Node with value 4
+q = root.right.left # Node with value 7
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 4 and 7: 6
+
+p = root.left.left #node with value 0
+q = root.left.right # node with value 4
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 0 and 4: 2
+```
+
+**Method 2: Iterative Approach**
+
+This approach uses a `while` loop instead of recursion:
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    while root:
+        if p.val < root.val and q.val < root.val:
+            root = root.left
+        elif p.val > root.val and q.val > root.val:
+            root = root.right
+        else:
+            return root
+    return None #p or q not found
+
+#Example usage (same as above, just replace the function call)
+lca = lowestCommonAncestorIterative(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")
+```
+
+Both methods have a time complexity of O(h), where h is the height of the BST (O(log n) for a balanced tree, O(n) for a skewed tree).  The space complexity is O(h) for the recursive approach (due to the recursion stack) and O(1) for the iterative approach.  The iterative approach is generally preferred for its slightly better space efficiency, especially in very deep trees, but the recursive approach is often considered more readable.  Choose the method that best suits your needs and coding style. Remember to handle edge cases like an empty tree or nodes not present in the tree.
+
