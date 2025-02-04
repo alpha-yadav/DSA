@@ -22508,3 +22508,155 @@ To overcome the problem of skewed trees, self-balancing BSTs are used.  These tr
 
 In summary, BSTs are a versatile data structure with many applications, but their efficiency depends on maintaining a reasonably balanced tree structure.  For applications requiring guaranteed logarithmic time complexity, self-balancing BSTs are preferred.
 
+#  Binary Search Tree - Insertion (Python) 
+Several implementations of binary search tree (BST) insertion in Python are possible, depending on how you want to handle duplicates and what error handling you prefer. Here are a few options:
+
+
+**Option 1:  Simple Insertion (No Duplicates Allowed)**
+
+This version raises an exception if you try to insert a duplicate value.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        elif data > node.data:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+        else:
+            raise ValueError("Duplicate value")  # Raise exception for duplicates
+
+# Example usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+
+#Attempting to insert a duplicate will raise an error
+try:
+    bst.insert(8)
+except ValueError as e:
+    print(f"Error: {e}")
+
+# (You would typically add methods to traverse and print the tree here)
+
+```
+
+
+**Option 2:  Insertion with Duplicate Handling (Allowing Duplicates)**
+
+This version allows duplicate values.  You could choose to simply ignore them, or increment a count associated with each node to track occurrences.  This example ignores duplicates.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        elif data > node.data:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+        #Ignore duplicates
+        #else:
+        #    pass
+
+
+# Example Usage (same as before, but duplicates will be ignored)
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(8) # Duplicate - will be ignored.
+
+
+```
+
+
+**Option 3:  Iterative Insertion (No Duplicates)**
+
+This version uses an iterative approach instead of recursion.  It's generally considered slightly more efficient for very large trees because it avoids potential stack overflow issues with deeply nested recursive calls.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    return
+                else:
+                    current = current.left
+            elif data > current.data:
+                if current.right is None:
+                    current.right = Node(data)
+                    return
+                else:
+                    current = current.right
+            else:
+                raise ValueError("Duplicate value")
+
+
+```
+
+Remember to add methods for traversing (inorder, preorder, postorder) and searching the tree to make it fully functional.  Choose the option that best suits your needs regarding duplicate handling and preferred coding style.  The iterative approach might be slightly preferable for very large trees to prevent potential stack overflow issues.
+
