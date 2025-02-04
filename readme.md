@@ -21745,3 +21745,58 @@ This version maps each number in the range 1...n to its corresponding FizzBuzz s
 
 Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).  Choose the version that best suits your understanding and project requirements.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm consumes as a function of the size of its input.  It's crucial for understanding how an algorithm will perform with larger datasets and for comparing the efficiency of different algorithms.
+
+We usually express complexity using **Big O notation**, which describes the upper bound of the growth rate of the algorithm's resource consumption.  It focuses on the dominant terms as the input size approaches infinity, ignoring constant factors and smaller-order terms.
+
+Here's a breakdown of key aspects:
+
+**1. Time Complexity:**  Measures how the runtime of an algorithm grows with the input size.
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array by index.
+* **O(log n) - Logarithmic Time:** The runtime grows logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime grows linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime grows proportionally to the square of the input size. Example: Nested loops iterating through the input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Generating all permutations of a sequence.
+
+
+**2. Space Complexity:** Measures how the memory usage of an algorithm grows with the input size.  It's analyzed similarly to time complexity using Big O notation.  Space complexity can include:
+
+* **Input data:** The space needed to store the input.
+* **Auxiliary space:** The extra space used by the algorithm beyond the input.
+
+
+**3. Best, Average, and Worst Case:**  The complexity of an algorithm can vary depending on the specific input.
+
+* **Best Case:** The most favorable input scenario resulting in the lowest complexity.
+* **Average Case:** The average complexity over all possible inputs. This is often the most practical measure.
+* **Worst Case:** The least favorable input scenario resulting in the highest complexity.  This is often important for guaranteeing performance bounds.
+
+
+**Example:**
+
+Consider searching for a specific element in an array:
+
+* **Unsorted Array:**
+    * **Best Case:** O(1) (element found at the beginning)
+    * **Average Case:** O(n) (element found roughly in the middle)
+    * **Worst Case:** O(n) (element found at the end or not found)
+* **Sorted Array (using binary search):**
+    * **Best Case:** O(1) (element found at the middle)
+    * **Average Case:** O(log n)
+    * **Worst Case:** O(log n)
+
+
+**Importance of Algorithm Complexity:**
+
+* **Performance prediction:** Estimate runtime and memory usage for different input sizes.
+* **Algorithm comparison:** Choose the most efficient algorithm for a given task.
+* **Scalability analysis:** Determine how well an algorithm handles growing datasets.
+* **Optimization:** Identify bottlenecks and improve algorithm performance.
+
+
+Understanding algorithm complexity is a crucial skill for any programmer or computer scientist.  It allows for informed decisions about algorithm selection and optimization, leading to more efficient and scalable software.
+
