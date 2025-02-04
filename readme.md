@@ -23616,3 +23616,113 @@ These traversals have different applications. For example:
 
 Remember that the efficiency of all three traversals is O(N), where N is the number of nodes in the tree, because each node is visited exactly once.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  This differs from the LCA in a binary *search* tree, where the algorithm is simpler.  For a general binary tree, we need a different approach.
+
+Here are a few common methods to find the LCA in a binary tree:
+
+**Method 1: Recursive Approach (Most common and efficient)**
+
+This approach uses recursion to traverse the tree.  The key idea is:
+
+* If either `node1` or `node2` is the current node, or if the current node is `null`, we've found something important.
+* If `node1` is in the left subtree and `node2` is in the right subtree (or vice-versa), the current node is the LCA.
+* Otherwise, recursively search the left or right subtree based on where `node1` and `node2` might be.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+
+
+```
+
+
+**Method 2: Using a Path Approach**
+
+This method finds the paths from the root to each node (`p` and `q`), then finds the last common node in those paths.
+
+```python
+def lowestCommonAncestor_path(root, p, q):
+    path_p = find_path(root, p)
+    path_q = find_path(root, q)
+
+    if not path_p or not path_q:
+        return None
+
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[i] == path_q[i]:
+        i += 1
+
+    return path_p[i - 1]  # Return the last common node
+
+
+def find_path(root, node):
+    if not root:
+        return None
+
+    if root == node:
+        return [root]
+
+    left_path = find_path(root.left, node)
+    if left_path:
+        return [root] + left_path
+
+    right_path = find_path(root.right, node)
+    if right_path:
+        return [root] + right_path
+
+    return None
+
+# Example Usage (same tree as before):
+lca_path = lowestCommonAncestor_path(root, p, q)
+print(f"LCA of {p.val} and {q.val} (path method): {lca_path.val}") # Output: 3
+
+```
+
+The recursive approach (Method 1) is generally preferred due to its better efficiency (avoiding repeated traversal). The path approach can be less efficient, especially in tall, unbalanced trees.  Choose the method that best suits your needs and understanding.  Remember to handle edge cases like `p` or `q` not being in the tree.
+
