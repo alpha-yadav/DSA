@@ -21671,3 +21671,77 @@ Output: [0,1]
 
 This is a classic algorithmic problem that can be solved in several ways, with varying time and space complexities.  A common efficient solution uses a hash table to achieve O(n) time complexity.  Let me know if you'd like to see a solution or want to try solving it yourself first!
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing some refinements:
+
+
+**Basic Implementation:**
+
+This version uses nested `if` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5.  If none of these conditions are met, it prints the number itself.
+
+
+**Improved Implementation with Ternary Operator:**
+
+This version uses the ternary operator (`condition ? value1 : value2`) for a more concise solution:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This version is more compact but might be slightly harder to read for beginners.
+
+
+**Functional Approach with `map`:**
+
+This demonstrates a more functional style using the `map` function:
+
+```swift
+func fizzBuzzFunctional(n: Int) -> [String] {
+    return (1...n).map { i in
+        (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+    }
+}
+
+let results = fizzBuzzFunctional(n: 15)
+print(results) // Prints the array of strings
+```
+
+This version maps each number in the range 1...n to its corresponding FizzBuzz string.  It returns an array, allowing for further processing of the results if needed.  This is generally considered more elegant and reusable in larger codebases.
+
+
+**Choosing the Right Approach:**
+
+* For beginners, the basic implementation with nested `if` statements is easiest to understand.
+* The improved version with the ternary operator is more concise.
+* The functional approach is more elegant and suitable for larger projects where functional programming is preferred.  It also separates the computation from the output (printing).
+
+
+Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).  Choose the version that best suits your understanding and project requirements.
+
