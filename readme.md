@@ -22092,3 +22092,89 @@ These are all examples of simple loops that iterate a specific number of times. 
 
 With more information, I can give you a much more tailored and useful example.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times, based on the number of iterations of the outer loop.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed in the inner loop
+    # Code to be executed after the inner loop completes for one iteration of the outer loop
+# Code to be executed after the outer loop completes
+```
+
+**Examples:**
+
+**1. Printing a multiplication table:**
+
+```python
+# Multiplication table for 1 to 5
+for i in range(1, 6):  # Outer loop: rows
+    for j in range(1, 6):  # Inner loop: columns
+        print(i * j, end="\t")  # end="\t" adds a tab for formatting
+    print()  # New line after each row
+```
+
+This will output:
+
+```
+1	2	3	4	5	
+2	4	6	8	10	
+3	6	9	12	15	
+4	8	12	16	20	
+5	10	15	20	25	
+```
+
+
+**2. Iterating through a matrix (list of lists):**
+
+```python
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()  # New line after each row
+```
+
+This will output:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+**3. Finding all pairs in a list:**
+
+```python
+my_list = [1, 2, 3, 4]
+
+for i in range(len(my_list)):
+    for j in range(i + 1, len(my_list)): # Start j from i+1 to avoid duplicate pairs and self-pairs
+        print(f"Pair: ({my_list[i]}, {my_list[j]})")
+```
+
+This outputs all unique pairs from the list:
+
+```
+Pair: (1, 2)
+Pair: (1, 3)
+Pair: (1, 4)
+Pair: (2, 3)
+Pair: (2, 4)
+Pair: (3, 4)
+```
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can significantly increase the execution time of your code, especially with large datasets. The time complexity often becomes O(n*m), where 'n' and 'm' are the sizes of the iterables in the outer and inner loops respectively.  Consider using more efficient algorithms if performance is critical.
+* **Readability:**  Well-structured nested loops with clear variable names and comments are crucial for maintaining readability and understanding the code's logic.
+
+
+Nested loops are a powerful tool for iterating over multi-dimensional data structures or performing operations that require repeated iterations within iterations. However, it's vital to be mindful of their potential impact on performance.
+
