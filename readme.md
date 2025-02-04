@@ -23726,3 +23726,99 @@ print(f"LCA of {p.val} and {q.val} (path method): {lca_path.val}") # Output: 3
 
 The recursive approach (Method 1) is generally preferred due to its better efficiency (avoiding repeated traversal). The path approach can be less efficient, especially in tall, unbalanced trees.  Choose the method that best suits your needs and understanding.  Remember to handle edge cases like `p` or `q` not being in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science.  There are several approaches, each with its own tradeoffs:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a common and relatively intuitive approach.  It works by recursively traversing the tree.
+
+* **Base Cases:**
+    * If the current node is `null`, return `null`.
+    * If the current node is either `p` or `q` (the nodes we're looking for), return the current node.
+
+* **Recursive Step:**
+    * Recursively search the left subtree and right subtree.
+    * If both subtrees return non-`null` values, it means `p` and `q` are on different sides of the current node, so the current node is the LCA.
+    * Otherwise, return the non-`null` result (the LCA is in one of the subtrees).
+
+```java
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
+}
+
+public class LCA {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) return root;
+
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+
+        if (left != null && right != null) return root;
+        return (left != null) ? left : right;
+    }
+}
+```
+
+**2. Iterative Approach (for Binary Trees):**
+
+This approach uses a stack or queue to simulate the recursion, often being more efficient in terms of memory usage, especially for deep trees.
+
+```java
+public class LCAIterative {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) return root;
+
+        Stack<TreeNode> stack = new Stack<>();
+        Map<TreeNode, TreeNode> parent = new HashMap<>();
+        stack.push(root);
+        parent.put(root, null);
+
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            if (node.left != null) {
+                parent.put(node.left, node);
+                stack.push(node.left);
+            }
+            if (node.right != null) {
+                parent.put(node.right, node);
+                stack.push(node.right);
+            }
+        }
+
+        Set<TreeNode> ancestors = new HashSet<>();
+        while (p != null) {
+            ancestors.add(p);
+            p = parent.get(p);
+        }
+
+        while (!ancestors.contains(q)) {
+            q = parent.get(q);
+        }
+        return q;
+    }
+}
+```
+
+
+**3. Using Parent Pointers (for Trees with Parent Pointers):**
+
+If each node in the tree already has a pointer to its parent, finding the LCA becomes simpler.  You can trace upwards from both `p` and `q`, storing their ancestors in sets. The first common ancestor encountered is the LCA.
+
+**4.  General Trees:**
+
+For general trees (not necessarily binary),  you can adapt the recursive approach or use a technique involving Depth-First Search (DFS) to find paths from the root to `p` and `q`.  The LCA is the deepest node shared by both paths.
+
+
+**Choosing the Right Approach:**
+
+* For binary trees, the recursive approach is often the easiest to understand and implement.
+* The iterative approach can be beneficial for large trees to avoid stack overflow errors.
+* If you have parent pointers, that method is the most efficient.
+* For general trees, a DFS-based approach is necessary.
+
+Remember to handle edge cases such as one or both nodes not being present in the tree, or one node being an ancestor of the other.  The provided code examples assume the nodes `p` and `q` exist in the tree.  Robust code would need to include checks for these scenarios.
+
