@@ -22178,3 +22178,28 @@ Pair: (3, 4)
 
 Nested loops are a powerful tool for iterating over multi-dimensional data structures or performing operations that require repeated iterations within iterations. However, it's vital to be mindful of their potential impact on performance.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They only require a number of steps proportional to the logarithm of the input size (n). This means that as the input size grows, the increase in the number of steps is relatively small.  This is achievable when the algorithm can effectively discard a significant portion of the input at each step.  Common examples include algorithms that utilize divide-and-conquer strategies or binary searches.
+
+Here are some types of algorithms that exhibit O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential O(log n) algorithm.  It works by repeatedly dividing the search interval in half.  If you're searching a sorted array, you can eliminate half the possibilities with each comparison.
+
+* **Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  Balanced binary search trees (like AVL trees or red-black trees) maintain a roughly balanced structure, ensuring that the height of the tree is logarithmic in the number of nodes.  Operations like searching, inserting, and deleting nodes in a balanced tree usually take O(log n) time.
+
+* **Efficient Searching in Hash Tables (with good hashing):**  While hash table lookups are ideally O(1),  in the worst case (e.g., with a poor hash function leading to many collisions), the time complexity can degrade to O(n).  However, with a well-designed hash function, the average case time complexity is O(1), which is much better than O(log n).
+
+* **Divide and Conquer Algorithms (with logarithmic recursion depth):** Some divide and conquer algorithms exhibit logarithmic time complexity if the problem size is halved (or reduced by a constant factor) at each recursive step.  Merge Sort, while having an overall time complexity of O(n log n), has a recursive depth of O(log n).
+
+
+**Important Considerations:**
+
+* **Base of the Logarithm:** The base of the logarithm (e.g., base 2, base 10) doesn't affect the overall Big O notation because changing the base only results in a constant factor difference.  We usually omit the base in Big O notation.
+
+* **Balanced vs. Unbalanced Structures:**  The logarithmic time complexity often relies on the structure being balanced.  For example, an unbalanced binary search tree can degrade to O(n) in the worst case.
+
+* **Average vs. Worst Case:**  Some algorithms might have O(log n) average-case complexity but a higher worst-case complexity (e.g., certain hash table operations).
+
+
+In summary, O(log n) algorithms are highly efficient for large datasets because the number of operations grows very slowly as the input size increases. They are frequently used in situations where fast search and retrieval are critical.
+
