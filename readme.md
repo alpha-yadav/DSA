@@ -27919,3 +27919,78 @@ While Big O describes the *upper bound*, other notations provide a more complete
 
 Understanding Big O notation is essential for designing efficient algorithms and choosing the right data structures for a given task.  It allows developers to compare the scalability of different approaches and make informed decisions about performance optimization.
 
+#  A Simple Loop 
+The simplest loop in most programming languages is a `while` loop or a `for` loop.  Here are examples in a few common languages:
+
+
+**Python (While Loop):**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This loop prints the numbers 0 through 4.  It continues as long as the condition `count < 5` is true.
+
+
+**Python (For Loop):**
+
+```python
+for i in range(5):
+  print(i)
+```
+
+This loop does the same thing as the while loop above, but more concisely. `range(5)` generates a sequence of numbers from 0 to 4.
+
+
+**JavaScript (While Loop):**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+
+**JavaScript (For Loop):**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+**C++ (While Loop):**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+**C++ (For Loop):**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+These are all basic examples.  Loops can be much more complex, involving nested loops, conditional statements within the loop, and breaking or continuing the loop based on certain conditions.  But these show the fundamental structure of a simple loop.
+
