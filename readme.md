@@ -24683,3 +24683,60 @@ This version checks for divisibility by 3 and 5 separately. If neither condition
 
 Remember to choose the method that best suits your understanding and coding style.  The important thing is that you understand the underlying logic of the FizzBuzz algorithm.  All three methods achieve the same result.
 
+#  Algorithm Complexity 
+Algorithm complexity describes how the runtime or space requirements of an algorithm grow as the input size grows.  It's a crucial aspect of algorithm analysis, allowing us to compare the efficiency of different algorithms and predict their performance on large datasets.  We typically focus on *asymptotic* complexity, meaning we're interested in the behavior as the input size approaches infinity, ignoring constant factors and smaller-order terms.
+
+There are several ways to express algorithm complexity:
+
+**1. Time Complexity:** This measures how the runtime of an algorithm scales with the input size.
+
+* **Big O Notation (O):** Represents the *upper bound* of the growth rate.  It describes the worst-case scenario.  For example, O(n) means the runtime grows linearly with the input size (n).  O(n²) indicates quadratic growth, and O(log n) indicates logarithmic growth.
+
+* **Big Omega Notation (Ω):** Represents the *lower bound* of the growth rate. It describes the best-case scenario.  Ω(n) means the runtime grows at least linearly with the input size.
+
+* **Big Theta Notation (Θ):** Represents the *tight bound*. It means the growth rate is both the upper and lower bound.  Θ(n) indicates that the runtime grows linearly with the input size, and this is a precise description of the algorithm's runtime behavior.
+
+
+**Common Time Complexities (from best to worst):**
+
+* **O(1) - Constant time:** The runtime is independent of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic time:** The runtime grows logarithmically with the input size. Example: Binary search in a sorted array.
+
+* **O(n) - Linear time:** The runtime grows linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic time:** The runtime grows proportionally to the square of the input size. Example: Bubble sort, selection sort.
+
+* **O(n³) - Cubic time:** The runtime grows proportionally to the cube of the input size. Example: Some matrix multiplication algorithms (naive approach).
+
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial time:** The runtime grows factorially with the input size. Example: Finding all permutations of a sequence.
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm scales with the input size.  The same Big O, Big Omega, and Big Theta notations apply.
+
+**Examples of Space Complexity:**
+
+* **O(1) - Constant space:** The algorithm uses a fixed amount of memory regardless of the input size.
+
+* **O(n) - Linear space:** The memory usage grows linearly with the input size. Example: Storing an array of the same size as the input.
+
+* **O(log n) - Logarithmic space:** The memory usage grows logarithmically with the input size. Example:  Recursive algorithms that use a stack with depth proportional to log n.
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing complexity often involves:
+
+* **Best-case, average-case, and worst-case scenarios:**  Algorithms might have different performance characteristics depending on the input data.
+
+* **Recurrence relations:** For recursive algorithms, recurrence relations help describe the runtime in terms of smaller subproblems.  Techniques like the Master Theorem can be used to solve these relations.
+
+* **Amortized analysis:**  This analyzes the average time cost per operation over a sequence of operations, even if individual operations have varying costs.
+
+
+Understanding algorithm complexity is crucial for choosing the most efficient algorithm for a given task, especially when dealing with large datasets.  Algorithms with lower time and space complexity are generally preferred.
+
