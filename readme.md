@@ -32610,3 +32610,58 @@ This approach is generally more efficient in terms of space complexity because i
 
 Choose the approach that best fits your needs and constraints.  For most cases, the recursive approach is simpler to implement and understand.  The iterative approach with parent pointers offers better space efficiency but at the cost of added complexity in implementation and data structure management.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science.  There are several approaches, each with varying efficiency depending on the tree structure and whether preprocessing is allowed.
+
+**Methods:**
+
+1. **Brute Force (Recursive Approach):**
+
+   This is a straightforward but inefficient method, especially for large trees.  It involves:
+
+   * **Traversing up from each node:**  For each of the two nodes, recursively traverse upwards towards the root, storing the path from each node to the root in separate lists.
+   * **Finding the common prefix:** Compare the two paths. The longest common prefix (the sequence of nodes shared by both paths) represents the path to the LCA.  The last node in this common prefix is the LCA.
+
+   **Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, you traverse almost the entire tree).
+   **Space Complexity:** O(N) (to store the paths)
+
+
+2. **Using a Parent Pointer:**
+
+   If you can modify the tree structure to include a parent pointer for each node (pointing to its parent), finding the LCA becomes much simpler and efficient.
+
+   * **Traverse upwards:** From each node, traverse upwards using the parent pointers until you reach a common ancestor.
+   * **Optimization:** Maintain a set (or hash table) of nodes encountered while traversing upwards from one of the nodes.  Check if the other node's ancestor is in this set.  The first node found in the set is the LCA.
+
+   **Time Complexity:** O(H), where H is the height of the tree (much better than the brute force approach).
+   **Space Complexity:** O(H) in the worst case (to store the set of nodes).
+
+
+3. **Binary Lifting:** (Efficient for repeated LCA queries)
+
+   This technique is particularly useful when you need to perform many LCA queries on the same tree. It preprocesses the tree to create a lookup table allowing for fast queries.
+
+   * **Preprocessing:** For each node, precompute the 2<sup>i</sup>-th ancestor for various values of *i*.  This can be done using dynamic programming in O(N log N) time.
+   * **Querying:** To find the LCA of two nodes *u* and *v*, find their depths.  If they are at different depths, move the deeper node up until both are at the same depth.  Then, simultaneously move both nodes upwards, using the precomputed lookup table, until they become equal.  This node is the LCA.
+
+   **Time Complexity:** O(N log N) for preprocessing, O(log N) for each query.
+   **Space Complexity:** O(N log N) for the lookup table.
+
+
+4. **Tarjan's Off-line LCA Algorithm:** (Efficient for many queries on the same tree)
+
+   This algorithm is designed for answering multiple LCA queries efficiently.  It's based on depth-first search and union-find data structures.  It processes all queries at once in a single DFS traversal.
+
+   **Time Complexity:**  O(N + Q), where N is the number of nodes and Q is the number of queries.
+   **Space Complexity:** O(N + Q)
+
+
+**Choosing the right method:**
+
+* For a single LCA query in a tree without parent pointers, the brute force approach is simple to implement but inefficient.
+* If you can modify the tree to include parent pointers, using parent pointers significantly improves efficiency.
+* For many LCA queries on the same tree, Binary Lifting or Tarjan's algorithm provides the best performance.
+
+
+Remember to consider the constraints of your problem (e.g., size of the tree, number of queries) when choosing the most appropriate method.  The code implementation will depend on the chosen method and data structures used (e.g., trees represented as adjacency lists or arrays).
+
