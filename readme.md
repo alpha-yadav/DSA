@@ -29518,3 +29518,105 @@ postorder(root) # Output: D E B C A
 
 Remember to install the necessary packages if you're using a different environment.  This code provides a clear and concise illustration of how to implement and use these fundamental tree traversal algorithms.  You can adapt it to use different data types or add error handling as needed.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the lowest common ancestor (LCA) of two nodes in a binary tree is a fundamental tree traversal problem.  There are several ways to solve it, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This approach recursively traverses the tree.  If a node is found, it's returned. If both nodes are in the left subtree, recursively search the left subtree.  If both nodes are in the right subtree, recursively search the right subtree.  Otherwise, the current node is the LCA.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca(root, n1, n2):
+       if root is None:
+           return None
+
+       if root.data == n1 or root.data == n2:
+           return root
+
+       left_lca = lca(root.left, n1, n2)
+       right_lca = lca(root.right, n1, n2)
+
+       if left_lca and right_lca:
+           return root
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   # Example usage:
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+   n1 = 4
+   n2 = 5
+   print(f"LCA of {n1} and {n2} is: ", lca(root, n1, n2).data)  # Output: 2
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (worst case: skewed tree).
+   * **Space Complexity:** O(H), where H is the height of the tree (due to recursive calls).  In a balanced tree, H is log(N).
+
+
+2. **Iterative Approach (using a stack or queue):**
+
+   You can achieve the same result iteratively using a stack (depth-first search) or a queue (breadth-first search). This avoids the recursion overhead but might use slightly more memory.
+
+   ```python
+   def lca_iterative(root, n1, n2):
+       if root is None:
+           return None
+       stack = [root]
+       parent = {} #Keep track of parent nodes for each node
+       parent[root] = None
+       while stack:
+           node = stack.pop()
+           if node.left:
+               stack.append(node.left)
+               parent[node.left] = node
+           if node.right:
+               stack.append(node.right)
+               parent[node.right] = node
+       path1 = []
+       curr = n1
+       while curr:
+           path1.append(curr)
+           curr = parent.get(curr)
+       path2 = []
+       curr = n2
+       while curr:
+           path2.append(curr)
+           curr = parent.get(curr)
+       lca_node = None
+       i=0
+       while i < len(path1) and i < len(path2) and path1[len(path1)-1-i] == path2[len(path2)-1-i]:
+           lca_node = path1[len(path1)-1-i]
+           i +=1
+       return lca_node
+
+   #Example Usage (same tree as above):
+   print(f"LCA of {n1} and {n2} (iterative): ", lca_iterative(root, root.left.left, root.left.right).data) #Output: 2
+
+   ```
+
+   * **Time Complexity:** O(N)
+   * **Space Complexity:** O(N) in the worst case (a skewed tree).  Better for balanced trees.
+
+
+**Important Considerations:**
+
+* **Node Existence:**  The algorithms assume `n1` and `n2` exist in the tree. You should add checks to handle cases where one or both nodes are not found.
+* **Binary Tree vs. Binary Search Tree:**  The recursive approach works for any binary tree.  For a *binary search tree*, a more efficient solution exists using the properties of BSTs.
+
+
+Choose the recursive approach for its simplicity and readability unless you have a specific reason to avoid recursion (e.g., extremely deep trees that might cause stack overflow).  The iterative approach provides more control over memory usage, which can be beneficial in certain scenarios. Remember to adapt the code to handle potential exceptions (like nodes not found in the tree).
+
