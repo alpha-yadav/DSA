@@ -24607,3 +24607,79 @@ These problems demonstrate a range of complexity and concepts commonly found in 
 
 Choosing a problem to work on depends on your current skill level.  Start with easier problems to build a foundation before moving onto more challenging ones.  Remember to focus on understanding the problem statement, designing an efficient algorithm, and writing clean, well-documented code.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It prints numbers from 1 to a given limit, but replaces multiples of 3 with "Fizz", multiples of 5 with "Buzz", and multiples of both 3 and 5 with "FizzBuzz".
+
+Here's how to implement a simple FizzBuzz algorithm in Swift, along with explanations:
+
+**Method 1: Using `if-else if-else` statements**
+
+This is the most straightforward approach:
+
+```swift
+func fizzBuzz(limit: Int) {
+    for i in 1...limit {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(limit: 15) // Call the function with your desired limit
+```
+
+This code iterates through numbers 1 to `limit`.  It first checks for divisibility by 15 (both 3 and 5), then 3, then 5.  If none of these conditions are met, it prints the number itself.  This order is important for accuracy.
+
+**Method 2: Using a ternary operator for conciseness**
+
+This method uses nested ternary operators to achieve the same result in a more compact way (though perhaps slightly less readable for beginners):
+
+
+```swift
+func fizzBuzzTernary(limit: Int) {
+    for i in 1...limit {
+        print(i % 15 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzzTernary(limit: 15)
+```
+
+While shorter, this version can be harder to understand if you're not familiar with ternary operators.
+
+
+**Method 3:  More readable conditional with string concatenation**
+
+This approach builds the output string incrementally, making it easier to follow the logic:
+
+
+```swift
+func fizzBuzzConcise(limit: Int) {
+    for i in 1...limit {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzConcise(limit: 15)
+```
+
+This version checks for divisibility by 3 and 5 separately. If neither condition is true, `output` remains empty, and the number itself is printed.
+
+
+**Choosing the Best Method:**
+
+* For readability and ease of understanding, especially for beginners, **Method 1** is recommended.
+* **Method 3** offers a good balance between readability and conciseness.
+* **Method 2** is the most compact but can sacrifice readability.
+
+Remember to choose the method that best suits your understanding and coding style.  The important thing is that you understand the underlying logic of the FizzBuzz algorithm.  All three methods achieve the same result.
+
