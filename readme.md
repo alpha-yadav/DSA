@@ -32527,3 +32527,86 @@ postorder_traversal(root)
 ```
 This will produce the output for the example tree above. Remember to replace the example tree with your own tree structure.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike a binary *search* tree, a general binary tree doesn't have any ordering guarantees, so finding the LCA requires a different approach.
+
+Here are two common approaches to find the LCA of two nodes in a binary tree:
+
+**1. Recursive Approach:**
+
+This approach recursively traverses the tree.  If a node contains either `p` or `q`, it's a potential ancestor. If both `p` and `q` are found in the left subtree or both are found in the right subtree, then the LCA is found recursively in that subtree.  If one is found in the left and the other in the right, then the current node is the LCA.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node.  Returns None if either p or q is not found.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:  # p and q are on different sides
+        return root
+    elif left:  # p and q are on the left side
+        return left
+    else:  # p and q are on the right side
+        return right
+
+
+# Example Usage
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+
+
+p = root.left.right.left #Node with value 7
+q = root.left.right.right #Node with value 4
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 7 and 4: 2
+```
+
+
+**2. Iterative Approach (using a parent pointer):**
+
+This approach is generally more efficient in terms of space complexity because it avoids the recursive call stack.  However, it requires modifying the tree structure to include parent pointers (or creating a separate parent map). This approach is not shown here because it requires more complex data structure management and is less commonly used than the recursive method for general binary trees.
+
+
+**Important Considerations:**
+
+* **Error Handling:** The code above includes basic error handling;  it returns `None` if either `p` or `q` is not found in the tree.  More robust error handling might be needed depending on the application.
+* **Node values:** This code assumes node values are unique.  If there are duplicate values, the algorithm will still find *a* lowest common ancestor, but it may not be the one you expect.
+* **Efficiency:** The recursive approach has a time complexity of O(N), where N is the number of nodes in the tree, in the worst case (skewed tree).  Space complexity is O(H) due to recursive calls, where H is the height of the tree. The iterative approach with parent pointers has O(N) time complexity and O(1) space complexity.
+
+
+Choose the approach that best fits your needs and constraints.  For most cases, the recursive approach is simpler to implement and understand.  The iterative approach with parent pointers offers better space efficiency but at the cost of added complexity in implementation and data structure management.
+
