@@ -27590,3 +27590,77 @@ Output: [0,1]
 
 This is a well-defined problem with clear input, output, and constraints. It's commonly used in interviews to assess a candidate's understanding of fundamental algorithmic concepts and data structures.  Trying to solve this problem yourself will help you understand how to approach algorithmic challenges.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then improving it:
+
+**Version 1: Basic Implementation**
+
+This version uses a `for` loop and a series of `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This works correctly, but we can make it more efficient and readable.
+
+**Version 2: Improved Readability with Ternary Operator**
+
+We can use the ternary operator (`condition ? value1 : value2`) to make the code more concise:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This version is shorter but might be slightly harder to read for beginners.  The nested ternary operators can become complex if you have many conditions.
+
+**Version 3:  More Readable with early exit**
+
+This version avoids nested conditionals by checking for divisibility by 15 first, then 3, then 5.  If a condition is met, the function immediately prints and continues to the next iteration. This approach can improve readability for more complex scenarios.
+
+
+```swift
+func fizzBuzzReadable(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzReadable(n: 15)
+
+```
+
+**Choosing the Best Version:**
+
+The "best" version depends on your priorities:
+
+* **Version 1:** Easiest to understand for beginners.
+* **Version 2:** Most concise but can be less readable with many conditions.
+* **Version 3:**  Balances readability and efficiency, especially beneficial when scaling to more complex rules.
+
+
+Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).  You'll see the FizzBuzz sequence printed to the console.  Experiment with different values of `n` to see how it works.
+
