@@ -27219,3 +27219,42 @@ else:
 
 This algorithm has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges, because it visits each vertex and edge once.  The space complexity is O(V) due to the `visited` and `recStack` arrays.  Remember that this detects *directed* cycle;  for undirected graphs, a slightly modified approach is needed.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a groundbreaking algorithm for finding single-source shortest paths (SSSP) in directed graphs with non-negative integer edge weights.  It achieves near-linear time complexity, a significant improvement over Dijkstra's algorithm, which has a time complexity of O(E log V) using a Fibonacci heap, where E is the number of edges and V is the number of vertices.
+
+Here's a breakdown of its key aspects:
+
+**Key Idea:** Thorup's algorithm cleverly uses randomized techniques to achieve its speed. It doesn't directly compute shortest paths like Dijkstra's algorithm. Instead, it builds a data structure that allows for extremely fast shortest path queries from a single source.
+
+**Algorithm Steps (High-Level):**
+
+1. **Preprocessing:** This is the most complex part of the algorithm.  It involves:
+    * **Random Sampling:**  Edges are randomly sampled with probabilities based on their weights.  Heavier edges have a higher chance of being sampled.
+    * **Constructing a Hierarchy:** Using the sampled edges, a hierarchical graph structure is built. This structure is crucial for efficient querying. The details of this hierarchy are quite intricate and involve sophisticated techniques.
+    * **Computing Shortest Paths in the Hierarchy:** Shortest path distances within this hierarchical structure are pre-computed.
+
+2. **Querying:** Once the preprocessing is complete, answering a single-source shortest path query is remarkably fast.  Given a source vertex, the algorithm traverses the hierarchical structure, efficiently utilizing the pre-computed distances to quickly estimate and refine the shortest path distances to other vertices.
+
+
+**Time Complexity:**
+
+* **Preprocessing:** The preprocessing time is expected O(m + n log n), where 'm' is the number of edges and 'n' is the number of vertices.  This is near-linear, a major improvement over Dijkstra's algorithm.
+* **Querying:**  Querying for shortest paths from a single source is extremely fast – expected O(m/n + n).  This is also near-linear on average.
+
+
+**Advantages:**
+
+* **Near-linear time complexity:**  A significant improvement over Dijkstra's algorithm for large graphs.
+* **Efficient for single-source queries:**  Once the preprocessing is done, querying is very fast.
+
+**Disadvantages:**
+
+* **Randomized:** The algorithm relies on randomization, so the performance is probabilistic. While the expected runtime is near-linear, there's a small probability of worse performance.
+* **Preprocessing Overhead:** The preprocessing step can be computationally expensive, especially for very large graphs.  This preprocessing cost needs to be considered in the context of the number of queries that will be performed.  It's only advantageous if many queries are expected after the preprocessing.
+* **Complexity:**  The algorithm's implementation is significantly more complex than Dijkstra's algorithm.
+
+
+**In Summary:**
+
+Thorup's algorithm represents a significant advancement in shortest path algorithms.  Its near-linear time complexity makes it highly attractive for applications involving large graphs and numerous single-source shortest path queries. However, its complexity and randomized nature should be considered when choosing an appropriate algorithm for a given problem.  It's not a simple "plug-and-play" replacement for Dijkstra's algorithm in all cases.
+
