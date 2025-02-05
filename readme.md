@@ -25263,3 +25263,12 @@ tree = {
 
 The choice of representation often depends on the specific needs of your application.  If you're primarily concerned with traversing the tree and don't need to frequently find parents, the child-sibling or list-of-children representation might suffice.  If you have a complete or nearly complete tree and memory efficiency is paramount, the array representation could be the best option.  For flexibility and the ability to store additional node-specific information, the dictionary approach may be preferred.
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need some context to write a helpful introduction.  For example, tell me:
+
+* **What is the main subject?** (e.g., the history of coffee, the benefits of exercise, the plot of a specific book)
+* **What is the purpose of this introduction?** (e.g., to inform, to persuade, to entertain)
+* **Who is the intended audience?** (e.g., experts, general public, children)
+
+Once I have this information, I can write a compelling and relevant introduction for you.
+
