@@ -28227,3 +28227,111 @@ Please provide me with context!  "Introduction" to what?  I need more informatio
 
 Once I have this information, I can write a suitable introduction.
 
+#  To check if two Binary trees are same or not 
+There are several ways to check if two binary trees are the same.  The core idea is to recursively compare nodes, ensuring that corresponding nodes have the same value and that their subtrees are also identical. Here are a few approaches, with varying levels of efficiency:
+
+**Method 1: Recursive Approach (Most Common)**
+
+This is the most straightforward and commonly used method.  It recursively compares the nodes:
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def are_trees_same(root1, root2):
+    """
+    Recursively checks if two binary trees are identical.
+
+    Args:
+        root1: Root of the first binary tree.
+        root2: Root of the second binary tree.
+
+    Returns:
+        True if the trees are identical, False otherwise.
+    """
+    # Base Case: If both roots are None, trees are the same (empty trees).
+    if root1 is None and root2 is None:
+        return True
+    # Base Case: If one root is None and the other isn't, trees are different.
+    if root1 is None or root2 is None:
+        return False
+    # Recursive Step: Check if values are equal and recursively check subtrees.
+    return (root1.val == root2.val and
+            are_trees_same(root1.left, root2.left) and
+            are_trees_same(root1.right, root2.right))
+
+
+# Example Usage:
+root1 = TreeNode(1)
+root1.left = TreeNode(2)
+root1.right = TreeNode(3)
+
+root2 = TreeNode(1)
+root2.left = TreeNode(2)
+root2.right = TreeNode(3)
+
+root3 = TreeNode(1)
+root3.left = TreeNode(2)
+root3.right = TreeNode(4) #Different from root1 and root2
+
+
+print(f"root1 and root2 are same: {are_trees_same(root1, root2)}")  # Output: True
+print(f"root1 and root3 are same: {are_trees_same(root1, root3)}")  # Output: False
+
+```
+
+**Method 2: Iterative Approach (Using Queues)**
+
+This method uses Breadth-First Search (BFS) with queues to compare the trees level by level.  It's less elegant than the recursive approach but can be slightly more efficient in some cases (avoids potential stack overflow for very deep trees).
+
+```python
+from collections import deque
+
+def are_trees_same_iterative(root1, root2):
+    if not root1 and not root2:
+        return True
+    if not root1 or not root2:
+        return False
+
+    queue1 = deque([root1])
+    queue2 = deque([root2])
+
+    while queue1 and queue2:
+        node1 = queue1.popleft()
+        node2 = queue2.popleft()
+
+        if node1.val != node2.val:
+            return False
+
+        # Add children to the queues, handling None children appropriately
+        if (node1.left and node2.left) or (not node1.left and not node2.left):
+            if node1.left:
+                queue1.append(node1.left)
+            if node2.left:
+                queue2.append(node2.left)
+        else:
+            return False  # Different number of children
+
+        if (node1.right and node2.right) or (not node1.right and not node2.right):
+            if node1.right:
+                queue1.append(node1.right)
+            if node2.right:
+                queue2.append(node2.right)
+        else:
+            return False  # Different number of children
+
+    return not queue1 and not queue2  # Both queues should be empty if trees are the same
+
+
+# Example usage (same as before, will give the same results)
+
+print(f"root1 and root2 are same (iterative): {are_trees_same_iterative(root1, root2)}")  # Output: True
+print(f"root1 and root3 are same (iterative): {are_trees_same_iterative(root1, root3)}")  # Output: False
+
+```
+
+The recursive approach is generally preferred for its clarity and readability unless you have concerns about stack overflow with extremely deep trees.  The iterative approach provides a safeguard against that but adds complexity.  Choose the method that best suits your needs and coding style. Remember to handle the `None` cases carefully in both methods to avoid errors.
+
