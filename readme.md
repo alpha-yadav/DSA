@@ -27758,3 +27758,52 @@ Big Theta is crucial in algorithm analysis because it allows us to precisely cha
 
 In summary, Big Theta notation provides a powerful tool for expressing the exact asymptotic growth rate of functions, making it essential for analyzing the efficiency of algorithms.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used to describe the limiting behavior of a function as its input approaches a certain value (usually infinity).  They're crucial in computer science for analyzing algorithm efficiency. Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than the square of the input size.  The actual runtime might be smaller (e.g., O(n)), but it's guaranteed not to exceed a quadratic growth rate.
+* **Focus:**  Worst-case performance.  Ignores constant factors and lower-order terms.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (or a lower limit on the runtime). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size.  It might be faster (e.g., O(n²)), but it's guaranteed to be at least linear.
+* **Focus:** Best-case performance (or a lower bound). Ignores constant factors and lower-order terms.
+
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function's growth rate is *both* upper-bounded and lower-bounded by the same function.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.  The runtime is neither significantly better nor worse than n log n.
+* **Focus:** Precise growth rate.  Ignores constant factors and lower-order terms.
+
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.
+* **Example:**  f(n) = o(n²) means f(n) grows slower than n².  This is a stronger statement than f(n) = O(n²).  f(n) could be O(n) or O(n log n), for instance.
+* **Focus:**  Asymptotic dominance; one function is significantly faster than the other.
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.
+* **Example:** f(n) = ω(n) means f(n) grows faster than n.  This is a stronger statement than f(n) = Ω(n). f(n) could be Ω(n²) or Ω(n³), for instance.
+* **Focus:** Asymptotic dominance; one function is significantly slower than the other.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Focus                                  |
+|---------|---------------------------------------|-----------------------------------------|
+| O       | Upper bound                           | Worst-case performance                 |
+| Ω       | Lower bound                           | Best-case performance (or a lower bound)|
+| Θ       | Tight bound                           | Precise growth rate                     |
+| o       | Strictly slower growth                 | Asymptotic dominance                    |
+| ω       | Strictly faster growth                 | Asymptotic dominance                    |
+
+
+**Important Note:**  These notations ignore constant factors and lower-order terms.  For example, O(2n²) is the same as O(n²) because the constant factor 2 is insignificant as n approaches infinity.  The focus is on the dominant term that determines the overall growth behavior.
+
