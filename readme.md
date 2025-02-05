@@ -27664,3 +27664,59 @@ The "best" version depends on your priorities:
 
 Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).  You'll see the FizzBuzz sequence printed to the console.  Experiment with different values of `n` to see how it works.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most commonly considered are:
+
+* **Time complexity:** The amount of time an algorithm takes to run as a function of the input size.
+* **Space complexity:** The amount of memory (or storage) an algorithm uses as a function of the input size.
+
+We typically analyze complexity using *Big O notation*, which describes the growth rate of the resource consumption as the input size approaches infinity.  It focuses on the dominant terms and ignores constant factors.  This allows us to compare algorithms effectively regardless of the specific hardware or implementation details.
+
+Here's a breakdown of common complexities, ordered from most efficient to least efficient:
+
+**Time Complexity (Big O Notation):**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Example:  Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms.  Example: Merge sort, heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases proportionally to the square of the input size.  Example: Nested loops iterating over the input.  Becomes slow quickly with larger inputs.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  These algorithms become impractical for even moderately sized inputs.  Example:  Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  Extremely inefficient for even small inputs.  Example:  Generating all permutations of a set.
+
+
+**Space Complexity (Big O Notation):**  The same Big O notation applies to space complexity, representing how much memory an algorithm uses.
+
+* **O(1) - Constant Space:** The algorithm uses a constant amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The algorithm uses an amount of memory proportional to the input size.
+
+* **O(log n) - Logarithmic Space:**  Less common, but can occur in algorithms using recursion with logarithmic depth.
+
+* **O(n²) - Quadratic Space:**  The algorithm uses an amount of memory proportional to the square of the input size.
+
+**Factors Affecting Complexity:**
+
+* **Algorithm Design:**  A well-designed algorithm will have lower complexity than a poorly designed one.
+* **Data Structures:** The choice of data structures significantly impacts an algorithm's performance.
+* **Input Data:** The characteristics of the input data (e.g., sorted vs. unsorted) can affect the actual running time.
+
+
+**Analyzing Complexity:**
+
+To analyze the complexity of an algorithm:
+
+1. **Identify the basic operations:** Determine which operations contribute most to the algorithm's runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size.
+3. **Identify the dominant terms:** Focus on the terms that grow most rapidly as the input size increases.
+4. **Express the complexity using Big O notation:**  Drop constant factors and lower-order terms.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task and for optimizing the performance of your code.  Choosing an algorithm with a lower time and space complexity is generally preferred, especially when dealing with large datasets.
+
