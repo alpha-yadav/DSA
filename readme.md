@@ -26626,3 +26626,110 @@ def lowestCommonAncestorIterative(root, p, q):
 
 Remember that both approaches assume that both `p` and `q` are present in the tree.  You might need to add error handling to your code to deal with cases where one or both nodes are not found.  Also, the iterative approach's example is incomplete because setting parent pointers during tree construction is a separate process not included here for brevity.  The recursive approach is typically simpler to implement correctly for this reason.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic algorithm problem.  The approach depends on the type of tree and whether you have parent pointers or only child pointers.
+
+Here's a breakdown of common approaches:
+
+**1. Binary Tree with Parent Pointers:**
+
+This is the simplest case.  If each node has a pointer to its parent, you can efficiently find the LCA:
+
+* **Algorithm:**
+    1. Traverse upwards from node A, storing its ancestors in a set.
+    2. Traverse upwards from node B, checking if each ancestor is in the set from step 1.
+    3. The first ancestor of B found in the set is the LCA.
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent(nodeA, nodeB):
+    ancestors_A = set()
+    current = nodeA
+    while current:
+        ancestors_A.add(current)
+        current = current.parent
+
+    current = nodeB
+    while current:
+        if current in ancestors_A:
+            return current
+        current = current.parent
+
+    return None # Nodes are not related
+
+# Example usage (assuming you've built a tree with parent pointers):
+# root = ...  # Your root node
+# nodeA = ... # Node A
+# nodeB = ... # Node B
+# lca = lca_with_parent(nodeA, nodeB)
+# print(f"LCA of {nodeA.data} and {nodeB.data}: {lca.data}")
+```
+
+**2. Binary Tree without Parent Pointers:**
+
+This requires a slightly more complex algorithm.  Two common approaches are:
+
+* **Recursive Approach:**
+
+    1. If the node is `None`, return `None`.
+    2. If the node is equal to `nodeA` or `nodeB`, return the node.
+    3. Recursively find the LCA in the left and right subtrees.
+    4. If both left and right calls return a node (meaning `nodeA` and `nodeB` are in different subtrees), the current node is the LCA.
+    5. Otherwise, return the non-`None` result from the left or right call.
+
+
+* **Python Code (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, nodeA, nodeB):
+    if root is None or root.data == nodeA.data or root.data == nodeB.data:
+        return root
+
+    left_lca = lca_recursive(root.left, nodeA, nodeB)
+    right_lca = lca_recursive(root.right, nodeA, nodeB)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example Usage:
+# root = ... # Your root node
+# nodeA = ... # Node A
+# nodeB = ... # Node B
+# lca = lca_recursive(root, nodeA, nodeB)
+# print(f"LCA of {nodeA.data} and {nodeB.data}: {lca.data}")
+
+```
+
+* **Iterative Approach (using a stack):**  A similar logic can be implemented iteratively using a stack to avoid recursion.  This is generally more memory-efficient for very deep trees.
+
+
+**3. General Trees (not necessarily binary):**
+
+The recursive approach can be adapted to work with general trees, but you'll need to iterate over all children instead of just left and right.
+
+
+**Important Considerations:**
+
+* **Error Handling:**  Add checks to handle cases where `nodeA` or `nodeB` are not in the tree.
+* **Duplicate Nodes:** If the tree can contain duplicate nodes, the definition of LCA might need clarification (e.g., return the first LCA encountered).
+* **Efficiency:** The recursive approach has a time complexity of O(N) in the worst case (N being the number of nodes), while the iterative approach can be slightly more efficient in terms of memory usage for deep trees.  The approach with parent pointers is generally the most efficient if parent pointers are available.
+
+
+Remember to adapt the code to your specific tree structure and data types.  Choose the algorithm that best suits your needs based on whether parent pointers are available and the characteristics of your tree.
+
