@@ -30688,3 +30688,47 @@ Consider searching for an element in an array.
 
 This illustrates how choosing the right algorithm can drastically improve efficiency, especially with large datasets.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate, meaning it provides both an upper and lower bound that are asymptotically proportional.  In simpler terms, it tells us that a function's growth is essentially the same as another function, ignoring constant factors and smaller terms.
+
+Here's a breakdown of its meaning and properties:
+
+**Formal Definition:**
+
+Given two functions *f(n)* and *g(n)*, we say that *f(n)* is Θ(*g(n)*) if and only if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+This means that for sufficiently large values of *n* (i.e., *n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.
+
+**What it means intuitively:**
+
+* **Tight bound:**  Θ provides a tighter bound than Big-O (O) notation, which only gives an upper bound.  Θ specifies that the function grows *at the same rate* as the reference function.
+* **Asymptotic behavior:** Θ is concerned with the behavior of the function as *n* approaches infinity.  We ignore constant factors and lower-order terms because they become insignificant as *n* grows very large.
+* **Same rate of growth:**  If *f(n)* = Θ(*g(n)*), it signifies that *f(n)* and *g(n)* have the same order of growth.  They grow proportionally to each other.
+
+**Example:**
+
+Let's say *f(n) = 2n² + 5n + 1*.  We can show that *f(n) = Θ(n²)*.
+
+To prove this, we need to find constants *c₁*, *c₂*, and *n₀* that satisfy the definition:
+
+1. **Upper Bound:** We can choose *c₂ = 3* and *n₀ = 1*. For *n ≥ 1*:
+   `2n² + 5n + 1 ≤ 2n² + 5n² + n² = 8n² ≤ 3n²`  (This inequality is incorrect, let's find a better one)
+   A better approach would be to find a suitable c2 such that for n>=n0, 2n^2 + 5n + 1 <= c2n^2.   If we choose c2 = 8 and n0=1, this works.  For n>=1, 2n^2 + 5n + 1 <= 2n^2 + 5n^2 + n^2 = 8n^2
+
+2. **Lower Bound:** We can choose *c₁ = 1* and *n₀ = 1*. For *n ≥ 1*:
+   `2n² + 5n + 1 ≥ 2n² ≥ 1n²` (This is a simplification, we can directly pick c1 = 1)
+
+Therefore, we have shown that for *n ≥ 1*,  `1n² ≤ 2n² + 5n + 1 ≤ 8n²`.  This satisfies the definition of Θ(n²), so *f(n) = Θ(n²)*.
+
+
+**Relationship to Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an upper bound.  If *f(n) = Θ(g(n))*, then *f(n) = O(g(n))*.
+* **Big-Ω (Ω):** Provides a lower bound. If *f(n) = Θ(g(n))*, then *f(n) = Ω(g(n))*.
+
+In essence, Θ combines both O and Ω, giving a precise characterization of the growth rate.  If a function is Θ(g(n)), it means its growth is neither faster nor slower than g(n) asymptotically; it grows at the same rate.
+
