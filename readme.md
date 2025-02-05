@@ -30549,3 +30549,79 @@ print(longest_palindrome("cbbd")) # Output: "bb"
 
 These examples demonstrate the progression of algorithmic problem complexity.  Remember that efficient solutions often involve choosing the right data structures and algorithms.  For harder problems, consider researching common algorithmic approaches (e.g., dynamic programming, greedy algorithms, divide and conquer).
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing improvements:
+
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This works correctly, but it can be made more efficient and readable.
+
+
+**Version 2: Improved Readability with Ternary Operator**
+
+We can improve readability using Swift's ternary operator:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : ((i % 3 == 0) ? "Fizz" : ((i % 5 == 0) ? "Buzz" : String(i)))
+        print(output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This version is more concise but might be harder to read for beginners due to the nested ternary operators.
+
+
+**Version 3:  More Efficient and Readable with String Interpolation**
+
+This version separates the logic for Fizz and Buzz, making it easier to understand and maintain:
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzEfficient(n: 15) // Example usage
+```
+
+This approach is generally preferred for its clarity and efficiency. It avoids unnecessary checks.  If a number is divisible by 15, it will correctly print "FizzBuzz" without needing a separate check.
+
+
+**Choosing the Right Version:**
+
+* **Version 1:**  Easiest to understand for beginners, but less efficient and elegant.
+* **Version 2:** Concise but potentially less readable due to nested ternary operators.
+* **Version 3:**  Most efficient and readable for experienced programmers, clearly separating concerns.
+
+
+Remember to choose the version that best suits your understanding and the context of your project.  For learning purposes, Version 1 or Version 3 are recommended.  Version 3 is generally preferred for production code.
+
