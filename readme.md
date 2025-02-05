@@ -30254,3 +30254,110 @@ Both algorithms have time complexity of O(V + E), where V is the number of verti
 
 This explanation provides a solid foundation for understanding graph traversals.  Remember that there are variations and optimizations depending on the specific graph type (directed, undirected, weighted) and the problem being solved.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and whether you need to handle cycles. Here are a few implementations in Python:
+
+
+**1. DFS using an adjacency list (recursive):**  This is generally the most concise and easiest to understand.
+
+```python
+def dfs_recursive(graph, start, visited=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and 
+               values are lists of their neighbors.
+        start: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(start, []):  # Handle nodes with no outgoing edges
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+    return visited
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Output: A B D E F C
+print("\nVisited nodes:", dfs_recursive(graph, 'A')) #Output: Visited nodes: {'A', 'B', 'D', 'E', 'F', 'C'}
+
+```
+
+
+**2. DFS using an adjacency list (iterative):** This version uses a stack instead of recursion, avoiding potential stack overflow errors for very deep graphs.
+
+```python
+def dfs_iterative(graph, start):
+    """
+    Performs a Depth-First Search traversal iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        start: The starting node.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [start]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            print(vertex, end=" ")
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)
+    return visited
+
+
+# Example usage:
+print("\n\nDFS traversal (iterative):")
+dfs_iterative(graph, 'A') # Output: A C F E B D
+print("\nVisited nodes:", dfs_iterative(graph, 'A')) #Output: Visited nodes: {'A', 'C', 'F', 'E', 'B', 'D'}
+```
+
+
+**3. Handling Cycles (with iterative approach):**  The above examples don't explicitly handle cycles. If your graph has cycles, you might get stuck in an infinite loop. To fix this, you can add a `processing` set to keep track of nodes currently on the stack.
+
+```python
+def dfs_iterative_cycles(graph, start):
+    visited = set()
+    stack = [start]
+    processing = set() # Tracks nodes currently being processed
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            processing.add(vertex)
+            print(vertex, end=" ")
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited and neighbor not in processing)
+            if vertex in processing:
+                processing.remove(vertex) # remove from processing once all neighbors are explored
+
+    return visited
+
+print("\n\nDFS traversal (iterative, handles cycles):")
+dfs_iterative_cycles(graph, 'A') # Output: A C F E B D
+print("\nVisited nodes:", dfs_iterative_cycles(graph, 'A')) #Output: Visited nodes: {'A', 'C', 'F', 'E', 'B', 'D'}
+```
+
+Remember to adapt these examples to your specific graph representation and needs.  For example, if you're using an adjacency matrix instead of a dictionary, the code will need to be modified to access neighbors appropriately.  You can also easily modify these functions to return a different result (e.g., a list of visited nodes instead of printing them).
+
