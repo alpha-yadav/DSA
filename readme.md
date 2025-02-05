@@ -31265,3 +31265,12 @@ The best representation depends on your needs:
 
 Remember that you can also combine aspects of these representations to optimize for specific use cases.  For example, you could use a child-sibling representation but augment it with parent pointers for easier upward traversal.
 
+#  Introduction 
+Please provide me with context!  "Introduction" to what?  I need more information to write an introduction.  For example, tell me:
+
+* **What is the topic?** (e.g., a research paper on climate change, a presentation on marketing strategies, a story about a talking dog)
+* **Who is the audience?** (e.g., experts in the field, general public, children)
+* **What is the purpose of the introduction?** (e.g., to grab attention, to provide background information, to state a thesis)
+
+Once I have this information, I can write a compelling introduction for you.
+
