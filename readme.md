@@ -30980,3 +30980,79 @@ public class SimpleLoop
 
 These examples all produce the same output:  The numbers 0 through 4, each on a new line.  They demonstrate the basic structure of `for` and `while` loops, which are fundamental building blocks in most programming languages.  Remember to always be mindful of the loop condition to avoid infinite loops.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop will execute completely for each iteration of the outer loop.  This is a fundamental programming construct used for iterating over multi-dimensional data structures or performing operations that require repeated iterations within iterations.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_variable in outer_iterable:
+    for inner_variable in inner_iterable:
+        # Code to be executed in the inner loop
+    # Code to be executed after the inner loop completes for each outer iteration
+# Code to be executed after the outer loop completes
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop iterates from 1 to 10
+    for j in range(1, 11):  # Inner loop iterates from 1 to 10
+        print(f"{i} x {j} = {i * j}", end="\t")  # '\t' adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This will output a nicely formatted 10x10 multiplication table.  For each value of `i` (the outer loop), the inner loop iterates through all values of `j`, calculating and printing the product.
+
+
+**Example (JavaScript):**
+
+This example prints a simple matrix:
+
+```javascript
+for (let i = 0; i < 3; i++) { // Outer loop
+  let row = "";
+  for (let j = 0; j < 4; j++) { // Inner loop
+    row += "* ";
+  }
+  console.log(row);
+}
+```
+
+This will output:
+
+```
+* * * * 
+* * * * 
+* * * * 
+```
+
+**Time Complexity:**
+
+The time complexity of nested loops is crucial to understand.  If both the outer and inner loops iterate `n` times, the total number of iterations is `n * n = n²`. This is known as O(n²) or quadratic time complexity.  Nested loops can significantly increase the execution time of your code, especially with large datasets.
+
+**Use Cases:**
+
+Nested loops are used in a wide range of applications, including:
+
+* **Matrix operations:**  Processing rows and columns of matrices.
+* **Graph traversal:**  Exploring nodes and edges in graphs.
+* **Searching and sorting algorithms:**  Implementing algorithms like bubble sort or searching within a 2D array.
+* **Generating patterns:**  Creating various text or graphical patterns.
+
+
+**Optimization:**
+
+When working with nested loops, consider these optimization techniques:
+
+* **Reduce iterations:** If possible, try to reduce the number of iterations in either the inner or outer loop.
+* **Algorithm selection:** Choose more efficient algorithms whenever possible.  For example, using a hash table for searching can significantly improve performance compared to nested loops.
+* **Memoization/Caching:** If computations within the inner loop are repeated, store the results to avoid redundant calculations.
+
+
+Understanding nested loops is critical for writing efficient and effective programs that handle multi-dimensional data and complex iterative processes.  Remember to carefully analyze the time complexity to avoid performance bottlenecks, especially when dealing with large datasets.
+
