@@ -25017,3 +25017,71 @@ This C++ `for` loop is analogous to the JavaScript and Python `for` loop example
 
 These examples all demonstrate a basic loop that iterates a set number of times.  The specific syntax varies slightly between languages, but the core concept remains the same.  Remember to choose the loop type that best suits your needs and coding style.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop. This allows you to iterate over multiple dimensions of data or perform repetitive tasks with varying parameters.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for i in range(outer_iterations):  # Outer loop
+    for j in range(inner_iterations):  # Inner loop
+        # Code to be executed for each inner and outer iteration
+        print(f"Outer: {i}, Inner: {j}")
+```
+
+**How it works:**
+
+1. **Outer Loop Initialization:** The outer loop begins its first iteration.
+2. **Inner Loop Execution:** The inner loop executes completely for the current iteration of the outer loop.
+3. **Inner Loop Completion:** Once the inner loop finishes, the control returns to the outer loop.
+4. **Outer Loop Iteration:** The outer loop increments its counter, and steps to the next iteration.
+5. **Repeat:** Steps 2-4 repeat until the outer loop completes all its iterations.
+
+
+**Example:  Printing a multiplication table**
+
+This example shows a nested loop creating a multiplication table:
+
+```python
+rows = 10
+cols = 10
+
+for i in range(1, rows + 1):  # Outer loop iterates through rows
+    for j in range(1, cols + 1):  # Inner loop iterates through columns
+        product = i * j
+        print(f"{product:4}", end="")  # :4 ensures consistent spacing
+    print()  # Newline after each row
+```
+
+This code will produce a 10x10 multiplication table.  The outer loop controls the rows, and the inner loop controls the columns. For each row (outer loop iteration), the inner loop calculates and prints all the products for that row.
+
+
+**Example: Processing a 2D array**
+
+Nested loops are very common when processing two-dimensional arrays (matrices):
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()
+```
+
+This code iterates through each element of the `matrix`.
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can be computationally expensive, especially with large numbers of iterations.  The time complexity increases significantly (often quadratically or higher).  Consider optimizing your code if performance becomes an issue.
+* **Readability:**  Deeply nested loops (more than 3-4 levels) can be difficult to read and maintain.  Try to break down complex logic into smaller, more manageable functions.
+
+
+Nested loops are a fundamental tool in programming, useful for iterating over multi-dimensional data structures and performing operations that require repeated iterations within iterations.  Understanding how they work is crucial for writing efficient and effective code.
+
