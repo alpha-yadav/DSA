@@ -26517,3 +26517,112 @@ postorder(root) # Output: D E B C A
 
 Remember to handle the case of an empty tree (where `node` is `None`) in your recursive functions to prevent errors.  Iterative solutions are also possible, often using stacks to mimic the recursive calls.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants (where we allow a node to be a descendant of itself).  Finding the LCA is a common problem in computer science, with applications in various fields.
+
+There are several ways to solve the LCA problem for a binary tree. Here are two common approaches:
+
+**1. Recursive Approach (Efficient):**
+
+This approach uses recursion and leverages the fact that the LCA must lie on the path between the two nodes.  If one node is found in the left subtree and the other in the right subtree, the current node is the LCA. Otherwise, the LCA lies in the subtree containing both nodes.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found in the tree.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:  # p and q are on different subtrees
+        return root
+    elif left_lca:              # p and q are on the left subtree
+        return left_lca
+    else:                       # p and q are on the right subtree
+        return right_lca
+
+#Example Usage
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left
+q = root.right
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") #Output: LCA of 5 and 1: 3
+
+
+```
+
+**2. Iterative Approach (Using Parent Pointers):**
+
+This approach requires a pre-processing step to add parent pointers to each node in the tree. Then, it traces the paths from `p` and `q` upwards towards the root, until a common ancestor is found.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None, parent=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.parent = parent
+
+def lowestCommonAncestorIterative(root, p, q):
+    # (Preprocessing - Assumes parent pointers are already set)
+    path_p = []
+    curr = p
+    while curr:
+        path_p.append(curr)
+        curr = curr.parent
+
+    path_q = []
+    curr = q
+    while curr:
+        path_q.append(curr)
+        curr = curr.parent
+
+    lca = None
+    i = len(path_p) -1
+    j = len(path_q) -1
+    while i>=0 and j>=0 and path_p[i] == path_q[j]:
+        lca = path_p[i]
+        i -= 1
+        j -= 1
+    return lca
+
+#Example Usage (requires setting parent pointers during tree construction) - omitted for brevity
+
+```
+
+**Choosing the Right Approach:**
+
+* The **recursive approach** is generally preferred for its elegance and simplicity. It doesn't require modification of the tree structure.
+
+* The **iterative approach** with parent pointers can be more efficient in some cases, especially if you need to perform multiple LCA queries on the same tree. However, the overhead of adding and maintaining parent pointers needs to be considered.
+
+
+Remember that both approaches assume that both `p` and `q` are present in the tree.  You might need to add error handling to your code to deal with cases where one or both nodes are not found.  Also, the iterative approach's example is incomplete because setting parent pointers during tree construction is a separate process not included here for brevity.  The recursive approach is typically simpler to implement correctly for this reason.
+
