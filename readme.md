@@ -34284,3 +34284,111 @@ To write a good introduction, I need to know the topic.  For example, are you lo
 
 Once you give me more information, I can help you write a compelling introduction.
 
+#  To check if two Binary trees are same or not 
+There are several ways to check if two binary trees are the same.  The core idea is to recursively compare nodes, ensuring that corresponding nodes have the same value and the same structure. Here are a few approaches with varying levels of efficiency:
+
+**Method 1: Recursive Approach (Most Common)**
+
+This is the most straightforward and commonly used method. It recursively compares the root nodes, then the left subtrees, and then the right subtrees.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def are_identical(root1, root2):
+    """
+    Recursively checks if two binary trees are identical.
+
+    Args:
+      root1: The root of the first binary tree.
+      root2: The root of the second binary tree.
+
+    Returns:
+      True if the trees are identical, False otherwise.
+    """
+    # Base Case: Both trees are empty
+    if root1 is None and root2 is None:
+        return True
+
+    # Base Case: One tree is empty, the other is not
+    if root1 is None or root2 is None:
+        return False
+
+    # Compare node values and recursively check subtrees
+    return (root1.val == root2.val and
+            are_identical(root1.left, root2.left) and
+            are_identical(root1.right, root2.right))
+
+
+# Example Usage
+root1 = TreeNode(1)
+root1.left = TreeNode(2)
+root1.right = TreeNode(3)
+
+root2 = TreeNode(1)
+root2.left = TreeNode(2)
+root2.right = TreeNode(3)
+
+root3 = TreeNode(1)
+root3.left = TreeNode(2)
+root3.right = TreeNode(4)  # Different from root1
+
+
+print(f"root1 and root2 are identical: {are_identical(root1, root2)}")  # True
+print(f"root1 and root3 are identical: {are_identical(root1, root3)}")  # False
+
+```
+
+**Method 2: Iterative Approach (Using Queues)**
+
+This approach uses Breadth-First Search (BFS) with queues to compare nodes level by level.  It's generally less intuitive but can be slightly more efficient in some cases due to the avoidance of recursive function calls.
+
+```python
+from collections import deque
+
+def are_identical_iterative(root1, root2):
+    """
+    Iteratively checks if two binary trees are identical using BFS.
+    """
+    if not root1 and not root2:
+        return True
+    if not root1 or not root2:
+        return False
+
+    queue1 = deque([root1])
+    queue2 = deque([root2])
+
+    while queue1 and queue2:
+        node1 = queue1.popleft()
+        node2 = queue2.popleft()
+
+        if node1.val != node2.val:
+            return False
+
+        # Add children to queues, handling None gracefully.
+        if (node1.left and node2.left):
+            queue1.append(node1.left)
+            queue2.append(node2.left)
+        elif node1.left or node2.left:
+            return False #One has a left child, the other doesn't
+
+        if (node1.right and node2.right):
+            queue1.append(node1.right)
+            queue2.append(node2.right)
+        elif node1.right or node2.right:
+            return False # One has a right child, the other doesn't
+
+
+    return len(queue1) == len(queue2) == 0 #Both queues must be empty
+
+
+# Example usage (same trees as above)
+print(f"root1 and root2 are identical (iterative): {are_identical_iterative(root1, root2)}")  # True
+print(f"root1 and root3 are identical (iterative): {are_identical_iterative(root1, root3)}")  # False
+```
+
+Both methods achieve the same result. The recursive approach is generally preferred for its readability and conciseness, while the iterative approach might offer a slight performance advantage in some scenarios (avoiding potential stack overflow issues with very deep trees).  Choose the method that best suits your needs and coding style. Remember to handle the `None` cases carefully in both methods to avoid errors.
+
