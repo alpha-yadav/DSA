@@ -36815,3 +36815,47 @@ Note that this hierarchy is not absolute; it shows the relative growth rates.  F
 
 It's crucial to understand that asymptotic analysis focuses on the *dominant terms* in a function.  Lower-order terms and constant factors are ignored because their impact diminishes as `n` grows large.  For instance, 10n + 5 is Θ(n), even though the constant 5 and coefficient 10 are present.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the lower bound of an algorithm's runtime or space complexity.  In simpler terms, it tells us the *best-case* scenario (or a lower bound) for how long an algorithm will take to run, or how much space it will use, as the input size grows.  It's a crucial part of analyzing algorithm efficiency.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that *f(n)* = Ω(*g(n)*) if and only if there exist positive constants *c* and *n₀* such that  0 ≤ *c* *g(n)* ≤ *f(n)* for all *n* ≥ *n₀*.
+
+Let's dissect this:
+
+* **f(n):** Represents the actual runtime (or space complexity) of the algorithm.
+* **g(n):** Represents a simpler function that we use to characterize the growth rate of *f(n)*.  This is often a basic function like n, n², log n, etc.
+* **c:** A positive constant.  It allows us to ignore constant factors in the analysis.
+* **n₀:** A positive integer.  It allows us to ignore the behavior of the function for small input sizes.  The inequality only needs to hold for inputs larger than *n₀*.
+
+**In essence:**
+
+Big-Omega means that the function *f(n)* grows at *least* as fast as *g(n)*.  There's a constant factor (*c*) and a threshold (*n₀*) beyond which *f(n)* is always greater than or equal to *c* times *g(n)*.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1; g(n) = n²:**  We can say f(n) = Ω(n²) because we can find a *c* (e.g., c = 1) and *n₀* (e.g., n₀ = 1) such that c*g(n) ≤ f(n) for all n ≥ n₀.  The dominant term (n²) determines the lower bound.
+
+* **f(n) = n log n; g(n) = n:**  f(n) = Ω(n) is true, but f(n) = Ω(n²) is *false*.  n log n grows slower than n², so it doesn't meet the definition for Ω(n²).
+
+* **f(n) = 10; g(n) = 1:**  f(n) = Ω(1).  A constant-time algorithm has a lower bound of constant time.
+
+
+**Relationship to Big-O and Big-Theta:**
+
+* **Big-O (O):** Describes the *upper bound* of an algorithm's runtime. It represents the worst-case scenario.
+* **Big-Omega (Ω):** Describes the *lower bound*.  It represents the best-case scenario.
+* **Big-Theta (Θ):** Describes both the upper and lower bounds.  It means the algorithm's runtime grows proportionally to the given function. If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+**Why is Big-Omega Important?**
+
+* **Guarantees:** It provides a guarantee about the minimum performance an algorithm will achieve.
+* **Algorithm Comparison:**  It helps compare algorithms, especially when dealing with algorithms that have variable performance depending on the input.
+* **Lower Bound Proof:** It is crucial in proving that a certain problem cannot be solved faster than a specific time complexity.  For example, proving that sorting algorithms have a lower bound of Ω(n log n) (for comparison-based sorting).
+
+
+Big-Omega notation, along with Big-O and Big-Theta, are essential tools for rigorously analyzing and comparing the efficiency of algorithms.  Understanding them is crucial for any serious study of algorithm design and analysis.
+
