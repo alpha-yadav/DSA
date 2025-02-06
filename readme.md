@@ -38012,3 +38012,132 @@ print(is_bst_recursive(root2)) # Output: False
 
 Both methods achieve the same result. The recursive approach is often preferred for its efficiency, especially for larger trees, as it avoids the overhead of creating and sorting an in-order list.  Choose the method that best suits your needs and understanding.  Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST produces a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val, max_val):
+    """
+    Recursively checks if a subtree is a BST.
+
+    Args:
+      node: The root node of the subtree.
+      min_val: The minimum allowed value in the subtree.
+      max_val: The maximum allowed value in the subtree.
+
+    Returns:
+      True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+
+def is_bst(root):
+    """
+    Checks if the entire binary tree is a BST.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    return is_bst_recursive(root, float('-inf'), float('inf'))
+
+
+# Example usage
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst(root)}")  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5)
+
+
+print(f"Is the tree a BST? {is_bst(root2)}")  # Output: False
+
+```
+
+**Method 2:  Iterative In-order Traversal**
+
+This method avoids recursion, which can be beneficial for very deep trees to prevent stack overflow errors.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_iterative(root):
+    """
+    Iteratively checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    stack = []
+    prev = None
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+        root = stack.pop()
+        if prev and root.data <= prev.data:
+            return False
+        prev = root
+        root = root.right
+    return True
+
+#Example Usage (same as above, will produce the same output)
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_iterative(root)}")  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5)
+
+
+print(f"Is the tree a BST? {is_bst_iterative(root2)}")  # Output: False
+```
+
+**Choosing a Method:**
+
+* **Recursive approach:** Simpler to understand and implement.  Might be less efficient for extremely deep trees due to potential stack overflow.
+
+* **Iterative approach:** More efficient for very deep trees as it avoids recursion and stack overflow issues. Slightly more complex to understand.
+
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach (H being the height of the tree) and O(H) in the worst case (for a skewed tree) or O(log N) on average (for a balanced tree) for the iterative approach due to the stack.  For a balanced tree, both approaches have approximately O(log N) space complexity.
+
