@@ -33603,3 +33603,65 @@ This version iterates similarly, but:
 
 For beginners, the first version (using `if-else if-else`) is easier to understand.  The second version (using string concatenation) is more efficient and demonstrates a more concise coding style, which is beneficial as you gain experience.  Both achieve the same result.  Choose the version that best suits your current understanding and coding style. Remember to replace `15` with your desired upper limit.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm consumes as the input size grows.  It's a crucial aspect of algorithm analysis, allowing us to compare the efficiency of different algorithms and predict their performance on larger datasets.  We generally focus on *asymptotic* complexity, meaning how the resource usage behaves as the input size approaches infinity.
+
+**Types of Complexity:**
+
+* **Time Complexity:**  Measures how the runtime of an algorithm scales with the input size (n).  This is usually expressed using Big O notation (O).
+
+* **Space Complexity:** Measures how the memory usage of an algorithm scales with the input size (n).  This is also usually expressed using Big O notation (O).
+
+
+**Big O Notation (O):**
+
+Big O notation describes the upper bound of an algorithm's complexity. It provides a simplified way to express how the runtime or space usage grows as the input size increases, ignoring constant factors and lower-order terms.  Common complexities include:
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example:  Finding all permutations of a set.
+
+
+**Other Notations:**
+
+Besides Big O, other notations are used to describe algorithm complexity more precisely:
+
+* **Big Omega (Ω):** Describes the *lower bound* of an algorithm's complexity.  It represents the best-case scenario.
+
+* **Big Theta (Θ):** Describes the *tight bound* of an algorithm's complexity.  It means the algorithm's complexity is both O(f(n)) and Ω(f(n)).  This provides the most precise description.
+
+
+**Example:**
+
+Consider searching for a specific element in an array:
+
+* **Unsorted array:**  Linear search has a time complexity of O(n) because in the worst case, you might have to check every element.
+
+* **Sorted array:** Binary search has a time complexity of O(log n) because it repeatedly divides the search space in half.
+
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity is crucial for:
+
+* **Choosing the right algorithm:**  Selecting an algorithm with a lower complexity can significantly improve performance, especially for large datasets.
+
+* **Optimizing code:**  Identifying performance bottlenecks and improving the efficiency of algorithms.
+
+* **Predicting performance:** Estimating the runtime and memory usage of an algorithm for different input sizes.
+
+* **Scaling applications:**  Ensuring that applications can handle increasing amounts of data efficiently.
+
+
+In summary, algorithm complexity analysis is a fundamental tool for evaluating and improving the performance of algorithms, enabling developers to build efficient and scalable software systems.
+
