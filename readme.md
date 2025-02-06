@@ -39071,3 +39071,92 @@ Both algorithms can easily detect cycles. In Kahn's algorithm, if you can't proc
 
 Kahn's algorithm is generally preferred for its simplicity and efficiency (O(V+E) time complexity, where V is the number of vertices and E is the number of edges).  DFS is conceptually elegant but might be slightly more complex to implement correctly.  The choice often depends on personal preference and the specific context.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on tracking the state of each node during the traversal.  We use three states:
+
+* **UNVISITED:** The node hasn't been explored yet.
+* **VISITING:** The node is currently being explored (in the recursion stack).
+* **VISITED:** The node has been completely explored (recursion has finished for this node).
+
+A cycle exists if, during the traversal, we encounter a node that's already in the `VISITING` state. This means we've encountered a back edge – an edge leading to an ancestor in the current DFS path.
+
+Here's how to implement cycle detection using DFS in Python:
+
+```python
+def detect_cycle(graph):
+    """
+    Detects cycles in a directed graph using Depth First Traversal.
+
+    Args:
+        graph: A dictionary representing the directed graph where keys are nodes
+               and values are lists of their neighbors.
+
+    Returns:
+        True if a cycle is detected, False otherwise.
+    """
+
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: UNVISITED, 1: VISITING, 2: VISITED
+
+    def dfs(node):
+        visited[node] = 1  # Mark as VISITING
+
+        for neighbor in graph.get(node, []):  # Handle nodes with no outgoing edges
+            if visited[neighbor] == 1:  # Cycle detected
+                return True
+            if visited[neighbor] == 0 and dfs(neighbor):  # Recursively explore neighbors
+                return True
+
+        visited[node] = 2  # Mark as VISITED
+        return False
+
+    for node in graph:
+        if visited[node] == 0:
+            if dfs(node):
+                return True
+
+    return False
+
+# Example usage:
+graph1 = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: []
+}
+
+graph2 = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [0]
+}
+
+graph3 = {} #Empty Graph
+
+graph4 = {0: [1], 1: [2], 2: [3], 3: [4], 4: []} #No Cycle
+
+
+print(f"Graph 1 has cycle: {detect_cycle(graph1)}")  # True
+print(f"Graph 2 has cycle: {detect_cycle(graph2)}")  # True
+print(f"Graph 3 has cycle: {detect_cycle(graph3)}")  # False
+print(f"Graph 4 has cycle: {detect_cycle(graph4)}")  # False
+
+```
+
+**Explanation:**
+
+1. **Initialization:** `visited` array keeps track of the state of each node.  It's initialized to all `UNVISITED` (0).
+
+2. **`dfs(node)` function:** This recursive function performs the Depth First Search.
+   - It marks the current `node` as `VISITING` (1).
+   - It iterates through the neighbors of the current node.
+   - If a neighbor is already `VISITING` (1), a cycle is found, and `True` is returned.
+   - If a neighbor is `UNVISITED` (0), the `dfs` function is recursively called on it.  If the recursive call returns `True` (cycle detected), `True` is propagated up.
+   - After exploring all neighbors, the node is marked as `VISITED` (2).
+
+3. **Main loop:** The main loop iterates through all nodes in the graph. If a node is `UNVISITED`, `dfs` is called on it to start the traversal from that node.  If any call to `dfs` returns `True`, a cycle exists.
+
+
+This implementation efficiently detects cycles in directed graphs using the characteristics of DFS and the state tracking mechanism.  The time complexity is O(V+E), where V is the number of vertices and E is the number of edges, which is linear in the size of the graph.  The space complexity is O(V) due to the `visited` array and the recursion stack in the worst case (a very deep graph).
+
