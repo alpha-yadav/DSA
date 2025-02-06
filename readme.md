@@ -36571,3 +36571,42 @@ else:
 
 Remember to start small, be patient, and celebrate your progress.  Learning algorithms takes time and effort, but the skills you gain are invaluable for any programmer.
 
+#  A sample algorithmic problem 
+Here are a few sample algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+* **Problem:**  Given an array of integers, find the sum of all the even numbers in the array.
+* **Input:** An array of integers (e.g., `[1, 2, 3, 4, 5, 6]`).
+* **Output:** The sum of the even numbers (e.g., 12).
+
+**Medium:**
+
+* **Problem:** Given a sorted array of integers, find the index of a specific integer using binary search.  Return -1 if the integer is not found.
+* **Input:** A sorted array of integers (e.g., `[2, 5, 7, 8, 11, 12]`) and a target integer (e.g., 11).
+* **Output:** The index of the target integer (e.g., 4) or -1 if not found.
+
+
+**Hard:**
+
+* **Problem:** Implement Dijkstra's algorithm to find the shortest path from a starting node to all other nodes in a graph represented as an adjacency matrix or list.
+* **Input:** A graph represented as an adjacency matrix or list (showing connections between nodes and their weights), and a starting node.
+* **Output:** The shortest distance from the starting node to all other reachable nodes.
+
+
+**Example of a more specific and challenging problem:**
+
+* **Problem:**  Given a string, find the longest palindromic substring within it.  A palindrome is a string that reads the same forwards and backward.
+* **Input:** A string (e.g., "bananas")
+* **Output:** The longest palindromic substring (e.g., "anana").
+
+
+These problems demonstrate different aspects of algorithmic problem-solving. They involve different data structures (arrays, graphs) and algorithmic techniques (iteration, binary search, graph traversal).  The difficulty increases with the complexity of the problem and the required algorithms.  When tackling these, consider things like:
+
+* **Efficiency:** How can you solve the problem with the least amount of computational resources (time and space)?
+* **Correctness:** Does your solution always produce the correct output for all valid inputs?
+* **Readability:** Is your code easy to understand and maintain?
+
+
+Remember to specify the input and output formats clearly when defining an algorithmic problem.
+
