@@ -38227,3 +38227,99 @@ This approach achieves the same result as Method 1 but iteratively, using a stac
 
 For most cases, **Method 1 (recursive in-order traversal)** offers a good balance of readability and efficiency.  Method 2 is a valuable alternative that can be slightly faster in some scenarios because it avoids the overhead of constructing a list, but is less intuitive. Method 3 is generally less preferred unless memory efficiency for extremely deep trees is paramount.  Remember to handle edge cases like empty trees appropriately in your chosen implementation.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit (process) each node in a binary tree exactly once.  There are several common traversal methods, each producing a different order of node visits:
+
+**1. Pre-order Traversal:**
+
+* **Process:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+* **Order:** Root, Left, Right
+* **Example:**  For a tree with root 'A', left child 'B', and right child 'C', the pre-order traversal would be: A B C
+
+**2. In-order Traversal:**
+
+* **Process:** Recursively traverse the left subtree, visit the root node, then recursively traverse the right subtree.
+* **Order:** Left, Root, Right
+* **Example:** For the same tree (A, B, C), the in-order traversal would be: B A C.  In-order traversal of a Binary Search Tree (BST) yields a sorted sequence of nodes.
+
+**3. Post-order Traversal:**
+
+* **Process:** Recursively traverse the left subtree, recursively traverse the right subtree, then visit the root node.
+* **Order:** Left, Right, Root
+* **Example:** For the same tree (A, B, C), the post-order traversal would be: B C A.
+
+**4. Level-order Traversal (Breadth-First Search):**
+
+* **Process:** Visits nodes level by level, starting from the root and going down.  Uses a queue data structure.
+* **Order:** Level by level, from left to right.
+* **Example:** For the same tree (A, B, C), the level-order traversal would be: A B C
+
+**Code Examples (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+def levelorder(node):
+    if node is None:
+        return
+
+    queue = [node]
+    while(len(queue) > 0):
+        print(queue[0].data, end=" ")
+        node = queue.pop(0)
+
+        if node.left is not None:
+            queue.append(node.left)
+
+        if node.right is not None:
+            queue.append(node.right)
+
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+
+print("Preorder traversal:", end=" ")
+preorder(root)
+print("\nInorder traversal:", end=" ")
+inorder(root)
+print("\nPostorder traversal:", end=" ")
+postorder(root)
+print("\nLevelorder traversal:", end=" ")
+levelorder(root)
+print()
+```
+
+**Applications:**
+
+* **Pre-order:** Used in expression tree evaluation and creating a copy of a tree.
+* **In-order:**  Used in BSTs to get sorted data.
+* **Post-order:** Used in deleting a tree and evaluating expressions in postfix notation.
+* **Level-order:**  Used in applications where level-wise processing is needed (e.g., displaying a tree level by level, finding the height of a tree).
+
+
+Remember to handle the case of an empty tree (where the root is `None`) in your traversal functions to avoid errors.  The code examples above demonstrate this.
+
