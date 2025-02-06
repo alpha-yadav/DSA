@@ -36610,3 +36610,77 @@ These problems demonstrate different aspects of algorithmic problem-solving. The
 
 Remember to specify the input and output formats clearly when defining an algorithmic problem.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing some improvements:
+
+**Basic Implementation:**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* If it's divisible by both 3 and 5 (meaning divisible by 15), it prints "FizzBuzz".
+* If it's divisible by 3, it prints "Fizz".
+* If it's divisible by 5, it prints "Buzz".
+* Otherwise, it prints the number itself.
+
+
+**Improved Implementation (using string concatenation):**
+
+This version is slightly more concise and efficient:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This version builds the output string (`output`) incrementally.  If `output` is empty after checking divisibility by 3 and 5, it means the number is not divisible by either, so the number itself is printed.
+
+
+**Even More Concise (using ternary operator):**
+
+While arguably less readable for beginners, this version demonstrates a more compact approach using the ternary operator:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print((i % 15 == 0 ? "FizzBuzz" : (i % 3 == 0 ? "Fizz" : (i % 5 == 0 ? "Buzz" : String(i))))
+    }
+}
+
+fizzBuzzConcise(n: 15) // Example usage
+```
+
+This uses nested ternary operators to achieve the same result in a single `print` statement.  However, readability suffers with deeply nested ternaries.  The improved version is generally preferred for balance of clarity and efficiency.
+
+
+**Choosing the Right Version:**
+
+For beginners, the first or improved version is recommended for readability and understanding. The concise version is good for demonstrating Swift's expressiveness but should be used cautiously to avoid sacrificing readability.  Prioritize code that is easy to understand and maintain, especially when starting out. Remember to choose the version that best suits your needs and coding style while keeping readability in mind.
+
