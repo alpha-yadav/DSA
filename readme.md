@@ -36684,3 +36684,62 @@ This uses nested ternary operators to achieve the same result in a single `print
 
 For beginners, the first or improved version is recommended for readability and understanding. The concise version is good for demonstrating Swift's expressiveness but should be used cautiously to avoid sacrificing readability.  Prioritize code that is easy to understand and maintain, especially when starting out. Remember to choose the version that best suits your needs and coding style while keeping readability in mind.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most often considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+Both time and space complexity are typically expressed using **Big O notation**, which describes the upper bound of the growth rate of the resource usage as the input size approaches infinity.  Big O notation ignores constant factors and lower-order terms, focusing on the dominant term that determines the algorithm's scaling behavior.
+
+Here's a breakdown of common complexities:
+
+**Time Complexity (Big O Notation):**
+
+* **O(1) - Constant time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic time:** The execution time increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear time:** The execution time increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic time:**  The execution time is a product of linear and logarithmic factors. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic time:** The execution time increases proportionally to the square of the input size. Example: Bubble sort, selection sort, nested loops iterating over the same input.
+
+* **O(2ⁿ) - Exponential time:** The execution time doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial time:** The execution time grows factorially with the input size. Example: Traveling salesman problem using brute force.
+
+
+**Space Complexity (Big O Notation):**  The same notations apply, but they refer to memory usage instead of execution time.
+
+* **O(1) - Constant space:** The algorithm uses a fixed amount of memory regardless of the input size.
+
+* **O(n) - Linear space:** The memory usage increases linearly with the input size.  Example:  Storing an array of the input.
+
+* **O(log n) - Logarithmic space:** The memory usage increases logarithmically with the input size.  Example: Recursive algorithms that use a stack proportional to log n.
+
+* and so on...
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity of an algorithm involves identifying the dominant operations and expressing their frequency as a function of the input size.  Techniques include:
+
+* **Counting operations:**  Carefully count the number of basic operations (comparisons, assignments, arithmetic operations) performed by the algorithm.
+* **Best, average, and worst-case analysis:**  Consider different input scenarios to determine the best, average, and worst-case time/space complexity.
+* **Amortized analysis:**  Analyze the average cost of an operation over a sequence of operations.
+
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity is crucial for:
+
+* **Selecting efficient algorithms:** Choosing algorithms with lower complexities leads to faster and more memory-efficient programs.
+* **Predicting performance:**  It allows you to estimate how an algorithm will perform with larger inputs.
+* **Optimizing code:** Identifying performance bottlenecks and improving algorithm efficiency.
+* **Scalability:** Determining whether an algorithm will scale well as the input size grows.
+
+
+By understanding and analyzing algorithm complexity, you can write more efficient and scalable programs. Remember that the choice of algorithm often involves trade-offs between time and space complexity.
+
