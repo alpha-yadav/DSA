@@ -36781,3 +36781,37 @@ Therefore, we can say that `f(n) = Θ(n²)`, meaning the function grows quadrati
 
 **In summary:**  Big-Theta notation provides the most precise description of an algorithm's time or space complexity when you can determine both its upper and lower bounds.  It tells you exactly how the algorithm scales with increasing input size.  If you can only find an upper bound, Big-O is used. If you can only find a lower bound, Big-Ω is used.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used in computer science to describe the behavior of functions, particularly the runtime or space complexity of algorithms, as the input size grows arbitrarily large.  The most common notations are:
+
+* **Big O (O):**  Describes the *upper bound* of a function's growth.  It represents the worst-case scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.  In simpler terms, f(n) grows no faster than g(n).  Examples: O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ), O(n!).
+
+* **Big Omega (Ω):** Describes the *lower bound* of a function's growth. It represents the best-case scenario (or a guarantee on how fast the function *at least* grows). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀. In simpler terms, f(n) grows at least as fast as g(n). Examples: Ω(1), Ω(log n), Ω(n), Ω(n log n), Ω(n²), Ω(2ⁿ), Ω(n!).
+
+* **Big Theta (Θ):** Describes the *tight bound* of a function's growth.  It means the function grows both no faster and no slower than the given function.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).  This provides a precise description of the function's growth rate.  Examples: Θ(1), Θ(log n), Θ(n), Θ(n log n), Θ(n²).
+
+* **Little o (o):**  Describes a *strict upper bound*.  f(n) = o(g(n)) means that for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  Essentially, f(n) grows significantly slower than g(n).
+
+* **Little omega (ω):** Describes a *strict lower bound*. f(n) = ω(g(n)) means that for any positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀. Essentially, f(n) grows significantly faster than g(n).
+
+
+**Comparison Table:**
+
+| Notation | Meaning                               | Example: f(n) = 10n + 5  |
+|----------|---------------------------------------|--------------------------|
+| O(g(n))  | Upper bound (worst-case)             | O(n)                     |
+| Ω(g(n))  | Lower bound (best-case)               | Ω(n)                     |
+| Θ(g(n))  | Tight bound (average-case)           | Θ(n)                     |
+| o(g(n))  | Strict upper bound                    | o(n²)                    |
+| ω(g(n))  | Strict lower bound                    | ω(log n)                  |
+
+
+**Hierarchy (from slowest to fastest growing):**
+
+O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³) < ... < O(2ⁿ) < O(n!)
+
+Note that this hierarchy is not absolute; it shows the relative growth rates.  For small values of `n`, a function with a higher asymptotic complexity might actually be faster than a function with a lower complexity.  The asymptotic notation only describes the behavior as `n` approaches infinity.
+
+
+It's crucial to understand that asymptotic analysis focuses on the *dominant terms* in a function.  Lower-order terms and constant factors are ignored because their impact diminishes as `n` grows large.  For instance, 10n + 5 is Θ(n), even though the constant 5 and coefficient 10 are present.
+
