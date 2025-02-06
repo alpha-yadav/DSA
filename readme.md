@@ -36958,3 +36958,84 @@ while i < 5:
 
 The `while` loop continues as long as the condition (`i < 5`) is true.  You must manually increment `i` within the loop body to avoid an infinite loop.  This makes `for` loops generally preferred for situations where the number of iterations is known in advance.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions of data or perform repetitive tasks with varying parameters.
+
+Here's a breakdown of nested loops:
+
+**Structure:**
+
+The general structure looks like this:
+
+```java
+for (int i = 0; i < outerLoopLimit; i++) { // Outer loop
+    for (int j = 0; j < innerLoopLimit; j++) { // Inner loop
+        // Code to be executed for each inner loop iteration
+    }
+    // Code to be executed after each outer loop iteration
+}
+```
+
+This can be adapted to use `while` loops or other looping constructs as well.
+
+**Example: Printing a Multiplication Table**
+
+Let's say we want to print a multiplication table (e.g., from 1 to 5).  We can use nested loops:
+
+```java
+public class NestedLoopExample {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 5; i++) { // Outer loop: Rows
+            for (int j = 1; j <= 5; j++) { // Inner loop: Columns
+                System.out.print(i * j + "\t"); // Print the product with a tab for spacing
+            }
+            System.out.println(); // Move to the next line after each row
+        }
+    }
+}
+```
+
+This code will produce the following output:
+
+```
+1	2	3	4	5	
+2	4	6	8	10	
+3	6	9	12	15	
+4	8	12	16	20	
+5	10	15	20	25
+```
+
+
+**Example: Processing a 2D Array**
+
+Nested loops are frequently used to traverse and manipulate two-dimensional arrays (matrices):
+
+```java
+public class TwoDimensionalArrayExample {
+    public static void main(String[] args) {
+        int[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        for (int i = 0; i < matrix.length; i++) { // Outer loop: Rows
+            for (int j = 0; j < matrix[i].length; j++) { // Inner loop: Columns
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+This will print the elements of the `matrix`.  Notice how `matrix[i].length` is used to ensure that the inner loop iterates only over the elements in the current row.
+
+**Important Considerations:**
+
+* **Efficiency:**  Nested loops can lead to a significant increase in execution time, especially with large datasets.  The time complexity increases quadratically (or higher, depending on the number of nested loops) with the size of the input.  Consider using more efficient algorithms if performance is critical.
+* **Readability:**  Deeply nested loops can make code harder to read and understand.  Try to keep your loops as shallow as possible and use meaningful variable names.
+
+
+Nested loops are a powerful tool but should be used judiciously, considering their impact on performance and code clarity.  Always choose the most appropriate algorithm for the task at hand.
+
