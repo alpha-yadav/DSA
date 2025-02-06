@@ -38528,3 +38528,78 @@ postorder(root) # Output: D E B C A
 
 These code examples demonstrate recursive implementations.  Iterative versions are also possible using stacks, but they are generally more complex.  Choose the traversal method based on the specific task; for example, inorder traversal is useful for sorting in a BST, while postorder is often used for expression evaluation.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants (where we allow a node to be a descendant of itself).  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This approach recursively traverses the tree.  If a node is equal to either `p` or `q`, it's returned. If `p` is found in the left subtree and `q` is found in the right subtree (or vice versa), the current node is the LCA. Otherwise, the LCA is found recursively in the subtree containing both nodes (either left or right).
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(self, root, p, q):
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:  # p and q are on different sides
+           return root
+       elif left:  # p and q are on the left side
+           return left
+       else:  # p and q are on the right side
+           return right
+
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree. In the worst case, we might traverse the entire tree.
+   * **Space Complexity:** O(H), where H is the height of the tree.  This is due to the recursive call stack. In the worst case (a skewed tree), H can be N.
+
+
+2. **Iterative Approach using Parent Pointers:**
+
+   If you can modify the tree to add parent pointers to each node (pointing to its parent), you can solve this iteratively.  Find the paths from the root to `p` and `q`. Then, iterate upwards from `p` and `q` simultaneously until you find the first common ancestor.
+
+   ```python
+   # Assuming a modified TreeNode class with a 'parent' attribute
+
+   def lowestCommonAncestor_iterative(self, root, p, q):
+       path_p = []
+       path_q = []
+
+       # functions to find paths (implementation omitted for brevity)
+       self.findPath(root, p, path_p)
+       self.findPath(root, q, path_q)
+
+       i = 0
+       while i < len(path_p) and i < len(path_q) and path_p[i] == path_q[i]:
+           i += 1
+       return path_p[i - 1] # The LCA is the last common node
+   ```
+
+   * **Time Complexity:** O(N) in the worst case.
+   * **Space Complexity:** O(N) in the worst case (if the paths are long).
+
+
+3. **Using a Hash Table (for storing parent pointers):**
+
+   Similar to the iterative approach but instead of modifying the tree, you can use a hash table (dictionary in Python) to store the parent of each node during a depth-first search (DFS). Then, you can retrace paths to find the LCA as in the iterative method. This avoids modifying the original tree.
+
+
+**Choosing the Right Method:**
+
+* The **recursive approach** is generally preferred for its simplicity and readability.  It's efficient unless you have a severely unbalanced tree.
+* The **iterative approach with parent pointers** is efficient if you already have parent pointers in your tree structure.  Adding parent pointers might require extra space and time.
+* The **hash table approach** is a good compromise if you want to avoid modifying the tree but need better space complexity than pure recursion in the worst case of a very deep unbalanced tree.
+
+
+Remember to handle edge cases such as empty trees, one node being an ancestor of the other, or both nodes not being present in the tree.  The code examples above implicitly handle some of these cases, but robust error handling might be needed in a production environment.
+
