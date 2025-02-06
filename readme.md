@@ -37201,3 +37201,14 @@ The optimal representation depends on the specific operations you'll be performi
 
 In summary, there's no single "best" representation. The appropriate choice depends entirely on your specific application and its requirements.  The `list of children` approach is often a good general-purpose option due to its flexibility and relatively good performance.
 
+#  Introduction 
+Please provide me with context!  An introduction to *what*?  To give you a good introduction, I need to know the topic.  For example, are you looking for an introduction to:
+
+* **A specific topic?** (e.g., the history of the Roman Empire, the benefits of exercise, the science of climate change)
+* **A piece of writing?** (e.g., a story, an essay, a research paper)
+* **A presentation?** (e.g., on a new product, a scientific discovery, a historical event)
+* **A person?** (e.g., a famous author, a historical figure, a colleague)
+* **A place?** (e.g., a city, a country, a natural landmark)
+
+Tell me what you want an introduction *to*, and I'll do my best to write one for you.
+
