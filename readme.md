@@ -33852,3 +33852,101 @@ While Big O describes the *worst-case* upper bound, other notations exist:
 
 Big O notation is a crucial tool for any computer scientist or software engineer to analyze and design efficient algorithms. Understanding it helps make informed decisions about choosing the right algorithm for a given task.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  Here are examples in several popular programming languages:
+
+**1. While Loop (checks condition before each iteration):**
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+
+**2. For Loop (iterates a specific number of times or over a sequence):**
+
+* **Python:**
+
+```python
+for i in range(5):
+  print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  The choice between `while` and `for` loops depends on the specific task.  `While` loops are suitable when the number of iterations isn't known beforehand, while `for` loops are better for situations where you know how many times the loop should run.  Remember to always include a way to exit the loop (incrementing `count` in these examples) to prevent infinite loops.
+
