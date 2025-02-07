@@ -49764,3 +49764,109 @@ postorder(root)  # Output: Postorder traversal: 4 5 2 3 1
 
 Remember to handle the case where the input `node` is `None` (empty subtree) in your recursive functions to avoid errors.  The iterative approaches are generally more efficient in terms of space complexity (avoiding recursive function call overhead), but the recursive versions are often easier to understand and implement.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the lowest common ancestor (LCA) of two nodes in a binary tree is a common algorithmic problem.  The approach differs slightly depending on whether the tree is a binary *search* tree or a general binary tree.
+
+**1. Binary Search Tree (BST):**
+
+In a BST, the LCA is simpler to find because of the inherent ordering property.  The LCA will always be either one of the nodes or a node on the path between them.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_bst(root, node1, node2):
+    """
+    Finds the LCA of node1 and node2 in a BST.
+
+    Args:
+        root: The root of the BST.
+        node1: The first node.
+        node2: The second node.
+
+    Returns:
+        The LCA node, or None if either node1 or node2 is not found.
+    """
+    if not root:
+        return None
+
+    if (node1.data < root.data and node2.data > root.data) or \
+       (node1.data > root.data and node2.data < root.data):
+        return root
+
+    elif node1.data < root.data and node2.data < root.data:
+        return lca_bst(root.left, node1, node2)
+    elif node1.data > root.data and node2.data > root.data:
+        return lca_bst(root.right, node1, node2)
+    else:  #One of the nodes is the root
+        return root
+
+#Example Usage
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+node1 = root.left.left  #node with value 4
+node2 = root.left.right #node with value 12
+lca = lca_bst(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca.data}") #Output: LCA of 4 and 12: 8
+
+
+```
+
+**2. General Binary Tree:**
+
+Finding the LCA in a general binary tree is more complex.  A common approach is to use a recursive function that traverses the tree. If a node is found, it returns `True`. If both nodes are found in a subtree, that subtree's root is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_binary_tree(root, node1, node2):
+    """Finds the LCA of node1 and node2 in a general binary tree."""
+
+    if not root or root == node1 or root == node2:
+        return root
+
+    left_lca = lca_binary_tree(root.left, node1, node2)
+    right_lca = lca_binary_tree(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+#Example Usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+node1 = root.left.left #node with value 4
+node2 = root.right.left #node with value 6
+lca = lca_binary_tree(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca.data}")  #Output: LCA of 4 and 6: 1
+
+```
+
+**Important Considerations:**
+
+* **Node Existence:**  The functions above assume `node1` and `node2` actually exist in the tree. You should add error handling (e.g., returning `None`) if the nodes are not found.
+* **Efficiency:** The BST approach is generally more efficient (O(h), where h is the height of the tree) than the general binary tree approach (also O(h) in the average case, but could be O(n) in the worst case for a skewed tree).
+* **Path-Based Approaches:**  Alternative approaches for general binary trees involve finding the paths from the root to each node and then finding the last common node in those paths.  This is less efficient than the recursive approach shown above.
+
+
+Remember to adapt these code snippets to your specific data structures and error-handling needs.  Choose the appropriate function (BST or general binary tree) based on the characteristics of your input tree.
+
