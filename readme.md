@@ -49422,3 +49422,105 @@ def is_bst_iterative(root):
 
 For most cases, the **recursive in-order traversal (Method 1) or the recursive min/max method (Method 2)** are preferred due to their clarity and readability.  Method 3 offers a potential performance advantage for extremely deep trees where recursion might hit stack limits, but this is less of a concern in most practical scenarios.  Choose the method that best suits your needs and coding style.  Remember to handle edge cases (empty trees) appropriately in your chosen implementation.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit all the nodes in a binary tree.  There are three main types, categorized by the order in which the root node is visited relative to its left and right subtrees:
+
+* **Inorder Traversal:** Left Subtree -> Root -> Right Subtree
+* **Preorder Traversal:** Root -> Left Subtree -> Right Subtree
+* **Postorder Traversal:** Left Subtree -> Right Subtree -> Root
+
+Let's break down each type, including their applications and how they're implemented recursively and iteratively:
+
+**1. Inorder Traversal:**
+
+* **Order:** Visit the left subtree, then the root, then the right subtree.
+* **Application:**  In a Binary Search Tree (BST), an inorder traversal will output the nodes in ascending order.
+* **Recursive Implementation (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal_recursive(node):
+    if node:
+        inorder_traversal_recursive(node.left)
+        print(node.data, end=" ")
+        inorder_traversal_recursive(node.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal (recursive):")
+inorder_traversal_recursive(root)  # Output: 4 2 5 1 3
+```
+
+* **Iterative Implementation (Python):**  Uses a stack to simulate the recursion.
+
+```python
+def inorder_traversal_iterative(node):
+    stack = []
+    current = node
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.data, end=" ")
+        current = current.right
+```
+
+**2. Preorder Traversal:**
+
+* **Order:** Visit the root, then the left subtree, then the right subtree.
+* **Application:**  Creating a copy of the tree, evaluating an expression tree.  Preorder traversal gives a representation of the tree's structure.
+* **Recursive Implementation (Python):**
+
+```python
+def preorder_traversal_recursive(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal_recursive(node.left)
+        preorder_traversal_recursive(node.right)
+```
+
+* **Iterative Implementation (Python):**  Similar to inorder, but the push and pop operations are adjusted.
+
+```python
+def preorder_traversal_iterative(node):
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if current:
+            print(current.data, end=" ")
+            stack.append(current.right)
+            stack.append(current.left)
+```
+
+**3. Postorder Traversal:**
+
+* **Order:** Visit the left subtree, then the right subtree, then the root.
+* **Application:**  Deleting a tree (deleting nodes in a bottom-up manner), evaluating an expression tree (operations are performed after operands are evaluated).
+* **Recursive Implementation (Python):**
+
+```python
+def postorder_traversal_recursive(node):
+    if node:
+        postorder_traversal_recursive(node.left)
+        postorder_traversal_recursive(node.right)
+        print(node.data, end=" ")
+```
+
+* **Iterative Implementation (Python):**  Requires a bit more complexity, often involving two stacks or a stack and a flag to track the recently visited node.  (Implementation omitted for brevity, but readily available online).
+
+
+**Choosing the Right Traversal:**
+
+The best traversal method depends on the specific application.  For example, inorder traversal is ideal for sorted output in a BST, while preorder and postorder are more useful for structural operations or expression evaluation.  Iterative solutions are generally preferred over recursive ones for large trees to avoid stack overflow errors.
+
