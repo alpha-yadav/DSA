@@ -45568,3 +45568,115 @@ BSTs can be implemented using nodes that contain a key (data), a left child poin
 
 In summary, BSTs are a powerful and versatile data structure offering efficient search, insertion, and deletion operations when properly balanced.  Understanding their properties and operations is crucial for many computer science applications.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement binary search tree (BST) insertion in Python. Here are a couple, starting with a more straightforward, iterative approach, followed by a recursive one:
+
+**Iterative Approach:**
+
+This approach uses a loop to traverse the tree and find the correct insertion point.  It's generally considered slightly more efficient than the recursive approach due to avoiding function call overhead.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        new_node = Node(data)
+        if self.root is None:
+            self.root = new_node
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = new_node
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = new_node
+                    break
+                else:
+                    current = current.right
+
+#Example Usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+#Further functions to traverse and print the tree would go here (e.g., inorder traversal)
+
+```
+
+**Recursive Approach:**
+
+This approach uses recursion to traverse the tree. It's often considered more elegant but can be less efficient for very deep trees due to function call overhead.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data, node=None):
+        if node is None:
+            node = self.root
+
+        if node is None:
+            self.root = Node(data)
+            return
+
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self.insert(data, node.left)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self.insert(data, node.right)
+
+
+#Example Usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+#Further functions to traverse and print the tree would go here (e.g., inorder traversal)
+```
+
+**Inorder Traversal (for verification):**  To verify the BST structure after insertion, you'll need a function to traverse the tree (e.g., inorder traversal which visits nodes in ascending order for a BST).
+
+```python
+    def inorder(self, node):
+        if node:
+            self.inorder(node.left)
+            print(node.data, end=" ")
+            self.inorder(node.right)
+
+#Example call after insertions:
+bst.inorder(bst.root) #Prints the sorted data
+```
+
+Remember to choose the iterative or recursive version based on your performance needs and coding style preference.  For most cases, the iterative version offers a slight performance advantage.  The recursive version is often easier to read and understand, especially for those new to recursion.  Always include a traversal method to check the correctness of your tree structure.
+
