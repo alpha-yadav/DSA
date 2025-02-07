@@ -46790,3 +46790,84 @@ print(f"LCA of 2 and 3 (path method): {lca.data}")  # Output: 1
 
 The **recursive approach** is generally preferred due to its cleaner code and better time complexity (O(N) in the worst case, where N is the number of nodes). The path-based approach has a higher time complexity (can be O(N^2) in the worst case).  Therefore, unless there's a specific constraint, use the recursive method.  Remember to handle edge cases like `p` or `q` not being in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (or graph) is a classic computer science problem.  There are several approaches, depending on the type of tree and the information available.
+
+**1.  Binary Tree (most common case):**
+
+* **Recursive Approach:** This is a simple and elegant solution for binary trees.  The idea is to recursively traverse the tree. If the current node is one of the targets, return the node.  If both targets are found in the left subtree, the LCA is in the left subtree.  If both are in the right subtree, the LCA is in the right subtree. Otherwise, the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lowestCommonAncestor(root, root.left, root.right)  # LCA of 2 and 3 is 1
+print(f"LCA of 2 and 3: {lca.data}")
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right) #LCA of 4 and 5 is 2
+print(f"LCA of 4 and 5: {lca.data}")
+
+```
+
+* **Iterative Approach (using parent pointers):** If each node has a pointer to its parent, you can efficiently find the LCA iteratively.  Find the paths from each target node to the root.  Then, iterate up the paths until you find the last common node.  This approach is usually more memory-efficient than recursion for very deep trees.
+
+```python
+# Assumes each node has a 'parent' attribute
+def lowestCommonAncestor_iterative(p, q):
+    path_p = []
+    path_q = []
+
+    curr = p
+    while curr:
+        path_p.append(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        path_q.append(curr)
+        curr = curr.parent
+
+    lca = None
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[len(path_p) - 1 -i] == path_q[len(path_q) -1 -i]:
+        lca = path_p[len(path_p) - 1 - i]
+        i += 1
+    return lca
+```
+
+
+**2.  General Tree (n-ary tree):**  The recursive approach can be adapted for n-ary trees.  Instead of just left and right subtrees, you check all children.
+
+**3.  Graph:** Finding the LCA in a graph is more complex because there might be multiple paths between two nodes.  Algorithms like Tarjan's off-line LCA algorithm or the Euler tour technique are often used for efficient solutions in this case.  These are more advanced and beyond the scope of a concise explanation here.
+
+
+**Important Considerations:**
+
+* **Error Handling:**  Always handle cases where one or both nodes are not in the tree.
+* **Efficiency:**  The recursive approach for binary trees is generally O(N) in the worst case (skewed tree), while the iterative approach with parent pointers is O(D), where D is the depth of the tree.  For graphs, the complexity depends on the algorithm used.
+* **Data Structures:** The choice of data structures (like parent pointers) impacts both the complexity and implementation.
+
+
+Remember to choose the appropriate method based on the specific characteristics of your tree or graph and the constraints of your problem.  For simple binary trees, the recursive approach is often the easiest to understand and implement.  For larger or more complex structures, more advanced algorithms might be necessary.
+
