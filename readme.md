@@ -48168,3 +48168,79 @@ These examples all demonstrate a simple loop that iterates five times.  The core
 
 These are basic examples.  Loops can become much more complex with nested loops, conditional statements within the loop, and more sophisticated termination conditions.  But these represent the fundamental structure of a simple loop.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times, based on the number of iterations of the outer loop.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+for (initialization1; condition1; increment1) {
+  // Outer loop code
+  for (initialization2; condition2; increment2) {
+    // Inner loop code
+  }
+  // More outer loop code
+}
+```
+
+* **Outer Loop:** The outer loop controls the overall number of times the inner loop runs.
+* **Inner Loop:** The inner loop executes repeatedly for each iteration of the outer loop.
+* **Initialization:**  Sets up counters or variables before the loops begin.
+* **Condition:**  A Boolean expression that determines if the loop should continue.
+* **Increment:** Updates the loop counter after each iteration.
+
+
+**Example (Python):**
+
+This code prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+  for j in range(1, 11):  # Inner loop (columns)
+    print(i * j, end="\t")  # \t adds a tab for spacing
+  print()  # Newline after each row
+```
+
+This will output a 10x10 multiplication table.  The outer loop iterates through the rows (1 to 10), and for each row, the inner loop iterates through the columns (1 to 10), calculating and printing the product.
+
+
+**Example (JavaScript):**
+
+This code prints a pattern of asterisks:
+
+```javascript
+for (let i = 1; i <= 5; i++) { // Outer loop (rows)
+  for (let j = 1; j <= i; j++) { // Inner loop (columns)
+    document.write("*");
+  }
+  document.write("<br>"); // Newline after each row
+}
+```
+
+This will output a triangle pattern:
+
+```
+*
+**
+***
+****
+*****
+```
+
+
+**When to use Nested Loops:**
+
+Nested loops are useful for processing multi-dimensional data structures like:
+
+* **Matrices (2D arrays):** Iterating through rows and columns.
+* **Tables:** Accessing rows and columns of data.
+* **Generating patterns:**  Creating graphical or textual patterns.
+* **Combinations:**  Generating all possible combinations of items from multiple sets.
+
+
+**Efficiency Considerations:**
+
+Nested loops can be computationally expensive, especially with deeply nested loops or large datasets.  The time complexity increases significantly with the number of nested loops.  Consider optimizing nested loops whenever possible to avoid performance issues, especially in large-scale applications.  Algorithms like dynamic programming can often help to reduce the computational cost of problems that might otherwise require nested loops.
+
