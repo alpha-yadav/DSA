@@ -45188,3 +45188,64 @@ int main() {
 
 These are just basic examples.  Loops can become much more complex with nested loops (loops inside loops),  iterating over data structures (like arrays or lists), and incorporating conditional statements (`if`, `else`) within the loop body.  Choose the type of loop that best suits your needs based on whether you know the number of iterations in advance or are relying on a condition to determine when to stop.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or structures efficiently.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop executes first.  Each iteration of the outer loop initiates a complete run of the inner loop.
+* **Inner Loop:** This loop is nested within the outer loop. It executes completely for every single iteration of the outer loop.
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # Print the product with a tab separator
+    print()  # Move to the next line after each row
+```
+
+**Explanation:**
+
+1. The outer loop iterates from 1 to 10 (inclusive).  This represents the rows of the multiplication table.
+2. For each row (each value of `i`), the inner loop iterates from 1 to 10. This represents the columns.
+3. Inside the inner loop, `i * j` calculates the product and is printed.  `end="\t"` ensures that the products are printed with tabs for proper alignment.
+4. `print()` after the inner loop moves the cursor to the next line, creating the table structure.
+
+
+**Example (JavaScript):**
+
+This example iterates through a 2D array:
+
+```javascript
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+for (let i = 0; i < matrix.length; i++) { // Outer loop (rows)
+  for (let j = 0; j < matrix[i].length; j++) { // Inner loop (columns)
+    console.log(matrix[i][j]);
+  }
+}
+```
+
+**When to use nested loops:**
+
+Nested loops are useful for:
+
+* **Processing 2D arrays or matrices:**  Iterating through rows and columns.
+* **Generating patterns:**  Creating shapes or sequences with repeating elements.
+* **Combinatorial problems:**  Exploring all possible combinations of items from multiple sets.
+* **Graph traversal:**  Visiting all nodes and edges in a graph.
+
+
+**Caution:**
+
+Nested loops can lead to significant performance overhead, especially with large datasets.  The time complexity increases proportionally to the product of the loop iterations.  For example, two loops iterating `n` times each have a time complexity of O(n²).  Consider more efficient algorithms if performance is critical.  For example, you might be able to use vectorized operations in libraries like NumPy (Python) instead of nested loops.
+
