@@ -42638,3 +42638,44 @@ While Big O notation describes the upper bound, other notations provide a more c
 
 Understanding algorithm complexity is fundamental for choosing efficient algorithms and optimizing software performance, especially when dealing with large datasets.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate.  It's a more precise way to express the efficiency of an algorithm than Big-O notation alone because it provides both upper and lower bounds.
+
+**Formal Definition:**
+
+Given two functions *f(n)* and *g(n)*, we say that *f(n)* is Θ(*g(n)*) if and only if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+In simpler terms:
+
+* **f(n) grows at the same rate as g(n).**  This means that as *n* approaches infinity, the ratio between *f(n)* and *g(n)* approaches a constant value (neither zero nor infinity).
+
+* **c₁ and c₂ are scaling factors:**  They account for constant factors that may be present in the implementation details of the algorithm, which don't affect the overall growth rate.
+
+* **n₀ is a threshold:**  The inequality holds only for values of *n* larger than *n₀*.  This is because the behavior of functions at small values of *n* is often irrelevant to their asymptotic behavior.
+
+**Comparison with Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an upper bound.  If *f(n)* = O(*g(n)*), then *f(n)* grows no faster than *g(n)*.
+
+* **Big-Ω (Ω):** Provides a lower bound.  If *f(n)* = Ω(*g(n)*), then *f(n)* grows at least as fast as *g(n)*.
+
+* **Big-Θ (Θ):** Provides both an upper and lower bound.  It implies both O and Ω.  If *f(n)* = Θ(*g(n)*), then *f(n)* grows at the *same* rate as *g(n)*.
+
+
+**Example:**
+
+Let's consider the function *f(n) = 2n² + 3n + 1*.
+
+We can show that *f(n) = Θ(n²)*:
+
+1. **Upper bound:** We can find constants *c₂* and *n₀* such that *2n² + 3n + 1 ≤ c₂n²* for all *n ≥ n₀*.  For example, if we choose *c₂ = 6* and *n₀ = 1*, then for all *n ≥ 1*, the inequality holds true.
+
+2. **Lower bound:** We can find constants *c₁* and *n₀* such that *c₁n² ≤ 2n² + 3n + 1* for all *n ≥ n₀*.  For example, if we choose *c₁ = 1* and *n₀ = 1*, then for all *n ≥ 1*, the inequality holds.
+
+Therefore, *f(n) = Θ(n²)*.  The dominant term (n²) dictates the asymptotic growth rate.
+
+
+**In summary:** Big-Theta notation is crucial for precisely characterizing the efficiency of algorithms, providing a more complete picture than Big-O alone.  It helps us understand how the runtime or space requirements of an algorithm scale with the input size.  It's particularly useful when comparing the efficiency of different algorithms.
+
