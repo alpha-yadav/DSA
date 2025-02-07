@@ -45515,3 +45515,56 @@ public class SameTreeIterative {
 
 Both methods achieve the same result. The recursive approach is generally preferred for its clarity and often better performance unless you anticipate extremely large trees that might lead to stack overflow errors.  In that case, the iterative approach is a safer alternative. Remember to include the `TreeNode` class definition in your code.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  Their core characteristic is that for every node in the tree:
+
+* The value of the node's left subtree is less than the node's value.
+* The value of the node's right subtree is greater than the node's value.
+
+This ordering property allows for efficient searching, insertion, and deletion of elements.
+
+Here's a breakdown of key aspects of BSTs:
+
+**1. Key Properties:**
+
+* **Ordered Data:**  This is the defining feature.  Elements are arranged in a specific order, making searches much faster than in an unordered structure like a linked list.
+* **Hierarchical Structure:**  The data is organized in a tree-like structure with a root node, branches, and leaf nodes.
+* **Unique Keys (Usually):** While not strictly required, BSTs often assume that each node holds a unique key.  If duplicates are allowed, variations like BSTs with duplicate keys need to be handled.
+* **Logarithmic Time Complexity (Ideally):**  For balanced BSTs (explained below), the time complexity for search, insertion, and deletion is O(log n), where n is the number of nodes. This is significantly faster than the O(n) complexity of linear search in an unsorted list.
+
+**2. Basic Operations:**
+
+* **Search:**  Traverses the tree, comparing the search key with the value of each node encountered.  Moves left if the key is smaller, and right if the key is larger.
+* **Insertion:**  Starts at the root and follows the same path as a search.  When a node with the same key is encountered (or a leaf node is reached), the new node is inserted as a child.
+* **Deletion:**  This is the most complex operation.  The algorithm must handle three cases:
+    * Node with no children (leaf node): Simply remove the node.
+    * Node with one child: Replace the node with its child.
+    * Node with two children:  Find the inorder successor (smallest node in the right subtree) or inorder predecessor (largest node in the left subtree), replace the node's value with the successor/predecessor's value, and then delete the successor/predecessor.
+* **Minimum/Maximum:**  Finding the minimum (maximum) value involves traversing the left (right) subtree until a leaf node is reached.
+
+**3. Balancing:**
+
+A major challenge with BSTs is that if data is inserted in a sorted or nearly sorted order, the tree becomes skewed (similar to a linked list). This degrades performance to O(n) for search, insertion, and deletion.  To avoid this, self-balancing BSTs are used:
+
+* **AVL Trees:**  Maintain balance by ensuring the height difference between the left and right subtrees of each node is at most 1.
+* **Red-Black Trees:**  Use a coloring scheme to maintain a relatively balanced tree.
+* **B-Trees:**  Optimized for disk access and used in databases.
+
+Self-balancing algorithms automatically adjust the tree structure during insertion and deletion to maintain balance and ensure good performance.
+
+**4. Applications:**
+
+BSTs are used in various applications, including:
+
+* **Symbol tables:**  Storing and retrieving data based on keys.
+* **Indexing:**  In databases and search engines.
+* **Priority queues:**  Maintaining a collection of elements with priorities.
+* **Sorting algorithms:**  Used as a basis for sorting algorithms like tree sort.
+
+**5. Implementation:**
+
+BSTs can be implemented using nodes that contain a key (data), a left child pointer, and a right child pointer.  The implementation details vary based on the programming language and whether or not self-balancing is needed.
+
+
+In summary, BSTs are a powerful and versatile data structure offering efficient search, insertion, and deletion operations when properly balanced.  Understanding their properties and operations is crucial for many computer science applications.
+
