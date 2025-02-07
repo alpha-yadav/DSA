@@ -46687,3 +46687,106 @@ postorder(root) # Output: D E B F C A
 
 This code demonstrates the three traversals using recursive functions.  You could also implement them iteratively using stacks, but the recursive approach is generally considered more elegant and easier to understand for these algorithms.  Remember that the choice of traversal depends on the specific task you're trying to accomplish with the tree.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary search tree, there's no simple ordering property to exploit in a general binary tree.  Therefore, we generally need to use a recursive approach or a path-based approach.
+
+**1. Recursive Approach:**
+
+This approach is arguably the most elegant and efficient.  It checks if either node is the current node, or if the node is in the left or right subtree.  If both nodes are found in different subtrees, the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+      root: The root of the binary tree.
+      p: The first node.
+      q: The second node.
+
+    Returns:
+      The LCA node, or None if either p or q is not found.
+    """
+
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:  # p and q are in different subtrees
+        return root
+    elif left_lca:             # p and q are in the left subtree
+        return left_lca
+    else:                      # p and q are in the right subtree
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+lca = lowestCommonAncestor(root, root.left, root.right)  # LCA of 2 and 3 is 1
+print(f"LCA of 2 and 3: {lca.data}")  # Output: 1
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right) # LCA of 4 and 5 is 2
+print(f"LCA of 4 and 5: {lca.data}") # Output: 2
+
+lca = lowestCommonAncestor(root, root.left, root.right.right) # LCA of 2 and 7 is 1
+print(f"LCA of 2 and 7: {lca.data}") # Output: 1
+
+
+lca = lowestCommonAncestor(root, Node(8), root.right) # Node 8 doesn't exist
+print(f"LCA of 8 and 7: {lca}") # Output: None
+
+
+```
+
+**2. Path-Based Approach:**
+
+This approach finds the paths from the root to each of the two nodes (`p` and `q`). Then, it iterates through both paths until it finds the last common node.  This approach is less efficient than the recursive approach because it requires traversing the tree multiple times.
+
+```python
+def find_path(root, node, path):
+    if root is None:
+        return False
+    path.append(root)
+    if root == node:
+        return True
+    if find_path(root.left, node, path) or find_path(root.right, node, path):
+        return True
+    path.pop()
+    return False
+
+def lowestCommonAncestor_path(root, p, q):
+    path1 = []
+    path2 = []
+    find_path(root, p, path1)
+    find_path(root, q, path2)
+
+    i = 0
+    while i < len(path1) and i < len(path2) and path1[i] == path2[i]:
+        i += 1
+    return path1[i-1] if i > 0 else None
+
+
+# Example Usage (same tree as above):
+lca = lowestCommonAncestor_path(root, root.left, root.right)
+print(f"LCA of 2 and 3 (path method): {lca.data}")  # Output: 1
+```
+
+**Choosing the best approach:**
+
+The **recursive approach** is generally preferred due to its cleaner code and better time complexity (O(N) in the worst case, where N is the number of nodes). The path-based approach has a higher time complexity (can be O(N^2) in the worst case).  Therefore, unless there's a specific constraint, use the recursive method.  Remember to handle edge cases like `p` or `q` not being in the tree.
+
