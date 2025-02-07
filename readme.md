@@ -40072,3 +40072,67 @@ The common thread in O(log n) algorithms is the ability to repeatedly reduce the
 
 **Important Note:**  The base of the logarithm (e.g., base 2, base 10) doesn't affect the overall Big O notation; it only affects the constant factor hidden within the O notation.  We usually just express it as O(log n).
 
+#  An O(log n) example 
+The most common example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search works on a *sorted* array (or list).  It repeatedly divides the search interval in half. If the value you're searching for is in the middle of the interval, you've found it.  If it's less than the middle value, you search the left half; if it's greater, you search the right half.  You continue this process until you either find the value or the interval is empty (meaning the value isn't present).
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+**Why O(log n)?**
+
+With each iteration of the `while` loop, the search space (the size of the interval) is halved.  This means the number of iterations required is roughly proportional to the logarithm base 2 of the input size (n).  Specifically, the maximum number of iterations is  ⌈log₂(n+1)⌉, where ⌈⌉ denotes the ceiling function (rounding up to the nearest integer).  Therefore, the time complexity is O(log n).
+
+
+**Other O(log n) examples:**
+
+While binary search is the most common, other algorithms exhibit O(log n) complexity, including:
+
+* **Tree traversals (balanced trees):**  Finding a node in a balanced binary search tree (BST) takes O(log n) time.
+* **Efficient exponentiation:** Calculating aⁿ using repeated squaring.
+* **Some divide and conquer algorithms:** Algorithms that recursively divide the problem into subproblems of roughly half the size.
+
+
+It's crucial to remember that the O(log n) complexity only applies when the algorithm effectively halves the problem size at each step.  If the problem size is only reduced by a constant factor other than 1/2, the complexity would be O(log n) but with a different base for the logarithm.  However, the asymptotic behavior remains logarithmic.
+
