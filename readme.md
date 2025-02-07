@@ -46147,3 +46147,110 @@ else:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the recursive approach, where H is the height of the tree (it can be O(N) in the worst case of a skewed tree).  The iterative approach (not shown here but possible) would have O(1) space complexity. Choose the method that best suits your coding style and understanding.  The min-max method might be slightly easier to understand conceptually for some.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.  We perform an in-order traversal and keep track of the previously visited node.  If the current node's value is less than the previous node's value, it violates the BST property.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, prev):
+    # traverse the tree in inorder fashion and for each node
+    # checks if the node is greater than previous node
+    if node is not None:
+        if not isBSTUtil(node.left, prev):  # Check left subtree first
+            return False
+
+        if prev is not None and node.data <= prev.data:
+            return False
+
+        prev = node  # Update previous node
+        return isBSTUtil(node.right, prev)  # Check right subtree
+
+    return True
+
+def isBST(root):
+    prev = None
+    return isBSTUtil(root, prev)
+
+# Example usage:
+root = Node(15)
+root.left = Node(10)
+root.right = Node(20)
+root.left.left = Node(8)
+root.left.right = Node(12)
+
+if isBST(root):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(20) # This is NOT a BST because 15 > 10
+if isBST(root2):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each subtree. For each node, it checks if the node's value is within the allowed range defined by the minimum and maximum values possible for that subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, min_val, max_val):
+    # An empty tree is BST
+    if node is None:
+        return True
+
+    # False if this node violates the min/max constraint
+    if node.data < min_val or node.data > max_val:
+        return False
+
+    # Otherwise check the subtrees recursively tightening the min/max constraints
+    return (isBSTUtil(node.left, min_val, node.data - 1) and
+            isBSTUtil(node.right, node.data + 1, max_val))
+
+
+def isBST(root):
+    return isBSTUtil(root, float('-inf'), float('inf'))
+
+# Example Usage (same as above,  try both root and root2)
+root = Node(15)
+root.left = Node(10)
+root.right = Node(20)
+root.left.left = Node(8)
+root.left.right = Node(12)
+
+if isBST(root):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(20) # This is NOT a BST because 15 > 10
+if isBST(root2):
+    print("Is BST")
+else:
+    print("Not a BST")
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity depends on the height of the tree.  In the worst case (a skewed tree), it's O(N); in the best case (a balanced tree), it's O(log N).  The recursive approach uses stack space proportional to the tree's height.  An iterative approach could be used to reduce the space complexity to O(1) in the average case for a balanced tree.  However, the iterative solutions are generally more complex to write and understand. Choose the method that best suits your needs and coding style.  The first method (in-order traversal) is often considered slightly simpler to understand.
+
