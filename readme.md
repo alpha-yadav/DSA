@@ -47907,3 +47907,43 @@ The basic operation is the `print` statement.  It's executed 'n' times.  Therefo
 
 Understanding algorithm complexity is crucial for selecting appropriate algorithms for various tasks.  Choosing an algorithm with a lower complexity usually results in better performance, especially when dealing with large datasets.  However, it's important to consider other factors like code readability and ease of implementation when making algorithm choices.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of a function.  Specifically, it describes the tight bound of a function's growth rate.  This means it provides both an upper and lower bound that are asymptotically proportional.
+
+Here's a breakdown of what Θ notation signifies:
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) if there exist positive constants c₁ and c₂, and a positive integer n₀ such that for all n ≥ n₀:
+
+   `c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of n (n ≥ n₀), the function f(n) is bounded both above and below by constant multiples of g(n).  The function g(n) is considered the "order" of f(n).
+
+**Intuitive Understanding:**
+
+Imagine you're comparing the runtime of two algorithms. If an algorithm's runtime is Θ(n²), it means that the runtime grows proportionally to the square of the input size (n).  This is a much stronger statement than just saying the runtime is *at most* O(n²) (Big-O notation), because Θ(n²) also states that the runtime grows *at least* proportionally to n².  In other words, it's not just an upper bound; it's a tight bound.
+
+**Key Differences from Other Asymptotic Notations:**
+
+* **Big-O (O):** Provides an upper bound.  f(n) = O(g(n)) means f(n) grows no faster than g(n).
+* **Big-Omega (Ω):** Provides a lower bound. f(n) = Ω(g(n)) means f(n) grows at least as fast as g(n).
+* **Big-Theta (Θ):** Provides a tight bound.  f(n) = Θ(g(n)) means f(n) grows at the same rate as g(n).  It combines both O and Ω.
+
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1:**  f(n) = Θ(n²)  (The dominant term is n², and the other terms are insignificant for large n).
+* **f(n) = 5n log n:** f(n) = Θ(n log n)
+* **f(n) = 10:** f(n) = Θ(1) (Constant time)
+
+
+**Why is Θ notation important?**
+
+Θ notation helps us analyze algorithms and compare their efficiency. When comparing algorithms with different Θ complexities, we can understand which algorithm will perform better for larger inputs.  For instance, an algorithm with Θ(n) complexity will always outperform an algorithm with Θ(n²) complexity for sufficiently large inputs, regardless of the constant factors involved.
+
+
+**Limitations:**
+
+Θ notation only describes the asymptotic behavior of a function. It doesn't provide information about the actual runtime for small input sizes or the impact of constant factors.  For example, an algorithm with Θ(n²) might be faster than an algorithm with Θ(n) for very small inputs due to the constants involved.  The Theta notation is about the *trend* as input size increases without limit.
+
