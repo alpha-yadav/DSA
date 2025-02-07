@@ -49630,3 +49630,137 @@ These examples demonstrate a basic level order traversal.  For more complex scen
 
 Remember to choose the implementation that best suits your programming language and specific needs.  The core algorithm remains consistent.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals (preorder, inorder, postorder) are ways to visit all nodes in a binary tree in a specific order.  They're fundamental to understanding and manipulating tree structures. Here's a breakdown of each, along with code examples in Python:
+
+**1. Preorder Traversal**
+
+* **Order:**  Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+* **Mnemonic:**  Root, Left, Right (**R**LR)
+* **Example:**  For the tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+The preorder traversal would be: `1 2 4 5 3`
+
+* **Python Code (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Preorder traversal:")
+preorder(root)  # Output: Preorder traversal: 1 2 4 5 3
+```
+
+* **Python Code (Iterative):**  Using a stack.
+
+```python
+def preorder_iterative(node):
+    if node is None:
+        return
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        print(current.data, end=" ")
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+
+print("\nPreorder traversal (iterative):")
+preorder_iterative(root) # Output: Preorder traversal (iterative): 1 2 4 5 3
+
+```
+
+
+**2. Inorder Traversal**
+
+* **Order:** Recursively traverse the left subtree, visit the root node, and then recursively traverse the right subtree.
+* **Mnemonic:** Left, Root, Right (L**R**R)
+* **Example:** For the same tree above, the inorder traversal would be: `4 2 5 1 3`  (This gives you a sorted list if the tree is a Binary Search Tree (BST)).
+
+* **Python Code (Recursive):**
+
+```python
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+print("\nInorder traversal:")
+inorder(root)  # Output: Inorder traversal: 4 2 5 1 3
+```
+
+* **Python Code (Iterative):** Using a stack
+
+```python
+def inorder_iterative(node):
+    if node is None:
+        return
+    stack = []
+    current = node
+    while True:
+        if current is not None:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.data, end=" ")
+            current = current.right
+        else:
+            break
+
+
+print("\nInorder traversal (iterative):")
+inorder_iterative(root) # Output: Inorder traversal (iterative): 4 2 5 1 3
+```
+
+
+**3. Postorder Traversal**
+
+* **Order:** Recursively traverse the left subtree, recursively traverse the right subtree, and then visit the root node.
+* **Mnemonic:** Left, Right, Root (LR**R**)
+* **Example:** For the same tree above, the postorder traversal would be: `4 5 2 3 1`
+
+* **Python Code (Recursive):**
+
+```python
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+print("\nPostorder traversal:")
+postorder(root)  # Output: Postorder traversal: 4 5 2 3 1
+```
+
+* **Python Code (Iterative):**  A bit more complex than preorder/inorder iterative, often involving two stacks or a stack and a flag.  Look up examples of iterative postorder traversal if you need that version.  The recursive approach is generally preferred for its clarity.
+
+
+Remember to handle the case where the input `node` is `None` (empty subtree) in your recursive functions to avoid errors.  The iterative approaches are generally more efficient in terms of space complexity (avoiding recursive function call overhead), but the recursive versions are often easier to understand and implement.
+
