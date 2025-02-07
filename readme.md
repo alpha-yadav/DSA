@@ -46254,3 +46254,109 @@ else:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity depends on the height of the tree.  In the worst case (a skewed tree), it's O(N); in the best case (a balanced tree), it's O(log N).  The recursive approach uses stack space proportional to the tree's height.  An iterative approach could be used to reduce the space complexity to O(1) in the average case for a balanced tree.  However, the iterative solutions are generally more complex to write and understand. Choose the method that best suits your needs and coding style.  The first method (in-order traversal) is often considered slightly simpler to understand.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree adheres to the Binary Search Tree (BST) property.  The core of the BST property is that for every node:
+
+* The left subtree contains only nodes with keys less than the node's key.
+* The right subtree contains only nodes with keys greater than the node's key.
+
+Here are two common methods:
+
+**Method 1: Recursive In-order Traversal**
+
+This is arguably the most efficient and elegant approach.  A BST's in-order traversal (left, node, right) yields a sorted sequence of its nodes.  Therefore, if we perform an in-order traversal and store the values in a list, we can simply check if the list is sorted.
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+    """
+    in_order_list = []
+
+    def in_order(node):
+        if node:
+            in_order(node.left)
+            in_order_list.append(node.key)
+            in_order(node.right)
+
+    in_order(root)
+
+    # Check if the list is sorted
+    for i in range(1, len(in_order_list)):
+        if in_order_list[i] < in_order_list[i - 1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+
+print(is_bst_recursive(root))  # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) # This violates BST property
+
+
+print(is_bst_recursive(root2))  # Output: False
+
+```
+
+**Method 2: Recursive Check with Bounds**
+
+This method recursively checks each subtree, passing along minimum and maximum bounds.  A node is valid if its value is within the bounds, and its left and right subtrees are also valid within adjusted bounds.
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_bounds(root, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Checks if a binary tree is a BST using recursion and bounds.
+    """
+    if root is None:
+        return True
+
+    if not (min_val < root.key < max_val):
+        return False
+
+    return (is_bst_recursive_bounds(root.left, min_val, root.key) and
+            is_bst_recursive_bounds(root.right, root.key, max_val))
+
+
+# Example Usage (same as above,  results will be identical)
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(is_bst_recursive_bounds(root))  # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8)
+
+print(is_bst_recursive_bounds(root2))  # Output: False
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once. The space complexity is O(H) in the recursive approach, where H is the height of the tree (O(log N) for a balanced BST, O(N) for a skewed tree).  The iterative in-order approach would have O(N) space complexity in the worst case due to the list.  Choose the method that best suits your coding style and memory constraints.  The recursive bounds method is generally considered slightly more efficient in space for balanced trees.
+
