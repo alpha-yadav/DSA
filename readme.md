@@ -45249,3 +45249,19 @@ Nested loops are useful for:
 
 Nested loops can lead to significant performance overhead, especially with large datasets.  The time complexity increases proportionally to the product of the loop iterations.  For example, two loops iterating `n` times each have a time complexity of O(n²).  Consider more efficient algorithms if performance is critical.  For example, you might be able to use vectorized operations in libraries like NumPy (Python) instead of nested loops.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to reduce the problem size by a constant factor with each step.  This typically involves dividing the problem in half (or some other constant fraction) repeatedly.  Here are some common types:
+
+**1. Binary Search:** This is the quintessential O(log n) algorithm.  It works on a sorted list (or array) by repeatedly dividing the search interval in half.  If the target value is in the list, the algorithm will find it; otherwise, it will determine that the value is not present.
+
+**2. Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  In a balanced binary search tree (like AVL trees or red-black trees), finding, adding, or removing a node takes O(log n) time on average and in the worst case because the height of the tree is logarithmic with respect to the number of nodes.  Unbalanced trees can degrade to O(n).
+
+**3. Efficient exponentiation:**  Calculating a<sup>b</sup> (a raised to the power of b) can be done in O(log b) time using repeated squaring.  This technique avoids iterating through all b multiplications.
+
+**4. Change-making algorithms (using dynamic programming):** Certain variations of change-making problems (finding the minimum number of coins to make a given amount) can be solved using dynamic programming with a time complexity of O(log n) under specific constraints (like having coin denominations that are powers of 2).  The general change-making problem is typically more complex.
+
+
+**5. Algorithms based on divide and conquer that repeatedly halve the input size:**  Any algorithm that follows a divide-and-conquer strategy where the problem is recursively broken down into subproblems of roughly half the size at each step will likely exhibit O(log n) time complexity.  The exact complexity will depend on the work done at each step.
+
+**Important Note:** The "n" in O(log n) refers to the size of the input data.  The base of the logarithm (e.g., base 2, base 10) is typically omitted in Big O notation because it only affects the constant factor, which is insignificant when considering the asymptotic behavior of the algorithm.  Different bases only change the coefficient of the logarithm, not the overall time complexity class.
+
