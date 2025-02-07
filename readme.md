@@ -43528,3 +43528,93 @@ void clearTree(Node* node) {
 clearTree(root);
 ```  Remember to call `clearTree(root)` before the program ends to free up all allocated memory.  This is crucial for preventing memory leaks.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where we consider a node to be a descendant of itself).  There are several ways to find the LCA in a BST, taking advantage of the BST property.
+
+**Method 1: Recursive Approach**
+
+This is arguably the most elegant and efficient method.  It leverages the BST property that all nodes smaller than a given node are in its left subtree, and all nodes larger than it are in its right subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_bst(root, n1, n2):
+    """
+    Finds the LCA of n1 and n2 in the BST rooted at root.
+
+    Args:
+        root: The root of the BST.
+        n1: The first node.
+        n2: The second node.
+
+    Returns:
+        The LCA node, or None if either n1 or n2 is not found.
+    """
+
+    if root is None:
+        return None
+
+    if root.data > n1 and root.data > n2:
+        return lca_bst(root.left, n1, n2)  # Both in left subtree
+    elif root.data < n1 and root.data < n2:
+        return lca_bst(root.right, n1, n2) # Both in right subtree
+    else:
+        return root  # root is the LCA
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+n1 = 10
+n2 = 14
+lca = lca_bst(root, n1, n2)
+print(f"LCA of {n1} and {n2} is {lca.data}")  # Output: LCA of 10 and 14 is 12
+
+n1 = 14
+n2 = 8
+lca = lca_bst(root, n1, n2)
+print(f"LCA of {n1} and {n2} is {lca.data}") # Output: LCA of 14 and 8 is 8
+
+n1 = 10
+n2 = 22
+lca = lca_bst(root, n1, n2)
+print(f"LCA of {n1} and {n2} is {lca.data}") # Output: LCA of 10 and 22 is 20
+```
+
+**Method 2: Iterative Approach**
+
+This approach uses a while loop instead of recursion.  It's functionally equivalent but might be slightly more efficient in some cases due to avoiding function call overhead.
+
+```python
+def lca_bst_iterative(root, n1, n2):
+    while root:
+        if root.data > n1 and root.data > n2:
+            root = root.left
+        elif root.data < n1 and root.data < n2:
+            root = root.right
+        else:
+            return root
+    return None #If either n1 or n2 is not in the tree
+
+#Example usage (same as above, you can test with the same tree)
+```
+
+**Important Considerations:**
+
+* **Node Existence:**  Both methods assume `n1` and `n2` exist in the BST. You might want to add error handling to check for their existence before proceeding.
+* **Efficiency:** Both the recursive and iterative approaches have a time complexity of O(h), where h is the height of the BST.  In a balanced BST, h is log(n), where n is the number of nodes. In a skewed BST, h could be n.
+* **Space Complexity:** The recursive approach uses O(h) space due to the recursive call stack. The iterative approach uses O(1) space.
+
+
+Choose the method that best suits your needs and coding style.  The iterative approach might be preferred in situations where you need to avoid potential stack overflow issues with very deep trees, while the recursive approach is often considered more readable.
+
