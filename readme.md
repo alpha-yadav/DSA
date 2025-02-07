@@ -43954,3 +43954,115 @@ else:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the worst case (for a skewed tree), where H is the height of the tree, due to the recursive call stack.  For a balanced tree, the space complexity becomes O(log N).  Choose whichever method you find more readable or suits your specific needs.  The min-max approach might be slightly easier to understand conceptually for some.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property. Here are two common methods, one recursive and one iterative:
+
+**Method 1: Recursive Approach**
+
+This approach recursively checks if the left subtree contains only smaller values and the right subtree contains only larger values than the current node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a given tree is a BST.
+
+    Args:
+      node: The root node of the tree.
+      min_val: The minimum allowed value in the current subtree.
+      max_val: The maximum allowed value in the current subtree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_recursive(root))  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5)
+
+print(is_bst_recursive(root2)) #Output: False
+
+```
+
+**Method 2: Iterative Approach using Inorder Traversal**
+
+This approach performs an inorder traversal of the BST.  A BST's inorder traversal produces a sorted sequence.  We can check if the inorder traversal is sorted to determine if it's a BST.
+
+```python
+def is_bst_iterative(node):
+    """
+    Iteratively checks if a given tree is a BST using inorder traversal.
+
+    Args:
+      node: The root node of the tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    inorder = []
+    stack = []
+    current = node
+
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+
+        current = stack.pop()
+        inorder.append(current.data)
+        current = current.right
+
+    # Check if inorder traversal is sorted
+    for i in range(1, len(inorder)):
+        if inorder[i] < inorder[i-1]:
+            return False
+    return True
+
+# Example Usage (same trees as above)
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_iterative(root))  # Output: True
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5)
+
+print(is_bst_iterative(root2)) #Output: False
+```
+
+
+**Choosing a Method:**
+
+* **Recursive Approach:**  Generally easier to understand and implement, but can be less efficient for very deep trees due to potential stack overflow issues.
+* **Iterative Approach:** More efficient for large trees as it avoids recursion's overhead, but might be slightly more complex to understand.
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node at least once.  The space complexity depends on the tree's structure. The recursive approach's space complexity is O(H) (height of the tree) due to the recursive call stack, while the iterative approach's space complexity is O(H) in the worst case (for a skewed tree) due to the stack used in the inorder traversal.  For a balanced tree, both methods have O(log N) space complexity.  Choose the method that best suits your needs and understanding.
+
