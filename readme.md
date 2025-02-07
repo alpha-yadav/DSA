@@ -44829,3 +44829,60 @@ While compact, this version might be harder to read for beginners.  The readabil
 
 For clarity and ease of understanding, especially for beginners, the **basic implementation** or the **improved implementation** are recommended.  The concise version is mainly for demonstrating Swift's capabilities but might sacrifice readability.  Choose the version that best suits your needs and understanding. Remember to always prioritize code clarity and maintainability.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long the algorithm takes to run) and space (how much memory the algorithm requires).  Complexity is usually expressed using Big O notation, which describes the growth rate of the resource consumption as the input size increases.
+
+Here's a breakdown of key concepts:
+
+**1. Big O Notation:**
+
+Big O notation provides an upper bound on the growth rate of an algorithm's resource usage.  It focuses on the dominant terms as the input size (n) approaches infinity, ignoring constant factors and lower-order terms.  Some common Big O complexities include:
+
+* **O(1) - Constant Time:** The algorithm's runtime doesn't depend on the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Bubble sort, selection sort, nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesperson problem (brute-force approach).
+
+
+**2. Time Complexity:**
+
+Time complexity analyzes how the runtime of an algorithm scales with the input size.  It's crucial for understanding how efficiently an algorithm performs on large datasets.  The best-case, average-case, and worst-case scenarios are often considered.
+
+* **Best-case:** The most efficient scenario for the algorithm.
+* **Average-case:** The expected runtime over many inputs.
+* **Worst-case:** The least efficient scenario for the algorithm.
+
+
+**3. Space Complexity:**
+
+Space complexity analyzes how much memory an algorithm uses as the input size grows.  This includes the memory used for variables, data structures, and function calls.  Similar to time complexity, it's often expressed using Big O notation.
+
+
+**4. Types of Analysis:**
+
+* **Asymptotic Analysis:** Analyzing the algorithm's behavior as the input size approaches infinity. Big O notation is a form of asymptotic analysis.
+* **Average-Case Analysis:** Analyzing the average runtime over many different inputs.  This is often more realistic than worst-case analysis.
+* **Worst-Case Analysis:** Analyzing the runtime for the input that causes the longest execution time.  This provides a guarantee on the upper bound of the runtime.
+
+
+**Example:**
+
+Consider searching for a specific element in an array:
+
+* **Unsorted array:**  Worst-case time complexity is O(n) (linear search).
+* **Sorted array:** Worst-case time complexity is O(log n) (binary search).
+
+
+**Choosing the Right Algorithm:**
+
+Understanding algorithm complexity helps in selecting the most efficient algorithm for a given task, especially when dealing with large datasets.  An algorithm with lower complexity will generally perform better for larger inputs.  However, other factors such as code readability, implementation complexity, and constant factors can also influence the choice of an algorithm.
+
