@@ -48289,3 +48289,68 @@ Here are some common types and examples of algorithms with O(log n) time complex
 
 It's crucial to understand the context and assumptions of an algorithm's claimed O(log n) complexity to fully appreciate its efficiency.  Always consider the average and worst-case scenarios.
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array or list.  Instead of checking each element one by one (which would be O(n)), it repeatedly divides the search interval in half.
+
+Here's how it works:
+
+1. **Start:**  Begin with the entire array as the search interval.
+2. **Midpoint:** Find the middle element of the interval.
+3. **Compare:** Compare the middle element to the target value you're searching for.
+4. **Reduce:**
+   * If the middle element is equal to the target, you've found it!
+   * If the middle element is greater than the target, the target must be in the *lower* half of the interval. Discard the upper half.
+   * If the middle element is less than the target, the target must be in the *upper* half of the interval. Discard the lower half.
+5. **Repeat:** Repeat steps 2-4 with the new, smaller interval until either the target is found or the interval is empty (meaning the target is not present).
+
+**Why it's O(log n):**
+
+Each comparison eliminates roughly half of the remaining search space.  This halving process continues until the search space is reduced to a single element or is empty.  The number of times you can halve `n` before reaching 1 is approximately log₂(n).  Therefore, the number of operations is proportional to the logarithm of the input size, resulting in O(log n) time complexity.
+
+**Example in Python:**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+This Python code demonstrates a binary search, highlighting its logarithmic time complexity.  Other algorithms that exhibit O(log n) complexity include finding an element in a balanced binary search tree, heap operations (insertion, deletion, finding min/max), and some efficient sorting algorithms (like merge sort and heapsort) in their recursive steps.
+
