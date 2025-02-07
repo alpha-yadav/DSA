@@ -50365,3 +50365,29 @@ else:
 
 This implementation efficiently detects cycles in a directed graph using Depth First Search and avoids unnecessary computations.  The use of `recStack` is key to identifying the back edges that indicate cycles. Remember that a self-loop (an edge from a node to itself) is also considered a cycle.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focused on efficient graph algorithms, particularly those dealing with shortest paths and connectivity.  There isn't one single "Thorup's algorithm," but rather several significant contributions with different applications and complexities.  The most well-known are related to:
+
+* **Linear-time shortest paths in undirected graphs:** This is perhaps his most celebrated result.  Thorup's algorithm (often in conjunction with others' work, notably Karger's work on cut-based algorithms) provides a way to compute shortest paths in undirected graphs with non-negative edge weights in *linear* time, O(m), where 'm' is the number of edges. This is asymptotically optimal, as simply reading the input graph takes O(m) time.  Prior to this, the best-known algorithms had complexities involving logarithmic factors or depended on the number of vertices.  The algorithm's core relies on sophisticated techniques involving graph decomposition and clever data structures.  The constant factors hidden in the O(m) notation are substantial, making it less practical than Dijkstra's algorithm for many real-world scenarios.
+
+* **Approximate shortest paths:** Thorup also contributed algorithms for finding *approximate* shortest paths, trading off some accuracy for a significant speedup. These algorithms are particularly useful when dealing with massive graphs where finding exact shortest paths is computationally prohibitive.
+
+* **Connectivity problems:** His work extends to efficient algorithms for connectivity problems, including finding minimum spanning trees (MSTs) and related tasks.
+
+**Key Characteristics and Techniques Used:**
+
+Thorup's algorithms often employ a combination of these techniques:
+
+* **Randomization:** Many of his algorithms use randomized techniques, meaning their running time is probabilistic (it's guaranteed to be fast with high probability).
+* **Graph Decomposition:**  Breaking down the graph into smaller, more manageable components to simplify computations.  This often involves techniques like creating a "sparse spanning subgraph" that captures essential connectivity information.
+* **Advanced Data Structures:**  Sophisticated data structures are crucial for achieving the linear-time performance. These are often highly specialized and not commonly used in other graph algorithms.
+* **Sampling and Approximation:**  In approximate algorithms, sampling techniques are used to efficiently estimate distances or other graph properties.
+
+
+**Limitations:**
+
+While incredibly significant theoretically, Thorup's algorithms for exact shortest paths in undirected graphs often have large constant factors hidden within the O(m) notation.  This makes them less practical than Dijkstra's algorithm or A* for many real-world applications.  Moreover, many of the algorithms are complex to implement, which can impact their adoption.
+
+
+In summary, "Thorup's algorithm" isn't a single algorithm but a collection of groundbreaking contributions to graph algorithms, especially in the area of shortest paths.  His work demonstrates the power of combining randomization, sophisticated data structures, and clever graph decompositions to achieve remarkable asymptotic efficiency.  However, practical considerations like constant factors and implementation complexity often limit their direct application in many real-world scenarios.
+
