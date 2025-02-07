@@ -42914,3 +42914,59 @@ while (count < 5) {
 
 These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on whether the number of iterations is known beforehand.  If you know the number of iterations, a `for` loop is generally more readable and concise. If the number of iterations depends on a condition, a `while` loop is more appropriate.  Remember to always include a way to exit the loop (incrementing the counter in these examples) to avoid infinite loops.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times, based on the number of iterations of the outer loop.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_variable in outer_sequence:
+  # Outer loop's code here (may include other operations)
+  for inner_variable in inner_sequence:
+    # Inner loop's code here
+    # This code executes for each inner loop iteration *within* each outer loop iteration.
+  # More outer loop code here (optional)
+```
+
+**Example:  Printing a multiplication table**
+
+Let's say we want to print a 5x5 multiplication table.  We can use nested loops:
+
+```python
+for i in range(1, 6):  # Outer loop iterates from 1 to 5
+  for j in range(1, 6):  # Inner loop iterates from 1 to 5
+    product = i * j
+    print(f"{i} x {j} = {product}", end="\t")  # \t adds a tab for formatting
+  print()  # Newline after each row
+```
+
+This code will produce:
+
+```
+1 x 1 = 1	1 x 2 = 2	1 x 3 = 3	1 x 4 = 4	1 x 5 = 5	
+2 x 1 = 2	2 x 2 = 4	2 x 3 = 6	2 x 4 = 8	2 x 5 = 10	
+3 x 1 = 3	3 x 2 = 6	3 x 3 = 9	3 x 4 = 12	3 x 5 = 15	
+4 x 1 = 4	4 x 2 = 8	4 x 3 = 12	4 x 4 = 16	4 x 5 = 20	
+5 x 1 = 5	5 x 2 = 10	5 x 3 = 15	5 x 4 = 20	5 x 5 = 25
+```
+
+**Explanation:**
+
+* The outer loop (controlled by `i`) iterates through rows.
+* The inner loop (controlled by `j`) iterates through columns within each row.
+* For each combination of `i` and `j`, the product is calculated and printed.
+
+**Common Uses:**
+
+* **Matrix/Array operations:** Processing two-dimensional data structures.
+* **Pattern printing:** Generating various shapes and patterns.
+* **Combinatorics:** Iterating through all possible combinations of elements.
+* **Searching/Sorting:**  Nested loops can be used in some basic sorting algorithms.
+
+
+**Important Note on Efficiency:**
+
+Nested loops can significantly increase the runtime of a program, especially with large input sizes.  The time complexity grows proportionally to the product of the sizes of the loops (e.g., O(n*m) for loops of size n and m).  Consider optimizing your algorithms if performance becomes an issue.  Algorithms that avoid nested loops are generally preferred for large datasets whenever possible.
+
