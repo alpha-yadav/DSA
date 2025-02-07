@@ -44698,3 +44698,61 @@ function findMax(array):
 
 Remember to be patient and persistent. Learning algorithms takes time and practice.  Focus on understanding the underlying concepts, and gradually work your way up to more complex algorithms.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Find the largest element in an unsorted array.
+
+**Input:** An array of integers `arr`.
+
+**Output:** The largest integer in `arr`.
+
+**Example:**
+
+Input: `arr = [1, 5, 2, 8, 3]`
+Output: `8`
+
+
+**Medium:**
+
+**Problem:**  Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  You may assume that each input would have ***exactly* one solution*, and you may not use the *same* element twice.
+
+**Example:**
+
+Input: `nums = [2,7,11,15], target = 9`
+Output: `[0,1]`  (Because nums[0] + nums[1] == 9)
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`.
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+Input: `s = "babad"`
+Output: `"bab"`  (or "aba", both are valid answers)
+
+
+**How to solve these (general approach):**
+
+1. **Understanding the Problem:**  Carefully read the problem statement. What's the input? What's the expected output?  What are the constraints (e.g., size of the array, range of numbers)?
+
+2. **Designing an Algorithm:** Choose an appropriate algorithm.  For the easy problem, a simple linear scan suffices. For the medium and hard problems, you might need to consider more sophisticated approaches (e.g., hash tables, dynamic programming).
+
+3. **Coding the Solution:** Write clean, efficient code in your preferred programming language.
+
+4. **Testing:** Test your code with various inputs, including edge cases (e.g., empty arrays, very large arrays, arrays with duplicates).
+
+
+These examples demonstrate the range of algorithmic problems.  The difficulty increases significantly as you move from easy to hard, requiring more advanced data structures and algorithms to solve efficiently.  Remember to focus on clear problem understanding and designing an efficient algorithm before jumping into the code.
+
