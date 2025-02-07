@@ -40244,3 +40244,13 @@ The choice depends on your specific needs. Consider:
 
 For many applications, the **list of children representation** offers a good balance of flexibility and efficiency.  The child-sibling representation is also a solid choice if finding specific children by their position within the sibling order is the primary operation. The array representation is excellent only when the maximum number of children per node is small and known, and the tree is relatively full.  The map/dictionary approach is best when you have labeled children.
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need more information to write an introduction.  For example, tell me:
+
+* **What is the subject of the piece?** (e.g., the history of coffee, the benefits of exercise, the plot of a specific movie)
+* **What is the purpose of the piece?** (e.g., to inform, to persuade, to entertain)
+* **Who is the intended audience?** (e.g., experts, general public, children)
+* **What is the overall tone?** (e.g., formal, informal, humorous, serious)
+
+Once I have this information, I can write a compelling introduction for you.
+
