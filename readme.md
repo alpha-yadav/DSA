@@ -47855,3 +47855,55 @@ For beginners, **Version 1** is recommended because its clarity makes it easier 
 
 You can copy either of these code snippets into a Swift playground (or a Swift file in an Xcode project) to run it.  The output will be a list of numbers from 1 to `n`, with "Fizz", "Buzz", or "FizzBuzz" replacing the numbers divisible by 3, 5, or both, respectively. Remember to adjust the `n` value to change the upper limit of the sequence.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (such as time and memory) an algorithm consumes as a function of the input size.  It's a crucial aspect of algorithm analysis, helping us understand how an algorithm's performance scales with increasing input. We typically analyze complexity in two primary ways:
+
+**1. Time Complexity:**  This describes how the runtime of an algorithm grows as the input size grows.
+
+* **Big O Notation (O):**  This expresses the upper bound of the growth rate.  It focuses on the dominant operations as the input size approaches infinity, ignoring constant factors and lower-order terms.  Common complexities include:
+
+    * **O(1): Constant time:** The runtime remains constant regardless of input size (e.g., accessing an array element by index).
+    * **O(log n): Logarithmic time:** The runtime increases logarithmically with input size (e.g., binary search).
+    * **O(n): Linear time:** The runtime increases linearly with input size (e.g., searching an unsorted array).
+    * **O(n log n): Linearithmic time:**  Common in efficient sorting algorithms like merge sort and heapsort.
+    * **O(n²): Quadratic time:** The runtime increases proportionally to the square of the input size (e.g., nested loops iterating through an array).
+    * **O(2ⁿ): Exponential time:** The runtime doubles with each addition to the input size (e.g., brute-force approaches to the traveling salesman problem).
+    * **O(n!): Factorial time:** The runtime grows factorially with the input size (e.g., generating all permutations of a set).
+
+
+* **Big Omega Notation (Ω):** This expresses the lower bound of the growth rate. It represents the best-case scenario for the algorithm's runtime.
+
+* **Big Theta Notation (Θ):** This expresses the tight bound, meaning both the upper and lower bounds are the same.  It precisely describes the growth rate.
+
+
+**2. Space Complexity:** This describes how the memory usage of an algorithm grows as the input size grows.  Similar notations (Big O, Big Omega, Big Theta) are used to express space complexity.
+
+* **Examples:**
+
+    * An algorithm that uses a fixed amount of extra memory regardless of input size has O(1) space complexity.
+    * An algorithm that creates a copy of the input array has O(n) space complexity.
+    * Recursive algorithms can have O(n) or even O(2ⁿ) space complexity due to the call stack.
+
+
+**How to Analyze Algorithm Complexity:**
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the algorithm's runtime.
+2. **Express the number of operations as a function of the input size:** Count how many times the basic operations are executed as a function of 'n' (the input size).
+3. **Simplify the function using Big O notation:** Ignore constant factors and lower-order terms.  Focus on the dominant term that determines the growth rate.
+
+
+**Example:**
+
+Consider a simple algorithm that iterates through an array of size 'n' and prints each element:
+
+```python
+def print_array(arr):
+  for i in range(len(arr)):
+    print(arr[i])
+```
+
+The basic operation is the `print` statement.  It's executed 'n' times.  Therefore, the time complexity is O(n) (linear time).  The space complexity is O(1) because it uses a constant amount of extra memory.
+
+
+Understanding algorithm complexity is crucial for selecting appropriate algorithms for various tasks.  Choosing an algorithm with a lower complexity usually results in better performance, especially when dealing with large datasets.  However, it's important to consider other factors like code readability and ease of implementation when making algorithm choices.
+
