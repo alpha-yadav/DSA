@@ -46360,3 +46360,126 @@ print(is_bst_recursive_bounds(root2))  # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once. The space complexity is O(H) in the recursive approach, where H is the height of the tree (O(log N) for a balanced BST, O(N) for a skewed tree).  The iterative in-order approach would have O(N) space complexity in the worst case due to the list.  Choose the method that best suits your coding style and memory constraints.  The recursive bounds method is generally considered slightly more efficient in space for balanced trees.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit all the nodes in a binary tree.  There are three main types: inorder, preorder, and postorder.  They differ in the order they visit the root node relative to its left and right subtrees.  A fourth traversal, level order, visits nodes level by level.
+
+Let's break down each traversal type, using the following example binary tree:
+
+```
+     A
+    / \
+   B   C
+  / \   \
+ D   E   F
+```
+
+**1. Inorder Traversal:**
+
+* **Order:** Left Subtree -> Root -> Right Subtree
+* **Recursive Definition:**
+    1. Traverse the left subtree recursively.
+    2. Visit the root node.
+    3. Traverse the right subtree recursively.
+* **Result for the example tree:** D B E A C F
+
+
+**2. Preorder Traversal:**
+
+* **Order:** Root -> Left Subtree -> Right Subtree
+* **Recursive Definition:**
+    1. Visit the root node.
+    2. Traverse the left subtree recursively.
+    3. Traverse the right subtree recursively.
+* **Result for the example tree:** A B D E C F
+
+
+**3. Postorder Traversal:**
+
+* **Order:** Left Subtree -> Right Subtree -> Root
+* **Recursive Definition:**
+    1. Traverse the left subtree recursively.
+    2. Traverse the right subtree recursively.
+    3. Visit the root node.
+* **Result for the example tree:** D E B F C A
+
+
+**4. Level Order Traversal (Breadth-First Search):**
+
+* **Order:** Level by level, from left to right.
+* **Implementation:**  Typically uses a queue.  You enqueue the root, then dequeue and process it, enqueuing its children.  Repeat until the queue is empty.
+* **Result for the example tree:** A B C D E F
+
+
+**Code Examples (Python):**
+
+These examples use recursive functions. Iterative solutions are also possible (and often preferred for very large trees to avoid stack overflow).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+def levelorder(node):
+    if node is None:
+        return
+    queue = [node]
+    while(len(queue) > 0):
+        print(queue[0].data, end=" ")
+        node = queue.pop(0)
+        if node.left is not None:
+            queue.append(node.left)
+        if node.right is not None:
+            queue.append(node.right)
+
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+root.right.right = Node('F')
+
+print("Inorder:", end=" ")
+inorder(root)
+print("\nPreorder:", end=" ")
+preorder(root)
+print("\nPostorder:", end=" ")
+postorder(root)
+print("\nLevelorder:", end=" ")
+levelorder(root)
+print()
+```
+
+**Applications:**
+
+The choice of traversal depends on the specific task.  For example:
+
+* **Inorder traversal:**  Often used to get a sorted list of elements from a Binary Search Tree (BST).
+* **Preorder traversal:**  Used in expression trees to represent the prefix notation (Polish notation) of an expression.
+* **Postorder traversal:** Used in expression trees to represent the postfix notation (Reverse Polish Notation) of an expression.  Also used for deleting nodes in a tree.
+* **Level order traversal:** Used in algorithms that require processing nodes level by level, such as finding the height of a tree or implementing certain graph algorithms.
+
+
+Understanding binary tree traversals is fundamental to working with tree-based data structures.  Remember the mnemonics (e.g., "Left Root Right" for inorder) to help you recall the order.
+
