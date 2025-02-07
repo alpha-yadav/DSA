@@ -42025,3 +42025,133 @@ print(f"Topological Sort (DFS): {sorted_nodes_dfs}") #Example output: ['A', 'B',
 
 Both Kahn's algorithm and the DFS approach correctly perform topological sorting.  Kahn's algorithm is often considered easier to understand and implement, while the DFS approach can be slightly more efficient in some cases.  The choice depends on preference and specific application requirements. Remember that if a cycle exists, neither algorithm will produce a valid topological ordering.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) is a common algorithm.  Here's how it works, explained with code examples in Python:
+
+**Core Idea:**
+
+The algorithm uses a `visited` array to track visited nodes and a `recursionStack` array to track nodes currently in the recursion stack (i.e., nodes being visited during the current DFT branch).  A cycle is detected if we encounter a node that's already in the `recursionStack`.  This indicates a back edge – an edge that leads to an ancestor in the DFS tree.
+
+**Algorithm:**
+
+1. **Initialization:** Create a `visited` array (all False initially) and a `recursionStack` array (all False initially).  The size of both arrays should be the number of nodes in the graph.
+
+2. **DFS:** Perform a Depth First Traversal starting from each unvisited node.
+
+3. **Visit Node:** For each node visited:
+   - Mark the node as visited (`visited[node] = True`).
+   - Add the node to the recursion stack (`recursionStack[node] = True`).
+   - Recursively visit all its unvisited neighbors.
+
+4. **Neighbor Check:**  Before recursively visiting a neighbor:
+   - If the neighbor is already in `recursionStack`, a cycle is detected. Return `True`.
+   - If the neighbor is already visited but *not* in `recursionStack` (meaning it's part of a different DFS branch), continue to the next neighbor.
+
+5. **Backtrack:** After recursively visiting all neighbors of a node, remove the node from the `recursionStack` (`recursionStack[node] = False`).
+
+6. **Cycle Detection:** If the DFS completes without finding any cycles (step 4), the graph is acyclic.
+
+
+**Python Code (Adjacency List Representation):**
+
+```python
+def isCyclic(graph):
+    """
+    Detects cycles in a directed graph using DFS.
+
+    Args:
+      graph: A dictionary representing the graph as an adjacency list.
+             e.g., {0: [1, 2], 1: [2], 2: [0, 3], 3: []}
+
+    Returns:
+      True if the graph contains a cycle, False otherwise.
+    """
+    num_nodes = len(graph)
+    visited = [False] * num_nodes
+    recursionStack = [False] * num_nodes
+
+    def dfs(node):
+        visited[node] = True
+        recursionStack[node] = True
+
+        for neighbor in graph.get(node, []):  # Handle nodes with no outgoing edges
+            if not visited[neighbor]:
+                if dfs(neighbor):
+                    return True
+            elif recursionStack[neighbor]:
+                return True
+
+        recursionStack[node] = False
+        return False
+
+    for node in range(num_nodes):
+        if not visited[node]:
+            if dfs(node):
+                return True
+    return False
+
+
+# Example usage:
+graph1 = {0: [1, 2], 1: [2], 2: [0, 3], 3: []}  # Acyclic
+graph2 = {0: [1, 2], 1: [2], 2: [0]}  # Cyclic
+graph3 = {0: [1], 1: [2], 2: [0, 3], 3: [4], 4:[]} #Cyclic
+graph4 = {0:[], 1:[], 2:[]} #Acyclic
+
+print(f"Graph 1 has cycle: {isCyclic(graph1)}")  # Output: False
+print(f"Graph 2 has cycle: {isCyclic(graph2)}")  # Output: True
+print(f"Graph 3 has cycle: {isCyclic(graph3)}")  # Output: True
+print(f"Graph 4 has cycle: {isCyclic(graph4)}")  # Output: False
+```
+
+**Python Code (Adjacency Matrix Representation):**
+
+While the adjacency list is generally preferred for graph algorithms, here's how you'd adapt it for an adjacency matrix:
+
+
+```python
+def isCyclic_matrix(graph):
+    num_nodes = len(graph)
+    visited = [False] * num_nodes
+    recursionStack = [False] * num_nodes
+
+    def dfs(node):
+        visited[node] = True
+        recursionStack[node] = True
+
+        for neighbor in range(num_nodes):
+            if graph[node][neighbor] == 1: #Check for edge
+                if not visited[neighbor]:
+                    if dfs(neighbor):
+                        return True
+                elif recursionStack[neighbor]:
+                    return True
+
+        recursionStack[node] = False
+        return False
+
+    for node in range(num_nodes):
+        if not visited[node]:
+            if dfs(node):
+                return True
+    return False
+
+# Example usage with adjacency matrix:
+graph_matrix = [
+    [0, 1, 1, 0],
+    [0, 0, 1, 0],
+    [1, 0, 0, 1],
+    [0, 0, 0, 0]
+]
+print(f"Graph Matrix has cycle: {isCyclic_matrix(graph_matrix)}") # Output: True
+
+graph_matrix2 = [
+    [0, 1, 0, 0],
+    [0, 0, 1, 0],
+    [0, 0, 0, 1],
+    [0, 0, 0, 0]
+]
+print(f"Graph Matrix 2 has cycle: {isCyclic_matrix(graph_matrix2)}") # Output: False
+```
+
+Remember to adapt the code based on how your graph is represented (adjacency list or matrix).  The core logic of using `visited` and `recursionStack` to detect back edges remains the same.
+
