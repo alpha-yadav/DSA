@@ -47795,3 +47795,63 @@ These problems illustrate a range of algorithmic techniques and difficulty level
 
 Remember to search for these problem names online if you want to try solving them – you'll find many resources with explanations and code examples.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's designed to test basic programming concepts like loops, conditionals, and modular arithmetic. Here's how to implement it in Swift, starting with a simple approach and then exploring a slightly more concise version:
+
+**Version 1:  Simple and Readable**
+
+This version uses a `for` loop and `if-else if-else` statements for clear readability:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by both 3 and 5 (15) – printing "FizzBuzz".
+* If not divisible by 15, it checks for divisibility by 3 ("Fizz").
+* If not divisible by 3, it checks for divisibility by 5 ("Buzz").
+* Otherwise, it prints the number itself.
+
+
+**Version 2:  Slightly More Concise**
+
+This version uses a ternary conditional operator to make the code a bit shorter but might be slightly less readable for beginners:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function
+```
+
+This version nests ternary operators to achieve the same result in a single line within the loop.  While shorter, it can be harder to follow if you're not familiar with the ternary operator.
+
+
+**Choosing the Best Version:**
+
+For beginners, **Version 1** is recommended because its clarity makes it easier to understand the logic.  Once you're comfortable with basic Swift syntax, **Version 2** demonstrates a more compact style.  The key is to prioritize readability, especially when learning.
+
+
+**Running the Code:**
+
+You can copy either of these code snippets into a Swift playground (or a Swift file in an Xcode project) to run it.  The output will be a list of numbers from 1 to `n`, with "Fizz", "Buzz", or "FizzBuzz" replacing the numbers divisible by 3, 5, or both, respectively. Remember to adjust the `n` value to change the upper limit of the sequence.
+
