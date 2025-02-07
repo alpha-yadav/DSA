@@ -42155,3 +42155,33 @@ print(f"Graph Matrix 2 has cycle: {isCyclic_matrix(graph_matrix2)}") # Output: F
 
 Remember to adapt the code based on how your graph is represented (adjacency list or matrix).  The core logic of using `visited` and `recursionStack` to detect back edges remains the same.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focused on efficient graph algorithms.  While there isn't one single "Thorup's algorithm," the most well-known and impactful are those related to **near-linear time shortest paths**.  These algorithms achieve remarkable speedups compared to classic Dijkstra's algorithm and the Bellman-Ford algorithm, especially for graphs with non-negative edge weights.
+
+Here's a breakdown of the key aspects and contributions:
+
+**Key Ideas and Techniques Used in Thorup's Algorithms:**
+
+* **Randomization:**  Thorup's algorithms frequently employ randomization to achieve their speed.  They use random sampling and other probabilistic techniques to efficiently handle graph structures.
+* **Hierarchical Decompositions:** Many of his algorithms build upon hierarchical decompositions of the input graph. This means breaking down the graph into smaller, more manageable subgraphs, solving the problem on these subgraphs, and then combining the solutions.
+* **Data Structures:**  Clever use of data structures is crucial for the efficiency of these algorithms.  Specific structures often tailored to the problem are employed to optimize search and update operations.
+* **Approximation:** Some versions of Thorup's algorithms offer approximate solutions to the shortest path problem, sacrificing perfect accuracy for significant speed improvements.  The approximation factor (how much the solution can deviate from the optimal solution) is typically small and well-controlled.
+
+**Specific Algorithms and Results:**
+
+* **Near-linear time single-source shortest paths:** This is the most significant contribution.  Thorup's algorithms achieve a time complexity that is very close to linear (O(m + n log log n)), where 'n' is the number of vertices and 'm' is the number of edges in the graph. This is a significant improvement over Dijkstra's algorithm's O(m log n) time complexity in the case of graphs with non-negative edge weights.
+
+* **Algorithms for other graph problems:** While primarily known for shortest paths, Thorup has also developed efficient algorithms for other graph problems, often using similar techniques.
+
+**Limitations:**
+
+* **Randomization:** The reliance on randomization means the algorithms' performance might vary slightly on different runs for the same input.
+* **Implementation complexity:** The algorithms can be quite complex to implement correctly due to the intricate data structures and probabilistic components.
+* **Non-negative weights:**  The near-linear time complexities for shortest paths are typically guaranteed only for graphs with non-negative edge weights. Handling negative weights adds significant complexity.
+
+**Significance:**
+
+Thorup's algorithms represent a major breakthrough in the field of graph algorithms.  The near-linear time complexities for shortest paths have significantly impacted various applications where fast graph processing is essential, such as network routing, transportation planning, and data analysis.  His work has inspired further research in designing efficient graph algorithms.
+
+In summary, "Thorup's algorithm" isn't a single entity but represents a collection of innovative algorithms that have pushed the boundaries of what's considered computationally feasible in graph processing.  They are characterized by their use of randomization, clever data structures, and hierarchical approaches to achieve near-linear time complexities for fundamental graph problems.
+
