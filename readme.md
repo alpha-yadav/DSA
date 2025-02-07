@@ -44427,3 +44427,87 @@ print(solution.val) # Output: 3
 
 Remember to adapt the code to your specific TreeNode class definition if needed.  The key is understanding the recursive approach; it's conceptually cleaner and more efficient than other methods.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a fundamental problem in computer science.  There are several approaches, each with different time and space complexities.  The best approach depends on the structure of the tree and whether you need to perform many LCA queries.
+
+**Methods:**
+
+1. **Brute-force using DFS (Depth-First Search):**
+
+   * This is a simple but inefficient approach, especially for large trees.
+   * For each node, perform a DFS to find if both nodes are descendants.  The first node encountered that satisfies this condition is the LCA.
+   * **Time Complexity:** O(N*M), where N is the number of nodes and M is the maximum depth of the tree.  This is because in the worst case, you might need to traverse the entire tree for each node.
+   * **Space Complexity:** O(M) due to the recursive call stack of DFS.
+
+2. **Using Parent Pointers (if available):**
+
+   * If each node stores a pointer to its parent, you can efficiently find the LCA.
+   * Find the paths from each of the two nodes to the root.
+   * Traverse these paths simultaneously, comparing parent pointers until you find the first common ancestor.
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(H) in the worst case (for storing paths).
+
+3. **Binary Tree LCA using Recursive Approach:**
+
+   * This is a very efficient recursive method for binary trees.
+   * If the current node is `null`, return `null`.
+   * If the current node is either `node1` or `node2`, return the current node.
+   * Recursively search the left and right subtrees.
+   * If both subtrees return non-null values, the current node is the LCA.
+   * Otherwise, return the non-null result from the subtrees.
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, you might traverse the entire tree).
+   * **Space Complexity:** O(H) due to the recursive call stack, where H is the height of the tree.
+
+4. **Binary Tree LCA using Iterative Approach:**
+
+   * This method uses an iterative approach with a stack instead of recursion.  It's essentially the same as the recursive approach but avoids recursion's overhead.
+   * **Time Complexity:** O(N)
+   * **Space Complexity:** O(H) for the stack
+
+
+5. **Tarjan's Off-line LCA Algorithm:**
+
+   * This algorithm is very efficient for finding the LCA of multiple pairs of nodes.  It uses Depth-First Search and union-find data structures.
+   * It preprocesses the tree to allow for fast LCA queries later.
+   * **Time Complexity:** O(N + Q*α(N)), where N is the number of nodes, Q is the number of LCA queries, and α(N) is the inverse Ackermann function (a very slowly growing function).
+   * **Space Complexity:** O(N)
+
+6. **Binary Lifting:**
+
+   * This method preprocesses the tree to create a table that allows for logarithmic-time LCA queries.
+   * **Time Complexity:** O(N log N) for preprocessing, O(log N) for each query.
+   * **Space Complexity:** O(N log N) for the preprocessing table.
+
+
+
+**Example (Recursive Binary Tree LCA):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, node1, node2):
+    if root is None or root.data == node1 or root.data == node2:
+        return root
+    left_lca = lca(root.left, node1, node2)
+    right_lca = lca(root.right, node1, node2)
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(lca(root, 4, 5).data)  # Output: 2
+print(lca(root, 4, 3).data)  # Output: 1
+```
+
+The choice of algorithm depends on your specific needs. If you only need to find the LCA of a few pairs of nodes, the recursive or iterative approach for binary trees is sufficient.  If you need to perform many LCA queries, Tarjan's algorithm or Binary Lifting is much more efficient.  For general trees with parent pointers, the parent pointer method is often the simplest and fastest. Remember to adapt the code according to your tree structure (binary tree, general tree, etc.).
+
