@@ -52622,3 +52622,89 @@ postorder(root) # Output: D E B F C A
 
 Remember to adapt the `Node` class and the traversal functions if you're using a different programming language or a more complex node structure.  You can also implement iterative versions of these traversals using stacks, which can be more memory-efficient for very deep trees.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several approaches to finding the LCA, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This is a relatively straightforward recursive solution.  The core idea is:
+
+   * **Base Case:** If the current node is `NULL`, return `NULL`.
+   * **If either node is found:** If the current node is either `p` or `q`, return the current node.
+   * **Recursively search:** Recursively search the left and right subtrees.
+   * **LCA Found:** If both recursive calls return non-`NULL` values, the current node is the LCA (because both `p` and `q` are found in its subtrees).  Return the current node.
+   * **Otherwise:** Return the non-`NULL` result from the recursive calls (if one exists).  If both are `NULL`, return `NULL`.
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+   ```
+
+2. **Iterative Approach (Using a Stack/Parent Pointers):**
+
+   This approach avoids recursion, which can be beneficial for very deep trees to avoid stack overflow.  It typically involves either:
+
+   * **Using a stack:**  Perform a depth-first search (DFS) iteratively using a stack, keeping track of parent nodes.  Once both `p` and `q` are found, trace back their paths to find the LCA.
+   * **Storing parent pointers:**  Modify the tree structure (or create a separate data structure) to store parent pointers for each node.  Then, trace back the paths from `p` and `q` to their roots, finding the last common ancestor.
+
+
+3. **Optimized Recursive Approach (with a small improvement):**
+
+This method includes a small check to avoid unnecessary recursion. If the current node is equal to `p` or `q`, there's no need to recurse further in both branches.
+
+```python
+   def lowestCommonAncestor_optimized(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor_optimized(root.left, p, q)
+       if left == p or left == q: # optimization: p or q found in left subtree
+           return left
+
+       right = self.lowestCommonAncestor_optimized(root.right, p, q)
+       if right == p or right == q: # optimization: p or q found in right subtree
+           return right
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+
+```
+
+**Time and Space Complexity:**
+
+* **Recursive Approach:**  Time complexity is O(N), where N is the number of nodes in the tree (in the worst case, we traverse the entire tree).  Space complexity is O(H) in the average case (due to the recursive call stack), where H is the height of the tree.  In the worst case (a skewed tree), it becomes O(N).
+* **Iterative Approach:** Time complexity is O(N). Space complexity is O(H) or O(N) depending on whether you use a stack or parent pointers.
+
+
+
+**Important Considerations:**
+
+* **Node Existence:** The algorithms assume that both `p` and `q` exist in the tree.  You might need to add error handling to check for this.
+* **Tree Structure:**  The algorithms work for both binary trees and binary search trees.
+
+
+Remember to choose the method that best suits your needs and the constraints of your problem (e.g., memory limitations for very large trees). The recursive approach is often the most concise and easiest to understand.  The iterative approach might be preferred for extremely deep trees or when recursion is undesirable.
+
