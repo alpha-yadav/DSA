@@ -51499,3 +51499,82 @@ print(f"Are root1 and root3 the same (iterative)? {are_trees_same_iterative(root
 
 Both methods achieve the same result.  The recursive approach is often preferred for its readability and conciseness unless you anticipate extremely deep trees where stack overflow could be a concern.  In that case, the iterative approach provides a safer alternative. Remember to handle the `None` cases properly in both approaches to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used to store and retrieve data efficiently.  They offer a balance between the simplicity of linked lists and the speed of more complex structures like balanced trees (AVL trees, red-black trees, etc.).
+
+Here's a breakdown of BSTs:
+
+**Key Properties:**
+
+* **Binary:** Each node has at most two children, referred to as the left child and the right child.
+* **Search Tree:**  The values stored in the tree are organized according to a specific ordering property:
+    * For any given node, all values in its left subtree are *less than* the node's value.
+    * For any given node, all values in its right subtree are *greater than* the node's value.
+
+**Basic Operations:**
+
+* **Search:**  Finding a specific value in the tree.  This is done recursively (or iteratively) by comparing the target value to the current node's value and traversing down the left or right subtree accordingly.  The time complexity is O(h), where h is the height of the tree. In a balanced tree, h is approximately log₂(n), where n is the number of nodes.  In a skewed tree, h can be n.
+
+* **Insertion:** Adding a new value to the tree. The new node is inserted into the appropriate location based on the ordering property.  The time complexity is also O(h).
+
+* **Deletion:** Removing a node from the tree. This is the most complex operation, as it involves handling cases where the node to be deleted has zero, one, or two children.  Different strategies exist for deletion, impacting the tree's structure. The time complexity is O(h).
+
+* **Minimum/Maximum:** Finding the minimum or maximum value in the tree. This can be done efficiently by traversing down the leftmost or rightmost branch, respectively.  Time complexity is O(h).
+
+* **Successor/Predecessor:** Finding the next larger or next smaller value in the tree.
+
+**Example (Python):**
+
+A simple node implementation:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+A basic BST implementation (inserting only for brevity):
+
+```python
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+```
+
+**Advantages:**
+
+* **Efficient search, insertion, and deletion (in a balanced tree):**  O(log n) on average.
+* **Simple to implement.**
+* **In-order traversal yields a sorted list of the elements.**
+
+**Disadvantages:**
+
+* **Performance degrades significantly in unbalanced trees:**  O(n) in the worst case (skewed tree).
+* **Not suitable for scenarios requiring frequent updates or deletions in a large dataset if balance isn't maintained.**
+
+
+**Balancing:** To mitigate the performance degradation of unbalanced trees, self-balancing BSTs like AVL trees and red-black trees are used. They employ algorithms to ensure the tree remains relatively balanced, maintaining logarithmic time complexity for most operations.  These are more complex to implement.
+
+
+In summary, BSTs are a versatile and efficient data structure when used appropriately.  Understanding their properties and limitations is crucial for choosing the right data structure for a given task.  If guaranteed logarithmic time complexity is needed, consider using a self-balancing BST.
+
