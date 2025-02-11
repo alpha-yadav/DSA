@@ -52124,3 +52124,105 @@ print(is_bst_recursive(root2))  # Output: False
 
 Remember to adapt the `Node` class if your tree implementation uses a different structure.  Both methods provide a robust way to determine if a given tree adheres to the Binary Search Tree properties.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: In-order Traversal and Sorting**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+1. **In-order Traversal:** Perform an in-order traversal of the binary tree, storing the values of the visited nodes in a list (or array).
+
+2. **Sorting and Comparison:**  Sort the list obtained in step 1.  Compare the sorted list to the original list from the in-order traversal. If they are identical, the tree is a BST; otherwise, it's not.
+
+   Alternatively, you can check if the list from the in-order traversal is sorted directly without explicitly sorting it.  This is more efficient. You just need to compare each element to the previous one.
+
+
+**Python Code (Method 1 - In-order Traversal and Check for Sortedness):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    in_order_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            in_order_list.append(node.data)
+            inorder(node.right)
+    inorder(root)
+
+    for i in range(1, len(in_order_list)):
+        if in_order_list[i] < in_order_list[i-1]:
+            return False  # Not sorted, therefore not a BST
+    return True #Sorted, therefore a BST
+
+
+#Example usage
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+print(is_bst_inorder(root))  # Output: True
+
+root = Node(3)
+root.left = Node(5)
+root.right = Node(1)
+print(is_bst_inorder(root)) # Output: False
+
+```
+
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks if each subtree satisfies the BST property:  the left subtree's nodes must be less than the current node, and the right subtree's nodes must be greater than the current node.  We pass min and max values to constrain the range for each subtree.
+
+1. **Base Case:** An empty tree is a BST.
+
+2. **Recursive Step:** For each node:
+   - Check if the node's value is within the allowed range (min < node.data < max).
+   - Recursively check the left subtree with the updated max value as `node.data - 1`.
+   - Recursively check the right subtree with the updated min value as `node.data + 1`.
+
+
+**Python Code (Method 2 - Recursive Check):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive(node.left, min_val, node.data -1) and
+            is_bst_recursive(node.right, node.data + 1, max_val))
+
+# Example usage (same as before)
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+print(is_bst_recursive(root))  # Output: True
+
+root = Node(3)
+root.left = Node(5)
+root.right = Node(1)
+print(is_bst_recursive(root))  # Output: False
+```
+
+**Which Method to Choose?**
+
+Method 2 (recursive check) is generally preferred because:
+
+* **Efficiency:** It avoids the overhead of creating and sorting a list (Method 1).  Its time complexity is O(N), where N is the number of nodes, while Method 1 has O(N log N) due to sorting.
+* **Space Complexity:** Method 2 has a better space complexity (O(H), where H is the height of the tree - which is O(log N) for balanced trees and O(N) for skewed trees) compared to Method 1 (O(N) due to list creation).
+
+Therefore, the recursive approach (Method 2) is more efficient and generally recommended for checking if a binary tree is a BST.
+
