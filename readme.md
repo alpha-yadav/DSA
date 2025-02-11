@@ -52801,3 +52801,12 @@ print(f"LCA of {node1} and {node2}: {lca_node.data}")  # Output: 2
 
 Remember to adapt the code to your specific tree structure and needs.  The more advanced methods require a more substantial understanding of algorithms and data structures.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **A set of points (x, y):**  For example, (1, 2), (3, 4), (5, 6).
+* **An equation:**  For example, y = x^2, y = 2x + 1,  y = sin(x).
+* **A description of the graph:**  For example, "a line connecting (0,0) and (1,1)".
+
+Once you give me this information, I can help you create a graph.  I can't create a graph without knowing what to graph.
+
