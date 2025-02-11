@@ -51242,3 +51242,56 @@ Here are some common types of algorithms with O(log n) time complexity:
 
 It's important to remember that the O(log n) complexity is often an *average-case* or *best-case* scenario.  Worst-case scenarios might degrade to O(n) in some algorithms (especially those involving unbalanced trees or poorly chosen pivot points in Quickselect).  Therefore, careful consideration of data structures and algorithms is essential to ensure the desired performance.
 
+#  An O(log n) example 
+The most common O(log n) example is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  Instead of checking each element sequentially, it repeatedly divides the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process continues until the target value is found or the search interval is empty.
+
+**Why it's O(log n):**
+
+Each comparison in binary search eliminates roughly half of the remaining search space.  Therefore, the number of comparisons required is proportional to the logarithm (base 2) of the number of elements (n) in the array.
+
+**Example in Python:**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the upper half
+        else:
+            high = mid - 1  # Search in the lower half
+
+    return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+
+```
+
+In this example, if the array has 8 elements, the maximum number of comparisons would be 4 (log₂8 = 3, but we need to account for the possibility of not finding it).  With 16 elements, it would be at most 5, and so on.  The growth rate is logarithmic, leading to O(log n) time complexity.
+
+
+Other algorithms with O(log n) time complexity include:
+
+* **Tree Traversal (balanced trees like AVL trees or red-black trees):**  Finding a node in a balanced binary search tree takes O(log n) time because the tree's height is logarithmic with respect to the number of nodes.
+* **Efficient exponentiation (using repeated squaring):** Calculating a^b efficiently takes logarithmic time.
+
+The key characteristic of O(log n) algorithms is that they reduce the problem size by a constant factor with each step.  This makes them very efficient for large datasets.
+
