@@ -52708,3 +52708,96 @@ This method includes a small check to avoid unnecessary recursion. If the curren
 
 Remember to choose the method that best suits your needs and the constraints of your problem (e.g., memory limitations for very large trees). The recursive approach is often the most concise and easiest to understand.  The iterative approach might be preferred for extremely deep trees or when recursion is undesirable.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a fundamental problem in computer science with applications in various areas, including file systems, phylogenetic trees, and version control systems.  There are several ways to solve this, each with different time and space complexities.
+
+**Methods:**
+
+1. **Brute Force (Traversal):**
+
+   * **Idea:**  Traverse the tree from the root.  For each node, check if both target nodes are present in its subtree. If both are present, that node is a common ancestor. Continue traversing down to find the lowest such ancestor.
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, you might have to visit all nodes.
+   * **Space Complexity:** O(H) in the average case (recursion stack depth), where H is the height of the tree; O(N) in the worst case (skewed tree).
+   * **Implementation:**  This is straightforward using recursive depth-first search (DFS) or iterative approaches using a stack or queue.
+
+
+2. **Using Parent Pointers:**
+
+   * **Idea:** If each node has a pointer to its parent, you can trace upwards from both target nodes simultaneously. When the paths converge, you've found the LCA.
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(1) – constant extra space.
+   * **Implementation:**  Requires modifying the tree structure to include parent pointers.
+
+
+3. **Binary Lifting (for Binary Trees):**
+
+   * **Idea:** Precompute the ancestor at powers of 2 (2<sup>0</sup>, 2<sup>1</sup>, 2<sup>2</sup>, etc.) for each node. To find the LCA, simultaneously lift both nodes towards the root, using the precomputed ancestors.  This is very efficient for queries on the same tree.
+   * **Time Complexity:**  O(log N) for precomputation, O(log N) for each LCA query.
+   * **Space Complexity:** O(N log N) to store precomputed ancestor information.
+   * **Implementation:** More complex than the other methods, but highly efficient for multiple LCA queries.
+
+
+4. **Using a Depth-First Search (DFS) with a Hash Table (for general trees):**
+
+   * **Idea:** Perform a depth-first search (DFS) to store the path from the root to each node in a hash table (using node values as keys). Then for a given pair of nodes, traverse their paths from the root until they diverge, and the last common node is the LCA.
+   * **Time Complexity:** O(N) for preprocessing (DFS), O(H) for query where H is the height of the tree (typically better than brute force)
+   * **Space Complexity:** O(N) to store paths in hash table
+
+
+5. **Euler Tour and Range Minimum Query (RMQ):**
+
+    * **Idea:**  Perform an Euler tour of the tree, recording the nodes visited in order.   Construct a Range Minimum Query (RMQ) data structure (e.g., using sparse tables) on an array of node depths from the Euler tour. Finding the LCA then involves finding the minimum depth in the range of the Euler tour representing the paths to the two nodes.
+    * **Time Complexity:** O(N) to build the Euler tour and RMQ data structure; O(1) to query the LCA for each pair of nodes.
+    * **Space Complexity:** O(N).
+    * **Implementation:** Advanced; requires understanding of Euler tours and RMQ data structures. This is highly efficient for multiple LCA queries.
+
+
+**Choosing the Right Method:**
+
+The best method depends on the specific application:
+
+* **For a single LCA query in a small tree:** The brute force method is simple and sufficient.
+* **For many LCA queries in a binary tree:** Binary lifting is very efficient.
+* **For many LCA queries in general trees:** The Euler tour with RMQ approach provides the best asymptotic performance.
+* **If parent pointers are readily available:** Using parent pointers is the easiest and most efficient method.
+
+
+**Example (Brute Force using DFS in Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, node1, node2):
+    if root is None or root.data == node1 or root.data == node2:
+        return root
+
+    left_lca = lca(root.left, node1, node2)
+    right_lca = lca(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = 4
+node2 = 5
+lca_node = lca(root, node1, node2)
+print(f"LCA of {node1} and {node2}: {lca_node.data}")  # Output: 2
+
+```
+
+Remember to adapt the code to your specific tree structure and needs.  The more advanced methods require a more substantial understanding of algorithms and data structures.
+
