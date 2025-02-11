@@ -50795,3 +50795,56 @@ Fizz
 FizzBuzz
 ```
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm requires to solve a problem as a function of the input size.  It's crucial for understanding how an algorithm's performance scales with larger inputs. We typically analyze complexity using Big O notation.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:** How the runtime of an algorithm grows with the input size (n).  This is often the most important aspect.
+* **Space Complexity:** How the memory usage of an algorithm grows with the input size (n).  This includes both auxiliary space (temporary space used during execution) and the space used to store the input itself.
+* **Big O Notation:**  A mathematical notation used to describe the upper bound of an algorithm's complexity. It focuses on the dominant terms as the input size grows very large, ignoring constant factors and lower-order terms.
+
+**Common Big O Notations and their meanings:**
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime grows logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime grows linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** The runtime grows proportionally to n multiplied by the logarithm of n.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime grows proportionally to the square of the input size.  Example: Bubble sort, selection sort, nested loops iterating through the input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Finding all permutations of a set.
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity of an algorithm often involves:
+
+1. **Identifying the basic operations:**  Determine the operations that contribute most significantly to the runtime.
+2. **Counting the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Simplifying the function:** Use Big O notation to simplify the function by ignoring constant factors and lower-order terms.  Focus on the dominant term as n approaches infinity.
+
+**Example:**
+
+Let's consider a simple function that finds the maximum value in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for num in arr:
+    if num > max_val:
+      max_val = num
+  return max_val
+```
+
+* **Basic operation:** The comparison `if num > max_val`
+* **Number of operations:**  The loop iterates `n` times (where n is the length of the array), performing one comparison in each iteration.  Therefore, the number of comparisons is approximately `n`.
+* **Big O notation:** The time complexity is O(n) – linear time.
+
+
+**Space Complexity Analysis:**
+
+Space complexity analysis is similar but focuses on memory usage.  You consider the amount of extra memory used by the algorithm, excluding the input itself.  For example, an algorithm that uses a recursive approach might have a space complexity related to the depth of recursion.
+
+
+Understanding algorithm complexity is essential for choosing the most efficient algorithm for a given task, particularly when dealing with large datasets.  Poorly chosen algorithms can lead to unacceptable performance.
+
