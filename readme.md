@@ -55668,3 +55668,80 @@ For extremely large trees where recursion might lead to stack overflow, you can 
 
 The recursive approach is generally preferred for its clarity and efficiency unless you have extremely large trees or memory constraints.  The iterative approach with parent pointers is an option if memory is a major concern and you can modify the tree structure, but it adds the overhead of maintaining parent pointers.  The HashMap approach is best suited for very large trees where recursion might be problematic.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (or more specifically, a directed acyclic graph – DAG, which includes trees as a special case) is a fundamental problem in computer science with applications in various areas like file systems, version control systems (like Git), and phylogenetic trees.  There are several approaches to solving this problem, each with its own trade-offs in terms of time and space complexity.
+
+Here are some common methods for finding the LCA:
+
+**1. Recursive Approach (for binary trees):**
+
+This is a straightforward and intuitive approach, particularly efficient for binary trees.  The algorithm recursively traverses the tree from the root.
+
+* **Base Case:** If the current node is `null`, return `null`. If the current node is either `node1` or `node2`, return the current node.
+* **Recursive Step:** Recursively search for `node1` and `node2` in the left and right subtrees.
+* **LCA Found:** If both subtrees return non-`null` values, the current node is the LCA.  If only one subtree returns a non-`null` value, return that value. Otherwise, return `null`.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, node1, node2):
+    if root is None:
+        return None
+    if root == node1 or root == node2:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, node1, node2)
+    right_lca = lowestCommonAncestor(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.right     # Node with data 3
+
+lca = lowestCommonAncestor(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca.data}")  # Output: LCA of 4 and 3: 1
+```
+
+**2. Iterative Approach (using parent pointers):**
+
+If each node in the tree has a pointer to its parent, you can efficiently find the LCA iteratively.  This method avoids recursion and can be slightly faster in some cases.
+
+1. **Path Traversal:** Find the paths from the root to `node1` and `node2`.
+2. **LCA Identification:** Iterate through both paths simultaneously.  The last common node in both paths is the LCA.
+
+
+**3. Lowest Common Ancestor in a General Tree (not necessarily binary):**
+
+The recursive approach can be adapted for general trees (trees where a node can have more than two children). The key change is to iterate through all children instead of just left and right.
+
+**4. Using Depth First Search (DFS) and Binary Lifting:**
+
+For very large trees,  Binary Lifting is an efficient technique.  It preprocesses the tree using DFS to calculate the ancestor of each node at various powers of 2. This allows for logarithmic-time LCA queries after the preprocessing step.
+
+
+**Choosing the Right Approach:**
+
+* **Binary trees with limited depth:** The recursive approach is simple and efficient.
+* **Binary trees with parent pointers:** The iterative approach might be slightly faster.
+* **General trees or large trees:** DFS with Binary Lifting offers the best performance for frequent LCA queries, although it requires preprocessing.
+* **Trees without parent pointers and infrequent queries:** The recursive approach for general trees is a reasonable choice.
+
+
+Remember to consider the specific characteristics of your tree and the frequency of LCA queries when selecting the most appropriate algorithm.  The complexities vary based on the chosen method and the structure of the tree.  For instance, the simple recursive approach for binary trees has a time complexity of O(N) in the worst case (where N is the number of nodes), while Binary Lifting achieves O(log N) query time after O(N log N) preprocessing.
+
