@@ -54769,3 +54769,83 @@ int main() {
 
 Remember to handle memory deallocation properly to avoid memory leaks, especially after deleting nodes.  The `main` function above lacks a crucial step:  a recursive function to delete the entire tree after you're done with it.  I encourage you to add that functionality to prevent memory leaks in your own implementation.  This involves recursively traversing the tree and deleting each node.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where a node is considered a descendant of itself).  There are several ways to find the LCA in a BST, but the most efficient leverages the BST property.
+
+**Efficient Algorithm (using BST properties):**
+
+This algorithm relies on the fact that in a BST, all nodes smaller than a given node are in its left subtree, and all nodes larger than it are in its right subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not in the tree.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    if p.data < root.data and q.data < root.data:
+        return lowestCommonAncestor(root.left, p, q)
+    elif p.data > root.data and q.data > root.data:
+        return lowestCommonAncestor(root.right, p, q)
+    else:
+        return root
+
+
+# Example usage:
+root = Node(6)
+root.left = Node(2)
+root.right = Node(8)
+root.left.left = Node(0)
+root.left.right = Node(4)
+root.right.left = Node(7)
+root.right.right = Node(9)
+
+p = root.left  # Node with data 2
+q = root.right # Node with data 8
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}")  # Output: LCA of 2 and 8: 6
+
+
+p = root.left.right #Node with data 4
+q = root.right.left #Node with data 7
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}")  # Output: LCA of 4 and 7: 6
+
+p = root.left.left #Node with data 0
+q = root.left.right #Node with data 4
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 0 and 4: 2
+
+#Handle cases where nodes might not be present
+p = Node(10) #Node not present in the tree
+q = root.right.left #Node with data 7
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca}") # Output: LCA of 10 and 7: None
+
+```
+
+**Time and Space Complexity:**
+
+* **Time Complexity:** O(H), where H is the height of the BST. In the worst case (a skewed BST), H can be equal to N (the number of nodes), resulting in O(N) time complexity.  In a balanced BST, H is log₂(N), leading to O(log N) time complexity.
+* **Space Complexity:** O(H) in the worst case due to the recursive call stack.  This becomes O(N) for a skewed tree and O(log N) for a balanced tree.
+
+
+This algorithm is significantly more efficient than a general tree LCA algorithm which would have O(N) time complexity even for balanced BSTs because it doesn't require traversing the entire tree.  It directly moves towards the LCA by utilizing the ordering property of the BST.
+
