@@ -55288,3 +55288,107 @@ print(f"Is the invalid tree a BST (iterative)? {is_bst_iterative(root_invalid)}"
 
 Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some cases due to avoiding recursive function call overhead.  Choose the method that best suits your coding style and performance requirements.  Remember to define your `Node` class appropriately.
 
+#  Binary Tree traversals 
+Binary tree traversals are methods for systematically visiting each node in a binary tree exactly once.  There are three main types of traversals, distinguished by the order in which the nodes are visited:
+
+* **Inorder Traversal:**  Left subtree -> Root -> Right subtree
+
+* **Preorder Traversal:** Root -> Left subtree -> Right subtree
+
+* **Postorder Traversal:** Left subtree -> Right subtree -> Root
+
+Let's break down each one, including their applications and how they're implemented:
+
+
+**1. Inorder Traversal:**
+
+* **Order:**  Visits the left subtree, then the root node, then the right subtree.
+* **Application:** For a binary *search* tree (BST), an inorder traversal yields the nodes in ascending order of their values.  This is a key property of BSTs.
+* **Implementation (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3
+```
+
+* **Implementation (Iterative):**  Uses a stack to simulate the recursion.
+
+```python
+def inorder_traversal_iterative(node):
+    stack = []
+    current = node
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.data, end=" ")
+        current = current.right
+```
+
+
+**2. Preorder Traversal:**
+
+* **Order:** Visits the root node, then the left subtree, then the right subtree.
+* **Application:**  Used to create a copy of the tree, to express the tree as a prefix notation (Polish notation), or in algorithms like creating an expression tree from a prefix expression.
+* **Implementation (Recursive):**
+
+```python
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+# Example usage (using the same tree as above):
+print("\nPreorder traversal:")
+preorder_traversal(root)  # Output: 1 2 4 5 3
+```
+
+* **Implementation (Iterative):** Uses a stack similarly to inorder traversal.
+
+
+**3. Postorder Traversal:**
+
+* **Order:** Visits the left subtree, then the right subtree, then the root node.
+* **Application:** Used to delete a tree (delete nodes from leaves to the root), to evaluate an expression tree, or to obtain postfix notation (reverse Polish notation).
+* **Implementation (Recursive):**
+
+```python
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+# Example usage (using the same tree as above):
+print("\nPostorder traversal:")
+postorder_traversal(root)  # Output: 4 5 2 3 1
+```
+
+* **Implementation (Iterative):**  Requires a slightly more complex stack manipulation than inorder or preorder.  It often involves tracking the previously visited node.
+
+
+**Choosing the Right Traversal:**
+
+The choice of traversal depends entirely on the specific task.  Understanding the order in which nodes are visited is crucial for selecting the appropriate algorithm.  For example, if you need to print the nodes in sorted order from a BST, inorder traversal is the clear choice.  If you need to delete a tree, postorder is preferred.  If you're working with expression trees, both preorder and postorder have specific applications depending on the notation (prefix or postfix).
+
