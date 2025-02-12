@@ -56737,3 +56737,59 @@ This means that for sufficiently large inputs (*n ≥ n₀*), *f(n)* is always b
 
 Big-Theta notation is crucial in algorithm analysis because it allows us to precisely characterize the time or space complexity of an algorithm.  Knowing the Θ complexity helps us compare the efficiency of different algorithms and predict how their runtime or memory usage will scale with increasing input size.  It's a fundamental tool for making informed decisions about algorithm selection and optimization.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used to describe the behavior of functions, particularly the running time of algorithms, as their input size approaches infinity.  Here's a comparison of the most common notations:
+
+**1. Big O (O): Upper Bound**
+
+* **Meaning:**  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  In simpler terms, *g(n)* is an upper bound for *f(n)*, eventually.  It describes the *worst-case* scenario.
+* **Focus:**  Only cares about the growth rate of the function; constant factors and smaller terms are ignored.
+* **Example:**  If `f(n) = 2n² + 5n + 1`, then `f(n) = O(n²)`.  We ignore the `5n` and `1` because they're insignificant compared to `n²` as *n* gets large.
+
+**2. Big Omega (Ω): Lower Bound**
+
+* **Meaning:** `f(n) = Ω(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.  *g(n)* is a lower bound for *f(n)*, eventually. It describes the *best-case* scenario (or a lower bound on the algorithm's complexity).
+* **Focus:** Similar to Big O, it ignores constant factors and smaller terms, focusing on the growth rate.
+* **Example:** If `f(n) = 2n² + 5n + 1`, then `f(n) = Ω(n²)`.
+
+**3. Big Theta (Θ): Tight Bound**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  This means *g(n)* is both an upper and a lower bound for *f(n)*, meaning they grow at the same rate. It describes the *average-case* scenario (or a tight bound on the algorithm's complexity).
+* **Focus:** Provides the most precise description of the asymptotic behavior.
+* **Example:** If `f(n) = 2n² + 5n + 1`, then `f(n) = Θ(n²)`.
+
+
+**4. Little o (o): Strict Upper Bound**
+
+* **Meaning:** `f(n) = o(g(n))` means that for *every* positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  This is a *stricter* upper bound than Big O; *f(n)* grows *significantly slower* than *g(n)*.
+* **Focus:**  Highlights a significant difference in growth rates.
+* **Example:** `n = o(n²)`, `log n = o(n)`.
+
+
+**5. Little omega (ω): Strict Lower Bound**
+
+* **Meaning:** `f(n) = ω(g(n))` means that for *every* positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`.  This is a *stricter* lower bound than Big Omega; *f(n)* grows *significantly faster* than *g(n)*.
+* **Focus:** Highlights a significant difference in growth rates.
+* **Example:** `n² = ω(n)`, `2ⁿ = ω(n²)`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Example              |
+|----------|----------------------------------------------|-----------------------|
+| O(g(n))  | Upper bound                                  | 2n² + 5n + 1 = O(n²) |
+| Ω(g(n))  | Lower bound                                  | 2n² + 5n + 1 = Ω(n²) |
+| Θ(g(n))  | Tight bound (both upper and lower)           | 2n² + 5n + 1 = Θ(n²) |
+| o(g(n))  | Strict upper bound                           | n = o(n²)            |
+| ω(g(n))  | Strict lower bound                           | n² = ω(n)            |
+
+
+**Important Considerations:**
+
+* Asymptotic notations describe the *behavior* as *n* approaches infinity; they don't tell you anything about the performance for small *n*.
+* They focus on the *dominant* terms in the function.
+* They are crucial for comparing algorithm efficiency and scalability.
+
+
+Understanding these notations is essential for analyzing the efficiency of algorithms and making informed decisions about which algorithm to use in different situations.
+
