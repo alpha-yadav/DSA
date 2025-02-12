@@ -53770,3 +53770,66 @@ This approach uses the remainders when dividing by 3 and 5 as a tuple to determi
 
 Remember to choose the method that you find most readable and maintainable. For FizzBuzz, the first two methods are generally preferred for their clarity.  The third is included for completeness to showcase different Swift features.  All three achieve the same result.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  This is typically expressed as a function of the input size (often denoted as 'n').  We're usually interested in how the resource consumption grows as the input size increases.  The two most common resources considered are:
+
+* **Time Complexity:** How long the algorithm takes to run.
+* **Space Complexity:** How much memory the algorithm uses.
+
+**Big O Notation:**
+
+Big O notation is a mathematical notation used to describe the limiting behavior of a function when the argument tends towards a particular value or infinity.  In algorithm analysis, it describes the upper bound of the growth rate of an algorithm's resource consumption.  It focuses on the dominant terms and ignores constant factors.
+
+For example:
+
+* **O(1): Constant time:** The algorithm takes the same amount of time regardless of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n): Logarithmic time:** The time increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n): Linear time:** The time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n): Linearithmic time:**  The time is a combination of linear and logarithmic growth.  Example: Merge sort.
+* **O(n²): Quadratic time:** The time increases proportionally to the square of the input size.  Example: Bubble sort, selection sort.
+* **O(2ⁿ): Exponential time:** The time doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!): Factorial time:** The time grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, we typically follow these steps:
+
+1. **Identify the basic operation:** Determine the operation that contributes most to the algorithm's running time.
+2. **Count the number of times the basic operation is executed:** Express this count as a function of the input size (n).
+3. **Express the function using Big O notation:** Simplify the function by ignoring constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The basic operation is the comparison `arr[i] == target`.  In the worst case (target not found), this comparison is executed `n` times, where `n` is the length of the array. Therefore, the time complexity of linear search is O(n).
+
+
+**Best Case, Average Case, Worst Case:**
+
+Algorithm complexity is often categorized into best-case, average-case, and worst-case scenarios:
+
+* **Best Case:** The input that leads to the fastest execution time.
+* **Average Case:** The expected execution time for a typical input.  This can be difficult to calculate precisely.
+* **Worst Case:** The input that leads to the slowest execution time.
+
+Big O notation usually refers to the worst-case complexity, as it provides a guarantee on the algorithm's performance.
+
+
+**Space Complexity:**
+
+Space complexity analyzes the amount of memory used by an algorithm.  It's also expressed using Big O notation.  For example, an algorithm that uses a constant amount of extra memory regardless of input size has a space complexity of O(1).  An algorithm that creates a copy of the input array has a space complexity of O(n).
+
+
+Understanding algorithm complexity is crucial for selecting appropriate algorithms for different tasks and for optimizing the performance of software systems.  Algorithms with lower complexity generally perform better for larger inputs.
+
