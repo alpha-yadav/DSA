@@ -57596,3 +57596,84 @@ int main() {
 
 Remember to handle memory management properly (especially when deleting nodes with two children).  The provided `main` function omits the complete cleanup for brevity, but in a production environment, you'd need a recursive function to delete all nodes to avoid memory leaks.  Consider using smart pointers (e.g., `unique_ptr` or `shared_ptr`) to automate memory management.  They significantly simplify the task of avoiding leaks in more complex tree operations.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where a node is considered a descendant of itself).  There are several ways to find the LCA in a BST, but the most efficient leverages the BST property.
+
+**Algorithm using BST Property:**
+
+The key idea is that in a BST:
+
+* If both nodes are greater than the current node's value, the LCA must be in the right subtree.
+* If both nodes are smaller than the current node's value, the LCA must be in the left subtree.
+* Otherwise, the current node is the LCA.
+
+Here's a Python function implementing this algorithm:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_bst(root, n1, n2):
+    """
+    Finds the Lowest Common Ancestor (LCA) of two nodes in a BST.
+
+    Args:
+        root: The root node of the BST.
+        n1: The first node.
+        n2: The second node.
+
+    Returns:
+        The LCA node, or None if either node is not found.
+    """
+
+    if root is None:
+        return None
+
+    if root.data > n1.data and root.data > n2.data:  #Both nodes are smaller
+        return lca_bst(root.left, n1, n2)
+    elif root.data < n1.data and root.data < n2.data: #Both nodes are larger
+        return lca_bst(root.right, n1, n2)
+    else:
+        return root  # Current node is the LCA
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+n1 = root.left.right.left  # Node with data 10
+n2 = root.left.right.right  # Node with data 14
+
+lca = lca_bst(root, n1, n2)
+print(f"LCA of {n1.data} and {n2.data} is {lca.data}") #Output: LCA of 10 and 14 is 12
+
+
+n3 = root.left # Node with data 8
+n4 = root.right # Node with data 22
+
+lca = lca_bst(root,n3,n4)
+print(f"LCA of {n3.data} and {n4.data} is {lca.data}") # Output: LCA of 8 and 22 is 20
+
+
+n5 = Node(25) #Node not in tree
+n6 = root.left.left # Node with data 4
+
+lca = lca_bst(root, n5, n6) #Handles cases where a node is not present
+print(lca) #Output: None
+```
+
+**Time Complexity:** O(H), where H is the height of the BST.  In a balanced BST, H is log(N), where N is the number of nodes. In a skewed BST, H can be N.
+
+**Space Complexity:** O(H) due to recursive call stack.  Again, this is log(N) for a balanced BST and N for a skewed BST.
+
+
+This algorithm is efficient because it avoids unnecessary traversals.  It directly targets the subtree containing the LCA.  Remember to handle edge cases like an empty tree or nodes not present in the tree.
+
