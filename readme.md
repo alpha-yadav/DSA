@@ -55068,3 +55068,110 @@ print(f"Is the tree a BST? {is_bst_recursive(root2, float('-inf'), float('inf'))
 
 Both methods are correct and efficient for this task.  Choose the one that best suits your understanding and the context of your application.  Remember to handle edge cases like empty trees correctly.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Inorder Traversal and Sorted Array Check**
+
+This method leverages the property that an inorder traversal of a BST yields a sorted sequence of nodes.
+
+1. **Inorder Traversal:** Perform an inorder traversal of the binary tree.  This will visit nodes in ascending order if it's a BST. Store the visited node values in an array or list.
+
+2. **Sorted Array Check:** Check if the resulting array is sorted in ascending order.  If it is, the tree is a BST; otherwise, it's not.
+
+**Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node, arr):
+    if node:
+        inorder_traversal(node.left, arr)
+        arr.append(node.data)
+        inorder_traversal(node.right, arr)
+
+def is_bst(root):
+    arr = []
+    inorder_traversal(root, arr)
+    for i in range(1, len(arr)):
+        if arr[i] < arr[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+print(is_bst(root)) #False (because of 1 being in the right subtree of 5)
+
+
+root2 = Node(2)
+root2.left = Node(1)
+root2.right = Node(3)
+print(is_bst(root2)) # True
+```
+
+
+**Method 2: Recursive Check with Min and Max Bounds**
+
+This method recursively checks each node, ensuring that its value is within the allowed range defined by its ancestors.
+
+1. **Recursive Function:** Define a recursive function `is_bst_recursive(node, min_val, max_val)` that takes a node and minimum and maximum allowed values as input.
+
+2. **Base Case:** If the node is `None`, return `True` (empty subtree is a BST).
+
+3. **Check Node Value:** Check if the node's value is within the `min_val` and `max_val` range. If not, return `False`.
+
+4. **Recursive Calls:** Recursively call the function for the left and right subtrees, updating the `min_val` and `max_val` accordingly.  The left subtree must have values less than the current node, and the right subtree must have values greater.
+
+**Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+import sys
+def is_bst_recursive(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+    if node is None:
+        return True
+    if node.data <= min_val or node.data >= max_val:
+        return False
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+
+# Example usage (same trees as above):
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+print(is_bst_recursive(root)) # False
+
+root2 = Node(2)
+root2.left = Node(1)
+root2.right = Node(3)
+print(is_bst_recursive(root2)) # True
+```
+
+**Which Method is Better?**
+
+The recursive method (Method 2) is generally preferred because:
+
+* **Space Efficiency:** It avoids creating an auxiliary array, making it more space-efficient, especially for large trees.
+* **Efficiency:**  While both have O(N) time complexity, the recursive approach might be slightly faster in practice due to the avoidance of array creation and sorting.
+
+
+Remember to handle edge cases appropriately (empty trees, single-node trees).  The provided code includes error handling for `sys.maxsize` for practical purposes, although theoretically, you could use `float('-inf')` and `float('inf')` as well. Choose the method that best suits your needs and coding style, but the recursive approach is generally considered more elegant and efficient.
+
