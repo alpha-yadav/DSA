@@ -56536,3 +56536,44 @@ print(f"The maximum value is: {max_num}")  # Output: The maximum value is: 9
 
 Remember to be patient and persistent.  Learning algorithms takes time and effort, but the rewards are well worth it.  Start small, focus on understanding the fundamentals, and gradually build your skills through consistent practice.
 
+#  A sample algorithmic problem 
+Let's consider a classic algorithmic problem: **Two Sum**.
+
+**Problem Statement:**
+
+Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+```
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+```
+
+```
+Input: nums = [3,3], target = 6
+Output: [0,1]
+```
+
+
+**Constraints:**
+
+* `2 <= nums.length <= 104`
+* `-109 <= nums[i] <= 109`
+* `-109 <= target <= 109`
+* **Only one valid answer exists.**
+
+
+This problem allows for exploration of different algorithmic approaches, ranging from brute-force (O(n^2) time complexity) to optimized solutions using hash tables (O(n) time complexity).  This makes it a good example for understanding time complexity and algorithmic design choices.  The problem is also relatively easy to understand, making it suitable for beginners.
+
