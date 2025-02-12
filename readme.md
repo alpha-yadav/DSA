@@ -53690,3 +53690,83 @@ Explanation: "aba" is also a valid answer.
 
 **Choosing the right problem depends on your skill level.**  The "easy" problem is a good starting point for beginners, while the "hard" problem is a challenge for more experienced programmers.  The "medium" problem ("Two Sum") is a classic interview question that tests fundamental data structure and algorithm knowledge.  Each problem provides an opportunity to practice different algorithmic techniques and data structures.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It prints numbers from 1 to a given number, but with the following twists:
+
+* If the number is divisible by 3, print "Fizz" instead of the number.
+* If the number is divisible by 5, print "Buzz" instead of the number.
+* If the number is divisible by both 3 and 5 (i.e., divisible by 15), print "FizzBuzz" instead of the number.
+
+Here's how to implement a simple FizzBuzz algorithm in Swift, along with explanations:
+
+
+**Method 1: Using a `for` loop and `if`/`else if`/`else` statements**
+
+This is the most straightforward approach:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates through numbers 1 to `n`.  The `%` operator is the modulo operator, giving the remainder after division.  The order of the `if` statements is important: we check for divisibility by 15 first to ensure "FizzBuzz" is printed correctly.
+
+
+**Method 2:  More concise using string concatenation**
+
+This method is slightly more compact:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) //Call the function to test
+```
+
+Here, we build the output string piece by piece. If the string remains empty after checking for divisibility by 3 and 5, we print the number itself.  This approach avoids the nested `if`/`else if` structure.
+
+
+**Method 3: Using a `switch` statement (less common but possible)**
+
+
+While less intuitive for this specific problem, you could use a `switch` statement with tuples:
+
+```swift
+func fizzBuzzSwitch(n: Int) {
+    for i in 1...n {
+        switch (i % 3, i % 5) {
+        case (0, 0): print("FizzBuzz")
+        case (0, _): print("Fizz")
+        case (_, 0): print("Buzz")
+        default: print(i)
+        }
+    }
+}
+
+fizzBuzzSwitch(n: 15) //Call the function to test
+```
+
+This approach uses the remainders when dividing by 3 and 5 as a tuple to determine the output. It's less readable than the other methods for FizzBuzz, but demonstrates the versatility of Swift's `switch` statement.
+
+
+Remember to choose the method that you find most readable and maintainable. For FizzBuzz, the first two methods are generally preferred for their clarity.  The third is included for completeness to showcase different Swift features.  All three achieve the same result.
+
