@@ -54156,3 +54156,30 @@ This will output:
 
 In summary, nested loops are a powerful tool for handling multi-dimensional data, but it's essential to be mindful of their potential performance implications and strive for clear, efficient code.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They mean the time it takes to complete the algorithm increases logarithmically with the input size (n).  This is significantly faster than linear time (O(n)) or quadratic time (O(n²)).  The base of the logarithm usually doesn't matter in Big O notation because it's a constant factor.
+
+Here are some common types of algorithms exhibiting O(log n) time complexity:
+
+**1. Binary Search:**  This is the quintessential example.  Binary search works on a *sorted* array or list.  It repeatedly divides the search interval in half.  If the target value is less than the middle element, the search continues in the left half; otherwise, it continues in the right half.  This halving process continues until the target value is found or the interval is empty.
+
+**2. Efficient Data Structures:**  Certain operations on specific data structures have logarithmic time complexity:
+
+* **Balanced Binary Search Trees (BSTs):**  Operations like search, insertion, and deletion in a balanced BST (e.g., AVL trees, red-black trees) typically take O(log n) time on average and in the worst case.  The balance ensures the tree doesn't become skewed, preventing worst-case scenarios that would lead to linear time.
+* **Heaps:**  Finding the minimum or maximum element (heap peek), insertion, and deletion of the minimum or maximum element (heap push/pop) in a heap (min-heap or max-heap) all take O(log n) time.  Heaps are crucial for priority queues and heapsort.
+* **Hash Tables (with good hash function):** While average-case performance is O(1), the worst-case scenario for hash table operations (e.g., search, insertion, deletion) can be O(n) if there are many collisions.  However, with a good hash function that distributes keys uniformly, the probability of hitting the worst-case is low.
+
+**3. Algorithms based on Divide and Conquer:**  Some divide-and-conquer algorithms exhibit logarithmic behavior if the problem size is reduced by a constant factor at each step:
+
+* **Exponentiation by Squaring:**  Calculating a<sup>n</sup> efficiently in O(log n) time instead of O(n) time.
+* **Finding the kth smallest element using QuickSelect (average case):**  QuickSelect is a selection algorithm that, on average, finds the kth smallest element in O(n) time.  However, variations that use a clever pivot selection strategy can achieve logarithmic behavior in specific contexts. (Note: Worst-case is O(n²))
+
+**4. Some Graph Algorithms (with specific structures):**
+
+* **Finding a node in a perfectly balanced tree:**  This is similar to binary search.
+
+**Key Point:**  The O(log n) complexity arises when the algorithm repeatedly reduces the problem size by a constant factor.  This is often achieved through techniques like divide and conquer or by using efficient data structures that maintain a balanced structure.
+
+
+It's important to note that the O(log n) complexity usually applies to *average-case* or *best-case* scenarios.  Some algorithms, even if they generally have logarithmic behavior, might have worst-case scenarios that reach O(n) or even worse.  For instance, a poorly implemented hash table or an unbalanced BST can degrade to linear time.
+
