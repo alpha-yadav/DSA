@@ -59019,3 +59019,74 @@ The best implementation depends on your specific needs:
 
 Remember to choose the representation that best suits the characteristics of your graph and the operations you'll be performing on it.  For most sparse graphs, the adjacency list is a very good choice.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so you can follow the arrows without ever going backward.  If a graph has a cycle (a path that leads back to its starting node), it cannot be topologically sorted.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):** Topological sorting only applies to DAGs.  The presence of cycles prevents a valid topological ordering.
+* **Linear Ordering:** The result is a sequence of nodes, not a tree or any other complex structure.
+* **Precedence:** The order respects the direction of edges.  If there's an edge from A to B, A must come before B in the sorted sequence.
+* **Multiple Solutions:**  A DAG may have multiple valid topological sortings.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm (using in-degree):**
+
+   * **Concept:** This algorithm iteratively removes nodes with an in-degree of 0 (nodes with no incoming edges).  These nodes can be placed at the beginning of the sorted list.  The algorithm continues until all nodes are processed.
+
+   * **Steps:**
+     1. Compute the in-degree (number of incoming edges) for each node.
+     2. Create a queue and add all nodes with an in-degree of 0 to the queue.
+     3. While the queue is not empty:
+        * Remove a node from the queue and add it to the sorted list.
+        * For each neighbor of the removed node:
+           * Decrement its in-degree.
+           * If its in-degree becomes 0, add it to the queue.
+     4. If the size of the sorted list is equal to the number of nodes in the graph, the sorting was successful. Otherwise, a cycle exists.
+
+2. **Depth-First Search (DFS) with Post-order Traversal:**
+
+   * **Concept:**  DFS recursively explores the graph.  Nodes are added to the sorted list in post-order (after all their descendants have been visited). This naturally respects the precedence constraints.
+
+   * **Steps:**
+     1. Create a list to store the sorted nodes (initially empty).
+     2. Mark all nodes as unvisited.
+     3. For each node, if it's unvisited, perform a DFS:
+        * Mark the node as visited.
+        * Recursively visit all its unvisited neighbors.
+        * Add the node to the sorted list *after* all its descendants have been processed (post-order).
+     4. Reverse the sorted list.  The reversed list is the topological ordering.
+
+**Example (Kahn's Algorithm):**
+
+Consider a DAG with nodes A, B, C, D, and E, and edges: A->C, B->C, C->D, C->E, D->E.
+
+1. In-degrees: A(0), B(0), C(2), D(1), E(2)
+2. Queue: [A, B]
+3. Sorted List: []
+4. Algorithm iterations:
+   * Remove A, Sorted List: [A], update C's in-degree to 1
+   * Remove B, Sorted List: [A, B], update C's in-degree to 0
+   * Add C to queue, Queue: [C]
+   * Remove C, Sorted List: [A, B, C], update D's in-degree to 0, E's in-degree to 0
+   * Add D and E to queue, Queue: [D, E]
+   * Remove D, Sorted List: [A, B, C, D], update E's in-degree to 0
+   * Remove E, Sorted List: [A, B, C, D, E]
+5. Final sorted list: [A, B, C, D, E]
+
+
+**Applications:**
+
+Topological sorting is used in various applications, including:
+
+* **Course scheduling:** Ordering courses based on prerequisites.
+* **Build systems (like Make):** Determining the order to compile files.
+* **Dependency resolution:**  In software package management.
+* **Data serialization:**  Ensuring data is written in a consistent order.
+
+
+Choosing between Kahn's algorithm and DFS depends on the specific application and data structures used.  Kahn's algorithm is often preferred for its simplicity and efficiency in some cases, while DFS can be more easily integrated with other graph traversal algorithms.  Both correctly solve the problem for DAGs.
+
