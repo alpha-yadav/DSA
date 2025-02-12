@@ -53833,3 +53833,44 @@ Space complexity analyzes the amount of memory used by an algorithm.  It's also 
 
 Understanding algorithm complexity is crucial for selecting appropriate algorithms for different tasks and for optimizing the performance of software systems.  Algorithms with lower complexity generally perform better for larger inputs.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a powerful tool in computer science and mathematics used to describe the asymptotic behavior of functions.  Unlike Big-O notation, which provides an *upper bound*, and Big-Ω notation, which provides a *lower bound*, Big-Theta notation provides both an *upper and a lower bound*, thereby giving a *tight bound* on the function's growth rate.
+
+**Formal Definition:**
+
+We say that a function *f(n)* is Θ(*g(n)*), written as  *f(n) = Θ(g(n))*, if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.  In simpler terms: *f(n)* grows at the same rate as *g(n)*.
+
+
+**Intuitive Understanding:**
+
+Imagine you're comparing the runtime of two algorithms.  If  `f(n) = Θ(n²)` and `g(n) = Θ(n²)`, it means both algorithms have a quadratic time complexity.  They will both slow down at roughly the same rate as the input size (*n*) increases.  Big-O would only tell you that they're *at most* quadratic; Big-Theta tells you they're *exactly* quadratic (within constant factors).
+
+
+**Example:**
+
+Let's consider the function:  `f(n) = 2n² + 3n + 1`
+
+We can show that `f(n) = Θ(n²)`.  To do this, we need to find constants *c₁*, *c₂*, and *n₀* that satisfy the definition:
+
+1. **Upper Bound:**  For sufficiently large *n*, the `2n²` term dominates.  We can say that `2n² + 3n + 1 ≤ 3n²` for all *n ≥ 1*.  So we can choose `c₂ = 3` and `n₀ = 1`.
+
+2. **Lower Bound:**  For sufficiently large *n*, the `2n²` term is significant. We can say that `2n² + 3n + 1 ≥ n²` for all *n ≥ 1*. So we can choose `c₁ = 1` and `n₀ = 1`.
+
+Therefore, we have shown that `1 * n² ≤ 2n² + 3n + 1 ≤ 3 * n²` for all *n ≥ 1*, fulfilling the definition of Θ(n²).
+
+
+**Key Differences from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an upper bound.  `f(n) = O(g(n))` means *f(n)* grows no faster than *g(n)*.
+* **Big-Ω (Ω):** Provides a lower bound. `f(n) = Ω(g(n))` means *f(n)* grows at least as fast as *g(n)*.
+* **Big-Theta (Θ):** Provides both an upper and lower bound, indicating that *f(n)* grows at the same rate as *g(n)*.  In essence, `f(n) = Θ(g(n))` implies `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+
+
+**Importance in Algorithm Analysis:**
+
+Big-Theta notation is crucial for precisely characterizing the time and space complexity of algorithms. It allows for a more accurate comparison of different algorithms and provides valuable insights into their efficiency.  Knowing the Θ complexity gives a much clearer picture of scalability and performance than just knowing the Big-O complexity.
+
