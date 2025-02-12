@@ -58499,3 +58499,135 @@ post_order(root) # Output: D E B C A
 
 Remember to adapt the `Node` class and the traversal functions if you're using a different data structure for your binary tree.  Non-recursive implementations are also possible using stacks or queues, but recursive versions are generally easier to understand and implement.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the lowest common ancestor (LCA) of two nodes in a binary tree is a common problem in computer science.  The approach varies slightly depending on whether the tree is a binary *search* tree (BST) or a general binary tree.
+
+**1. Binary Search Tree (BST)**
+
+In a BST, the properties of the tree allow for a very efficient solution:
+
+* **Algorithm:**
+    1. If both nodes are greater than the root, recursively search the right subtree.
+    2. If both nodes are smaller than the root, recursively search the left subtree.
+    3. Otherwise, the root is the LCA.
+
+
+* **Python Code:**
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestorBST(root, p, q):
+    """
+    Finds the LCA of p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node.  Returns None if either p or q are not in the tree.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    if (p.val < root.val and q.val < root.val):
+        return lowestCommonAncestorBST(root.left, p, q)
+    elif (p.val > root.val and q.val > root.val):
+        return lowestCommonAncestorBST(root.right, p, q)
+    else:
+        return root
+
+#Example usage
+root = TreeNode(6)
+root.left = TreeNode(2)
+root.right = TreeNode(8)
+root.left.left = TreeNode(0)
+root.left.right = TreeNode(4)
+root.right.left = TreeNode(7)
+root.right.right = TreeNode(9)
+p = root.left
+q = root.right
+lca = lowestCommonAncestorBST(root,p,q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") #Output: LCA of 2 and 8: 6
+
+```
+
+**2. General Binary Tree**
+
+For a general binary tree (not necessarily a BST), we need a different approach.  A common and efficient method uses a post-order traversal with a parent pointer (or by keeping track of parent nodes during traversal):
+
+
+* **Algorithm (using parent pointers, which is a common augmentation for LCA in a general tree):**
+
+    1. Perform Depth-First Search (DFS) to find the paths from the root to both nodes `p` and `q`.  You'll need to modify your DFS to track parent nodes.
+    2. Iterate through the paths simultaneously from the root. The last node common to both paths is the LCA.
+
+
+* **Python Code (Simulating parent pointers for illustrative purposes -  In real-world scenarios, you might modify a tree node structure to include a `parent` attribute):**
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+  """LCA in a general binary tree (simulating parent pointers)."""
+
+  path_p = []
+  path_q = []
+
+  def dfs(node, target, path):
+    if not node:
+      return False
+    path.append(node)
+    if node == target:
+      return True
+    if dfs(node.left, target, path) or dfs(node.right, target, path):
+      return True
+    path.pop()
+    return False
+
+  dfs(root, p, path_p)
+  dfs(root, q, path_q)
+
+  lca = root
+  for i in range(min(len(path_p), len(path_q))):
+    if path_p[i] == path_q[i]:
+      lca = path_p[i]
+    else:
+      break
+  return lca
+
+#Example Usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left
+q = root.right
+lca = lowestCommonAncestor(root,p,q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") #Output: LCA of 5 and 1: 3
+
+
+```
+
+**Important Considerations:**
+
+* **Error Handling:**  The code examples above lack robust error handling (e.g., checking if `p` and `q` actually exist in the tree).  Production-ready code should include such checks.
+* **Efficiency:** The BST solution is O(h), where h is the height of the tree (very efficient for balanced BSTs). The general tree solution with parent pointers or path reconstruction is also relatively efficient.  Without parent pointers, finding paths requires a potentially less efficient O(N) traversal.
+* **Parent Pointers:** The general tree solution is cleaner and more efficient if the tree nodes are augmented to include parent pointers.
+
+
+Remember to choose the appropriate algorithm based on whether you have a BST or a general binary tree.  If performance is critical for general binary trees, consider adding parent pointers to your node structure.
+
