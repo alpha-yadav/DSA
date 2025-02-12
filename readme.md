@@ -53636,3 +53636,57 @@ print(f"The target value {target_value} is at index: {index}")
 
 This is a simple example, but it demonstrates the core principles of an algorithm: a clear, step-by-step procedure to solve a specific problem.  As you progress, you'll tackle more complex algorithms and data structures. Remember to be patient and persistent; mastering algorithms takes time and effort.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:** Find the maximum value in an array of integers.
+
+**Input:** An array of integers (e.g., `[3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]`).
+
+**Output:** The maximum integer in the array (e.g., `9`).
+
+**Algorithm (simple approach):** Iterate through the array, keeping track of the largest value encountered so far.
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers (`nums`) and an integer target (`target`).
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  Assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Algorithm:**  A common approach uses a hash table (dictionary in Python) for efficient lookups.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string (e.g., "babad").
+
+**Output:** The longest palindromic substring (e.g., "bab" or "aba").  If multiple palindromes of the same length exist, return any one.
+
+**Example:**
+
+```
+Input: s = "babad"
+Output: "bab"
+Explanation: "aba" is also a valid answer.
+```
+
+**Algorithm:**  This problem has several algorithmic solutions, including dynamic programming and a clever "expand around center" approach.  The optimal solution usually involves a time complexity of O(n^2).
+
+
+**Choosing the right problem depends on your skill level.**  The "easy" problem is a good starting point for beginners, while the "hard" problem is a challenge for more experienced programmers.  The "medium" problem ("Two Sum") is a classic interview question that tests fundamental data structure and algorithm knowledge.  Each problem provides an opportunity to practice different algorithmic techniques and data structures.
+
