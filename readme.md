@@ -56577,3 +56577,71 @@ Output: [0,1]
 
 This problem allows for exploration of different algorithmic approaches, ranging from brute-force (O(n^2) time complexity) to optimized solutions using hash tables (O(n) time complexity).  This makes it a good example for understanding time complexity and algorithmic design choices.  The problem is also relatively easy to understand, making it suitable for beginners.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple version and then showing ways to improve it:
+
+**Version 1: Basic Implementation**
+
+This version is straightforward and easy to understand:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both Fizz and Buzz cases), then 3, then 5.  If none of these conditions are met, it prints the number itself.
+
+**Version 2: Using String Interpolation for Conciseness**
+
+This version uses string interpolation to make the code slightly more compact:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? i : output)
+    }
+}
+
+fizzBuzz(n: 15)
+```
+
+This version builds the output string incrementally.  If the string is empty after checking for divisibility by 3 and 5, it prints the number; otherwise, it prints the accumulated string.
+
+
+**Version 3:  More Functional Approach**
+
+This version uses a ternary operator for a more concise solution, although it might be slightly less readable for beginners:
+
+```swift
+func fizzBuzz(n: Int) {
+    (1...n).forEach { i in
+        print((i % 15 == 0 ? "FizzBuzz" : (i % 3 == 0 ? "Fizz" : (i % 5 == 0 ? "Buzz" : "\(i)")))
+    }
+}
+
+fizzBuzz(n: 15)
+```
+
+This uses a `forEach` loop and nested ternary operators to achieve the same result in a more compact way.  However, deeply nested ternary operators can reduce readability.
+
+
+**Choosing the Best Version:**
+
+For beginners, **Version 1** is recommended due to its clarity.  **Version 2** offers a good balance between readability and conciseness.  **Version 3** is the most concise but might be harder to understand if you're new to Swift.  Choose the version that best suits your understanding and coding style.  Remember, readability is crucial, especially when sharing code with others or revisiting it later.
+
