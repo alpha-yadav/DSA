@@ -56244,3 +56244,91 @@ While remarkably fast in theory, Thorup's algorithm's practical implementation c
 
 In summary, Thorup's algorithm represents a significant theoretical breakthrough in the field of graph algorithms. While its practical implementation might be challenging, its near-linear time complexity demonstrates the power of advanced techniques in designing efficient algorithms for fundamental graph problems.
 
+#  Graph Traversals 
+Graph traversals are algorithms used to visit all the vertices (nodes) of a graph in a systematic way.  There are several common traversal methods, each with its own properties and applications.  The most popular are Breadth-First Search (BFS) and Depth-First Search (DFS).
+
+**1. Breadth-First Search (BFS)**
+
+* **Idea:**  BFS explores the graph level by level. It starts at a root node and visits all its neighbors before moving on to their neighbors, and so on.  It uses a queue data structure to manage the nodes to be visited.
+
+* **Algorithm:**
+
+    1. Start at a root node and mark it as visited.
+    2. Add the root node to a queue.
+    3. While the queue is not empty:
+        * Dequeue a node from the queue.
+        * For each of its unvisited neighbors:
+            * Mark the neighbor as visited.
+            * Add the neighbor to the queue.
+
+* **Properties:**
+    * Finds the shortest path in unweighted graphs.
+    * Explores the graph horizontally.
+    * Uses more memory than DFS (because the queue can hold many nodes).
+
+* **Example (using an adjacency list):**
+
+   Let's say we have a graph represented as an adjacency list:
+
+   ```
+   A: [B, C]
+   B: [A, D, E]
+   C: [A, F]
+   D: [B]
+   E: [B, F]
+   F: [C, E]
+   ```
+
+   Starting at node A, BFS traversal would visit nodes in this order: A, B, C, D, E, F.
+
+
+**2. Depth-First Search (DFS)**
+
+* **Idea:** DFS explores the graph as deeply as possible along each branch before backtracking. It uses a stack (implicitly through recursion or explicitly using a stack data structure) to manage the nodes to be visited.
+
+* **Algorithm (recursive):**
+
+    1. Mark the current node as visited.
+    2. For each unvisited neighbor of the current node:
+        * Recursively call DFS on the neighbor.
+
+* **Algorithm (iterative using a stack):**
+
+    1. Push the root node onto a stack.
+    2. While the stack is not empty:
+        * Pop a node from the stack.
+        * If the node is not visited:
+            * Mark the node as visited.
+            * Push its unvisited neighbors onto the stack (in some order, often reverse order of adjacency list).
+
+* **Properties:**
+    * Doesn't guarantee the shortest path.
+    * Explores the graph vertically.
+    * Uses less memory than BFS (generally, as the stack depth is usually less than the queue size in BFS).
+    * Useful for detecting cycles, topological sorting, and finding connected components.
+
+
+* **Example (using the same adjacency list as above):**
+
+   Starting at node A, a possible DFS traversal (depending on the order of neighbors explored) could be: A, B, D, E, F, C.  Another possible order is A, C, F, E, B, D.
+
+
+**Other Graph Traversal Algorithms:**
+
+* **Dijkstra's Algorithm:** Finds the shortest path between nodes in a weighted graph with non-negative edge weights.
+* **A* Search:**  A more efficient search algorithm than Dijkstra's for finding shortest paths, particularly in large graphs, using a heuristic function to guide the search.
+* **Bellman-Ford Algorithm:** Finds the shortest path in a weighted graph, even with negative edge weights (but can't handle negative cycles).
+
+
+**Choosing the Right Algorithm:**
+
+The choice between BFS and DFS depends on the specific application:
+
+* **Shortest path in unweighted graphs:** Use BFS.
+* **Detecting cycles, topological sorting, connected components:** Use DFS.
+* **Weighted graphs with non-negative weights:** Use Dijkstra's algorithm or A*.
+* **Weighted graphs with potentially negative weights:** Use Bellman-Ford.
+
+
+Understanding graph traversals is fundamental to solving many graph-related problems in computer science.  The choice of algorithm is crucial for efficiency and correctness.
+
