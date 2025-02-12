@@ -59291,3 +59291,119 @@ The best traversal algorithm depends on the specific problem and the properties 
 
 Understanding graph traversals is fundamental to solving many graph-related problems in computer science.  Remember to choose the algorithm that best suits your needs based on the properties of the graph and the specific problem you are trying to solve.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix or list) and whether you're looking for a specific node or just traversing the entire graph.  Here are a few examples:
+
+**1. DFS using Adjacency List (Recursive):** This is a common and elegant approach for graphs represented using adjacency lists.
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might have no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+    return list(visited) #Return the list of visited nodes.
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A') # Output: A B D E F C (Order may vary slightly depending on implementation)
+print("\nVisited nodes:", dfs_recursive(graph,'A'))
+
+```
+
+**2. DFS using Adjacency List (Iterative):**  This uses a stack to achieve the same result without recursion.  It can be more efficient for very deep graphs to avoid stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [node]
+    visited_nodes = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            visited_nodes.append(node)
+            print(node, end=" ") # Process the node
+            stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+    return visited_nodes
+
+
+print("\n\nDFS traversal (iterative):")
+dfs_iterative(graph, 'A') #Output: A C F E B D (Order may vary slightly depending on implementation)
+print("\nVisited nodes:", dfs_iterative(graph,'A'))
+
+```
+
+**3.  DFS for finding a specific node:**  This modification stops when the target node is found.
+
+```python
+def dfs_find(graph, node, target):
+    """
+    Performs DFS to find a specific target node.
+
+    Args:
+        graph: The graph represented as an adjacency list.
+        node: The starting node.
+        target: The node to search for.
+
+    Returns:
+        True if the target node is found, False otherwise.
+    """
+    visited = set()
+    stack = [node]
+
+    while stack:
+        current = stack.pop()
+        if current == target:
+            return True
+        visited.add(current)
+        stack.extend(neighbor for neighbor in graph.get(current, []) if neighbor not in visited)
+
+    return False
+
+print("\n\nIs node 'F' found using DFS?:", dfs_find(graph,'A','F')) #Output: True
+print("Is node 'Z' found using DFS?:", dfs_find(graph,'A','Z')) #Output: False
+
+```
+
+Remember to adapt these functions to your specific needs, especially the way you represent your graph (adjacency matrix would require a different implementation).  The `print(node, end=" ")` line is for demonstration; replace it with your desired node processing logic.  Also consider adding error handling (e.g., checking for invalid input nodes).
+
