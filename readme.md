@@ -59826,3 +59826,101 @@ For a small array, Algorithm A might be faster.  However, as the array size incr
 
 In summary, Big O notation is a crucial tool for comparing the efficiency of algorithms and making informed decisions about which algorithm is best suited for a given problem, especially as the input size scales.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  The type of loop used depends on when you want to check the condition (before or after each iteration) and how you want to control the number of iterations.  Here are examples in a few common programming languages:
+
+**1. `for` loop (counter-controlled):**  This loop is best when you know the number of iterations in advance.
+
+* **Python:**
+
+```python
+for i in range(5):  # Executes 5 times, i = 0, 1, 2, 3, 4
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+**2. `while` loop (condition-controlled):** This loop continues as long as a specified condition is true.  The condition is checked *before* each iteration.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+**3. `do-while` loop (condition-controlled):** Similar to `while`, but the condition is checked *after* each iteration.  This guarantees at least one execution of the loop body.  (Note:  `do-while` is not available in Python.)
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+do {
+  console.log(count);
+  count++;
+} while (count < 5);
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  do {
+    std::cout << count << std::endl;
+    count++;
+  } while (count < 5);
+  return 0;
+}
+```
+
+These are just basic examples.  Loops can be much more complex, incorporating nested loops, `break` statements (to exit the loop prematurely), `continue` statements (to skip to the next iteration), and more sophisticated conditions.  The best type of loop to use depends on the specific problem you're trying to solve.
+
