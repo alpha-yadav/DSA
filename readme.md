@@ -60181,3 +60181,39 @@ This algorithm performs one print operation for each element in the array.  Ther
 
 Understanding algorithm complexity is vital for writing efficient and scalable programs, especially when dealing with large datasets or computationally intensive tasks.  Choosing algorithms with lower complexities can drastically improve performance.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  It's used to classify algorithms based on their runtime or space complexity, providing a more precise description than Big-O notation alone.  While Big-O gives an upper bound, Big-Theta provides both an upper *and* a lower bound, indicating that the function's growth rate is bound by two functions, both growing at the same rate (up to constant factors).
+
+**Formal Definition:**
+
+A function *f(n)* is said to be in Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁g(n) ≤ f(n) ≤ c₂g(n)`
+
+This means that *f(n)* is bounded both above and below by constant multiples of *g(n)* for sufficiently large *n*.  In simpler terms: *f(n)* grows at the same rate as *g(n)*.
+
+
+**Key Differences from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  It means *f(n)* grows *no faster* than *g(n)*.  It only states that *f(n) ≤ c₂g(n)* for some constants *c₂* and *n₀*.
+
+* **Big-Ω (Ω):** Provides a *lower bound*. It means *f(n)* grows *no slower* than *g(n)*. It only states that *c₁g(n) ≤ f(n)* for some constants *c₁* and *n₀*.
+
+* **Big-Θ (Θ):** Provides both an *upper and lower bound*, meaning *f(n)* grows at the *same rate* as *g(n)*.  It combines the information provided by Big-O and Big-Ω.
+
+
+**Examples:**
+
+* **Θ(n):**  Linear time complexity.  Functions like `f(n) = 2n + 5` and `f(n) = n/2` are both in Θ(n).
+
+* **Θ(n²):** Quadratic time complexity.  Functions like `f(n) = 3n² + 2n + 1` are in Θ(n²).
+
+* **Θ(log n):** Logarithmic time complexity.  Functions like `f(n) = 2log₂n + 7` are in Θ(log n).
+
+* **Θ(1):** Constant time complexity.  Functions like `f(n) = 5` are in Θ(1).
+
+
+**Why use Big-Theta?**
+
+Big-Theta provides a more precise and complete picture of an algorithm's efficiency than Big-O alone.  While Big-O is sufficient for many analyses (especially when focusing on worst-case scenarios), Big-Theta gives a stronger statement about the algorithm's performance in the long run, indicating a tight bound on its growth rate.  This is especially valuable when comparing different algorithms, as it clarifies if they exhibit the same asymptotic behavior.  Using only Big-O, you might wrongly conclude two algorithms have the same efficiency when they don't; using Big-Theta helps avoid this mistake.
+
