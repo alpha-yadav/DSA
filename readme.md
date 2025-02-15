@@ -61554,3 +61554,111 @@ This algorithm achieves the same result using an iterative approach with a stack
 
 Choosing between the recursive and iterative approaches often depends on personal preference and the specific context.  The recursive version is often considered more readable, while the iterative version might offer slightly better performance in some cases.  For most practical purposes, either approach will work effectively.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* All nodes in the left subtree have values less than the node's value.
+* All nodes in the right subtree have values greater than the node's value.
+
+
+Here are three common methods, with increasing efficiency:
+
+**Method 1: Recursive In-Order Traversal**
+
+This method performs an in-order traversal of the BST.  If the resulting sequence is sorted, the tree is a valid BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """Checks if a tree is a BST using recursive in-order traversal."""
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    for i in range(1, len(result)):
+        if result[i] < result[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(2)
+root.left.right = Node(4)
+
+print(is_bst_recursive(root))  # Output: True
+
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(2)
+root.left.right = Node(8) #Violation of BST property
+
+print(is_bst_recursive(root)) # Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max Values**
+
+This approach is more efficient because it avoids creating a sorted list. It recursively checks each subtree, passing down the minimum and maximum allowed values.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_minmax(root, min_val=-float('inf'), max_val=float('inf')):
+    """Checks if a tree is a BST recursively using min/max values."""
+    if not root:
+        return True
+    if not (min_val < root.data < max_val):
+        return False
+    return (is_bst_recursive_minmax(root.left, min_val, root.data) and
+            is_bst_recursive_minmax(root.right, root.data, max_val))
+
+# Example usage (same as before, will produce same True/False results)
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(2)
+root.left.right = Node(4)
+
+print(is_bst_recursive_minmax(root))  # Output: True
+
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(2)
+root.left.right = Node(8) #Violation of BST property
+
+print(is_bst_recursive_minmax(root)) # Output: False
+
+```
+
+**Method 3: Iterative Approach (Using a Stack)**
+
+This approach uses a stack for an iterative in-order traversal, avoiding the potential for stack overflow with very deep trees (though Python's recursion depth is usually sufficient for most cases).  It's functionally similar to Method 1 but iterative.
+
+(Implementation of an iterative method is more complex than the recursive versions and is omitted for brevity.  The core logic would involve using a stack to simulate the recursive calls of the in-order traversal.)
+
+
+**Choosing the best method:**
+
+* For most cases, `is_bst_recursive_minmax` (Method 2) provides a good balance of clarity and efficiency. It avoids the overhead of building an entire sorted array.
+* If you're concerned about exceptionally deep trees and the risk of exceeding Python's recursion limit, the iterative approach (Method 3) is preferable.
+* `is_bst_recursive` (Method 1) is the simplest to understand but is less efficient.
+
+
+Remember to adapt the `Node` class definition if your tree implementation differs.  Choose the method that best suits your needs and coding style, considering potential limitations for very large trees.
+
