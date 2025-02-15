@@ -62113,3 +62113,18 @@ def lca_recursive(root, node1, node2):
 
 Remember to adapt the code examples to your specific node structure and tree implementation.  You might need to handle edge cases (nodes not found in the tree) appropriately.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need the information to create the graph.  For example, you could give me:
+
+* **A set of points:**  (1, 2), (3, 4), (5, 6)
+* **An equation:** y = 2x + 1
+* **A table of values:**
+| x | y |
+|---|---|
+| 0 | 1 |
+| 1 | 3 |
+| 2 | 5 |
+
+
+Once you provide the data, I'll tell you how I can graph it for you (I can't *visually* create a graph here, but I can describe it or give you instructions to create one using a graphing tool).
+
