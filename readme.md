@@ -59652,3 +59652,37 @@ Consider searching for an element in an array:
 
 In summary, understanding algorithm complexity is essential for writing efficient and scalable software.  Big O notation provides a standardized way to compare and analyze the performance of different algorithms.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a notation used in computer science and mathematics to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds.  In simpler terms, it tells us that a function grows at the *same rate* as another function, ignoring constant factors.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be in Θ(*g(n)*), written as *f(n) = Θ(g(n))*, if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that *f(n)* is bounded both above and below by multiples of *g(n)* for sufficiently large values of *n*.  The constant factors *c₁* and *c₂* and the threshold *n₀* are crucial for capturing the essence of asymptotic behavior. They hide constant factors that are irrelevant when considering the growth rate for large inputs.
+
+
+**Explanation:**
+
+* **Asymptotic Behavior:**  Big-Theta focuses on the behavior of the function as *n* (usually representing input size) approaches infinity.  We're not concerned with small values of *n*, only the long-term growth trend.
+
+* **Tight Bound:** Unlike Big-O notation (O), which only provides an upper bound, and Big-Omega notation (Ω), which only provides a lower bound, Big-Theta provides both simultaneously. This signifies that the function grows proportionally to the bounding function.
+
+* **Ignoring Constant Factors:** The constants *c₁* and *c₂* allow us to disregard constant multiplicative factors. For instance,  `5n² + 3n + 10 = Θ(n²)`, even though 5, 3, and 10 are present. The dominant term (n²) determines the growth rate in this case.
+
+**Example:**
+
+Let's say we have a function `f(n) = 2n² + 5n + 1`. We can show that `f(n) = Θ(n²)`.
+
+1. **Find c₁ and n₀:**  We need to find constants such that `c₁n² ≤ 2n² + 5n + 1` for sufficiently large *n*. If we choose `c₁ = 1`, then for `n ≥ 1`,  `n² ≤ 2n² + 5n + 1` always holds.
+
+2. **Find c₂ and n₀:** We need to find constants such that `2n² + 5n + 1 ≤ c₂n²` for sufficiently large *n*.  Let's choose `c₂ = 4`. Then, for `n ≥ 5`, `2n² + 5n + 1 ≤ 4n²`.
+
+Therefore, we've found `c₁ = 1`, `c₂ = 4`, and `n₀ = 5` satisfying the definition, proving that `2n² + 5n + 1 = Θ(n²)`.
+
+**When to Use Big-Theta:**
+
+Big-Theta is used when you want to express a precise asymptotic relationship between two functions.  It's used to describe the exact complexity of an algorithm, offering more precise information than just Big-O, which only gives an upper bound.  If you only need an upper bound, Big-O suffices. If you need a lower bound, Big-Omega is appropriate. But when you need *both*, that's when Big-Theta is the most suitable choice.
+
