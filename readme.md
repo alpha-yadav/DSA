@@ -60217,3 +60217,51 @@ This means that *f(n)* is bounded both above and below by constant multiples of 
 
 Big-Theta provides a more precise and complete picture of an algorithm's efficiency than Big-O alone.  While Big-O is sufficient for many analyses (especially when focusing on worst-case scenarios), Big-Theta gives a stronger statement about the algorithm's performance in the long run, indicating a tight bound on its growth rate.  This is especially valuable when comparing different algorithms, as it clarifies if they exhibit the same asymptotic behavior.  Using only Big-O, you might wrongly conclude two algorithms have the same efficiency when they don't; using Big-Theta helps avoid this mistake.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used in computer science to describe the performance or complexity of algorithms as the input size grows to infinity.  The most common notations are Big O (O), Big Omega (Ω), and Big Theta (Θ).  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Intuitive Explanation:**  f(n) grows no faster than g(n).
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows at most quadratically with the input size (n).  It could be faster, but it won't be significantly slower than n².
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function.  It describes the *best-case* scenario (or a lower bound on the complexity in all cases). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Intuitive Explanation:** f(n) grows at least as fast as g(n).
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size. It could be faster (e.g., O(n log n)), but it won't be significantly slower than linear growth in the best case.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function's growth rate is both upper and lower bounded by the same function.  We say f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁*g(n) ≤ f(n) ≤ c₂*g(n) for all n ≥ n₀.
+* **Intuitive Explanation:** f(n) grows at the same rate as g(n).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.  The algorithm's runtime is neither significantly faster nor significantly slower than n log n.
+
+**Comparison Table:**
+
+| Notation | Meaning                     | Bound Type | Intuitive Explanation                |
+|---------|------------------------------|-------------|------------------------------------|
+| O(g(n))  | Upper bound                  | Upper       | Grows no faster than g(n)          |
+| Ω(g(n))  | Lower bound                  | Lower       | Grows at least as fast as g(n)     |
+| Θ(g(n))  | Tight bound (both upper & lower) | Both        | Grows at the same rate as g(n)     |
+
+
+**Relationships:**
+
+* If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* O(g(n)) and Ω(g(n)) don't imply Θ(g(n)).  A function can have different upper and lower bounds.
+
+**Example:**
+
+Consider an algorithm with a runtime of:
+
+* Best-case:  O(1) (constant time)
+* Average-case: O(n log n)
+* Worst-case: O(n²)
+
+We might say its runtime is Ω(1),  O(n²), and the average case is Θ(n log n) if that's a tight bound on the average case complexity.
+
+
+Understanding these notations is crucial for analyzing and comparing the efficiency of algorithms, allowing you to choose the most appropriate algorithm for a given task based on its scalability and resource consumption.
+
