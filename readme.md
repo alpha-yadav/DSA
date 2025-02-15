@@ -62031,3 +62031,85 @@ If your tree nodes have parent pointers, you can use a simpler method.  Find the
 
 Remember that if either `p` or `q` is not found in the tree, these functions will return `None` (or equivalent in your chosen language).  You might want to add error handling for that specific case in a production setting.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree or graph is a fundamental problem in computer science.  The optimal approach depends on the type of tree (binary tree, general tree) and the information available (parent pointers, only child pointers).
+
+Here are several methods for finding the LCA, along with their complexities and explanations:
+
+**1. Using Parent Pointers (for any tree):**
+
+* **Idea:** If each node has a pointer to its parent, you can trace upwards from both nodes until you find a common ancestor.  The first common ancestor encountered is the LCA.
+* **Algorithm:**
+    1. Create two sets, `path1` and `path2`, to store the paths from the root to each node (`node1` and `node2`).  This can be done by traversing upwards from each node using parent pointers.
+    2. Iterate through `path1` and find the last common element in `path2`. This element is the LCA.
+* **Time Complexity:** O(h), where h is the height of the tree.
+* **Space Complexity:** O(h) to store the paths.
+* **Code Example (Python):**  This assumes a node structure like `class Node: def __init__(self, data, parent=None): ...`
+
+```python
+def lca_with_parent_pointers(node1, node2):
+    path1 = []
+    current = node1
+    while current:
+        path1.append(current)
+        current = current.parent
+
+    path2 = []
+    current = node2
+    while current:
+        path2.append(current)
+        current = current.parent
+
+    lca = None
+    i = len(path1) - 1
+    j = len(path2) - 1
+    while i >= 0 and j >= 0 and path1[i] == path2[j]:
+        lca = path1[i]
+        i -= 1
+        j -= 1
+    return lca
+```
+
+**2.  Recursive Approach (for Binary Trees):**
+
+* **Idea:** Recursively traverse the tree. If both nodes are found in the left subtree, recursively search the left subtree.  If both are found in the right subtree, search the right subtree. If one node is in the left and the other in the right, the current node is the LCA.
+* **Algorithm:**
+    1. If the current node is null, return null.
+    2. If the current node is equal to either `node1` or `node2`, return the current node.
+    3. Recursively search the left and right subtrees.
+    4. If both recursive calls return non-null values, the current node is the LCA.
+    5. Otherwise, return the non-null result from the recursive calls.
+* **Time Complexity:** O(n), where n is the number of nodes in the worst case (skewed tree).  O(h) on average, where h is the height of the tree.
+* **Space Complexity:** O(h) due to recursive call stack.
+* **Code Example (Python):**
+
+```python
+def lca_recursive(root, node1, node2):
+    if root is None or root == node1 or root == node2:
+        return root
+
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+```
+
+**3.  Using Tarjan's Off-line LCA Algorithm (for general graphs):**
+
+* This is a more advanced algorithm that efficiently finds the LCAs of multiple pairs of nodes simultaneously.  It uses depth-first search and disjoint-set union data structure.  It's more complex to implement but has better performance for multiple queries.
+
+
+**Choosing the Right Method:**
+
+* If you have parent pointers readily available, the parent pointer method is the simplest and most efficient.
+* For binary trees, the recursive approach is generally efficient and easy to understand.
+* For general trees or graphs with multiple LCA queries, Tarjan's algorithm is the best option.
+
+
+Remember to adapt the code examples to your specific node structure and tree implementation.  You might need to handle edge cases (nodes not found in the tree) appropriately.
+
