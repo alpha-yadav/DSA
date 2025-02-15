@@ -60009,3 +60009,30 @@ else:
 
 Remember to start slowly, focus on understanding the concepts, and practice consistently.  You'll gradually build your algorithmic thinking skills.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+* **Problem:**  Given an array of integers, find the maximum value.
+* **Input:** An array of integers (e.g., `[1, 5, 2, 8, 3]`)
+* **Output:** The maximum integer in the array (e.g., `8`)
+* **Solution Idea:** Iterate through the array, keeping track of the largest value seen so far.
+
+**Medium:**
+
+* **Problem:** Given a sorted array of integers and a target integer, determine if the target exists in the array using binary search.
+* **Input:** A sorted array of integers (e.g., `[2, 5, 7, 8, 11, 12]`) and a target integer (e.g., `7`).
+* **Output:**  `true` if the target exists, `false` otherwise. (e.g., `true`)
+* **Solution Idea:** Use binary search to efficiently search the sorted array.  Repeatedly divide the search interval in half.
+
+**Hard:**
+
+* **Problem:**  Given a graph represented as an adjacency list, find the shortest path between two nodes using Dijkstra's algorithm.
+* **Input:**  An adjacency list representing a graph (e.g., `{A: [B, 3], [C, 1], B: [A,3], [D,2], C: [A,1], [E, 5], D: [B, 2], [F, 4], E: [C, 5], F: [D, 4]}` where the first element in each inner list is the neighbor and the second is the weight of the edge) and two nodes (e.g., A and F).
+* **Output:** The shortest path between the two nodes and its length. (e.g.,  `A -> C -> E -> F`, length = 10). Note that this representation isn't unique if multiple shortest paths exist.
+* **Solution Idea:** Implement Dijkstra's algorithm using a priority queue to efficiently find the shortest path.
+
+
+These problems represent a range of complexities.  The easy problem can be solved with a simple loop, the medium problem requires a more sophisticated search algorithm, and the hard problem involves graph traversal and a more advanced algorithm.  You can choose a problem based on your current skill level.  Remember to consider edge cases and optimize for efficiency when implementing your solution.
+
