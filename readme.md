@@ -60036,3 +60036,84 @@ Here are a few algorithmic problems, ranging in difficulty:
 
 These problems represent a range of complexities.  The easy problem can be solved with a simple loop, the medium problem requires a more sophisticated search algorithm, and the hard problem involves graph traversal and a more advanced algorithm.  You can choose a problem based on your current skill level.  Remember to consider edge cases and optimize for efficiency when implementing your solution.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's simple to understand but helps assess a candidate's basic programming skills. Here's how to implement it in Swift, starting with a basic version and then improving it:
+
+**Basic Version:**
+
+This version uses a simple `for` loop and conditional statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* If it's divisible by both 3 and 5 (meaning divisible by 15), it prints "FizzBuzz".
+* If it's divisible by 3, it prints "Fizz".
+* If it's divisible by 5, it prints "Buzz".
+* Otherwise, it prints the number itself.
+
+**Improved Version (using string interpolation and ternary operator):**
+
+This version is more concise and uses Swift's features for better readability:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function
+```
+
+This version builds the output string using the ternary operator (`condition ? value1 : value2`).  If a number is divisible by 3, "Fizz" is added; if divisible by 5, "Buzz" is added.  If the `output` string remains empty, the number itself is printed.
+
+
+**Even More Concise Version (using `map`):**
+
+This version leverages Swift's functional programming capabilities for a very compact solution:
+
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    (1...n).map { i in
+        let output = (i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This uses the `map` function to iterate and transform each number in the range into its FizzBuzz equivalent.
+
+
+**Choosing the Best Version:**
+
+The "best" version depends on your priorities:
+
+* **Readability:** The first version is the easiest to understand for beginners.
+* **Conciseness:** The third version is the most compact but might be harder to grasp initially.
+* **Efficiency:**  All three versions have similar time complexity (O(n)), so the performance differences are negligible for most inputs.
+
+Start with the basic version to grasp the core logic, and then gradually explore the more concise approaches as you become more comfortable with Swift. Remember to choose the version that best balances readability and maintainability for your specific context.
+
