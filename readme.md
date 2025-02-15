@@ -59686,3 +59686,61 @@ Therefore, we've found `c₁ = 1`, `c₂ = 4`, and `n₀ = 5` satisfying the def
 
 Big-Theta is used when you want to express a precise asymptotic relationship between two functions.  It's used to describe the exact complexity of an algorithm, offering more precise information than just Big-O, which only gives an upper bound.  If you only need an upper bound, Big-O suffices. If you need a lower bound, Big-Omega is appropriate. But when you need *both*, that's when Big-Theta is the most suitable choice.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly useful in analyzing the efficiency of algorithms.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c*g(n)` for all `n ≥ n₀`.  In simpler terms, *g(n)* is an *upper bound* on the growth rate of *f(n)* for sufficiently large *n*.  We ignore constant factors and lower-order terms.
+* **Use Case:**  Describes the *worst-case* time or space complexity of an algorithm.  It provides an upper limit on how the resource usage grows.
+* **Example:**  If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its complexity is O(n²), because the n² term dominates as n grows large.
+
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** `f(n) = Ω(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ c*g(n) ≤ f(n)` for all `n ≥ n₀`.  *g(n)* is a *lower bound* on the growth rate of *f(n)*.
+* **Use Case:** Describes the *best-case* time or space complexity of an algorithm. It provides a lower limit on how the resource usage grows.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its complexity is Ω(n²).
+
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that there exist positive constants *c₁*, *c₂*, and *n₀* such that `0 ≤ c₁*g(n) ≤ f(n) ≤ c₂*g(n)` for all `n ≥ n₀`.  This means *g(n)* is both an *upper bound* and a *lower bound* on the growth rate of *f(n)*.
+* **Use Case:** Describes the *tight bound* or *exact* growth rate of an algorithm.  It indicates that the algorithm's resource usage grows proportionally to *g(n)*.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its complexity is Θ(n²).
+
+
+**4. Little o Notation (o):**
+
+* **Meaning:** `f(n) = o(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ f(n) < c*g(n)` for all `n ≥ n₀`.  This means *f(n)* grows *strictly slower* than *g(n)*.
+* **Use Case:** Used to express that one function grows significantly slower than another.
+* **Example:** `n = o(n²)`,  `log n = o(n)`.
+
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** `f(n) = ω(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ c*g(n) < f(n)` for all `n ≥ n₀`. This means *f(n)* grows *strictly faster* than *g(n)*.
+* **Use Case:** Used to express that one function grows significantly faster than another.
+* **Example:** `n² = ω(n)`, `2ⁿ = ω(n²)`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Relationship                               |
+|----------|----------------------------------------------|-------------------------------------------|
+| O(g(n))  | f(n) is asymptotically less than or equal to g(n) | Upper bound                               |
+| Ω(g(n))  | f(n) is asymptotically greater than or equal to g(n) | Lower bound                               |
+| Θ(g(n))  | f(n) is asymptotically equal to g(n)           | Tight bound                               |
+| o(g(n))  | f(n) is asymptotically strictly less than g(n)   | Strict upper bound                         |
+| ω(g(n))  | f(n) is asymptotically strictly greater than g(n) | Strict lower bound                         |
+
+
+**Relationships:**
+
+* `f(n) = Θ(g(n))` implies `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+* `f(n) = o(g(n))` implies `f(n) = O(g(n))`, but not vice versa.
+* `f(n) = ω(g(n))` implies `f(n) = Ω(g(n))`, but not vice versa.
+
+
+Understanding these notations is crucial for comparing the efficiency of different algorithms and choosing the most appropriate one for a given task. Remember that these are asymptotic notations – they describe behavior as input size approaches infinity.  For small input sizes, the actual runtime might differ.
+
