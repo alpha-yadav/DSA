@@ -61478,3 +61478,79 @@ print(f"Is the tree a BST (Recursive method)? {is_bst_recursive(root2)}") # Fals
 
 Both methods have a time complexity of O(n), where n is the number of nodes in the tree.  The inorder traversal method is usually recommended due to its clarity and often comparable performance. Remember to handle edge cases like empty trees appropriately in your implementation.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Algorithm 1: Recursive In-Order Traversal**
+
+This algorithm leverages the property that an in-order traversal of a BST will produce a sorted sequence of nodes.
+
+1. **Recursive Function:** Create a recursive function `isBST(node, min, max)` that takes three arguments:
+   - `node`: The current node being visited.
+   - `min`: The minimum value allowed for the node's value (initially negative infinity).
+   - `max`: The maximum value allowed for the node's value (initially positive infinity).
+
+2. **Base Case:** If `node` is `NULL`, return `true` (an empty subtree is a valid BST).
+
+3. **Check Value:** If `node->val` is less than `min` or greater than or equal to `max`, return `false` (the node violates the BST property).
+
+4. **Recursive Calls:** Recursively call `isBST` for the left and right subtrees, passing updated `min` and `max` values:
+   - `isBST(node->left, min, node->val)`  (Left subtree values must be less than the current node's value)
+   - `isBST(node->right, node->val, max)` (Right subtree values must be greater than or equal to the current node's value)
+
+5. **Return Value:** Return `true` only if both recursive calls return `true`.
+
+**Code Example (C++):**
+
+```cpp
+#include <iostream>
+#include <limits> // for numeric_limits
+
+struct Node {
+    int val;
+    Node *left;
+    Node *right;
+    Node(int v) : val(v), left(nullptr), right(nullptr) {}
+};
+
+bool isBST(Node* node, int min = std::numeric_limits<int>::min(), int max = std::numeric_limits<int>::max()) {
+    if (node == nullptr) return true;
+    if (node->val < min || node->val >= max) return false;
+    return isBST(node->left, min, node->val) && isBST(node->right, node->val, max);
+}
+
+int main() {
+    Node* root = new Node(2);
+    root->left = new Node(1);
+    root->right = new Node(3);
+    std::cout << "Is BST: " << isBST(root) << std::endl; // Output: Is BST: 1
+
+    Node* root2 = new Node(5);
+    root2->left = new Node(1);
+    root2->right = new Node(4);
+    root2->right->left = new Node(3);
+    root2->right->right = new Node(6);
+    std::cout << "Is BST: " << isBST(root2) << std::endl; // Output: Is BST: 0
+
+    return 0;
+}
+```
+
+
+**Algorithm 2: Iterative In-Order Traversal**
+
+This algorithm achieves the same result using an iterative approach with a stack.  It's generally slightly more efficient in terms of space complexity for very deep trees because it avoids the overhead of recursive function calls.
+
+1. **Initialization:** Initialize an empty stack and set `prev` (previous node visited) to `NULL`.
+
+2. **Iteration:** While the stack is not empty or the current node is not `NULL`:
+   - While the current node is not `NULL`: push the node onto the stack and move to its left child.
+   - Pop the top node from the stack.
+   - Check if `prev` is `NULL` or the popped node's value is greater than `prev`'s value. If not, it's not a BST. Update `prev`.
+   - Move to the right child of the popped node.
+
+3. **Return Value:** Return `true` if the loop completes without finding any violations; otherwise, return `false`.
+
+
+Choosing between the recursive and iterative approaches often depends on personal preference and the specific context.  The recursive version is often considered more readable, while the iterative version might offer slightly better performance in some cases.  For most practical purposes, either approach will work effectively.
+
