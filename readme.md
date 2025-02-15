@@ -59459,3 +59459,56 @@ The key to mastering algorithms is consistent practice.  Work through problems r
 
 Remember, learning algorithms is a marathon, not a sprint. Be patient, persistent, and celebrate your progress along the way.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, along with explanations to help you understand them:
+
+**Problem 1: Two Sum** (Easy)
+
+**Problem Statement:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+Output: `[0,1]` because `nums[0] + nums[1] == 9`
+
+**Solution Approach:**  A common approach uses a hash map (dictionary in Python) to store each number and its index.  Iterate through the array, and for each number, check if the complement (`target - number`) exists in the hash map.
+
+**Problem 2:  Reverse a Linked List** (Medium)
+
+**Problem Statement:** Reverse a singly linked list.
+
+**Example:**
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+
+**Solution Approach:**  This problem can be solved iteratively or recursively.  The iterative approach involves three pointers: `prev`, `curr`, and `next`.  You iterate through the list, changing the `next` pointer of each node to point to the previous node.
+
+**Problem 3:  Longest Palindromic Substring** (Medium/Hard)
+
+**Problem Statement:** Given a string `s`, find the longest palindromic substring in `s`.
+
+**Example:**
+
+Input: "babad"
+Output: "bab" or "aba" (both are valid answers)
+
+Input: "cbbd"
+Output: "bb"
+
+**Solution Approach:**  Several approaches exist, including dynamic programming, expanding around the center, and Manacher's algorithm.  Expanding around the center is a relatively intuitive approach.  For each character (or pair of characters), expand outwards to check for palindromes.
+
+**Problem 4:  Merge k Sorted Lists** (Hard)
+
+**Problem Statement:** You are given an array of `k` linked-lists, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.
+
+**Example:**
+
+Input:  lists = [[1,4,5],[1,3,4],[2,6]]
+Output: [1,1,2,3,4,4,5,6]
+
+**Solution Approach:**  This problem can be solved using a priority queue (heap) or merge sort.  The priority queue approach is more efficient.  You add the head of each list to the priority queue, then repeatedly extract the minimum element and add the next element from its list to the queue.
+
+
+These problems represent a range of complexity.  Remember to consider time and space complexity when designing your solutions.  Try to implement these problems in your preferred programming language.  If you have trouble, searching for the problem name online will yield numerous solutions and explanations.
+
