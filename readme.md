@@ -64879,3 +64879,42 @@ else:
 
 This improved code uses a more efficient representation of the visited states (0, 1, 2) and clearly separates the main function from the recursive DFS helper function.  Remember that the `add_edge` function assumes a 0-based indexing for vertices.  You might need to adjust it depending on your graph representation.  This approach has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges, which is optimal for this problem.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms designed for efficiently solving graph problems, most notably finding single-source shortest paths (SSSP) and minimum spanning trees (MST).  These algorithms are known for their near-linear time complexity, often expressed as O(m α(m, n)), where:
+
+* **m** is the number of edges in the graph.
+* **n** is the number of vertices in the graph.
+* **α(m, n)** is the inverse Ackermann function, which grows incredibly slowly and is practically a constant for all realistic input sizes.  For all practical purposes, you can consider α(m, n) ≈ 4.
+
+This near-linear time complexity makes Thorup's algorithms significantly faster than many other algorithms for these problems, especially on large graphs.  However, it's important to understand that the constant factors hidden within the big-O notation can be relatively large, potentially making them slower than simpler algorithms for very small graphs.
+
+**Key Features and Variations:**
+
+Thorup's work encompasses several algorithms, often built upon similar ideas.  Some key features include:
+
+* **Randomization:** Many of Thorup's algorithms utilize randomization.  This means they are not guaranteed to always produce the correct result, but the probability of error can be made arbitrarily small.
+* **Hopcroft-Tarjan Planarity Testing:**  Some algorithms leverage ideas from Hopcroft and Tarjan's planarity testing algorithm.
+* **Partitioning Techniques:**  These algorithms often involve clever partitioning of the graph to achieve the near-linear time complexity.
+* **Hierarchical Structures:**  They often build hierarchical data structures that allow for efficient search and traversal.
+
+**Specific Applications:**
+
+Thorup's algorithms are applicable to several graph problems, including:
+
+* **Single-Source Shortest Paths (SSSP):** Finding the shortest paths from a single source vertex to all other vertices in a graph with non-negative edge weights.
+* **Minimum Spanning Trees (MST):** Finding a tree that connects all vertices in a graph with the minimum total edge weight.
+* **Approximate shortest paths:**  Some variations offer approximate solutions, trading accuracy for even faster execution.
+
+
+**Comparison to other algorithms:**
+
+While Dijkstra's algorithm is a classic for SSSP, it has a time complexity of O(m log n) or O(n²), making Thorup's approach faster for large graphs.  Similarly, Prim's and Kruskal's algorithms for MST are typically slower than Thorup's MST algorithm.  However, Dijkstra's and Prim's algorithms are often easier to implement and may be preferable for smaller graphs or situations where simplicity is prioritized over raw speed.
+
+
+**Implementation Challenges:**
+
+Thorup's algorithms are considered quite sophisticated and complex to implement.  The constant factors in the runtime can be substantial, and the intricate data structures involved add to the implementation difficulty.  Therefore, optimized implementations are often necessary to achieve the theoretical speedup in practice.
+
+
+In summary, Thorup's algorithms represent a significant advancement in the field of graph algorithms, providing near-linear time solutions for fundamental problems.  While their implementation complexity is high, the potential performance gains for extremely large graphs make them an important area of research and development.
+
