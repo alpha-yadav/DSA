@@ -63906,3 +63906,126 @@ print(is_bst_iterative(root2)) # False
 
 The in-order traversal method (Method 1) is generally preferred for its simplicity and efficiency, especially for moderately sized trees.  Method 2 and 3 provide alternatives, particularly useful when you need to handle very large trees or want to avoid recursion entirely. Remember to adapt the `Node` class definition if your tree uses a different structure.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit every node in a binary tree exactly once.  There are several common traversal methods, each producing a different ordering of the nodes:
+
+**1. Depth-First Traversals:** These traversals prioritize going deeper into the tree before exploring siblings.  There are three main types:
+
+* **Pre-order Traversal:**  Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The order is: Root, Left, Right.
+
+   ```
+   1. Visit the root node.
+   2. Recursively traverse the left subtree.
+   3. Recursively traverse the right subtree.
+   ```
+
+* **In-order Traversal:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. The order is: Left, Root, Right.  For a Binary *Search* Tree (BST), this traversal yields a sorted sequence of the nodes' values.
+
+   ```
+   1. Recursively traverse the left subtree.
+   2. Visit the root node.
+   3. Recursively traverse the right subtree.
+   ```
+
+* **Post-order Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node. The order is: Left, Right, Root.
+
+   ```
+   1. Recursively traverse the left subtree.
+   2. Recursively traverse the right subtree.
+   3. Visit the root node.
+   ```
+
+
+**2. Breadth-First Traversal (Level-Order Traversal):** This traversal visits nodes level by level, starting from the root and moving down.  It uses a queue data structure.
+
+```
+1. Enqueue the root node.
+2. While the queue is not empty:
+   a. Dequeue a node.
+   b. Visit the node.
+   c. Enqueue the node's left child (if it exists).
+   d. Enqueue the node's right child (if it exists).
+```
+
+**Example:**
+
+Consider this binary tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+The traversals would produce the following sequences:
+
+* **Pre-order:** 1, 2, 4, 5, 3
+* **In-order:** 4, 2, 5, 1, 3
+* **Post-order:** 4, 5, 2, 3, 1
+* **Level-order:** 1, 2, 3, 4, 5
+
+
+**Python Code Examples:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+def levelorder(node):
+    import collections
+    if node is None:
+        return
+
+    queue = collections.deque([node])
+    while(len(queue) > 0):
+        curr = queue.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            queue.append(curr.left)
+
+        if curr.right is not None:
+            queue.append(curr.right)
+
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Pre-order traversal: ")
+preorder(root)
+print("\nIn-order traversal: ")
+inorder(root)
+print("\nPost-order traversal: ")
+postorder(root)
+print("\nLevel-order traversal: ")
+levelorder(root)
+```
+
+These traversal methods have various applications in algorithms and data structures. For instance, in-order traversal is crucial for BSTs, while level-order traversal is useful for visualizing trees and implementing certain algorithms.  The choice of traversal depends on the specific problem you're trying to solve.
+
