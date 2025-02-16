@@ -64800,3 +64800,82 @@ Topological sorting is used in many areas, including:
 
 Remember that a topological sort is *not* unique for a given DAG; multiple valid orderings might exist.  The algorithms above will produce one such ordering.  If a cycle exists, neither algorithm will produce a valid topological sort.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) is a common algorithm.  The key is to track the state of each node during the traversal.  We'll use three states:
+
+* **UNVISITED:** The node hasn't been visited yet.
+* **VISITING:** The node is currently being visited (on the recursion stack).
+* **VISITED:** The node has been completely visited (recursion has returned from it).
+
+A cycle is detected if we encounter a node that's already in the `VISITING` state during the traversal. This means we've reached a node that's already on the current path, forming a cycle.
+
+Here's how the algorithm works:
+
+1. **Initialization:** Mark all nodes as `UNVISITED`.
+2. **DFS:** Perform a Depth-First Search starting from each unvisited node.
+3. **State Tracking:**  For each node during the DFS:
+   - Change its state to `VISITING`.
+   - Recursively visit its neighbors.
+   - If a neighbor is in the `VISITING` state, a cycle is detected.
+   - After recursively visiting all neighbors, change the node's state to `VISITED`.
+4. **Cycle Detection:** If a cycle is detected during the DFS, return `true`. Otherwise, if the DFS completes without finding a cycle, return `false`.
+
+
+**Python Implementation:**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.adj_list = [[] for _ in range(num_vertices)]
+
+    def add_edge(self, u, v):
+        self.adj_list[u].append(v)
+
+    def has_cycle_dfs(self):
+        visited = [0] * self.num_vertices  # 0: UNVISITED, 1: VISITING, 2: VISITED
+
+        def dfs(node):
+            visited[node] = 1  # Mark as VISITING
+            for neighbor in self.adj_list[node]:
+                if visited[neighbor] == 1:  # Cycle detected
+                    return True
+                if visited[neighbor] == 0 and dfs(neighbor):
+                    return True
+            visited[node] = 2  # Mark as VISITED
+            return False
+
+        for node in range(self.num_vertices):
+            if visited[node] == 0 and dfs(node):
+                return True
+        return False
+
+
+# Example usage:
+graph = Graph(4)
+graph.add_edge(0, 1)
+graph.add_edge(0, 2)
+graph.add_edge(1, 2)
+graph.add_edge(2, 0)  # Cycle
+graph.add_edge(2, 3)
+
+if graph.has_cycle_dfs():
+    print("Graph contains a cycle")
+else:
+    print("Graph does not contain a cycle")
+
+
+graph2 = Graph(4)
+graph2.add_edge(0, 1)
+graph2.add_edge(1, 2)
+graph2.add_edge(2, 3)
+
+if graph2.has_cycle_dfs():
+    print("Graph contains a cycle")
+else:
+    print("Graph does not contain a cycle")
+
+```
+
+This improved code uses a more efficient representation of the visited states (0, 1, 2) and clearly separates the main function from the recursive DFS helper function.  Remember that the `add_edge` function assumes a 0-based indexing for vertices.  You might need to adjust it depending on your graph representation.  This approach has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges, which is optimal for this problem.
+
