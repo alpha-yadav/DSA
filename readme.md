@@ -62669,3 +62669,105 @@ While Big O describes the worst-case scenario, other notations exist:
 
 Understanding Big O notation is crucial for writing efficient and scalable code, particularly when dealing with large amounts of data.  It's a fundamental concept in computer science and algorithm design.
 
+#  A Simple Loop 
+A "simple loop" can mean different things depending on the context (programming language, specific task).  Here are examples of simple loops in a few common languages:
+
+**1.  Python:**
+
+This loop prints numbers 1 through 5:
+
+```python
+for i in range(1, 6):
+  print(i)
+```
+
+This does the same thing using a `while` loop:
+
+```python
+i = 1
+while i <= 5:
+  print(i)
+  i += 1
+```
+
+
+**2. JavaScript:**
+
+This loop prints numbers 1 through 5:
+
+```javascript
+for (let i = 1; i <= 5; i++) {
+  console.log(i);
+}
+```
+
+This does the same using a `while` loop:
+
+```javascript
+let i = 1;
+while (i <= 5) {
+  console.log(i);
+  i++;
+}
+```
+
+**3. C++:**
+
+This loop prints numbers 1 through 5:
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 1; i <= 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+This does the same using a `while` loop:
+
+```c++
+#include <iostream>
+
+int main() {
+  int i = 1;
+  while (i <= 5) {
+    std::cout << i << std::endl;
+    i++;
+  }
+  return 0;
+}
+```
+
+**4. Java:**
+
+This loop prints numbers 1 through 5:
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 1; i <= 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+This does the same using a `while` loop:
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int i = 1;
+    while (i <= 5) {
+      System.out.println(i);
+      i++;
+    }
+  }
+}
+```
+
+These are all examples of "simple loops" because they perform a basic iterative task.  More complex loops might involve nested loops, conditional statements within the loop, or more sophisticated iteration logic.  To get a more tailored example, please specify the programming language and the desired task.
+
