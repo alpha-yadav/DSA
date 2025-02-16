@@ -62462,3 +62462,58 @@ The dominant operation is the `print` statement, which is executed `n` times (wh
 
 Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance on different input sizes.  It's a fundamental concept in computer science and software engineering.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate, indicating that the function grows at the same rate as another function, both in the upper and lower bounds.  It essentially says "a function grows proportionally to another function".
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.  *g(n)* represents the growth rate, and *f(n)* behaves proportionally to *g(n)*.
+
+
+**What it means:**
+
+* **Tight Bound:**  Unlike Big O notation (which only provides an upper bound) and Big Ω notation (which only provides a lower bound), Big Theta provides both an upper and lower bound, thus giving a precise description of the function's growth rate.
+
+* **Asymptotic Behavior:**  Big Theta focuses on the behavior of the function as the input size (*n*) approaches infinity.  Minor differences in the function for small values of *n* are ignored.
+
+* **Proportional Growth:** The function *f(n)* grows proportionally to *g(n)*.  The constants *c₁* and *c₂* simply account for constant factors and don't affect the overall growth rate.
+
+
+**Example:**
+
+Let's say we have a function:  `f(n) = 2n² + 3n + 1`
+
+We can say that `f(n) = Θ(n²)`.
+
+Why?
+
+Because we can find constants:
+
+* `c₁ = 1`
+* `c₂ = 3` (or any number greater than 2)
+* `n₀ = 1` (or any sufficiently large number)
+
+Such that for all `n ≥ 1`:
+
+`1 * n² ≤ 2n² + 3n + 1 ≤ 3 * n²` (this inequality holds for n≥1, you can verify this)
+
+Therefore, `f(n)` has a quadratic growth rate, and its growth is tightly bound by `n²`.  The lower-order terms (3n and 1) become insignificant as *n* gets large.
+
+
+**Contrast with Big O and Big Ω:**
+
+* **Big O (O):**  Provides an upper bound.  `f(n) = O(g(n))` means *f(n)* grows *no faster* than *g(n)*.
+* **Big Ω (Ω):** Provides a lower bound. `f(n) = Ω(g(n))` means *f(n)* grows *at least as fast* as *g(n)*.
+* **Big Θ (Θ):** Provides both an upper and lower bound. `f(n) = Θ(g(n))` means *f(n)* grows *at the same rate* as *g(n)*.
+
+
+In essence,  `f(n) = Θ(g(n))` implies both `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  Big Theta gives the most precise description of the asymptotic growth rate.  If you can prove a Θ bound, it's generally preferred over just O or Ω.
+
