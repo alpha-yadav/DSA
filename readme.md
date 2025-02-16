@@ -62398,3 +62398,67 @@ This version uses `map` to transform the range of numbers (1...n) into an array 
 
 Remember to choose the version that best suits your understanding and coding style.  For learning purposes, starting with Version 1 is a great way to grasp the fundamental logic before moving to more advanced approaches.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  Resources typically include:
+
+* **Time complexity:** The amount of time an algorithm takes to run as a function of the input size.
+* **Space complexity:** The amount of memory an algorithm takes to run as a function of the input size.
+
+We usually express complexity using **Big O notation**, which describes the growth rate of the complexity as the input size approaches infinity.  It ignores constant factors and lower-order terms, focusing on the dominant factor that determines the scaling behavior.
+
+Here's a breakdown:
+
+**Common Time Complexities (from best to worst):**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Examples include accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This often occurs in algorithms that divide the problem size in half with each step, like binary search.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Examples include searching for an element in an unsorted array or iterating through a list.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases proportionally to the square of the input size.  This is often seen in nested loops iterating over the input data, such as bubble sort or selection sort.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  This indicates a very inefficient algorithm, often found in brute-force approaches to problems like the traveling salesman problem.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  This is extremely inefficient and usually only encountered in algorithms that explore all permutations of the input, such as finding all possible arrangements of a set.
+
+
+**Space Complexity:**
+
+Similar to time complexity, space complexity describes the amount of memory used.  It can also be expressed using Big O notation.  Common space complexities include:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The memory used grows linearly with the input size (e.g., creating a copy of an array).
+
+* **O(log n) - Logarithmic Space:** Memory usage grows logarithmically.  This is often seen in recursive algorithms that divide the problem in half.
+
+* **O(n²) - Quadratic Space:** Memory grows proportionally to the square of the input size (e.g., storing all pairs of elements from an input).
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity of an algorithm often involves:
+
+* **Identifying the basic operations:** What are the core computations that dominate the execution time?
+* **Determining the number of times these operations are executed:** This is usually expressed as a function of the input size (n).
+* **Expressing the complexity using Big O notation:**  Focus on the dominant term and ignore constant factors.
+
+
+**Example:**
+
+Consider a function that iterates through an array and prints each element:
+
+```python
+def print_array(arr):
+  for i in range(len(arr)):
+    print(arr[i])
+```
+
+The dominant operation is the `print` statement, which is executed `n` times (where `n` is the length of the array). Therefore, the time complexity is O(n) and the space complexity is O(1) (assuming the `print` function doesn't consume significant additional memory).
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance on different input sizes.  It's a fundamental concept in computer science and software engineering.
+
