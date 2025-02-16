@@ -62319,3 +62319,82 @@ Here are a few algorithmic problems of varying difficulty, along with explanatio
 
 These are just a few examples.  The difficulty can be adjusted by changing constraints (e.g., larger input sizes, stricter time/space complexity requirements), adding more constraints to the problem, or requiring more sophisticated algorithms.  Remember to always consider time and space complexity when designing your solution.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple version and then showing ways to improve it:
+
+**Version 1: Basic Implementation**
+
+This version uses a straightforward `for` loop and conditional statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the desired upper limit
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks divisibility by 15 first (to handle both 3 and 5).
+* Then it checks divisibility by 3 and 5.
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Version 2: Slightly Improved Readability**
+
+We can improve readability by using a string interpolation and a ternary operator:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This version builds the output string incrementally. If the string is empty after checking for "Fizz" and "Buzz", it prints the number; otherwise, it prints the combined string.
+
+**Version 3:  Using a `map` for a more functional approach (Swift 5.7 and above)**
+
+For Swift 5.7 and later, you can leverage the `map` function for a more concise and functional approach:
+
+```swift
+func fizzBuzzFunctional(n: Int) -> [String] {
+    (1...n).map { i in
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        return output.isEmpty ? "\(i)" : output
+    }
+}
+
+print(fizzBuzzFunctional(n: 15).joined(separator: "\n"))
+```
+
+This version uses `map` to transform the range of numbers (1...n) into an array of strings, then `joined(separator: "\n")` to neatly format the output.
+
+
+**Choosing the Best Version:**
+
+* **Version 1** is the most straightforward and easiest to understand for beginners.
+* **Version 2** is slightly more concise and efficient.
+* **Version 3** is the most functional and arguably the most elegant, but requires a basic understanding of functional programming concepts.  It also returns an array of strings instead of printing directly.
+
+Remember to choose the version that best suits your understanding and coding style.  For learning purposes, starting with Version 1 is a great way to grasp the fundamental logic before moving to more advanced approaches.
+
