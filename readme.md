@@ -65004,3 +65004,129 @@ bfs(graph, 'A')  # Output: A B C D E F (or a similar order depending on queue im
 
 Remember to choose the traversal algorithm that best suits the specific problem you're trying to solve. The choice depends on factors like the graph's structure, the desired outcome, and memory constraints.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on whether you're traversing a graph or a tree, and whether you need to handle cycles. Here are a few implementations:
+
+**1. DFS for a Tree (Recursive):**
+
+This is the simplest version, suitable for trees where cycles are not possible.  It uses recursion for a concise implementation.
+
+```python
+def dfs_tree(node, visited=None):
+    """
+    Performs Depth-First Search traversal on a tree.
+
+    Args:
+        node: The starting node (can be a dictionary, object, or anything with children).
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+
+    Returns:
+        A list of nodes in DFS order.
+    """
+    if visited is None:
+        visited = set()
+
+    visited.add(node)
+    result = [node]
+
+    for child in node.children: # Assumes your node has a 'children' attribute
+        if child not in visited:
+            result.extend(dfs_tree(child, visited))
+
+    return result
+
+# Example usage (assuming a tree structure where each node has a 'children' list):
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+root = Node('A')
+root.children = [Node('B'), Node('C')]
+root.children[0].children = [Node('D'), Node('E')]
+root.children[1].children = [Node('F')]
+
+dfs_order = dfs_tree(root)
+print([node.data for node in dfs_order]) # Output will depend on your tree structure.
+```
+
+**2. DFS for a Graph (Recursive, handling cycles):**
+
+This version handles graphs that may contain cycles using a `visited` set to prevent infinite loops.
+
+```python
+def dfs_graph_recursive(graph, start, visited=None):
+    """
+    Performs Depth-First Search traversal on a graph.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        start: The starting node.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+
+    Returns:
+        A list of nodes in DFS order.
+    """
+    if visited is None:
+        visited = set()
+
+    visited.add(start)
+    result = [start]
+
+    for neighbor in graph.get(start, []): # Handle nodes with no outgoing edges
+        if neighbor not in visited:
+            result.extend(dfs_graph_recursive(graph, neighbor, visited))
+
+    return result
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+dfs_order = dfs_graph_recursive(graph, 'A')
+print(dfs_order)  # Output: ['A', 'B', 'D', 'E', 'F', 'C'] (order might vary slightly)
+```
+
+**3. DFS for a Graph (Iterative, handling cycles):**
+
+This iterative version uses a stack to avoid recursion, which can be more efficient for very deep graphs and avoids potential stack overflow errors.
+
+```python
+def dfs_graph_iterative(graph, start):
+    """
+    Performs Depth-First Search traversal on a graph iteratively.
+
+    Args:
+        graph: A dictionary representing the graph.
+        start: The starting node.
+
+    Returns:
+        A list of nodes in DFS order.
+    """
+    visited = set()
+    stack = [start]
+    result = []
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            result.append(vertex)
+            stack.extend(neighbor for neighbor in reversed(graph.get(vertex, [])) if neighbor not in visited) # Add neighbors in reverse to maintain DFS order
+
+    return result
+
+#Example usage (same graph as above):
+dfs_order = dfs_graph_iterative(graph, 'A')
+print(dfs_order) # Output: ['A', 'C', 'F', 'B', 'E', 'D'] (order might vary slightly)
+
+```
+
+Remember to adapt the `children` attribute or the graph representation to match your specific data structure. Choose the version that best suits your needs and the type of data structure you are working with.  The iterative approach is generally preferred for larger graphs due to its avoidance of recursion.
+
