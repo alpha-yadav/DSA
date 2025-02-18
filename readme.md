@@ -74195,3 +74195,88 @@ The adjacency list representation works equally well for directed graphs.  In a 
 
 Choosing between an adjacency list and an adjacency matrix depends on the specific application and the characteristics of the graph (sparse vs. dense).  For most real-world applications involving large, sparse graphs, the adjacency list is the preferred method.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so that you can follow all the arrows without ever going backward.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):**  Topological sorting only works on DAGs.  A cycle would make it impossible to create a linear ordering satisfying the condition.
+* **Multiple Solutions:**  A DAG might have multiple valid topological orderings.
+* **No Ordering for Cyclic Graphs:**  If the graph has cycles, a topological sort is impossible.
+
+**Algorithms:**
+
+Two common algorithms are used for topological sorting:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm is based on the idea of repeatedly removing nodes with no incoming edges.
+
+   * **Initialization:**
+     * Create an in-degree array `in_degree` to store the number of incoming edges for each node.
+     * Create a queue `queue` and add all nodes with an in-degree of 0 (nodes with no incoming edges).
+
+   * **Iteration:**
+     * While the queue is not empty:
+       * Remove a node `u` from the queue.
+       * Add `u` to the topological ordering (e.g., a list).
+       * For each neighbor `v` of `u`:
+         * Decrement `in_degree[v]` by 1.
+         * If `in_degree[v]` becomes 0, add `v` to the queue.
+
+   * **Result:**
+     * If the size of the topological ordering is equal to the number of nodes in the graph, a valid topological ordering is found. Otherwise, the graph contains a cycle.
+
+
+2. **Depth-First Search (DFS) based Algorithm:**
+
+   This algorithm uses DFS to traverse the graph and constructs the topological ordering in reverse post-order.
+
+   * **Initialization:**
+     * Create a visited array `visited` to track visited nodes.
+     * Create a stack `stack` to store nodes in reverse post-order.
+
+   * **DFS function:**
+     * For each node `u`:
+       * If `u` is not visited:
+         * Mark `u` as visited.
+         * Recursively call DFS on all neighbors of `u`.
+         * Push `u` onto the stack.
+
+   * **Result:**
+     * After DFS completes, the nodes in the stack represent a topological ordering (when popped from the stack).
+
+
+**Example (Kahn's Algorithm):**
+
+Let's say we have a graph represented by the following adjacency list:
+
+```
+0 -> [1, 2]
+1 -> [3]
+2 -> [3]
+3 -> []
+```
+
+1. `in_degree` = [0, 1, 1, 2]
+2. `queue` = [0]
+3. The algorithm proceeds as follows:
+   * Remove 0 from `queue`. Add 0 to the ordering. Update `in_degree`: [0, 0, 1, 1]. Add 1 and 2 to `queue`.
+   * Remove 1 from `queue`. Add 1 to the ordering. Update `in_degree`: [0, 0, 0, 1]. Add 3 to `queue`.
+   * Remove 2 from `queue`. Add 2 to the ordering. Update `in_degree`: [0, 0, 0, 0].
+   * Remove 3 from `queue`. Add 3 to the ordering.
+4. The topological ordering is [0, 1, 2, 3] (or other variations).
+
+
+**Applications:**
+
+Topological sorting has many applications, including:
+
+* **Dependency resolution:**  Installing software packages, scheduling tasks, resolving build orders (like in Makefiles).
+* **Course scheduling:** Determining the order to take courses with prerequisites.
+* **Data serialization:** Ensuring data is processed in the correct order.
+* **Compilation:** Ordering the compilation of source code files that depend on each other.
+
+
+Choosing between Kahn's algorithm and the DFS-based algorithm often depends on the specific implementation and data structures used.  Kahn's algorithm is generally considered more efficient for sparse graphs, while the DFS approach can be simpler to implement recursively.  Both correctly solve the problem for DAGs.
+
