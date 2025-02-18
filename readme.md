@@ -69168,3 +69168,68 @@ public class SimpleLoop {
 
 These examples demonstrate the fundamental structure of simple loops.  They all achieve the same basic outcome: repeating a set of instructions.  The choice between `for` and `while` loops depends on whether you know the number of iterations in advance.  `for` loops are typically used when the number of iterations is known, while `while` loops are better suited when the loop continues until a specific condition is met.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a structure where you iterate through combinations of elements.  They're incredibly useful for tasks involving multi-dimensional data structures or scenarios requiring repeated operations across multiple sets of values.
+
+Here's a breakdown:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed for each combination of outer and inner loop variables
+        print(f"Outer: {outer_loop_variable}, Inner: {inner_loop_variable}")
+```
+
+**Example: Printing a Multiplication Table**
+
+Let's say you want to print a 5x5 multiplication table.  Nested loops are perfect for this:
+
+```python
+for i in range(1, 6):  # Outer loop iterates through rows (1 to 5)
+    for j in range(1, 6):  # Inner loop iterates through columns (1 to 5)
+        print(i * j, end="\t")  # Calculate and print the product, using a tab for spacing
+    print()  # New line after each row
+```
+
+This code will output:
+
+```
+1	2	3	4	5	
+2	4	6	8	10	
+3	6	9	12	15	
+4	8	12	16	20	
+5	10	15	20	25
+```
+
+**Example: Processing a 2D Array (Matrix)**
+
+Nested loops are commonly used to process matrices or other 2D data structures:
+
+```python
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+for row in matrix:
+    for element in row:
+        print(element, end=" ")
+    print()
+```
+
+This will print:
+
+```
+1 2 3 
+4 5 6 
+7 8 9
+```
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the runtime of your code.  The time complexity is often O(n*m), where 'n' and 'm' are the sizes of the outer and inner loops respectively.  For large datasets, the performance impact can be substantial.  Consider optimizing your algorithm if nested loops become a bottleneck.
+* **Readability:**  While powerful, deeply nested loops (more than 3 or 4 levels) can become difficult to read and understand.  Refactoring into more modular functions can improve clarity.
+
+
+In summary, nested loops provide a concise way to iterate over multiple levels of data or perform repetitive tasks across multiple dimensions.  However, it's crucial to be mindful of their potential performance implications and strive for code clarity, especially when dealing with complex nested structures.
+
