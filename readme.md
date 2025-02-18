@@ -71841,3 +71841,73 @@ This approach creates a tuple `(fizz, buzz)` to store the boolean results of div
 
 Start with Version 1, and then gradually explore the other versions as you become more comfortable with Swift. Remember to choose the version that best balances readability and conciseness for your needs and skill level.
 
+#  Algorithm Complexity 
+Algorithm complexity describes how the runtime or space requirements of an algorithm grow as the input size grows.  It's crucial for understanding an algorithm's efficiency and scalability.  We typically analyze complexity using *Big O notation*.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:** How the runtime of an algorithm increases with the size of the input.  This is often the most important aspect.
+* **Space Complexity:** How the memory usage of an algorithm increases with the size of the input.  This is important for memory-constrained environments.
+* **Big O Notation:** A mathematical notation used to classify algorithms according to how their runtime or space requirements grow as the input size grows towards infinity.  It focuses on the dominant terms and ignores constant factors.
+
+**Common Big O Notations:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array by index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Bubble sort, selection sort.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesperson problem (brute-force approach).
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing complexity involves identifying the dominant operations within an algorithm and expressing their frequency in terms of the input size (usually denoted by 'n').  Consider these steps:
+
+1. **Identify the basic operation:**  This is the operation that contributes most to the runtime.
+2. **Count the number of times the basic operation is executed:**  Express this count as a function of the input size 'n'.
+3. **Express the function using Big O notation:**  Simplify the function by ignoring constant factors and lower-order terms.
+
+
+**Example:**
+
+Let's analyze the time complexity of a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+1. **Basic operation:** Comparing `arr[i]` with `target`.
+2. **Count:** In the worst case (target not found), the comparison is executed `n` times (where `n` is the length of `arr`).
+3. **Big O notation:** The time complexity is O(n).
+
+
+**Best, Worst, and Average Case:**
+
+Complexity analysis often considers different cases:
+
+* **Best Case:** The most favorable scenario.
+* **Worst Case:** The least favorable scenario.
+* **Average Case:** The average scenario over all possible inputs.
+
+
+**Space Complexity:**
+
+Space complexity is analyzed similarly to time complexity, but focuses on memory usage instead of runtime.  It considers the amount of extra memory used by the algorithm, excluding the input itself.
+
+
+**Importance of Complexity Analysis:**
+
+* **Algorithm Selection:** Choosing the most efficient algorithm for a given task.
+* **Performance Prediction:** Estimating the runtime and memory usage for different input sizes.
+* **Scalability Assessment:** Determining how well an algorithm will perform as the input size increases.
+* **Optimization:** Identifying bottlenecks and areas for improvement in an algorithm's performance.
+
+
+Understanding algorithm complexity is fundamental for any programmer or computer scientist.  It's a powerful tool for designing, analyzing, and improving the efficiency of software.
+
