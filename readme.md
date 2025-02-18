@@ -65504,3 +65504,42 @@ Why? Because we can find constants *c* and *n₀* that satisfy the inequality `2
 
 Big-Omega notation is a powerful tool for analyzing algorithms.  It provides a lower bound on their runtime or space complexity, helping us understand their best-case (or a guaranteed minimum) performance as the input size grows large.  It's often used in conjunction with Big-O to give a complete picture of an algorithm's efficiency.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *worst-case* scenario of an algorithm's runtime or space requirements as the input size grows.  It doesn't measure the exact runtime, but rather how the runtime *scales* with the input size.  This is crucial for understanding how an algorithm will perform on large datasets.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Scalability:**  How the runtime or space usage grows as the input size (n) increases.  It focuses on the dominant factors as n becomes very large.  Minor details and constant factors are ignored.
+* **Worst-Case Scenario:** Big O focuses on the upper bound of an algorithm's performance.  It represents the slowest the algorithm could possibly run for a given input size.
+* **Asymptotic Behavior:** It describes the behavior of the algorithm as the input size approaches infinity.  This means we're interested in the trend, not the exact runtime for small inputs.
+
+
+**Common Big O Notations:**
+
+These are listed in order of increasing complexity (slowest to fastest):
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Examples include accessing an element in an array by index or performing a single arithmetic operation.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient.  Examples include binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Examples include searching an unsorted array or iterating through a list once.
+* **O(n log n) - Linearithmic Time:**  A common runtime for efficient sorting algorithms like merge sort and heapsort.
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  This is often seen in nested loops where the inner loop iterates through the entire input for each element in the outer loop.  Examples include bubble sort and selection sort.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  This becomes extremely slow very quickly.  Examples include finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  This is extremely slow and only practical for very small input sizes.  Examples include finding all permutations of a set.
+
+
+**Example:**
+
+Let's say we have an algorithm that searches for a specific element in an unsorted array.  In the worst-case scenario, the algorithm might have to check every element in the array before finding the element (or determining it's not present).  Therefore, the runtime is proportional to the size of the array (n).  We would say this algorithm has a time complexity of O(n).
+
+
+**Important Considerations:**
+
+* **Space Complexity:** Big O can also be used to describe the space complexity of an algorithm – how much memory it uses as the input size grows.
+* **Average Case:** While Big O typically focuses on the worst case, analyzing the average case can also be valuable.
+* **Best Case:** The best-case scenario is rarely analyzed using Big O, as it's often not representative of the algorithm's overall performance.
+* **Drop Constant Factors and Lower-Order Terms:**  In Big O notation, we only consider the dominant term as n approaches infinity.  For example, O(2n² + 5n + 10) simplifies to O(n²).
+
+Understanding Big O notation is essential for choosing efficient algorithms and designing scalable software.  It allows developers to compare the performance of different algorithms and make informed decisions about which algorithm is best suited for a particular task and dataset size.
+
