@@ -65653,3 +65653,73 @@ These examples all perform the same basic task: printing the numbers 0 through 4
 
 Remember to choose the loop type ( `for` or `while`) that best suits your needs.  `for` loops are generally preferred when the number of iterations is known in advance, while `while` loops are more suitable when the loop's termination depends on a condition that might not be known beforehand.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This is a common programming construct used to process multi-dimensional data structures or perform repetitive tasks where the number of repetitions depends on another variable.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+outer_loop:
+  for i in range(outer_iterations):  // Outer loop
+    inner_loop:
+      for j in range(inner_iterations): // Inner loop
+        # Code to be executed in the inner loop
+    # Code to be executed after the inner loop completes for a single outer loop iteration
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+# Outer loop iterates through rows (multiplicands)
+for i in range(1, 11):
+    # Inner loop iterates through columns (multipliers)
+    for j in range(1, 11):
+        # Calculate and print the product
+        product = i * j
+        print(f"{i} x {j} = {product}", end="\t")  # \t adds a tab for better formatting
+    print() # Newline after each row
+```
+
+This will output a 10x10 multiplication table.  The inner loop (the `j` loop) runs 10 times for *each* iteration of the outer loop (the `i` loop).
+
+
+**Example (JavaScript):**
+
+This example iterates through a 2D array:
+
+```javascript
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+for (let i = 0; i < matrix.length; i++) { // Outer loop iterates through rows
+  for (let j = 0; j < matrix[i].length; j++) { // Inner loop iterates through columns
+    console.log(`matrix[${i}][${j}] = ${matrix[i][j]}`);
+  }
+}
+```
+
+This will print each element of the `matrix` array.  Note that the inner loop's iterations depend on the length of each row in the matrix.
+
+
+**Time Complexity:**
+
+Nested loops significantly increase the time complexity of an algorithm.  If both the outer and inner loops iterate `n` times, the overall time complexity becomes O(n²), which is quadratic.  This means the execution time grows proportionally to the square of the input size.  Therefore, nested loops should be used cautiously, especially with large datasets, as they can lead to performance issues.
+
+
+**Use Cases:**
+
+* **Processing matrices and multi-dimensional arrays:**  As shown in the examples above.
+* **Generating patterns:**  Creating shapes or other visual output.
+* **Implementing algorithms:**  Many algorithms, such as sorting and searching, utilize nested loops.
+* **Combinatorial problems:**  Finding all possible combinations or permutations.
+
+
+In summary, nested loops are a powerful tool, but understanding their time complexity and using them judiciously is crucial for writing efficient code.  Consider alternative algorithms or data structures if dealing with very large datasets to avoid performance bottlenecks.
+
