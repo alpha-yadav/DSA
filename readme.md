@@ -68956,3 +68956,50 @@ Imagine you have two functions, f(n) and g(n).  If f(n) is Θ(g(n)), it means th
 
 Big-Theta notation is crucial for analyzing the efficiency of algorithms. It allows us to compare the time or space complexity of different algorithms independent of specific hardware or implementation details. Knowing the time complexity of an algorithm as Θ(n²) tells us that its execution time grows quadratically with the input size, regardless of the specific constants involved.  This helps us make informed decisions about which algorithms to use for different problem sizes.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of functions, particularly useful for analyzing the efficiency of algorithms. Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the worst-case scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Example:**  If an algorithm takes 5n² + 2n + 10 steps, we can say its time complexity is O(n²).  We ignore the lower-order terms and constants because they become insignificant as n grows very large.
+* **Focus:** Worst-case performance.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the best-case scenario (or a lower bound on the time taken even in the worst case). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm takes at least n steps, we can say its time complexity is Ω(n).
+* **Focus:** Best-case or lower bound on performance.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows at the same rate as the bounding function, both upper and lower.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm takes 5n² + 2n + 10 steps, we can say its time complexity is Θ(n²) because it's bounded both above and below by a quadratic function.
+* **Focus:** Precise characterization of growth rate.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.  The inequality is *strict*.
+* **Example:** n = o(n²) because n grows significantly slower than n².
+* **Focus:** Asymptotically less significant growth.
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀. The inequality is *strict*.
+* **Example:** n² = ω(n) because n² grows significantly faster than n.
+* **Focus:** Asymptotically more significant growth.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Relationship to g(n) | Example             |
+|----------|---------------------------------------|------------------------|----------------------|
+| O(g(n))  | Upper bound                            | f(n) ≤ c*g(n)          | 5n² + 2n + 10 = O(n²) |
+| Ω(g(n))  | Lower bound                            | c*g(n) ≤ f(n)          | n = Ω(1)             |
+| Θ(g(n))  | Tight bound (both upper and lower)    | c₁*g(n) ≤ f(n) ≤ c₂*g(n) | 5n² + 2n + 10 = Θ(n²) |
+| o(g(n))  | Strictly slower growth                | f(n) < c*g(n)          | n = o(n²)            |
+| ω(g(n))  | Strictly faster growth                | c*g(n) < f(n)          | n² = ω(n)            |
+
+
+It's crucial to remember that these notations describe *asymptotic* behavior; they only matter as the input size (n) approaches infinity.  For small values of n, the actual running time might differ significantly.  Also, these are relative comparisons; we're comparing the growth rate of one function relative to another.
+
