@@ -68269,3 +68269,60 @@ This version is more organized, easier to extend (e.g., adding "Bang" for multip
 
 Remember to choose the version that best suits your understanding and coding style.  Start with the one that's easiest for you to grasp, and then gradually try the more advanced versions as you gain experience.  The key takeaway is that there are multiple ways to solve the same problem, and the "best" way often depends on context and readability.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long it takes to run) and space (how much memory it uses).  We usually analyze complexity using *asymptotic notation*, which describes the growth rate of the resource usage as the input size grows very large.  Ignoring constant factors and smaller terms allows us to focus on the dominant factors influencing runtime and memory usage.
+
+Here's a breakdown of key concepts:
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm scales with the input size (often denoted as 'n').
+
+* **Big O Notation (O):**  Describes the *upper bound* of the algorithm's runtime. It represents the worst-case scenario.  For example, O(n) means the runtime grows linearly with the input size, while O(n²) means it grows quadratically.
+
+* **Big Omega Notation (Ω):** Describes the *lower bound* of the algorithm's runtime. It represents the best-case scenario.
+
+* **Big Theta Notation (Θ):** Describes the *tight bound*, meaning both the upper and lower bounds are the same.  It indicates that the runtime grows at a specific rate.
+
+**Common Time Complexities (from best to worst):**
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array by index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, quicksort (average case).
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Bubble sort, selection sort.
+
+* **O(n³) - Cubic Time:** The runtime increases cubically with the input size. Example: Some naive matrix multiplication algorithms.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example:  Traveling salesman problem (brute-force approach).
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm scales with the input size.  The same asymptotic notations (Big O, Big Omega, Big Theta) are used.
+
+* **Examples:**
+    * O(1) - Constant space:  Using a fixed number of variables regardless of input size.
+    * O(n) - Linear space:  Creating an array of the same size as the input.
+    * O(log n) - Logarithmic space:  Recursive algorithms that use a stack whose depth is logarithmic in the input size.
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing complexity often involves:
+
+* **Best-case:**  The scenario where the algorithm performs most efficiently.
+* **Average-case:** The expected runtime over many inputs. This is often the most useful measure.
+* **Worst-case:** The scenario where the algorithm performs least efficiently.  This is often the most important for guaranteeing performance bounds.
+
+**Factors Affecting Complexity:**
+
+* **Data structures:** The choice of data structure significantly impacts complexity.
+* **Algorithm design:** Different algorithms for the same problem can have vastly different complexities.
+* **Input characteristics:** The order or distribution of the input data can affect the runtime.
+
+
+Understanding algorithm complexity is crucial for selecting the most efficient algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better as the input size increases.
+
