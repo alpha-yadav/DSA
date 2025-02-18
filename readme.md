@@ -67273,3 +67273,113 @@ While recursion is elegant, an iterative approach can be beneficial for very dee
 
 The recursive approach is generally preferred for its clarity and efficiency for most cases, unless you anticipate extremely deep trees where stack overflow might be a concern.  The iterative approach offers better control in such situations.  The path finding approach is conceptually simple but might be less efficient than the recursive method.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic problem in computer science.  The approach varies depending on the type of tree and whether you have parent pointers or not.
+
+Here's a breakdown of common approaches:
+
+**1.  Binary Tree (with Parent Pointers):**
+
+If each node has a pointer to its parent, finding the LCA is relatively straightforward:
+
+* **Algorithm:**
+    1. Traverse upwards from each node, storing the path to the root in two separate lists (Path1 and Path2).
+    2. Iterate through both lists simultaneously, comparing nodes.  The last common node before the paths diverge is the LCA.
+
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent(node1, node2):
+    path1 = []
+    path2 = []
+
+    while node1:
+        path1.append(node1)
+        node1 = node1.parent
+    while node2:
+        path2.append(node2)
+        node2 = node2.parent
+
+    lca = None
+    i = len(path1) -1
+    j = len(path2) -1
+
+    while i >= 0 and j >= 0 and path1[i] == path2[j]:
+        lca = path1[i]
+        i -= 1
+        j -= 1
+    return lca.data if lca else None
+
+
+#Example Usage
+root = Node('A')
+b = Node('B'); b.parent = root
+c = Node('C'); c.parent = root
+d = Node('D'); d.parent = b
+e = Node('E'); e.parent = b
+f = Node('F'); f.parent = c
+
+print(lca_with_parent(d,e)) # Output: B
+print(lca_with_parent(d,f)) # Output: A
+
+```
+
+**2. Binary Tree (without Parent Pointers):**
+
+This requires a more sophisticated approach, often using recursion:
+
+* **Algorithm:**
+    1. **Recursive Approach:**  The LCA is found recursively.  If the current node is one of the targets (`node1` or `node2`), it's returned. If `node1` and `node2` are on different subtrees, the current node is the LCA. Otherwise, recursively search the left and right subtrees.
+
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_no_parent(root, node1, node2):
+    if not root or root.data == node1 or root.data == node2:
+        return root
+
+    left_lca = lca_no_parent(root.left, node1, node2)
+    right_lca = lca_no_parent(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+
+#Example Usage
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+root.right.left = Node('F')
+
+print(lca_no_parent(root, 'D', 'E').data) # Output: B
+print(lca_no_parent(root, 'D', 'F').data) # Output: A
+```
+
+
+**3. General Tree (Arbitrary Number of Children):**
+
+The algorithm adapts similarly to the binary tree case without parent pointers.  You'd recursively explore each child subtree until you find `node1` and `node2` in different subtrees or find one of the nodes.
+
+**Efficiency:**
+
+* **With parent pointers:** The time complexity is O(h), where h is the height of the tree (linear in the worst case for skewed trees, logarithmic for balanced trees). Space complexity is O(h) for storing the paths.
+
+* **Without parent pointers:** The time complexity is also O(n) in the worst case (n being the number of nodes) and O(h) in average for balanced trees.  Space complexity is O(h) due to recursion depth.
+
+
+Remember to handle edge cases like when one or both nodes are not present in the tree.  The code examples above assume the nodes exist.  You'll want to add checks for that in a production-ready implementation.
+
