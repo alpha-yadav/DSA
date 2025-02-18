@@ -72270,3 +72270,59 @@ Here are some common types of algorithms exhibiting O(log n) time complexity:
 
 It's crucial to remember that the O(log n) notation describes the *asymptotic* behavior of the algorithm.  For small input sizes, the constant factors hidden in the Big O notation might make the algorithm appear slower than other algorithms with higher asymptotic complexity.  However, as the input size grows large, O(log n) algorithms become significantly more efficient.
 
+#  An O(log n) example 
+The most common example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a target value within a *sorted* array (or list).  It works by repeatedly dividing the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process is repeated until the target value is found or the search interval is empty.
+
+**Why it's O(log n):**
+
+With each comparison, we eliminate roughly half of the remaining search space.  Let's say 'n' is the number of elements in the array.
+
+* **Step 1:** We start with 'n' elements.
+* **Step 2:** After one comparison, we're left with roughly n/2 elements.
+* **Step 3:** After two comparisons, we're left with roughly n/4 elements.
+* **Step k:** After k comparisons, we're left with roughly n/2<sup>k</sup> elements.
+
+The algorithm terminates when the remaining search space is empty or the target is found. This happens when n/2<sup>k</sup> is approximately 1 (or less).  Solving for k:
+
+n/2<sup>k</sup> ≈ 1  =>  n ≈ 2<sup>k</sup>  =>  k ≈ log₂(n)
+
+Therefore, the number of steps (comparisons) is proportional to the logarithm base 2 of n.  The base of the logarithm doesn't affect the Big O notation, so we simply say it's O(log n).
+
+
+**Example in Python:**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the right half
+        else:
+            high = mid - 1  # Search in the left half
+
+    return -1  # Target not found
+
+
+sorted_array = [2, 5, 7, 8, 11, 12]
+target = 11
+index = binary_search(sorted_array, target)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+
+```
+
+This Python code implements binary search.  Note that it only works correctly on *sorted* arrays.  The logarithmic time complexity is only achieved because of the halving of the search space in each iteration.
+
