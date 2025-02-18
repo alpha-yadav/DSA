@@ -73473,3 +73473,105 @@ print()
 
 This code demonstrates all four traversal methods.  Remember that the choice of traversal depends on the specific application.  For example, in-order traversal is crucial for binary search trees because it yields a sorted sequence.  Level-order traversal is useful for visualizing the tree structure.  Pre-order and post-order are used in expression tree evaluations and other applications.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes of a tree level by level, from left to right.  Here are implementations in Python and JavaScript, along with explanations:
+
+
+**Python Implementation:**
+
+This uses a queue to manage nodes to be visited.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])  # Initialize a queue with the root node
+    while(len(nodes) > 0):
+        curr = nodes.popleft() #Remove from the front of queue
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+
+**JavaScript Implementation:**
+
+This uses a queue implemented using an array.
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) {
+    return;
+  }
+
+  let queue = [root]; // Initialize a queue with the root node
+  while (queue.length > 0) {
+    let curr = queue.shift(); //Remove from the front of queue
+    console.log(curr.data + " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+// Example usage:
+let root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1 2 3 4 5
+```
+
+**Explanation:**
+
+Both implementations follow these steps:
+
+1. **Initialization:** A queue is created and the root node is added to it.
+2. **Iteration:** While the queue is not empty:
+   - Dequeue (remove) a node from the front of the queue.
+   - Process the node's data (in this case, print it).
+   - Enqueue (add) the node's left and right children to the rear of the queue if they exist.
+
+
+This ensures that nodes at the same level are processed before moving to the next level, achieving the level order traversal.  Remember to handle the case of an empty tree (where the root is `null` or `None`).  These examples use simple printing, but you could easily modify them to perform other operations on the nodes as they are visited.
+
