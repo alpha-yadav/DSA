@@ -71531,3 +71531,121 @@ While BFS and DFS are the most common, other graph traversal algorithms exist, o
 
 Choosing the appropriate traversal algorithm depends on the specific problem and the characteristics of the graph.  For instance, if you need to find the shortest path in an unweighted graph, BFS is the better choice. If you need to detect cycles or perform topological sorting, DFS is more suitable.  If you have a weighted graph, Dijkstra's or Bellman-Ford might be necessary.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency list or matrix) and whether you're looking for a specific node or traversing the entire graph. Below are a few implementations in Python.
+
+**1. DFS using an adjacency list (recursive):**  This is generally the most concise and easy-to-understand implementation for DFS.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal on a graph represented as an adjacency list.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (used for recursion).
+        path: A list to store the traversal path (optional).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+traversal_path = dfs_recursive(graph, 'A')
+print(f"DFS traversal path (recursive): {traversal_path}") #Example output: ['A', 'B', 'D', 'E', 'F', 'C']  (order may vary slightly)
+
+```
+
+**2. DFS using an adjacency list (iterative):** This version uses a stack instead of recursion. It's useful for very deep graphs where recursion might lead to stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal on a graph represented as an adjacency list (iteratively).
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    visited = set()
+    stack = [node]
+    path = []
+
+    while stack:
+        current_node = stack.pop()
+        if current_node not in visited:
+            visited.add(current_node)
+            path.append(current_node)
+            stack.extend(neighbor for neighbor in reversed(graph.get(current_node, [])) if neighbor not in visited) # reversed for proper DFS order
+
+    return path
+
+
+traversal_path = dfs_iterative(graph, 'A')
+print(f"DFS traversal path (iterative): {traversal_path}") #Example output: ['A', 'C', 'F', 'B', 'E', 'D'] (order may vary slightly)
+```
+
+
+**3. DFS for finding a specific node:**  This modification stops the search as soon as the target node is found.
+
+```python
+def dfs_find_node(graph, start_node, target_node):
+    """
+    Performs DFS to find a specific node in a graph.
+
+    Args:
+      graph: The graph represented as an adjacency list.
+      start_node: The starting node.
+      target_node: The node to search for.
+
+    Returns:
+      True if the target node is found, False otherwise.
+    """
+    visited = set()
+    stack = [start_node]
+
+    while stack:
+        node = stack.pop()
+        if node == target_node:
+            return True
+        if node not in visited:
+            visited.add(node)
+            stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+    return False
+
+found = dfs_find_node(graph, 'A', 'F')
+print(f"Found 'F'?: {found}") # Output: True
+found = dfs_find_node(graph, 'A', 'Z')
+print(f"Found 'Z'?: {found}") # Output: False
+```
+
+Remember to adapt these functions to your specific graph representation (adjacency matrix would require a different approach) and the type of information you need to retrieve during the traversal.  The order of nodes in the path might vary slightly depending on the implementation and the order of neighbors in the adjacency list.
+
