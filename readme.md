@@ -69233,3 +69233,39 @@ This will print:
 
 In summary, nested loops provide a concise way to iterate over multiple levels of data or perform repetitive tasks across multiple dimensions.  However, it's crucial to be mindful of their potential performance implications and strive for code clarity, especially when dealing with complex nested structures.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They imply that the time it takes to solve a problem grows logarithmically with the size of the input (n).  This means that adding more input data only increases the runtime by a small amount.  This is because these algorithms typically exploit some form of divide-and-conquer strategy.  Here are some common types and examples:
+
+**1. Binary Search:**
+
+* **Concept:** Repeatedly divides the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.
+* **Example:** Searching a sorted array for a specific value.
+* **Why O(log n):** With each comparison, you eliminate roughly half of the remaining search space.  This leads to a logarithmic number of steps.
+
+**2. Binary Tree Operations (balanced):**
+
+* **Concept:** Operations like searching, insertion, and deletion in a *balanced* binary search tree (e.g., AVL tree, red-black tree).
+* **Example:** Finding a specific node in a balanced binary search tree.
+* **Why O(log n):**  The height of a balanced binary tree is proportional to log₂(n), where n is the number of nodes.  Most operations involve traversing a path from the root to a leaf, taking logarithmic time.
+
+**3. Efficient exponentiation (e.g., binary exponentiation):**
+
+* **Concept:** Calculates a<sup>b</sup> (a raised to the power of b) efficiently using repeated squaring.
+* **Example:** Computing large powers modulo m (often used in cryptography).
+* **Why O(log n):** The algorithm repeatedly squares the base and reduces the exponent by half. The number of steps is proportional to the number of bits in the exponent (log₂(b)), assuming b is roughly equivalent to n.
+
+**4. Logarithmic-time sorting algorithms (in a limited sense):**
+
+* **Concept:** While not strictly O(log n) for the whole sorting process, some sorting algorithms have steps that take logarithmic time.  This is often within a larger O(n log n) algorithm.
+* **Example:**  Radix sort (when the number of digits is considered constant), or certain steps within merge sort (comparing elements within sub-arrays)
+* **Why (partially) O(log n):** Some comparisons and operations might only require logarithmic time, but not all parts of the algorithm.
+
+**5. Finding the kth smallest element using QuickSelect (average case):**
+
+* **Concept:** A selection algorithm related to quicksort, but it only partitions the array until the kth smallest element is found.
+* **Example:** Finding the median of a dataset.
+* **Why O(log n) (average case):**  On average, the algorithm successfully partitions the array in half in each iteration. The worst-case is O(n), though.
+
+
+**Important Note:** The O(log n) notation is usually understood to be base 2 (log₂(n)), but the base doesn't change the overall classification because changing bases only involves multiplying by a constant factor (which O notation ignores).  The crucial aspect is that the growth rate is logarithmic, not the specific base of the logarithm.
+
