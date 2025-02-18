@@ -72418,3 +72418,12 @@ print(root.children[0].children[0].data) # Output: D
 
 The choice between these representations depends on the application.  If you need to frequently add or delete nodes and the number of children per node is variable, the list-of-children approach is often preferred. If space efficiency is paramount and the tree structure is relatively fixed, the array representation might be better (though it's often less flexible). The child-sibling representation offers a good balance between simplicity and flexibility for many scenarios.
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need more information to write an introduction.  For example, tell me:
+
+* **What is the topic?** (e.g., the history of coffee, the benefits of exercise, the plot of Hamlet)
+* **What is the purpose of the introduction?** (e.g., to inform, to persuade, to entertain)
+* **Who is the intended audience?** (e.g., experts, general public, children)
+
+Once I have this information, I can write a compelling and relevant introduction.
+
