@@ -73150,3 +73150,119 @@ else:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  Method 1 (using `minVal` and `maxVal`) is generally preferred because it avoids the creation of an extra array, making it slightly more space-efficient.  Method 2 is perhaps a bit easier to understand for beginners.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Recursively checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+        node: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    _inorder_traversal(node, inorder_list)
+
+    # Check if the in-order list is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i].data < inorder_list[i - 1].data:
+            return False
+    return True
+
+
+def _inorder_traversal(node, inorder_list):
+    """Performs in-order traversal and appends nodes to the list."""
+    if node:
+        _inorder_traversal(node.left, inorder_list)
+        inorder_list.append(node)
+        _inorder_traversal(node.right, inorder_list)
+
+
+#Example Usage
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+
+if is_bst_recursive(root):
+    print("The tree is a BST")
+else:
+    print("The tree is not a BST")
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(12)
+root2.left.right.left = Node(10)
+root2.left.right.right = Node(15) #this breaks the BST property
+root2.left.right.right.right = Node(16)
+
+if is_bst_recursive(root2):
+    print("The tree is a BST")
+else:
+    print("The tree is not a BST")
+
+```
+
+**Method 2: Recursive with Range Check**
+
+This method recursively checks if the node's data falls within a valid range defined by its ancestors.  It's generally more efficient than the in-order traversal method because it avoids creating and sorting an entire list.
+
+```python
+def is_bst_recursive_range(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a binary tree is a BST using range checking.
+
+    Args:
+      node: The root node of the subtree being checked.
+      min_val: The minimum allowed value for the node's data.
+      max_val: The maximum allowed value for the node's data.
+
+    Returns:
+      True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False  # Node value outside allowed range
+
+    return (is_bst_recursive_range(node.left, min_val, node.data) and
+            is_bst_recursive_range(node.right, node.data, max_val))
+
+
+#Example usage (same trees as above)
+if is_bst_recursive_range(root):
+    print("The tree is a BST")
+else:
+    print("The tree is not a BST")
+
+if is_bst_recursive_range(root2):
+    print("The tree is a BST")
+else:
+    print("The tree is not a BST")
+
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) for the recursive range method (H is the height of the tree, which can be O(N) in the worst case of a skewed tree) and O(N) for the in-order traversal method in the worst case (because the list holds all nodes).  The recursive range method is generally preferred because of its better space complexity in balanced trees.  Choose the method that best suits your needs and understanding. Remember to handle edge cases like empty trees appropriately.
+
