@@ -74368,3 +74368,40 @@ The core logic lies in checking `recStack[neighbour]`. If it's `True`, it means 
 
 This improved answer provides a complete, runnable Python code example with clear explanations, making it easier to understand and use.  Remember that this detects cycles in *directed* graphs.  Cycle detection in undirected graphs requires a slightly different approach.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focused on efficient graph algorithms.  The most famous are his algorithms for finding minimum spanning trees (MSTs) and shortest paths.  They're notable for their theoretical efficiency, often achieving near-linear time complexity, which is significantly faster than many traditional algorithms.
+
+Here's a breakdown of the key aspects:
+
+**1. Minimum Spanning Tree (MST) Algorithms:**
+
+* **Near-Linear Time MST Algorithm:** Thorup's most significant contribution in this area is an algorithm that constructs an MST in time close to linear, specifically O(m α(m, n)), where:
+    * `m` is the number of edges in the graph.
+    * `n` is the number of vertices in the graph.
+    * `α(m, n)` is the inverse Ackermann function, which grows extremely slowly.  For all practical purposes, α(m, n) can be considered a constant.
+
+This makes it asymptotically faster than many classic MST algorithms like Prim's or Kruskal's, which have complexities of O(m log n) or O(m log* n) respectively.  The improvement comes from sophisticated techniques that cleverly combine various data structures and algorithmic ideas.
+
+* **Importance:**  This breakthrough significantly advanced the field of graph algorithms, demonstrating that near-linear time MST computation is achievable.
+
+**2. Shortest Path Algorithms:**
+
+* **Fast Shortest Path Algorithms:** Thorup has also contributed significantly to the area of shortest path algorithms.  He's developed algorithms that achieve near-linear time for various shortest path problems under specific conditions (e.g., undirected graphs).  These algorithms often rely on clever preprocessing techniques and sophisticated data structures.
+
+**3. Key Techniques Used:**
+
+Thorup's algorithms frequently utilize advanced techniques like:
+
+* **Randomization:** Many of his algorithms are randomized, meaning they use randomness during their execution. This often simplifies the algorithms and allows for better performance in practice.
+* **Advanced Data Structures:** He makes extensive use of sophisticated data structures to achieve the near-linear time complexity.  These might include specialized hash tables, tree structures, or other complex data structures tailored to the specific problem.
+* **Combinatorial techniques:** Thorup skillfully combines various combinatorial ideas and insights to devise efficient algorithms.
+
+**4. Practical Considerations:**
+
+While theoretically very efficient, Thorup's algorithms often involve significant constant factors in their running time.  This means that for smaller graphs, simpler algorithms like Prim's or Kruskal's might be faster in practice. However, as the size of the graph grows very large, Thorup's algorithms demonstrate their superior asymptotic performance.  Their implementation can also be considerably more complex than simpler algorithms.
+
+
+**In Summary:**
+
+Thorup's algorithms represent a major advancement in the field of graph algorithms, showcasing the possibility of achieving near-linear time complexity for fundamental graph problems like MST and shortest paths.  While not always the most practical choice for small graphs due to implementation complexity and constant factors, they are groundbreaking in their theoretical contributions and demonstrate the power of advanced algorithmic techniques.  Understanding his work requires a strong background in algorithms and data structures.
+
