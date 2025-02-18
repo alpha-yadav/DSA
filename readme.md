@@ -72041,3 +72041,51 @@ Therefore, the runtime of the algorithm is at least proportional to n².  The lo
 
 In essence, Ω provides a guarantee on the *minimum* performance of an algorithm.  It's useful when you want to know the best-case scenario or when establishing a lower bound for a problem's inherent complexity (meaning no algorithm can solve the problem faster than Ω(g(n))).
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of an algorithm's runtime or space requirements as the input size grows.  It focuses on how the runtime or space scales, not the exact runtime or space used for a specific input.
+
+Here's a breakdown of key aspects:
+
+**What Big O describes:**
+
+* **Worst-case scenario:** Big O typically describes the worst-case runtime or space complexity.  It represents the upper limit of how much resources an algorithm might consume.
+* **Asymptotic behavior:** Big O describes the behavior of the algorithm as the input size (often denoted as 'n') approaches infinity.  It's less concerned with small input sizes and more focused on how the algorithm scales for very large inputs.
+* **Order of growth:** It focuses on the *order* of growth, not the exact number of operations.  For example, an algorithm with a runtime of 5n² + 10n + 5 is said to have a Big O of O(n²), because the n² term dominates as n becomes large.  The constant factors (5, 10, 5) are ignored.
+
+**Common Big O notations and their meanings:**
+
+* **O(1) - Constant time:** The runtime is independent of the input size.  Examples: accessing an array element by index, returning a value from a hash table.
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  Examples: binary search in a sorted array, finding an element in a balanced binary search tree.
+* **O(n) - Linear time:** The runtime increases linearly with the input size.  Examples: searching an unsorted array, iterating through a list.
+* **O(n log n) - Linearithmic time:** The runtime is a combination of linear and logarithmic growth.  Examples: efficient sorting algorithms like merge sort and heap sort.
+* **O(n²) - Quadratic time:** The runtime increases proportionally to the square of the input size.  Examples: nested loops iterating over the input.
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size.  Examples: finding all subsets of a set, certain recursive algorithms without memoization.
+* **O(n!) - Factorial time:** The runtime grows factorially with the input size.  Examples: traveling salesman problem using brute force.
+
+
+**Why is Big O important?**
+
+* **Algorithm comparison:** It allows for a standardized way to compare the efficiency of different algorithms.
+* **Scalability analysis:**  It helps predict how an algorithm will perform with larger datasets.
+* **Resource optimization:** It guides developers in choosing efficient algorithms for their applications.
+
+
+**Example:**
+
+Let's say we have two algorithms to search for a number in an array:
+
+* **Algorithm 1 (Linear Search):** Iterates through the array sequentially.  Its runtime is proportional to the size of the array (O(n)).
+* **Algorithm 2 (Binary Search):**  Works only on sorted arrays. It repeatedly divides the search interval in half. Its runtime is logarithmic (O(log n)).
+
+For small arrays, the difference might be negligible. But for very large arrays, the binary search (O(log n)) will be significantly faster than the linear search (O(n)).
+
+
+**Other notations:**
+
+While Big O focuses on the *upper bound*, there are also:
+
+* **Big Omega (Ω):** Describes the *lower bound* of an algorithm's runtime.
+* **Big Theta (Θ):** Describes both the *upper and lower bound*, providing a tight bound on the algorithm's runtime.
+
+Understanding Big O notation is crucial for any computer scientist or software engineer to write efficient and scalable code.  It helps in choosing the right algorithms and data structures to solve problems effectively.
+
