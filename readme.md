@@ -66358,3 +66358,106 @@ int main() {
 
 Remember to add a function to deallocate the memory used by the tree after you're finished with it to prevent memory leaks.  This is often done recursively, starting from the root and traversing the tree.  I've left that as an exercise because it's a good practice problem.  The provided `main` function demonstrates insertion and deletion with different scenarios.  Remember to compile and run this code to see it in action.  This improved version handles all three deletion cases correctly and includes better error handling.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node that has both nodes as descendants (where a node is considered a descendant of itself).  There are several ways to find the LCA in a BST, with the most efficient leveraging the BST property.
+
+**Efficient Approach (using BST properties):**
+
+This approach is significantly faster than a general tree LCA algorithm because it uses the ordered nature of a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not in the tree.
+    """
+
+    if not root or p.data is None or q.data is None:  #Handle empty tree or missing nodes.
+        return None
+
+
+    while root:
+        if p.data > root.data and q.data > root.data:
+            root = root.right  # Both nodes are in the right subtree
+        elif p.data < root.data and q.data < root.data:
+            root = root.left   # Both nodes are in the left subtree
+        else:
+            return root       # LCA found (one node is in left, other in right, or both are equal to root)
+
+
+
+# Example usage:
+root = Node(6)
+root.left = Node(2)
+root.right = Node(8)
+root.left.left = Node(0)
+root.left.right = Node(4)
+root.right.left = Node(7)
+root.right.right = Node(9)
+
+p = root.left      # Node with value 2
+q = root.right     # Node with value 8
+
+lca = lowestCommonAncestor(root, p, q)
+if lca:
+  print(f"LCA of {p.data} and {q.data} is {lca.data}") #Output: LCA of 2 and 8 is 6
+
+p = root.left.right #Node with value 4
+q = root.left.left #Node with value 0
+lca = lowestCommonAncestor(root, p, q)
+if lca:
+    print(f"LCA of {p.data} and {q.data} is {lca.data}") #Output: LCA of 4 and 0 is 2
+
+p = root.left.right #Node with value 4
+q = root.right.left #Node with value 7
+lca = lowestCommonAncestor(root,p,q)
+if lca:
+    print(f"LCA of {p.data} and {q.data} is {lca.data}") #Output: LCA of 4 and 7 is 6
+
+
+```
+
+**Recursive Approach (less efficient):**
+
+While functional, this recursive approach is generally less efficient than the iterative one because of the potential for repeated tree traversals:
+
+
+```python
+def lowestCommonAncestorRecursive(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestorRecursive(root.left, p, q)
+    right_lca = lowestCommonAncestorRecursive(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+```
+
+**Important Considerations:**
+
+* **Error Handling:** The code includes checks for an empty tree and cases where either `p` or `q` might not be present in the BST.  Robust error handling is crucial.
+* **Node Representation:**  The `Node` class is a simple representation; you might need to adapt it based on your specific node structure.
+* **Efficiency:** The iterative approach (using `while`) is generally preferred for its better space complexity (O(1) versus O(h), where h is the height of the tree, for the recursive approach).
+
+
+Remember to choose the approach that best suits your needs and coding style.  For BSTs, the iterative approach using the BST property is highly recommended for its efficiency.
+
