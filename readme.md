@@ -72530,3 +72530,66 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Remember to handle the `None` cases carefully in both methods to avoid errors.  The `None` checks are crucial for accurately comparing tree structures.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They're a special type of binary tree where the nodes are arranged in a specific order.  This order allows for faster search, insertion, and deletion operations compared to a simple linear search, but with some trade-offs.
+
+Here's a breakdown of BSTs:
+
+**Key Properties:**
+
+* **Binary Tree:**  Each node has at most two children, referred to as the left child and the right child.
+* **Ordered Property:** For every node in the tree:
+    * All nodes in the *left subtree* have keys less than the node's key.
+    * All nodes in the *right subtree* have keys greater than the node's key.
+    * No duplicate keys are allowed (though some implementations might handle duplicates differently).
+
+
+**Operations:**
+
+* **Search:**  The most efficient operation in a balanced BST.  It starts at the root and recursively traverses down the tree. If the target key is less than the current node's key, it goes left; otherwise, it goes right.  This continues until the key is found or a leaf node is reached.  The time complexity is O(h), where 'h' is the height of the tree (in a balanced tree, h is approximately log₂n, where n is the number of nodes).
+
+* **Insertion:** A new node is inserted into the tree by following the same path as a search. When a leaf node is reached, the new node is added as a child of that leaf node. The time complexity is also O(h).
+
+* **Deletion:** This is the most complex operation.  Deleting a node requires careful consideration of its children.  There are three cases:
+    * **Leaf Node:** Simply remove the node.
+    * **One Child:** Replace the node with its child.
+    * **Two Children:**  Find the inorder predecessor (largest node in the left subtree) or inorder successor (smallest node in the right subtree), replace the node with it, and then delete the predecessor/successor node (which will now be a leaf or a one-child node). The time complexity is O(h).
+
+
+**Time Complexity (for balanced trees):**
+
+* **Search:** O(log₂n)
+* **Insertion:** O(log₂n)
+* **Deletion:** O(log₂n)
+
+**Time Complexity (for unbalanced trees - worst case, e.g., a skewed tree that resembles a linked list):**
+
+* **Search:** O(n)
+* **Insertion:** O(n)
+* **Deletion:** O(n)
+
+**Space Complexity:** O(n) (proportional to the number of nodes)
+
+
+**Advantages:**
+
+* Efficient search, insertion, and deletion in a balanced tree.
+* Simple to implement.
+* Useful for representing hierarchical data.
+
+**Disadvantages:**
+
+* Performance degrades significantly if the tree becomes unbalanced (e.g., due to insertion of sorted data).  An unbalanced tree approaches the performance of a linked list.
+* No inherent support for efficient range queries (finding all keys within a given range).  Specialized tree structures like order statistics trees are better for this.
+
+
+**Balancing:**
+
+To prevent the worst-case scenario of an unbalanced tree, self-balancing BST algorithms are used. These algorithms automatically adjust the tree structure during insertion and deletion to maintain a balanced state, ensuring logarithmic time complexity for operations.  Examples include:
+
+* **AVL Trees:**  Self-balancing BSTs that maintain a balance factor for each node.
+* **Red-Black Trees:**  Another self-balancing BST that uses color information to maintain balance.
+* **B-Trees:** Used in databases and file systems; they are more complex but optimized for disk access.
+
+In summary, BSTs are a versatile data structure, but their efficiency heavily relies on maintaining a relatively balanced tree structure.  Self-balancing variants address this crucial issue.  Understanding their properties and limitations is essential for choosing the appropriate data structure for a given application.
+
