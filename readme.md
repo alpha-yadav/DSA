@@ -65747,3 +65747,70 @@ Here are some common types of algorithms with O(log n) time complexity:
 
 It's crucial to remember that the "n" in O(log n) refers to the size of the input.  The base of the logarithm (e.g., base 2, base 10) is typically ignored in Big O notation because it only affects the constant factor, which is not significant in asymptotic analysis.
 
+#  An O(log n) example 
+The quintessential O(log n) example is **binary search** in a sorted array.
+
+**Binary Search Algorithm:**
+
+Binary search works by repeatedly dividing the search interval in half.  If the value you're searching for is in the middle of the interval, you've found it.  If it's less than the middle value, you search the left half; if it's greater, you search the right half.  You repeat this process until you find the value or the interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found in the array.")
+
+```
+
+**Why it's O(log n):**
+
+With each comparison, we effectively halve the size of the search space.  This means the number of comparisons needed is proportional to the logarithm (base 2) of the input size (n).  The number of steps required grows logarithmically, not linearly, with the size of the input.  For example:
+
+* An array of 16 elements requires at most 4 comparisons (log₂16 = 4).
+* An array of 1024 elements requires at most 10 comparisons (log₂1024 = 10).
+* An array of 1,048,576 elements requires at most 20 comparisons (log₂1048576 = 20).
+
+
+Other O(log n) algorithms include:
+
+* **Tree traversals (balanced trees like AVL or red-black trees):**  Finding a node in a balanced binary search tree takes logarithmic time.
+* **Efficient exponentiation:** Algorithms for calculating a<sup>b</sup> can achieve O(log b) time complexity.
+
+
+The key characteristic of O(log n) algorithms is that they efficiently reduce the problem size with each step, leading to significantly faster performance than linear O(n) algorithms for large input sizes.
+
