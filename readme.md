@@ -74005,3 +74005,56 @@ for row in adj_matrix_weighted:
 
 Remember to adapt the code to your specific needs (directed/undirected, weighted/unweighted) and choose the most appropriate data structure based on your graph's characteristics.
 
+#  Introduction To Graph Theory 
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph consists of vertices (also called nodes or points) and edges (also called arcs or lines) that connect pairs of vertices.  Think of it like a map: cities are vertices, and roads connecting them are edges.
+
+Here's a breakdown of key introductory concepts:
+
+**1. Basic Definitions:**
+
+* **Graph:** A set of vertices (V) and a set of edges (E) connecting pairs of vertices.  Formally, G = (V, E).
+* **Vertex (or Node):** A point in the graph.
+* **Edge (or Arc):** A connection between two vertices.  Edges can be:
+    * **Directed:** An edge with a direction, represented by an arrow (e.g., a one-way street).  A directed graph is called a **digraph**.
+    * **Undirected:** An edge without a direction (e.g., a two-way street).
+* **Adjacent Vertices:** Two vertices connected by an edge.
+* **Incident Edge:** An edge connected to a vertex.
+* **Degree of a Vertex (in an undirected graph):** The number of edges connected to that vertex.
+* **In-degree and Out-degree (in a directed graph):** The in-degree of a vertex is the number of edges pointing to it; the out-degree is the number of edges pointing away from it.
+* **Path:** A sequence of vertices where consecutive vertices are adjacent.
+* **Cycle:** A path that starts and ends at the same vertex, with no repeated vertices in between.
+* **Connected Graph:** An undirected graph where there's a path between any two vertices.
+* **Complete Graph:** An undirected graph where every pair of vertices is connected by an edge.  A complete graph with *n* vertices is denoted as K<sub>n</sub>.
+* **Tree:** A connected graph with no cycles.  Trees have many important properties and applications.
+* **Subgraph:** A graph whose vertices and edges are subsets of a larger graph.
+* **Weighted Graph:** A graph where each edge has an associated weight (e.g., distance, cost).
+
+
+**2. Types of Graphs:**
+
+Beyond the basic types mentioned above, there are many specialized graph types, including:
+
+* **Bipartite Graphs:** Graphs whose vertices can be divided into two disjoint sets, and every edge connects a vertex from one set to a vertex from the other.
+* **Planar Graphs:** Graphs that can be drawn on a plane without any edges crossing.
+* **Complete Bipartite Graphs:** Bipartite graphs where every vertex in one set is connected to every vertex in the other set.  A complete bipartite graph with *m* vertices in one set and *n* vertices in the other is denoted as K<sub>m,n</sub>.
+
+
+**3. Applications of Graph Theory:**
+
+Graph theory has a remarkably wide range of applications across various fields, including:
+
+* **Computer Science:** Networks, algorithms, data structures, databases.
+* **Operations Research:** Transportation networks, scheduling, resource allocation.
+* **Social Sciences:** Social networks, relationships, information diffusion.
+* **Biology:** Molecular structures, evolutionary trees.
+* **Physics:** Networks of interacting particles.
+* **Engineering:** Circuit design, network analysis.
+
+
+**4. Further Study:**
+
+This is a brief introduction.  Further study would delve into graph algorithms (e.g., shortest path algorithms like Dijkstra's and Bellman-Ford, minimum spanning trees like Prim's and Kruskal's), graph coloring, network flow, and much more.  There are many excellent textbooks and online resources available for deeper exploration.
+
+
+This introduction provides a foundational understanding of graph theory.  By learning the basic definitions and types of graphs, you'll be well-equipped to explore more advanced concepts and applications.
+
