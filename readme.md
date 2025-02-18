@@ -67383,3 +67383,12 @@ The algorithm adapts similarly to the binary tree case without parent pointers. 
 
 Remember to handle edge cases like when one or both nodes are not present in the tree.  The code examples above assume the nodes exist.  You'll want to add checks for that in a production-ready implementation.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about what to graph, such as:
+
+* **A set of points:**  e.g., (1,2), (3,4), (5,6)
+* **An equation:** e.g., y = 2x + 1, y = x^2,  sin(x)
+* **A table of values:**  With x and y values.
+
+Once you give me this information, I can help you graph it.  I can't create a visual graph directly, but I can give you the coordinates to plot or describe the shape of the graph.
+
