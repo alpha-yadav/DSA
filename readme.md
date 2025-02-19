@@ -79473,3 +79473,108 @@ postorder(root) # Output: D E B F C A
 
 This code defines a `Node` class and functions for each traversal type.  You can easily adapt this to other programming languages like Java, C++, or JavaScript using similar recursive approaches.  Remember that the base case for the recursion is when `node` is `None` (an empty subtree).
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike a binary *search* tree, a binary tree doesn't have any ordering properties, making the LCA problem slightly more complex.
+
+Here are a few approaches to finding the LCA in a binary tree:
+
+**1. Recursive Approach:**
+
+This is a common and efficient approach.  The algorithm recursively traverses the tree.  If a node is found to be one of the targets (node `p` or `q`), it's returned. If both `p` and `q` are found in different subtrees of the current node, the current node is the LCA. If neither `p` nor `q` is found in a subtree, the function returns `null`.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node, or None if either p or q is not found.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:  # p and q are in different subtrees
+        return root
+    elif left:          # p or q is in the left subtree
+        return left
+    else:               # p or q is in the right subtree
+        return right
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # node with value 5
+q = root.right # node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
+```
+
+**2. Iterative Approach (using a stack):**
+
+This approach uses a stack to simulate recursion, potentially offering slight performance improvements in some cases and avoiding potential stack overflow errors for very deep trees.  It's conceptually similar to the recursive approach.
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    stack = [root]
+    parent = {root: None} #Keep track of parent nodes
+
+    while stack:
+        node = stack.pop()
+        if node.left:
+            parent[node.left] = node
+            stack.append(node.left)
+        if node.right:
+            parent[node.right] = node
+            stack.append(node.right)
+
+    path_p = []
+    curr = p
+    while curr:
+        path_p.append(curr)
+        curr = parent.get(curr)
+
+    path_q = []
+    curr = q
+    while curr:
+        path_q.append(curr)
+        curr = parent.get(curr)
+
+    lca = None
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[len(path_p)-1-i] == path_q[len(path_q)-1-i]:
+        lca = path_p[len(path_p)-1-i]
+        i += 1
+    return lca
+```
+
+
+**Important Considerations:**
+
+* **Error Handling:**  The code should handle cases where `p` or `q` are not found in the tree (returning `None` or raising an exception).
+* **Node Values:**  The examples assume node values are unique. If not, you might need to adapt the comparison logic.
+* **Efficiency:**  Both recursive and iterative solutions have a time complexity of O(N), where N is the number of nodes in the tree, as they might traverse the entire tree in the worst case.  The space complexity is O(H) for the recursive approach (where H is the height of the tree, due to the recursive call stack) and O(N) in the worst case for the iterative approach (when the tree is skewed).
+
+
+Remember to choose the approach that best suits your needs and coding style.  The recursive approach is generally considered more elegant and easier to understand, while the iterative approach might offer slight performance benefits in some scenarios and avoids potential stack overflow issues.
+
