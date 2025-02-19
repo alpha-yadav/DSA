@@ -76527,3 +76527,108 @@ Consider this binary tree:
 
 **Iterative Approaches:**  While the recursive approaches are elegant and easy to understand, iterative versions using stacks are also possible and are often preferred for very large trees to avoid stack overflow issues.  These iterative approaches typically involve pushing nodes onto a stack and systematically popping and processing them according to the traversal order.  The implementation of iterative versions is slightly more complex but crucial for handling potentially large trees.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most common and efficient):**
+
+   This approach recursively traverses the tree.  If a node contains either `node1` or `node2`, it returns itself. If `node1` and `node2` are found in different subtrees, then the current node is the LCA.  Otherwise, the LCA is found recursively in the appropriate subtree.
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(root, p, q):
+       if not root or root == p or root == q:
+           return root
+
+       left = lowestCommonAncestor(root.left, p, q)
+       right = lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+
+   #Example Usage
+   root = TreeNode(3)
+   root.left = TreeNode(5)
+   root.right = TreeNode(1)
+   root.left.left = TreeNode(6)
+   root.left.right = TreeNode(2)
+   root.right.left = TreeNode(0)
+   root.right.right = TreeNode(8)
+   p = root.left  # Node with value 5
+   q = root.right # Node with value 1
+
+   lca = lowestCommonAncestor(root, p, q)
+   print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, we might traverse the entire tree.
+   * **Space Complexity:** O(H), where H is the height of the tree.  This is due to the recursive call stack.  In the worst case (a skewed tree), H could be N.
+
+
+2. **Iterative Approach (using a stack):**
+
+   This approach uses a stack to simulate recursion, offering a slightly different perspective and potentially avoiding stack overflow issues in very deep trees.  It's conceptually similar to the recursive approach.
+
+   ```python
+   def lowestCommonAncestorIterative(root, p, q):
+       stack = [root]
+       parent = {root: None}  # Keep track of parent nodes
+
+       while p not in parent or q not in parent:
+           node = stack.pop()
+           if node.left:
+               parent[node.left] = node
+               stack.append(node.left)
+           if node.right:
+               parent[node.right] = node
+               stack.append(node.right)
+
+       ancestors_p = set()
+       while p:
+           ancestors_p.add(p)
+           p = parent[p]
+
+       while q:
+           if q in ancestors_p:
+               return q
+           q = parent[q]
+
+       return None #Should not happen if p and q are in the tree
+
+   ```
+   * **Time Complexity:** O(N)
+   * **Space Complexity:** O(N) in the worst case (skewed tree).
+
+
+3. **Using Parent Pointers (if available):**
+
+   If the tree nodes already have parent pointers, you can efficiently find the LCA by traversing upwards from both nodes `p` and `q` until you find a common ancestor. This is more efficient than the recursive approach if parent pointers are already present.
+
+
+
+**Choosing the Right Method:**
+
+* For most cases, the **recursive approach** is the simplest and easiest to understand and implement. Its performance is generally sufficient.
+* If you have extremely deep trees and worry about stack overflow, the **iterative approach** is a good alternative.
+* If parent pointers are already part of your tree structure, using them directly is the most efficient method.
+
+
+Remember to handle edge cases like:
+
+* `p` or `q` not being in the tree.
+* `p` or `q` being the root.
+* `p` and `q` being the same node.
+
+The provided code examples include error handling for some of these cases, but you might need to add more robust checks depending on your specific requirements.
+
