@@ -75461,3 +75461,60 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Both methods achieve the same result. Choose the one you find more readable and suitable for your context.  The recursive approach is often preferred for its clarity and conciseness, unless you have concerns about potential stack overflow issues with very deep trees.  In that case, the iterative approach might be safer.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They are tree-like structures where each node contains a value and pointers to two subtrees: a left subtree and a right subtree.  The key property that defines a BST is the *search property*:
+
+* **For every node in the tree:**  All values in the left subtree are *less than* the node's value, and all values in the right subtree are *greater than* the node's value.
+
+This property allows for efficient searching, insertion, and deletion operations, typically with a time complexity of O(log n) in the average case (where n is the number of nodes), provided the tree is balanced. However, in the worst-case scenario (e.g., a completely skewed tree resembling a linked list), the complexity degrades to O(n).
+
+Here's a breakdown of key aspects:
+
+**Key Operations:**
+
+* **Search:**  To search for a value, start at the root. If the target value is equal to the current node's value, you've found it. If the target is less than the current node's value, recursively search the left subtree. Otherwise, recursively search the right subtree.
+
+* **Insertion:**  To insert a new value, follow the search procedure.  When you reach a leaf node (a node with no children) where the search would normally terminate, insert the new node as a child of that leaf node, maintaining the BST property.
+
+* **Deletion:**  Deletion is more complex and has several cases to consider:
+    * **Node with no children:** Simply remove the node.
+    * **Node with one child:** Replace the node with its child.
+    * **Node with two children:**  This is the most complex case.  There are two common approaches:
+        * **In-order predecessor/successor:** Replace the node's value with its in-order predecessor (the largest value in the left subtree) or its in-order successor (the smallest value in the right subtree), then recursively delete the predecessor/successor node.
+        * **Removing the node and rebalancing:** Remove the node and reconstruct the subtree in a way that maintains the BST property.  This approach might involve rebalancing algorithms if the BST is prone to imbalance.
+
+
+**Advantages of BSTs:**
+
+* **Efficient search, insertion, and deletion (on average):** O(log n) time complexity.
+* **Ordered data:** Elements are automatically sorted.
+* **Flexible:** Can handle dynamic data (insertions and deletions).
+
+**Disadvantages of BSTs:**
+
+* **Worst-case performance:** O(n) time complexity for skewed trees.
+* **Susceptible to imbalance:** Frequent insertions or deletions can lead to an unbalanced tree, degrading performance.
+* **Not ideal for all scenarios:** For scenarios requiring frequent random access, hash tables might be more efficient.
+
+
+**Balancing BSTs:**
+
+To mitigate the risk of imbalance and maintain O(log n) performance, self-balancing BSTs are used. These include:
+
+* **AVL Trees:**  Maintain a balance factor for each node, ensuring that the height difference between the left and right subtrees is at most 1.
+* **Red-Black Trees:**  Use coloring of nodes to ensure a roughly balanced tree.
+* **B-Trees:**  Optimized for disk-based storage, often used in databases.
+
+
+**Applications:**
+
+BSTs are used in various applications, including:
+
+* **Symbol tables:** Storing and retrieving data associated with keys.
+* **Databases:** Indexing and querying data.
+* **Sorting algorithms:** Some sorting algorithms are based on BSTs.
+* **Implementing sets and maps:** Providing efficient operations for set and map data structures.
+
+
+In summary, Binary Search Trees are a powerful data structure for efficiently managing sorted data, but understanding their limitations and employing self-balancing techniques when necessary is crucial for optimal performance.
+
