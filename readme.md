@@ -74839,3 +74839,61 @@ Therefore, we have shown that 1*n² ≤ 2n² + 5n + 1 ≤ 3*n² for n ≥ 1 (n�
 
 **In summary:** Big-Theta notation precisely characterizes the growth rate of a function, providing both upper and lower bounds.  It's a crucial tool for analyzing algorithm efficiency and comparing the performance of different algorithms.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of a function, often used to analyze the efficiency of algorithms.  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  An upper bound on the growth rate of a function.  It describes the *worst-case* scenario.
+* **Formal Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Intuitive Meaning:** f(n) grows no faster than g(n).
+* **Example:**  If an algorithm's runtime is O(n²), it means the runtime grows at most quadratically with the input size (n).  It could be faster, but it won't be significantly worse than n².
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** A lower bound on the growth rate of a function. It describes the *best-case* scenario (though often used for the lower bound of the *average case* as well).
+* **Formal Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Intuitive Meaning:** f(n) grows at least as fast as g(n).
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** A tight bound on the growth rate of a function. It describes both the upper and lower bounds.
+* **Formal Definition:** f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Intuitive Meaning:** f(n) grows proportionally to g(n).
+* **Example:** If an algorithm's runtime is Θ(n log n), its runtime grows proportionally to n log n.  It's neither significantly faster nor significantly slower than n log n.
+
+**4. Little o Notation (o):**
+
+* **Meaning:** A strict upper bound on the growth rate of a function.
+* **Formal Definition:** f(n) = o(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Intuitive Meaning:** f(n) grows strictly slower than g(n).
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** A strict lower bound on the growth rate of a function.
+* **Formal Definition:** f(n) = ω(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Intuitive Meaning:** f(n) grows strictly faster than g(n).
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Relationship to g(n)        |
+|---------|---------------------------------------|-----------------------------|
+| O(g(n))  | Upper bound                           | f(n) grows no faster than g(n) |
+| Ω(g(n))  | Lower bound                           | f(n) grows at least as fast as g(n) |
+| Θ(g(n))  | Tight bound                          | f(n) grows proportionally to g(n) |
+| o(g(n))  | Strict upper bound                    | f(n) grows strictly slower than g(n) |
+| ω(g(n))  | Strict lower bound                    | f(n) grows strictly faster than g(n) |
+
+
+**Key Differences:**
+
+* **Big vs. Little:** Big O, Ω, and Θ describe asymptotic bounds (up to a constant factor), while little o and ω are stricter and exclude the possibility of proportionality.
+* **Upper vs. Lower Bounds:** O and o provide upper bounds, while Ω and ω provide lower bounds. Θ provides both.
+
+
+Understanding these notations is crucial for analyzing algorithm efficiency and comparing different algorithms.  They allow us to focus on the dominant factors influencing runtime and space complexity as the input size becomes very large, ignoring less significant details.
+
