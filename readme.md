@@ -75082,3 +75082,65 @@ public class Main {
 
 These examples show the basic structure of simple loops.  The specific syntax might vary slightly between languages, but the core concept remains the same:  a block of code is executed repeatedly as long as a certain condition is true.  Remember to be careful to avoid infinite loops (loops that never end) by ensuring your loop's condition will eventually become false.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This structure is commonly used to process multi-dimensional data structures like matrices or tables, or to iterate through combinations of items.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed for each inner loop iteration
+        # This code has access to both outer_loop_variable and inner_loop_variable
+    # Code that executes after the inner loop completes for a single outer loop iteration
+```
+
+**Examples:**
+
+**1. Printing a multiplication table:**
+
+```python
+# Print a 5x5 multiplication table
+for i in range(1, 6):  # Outer loop iterates through rows
+    for j in range(1, 6):  # Inner loop iterates through columns
+        print(i * j, end="\t")  # Print the product, \t adds a tab for spacing
+    print()  # New line after each row
+```
+
+**2. Iterating through a matrix:**
+
+```python
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()  # New line after each row
+```
+
+**3. Finding all pairs in a list:**
+
+```python
+my_list = [1, 2, 3]
+
+for i in range(len(my_list)):
+    for j in range(i + 1, len(my_list)):  # Start j from i+1 to avoid duplicate pairs and self-pairs
+        print(f"({my_list[i]}, {my_list[j]})")
+```
+
+**Time Complexity:**
+
+The time complexity of nested loops is the product of the time complexities of the individual loops.  For example, if both the outer and inner loops iterate `n` times, the overall time complexity is O(n²). This means the execution time grows quadratically with the input size.  Nested loops can be computationally expensive for large datasets.
+
+
+**Important Considerations:**
+
+* **Efficiency:**  Nested loops can be inefficient for large datasets. Consider alternative algorithms or data structures if performance becomes an issue.
+* **Readability:**  Deeply nested loops can be hard to read and understand.  Break down complex logic into smaller, more manageable functions.
+* **Infinite Loops:**  Ensure your loop conditions are correctly defined to avoid infinite loops, especially in nested structures.
+
+
+Nested loops are a fundamental programming construct, but it's crucial to understand their implications on efficiency and code readability before using them extensively, particularly with large datasets.  Often, more efficient algorithms exist to achieve the same result.
+
