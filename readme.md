@@ -77795,3 +77795,49 @@ Let's say f(n) = 2n + 5 and g(n) = n.
 
 Understanding these notations is crucial for analyzing algorithms and comparing their efficiency.  They allow us to focus on the dominant factors affecting runtime as the input size grows large, ignoring less significant details.
 
+#  Big-Omega Notation 
+Big-Omega (Ω) notation is used in computer science to describe the lower bound of an algorithm's time or space complexity.  It provides a formal way to express the best-case or minimum time an algorithm will take to complete, given an input of size *n*.  In simpler terms, it tells us how fast an algorithm *at least* runs.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that f(n) = Ω(g(n)) if and only if there exist positive constants *c* and *n₀* such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+
+Let's break this down:
+
+* **f(n):**  This represents the actual runtime or space complexity of the algorithm as a function of the input size *n*.
+
+* **g(n):** This represents a simpler function that describes the lower bound of the algorithm's complexity.  This is often a well-known function like n, n log n, n², etc.
+
+* **c:** This is a positive constant.  It accounts for differences in machine speeds, implementation details, and other factors that don't fundamentally change the growth rate of the function.
+
+* **n₀:** This is a positive constant representing a threshold input size.  The inequality 0 ≤ c * g(n) ≤ f(n) only needs to hold for all input sizes *n* greater than or equal to *n₀*. This allows us to ignore smaller input sizes where the behavior might be erratic.
+
+**What it means:**
+
+The inequality `c * g(n) ≤ f(n)` means that the function f(n) (the algorithm's complexity) is always greater than or equal to a constant multiple of g(n) (the lower bound) for sufficiently large input sizes.  This implies that the algorithm's runtime will *never* be significantly *less* than g(n).
+
+**Example:**
+
+Let's say we have an algorithm with a runtime of f(n) = n² + 2n + 1. We can say that f(n) = Ω(n²).  Why?
+
+Because we can find constants *c* and *n₀* that satisfy the definition.  For example, let's choose c = 1 and n₀ = 1. Then, for all n ≥ 1:
+
+1 * n² ≤ n² + 2n + 1
+
+This shows that the runtime of the algorithm is at least proportional to n². The lower bound is n².  We're ignoring the lower-order terms (2n and 1) because they become insignificant compared to n² as *n* grows large.
+
+**Difference from Big-O (O) and Big-Theta (Θ):**
+
+* **Big-O (O):** Describes the *upper bound* of an algorithm's complexity.  It tells us how fast the algorithm *at most* runs (worst-case scenario).
+
+* **Big-Omega (Ω):** Describes the *lower bound* of an algorithm's complexity.  It tells us how fast the algorithm *at least* runs (best-case scenario).
+
+* **Big-Theta (Θ):** Describes both the *upper* and *lower bounds*.  It means the algorithm's complexity grows at the same rate as the given function (tight bound).
+
+In short, if f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).  However, the converse isn't always true.  An algorithm can have a different best-case and worst-case complexity.
+
+
+Ω notation is crucial for understanding the fundamental limitations of an algorithm. It tells us how efficient an algorithm *can be* at its very best, setting a benchmark for performance expectations.  It's often used in conjunction with Big-O notation to get a complete picture of an algorithm's performance characteristics.
+
