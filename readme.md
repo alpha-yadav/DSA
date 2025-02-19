@@ -78056,3 +78056,43 @@ public class NestedLoopExample {
 
 Nested loops are a fundamental programming concept used in a wide variety of algorithms and tasks, from processing matrices to generating patterns and searching data structures.  Understanding how they work is essential for any programmer.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are very efficient.  They mean the time it takes to complete the algorithm grows logarithmically with the input size (n).  This is significantly faster than linear time (O(n)) or quadratic time (O(n²)).  The base of the logarithm (e.g., base 2, base 10) doesn't affect the overall classification as O(log n); it only affects the constant factor.
+
+Here are some common types and examples of algorithms with O(log n) time complexity:
+
+**1. Binary Search:**
+
+* **Description:**  This is perhaps the most well-known O(log n) algorithm. It works on a *sorted* list or array.  It repeatedly divides the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This continues until the target value is found or the search interval is empty.
+* **Example:**  Searching for a word in a dictionary.
+
+**2. Tree Traversal (Balanced Trees):**
+
+* **Description:**  Operations like searching, insertion, and deletion in balanced binary search trees (like AVL trees or red-black trees) have logarithmic time complexity.  The balanced nature ensures the tree's height remains logarithmic with the number of nodes.
+* **Example:**  Finding a specific node in a balanced binary search tree.
+
+**3. Finding a number in a sorted rotated array:**
+
+* **Description:**  A modification of binary search.  A rotated sorted array is a sorted array that has been rotated a certain number of times.  You can still use a modified binary search to efficiently find a target number.
+
+
+**4. Exponentiation by Squaring (Binary Exponentiation):**
+
+* **Description:**  This algorithm efficiently calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time.  It uses the property that a<sup>b</sup> = (a<sup>b/2</sup>)<sup>2</sup> if b is even, and a<sup>b</sup> = a * a<sup>(b-1)</sup> if b is odd.
+* **Example:**  Cryptography often uses this for fast modular exponentiation.
+
+
+**5. Some Graph Algorithms (with specific structures):**
+
+* **Description:** Depending on the data structure used, certain graph operations might exhibit logarithmic complexity.  For example, using a Fibonacci heap in Dijkstra's algorithm (though the overall algorithm is not strictly O(log n),  some of its steps can be.)
+* **Example:**  Certain shortest path algorithms with specialized heaps.
+
+**Key Characteristics Leading to O(log n):**
+
+Algorithms with O(log n) complexity typically involve:
+
+* **Repeated Halving or Division:** The problem size is repeatedly reduced by a constant factor (usually by half) in each step.
+* **Efficient Data Structures:** The use of balanced trees or other efficient data structures that maintain a logarithmic height is crucial.
+
+**Important Note:**  The O(log n) complexity only holds true under certain conditions. For example, binary search requires a sorted input; if the input is unsorted, you'd need to sort it first (adding O(n log n) time complexity). Similarly, balanced tree operations are O(log n) only if the tree remains balanced.  If the tree becomes skewed (e.g., a linked list), the complexity degrades to O(n).
+
