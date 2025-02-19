@@ -77575,3 +77575,74 @@ Output: "bab" or "aba" (both are valid answers)
 
 These problems represent a range of difficulty and cover common algorithmic concepts.  Try solving them to improve your algorithmic thinking.  Remember to consider time and space complexity when designing your solutions.  You can find many more algorithmic problems on websites like LeetCode, HackerRank, and Codewars.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing improvements:
+
+**Version 1: Basic Approach**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This is straightforward and easy to understand.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5.
+
+**Version 2: Slightly More Efficient**
+
+This version uses a ternary operator for conciseness and slightly better performance (avoiding nested `if-else`):
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This achieves the same result but is a bit more compact.
+
+**Version 3:  Using String Interpolation for Clarity**
+
+This version improves readability by using string interpolation:
+
+```swift
+func fizzBuzz(n: Int) {
+  for i in 1...n {
+    var output = ""
+    if i % 3 == 0 { output += "Fizz" }
+    if i % 5 == 0 { output += "Buzz" }
+    print(output.isEmpty ? "\(i)" : output)
+  }
+}
+
+fizzBuzz(n: 15) // Example usage
+
+```
+This approach avoids nested conditionals and is often considered more readable, especially for more complex variations of FizzBuzz.
+
+
+**Choosing the Best Version:**
+
+For simple FizzBuzz, all three versions work correctly.  Version 3 is often preferred for readability, especially as the problem becomes more complex (e.g., adding more divisors).  Version 2 is slightly more concise but might be less readable for those unfamiliar with the ternary operator.  Version 1 is the easiest to understand for beginners.
+
+
+Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using Swift's command-line tools).  Choose the version that best suits your understanding and coding style.
+
