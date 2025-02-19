@@ -75332,3 +75332,15 @@ The choice of representation depends heavily on factors like:
 
 Often, the child-sibling representation offers a good balance of simplicity and efficiency for many applications. However, if specific operations (like directly accessing children) are crucial for performance, a different representation might be preferable.
 
+#  Introduction 
+Please provide me with context!  An introduction to *what*?  To give you a good introduction, I need to know the topic.  For example, are you looking for an introduction to:
+
+* **A specific subject?** (e.g., the history of the Roman Empire, the science of climate change, the works of Shakespeare)
+* **An essay or paper?** (Please give me the essay topic!)
+* **A presentation?** (What is the presentation about?)
+* **A book?** (What is the book about?)
+* **A person?** (Who are you introducing?)
+* **A concept?** (What is the concept?)
+
+Once you tell me what you need an introduction *for*, I can write a helpful and relevant one.
+
