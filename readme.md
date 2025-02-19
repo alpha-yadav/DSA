@@ -77965,3 +77965,94 @@ These examples all demonstrate the basic structure of a `while` loop:
 
 Remember to always include a mechanism to eventually make the loop condition false, otherwise your program will run indefinitely.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or combinations of data.
+
+Here's a breakdown with examples in several programming languages:
+
+**Concept:**
+
+Imagine you have a grid (like a matrix or table).  The outer loop iterates over the rows, and the inner loop iterates over the columns within each row.
+
+**Example (Python):**
+
+This code prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+**Example (JavaScript):**
+
+This code iterates through a 2D array:
+
+```javascript
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
+
+for (let i = 0; i < matrix.length; i++) { // Outer loop (rows)
+  for (let j = 0; j < matrix[i].length; j++) { // Inner loop (columns)
+    console.log(matrix[i][j]);
+  }
+}
+```
+
+**Example (C++):**
+
+This code does the same as the JavaScript example:
+
+```c++
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<std::vector<int>> matrix = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+  };
+
+  for (int i = 0; i < matrix.size(); i++) { // Outer loop
+    for (int j = 0; j < matrix[i].size(); j++) { // Inner loop
+      std::cout << matrix[i][j] << std::endl;
+    }
+  }
+  return 0;
+}
+```
+
+**Example (Java):**
+
+```java
+public class NestedLoopExample {
+    public static void main(String[] args) {
+        int[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        for (int i = 0; i < matrix.length; i++) { // Outer loop
+            for (int j = 0; j < matrix[i].length; j++) { // Inner loop
+                System.out.println(matrix[i][j]);
+            }
+        }
+    }
+}
+```
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the runtime of your code.  If the outer loop iterates `m` times and the inner loop iterates `n` times, the total number of iterations is `m * n`.  This is often referred to as O(m*n) time complexity.  Be mindful of this, especially when dealing with large datasets.
+* **Readability:**  Proper indentation is crucial for understanding nested loops.  Make sure your code is well-formatted to avoid confusion.
+
+
+Nested loops are a fundamental programming concept used in a wide variety of algorithms and tasks, from processing matrices to generating patterns and searching data structures.  Understanding how they work is essential for any programmer.
+
