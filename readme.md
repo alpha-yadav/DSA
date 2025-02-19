@@ -77892,3 +77892,76 @@ def sum_array_2(arr):
 
 Big O notation is a crucial tool for comparing the efficiency of different algorithms and making informed decisions about which algorithm to choose for a given task.  Understanding Big O allows you to predict how an algorithm's performance will scale as the input size grows, which is essential for building efficient and scalable software.
 
+#  A Simple Loop 
+The simplest loop is a "while" loop that continues as long as a condition is true.  Here are examples in a few common programming languages:
+
+**Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This loop prints the numbers 0 through 4.  The condition `count < 5` is checked before each iteration.  When `count` becomes 5, the loop terminates.
+
+
+**JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+This is functionally identical to the Python example.
+
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+This C++ example does the same thing, using `std::cout` for output and `std::endl` for a newline.
+
+
+**Java:**
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+This Java example requires a class and a `main` method.
+
+
+These examples all demonstrate the basic structure of a `while` loop:
+
+* **Initialization:** A variable (e.g., `count`) is initialized before the loop.
+* **Condition:** A condition (e.g., `count < 5`) is checked at the beginning of each iteration.  If the condition is true, the loop body executes.  If false, the loop terminates.
+* **Loop Body:** The code inside the loop (e.g., `print(count)`, `count += 1`) is executed repeatedly as long as the condition is true.
+* **Update:** The loop variable (e.g., `count`) is updated within the loop body to eventually make the condition false, preventing an infinite loop.  Failure to update this variable will result in an infinite loop.
+
+
+Remember to always include a mechanism to eventually make the loop condition false, otherwise your program will run indefinitely.
+
