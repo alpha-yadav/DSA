@@ -77646,3 +77646,59 @@ For simple FizzBuzz, all three versions work correctly.  Version 3 is often pref
 
 Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using Swift's command-line tools).  Choose the version that best suits your understanding and coding style.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources of primary interest are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We typically analyze complexity using **Big O notation**, which describes the growth rate of the resource consumption as the input size grows without bound.  Big O focuses on the dominant terms and ignores constant factors.  This allows us to compare algorithms' efficiency in a general way, independent of specific hardware or implementation details.
+
+**Common Big O Notations:**
+
+* **O(1): Constant time:** The algorithm's runtime is independent of the input size.  Example: Accessing an element in an array by index.
+* **O(log n): Logarithmic time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n): Linear time:** The runtime increases linearly with the input size. Example: Searching an unsorted array for a specific element.
+* **O(n log n): Linearithmic time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+* **O(n²): Quadratic time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating through the input.
+* **O(2ⁿ): Exponential time:** The runtime doubles with each increase in input size. Example: Finding all subsets of a set.
+* **O(n!): Factorial time:** The runtime grows factorially with the input size. Example: Generating all permutations of a sequence.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity, we typically:
+
+1. **Identify the basic operation:** The operation that contributes most significantly to the runtime.
+2. **Count the number of times the basic operation is executed:** This count will be a function of the input size (n).
+3. **Express the count using Big O notation:**  Focus on the dominant terms and ignore constant factors.
+
+**Example: Linear Search**
+
+A linear search iterates through an array to find a target element.  The basic operation is the comparison of the target element with each element in the array.  In the worst case (element not found), the comparison is performed `n` times, where `n` is the array size.  Therefore, the time complexity is O(n).
+
+**Example: Bubble Sort**
+
+Bubble sort uses nested loops to compare and swap adjacent elements. The outer loop iterates `n-1` times, and the inner loop iterates up to `n-i` times (where `i` is the outer loop counter).  The total number of comparisons is approximately proportional to n², making the time complexity O(n²).
+
+
+**Space Complexity:**
+
+Space complexity measures the amount of memory used by an algorithm. It's analyzed similarly to time complexity, using Big O notation to express the growth rate of memory usage as a function of input size.  Space complexity can be:
+
+* **O(1): Constant space:** The algorithm uses a fixed amount of memory regardless of input size.
+* **O(n): Linear space:** The memory usage grows linearly with the input size.
+* **O(log n), O(n²), O(2ⁿ), etc.:** Similar to time complexity, other growth rates are possible.
+
+**Best, Average, and Worst Case:**
+
+Complexity analysis often considers three cases:
+
+* **Best case:** The most favorable input scenario.
+* **Average case:** The expected runtime for a typical input.
+* **Worst case:** The least favorable input scenario.
+
+Often, the worst-case complexity is of most interest, as it provides an upper bound on the algorithm's runtime.
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and for predicting the performance of software systems.  Choosing an algorithm with a lower complexity often leads to significant performance improvements, especially when dealing with large datasets.
+
