@@ -80231,3 +80231,115 @@ bfs(graph, 'A') # Output: A B C D E F
 
 Choosing between DFS and BFS depends on the specific application and the properties of the graph.  If you need the shortest path in an unweighted graph, BFS is the better choice.  If you need to find paths or cycles, DFS might be more suitable.  Sometimes, a combination of both can be effective.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used and whether you're working with graphs or trees.  Here are a few examples in Python, showcasing different approaches:
+
+**1. DFS for a Tree using Recursion (most common and straightforward):**
+
+This version is ideal for trees where each node has a known set of children.
+
+```python
+def dfs_recursive(node):
+  """
+  Performs a depth-first search traversal of a tree recursively.
+
+  Args:
+    node: The root node of the tree or subtree.  Each node should have a 'children' attribute,
+          which is a list of its child nodes.  Nodes should also have a 'data' attribute to access the node's value.
+  """
+  print(node.data)  # Process the current node
+
+  for child in node.children:
+    dfs_recursive(child)
+
+# Example usage (assuming you have a Node class defined):
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+root = Node('A')
+root.children = [Node('B'), Node('C')]
+root.children[0].children = [Node('D'), Node('E')]
+root.children[1].children = [Node('F')]
+
+dfs_recursive(root) # Output: A B D E C F
+```
+
+**2. DFS for a Graph using a Stack (iterative approach):**
+
+This version is more flexible and works well for graphs with cycles or arbitrary connections.  It uses a stack to simulate recursion.
+
+```python
+def dfs_iterative(graph, start_node):
+  """
+  Performs a depth-first search traversal of a graph iteratively using a stack.
+
+  Args:
+    graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+    start_node: The starting node for the traversal.
+  """
+  visited = set()
+  stack = [start_node]
+
+  while stack:
+    node = stack.pop()
+    if node not in visited:
+      visited.add(node)
+      print(node)
+      stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': [],
+    'F': []
+}
+
+dfs_iterative(graph, 'A') # Output: A C F B E D  (order may vary slightly depending on stack implementation)
+
+```
+
+**3. DFS with Adjacency Matrix (for graphs):**
+
+If your graph is represented as an adjacency matrix, you'll need a slightly different approach:
+
+
+```python
+def dfs_matrix(adj_matrix, start_node):
+    """
+    Performs DFS on a graph represented as an adjacency matrix.
+
+    Args:
+        adj_matrix: A list of lists representing the adjacency matrix.
+        start_node: The index of the starting node.
+    """
+    num_nodes = len(adj_matrix)
+    visited = [False] * num_nodes
+    stack = [start_node]
+
+    while stack:
+        node = stack.pop()
+        if not visited[node]:
+            visited[node] = True
+            print(node)  # Process the node
+            for neighbor in range(num_nodes):
+                if adj_matrix[node][neighbor] == 1 and not visited[neighbor]:
+                    stack.append(neighbor)
+
+#Example usage:
+adj_matrix = [
+    [0, 1, 1, 0],
+    [1, 0, 0, 1],
+    [1, 0, 0, 1],
+    [0, 1, 1, 0]
+]
+dfs_matrix(adj_matrix, 0) #Output will depend on the stack implementation and node numbering
+
+```
+
+Remember to adapt these examples to your specific needs and data structures.  You'll likely need to adjust how nodes and their connections are accessed based on how you've implemented your graph or tree.  The key concepts remain consistent across all implementations: visiting a node, marking it as visited, and recursively (or iteratively) exploring its neighbors.
+
