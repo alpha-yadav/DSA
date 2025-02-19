@@ -74624,3 +74624,68 @@ This is a very basic algorithm, but it illustrates the fundamental structure: in
 
 Starting with the basics and gradually increasing the complexity of the problems you solve is the best approach.  Be patient, persistent, and enjoy the learning process!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:** Two Sum
+
+**Description:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Medium:**
+
+**Problem:**  Reverse Linked List
+
+**Description:** Given the `head` of a singly linked list, reverse the list, and return *the reversed list*.
+
+
+**Example:**
+
+```
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+```
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Description:** Given a string `s`, return *the longest palindromic substring* in `s`.
+
+**Example:**
+
+```
+Input: s = "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+```
+
+
+These problems showcase different aspects of algorithmic thinking:
+
+* **Two Sum:** Focuses on efficient searching and data structures (hash tables are ideal).
+* **Reverse Linked List:** Deals with linked list manipulation and iterative/recursive approaches.
+* **Longest Palindromic Substring:**  Requires understanding of string manipulation, dynamic programming (for optimal solutions), and potentially expanding around center or manacher's algorithm.
+
+
+Remember to consider:
+
+* **Time Complexity:** How does the runtime scale with the input size?  (e.g., O(n), O(n^2), O(log n))
+* **Space Complexity:** How much extra memory does your algorithm use? (e.g., O(1), O(n), O(log n))
+
+
+Choose the problem that best suits your current skill level and work through it.  Try to solve it yourself before searching for solutions online.  This will help you learn and improve your algorithmic thinking skills.
+
