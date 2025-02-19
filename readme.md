@@ -76632,3 +76632,107 @@ Remember to handle edge cases like:
 
 The provided code examples include error handling for some of these cases, but you might need to add more robust checks depending on your specific requirements.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic computer science problem.  There are several ways to solve it, each with different time and space complexities. Here's a breakdown of common approaches:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a straightforward and efficient approach for binary trees.  The idea is to recursively traverse the tree. If the current node is one of the targets, return it.  Otherwise, recursively search the left and right subtrees.  If both subtrees return a node (meaning each target was found in a different subtree), the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+
+#Example Usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+lca = lowestCommonAncestor(root, root.left, root.right) #LCA is root (1)
+print(f"LCA of 2 and 3 is: {lca.data}")
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right) #LCA is root.left (2)
+print(f"LCA of 4 and 5 is: {lca.data}")
+
+lca = lowestCommonAncestor(root, root.left, root.right.right) #LCA is root (1)
+print(f"LCA of 2 and 7 is: {lca.data}")
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, we visit all nodes).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive calls on the call stack).  In a balanced tree, H is log(N); in a skewed tree, H is N.
+
+
+**2. Iterative Approach (using Parent Pointers):**
+
+If each node in the tree has a pointer to its parent, you can solve the LCA iteratively.  This approach avoids recursion and might be slightly more efficient in some cases.
+
+1. Find the paths from the root to `p` and from the root to `q`.
+2. Iterate through both paths simultaneously.  The last common node in both paths is the LCA.
+
+**3. Using a Hash Table (for General Trees):**
+
+For general trees (not necessarily binary), a hash table can be useful.
+
+1. Perform a Depth-First Search (DFS) to create a parent-child relationship map (using a hash table/dictionary).
+2. Find the path from the root to `p` and from the root to `q`.
+3. Iterate through both paths to find the LCA (as in the iterative approach with parent pointers).
+
+**4. Lowest Common Ancestor in a Binary Search Tree (BST):**
+
+If the tree is a Binary Search Tree (BST), finding the LCA is even simpler.  You can leverage the BST property:
+
+```python
+def lca_bst(root, p, q):
+    if not root:
+        return None
+    if p.data < root.data and q.data < root.data:
+        return lca_bst(root.left, p, q)
+    elif p.data > root.data and q.data > root.data:
+        return lca_bst(root.right, p, q)
+    else:
+        return root
+
+```
+
+**Time Complexity (BST):** O(H), where H is the height of the BST.  In a balanced BST, H is log(N).
+**Space Complexity (BST):** O(H) due to recursion.
+
+
+Remember to handle edge cases such as:
+
+* One or both nodes not being present in the tree.
+* One node being an ancestor of the other.
+
+Choose the approach that best suits your specific needs and the type of tree you're working with.  For binary trees, the recursive approach is generally preferred for its clarity and efficiency.  For BSTs, the BST-specific approach is the most efficient. For general trees, the hash table approach provides a flexible solution.
+
