@@ -76747,3 +76747,105 @@ Please provide me with the data or equation you want me to graph.  I need inform
 
 Once you give me this information, I can help you create a graph.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common technique, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, its advantages and disadvantages, and different implementation details:
+
+**How it works:**
+
+An adjacency matrix represents a graph as a square matrix where each element `matrix[i][j]` indicates the presence or weight of an edge between vertex `i` and vertex `j`.
+
+* **Unweighted Graph:**  `matrix[i][j]` is 1 if there's an edge between vertex `i` and vertex `j`, and 0 otherwise.
+* **Weighted Graph:** `matrix[i][j]` is the weight of the edge between vertex `i` and vertex `j`. If there's no edge, it's usually represented by a special value like `infinity` (for shortest path algorithms) or `-1` (or 0 if weights can't be negative).
+* **Directed Graph:** The matrix is not necessarily symmetric. `matrix[i][j]` represents an edge from vertex `i` to vertex `j`.  `matrix[j][i]` may or may not exist.
+* **Undirected Graph:** The matrix is symmetric.  `matrix[i][j] == matrix[j][i]`.
+
+**Example (Unweighted, Undirected Graph):**
+
+Consider a graph with 4 vertices (A, B, C, D) and edges: A-B, A-C, B-C, C-D.
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  1  0  1  0
+C  1  1  0  1
+D  0  0  1  0
+```
+
+**Implementation (Python):**
+
+```python
+import sys
+
+def create_adjacency_matrix(num_vertices, edges):
+    """Creates an adjacency matrix for an unweighted, undirected graph.
+
+    Args:
+        num_vertices: The number of vertices in the graph.
+        edges: A list of tuples, where each tuple represents an edge (u, v).
+
+    Returns:
+        A list of lists representing the adjacency matrix.  Returns None if input is invalid.
+    """
+    if num_vertices <= 0:
+      return None
+    matrix = [[0] * num_vertices for _ in range(num_vertices)]
+    for u, v in edges:
+        if 0 <= u < num_vertices and 0 <= v < num_vertices:
+            matrix[u][v] = matrix[v][u] = 1  # Undirected graph
+        else:
+            print(f"Invalid edge: ({u},{v}) - vertex index out of bounds.")
+            return None #Handles invalid edges gracefully
+
+    return matrix
+
+
+# Example usage:
+num_vertices = 4
+edges = [(0, 1), (0, 2), (1, 2), (2, 3)]  # Vertices are 0-indexed
+adjacency_matrix = create_adjacency_matrix(num_vertices, edges)
+
+if adjacency_matrix:
+    for row in adjacency_matrix:
+        print(row)
+
+#Weighted Graph Example:
+weighted_edges = [(0,1,5),(1,2,10),(2,3,2)] # (u,v,weight)
+def create_weighted_adjacency_matrix(num_vertices, edges):
+    matrix = [[sys.maxsize] * num_vertices for _ in range(num_vertices)] #Initialize with infinity for no connection
+    for u, v, weight in edges:
+        if 0 <= u < num_vertices and 0 <= v < num_vertices:
+            matrix[u][v] = weight #Directed graph example
+        else:
+            print(f"Invalid edge: ({u},{v}) - vertex index out of bounds.")
+            return None
+    return matrix
+
+weighted_matrix = create_weighted_adjacency_matrix(4, weighted_edges)
+if weighted_matrix:
+    for row in weighted_matrix:
+        print(row)
+```
+
+
+**Advantages:**
+
+* **Simple Implementation:**  Easy to understand and implement.
+* **Efficient for Dense Graphs:**  Finding edges is O(1) time complexity.
+* **Easy to check for existence of an edge:**  Just access the corresponding element in the matrix.
+
+**Disadvantages:**
+
+* **Space Inefficient for Sparse Graphs:**  Uses O(V²) space, where V is the number of vertices.  This is wasteful for graphs with relatively few edges.
+* **Adding/Deleting Vertices:**  Can be expensive because it requires resizing the matrix.
+
+**When to use Adjacency Matrices:**
+
+* Dense graphs (many edges)
+* When you need to quickly check for the existence of an edge
+* Algorithms that benefit from easy access to all neighbors of a vertex (e.g., some shortest path algorithms)
+
+
+Remember to choose the appropriate graph representation (adjacency matrix or adjacency list) based on the characteristics of your graph and the specific operations you need to perform.  For sparse graphs, an adjacency list is generally preferred due to its better space efficiency.
+
