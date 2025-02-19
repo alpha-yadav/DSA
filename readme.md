@@ -74806,3 +74806,36 @@ The basic operation is the comparison `x > max_val`. This comparison is executed
 
 Understanding algorithm complexity is crucial for selecting appropriate algorithms for different tasks and for predicting the performance of your code as the input size grows.  Choosing an algorithm with a lower time and space complexity generally leads to more efficient and scalable solutions.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate, indicating that the function's growth rate is *both* upper-bounded and lower-bounded by the same function (within constant factors).  In simpler terms, it means a function grows at the *same rate* as another function, ignoring constant factors.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n* ≥ *n₀*:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.  The constants *c₁* and *c₂* absorb any constant factors in *f(n)*, allowing us to focus on the dominant growth term.
+
+**Key aspects of Big-Theta notation:**
+
+* **Tight Bound:** Unlike Big-O (O) notation, which provides only an upper bound, and Big-Ω (Ω) notation, which provides only a lower bound, Big-Theta provides a *tight* bound.  It says the function grows *exactly* at the rate of *g(n)*.
+
+* **Asymptotic Behavior:**  Big-Theta is concerned with the behavior of the function as *n* approaches infinity.  For small values of *n*, the inequality might not hold, but it must hold for all *n* beyond a certain threshold (*n₀*).
+
+* **Constant Factors Ignored:**  The constants *c₁* and *c₂* are crucial because they allow us to ignore constant factors that don't affect the overall growth rate.  For example, 100n and n are both Θ(n) because the constant 100 is insignificant as *n* grows large.
+
+**Example:**
+
+Let's consider the function *f(n) = 2n² + 5n + 1*.  We can say that *f(n)* is Θ(n²).  To prove this, we need to find constants *c₁*, *c₂*, and *n₀* that satisfy the definition:
+
+1. **Find c₂:**  For sufficiently large *n*, the n² term dominates.  We can choose c₂ = 3.  Then, for n ≥ 1,  2n² + 5n + 1 ≤ 2n² + 5n² + n² = 8n² ≤ 3(2n²) = 3*g(n). This is an upper bound
+
+2. **Find c₁:**  Again, for sufficiently large *n*, the n² term dominates.  We can choose c₁ = 1.  Then, for n ≥ 1,  2n² + 5n + 1 ≥ 2n² ≥ 1*n² = 1*g(n). This is a lower bound.
+
+Therefore, we have shown that 1*n² ≤ 2n² + 5n + 1 ≤ 3*n² for n ≥ 1 (n₀ = 1), fulfilling the definition of Θ(n²).
+
+**In summary:** Big-Theta notation precisely characterizes the growth rate of a function, providing both upper and lower bounds.  It's a crucial tool for analyzing algorithm efficiency and comparing the performance of different algorithms.
+
