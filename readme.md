@@ -77342,3 +77342,97 @@ bfs(graph, 'A') # Output: A B C D E F (order is consistent, level by level)
 
 Choosing between DFS and BFS depends on the specific problem and its requirements.  If you need to find a path quickly, BFS might be better in unweighted graphs. If you need to explore deeply or perform topological sorting, DFS is more suitable.  Many problems can be solved with either algorithm, but one might be significantly more efficient than the other.
 
+#  Depth First Search traversal function 
+There are several ways to implement a Depth-First Search (DFS) traversal function, depending on the data structure used to represent the graph (adjacency matrix, adjacency list) and whether you want to use recursion or iteration.  Below are examples using both approaches and an adjacency list representation, which is generally more efficient for sparse graphs.
+
+**1. Recursive DFS (Adjacency List):**
+
+This is arguably the most intuitive way to implement DFS.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (used for recursion).
+        path: A list to store the traversal path (used for recursion).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph.get(node, []):  # Handle nodes with no outgoing edges
+        if neighbor not in visited:
+            path = dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+dfs_path = dfs_recursive(graph, 'A')
+print(f"DFS traversal path (recursive): {dfs_path}")  # Output will vary slightly depending on neighbor order
+
+```
+
+**2. Iterative DFS (Adjacency List):**
+
+This approach uses a stack to simulate the recursion, making it potentially more efficient for very deep graphs and avoiding potential stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal iteratively.
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    visited = set()
+    stack = [node]
+    path = []
+
+    while stack:
+        current_node = stack.pop()
+        if current_node not in visited:
+            visited.add(current_node)
+            path.append(current_node)
+            stack.extend(neighbor for neighbor in graph.get(current_node, []) if neighbor not in visited)
+
+    return path
+
+
+dfs_path = dfs_iterative(graph, 'A')
+print(f"DFS traversal path (iterative): {dfs_path}") # Output may vary slightly
+```
+
+**Key Differences and Considerations:**
+
+* **Recursion vs. Iteration:** Recursive DFS is often more readable, but iterative DFS avoids potential stack overflow issues with very deep graphs and might be slightly more efficient in some cases.
+* **Adjacency List vs. Adjacency Matrix:**  The examples use adjacency lists. Adjacency matrices are suitable for dense graphs but can be less memory-efficient for sparse graphs (graphs with relatively few edges).  Adapting these functions to use an adjacency matrix would involve changes in how neighbors are accessed.
+* **Visited Set:** The `visited` set is crucial to prevent infinite loops in graphs with cycles.
+* **Path Tracking:** The `path` list keeps track of the order of nodes visited.
+
+
+Remember to choose the implementation best suited for your needs and the characteristics of your graph.  If you have a very large graph, the iterative approach might be preferable for robustness.  If readability is paramount and stack overflow isn't a concern, the recursive version is a good choice.
+
