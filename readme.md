@@ -76443,3 +76443,87 @@ levelOrder(root); // Output: 1 2 3 4 5
 
 Remember to choose the implementation that best suits your needs and coding style.  For larger trees, the `collections.deque` in Python or using a dedicated queue data structure in other languages will provide better performance.  The list-based queue is simpler but less efficient for large datasets.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals (preorder, inorder, and postorder) are ways to systematically visit every node in a binary tree.  They differ in the order they visit the root, left subtree, and right subtree.
+
+**Binary Tree Structure:**  Assume a node structure like this:
+
+```c++
+struct Node {
+  int data;
+  Node *left;
+  Node *right;
+  Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+```
+
+**1. Preorder Traversal:**
+
+* **Order:** Root, Left, Right
+* **Algorithm:**
+    1. Visit the root node.
+    2. Recursively traverse the left subtree.
+    3. Recursively traverse the right subtree.
+
+```c++
+void preorder(Node* node) {
+  if (node == nullptr) return;
+  std::cout << node->data << " ";  // Visit root
+  preorder(node->left);           // Traverse left subtree
+  preorder(node->right);          // Traverse right subtree
+}
+```
+
+**2. Inorder Traversal:**
+
+* **Order:** Left, Root, Right
+* **Algorithm:**
+    1. Recursively traverse the left subtree.
+    2. Visit the root node.
+    3. Recursively traverse the right subtree.
+
+```c++
+void inorder(Node* node) {
+  if (node == nullptr) return;
+  inorder(node->left);            // Traverse left subtree
+  std::cout << node->data << " ";  // Visit root
+  inorder(node->right);           // Traverse right subtree
+}
+```
+
+**3. Postorder Traversal:**
+
+* **Order:** Left, Right, Root
+* **Algorithm:**
+    1. Recursively traverse the left subtree.
+    2. Recursively traverse the right subtree.
+    3. Visit the root node.
+
+```c++
+void postorder(Node* node) {
+  if (node == nullptr) return;
+  postorder(node->left);           // Traverse left subtree
+  postorder(node->right);          // Traverse right subtree
+  std::cout << node->data << " ";  // Visit root
+}
+```
+
+**Example:**
+
+Consider this binary tree:
+
+```
+      1
+     / \
+    2   3
+   / \
+  4   5
+```
+
+* **Preorder:** 1 2 4 5 3
+* **Inorder:** 4 2 5 1 3
+* **Postorder:** 4 5 2 3 1
+
+
+**Iterative Approaches:**  While the recursive approaches are elegant and easy to understand, iterative versions using stacks are also possible and are often preferred for very large trees to avoid stack overflow issues.  These iterative approaches typically involve pushing nodes onto a stack and systematically popping and processing them according to the traversal order.  The implementation of iterative versions is slightly more complex but crucial for handling potentially large trees.
+
