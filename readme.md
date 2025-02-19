@@ -78967,3 +78967,112 @@ print(f"Is the tree a BST? {is_bst_recursive(root2)}") # Output: False
 
 Both methods achieve the same result. The recursive approach with bounds is generally preferred for its efficiency, especially with unbalanced trees.  The inorder traversal is simpler to understand but can be less efficient for large datasets due to the list creation.  Choose the method that best suits your needs and understanding.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Algorithm 1: Recursive Approach with In-order Traversal**
+
+This algorithm leverages the property that an in-order traversal of a BST yields a sorted sequence.
+
+1. **In-order Traversal:** Perform an in-order traversal of the binary tree, storing the visited nodes' values in a list.
+
+2. **Sorted Check:** Check if the list obtained in step 1 is sorted in ascending order.  If it is, the tree is a BST; otherwise, it's not.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+    """
+    inorder_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.data)
+            inorder(node.right)
+    inorder(root)
+
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.left.left = Node(0)
+root.left.right = Node(2)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}") #Output: True
+
+
+root2 = Node(3)
+root2.left = Node(5)
+root2.right = Node(1)
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") #Output: False
+
+```
+
+
+**Algorithm 2: Recursive Approach with Range Check**
+
+This algorithm recursively checks if each subtree satisfies the BST property within a given range.
+
+1. **Base Case:** If the node is `None`, it's a valid BST within any range.
+
+2. **Recursive Step:**  For a given node:
+   - Check if the node's value is within the allowed range (`min_val` to `max_val`).
+   - Recursively check the left subtree with the range (`min_val`, `node.data`).
+   - Recursively check the right subtree with the range (`node.data`, `max_val`).
+   - If any of these checks fail, the subtree is not a BST.
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_range(node, min_val, max_val):
+    """
+    Checks if a binary tree is a BST using recursive range checking.
+    """
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_range(node.left, min_val, node.data) and
+            is_bst_range(node.right, node.data, max_val))
+
+# Example usage (same trees as above):
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.left.left = Node(0)
+root.left.right = Node(2)
+
+print(f"Is the tree a BST? {is_bst_range(root, float('-inf'), float('inf'))}") # Output: True
+
+root2 = Node(3)
+root2.left = Node(5)
+root2.right = Node(1)
+
+print(f"Is the tree a BST? {is_bst_range(root2, float('-inf'), float('inf'))}") # Output: False
+
+```
+
+**Time and Space Complexity:**
+
+Both algorithms have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach (where H is the height of the tree), due to the recursive call stack.  In the worst case (a skewed tree), H could be N, making the space complexity O(N).  The iterative in-order traversal would have O(N) space complexity in the worst case as well due to the list storage.  The iterative range-check method would be O(H) space.
+
+The recursive range check method is generally preferred because it avoids the need to create and sort a list, potentially making it more efficient for very large trees.  The choice ultimately depends on coding style and specific performance requirements.
+
