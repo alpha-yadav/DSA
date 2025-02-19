@@ -80081,3 +80081,35 @@ else:
 
 This improved version handles both cycles involving self-loops and cycles that aren't directly connected to the starting node of the DFS.  It's a robust and efficient way to detect cycles in directed graphs. Remember to adapt the vertex indexing (starting from 0) to your specific needs.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focusing on efficient graph algorithms.  The most famous among these is his algorithm for finding minimum spanning trees (MSTs) in linear time.  However, he's contributed significantly to other areas like dynamic graph algorithms and approximate algorithms.
+
+Let's break down the key aspects:
+
+**1. Linear-Time Minimum Spanning Tree (MST) Algorithm:**
+
+This is arguably Thorup's most impactful contribution.  Prior to his work, the best known deterministic algorithms for MSTs had a time complexity slightly above linear (e.g., using Fibonacci heaps).  Thorup's algorithm, along with a subsequent improvement by Karger, Klein, and Tarjan, achieved a truly linear time complexity, *O(m)*, where *m* is the number of edges in the graph.  It's important to note that this linear time complexity holds for graphs with integer edge weights that are polynomially bounded in the number of vertices.
+
+The algorithm is quite sophisticated and relies on several clever techniques, including:
+
+* **Borůvka's algorithm:** It uses Borůvka's algorithm as a subroutine, which finds a significant portion of the MST in a relatively small number of iterations.
+* **Contraction:**  After each Borůvka's iteration, the algorithm contracts components to simplify the graph.
+* **Advanced data structures:**  The algorithm leverages sophisticated data structures to efficiently handle the contractions and maintain information about the graph.
+* **Randomization (in some versions):** Some versions of the algorithm incorporate randomization to achieve the linear time bound, while others are fully deterministic.
+
+**2. Other Significant Contributions:**
+
+Thorup's research extends beyond MSTs.  He has made notable contributions to:
+
+* **Dynamic graph algorithms:** These are algorithms that efficiently handle updates (insertions and deletions) to a graph's structure.
+* **Approximate algorithms:**  These algorithms sacrifice some accuracy for improved speed.  Thorup has worked on approximate algorithms for various graph problems.
+* **Data structures:** His work often involves designing or adapting data structures to optimize the performance of his graph algorithms.
+
+**Key characteristics of Thorup's algorithms:**
+
+* **Sophistication:** These algorithms are often highly intricate and rely on advanced theoretical concepts.
+* **Efficiency:**  The primary goal is achieving optimal or near-optimal time complexity.
+* **Impact:** Thorup's work has significantly advanced the field of graph algorithms, pushing the boundaries of what's computationally possible.
+
+**In summary:**  "Thorup's algorithm" isn't a single algorithm but rather refers to a body of work by Mikkel Thorup that has revolutionized the understanding and efficiency of graph algorithms, most notably his linear-time MST algorithm.  Understanding his work requires a strong background in algorithms and data structures.
+
