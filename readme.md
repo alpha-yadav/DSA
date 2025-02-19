@@ -78747,3 +78747,115 @@ print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 0 and 4: 2
 
 This approach is significantly more efficient than a general LCA algorithm for a binary tree (which would typically require O(N) time).  Remember that this algorithm *only* works correctly for Binary Search Trees.  For general binary trees, a different approach is needed.
 
+#  Binary Search Tree - Python 
+The following code implements a Binary Search Tree (BST) in Python.  It includes methods for insertion, search, deletion (a slightly more complex operation), inorder traversal (for sorted output), and a helper function to find the minimum value in a subtree.
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        if self.root is None:
+            self.root = Node(key)
+        else:
+            self._insert_recursive(self.root, key)
+
+    def _insert_recursive(self, node, key):
+        if key < node.key:
+            if node.left is None:
+                node.left = Node(key)
+            else:
+                self._insert_recursive(node.left, key)
+        else:
+            if node.right is None:
+                node.right = Node(key)
+            else:
+                self._insert_recursive(node.right, key)
+
+    def search(self, key):
+        return self._search_recursive(self.root, key)
+
+    def _search_recursive(self, node, key):
+        if node is None or node.key == key:
+            return node
+        if key < node.key:
+            return self._search_recursive(node.left, key)
+        return self._search_recursive(node.right, key)
+
+    def delete(self, key):
+        self.root = self._delete_recursive(self.root, key)
+
+    def _delete_recursive(self, node, key):
+        if node is None:
+            return node
+
+        if key < node.key:
+            node.left = self._delete_recursive(node.left, key)
+        elif key > node.key:
+            node.right = self._delete_recursive(node.right, key)
+        else:
+            # Node with one or no children
+            if node.left is None:
+                return node.right
+            elif node.right is None:
+                return node.left
+
+            # Node with two children: Get the inorder successor (smallest in the right subtree)
+            node.key = self._find_min(node.right)
+            node.right = self._delete_recursive(node.right, node.key)
+
+        return node
+
+    def _find_min(self, node):
+        current = node
+        while current.left is not None:
+            current = current.left
+        return current.key
+
+
+    def inorder_traversal(self):
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.key)
+            self._inorder_recursive(node.right, result)
+
+
+# Example usage
+bst = BinarySearchTree()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:", bst.inorder_traversal())  # Output should be sorted
+
+print("Search for 6:", bst.search(6).key if bst.search(6) else "Not found") # Output: 6
+print("Search for 15:", bst.search(15) ) # Output: None
+
+bst.delete(8) #Deleting the root is a more complex case
+print("Inorder traversal after deleting 8:", bst.inorder_traversal())
+
+bst.delete(1)
+print("Inorder traversal after deleting 1:", bst.inorder_traversal())
+
+```
+
+This improved version handles deletion more robustly, especially the case where the node to be deleted has two children. Remember that the efficiency of a BST relies heavily on the order of insertions;  a poorly ordered sequence can degenerate the tree into a linked list, resulting in O(n) search time instead of the ideal O(log n).  Self-balancing BSTs (like AVL trees or red-black trees) address this issue.
+
