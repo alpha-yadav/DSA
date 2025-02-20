@@ -80416,3 +80416,52 @@ print(f"The index of {target} is: {index}")
 
 This is a very basic example.  As you progress, you'll tackle more complex algorithms and data structures.  Remember that consistency and persistence are key to mastering algorithms.  Start small, build your foundation, and gradually work your way up to more challenging problems.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, along with explanations:
+
+**Problem 1: Two Sum (Easy)**
+
+* **Problem Statement:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+* **Example:**
+  `nums = [2,7,11,15], target = 9`
+  Output: `[0,1]` because `nums[0] + nums[1] == 9`
+
+* **Algorithm Idea:**  Use a hash table (dictionary in Python) to store numbers and their indices. Iterate through the array. For each number, check if `target - number` exists in the hash table. If it does, you've found the pair.
+
+
+**Problem 2: Reverse a Linked List (Medium)**
+
+* **Problem Statement:** Reverse a singly linked list.
+
+* **Example:**
+  Input: `1->2->3->4->5->NULL`
+  Output: `5->4->3->2->1->NULL`
+
+* **Algorithm Idea:**  Iterative approach is most common.  Use three pointers: `prev`, `curr`, and `next`.  Iterate through the list, changing the `next` pointer of each node to point to the previous node.
+
+
+**Problem 3: Longest Palindromic Substring (Medium/Hard)**
+
+* **Problem Statement:** Given a string `s`, find the longest palindromic substring in `s`.
+
+* **Example:**
+  Input: `babad`
+  Output: `bab` (or "aba", both are valid)
+
+* **Algorithm Idea:**  Several approaches exist, including:
+    * **Expand Around Center:** Iterate through each character (and between each pair of characters) as a potential center of a palindrome. Expand outwards to find the longest palindrome centered there.
+    * **Dynamic Programming:** Create a table `dp[i][j]` where `dp[i][j]` is true if the substring from `i` to `j` is a palindrome.
+
+
+**Problem 4:  Graph Traversal (Medium/Hard - depends on specifics)**
+
+* **Problem Statement:** Given a graph represented as an adjacency list or matrix, perform a breadth-first search (BFS) or depth-first search (DFS) traversal.  Often, this is coupled with a problem like finding the shortest path or detecting cycles.
+
+* **Example:**  (BFS finding shortest path)  Given a graph and a starting node, find the shortest path to all other reachable nodes.
+
+* **Algorithm Idea:** BFS uses a queue, while DFS uses a stack (or recursion).  For shortest path, BFS is generally preferred because it explores nodes level by level.
+
+
+These examples show a range of difficulty and common algorithmic techniques.  Choosing a problem to solve depends on your current skill level.  Start with easier problems and gradually increase the difficulty. Remember to consider time and space complexity when designing your solution.
+
