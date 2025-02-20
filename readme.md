@@ -83032,3 +83032,38 @@ else:
 
 This implementation efficiently detects cycles in a directed graph using Depth First Search.  The use of `recursionStack` is crucial for identifying cycles during the traversal.  The time complexity is O(V+E), where V is the number of vertices and E is the number of edges, which is the same as a standard DFS traversal.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a groundbreaking algorithm for finding minimum spanning trees (MSTs) in undirected, weighted graphs.  Its significance lies in its remarkable time complexity:  **O(m α(m, n))**, where:
+
+* **m** is the number of edges in the graph.
+* **n** is the number of vertices in the graph.
+* **α(m, n)** is the inverse Ackermann function, which grows incredibly slowly.  For all practical purposes, α(m, n) can be considered a constant, making the algorithm effectively linear in the number of edges.
+
+This is a major improvement over previous MST algorithms like Prim's and Kruskal's, which have complexities of O(m log n) and O(m log* n) respectively.  Log* n (the iterated logarithm) is also a very slowly growing function, but still significantly larger than the inverse Ackermann function.
+
+**How it works (high-level overview):**
+
+Thorup's algorithm is quite complex and doesn't lend itself to a simple explanation.  However, the core ideas are:
+
+1. **Partitioning:** The algorithm partitions the graph into smaller components using a sophisticated technique that leverages the properties of random sampling and connectivity.
+
+2. **Contraction:** It then contracts these smaller components into single nodes, effectively reducing the size of the graph.
+
+3. **Recursive application:** Steps 1 and 2 are applied recursively to the smaller contracted graph until it becomes sufficiently small to solve directly using a simpler MST algorithm (like Prim's or Kruskal's).
+
+4. **Reconstruction:** Finally, the algorithm reconstructs the MST of the original graph from the MSTs of the smaller components.
+
+The key to the algorithm's efficiency lies in its clever use of randomization and the careful design of the partitioning scheme.  The probabilistic nature of the algorithm means it is not deterministic—there's a small chance it might fail to find the MST, but this probability can be made arbitrarily small.  The analysis of its time complexity relies on sophisticated probabilistic techniques.
+
+
+**Key Differences from other MST algorithms:**
+
+* **Speed:** Its near-linear time complexity is its biggest advantage.
+* **Complexity:**  It's significantly more complex to understand and implement than Prim's or Kruskal's algorithms.
+* **Randomization:** It's a randomized algorithm, unlike Prim's and Kruskal's, which are deterministic.
+
+
+**In summary:**
+
+Thorup's algorithm represents a significant theoretical breakthrough in the field of graph algorithms.  While its implementation is challenging, its exceptional speed makes it a valuable tool for dealing with extremely large graphs where speed is critical.  However, for most practical purposes, simpler algorithms like Prim's or Kruskal's might be preferred due to their ease of implementation unless the graph is truly massive.
+
