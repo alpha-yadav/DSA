@@ -80893,3 +80893,27 @@ print("Maximum value:", max_value)
 
 Nested loops are a fundamental programming construct, but understanding their time complexity and considering alternatives are crucial for writing efficient and maintainable code.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They indicate that the time it takes to complete the algorithm increases logarithmically with the size of the input (n). This means that even for very large inputs, the algorithm remains relatively fast.  The base of the logarithm doesn't matter in Big O notation (because a change of base is just a constant factor).
+
+Here are some common types of algorithms exhibiting O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential O(log n) algorithm.  It works on a *sorted* list or array by repeatedly dividing the search interval in half.  If the target value is not present, it will still complete in O(log n) time.
+
+* **Efficient Searching in Balanced Binary Search Trees (BSTs):** Operations like searching, insertion, and deletion in self-balancing BSTs (like AVL trees or red-black trees) have an average and worst-case time complexity of O(log n).  This is because the tree structure ensures that the height of the tree remains logarithmic with the number of nodes.  (Note:  Unbalanced BSTs can degenerate to O(n) performance in the worst case.)
+
+* **Binary Heaps (Priority Queues):**  Finding the minimum element, inserting an element, or deleting the minimum element in a binary heap all take O(log n) time. This is fundamental to heapsort's efficiency.
+
+* **Exponential Search:**  Useful for unbounded searches (searching in an array that's not necessarily sorted, but exponentially increasing). It combines exponential stepping with binary search.
+
+* **Some Divide and Conquer Algorithms:**  Algorithms that recursively break down a problem into smaller subproblems of roughly half the size at each step.  A good example, other than Binary Search, might be finding the k-th smallest element using a median-of-medians algorithm (although the constants hidden within the Big O can make it less practical than simpler approaches for smaller k).
+
+**Key Characteristics that Lead to O(log n) Time Complexity:**
+
+* **Halving (or similar reduction) of the problem size at each step:**  The core idea behind many O(log n) algorithms is to repeatedly reduce the size of the problem by a constant factor.  This leads to the logarithmic behavior.
+
+* **Efficient Data Structures:**  Balanced binary search trees and heaps are crucial for achieving O(log n) performance in many cases.  These structures maintain a specific organization that allows for rapid access to information.
+
+
+**Important Note:**  The O(log n) complexity only applies when the input is appropriately structured (e.g., sorted for binary search, balanced for BST operations). If the input isn't structured correctly, the algorithm might degrade to linear O(n) time or even worse.
+
