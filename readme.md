@@ -82091,3 +82091,132 @@ print(is_bst_iterative(root2)) # Output: False
 
 Both methods achieve the same result. Choose the method that best suits your needs and understanding.  The iterative approach is generally preferred for production code due to its robustness in handling large inputs.
 
+#  Binary Tree traversals 
+Binary tree traversals are methods for systematically visiting (processing) each node in a binary tree exactly once.  There are three main types of traversals, categorized by the order in which the root node is visited relative to its left and right subtrees:
+
+* **Inorder Traversal:**  Left subtree -> Root -> Right subtree
+* **Preorder Traversal:** Root -> Left subtree -> Right subtree
+* **Postorder Traversal:** Left subtree -> Right subtree -> Root
+
+
+Let's break down each traversal type with examples and code (using Python):
+
+**1. Inorder Traversal**
+
+* **Process:**  First, recursively traverse the left subtree. Then, visit the root node. Finally, recursively traverse the right subtree.
+* **Output:** For a Binary Search Tree (BST), inorder traversal yields nodes in ascending order.
+* **Example:** Consider the following tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+Inorder traversal would yield: 4 2 5 1 3
+
+* **Python Code (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3
+```
+
+* **Python Code (Iterative):**  Using a stack
+
+```python
+def inorder_traversal_iterative(root):
+    stack = []
+    current = root
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.data, end=" ")
+        current = current.right
+```
+
+
+**2. Preorder Traversal**
+
+* **Process:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+* **Output:**  Useful for creating a copy of the tree or expressing the tree structure in a prefix notation.
+* **Example:** Using the same tree as above:
+
+Preorder traversal would yield: 1 2 4 5 3
+
+* **Python Code (Recursive):**
+
+```python
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+print("\nPreorder traversal:")
+preorder_traversal(root) # Output: 1 2 4 5 3
+```
+
+* **Python Code (Iterative):** Using a stack
+
+```python
+def preorder_traversal_iterative(root):
+    stack = [root]
+    while stack:
+        current = stack.pop()
+        if current:
+            print(current.data, end=" ")
+            stack.append(current.right)
+            stack.append(current.left)
+```
+
+
+**3. Postorder Traversal**
+
+* **Process:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node.
+* **Output:** Useful for deleting a tree or evaluating an expression tree.
+* **Example:** Using the same tree as above:
+
+Postorder traversal would yield: 4 5 2 3 1
+
+* **Python Code (Recursive):**
+
+```python
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+print("\nPostorder traversal:")
+postorder_traversal(root) # Output: 4 5 2 3 1
+```
+
+* **Python Code (Iterative):**  This is slightly more complex than the iterative versions of inorder and preorder and often involves two stacks or a stack and a flag.  Look up "iterative postorder traversal" for details if needed.
+
+
+These examples demonstrate the basic recursive and iterative approaches.  Iterative methods are generally preferred for very large trees to avoid potential stack overflow errors caused by deep recursion.  Remember to handle the `None` case (empty subtree) in your recursive functions.
+
