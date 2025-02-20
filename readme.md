@@ -81196,3 +81196,50 @@ print(f"root1 and root3 are identical (iterative): {are_identical_iterative(root
 
 Both methods achieve the same result.  The recursive approach is often preferred for its clarity and conciseness, while the iterative approach might be slightly more efficient in some cases (especially for very deep trees, avoiding potential stack overflow issues).  Choose the method that best suits your understanding and coding style. Remember to handle the case where one tree is empty and the other is not.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science. They are tree-like structures where each node has at most two children, referred to as the left child and the right child.  The key characteristic of a BST is that for any given node:
+
+* All nodes in its *left* subtree have keys *less than* the node's key.
+* All nodes in its *right* subtree have keys *greater than* the node's key.
+
+This property allows for efficient searching, insertion, and deletion of nodes.
+
+**Key Operations:**
+
+* **Search:**  Searching for a specific key in a BST is efficient.  You start at the root and compare the target key to the current node's key. If they are equal, you've found the node. If the target key is less than the current node's key, you recursively search the left subtree; otherwise, you search the right subtree.  In a balanced tree, this takes O(log n) time on average, where n is the number of nodes.  In a worst-case scenario (e.g., a skewed tree resembling a linked list), it can take O(n) time.
+
+* **Insertion:**  To insert a new node, you follow the search algorithm until you reach a leaf node (a node with no children).  You then create a new node and attach it as the left or right child of the leaf node, depending on whether the new key is less than or greater than the leaf node's key.  This also takes O(log n) time on average in a balanced tree and O(n) in the worst case.
+
+* **Deletion:** Deletion is the most complex operation.  There are three cases to consider:
+
+    * **Node with no children (leaf node):** Simply remove the node.
+    * **Node with one child:** Replace the node with its child.
+    * **Node with two children:**  This is the most complex case.  There are two common approaches:
+        * **Find the inorder predecessor (largest node in the left subtree) or inorder successor (smallest node in the right subtree).** Replace the node's key with the predecessor/successor's key, then delete the predecessor/successor (which will be one of the simpler cases above).
+        * **Replace the node with its inorder successor and recursively delete the inorder successor.**
+
+Deletion, like insertion and search, has an average time complexity of O(log n) in a balanced tree and O(n) in the worst case.
+
+
+**Advantages of BSTs:**
+
+* **Efficient search, insertion, and deletion (on average).**
+* **Simple implementation.**
+* **Ordered traversal (inorder, preorder, postorder) allows for easy sorting and other operations.**
+
+**Disadvantages of BSTs:**
+
+* **Performance degrades to O(n) in the worst case (unbalanced tree).**  This is a significant drawback, and strategies like self-balancing BSTs (AVL trees, red-black trees) are often used to mitigate this.
+* **Not efficient for all operations.**  For example, finding the minimum or maximum element is more efficient with a min-heap or max-heap.
+
+
+**Self-Balancing BSTs:**
+
+To address the performance degradation caused by unbalanced trees, self-balancing BSTs maintain a balanced structure through rotations and other operations during insertions and deletions.  This guarantees O(log n) time complexity for most operations even in the worst case.  Examples include:
+
+* **AVL trees:**  Maintain balance by ensuring the height difference between the left and right subtrees of any node is at most 1.
+* **Red-black trees:**  Use color information to maintain balance, allowing for more flexibility than AVL trees.
+
+
+In summary, BSTs are a versatile data structure suitable for many applications where efficient search, insertion, and deletion are needed.  However, understanding their limitations and considering self-balancing variants are crucial for building robust and efficient applications.
+
