@@ -82441,3 +82441,90 @@ The choice of traversal method depends on the application. For example:
 
 Remember to handle the case where the node is `None` (empty subtree) in your recursive functions to avoid errors.  These examples demonstrate the basic recursive approach; iterative (non-recursive) methods also exist but are generally more complex to implement.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  This is different from the LCA in a binary *search* tree, where the solution is much simpler.  In a general binary tree, we don't have the ordering property to leverage.
+
+Here are a few approaches to find the LCA in a binary tree:
+
+**1. Recursive Approach:**
+
+This is a common and relatively efficient approach.  The algorithm works by recursively traversing the tree.  If a node is found to be one of the target nodes, it is returned.  If a node has one of the target nodes in its left subtree and the other in its right subtree, the node itself is the LCA.  Otherwise, the LCA is found recursively in the subtree containing both target nodes (or in neither if they're not found).
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+      root: The root of the binary tree.
+      p: The first node.
+      q: The second node.
+
+    Returns:
+      The lowest common ancestor node, or None if p or q are not in the tree.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+#Example Usage
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left
+q = root.right
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+
+p = root.left.right
+q = root.left.left
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 2 and 6: 5
+
+
+```
+
+**2. Iterative Approach using Parent Pointers:**
+
+If you can modify the tree to add parent pointers to each node, you can solve this iteratively.  This involves finding the paths from the root to each target node and then iterating up those paths until a common ancestor is found. This is usually more efficient in terms of space complexity compared to the recursive approach, as it doesn't use the call stack for recursion. However, it requires modifying the tree structure.
+
+
+**3. Using a Hash Table (for node existence check):**
+
+You can use a hash table (dictionary in Python) to store a set of visited nodes during the recursive search, or before it begins to make the existence check faster.  This optimizes the search for `p` and `q` which are O(N) otherwise.  But the time complexity of the LCA algorithm itself remains O(N) for the recursive version.
+
+
+**Time and Space Complexity:**
+
+* **Recursive Approach:** The time complexity is O(N), where N is the number of nodes in the tree, in the worst case (skewed tree). The space complexity is O(H), where H is the height of the tree (due to the recursive call stack).  In a balanced tree, H is log N. In a skewed tree, H is N.
+
+* **Iterative Approach (with parent pointers):** The time complexity is O(H), where H is the height of the tree (finding paths from root to nodes takes O(H) time), and the space complexity is O(1).
+
+
+Choose the approach that best suits your needs and constraints.  The recursive approach is generally easier to understand and implement, while the iterative approach can be more efficient in space if parent pointers are available.  Remember to handle edge cases like empty trees or when one or both nodes are not present in the tree.
+
