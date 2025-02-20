@@ -81243,3 +81243,128 @@ To address the performance degradation caused by unbalanced trees, self-balancin
 
 In summary, BSTs are a versatile data structure suitable for many applications where efficient search, insertion, and deletion are needed.  However, understanding their limitations and considering self-balancing variants are crucial for building robust and efficient applications.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement binary search tree (BST) insertion in Python. Here are a couple, focusing on clarity and efficiency:
+
+**Method 1: Recursive Insertion**
+
+This approach is often considered more elegant and easier to understand.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        """Inserts a new node with the given data into the BST."""
+        self.root = self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        else:
+            node.right = self._insert_recursive(node.right, data)
+        return node
+
+    def inorder_traversal(self):
+      """Performs an inorder traversal (prints nodes in ascending order).  Useful for verification."""
+      result = []
+      self._inorder_recursive(self.root, result)
+      return result
+
+    def _inorder_recursive(self, node, result):
+      if node:
+        self._inorder_recursive(node.left, result)
+        result.append(node.data)
+        self._inorder_recursive(node.right, result)
+
+
+# Example usage
+bst = BinarySearchTree()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:", bst.inorder_traversal()) # Output should be sorted data
+```
+
+**Method 2: Iterative Insertion**
+
+This method avoids recursion, which can be more efficient for very large trees and avoids potential stack overflow errors.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        """Inserts a new node with the given data into the BST iteratively."""
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+    def inorder_traversal(self):
+      """Performs an inorder traversal (prints nodes in ascending order).  Useful for verification."""
+      result = []
+      self._inorder_recursive(self.root, result)
+      return result
+
+    def _inorder_recursive(self, node, result):
+      if node:
+        self._inorder_recursive(node.left, result)
+        result.append(node.data)
+        self._inorder_recursive(node.right, result)
+
+#Example Usage (same as above, just change the BST instantiation)
+bst = BinarySearchTree()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:", bst.inorder_traversal()) # Output should be sorted data
+
+```
+
+Both methods achieve the same result.  Choose the recursive version for readability, and the iterative version for potential performance benefits in very large trees.  Remember to include error handling (e.g., for duplicate data) for production-level code.  The `inorder_traversal` method is added to easily verify the correctness of the insertion.  A balanced BST would be even more efficient for larger datasets but is more complex to implement.
+
