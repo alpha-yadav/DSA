@@ -80754,3 +80754,78 @@ Consider two algorithms to search for a value in an array:
 
 **Important Note:** Big O provides an *upper bound*.  An algorithm might perform better in practice than its Big O notation suggests, especially for small inputs.  However, Big O gives a crucial indication of how the algorithm's performance will scale.  Other notations like Ω (Omega) and Θ (Theta) provide lower bounds and tight bounds respectively, giving a more complete picture of an algorithm's complexity.
 
+#  A Simple Loop 
+The term "a simple loop" is very broad.  To give you a helpful example, I need to know *what* kind of loop and *what* the loop should do.  Loops are fundamental in programming and exist in almost every language.  They let you repeat a block of code multiple times.
+
+Here are examples of simple loops in a few common programming languages:
+
+**1. Python `for` loop (iterating through a sequence):**
+
+This loop iterates through a list of numbers and prints each one.
+
+```python
+numbers = [1, 2, 3, 4, 5]
+for number in numbers:
+  print(number)
+```
+
+**2. Python `while` loop (repeating until a condition is false):**
+
+This loop prints numbers from 1 to 5.
+
+```python
+count = 1
+while count <= 5:
+  print(count)
+  count += 1
+```
+
+**3. JavaScript `for` loop (using a counter):**
+
+This loop prints numbers from 1 to 5.
+
+```javascript
+for (let i = 1; i <= 5; i++) {
+  console.log(i);
+}
+```
+
+**4. C++ `for` loop (similar to JavaScript):**
+
+This loop also prints numbers from 1 to 5.
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 1; i <= 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+**5. Java `for` loop:**
+
+This loop, like the others, prints numbers from 1 to 5.
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 1; i <= 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+These are just basic examples.  To get a more specific and helpful answer, please tell me:
+
+* **Which programming language are you interested in?**
+* **What should the loop do?** (e.g., print numbers, calculate a sum, process data from an array, etc.)
+* **What is the stopping condition?** (e.g., loop a fixed number of times, loop until a specific condition is met)
+
+
+With more information, I can provide a much more tailored and useful example.
+
