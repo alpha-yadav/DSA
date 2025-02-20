@@ -82320,3 +82320,124 @@ Both implementations use a `queue` (a FIFO - First-In, First-Out data structure)
 
 The use of a queue guarantees that nodes are processed level by level.  The `deque` in Python and the `queue` array in JavaScript are efficient for this purpose.  You can adapt these examples to other tree structures (e.g., n-ary trees) by adjusting the enqueueing of children accordingly.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversal refers to the process of visiting (processing) each node in a tree data structure exactly once.  There are several ways to traverse a binary tree, the most common being pre-order, in-order, and post-order traversal.  These methods differ in the order in which they visit the nodes.  They are all recursive algorithms.
+
+
+**1. Pre-order Traversal**
+
+* **Algorithm:**  Visit the root node, then recursively traverse the left subtree, then recursively traverse the right subtree.  The acronym is **VLR** (Visit Left Right).
+
+* **Example:**
+
+   Consider this binary tree:
+
+     A
+    / \
+   B   C
+  / \
+ D   E
+
+
+   Pre-order traversal would visit the nodes in this order: A, B, D, E, C
+
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Preorder traversal:")
+preorder(root)  # Output: A B D E C
+```
+
+
+**2. In-order Traversal**
+
+* **Algorithm:** Recursively traverse the left subtree, then visit the root node, then recursively traverse the right subtree. The acronym is **LVR** (Left Visit Right).
+
+* **Example:**
+
+   Using the same tree as above:
+
+   In-order traversal would visit the nodes in this order: D, B, E, A, C
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+# Example usage (same tree as preorder example)
+print("\nInorder traversal:")
+inorder(root)  # Output: D B E A C
+```
+
+
+**3. Post-order Traversal**
+
+* **Algorithm:** Recursively traverse the left subtree, then recursively traverse the right subtree, then visit the root node. The acronym is **LRV** (Left Right Visit).
+
+* **Example:**
+
+   Using the same tree as above:
+
+   Post-order traversal would visit the nodes in this order: D, E, B, C, A
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage (same tree as preorder example)
+print("\nPostorder traversal:")
+postorder(root)  # Output: D E B C A
+```
+
+**Importance:**
+
+The choice of traversal method depends on the application. For example:
+
+* **In-order traversal** of a Binary Search Tree (BST) yields the nodes in ascending order of their values.
+* **Pre-order traversal** is often used for creating a copy of the tree.
+* **Post-order traversal** is useful for deleting nodes in a tree or evaluating expressions represented as trees.
+
+
+Remember to handle the case where the node is `None` (empty subtree) in your recursive functions to avoid errors.  These examples demonstrate the basic recursive approach; iterative (non-recursive) methods also exist but are generally more complex to implement.
+
