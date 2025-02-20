@@ -82528,3 +82528,87 @@ You can use a hash table (dictionary in Python) to store a set of visited nodes 
 
 Choose the approach that best suits your needs and constraints.  The recursive approach is generally easier to understand and implement, while the iterative approach can be more efficient in space if parent pointers are available.  Remember to handle edge cases like empty trees or when one or both nodes are not present in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science with applications in various areas like file systems, version control systems (like Git), and phylogenetic trees.  There are several approaches to solving this problem, each with its own trade-offs in terms of time and space complexity.
+
+**Methods for Finding LCA:**
+
+1. **Brute-Force Approach:**
+
+   - This involves traversing the tree from the root.
+   - For each node, check if both nodes are descendants of that node.
+   - The first node encountered that satisfies this condition is the LCA.
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  This is inefficient for large trees.
+   - **Space Complexity:** O(H) in the worst case (H is the height of the tree), due to recursive calls.
+
+2. **Using Parent Pointers:**
+
+   - If each node has a pointer to its parent, you can efficiently find the LCA.
+   - Trace the paths from each node to the root.
+   - The last common node in these paths is the LCA.
+
+   * **Time Complexity:** O(H), where H is the height of the tree. This is significantly faster than the brute-force approach for balanced trees.
+   - **Space Complexity:** O(H) in the worst case, due to storing the paths.
+
+
+3. **Recursive Approach (Binary Trees):**
+
+   - This is a highly efficient approach for binary trees.
+   - The algorithm checks if the nodes are in the left or right subtree.
+   - If both nodes are in the left subtree, recursively search the left subtree.
+   - If both nodes are in the right subtree, recursively search the right subtree.
+   - If one node is in the left and the other in the right subtree, the current node is the LCA.
+
+   * **Time Complexity:** O(H), where H is the height of the tree.  Optimal for balanced trees.
+   - **Space Complexity:** O(H) in the worst case, due to recursive calls.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca(root, n1, n2):
+       if root is None:
+           return None
+       if root.data == n1 or root.data == n2:
+           return root
+       left_lca = lca(root.left, n1, n2)
+       right_lca = lca(root.right, n1, n2)
+       if left_lca and right_lca:
+           return root
+       return left_lca if left_lca else right_lca
+
+   #Example usage
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+   print(lca(root, 4, 5).data)  # Output: 2
+   ```
+
+
+4. **Using Depth-First Search (DFS) and Tarjan's Off-line LCA Algorithm:**
+
+   - This algorithm is efficient for finding the LCA of multiple pairs of nodes simultaneously.
+   - It uses DFS to assign timestamps to each node and then efficiently determines the LCA from these timestamps.
+   * **Time Complexity:** O(N + Q*log(N)) where N is the number of nodes and Q is the number of LCA queries.
+   * **Space Complexity:** O(N)
+
+
+
+**Choosing the Right Approach:**
+
+The best approach depends on factors like:
+
+* **Tree type:** Binary tree or general tree.
+* **Availability of parent pointers:** Does each node have a pointer to its parent?
+* **Number of LCA queries:** Are you finding the LCA for many pairs of nodes or just one?
+
+
+For a single LCA query in a binary tree, the recursive approach is generally the most efficient and elegant.  If you have parent pointers, that's the fastest method. For multiple queries, Tarjan's algorithm is superior.  For large general trees without parent pointers, a modified depth-first search might be necessary.
+
