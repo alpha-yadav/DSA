@@ -80626,3 +80626,61 @@ Consider the function `f(n) = 2n² + 3n + 1`.
 
 **In summary:** Big-Theta notation gives a precise and informative description of the asymptotic growth rate of a function, making it a crucial tool for analyzing the efficiency of algorithms.  It tells us the dominant behavior as the input size goes to infinity, abstracting away less important constant factors and lower-order terms.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, especially as their input size approaches infinity. They're crucial in algorithm analysis for comparing the efficiency of different algorithms. Here's a comparison of the most common asymptotic notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  An upper bound on the growth rate of a function.  `f(n) = O(g(n))` means that there exist positive constants `c` and `n₀` such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  In simpler terms, `f(n)` grows no faster than `g(n)`.
+* **Use:** Describes the *worst-case* time or space complexity of an algorithm.
+* **Example:**  If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its time complexity is O(n²), because the quadratic term dominates as `n` gets large.  We ignore constant factors and lower-order terms.
+
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** A lower bound on the growth rate of a function. `f(n) = Ω(g(n))` means there exist positive constants `c` and `n₀` such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`. In simpler terms, `f(n)` grows at least as fast as `g(n)`.
+* **Use:** Describes the *best-case* time or space complexity of an algorithm.
+* **Example:** If an algorithm's runtime is `f(n) = n² + 2n`, we can say its time complexity is Ω(n²).
+
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** A tight bound on the growth rate of a function. `f(n) = Θ(g(n))` means that `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  In simpler terms, `f(n)` grows at the same rate as `g(n)`.
+* **Use:** Describes the *average-case* time or space complexity of an algorithm, or when both the upper and lower bounds are known and equal.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 3n`, we can say its time complexity is Θ(n²).
+
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  A strict upper bound. `f(n) = o(g(n))` means that for any positive constant `c`, there exists a constant `n₀` such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  `f(n)` grows strictly slower than `g(n)`.
+* **Use:**  Indicates that one function is asymptotically insignificant compared to another.
+* **Example:** `n = o(n²)` because `n` grows much slower than `n²`.
+
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** A strict lower bound. `f(n) = ω(g(n))` means that for any positive constant `c`, there exists a constant `n₀` such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`. `f(n)` grows strictly faster than `g(n)`.
+* **Use:** Indicates that one function is asymptotically dominant compared to another.
+* **Example:** `n² = ω(n)` because `n²` grows much faster than `n`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                  | Example                |
+| -------- | ---------------------------------------- | ---------------------- |
+| O(g(n))  | Upper bound                              | 2n² + 3n = O(n²)      |
+| Ω(g(n))  | Lower bound                              | 2n² + 3n = Ω(n²)      |
+| Θ(g(n))  | Tight bound                              | 2n² + 3n = Θ(n²)      |
+| o(g(n))  | Strict upper bound                        | n = o(n²)              |
+| ω(g(n))  | Strict lower bound                        | n² = ω(n)              |
+
+
+**Relationships:**
+
+* `f(n) = Θ(g(n))` implies `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+* `f(n) = o(g(n))` implies `f(n) = O(g(n))`, but not vice-versa.
+* `f(n) = ω(g(n))` implies `f(n) = Ω(g(n))`, but not vice-versa.
+
+
+Understanding these notations is essential for analyzing and comparing the efficiency of algorithms, making informed decisions about which algorithm to choose for a given problem. Remember that these notations describe *asymptotic* behavior; they don't tell you anything about the runtime for small input sizes.
+
