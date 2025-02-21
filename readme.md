@@ -89351,3 +89351,56 @@ Therefore, because we can find constants c₁ and c₂ that satisfy the definiti
 
 In essence, Θ notation gives a precise description of the growth rate of an algorithm's time or space complexity, which is crucial for comparing algorithms' efficiency.  If an algorithm is Θ(n²), you know its runtime scales quadratically with the input size.  This is far more informative than just saying it's O(n²) (which is true but doesn't tell the whole story).
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input approaches infinity.  They're crucial in computer science for analyzing the efficiency of algorithms.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It states that the function's growth is *no worse than* some other function.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ cg(n) for all n ≥ n₀.
+* **Focus:** Worst-case scenario.  It's the most commonly used notation because it gives a guarantee on how bad things *could* get.
+* **Example:** If an algorithm has a time complexity of O(n²), it means the runtime grows no faster than the square of the input size.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function.  It states that the function's growth is *no better than* some other function. We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ cg(n) ≤ f(n) for all n ≥ n₀.
+* **Focus:** Best-case or lower bound on the runtime.  Less frequently used than Big O.
+* **Example:** If an algorithm has a time complexity of Ω(n), it means the runtime grows at least linearly with the input size.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows *at the same rate* as another function, both from above and below.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Focus:** Precise description of the growth rate.  Indicates that the algorithm's performance scales proportionally to the given function.
+* **Example:** If an algorithm has a time complexity of Θ(n log n), its runtime grows proportionally to n log n.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that the function grows *strictly slower* than another function.  f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < cg(n) for all n ≥ n₀.
+* **Focus:** Asymptotic dominance.  The function f(n) is insignificant compared to g(n) as n approaches infinity.
+* **Example:**  n = o(n²)  (linear growth is strictly slower than quadratic growth).
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Indicates that the function grows *strictly faster* than another function.  f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ cg(n) < f(n) for all n ≥ n₀.
+* **Focus:** Asymptotic dominance. The function f(n) significantly outpaces g(n) as n approaches infinity.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+
+
+**Relationships:**
+
+* Θ represents a tighter bound than O or Ω.
+* O and Ω give upper and lower bounds, respectively, but don't necessarily describe the exact growth rate.
+* o and ω indicate strict dominance relationships.
+
+**In Summary:**
+
+| Notation | Meaning                                      | Example                  |
+|---------|----------------------------------------------|---------------------------|
+| O       | Upper bound                                   | f(n) = O(n²)             |
+| Ω       | Lower bound                                   | f(n) = Ω(n)              |
+| Θ       | Tight bound                                   | f(n) = Θ(n log n)        |
+| o       | Strictly slower growth                       | n = o(n²)                |
+| ω       | Strictly faster growth                       | n² = ω(n)                |
+
+
+Understanding these notations is essential for comparing and evaluating the efficiency of different algorithms, particularly as the input size becomes large.  They allow us to abstract away from constant factors and lower-order terms, focusing on the dominant behavior of the algorithm.
+
