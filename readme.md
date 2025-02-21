@@ -85866,3 +85866,85 @@ Topological sorting has numerous applications in computer science, including:
 
 Kahn's algorithm is generally preferred for its simplicity and explicit cycle detection.  DFS is also effective, but requires careful handling of the recursion or stack to ensure correctness.  The choice often depends on personal preference and the specific context.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on tracking the state of each node during the traversal.  We use three states:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (in the recursion stack).
+* **Visited:** The node has been completely explored (recursion has returned from it).
+
+A cycle exists if we encounter a node that is currently "Visiting" while traversing from another node.  This indicates a back edge – an edge that points to an ancestor in the DFS tree.
+
+
+Here's how the algorithm works:
+
+1. **Initialization:** Assign all nodes to the "Unvisited" state.
+2. **DFS Traversal:** Perform a Depth-First Traversal of the graph.  For each node:
+   * **Mark the node as "Visiting".**
+   * **Recursively visit all its unvisited neighbors.**  If a neighbor is already "Visiting," a cycle is detected.
+   * **Mark the node as "Visited" after all its neighbors have been visited.**
+3. **Cycle Detection:** If a "Visiting" node is encountered during the recursive calls, a cycle exists.
+
+
+**Python Implementation:**
+
+```python
+def has_cycle(graph):
+    """
+    Detects cycles in a directed graph using Depth First Traversal.
+
+    Args:
+      graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+
+    Returns:
+      True if a cycle exists, False otherwise.
+    """
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: Unvisited, 1: Visiting, 2: Visited
+
+    def dfs(node):
+        visited[node] = 1  # Mark as Visiting
+        for neighbor in graph.get(node, []):
+            if visited[neighbor] == 1:  # Cycle detected
+                return True
+            if visited[neighbor] == 0 and dfs(neighbor):
+                return True
+        visited[node] = 2  # Mark as Visited
+        return False
+
+    for node in graph:
+        if visited[node] == 0:
+            if dfs(node):
+                return True
+    return False
+
+# Example usage:
+graph1 = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: []
+}
+
+graph2 = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [0] #cycle here
+}
+
+
+print(f"Graph 1 has cycle: {has_cycle(graph1)}")  # Output: False
+print(f"Graph 2 has cycle: {has_cycle(graph2)}")  # Output: True
+
+```
+
+**Explanation:**
+
+* The `visited` list keeps track of the state of each node.
+* The `dfs` function recursively explores the graph.
+* The core of cycle detection is the check `if visited[neighbor] == 1:` inside the `dfs` function.  If a neighbor is already marked as "Visiting," it means we've found a back edge, indicating a cycle.
+
+
+This approach is efficient, with a time complexity of O(V + E), where V is the number of vertices (nodes) and E is the number of edges in the graph.  This is because each node and edge is visited at most once.  The space complexity is O(V) due to the `visited` list and the recursion stack. Remember to handle potential errors like nodes not being present in the graph or using appropriate data structures for larger graphs.
+
