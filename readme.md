@@ -84931,3 +84931,108 @@ print(is_bst(root)) #Output: False
 
 The second method (using `min_val` and `max_val`) is generally preferred for its efficiency, especially for larger trees, as it avoids the overhead of creating and sorting a list.  Both methods, however, correctly identify whether a given binary tree is a BST.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given tree adheres to the Binary Search Tree (BST) property.  Here are two common methods, one recursive and one iterative:
+
+**Method 1: Recursive Approach**
+
+This method recursively checks if the left subtree contains only nodes smaller than the current node and the right subtree contains only nodes greater than the current node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Recursively checks if a given tree is a BST.
+
+    Args:
+        node: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    # Check if the left subtree is a BST and contains only smaller values
+    is_left_bst = is_bst_recursive(node.left) and (node.left is None or node.left.data < node.data)
+
+    # Check if the right subtree is a BST and contains only larger values
+    is_right_bst = is_bst_recursive(node.right) and (node.right is None or node.right.data > node.data)
+
+    return is_left_bst and is_right_bst
+
+
+
+# Example usage:
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+#root.right.right = Node(12) # Uncomment this line to make it NOT a BST
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")
+
+root2 = Node(10)
+root2.left = Node(15) #Invalid BST
+root2.right = Node(5)
+print(f"Is the tree a BST? {is_bst_recursive(root2)}")
+
+
+```
+
+**Method 2: Iterative Approach (Inorder Traversal)**
+
+This method utilizes the property that an inorder traversal of a BST will produce a sorted sequence.  We perform an inorder traversal and check if the resulting sequence is sorted.
+
+```python
+def is_bst_iterative(node):
+    """
+    Iteratively checks if a given tree is a BST using inorder traversal.
+
+    Args:
+        node: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    stack = []
+    prev = float('-inf') # Initialize with negative infinity for comparison
+    current = node
+
+    while current is not None or len(stack) > 0:
+        while current is not None:
+            stack.append(current)
+            current = current.left
+
+        current = stack.pop()
+        if current.data <= prev:
+            return False  # Not sorted
+        prev = current.data
+        current = current.right
+
+    return True
+
+#Example Usage (same as above, will give identical results)
+print(f"Is the tree a BST (iterative)? {is_bst_iterative(root)}")
+print(f"Is the tree a BST (iterative)? {is_bst_iterative(root2)}")
+
+```
+
+**Choosing a Method:**
+
+* **Recursive approach:**  More elegant and easier to understand for smaller trees, but can lead to stack overflow errors for very deep trees.
+
+* **Iterative approach:**  More efficient for large and deep trees as it avoids the risk of stack overflow.  It's generally preferred for production-level code.
+
+
+Remember to handle edge cases like empty trees (`node is None`) correctly in both methods.  Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node at least once.  The space complexity depends on the tree's shape; for a skewed tree, it can be O(N) (recursive) or O(N) (iterative in the worst case). For a balanced tree, it's O(log N) for recursive and O(log N) in average case iterative.
+
