@@ -85948,3 +85948,42 @@ print(f"Graph 2 has cycle: {has_cycle(graph2)}")  # Output: True
 
 This approach is efficient, with a time complexity of O(V + E), where V is the number of vertices (nodes) and E is the number of edges in the graph.  This is because each node and edge is visited at most once.  The space complexity is O(V) due to the `visited` list and the recursion stack. Remember to handle potential errors like nodes not being present in the graph or using appropriate data structures for larger graphs.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a groundbreaking algorithm for finding minimum spanning trees (MSTs) in undirected graphs.  Its significance lies in its remarkably fast runtime: it achieves **linear time**, O(m), where 'm' is the number of edges in the graph.  This is asymptotically optimal, meaning it's impossible to create a fundamentally faster algorithm (ignoring constant factors).
+
+However, it's crucial to understand that this linear time complexity comes with caveats:
+
+* **Randomized:**  Thorup's algorithm is a *randomized* algorithm. This means it uses random choices during its execution.  While it achieves linear expected time, there's a (very small) probability it might take longer.  The probability of exceeding the expected time decreases exponentially as the graph size increases.
+
+* **Word RAM model:** The linear time complexity holds under the Word RAM model of computation.  This model assumes that arithmetic operations on words (typically 32 or 64 bits) take constant time.  This is a reasonable assumption for most practical purposes, but it's important to be aware of it.
+
+* **Complexity of implementation:** The algorithm is quite intricate and challenging to implement correctly.  Its elegance is in its theoretical performance, not necessarily in its ease of implementation.
+
+
+**How it works (high-level overview):**
+
+Thorup's algorithm cleverly combines several techniques:
+
+1. **Partitioning:**  It partitions the graph into smaller components using a randomized approach.
+
+2. **Contraction:** These components are then "contracted" into single nodes, significantly reducing the graph's size.
+
+3. **Recursive application:** The algorithm recursively applies itself to the smaller graph.
+
+4. **Connectivity information:** Crucial information about the connectivity between components is carefully maintained throughout the process.
+
+5. **Careful handling of edges:** The algorithm processes edges strategically, taking advantage of the probabilistic guarantees of the partitioning to ensure finding the MST efficiently.
+
+6. **Boruvka's algorithm integration:** Borůvka's algorithm (another MST algorithm) is sometimes used as a subroutine within Thorup's algorithm.
+
+The specific details are complex and involve intricate probability arguments. The algorithm's correctness and efficiency rely heavily on the properties of random sampling and the way it handles edge weights.
+
+**Comparison to other MST algorithms:**
+
+* **Prim's algorithm and Kruskal's algorithm:** These classic algorithms have time complexities of O(m log n) and O(m log* n) respectively (where n is the number of nodes), making Thorup's algorithm significantly faster for large graphs.
+
+* **Karger-Klein-Tarjan algorithm:** This other randomized algorithm also achieves linear time, but Thorup's algorithm is often considered simpler in its approach, although the implementation is still very involved.
+
+
+In summary, Thorup's algorithm is a theoretically optimal MST algorithm offering linear expected time complexity.  However, its practical implementation is considerably more complex than simpler algorithms like Prim's or Kruskal's, making it less commonly used in practice unless dealing with extremely large graphs where the performance gains become significant.
+
