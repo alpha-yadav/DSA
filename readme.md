@@ -88247,3 +88247,113 @@ An iterative approach can be implemented using a stack (for depth-first search) 
 
 The recursive approach is generally preferred for its clarity and simplicity unless you have specific reasons to favor an iterative solution (e.g., very deep trees where recursion might lead to stack overflow). Remember to adapt the code to your specific data structure and needs.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic computer science problem.  The approach varies depending on the type of tree and whether you have parent pointers or only child pointers.
+
+Here's a breakdown of common approaches:
+
+**1.  Binary Tree with Parent Pointers:**
+
+If each node has a pointer to its parent, finding the LCA is relatively straightforward:
+
+* **Algorithm:**
+    1. Traverse upward from each node, storing the path to the root in two separate lists.
+    2. Iterate through both lists simultaneously.  The last common node in both lists is the LCA.
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent(node1, node2):
+    path1 = []
+    path2 = []
+
+    while node1:
+        path1.append(node1)
+        node1 = node1.parent
+    while node2:
+        path2.append(node2)
+        node2 = node2.parent
+
+    lca = None
+    i = len(path1) - 1
+    j = len(path2) - 1
+    while i >= 0 and j >= 0 and path1[i] == path2[j]:
+        lca = path1[i]
+        i -= 1
+        j -= 1
+    return lca
+
+#Example Usage (you'd need to build your tree structure first)
+# root = ...  # Your root node
+# node1 = ... # Your first node
+# node2 = ... # Your second node
+# lca = lca_with_parent(node1, node2)
+# print(f"LCA: {lca.data}")
+```
+
+**2. Binary Tree without Parent Pointers (Recursive Approach):**
+
+This is a more common scenario.  The recursive approach is efficient:
+
+* **Algorithm:**
+    1. If the current node is `None`, return `None`.
+    2. If the current node is equal to either `node1` or `node2`, return the current node.
+    3. Recursively search the left and right subtrees.
+    4. If both recursive calls return a node (meaning `node1` and `node2` are in different subtrees), the current node is the LCA.
+    5. Otherwise, return the non-`None` result from the recursive calls.
+
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node1, node2):
+    if root is None:
+        return None
+    if root == node1 or root == node2:
+        return root
+
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+#Example Usage (you'd need to build your tree structure first)
+# root = ...  # Your root node
+# node1 = ... # Your first node
+# node2 = ... # Your second node
+# lca = lca_recursive(root, node1, node2)
+# print(f"LCA: {lca.data}")
+
+```
+
+**3. General Tree (without parent pointers):**
+
+For general trees (not necessarily binary), you might need a more generalized approach, potentially using Depth-First Search (DFS) or Breadth-First Search (BFS) to find paths to the nodes and then compare those paths as in the parent pointer method.
+
+
+**Important Considerations:**
+
+* **Error Handling:**  Add checks to handle cases where `node1` or `node2` are not in the tree.
+* **Efficiency:** The recursive approach (without parent pointers) generally has a time complexity of O(N), where N is the number of nodes in the tree. The parent-pointer method is also O(h), where h is the height of the tree.
+* **Tree Structure:**  Make sure your tree is correctly structured before running the LCA algorithms.
+
+
+Remember to adapt the code to your specific tree implementation and data structures.  Choose the algorithm that best suits your tree's characteristics and the information available to you (parent pointers or not).
+
