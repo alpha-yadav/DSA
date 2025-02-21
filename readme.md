@@ -85499,3 +85499,13 @@ def lowest_common_ancestor(node1, node2):
 
 Remember to adapt the code to your specific tree representation and data structure.  The examples provided illustrate the core concepts; you may need to adjust them based on your needs.
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need information about what you want to graph before I can create a graph for you.  For example, tell me:
+
+* **What kind of graph?** (Line graph, bar graph, scatter plot, pie chart, etc.)
+* **What are the variables?** (What are you plotting on the x-axis and y-axis?)
+* **What is the data?** (Give me the numbers or values.)  This could be a table of values, a list of points, or an equation.
+
+
+Once I have this information, I can help you.
+
