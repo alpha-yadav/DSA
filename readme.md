@@ -83633,3 +83633,54 @@ Why? Because we can find constants *c* and *n₀* that satisfy the definition.  
 
 Big-Omega notation provides a valuable tool for analyzing the efficiency of algorithms by establishing a lower bound on their runtime or space complexity.  While Big-O is often more commonly used, understanding Big-Omega gives a more complete picture of an algorithm's performance characteristics.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of a function, usually representing the time or space resources used by an algorithm as the input size grows.  It focuses on the dominant factors affecting performance as the input size becomes very large, ignoring constant factors and smaller terms.
+
+Here's a breakdown of key aspects:
+
+**What Big O describes:**
+
+* **Time Complexity:** How the runtime of an algorithm scales with the input size (n).
+* **Space Complexity:** How the memory usage of an algorithm scales with the input size (n).
+
+**Key aspects of Big O notation:**
+
+* **Asymptotic Analysis:** Big O describes the behavior of an algorithm as the input size approaches infinity.  It's less concerned with the performance on small inputs.
+* **Upper Bound:** Big O provides an upper bound on the growth rate.  The actual runtime might be better in some cases, but it will never be significantly worse than the Big O bound for large inputs.
+* **Ignoring Constants and Lower-Order Terms:**  Big O simplifies the analysis by ignoring constant factors and terms with lower growth rates. For example, O(2n + 5) is simplified to O(n) because the constant '5' and the factor '2' become insignificant as 'n' gets very large.
+* **Worst-Case Scenario:**  Big O usually represents the worst-case time or space complexity.  This means it describes the upper limit of resources the algorithm might need.  Other notations like Ω (Omega) represent the lower bound (best-case) and Θ (Theta) represents the tight bound (average case).
+
+**Common Big O notations and their growth rates:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array by its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size. Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Nested loops iterating over the input data.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Finding all permutations of a set.
+
+
+**Example:**
+
+Consider a function that iterates through an array and prints each element:
+
+```python
+def print_array(arr):
+  for item in arr:
+    print(item)
+```
+
+The runtime of this function is directly proportional to the size of the array. If the array doubles in size, the runtime doubles.  Therefore, the time complexity is O(n).
+
+**Importance of Big O Notation:**
+
+Big O notation is crucial for:
+
+* **Algorithm Comparison:**  It allows you to compare the efficiency of different algorithms for the same problem.
+* **Algorithm Design:** It guides the design of efficient algorithms by identifying bottlenecks and areas for optimization.
+* **Scalability Analysis:**  It helps predict how an algorithm will perform with increasing input sizes, which is important for large datasets.
+
+
+Understanding Big O notation is fundamental for any serious programmer or computer scientist. While it doesn't provide exact runtime measurements, it provides valuable insights into an algorithm's scalability and efficiency.
+
