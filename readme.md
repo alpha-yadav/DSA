@@ -83374,3 +83374,59 @@ Here are a few algorithmic problems of varying difficulty, along with explanatio
 
 These examples show a range of difficulty and common algorithmic patterns.  Remember to consider time and space complexity when designing your solutions.  Choose a problem that matches your current skill level and try to solve it.  If you get stuck, searching for the problem name online will yield many resources and solutions.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's simple to understand but can reveal a programmer's attention to detail and ability to write clean, efficient code.  Here's how to get started with a simple FizzBuzz implementation in Swift:
+
+**Basic Approach:**
+
+This approach uses a `for` loop to iterate through numbers and applies conditional logic:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+**Explanation:**
+
+* **`func fizzBuzz(n: Int)`:** This defines a function named `fizzBuzz` that takes an integer `n` as input, representing the upper limit of the range.
+* **`for i in 1...n`:** This loop iterates through numbers from 1 to `n` (inclusive).
+* **`if i % 15 == 0`:** This checks if the number is divisible by both 3 and 5 (hence, divisible by 15). If true, it prints "FizzBuzz".  We check for divisibility by 15 *first* to avoid redundant printing if the number is also divisible by 3 or 5.
+* **`else if i % 3 == 0`:** Checks if the number is divisible by 3. If true, it prints "Fizz".
+* **`else if i % 5 == 0`:** Checks if the number is divisible by 5. If true, it prints "Buzz".
+* **`else`:** If none of the above conditions are met, it prints the number itself.
+
+**More Concise Approach (using ternary operator):**
+
+While the above is clear and easy to read, you can make it slightly more concise using Swift's ternary operator:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Example usage
+```
+
+This version achieves the same result but packs the conditional logic into a single line using nested ternary operators.  However, for beginners, the first version might be easier to understand and maintain.
+
+
+**Choosing the Best Approach:**
+
+For readability and maintainability, especially for larger or more complex code, the first (more verbose) approach is generally preferred. The concise version is fine for short, simple functions like this, but can become harder to read as complexity increases.  Prioritize clarity over extreme brevity.  Choose the style that best suits your understanding and the context of your project.
+
