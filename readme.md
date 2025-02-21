@@ -86318,3 +86318,72 @@ Output:  The nodes visited in the order they were visited during a BFS traversal
 
 These are just a few examples. The difficulty and complexity of algorithmic problems can vary greatly.  Remember that a key part of solving these problems is choosing the right data structure and algorithm to optimize for time and space complexity.  Consider factors like time complexity (Big O notation) when evaluating your solution's efficiency.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing improvements:
+
+
+**Basic Approach:**
+
+This version uses nested `if` statements.  It's straightforward but can become less readable with more complex rules.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+**Improved Approach (using String Interpolation):**
+
+This version uses string interpolation and the ternary conditional operator (`?:`) to make the code more concise and readable.
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += i % 3 == 0 ? "Fizz" : ""
+        output += i % 5 == 0 ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function
+```
+
+**Explanation of the Improved Approach:**
+
+* **`var output = ""`:**  We initialize an empty string to store the output for each number.
+* **`output += i % 3 == 0 ? "Fizz" : ""`:** This uses the ternary operator. If `i` is divisible by 3, "Fizz" is appended to `output`; otherwise, nothing is appended.  A similar line handles divisibility by 5 and "Buzz".
+* **`print(output.isEmpty ? "\(i)" : output)`:**  If `output` is still empty after checking for divisibility by 3 and 5 (meaning the number is not divisible by either), the number itself (`i`) is printed. Otherwise, the accumulated string in `output` ("Fizz", "Buzz", or "FizzBuzz") is printed.
+
+
+**Even More Concise (but potentially less readable for beginners):**
+
+This version uses a single `print` statement and combines the conditional logic further, but it might be harder to understand at first.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print((i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")  ?? "\(i)")
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function
+
+```
+This uses the nil-coalescing operator (`??`) to handle the case where both conditional expressions result in empty strings.
+
+
+Choose the version that best suits your understanding and coding style.  The improved approach offers a good balance of readability and conciseness.  Remember to run this code in a Swift playground or a Swift project to see the output.
+
