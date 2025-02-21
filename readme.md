@@ -89241,3 +89241,70 @@ For a simple FizzBuzz, any of these versions work well.  The best choice depends
 
 Remember to choose the version that best suits your coding style and the context of your project.  For a simple algorithm like FizzBuzz, readability is usually more important than extreme conciseness.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (like time and memory) an algorithm consumes as the input size grows.  It's a crucial aspect of algorithm analysis, allowing us to compare different algorithms and choose the most efficient one for a given task.  We usually express complexity using Big O notation.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:** Measures how the runtime of an algorithm scales with the input size (n).  It's usually expressed as a function of *n*, like O(n), O(n²), O(log n), etc.
+
+* **Space Complexity:** Measures how the memory usage of an algorithm scales with the input size (n).  Similar to time complexity, it's expressed as a function of *n*, such as O(1), O(n), O(n²), etc.
+
+* **Big O Notation:**  A mathematical notation used to describe the upper bound of an algorithm's complexity. It focuses on the dominant terms and ignores constant factors.  For example, if an algorithm has a runtime of 5n² + 10n + 3, its Big O notation is O(n²) because the n² term dominates as *n* gets large.
+
+**Common Time Complexity Classes:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Bubble sort, selection sort.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each increase in input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Finding all permutations of a set.
+
+
+**Space Complexity Classes (similar notations as Time Complexity):**
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of input size.
+
+* **O(n) - Linear Space:** The memory usage grows linearly with the input size.
+
+* **O(log n) - Logarithmic Space:**  The memory usage grows logarithmically with the input size (e.g., recursive algorithms using a stack).
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze an algorithm's complexity, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the runtime.
+
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+
+3. **Determine the dominant term:** Identify the term that grows fastest as *n* increases.
+
+4. **Express the complexity using Big O notation:** Drop constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple function that sums all elements of an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for num in arr:
+    total += num
+  return total
+```
+
+The basic operation is the addition within the loop.  This operation is performed *n* times (where *n* is the length of the array).  Therefore, the time complexity is O(n) and the space complexity is O(1) (assuming the array itself is not considered part of the algorithm's space usage).
+
+
+Understanding algorithm complexity is vital for writing efficient and scalable programs.  Choosing the right algorithm can drastically impact performance, especially when dealing with large datasets.
+
