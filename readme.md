@@ -89557,3 +89557,63 @@ Java's `for` loop works similarly to those in Python and JavaScript.
 
 These examples all accomplish the same basic task:  repeating a simple print statement five times.  The choice of which loop to use often depends on the specific problem and the programmer's preference, but both `while` and `for` loops are fundamental building blocks of programming.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a way to iterate over multiple dimensions of data or perform repeated actions based on combinations of values.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop runs first.  Its iterations determine how many times the inner loop will run completely.
+* **Inner Loop:** This loop is nested inside the outer loop. It executes for each iteration of the outer loop.  The number of times the inner loop runs depends on both the outer loop's current iteration and the inner loop's condition.
+
+**Example (Python):**
+
+This code prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # New line after each row
+```
+
+**Explanation:**
+
+1. The outer loop iterates from 1 to 10 (inclusive).  This represents the rows of the multiplication table.
+2. For each value of `i` (the row number), the inner loop iterates from 1 to 10.  This represents the columns.
+3. Inside the inner loop, `i * j` calculates the product, which is then printed.  `end="\t"` ensures that the numbers are separated by tabs, creating a neat table.
+4. `print()` after the inner loop creates a new line after each row is complete.
+
+**Another Example (Printing a Pattern):**
+
+```python
+for i in range(1, 6): # Outer loop (rows)
+  for j in range(i): # Inner loop (columns, depends on outer loop)
+    print("*", end="")
+  print()
+```
+
+This will output a triangle pattern:
+
+```
+*
+**
+***
+****
+*****
+```
+
+Here, the number of columns in each row depends on the current row number (`i`).
+
+**Common Uses:**
+
+* **Matrix/Array operations:**  Processing elements in two-dimensional data structures.
+* **Nested data structures:** Iterating through lists of lists, dictionaries within dictionaries, etc.
+* **Combinations and permutations:** Generating all possible combinations or permutations of items from multiple sets.
+* **Complex algorithms:** Building the structure of many algorithms, such as searching or sorting algorithms.
+
+**Efficiency Considerations:**
+
+Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly as the number of nested loops and the size of the data increase.  It's important to consider the efficiency of nested loops and look for optimizations if performance becomes a concern.  Techniques like memoization or dynamic programming can help improve performance in such cases.
+
