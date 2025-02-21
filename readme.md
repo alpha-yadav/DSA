@@ -85509,3 +85509,116 @@ Please provide me with the data or equation you would like me to graph.  I need 
 
 Once I have this information, I can help you.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using adjacency matrices is a common approach, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, along with its advantages and disadvantages:
+
+**How it works:**
+
+An adjacency matrix is a 2D array (or a list of lists) where each element `matrix[i][j]` represents the connection between vertex `i` and vertex `j`.  The value stored in `matrix[i][j]` can represent different things depending on the type of graph:
+
+* **Unweighted graph:**
+    * `matrix[i][j] = 1` if there's an edge between vertex `i` and vertex `j`.
+    * `matrix[i][j] = 0` if there's no edge between vertex `i` and vertex `j`.
+
+* **Weighted graph:**
+    * `matrix[i][j] = weight` if there's an edge between vertex `i` and vertex `j`, with `weight` representing the cost or distance of that edge.
+    * `matrix[i][j] = ∞` (or a very large number) if there's no edge between vertex `i` and vertex `j`.
+    * `matrix[i][j] = 0`  can represent a self-loop (an edge from a vertex to itself).
+
+
+* **Directed graph:**  The matrix is not necessarily symmetric. `matrix[i][j]` represents an edge from vertex `i` to vertex `j`.  `matrix[j][i]` may or may not exist, and even if both exist, they might have different weights.
+
+* **Undirected graph:** The matrix is symmetric (`matrix[i][j] = matrix[j][i]`).
+
+
+**Example (Unweighted, Undirected Graph):**
+
+Consider a graph with 4 vertices (A, B, C, D) and edges: A-B, A-C, B-C, C-D.
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  1  0  1  0
+C  1  1  0  1
+D  0  0  1  0
+```
+
+
+**Example (Weighted, Directed Graph):**
+
+Consider a graph with 3 vertices (A, B, C) and the following edges: A->B (weight 5), B->C (weight 2), C->A (weight 3).
+
+The adjacency matrix would be:
+
+```
+   A  B  C
+A  0  5  0
+B  0  0  2
+C  3  0  0
+```
+
+**Implementation (Python):**
+
+```python
+class Graph:
+    def __init__(self, num_vertices, weighted=False, directed=False):
+        self.num_vertices = num_vertices
+        self.weighted = weighted
+        self.directed = directed
+        self.matrix = [[0] * num_vertices for _ in range(num_vertices)]
+
+    def add_edge(self, u, v, weight=1):
+        if not self.weighted:
+            weight = 1
+        self.matrix[u][v] = weight
+        if not self.directed:
+            self.matrix[v][u] = weight
+
+    def print_matrix(self):
+        for row in self.matrix:
+            print(row)
+
+
+# Example usage:
+# Unweighted, undirected graph
+graph1 = Graph(4)
+graph1.add_edge(0, 1)
+graph1.add_edge(0, 2)
+graph1.add_edge(1, 2)
+graph1.add_edge(2, 3)
+print("Unweighted, Undirected Graph:")
+graph1.print_matrix()
+
+
+# Weighted, directed graph
+graph2 = Graph(3, weighted=True, directed=True)
+graph2.add_edge(0, 1, 5)
+graph2.add_edge(1, 2, 2)
+graph2.add_edge(2, 0, 3)
+print("\nWeighted, Directed Graph:")
+graph2.print_matrix()
+
+```
+
+**Advantages:**
+
+* **Easy to check for edge existence:**  O(1) time complexity.
+* **Simple implementation:** Relatively straightforward to implement.
+
+**Disadvantages:**
+
+* **Space complexity:**  O(V^2), where V is the number of vertices. This can be very inefficient for sparse graphs (graphs with few edges compared to the number of vertices).
+* **Adding/removing vertices:**  Requires matrix resizing, which is inefficient.
+
+
+**When to use adjacency matrices:**
+
+* Dense graphs: When the number of edges is close to the maximum possible (V*(V-1)/2 for undirected, V*(V-1) for directed).
+* When you need to quickly check for the existence of an edge between two vertices.
+* When dealing with algorithms that benefit from the direct access provided by the matrix (e.g., Floyd-Warshall algorithm for all-pairs shortest paths).
+
+
+For sparse graphs, adjacency lists are generally a more efficient way to represent graphs.  The choice between adjacency matrices and adjacency lists depends on the specific characteristics of the graph and the algorithms you intend to use.
+
