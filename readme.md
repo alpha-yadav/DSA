@@ -87410,3 +87410,133 @@ print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 4 and 0: 2
 
 This approach efficiently utilizes the ordered nature of a BST to quickly find the LCA.  Remember that if either `p` or `q` isn't in the tree, the function might return an unexpected result.  You could add checks to handle this scenario if needed.
 
+#  Binary Search Tree - Python 
+Here's a Python implementation of a Binary Search Tree (BST), along with explanations and examples:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    def search(self, data):
+        return self._search_recursive(self.root, data)
+
+    def _search_recursive(self, node, data):
+        if node is None or node.data == data:
+            return node  # Return the node if found, or None if not
+        elif data < node.data:
+            return self._search_recursive(node.left, data)
+        else:
+            return self._search_recursive(node.right, data)
+
+
+    def min_value(self):
+        current = self.root
+        while current.left is not None:
+            current = current.left
+        return current.data
+
+
+    def max_value(self):
+        current = self.root
+        while current.right is not None:
+            current = current.right
+        return current.data
+
+    def inorder_traversal(self):
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_recursive(node.right, result)
+
+    def preorder_traversal(self):
+        result = []
+        self._preorder_recursive(self.root, result)
+        return result
+
+    def _preorder_recursive(self, node, result):
+        if node:
+            result.append(node.data)
+            self._preorder_recursive(node.left, result)
+            self._preorder_recursive(node.right, result)
+
+
+    def postorder_traversal(self):
+        result = []
+        self._postorder_recursive(self.root, result)
+        return result
+
+    def _postorder_recursive(self, node, result):
+        if node:
+            self._postorder_recursive(node.left, result)
+            self._postorder_recursive(node.right, result)
+            result.append(node.data)
+
+    #Deletion is more complex and omitted for brevity.  It requires handling various cases.
+
+
+
+# Example usage:
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+
+print("Inorder Traversal:", bst.inorder_traversal())  #Should be sorted
+print("Preorder Traversal:", bst.preorder_traversal())
+print("Postorder Traversal:", bst.postorder_traversal())
+print("Minimum value:", bst.min_value())
+print("Maximum value:", bst.max_value())
+
+print("Search for 6:", bst.search(6).data) # Should print 6
+print("Search for 15:", bst.search(15))  # Should print None
+
+```
+
+**Explanation:**
+
+* **`Node` class:** Represents a single node in the BST.  Each node stores data, a left child (`left`), and a right child (`right`).
+* **`BST` class:**  Implements the BST functionality.
+* **`insert(data)`:** Inserts a new node with the given data into the BST, maintaining the BST property (left subtree < node < right subtree).  It uses a recursive helper function `_insert_recursive`.
+* **`search(data)`:** Searches for a node with the given data.  It uses a recursive helper function `_search_recursive`. Returns the node if found, otherwise `None`.
+* **`min_value()` and `max_value()`:** Find the minimum and maximum values in the BST.
+* **`inorder_traversal()`, `preorder_traversal()`, `postorder_traversal()`:** Perform the respective tree traversals and return a list of the node data.  They use recursive helper functions.
+
+**Important Note:**  Deletion from a BST is more complex than insertion and search.  A robust deletion function needs to handle several cases (node with zero, one, or two children).  It's omitted here for brevity, but you can find numerous resources online detailing BST deletion algorithms.  Remember to consider edge cases when implementing deletion.
+
