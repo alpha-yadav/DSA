@@ -87765,3 +87765,102 @@ print(is_bst(root2)) # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) for the recursive methods, where H is the height of the tree (O(N) in the worst case of a skewed tree, O(log N) in the best case of a balanced tree).  The recursive min-max approach is generally preferred because it avoids the need to create an extra list for in-order traversal.  It directly checks the BST property during the traversal. Therefore, the `is_bst` function (Method 2) is generally a more efficient and elegant solution.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The core idea is to recursively check that for every node:
+
+* All nodes in its left subtree have values less than the node's value.
+* All nodes in its right subtree have values greater than the node's value.
+
+
+Here are three common methods:
+
+**Method 1: In-order Traversal**
+
+The simplest and most efficient method leverages the property that an in-order traversal of a BST will yield a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    """Checks if a tree is a BST using in-order traversal."""
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    return all(result[i] <= result[i+1] for i in range(len(result)-1))
+
+
+# Example Usage
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+print(f"Is it a BST (Inorder): {is_bst_inorder(root)}") # True
+
+root = Node(3)
+root.left = Node(5)
+root.right = Node(1)
+print(f"Is it a BST (Inorder): {is_bst_inorder(root)}") #False
+
+root = None
+print(f"Is it a BST (Inorder): {is_bst_inorder(root)}") #True (empty tree is a BST)
+
+```
+
+**Method 2: Recursive Check**
+
+This approach directly implements the BST property definition recursively.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """Checks if a tree is a BST recursively."""
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+# Example Usage (same as above, just change the function call)
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+print(f"Is it a BST (Recursive): {is_bst_recursive(root)}") # True
+
+root = Node(3)
+root.left = Node(5)
+root.right = Node(1)
+print(f"Is it a BST (Recursive): {is_bst_recursive(root)}") # False
+
+root = None
+print(f"Is it a BST (Recursive): {is_bst_recursive(root)}") #True
+```
+
+**Method 3: Iterative Check (using a stack)**
+
+This method avoids recursion and uses a stack for depth-first traversal. It's less elegant than the recursive approach but can handle very deep trees more efficiently in some environments due to avoiding potential stack overflow errors.  The implementation is more complex and omitted here for brevity;  the recursive method is generally preferred unless you have strong concerns about recursion depth.
+
+
+**Choosing a Method:**
+
+* For simplicity and readability, the **in-order traversal** method is often preferred, especially if you're already familiar with tree traversals.  Its time complexity is O(N), where N is the number of nodes.
+
+* The **recursive method** is also O(N) but might be slightly less efficient due to the function call overhead.  However, it directly expresses the BST property and can be easier to understand for some.
+
+* The iterative method is useful for avoiding potential stack overflow issues with very deep trees, but it's less concise and readable.
+
+
+Remember to handle the case of an empty tree (which is considered a valid BST).  The provided examples include this handling. Choose the method that best suits your needs and coding style; they all achieve the same result.
+
