@@ -84700,3 +84700,119 @@ This improved version includes:
 
 Remember that the efficiency of BST operations (insertion, search, deletion) is O(h), where h is the height of the tree. In a balanced BST, h is approximately log₂(n), where n is the number of nodes.  However, in a worst-case scenario (a skewed tree), h can be equal to n, resulting in linear time complexity.  Self-balancing BSTs (like AVL trees or red-black trees) are designed to mitigate this worst-case scenario.
 
+#  Check if a tree is BST or not 
+Several approaches can be used to check if a given binary tree is a Binary Search Tree (BST). Here are two common methods, one using recursion and another using an iterative approach with inorder traversal:
+
+**Method 1: Recursive Approach**
+
+This method recursively checks if each subtree satisfies the BST property:  every node in the left subtree must be less than the current node, and every node in the right subtree must be greater than the current node.  We need to use `Integer.MIN_VALUE` and `Integer.MAX_VALUE` to handle boundary conditions.
+
+```java
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int val) {
+        this.val = val;
+    }
+}
+
+public class BSTCheck {
+
+    public boolean isValidBST(TreeNode root) {
+        return isValidBSTHelper(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean isValidBSTHelper(TreeNode node, int min, int max) {
+        if (node == null) {
+            return true;
+        }
+
+        if (node.val <= min || node.val >= max) {
+            return false;
+        }
+
+        return isValidBSTHelper(node.left, min, node.val) && isValidBSTHelper(node.right, node.val, max);
+    }
+
+    public static void main(String[] args) {
+        BSTCheck checker = new BSTCheck();
+
+        // Example usage:
+        TreeNode root = new TreeNode(2);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(3);
+        System.out.println("Is BST: " + checker.isValidBST(root)); // true
+
+        TreeNode root2 = new TreeNode(5);
+        root2.left = new TreeNode(1);
+        root2.right = new TreeNode(4);
+        root2.right.left = new TreeNode(3);
+        root2.right.right = new TreeNode(6);
+        System.out.println("Is BST: " + checker.isValidBST(root2)); // false
+
+        TreeNode root3 = new TreeNode(1);
+        root3.left = new TreeNode(1);
+        System.out.println("Is BST: " + checker.isValidBST(root3)); //false
+
+
+    }
+}
+```
+
+**Method 2: Iterative Approach (Inorder Traversal)**
+
+This method uses inorder traversal.  In a BST, inorder traversal will yield a sorted sequence of nodes.  We can track the previously visited node and check if the current node's value is greater.
+
+```java
+import java.util.Stack;
+
+public class BSTCheckIterative {
+
+    public boolean isValidBST(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode prev = null;
+
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+
+            root = stack.pop();
+
+            if (prev != null && root.val <= prev.val) {
+                return false;
+            }
+            prev = root;
+            root = root.right;
+        }
+        return true;
+    }
+
+    //TreeNode class remains the same as in the recursive example
+    public static void main(String[] args){
+        BSTCheckIterative checker = new BSTCheckIterative();
+        //Example Usage (same as recursive example)
+        TreeNode root = new TreeNode(2);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(3);
+        System.out.println("Is BST: " + checker.isValidBST(root)); // true
+
+        TreeNode root2 = new TreeNode(5);
+        root2.left = new TreeNode(1);
+        root2.right = new TreeNode(4);
+        root2.right.left = new TreeNode(3);
+        root2.right.right = new TreeNode(6);
+        System.out.println("Is BST: " + checker.isValidBST(root2)); // false
+
+        TreeNode root3 = new TreeNode(1);
+        root3.left = new TreeNode(1);
+        System.out.println("Is BST: " + checker.isValidBST(root3)); //false
+    }
+}
+```
+
+Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some cases (avoiding recursive function call overhead). Choose the method that best suits your coding style and performance requirements. Remember to include the `TreeNode` class definition in your code.  The `main` method provides example usage.
+
