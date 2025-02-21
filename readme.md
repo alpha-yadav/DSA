@@ -84148,3 +84148,103 @@ print(f"Are root1 and root3 the same (iterative)? {are_trees_same_iterative(root
 
 Both methods achieve the same result. Choose the recursive approach for its simplicity and readability unless you anticipate dealing with extremely deep trees where stack overflow might be a concern, in which case the iterative approach is preferable. Remember to handle the `None` cases appropriately in both methods to account for empty subtrees.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They're particularly useful when you need to perform searches, insertions, and deletions quickly.  Here's a breakdown of their key aspects:
+
+**Definition:**
+
+A Binary Search Tree is a tree-like data structure where each node contains:
+
+* **Key:** A value that is used for comparisons.
+* **Left Child:** A pointer to a subtree containing nodes with keys less than the parent node's key.
+* **Right Child:** A pointer to a subtree containing nodes with keys greater than the parent node's key.
+
+Crucially, **no two nodes in a BST can have the same key**.
+
+**Properties:**
+
+* **Ordered Property:** For every node, all nodes in its left subtree have keys less than the node's key, and all nodes in its right subtree have keys greater than the node's key.
+* **Binary Property:** Each node has at most two children (left and right).
+* **No Duplicates:**  A BST does not allow duplicate keys.  Different approaches handle this (e.g., rejecting duplicates, adding a count to each node).
+
+**Operations:**
+
+The efficiency of BSTs stems from their ability to perform these operations efficiently (in logarithmic time on average, but potentially linear time in the worst case, see below):
+
+* **Search:** To find a specific key, you start at the root and traverse down the tree.  If the key is less than the current node's key, you go left; otherwise, you go right.  This continues until the key is found or you reach a leaf node (a node with no children).
+
+* **Insertion:** To insert a new key, you follow the same search process. When you reach a leaf node or a node with a missing child (left or right), you insert the new node there.
+
+* **Deletion:** Deleting a node is more complex and involves different cases:
+    * **Leaf Node:** Simply remove the node.
+    * **Node with One Child:** Replace the node with its child.
+    * **Node with Two Children:**  There are two common strategies:
+        * **In-order successor:** Replace the node with its in-order successor (the smallest node in its right subtree).
+        * **In-order predecessor:** Replace the node with its in-order predecessor (the largest node in its left subtree).
+
+* **Minimum/Maximum:** Finding the minimum or maximum key is straightforward. The minimum key is the leftmost node, and the maximum key is the rightmost node.
+
+**Traversal Methods:**
+
+These methods systematically visit each node in the tree:
+
+* **In-order traversal:**  Visits nodes in ascending order of their keys.  (Left, Root, Right)
+* **Pre-order traversal:** Visits the root node first, then the left subtree, then the right subtree. (Root, Left, Right)
+* **Post-order traversal:** Visits the left subtree, then the right subtree, then the root node. (Left, Right, Root)
+
+
+**Advantages:**
+
+* **Efficient Search, Insertion, and Deletion:**  O(log n) time complexity on average, where n is the number of nodes.  This makes BSTs very efficient for large datasets.
+* **Ordered Data:**  BSTs inherently maintain the sorted order of the data.
+
+**Disadvantages:**
+
+* **Worst-Case Performance:** In the worst case (e.g., a skewed tree where all nodes are on one side), the time complexity becomes O(n), which is inefficient.  This can happen if the data is inserted in a sorted order.
+* **Self-Balancing:**  To mitigate the worst-case scenario, self-balancing BSTs (like AVL trees or red-black trees) are used. These trees use algorithms to maintain a balanced structure, ensuring logarithmic time complexity even in the worst case.  However, they are more complex to implement.
+
+
+**Example (Python):**
+
+A simplified node class and basic insertion:
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        if self.root is None:
+            self.root = Node(key)
+        else:
+            self._insert_recursive(self.root, key)
+
+    def _insert_recursive(self, node, key):
+        if key < node.key:
+            if node.left is None:
+                node.left = Node(key)
+            else:
+                self._insert_recursive(node.left, key)
+        else:
+            if node.right is None:
+                node.right = Node(key)
+            else:
+                self._insert_recursive(node.right, key)
+
+# Example usage:
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+```
+
+This is a basic example; a complete implementation would include search, deletion, and traversal methods.  Remember that for production-level code, using a well-tested library implementation (like those found in many programming languages' standard libraries) is usually recommended.
+
