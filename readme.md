@@ -86786,3 +86786,30 @@ for (let i = 1; i <= 10; i++) { // Outer loop
 
 Nested loops are appropriate when you need to perform operations on combinations of elements from multiple data structures or when you are working with multi-dimensional data such as matrices, tables, or graphs. However, be cautious about their computational cost, especially for large datasets, as they can lead to significant performance issues.  Consider alternative algorithms (like using matrix operations in libraries like NumPy in Python) if possible to avoid excessive nested looping for improved efficiency.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They indicate that the time it takes to complete the algorithm increases logarithmically with the input size (n).  This means that as the input size doubles, the time taken only increases by a constant amount.  This is achievable because these algorithms typically work by repeatedly halving the problem size.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:**  This is the quintessential example.  In a sorted array or list, it repeatedly divides the search interval in half. If the target value is not found in the middle element, it eliminates half the remaining elements based on whether the target is greater or smaller than the middle element and repeats until the target is found or the interval is empty.
+
+* **Binary Tree Operations (Search, Insertion, Deletion - in a balanced tree):**  In a balanced binary search tree (like an AVL tree or a red-black tree), finding, inserting, or deleting a node typically takes O(log n) time because the tree's height is proportional to log₂(n), where n is the number of nodes.  Unbalanced trees can degrade to O(n) in the worst case.
+
+* **Efficient Set/Map Operations (in balanced tree implementations):**  Many implementations of sets and maps (like those found in standard libraries) use balanced binary search trees.  Operations like `contains`, `insert`, and `delete` therefore have logarithmic time complexity.
+
+* **Exponentiation by Squaring:** This algorithm efficiently computes a<sup>b</sup> (a raised to the power of b) in O(log b) time.  It cleverly uses the fact that a<sup>b</sup> = (a<sup>b/2</sup>)<sup>2</sup> if b is even, and a<sup>b</sup> = a * a<sup>(b-1)</sup> if b is odd.
+
+* **Finding the kth smallest element using Quickselect (average case):**  Quickselect is a selection algorithm related to quicksort.  While its worst-case time complexity is O(n²), its average-case time complexity is O(n), and finding a specific kth smallest element can be adapted to O(log n) with clever pivoting and partition strategies under certain conditions.
+
+
+**Key Characteristics Leading to O(log n) Complexity:**
+
+The common thread among these algorithms is the ability to repeatedly divide the problem size in half (or by some constant factor). This is often achieved through techniques like:
+
+* **Divide and conquer:** Breaking a problem into smaller subproblems.
+* **Binary trees:**  Leveraging the balanced structure of a binary tree to efficiently search or manipulate data.
+* **Efficient data structures:** Using data structures designed to provide fast logarithmic time operations.
+
+
+It's crucial to remember that the O(log n) complexity only holds true under certain assumptions (e.g., a sorted array for binary search, a balanced tree for tree operations).  If these assumptions are violated, the time complexity might degrade to O(n) or even worse.
+
