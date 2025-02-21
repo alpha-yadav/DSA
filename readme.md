@@ -85622,3 +85622,50 @@ graph2.print_matrix()
 
 For sparse graphs, adjacency lists are generally a more efficient way to represent graphs.  The choice between adjacency matrices and adjacency lists depends on the specific characteristics of the graph and the algorithms you intend to use.
 
+#  Introduction To Graph Theory 
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph consists of:
+
+* **Vertices (or nodes):** These represent the objects in the system.  Think of them as points or dots.
+* **Edges (or arcs):** These represent the relationships between the vertices.  They are lines connecting pairs of vertices.
+
+Graphs can be visualized as diagrams with points and lines, making them intuitively understandable and applicable to numerous real-world problems.  However, their power lies in their abstract mathematical representation, allowing for rigorous analysis and the development of powerful algorithms.
+
+Here's a breakdown of key concepts within introductory graph theory:
+
+**Types of Graphs:**
+
+* **Undirected Graphs:** Edges have no direction; the relationship between two vertices is mutual.  Think of a friendship network – if A is friends with B, B is also friends with A.
+* **Directed Graphs (or Digraphs):** Edges have a direction, indicating a one-way relationship.  Think of a road network with one-way streets, or a website with hyperlinks.
+* **Weighted Graphs:** Edges have associated weights, representing a numerical value associated with the relationship.  This could be distance, cost, or strength of connection.  Think of a map showing distances between cities.
+* **Simple Graphs:**  Graphs that have no loops (edges connecting a vertex to itself) and no multiple edges (more than one edge connecting the same pair of vertices).
+* **Complete Graphs:** Every pair of vertices is connected by a unique edge.
+* **Bipartite Graphs:** The vertices can be divided into two disjoint sets such that every edge connects a vertex in one set to a vertex in the other set.  Think of a matching problem, like assigning tasks to workers.
+* **Trees:** Connected, acyclic (no cycles) graphs. They are fundamental data structures in computer science.
+* **Planar Graphs:** Graphs that can be drawn on a plane without any edges crossing.
+
+
+**Key Concepts and Terminology:**
+
+* **Degree of a vertex:** The number of edges incident to a vertex.  In directed graphs, we have in-degree (incoming edges) and out-degree (outgoing edges).
+* **Path:** A sequence of vertices connected by edges.
+* **Cycle:** A path that starts and ends at the same vertex, without repeating any other vertices or edges.
+* **Connected Graph:** A graph where there is a path between any two vertices.
+* **Connected Component:** A maximal connected subgraph.
+* **Subgraph:** A graph whose vertices and edges are subsets of another graph.
+* **Isomorphism:** Two graphs are isomorphic if they have the same structure, even if their vertices and edges are labeled differently.
+* **Adjacency Matrix:** A matrix representing the graph where entry (i,j) is 1 if there's an edge between vertex i and vertex j, and 0 otherwise.
+* **Adjacency List:** A list of lists representing the graph, where each list contains the neighbors of a vertex.
+
+**Applications of Graph Theory:**
+
+Graph theory has incredibly broad applications across many fields, including:
+
+* **Computer Science:** Data structures, algorithms, network analysis, social networks.
+* **Engineering:** Network design, circuit design, transportation networks.
+* **Biology:** Modeling biological networks (protein-protein interaction networks, gene regulatory networks).
+* **Social Sciences:** Social network analysis, modeling relationships between individuals or groups.
+* **Operations Research:** Optimization problems, scheduling problems.
+
+
+This introduction provides a basic overview of graph theory.  Further study involves exploring specific algorithms (e.g., Dijkstra's algorithm for shortest paths, breadth-first search, depth-first search), more advanced graph properties, and specialized types of graphs.
+
