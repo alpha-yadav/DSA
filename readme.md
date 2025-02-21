@@ -87332,3 +87332,81 @@ int main() {
 
 Remember to handle memory management properly.  The provided code uses `new` to allocate nodes; you would typically need a more sophisticated approach (like smart pointers) in a production environment to automatically deallocate memory when nodes are deleted to prevent memory leaks.  The `main` function demonstrates deleting nodes with 0, 1, and 2 children.  Study the code carefully to understand each case.  The `minValueNode` helper function efficiently finds the inorder successor. Remember to compile with a C++ compiler (like g++) before running.
 
+#  Lowest common ancestor in a BST 
+The lowest common ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node that has both nodes as descendants (where a node is considered a descendant of itself).  There are several ways to find the LCA in a BST, but the most efficient leverages the BST property.
+
+**Efficient Approach (using BST properties):**
+
+This approach is O(h) time complexity, where h is the height of the tree (best case O(log n), worst case O(n) for a skewed tree).  It's also O(1) space complexity.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not in the tree.
+    """
+
+    if not root or p.data == root.data or q.data == root.data:
+      return root
+
+    if p.data < root.data and q.data < root.data:
+        return lowestCommonAncestor(root.left, p, q)
+    elif p.data > root.data and q.data > root.data:
+        return lowestCommonAncestor(root.right, p, q)
+    else:
+        return root  # p and q are on opposite sides of the root
+
+
+# Example usage:
+root = Node(6)
+root.left = Node(2)
+root.right = Node(8)
+root.left.left = Node(0)
+root.left.right = Node(4)
+root.right.left = Node(7)
+root.right.right = Node(9)
+
+p = root.left  # Node with data 2
+q = root.right  # Node with data 8
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}")  # Output: LCA of 2 and 8: 6
+
+
+p = root.left.right # Node with data 4
+q = root.right.left # Node with data 7
+lca = lowestCommonAncestor(root, p,q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 4 and 7: 6
+
+p = root.left.right # Node with data 4
+q = root.left.left # Node with data 0
+lca = lowestCommonAncestor(root, p,q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 4 and 0: 2
+
+
+```
+
+**Explanation:**
+
+1. **Base Case:** If the root is `None` or if either `p` or `q` is the root, the root is the LCA.
+
+2. **Recursive Steps:**
+   - If both `p` and `q` are smaller than the root's data, the LCA must be in the left subtree.
+   - If both `p` and `q` are larger than the root's data, the LCA must be in the right subtree.
+   - Otherwise, the root itself is the LCA because `p` and `q` are on opposite sides.
+
+This approach efficiently utilizes the ordered nature of a BST to quickly find the LCA.  Remember that if either `p` or `q` isn't in the tree, the function might return an unexpected result.  You could add checks to handle this scenario if needed.
+
