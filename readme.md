@@ -89160,3 +89160,84 @@ This problem highlights common algorithmic concepts like:
 
 This is a relatively simple but effective example of an algorithmic problem.  It allows for the demonstration of different approaches and their trade-offs, making it suitable for practice and learning.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  Here's how to implement it in Swift, starting with a simple version and then showing a slightly more advanced approach:
+
+**Version 1:  Basic Approach**
+
+This version uses a simple `for` loop and `if`/`else if`/`else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks divisibility by 15 first (to handle both 3 and 5).
+* Then it checks divisibility by 3.
+* Then it checks divisibility by 5.
+* If none of the above are true, it prints the number itself.
+
+
+**Version 2: Slightly More Concise (using the ternary conditional operator)**
+
+We can make the code slightly more compact using the ternary conditional operator (`condition ? value1 : value2`):
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This version nests ternary operators to achieve the same result in fewer lines.  While concise,  it can become less readable as complexity increases.
+
+
+**Version 3:  Using String Interpolation for even better readability**
+
+This version uses string interpolation to create the output string.  It's easier to understand the logic:
+
+```swift
+func fizzBuzzReadable(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzReadable(n: 15)
+```
+
+This approach is often considered the most readable because it clearly separates the logic for each condition.
+
+
+**Choosing the Best Version:**
+
+For a simple FizzBuzz, any of these versions work well.  The best choice depends on your priorities:
+
+* **Readability:** Version 3 is generally preferred for its clarity.
+* **Conciseness:** Version 2 is the shortest but can be harder to understand for beginners.
+* **Maintainability:** Version 3 is also easier to maintain and extend if you need to add more conditions in the future.
+
+Remember to choose the version that best suits your coding style and the context of your project.  For a simple algorithm like FizzBuzz, readability is usually more important than extreme conciseness.
+
