@@ -83764,3 +83764,86 @@ while (count < 5) {
 
 These examples all perform the same basic task: printing the numbers 0 through 4.  The choice between `for` and `while` loops depends on whether the number of iterations is known in advance.  `for` loops are generally preferred when the number of iterations is known, while `while` loops are better suited for situations where the number of iterations depends on a condition.  Remember to always ensure your loop condition eventually becomes false to prevent infinite loops.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or combinations of data.
+
+Here's a breakdown with examples in Python and a description of their use cases:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed for each inner loop iteration
+        # Access both outer_loop_variable and inner_loop_variable here
+    # Code executed after each complete inner loop cycle
+```
+
+**Example 1:  Printing a multiplication table**
+
+This example shows how nested loops can be used to generate a multiplication table. The outer loop iterates through rows, and the inner loop iterates through columns.
+
+```python
+for i in range(1, 11):  # Outer loop: rows (1 to 10)
+    for j in range(1, 11):  # Inner loop: columns (1 to 10)
+        print(i * j, end="\t")  # Print the product with a tab separator
+    print()  # Newline after each row
+```
+
+**Example 2:  Iterating through a 2D list (matrix)**
+
+Nested loops are commonly used to process two-dimensional data structures like matrices or lists of lists.
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()  # Newline after each row
+```
+
+**Example 3: Finding the maximum value in a 2D array**
+
+```python
+matrix = [
+    [1, 5, 2],
+    [8, 3, 9],
+    [4, 7, 6]
+]
+
+max_value = float('-inf')  # Initialize with negative infinity
+
+for row in matrix:
+    for element in row:
+        if element > max_value:
+            max_value = element
+
+print("The maximum value is:", max_value)
+```
+
+**Example 4:  Nested loops with different iterables:**
+
+You don't need to use the same iterable in both loops.
+
+```python
+names = ["Alice", "Bob", "Charlie"]
+numbers = [1, 2, 3]
+
+for name in names:
+    for number in numbers:
+        print(f"{name} - {number}")
+```
+
+
+**Efficiency Considerations:**
+
+Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly as the size of the iterables grows (often O(n*m) where n and m are the sizes of the outer and inner loop iterables respectively).  Consider optimizing your code if performance becomes a concern, perhaps by using more efficient algorithms or data structures.
+
+
+In summary, nested loops provide a powerful way to iterate through multiple levels of data, but it's crucial to be mindful of their potential performance impact when dealing with large datasets.  Understanding their structure and application is fundamental to programming in many contexts.
+
