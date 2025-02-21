@@ -86630,3 +86630,101 @@ Big O notation makes this clear: Binary search is significantly more efficient f
 
 Big O notation is a powerful tool for evaluating and comparing the efficiency of algorithms, allowing developers to choose the most appropriate solution for a given problem, especially when dealing with large datasets.
 
+#  A Simple Loop 
+A simple loop repeats a block of code a certain number of times or until a condition is met.  Here are examples in a few common programming languages:
+
+**1. `for` loop (counting loops):**  These loops are best when you know the number of iterations in advance.
+
+* **Python:**
+
+```python
+for i in range(5):  # Loops 5 times, i takes values 0, 1, 2, 3, 4
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. `while` loop (conditional loops):** These loops continue as long as a condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on whether you know the number of iterations beforehand.  If you do, `for` is generally preferred for its clarity.  If you don't, `while` is necessary.  Remember to always have a condition that will eventually make the loop terminate to avoid infinite loops.
+
