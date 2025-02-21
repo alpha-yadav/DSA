@@ -86387,3 +86387,57 @@ This uses the nil-coalescing operator (`??`) to handle the case where both condi
 
 Choose the version that best suits your understanding and coding style.  The improved approach offers a good balance of readability and conciseness.  Remember to run this code in a Swift playground or a Swift project to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm consumes as the input size grows.  It's crucial for understanding how an algorithm's performance scales with larger datasets.  We usually express complexity using Big O notation (and related notations like Big Omega and Big Theta).
+
+Here's a breakdown of key aspects:
+
+**1. Time Complexity:**  This analyzes how the runtime of an algorithm increases as the input size (n) increases.  We focus on the dominant operations, ignoring constant factors and lower-order terms.
+
+* **Common Time Complexities (from best to worst):**
+
+    * **O(1) - Constant Time:** The runtime remains the same regardless of the input size.  Example: Accessing an element in an array using its index.
+    * **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+    * **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+    * **O(n log n) - Linearithmic Time:**  A combination of linear and logarithmic.  Example: Merge sort, heap sort.
+    * **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size. Example: Bubble sort, selection sort, nested loops iterating over the input.
+    * **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+    * **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example:  Trying all permutations of a set.
+
+
+* **Analyzing Time Complexity:**  We typically analyze the worst-case, average-case, and best-case scenarios.  Worst-case is most common as it provides an upper bound on the runtime.
+
+**2. Space Complexity:** This analyzes how the memory usage of an algorithm increases as the input size (n) increases.  Similar to time complexity, we use Big O notation.
+
+* **Common Space Complexities:**  Similar categories to time complexity exist (O(1), O(log n), O(n), O(n²), etc.).
+
+* **Analyzing Space Complexity:**  We consider the space used by the algorithm itself (variables, data structures) and the space used for the input data.
+
+
+**3. Big O Notation (and related notations):**
+
+* **Big O (O):** Represents the upper bound of the growth rate. It describes the worst-case scenario.  We say an algorithm has a time complexity of O(n²) if its runtime grows no faster than the square of the input size.
+
+* **Big Omega (Ω):** Represents the lower bound of the growth rate. It describes the best-case scenario.
+
+* **Big Theta (Θ):** Represents both the upper and lower bounds of the growth rate.  It describes the tight bound, meaning the algorithm's runtime grows proportionally to the function.  For example, Θ(n) means the runtime grows linearly with the input size.
+
+
+**4. Factors Affecting Complexity:**
+
+* **Algorithm Design:** Different algorithms for the same problem can have vastly different complexities.
+* **Data Structures:** The choice of data structures significantly impacts the efficiency of an algorithm.
+* **Input Data:** The specific characteristics of the input data (e.g., already sorted data) can influence the actual runtime.
+* **Hardware:** The underlying hardware (processor speed, memory) affects the absolute runtime but doesn't change the complexity class.
+
+
+**Example:**
+
+Consider searching for an element in an array:
+
+* **Linear Search (unsorted):** Worst-case time complexity is O(n) because you might have to examine every element.
+* **Binary Search (sorted):** Worst-case time complexity is O(log n) because you repeatedly halve the search space.
+
+
+Understanding algorithm complexity is essential for choosing the most efficient algorithms for a given task, especially when dealing with large datasets where performance differences can be dramatic.  It allows you to make informed decisions about algorithm selection and optimization.
+
