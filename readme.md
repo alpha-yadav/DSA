@@ -86728,3 +86728,61 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on whether you know the number of iterations beforehand.  If you do, `for` is generally preferred for its clarity.  If you don't, `while` is necessary.  Remember to always have a condition that will eventually make the loop terminate to avoid infinite loops.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a structure where you iterate through combinations of data.  They are commonly used for processing two-dimensional arrays or performing operations that require multiple iterations over different sets of data.
+
+
+**Example (Python):**
+
+This code iterates through a 3x3 matrix and prints each element:
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for i in range(len(matrix)):  # Outer loop iterates through rows
+    for j in range(len(matrix[i])):  # Inner loop iterates through columns
+        print(f"Element at ({i}, {j}): {matrix[i][j]}")
+```
+
+**Output:**
+
+```
+Element at (0, 0): 1
+Element at (0, 1): 2
+Element at (0, 2): 3
+Element at (1, 0): 4
+Element at (1, 1): 5
+Element at (1, 2): 6
+Element at (2, 0): 7
+Element at (2, 1): 8
+Element at (2, 2): 9
+```
+
+
+**Example (JavaScript):**
+
+This code prints a multiplication table:
+
+```javascript
+for (let i = 1; i <= 10; i++) { // Outer loop
+  for (let j = 1; j <= 10; j++) { // Inner loop
+    console.log(i + " x " + j + " = " + (i * j));
+  }
+}
+```
+
+**Explanation:**
+
+* **Outer Loop:** Controls the main iteration, often representing the rows or the first dimension of data.
+* **Inner Loop:** Iterates for each iteration of the outer loop, often representing columns or the second dimension of data.
+* **Complexity:** Nested loops increase the time complexity of your code.  A nested loop with two loops each running `n` times will have a time complexity of O(n²).  This means the execution time grows quadratically with the input size.  With more nested loops, the complexity increases exponentially.  Be mindful of this when dealing with large datasets.
+
+
+**When to use nested loops:**
+
+Nested loops are appropriate when you need to perform operations on combinations of elements from multiple data structures or when you are working with multi-dimensional data such as matrices, tables, or graphs. However, be cautious about their computational cost, especially for large datasets, as they can lead to significant performance issues.  Consider alternative algorithms (like using matrix operations in libraries like NumPy in Python) if possible to avoid excessive nested looping for improved efficiency.
+
