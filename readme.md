@@ -85416,3 +85416,86 @@ While recursion is elegant, an iterative approach can be more efficient for very
 
 The recursive approach is generally preferred for its readability and simplicity, unless you anticipate extremely deep trees where stack overflow becomes a concern.  Choose the method that best suits your needs and coding style. Remember to handle potential errors robustly in a production setting.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (or more specifically, a directed acyclic graph, or DAG, which includes trees as a special case) is a fundamental problem in computer science with applications in various fields, including file systems, version control systems (like Git), and phylogenetic trees.  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Brute Force:**
+
+   * **Algorithm:**  For each node, traverse upwards towards the root.  Check if both nodes are present in the subtree rooted at this node. The first such node encountered is the LCA.
+   * **Time Complexity:** O(N*h), where N is the number of nodes and h is the height of the tree.  In the worst case (a skewed tree), h can be N.
+   * **Space Complexity:** O(h) due to recursive calls or stack space during traversal.
+
+2. **Using Parent Pointers:**
+
+   * **Algorithm:**  If each node stores a pointer to its parent, you can traverse upwards from both nodes simultaneously. When the paths converge, you've found the LCA.
+   * **Time Complexity:** O(h), where h is the height of the tree.
+   * **Space Complexity:** O(1)
+
+3. **Depth-First Search (DFS) with a Hash Table:**
+
+   * **Algorithm:** Perform a DFS traversal starting from the root.  During the traversal, store the path from the root to each node in a hash table (using the node as the key and the path as the value).  To find the LCA of two nodes, retrieve their paths from the hash table.  Traverse both paths simultaneously from the root until the paths diverge. The last common node is the LCA.
+   * **Time Complexity:** O(N) for the DFS traversal and O(1) for LCA lookup assuming efficient hash table implementation.
+   * **Space Complexity:** O(N) to store the paths in the hash table.
+
+4. **Binary Lifting (for Trees):**
+
+   * **Algorithm:** This is an efficient method for trees, particularly useful when you need to query the LCA of many node pairs. It preprocesses the tree to allow for fast LCA queries.  It involves building a jump table (or similar structure) that allows you to efficiently jump up the tree by powers of 2.
+   * **Time Complexity:** O(N log N) for preprocessing, O(log N) for each LCA query.
+   * **Space Complexity:** O(N log N) for the jump table.
+
+
+5. **Euler Tour and Range Minimum Query (RMQ):**
+
+   * **Algorithm:** This advanced technique combines an Euler tour of the tree with a Range Minimum Query (RMQ) data structure (e.g., Sparse Table). The Euler tour creates a linear representation of the tree traversal, and RMQ efficiently finds the minimum value (representing the lowest depth) within a given range.
+   * **Time Complexity:** O(N) for preprocessing, O(1) for each LCA query.
+   * **Space Complexity:** O(N)
+
+
+**Choosing the Right Method:**
+
+The best method depends on the specifics of your problem:
+
+* **For single LCA queries in a small tree:** The brute-force method or using parent pointers is sufficient.
+* **For frequent LCA queries in a large tree:** Binary Lifting or the Euler Tour/RMQ approach is significantly more efficient.
+* **If you don't have parent pointers and don't want to pre-process the tree:** DFS with a hash table is a good compromise.
+
+
+**Example (Using Parent Pointers):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None  # Pointer to the parent node
+
+def lowest_common_ancestor(node1, node2):
+    path1 = []
+    path2 = []
+
+    while node1:
+        path1.append(node1)
+        node1 = node1.parent
+    while node2:
+        path2.append(node2)
+        node2 = node2.parent
+
+    lca = None
+    i = len(path1) - 1
+    j = len(path2) - 1
+    while i >= 0 and j >= 0 and path1[i] == path2[j]:
+        lca = path1[i]
+        i -= 1
+        j -= 1
+
+    return lca
+
+# Example Usage (You'd need to build your tree structure first)
+# ... (build a tree with Node objects and set their parent pointers) ...
+# lca_node = lowest_common_ancestor(nodeA, nodeB)
+# print(f"LCA: {lca_node.data}")
+```
+
+Remember to adapt the code to your specific tree representation and data structure.  The examples provided illustrate the core concepts; you may need to adjust them based on your needs.
+
