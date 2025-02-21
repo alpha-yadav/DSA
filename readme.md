@@ -87644,3 +87644,124 @@ def isBST_iterative(root):
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once. The space complexity is O(H) for the recursive approach (where H is the height of the tree,  potentially O(N) in a skewed tree), and O(H)  (again, potentially O(N) in a skewed tree) for the iterative approach due to the stack.  The iterative approach is generally preferred for its slightly better space efficiency in the worst case.  Choose the method that best suits your needs and coding style. Remember to adapt the `Node` class if you are using a different node structure.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property of BSTs that an in-order traversal yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.data)
+            inorder(node.right)
+
+    inorder(root)
+
+    # Check if the in-order traversal is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+
+# Example usage
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+
+print(is_bst_recursive(root)) # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) # Violation: 8 > 7
+
+print(is_bst_recursive(root2)) # Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max Bounds**
+
+This approach recursively checks each subtree, maintaining minimum and maximum allowed values for the nodes within that subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_minmax(node, min_val, max_val):
+    """
+    Checks if a binary tree is a BST using recursive min/max bounds.
+
+    Args:
+        node: The current node being checked.
+        min_val: The minimum allowed value for this subtree.
+        max_val: The maximum allowed value for this subtree.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive_minmax(node.left, min_val, node.data) and
+            is_bst_recursive_minmax(node.right, node.data, max_val))
+
+
+def is_bst(root):
+    """Wrapper function for is_bst_recursive_minmax"""
+    return is_bst_recursive_minmax(root, float('-inf'), float('inf'))
+
+
+# Example usage (same trees as before)
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(is_bst(root)) # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8)
+
+print(is_bst(root2)) # Output: False
+```
+
+**Which method to choose?**
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) for the recursive methods, where H is the height of the tree (O(N) in the worst case of a skewed tree, O(log N) in the best case of a balanced tree).  The recursive min-max approach is generally preferred because it avoids the need to create an extra list for in-order traversal.  It directly checks the BST property during the traversal. Therefore, the `is_bst` function (Method 2) is generally a more efficient and elegant solution.
+
