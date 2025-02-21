@@ -87864,3 +87864,105 @@ This method avoids recursion and uses a stack for depth-first traversal. It's le
 
 Remember to handle the case of an empty tree (which is considered a valid BST).  The provided examples include this handling. Choose the method that best suits your needs and coding style; they all achieve the same result.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can systematically visit each node in a binary tree exactly once.  There are three main types of traversals, categorized by the order in which you visit the root node relative to its left and right subtrees:
+
+* **Inorder Traversal:**  Left Subtree -> Root -> Right Subtree
+
+    * This traversal is particularly useful for binary *search* trees (BSTs).  An inorder traversal of a BST will visit the nodes in ascending order of their values.
+
+    * **Example (recursive):**
+
+    ```python
+    def inorder_traversal(node):
+        if node:
+            inorder_traversal(node.left)
+            print(node.data, end=" ")
+            inorder_traversal(node.right)
+    ```
+
+    * **Example (iterative):**  Using a stack
+
+    ```python
+    def inorder_traversal_iterative(root):
+        stack = []
+        current = root
+        while True:
+            if current:
+                stack.append(current)
+                current = current.left
+            elif stack:
+                current = stack.pop()
+                print(current.data, end=" ")
+                current = current.right
+            else:
+                break
+
+    ```
+
+* **Preorder Traversal:** Root -> Left Subtree -> Right Subtree
+
+    * Preorder traversal is often used to create a copy of the tree or to generate an expression from a binary expression tree.
+
+    * **Example (recursive):**
+
+    ```python
+    def preorder_traversal(node):
+        if node:
+            print(node.data, end=" ")
+            preorder_traversal(node.left)
+            preorder_traversal(node.right)
+    ```
+
+    * **Example (iterative):** Using a stack
+
+    ```python
+    def preorder_traversal_iterative(root):
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                print(node.data, end=" ")
+                stack.append(node.right)
+                stack.append(node.left)
+    ```
+
+
+* **Postorder Traversal:** Left Subtree -> Right Subtree -> Root
+
+    * Postorder traversal is commonly used to delete a tree or to evaluate an expression tree (e.g., performing calculations based on the order of operations).
+
+    * **Example (recursive):**
+
+    ```python
+    def postorder_traversal(node):
+        if node:
+            postorder_traversal(node.left)
+            postorder_traversal(node.right)
+            print(node.data, end=" ")
+    ```
+
+    * **Example (iterative):** This is slightly more complex than preorder or inorder iterative traversals and often involves two stacks or a more sophisticated approach using a single stack and flags to track visited nodes.  (See resources for examples)
+
+
+**Key Considerations:**
+
+* **Recursive vs. Iterative:**  Recursive implementations are often more concise and easier to understand, but they can be less efficient for very large trees due to function call overhead and potential stack overflow. Iterative implementations using stacks avoid these issues.
+
+* **Binary Tree Node Structure:**  These examples assume a simple binary tree node structure like this (in Python):
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+* **Error Handling:**  Robust code should include checks for `None` (empty) nodes to prevent `AttributeError` exceptions.
+
+* **Applications:** The choice of traversal depends entirely on the specific application.  Understanding the order of node visitation for each method is crucial.
+
+
+Remember to adapt the code to your specific node structure and programming language.  Many resources online provide detailed explanations and visual examples of binary tree traversals.  Searching for "binary tree traversal visualization" will yield helpful diagrams.
+
