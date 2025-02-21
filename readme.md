@@ -86483,3 +86483,61 @@ Therefore, since we've found constants *c₁ = 2*, *c₂ = 10*, and *n₀ = 1* (
 
 Big-Theta notation gives the most precise description of a function's growth rate among these three notations.  It tells us not only how fast it grows at most, but also how fast it grows at least, ensuring a tight bound.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly useful in analyzing the efficiency of algorithms.  Here's a comparison of the most common ones:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than a quadratic function of the input size n.
+* **Focus:**  Worst-case performance.  It doesn't tell us anything about the best-case or average-case behavior.
+
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (though sometimes used for a lower bound on average-case behavior as well). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least as fast as a linear function of the input size n.
+* **Focus:** Best-case performance (or sometimes average-case lower bound).
+
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows *both* at least as fast and at most as fast as the given function.  Formally, f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+* **Focus:** Precise asymptotic behavior, capturing both upper and lower bounds.
+
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.  The key difference from Big O is the strict inequality.
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+* **Focus:**  Strict upper bound; f(n) grows significantly slower than g(n).
+
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:**  Indicates that a function grows *strictly faster* than another function.  f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.  The key difference from Big Omega is the strict inequality.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+* **Focus:** Strict lower bound; f(n) grows significantly faster than g(n).
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Relationship to other notations |
+|----------|---------------------------------------|---------------------------------|
+| O(g(n))  | Upper bound                            |                                 |
+| Ω(g(n))  | Lower bound                            |                                 |
+| Θ(g(n))  | Tight bound (O and Ω)                   | O(g(n)) and Ω(g(n))              |
+| o(g(n))  | Strictly smaller upper bound           | O(g(n)) but not Θ(g(n))         |
+| ω(g(n))  | Strictly larger lower bound            | Ω(g(n)) but not Θ(g(n))         |
+
+
+**Important Considerations:**
+
+* **Constants are ignored:** Asymptotic notations focus on the dominant terms as n approaches infinity.  Constants are irrelevant.  O(2n) is the same as O(n).
+* **Lower-order terms are ignored:**  O(n² + n) simplifies to O(n²) because the n² term dominates as n grows large.
+* **Base of logarithms is irrelevant:** O(log₂n) is the same as O(log₁₀n), as they differ only by a constant factor.
+
+
+Understanding these notations is crucial for comparing the efficiency of different algorithms and making informed decisions about which algorithm to use for a given problem.
+
