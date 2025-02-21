@@ -85036,3 +85036,116 @@ print(f"Is the tree a BST (iterative)? {is_bst_iterative(root2)}")
 
 Remember to handle edge cases like empty trees (`node is None`) correctly in both methods.  Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node at least once.  The space complexity depends on the tree's shape; for a skewed tree, it can be O(N) (recursive) or O(N) (iterative in the worst case). For a balanced tree, it's O(log N) for recursive and O(log N) in average case iterative.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit (or "traverse") all the nodes in a binary tree.  There are three main types of traversals, categorized by the order in which they visit the root node relative to its left and right subtrees:
+
+* **Inorder Traversal:**  Left Subtree -> Root -> Right Subtree
+
+   * This traversal visits the nodes in ascending order for a Binary Search Tree (BST).
+   * **Example:**  For a tree with root R, left subtree L, and right subtree R, the order would be L R R.
+
+* **Preorder Traversal:** Root -> Left Subtree -> Right Subtree
+
+   * This traversal is often used to create a copy of the tree or to express the tree's structure in prefix notation.
+   * **Example:**  The order would be R L R.
+
+* **Postorder Traversal:** Left Subtree -> Right Subtree -> Root
+
+   * This traversal is often used to delete a tree or to express the tree's structure in postfix notation.  It's also useful for evaluating expressions represented as binary trees.
+   * **Example:**  The order would be L R R.
+
+
+**Recursive Implementation (Common and Elegant):**
+
+Recursive functions are the most natural and concise way to implement these traversals.  Here's Python code demonstrating all three:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder(root)  # Output: 4 2 5 1 3
+print("\nPreorder traversal:")
+preorder(root)  # Output: 1 2 4 5 3
+print("\nPostorder traversal:")
+postorder(root)  # Output: 4 5 2 3 1
+```
+
+**Iterative Implementation (Using Stacks):**
+
+While recursion is elegant, it can lead to stack overflow errors for very deep trees.  Iterative approaches using stacks avoid this problem:
+
+```python
+def inorder_iterative(node):
+    stack = []
+    current = node
+    while True:
+        if current:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.data, end=" ")
+            current = current.right
+        else:
+            break
+
+# Similar iterative functions can be written for preorder and postorder using stacks.  The logic would adjust based on the order of pushing and popping from the stack.
+
+```
+
+**Level Order Traversal (Breadth-First Search):**
+
+This traversal visits nodes level by level, starting from the root.  It requires a queue data structure.
+
+```python
+from collections import deque
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+```
+
+Remember to choose the appropriate traversal method based on the specific task you're trying to accomplish.  The recursive implementations are generally easier to understand and write, but the iterative versions are more robust for large trees.  Level order traversal is useful when you need to process nodes level by level.
+
