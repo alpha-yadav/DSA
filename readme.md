@@ -83530,3 +83530,64 @@ The lower-order terms (3n and 10) and the constant factor (5) become insignifica
 
 In essence, Θ notation gives the most precise and informative description of an algorithm's asymptotic behavior when it's available.  If we only know the upper bound (O), we're not entirely sure how efficiently the algorithm performs; likewise, for a lower bound (Ω).  Θ tells us the true asymptotic growth rate.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly useful in analyzing the efficiency of algorithms.  Here's a comparison of the most common ones:
+
+**1. Big O (O-notation):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It essentially says, "the function grows no faster than this."
+* **Formal Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Intuition:**  Focuses on the *worst-case* scenario.  It describes how the runtime or space usage scales as the input size (n) approaches infinity.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows at most quadratically with the input size.
+
+**2. Big Omega (Ω-notation):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It says, "the function grows at least this fast."
+* **Formal Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Intuition:** Focuses on the *best-case* scenario (or a lower bound on the runtime).
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size.
+
+**3. Big Theta (Θ-notation):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function. It says, "the function grows at this rate."
+* **Formal Definition:** f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Intuition:**  Indicates that the upper and lower bounds match, giving a precise characterization of the growth rate.
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+
+**4. Little o (o-notation):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.
+* **Formal Definition:** f(n) = o(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Intuition:**  A more precise version of Big O; it emphasizes that g(n) dominates f(n) asymptotically.
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+
+
+**5. Little omega (ω-notation):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function.
+* **Formal Definition:** f(n) = ω(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Intuition:** A more precise version of Big Omega; it emphasizes that f(n) dominates g(n) asymptotically.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+
+
+**Relationships:**
+
+* Θ(g(n)) ⊂ O(g(n))
+* Θ(g(n)) ⊂ Ω(g(n))
+* o(g(n)) ⊂ O(g(n))
+* ω(g(n)) ⊂ Ω(g(n))
+
+
+**In Summary:**
+
+| Notation | Meaning                               | Bound Type | Strictness |
+|---|---|---|---|
+| O(g(n))  | Upper bound                            | Upper      | Non-strict |
+| Ω(g(n))  | Lower bound                            | Lower      | Non-strict |
+| Θ(g(n))  | Tight bound (upper and lower)         | Both       | Non-strict |
+| o(g(n))  | Strictly smaller upper bound           | Upper      | Strict     |
+| ω(g(n))  | Strictly larger lower bound            | Lower      | Strict     |
+
+
+Big O, Big Omega, and Big Theta are the most commonly used notations in algorithm analysis.  Little o and little omega provide finer distinctions when needed.  Understanding these notations is crucial for comparing the efficiency of different algorithms and making informed decisions about algorithm selection.
+
