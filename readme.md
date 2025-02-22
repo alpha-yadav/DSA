@@ -91837,3 +91837,116 @@ print(f"Is the tree a BST? {is_bst_recursive_minmax(root2, float('-inf'), float(
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) for the recursive approach (where H is the height of the tree), which becomes O(N) in the worst case (a skewed tree).  The recursive min/max method is generally considered slightly more efficient because it might prune branches earlier if a violation is detected.  The in-order traversal method is easier to understand conceptually. Choose the method that best suits your needs and understanding. Remember to handle edge cases such as empty trees appropriately.
 
+#  Binary Tree traversals 
+Binary tree traversals are methods for visiting each node in a binary tree exactly once.  There are three fundamental ways to traverse a binary tree: inorder, preorder, and postorder.  These traversals differ in the order in which they visit the root node relative to its left and right subtrees.  Let's examine each:
+
+**1. Inorder Traversal:**
+
+* **Order:** Left Subtree -> Root -> Right Subtree
+* **Recursive Implementation (Python):**
+
+```python
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")  # Process the node (e.g., print its data)
+        inorder_traversal(node.right)
+
+# Example Node class (assuming you have one)
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3
+```
+
+* **Iterative Implementation (Python using a stack):**  This avoids potential stack overflow issues for very deep trees.
+
+```python
+def inorder_traversal_iterative(node):
+    stack = []
+    current = node
+    while True:
+        if current:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.data, end=" ")
+            current = current.right
+        else:
+            break
+```
+
+* **Properties:**  For a Binary Search Tree (BST), inorder traversal yields a sorted sequence of the node values.
+
+
+**2. Preorder Traversal:**
+
+* **Order:** Root -> Left Subtree -> Right Subtree
+* **Recursive Implementation (Python):**
+
+```python
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+```
+
+* **Iterative Implementation (Python using a stack):**
+
+```python
+def preorder_traversal_iterative(node):
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if current:
+            print(current.data, end=" ")
+            stack.append(current.right)
+            stack.append(current.left)
+```
+
+* **Properties:** Preorder traversal is often used to create a copy of the tree or to represent the tree's structure in a prefix notation.
+
+
+**3. Postorder Traversal:**
+
+* **Order:** Left Subtree -> Right Subtree -> Root
+* **Recursive Implementation (Python):**
+
+```python
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+```
+
+* **Iterative Implementation (Python using two stacks):**  The iterative approach is slightly more complex for postorder than for inorder or preorder.  It typically involves using two stacks.
+
+
+* **Properties:** Postorder traversal is useful for deleting nodes in a tree (delete leaves first, then their parents) or for evaluating expressions represented as expression trees.
+
+
+**Choosing the Right Traversal:**
+
+The choice of traversal depends on the application.  For example:
+
+* **Inorder:**  Useful for sorted output from a BST, and generally used when you need to process nodes in a specific sorted order.
+* **Preorder:** Useful for creating a copy of the tree, prefix notation, or when you need to process the root node before its children.
+* **Postorder:**  Useful for deleting nodes (post-order deletion), evaluating expressions, or when you want to process children before the parent.
+
+
+Remember to replace the example `Node` class with your own implementation if it's different.  These examples assume a binary tree where each node has at most two children (left and right).  For more complex tree structures, you'll need to adapt the traversals accordingly.
+
