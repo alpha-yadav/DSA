@@ -91050,3 +91050,61 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Both methods achieve the same result. The recursive approach is generally preferred for its readability and simplicity, unless you anticipate dealing with extremely deep trees where stack overflow might be a concern.  In that case, the iterative approach with queues is a safer alternative.  Remember to handle the `None` cases appropriately in both methods to prevent errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  Their key characteristic is that for any given node:
+
+* All nodes in the left subtree have a value *less than* the node's value.
+* All nodes in the right subtree have a value *greater than* the node's value.
+
+This property allows for logarithmic time complexity (O(log n)) for many operations, provided the tree is balanced.  However, in worst-case scenarios (like a completely skewed tree resembling a linked list), the time complexity degrades to linear time (O(n)).
+
+
+**Key Operations:**
+
+* **Search:**  Finding a node with a specific value.  The search proceeds down the tree, comparing the target value to the current node's value and recursively searching the left or right subtree accordingly.
+
+* **Insertion:** Adding a new node.  The new node is inserted in the appropriate location to maintain the BST property.  This involves traversing the tree until an appropriate spot is found (a leaf node or a node with a missing child).
+
+* **Deletion:** Removing a node. This is the most complex operation.  There are three cases:
+    * **Leaf node:** Simply remove the node.
+    * **Node with one child:** Replace the node with its child.
+    * **Node with two children:**  Find the inorder predecessor (largest node in the left subtree) or inorder successor (smallest node in the right subtree), replace the node's value with the predecessor/successor's value, and then delete the predecessor/successor node (which will now be a node with at most one child).
+
+* **Minimum/Maximum:** Finding the smallest/largest value in the tree.  These can be found by traversing the leftmost/rightmost branches.
+
+* **Inorder Traversal:** Visiting nodes in ascending order. This involves recursively traversing the left subtree, visiting the current node, and then recursively traversing the right subtree.
+
+* **Preorder Traversal:** Visiting the root node first, then recursively traversing the left subtree, and then the right subtree.
+
+* **Postorder Traversal:** Recursively traversing the left subtree, then the right subtree, and finally visiting the root node.
+
+
+**Advantages of BSTs:**
+
+* **Efficient Search, Insertion, and Deletion:**  O(log n) on average, making them suitable for applications requiring frequent lookups.
+* **Ordered Data:**  BSTs naturally maintain sorted data, simplifying tasks requiring ordered access.
+* **Flexible:**  Can handle dynamic data, allowing for efficient addition and removal of elements.
+
+
+**Disadvantages of BSTs:**
+
+* **Worst-Case Scenario:**  In a skewed tree, performance degrades to O(n).
+* **Not Suitable for all Applications:**  BSTs are not ideal for situations requiring extremely fast access to any element (like hash tables) or guaranteed balancing (like AVL trees or red-black trees).
+* **Implementation Complexity:**  Deletion, in particular, can be tricky to implement correctly.
+
+
+**Self-Balancing BSTs:**
+
+To mitigate the worst-case scenario of unbalanced trees, self-balancing BSTs like AVL trees and red-black trees are used.  These trees automatically rebalance themselves during insertion and deletion operations to maintain a relatively balanced structure, ensuring O(log n) performance for all operations.
+
+
+**Applications:**
+
+* **Database Indexing:**  Used to efficiently store and retrieve data in databases.
+* **Symbol Tables:**  In compilers and interpreters, used to store and retrieve information about variables and functions.
+* **Sorting Algorithms:**  BSTs can be used as a basis for sorting algorithms.
+* **Priority Queues:**  Can be used to implement priority queues where elements are accessed based on priority.
+
+
+In summary, Binary Search Trees offer a powerful and efficient way to store and retrieve ordered data.  Understanding their properties and limitations is crucial for choosing the appropriate data structure for a given application.  For applications requiring guaranteed balanced performance, self-balancing BSTs are a better choice.
+
