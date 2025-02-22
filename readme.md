@@ -97331,3 +97331,53 @@ If n is large enough (say, n ≥ 5), then the inequality holds.  The lower-order
 
 In essence, Θ gives a more precise and complete description of the asymptotic behavior than O or Ω alone.  However, it's often harder to prove a Θ bound than an O bound.  If you can prove a Θ bound, it's generally preferred, but if only an O bound can be easily established, that's often sufficient for practical purposes.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input grows very large.  They're crucial in computer science for analyzing the efficiency of algorithms. Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than a quadratic function of the input size (n).  It could be faster, but it won't be significantly worse.
+* **Focus:** Worst-case performance.  Ignores constant factors and lower-order terms.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (or a lower bound on the runtime in all cases). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least as fast as a linear function of the input size.
+* **Focus:** Best-case or lower bound performance. Ignores constant factors and lower-order terms.
+
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function. It means the function grows *both* at least as fast and no faster than the specified function.  It describes the average-case performance.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+* **Focus:** Average-case or tight bound performance. Ignores constant factors and lower-order terms.
+
+
+**4. Little O Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.  The difference is that `o` doesn't allow for a constant multiple.
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+* **Focus:**  Strictly less growth rate.
+
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+* **Focus:** Strictly greater growth rate.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Relationship to g(n)         |
+|----------|----------------------------------------------|-------------------------------|
+| O(g(n))  | Upper bound                                   | f(n) ≤ c*g(n) for some c, n₀ |
+| Ω(g(n))  | Lower bound                                   | c*g(n) ≤ f(n) for some c, n₀ |
+| Θ(g(n))  | Tight bound (both upper and lower)            | c₁*g(n) ≤ f(n) ≤ c₂*g(n)     |
+| o(g(n))  | Strictly smaller upper bound                  | f(n) < c*g(n) for all c     |
+| ω(g(n))  | Strictly larger lower bound                   | c*g(n) < f(n) for all c     |
+
+
+**Important Note:**  Asymptotic notations only describe the behavior for large inputs.  They don't say anything about the performance for small inputs.  An algorithm with O(n²) complexity might be faster than an algorithm with O(n) complexity for small n, due to constant factors hidden by the notation.
+
