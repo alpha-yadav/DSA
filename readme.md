@@ -91950,3 +91950,130 @@ The choice of traversal depends on the application.  For example:
 
 Remember to replace the example `Node` class with your own implementation if it's different.  These examples assume a binary tree where each node has at most two children (left and right).  For more complex tree structures, you'll need to adapt the traversals accordingly.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes of a tree level by level.  Here are implementations in Python and JavaScript, demonstrating different approaches:
+
+**Python**
+
+This implementation uses a queue data structure:
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root) # Output: 1 2 3 4 5
+```
+
+
+**Python (Recursive approach - less efficient):**
+
+While less efficient than the iterative approach, a recursive solution can be implemented using a helper function.  This is generally less preferred for level order traversal due to higher space complexity.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrderRecursive(root, level):
+    if root is None:
+        return
+    if level == 1:
+        print(root.data, end=" ")
+    elif level > 1:
+        levelOrderRecursive(root.left, level - 1)
+        levelOrderRecursive(root.right, level - 1)
+
+
+def levelOrderRecursiveHelper(root):
+    h = height(root)
+    for i in range(1, h + 1):
+        levelOrderRecursive(root, i)
+
+def height(node):
+    if node is None:
+        return 0
+    else:
+        lheight = height(node.left)
+        rheight = height(node.right)
+        return max(lheight, rheight) + 1
+
+# Example usage (same tree as above)
+print("\nLevel Order traversal of binary tree (recursive) is -")
+levelOrderRecursiveHelper(root) # Output: 1 2 3 4 5
+
+```
+
+
+**JavaScript**
+
+This JavaScript implementation also uses a queue:
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) return;
+
+  let queue = [root];
+  while (queue.length > 0) {
+    let current = queue.shift();
+    console.log(current.data + " ");
+
+    if (current.left !== null) {
+      queue.push(current.left);
+    }
+    if (current.right !== null) {
+      queue.push(current.right);
+    }
+  }
+}
+
+// Example usage
+let root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1 2 3 4 5
+```
+
+Remember to choose the iterative approach (using a queue) for better performance, especially with large trees. The recursive approach has higher space complexity due to function call stack.  The iterative approach maintains a constant space complexity for queue operations relative to the tree's size.
+
