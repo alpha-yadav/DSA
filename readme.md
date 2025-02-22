@@ -90706,3 +90706,61 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The key difference is that the `for` loop is designed for a predetermined number of iterations, while the `while` loop continues until a condition becomes false.  Remember to avoid infinite loops by ensuring your loop's condition will eventually become false.  If you use a `while` loop, make sure the variable being checked changes inside the loop's body.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a way to iterate over multiple dimensions of data or perform repetitive tasks that depend on multiple variables.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    # Outer loop code (may include other operations)
+    for inner_loop_variable in inner_loop_iterable:
+        # Inner loop code (often depends on both outer and inner loop variables)
+    # Outer loop code (may include other operations)
+```
+
+**Example: Printing a Multiplication Table**
+
+This is a classic example demonstrating the usefulness of nested loops.  Let's print a 10x10 multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+This code will produce output like this:
+
+```
+1	2	3	4	5	6	7	8	9	10	
+2	4	6	8	10	12	14	16	18	20	
+3	6	9	12	15	18	21	24	27	30	
+... and so on ...
+```
+
+**Explanation:**
+
+* The outer loop iterates through numbers 1 to 10 (rows).
+* For each row (outer loop iteration), the inner loop iterates through numbers 1 to 10 (columns).
+* Inside the inner loop, the product `i * j` is calculated and printed.
+* `end="\t"` prevents a newline after each number, keeping them on the same line.
+* `print()` after the inner loop adds a newline to move to the next row.
+
+
+**Other Use Cases:**
+
+Nested loops are useful for:
+
+* **Processing matrices or 2D arrays:** Accessing and manipulating elements row by row and column by column.
+* **Generating patterns:**  Creating various shapes or designs using characters or symbols.
+* **Combinatorial problems:** Iterating through all possible combinations of items.
+* **Implementing algorithms:**  Many algorithms, like searching and sorting, can use nested loops.
+
+
+**Caution:**
+
+Nested loops can lead to significant performance issues if not used carefully.  The time complexity increases proportionally to the product of the number of iterations in each loop.  For very large datasets, consider optimizing your approach using techniques like vectorization or more efficient algorithms.
+
