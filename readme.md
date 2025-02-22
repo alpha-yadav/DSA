@@ -93813,3 +93813,60 @@ O(log n) algorithms are characterized by their ability to solve a problem by rep
 
 Remember that the O(log n) complexity is an *upper bound* on the algorithm's performance. The actual number of operations might be lower in some cases.
 
+#  An O(log n) example 
+The quintessential O(log n) example is **binary search**.
+
+**Binary Search Algorithm:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process is repeated until the target value is found or the search interval is empty.
+
+**Why it's O(log n):**
+
+Each step of binary search effectively halves the size of the remaining search space.  Let's say we start with an array of size `n`.  After one step, we're left with roughly `n/2` elements. After two steps, `n/4`. After three steps, `n/8`, and so on.  This continues until we're left with just one element or the element isn't found.
+
+The number of times we can divide `n` by 2 before we reach 1 is approximately log₂(n) (the base-2 logarithm of n).  Therefore, the number of steps required by binary search is proportional to log₂(n), making its time complexity O(log n).
+
+**Example Code (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found in the array.")
+
+```
+
+This Python code demonstrates a practical implementation of binary search, clearly illustrating the logarithmic time complexity.  Other algorithms, like efficient tree traversal methods (e.g., in balanced binary search trees), also exhibit O(log n) behavior.
+
