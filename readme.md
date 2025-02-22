@@ -97286,3 +97286,48 @@ The basic operation is the comparison `x > max_val`.  This operation is executed
 
 Understanding algorithm complexity is crucial for choosing efficient algorithms and designing scalable software.  Algorithms with lower complexity generally perform better for larger inputs.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions, particularly the complexity of algorithms.  It provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds.  In simpler terms, it says that a function grows at roughly the same rate as another function, within constant factors.
+
+**Formal Definition:**
+
+We say that f(n) = Θ(g(n)) if and only if there exist positive constants c₁ and c₂, and a positive integer n₀, such that for all n ≥ n₀:
+
+0 ≤ c₁g(n) ≤ f(n) ≤ c₂g(n)
+
+Let's break this down:
+
+* **f(n):** The function representing the actual runtime or resource usage of an algorithm.
+* **g(n):** The function representing the growth rate we're comparing f(n) to (e.g., n, n², log n).
+* **c₁ and c₂:** Positive constants that account for differences in constant factors between f(n) and g(n).  These constants are independent of n.
+* **n₀:** A positive integer.  The inequality only needs to hold for values of n greater than or equal to n₀.  This is important because we're concerned with the asymptotic behavior (as n grows large).
+
+
+**What it means:**
+
+Θ notation tells us that the function f(n) is bounded both above and below by the function g(n), ignoring constant factors.  As n approaches infinity, f(n) grows proportionally to g(n).  It's not just an upper bound (like Big-O notation) or a lower bound (like Big-Ω notation), but a precise characterization of the growth rate.
+
+**Example:**
+
+Let's say we have an algorithm with runtime f(n) = 2n² + 5n + 1.  We can say that f(n) = Θ(n²).  Why?
+
+Because we can find constants c₁ and c₂ such that:
+
+* c₁n² ≤ 2n² + 5n + 1 ≤ c₂n²  for sufficiently large n.
+
+For instance, we could choose:
+
+* c₁ = 1
+* c₂ = 3
+
+If n is large enough (say, n ≥ 5), then the inequality holds.  The lower-order terms (5n and 1) become insignificant compared to n² as n grows.
+
+**Difference from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an upper bound.  f(n) = O(g(n)) means f(n) grows no faster than g(n).
+* **Big-Ω (Ω):** Provides a lower bound.  f(n) = Ω(g(n)) means f(n) grows at least as fast as g(n).
+* **Big-Θ (Θ):** Provides both an upper and lower bound.  f(n) = Θ(g(n)) means f(n) grows at the same rate as g(n).
+
+
+In essence, Θ gives a more precise and complete description of the asymptotic behavior than O or Ω alone.  However, it's often harder to prove a Θ bound than an O bound.  If you can prove a Θ bound, it's generally preferred, but if only an O bound can be easily established, that's often sufficient for practical purposes.
+
