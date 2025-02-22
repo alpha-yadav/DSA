@@ -99399,3 +99399,135 @@ Please provide me with the data or equation you would like me to graph.  I need 
 
 Once I have this information, I can help you.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, particularly suitable for dense graphs (graphs with many edges).  Here's a breakdown of how it works, along with considerations for implementation:
+
+**Concept:**
+
+An adjacency matrix represents a graph as a square matrix where each element `matrix[i][j]` indicates the presence or weight of an edge between vertex `i` and vertex `j`.
+
+* **Unweighted Graph:**  `matrix[i][j] = 1` if an edge exists between vertices `i` and `j`; otherwise, `matrix[i][j] = 0`.
+* **Weighted Graph:** `matrix[i][j]` stores the weight of the edge between vertices `i` and `j`. If no edge exists, `matrix[i][j]` can be a special value (like `Infinity` or `-1`), or simply 0 depending on the application and how you interpret the weight values.
+* **Directed Graph:** The matrix is not necessarily symmetric. `matrix[i][j]` represents an edge from vertex `i` to vertex `j`.
+* **Undirected Graph:** The matrix is symmetric. `matrix[i][j] = matrix[j][i]`.
+
+**Implementation Examples:**
+
+**Python:**
+
+```python
+import numpy as np
+
+class AdjacencyMatrix:
+    def __init__(self, num_vertices, weighted=False, directed=False):
+        self.num_vertices = num_vertices
+        self.weighted = weighted
+        self.directed = directed
+        self.matrix = np.zeros((num_vertices, num_vertices), dtype=float)  # Use float to handle weights
+
+    def add_edge(self, u, v, weight=1):
+        if not self.weighted:
+            weight = 1
+        self.matrix[u][v] = weight
+        if not self.directed:
+            self.matrix[v][u] = weight
+
+    def get_edge(self, u, v):
+        return self.matrix[u][v]
+
+    def print_matrix(self):
+        print(self.matrix)
+
+
+# Example usage:
+# Unweighted undirected graph
+graph = AdjacencyMatrix(5)
+graph.add_edge(0, 1)
+graph.add_edge(1, 2)
+graph.add_edge(2, 3)
+graph.add_edge(3, 0)
+graph.print_matrix()
+
+
+#Weighted directed graph
+weighted_graph = AdjacencyMatrix(4, weighted=True, directed=True)
+weighted_graph.add_edge(0, 1, 5)
+weighted_graph.add_edge(1, 2, 2)
+weighted_graph.add_edge(2, 3, 10)
+weighted_graph.print_matrix()
+
+```
+
+**C++:**
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class AdjacencyMatrix {
+public:
+    AdjacencyMatrix(int num_vertices, bool weighted = false, bool directed = false) :
+        num_vertices_(num_vertices), weighted_(weighted), directed_(directed) {
+        matrix_.resize(num_vertices_, vector<double>(num_vertices_, 0)); //Use double for weights
+    }
+
+    void add_edge(int u, int v, double weight = 1.0) {
+        if (!weighted_) weight = 1.0;
+        matrix_[u][v] = weight;
+        if (!directed_) matrix_[v][u] = weight;
+    }
+
+    double get_edge(int u, int v) {
+        return matrix_[u][v];
+    }
+
+    void print_matrix() {
+        for (int i = 0; i < num_vertices_; ++i) {
+            for (int j = 0; j < num_vertices_; ++j) {
+                cout << matrix_[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+private:
+    int num_vertices_;
+    bool weighted_;
+    bool directed_;
+    vector<vector<double>> matrix_;
+};
+
+int main() {
+  AdjacencyMatrix graph(5);
+  graph.add_edge(0,1);
+  graph.add_edge(1,2);
+  graph.print_matrix();
+  return 0;
+}
+```
+
+
+**Advantages of Adjacency Matrix:**
+
+* **Simple to implement:** Easy to understand and code.
+* **Fast edge existence check:** Checking if an edge exists between two vertices is O(1).
+* **Suitable for dense graphs:**  Efficient for graphs with many edges.
+
+
+**Disadvantages of Adjacency Matrix:**
+
+* **High space complexity:** Requires O(V²) space, where V is the number of vertices. This is inefficient for sparse graphs (graphs with few edges).
+* **Slow for adding/deleting edges in large graphs:**  Not as efficient for modifying the graph structure compared to adjacency lists, especially for large graphs.
+
+
+**When to use Adjacency Matrix:**
+
+* Dense graphs
+* When frequent edge existence checks are needed
+* When simplicity and ease of implementation are prioritized over space efficiency.
+
+
+In summary, the choice between adjacency matrix and adjacency list representations depends heavily on the characteristics of your graph (dense vs. sparse) and the operations you'll be performing most frequently.  For very large sparse graphs, an adjacency list is generally preferred.
+
