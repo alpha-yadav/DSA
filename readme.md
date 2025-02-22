@@ -97122,3 +97122,50 @@ else:
 
 Remember to start small, focus on understanding the concepts, and gradually increase the complexity of the algorithms you tackle.  Consistency and practice are key to mastering algorithms.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:** Reverse a string.
+
+**Input:** A string, e.g., "hello"
+
+**Output:** The reversed string, e.g., "olleh"
+
+**Solution Outline:**  Iterate through the string from the last character to the first, appending each character to a new string.  Alternatively, use built-in string reversal functions (if allowed).
+
+
+**Medium:**
+
+**Problem:** Find the two largest numbers in an unsorted array.
+
+**Input:** An array of numbers, e.g., `[3, 1, 4, 1, 5, 9, 2, 6]`
+
+**Output:** The two largest numbers, e.g., `9, 6`  (order doesn't strictly matter)
+
+**Solution Outline:**  One approach is to sort the array (n log n time complexity) and then return the last two elements. A more efficient approach (linear time complexity) involves iterating through the array, keeping track of the largest and second largest numbers encountered so far.
+
+
+**Hard:**
+
+**Problem:**  Implement a LRU (Least Recently Used) cache.
+
+**Input:**  A sequence of `get(key)` and `put(key, value)` operations.
+
+**Output:** The value associated with a key, or -1 if the key is not found.  The cache should evict the least recently used item when it's full.
+
+**Solution Outline:** This requires a data structure that efficiently tracks both the order of access and the key-value pairs. A common approach is to use a doubly linked list (for ordering) and a hash map (for fast key lookups).  When a `get` or `put` operation occurs, the corresponding node in the linked list is moved to the head (most recently used).  If the cache is full, the tail (least recently used) node is removed.
+
+
+**Expert:**
+
+**Problem:** Find the shortest path in a weighted graph using Dijkstra's algorithm.
+
+**Input:** A graph represented as an adjacency matrix or adjacency list, with weighted edges.  A source node and a destination node.
+
+**Output:** The shortest path from the source node to the destination node, and its length.
+
+
+These are just examples; many variations and complexities are possible within each problem.  The "hard" and "expert" problems often require understanding of specific algorithms and data structures.  Choosing the right algorithm and data structure is crucial for solving these efficiently.
+
