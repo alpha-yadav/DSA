@@ -92355,3 +92355,12 @@ DFS can be used to find the paths from the root to both nodes, then find the com
 
 Remember to handle edge cases such as one or both nodes not being present in the tree.  The specific implementation details will depend on the data structure you are using to represent the tree.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **Type of graph:**  (e.g., line graph, bar graph, scatter plot, pie chart)
+* **Data:** (e.g., a table of x and y values, a set of categories and their frequencies, an equation)
+* **Labels:** (e.g., axis labels, title, legend)
+
+Once you give me this information, I can help you create the graph.  I can't create a graph from just the word "graph".
+
