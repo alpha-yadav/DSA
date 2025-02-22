@@ -94139,3 +94139,111 @@ print(bst.search(15)) # Output: None
 
 Choosing between a BST and other tree structures (like AVL trees, red-black trees, or heaps) depends on the specific application requirements and the trade-offs between performance, complexity, and memory usage.  Self-balancing BSTs are generally preferred when guaranteed logarithmic time complexity is crucial.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement insertion into a Binary Search Tree (BST) in Python. Here are a few, with explanations and considerations:
+
+**Method 1: Recursive Insertion**
+
+This is a classic and elegant approach.  The recursion handles the traversal down the tree efficiently.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+# Example usage:
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+```
+
+
+**Method 2: Iterative Insertion**
+
+This method avoids recursion, potentially offering better performance for very deep trees, as it avoids the overhead of function calls.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+# Example usage (same as above):
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+```
+
+**Choosing between Recursive and Iterative:**
+
+* **Readability:** The recursive version is generally considered more readable and easier to understand.
+* **Performance:** For most practical applications, the difference in performance between the two methods will be negligible.  The iterative approach might have a slight edge for extremely deep trees due to the avoidance of recursive function call overhead.
+* **Stack Overflow:**  In the case of extremely deep trees, the recursive approach *could* lead to a stack overflow error.  The iterative version avoids this risk.
+
+
+**Important Considerations:**
+
+* **Duplicate Values:**  These implementations don't handle duplicate values. You might want to add logic to either ignore duplicates or handle them in a specific way (e.g., increment a count for each duplicate).
+* **Error Handling:** Consider adding error handling (e.g., `try...except` blocks) to gracefully handle potential issues, such as invalid input data types.
+* **Balancing:**  Repeated insertions of sorted data can lead to an unbalanced BST, degrading performance to O(n) for search, insertion, and deletion.  Consider using self-balancing BST algorithms like AVL trees or red-black trees for better performance in such scenarios.
+
+
+Remember to choose the method that best suits your needs and understanding.  For most cases, the recursive approach provides a good balance of readability and efficiency.  If you anticipate extremely large or deeply unbalanced trees, the iterative approach might be preferable.
+
