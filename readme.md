@@ -97666,3 +97666,68 @@ O(log n) algorithms are characterized by their ability to solve a problem by rep
 
 In essence, any algorithm that repeatedly reduces the problem size by a constant factor at each step is a candidate for O(log n) complexity.  However, always carefully analyze the algorithm's specific steps to determine its true time complexity.
 
+#  An O(log n) example 
+The most common O(log n) example is **binary search** in a sorted array.
+
+**Binary Search Algorithm:**
+
+Binary search works by repeatedly dividing the search interval in half.  If the value you're looking for is in the middle of the interval, you've found it.  If it's less than the middle value, you search the lower half; if it's greater, you search the upper half.  You continue this process until either you find the value or the search interval is empty.
+
+**Why it's O(log n):**
+
+Each comparison in binary search eliminates roughly half of the remaining search space.  This means the number of comparisons needed to find an element (or determine it's not present) is proportional to the logarithm (base 2) of the number of elements (n).
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found in the array.")
+
+```
+
+**Other O(log n) examples:**
+
+Other algorithms with O(log n) time complexity include:
+
+* **Tree traversal (balanced trees):**  Searching, insertion, and deletion in balanced binary search trees (like AVL trees or red-black trees) have logarithmic time complexity because the tree's height is logarithmic in the number of nodes.
+* **Efficient exponentiation (using repeated squaring):**  Calculating a<sup>b</sup> can be done in O(log b) time.
+* **Finding an element in a sorted array using interpolation search (under certain conditions):**  Interpolation search is similar to binary search but uses interpolation to estimate the position of the target element.  Its average-case complexity is O(log log n) but its worst-case is O(n).
+
+
+The key characteristic of O(log n) algorithms is that they efficiently reduce the problem size by a constant factor with each step.  This leads to significantly faster performance compared to O(n) or worse algorithms, especially for large input sizes.
+
