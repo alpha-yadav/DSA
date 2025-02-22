@@ -92248,3 +92248,110 @@ This method is generally more efficient in terms of time complexity if parent po
 
 Remember to handle edge cases like empty trees, nodes not in the tree, and one node being an ancestor of the other.  The recursive approach elegantly handles these cases. Choose the method that best suits your constraints and context.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science with applications in various areas like file systems, version control systems (like Git), and phylogenetic analysis.  There are several approaches to solving this, each with different time and space complexities.
+
+**Methods for Finding LCA:**
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a simple and elegant approach for binary trees.  The idea is to recursively traverse the tree. If either `node1` or `node2` is found, return the current node.  If both `node1` and `node2` are found in different subtrees, then the current node is the LCA.  If neither is found, return `null`.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def findLCA(root, node1, node2):
+    if root is None:
+        return None
+    if root == node1 or root == node2:
+        return root
+
+    left_lca = findLCA(root.left, node1, node2)
+    right_lca = findLCA(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.right      # Node with data 3
+
+lca = findLCA(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data} is: {lca.data}") # Output: LCA of 4 and 3 is: 1
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (worst case, traverse the entire tree).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive calls).  In a skewed tree, this could be O(N).
+
+
+**2. Iterative Approach (using Parent Pointers):**
+
+If each node in the tree has a pointer to its parent, finding the LCA becomes much more efficient. We can use two stacks (or lists) to store the paths from the root to `node1` and `node2`. Then, we iterate through the paths, finding the last common ancestor.
+
+```python
+# Assuming each node has a 'parent' attribute
+
+def findLCA_iterative(node1, node2):
+    path1 = []
+    path2 = []
+
+    # Find path from root to node1
+    curr = node1
+    while curr:
+        path1.append(curr)
+        curr = curr.parent
+
+    # Find path from root to node2
+    curr = node2
+    while curr:
+        path2.append(curr)
+        curr = curr.parent
+
+    # Find the LCA
+    lca = None
+    i = len(path1) - 1
+    j = len(path2) - 1
+    while i >= 0 and j >= 0 and path1[i] == path2[j]:
+        lca = path1[i]
+        i -= 1
+        j -= 1
+    return lca
+
+```
+
+**Time Complexity:** O(H), where H is the height of the tree.
+**Space Complexity:** O(H)
+
+
+**3. Lowest Common Ancestor in a General Tree:**
+
+For general trees (not necessarily binary), the recursive approach needs modification. You'd need to iterate through all children to find the nodes.  The iterative approach with parent pointers would also work.
+
+**4. Using Depth First Search (DFS):**
+
+DFS can be used to find the paths from the root to both nodes, then find the common part of the paths similar to the iterative approach with parent pointers.
+
+**Choosing the Right Method:**
+
+* For binary trees without parent pointers, the recursive approach is often the simplest.
+* If parent pointers are available, the iterative approach is more efficient.
+* For general trees, you'll need to adapt the methods or utilize a more generalized graph algorithm.
+
+
+Remember to handle edge cases such as one or both nodes not being present in the tree.  The specific implementation details will depend on the data structure you are using to represent the tree.
+
