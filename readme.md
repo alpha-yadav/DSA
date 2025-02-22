@@ -95913,3 +95913,39 @@ print(f"Graph 5 has cycle: {has_cycle(graph5)}") #Output: False
 
 This approach efficiently detects cycles in directed graphs using the properties of DFS and the concept of back edges.  The time complexity is O(V + E), where V is the number of vertices and E is the number of edges.  The space complexity is O(V) due to the `visited` and `recursion_stack` arrays.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a breakthrough in the field of graph algorithms, specifically concerning the construction of approximate distance oracles.  It offers a way to quickly answer approximate shortest path queries in a graph.  Let's break down its key aspects:
+
+**Problem:**  Given a weighted undirected graph G, efficiently answer queries of the form "What is the distance between nodes u and v?"
+
+**Exact Solutions vs. Approximate Solutions:**  Finding the *exact* shortest path between any two nodes requires algorithms like Dijkstra's or Bellman-Ford, which can be computationally expensive, especially for large graphs.  Thorup's algorithm trades off some accuracy for a massive improvement in query time.
+
+**Approximation:**  Thorup's algorithm doesn't guarantee the *exact* shortest path distance. Instead, it provides a distance that's at most a small multiplicative factor (typically denoted as `(1+ε)`) greater than the true shortest path distance, where ε is a user-specified parameter that controls the trade-off between accuracy and efficiency. A smaller ε means higher accuracy but also higher construction time and space complexity.
+
+**Key Ideas:**
+
+* **Hierarchical Decomposition:** The algorithm cleverly decomposes the graph into a hierarchy of smaller subgraphs. This hierarchical structure allows for efficient query processing.
+* **Sampling and Sparsification:**  It uses a probabilistic sampling technique to create a smaller, sparser representation of the graph while preserving approximate distance information. This sparsification is crucial for efficiency.
+* **Distance Labels:** Each node in the graph is assigned a set of "distance labels." These labels are used to quickly estimate distances during query processing.  The labels are carefully chosen based on the hierarchical decomposition.
+* **Combining information from different levels of the hierarchy**  Queries are answered by combining information from multiple levels of the hierarchy to obtain an approximate distance.
+
+**Performance:**
+
+* **Construction Time:**  Thorup's algorithm has a nearly linear construction time (close to O(m log log n), where 'm' is the number of edges and 'n' is the number of nodes). This is significantly faster than algorithms that compute exact distances.
+* **Query Time:** The query time is exceptionally fast, often close to O(1) (constant time). This is the major advantage of the algorithm.
+* **Space Complexity:** The space required is also relatively small, nearly linear in the size of the graph.
+
+**Variations and Improvements:**
+
+There have been various refinements and improvements to Thorup's original algorithm, leading to even faster construction times and query times, as well as better space efficiency under different graph characteristics.
+
+**Limitations:**
+
+* **Approximation:** It's crucial to remember that the result is an *approximation*.  The accuracy depends on the chosen ε.  For applications requiring precise distances, this algorithm is not suitable.
+* **Complexity:**  While the asymptotic complexities are impressive, the hidden constants in the Big O notation can still be substantial, making it less efficient for extremely small graphs.
+
+
+**In Summary:**
+
+Thorup's algorithm is a powerful tool for processing shortest path queries in large graphs where approximate answers are acceptable. Its extremely fast query time and relatively efficient construction make it a valuable algorithm in various applications such as network routing, graph databases, and social network analysis.  The trade-off between accuracy and speed is a crucial consideration when deciding whether to use this algorithm.
+
