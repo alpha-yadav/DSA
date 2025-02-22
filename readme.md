@@ -97989,3 +97989,132 @@ To avoid the worst-case scenario of an unbalanced tree, self-balancing BSTs are 
 
 In summary, BSTs are powerful and versatile data structures, but their performance critically depends on maintaining a reasonably balanced tree structure.  For applications requiring guaranteed logarithmic time complexity, self-balancing BSTs are preferred.
 
+#  Binary Search Tree - Insertion (Python) 
+Several variations exist for inserting a node into a Binary Search Tree (BST) in Python. Here are a few, progressing from a simple recursive approach to a more iterative solution and one handling duplicates:
+
+**Method 1: Recursive Insertion**
+
+This is a clean and commonly used approach.  It recursively searches for the correct position to insert the new node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+# Example usage:
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+
+# (You would typically add a method to traverse and print the tree here for verification)
+```
+
+**Method 2: Iterative Insertion**
+
+This avoids recursive calls, which can be beneficial for very deep trees to prevent stack overflow issues.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+# Example usage (same as above, just replace insert_recursive with insert_iterative)
+```
+
+**Method 3: Handling Duplicates**
+
+The previous methods don't handle duplicate values.  Here's a version that allows duplicates by incrementing a count:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.count = 1  # To track duplicate counts
+        self.left = None
+        self.right = None
+
+class BST:
+    # ... (rest of the class remains similar to Method 1 or 2)
+
+    def insert_with_duplicates(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            elif data > current.data:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+            else:  # Duplicate found
+                current.count += 1
+                break
+
+
+```
+
+Remember to add a `print_tree` or similar function to visually inspect the tree after insertions to verify the correctness of your implementation.  You could use inorder traversal for a sorted output.  Choose the method that best suits your needs and understanding.  The iterative approach is generally preferred for its efficiency and avoidance of potential stack overflow errors in large trees.  Handling duplicates depends on the specific requirements of your application.
+
