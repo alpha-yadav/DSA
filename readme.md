@@ -96665,3 +96665,63 @@ For beginners, **Version 1** is recommended because of its clarity.  As you gain
 
 Remember to compile and run this code in a Swift environment (like Xcode's playground or a Swift REPL) to see the output.  You'll see the numbers 1 through 15, with "Fizz", "Buzz", and "FizzBuzz" replacing multiples of 3, 5, and 15 respectively.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long the algorithm takes to run) and space (how much memory the algorithm needs).  Analyzing algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.
+
+We typically analyze complexity using **asymptotic notation**, focusing on how the resource usage grows as the input size increases. This allows us to compare algorithms regardless of constant factors or specific hardware.  The most common notations are:
+
+* **Big O (O):** Represents the *upper bound* of an algorithm's time or space complexity. It describes the worst-case scenario.  We say an algorithm is O(n) if its runtime grows linearly with the input size (n).
+
+* **Big Omega (Ω):** Represents the *lower bound* of an algorithm's time or space complexity. It describes the best-case scenario.  An algorithm is Ω(n) if its runtime grows at least linearly with the input size.
+
+* **Big Theta (Θ):** Represents the *tight bound*.  It means the algorithm's time or space complexity grows proportionally to the given function.  If an algorithm is Θ(n), its runtime grows linearly with the input size, both in the best and worst cases.
+
+**Common Complexity Classes:**
+
+Here are some frequently encountered complexity classes, ordered from best to worst:
+
+* **O(1) - Constant Time:** The algorithm's runtime remains the same regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient. Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Nested loops iterating over the input data.  Becomes slow quickly with increasing input size.
+
+* **O(n³) - Cubic Time:** The runtime increases proportionally to the cube of the input size.  Even slower than quadratic.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  These algorithms become impractical for even moderately sized inputs.  Example:  Brute-force approaches to solving the Traveling Salesperson Problem.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Extremely slow, only practical for very small inputs.  Example:  Generating all permutations of a set.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine which operations contribute most significantly to the algorithm's runtime.
+
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+
+3. **Use asymptotic notation:**  Express the function using Big O, Big Omega, or Big Theta notation, focusing on the dominant terms as n becomes large.
+
+**Example:**
+
+Consider a simple function that finds the maximum value in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+This algorithm iterates through the array once (n times).  Therefore, its time complexity is O(n).  The space complexity is O(1) because it uses a constant amount of extra space regardless of the array size.
+
+
+Understanding algorithm complexity is vital for efficient software development. Choosing the right algorithm can significantly impact performance, particularly when dealing with large datasets or computationally intensive tasks.
+
