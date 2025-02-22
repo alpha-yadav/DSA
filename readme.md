@@ -95448,3 +95448,12 @@ Perform a DFS to find the path from the root to each of the target nodes (p and 
 
 Remember to handle edge cases such as one or both nodes not being present in the tree.  The specific implementation details might need adjustments depending on how your tree data structure is defined.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about the function or data points to create a graph for you.  For example, you could give me:
+
+* **A list of points:**  (1,2), (3,4), (5,6)
+* **An equation:** y = 2x + 1
+* **A description:** A bar graph showing the number of apples sold each day of the week. (You'd need to provide the sales data).
+
+Once you give me the information, I can help you create a graph.  I can't create a graph without knowing what to graph.
+
