@@ -90549,3 +90549,62 @@ Often, you'll see all three notations used together to give a complete picture o
 
 In summary, Big-Omega notation is a crucial tool for understanding the fundamental limitations of an algorithm's performance – what is the absolute fastest it can possibly run, disregarding constant factors and smaller-order terms?
 
+#  Big-O Notation 
+Big O notation is a mathematical notation that describes the limiting behavior of a function when the argument tends towards a particular value or infinity.  In computer science, it's used to classify algorithms according to how their runtime or space requirements grow as the input size grows.  It focuses on the *dominant* factors influencing performance, ignoring constant factors and smaller terms.  This provides a high-level understanding of an algorithm's scalability.
+
+Here's a breakdown of key aspects:
+
+**What Big O describes:**
+
+* **Growth rate:**  Big O describes how the runtime or space usage of an algorithm grows as the input size (usually denoted as 'n') increases.  It's not about the exact runtime in seconds, but how the runtime changes *relative* to the input size.
+* **Worst-case scenario:** Big O notation typically describes the *worst-case* time complexity.  This means it represents the upper bound on the runtime or space usage.  While an algorithm might perform better in some cases, Big O guarantees a performance ceiling.
+* **Asymptotic behavior:** Big O describes the behavior of the algorithm as the input size approaches infinity.  Minor inefficiencies for small input sizes are ignored.
+
+
+**Common Big O notations and their meanings:**
+
+* **O(1) - Constant time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  This is very efficient. Example: Binary search in a sorted array.
+
+* **O(n) - Linear time:** The runtime increases linearly with the input size.  Example:  Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic time:** The runtime increases proportionally to the square of the input size. Example: Nested loops iterating through the input.
+
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size.  This is very inefficient for large inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial time:** The runtime increases factorially with the input size.  This is extremely inefficient even for moderately sized inputs.  Example:  Traveling salesman problem (brute-force approach).
+
+
+**How to analyze Big O:**
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime (e.g., comparisons, assignments, arithmetic operations).
+
+2. **Count the operations:**  Estimate how many times these basic operations are executed as a function of the input size 'n'.
+
+3. **Identify the dominant term:**  Focus on the term that grows fastest as 'n' increases.  Ignore constant factors and lower-order terms.
+
+**Example:**
+
+Consider a function that iterates through an array of size 'n' and prints each element:
+
+```python
+def print_array(arr):
+  for element in arr:
+    print(element)
+```
+
+* The basic operation is the `print` statement.
+* The `print` statement is executed 'n' times (once for each element).
+* The dominant term is 'n'.
+* Therefore, the time complexity is O(n).
+
+
+**Space Complexity (Big O of Space):**
+
+Big O notation can also be used to analyze the space complexity of an algorithm, which refers to the amount of memory it uses as a function of the input size. The same principles apply.
+
+**Important Note:** Big O is an *upper bound*.  An algorithm with O(n²) complexity might perform better than O(n) in some specific cases, but as 'n' gets larger, the quadratic growth will eventually dominate.  It provides a worst-case guarantee and helps compare the scalability of different algorithms.
+
