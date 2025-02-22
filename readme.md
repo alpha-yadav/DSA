@@ -96725,3 +96725,46 @@ This algorithm iterates through the array once (n times).  Therefore, its time c
 
 Understanding algorithm complexity is vital for efficient software development. Choosing the right algorithm can significantly impact performance, particularly when dealing with large datasets or computationally intensive tasks.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science and mathematics to describe the asymptotic behavior of functions.  It's a more precise way of describing the growth rate of an algorithm's runtime or space usage compared to Big-O notation. While Big-O gives an upper bound, Big-Theta provides both an upper *and* a lower bound, meaning it tightly bounds the function's growth.
+
+**Formal Definition:**
+
+We say that f(n) = Θ(g(n)) if and only if there exist positive constants c₁ and c₂, and a non-negative integer n₀, such that for all n ≥ n₀:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+In simpler terms:
+
+* **f(n)** is the function representing the actual runtime or space usage of an algorithm.
+* **g(n)** is a simpler function (e.g., n, n², log n) that represents the growth rate.
+* **c₁ and c₂** are positive constants that scale the simpler function.  These constants essentially account for implementation details and constant factors that don't affect the overall growth rate as n becomes very large.
+* **n₀** is a threshold.  The inequality holds for all values of n greater than or equal to n₀. This means we are only concerned with the behavior of the function as n approaches infinity.
+
+
+**What Θ means:**
+
+Θ(g(n)) indicates that the function f(n) grows at the *same rate* as g(n).  The growth of f(n) is bounded both above and below by constant multiples of g(n) for sufficiently large n.  This is a stronger statement than Big-O, which only provides an upper bound.
+
+**Examples:**
+
+* **f(n) = 2n² + 5n + 10 is Θ(n²)**:  We can find constants c₁, c₂, and n₀ that satisfy the definition. For example:
+    * If n ≥ 1, then 2n² ≤ 2n² + 5n + 10.  So we can choose c₁ = 1.
+    * If n ≥ 1, then 2n² + 5n + 10 ≤ 2n² + 5n² + 10n² = 17n² for sufficiently large n. So we can choose c₂ = 17.
+    * Therefore, for n ≥ 1 (n₀ = 1), 1*n² ≤ 2n² + 5n + 10 ≤ 17*n².
+
+* **f(n) = 7n + log₂(n) is Θ(n)**:  The logarithmic term is insignificant compared to the linear term as n grows large.
+
+* **f(n) = n² is NOT Θ(n)**:  n² grows faster than n; there's no constant c₂ that can bound n² from above by a constant multiple of n for all sufficiently large n.
+
+**Relationship to Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an upper bound.  If f(n) = O(g(n)), then f(n) grows no faster than g(n).
+* **Big-Ω (Ω):** Provides a lower bound.  If f(n) = Ω(g(n)), then f(n) grows at least as fast as g(n).
+* **Big-Theta (Θ):** Provides both an upper and lower bound.  If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).  It signifies a tight bound.
+
+
+Big-Theta notation is crucial for analyzing algorithm efficiency, allowing for a more precise and complete understanding of how an algorithm's runtime or space usage scales with input size.  It tells us the exact growth rate of the algorithm, ignoring constant factors and smaller terms.
+
