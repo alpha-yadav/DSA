@@ -98697,3 +98697,118 @@ print(isBST_MinMax(root)) # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach, where H is the height of the tree (O(N) in the worst case of a skewed tree, O(log N) in the best case of a balanced tree).  The iterative in-order traversal method would have O(N) space complexity in the worst case due to the list it creates.  Choose the method that best suits your needs and coding style.  The min-max approach is generally considered slightly more efficient because it avoids the extra space used by creating the `inorder_list`.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given tree follows the Binary Search Tree (BST) property. Here are two common methods:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST will produce a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Recursively checks if a tree is a BST using in-order traversal.
+
+    Args:
+        root: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    values = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            values.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    for i in range(1, len(values)):
+        if values[i] < values[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  #Output: True
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(12)
+root2.left.right.left = Node(10) #this makes it not a BST, 10<12 is fine but 10>8 breaks rule
+root2.left.right.right = Node(15) #this also makes it not a BST, 15>12 is fine but 15<22 is also fine.
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}")  #Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This approach recursively checks each subtree, maintaining the minimum and maximum allowed values for the current node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_minmax(node, min_val, max_val):
+    """
+    Recursively checks if a tree is a BST using min and max values.
+
+    Args:
+      node: The current node being checked.
+      min_val: The minimum allowed value for the node's data.
+      max_val: The maximum allowed value for the node's data.
+
+    Returns:
+      True if the subtree rooted at node is a BST, False otherwise.
+    """
+    if not node:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive_minmax(node.left, min_val, node.data) and
+            is_bst_recursive_minmax(node.right, node.data, max_val))
+
+
+# Example usage (same tree as before):
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root, float('-inf'), float('inf'))}")  # Output: True
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(12)
+root2.left.right.left = Node(10) #this makes it not a BST, 10<12 is fine but 10>8 breaks rule
+
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root2, float('-inf'), float('inf'))}")  # Output: False
+
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The recursive min-max approach might be slightly more efficient in practice because it can sometimes prune subtrees earlier if a violation is detected.  Choose the method that you find more readable and easier to understand. Remember to handle edge cases like empty trees appropriately.
+
