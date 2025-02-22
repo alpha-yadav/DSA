@@ -91396,3 +91396,112 @@ print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 0 and 4: 2
 
 This algorithm efficiently utilizes the BST property to quickly find the LCA.  Remember that if either `p` or `q` is not present in the BST, the function might return `None` or an incorrect result depending on how you handle the case where a node isn't found.  You could add error handling to explicitly check for this scenario.
 
+#  Binary Search Tree - Python 
+A Binary Search Tree (BST) is a tree data structure where each node has at most two children, which are referred to as the left child and the right child.  The key property of a BST is that for every node, all the values in its left subtree are less than the node's value, and all the values in its right subtree are greater than the node's value.  This property allows for efficient searching, insertion, and deletion operations.
+
+Here's a Python implementation of a BST, along with explanations:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    def search(self, data):
+        return self._search_recursive(self.root, data)
+
+    def _search_recursive(self, node, data):
+        if node is None or node.data == data:
+            return node
+        if data < node.data:
+            return self._search_recursive(node.left, data)
+        return self._search_recursive(node.right, data)
+
+    def delete(self, data):
+        self.root = self._delete_recursive(self.root, data)
+
+    def _delete_recursive(self, node, data):
+        if node is None:
+            return node
+
+        if data < node.data:
+            node.left = self._delete_recursive(node.left, data)
+        elif data > node.data:
+            node.right = self._delete_recursive(node.right, data)
+        else:
+            # Node with one or no children
+            if node.left is None:
+                return node.right
+            elif node.right is None:
+                return node.left
+
+            # Node with two children: Get the inorder successor (smallest in the right subtree)
+            node.data = self._find_min(node.right).data
+            node.right = self._delete_recursive(node.right, node.data)
+
+        return node
+
+    def _find_min(self, node):
+        while node.left:
+            node = node.left
+        return node
+
+    def inorder_traversal(self):  # Inorder traversal gives sorted output
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_recursive(node.right, result)
+
+
+#Example Usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:", bst.inorder_traversal())  # Output: Sorted list
+
+print("Search for 6:", bst.search(6).data if bst.search(6) else "Not found") # Output: 6
+print("Search for 15:", bst.search(15) ) # Output: None
+
+bst.delete(8)
+print("Inorder traversal after deleting 8:", bst.inorder_traversal())
+
+```
+
+This code provides the basic operations for a BST: insertion, searching, and deletion (handling all cases including nodes with two children).  The `inorder_traversal` method demonstrates that an inorder traversal of a BST yields a sorted list of the data.  Remember that the efficiency of BST operations depends heavily on the balance of the tree.  For very unbalanced trees, performance can degrade to O(n) in the worst case.  Self-balancing BSTs like AVL trees or red-black trees address this issue.
+
