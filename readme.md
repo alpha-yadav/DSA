@@ -93376,3 +93376,73 @@ fizzBuzzConcise(n: 15) // Call the function
 
 Remember to choose the version that best suits your understanding and the context of your project.  The simple version is great for learning, while the more concise versions can be beneficial for more advanced projects where brevity is important.  The refined version strikes a good balance between readability and efficiency.
 
+#  Algorithm Complexity 
+Algorithm complexity describes how the runtime or space requirements of an algorithm grow as the input size grows.  It's crucial for understanding the efficiency and scalability of an algorithm, especially when dealing with large datasets.  We typically analyze complexity using **Big O notation**.
+
+Here's a breakdown of key aspects:
+
+**1. Big O Notation:**
+
+Big O notation expresses the upper bound of an algorithm's growth rate. It focuses on the dominant terms as the input size (usually denoted as 'n') approaches infinity, ignoring constant factors and lower-order terms.  It describes the *worst-case* scenario.
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient. Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  This becomes slow quickly for large inputs. Example: Bubble sort, selection sort, nested loops iterating through the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  These algorithms become impractical for even moderately sized inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Extremely inefficient for even small inputs. Example: Finding all permutations of a set.
+
+
+**2. Other Notations:**
+
+While Big O is the most common, other notations provide a more complete picture:
+
+* **Ω (Big Omega):**  Describes the *lower bound* of an algorithm's growth rate – the best-case scenario.
+
+* **Θ (Big Theta):** Describes the *tight bound*, meaning both the upper and lower bounds are the same.  This indicates a precise growth rate.
+
+
+**3. Space Complexity:**
+
+Similar to time complexity, space complexity analyzes the amount of memory an algorithm uses as the input size grows.  It's also expressed using Big O notation.  Examples include:
+
+* **O(1):** Constant space – the algorithm uses a fixed amount of memory regardless of input size.
+* **O(n):** Linear space – the memory used grows linearly with the input size.
+* **O(log n):** Logarithmic space.
+* **O(n²):** Quadratic space.
+
+
+**4. Analyzing Algorithm Complexity:**
+
+To analyze an algorithm's complexity:
+
+1. **Identify the basic operation:** This is the operation that contributes most to the runtime.
+2. **Count the number of times the basic operation is executed** as a function of the input size.
+3. **Express the count using Big O notation**, ignoring constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for i in range(1, len(arr)):
+    if arr[i] > max_val:
+      max_val = arr[i]
+  return max_val
+```
+
+The basic operation is the comparison `arr[i] > max_val`. This operation is executed `n-1` times (where `n` is the length of the array).  Therefore, the time complexity is O(n) – linear time.  The space complexity is O(1) because it uses a constant amount of extra memory (just the `max_val` variable).
+
+
+Understanding algorithm complexity is essential for choosing the right algorithm for a given task and for predicting the performance of your code as the input size scales.  Choosing an algorithm with a lower complexity often leads to significant performance improvements, especially for large datasets.
+
