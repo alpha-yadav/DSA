@@ -96606,3 +96606,62 @@ Output: The order of nodes visited in a breadth-first traversal.
 
 These examples demonstrate the range of algorithmic problems.  The difficulty depends on your experience and understanding of data structures and algorithms.  Start with the easier problems and gradually work your way up. Remember to consider time and space complexity when designing your solutions.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple, easy-to-understand version, and then showing a slightly more concise approach.
+
+**Version 1:  Clear and Readable**
+
+This version uses a series of `if`/`else if`/`else` statements, making the logic very explicit:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3, printing "Fizz" if true.
+* Then it checks divisibility by 5, printing "Buzz" if true.
+* If none of the above are true, it prints the number itself.
+
+
+**Version 2:  More Concise (using the ternary operator)**
+
+This version uses the ternary operator (`condition ? value1 : value2`) to make the code slightly more compact, though perhaps a little less readable for beginners:
+
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+This version nests ternary operators to achieve the same result.  While shorter, it might be harder to understand at first glance.
+
+
+**Choosing the Best Version:**
+
+For beginners, **Version 1** is recommended because of its clarity.  As you gain experience, understanding and using more concise approaches like **Version 2** becomes beneficial.  The key is readability and maintainability; choose the style that best suits your needs and understanding.
+
+
+Remember to compile and run this code in a Swift environment (like Xcode's playground or a Swift REPL) to see the output.  You'll see the numbers 1 through 15, with "Fizz", "Buzz", and "FizzBuzz" replacing multiples of 3, 5, and 15 respectively.
+
