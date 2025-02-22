@@ -93947,3 +93947,98 @@ Please provide me with context!  "Introduction" to what?  I need more informatio
 
 Once I have this information, I can write a compelling introduction for you.
 
+#  To check if two Binary trees are same or not 
+There are several ways to check if two binary trees are the same. Here are two common approaches, one recursive and one iterative:
+
+**1. Recursive Approach:**
+
+This is generally the most elegant and efficient approach for this problem.  The core idea is to recursively compare the nodes of the two trees.  If the structures and values match at every corresponding node, the trees are identical.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def are_identical(root1, root2):
+    # Base Case: If both trees are empty, they are identical
+    if root1 is None and root2 is None:
+        return True
+
+    # If one is empty and the other is not, they are not identical
+    if root1 is None or root2 is None:
+        return False
+
+    # Check if the data and the structure match recursively
+    return (root1.data == root2.data and
+            are_identical(root1.left, root2.left) and
+            are_identical(root1.right, root2.right))
+
+
+# Example usage:
+root1 = Node(1)
+root1.left = Node(2)
+root1.right = Node(3)
+
+root2 = Node(1)
+root2.left = Node(2)
+root2.right = Node(3)
+
+root3 = Node(1)
+root3.left = Node(2)
+root3.right = Node(4) #different from root1 and root2
+
+
+print(f"Root1 and Root2 are identical: {are_identical(root1, root2)}") # True
+print(f"Root1 and Root3 are identical: {are_identical(root1, root3)}") # False
+
+```
+
+
+**2. Iterative Approach (using Queues):**
+
+This approach uses Breadth-First Search (BFS) to compare the trees level by level.  It's less elegant than the recursive approach but can be slightly more efficient in some cases, particularly for very deep trees where recursion might hit stack overflow limits.
+
+```python
+from collections import deque
+
+def are_identical_iterative(root1, root2):
+    if root1 is None and root2 is None:
+        return True
+    if root1 is None or root2 is None:
+        return False
+
+    queue1 = deque([root1])
+    queue2 = deque([root2])
+
+    while queue1 and queue2:
+        node1 = queue1.popleft()
+        node2 = queue2.popleft()
+
+        if node1.data != node2.data:
+            return False
+
+        #Enqueue children, handling None values carefully
+        if node1.left and node2.left:
+            queue1.append(node1.left)
+            queue2.append(node2.left)
+        elif node1.left or node2.left: #one has left child, other doesn't
+            return False
+
+        if node1.right and node2.right:
+            queue1.append(node1.right)
+            queue2.append(node2.right)
+        elif node1.right or node2.right: #one has right child, other doesn't
+            return False
+
+    return not queue1 and not queue2 #both queues should be empty if trees are identical
+
+
+# Example usage (same trees as above):
+print(f"Root1 and Root2 are identical (iterative): {are_identical_iterative(root1, root2)}") # True
+print(f"Root1 and Root3 are identical (iterative): {are_identical_iterative(root1, root3)}") # False
+```
+
+Both methods achieve the same result.  The recursive approach is generally preferred for its readability and conciseness, unless you have concerns about potential stack overflow issues with very deep trees.  In those cases, the iterative approach using queues provides a robust alternative. Remember to handle `None` values appropriately in both methods to prevent errors.
+
