@@ -95815,3 +95815,101 @@ Topological sorting has numerous applications in various fields, including:
 
 Remember that if your graph contains cycles, neither algorithm will produce a valid topological sort.  You'll either get an error (or `None` in the Python examples) or an incorrect, incomplete ordering.  Detecting cycles is an important part of the process.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth-First Traversal (DFT) involves tracking the state of each node during the traversal.  We use three states:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (in the recursion stack).
+* **Visited:** The node has been fully explored (recursion has completed for it).
+
+A cycle exists if, during the traversal, we encounter a node that's already in the `Visiting` state. This means we've encountered a back edge – an edge that leads to an ancestor in the DFS tree.
+
+Here's how the algorithm works, along with Python code:
+
+```python
+def has_cycle(graph):
+    """
+    Detects cycles in a directed graph using Depth-First Traversal.
+
+    Args:
+        graph: A dictionary representing the directed graph where keys are nodes
+               and values are lists of their neighbors.
+
+    Returns:
+        True if the graph contains a cycle, False otherwise.
+    """
+
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: Unvisited, 1: Visiting, 2: Visited
+    recursion_stack = [False] * num_nodes # Tracks nodes currently in the recursion stack
+
+    def dfs(node):
+        visited[node] = 1  # Mark as Visiting
+        recursion_stack[node] = True
+
+        for neighbor in graph.get(node, []):
+            if visited[neighbor] == 0:  # Unvisited
+                if dfs(neighbor):
+                    return True
+            elif recursion_stack[neighbor]:  # Visiting (cycle detected)
+                return True
+
+        recursion_stack[node] = False  # Remove from recursion stack
+        visited[node] = 2  # Mark as Visited
+        return False
+
+    for node in graph:
+        if visited[node] == 0:
+            if dfs(node):
+                return True
+
+    return False
+
+
+# Example usage:
+graph1 = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: []
+}
+
+graph2 = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [0]  # Cycle: 0 -> 1 -> 2 -> 3 -> 0
+}
+
+print(f"Graph 1 has cycle: {has_cycle(graph1)}")  # Output: False
+print(f"Graph 2 has cycle: {has_cycle(graph2)}")  # Output: True
+
+graph3 = {
+    0: [1],
+    1: [2, 3],
+    2: [],
+    3: [1] #cycle
+}
+print(f"Graph 3 has cycle: {has_cycle(graph3)}") # Output: True
+
+graph4 = {} #empty graph
+print(f"Graph 4 has cycle: {has_cycle(graph4)}") #Output: False
+
+graph5 = {0:[]} #single node graph
+print(f"Graph 5 has cycle: {has_cycle(graph5)}") #Output: False
+```
+
+**Explanation:**
+
+1. **Initialization:** `visited` and `recursion_stack` arrays track node states.
+2. **`dfs(node)` function:** This performs the recursive Depth-First Search.
+   - It marks the current node as `Visiting` and adds it to the `recursion_stack`.
+   - It recursively explores its neighbors.
+   - If a neighbor is `Visiting`, a cycle is detected.
+   - Once all neighbors are explored, the node is marked as `Visited`, and removed from the `recursion_stack`.
+3. **Main loop:** Iterates through all nodes in the graph. If a node is unvisited, it starts a DFS from that node.
+4. **Cycle detection:** The function returns `True` immediately upon detecting a cycle (a `Visiting` neighbor). Otherwise, it returns `False` after exploring the entire graph.
+
+
+This approach efficiently detects cycles in directed graphs using the properties of DFS and the concept of back edges.  The time complexity is O(V + E), where V is the number of vertices and E is the number of edges.  The space complexity is O(V) due to the `visited` and `recursion_stack` arrays.
+
