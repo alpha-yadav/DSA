@@ -99390,3 +99390,12 @@ For a general tree, we need a different approach.  Two common methods are:
 
 Remember to handle edge cases such as one or both nodes not being present in the tree.  The code examples provided above are simplified;  a production-ready solution should include robust error handling.
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need information about what you want to graph before I can create a graph for you.  For example, tell me:
+
+* **What kind of graph?** (line graph, bar graph, scatter plot, pie chart, etc.)
+* **What are the variables?** (x-axis and y-axis labels)
+* **What is the data?** (e.g., a table of values, a function like y = 2x + 1)
+
+Once I have this information, I can help you.
+
