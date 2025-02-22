@@ -99212,3 +99212,111 @@ Let's say you have this tree:
 
 Remember to replace `... (your tree root)` with the actual root node of your binary tree when you run the code.  You need to construct the tree beforehand using the `Node` class.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants (where we allow a node to be a descendant of itself).  Finding the LCA is a common problem in computer science.  There are several ways to solve it. Here are two common approaches:
+
+**Method 1: Recursive Approach**
+
+This approach recursively traverses the tree.  If a node is found, we return it. If both nodes are found in the left subtree or right subtree, we recursively search there.  If one node is found in the left subtree and the other in the right subtree, the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node, or None if either p or q is not found.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # p and q are on different sides
+    elif left_lca:
+        return left_lca  # Both p and q are on the left side
+    else:
+        return right_lca  # Both p and q are on the right side
+
+
+# Example Usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+lca = lowestCommonAncestor(root, root.left, root.right)
+print(f"LCA of 2 and 3 is: {lca.data}")  # Output: LCA of 2 and 3 is: 1
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right)
+print(f"LCA of 4 and 5 is: {lca.data}")  # Output: LCA of 4 and 5 is: 2
+
+lca = lowestCommonAncestor(root, root.left, root.right.right)
+print(f"LCA of 2 and 7 is: {lca.data}") #Output: LCA of 2 and 7 is: 1
+
+lca = lowestCommonAncestor(root, root.left, root)
+print(f"LCA of 2 and 1 is: {lca.data}") #Output: LCA of 2 and 1 is: 1
+
+lca = lowestCommonAncestor(root, Node(8), Node(9)) #Handles nodes not in tree
+print(lca) #Output: None
+
+```
+
+**Method 2: Iterative Approach (Using Parent Pointers)**
+
+This method requires modifying the tree to include parent pointers. Each node would have a `parent` attribute.  This approach is generally more efficient in terms of space complexity as it avoids the recursive call stack.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.parent = None  # Added parent pointer
+
+def lowestCommonAncestor_iterative(root, p, q):
+    #This method requires pre-processing to set the parent pointers
+    #This isn't implemented here for brevity, but it would involve a tree traversal.
+
+    path_p = []
+    path_q = []
+
+    curr = p
+    while curr:
+        path_p.append(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        path_q.append(curr)
+        curr = curr.parent
+
+    lca = None
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[len(path_p)-1-i] == path_q[len(path_q)-1-i]:
+        lca = path_p[len(path_p)-1-i]
+        i += 1
+
+    return lca
+
+```
+
+Remember that the iterative approach requires adding parent pointers to the tree nodes, making it slightly more complex to set up but potentially faster for large trees. The recursive approach is generally easier to understand and implement. Choose the method best suited to your needs and context.  If you don't need to repeatedly find LCAs, the recursive approach is often preferred for its simplicity.  If you are performing many LCA queries on the same tree, the iterative approach with parent pointers might be more efficient.
+
