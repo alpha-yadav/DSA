@@ -96377,3 +96377,77 @@ The best version depends on your priorities:
 
 Start with Version 1 to grasp the core logic, then explore the other options to see how you can improve code style and conciseness as you become more comfortable with Swift. Remember to choose the version that prioritizes clarity and maintainability for the specific context.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most often considered are:
+
+* **Time complexity:**  How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We usually express complexity using Big O notation (O), which describes the upper bound of the growth rate of the algorithm's resource consumption as the input size (often denoted as 'n') approaches infinity.  It ignores constant factors and lower-order terms, focusing on the dominant factor affecting performance as the input grows large.
+
+
+**Common Complexity Classes:**
+
+Here are some common Big O notations and their general interpretations:
+
+* **O(1) - Constant time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic time:** The execution time increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic time:** A common complexity for efficient sorting algorithms.  Example: Merge sort, heapsort.
+
+* **O(n²) - Quadratic time:** The execution time increases quadratically with the input size.  This can become slow for large inputs.  Example: Bubble sort, selection sort, nested loops iterating through the entire input.
+
+* **O(2ⁿ) - Exponential time:** The execution time doubles with each addition to the input size.  These algorithms become impractical very quickly for even moderately sized inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial time:** The execution time grows factorially with the input size.  Extremely inefficient for anything beyond very small inputs.  Example: Generating all permutations of a sequence.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically need to:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the algorithm's running time.
+
+2. **Count the number of operations:** Express the number of basic operations as a function of the input size (n).
+
+3. **Use Big O notation:** Identify the dominant term in the function and express it using Big O notation, ignoring constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple algorithm that iterates through an array of size 'n' and prints each element:
+
+```python
+def print_array(arr):
+  for element in arr:
+    print(element)
+```
+
+The basic operation is printing an element.  This operation is performed 'n' times (once for each element). Therefore, the time complexity is O(n) – linear time.  The space complexity is O(1) because it uses a constant amount of extra memory regardless of the array size.
+
+
+**Space Complexity:**
+
+Space complexity considers the amount of memory used by an algorithm. This includes:
+
+* **Input data:** The space needed to store the input.
+* **Auxiliary space:** The extra space used by the algorithm during execution (e.g., variables, data structures).
+
+
+**Best, Average, and Worst Case:**
+
+Complexity analysis can also consider different scenarios:
+
+* **Best-case:** The most favorable input that leads to the fastest execution time.
+* **Average-case:** The average execution time over all possible inputs.
+* **Worst-case:** The input that leads to the slowest execution time.
+
+
+Often, the worst-case complexity is of primary interest because it provides a guarantee on the algorithm's performance even under unfavorable conditions.  However, the average case is also important in practice.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance for different input sizes.  It's a fundamental concept in computer science and software engineering.
+
