@@ -94042,3 +94042,100 @@ print(f"Root1 and Root3 are identical (iterative): {are_identical_iterative(root
 
 Both methods achieve the same result.  The recursive approach is generally preferred for its readability and conciseness, unless you have concerns about potential stack overflow issues with very deep trees.  In those cases, the iterative approach using queues provides a robust alternative. Remember to handle `None` values appropriately in both methods to prevent errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They offer a balance between the speed of array lookups and the flexibility of linked lists.  Here's a breakdown of their key characteristics, operations, and applications:
+
+**Key Characteristics:**
+
+* **Hierarchical Structure:**  A BST is a tree-like structure where each node contains a value and pointers to two child nodes: a left child and a right child.
+* **Ordering Property:** The core principle is that for any given node:
+    * All values in the left subtree are less than the node's value.
+    * All values in the right subtree are greater than the node's value.
+* **Uniqueness (Usually):**  BSTs typically don't allow duplicate values.  If you need to handle duplicates, you'll need a modified approach (e.g., adding a count to each node).
+* **Not Necessarily Balanced:**  The efficiency of a BST depends heavily on its structure. A highly unbalanced tree (e.g., a skewed tree resembling a linked list) can degrade performance to O(n) for search, insertion, and deletion.  Self-balancing BSTs (like AVL trees and red-black trees) address this issue.
+
+**Basic Operations:**
+
+* **Search:**  Finds a specific value in the tree.  The search algorithm leverages the ordering property to efficiently traverse the tree.  In a balanced tree, search has an average time complexity of O(log n), where n is the number of nodes.  In a skewed tree, it's O(n).
+
+* **Insertion:**  Adds a new value to the tree. The new node is inserted in its correct position based on the ordering property.  Average time complexity is O(log n) for a balanced tree and O(n) for a skewed tree.
+
+* **Deletion:**  Removes a node from the tree.  This is the most complex operation, as it needs to handle various cases (nodes with zero, one, or two children).  Average time complexity is O(log n) for a balanced tree and O(n) for a skewed tree.
+
+* **Minimum/Maximum:**  Finding the minimum or maximum value in the tree is efficient because the minimum is always the leftmost node, and the maximum is always the rightmost node.  Time complexity is O(h), where h is the height of the tree (O(log n) for a balanced tree, O(n) for a skewed tree).
+
+* **Successor/Predecessor:** Finding the next largest (successor) or next smallest (predecessor) value after a given node. This also leverages the tree's structure.
+
+**Example (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    def search(self, data):
+        return self._search_recursive(self.root, data)
+
+    def _search_recursive(self, node, data):
+        if node is None or node.data == data:
+            return node
+        if data < node.data:
+            return self._search_recursive(node.left, data)
+        return self._search_recursive(node.right, data)
+
+# Example Usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+
+print(bst.search(6).data)  # Output: 6
+print(bst.search(15)) # Output: None
+
+```
+
+
+**Applications:**
+
+* **Data Storage and Retrieval:**  Efficiently storing and retrieving data based on key values.
+* **Symbol Tables:** In compilers and interpreters, BSTs are used to manage symbol tables, mapping identifiers to their corresponding data.
+* **Indexing:**  Used in databases for indexing data.
+* **In-memory data structures:**  Suitable for situations where data needs to be quickly searched, inserted, and deleted.
+
+
+**Limitations:**
+
+* **Performance degradation in unbalanced trees:**  The efficiency heavily relies on the tree's balance.
+* **Deletion complexity:**  Deletion can be more complex than insertion.
+* **Not ideal for all scenarios:**  For certain operations (e.g., finding the kth smallest element), other data structures might be more efficient.
+
+
+Choosing between a BST and other tree structures (like AVL trees, red-black trees, or heaps) depends on the specific application requirements and the trade-offs between performance, complexity, and memory usage.  Self-balancing BSTs are generally preferred when guaranteed logarithmic time complexity is crucial.
+
