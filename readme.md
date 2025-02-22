@@ -94929,3 +94929,115 @@ print(f"Is the tree a BST? {is_bst_recursive_range(root2)}") # Output: False
 
 For most cases, especially when dealing with potentially large trees, the recursive range check (Method 2) is preferred for its better performance.  However, if simplicity is paramount and efficiency isn't a critical concern, Method 1 is a good option. Remember to handle edge cases like empty trees appropriately in your implementation.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can visit (or "traverse") each node in a binary tree exactly once.  The order in which you visit the nodes affects the sequence of values you obtain.  There are three primary traversal methods:
+
+**1. Inorder Traversal:**
+
+* **Process:** Visit the left subtree, then the root node, then the right subtree.
+* **Result:** For a Binary Search Tree (BST), this produces a sorted sequence of node values in ascending order.
+* **Recursive Algorithm:**
+```python
+def inorder_traversal(node):
+  if node:
+    inorder_traversal(node.left)
+    print(node.data, end=" ")  # Process the node
+    inorder_traversal(node.right)
+
+```
+* **Iterative Algorithm (using a stack):**
+```python
+def inorder_traversal_iterative(root):
+    stack = []
+    current = root
+    while True:
+        if current:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.data, end=" ")
+            current = current.right
+        else:
+            break
+```
+
+**2. Preorder Traversal:**
+
+* **Process:** Visit the root node, then the left subtree, then the right subtree.
+* **Result:**  Useful for creating a copy of the tree or generating an expression from an expression tree.
+* **Recursive Algorithm:**
+```python
+def preorder_traversal(node):
+  if node:
+    print(node.data, end=" ")  # Process the node
+    preorder_traversal(node.left)
+    preorder_traversal(node.right)
+```
+* **Iterative Algorithm (using a stack):**
+```python
+def preorder_traversal_iterative(root):
+    stack = [root]
+    while stack:
+        current = stack.pop()
+        if current:
+            print(current.data, end=" ")
+            stack.append(current.right)
+            stack.append(current.left)
+
+```
+
+**3. Postorder Traversal:**
+
+* **Process:** Visit the left subtree, then the right subtree, then the root node.
+* **Result:** Useful for deleting a tree or evaluating an expression tree (e.g., calculating the value of an arithmetic expression).
+* **Recursive Algorithm:**
+```python
+def postorder_traversal(node):
+  if node:
+    postorder_traversal(node.left)
+    postorder_traversal(node.right)
+    print(node.data, end=" ")  # Process the node
+```
+* **Iterative Algorithm (using two stacks):**  Postorder traversal's iterative implementation is slightly more complex than inorder and preorder and often uses two stacks or a stack and a flag to keep track of visited nodes.  (See resources online for detailed examples).
+
+
+**Example Tree (for testing):**
+
+Let's assume a simple binary tree structure like this:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+
+**Output for each traversal:**
+
+* **Inorder:** 4 2 5 1 3
+* **Preorder:** 1 2 4 5 3
+* **Postorder:** 4 5 2 3 1
+
+
+**Important Considerations:**
+
+* **Node Structure:**  The code examples assume a node structure like this (you might need to adapt it to your specific node definition):
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+* **Handling Empty Trees:** The recursive algorithms gracefully handle empty trees (when the `node` is `None`). The iterative algorithms need to check for an empty root before starting.
+
+* **Iterative vs. Recursive:** Recursive approaches are often more concise and easier to understand, but they can lead to stack overflow errors for very deep trees. Iterative methods are generally more efficient in terms of memory usage for large trees.  Choose the method that best suits your needs and the size of the trees you expect to process.
+
+
+Remember to replace  `node.data` with the appropriate way to access the data stored in your tree's nodes.  These examples provide a foundation – you'll likely need to modify them slightly based on your specific tree implementation.
+
