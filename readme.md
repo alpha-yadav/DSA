@@ -93446,3 +93446,46 @@ The basic operation is the comparison `arr[i] > max_val`. This operation is exec
 
 Understanding algorithm complexity is essential for choosing the right algorithm for a given task and for predicting the performance of your code as the input size scales.  Choosing an algorithm with a lower complexity often leads to significant performance improvements, especially for large datasets.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a powerful tool in computer science and mathematics used to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, indicating that the function's growth is bounded both above and below by the same function (within constant factors).
+
+**Formal Definition:**
+
+Given two functions, *f(n)* and *g(n)*, we say that *f(n)* is Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large inputs (*n ≥ n₀*), the function *f(n)* is always sandwiched between *c₁ * g(n)* and *c₂ * g(n)*.  In simpler terms: *f(n)* grows at the same rate as *g(n)*, ignoring constant factors.
+
+**Key Aspects:**
+
+* **Asymptotic Behavior:** Θ-notation focuses on the growth rate of functions as the input size (*n*) approaches infinity.  It ignores constant factors and lower-order terms because these become insignificant as *n* grows large.
+
+* **Tight Bound:** Unlike Big-O (O) notation, which provides an upper bound, and Big-Ω (Ω) notation, which provides a lower bound, Θ-notation provides a *tight* bound.  This means the function's growth is not only bounded above but also bounded below by the same function.
+
+* **Constant Factors:** Constant factors are ignored.  For example,  `f(n) = 5n² + 3n + 10` is Θ(n²) because the n² term dominates as n gets large. The constants 5, 3, and 10 are irrelevant in the asymptotic analysis.
+
+* **Lower-Order Terms:** Lower-order terms are also ignored. In the above example, the `3n` and `10` terms are insignificant compared to `5n²` as *n* approaches infinity.
+
+
+**Example:**
+
+Let's consider the function `f(n) = 2n² + 3n + 1`.  We can show that `f(n)` is Θ(n²) as follows:
+
+1. **Upper Bound:**  We need to find *c₂* and *n₀* such that `2n² + 3n + 1 ≤ c₂n²` for all `n ≥ n₀`.  Let's choose `c₂ = 6`.  Then:
+
+   `2n² + 3n + 1 ≤ 2n² + 3n² + n² = 6n²` (for n ≥ 1)
+
+   So, we can choose `n₀ = 1`.
+
+2. **Lower Bound:** We need to find *c₁* and *n₀* such that `c₁n² ≤ 2n² + 3n + 1` for all `n ≥ n₀`.  Let's choose `c₁ = 1`. Then:
+
+   `n² ≤ 2n² + 3n + 1` (This is true for n ≥ 1)
+
+   So, we can choose `n₀ = 1`.
+
+Since we have found *c₁ = 1*, *c₂ = 6*, and *n₀ = 1* that satisfy the definition, we can conclude that `f(n) = 2n² + 3n + 1` is Θ(n²).
+
+
+**In summary:** Θ-notation precisely characterizes the growth rate of a function, providing both upper and lower bounds that are asymptotically tight. It's crucial for analyzing algorithm efficiency and comparing the performance of different algorithms.
+
