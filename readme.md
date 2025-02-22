@@ -92959,3 +92959,124 @@ While DFS and BFS are the most common, other traversal methods exist, often tail
 
 The choice of traversal algorithm depends heavily on the specific problem you are trying to solve and the characteristics of the graph itself.  Understanding the strengths and weaknesses of each algorithm is crucial for efficient graph processing.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and whether you want to handle cycles or not.  Here are a few examples in Python:
+
+**1. DFS using an adjacency list (recursive):**  This is the most common and often clearest implementation.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and 
+               values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, for cycle detection).
+        path: A list to store the traversal path (optional).
+
+    Returns:
+        A list representing the DFS traversal path.  Returns None if the node is not in the graph.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    if node not in graph:
+        return None
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print(dfs_recursive(graph, 'A'))  # Output: ['A', 'B', 'D', 'E', 'F', 'C'] (order might vary slightly)
+
+
+```
+
+**2. DFS using an adjacency list (iterative):** This version uses a stack instead of recursion.  It's generally more efficient for very deep graphs, avoiding potential stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        node: The starting node.
+
+    Returns:
+        A list representing the DFS traversal path. Returns None if node is not in the graph.
+    """
+    if node not in graph:
+        return None
+
+    visited = set()
+    stack = [node]
+    path = []
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            path.append(vertex)
+            stack.extend(neighbor for neighbor in graph[vertex] if neighbor not in visited)
+
+    return path
+
+print(dfs_iterative(graph, 'A')) # Output: ['A', 'C', 'F', 'B', 'E', 'D'] (order might vary slightly)
+
+```
+
+**3. DFS for a graph represented as an adjacency matrix:**
+
+This approach is less common for DFS because adjacency lists are generally more efficient for sparse graphs (graphs with relatively few edges).
+
+```python
+def dfs_matrix(matrix, node, visited, path):
+    """
+    DFS for a graph represented as an adjacency matrix.  Note:  Assumes nodes are numbered 0 to n-1.
+    """
+    num_nodes = len(matrix)
+    visited[node] = True
+    path.append(node)
+
+    for neighbor in range(num_nodes):
+        if matrix[node][neighbor] == 1 and not visited[neighbor]:
+            dfs_matrix(matrix, neighbor, visited, path)
+
+    return path
+
+#Example Adjacency Matrix
+adj_matrix = [
+    [0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0]
+]
+visited = [False] * len(adj_matrix)
+print(dfs_matrix(adj_matrix, 0, visited, [])) #Output: [0, 1, 3, 4, 2, 5] (order might vary slightly)
+
+```
+
+Remember to choose the implementation that best suits your graph representation and needs.  The recursive version is generally easier to understand, while the iterative version is often more efficient for larger graphs.  The adjacency matrix version is included for completeness but is less efficient than the adjacency list approach for most applications.  Also note that the order of nodes in the output path might vary slightly depending on the implementation and the order of neighbors in the adjacency list or matrix.
+
