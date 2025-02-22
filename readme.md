@@ -98812,3 +98812,122 @@ print(f"Is the tree a BST? {is_bst_recursive_minmax(root2, float('-inf'), float(
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The recursive min-max approach might be slightly more efficient in practice because it can sometimes prune subtrees earlier if a violation is detected.  Choose the method that you find more readable and easier to understand. Remember to handle edge cases like empty trees appropriately.
 
+#  Binary Tree traversals 
+Binary tree traversals are methods for visiting (processing) each node in a binary tree exactly once.  There are three primary ways to traverse a binary tree:
+
+* **Inorder Traversal:**  Visit the left subtree, then the root, then the right subtree.  This typically results in a sorted order for Binary Search Trees (BSTs).
+
+* **Preorder Traversal:** Visit the root, then the left subtree, then the right subtree.
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root.
+
+
+Let's illustrate each with an example tree and the resulting traversal order:
+
+```
+     A
+    / \
+   B   C
+  / \   \
+ D   E   F
+```
+
+**1. Inorder Traversal:**
+
+The order would be: D B E A C F
+
+* Start at A.
+* Go left to B.
+* Go left to D.  Process D.
+* Go back up to B.  Process B.
+* Go right to E. Process E.
+* Go back up to A. Process A.
+* Go right to C.
+* Go right to F. Process F.
+* Go back up to C. Process C.
+
+
+**2. Preorder Traversal:**
+
+The order would be: A B D E C F
+
+* Start at A. Process A.
+* Go left to B. Process B.
+* Go left to D. Process D.
+* Go back up to B. Go right to E. Process E.
+* Go back up to A. Go right to C. Process C.
+* Go right to F. Process F.
+
+
+**3. Postorder Traversal:**
+
+The order would be: D E B F C A
+
+* Start at A.
+* Go left to B.
+* Go left to D. Process D.
+* Go right to E. Process E.
+* Go back up to B. Process B.
+* Go back up to A.
+* Go right to C.
+* Go right to F. Process F.
+* Go back up to C. Process C.
+* Go back up to A. Process A.
+
+
+**Recursive Implementation (Python):**
+
+A common way to implement these traversals is recursively:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+root.right.right = Node('F')
+
+print("Inorder:", end=" ")
+inorder_traversal(root)
+print("\nPreorder:", end=" ")
+preorder_traversal(root)
+print("\nPostorder:", end=" ")
+postorder_traversal(root)
+```
+
+**Iterative Implementation:**  Iterative traversals are also possible using stacks (for preorder and inorder) and stacks/two stacks (for postorder). These avoid recursion's overhead, but are slightly more complex to implement.
+
+**Applications:**
+
+* **Inorder traversal:**  Useful for Binary Search Trees to get sorted data.
+* **Preorder traversal:** Used in expression trees to represent the prefix notation of an expression.  Also used in creating a copy of the tree.
+* **Postorder traversal:** Used to delete a tree or to evaluate an expression tree in postfix notation.
+
+
+Understanding binary tree traversals is fundamental to working with tree-based data structures.  Choose the traversal method based on the specific task you're trying to accomplish.
+
