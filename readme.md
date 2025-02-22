@@ -93304,3 +93304,75 @@ Explanation: "aba" is also a valid answer.
 
 These problems showcase different algorithmic concepts and difficulty levels.  Choosing a problem depends on your current skill level and the specific concepts you want to practice (e.g., data structures, graph algorithms, dynamic programming). Remember to consider time and space complexity when designing your solutions.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more refined version:
+
+**Simple Version:**
+
+This version uses nested `if` statements.  It's easy to understand but can become less efficient with more complex rules.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+**Slightly More Refined Version:**
+
+This version uses a single `if-else if-else` chain and prioritizes checking for divisibility by 15 first for better efficiency and readability:
+
+```swift
+func fizzBuzzRefined(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzzRefined(n: 15) // Call the function
+```
+
+
+**Even More Concise Version (using string interpolation and ternary operator):**
+
+This version is more compact but might be slightly harder to read for beginners.  It uses string interpolation and the ternary operator for a more concise solution.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print( (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function
+```
+
+**Explanation:**
+
+* **`for i in 1...n`:** This loop iterates through numbers from 1 to `n`.
+* **`i % 3 == 0`:** The modulo operator (`%`) gives the remainder of a division.  If the remainder is 0, the number is divisible by 3.
+* **`if-else if-else`:** This structure checks the conditions sequentially.  The first condition that evaluates to `true` determines the output.
+* **`print()`:** This function displays the output to the console.
+
+
+Remember to choose the version that best suits your understanding and the context of your project.  The simple version is great for learning, while the more concise versions can be beneficial for more advanced projects where brevity is important.  The refined version strikes a good balance between readability and efficiency.
+
