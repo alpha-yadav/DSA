@@ -90764,3 +90764,26 @@ Nested loops are useful for:
 
 Nested loops can lead to significant performance issues if not used carefully.  The time complexity increases proportionally to the product of the number of iterations in each loop.  For very large datasets, consider optimizing your approach using techniques like vectorization or more efficient algorithms.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are very efficient.  They mean the time it takes to complete the algorithm increases logarithmically with the input size (n).  This is significantly faster than linear time (O(n)) or quadratic time (O(n²)).  The base of the logarithm usually doesn't matter in Big O notation because a change of base is just a constant factor.
+
+Here are some common types of algorithms that exhibit O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential O(log n) algorithm. It works on sorted data.  It repeatedly divides the search interval in half. If the target value is less than the middle element, the search continues in the left half; otherwise, it continues in the right half.  This halving continues until the target is found or the interval is empty.
+
+* **Binary Tree Operations (search, insertion, deletion in a balanced tree):**  Self-balancing binary search trees (like AVL trees or red-black trees) maintain a balanced structure, ensuring that the height of the tree is logarithmic in the number of nodes.  Operations like searching, inserting, and deleting nodes involve traversing a path down the tree, resulting in O(log n) time complexity.
+
+* **Efficient Searching in Hash Tables (average case):**  Hash tables provide, on average, O(1) (constant time) access to elements. However, in the worst case (e.g., many collisions), searching might degrade to O(n). But *on average*, the search time is considered O(log n) when using good hashing techniques and handling collisions effectively.  Note that some implementations might even reach O(1) in average case.
+
+* **Exponentiation by Squaring:**  This algorithm efficiently computes large powers (a<sup>n</sup>) in O(log n) time by repeatedly squaring the base and reducing the exponent.
+
+* **Finding the kth smallest element using Quickselect (average case):** While the worst-case time complexity of Quickselect is O(n²), its average-case time complexity is O(n).  However, finding the *k*th smallest element can be done in O(log n) within the context of a binary search tree if the tree is balanced, or an O(n) algorithm followed by a binary search to locate the kth element.
+
+
+
+**Key Characteristics leading to O(log n) complexity:**
+
+The common thread in these algorithms is the ability to repeatedly divide the problem size in half (or by some constant factor) with each step.  This halving of the problem size at each step is what leads to the logarithmic time complexity.  If the problem size reduces by a constant factor at each step, the number of steps required is logarithmic with respect to the input size.
+
+**Important Note:**  The O(log n) complexity is often associated with *successful* searches. Unsuccessful searches in balanced trees might also take O(log n) in the worst case.  However, the precise complexity can vary based on the specific algorithm and data structures involved, as well as whether it's an average-case or worst-case analysis.
+
