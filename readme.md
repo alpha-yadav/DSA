@@ -91601,3 +91601,127 @@ print(f"Is the tree a BST? {is_bst_recursive(root2)}")  # Output: False
 
 Both methods effectively determine whether a tree is a BST.  The recursive method might be slightly preferred for its potential for early termination in certain scenarios, but the inorder traversal method is often easier to grasp for beginners.  Choose the method that best suits your understanding and performance requirements.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    in_order_list = []
+    
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            in_order_list.append(node.data)
+            inorder(node.right)
+
+    inorder(root)
+    
+    # Check if the in-order traversal is sorted
+    for i in range(1, len(in_order_list)):
+        if in_order_list[i] < in_order_list[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(is_bst_recursive(root))  # Output: True
+
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+root2.left.right = Node(4)  # Violates BST property
+
+
+print(is_bst_recursive(root2))  # Output: False
+
+```
+
+**Method 2: Recursive with Min and Max Range**
+
+This approach is more efficient because it avoids creating a separate list.  It recursively checks each subtree, ensuring that nodes in the left subtree are smaller than the current node, and nodes in the right subtree are larger.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_range(node, min_val, max_val):
+    """
+    Checks if a binary tree is a BST using recursive range checking.
+
+    Args:
+      node: The current node being checked.
+      min_val: The minimum allowed value for this subtree.
+      max_val: The maximum allowed value for this subtree.
+
+    Returns:
+      True if the subtree rooted at node is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):  #check if current node is within range
+        return False
+    return (is_bst_range(node.left, min_val, node.data) and 
+            is_bst_range(node.right, node.data, max_val))
+
+def is_bst_recursive_range(root):
+    """
+    Wrapper function for is_bst_range to handle initial call.
+    """
+    return is_bst_range(root, float('-inf'), float('inf'))
+
+#Example Usage (same trees as above)
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(is_bst_recursive_range(root))  # Output: True
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+root2.left.right = Node(4)
+
+print(is_bst_recursive_range(root2))  # Output: False
+
+```
+
+**Choosing the right method:**
+
+* **Method 1 (In-order traversal):** Simpler to understand, but requires extra space to store the in-order traversal.  Time complexity is O(N), space complexity is O(N) in the worst case (completely skewed tree).
+
+* **Method 2 (Range checking):**  More efficient in space, as it doesn't create a separate list.  Time complexity is O(N), but space complexity is O(H) where H is the height of the tree (O(log N) for balanced trees, O(N) for skewed trees).
+
+
+For most cases, Method 2 (recursive with min/max range) is preferred for its better space efficiency, especially when dealing with very large trees.  However, Method 1 can be easier to grasp initially. Remember to handle edge cases like empty trees appropriately.
+
