@@ -99320,3 +99320,73 @@ def lowestCommonAncestor_iterative(root, p, q):
 
 Remember that the iterative approach requires adding parent pointers to the tree nodes, making it slightly more complex to set up but potentially faster for large trees. The recursive approach is generally easier to understand and implement. Choose the method best suited to your needs and context.  If you don't need to repeatedly find LCAs, the recursive approach is often preferred for its simplicity.  If you are performing many LCA queries on the same tree, the iterative approach with parent pointers might be more efficient.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic computer science problem.  The approach depends on the type of tree and any constraints (e.g., whether it's a binary search tree).
+
+Here's a breakdown of common approaches and their complexities:
+
+**1. Binary Search Tree (BST):**
+
+If the tree is a BST, finding the LCA is significantly easier.  We leverage the property that all nodes smaller than a node are in its left subtree, and all nodes larger are in its right subtree.
+
+* **Algorithm:**
+    1. Start at the root.
+    2. If both nodes are smaller than the current node, recursively search the left subtree.
+    3. If both nodes are larger than the current node, recursively search the right subtree.
+    4. Otherwise, the current node is the LCA.
+
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_bst(root, n1, n2):
+    if root is None:
+        return None
+    if root.data > n1 and root.data > n2:
+        return lca_bst(root.left, n1, n2)
+    if root.data < n1 and root.data < n2:
+        return lca_bst(root.right, n1, n2)
+    return root
+```
+
+* **Time Complexity:** O(h), where h is the height of the tree (O(log n) for a balanced BST, O(n) for a skewed BST).
+* **Space Complexity:** O(h) due to recursive calls (O(log n) for a balanced BST, O(n) for a skewed BST).
+
+
+**2. General Tree (Not necessarily a BST):**
+
+For a general tree, we need a different approach.  Two common methods are:
+
+* **a) Using Parent Pointers:**  If each node has a pointer to its parent, we can traverse upwards from each node until we find a common ancestor.  The first common ancestor encountered is the LCA.
+
+    * **Time Complexity:** O(h), where h is the height of the tree.
+    * **Space Complexity:** O(1) (constant extra space)
+
+
+* **b) Recursive Approach (without parent pointers):**  This approach involves recursively searching the tree.  It's slightly more complex than the BST approach.  The basic idea is to check if one node is in the subtree rooted at the other. If not, then recurse down both subtrees and check for LCA in each subtree.
+
+    * **Algorithm:** (Conceptual Outline)
+        1. Check if either `n1` or `n2` is the root. If so, return the root.
+        2. Recursively search the left subtree for `n1` and `n2`. If both are found in the left subtree, the LCA is in the left subtree.
+        3. Recursively search the right subtree for `n1` and `n2`. If both are found in the right subtree, the LCA is in the right subtree.
+        4. If `n1` is found in the left subtree and `n2` in the right subtree (or vice-versa), then the root is the LCA.
+        5. If neither `n1` nor `n2` is found in the tree rooted at the current node, return `None`.
+
+    * **Time Complexity:** O(n) in the worst case (skewed tree).
+    * **Space Complexity:** O(h) due to recursive calls.
+
+
+**Choosing the right approach:**
+
+* **BST:** If you have a BST, use the BST-specific algorithm; it's significantly more efficient.
+* **General Tree with Parent Pointers:** If you have parent pointers, this is an efficient approach.
+* **General Tree without Parent Pointers:**  The recursive approach is a standard solution, but it can be less efficient for very tall or skewed trees.  There might be more optimized solutions based on specific tree structures or using techniques like path compression.
+
+
+Remember to handle edge cases such as one or both nodes not being present in the tree.  The code examples provided above are simplified;  a production-ready solution should include robust error handling.
+
