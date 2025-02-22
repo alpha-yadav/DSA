@@ -97544,3 +97544,103 @@ Fruit at index 2: cherry
 
 These examples demonstrate simple loops in Python.  Other programming languages have similar loop structures with slight syntactic differences.  The core concepts remain the same.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a structure where you can iterate over multiple dimensions or combinations of data.
+
+Here's a breakdown with examples in several programming languages:
+
+**General Structure:**
+
+```
+outer_loop:
+  for outer_variable in outer_iterable:
+    inner_loop:
+      for inner_variable in inner_iterable:
+        # Code to execute for each inner and outer iteration
+```
+
+**Examples:**
+
+**Python:**
+
+```python
+for i in range(3):  # Outer loop (iterates 3 times)
+  for j in range(2):  # Inner loop (iterates 2 times for each outer iteration)
+    print(f"Outer: {i}, Inner: {j}")
+```
+
+This will output:
+
+```
+Outer: 0, Inner: 0
+Outer: 0, Inner: 1
+Outer: 1, Inner: 0
+Outer: 1, Inner: 1
+Outer: 2, Inner: 0
+Outer: 2, Inner: 1
+```
+
+**JavaScript:**
+
+```javascript
+for (let i = 0; i < 3; i++) { // Outer loop
+  for (let j = 0; j < 2; j++) { // Inner loop
+    console.log(`Outer: ${i}, Inner: ${j}`);
+  }
+}
+```
+
+This produces the same output as the Python example.
+
+**Java:**
+
+```java
+public class NestedLoop {
+  public static void main(String[] args) {
+    for (int i = 0; i < 3; i++) { // Outer loop
+      for (int j = 0; j < 2; j++) { // Inner loop
+        System.out.println("Outer: " + i + ", Inner: " + j);
+      }
+    }
+  }
+}
+```
+
+This also yields the same output.
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 3; i++) { // Outer loop
+    for (int j = 0; j < 2; j++) { // Inner loop
+      std::cout << "Outer: " << i << ", Inner: " << j << std::endl;
+    }
+  }
+  return 0;
+}
+```
+
+Again, the output is identical.
+
+
+**Uses of Nested Loops:**
+
+Nested loops are frequently used for:
+
+* **Processing two-dimensional arrays (matrices):** Iterating through rows and columns.
+* **Generating combinations:**  Finding all possible pairs or combinations of elements from two sets.
+* **Implementing algorithms:**  Many algorithms, like searching or sorting, utilize nested loops.
+* **Creating patterns:**  Generating patterns like multiplication tables or shapes in text-based output.
+
+
+**Important Considerations:**
+
+* **Computational Cost:** Nested loops can lead to significant computational expense, especially with large iterables.  The time complexity increases significantly (e.g., from O(n) to O(n^2) for two nested loops).
+* **Readability:**  Deeply nested loops can be difficult to read and understand.  Consider refactoring complex nested loops into functions to improve clarity.
+
+
+Remember to choose the most appropriate looping structure for your task.  While nested loops are powerful, they should be used judiciously to avoid performance issues and maintain code readability.
+
