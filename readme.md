@@ -96947,3 +96947,92 @@ Big O notation is crucial for:
 
 Big O notation doesn't tell you the exact runtime, but it provides a valuable way to understand how an algorithm scales with increasing input size.  It's an essential tool for any computer scientist or software engineer.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a certain condition is met.  Here are examples in a few common programming languages:
+
+**1. While Loop:**  This loop continues as long as a condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+
+**2. For Loop:** This loop iterates a specific number of times or over a sequence.
+
+* **Python:**
+
+```python
+for i in range(5):  # range(5) generates numbers 0, 1, 2, 3, 4
+  print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+**3. Do-While Loop (less common):** This loop executes the code block at least once, and then repeats as long as a condition is true.  Do-while loops are not available in all languages (Python, for example, doesn't have a direct equivalent).
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  do {
+    std::cout << count << std::endl;
+    count++;
+  } while (count < 5);
+  return 0;
+}
+```
+
+These examples all print the numbers 0 through 4.  The choice of which loop to use depends on the specific task.  `while` loops are best when the number of iterations isn't known in advance, while `for` loops are better when you know exactly how many times you need to iterate.  `do-while` is useful when you *always* need at least one iteration.
+
