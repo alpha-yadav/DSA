@@ -94597,3 +94597,116 @@ This improved version includes:
 
 Remember that the efficiency of BST operations (insertion, search, deletion) is O(h), where h is the height of the tree.  In a balanced BST, h is approximately log₂(n), where n is the number of nodes, resulting in logarithmic time complexity. However, in a skewed tree, h can become n, leading to linear time complexity.  For guaranteed logarithmic time complexity, consider using self-balancing BSTs like AVL trees or red-black trees.
 
+#  Check if a tree is BST or not 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Inorder Traversal**
+
+A BST's inorder traversal always results in a sorted sequence of nodes.  This is the simplest and most efficient method.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    """Checks if a tree is a BST using inorder traversal."""
+    inorder_list = []
+    _inorder(root, inorder_list)
+
+    # Check if the inorder list is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+def _inorder(node, inorder_list):
+    """Recursive inorder traversal."""
+    if node:
+        _inorder(node.left, inorder_list)
+        inorder_list.append(node.data)
+        _inorder(node.right, inorder_list)
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+
+print(f"Is the tree a BST (inorder method)? {is_bst_inorder(root)}") #False because of 1
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(2)
+root2.left.right = Node(4)
+root2.right.left = Node(6)
+root2.right.right = Node(8)
+
+print(f"Is the tree a BST (inorder method)? {is_bst_inorder(root2)}") #True
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each node to ensure its value is within the allowed range defined by its ancestors.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """Checks if a tree is a BST recursively."""
+    return _is_bst_recursive(root, float('-inf'), float('inf'))
+
+def _is_bst_recursive(node, min_val, max_val):
+    """Recursive helper function."""
+    if not node:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (_is_bst_recursive(node.left, min_val, node.data) and
+            _is_bst_recursive(node.right, node.data, max_val))
+
+#Example Usage (same trees as above):
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root)}") #False
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(2)
+root2.left.right = Node(4)
+root2.right.left = Node(6)
+root2.right.right = Node(8)
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}") #True
+
+```
+
+**Choosing a Method:**
+
+* **Inorder Traversal:** Simpler to understand and implement, generally more efficient for large trees because it avoids the overhead of recursive calls with extra parameters.  Time complexity O(n), Space Complexity O(n) in worst case (if the tree is heavily skewed).
+
+* **Recursive Check:**  More elegant in terms of expressing the BST property directly, but can be less efficient due to the recursive overhead. Time Complexity O(n), Space Complexity O(h), where h is the height of the tree. In the worst case (a skewed tree), the space complexity can be O(n).
+
+
+For most cases, the inorder traversal method is preferred due to its simplicity and efficiency.  However, the recursive method can be slightly more efficient for balanced trees because the recursive depth will be smaller. Choose the method that best suits your needs and understanding.
+
