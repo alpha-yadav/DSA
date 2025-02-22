@@ -97482,3 +97482,65 @@ This function performs a single print operation for each element in the array.  
 
 Big O notation is a crucial tool for evaluating the efficiency of algorithms and comparing different approaches to solving the same problem.  Understanding it allows you to make informed decisions about which algorithm is best suited for a given task, especially when dealing with large datasets.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  There are several types of loops, but the most common are `for` and `while` loops.
+
+**1. `while` loop:**
+
+A `while` loop continues to execute as long as a given condition is true.
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This code will print the numbers 0 through 4.  The loop continues until `count` is no longer less than 5.
+
+**2. `for` loop:**
+
+A `for` loop iterates over a sequence (like a list, tuple, string, or range) or other iterable object.
+
+```python
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+  print(fruit)
+```
+
+This code will print each fruit in the `fruits` list.
+
+```python
+for i in range(5):  # range(5) generates numbers 0, 1, 2, 3, 4
+  print(i)
+```
+
+This code will print the numbers 0 through 4, similar to the `while` loop example.
+
+
+**3. `for` loop with `enumerate` (for index and value):**
+
+If you need both the index and the value of each item in a sequence:
+
+```python
+fruits = ["apple", "banana", "cherry"]
+for index, fruit in enumerate(fruits):
+  print(f"Fruit at index {index}: {fruit}")
+```
+
+This will print:
+
+```
+Fruit at index 0: apple
+Fruit at index 1: banana
+Fruit at index 2: cherry
+```
+
+**Choosing between `while` and `for`:**
+
+* Use a `while` loop when you don't know in advance how many times you need to iterate.  The loop continues until a condition becomes false.
+* Use a `for` loop when you know the number of iterations or you're iterating over a sequence.
+
+
+These examples demonstrate simple loops in Python.  Other programming languages have similar loop structures with slight syntactic differences.  The core concepts remain the same.
+
