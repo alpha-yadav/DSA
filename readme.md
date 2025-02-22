@@ -90303,3 +90303,58 @@ Several algorithms can solve this problem, each with different time complexities
 
 This problem demonstrates a common type of algorithmic problem:  optimization.  We're trying to find the *best* solution (shortest path) among many possible solutions.  The choice of algorithm depends on the specific constraints of the problem (e.g., negative edge weights).
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+**Simple Version:**
+
+This version uses a straightforward `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle cases divisible by both 3 and 5), then by 3, then by 5. If none of these conditions are met, it prints the number itself.
+
+
+**Slightly More Advanced Version (using string interpolation and ternary operator):**
+
+This version is more concise and leverages Swift's features:
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzAdvanced(n: 15) // Example usage
+```
+
+This version uses the ternary operator (`condition ? value1 : value2`) to add "Fizz" or "Buzz" to the `output` string based on divisibility.  If `output` remains empty after checking for 3 and 5, it prints the number; otherwise, it prints the accumulated string.
+
+
+**Explanation of Improvements in the Advanced Version:**
+
+* **Conciseness:** The ternary operator makes the code shorter and potentially easier to read for those familiar with it.
+* **Efficiency (minor):**  While the difference is negligible for small `n`, this approach avoids nested `if-else if` checks, potentially improving performance slightly for very large `n`.  The difference is minimal in practice unless dealing with extremely large numbers.
+
+Both versions achieve the same result. Choose the version that you find more readable and maintainable.  The simple version is often preferred for beginners due to its clarity.  The advanced version showcases more advanced Swift features but might be less immediately understandable for someone new to the language.
+
