@@ -90608,3 +90608,101 @@ Big O notation can also be used to analyze the space complexity of an algorithm,
 
 **Important Note:** Big O is an *upper bound*.  An algorithm with O(n²) complexity might perform better than O(n) in some specific cases, but as 'n' gets larger, the quadratic growth will eventually dominate.  It provides a worst-case guarantee and helps compare the scalability of different algorithms.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  There are several types of loops, but here are examples of the most common in a few programming languages:
+
+**1. `for` loop (iterating a specific number of times):**
+
+* **Python:**
+
+```python
+for i in range(5):  # Executes 5 times (i = 0, 1, 2, 3, 4)
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. `while` loop (executing as long as a condition is true):**
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  The key difference is that the `for` loop is designed for a predetermined number of iterations, while the `while` loop continues until a condition becomes false.  Remember to avoid infinite loops by ensuring your loop's condition will eventually become false.  If you use a `while` loop, make sure the variable being checked changes inside the loop's body.
+
