@@ -93713,3 +93713,59 @@ This Java example requires a class and a `main` method.
 
 These are all simple `while` loops.  Other types of loops exist (like `for` loops and `do-while` loops), but the `while` loop is the most fundamental.  They all share the basic structure: a condition that's checked before each iteration, and a block of code that's executed repeatedly as long as the condition remains true.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or data structures efficiently.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed in the inner loop
+        # This code accesses both outer_loop_variable and inner_loop_variable
+    # Code to be executed after the inner loop completes for a single outer loop iteration
+# Code to be executed after the outer loop completes
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop iterates from 1 to 10
+    for j in range(1, 11):  # Inner loop iterates from 1 to 10
+        print(f"{i} x {j} = {i * j}", end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+**Explanation:**
+
+1. **Outer Loop:** The outer loop iterates through numbers 1 to 10, representing the rows of the multiplication table.  The variable `i` represents the current row number.
+
+2. **Inner Loop:** The inner loop also iterates from 1 to 10, representing the columns. The variable `j` represents the current column number.
+
+3. **Inner Loop Body:** Inside the inner loop, the code calculates `i * j` (the product of the row and column numbers) and prints it.  `end="\t"` prevents the print statement from adding a newline, keeping the output on the same line.
+
+4. **Outer Loop Body (after inner loop):**  `print()` adds a newline after the inner loop completes for each row, moving to the next line in the multiplication table.
+
+**Applications:**
+
+Nested loops are commonly used for:
+
+* **Processing matrices (2D arrays):**  Iterating over rows and columns.
+* **Nested data structures:** Traversing through lists of lists, dictionaries within dictionaries, etc.
+* **Combinations and permutations:** Generating all possible combinations or permutations of elements.
+* **Search algorithms:** Exploring different paths or possibilities.
+
+
+**Efficiency Considerations:**
+
+Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly with the size of the iterables.  For very large datasets, consider alternative approaches like vectorization (using libraries like NumPy in Python) or more efficient algorithms.
+
+
+**Other Programming Languages:**
+
+The basic concept of nested loops applies to most programming languages, although the syntax might differ slightly.  The principle remains the same: an inner loop runs to completion for each iteration of the outer loop.
+
