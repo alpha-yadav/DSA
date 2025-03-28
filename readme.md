@@ -5175,3 +5175,101 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The specific syntax varies slightly between languages, but the core concept of repeating a block of code remains the same.  Remember to be careful to avoid infinite loops (loops that never end) by ensuring your loop condition eventually becomes false.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a structure where you iterate over a combination of elements from multiple data structures or iterate through a single structure in a structured way.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_sequence:
+    for inner_loop_variable in inner_sequence:
+        # Code to execute for each combination of outer and inner loop variables
+        print(f"Outer: {outer_loop_variable}, Inner: {inner_loop_variable}")
+```
+
+**Examples:**
+
+**1. Printing a Multiplication Table:**
+
+This example demonstrates creating a multiplication table using nested loops. The outer loop iterates through the rows, and the inner loop iterates through the columns.
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(f"{i * j}\t", end="")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+**2. Iterating Through a Matrix (List of Lists):**
+
+Nested loops are commonly used to process matrices or two-dimensional arrays.
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:
+    for element in row:
+        print(element, end=" ")
+    print()
+```
+
+**3. Finding the Largest Number in a Matrix:**
+
+```python
+matrix = [
+    [1, 5, 2],
+    [8, 3, 9],
+    [4, 7, 6]
+]
+
+largest = matrix[0][0]  # Initialize with the first element
+
+for row in matrix:
+    for element in row:
+        if element > largest:
+            largest = element
+
+print(f"The largest number is: {largest}")
+```
+
+**4.  Checking for a specific element:**
+
+```python
+matrix = [
+    [1, 5, 2],
+    [8, 3, 9],
+    [4, 7, 6]
+]
+
+target = 7
+
+found = False
+for row in matrix:
+    for element in row:
+        if element == target:
+            found = True
+            break  #Exit inner loop once the element is found
+    if found:
+        break #Exit outer loop once the element is found
+
+if found:
+    print(f"The target element {target} was found.")
+else:
+    print(f"The target element {target} was not found.")
+```
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can significantly increase the execution time of your code, especially with large datasets.  The time complexity often increases quadratically (O(n^2)) or even higher depending on the number of nested loops.  Consider optimizing your algorithms if performance becomes a concern.
+* **Readability:**  Proper indentation and meaningful variable names are crucial for readability when working with nested loops.
+
+
+Nested loops are a fundamental programming construct that is very versatile, but it's essential to be aware of their potential performance implications and to write them clearly.
+
