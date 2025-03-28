@@ -4738,3 +4738,96 @@ This problem can be solved using several approaches, with varying time complexit
 
 This is a classic algorithmic problem that highlights the importance of choosing efficient data structures and algorithms to solve problems effectively.  Try to implement a solution using the Hash Table approach for optimal performance.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's simple to understand but useful for illustrating basic programming concepts like loops and conditional statements. Here's how to implement it in Swift, from a basic version to a more robust one:
+
+**Basic FizzBuzz in Swift:**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz") and then by 5 ("Buzz").
+* If none of the above conditions are met, it prints the number itself.
+
+
+**More Robust FizzBuzz (with function return):**
+
+This version returns an array of strings, making it more flexible and testable:
+
+
+```swift
+func fizzBuzzArray(n: Int) -> [String] {
+    var result: [String] = []
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        if output.isEmpty {
+            output = String(i)
+        }
+        result.append(output)
+    }
+    return result
+}
+
+let fizzBuzzResults = fizzBuzzArray(n: 15)
+print(fizzBuzzResults) // Prints the array of results
+```
+
+This improved version:
+
+* Uses a `String` variable (`output`) to build the result for each number.
+* Appends the result to the `result` array.
+* Returns the array, allowing you to process the output in other parts of your code.  This is better for unit testing.
+
+
+**Even More Advanced (handling errors):**
+
+For even more robustness, you could add error handling for invalid input:
+
+```swift
+func fizzBuzzArrayWithSafety(n: Int) -> [String]? {
+    guard n > 0 else {
+        print("Error: n must be a positive integer.")
+        return nil
+    }
+    // ... (rest of the fizzBuzzArray function from above) ...
+}
+
+if let results = fizzBuzzArrayWithSafety(n: 15) {
+    print(results)
+}
+if let results = fizzBuzzArrayWithSafety(n: -5) {
+    print(results) //This won't be printed because of the error handling
+}
+
+```
+
+This version checks if `n` is positive before proceeding, returning `nil` if it's not, preventing unexpected behavior.  The `if let` unwraps the optional result safely.
+
+Choose the version that best suits your needs.  The basic version is great for understanding the core logic, while the more advanced versions demonstrate better coding practices for larger projects. Remember to compile and run this code in a Swift environment like Xcode's playground.
+
