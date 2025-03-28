@@ -788,3 +788,65 @@ O(log n) algorithms are characterized by their ability to solve problems by repe
 
 It's crucial to remember that O(log n) is a *best-case or average-case* complexity for some of these algorithms. Always consider the worst-case scenario to get a complete picture of an algorithm's performance.
 
+#  An O(log n) example 
+The most classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  It works by repeatedly dividing the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process is repeated until the target value is found or the search interval is empty.
+
+**Why it's O(log n):**
+
+Each comparison in binary search eliminates roughly half of the remaining search space.  Let's say you start with `n` elements.  After one comparison, you have `n/2` elements left. After two comparisons, you have `n/4` elements.  After `k` comparisons, you have `n/2^k` elements.
+
+The algorithm stops when the search space is reduced to a single element (or is empty).  Therefore, we need to find the value of `k` such that `n/2^k ≈ 1`.  Solving for `k`, we get `k ≈ log₂(n)`.  This means the number of operations (comparisons) grows logarithmically with the input size `n`.  The base of the logarithm (2 in this case) is not significant in Big O notation, so we simply say the time complexity is O(log n).
+
+**Example Code (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+Other algorithms with O(log n) time complexity include:
+
+* **Tree Traversal (balanced trees):**  Operations like searching, insertion, and deletion in balanced binary search trees (like AVL trees or red-black trees) have O(log n) time complexity.
+* **Efficient exponentiation:** Algorithms for calculating a^b (a raised to the power of b) can be done in O(log b) time.
+
+
+Remember that O(log n) algorithms are very efficient, especially for large datasets, as the number of operations grows much slower than the input size.
+
