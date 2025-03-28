@@ -927,3 +927,13 @@ node = {
 
 The choice of representation depends heavily on your needs.  If you need to frequently add and remove nodes, the child-sibling or list-of-children representations are good choices. If you have a complete n-ary tree and need efficient access to children, the array representation might be best.  For flexibility and readability, the dictionary approach is often preferred.
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need more information to write an effective introduction.  For example, tell me:
+
+* **What is the main topic?** (e.g., the history of coffee, the benefits of exercise, the impact of climate change)
+* **What is the purpose of the writing?** (e.g., to inform, to persuade, to entertain)
+* **Who is the intended audience?** (e.g., experts, general public, children)
+* **What is the overall tone?** (e.g., formal, informal, humorous)
+
+Once I have this information, I can write a compelling introduction for you.
+
