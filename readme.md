@@ -749,3 +749,42 @@ int main() {
 
 These examples show how nested loops can be used to process data in a two-dimensional structure.  The concept can be extended to more than two nested loops for higher-dimensional data.  However, be mindful of computational complexity, as nested loops can significantly increase execution time, especially with large datasets.  Consider using more efficient algorithms if performance becomes a concern.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to solve problems by repeatedly dividing the problem size in half (or by a constant factor).  This makes them incredibly efficient for large datasets.  Here are some common types and examples:
+
+**1. Binary Search:** This is the quintessential O(log n) algorithm.  It works on sorted data.  To find a target value, it repeatedly eliminates half of the remaining search space.
+
+* **Example:** Searching for a name in a phone book. You don't start at the beginning and read every name; instead, you open to the middle and determine which half contains your name, then repeat the process until you find it.
+
+**2. Binary Search Tree (BST) Operations:**  Basic operations like search, insertion, and deletion in a balanced BST have O(log n) time complexity on average.  In the worst case (a completely skewed tree), it becomes O(n).
+
+* **Example:**  Efficiently storing and retrieving data based on a key, like finding a product in an online store's inventory based on product ID.
+
+
+**3. Heap Operations:**  Heaps (min-heaps or max-heaps) are tree-based data structures used for priority queues. Operations like insertion and deletion of the minimum/maximum element are O(log n).
+
+* **Example:**  Implementing a priority queue for task scheduling, where the task with the highest priority is processed first.
+
+
+**4. Merge Sort and Quick Sort (in average case):**  These are divide-and-conquer sorting algorithms. While their worst-case time complexity is O(n log n), their average-case complexity is O(n log n) as well.  The "log n" part comes from the recursive halving of the input.
+
+* **Example:**  Efficiently sorting a large dataset of numbers before performing other operations.  Note that QuickSort's *worst-case* is O(n²), making it less predictable than MergeSort.
+
+
+**5. Exponentiation by Squaring:**  This algorithm calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time.
+
+* **Example:**  Cryptography uses this frequently for efficient modular exponentiation in RSA encryption.
+
+
+**6. Finding the kth smallest element (using quickselect):**  Quickselect is a selection algorithm related to quicksort.  On average it finds the kth smallest element in O(n) time.  However,  a variant using a median-of-medians approach can achieve a guaranteed worst-case time of O(n). While not strictly O(log n), this illustrates a logarithmic-related improvement compared to brute-force approaches.
+
+
+**Key Characteristics that lead to O(log n):**
+
+* **Divide and Conquer:**  The problem is repeatedly broken down into smaller subproblems of roughly half the size.
+* **Sorted or Ordered Data:** Many O(log n) algorithms rely on the input data being sorted or having some inherent order.
+* **Efficient Data Structures:**  Data structures like balanced binary search trees and heaps are crucial for achieving O(log n) performance.
+
+
+It's crucial to remember that O(log n) is a *best-case or average-case* complexity for some of these algorithms. Always consider the worst-case scenario to get a complete picture of an algorithm's performance.
+
