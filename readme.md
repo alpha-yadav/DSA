@@ -654,3 +654,98 @@ int main() {
 
 These examples show basic `while` and `for` loops.  More complex loops might involve nested loops (loops inside other loops), `break` statements (to exit a loop prematurely), or `continue` statements (to skip to the next iteration).  The specific syntax varies slightly between languages, but the underlying concept remains the same.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or combinations of data.
+
+Here's a breakdown with examples in several programming languages:
+
+**Concept:**
+
+Imagine you have a grid (like a spreadsheet or matrix). A nested loop is a way to systematically visit each cell in the grid.  The outer loop iterates through the rows, and the inner loop iterates through the columns within each row.
+
+**Examples:**
+
+**1. Python:**
+
+```python
+# Print a multiplication table
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+
+# Nested loops to iterate through a list of lists
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+for row in matrix:
+    for element in row:
+        print(element)
+```
+
+**2. JavaScript:**
+
+```javascript
+// Print a multiplication table
+for (let i = 1; i <= 10; i++) { // Outer loop
+  for (let j = 1; j <= 10; j++) { // Inner loop
+    console.log(i * j);
+  }
+}
+
+// Nested loops to iterate through a 2D array
+const matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+for (let i = 0; i < matrix.length; i++) {
+  for (let j = 0; j < matrix[i].length; j++) {
+    console.log(matrix[i][j]);
+  }
+}
+```
+
+**3. Java:**
+
+```java
+// Print a multiplication table
+for (int i = 1; i <= 10; i++) { // Outer loop
+  for (int j = 1; j <= 10; j++) { // Inner loop
+    System.out.print(i * j + "\t");
+  }
+  System.out.println(); // Newline after each row
+}
+
+// Nested loops to iterate through a 2D array
+int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+for (int i = 0; i < matrix.length; i++) {
+  for (int j = 0; j < matrix[i].length; j++) {
+    System.out.print(matrix[i][j] + " ");
+  }
+  System.out.println();
+}
+```
+
+**4. C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  // Print a multiplication table
+  for (int i = 1; i <= 10; i++) { // Outer loop
+    for (int j = 1; j <= 10; j++) { // Inner loop
+      std::cout << i * j << "\t";
+    }
+    std::cout << std::endl; // Newline after each row
+  }
+
+  // Nested loops to iterate through a 2D array
+  int matrix[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      std::cout << matrix[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+  return 0;
+}
+```
+
+These examples show how nested loops can be used to process data in a two-dimensional structure.  The concept can be extended to more than two nested loops for higher-dimensional data.  However, be mindful of computational complexity, as nested loops can significantly increase execution time, especially with large datasets.  Consider using more efficient algorithms if performance becomes a concern.
+
