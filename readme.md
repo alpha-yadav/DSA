@@ -4885,3 +4885,42 @@ Big O notation typically focuses on the worst-case scenario, as it provides an u
 
 Understanding algorithm complexity is crucial for choosing efficient algorithms for various tasks.  By analyzing the time and space complexity, developers can predict how an algorithm will scale with increasing input size and make informed decisions about which algorithm is best suited for a particular application.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a powerful tool in computer science used to describe the **asymptotic tight bound** of an algorithm's time or space complexity.  Unlike Big-O (O) which provides an upper bound, and Big-Omega (Ω) which provides a lower bound, Big-Theta provides both simultaneously.  It means the function's growth rate is bounded both above and below by the same function, ignoring constant factors.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large inputs (*n ≥ n₀*), *f(n)* is always within a constant factor of *g(n)*.  Both the upper and lower bounds are proportional to *g(n)*.
+
+**In simpler terms:**
+
+*Θ(g(n))* describes functions that grow at roughly the same rate as *g(n)*.  The function *f(n)* might be slightly faster or slower, but the difference is only a constant factor. Constant factors are ignored because they become insignificant as the input size grows to infinity.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1 is Θ(n²)**:  We can find constants *c₁*, *c₂*, and *n₀* that satisfy the definition.  For instance, for *n ≥ 1*:  `n² ≤ 2n² + 3n + 1 ≤ 6n²`.  Thus, *c₁ = 1*, *c₂ = 6*, and *n₀ = 1*.
+
+* **f(n) = 5n + 10 is Θ(n)**:  The dominant term is *n*. Ignoring the constant factor, the growth rate is linear.
+
+* **f(n) = log₂(n) is NOT Θ(n)**:  The logarithmic function grows much slower than a linear function.  There's no constant that can make `c₁n ≤ log₂(n)` for all sufficiently large *n*.
+
+
+**When to use Θ:**
+
+Big-Theta notation is preferred when you want to express a precise characterization of an algorithm's complexity.  If you can prove a tight bound using Θ, it gives a more complete and informative analysis than using only Big-O.  However, proving a tight bound isn't always easy or possible.  Big-O is often used when a tight bound is difficult to establish.
+
+
+**Relationship to Big-O and Big-Ω:**
+
+* If *f(n)* is Θ(*g(n)*), then it's also O(*g(n)*) (upper bound) and Ω(*g(n)*) (lower bound).
+* O(*g(n)*) only provides an upper bound; the function might grow significantly slower.
+* Ω(*g(n)*) only provides a lower bound; the function might grow significantly faster.
+* Θ(*g(n)*) provides both an upper and lower bound, making it the strongest statement about asymptotic complexity.
+
+
+Big-Theta gives a precise and complete picture of the asymptotic behavior of an algorithm's complexity.  While Big-O is often sufficient for practical purposes, Θ offers a more rigorous and informative analysis when possible.
+
