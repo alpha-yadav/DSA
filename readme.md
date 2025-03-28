@@ -3776,3 +3776,42 @@ Understanding data structures is essential for implementing efficient algorithms
 
 Start with the basics, gradually increase the complexity of the problems you tackle, and don't be afraid to seek help when you get stuck.  Consistent effort and practice are key to mastering algorithms.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems with varying difficulty, categorized for clarity:
+
+**Easy:**
+
+* **Problem:** Two Sum
+    * **Description:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+    * **Example:**  `nums = [2,7,11,15], target = 9`  Output: `[0,1]` (because 2 + 7 = 9)
+    * **Challenge:** Can you solve this in less than O(n^2) time? (Linear time is possible)
+
+
+**Medium:**
+
+* **Problem:**  Reverse a Linked List
+    * **Description:** Given the head of a singly linked list, reverse the list, and return the reversed list.
+    * **Example:** Input: `1->2->3->4->5`, Output: `5->4->3->2->1`
+    * **Challenge:** Solve this iteratively and recursively.  Consider space complexity.
+
+* **Problem:**  Merge Intervals
+    * **Description:** Given an array of intervals where `intervals[i] = [starti, endi]`, merge all overlapping intervals, and return *an array of the non-overlapping intervals that cover all the intervals in the input*.
+    * **Example:** Input: `[[1,3],[2,6],[8,10],[15,18]]`, Output: `[[1,6],[8,10],[15,18]]`
+    * **Challenge:**  Sort the intervals efficiently before merging.
+
+
+**Hard:**
+
+* **Problem:**  Longest Increasing Subsequence
+    * **Description:** Given an integer array `nums`, return the length of the longest strictly increasing subsequence.
+    * **Example:** Input: `[10,9,2,5,3,7,101,18]`, Output: `4` (The longest increasing subsequence is `[2,3,7,101]`, therefore the length is 4.)
+    * **Challenge:** Can you solve this in O(n log n) time?  (A naive solution is O(n^2))
+
+* **Problem:**  Trapping Rain Water
+    * **Description:** Given `n` non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+    * **Example:** Input: `height = [0,1,0,2,1,0,1,3,2,1,2,1]`, Output: `6`
+    * **Challenge:**  Find an efficient solution that avoids brute force.  (Think about using two pointers)
+
+
+These are just a few examples, and the difficulty is subjective.  Remember to consider time and space complexity when designing your solution.  Try to work through these, and search online for hints or solutions if you get stuck!  There are many resources available to help you learn more about algorithm design and problem-solving.
+
