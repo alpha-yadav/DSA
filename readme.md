@@ -4090,3 +4090,53 @@ Let's break down this definition:
 
 In summary, Big-Omega notation is a powerful tool for analyzing algorithms by providing a guarantee on their minimum resource consumption.  While Big-O often receives more attention, understanding Big-Omega gives a more complete picture of an algorithm's efficiency.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of an algorithm's runtime or space requirements as the input size grows.  It focuses on how the runtime or space scales, not on the exact runtime for a specific input.  We ignore constant factors and lower-order terms because they become insignificant as the input size becomes large.
+
+Here's a breakdown of key aspects:
+
+**What Big O describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases as the input size (n) grows.  This is often the most important aspect.
+* **Space Complexity:** How the amount of memory an algorithm uses increases as the input size (n) grows.
+
+**Key Big O notations and their meanings:**
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Nested loops iterating over the input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime increases factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**Understanding the notation:**
+
+The notation `O(f(n))` means that the runtime (or space) is bounded above by a constant multiple of `f(n)` as `n` approaches infinity.  In simpler terms:
+
+* We only care about the dominant term (the term that grows fastest as n increases).  For example, in O(n³ + 2n² + 100), we only consider O(n³).
+* Constant factors are ignored.  O(5n) is simplified to O(n).
+
+**Example:**
+
+Let's say we have an algorithm with a runtime of `T(n) = 2n² + 5n + 10`.  As `n` gets very large, the `2n²` term dominates.  Therefore, the Big O notation for this algorithm's time complexity is O(n²).
+
+
+**Why is Big O important?**
+
+* **Algorithm Comparison:**  It allows us to compare the efficiency of different algorithms, independent of hardware or specific implementation details.
+* **Scalability Prediction:**  It helps predict how an algorithm will perform with larger inputs, allowing us to choose algorithms that scale well.
+* **Optimization Focus:** It helps developers identify bottlenecks and focus optimization efforts on the most critical parts of the code.
+
+
+**Beyond Big O:**
+
+While Big O describes the upper bound, other notations exist:
+
+* **Ω (Big Omega):** Describes the *lower bound* of an algorithm's runtime.
+* **Θ (Big Theta):** Describes both the upper and lower bounds, providing a tight bound on the runtime.
+
+
+Big O notation is a fundamental concept in computer science, essential for understanding and designing efficient algorithms.  While it doesn't give precise runtime, it provides a crucial framework for analyzing and comparing algorithm performance.
+
