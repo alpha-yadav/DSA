@@ -2293,3 +2293,149 @@ This approach uses a stack (or a queue for a breadth-first search) to traverse t
 
 Choose the approach that best suits your needs and coding style. The recursive approach is generally considered more concise and easier to understand for this problem.  The iterative approach might be preferred in scenarios where you need to strictly control memory usage or handle extremely large trees.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic algorithm problem.  The approach depends on the type of tree and the information available. Here are some common methods:
+
+**1.  Recursive Approach (for Binary Trees):**
+
+This is a very elegant and efficient solution for binary trees.  It leverages the recursive nature of the tree structure.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree using recursion.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lca_recursive(root.left, p, q)
+    right_lca = lca_recursive(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+p = root.left  # Node with data 2
+q = root.left.right # Node with data 5
+
+lca = lca_recursive(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data if lca else None}")  # Output: LCA of 2 and 5: 2
+
+
+```
+
+**2. Iterative Approach (for Binary Trees):**
+
+While recursion is often preferred for its clarity, an iterative approach can be beneficial for very deep trees to avoid potential stack overflow issues.
+
+```python
+def lca_iterative(root, p, q):
+  """
+  Finds the LCA of nodes p and q in a binary tree iteratively.
+
+  Args:
+    root: The root of the binary tree.
+    p: The first node.
+    q: The second node.
+
+  Returns:
+    The LCA node, or None if either p or q is not found.
+  """
+  stack = [root]
+  parent = {}  # Map nodes to their parents
+  parent[root] = None
+
+  while stack:
+    node = stack.pop()
+    if node.left:
+      parent[node.left] = node
+      stack.append(node.left)
+    if node.right:
+      parent[node.right] = node
+      stack.append(node.right)
+
+  path_p = []
+  curr = p
+  while curr:
+    path_p.append(curr)
+    curr = parent[curr]
+
+  path_q = []
+  curr = q
+  while curr:
+    path_q.append(curr)
+    curr = parent[curr]
+
+  lca = None
+  i = 0
+  while i < len(path_p) and i < len(path_q) and path_p[len(path_p)-1-i] == path_q[len(path_q)-1-i]:
+    lca = path_p[len(path_p)-1-i]
+    i += 1
+
+  return lca
+
+#Example Usage (same tree as before)
+lca = lca_iterative(root,p,q)
+print(f"LCA of {p.data} and {q.data}: {lca.data if lca else None}") #Output: LCA of 2 and 5: 2
+```
+
+**3.  Using Parent Pointers (for any Tree):**
+
+If each node has a pointer to its parent, finding the LCA becomes simpler.  You can trace upward from both `p` and `q` until you find a common ancestor.
+
+```python
+# Assuming nodes have a 'parent' attribute
+def lca_parent_pointers(p, q):
+    ancestors_p = set()
+    curr = p
+    while curr:
+        ancestors_p.add(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        if curr in ancestors_p:
+            return curr
+        curr = curr.parent
+    return None #should not happen if both nodes are in the tree.
+
+```
+
+**4.  For General Trees (not necessarily binary):**
+
+The recursive approach can be adapted. You'd need to iterate over all children instead of just left and right.  The parent pointer method also works directly.
+
+
+Remember to handle edge cases:
+
+*   Nodes `p` or `q` might not be present in the tree.
+*   One node might be an ancestor of the other.
+
+
+Choose the method best suited to your tree structure and constraints.  The recursive approach is often the most concise and readable for binary trees, while the iterative approach avoids potential stack overflow issues.  The parent pointer method is efficient if parent pointers are readily available.
+
