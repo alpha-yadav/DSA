@@ -201,3 +201,95 @@ else:
 
 This is a very basic example. As you progress, you'll tackle more complex algorithms and data structures.  Remember to be patient, persistent, and enjoy the learning process!
 
+#  A sample algorithmic problem 
+## Algorithmic Problem: Two Sum
+
+**Problem Statement:**
+
+Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+
+**Example 1:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Example 2:**
+
+```
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+```
+
+**Example 3:**
+
+```
+Input: nums = [3,3], target = 6
+Output: [0,1]
+```
+
+
+**Constraints:**
+
+* `2 <= nums.length <= 104`
+* `-109 <= nums[i] <= 109`
+* `-109 <= target <= 109`
+* **Only one valid answer exists.**
+
+
+**Solution Approaches (varying in efficiency):**
+
+* **Brute Force:**  Nested loops comparing every pair of numbers.  This is O(n²) time complexity.
+* **Hash Table (Optimal):** Use a hash table (dictionary in Python) to store numbers and their indices. Iterate through the array, checking if the complement (target - current number) exists in the hash table. This approach has O(n) time complexity.
+
+
+**Python Solution (using Hash Table):**
+
+```python
+def two_sum(nums, target):
+    """
+    Finds indices of two numbers in a list that add up to a target.
+
+    Args:
+        nums: A list of integers.
+        target: The target sum.
+
+    Returns:
+        A list containing the indices of the two numbers, or None if no solution exists.
+    """
+    num_map = {}  # Hash table to store numbers and their indices
+
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i  # Add the current number and its index to the hash table
+
+    return None  # No solution found
+
+# Example usage
+nums = [2, 7, 11, 15]
+target = 9
+result = two_sum(nums, target)
+print(f"Indices: {result}")  # Output: Indices: [0, 1]
+
+nums = [3, 2, 4]
+target = 6
+result = two_sum(nums, target)
+print(f"Indices: {result}")  # Output: Indices: [1, 2]
+
+nums = [3,3]
+target = 6
+result = two_sum(nums, target)
+print(f"Indices: {result}") # Output: Indices: [0, 1]
+```
+
+This problem demonstrates a common algorithmic pattern and highlights the importance of choosing efficient data structures and algorithms to solve problems effectively.  The brute force approach works, but the hash table solution is significantly faster for larger input sizes.
+
