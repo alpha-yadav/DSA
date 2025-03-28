@@ -293,3 +293,63 @@ print(f"Indices: {result}") # Output: Indices: [0, 1]
 
 This problem demonstrates a common algorithmic pattern and highlights the importance of choosing efficient data structures and algorithms to solve problems effectively.  The brute force approach works, but the hash table solution is significantly faster for larger input sizes.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing some improvements:
+
+**Basic Approach:**
+
+This version uses nested `if-else if-else` statements. It's straightforward and easy to understand, but can become less readable with more complex conditions.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+**Improved Approach using String Interpolation and the Ternary Operator:**
+
+This version is more concise and efficient. It leverages string interpolation and the ternary operator to create a more compact solution.
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+**Explanation of the Improved Approach:**
+
+1. **`var output = ""`**:  An empty string is initialized to store the output for each number.
+
+2. **`output += (i % 3 == 0) ? "Fizz" : ""`**: This line uses the ternary operator.  If `i` is divisible by 3, "Fizz" is appended to `output`; otherwise, nothing is appended.  A similar line handles divisibility by 5 and "Buzz".
+
+3. **`print(output.isEmpty ? "\(i)" : output)`**: This line uses another ternary operator. If `output` is still empty (meaning `i` wasn't divisible by 3 or 5), the number `i` itself is printed; otherwise, the accumulated string in `output` ("Fizz", "Buzz", or "FizzBuzz") is printed.
+
+
+**Further Enhancements (Optional):**
+
+* **Error Handling:**  You could add error handling to check for invalid input (e.g., negative `n`).
+* **Function Return Value:** Instead of printing directly, the function could return an array of strings containing the FizzBuzz results. This makes the function more reusable.
+* **Generics:** For even more flexibility, you could generalize the function to handle different divisors and output strings.
+
+
+This gives you a good starting point for understanding and implementing the FizzBuzz algorithm in Swift. Choose the approach that best suits your needs and understanding.  The improved version is generally preferred for its conciseness and efficiency, but the basic version is easier to grasp for beginners.
+
