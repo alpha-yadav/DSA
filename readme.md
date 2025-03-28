@@ -4924,3 +4924,57 @@ Big-Theta notation is preferred when you want to express a precise characterizat
 
 Big-Theta gives a precise and complete picture of the asymptotic behavior of an algorithm's complexity.  While Big-O is often sufficient for practical purposes, Θ offers a more rigorous and informative analysis when possible.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used in computer science to describe the behavior of functions as their input size grows arbitrarily large.  They're crucial for analyzing the efficiency of algorithms.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than the square of the input size.
+* **Focus:**  Worst-case complexity.  It tells us how bad things *could* get.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (or a lower bound on the complexity in all cases). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least as fast as the input size.
+* **Focus:** Best-case complexity (or a lower bound on complexity). It tells us how good things *could* get at best.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows at the *same rate* as another function, both upper and lower bounded.  We say f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+* **Focus:** Tight bound, indicating precise growth rate.  It's the most informative notation if available.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+* **Focus:**  Asymptotically smaller growth rate.
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+* **Focus:** Asymptotically larger growth rate.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Example       |
+|----------|---------------------------------------|---------------|
+| O(g(n))  | Upper bound                             | f(n) = O(n²)   |
+| Ω(g(n))  | Lower bound                             | f(n) = Ω(n)    |
+| Θ(g(n))  | Tight bound                             | f(n) = Θ(n log n) |
+| o(g(n))  | Strictly slower growth                 | n = o(n²)     |
+| ω(g(n))  | Strictly faster growth                 | n² = ω(n)      |
+
+
+**Relationships:**
+
+* If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* If f(n) = o(g(n)), then f(n) = O(g(n)) but f(n) ≠ Θ(g(n)).
+* If f(n) = ω(g(n)), then f(n) = Ω(g(n)) but f(n) ≠ Θ(g(n)).
+
+
+These notations allow us to compare the efficiency of algorithms regardless of constant factors or machine-specific details, focusing on how the runtime scales with the input size.  Θ is generally preferred when a tight bound can be determined, as it gives the most precise information.  However, sometimes only an upper bound (O) or lower bound (Ω) is readily obtainable or relevant.
+
