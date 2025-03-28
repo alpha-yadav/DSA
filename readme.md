@@ -1091,3 +1091,127 @@ BSTs are used extensively in various applications, including:
 
 In summary, Binary Search Trees are a powerful data structure that offers efficient operations for managing ordered data.  Understanding their properties and limitations, as well as the benefits of self-balancing variants, is crucial for selecting the right data structure for a given application.
 
+#  Binary Search Tree - Insertion (Python) 
+Several Python implementations of binary search tree (BST) insertion exist, each with slight variations.  Here are a few, ranging from a simple recursive approach to a more robust iterative one that handles duplicates:
+
+**Method 1: Recursive Insertion (Simplest)**
+
+This version is concise but doesn't handle duplicate keys.  It simply inserts the new node at the appropriate leaf.
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, key):
+        self.root = self._insert_recursive(self.root, key)
+
+    def _insert_recursive(self, node, key):
+        if node is None:
+            return Node(key)
+        if key < node.key:
+            node.left = self._insert_recursive(node.left, key)
+        else:
+            node.right = self._insert_recursive(node.right, key)
+        return node
+
+# Example usage
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+
+# (You would need a traversal function to print the tree for verification)
+```
+
+**Method 2: Iterative Insertion**
+
+This approach avoids recursion, potentially improving performance for very deep trees and reducing the risk of stack overflow errors.  It also demonstrates handling duplicates (by simply not inserting).
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, key):
+        if self.root is None:
+            self.root = Node(key)
+            return
+
+        node = self.root
+        while True:
+            if key < node.key:
+                if node.left is None:
+                    node.left = Node(key)
+                    return
+                else:
+                    node = node.left
+            elif key > node.key:  #Explicitly handle > case
+                if node.right is None:
+                    node.right = Node(key)
+                    return
+                else:
+                    node = node.right
+            else: #Handle duplicates
+                return # Or you could increment a count in the node
+
+
+#Example usage (same as before)
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+bst.insert_iterative(8) # Duplicate - will be ignored.
+
+```
+
+**Method 3: Recursive Insertion with Duplicate Handling**
+
+Combines the simplicity of recursion with the ability to handle duplicates (e.g., by counting occurrences).
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.count = 1 #To track duplicates
+        self.left = None
+        self.right = None
+
+class BST:
+    # ... (init method same as before) ...
+
+    def insert_recursive_duplicates(self, key):
+        self.root = self._insert_recursive_duplicates(self.root, key)
+
+    def _insert_recursive_duplicates(self, node, key):
+        if node is None:
+            return Node(key)
+        if key < node.key:
+            node.left = self._insert_recursive_duplicates(node.left, key)
+        elif key > node.key:
+            node.right = self._insert_recursive_duplicates(node.right, key)
+        else:  # Duplicate found
+            node.count += 1
+        return node
+```
+
+Remember that you'll need a tree traversal function (e.g., inorder, preorder, postorder) to verify the insertion.  Choose the method that best suits your needs and understanding. The iterative approach is generally preferred for its robustness, while the recursive methods offer cleaner code.  The duplicate handling is a crucial consideration depending on your application requirements.
+
