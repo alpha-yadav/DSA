@@ -353,3 +353,61 @@ fizzBuzzImproved(n: 15) // Example usage
 
 This gives you a good starting point for understanding and implementing the FizzBuzz algorithm in Swift. Choose the approach that best suits your needs and understanding.  The improved version is generally preferred for its conciseness and efficiency, but the basic version is easier to grasp for beginners.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long it takes to run) and space (how much memory it needs).  We analyze complexity to understand how an algorithm's performance scales as the input size grows.  This allows us to compare different algorithms and choose the most efficient one for a given task.
+
+Here's a breakdown of key concepts:
+
+**1. Time Complexity:**
+
+* **Describes how the runtime of an algorithm increases with the size of the input.**  We usually express this using Big O notation (O), which focuses on the dominant factors as the input size approaches infinity, ignoring constant factors and lower-order terms.
+
+* **Common Time Complexities (from best to worst):**
+
+    * **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+    * **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+    * **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+    * **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+    * **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Nested loops iterating over the input.
+    * **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+    * **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example:  Finding all permutations of a set.
+
+
+* **Analyzing Time Complexity:**  We analyze the number of basic operations performed by the algorithm as a function of the input size. This often involves counting comparisons, assignments, or other fundamental steps.  Best-case, worst-case, and average-case scenarios are often considered.
+
+**2. Space Complexity:**
+
+* **Describes how the memory usage of an algorithm increases with the size of the input.**  Like time complexity, it's also usually expressed using Big O notation.
+
+* **Factors affecting space complexity:**
+
+    * **Input size:** The amount of memory needed to store the input data.
+    * **Auxiliary space:** The additional memory used by the algorithm beyond the input data (e.g., variables, data structures).
+
+* **Examples:**
+
+    * **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+    * **O(n) - Linear Space:** The memory usage increases linearly with the input size.
+    * **O(log n) - Logarithmic Space:**  The memory usage increases logarithmically with the input size (e.g., recursive algorithms with logarithmic depth).
+
+
+**3. Big O Notation (and related notations):**
+
+* **Big O (O):**  Provides an upper bound on the growth rate of the algorithm's resource usage.  It describes the worst-case scenario.
+* **Big Omega (Ω):** Provides a lower bound on the growth rate.  It describes the best-case scenario.
+* **Big Theta (Θ):** Provides both an upper and lower bound, indicating that the algorithm's resource usage grows at a specific rate.  It describes the average-case scenario (when applicable).
+
+
+**Example:**
+
+Consider a simple linear search algorithm that searches for a value in an unsorted array.
+
+* **Best-case:** The value is found at the beginning of the array – O(1)
+* **Worst-case:** The value is at the end (or not present) – O(n)
+* **Average-case:** The value is somewhere in the middle – O(n)
+
+We typically focus on the worst-case complexity (Big O) because it provides a guarantee on the algorithm's performance.
+
+
+Understanding algorithm complexity is crucial for writing efficient and scalable programs.  Choosing the right algorithm can significantly impact performance, especially when dealing with large datasets.
+
