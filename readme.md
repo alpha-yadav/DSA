@@ -6118,3 +6118,107 @@ print("Inorder Traversal after deleting 8:", bst.inorder_traversal())
 
 This code provides `insert`, `search`, `delete`, and three traversal methods (`inorder`, `preorder`, `postorder`).  The `delete` method handles all three cases: deleting a leaf node, a node with one child, and a node with two children (using the inorder successor). Remember that BST operations have time complexities that depend on the tree's balance.  In a worst-case scenario (a skewed tree), operations can be O(n), but in a balanced tree, they are O(log n).  For very large datasets, consider using a self-balancing BST like an AVL tree or a red-black tree to maintain O(log n) performance.
 
+#  Check if a tree is BST or not 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-Order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.  We recursively traverse the tree in-order, keeping track of the minimum and maximum allowed values for each node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val, max_val):
+    """
+    Recursively checks if a subtree is a BST.
+
+    Args:
+        node: The root of the subtree.
+        min_val: The minimum allowed value for the node's data.
+        max_val: The maximum allowed value for the node's data.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+
+def is_bst(root):
+    """
+    Checks if the entire tree is a BST.
+
+    Args:
+        root: The root of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    return is_bst_recursive(root, float('-inf'), float('inf'))
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+print("Is BST:", is_bst(root))  # Output: True
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(12)
+root2.left.right.left = Node(10)
+root2.left.right.right = Node(15) #Changed this value to make it not a BST
+root2.left.right.right.right = Node(100)
+
+print("Is BST:", is_bst(root2))  # Output: False
+
+```
+
+**Method 2: Iterative In-Order Traversal**
+
+This method uses an iterative approach with a stack to perform the in-order traversal, offering slightly improved space complexity in some cases (though still O(h), where h is the height of the tree).
+
+```python
+def is_bst_iterative(root):
+    stack = []
+    prev = None
+    curr = root
+
+    while curr or stack:
+        while curr:
+            stack.append(curr)
+            curr = curr.left
+
+        curr = stack.pop()
+        if prev and curr.data <= prev.data:
+            return False
+        prev = curr
+        curr = curr.right
+
+    return True
+
+#Example Usage (same as above, will produce the same output)
+print("Is BST (iterative):", is_bst_iterative(root))  # Output: True
+print("Is BST (iterative):", is_bst_iterative(root2))  # Output: False
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the worst case (for a skewed tree), where H is the height of the tree, due to the recursion depth or stack size.  For a balanced tree, the space complexity would be O(log N).  Choose the method that best suits your needs and coding style.  The recursive version is often considered more elegant and easier to understand, while the iterative version might have a slight edge in performance for extremely deep trees.
+
