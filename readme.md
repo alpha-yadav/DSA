@@ -6940,3 +6940,76 @@ Remember to handle edge cases like empty trees, nodes not being present in the t
 #  Graph 
 Please provide me with the data or equation you want me to graph.  I need information about what you want to plot (e.g., points, a function, etc.) before I can create a graph.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, particularly suitable for dense graphs (graphs with many edges).  Here's a breakdown of how it works, along with considerations for different data types and implementation details:
+
+**The Adjacency Matrix**
+
+An adjacency matrix is a 2D array (or a list of lists) where each element `matrix[i][j]` represents the connection between vertex `i` and vertex `j`.
+
+* **Value Representation:** The value at `matrix[i][j]` can represent different things:
+    * **Boolean (0/1):**  `1` indicates an edge exists between vertices `i` and `j`, `0` indicates no edge. This is suitable for unweighted graphs.
+    * **Integer:** The value represents the weight of the edge between vertices `i` and `j`.  `0` or a special value (like `-1` or `Infinity`) could represent the absence of an edge. This is used for weighted graphs.
+    * **Float:** Similar to integers, but for graphs with floating-point edge weights.
+    * **Object:** You can store more complex information about the edge (e.g., a custom edge object containing weight, color, capacity, etc.).
+
+* **Directed vs. Undirected:**
+    * **Directed:**  `matrix[i][j]` represents an edge from vertex `i` to vertex `j`.  `matrix[i][j]` can be different from `matrix[j][i]`.
+    * **Undirected:** `matrix[i][j]` equals `matrix[j][i]`.  You can choose to store only the upper or lower triangle of the matrix to save space (since the other half is redundant).
+
+**Example (Python):**
+
+Let's represent an undirected, unweighted graph with 4 vertices:
+
+```python
+# Adjacency matrix for an undirected, unweighted graph
+graph = [
+    [0, 1, 1, 0],  # Vertex 0 is connected to 1 and 2
+    [1, 0, 1, 1],  # Vertex 1 is connected to 0, 2, and 3
+    [1, 1, 0, 1],  # Vertex 2 is connected to 0, 1, and 3
+    [0, 1, 1, 0]   # Vertex 3 is connected to 1 and 2
+]
+
+# Accessing information:
+print(graph[0][1])  # Output: 1 (there's an edge between vertex 0 and 1)
+print(graph[0][3])  # Output: 0 (no edge between vertex 0 and 3)
+```
+
+
+**Example (Weighted Directed Graph - Python):**
+
+```python
+graph = [
+    [0, 5, 2, 0],    #Weight from 0 to 1 is 5, from 0 to 2 is 2, no edge to 3
+    [0, 0, 0, 7],   #Weight from 1 to 3 is 7
+    [0, 3, 0, 1],    #Weight from 2 to 1 is 3, from 2 to 3 is 1
+    [0, 0, 0, 0]    #No outgoing edge from 3
+]
+
+print(graph[1][3]) #Output: 7 (Weight of edge from vertex 1 to 3)
+```
+
+
+**Advantages of Adjacency Matrix:**
+
+* **Easy to check for edge existence:**  `O(1)` time complexity.
+* **Simple implementation:** Relatively straightforward to implement.
+* **Suitable for dense graphs:**  When the number of edges is close to |V|^2 (where |V| is the number of vertices), the matrix is relatively efficient.
+
+**Disadvantages of Adjacency Matrix:**
+
+* **Space complexity:**  `O(V^2)` regardless of the number of edges.  This is inefficient for sparse graphs (graphs with few edges).
+* **Adding/removing vertices:**  Requires resizing the matrix, which can be computationally expensive.
+
+
+**When to Use Adjacency Matrix:**
+
+* Dense graphs.
+* When fast edge existence checks are crucial.
+* When you need to store edge weights or other edge attributes.
+
+
+**Alternatives:**
+
+For sparse graphs, adjacency lists are generally a more efficient way to represent graphs.  They use less memory and are more efficient for operations like finding neighbors.  Other representations include incidence matrices and edge lists.
+
