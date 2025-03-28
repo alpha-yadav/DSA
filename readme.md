@@ -7507,3 +7507,119 @@ bfs(graph, 'A') # Output: A B C D E F (order is consistent)
 
 Choosing between DFS and BFS depends on the specific application. If you need the shortest path in an unweighted graph, BFS is preferred.  If you need to find cycles or perform topological sorting, DFS is usually a better choice.  For many other graph problems, either algorithm could be suitable.
 
+#  Depth First Search traversal function 
+The implementation of a Depth-First Search (DFS) traversal function depends on the data structure you're traversing (graph represented as an adjacency list or adjacency matrix, tree, etc.).  Here are examples for common scenarios:
+
+**1. DFS for a Graph (using an adjacency list):**
+
+This is the most common use case.  We represent the graph as an adjacency list, where each node has a list of its neighbors.
+
+```python
+def dfs(graph, start, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        start: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, for recursive calls).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)  # Recursive call for unvisited neighbors
+
+    return visited
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal starting from A:")
+dfs(graph, 'A')  # Output: A B D E F C (order may vary slightly depending on implementation)
+
+```
+
+
+**2. DFS for a Tree (using a dictionary or object representation):**
+
+Trees are a special case of graphs. This example assumes a tree represented as a dictionary where keys are nodes and values are lists of their children.
+
+```python
+def dfs_tree(tree, node):
+    """
+    Performs a Depth-First Search traversal of a tree.
+
+    Args:
+        tree: A dictionary representing the tree where keys are nodes and values are lists of their children.
+        node: The starting node for the traversal.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    visited = []
+    stack = [node]
+
+    while stack:
+        current = stack.pop()
+        if current not in visited:
+            visited.append(current)
+            print(current, end=" ")
+            stack.extend(tree.get(current, [])) # Extend with children, handling missing children gracefully.
+
+    return visited
+
+
+# Example tree
+tree = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': [],
+    'F': []
+}
+
+print("\nDFS traversal of tree starting from A:")
+dfs_tree(tree, 'A') # Output: A C F B E D (order might vary based on stack implementation)
+
+```
+
+**3. Iterative DFS using a Stack:**
+
+The recursive approach can lead to stack overflow errors for very deep graphs. An iterative approach using a stack avoids this:
+
+```python
+def iterative_dfs(graph, start):
+    visited = set()
+    stack = [start]
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            print(vertex, end=" ")
+            stack.extend(neighbor for neighbor in graph[vertex] if neighbor not in visited) #Add unvisited neighbors
+
+    return visited
+
+print("\nIterative DFS traversal starting from A:")
+iterative_dfs(graph, 'A') # Output: A C F B E D (or a similar order)
+```
+
+Remember to adapt these examples to your specific data structure and needs.  You might need to modify the way nodes are processed (instead of just printing them) depending on the task.  For example, you might want to search for a specific value, collect all nodes at a certain depth, etc.
+
