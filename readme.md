@@ -1331,3 +1331,91 @@ int main() {
 
 Remember to handle memory management properly.  In this simplified example, I haven't shown the complete cleanup of the tree after deletion.  In a production environment, you should use smart pointers (like `std::unique_ptr` or `std::shared_ptr`) to automatically manage memory and prevent leaks.  Alternatively, you would need to implement a recursive function to delete all nodes after the main operations.  The commented-out section in `main()` indicates where that would go.  Smart pointers are highly recommended for this task.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where we consider a node to be a descendant of itself).  There are several ways to find the LCA in a BST, taking advantage of the BST's ordered property:
+
+**Method 1: Recursive Approach**
+
+This is a concise and efficient method.  The core logic is:
+
+* **If both `p` and `q` are less than the current node's value, the LCA must be in the left subtree.**
+* **If both `p` and `q` are greater than the current node's value, the LCA must be in the right subtree.**
+* **Otherwise (one is smaller and one is larger), the current node is the LCA.**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if not root or root.data == p.data or root.data == q.data:
+        return root
+
+    if p.data < root.data and q.data < root.data:
+        return lowestCommonAncestor(root.left, p, q)
+    elif p.data > root.data and q.data > root.data:
+        return lowestCommonAncestor(root.right, p, q)
+    else:
+        return root
+
+# Example Usage:
+root = Node(6)
+root.left = Node(2)
+root.right = Node(8)
+root.left.left = Node(0)
+root.left.right = Node(4)
+root.right.left = Node(7)
+root.right.right = Node(9)
+
+p = root.left  # Node with value 2
+q = root.right # Node with value 8
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}")  # Output: LCA of 2 and 8: 6
+
+
+p = root.left.right #Node with value 4
+q = root.right.left #Node with value 7
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}")  # Output: LCA of 4 and 7: 6
+
+p = root.left.left #Node with value 0
+q = root.left.right #Node with value 4
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}")  # Output: LCA of 0 and 4: 2
+
+```
+
+**Method 2: Iterative Approach**
+
+This approach avoids recursion and might be slightly more efficient in some cases:
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    while root:
+        if p.data < root.data and q.data < root.data:
+            root = root.left
+        elif p.data > root.data and q.data > root.data:
+            root = root.right
+        else:
+            return root
+    return None #Should ideally never reach here if p and q are present.  Handle appropriately if needed.
+
+# Example usage (same as above, replace function call)
+```
+
+Both methods have a time complexity of O(h), where h is the height of the BST (O(log n) for a balanced tree, O(n) for a skewed tree).  The space complexity is O(h) for the recursive approach (due to the recursive call stack) and O(1) for the iterative approach.  Choose the method that best suits your coding style and performance requirements.  Remember to handle edge cases like empty trees or nodes not being present in the tree.
+
