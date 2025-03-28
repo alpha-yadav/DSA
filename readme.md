@@ -5077,3 +5077,101 @@ As you can see, the difference in efficiency becomes dramatically more significa
 
 Big O notation is a crucial tool for evaluating and comparing the efficiency of algorithms, allowing developers to make informed decisions about which algorithms to use for different tasks.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  There are several types of loops, but here are examples of the most common in several programming languages:
+
+**1. `for` loop (iterating a specific number of times):**
+
+* **Python:**
+
+```python
+for i in range(5):  # Executes 5 times (i = 0, 1, 2, 3, 4)
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. `while` loop (repeating until a condition is false):**
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  The specific syntax varies slightly between languages, but the core concept of repeating a block of code remains the same.  Remember to be careful to avoid infinite loops (loops that never end) by ensuring your loop condition eventually becomes false.
+
