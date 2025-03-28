@@ -3948,3 +3948,48 @@ The binary search is significantly faster for large arrays because its logarithm
 
 **In summary:** Understanding algorithm complexity is crucial for writing efficient and scalable software. By analyzing time and space complexity, we can choose the best algorithm for a given task and predict its performance as the input size grows.  Big O notation provides a convenient and standardized way to express this complexity.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate, meaning it provides both an upper and a lower bound that are asymptotically proportional.  This contrasts with Big O notation (O), which only provides an upper bound, and Big Omega notation (Ω), which only provides a lower bound.
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) if there exist positive constants c₁ and c₂, and a positive integer n₀ such that for all n ≥ n₀:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+This means that for sufficiently large inputs (n ≥ n₀), the function f(n) is always bounded both above and below by constant multiples of g(n).  In other words, f(n) grows at the same rate as g(n).
+
+**What it means:**
+
+* **Tight Bound:**  Θ notation provides a much stronger statement than O or Ω alone.  It accurately reflects the function's growth rate, indicating that it's neither significantly faster nor significantly slower than g(n).
+* **Asymptotic Behavior:** Θ notation focuses on the behavior of the function as the input size (n) approaches infinity.  It ignores constant factors and lower-order terms, which become insignificant as n grows large.
+* **Growth Rate Classification:**  It's used to classify algorithms based on their efficiency.  For example, an algorithm with a time complexity of Θ(n²) is considered quadratically more complex than an algorithm with a time complexity of Θ(n).
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1 is Θ(n²)**
+
+   We can find constants:
+   * Let c₁ = 1.  For sufficiently large n, 2n² + 3n + 1 > n².
+   * Let c₂ = 3.  For sufficiently large n, 2n² + 3n + 1 < 3n².
+
+* **f(n) = 5n + log₂(n) is Θ(n)**
+
+   The logarithmic term is insignificant compared to the linear term as n grows large.
+
+* **f(n) = n³ is not Θ(n²)**
+
+   While f(n) is O(n³),  it's not bounded below by a constant multiple of n².
+
+
+**Distinguishing Θ from O and Ω:**
+
+* **O(g(n)):**  f(n) grows *no faster* than g(n).  It's an upper bound.
+* **Ω(g(n)):** f(n) grows *no slower* than g(n). It's a lower bound.
+* **Θ(g(n)):** f(n) grows *at the same rate* as g(n). It's both an upper and a lower bound.
+
+
+In essence, Θ provides the most precise description of a function's asymptotic growth rate, providing a clear understanding of its computational efficiency relative to other functions.  It's crucial for comparing and analyzing the performance of algorithms.
+
