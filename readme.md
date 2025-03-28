@@ -3517,3 +3517,84 @@ This function iterates through the array once in the worst case.  Therefore, its
 
 Big O notation is a crucial tool for comparing the efficiency of different algorithms and making informed choices when designing software. Understanding it is essential for any serious computer scientist or programmer.
 
+#  A Simple Loop 
+The term "a simple loop" is quite broad, as it can refer to loops in various programming contexts.  To give you useful examples, I'll show simple loops in a few popular languages:
+
+**1. Python:**
+
+This example uses a `for` loop to iterate through a range of numbers:
+
+```python
+for i in range(5):  # Loops 5 times (0, 1, 2, 3, 4)
+    print(i)
+```
+
+This example uses a `while` loop to count up to 5:
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+
+**2. JavaScript:**
+
+This example uses a `for` loop to iterate through an array:
+
+```javascript
+const myArray = ["apple", "banana", "cherry"];
+for (let i = 0; i < myArray.length; i++) {
+  console.log(myArray[i]);
+}
+```
+
+This example uses a `while` loop to count down from 5:
+
+```javascript
+let count = 5;
+while (count > 0) {
+  console.log(count);
+  count--;
+}
+```
+
+**3. C++:**
+
+This example uses a `for` loop to print numbers 1 to 10:
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 1; i <= 10; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+This example uses a `while` loop to print numbers 1 to 10:
+
+```c++
+#include <iostream>
+
+int main() {
+  int i = 1;
+  while (i <= 10) {
+    std::cout << i << std::endl;
+    i++;
+  }
+  return 0;
+}
+```
+
+
+These are just basic examples.  Loops can be much more complex, incorporating nested loops, conditional statements, and break/continue statements to control their flow.  To get a more specific and helpful answer, please tell me:
+
+* **Which programming language are you interested in?**
+* **What is the specific task you want the loop to accomplish?**
+
+With more information, I can provide a more tailored and relevant example.
+
