@@ -3672,3 +3672,29 @@ Output:
 
 Nested loops are fundamental in programming and are used in a wide variety of algorithms, from matrix operations to searching and sorting.  Understanding how they work is essential for any programmer.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They mean the time it takes to solve a problem grows logarithmically with the input size (n).  This is incredibly fast because the growth rate is extremely slow as n increases.  Here are some common types and examples:
+
+**1. Binary Search:** This is the quintessential O(log n) algorithm.  It works on sorted data.  Each step, you eliminate half the remaining search space.
+
+* **How it works:** You compare the target value to the middle element. If it's equal, you're done. If it's less, you search the left half; if it's greater, you search the right half.  You repeat this until you find the target or the search space is empty.
+* **Example:** Finding a word in a dictionary.  You don't check every word; you efficiently narrow down the search.
+
+**2. Algorithms using Binary Trees/Heaps:** Many operations on balanced binary search trees and heaps have logarithmic time complexity.
+
+* **Search:** Finding a specific node in a balanced binary search tree takes O(log n) time.
+* **Insertion:** Adding a new node to a balanced binary search tree or heap usually takes O(log n) time.
+* **Deletion:** Removing a node from a balanced binary search tree or heap generally takes O(log n) time.
+* **Heapify:** Building a heap from an unsorted array takes O(n) time, but operations like extracting the minimum (or maximum) element take O(log n).
+
+**3. Exponentiation by Squaring:**  This algorithm calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time.  It cleverly uses repeated squaring to avoid iterating through all b multiplications.
+
+* **How it works:** It's based on the observation that a<sup>b</sup> = (a<sup>b/2</sup>)<sup>2</sup> if b is even, and a<sup>b</sup> = a * a<sup>(b-1)</sup> if b is odd.  This recursive approach significantly reduces the number of multiplications.
+
+**4. Efficient Searching in Trie Data Structures:** Tries (prefix trees) are used for efficient string searching. Searching for a string in a balanced trie takes O(m log n) time, where 'm' is the length of the search string and 'n' is the number of strings in the trie.  If 'm' is considered constant or relatively small compared to 'n', this can be considered effectively O(log n).
+
+**5. Some Graph Algorithms (with specific conditions):**  Certain graph algorithms can achieve O(log n) performance under specific constraints, often involving highly structured graphs or specialized data structures.  These aren't as common as the above examples.
+
+
+**Important Note:**  The O(log n) complexity only applies when the algorithm is efficient in its use of data.  For example, a poorly implemented binary search (e.g., one that doesn't halve the search space correctly) would not be O(log n).  The base of the logarithm (e.g., base 2 for binary search) is often omitted in Big O notation because it only affects the constant factor, which is insignificant compared to the overall growth rate.
+
