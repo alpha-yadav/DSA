@@ -3894,3 +3894,57 @@ The best version depends on your priorities:
 
 Remember to choose the version that best suits your understanding and coding style.  For learning purposes, Version 1 is a great starting point.  As you become more comfortable with Swift, you can explore the more concise options.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long the algorithm takes to run) and space (how much memory the algorithm requires).  We analyze complexity to understand how an algorithm's performance scales as the input size grows.  This allows us to compare different algorithms and choose the most efficient one for a given task.
+
+Here's a breakdown of key aspects of algorithm complexity:
+
+**1. Time Complexity:**  This describes how the runtime of an algorithm increases with the size of the input.  We often use Big O notation (O) to express this.  Big O focuses on the dominant terms and ignores constant factors, giving us a high-level understanding of growth.
+
+* **Common Time Complexities (from best to worst):**
+
+    * **O(1) - Constant Time:** The runtime remains the same regardless of input size.  Example: Accessing an element in an array using its index.
+    * **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+    * **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+    * **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort.
+    * **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Nested loops iterating through an array.
+    * **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+    * **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Traveling salesman problem (brute-force approach).
+
+
+* **Analyzing Time Complexity:**  Techniques include:
+
+    * **Best-case:** The minimum time an algorithm takes to complete (rarely used in practice).
+    * **Average-case:** The average time an algorithm takes to complete (often difficult to calculate).
+    * **Worst-case:** The maximum time an algorithm takes to complete (most commonly used).
+
+
+**2. Space Complexity:** This describes how the memory usage of an algorithm increases with the size of the input.  We also use Big O notation (O) to express this.
+
+* **Common Space Complexities:**  Similar to time complexity, we can have O(1), O(log n), O(n), O(n²), and so on.
+
+* **Analyzing Space Complexity:**  Consider factors like:
+
+    * **Auxiliary space:** The extra space used by the algorithm beyond the input.
+    * **Input space:** The space used to store the input itself.  Often not included in space complexity analysis unless it's significant.
+
+
+**3. Other Factors Affecting Performance:**
+
+* **Constants:** Big O notation ignores constant factors, but in practice, they can still matter.
+* **Hardware:** The speed of the processor, memory, and other hardware components impact runtime.
+* **Implementation:**  Different programming languages and implementations of the same algorithm can have varying performance.
+
+
+**Example:**
+
+Consider searching for an element in an array.
+
+* **Unsorted array:**  A linear search has O(n) time complexity (worst-case).
+* **Sorted array:** A binary search has O(log n) time complexity (worst-case).
+
+The binary search is significantly faster for large arrays because its logarithmic growth is much slower than linear growth.
+
+
+**In summary:** Understanding algorithm complexity is crucial for writing efficient and scalable software. By analyzing time and space complexity, we can choose the best algorithm for a given task and predict its performance as the input size grows.  Big O notation provides a convenient and standardized way to express this complexity.
+
