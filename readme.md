@@ -3815,3 +3815,82 @@ Here are a few algorithmic problems with varying difficulty, categorized for cla
 
 These are just a few examples, and the difficulty is subjective.  Remember to consider time and space complexity when designing your solution.  Try to work through these, and search online for hints or solutions if you get stuck!  There are many resources available to help you learn more about algorithm design and problem-solving.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`, checking for divisibility by 15 (FizzBuzz), 3 (Fizz), and 5 (Buzz).  If none of these conditions are met, it prints the number itself.
+
+**Version 2: Slightly More Concise**
+
+We can make the code slightly more concise by using the ternary conditional operator (`?:`):
+
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        let fizz = i % 3 == 0
+        let buzz = i % 5 == 0
+        print(fizz ? (buzz ? "FizzBuzz" : "Fizz") : buzz ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzz(n: 15)
+```
+
+This version uses boolean variables `fizz` and `buzz` to simplify the conditional logic.  The nested ternary operator efficiently handles all cases.  While shorter, this might be less readable for beginners.
+
+**Version 3: Using String Interpolation for Clarity**
+
+This version prioritizes readability by building the output string incrementally:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzz(n: 15)
+```
+
+This approach adds "Fizz" or "Buzz" to the `output` string only if the number is divisible by 3 or 5 respectively.  If `output` remains empty, it prints the number itself.
+
+**Choosing the Best Version:**
+
+The best version depends on your priorities:
+
+* **Version 1:** Easiest to understand for beginners.
+* **Version 2:** Most concise, but potentially less readable.
+* **Version 3:**  Good balance of readability and conciseness.
+
+Remember to choose the version that best suits your understanding and coding style.  For learning purposes, Version 1 is a great starting point.  As you become more comfortable with Swift, you can explore the more concise options.
+
