@@ -5307,3 +5307,62 @@ O(log n) algorithms are characterized by their ability to halve (or reduce by a 
 
 It's crucial to remember that O(log n) time complexity applies *only* under specific conditions.  For instance, binary search only works on sorted data.  The efficiency of these algorithms relies on repeatedly reducing the problem size by a constant factor.  If this reduction isn't possible, the complexity will likely be higher (e.g., O(n), O(n log n), O(n²)).
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  Instead of checking each element sequentially, it repeatedly divides the search interval in half.  If the search key is less than the item in the middle of the interval, the search continues in the lower half. Otherwise, the search continues in the upper half. This process is repeated until the element is found or the interval is empty.
+
+**Why it's O(log n):**
+
+With each comparison, you eliminate roughly half of the remaining search space.  Therefore, the number of comparisons needed to find the element (or determine it's not present) is proportional to the logarithm (base 2) of the array's size (n).
+
+Let's illustrate with an example:
+
+Suppose you have a sorted array of 16 elements (n=16).
+
+1. **First comparison:** You check the middle element (index 7).  You've eliminated either the top or bottom half (8 elements).
+2. **Second comparison:** You check the middle element of the remaining half (4 elements). You've eliminated another half (4 elements).
+3. **Third comparison:**  You check the middle of the remaining 2 elements. You eliminate half again (1 element).
+4. **Fourth comparison:**  You either find the element or determine it's not present.
+
+
+Notice how the number of elements you need to consider is halved with each comparison: 16 -> 8 -> 4 -> 2 -> 1.  This is logarithmic behavior.  The number of comparisons is approximately log₂(16) = 4.
+
+**Code Example (Python):**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the right half
+        else:
+            high = mid - 1  # Search in the left half
+    return -1  # Target not found
+
+
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+
+```
+
+Other examples of O(log n) algorithms include:
+
+* **Tree Traversal (Balanced Trees):**  Searching, insertion, and deletion in a balanced binary search tree (like AVL trees or red-black trees) have logarithmic time complexity.
+* **Efficient exponentiation:** Calculating a^b using repeated squaring.
+
+
+The key characteristic of O(log n) algorithms is their ability to reduce the problem size significantly with each step, leading to efficient solutions for large datasets.
+
