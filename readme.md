@@ -2439,3 +2439,12 @@ Remember to handle edge cases:
 
 Choose the method best suited to your tree structure and constraints.  The recursive approach is often the most concise and readable for binary trees, while the iterative approach avoids potential stack overflow issues.  The parent pointer method is efficient if parent pointers are readily available.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **A set of points (x, y):**  For example, (1, 2), (3, 4), (5, 6)
+* **An equation:** For example, y = 2x + 1,  y = x²,  y = sin(x)
+* **A description of the graph:** For example, "a bar chart showing sales for each month"
+
+Once you give me this information, I can help you create a graph.
+
