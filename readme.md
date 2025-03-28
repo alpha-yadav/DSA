@@ -4483,3 +4483,12 @@ while current:
 
 The choice of representation depends heavily on the specific use case.  For example, if you need fast access to children by index and the maximum number of children is known, the array representation might be best.  If you need flexibility and frequent adding/removing of children, the list of children or child-sibling representation might be more suitable.  For very large trees where you need efficient lookups by node ID, a dictionary-based approach could be advantageous.
 
+#  Introduction 
+Please provide me with the topic or subject you would like an introduction for.  I need more information to write an introduction.  For example, tell me:
+
+* **What is the subject of the paper, essay, presentation, etc.?** (e.g., the impact of social media on teenagers, the history of the Roman Empire, the benefits of regular exercise)
+* **What is the main point or argument you are trying to make?** (e.g., Social media has a negative impact on teenage mental health, the Roman Empire fell due to internal strife and economic instability, regular exercise improves cardiovascular health)
+* **Who is your intended audience?** (e.g., academics, general public, children)
+
+Once I have this information, I can write a compelling introduction for you.
+
