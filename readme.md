@@ -6937,3 +6937,6 @@ For general trees (not necessarily binary), you might need a different approach.
 
 Remember to handle edge cases like empty trees, nodes not being present in the tree, and the case where one node is the ancestor of the other.  Always thoroughly test your implementation.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about what you want to plot (e.g., points, a function, etc.) before I can create a graph.
+
