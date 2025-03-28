@@ -3362,3 +3362,50 @@ Therefore, *f(n)* grows at the same rate as *n²*. The lower-order terms (5n and
 
 Big-Theta notation is crucial for analyzing the efficiency of algorithms. It allows us to precisely characterize the time or space complexity of an algorithm, focusing on the dominant factors that determine its scalability.  By using Θ-notation, we can compare the relative efficiency of different algorithms without getting bogged down in minor implementation details.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) are used to classify the growth rates of functions, primarily in the context of algorithm analysis.  They describe how the runtime or space requirements of an algorithm scale as the input size grows very large.  Here's a comparison:
+
+**1. Big O Notation (O): Upper Bound**
+
+* **Meaning:**  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  In simpler terms, *g(n)* is an upper bound on the growth rate of *f(n)*.  We're only concerned with the dominant term as *n* approaches infinity; constant factors and lower-order terms are ignored.
+* **Example:**  If `f(n) = 2n² + 3n + 1`, then `f(n) = O(n²)`.  The quadratic term dominates as *n* gets large.
+* **Focus:** Worst-case scenario.  It tells us that the algorithm will *not* perform worse than *g(n)*.
+
+**2. Big Omega Notation (Ω): Lower Bound**
+
+* **Meaning:** `f(n) = Ω(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.  *g(n)* is a lower bound on the growth rate of *f(n)*.
+* **Example:** If `f(n) = 2n² + 3n + 1`, then `f(n) = Ω(n²)`.
+* **Focus:** Best-case scenario (sometimes). It tells us that the algorithm will *not* perform better than *g(n)*.  It can also be used to describe a lower bound on the complexity of a *problem*, regardless of a specific algorithm.
+
+**3. Big Theta Notation (Θ): Tight Bound**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  In other words, *g(n)* is both an upper and lower bound on the growth rate of *f(n)*.  This provides the most precise description of the asymptotic behavior.
+* **Example:** If `f(n) = 2n² + 3n + 1`, then `f(n) = Θ(n²)`.
+* **Focus:** Provides a precise characterization of the growth rate.  It indicates that the algorithm's performance is directly proportional to *g(n)*.
+
+**4. Little o Notation (o): Strict Upper Bound**
+
+* **Meaning:** `f(n) = o(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  This is a *strict* upper bound; *f(n)* grows significantly slower than *g(n)*.
+* **Example:** `n = o(n²)`, `log n = o(n)`.
+* **Focus:**  Shows a significant difference in growth rates.
+
+**5. Little omega Notation (ω): Strict Lower Bound**
+
+* **Meaning:** `f(n) = ω(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`. This is a *strict* lower bound; *f(n)* grows significantly faster than *g(n)*.
+* **Example:** `n² = ω(n)`, `2ⁿ = ω(n²)`.
+* **Focus:** Shows a significant difference in growth rates.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Relationship to g(n) |
+|----------|----------------------------------------------|-----------------------|
+| O(g(n))  | Upper bound                                   | f(n) ≤ c * g(n)      |
+| Ω(g(n))  | Lower bound                                   | c * g(n) ≤ f(n)      |
+| Θ(g(n))  | Tight bound (both upper and lower)           | c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) |
+| o(g(n))  | Strict upper bound                           | f(n) < c * g(n)       |
+| ω(g(n))  | Strict lower bound                           | c * g(n) < f(n)       |
+
+
+It's crucial to remember that these notations describe *asymptotic* behavior – how the functions behave as the input size approaches infinity.  They don't tell us anything about the actual runtime for small input sizes.  For small inputs, a less efficient algorithm (with a better asymptotic notation) might actually be faster.
+
