@@ -4684,3 +4684,57 @@ else:
 
 Remember to be patient and persistent. Learning algorithms takes time and effort. Start with the basics, practice consistently, and gradually work your way up to more complex concepts.  Focus on understanding the underlying principles rather than just memorizing code.
 
+#  A sample algorithmic problem 
+## Algorithmic Problem:  Two Sum
+
+**Problem Statement:**
+
+Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+
+**Example 1:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Example 2:**
+
+```
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+```
+
+**Example 3:**
+
+```
+Input: nums = [3,3], target = 6
+Output: [0,1]
+```
+
+
+**Constraints:**
+
+* `2 <= nums.length <= 104`
+* `-109 <= nums[i] <= 109`
+* `-109 <= target <= 109`
+* **Only one valid answer exists.**
+
+
+**Solution Approaches (consider efficiency):**
+
+This problem can be solved using several approaches, with varying time complexities:
+
+* **Brute Force:** Iterate through all possible pairs of numbers in the array and check if their sum equals the target.  This has a time complexity of O(n²).
+
+* **Hash Table (or Dictionary):**  Use a hash table to store each number and its index.  For each number, check if the complement (target - number) exists in the hash table. This approach has a time complexity of O(n) and is generally preferred for its efficiency.
+
+
+This is a classic algorithmic problem that highlights the importance of choosing efficient data structures and algorithms to solve problems effectively.  Try to implement a solution using the Hash Table approach for optimal performance.
+
