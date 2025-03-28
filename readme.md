@@ -3598,3 +3598,77 @@ These are just basic examples.  Loops can be much more complex, incorporating ne
 
 With more information, I can provide a more tailored and relevant example.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This allows you to perform operations on all combinations of elements from two or more sets of data.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+outer_loop:
+  for i in range(outer_limit):  # Outer loop iterates 'outer_limit' times
+    inner_loop:
+      for j in range(inner_limit):  # Inner loop iterates 'inner_limit' times for each iteration of the outer loop
+        # Code to be executed for each combination of i and j
+```
+
+**Example (Python):**
+
+This example prints all possible pairs from two lists:
+
+```python
+list1 = ['a', 'b', 'c']
+list2 = [1, 2, 3]
+
+for item1 in list1:  # Outer loop
+  for item2 in list2:  # Inner loop
+    print(f"({item1}, {item2})")
+```
+
+Output:
+
+```
+(a, 1)
+(a, 2)
+(a, 3)
+(b, 1)
+(b, 2)
+(b, 3)
+(c, 1)
+(c, 2)
+(c, 3)
+```
+
+**Another Example (Python):  Multiplication Table**
+
+This example generates a multiplication table:
+
+```python
+size = 5  # Size of the multiplication table
+
+for i in range(1, size + 1):  # Outer loop (rows)
+  for j in range(1, size + 1):  # Inner loop (columns)
+    print(i * j, end="\t")  # \t adds a tab for spacing
+  print()  # Newline after each row
+```
+
+Output:
+
+```
+1	2	3	4	5	
+2	4	6	8	10	
+3	6	9	12	15	
+4	8	12	16	20	
+5	10	15	20	25	
+```
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops often lead to a higher time complexity (e.g., O(n^2) for two nested loops iterating over `n` elements each).  This means the execution time grows quadratically with the input size.  For very large datasets, nested loops can be slow. Consider more efficient algorithms if performance becomes an issue.
+* **Readability:**  Proper indentation is crucial for readability when using nested loops.  Use clear variable names and comments to explain the logic.
+
+
+Nested loops are fundamental in programming and are used in a wide variety of algorithms, from matrix operations to searching and sorting.  Understanding how they work is essential for any programmer.
+
