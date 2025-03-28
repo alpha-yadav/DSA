@@ -5475,3 +5475,12 @@ The best representation depends on your needs:
 
 Remember to consider factors like memory usage, the frequency of different operations (inserting, deleting, searching, traversing), and the overall complexity of your application when making your choice.
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need more information to write a useful introduction.  For example, tell me:
+
+* **What is the subject of the paper, essay, presentation, etc.?** (e.g., the impact of social media on teenagers, the history of the Roman Empire, the benefits of exercise)
+* **What is the main point or argument you're trying to make?** (e.g., social media has a negative effect on teenagers' mental health, the Roman Empire's fall was due to a combination of factors, regular exercise improves cardiovascular health)
+* **Who is your target audience?** (e.g., academic peers, general public, potential investors)
+
+Once I have this information, I can write a compelling and appropriate introduction.
+
