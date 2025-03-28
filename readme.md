@@ -4831,3 +4831,57 @@ This version checks if `n` is positive before proceeding, returning `nil` if it'
 
 Choose the version that best suits your needs.  The basic version is great for understanding the core logic, while the more advanced versions demonstrate better coding practices for larger projects. Remember to compile and run this code in a Swift environment like Xcode's playground.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most often considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm requires as a function of the input size.
+
+We usually express complexity using **Big O notation**, which describes the upper bound of the growth rate of the algorithm's resource usage as the input size grows infinitely large.  It ignores constant factors and lower-order terms, focusing on the dominant factor that determines growth.
+
+Here's a breakdown of common complexity classes:
+
+**Time Complexity Classes (Big O Notation):**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Examples include accessing an element in an array by its index or performing a single arithmetic operation.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is often seen in algorithms that divide the problem size in half with each step, such as binary search.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Examples include searching for an element in an unsorted array or iterating through a list once.
+
+* **O(n log n) - Linearithmic Time:** The execution time is a product of linear and logarithmic factors.  Common in efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  This is typical of nested loops iterating over the input data, such as a simple bubble sort.
+
+* **O(n³) - Cubic Time:** The execution time increases cubically with the input size.  Often found in algorithms with three nested loops.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  This is characteristic of brute-force approaches to problems like the traveling salesman problem.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size. This is extremely slow and usually indicates an inefficient algorithm.
+
+
+**Space Complexity Classes (Big O Notation):**  Similar notation applies to space complexity.
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The memory used increases linearly with the input size.
+
+* **O(log n) - Logarithmic Space:** The memory used increases logarithmically with the input size.
+
+* **O(n²) - Quadratic Space:**  The memory used increases quadratically with the input size.
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity of an algorithm involves identifying the dominant operations and expressing their execution count as a function of the input size.  This often requires considering best-case, average-case, and worst-case scenarios.
+
+**Best-case:** The most favorable input that results in the fastest execution time.
+**Average-case:** The expected execution time for a random input.
+**Worst-case:** The least favorable input that results in the slowest execution time.
+
+Big O notation typically focuses on the worst-case scenario, as it provides an upper bound on the algorithm's performance.
+
+
+**In Summary:**
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms for various tasks.  By analyzing the time and space complexity, developers can predict how an algorithm will scale with increasing input size and make informed decisions about which algorithm is best suited for a particular application.
+
