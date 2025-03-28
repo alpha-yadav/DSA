@@ -3144,3 +3144,50 @@ It's more important to understand the underlying principles of an algorithm than
 
 Remember to be patient and persistent. Learning algorithms takes time and effort. Start with the basics, practice consistently, and gradually work your way up to more advanced topics.  Break down complex problems into smaller, manageable subproblems.  Good luck!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, categorized by difficulty:
+
+**Easy:**
+
+* **Problem:**  Reverse a string.
+* **Input:** A string (e.g., "hello").
+* **Output:** The reversed string (e.g., "olleh").
+* **Solution Approach:** Iterate through the string from the end to the beginning and build a new reversed string.  Alternatively, use built-in string reversal functions (if allowed).
+
+
+* **Problem:** Find the maximum value in an array of integers.
+* **Input:** An array of integers (e.g., [1, 5, 2, 8, 3]).
+* **Output:** The maximum integer in the array (e.g., 8).
+* **Solution Approach:** Iterate through the array, keeping track of the largest number encountered so far.
+
+
+**Medium:**
+
+* **Problem:** Check if a given string is a palindrome (reads the same forwards and backward).  Ignore case and non-alphanumeric characters.
+* **Input:** A string (e.g., "A man, a plan, a canal: Panama").
+* **Output:** True or False (True in this case).
+* **Solution Approach:**  Clean the string (remove non-alphanumeric characters, convert to lowercase), then compare the cleaned string to its reverse.
+
+
+* **Problem:** Implement a binary search algorithm on a sorted array.
+* **Input:** A sorted array of integers and a target integer.
+* **Output:** The index of the target integer in the array, or -1 if not found.
+* **Solution Approach:**  Recursively or iteratively divide the search interval in half until the target is found or the interval is empty.
+
+
+**Hard:**
+
+* **Problem:** Find the longest palindromic substring within a given string.
+* **Input:** A string (e.g., "babad").
+* **Output:** The longest palindromic substring (e.g., "bab" or "aba").
+* **Solution Approach:**  Dynamic programming or a clever expansion around the center of potential palindromes.
+
+
+* **Problem:** Implement Dijkstra's algorithm to find the shortest path from a source node to all other nodes in a graph.
+* **Input:** A graph represented as an adjacency matrix or list, and a source node.
+* **Output:** The shortest distance from the source node to all other nodes.
+* **Solution Approach:**  Use a priority queue to efficiently explore nodes in increasing order of distance from the source.
+
+
+These are just a few examples.  The specific details of the problem (constraints, input format, etc.) can significantly impact the difficulty and the optimal solution approach.  When working on algorithmic problems, consider the time and space complexity of your solution.  Often, there are multiple ways to solve a problem, and choosing the most efficient one is key.
+
