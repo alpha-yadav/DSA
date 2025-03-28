@@ -571,3 +571,86 @@ Let's say you have an algorithm that searches for a specific element in an unsor
 
 Despite these limitations, Big O notation is an invaluable tool for analyzing and comparing the efficiency of algorithms, and is a fundamental concept in computer science.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a certain condition is met.  The most common types are `for` and `while` loops.  Here are examples in a few common programming languages:
+
+**Python:**
+
+```python
+# While loop: repeats as long as x is less than 5
+x = 0
+while x < 5:
+  print(x)
+  x += 1
+
+# For loop: iterates through a sequence (list in this case)
+my_list = [10, 20, 30, 40, 50]
+for item in my_list:
+  print(item)
+
+# For loop with range: iterates a specific number of times
+for i in range(5):  # range(5) generates numbers 0, 1, 2, 3, 4
+  print(i)
+```
+
+**JavaScript:**
+
+```javascript
+// While loop: repeats as long as x is less than 5
+let x = 0;
+while (x < 5) {
+  console.log(x);
+  x++;
+}
+
+// For loop: iterates through an array
+let myArray = [10, 20, 30, 40, 50];
+for (let i = 0; i < myArray.length; i++) {
+  console.log(myArray[i]);
+}
+
+// For...of loop: iterates through the values of an iterable
+for (const item of myArray) {
+  console.log(item);
+}
+
+// For loop with a counter
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  // While loop: repeats as long as x is less than 5
+  int x = 0;
+  while (x < 5) {
+    std::cout << x << std::endl;
+    x++;
+  }
+
+  // For loop: iterates through an array (requires more setup)
+  int myArray[] = {10, 20, 30, 40, 50};
+  for (int i = 0; i < sizeof(myArray) / sizeof(myArray[0]); i++) {
+    std::cout << myArray[i] << std::endl;
+  }
+
+  //For loop with range-based for loop (C++11 and later)
+  for (int item : myArray){
+    std::cout << item << std::endl;
+  }
+
+  //For loop with counter
+  for(int i = 0; i < 5; i++){
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+These examples show basic `while` and `for` loops.  More complex loops might involve nested loops (loops inside other loops), `break` statements (to exit a loop prematurely), or `continue` statements (to skip to the next iteration).  The specific syntax varies slightly between languages, but the underlying concept remains the same.
+
