@@ -7269,3 +7269,97 @@ Both algorithms can detect cycles.  In Kahn's algorithm, if the final sorted lis
 
 Kahn's algorithm is generally easier to understand and implement.  The DFS-based algorithm might be slightly more efficient in some cases, but its implementation is a bit more complex.  The choice often depends on personal preference and the specific application context.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) involves tracking the state of each node during the traversal. We use three states:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (in the recursion stack).
+* **Visited:** The node has been fully explored.
+
+A cycle exists if, during the traversal, we encounter a node that's already in the `Visiting` state. This indicates a back edge – an edge pointing to an ancestor in the DFS tree, forming a cycle.
+
+Here's how it works, illustrated with Python code:
+
+```python
+from collections import defaultdict
+
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.graph = defaultdict(list)  # Adjacency list representation
+
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+
+    def isCyclicUtil(self, v, visited, recStack):
+        visited[v] = True
+        recStack[v] = True
+
+        for neighbor in self.graph[v]:
+            if not visited[neighbor]:
+                if self.isCyclicUtil(neighbor, visited, recStack):
+                    return True
+            elif recStack[neighbor]:
+                return True
+
+        recStack[v] = False
+        return False
+
+
+    def isCyclic(self):
+        visited = [False] * self.V
+        recStack = [False] * self.V
+        for node in range(self.V):
+            if not visited[node]:
+                if self.isCyclicUtil(node, visited, recStack):
+                    return True
+        return False
+
+# Example usage:
+g = Graph(4)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(1, 2)
+g.add_edge(2, 0)
+g.add_edge(2, 3)
+g.add_edge(3, 3)
+
+
+if g.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+
+
+g2 = Graph(3)
+g2.add_edge(0,1)
+g2.add_edge(1,2)
+
+if g2.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+
+```
+
+**Explanation:**
+
+1. **`__init__(self, vertices)`:** Initializes the graph with the given number of vertices.
+2. **`add_edge(self, u, v)`:** Adds a directed edge from vertex `u` to vertex `v`.
+3. **`isCyclicUtil(self, v, visited, recStack)`:** This is a recursive helper function.
+   - `visited[v] = True`: Marks the current vertex `v` as visited.
+   - `recStack[v] = True`: Marks the current vertex `v` as being in the recursion stack (currently being explored).
+   - The loop iterates through neighbors:
+     - If a neighbor is not visited, recursively call `isCyclicUtil` on it. If the recursive call returns `True` (cycle detected), return `True`.
+     - If a neighbor is already in the `recStack`, a back edge is found (cycle detected), return `True`.
+   - `recStack[v] = False`:  After exploring all neighbors, mark `v` as no longer in the recursion stack.
+4. **`isCyclic(self)`:** This function initiates the cycle detection. It iterates through all vertices. If a vertex is not visited, it calls `isCyclicUtil` to start DFS from that vertex.  If any call to `isCyclicUtil` returns `True`, a cycle is present.
+
+**Time and Space Complexity:**
+
+* **Time Complexity:** O(V + E), where V is the number of vertices and E is the number of edges. This is because we visit each vertex and edge once.
+* **Space Complexity:** O(V) to store the `visited` and `recStack` arrays.  The recursion stack also takes O(V) in the worst case (a very deep DFS tree).
+
+
+This improved answer provides a complete, working Python implementation with clear explanations and example usage.  Remember that this detects cycles in *directed* graphs;  cycle detection in undirected graphs is simpler.
+
