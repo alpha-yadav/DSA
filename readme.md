@@ -7363,3 +7363,31 @@ else:
 
 This improved answer provides a complete, working Python implementation with clear explanations and example usage.  Remember that this detects cycles in *directed* graphs;  cycle detection in undirected graphs is simpler.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focused on efficient graph algorithms.  The most famous of these is probably his algorithm for finding single-source shortest paths (SSSP) in undirected graphs with non-negative weights.  However, he's also made significant contributions to other areas, including:
+
+**1. Single-Source Shortest Paths (SSSP) in Undirected Graphs with Non-Negative Weights:**
+
+* **Key Idea:**  Thorup's algorithm achieves nearly linear time complexity, specifically O(m α(m,n)), where 'm' is the number of edges, 'n' is the number of nodes, and α(m,n) is the inverse Ackermann function, which grows incredibly slowly and can be considered practically constant for all realistic input sizes.  This is a significant improvement over Dijkstra's algorithm (O(m log n) with Fibonacci heaps) for sparse graphs.
+
+* **How it Works (High-Level):**  The algorithm cleverly combines several techniques, including:
+    * **Contraction Hierarchies:**  It preprocesses the graph to create a hierarchy of smaller graphs.  Queries then navigate this hierarchy, finding shortcuts to significantly reduce the search space.
+    * **Randomized Techniques:**  Randomization plays a role in the construction of the hierarchy, making the algorithm probabilistic.
+    * **Advanced Data Structures:**  Sophisticated data structures are employed to efficiently manage the search process within the hierarchical representation.
+
+* **Significance:** It's a groundbreaking result demonstrating that SSSP can be solved in almost linear time.  However, the hidden constant factor in the algorithm's time complexity can be large, potentially making it less practical than Dijkstra's for very small graphs.
+
+**2. Other Contributions:**
+
+Thorup has also developed algorithms and made significant contributions to:
+
+* **Minimum Spanning Tree (MST) algorithms:** Achieving near-linear time complexity.
+* **Dynamic graph algorithms:**  Efficiently handling updates (insertions and deletions) in graphs.
+* **Approximate algorithms:**  Developing algorithms that provide solutions within a guaranteed approximation factor but with improved efficiency.
+* **Data structures for graph problems:** Designing efficient data structures to support graph operations.
+
+
+**In Summary:**
+
+Thorup's algorithms are known for their sophisticated techniques and their pursuit of near-linear time complexity for fundamental graph problems. While some algorithms might have large hidden constant factors, making them less practical than simpler algorithms for small instances,  they represent significant theoretical breakthroughs and provide valuable insights into the computational limits of graph problems.  They are often discussed in advanced algorithms courses and research papers focusing on graph theory and algorithm design.
+
