@@ -6421,3 +6421,107 @@ print(f"Is the tree a BST? {is_bst_iterative(root2)}")
 
 Both methods achieve the same result.  Choose the recursive version for its simplicity and readability, or the iterative version for potential performance advantages with very deep trees (to avoid potential stack overflow errors).  Remember to adapt the `Node` class definition to your specific implementation if needed.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit each node in a binary tree exactly once.  There are several common traversal methods, each producing a different ordering of the nodes.  Here's a breakdown of the most frequently used ones:
+
+**1. Depth-First Traversals:** These traversals prioritize going deeper into the tree before exploring siblings.
+
+* **Inorder Traversal:**  Visit the left subtree, then the current node, then the right subtree.  For a Binary Search Tree (BST), this produces a sorted sequence of nodes.
+
+   * **Algorithm (Recursive):**
+     ```python
+     def inorder_traversal(node):
+         if node:
+             inorder_traversal(node.left)
+             print(node.data, end=" ")
+             inorder_traversal(node.right)
+     ```
+
+   * **Algorithm (Iterative):** Uses a stack.
+     ```python
+     def inorder_traversal_iterative(node):
+         stack = []
+         current = node
+         while current or stack:
+             while current:
+                 stack.append(current)
+                 current = current.left
+             current = stack.pop()
+             print(current.data, end=" ")
+             current = current.right
+     ```
+
+* **Preorder Traversal:** Visit the current node, then the left subtree, then the right subtree.  Useful for creating a copy of the tree.
+
+   * **Algorithm (Recursive):**
+     ```python
+     def preorder_traversal(node):
+         if node:
+             print(node.data, end=" ")
+             preorder_traversal(node.left)
+             preorder_traversal(node.right)
+     ```
+
+   * **Algorithm (Iterative):** Uses a stack.
+     ```python
+     def preorder_traversal_iterative(node):
+         stack = [node]
+         while stack:
+             current = stack.pop()
+             if current:
+                 print(current.data, end=" ")
+                 stack.append(current.right)
+                 stack.append(current.left)
+     ```
+
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the current node.  Useful for deleting a tree or evaluating expressions represented as a tree.
+
+   * **Algorithm (Recursive):**
+     ```python
+     def postorder_traversal(node):
+         if node:
+             postorder_traversal(node.left)
+             postorder_traversal(node.right)
+             print(node.data, end=" ")
+     ```
+
+   * **Algorithm (Iterative):**  More complex than inorder/preorder iterative; usually involves two stacks or a clever use of a single stack with flags.
+
+
+**2. Breadth-First Traversal (Level Order Traversal):** This traversal visits nodes level by level, from left to right.  It uses a queue.
+
+   * **Algorithm:**
+     ```python
+     from collections import deque
+
+     def level_order_traversal(node):
+         if not node:
+             return
+
+         queue = deque([node])
+         while queue:
+             current = queue.popleft()
+             print(current.data, end=" ")
+             if current.left:
+                 queue.append(current.left)
+             if current.right:
+                 queue.append(current.right)
+     ```
+
+
+**Example Node Class (Python):**  You'll need a node class to represent the tree structure:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+**Choosing the Right Traversal:**  The choice of traversal depends on the specific task.  Inorder traversal is essential for BSTs, preorder for copying, postorder for deletion, and level order for things like visualizing the tree's structure at each level.
+
+
+Remember to handle the case of an empty tree (`node is None`) in your traversal functions to avoid errors.  The iterative approaches are generally more memory-efficient for very large trees than the recursive ones, which can lead to stack overflow errors.
+
