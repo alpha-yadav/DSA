@@ -5273,3 +5273,37 @@ else:
 
 Nested loops are a fundamental programming construct that is very versatile, but it's essential to be aware of their potential performance implications and to write them clearly.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to halve (or reduce by a constant factor) the problem size with each step.  This makes them incredibly efficient for large inputs. Here are some common types and examples:
+
+**1. Binary Search:**
+
+* **Description:**  Efficiently searches a *sorted* array (or list) for a target value.  It repeatedly divides the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.
+* **Example:** Finding a word in a dictionary, searching a sorted database.
+
+**2. Binary Tree Operations (Search, Insertion, Deletion):**
+
+* **Description:**  Self-balancing binary search trees (like AVL trees or red-black trees) maintain a balanced structure, ensuring that the height of the tree remains logarithmic in the number of nodes.  Searching, inserting, or deleting a node involves traversing a path down the tree, which takes O(log n) time in the average and worst cases (for self-balancing trees).  Simple binary trees without balancing can be O(n) in the worst case (a completely skewed tree).
+* **Example:** Implementing efficient sets and maps, symbol tables.
+
+**3. Heap Operations (Insertion, Deletion, Finding Min/Max):**
+
+* **Description:** Heaps (min-heaps or max-heaps) are tree-based data structures that satisfy the heap property (e.g., in a min-heap, the value of each node is less than or equal to the value of its children).  Insertion and deletion of elements, as well as finding the minimum or maximum element, all take O(log n) time because they involve adjusting the heap structure along a path from a leaf to the root (or vice versa).
+* **Example:** Priority queues, heapsort algorithm.
+
+**4. Exponentiation by Squaring:**
+
+* **Description:**  Calculates a<sup>n</sup> efficiently by repeatedly squaring the base and reducing the exponent. For example, a<sup>8</sup> can be calculated as ((a<sup>2</sup>)<sup>2</sup>)<sup>2</sup>.
+* **Example:** Cryptography, efficient calculation of large powers.
+
+**5. Finding the kth smallest/largest element using QuickSelect (average case):**
+
+* **Description:** A variation of quicksort that doesn't sort the entire array but partitions it around a pivot and recursively processes only the partition containing the kth smallest/largest element.  The average-case time complexity is O(n) but in the worst case it's O(n²).  However, using randomized pivots reduces the likelihood of hitting the worst-case scenario.  Other algorithms like Median of Medians can guarantee O(n) worst-case.
+* **Example:** Finding the median of a dataset.
+
+
+**Important Note:**  The O(log n) complexity is usually associated with the *base-2* logarithm (log₂ n). However, the base of the logarithm doesn't affect the overall classification of the algorithm as O(log n) because the change of base is just a constant factor.  For example, log₁₀ n = log₂ n / log₂ 10, and the constant 1/log₂ 10 is ignored in Big O notation.
+
+
+It's crucial to remember that O(log n) time complexity applies *only* under specific conditions.  For instance, binary search only works on sorted data.  The efficiency of these algorithms relies on repeatedly reducing the problem size by a constant factor.  If this reduction isn't possible, the complexity will likely be higher (e.g., O(n), O(n log n), O(n²)).
+
