@@ -7013,3 +7013,58 @@ print(graph[1][3]) #Output: 7 (Weight of edge from vertex 1 to 3)
 
 For sparse graphs, adjacency lists are generally a more efficient way to represent graphs.  They use less memory and are more efficient for operations like finding neighbors.  Other representations include incidence matrices and edge lists.
 
+#  Introduction To Graph Theory 
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph is essentially a collection of points (called **vertices** or **nodes**) and lines connecting some pairs of these points (called **edges** or **arcs**).  These seemingly simple objects have incredibly rich structure and find applications in a vast number of fields.
+
+Here's a breakdown of introductory concepts:
+
+**1. Basic Definitions:**
+
+* **Graph:** A graph G is an ordered pair G = (V, E), where V is a finite set of vertices, and E is a set of edges, where each edge connects two vertices.
+* **Directed Graph (Digraph):**  A graph where edges have a direction.  An edge goes from one vertex (the source) to another (the target).  Often represented with arrows on the edges.
+* **Undirected Graph:** A graph where edges have no direction.  An edge simply connects two vertices without specifying a direction.
+* **Weighted Graph:** A graph where each edge has an associated weight (e.g., distance, cost, capacity).
+* **Simple Graph:** A graph with no loops (edges connecting a vertex to itself) and no multiple edges (more than one edge between the same pair of vertices).
+* **Complete Graph:** A simple graph where every pair of distinct vertices is connected by a unique edge.  Often denoted as K<sub>n</sub> for a complete graph with n vertices.
+* **Subgraph:** A graph whose vertices and edges are subsets of another graph.
+* **Path:** A sequence of vertices where consecutive vertices are connected by an edge.
+* **Cycle:** A path that starts and ends at the same vertex, with no repeated vertices (except the start/end).
+* **Connected Graph:** An undirected graph where there is a path between every pair of vertices.
+* **Connected Component:** A maximal connected subgraph of a disconnected graph.
+* **Tree:** A connected graph with no cycles.
+* **Degree of a vertex:** The number of edges incident to a vertex (in an undirected graph).  In-degree and out-degree are used for directed graphs, representing the number of edges pointing into and out of a vertex, respectively.
+
+
+**2. Representations of Graphs:**
+
+Graphs can be represented in several ways:
+
+* **Adjacency Matrix:** A square matrix where the entry (i,j) is 1 if there's an edge between vertex i and vertex j (and 0 otherwise).  For weighted graphs, the entry represents the weight of the edge.
+* **Adjacency List:**  A list where each entry corresponds to a vertex, and contains a list of its adjacent vertices.  This is often more efficient for sparse graphs (graphs with relatively few edges).
+
+
+**3. Key Problems in Graph Theory:**
+
+Graph theory addresses many fundamental problems, including:
+
+* **Connectivity:** Determining if a graph is connected.
+* **Shortest Path:** Finding the shortest path between two vertices in a weighted graph (e.g., Dijkstra's algorithm, Bellman-Ford algorithm).
+* **Minimum Spanning Tree:** Finding a tree that connects all vertices with minimum total edge weight (e.g., Prim's algorithm, Kruskal's algorithm).
+* **Graph Coloring:** Assigning colors to vertices such that no adjacent vertices have the same color (e.g., finding the chromatic number).
+* **Network Flow:** Finding the maximum flow through a network (a directed graph with capacities on edges).
+* **Matching:** Finding pairs of vertices in a graph that are connected by edges (e.g., maximum matching).
+
+
+**4. Applications of Graph Theory:**
+
+Graph theory has applications in a wide variety of fields, including:
+
+* **Computer Science:** Algorithm design, data structures, network analysis, database systems.
+* **Engineering:** Network design, transportation planning, circuit design.
+* **Social Sciences:** Social network analysis, modeling relationships.
+* **Biology:** Modeling biological networks, phylogenetic trees.
+* **Chemistry:** Molecular structure representation.
+
+
+This is a brief introduction.  Further study will delve into specific algorithms, more advanced concepts, and deeper applications of this fascinating and practical branch of mathematics.
+
