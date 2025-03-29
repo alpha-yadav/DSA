@@ -13354,3 +13354,34 @@ int main() {
 
 Both examples demonstrate the core algorithm.  Remember to handle potential errors, such as nodes not being in the graph, depending on your application's requirements.  The time complexity is O(V + E), where V is the number of vertices and E is the number of edges, which is optimal for graph traversal algorithms.  The space complexity is O(V) due to the `visited` array (and the recursion stack in the worst case).
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focusing on efficient graph algorithms.  The most famous among these is his algorithm for finding minimum spanning trees (MSTs) in linear time,  often cited as **Thorup's linear-time MST algorithm**.  There are other significant algorithms developed by him as well, but the MST algorithm is the one most frequently associated with "Thorup's algorithm".
+
+Let's break down the key aspects of Thorup's linear-time MST algorithm:
+
+**Key Idea:**  The algorithm cleverly utilizes a combination of techniques to achieve linear time complexity, O(m), where 'm' is the number of edges in the graph.  This is a significant improvement over previous algorithms that had complexities like O(m log log n) or O(m α(m,n)), where 'n' is the number of vertices and α is the inverse Ackermann function (which grows extremely slowly).
+
+**Techniques Employed:**
+
+* **Contraction:** The algorithm strategically contracts parts of the graph, simplifying the structure while preserving the MST properties.  This reduces the size of the problem to be solved.
+
+* **Randomization:** Randomization plays a crucial role in the algorithm's efficiency.  Edge selection and contraction steps involve random choices, ensuring good performance in expectation.  This means that while the algorithm isn't guaranteed to be linear in every single run, its average-case complexity is linear.
+
+* **Sophisticated Data Structures:**  Efficient data structures are essential to manage the graph and its contractions effectively.  Thorup's algorithm utilizes custom data structures tailored to optimize the operations required during the contraction process.
+
+* **Analysis based on probabilistic methods:** The proof of the algorithm's linear time complexity relies heavily on probabilistic analysis, bounding the expected running time.
+
+**Limitations:**
+
+* **Randomized:** The algorithm's linear time guarantee is probabilistic, not deterministic. This means that there's a chance (though extremely small in practice) that the algorithm might take longer than linear time on a particular input.
+
+* **Complexity of Implementation:** The algorithm is quite intricate to implement correctly.  The data structures and probabilistic analysis require a deep understanding of algorithms and data structures.
+
+
+**Significance:**
+
+Thorup's linear-time MST algorithm was a major breakthrough in the field of graph algorithms.  It demonstrated that a fundamental graph problem could be solved in truly linear time, improving upon decades of research. Although simpler, deterministic linear time MST algorithms have since been developed, Thorup's algorithm remains a landmark achievement showcasing the power of randomization and advanced techniques in algorithm design.  It also stimulated further research in the area, leading to improvements and related algorithms.
+
+
+In summary, "Thorup's algorithm" most often refers to his linear-time MST algorithm, a groundbreaking achievement that uses randomization and sophisticated techniques to achieve optimal time complexity.  While complex to implement, it holds significant theoretical and practical importance in the field of graph algorithms.
+
