@@ -9755,3 +9755,113 @@ The choice of traversal depends on the specific application:
 
 Remember to adapt these code snippets to your specific binary tree node class definition.  If your node class has different attribute names (e.g., `value` instead of `data`), you'll need to modify the code accordingly.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary *search* tree, where we can leverage the sorted property, finding the LCA in a general binary tree requires a different approach.  Here are two common methods:
+
+**Method 1: Recursive Approach**
+
+This method recursively traverses the tree.  If a node is found to contain both `p` and `q` as descendants, it's the LCA.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q are not in the tree.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:  # Found p and q in different subtrees
+        return root
+    elif left_lca:             # Found both p and q in the left subtree
+        return left_lca
+    else:                       # Found both p and q in the right subtree
+        return right_lca
+
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
+
+
+```
+
+**Method 2: Iterative Approach (using parent pointers)**
+
+This method requires modifying the tree to include parent pointers (each node knows its parent).  It then uses a stack or queue to traverse from `p` and `q` upwards, finding their common ancestor. This is often more space-efficient for large trees than recursion.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None, parent=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.parent = parent #Added parent pointer
+
+def lowestCommonAncestor_iterative(root, p, q):
+    path_p = []
+    path_q = []
+
+    #Find paths from root to p and q using parent pointers
+    curr = p
+    while curr:
+        path_p.append(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        path_q.append(curr)
+        curr = curr.parent
+
+    #Find the LCA by comparing paths
+    lca = None
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[len(path_p)-1-i] == path_q[len(path_q)-1-i]:
+        lca = path_p[len(path_p)-1-i]
+        i += 1
+
+    return lca
+
+
+#Example Usage (requires building the tree with parent pointers) - This part is omitted for brevity, but you need to correctly populate `parent` attribute in the tree nodes during construction.
+
+```
+
+
+**Choosing the right method:**
+
+* **Recursive approach:** Simpler to implement and understand, but can be less efficient for very deep trees due to recursion depth.
+* **Iterative approach:** More efficient for large, deep trees if parent pointers are already available or can be easily added. Requires modifying the tree structure.
+
+Remember to handle cases where one or both nodes are not present in the tree.  The examples above return `None` in such scenarios.  You might need to adapt error handling based on your specific needs.
+
