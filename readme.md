@@ -12486,3 +12486,113 @@ postorder(root)
 
 Remember to adapt these examples and concepts to the specific programming language and data structures you are using.  Understanding the logic behind the traversal algorithms is more important than memorizing code snippets.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes at a given level before moving to the next level.  Here are implementations in Python and Java, along with explanations:
+
+**Python Implementation**
+
+This uses a queue data structure to achieve the level order traversal.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+
+**Java Implementation**
+
+This Java implementation also uses a queue (from `java.util.Queue`).
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int item) {
+        data = item;
+        left = right = null;
+    }
+}
+
+class BinaryTree {
+    Node root;
+
+    void levelOrder() {
+        if (root == null)
+            return;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            System.out.print(node.data + " ");
+
+            if (node.left != null)
+                queue.add(node.left);
+
+            if (node.right != null)
+                queue.add(node.right);
+        }
+    }
+
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+        tree.root.left.right = new Node(5);
+
+        System.out.println("Level order traversal of binary tree is -");
+        tree.levelOrder(); // Output: 1 2 3 4 5
+    }
+}
+```
+
+**Explanation:**
+
+Both implementations follow these steps:
+
+1. **Initialization:** Create a queue and add the root node to it.
+2. **Iteration:** While the queue is not empty:
+   - Dequeue (remove) the first node from the queue.
+   - Print the data of the dequeued node.
+   - Enqueue (add) the left and right children of the dequeued node to the queue, if they exist.
+
+
+This ensures that nodes at the same level are processed before moving to the next level, resulting in a level order traversal.  Remember to handle the case where the root node is `null`.
+
