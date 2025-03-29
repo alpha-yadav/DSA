@@ -13230,3 +13230,127 @@ Topological sorting is used in various applications, including:
 
 Implementing topological sort requires careful handling of graph representations (adjacency list or matrix) and cycle detection.  The choice between Kahn's algorithm and DFS depends on personal preference and the specific characteristics of the graph.  Kahn's algorithm is often considered more efficient for large graphs.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on tracking the state of each node during the traversal.  We use three states:
+
+* **UNVISITED:** The node hasn't been explored yet.
+* **VISITING:** The node is currently being explored (in the recursion stack).
+* **VISITED:** The node has been fully explored.
+
+A cycle exists if we encounter a node that is already in the `VISITING` state during our traversal. This means we've found a back edge – an edge that leads to an ancestor in the DFS tree.
+
+Here's how the algorithm works, along with code examples in Python and C++:
+
+**Python:**
+
+```python
+def has_cycle(graph):
+    """
+    Detects cycles in a directed graph using Depth First Traversal.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+
+    Returns:
+        True if a cycle is detected, False otherwise.
+    """
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: UNVISITED, 1: VISITING, 2: VISITED
+
+    def dfs(node):
+        visited[node] = 1  # Mark as VISITING
+        for neighbor in graph.get(node, []):
+            if visited[neighbor] == 1:  # Cycle detected
+                return True
+            if visited[neighbor] == 0 and dfs(neighbor):
+                return True
+        visited[node] = 2  # Mark as VISITED
+        return False
+
+    for node in graph:
+        if visited[node] == 0:
+            if dfs(node):
+                return True
+    return False
+
+
+# Example usage:
+graph = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: []
+}
+
+graph2 = {
+    0: [1],
+    1: [2],
+    2: [3],
+    3: [0] #Cycle
+}
+
+print(f"Graph 1 has cycle: {has_cycle(graph)}")  # Output: False
+print(f"Graph 2 has cycle: {has_cycle(graph2)}")  # Output: True
+
+```
+
+**C++:**
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+bool hasCycle(map<int, vector<int>>& graph) {
+    int numNodes = graph.size();
+    vector<int> visited(numNodes, 0); // 0: UNVISITED, 1: VISITING, 2: VISITED
+
+    function<bool(int)> dfs = [&](int node) {
+        visited[node] = 1; // Mark as VISITING
+        for (int neighbor : graph[node]) {
+            if (visited[neighbor] == 1) { // Cycle detected
+                return true;
+            }
+            if (visited[neighbor] == 0 && dfs(neighbor)) {
+                return true;
+            }
+        }
+        visited[node] = 2; // Mark as VISITED
+        return false;
+    };
+
+    for (auto const& [node, _] : graph) {
+        if (visited[node] == 0) {
+            if (dfs(node)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+int main() {
+    map<int, vector<int>> graph = {
+        {0, {1, 2}},
+        {1, {2}},
+        {2, {0, 3}},
+        {3, {}}
+    };
+
+    map<int, vector<int>> graph2 = {
+        {0, {1}},
+        {1, {2}},
+        {2, {3}},
+        {3, {0}} //Cycle
+    };
+
+    cout << "Graph 1 has cycle: " << hasCycle(graph) << endl;  // Output: 0 (False)
+    cout << "Graph 2 has cycle: " << hasCycle(graph2) << endl;  // Output: 1 (True)
+    return 0;
+}
+```
+
+Both examples demonstrate the core algorithm.  Remember to handle potential errors, such as nodes not being in the graph, depending on your application's requirements.  The time complexity is O(V + E), where V is the number of vertices and E is the number of edges, which is optimal for graph traversal algorithms.  The space complexity is O(V) due to the `visited` array (and the recursion stack in the worst case).
+
