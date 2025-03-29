@@ -9459,3 +9459,101 @@ print(f"Is the tree a BST (Iterative)? {is_bst_iterative(root2)}")  # Output: Fa
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The recursive approach might use slightly more space in the worst case due to recursive calls on the call stack.  The iterative approach uses a stack, which will generally have a smaller maximum size than the recursive call stack for deep trees. Choose the method that best suits your coding style and memory constraints. Remember to handle edge cases like empty trees appropriately.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit (or "traverse") all the nodes in a binary tree.  There are three main types:
+
+* **Inorder Traversal:**  Visit the left subtree, then the root, then the right subtree.  For a binary *search* tree (BST), this produces a sorted list of the nodes' values.
+
+* **Preorder Traversal:** Visit the root, then the left subtree, then the right subtree.  This traversal is often used to create a copy of a tree or to express the tree's structure in a prefix notation.
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root. This traversal is useful for tasks like deleting a tree or evaluating an expression tree (where operators are in the nodes and operands are in the leaves).
+
+
+**Algorithmic Representations:**
+
+These traversals can be implemented recursively or iteratively.  Here's how they look recursively in Python (assuming a node structure like this):
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3
+print("\nPreorder traversal:")
+preorder_traversal(root)  # Output: 1 2 4 5 3
+print("\nPostorder traversal:")
+postorder_traversal(root) # Output: 4 5 2 3 1
+```
+
+**Iterative Implementations:**
+
+Iterative versions often use stacks (for preorder and inorder) or stacks and a flag (for postorder). They avoid the potential stack overflow issues that can occur with very deep recursive calls.  However, they are generally more complex to write and understand.  Here is an example of an iterative inorder traversal:
+
+```python
+def inorder_traversal_iterative(node):
+    stack = []
+    current = node
+    while True:
+        if current:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.data, end=" ")
+            current = current.right
+        else:
+            break
+```
+
+
+**Level Order Traversal (Breadth-First Search):**
+
+While not one of the "main three," level order traversal is also important.  It visits nodes level by level, from left to right.  This requires a queue data structure.
+
+```python
+from collections import deque
+
+def level_order_traversal(node):
+    if not node:
+        return
+    queue = deque([node])
+    while queue:
+        current = queue.popleft()
+        print(current.data, end=" ")
+        if current.left:
+            queue.append(current.left)
+        if current.right:
+            queue.append(current.right)
+
+```
+
+Choosing the right traversal depends on the specific task you are performing on the binary tree.  Understanding each type and their properties is crucial for effective tree manipulation.
+
