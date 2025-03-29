@@ -10302,3 +10302,130 @@ Topological sorting is used in various applications, including:
 
 Choosing between Kahn's algorithm and DFS depends on the specific application and its requirements. Kahn's algorithm is often easier to understand and implement, while DFS can be slightly more efficient in some cases. Both are effective for detecting cycles.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) involves tracking the state of each node during the traversal.  We use three states:
+
+* **Unvisited:** The node hasn't been encountered yet.
+* **Visiting:** The node is currently being visited (in the recursion stack).
+* **Visited:** The node has been fully explored (recursion has completed for it).
+
+A cycle exists if, during the traversal, we encounter a node that's already in the `Visiting` state. This means we've reached a node that's already on the current path, forming a cycle.
+
+Here's how the algorithm works and code examples in Python:
+
+**Algorithm:**
+
+1. **Initialization:**  Create a `state` array (or dictionary) to store the state of each node. Initialize all nodes to `Unvisited`.
+2. **DFS:** Perform a Depth First Search starting from each unvisited node in the graph.
+3. **Recursive DFS function:**
+   - Set the state of the current node to `Visiting`.
+   - Iterate through the neighbors of the current node.
+     - If a neighbor is `Unvisited`, recursively call DFS on that neighbor.
+     - If a neighbor is `Visiting`, a cycle is detected. Return `True`.
+   - Set the state of the current node to `Visited`.
+   - Return `False` (no cycle detected from this branch).
+4. **Cycle Detection:** If the recursive DFS function ever returns `True`, the graph contains a cycle.
+
+
+**Python Code (using adjacency list):**
+
+```python
+def has_cycle_directed_dfs(graph):
+    """
+    Detects cycles in a directed graph using Depth First Traversal.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes 
+               and values are lists of their neighbors.
+
+    Returns:
+        True if a cycle is detected, False otherwise.
+    """
+    num_nodes = len(graph)
+    state = ['Unvisited'] * num_nodes  # Initialize states
+
+    def dfs(node):
+        state[node] = 'Visiting'
+        for neighbor in graph.get(node, []):
+            if state[neighbor] == 'Unvisited':
+                if dfs(neighbor):
+                    return True
+            elif state[neighbor] == 'Visiting':
+                return True  # Cycle detected
+        state[node] = 'Visited'
+        return False
+
+    for node in graph:
+        if state[node] == 'Unvisited':
+            if dfs(node):
+                return True
+    return False
+
+
+# Example usage:
+graph1 = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: []
+}  # Has a cycle (0 -> 1 -> 2 -> 0)
+
+graph2 = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: []
+}  # No cycle
+
+print(f"Graph 1 has cycle: {has_cycle_directed_dfs(graph1)}")  # Output: True
+print(f"Graph 2 has cycle: {has_cycle_directed_dfs(graph2)}")  # Output: False
+
+```
+
+**Python Code (using adjacency matrix):**
+
+```python
+def has_cycle_directed_dfs_matrix(graph):
+    num_nodes = len(graph)
+    state = ['Unvisited'] * num_nodes
+
+    def dfs(node):
+        state[node] = 'Visiting'
+        for neighbor in range(num_nodes):
+            if graph[node][neighbor] == 1:  #Check for edge
+                if state[neighbor] == 'Unvisited':
+                    if dfs(neighbor):
+                        return True
+                elif state[neighbor] == 'Visiting':
+                    return True
+        state[node] = 'Visited'
+        return False
+
+    for node in range(num_nodes):
+        if state[node] == 'Unvisited':
+            if dfs(node):
+                return True
+    return False
+
+#Example usage (adjacency matrix)
+graph_matrix1 = [
+    [0, 1, 1, 0],
+    [0, 0, 1, 0],
+    [1, 0, 0, 1],
+    [0, 0, 0, 0]
+] #Has Cycle
+
+graph_matrix2 = [
+    [0, 1, 1, 0],
+    [0, 0, 1, 0],
+    [0, 0, 0, 1],
+    [0, 0, 0, 0]
+] #No Cycle
+
+print(f"Graph matrix 1 has cycle: {has_cycle_directed_dfs_matrix(graph_matrix1)}")  # Output: True
+print(f"Graph matrix 2 has cycle: {has_cycle_directed_dfs_matrix(graph_matrix2)}")  # Output: False
+
+```
+
+Remember to adapt the code based on your graph representation (adjacency list or matrix).  The core logic of using the `Visiting` and `Visited` states to detect cycles remains the same.
+
