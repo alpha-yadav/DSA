@@ -9966,3 +9966,15 @@ For extremely large trees, more sophisticated techniques might be necessary for 
 
 Remember to adapt the code to your specific tree implementation and node structure.  The examples provided show the core logic.  Error handling (e.g., checking for null nodes or nodes not in the tree) should be added for robust code.
 
+#  Graph 
+Please provide me with the data or equation I need to graph.  I need information like:
+
+* **For a line:**  The slope and y-intercept (or two points)
+* **For a parabola (quadratic):** The equation in the form ax² + bx + c = y
+* **For other functions:** The equation (e.g., y = sin(x), y = e^x, etc.)
+* **For a scatter plot:** A set of (x, y) data points
+* **For a bar chart or pie chart:** The categorical data and corresponding values
+
+
+Once you give me the data or equation, I can tell you how to graph it or, if you'd like,  I can try to generate a textual representation of the graph (though a visual graph would be much clearer).
+
