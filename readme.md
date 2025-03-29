@@ -12596,3 +12596,110 @@ Both implementations follow these steps:
 
 This ensures that nodes at the same level are processed before moving to the next level, resulting in a level order traversal.  Remember to handle the case where the root node is `null`.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals (preorder, inorder, postorder) are ways to systematically visit every node in a binary tree.  They differ in the order they visit the root, left subtree, and right subtree.
+
+**1. Binary Tree Representation:**
+
+We'll represent a binary tree node using a class (or struct):
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+
+**2. Traversal Algorithms:**
+
+* **Preorder Traversal:**  Root, Left, Right
+
+   ```python
+   def preorder(node):
+       if node:
+           print(node.data, end=" ")  # Visit root
+           preorder(node.left)       # Traverse left subtree
+           preorder(node.right)      # Traverse right subtree
+   ```
+
+* **Inorder Traversal:** Left, Root, Right
+
+   ```python
+   def inorder(node):
+       if node:
+           inorder(node.left)        # Traverse left subtree
+           print(node.data, end=" ")  # Visit root
+           inorder(node.right)       # Traverse right subtree
+   ```
+
+* **Postorder Traversal:** Left, Right, Root
+
+   ```python
+   def postorder(node):
+       if node:
+           postorder(node.left)      # Traverse left subtree
+           postorder(node.right)     # Traverse right subtree
+           print(node.data, end=" ")  # Visit root
+   ```
+
+
+**3. Example Usage:**
+
+Let's create a sample binary tree:
+
+```python
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+```
+
+This tree looks like:
+
+```
+      1
+     / \
+    2   3
+   / \
+  4   5
+```
+
+Now, let's perform the traversals:
+
+```python
+print("Preorder traversal:")
+preorder(root)  # Output: 1 2 4 5 3 
+print("\nInorder traversal:")
+inorder(root)   # Output: 4 2 5 1 3
+print("\nPostorder traversal:")
+postorder(root) # Output: 4 5 2 3 1
+```
+
+
+**4.  Iterative Approaches (using stacks):**
+
+While the recursive approaches are elegant, iterative versions using stacks are often preferred for very large trees to avoid potential stack overflow errors.  Here's an example for preorder traversal (inorder and postorder can be similarly implemented):
+
+```python
+def preorder_iterative(node):
+    if node is None:
+        return
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        print(current.data, end=" ")
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+
+print("\nPreorder traversal (iterative):")
+preorder_iterative(root) # Output: 1 2 4 5 3
+```
+
+
+Remember to adapt the iterative versions to handle empty trees gracefully.  Choose the recursive or iterative approach based on your needs and the potential size of the trees you'll be working with.  Recursive solutions are generally more concise and easier to understand, but iterative solutions are better for avoiding stack overflow issues in extremely deep trees.
+
