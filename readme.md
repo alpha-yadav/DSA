@@ -10227,3 +10227,78 @@ Several data structures can be used to implement adjacency lists:
 
 Choose the implementation that best suits your needs and the characteristics of your graph (sparse vs. dense, directed vs. undirected, weighted vs. unweighted). For most applications, the array of linked lists or dynamic arrays offer a good balance of flexibility and performance.  If you have a large graph and need efficient lookup of specific edges, a dictionary-based approach might be better.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so you can follow all the arrows without ever going backward.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):**  Topological sorting only works on DAGs.  If there's a cycle (a path that leads back to its starting node), a topological sort is impossible.
+* **Linear Ordering:** The output is a sequence of nodes, not a tree or other complex structure.
+* **Precedence Constraints:** The order respects the dependencies between nodes.  If A points to B, A must come before B.
+* **Multiple Solutions:**  DAGs often have multiple valid topological sorts.
+
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue to process nodes.
+
+   * **Initialization:**
+      * Calculate the in-degree of each node (the number of incoming edges).
+      * Add all nodes with an in-degree of 0 to the queue.  These are nodes with no dependencies.
+
+   * **Iteration:**
+      * While the queue is not empty:
+         * Remove a node `u` from the queue.
+         * Add `u` to the sorted list.
+         * For each neighbor `v` of `u`:
+            * Decrement the in-degree of `v`.
+            * If the in-degree of `v` becomes 0, add `v` to the queue.
+
+   * **Cycle Detection:** If the final sorted list doesn't contain all nodes, then the graph contains a cycle.
+
+
+2. **Depth-First Search (DFS) Algorithm:**
+
+   This algorithm uses recursion and a finishing time to order nodes.
+
+   * **Initialization:**  Mark all nodes as unvisited.
+
+   * **DFS Traversal:**  Perform a depth-first search on the graph.  Each time a node's recursion finishes, add it to the *beginning* of a list (this is crucial for the correct order).
+
+   * **Cycle Detection:**  If a DFS call encounters a visited node (other than its parent), a cycle is detected.
+
+   * **Result:** The list of nodes (initially built in reverse order) represents a topological sort.
+
+
+
+**Example (Kahn's Algorithm):**
+
+Consider a DAG with nodes A, B, C, D, and E, and edges: A->C, B->C, C->D, B->E, D->F.
+
+1. **In-degrees:** A=0, B=0, C=2, D=1, E=1, F=1
+2. **Queue:** A, B (in-degree 0)
+3. **Iteration:**
+   * Remove A: Sorted list = [A], in-degree(C) = 1
+   * Remove B: Sorted list = [A, B], in-degree(C) = 0, in-degree(E) = 0. Add C and E to the queue.
+   * Remove C: Sorted list = [A, B, C], in-degree(D) = 0. Add D to the queue.
+   * Remove E: Sorted list = [A, B, C, E], in-degree(F) remains 1. Add F to queue.
+   * Remove D: Sorted list = [A, B, C, E, D], in-degree(F) = 0. Add F to queue.
+   * Remove F: Sorted list = [A, B, C, E, D, F]
+
+
+**Applications:**
+
+Topological sorting is used in various applications, including:
+
+* **Dependency resolution:**  Software builds, makefiles, and package managers rely on it to determine the order of compilation or installation.
+* **Instruction scheduling:** In compilers, it optimizes instruction execution order.
+* **Course scheduling:**  Determining the order of courses to satisfy prerequisites.
+* **Data serialization:**  Ensuring that data is written or processed in a consistent order.
+
+
+Choosing between Kahn's algorithm and DFS depends on the specific application and its requirements. Kahn's algorithm is often easier to understand and implement, while DFS can be slightly more efficient in some cases. Both are effective for detecting cycles.
+
