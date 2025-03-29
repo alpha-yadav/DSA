@@ -11657,3 +11657,116 @@ bst.insert(6)
 
 This is a basic implementation.  A complete BST implementation would include methods for search, deletion, traversal, and potentially balancing.  Remember to consider using self-balancing variants for production-level applications to avoid worst-case scenarios.
 
+#  Binary Search Tree - Insertion (Python) 
+There are several ways to implement insertion into a Binary Search Tree (BST) in Python. Here are a few options, ranging from a simple recursive approach to a more iterative one:
+
+**Method 1: Recursive Insertion**
+
+This is often considered the most elegant and conceptually straightforward approach.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+# Example usage:
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+
+# (You'd typically add a traversal method to print or verify the tree structure)
+
+```
+
+**Method 2: Iterative Insertion**
+
+This method avoids recursion, which can be more efficient for very deep trees and avoids potential stack overflow errors.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+# Example Usage (same as recursive example)
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+```
+
+**Important Considerations:**
+
+* **Duplicate Values:**  These examples don't handle duplicate values.  You might want to modify them to either ignore duplicates or to handle them in a specific way (e.g., increment a count for each duplicate).
+* **Error Handling:**  More robust code would include error handling (e.g., checking for invalid input data types).
+* **Traversal Methods:** To verify the tree structure after insertion, you'll need methods for traversing the tree (in-order, pre-order, post-order).  These are not included in the examples above but are essential for debugging and working with BSTs.  Here's a simple in-order traversal:
+
+```python
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+# Example usage after insertion:
+bst.inorder_traversal(bst.root) # Output will show the sorted values
+```
+
+Remember to choose the insertion method that best suits your needs and coding style.  The iterative approach is generally preferred for its efficiency and avoidance of potential stack overflow issues, especially when dealing with large trees.  The recursive approach is often easier to understand initially.
+
