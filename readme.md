@@ -11101,3 +11101,101 @@ This function iterates through the array once (n times, where n is the length of
 
 **Important Note:** Big O notation is a powerful tool for comparing the efficiency of algorithms, but it doesn't tell the whole story.  Constant factors and the actual runtime for small inputs can be significant in practice.  Always consider the specific context when choosing an algorithm.
 
+#  A Simple Loop 
+A simple loop repeats a block of code a certain number of times or until a condition is met.  Here are examples in a few common programming languages:
+
+**1. `for` loop (counting loop):**  This is best when you know how many times you want to loop beforehand.
+
+* **Python:**
+
+```python
+for i in range(5):  # Loops 5 times, i takes values 0, 1, 2, 3, 4
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. `while` loop (conditional loop):** This is best when you don't know beforehand how many times you need to loop; the loop continues as long as a condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on the specific problem you're solving.  If you know the number of iterations in advance, a `for` loop is usually clearer.  If the number of iterations depends on a condition, a `while` loop is more appropriate.  There are also `do-while` loops (in some languages) which execute at least once before checking the condition.
+
