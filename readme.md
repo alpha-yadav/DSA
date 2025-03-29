@@ -8364,3 +8364,61 @@ Here are some common types of algorithms with O(log n) time complexity:
 
 In summary, O(log n) algorithms are highly desirable because they scale very well with increasing input sizes, making them suitable for processing large datasets.  Understanding how these algorithms reduce the problem size repeatedly is key to grasping their efficiency.
 
+#  An O(log n) example 
+The most common O(log n) example is **binary search** in a sorted array.
+
+**Binary Search:**
+
+Let's say you have a sorted array of numbers, and you want to find a specific number within that array.  Instead of checking each element one by one (which would be O(n)), binary search works by repeatedly dividing the search interval in half.
+
+1. **Start:**  You begin by considering the entire array as your search interval.
+2. **Midpoint:** Find the middle element of the interval.
+3. **Compare:** Compare the middle element to the target number you're searching for.
+   * If they are equal, you've found the number!
+   * If the target is smaller, discard the right half of the interval and repeat steps 2 and 3 on the left half.
+   * If the target is larger, discard the left half of the interval and repeat steps 2 and 3 on the right half.
+4. **Repeat:** Continue this process until either you find the number or the search interval is empty (meaning the number is not in the array).
+
+**Why is it O(log n)?**
+
+Each time you perform a comparison, you're effectively halving the size of the search interval.  This means the number of comparisons needed is roughly proportional to the logarithm (base 2) of the number of elements in the array.
+
+* With `n` elements, the first comparison eliminates roughly `n/2` elements.
+* The second comparison eliminates roughly `n/4` elements.
+* The third eliminates `n/8`, and so on.
+
+This logarithmic reduction leads to a time complexity of O(log n).  The base of the logarithm (usually 2 in binary search) doesn't affect the big O notation, as it's just a constant factor.
+
+**Code Example (Python):**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+
+        if arr[mid] == target:
+            return mid  # Found it!
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the right half
+        else:
+            high = mid - 1  # Search in the left half
+
+    return -1  # Not found
+
+
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_number = 11
+
+index = binary_search(sorted_array, target_number)
+
+if index != -1:
+    print(f"Element {target_number} found at index {index}")
+else:
+    print(f"Element {target_number} not found")
+```
+
+Other algorithms with O(log n) complexity include tree traversals in balanced binary search trees (like AVL trees or red-black trees), and certain efficient sorting algorithms like merge sort (although merge sort's overall complexity is O(n log n) due to the merging step).
+
