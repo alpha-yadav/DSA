@@ -11199,3 +11199,92 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on the specific problem you're solving.  If you know the number of iterations in advance, a `for` loop is usually clearer.  If the number of iterations depends on a condition, a `while` loop is more appropriate.  There are also `do-while` loops (in some languages) which execute at least once before checking the condition.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a structure where the inner loop's iterations are repeated multiple times based on the outer loop's iterations.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_sequence:
+    for inner_loop_variable in inner_loop_sequence:
+        # Code to be executed in the inner loop
+    # Code to be executed after the inner loop completes for each outer loop iteration
+```
+
+**Example 1: Printing a Multiplication Table**
+
+This example shows how nested loops can be used to generate a multiplication table:
+
+```python
+# Multiplication table from 1 to 5
+for i in range(1, 6):  # Outer loop: Rows
+    for j in range(1, 6):  # Inner loop: Columns
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+Output:
+
+```
+1	2	3	4	5	
+2	4	6	8	10	
+3	6	9	12	15	
+4	8	12	16	20	
+5	10	15	20	25	
+```
+
+**Example 2: Accessing Elements of a 2D Array (List of Lists)**
+
+Nested loops are commonly used to traverse through 2D data structures:
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print() # Newline after each row
+```
+
+Output:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+
+**Example 3: Finding the Maximum Element in a 2D Array**
+
+```python
+matrix = [
+    [1, 5, 2],
+    [8, 3, 9],
+    [4, 7, 6]
+]
+
+max_element = matrix[0][0] # Initialize with the first element
+
+for row in matrix:
+    for element in row:
+        if element > max_element:
+            max_element = element
+
+print("The maximum element is:", max_element) # Output: The maximum element is: 9
+```
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can lead to increased computation time, especially with large datasets. The time complexity often increases quadratically (O(n²)) or even higher depending on the number of nested loops.
+* **Readability:**  Deeply nested loops can make code harder to read and understand. Try to keep the nesting level as shallow as possible.  Consider refactoring if you have more than three or four levels of nesting.
+
+
+Nested loops are a fundamental programming construct, but understanding their potential performance implications is crucial for writing efficient and maintainable code.  Choose them judiciously and consider alternative approaches (like list comprehensions or vectorized operations in NumPy) when dealing with very large datasets.
+
