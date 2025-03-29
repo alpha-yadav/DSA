@@ -10856,3 +10856,62 @@ This is the most compact version, but it can be harder to read for beginners due
 
 For most situations, **Version 2** offers a good balance of readability and efficiency.  Choose the version that best suits your understanding and coding style.  Remember to always prioritize code clarity, especially when working on a team or maintaining code over time.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm consumes as the input size grows.  It's a crucial aspect of algorithm analysis, helping us understand how efficiently an algorithm performs and scale with larger datasets.  We typically express complexity using Big O notation (and related notations like Big Omega and Big Theta).
+
+Here's a breakdown of key concepts:
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm scales with the input size (usually denoted by 'n').  We focus on the dominant operations and ignore constant factors.
+
+* **Big O Notation (O):** Describes the *upper bound* of an algorithm's time complexity. It gives the worst-case scenario.  For example, O(n) means the runtime grows linearly with the input size.
+
+* **Big Omega Notation (Ω):** Describes the *lower bound* of an algorithm's time complexity.  It represents the best-case scenario.
+
+* **Big Theta Notation (Θ):** Describes the *tight bound* of an algorithm's time complexity.  It means the algorithm's runtime is both O(f(n)) and Ω(f(n)) for some function f(n).  This indicates that the growth rate is precisely described.
+
+**Common Time Complexities:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime grows logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime grows linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime grows proportionally to the square of the input size. Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Traveling salesperson problem (brute-force approach).
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm scales with the input size.  Similar to time complexity, we use Big O notation to express space complexity.
+
+* **O(1) - Constant Space:** The memory usage is independent of the input size.
+
+* **O(n) - Linear Space:** The memory usage grows linearly with the input size.  Example: Storing the input in an array.
+
+* **O(log n) - Logarithmic Space:** The memory usage grows logarithmically with the input size.  Example: Recursive algorithms using a stack.
+
+* **O(n²) - Quadratic Space:** The memory usage grows proportionally to the square of the input size.
+
+
+**Factors Affecting Complexity:**
+
+* **Algorithm Design:** Different algorithms solving the same problem can have vastly different complexities.
+* **Data Structures:** The choice of data structure significantly impacts both time and space complexity.
+* **Input Characteristics:** The complexity might vary depending on the properties of the input data (e.g., sorted vs. unsorted).
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing complexity typically involves:
+
+1. **Identifying the basic operations:**  Determine the operations that contribute most to the runtime.
+2. **Counting the number of operations:** Express the number of operations as a function of the input size.
+3. **Expressing the complexity using Big O notation:** Simplify the function to its dominant term and ignore constant factors.
+
+
+Understanding algorithm complexity is essential for choosing the most efficient algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower time complexity will generally perform faster, while an algorithm with lower space complexity will use less memory.
+
