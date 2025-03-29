@@ -8269,3 +8269,71 @@ These examples all print the numbers 0 through 4.  The key components of a simpl
 
 Remember to be cautious about infinite loops—loops where the condition never becomes false.  This can crash your program.  Always make sure your loop's condition will eventually evaluate to `false`.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to process data in multiple dimensions or iterate through combinations of elements.
+
+Here's a breakdown with examples in several popular programming languages:
+
+**Concept:**
+
+Imagine you have a grid (like a matrix or table).  The outer loop iterates through the rows, and the inner loop iterates through the columns within each row.
+
+**Example: Printing a Multiplication Table (Python):**
+
+```python
+for i in range(1, 11):  # Outer loop: rows (1 to 10)
+    for j in range(1, 11):  # Inner loop: columns (1 to 10)
+        print(i * j, end="\t")  # Print the product, \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This code will print a 10x10 multiplication table.  The outer loop runs 10 times, and for each iteration, the inner loop runs 10 times, resulting in 100 total iterations.
+
+
+**Example: Accessing elements of a 2D array (JavaScript):**
+
+```javascript
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+for (let i = 0; i < matrix.length; i++) { // Outer loop: rows
+  for (let j = 0; j < matrix[i].length; j++) { // Inner loop: columns
+    console.log(matrix[i][j]); // Access and print each element
+  }
+}
+```
+
+This JavaScript code iterates through a 2D array and prints each element.
+
+
+**Example: Nested Loops in C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 3; i++) { // Outer loop
+    for (int j = 0; j < 5; j++) { // Inner loop
+      std::cout << "(" << i << ", " << j << ") ";
+    }
+    std::cout << std::endl;
+  }
+  return 0;
+}
+```
+
+This C++ code prints coordinate pairs representing a 3x5 grid.
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the execution time of your program.  The time complexity often increases exponentially with the number of nested loops.  For example, two nested loops iterating `n` times each have a time complexity of O(n²).
+* **Efficiency:**  Carefully consider the need for nested loops.  Sometimes, more efficient algorithms can achieve the same result without nested loops.
+* **Readability:**  Use meaningful variable names and add comments to improve the readability of nested loops, especially when they become complex.
+
+
+Nested loops are a fundamental programming construct used for processing multi-dimensional data and solving problems requiring iterative combinations.  Understanding their behavior and potential performance implications is crucial for writing efficient and effective code.
+
