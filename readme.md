@@ -11314,3 +11314,61 @@ Here are some common types of algorithms that exhibit O(log n) time complexity:
 
 In summary, O(log n) algorithms are extremely efficient for tasks where the problem size can be repeatedly halved.  They are frequently used in searching, sorting, and data structure manipulation.
 
+#  An O(log n) example 
+The most common example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a target value within a *sorted* array.  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process repeats until the target value is found or the search interval is empty.
+
+**Why it's O(log n):**
+
+Each step of binary search reduces the search space by half.  Let's say you start with `n` elements.  After one step, you have `n/2` elements left. After two steps, you have `n/4` elements. After `k` steps, you have `n/2<sup>k</sup>` elements.
+
+The algorithm terminates when the search space is reduced to a single element (or is empty).  Therefore, we want to find the smallest `k` such that:
+
+`n/2<sup>k</sup> ≤ 1`
+
+Solving for `k`, we get:
+
+`n ≤ 2<sup>k</sup>`
+`log₂(n) ≤ k`
+
+This means the maximum number of steps (`k`) is proportional to the logarithm base 2 of `n`.  Therefore, the time complexity is O(log n).
+
+**Code Example (Python):**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the right half
+        else:
+            high = mid - 1  # Search in the left half
+    return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+```
+
+Other algorithms with O(log n) time complexity include:
+
+* **Tree traversals (balanced trees):**  Finding a node in a balanced binary search tree takes O(log n) time.
+* **Efficient exponentiation:** Calculating a<sup>b</sup> can be done in O(log b) time using repeated squaring.
+
+
+The key characteristic of O(log n) algorithms is that they reduce the problem size by a constant factor with each step. This leads to significantly faster performance than linear O(n) algorithms for large input sizes.
+
