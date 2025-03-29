@@ -7699,3 +7699,106 @@ else:
 
 Remember to start slowly, build a solid foundation, and gradually increase the complexity of the algorithms you tackle.  Good luck!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:** Reverse a string.
+
+**Input:** A string, e.g., "hello"
+
+**Output:** The reversed string, e.g., "olleh"
+
+**Solution (Python):**
+
+```python
+def reverse_string(s):
+  return s[::-1]
+
+print(reverse_string("hello"))  # Output: olleh
+```
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Indices of the two numbers such that they add up to `target`.  Return an empty array if no two such numbers exist.
+
+**Example:**
+
+Input: `nums = [2, 7, 11, 15], target = 9`
+Output: `[0, 1]` because `nums[0] + nums[1] == 9`
+
+**Solution (Python):**  (This uses a hash map for efficiency)
+
+```python
+def two_sum(nums, target):
+    num_map = {}  # Create a dictionary to store numbers and their indices
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i  # Add the number and its index to the dictionary
+    return []  # No two numbers add up to the target
+
+print(two_sum([2,7,11,15], 9)) # Output: [0, 1]
+```
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring within `s`.
+
+**Example:**
+
+Input: `s = "babad"`
+Output: `"bab"` or `"aba"` (both are valid)
+
+**Solution (Python):** (This is a more optimized solution using dynamic programming.  A brute-force approach would be much less efficient)
+
+```python
+def longest_palindrome(s):
+    n = len(s)
+    if n < 2:
+        return s
+
+    dp = [[False] * n for _ in range(n)]
+    start = 0
+    max_len = 1
+
+    # All single characters are palindromes
+    for i in range(n):
+        dp[i][i] = True
+
+    # Check for palindromes of length 2
+    for i in range(n - 1):
+        if s[i] == s[i + 1]:
+            dp[i][i + 1] = True
+            start = i
+            max_len = 2
+
+    # Check for palindromes of length 3 or greater
+    for k in range(3, n + 1):
+        for i in range(n - k + 1):
+            j = i + k - 1
+            if s[i] == s[j] and dp[i + 1][j - 1]:
+                dp[i][j] = True
+                if k > max_len:
+                    start = i
+                    max_len = k
+
+    return s[start:start + max_len]
+
+print(longest_palindrome("babad")) # Output: bab or aba (depending on implementation)
+
+```
+
+These examples demonstrate a range of difficulty and algorithmic techniques. Remember that the "best" solution often involves considering time and space complexity.  For the harder problems, there might be multiple approaches with varying efficiency.
+
