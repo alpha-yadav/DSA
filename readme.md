@@ -9015,3 +9015,160 @@ def lca_bst_iterative(root, node1, node2):
 
 Choose either the recursive or iterative approach based on your preference and coding style.  The iterative approach might be slightly more efficient in some cases due to avoiding the overhead of function calls.  However, the recursive approach is often considered more readable.
 
+#  Binary Search Tree - Python 
+A Binary Search Tree (BST) is a tree data structure in which each node has at most two children, which are referred to as the left child and the right child.  A key constraint is that the value in any node must be greater than or equal to the values in all nodes in its left subtree and less than or equal to the values in all nodes in its right subtree. This property makes searching, insertion, and deletion operations efficient.
+
+
+Here's a Python implementation of a Binary Search Tree, along with explanations:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    def search(self, data):
+        return self._search_recursive(self.root, data)
+
+    def _search_recursive(self, node, data):
+        if node is None or node.data == data:
+            return node
+        if data < node.data:
+            return self._search_recursive(node.left, data)
+        return self._search_recursive(node.right, data)
+
+    def delete(self, data):
+        self.root = self._delete_recursive(self.root, data)
+
+    def _delete_recursive(self, node, data):
+        if node is None:
+            return node
+        if data < node.data:
+            node.left = self._delete_recursive(node.left, data)
+        elif data > node.data:
+            node.right = self._delete_recursive(node.right, data)
+        else:
+            # Node with one or no child
+            if node.left is None:
+                return node.right
+            elif node.right is None:
+                return node.left
+            # Node with two children: Get the inorder successor (smallest in the right subtree)
+            else:
+                temp = self._find_min(node.right)
+                node.data = temp.data
+                node.right = self._delete_recursive(node.right, temp.data)
+        return node
+
+    def _find_min(self, node):
+        while node.left:
+            node = node.left
+        return node
+
+
+    def inorder_traversal(self): #Inorder traversal gives sorted output.
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_recursive(node.right, result)
+
+
+    def preorder_traversal(self):
+        result = []
+        self._preorder_recursive(self.root, result)
+        return result
+
+    def _preorder_recursive(self, node, result):
+        if node:
+            result.append(node.data)
+            self._preorder_recursive(node.left, result)
+            self._preorder_recursive(node.right, result)
+
+    def postorder_traversal(self):
+        result = []
+        self._postorder_recursive(self.root, result)
+        return result
+
+    def _postorder_recursive(self, node, result):
+        if node:
+            self._postorder_recursive(node.left, result)
+            self._postorder_recursive(node.right, result)
+            result.append(node.data)
+
+
+```
+
+**Explanation:**
+
+* **`Node` class:** Represents a single node in the BST, containing the `data` and references to the `left` and `right` children.
+
+* **`BST` class:** Implements the BST functionality.
+
+    * **`insert(data)`:** Inserts a new node with the given `data` into the BST.  It uses recursion (`_insert_recursive`) to efficiently find the correct position.
+
+    * **`search(data)`:** Searches for a node with the given `data`. It returns the node if found, otherwise `None`.  Uses recursion (`_search_recursive`).
+
+    * **`delete(data)`:** Deletes a node with the given `data`. This is the most complex operation, handling cases where the node has zero, one, or two children.  It uses recursion (`_delete_recursive`) and `_find_min` to find the inorder successor for deletion in the two-children case.
+
+    * **`_find_min(node)`:** Finds the node with the minimum value in a subtree.
+
+    * **`inorder_traversal()`, `preorder_traversal()`, `postorder_traversal()`:**  These methods perform the respective tree traversals and return lists of the node data.
+
+
+**How to use it:**
+
+```python
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+
+print("Inorder traversal:", bst.inorder_traversal())  # Sorted output
+print("Preorder traversal:", bst.preorder_traversal())
+print("Postorder traversal:", bst.postorder_traversal())
+
+print("Search for 6:", bst.search(6).data if bst.search(6) else "Not Found")
+print("Search for 15:", bst.search(15) )
+
+bst.delete(8)
+print("Inorder traversal after deleting 8:", bst.inorder_traversal())
+
+```
+
+Remember that the efficiency of BST operations (search, insert, delete) depends on the balance of the tree.  In the worst case (a completely skewed tree), these operations can take O(n) time, where n is the number of nodes.  For better performance in the average and worst case, consider using self-balancing BSTs like AVL trees or red-black trees.
+
