@@ -12789,3 +12789,85 @@ This approach is suitable if you don't want to modify the tree structure but mig
 
 Remember that if either `n1` or `n2` is not present in the tree, the function should handle that case gracefully (usually by returning `None`).  The provided recursive code includes this error handling.  You would need to add similar handling to the other approaches.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree or graph is a common problem in computer science.  The approach varies depending on the type of tree (binary tree, general tree) and whether the tree is rooted or unrooted.  Here's a breakdown of common methods:
+
+**1. Binary Trees (Rooted)**
+
+* **Recursive Approach:** This is a classic and efficient approach for binary trees.  The idea is to traverse the tree recursively.  If the current node is one of the targets, return the node. Otherwise, recursively search the left and right subtrees. If both subtrees return a node (meaning both targets are found in different subtrees), the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lca_recursive(root.left, p, q)
+    right_lca = lca_recursive(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(lca_recursive(root, root.left, root.right).data)  # Output: 1
+print(lca_recursive(root, root.left.left, root.left.right).data) # Output: 2
+```
+
+* **Iterative Approach (using parent pointers):** If each node has a pointer to its parent, you can use an iterative approach.  Find the paths from the root to both `p` and `q`. Then, iterate upwards from both `p` and `q` simultaneously, until you find the first common ancestor.  This method is generally less efficient than the recursive approach for binary trees unless you already have parent pointers.
+
+**2. General Trees (Rooted)**
+
+The recursive approach can be adapted to general trees (trees where a node can have more than two children).  The key difference is that instead of checking left and right subtrees, you check all child subtrees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+def lca_general_tree(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    for child in root.children:
+        lca = lca_general_tree(child, p, q)
+        if lca:
+            return lca if lca == p or lca == q else root # if both p and q found in subtree
+    return None
+```
+
+**3. Unrooted Trees**
+
+Finding the LCA in an unrooted tree is more complex.  Common approaches involve rooting the tree arbitrarily or using more advanced graph algorithms.
+
+
+**4.  Efficiency:**
+
+* The recursive approach for binary trees is generally O(N) in time complexity (where N is the number of nodes), and O(H) in space complexity (where H is the height of the tree - which can be log N in a balanced tree, or N in a skewed tree).
+
+* The iterative approach with parent pointers is also O(N) in the worst case (skewed tree).
+
+
+**Choosing the right method:**
+
+The best method depends on the specific context:
+
+* For binary trees, the recursive approach is usually the most concise and efficient.
+* For general trees, the adapted recursive method works well.
+* For unrooted trees, more sophisticated algorithms are needed.  Consider researching algorithms like those based on depth-first search or Tarjan's off-line LCA algorithm for optimal performance in these cases.  These are more complex but can achieve better time complexity than naive approaches.
+
+
+Remember to handle edge cases such as when one or both nodes are not in the tree.  The provided code snippets can be extended to include such error handling.
+
