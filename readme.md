@@ -10429,3 +10429,37 @@ print(f"Graph matrix 2 has cycle: {has_cycle_directed_dfs_matrix(graph_matrix2)}
 
 Remember to adapt the code based on your graph representation (adjacency list or matrix).  The core logic of using the `Visiting` and `Visited` states to detect cycles remains the same.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a breakthrough algorithm for finding minimum spanning trees (MSTs) in undirected graphs.  Its significance lies in its incredibly fast running time, achieving near-linear time complexity.  Specifically, it computes an MST in time O(m α(m, n)), where:
+
+* **m** is the number of edges in the graph.
+* **n** is the number of vertices in the graph.
+* **α(m, n)** is the inverse Ackermann function, a function that grows incredibly slowly.  For all practical purposes, α(m, n) can be considered a constant.
+
+This makes Thorup's algorithm asymptotically faster than the previously known algorithms like Prim's and Kruskal's algorithms, which have complexities of O(m log n) and O(m log* n) respectively (where log* n is the iterated logarithm).
+
+**Key Ideas and Techniques:**
+
+Thorup's algorithm relies on several sophisticated techniques, making a detailed explanation quite complex. However, some key ideas include:
+
+* **Contraction:** The algorithm cleverly uses graph contraction to reduce the size of the problem.  It repeatedly contracts edges, merging vertices, until the graph becomes sufficiently small.
+* **Borůvka's algorithm:**  Borůvka's algorithm is a fundamental MST algorithm that forms the basis of several faster MST algorithms, including Thorup's. It's used in a crucial step of Thorup's algorithm.
+* **Randomization:** Thorup's algorithm employs randomization techniques to achieve its efficiency.  This randomization helps to ensure that the graph contraction process happens in a way that leads to good performance.
+* **Advanced data structures:**  The algorithm utilizes sophisticated data structures to efficiently manage the graph during the contraction process.  These data structures play a crucial role in achieving the near-linear time complexity.
+* **Low-weight cycles:** The algorithm focuses on finding and resolving low-weight cycles efficiently, which is a core challenge in MST algorithms.
+
+**Why it's significant:**
+
+The near-linear time complexity is a significant achievement in algorithmic graph theory.  It means that for all practical purposes, the algorithm can find an MST in time nearly proportional to the size of the input graph.  This is a substantial improvement over previous algorithms and has implications for various applications that rely on MST computation.
+
+
+**Limitations:**
+
+While incredibly fast asymptotically, Thorup's algorithm has some practical limitations:
+
+* **Complexity of Implementation:** The algorithm is very intricate and difficult to implement correctly. The constant factors hidden in the big-O notation are quite large, making it potentially slower than simpler algorithms like Prim's or Kruskal's for smaller graphs.
+* **Randomization:** The algorithm's reliance on randomization means that its running time is not guaranteed to be always near-linear; there's a small probability of worse-case performance.
+
+
+In summary, Thorup's algorithm represents a remarkable theoretical advancement in minimum spanning tree computation, achieving near-linear time complexity.  While its implementation complexity and the presence of randomization present challenges, its theoretical significance remains substantial.  It's a testament to the power of advanced algorithmic techniques and shows the continuous evolution of algorithms for fundamental graph problems.
+
