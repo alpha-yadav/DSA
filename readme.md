@@ -7990,3 +7990,50 @@ However, *f(n)* is *not* Θ(n), because *n* is not a tight bound.  *f(n)* grows 
 
 Big-Theta notation is crucial in algorithm analysis because it allows us to compare the efficiency of different algorithms precisely. By determining the time or space complexity of an algorithm using Θ notation, we can understand how its resource consumption scales with the input size. This helps in choosing the most efficient algorithm for a given task.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) are used in computer science to describe the performance or complexity of algorithms. They describe how the runtime or space requirements of an algorithm scale as the input size grows very large.  Here's a comparison:
+
+**1. Big O Notation (O): Upper Bound**
+
+* **Meaning:**  `f(n) = O(g(n))` means that the growth rate of `f(n)` is *no worse than* the growth rate of `g(n)`.  In simpler terms, `f(n)` is asymptotically bounded *above* by `g(n)`.  There exists a constant `c > 0` and an integer `n₀ ≥ 1` such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.
+* **Use:** Describes the *worst-case* scenario or an upper bound on the runtime.  It's the most commonly used notation.
+* **Example:**  If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its time complexity is O(n²).  We ignore constant factors and lower-order terms.
+
+**2. Big Omega Notation (Ω): Lower Bound**
+
+* **Meaning:** `f(n) = Ω(g(n))` means that the growth rate of `f(n)` is *no better than* the growth rate of `g(n)`.  `f(n)` is asymptotically bounded *below* by `g(n)`. There exists a constant `c > 0` and an integer `n₀ ≥ 1` such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.
+* **Use:** Describes the *best-case* scenario or a lower bound on the runtime.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its time complexity is Ω(n²).
+
+**3. Big Theta Notation (Θ): Tight Bound**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that the growth rate of `f(n)` is *the same as* the growth rate of `g(n)`.  It's a tight bound, meaning `f(n)` is both O(g(n)) and Ω(g(n)).
+* **Use:** Provides a precise characterization of the algorithm's asymptotic behavior.  It describes both the upper and lower bounds.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its time complexity is Θ(n²).
+
+**4. Little o Notation (o): Strict Upper Bound**
+
+* **Meaning:** `f(n) = o(g(n))` means that the growth rate of `f(n)` is *strictly smaller* than the growth rate of `g(n)`.  `f(n)` grows significantly slower than `g(n)`. Formally:  For any constant `c > 0`, there exists an integer `n₀ ≥ 1` such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.
+* **Use:**  Indicates a significantly tighter upper bound than Big O.
+* **Example:** `n = o(n²)` (n grows significantly slower than n²)
+
+**5. Little Omega Notation (ω): Strict Lower Bound**
+
+* **Meaning:** `f(n) = ω(g(n))` means that the growth rate of `f(n)` is *strictly larger* than the growth rate of `g(n)`. `f(n)` grows significantly faster than `g(n)`. Formally: For any constant `c > 0`, there exists an integer `n₀ ≥ 1` such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`.
+* **Use:** Indicates a significantly tighter lower bound than Big Omega.
+* **Example:** `n² = ω(n)` (n² grows significantly faster than n)
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Type of Bound |
+|----------|---------------------------------------|----------------|
+| O(g(n))  | f(n) ≤ c * g(n)                       | Upper Bound     |
+| Ω(g(n))  | c * g(n) ≤ f(n)                       | Lower Bound     |
+| Θ(g(n))  | c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)           | Tight Bound     |
+| o(g(n))  | f(n) < c * g(n) for all c > 0         | Strict Upper Bound |
+| ω(g(n))  | c * g(n) < f(n) for all c > 0         | Strict Lower Bound |
+
+
+Remember that these notations describe asymptotic behavior; they only tell us about the growth rates for large input sizes.  They don't provide information about constant factors or the runtime for small inputs.
+
