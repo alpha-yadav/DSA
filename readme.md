@@ -16502,3 +16502,73 @@ print(f"The maximum element is: {max_val}") # Output: The maximum element is: 8
 
 Remember, learning algorithms is an iterative process. Start with the basics, practice consistently, and gradually tackle more challenging problems.  Don't get discouraged if you find it difficult at first – persistence is key!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Find the largest number in an unsorted array.
+
+**Input:** An array of integers.  Example: `[3, 1, 4, 1, 5, 9, 2, 6]`
+
+**Output:** The largest integer in the array. Example: `9`
+
+**Solution Idea:** Iterate through the array, keeping track of the largest number seen so far.
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Solution Idea:**  Use a hash table (dictionary in Python) to store numbers and their indices.  Iterate through the array, checking if `target - current_number` exists in the hash table.
+
+
+**Hard:**
+
+**Problem:** Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+```
+Input: s = "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+```
+
+```
+Input: s = "cbbd"
+Output: "bb"
+```
+
+**Solution Idea:** This problem has several approaches, including dynamic programming or expanding around the center of potential palindromes.  Dynamic programming is generally more efficient for larger inputs.
+
+
+**How to Approach Algorithmic Problems:**
+
+1. **Understand the Problem:**  Clearly define the input, output, and constraints.  What are the edge cases (e.g., empty input, single element input)?
+
+2. **Develop an Algorithm:**  Think about different approaches to solve the problem.  Consider time and space complexity.  Draw diagrams or write pseudocode to clarify your thinking.
+
+3. **Implement the Algorithm:**  Write code in your chosen programming language.
+
+4. **Test Your Solution:**  Test with various inputs, including edge cases, to ensure correctness.
+
+
+Remember to analyze the time and space complexity of your solution.  This is a crucial part of algorithmic problem-solving.  Big O notation is commonly used to describe this complexity.
+
