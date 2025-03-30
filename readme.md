@@ -16572,3 +16572,71 @@ Output: "bb"
 
 Remember to analyze the time and space complexity of your solution.  This is a crucial part of algorithmic problem-solving.  Big O notation is commonly used to describe this complexity.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's simple to understand but helps assess basic programming skills. Here's how to implement it in Swift, starting with a straightforward approach and then showing a slightly more advanced version:
+
+**Basic Approach:**
+
+This version uses a `for` loop and a series of `if`/`else if`/`else` statements.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* It checks for divisibility by 15 first (to handle both 3 and 5).
+* Then it checks for divisibility by 3 and 5 individually.
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Slightly More Advanced Approach (using string interpolation):**
+
+This version is more concise and uses string interpolation for cleaner output.
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function
+```
+
+This version builds the output string incrementally.  If `output` remains empty after checking for divisibility by 3 and 5, it prints the number; otherwise, it prints the constructed "Fizz", "Buzz", or "FizzBuzz" string.  This approach is generally considered more efficient because it avoids multiple `if/else if` checks.
+
+
+**How to Run This Code:**
+
+1. **Create a new Swift file:**  Open Xcode or a Swift Playground.
+2. **Paste the code:** Copy either of the `fizzBuzz` functions above and paste it into your file.
+3. **Call the function:**  Make sure you have a line calling the function with an integer argument (e.g., `fizzBuzz(n: 15)`).
+4. **Run the code:** Build and run your project (or press play in the Playground).  The output will be printed to the console.
+
+
+These examples provide a solid foundation. You can further enhance them by:
+
+* **Error handling:** Add checks to ensure the input `n` is a positive integer.
+* **Functional programming:** Explore using `map` or other functional techniques for a more concise (but potentially less readable for beginners) solution.
+
+
+Remember to choose the approach that best suits your understanding and the context of your use case. The first version is easier to understand for beginners, while the second is more efficient and showcases good coding style.
+
