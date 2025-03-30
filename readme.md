@@ -15684,3 +15684,108 @@ print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
 
 Remember to adapt the code to your specific TreeNode class definition if it's different.  Also, error handling (e.g., checking if `p` and `q` actually exist in the tree) might be needed in a production environment.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (or graph) is a classic algorithm problem.  The approach depends heavily on the type of tree:  a binary tree, a general tree, or a directed acyclic graph (DAG).  Here's a breakdown of common methods:
+
+**1. Binary Trees:**
+
+* **Recursive Approach (Efficient):** This is arguably the most elegant and efficient approach for binary trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+      root: The root of the binary tree.
+      p: The first node.
+      q: The second node.
+
+    Returns:
+      The LCA node, or None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lowestCommonAncestor(root, root.left, root.left.right)
+print(f"LCA of 2 and 5 is: {lca.data}")  # Output: 2
+
+lca = lowestCommonAncestor(root, root.left.left, root.right)
+print(f"LCA of 4 and 3 is: {lca.data}")  # Output: 1
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.left) # same node
+print(f"LCA of 4 and 4 is: {lca.data}") #Output: 4
+
+
+```
+
+* **Iterative Approach (using parent pointers):** If you have a binary tree where each node has a pointer to its parent, you can use an iterative approach. This involves finding the paths from the root to `p` and `q`, and then finding the last common node in those paths.  This is generally less efficient than the recursive approach unless you already have the parent pointers readily available.
+
+**2. General Trees (N-ary Trees):**
+
+The recursive approach can be adapted for general trees.  Instead of just two children (left and right), you'll iterate through all children.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+def lowestCommonAncestor_general(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    for child in root.children:
+        lca = lowestCommonAncestor_general(child, p, q)
+        if lca:
+            return lca
+    return None
+
+```
+
+**3. Directed Acyclic Graphs (DAGs):**
+
+Finding the LCA in a DAG is more complex.  Common techniques involve:
+
+* **Depth-First Search (DFS):** Perform DFS from both `p` and `q`.  The deepest node that is visited by both searches is the LCA.
+* **Tarjan's Algorithm:** A more sophisticated algorithm that efficiently computes the LCA for all pairs of nodes in a DAG.
+
+**Choosing the Right Approach:**
+
+* **Binary Tree:** The recursive approach is generally preferred due to its elegance and efficiency.
+* **General Tree:** The adapted recursive approach is suitable.
+* **DAG:**  DFS or Tarjan's Algorithm are necessary, depending on your needs and the size of the graph.  Tarjan's is more efficient for finding LCAs for all node pairs.
+
+
+Remember to handle edge cases like:
+
+* One or both nodes are not present in the tree.
+* The LCA is one of the input nodes.
+* The input nodes are the same.
+
+Always consider the characteristics of your tree/graph structure when selecting an algorithm. The recursive approach for binary trees is a good starting point for many cases.
+
