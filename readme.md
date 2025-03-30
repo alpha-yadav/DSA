@@ -15603,3 +15603,84 @@ postorder(root) # Output: 4 5 2 3 1
 
 This code demonstrates how each traversal method produces a different sequence of node visits.  Remember that the specific output depends on the structure of your binary tree.  These functions assume a `Node` class as defined above.  Adapt the `print` statements if you need to return lists instead of printing to the console.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants (where a node is considered a descendant of itself).  There are several ways to find the LCA, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This approach is elegant and efficient.  It uses recursion to traverse the tree.  The core idea is:
+
+   * If the current node is `null`, return `null`.
+   * If the current node is one of the target nodes (`p` or `q`), return the current node.
+   * Recursively search the left and right subtrees.
+   * If both left and right subtrees return a non-null value, it means the target nodes are in different subtrees, and the current node is their LCA. Return the current node.
+   * Otherwise, return whichever subtree returned a non-null value (or `null` if both returned `null`).
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, we might traverse the entire tree.
+   * **Space Complexity:** O(H), where H is the height of the tree. This is due to the recursive call stack.  In the worst case (a skewed tree), H could be N.
+
+
+2. **Iterative Approach (Using a Stack or Queue):**
+
+   While recursion is often preferred for its readability, an iterative approach can be implemented using a stack (or queue) to simulate the recursive calls. This can be slightly more memory-efficient in some cases, especially for very deep trees, as it avoids the potential for stack overflow.  However, it's generally less readable.
+
+
+3. **Using Parent Pointers:**
+
+   If the tree nodes have parent pointers (a pointer to their parent node), you can find the LCA more efficiently. You traverse upwards from both `p` and `q` until you find a common ancestor.  The first common ancestor encountered is the LCA.
+
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(1)
+
+
+**Choosing the Right Method:**
+
+The recursive approach is generally the easiest to understand and implement.  The iterative approach is beneficial if you need to handle extremely deep trees to prevent stack overflow. The parent pointer approach is the fastest if parent pointers are already available in your tree structure.  For most cases, the recursive method is a good choice.
+
+
+**Example Usage (Recursive Method):**
+
+```python
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
+```
+
+Remember to adapt the code to your specific TreeNode class definition if it's different.  Also, error handling (e.g., checking if `p` and `q` actually exist in the tree) might be needed in a production environment.
+
