@@ -16237,3 +16237,23 @@ else:
 
 This implementation efficiently detects cycles in directed graphs using Depth First Search.  The time complexity is O(V+E), where V is the number of vertices and E is the number of edges, which is optimal for graph traversal algorithms. The space complexity is O(V) due to the `visited` and `recStack` arrays.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focused on efficient graph algorithms, particularly those concerning connectivity and shortest paths.  There isn't one single "Thorup's algorithm," but rather several significant contributions using innovative techniques.  The most well-known are likely these:
+
+* **Linear-time planarity testing:** Thorup contributed to algorithms that determine if a graph is planar in linear time, O(n), where n is the number of vertices.  This is a significant improvement over previous algorithms.  These algorithms often involve sophisticated techniques like data structures tailored to the problem.
+
+* **Near-linear time shortest paths:**  Thorup, along with others, developed algorithms that compute all-pairs shortest paths (APSP) in near-linear time for certain classes of graphs.  This is a substantial improvement over the O(n³) time complexity of classic algorithms like Floyd-Warshall for general graphs.  These algorithms often exploit properties of specific graph types or use sophisticated data structures like hierarchical decompositions.
+
+* **Dynamic graph algorithms:**  Thorup also contributed significantly to the field of dynamic graph algorithms, where the graph structure changes over time (insertions and deletions of edges). His work focused on designing efficient data structures and algorithms to maintain connectivity information or shortest paths in the face of these changes, achieving near-optimal time bounds for certain operations.
+
+**Key characteristics of Thorup's algorithms often include:**
+
+* **Randomization:**  Many of his algorithms utilize randomization, leading to expected (rather than worst-case) time complexities.  The probability of failure is usually very small.
+* **Sophisticated data structures:**  He often employs or designs novel data structures crucial for achieving efficiency. These structures might be tailored to the specific problem at hand.
+* **Advanced combinatorial techniques:**  The algorithms often rely on deep combinatorial insights and arguments.
+
+
+It's impossible to describe the details of any single Thorup algorithm fully here due to their complexity.  The algorithms involve intricate mathematical analysis and implementations. To delve into the specifics of a particular algorithm, you would need to refer to the corresponding research papers.  You can find many of Thorup's publications on academic databases like Google Scholar or his personal webpage (if maintained).
+
+In short, Thorup's contributions are highly influential in algorithm design, pushing the boundaries of what's achievable in terms of efficiency for fundamental graph problems.  His work is often characterized by its ingenuity and sophisticated use of randomization and advanced data structures.
+
