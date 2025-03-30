@@ -15789,3 +15789,12 @@ Remember to handle edge cases like:
 
 Always consider the characteristics of your tree/graph structure when selecting an algorithm. The recursive approach for binary trees is a good starting point for many cases.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **A set of points:**  For example, (1,2), (3,4), (5,6)
+* **An equation:** For example, y = 2x + 1,  y = x²,  y = sin(x)
+* **A table of data:**  With x and y values.
+
+Once you give me the data, I can tell you how to graph it or, if you'd like,  I can describe the graph (shape, intercepts, etc.).  I can't create visual graphs directly.
+
