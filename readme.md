@@ -15948,3 +15948,131 @@ This introduction only scratches the surface.  More advanced topics include:
 
 By understanding these fundamental concepts, you can begin to explore the rich world of graph theory and its numerous applications.  There are many excellent resources available online and in textbooks to delve deeper into the subject.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient method, particularly when the graph is sparse (meaning it has relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementations and considerations:
+
+**The Core Idea:**
+
+An adjacency list represents a graph as a collection of lists, one for each vertex.  Each list contains the vertices adjacent to (connected to) the corresponding vertex.  This means each vertex is implicitly represented by its index in the list of lists.
+
+**Example:**
+
+Consider an undirected graph with 4 vertices (0, 1, 2, 3) and the following edges:
+
+* 0 -- 1
+* 0 -- 2
+* 1 -- 2
+* 2 -- 3
+
+Its adjacency list representation would be:
+
+```
+0: [1, 2]
+1: [0, 2]
+2: [0, 1, 3]
+3: [2]
+```
+
+This means:
+
+* Vertex 0 is connected to vertices 1 and 2.
+* Vertex 1 is connected to vertices 0 and 2.
+* Vertex 2 is connected to vertices 0, 1, and 3.
+* Vertex 3 is connected to vertex 2.
+
+
+**Implementations:**
+
+The choice of implementation depends on the programming language and specific needs:
+
+* **Using Arrays of Lists (Python):**
+
+```python
+graph = [
+    [1, 2],  # Adjacency list for vertex 0
+    [0, 2],  # Adjacency list for vertex 1
+    [0, 1, 3], # Adjacency list for vertex 2
+    [2]       # Adjacency list for vertex 3
+]
+
+# Accessing neighbors of vertex 2:
+neighbors_of_2 = graph[2]
+print(neighbors_of_2)  # Output: [0, 1, 3]
+```
+
+* **Using Dictionaries (Python):**  This offers more flexibility, especially when vertex labels are not simple integers.
+
+```python
+graph = {
+    0: [1, 2],
+    1: [0, 2],
+    2: [0, 1, 3],
+    3: [2]
+}
+
+# Accessing neighbors of vertex 2:
+neighbors_of_2 = graph[2]
+print(neighbors_of_2)  # Output: [0, 1, 3]
+```
+
+
+* **Using `std::vector` in C++:**
+
+```c++
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<std::vector<int>> graph = {
+    {1, 2},
+    {0, 2},
+    {0, 1, 3},
+    {2}
+  };
+
+  // Accessing neighbors of vertex 2:
+  for (int neighbor : graph[2]) {
+    std::cout << neighbor << " ";
+  }
+  std::cout << std::endl; // Output: 0 1 3
+
+  return 0;
+}
+```
+
+**Weighted Graphs:**
+
+For weighted graphs (where edges have associated weights), you can extend the adjacency list to include the weights:
+
+* **Python (Dictionary):**
+
+```python
+graph = {
+    0: [(1, 5), (2, 2)],  # (neighbor, weight)
+    1: [(0, 5), (2, 1)],
+    2: [(0, 2), (1, 1), (3, 7)],
+    3: [(2, 7)]
+}
+
+# Accessing neighbors and weights of vertex 0
+for neighbor, weight in graph[0]:
+    print(f"Neighbor: {neighbor}, Weight: {weight}")
+```
+
+**Directed vs. Undirected Graphs:**
+
+* **Undirected:**  The adjacency list is symmetric (if `A` is in the list for `B`, then `B` is in the list for `A`).
+* **Directed:** The adjacency list represents only outgoing edges.  If there's an edge from `A` to `B`, `B` will be in `A`'s list, but `A` may not be in `B`'s list.
+
+**Space Complexity:**
+
+The space complexity of an adjacency list is O(V + E), where V is the number of vertices and E is the number of edges.  This is efficient for sparse graphs because you only store the existing edges.  For dense graphs (many edges), an adjacency matrix might be more space-efficient.
+
+**Time Complexity:**
+
+* **Adding an edge:** O(1) on average (worst case O(E) if you need to resize the list)
+* **Checking for an edge:** O(degree(v)), where degree(v) is the number of edges connected to vertex v.  This can be improved to O(1) with a hash table for neighbors.
+* **Traversing all neighbors:** O(degree(v))
+
+In summary, adjacency lists are a powerful and versatile way to represent graphs, especially when dealing with sparse graphs.  Choose the implementation that best suits your programming language and the characteristics of your graph.
+
