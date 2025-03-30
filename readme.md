@@ -15322,3 +15322,106 @@ print(f"Is the tree a BST? {is_bst_iterative(root2)}") # Output: False
 
 Both methods achieve the same result. Choose the recursive version for simplicity and readability (unless you're concerned about potential stack overflow for extremely deep trees, in which case the iterative method is preferable). Remember to adapt the `Node` class if your input tree uses a different node structure.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit each node in a binary tree exactly once.  There are several common traversal methods, each with its own order of visiting nodes:
+
+**1. Depth-First Traversals:** These traversals prioritize going as deep as possible down one branch before backtracking.  There are three main types:
+
+* **Pre-order Traversal:**  Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The order is: **Root, Left, Right**.
+
+  * Example:  For a tree with root 'A', left child 'B', and right child 'C', the pre-order traversal would be A, B, C.
+
+* **In-order Traversal:** Recursively traverse the left subtree, visit the root node, then recursively traverse the right subtree. The order is: **Left, Root, Right**.
+
+  * Example: For the same tree, the in-order traversal would be B, A, C.  This traversal is particularly useful for binary *search* trees (BSTs), as it produces a sorted sequence of the nodes' values.
+
+* **Post-order Traversal:** Recursively traverse the left subtree, recursively traverse the right subtree, then visit the root node. The order is: **Left, Right, Root**.
+
+  * Example: For the same tree, the post-order traversal would be B, C, A.  This traversal is useful for deleting nodes in a tree or evaluating expressions represented by the tree.
+
+
+**2. Breadth-First Traversal (Level-Order Traversal):** This traversal visits nodes level by level, starting from the root and moving down.  It uses a queue data structure.
+
+* Process:
+    1. Enqueue the root node.
+    2. While the queue is not empty:
+        a. Dequeue a node.
+        b. Visit the node.
+        c. Enqueue its left child (if it exists).
+        d. Enqueue its right child (if it exists).
+
+
+**Example (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+from collections import deque
+
+def levelorder(node):
+    if node is None:
+        return
+
+    queue = deque([node])
+    while(len(queue) > 0):
+        curr = queue.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            queue.append(curr.left)
+
+        if curr.right is not None:
+            queue.append(curr.right)
+
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Preorder traversal:")
+preorder(root)  # Output: A B D E C
+print("\nInorder traversal:")
+inorder(root)   # Output: D B E A C
+print("\nPostorder traversal:")
+postorder(root) # Output: D E B C A
+print("\nLevelorder traversal:")
+levelorder(root) # Output: A B C D E
+```
+
+**Applications:**
+
+The choice of traversal method depends on the application:
+
+* **Pre-order:** Used in expression trees, creating copies of trees.
+* **In-order:**  Useful for binary search trees (sorted output), expression evaluation.
+* **Post-order:**  Used in tree deletion, expression evaluation (postfix notation).
+* **Level-order:** Used for level-by-level processing, e.g., displaying a tree's structure visually.
+
+
+Understanding binary tree traversals is fundamental to working with tree-based data structures in computer science. Remember that the recursive implementations are elegant but can lead to stack overflow errors for very deep trees. Iterative approaches (using stacks or queues) are often preferred for production code to handle such cases.
+
