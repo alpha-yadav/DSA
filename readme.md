@@ -13889,3 +13889,56 @@ If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).  However, the rever
 
 Big-Theta notation is crucial in algorithm analysis because it allows us to precisely characterize the time and space complexity of algorithms.  Knowing the Θ-notation of an algorithm's complexity helps in comparing different algorithms and choosing the most efficient one for a given task. For instance, knowing an algorithm is Θ(n²) means its runtime scales quadratically with the input size, while an algorithm with Θ(n log n) runtime is generally more efficient for large inputs.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input approaches infinity.  They're crucial in computer science for analyzing the efficiency of algorithms.  Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the worst-case scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than a quadratic function of the input size.  The actual runtime might be smaller (e.g., O(n) in some cases), but it's guaranteed to be no worse than O(n²).
+* **Focus:** Worst-case complexity.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function.  It describes the best-case scenario (or a lower limit on the growth).  We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least as fast as a linear function of the input size.  The actual runtime might be larger (e.g., O(n²)), but it's guaranteed to be no better than Ω(n).
+* **Focus:** Best-case or lower bound complexity.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows at the same rate as another function, both upper and lower bounded.  We say f(n) = Θ(g(n)) if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+* **Focus:** Precise characterization of the growth rate.
+
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) means that for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  The inequality is strict.
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) means that for any positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀. The inequality is strict.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+
+
+**Summary Table:**
+
+| Notation | Meaning                                   | Example             |
+|----------|-------------------------------------------|----------------------|
+| O(g(n))  | Upper bound                               | f(n) = O(n²)         |
+| Ω(g(n))  | Lower bound                               | f(n) = Ω(n)          |
+| Θ(g(n))  | Tight bound (both upper and lower)         | f(n) = Θ(n log n)    |
+| o(g(n))  | Strictly slower                           | n = o(n²)            |
+| ω(g(n))  | Strictly faster                           | n² = ω(n)            |
+
+
+**Important Considerations:**
+
+* **Asymptotic Analysis:** These notations focus on the behavior as input size approaches infinity.  They don't tell you the exact runtime for a specific input size.
+* **Constants Ignored:** Constant factors are ignored in asymptotic analysis because they become insignificant as n grows large.
+* **Dominant Terms:**  Only the dominant term (the term that grows fastest) is usually kept in the asymptotic notation.  For example,  5n² + 3n + 10 is simplified to O(n²).
+
+
+Understanding these notations is essential for comparing the efficiency of different algorithms and choosing the best one for a given task.
+
