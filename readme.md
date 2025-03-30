@@ -14100,3 +14100,76 @@ do {
 
 These examples all print the numbers 0 through 4.  Remember to choose the loop type that best suits your needs.  `while` loops are best when the number of iterations isn't known beforehand, while `for` loops are more suitable when the number of iterations is known.  `do-while` loops ensure at least one execution of the loop body.  Infinite loops can occur if the condition in a `while` or `do-while` loop never becomes false, so be careful with your loop conditions.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This allows you to perform operations on all combinations of elements from two or more sets of data.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+outer_loop:
+  for outer_variable in outer_iterable:
+    inner_loop:
+      for inner_variable in inner_iterable:
+        # Code to execute for each combination of outer_variable and inner_variable
+```
+
+**Example (Python):**
+
+This example prints all possible pairs from two lists:
+
+```python
+outer_list = ["A", "B", "C"]
+inner_list = [1, 2, 3]
+
+for outer_item in outer_list:
+  for inner_item in inner_list:
+    print(f"Outer: {outer_item}, Inner: {inner_item}")
+```
+
+**Output:**
+
+```
+Outer: A, Inner: 1
+Outer: A, Inner: 2
+Outer: A, Inner: 3
+Outer: B, Inner: 1
+Outer: B, Inner: 2
+Outer: B, Inner: 3
+Outer: C, Inner: 1
+Outer: C, Inner: 2
+Outer: C, Inner: 3
+```
+
+**Example (JavaScript):**
+
+This example calculates the multiplication table up to 10:
+
+```javascript
+for (let i = 1; i <= 10; i++) {
+  for (let j = 1; j <= 10; j++) {
+    console.log(`${i} x ${j} = ${i * j}`);
+  }
+}
+```
+
+
+**Use Cases:**
+
+Nested loops are commonly used for:
+
+* **Matrix operations:** Processing rows and columns of a matrix.
+* **Generating combinations:**  Finding all possible combinations of items from multiple sets.
+* **Searching within data structures:**  Iterating through nested arrays or objects.
+* **Table processing:** Iterating over rows and columns in a table.
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the time complexity of your algorithm.  If the outer loop iterates `m` times and the inner loop iterates `n` times, the total number of iterations is `m * n`.  This can become computationally expensive for large datasets.  Consider using more efficient algorithms if performance is critical.
+* **Readability:**  Deeply nested loops (more than 3 levels) can be difficult to read and understand.  Try to refactor complex nested loops into smaller, more manageable functions.
+
+
+Nested loops are a fundamental concept in programming, providing a powerful way to process data that requires multiple levels of iteration. However, always be mindful of their potential performance implications.
+
