@@ -14027,3 +14027,76 @@ Understanding Big O notation is crucial for:
 
 While Big O simplifies analysis by ignoring constant factors and lower-order terms, it provides a valuable tool for understanding and comparing the scalability of algorithms.  It's an essential concept for any serious computer scientist or software engineer.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a certain condition is met.  The exact implementation depends on the programming language, but the basic structure is the same.  Here are examples in a few common languages:
+
+**1. While Loop (most languages)**
+
+A `while` loop continues as long as a condition is true.
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+```c++
+int count = 0;
+while (count < 5) {
+  std::cout << count << std::endl;
+  count++;
+}
+```
+
+**2. For Loop (most languages)**
+
+A `for` loop is often used when you know the number of iterations in advance.
+
+```python
+for i in range(5):  # range(5) generates numbers 0, 1, 2, 3, 4
+  print(i)
+```
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+```c++
+for (int i = 0; i < 5; i++) {
+  std::cout << i << std::endl;
+}
+```
+
+**3. Do-While Loop (some languages like C++, Java, JavaScript)**
+
+A `do-while` loop executes the code block at least once, and then repeats as long as the condition is true.
+
+```javascript
+let count = 0;
+do {
+  console.log(count);
+  count++;
+} while (count < 5);
+```
+
+```c++
+int count = 0;
+do {
+  std::cout << count << std::endl;
+  count++;
+} while (count < 5);
+```
+
+These examples all print the numbers 0 through 4.  Remember to choose the loop type that best suits your needs.  `while` loops are best when the number of iterations isn't known beforehand, while `for` loops are more suitable when the number of iterations is known.  `do-while` loops ensure at least one execution of the loop body.  Infinite loops can occur if the condition in a `while` or `do-while` loop never becomes false, so be careful with your loop conditions.
+
