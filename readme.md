@@ -23371,3 +23371,12 @@ class Node:
 
 The "best" representation depends entirely on the context.  For highly irregular trees, the child-sibling or list of children approaches are generally preferred.  For complete or nearly complete n-ary trees, the array representation is often more efficient.  If you need key-based access to nodes, a dictionary-based approach is suitable.  Consider the trade-offs between space and time complexity when selecting a representation.
 
+#  Introduction 
+Please provide me with context.  An introduction to *what*?  I need more information to write a helpful introduction.  For example, tell me:
+
+* **What is the topic?** (e.g., a research paper on climate change, a presentation on marketing strategies, a story about a talking dog)
+* **Who is the audience?** (e.g., experts in the field, general public, children)
+* **What is the purpose?** (e.g., to inform, persuade, entertain)
+
+Once I have this information, I can write a suitable introduction.
+
