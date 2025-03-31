@@ -17600,3 +17600,126 @@ To mitigate the issue of unbalanced trees, self-balancing BSTs are used. These d
 
 In summary, BSTs are a valuable data structure, especially when dealing with sorted data and requiring efficient searching, insertion, and deletion. However, understanding their limitations and considering self-balancing variants is crucial for achieving optimal performance in various applications.
 
+#  Binary Search Tree - Insertion (Python) 
+There are several ways to implement insertion into a Binary Search Tree (BST) in Python. Here are a couple of approaches, one iterative and one recursive:
+
+
+**Iterative Approach:**
+
+This approach uses a loop to traverse the tree and find the correct position for the new node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+    def inorder_traversal(self):  # Helper function for testing
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result): # Helper function for inorder traversal
+      if node:
+        self._inorder_recursive(node.left, result)
+        result.append(node.data)
+        self._inorder_recursive(node.right, result)
+
+```
+
+**Recursive Approach:**
+
+This approach uses recursion to traverse the tree and find the correct position for the new node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        self.root = self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        else:
+            node.right = self._insert_recursive(node.right, data)
+        return node
+
+    def inorder_traversal(self):  # Helper function for testing
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result): # Helper function for inorder traversal
+      if node:
+        self._inorder_recursive(node.left, result)
+        result.append(node.data)
+        self._inorder_recursive(node.right, result)
+
+```
+
+
+**Example Usage:**
+
+```python
+# Iterative
+bst_iterative = BST()
+bst_iterative.insert_iterative(8)
+bst_iterative.insert_iterative(3)
+bst_iterative.insert_iterative(10)
+bst_iterative.insert_iterative(1)
+bst_iterative.insert_iterative(6)
+bst_iterative.insert_iterative(14)
+print("Inorder traversal (Iterative):", bst_iterative.inorder_traversal())
+
+
+# Recursive
+bst_recursive = BST()
+bst_recursive.insert_recursive(8)
+bst_recursive.insert_recursive(3)
+bst_recursive.insert_recursive(10)
+bst_recursive.insert_recursive(1)
+bst_recursive.insert_recursive(6)
+bst_recursive.insert_recursive(14)
+print("Inorder traversal (Recursive):", bst_recursive.inorder_traversal())
+```
+
+Both approaches achieve the same result. The recursive approach is often considered more elegant and easier to read, but the iterative approach might be slightly more efficient in some cases (avoiding function call overhead).  Choose the approach that best suits your coding style and performance requirements.  Remember to include a helper function like `inorder_traversal` to verify the correct insertion.
+
