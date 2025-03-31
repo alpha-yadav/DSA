@@ -19122,3 +19122,73 @@ The best implementation depends on your specific needs:
 
 Remember to choose the data structure that best balances the needs of your application in terms of space efficiency, time complexity for different operations, and ease of implementation.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so you can follow all the arrows without ever going backwards.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):** Topological sorting only works on DAGs.  A cycle (a path that starts and ends at the same node) prevents a topological ordering from existing.
+* **Linear Ordering:** The result is a sequence, not a tree or other complex structure.
+* **Precedence:** The order reflects dependencies.  If A depends on B (there's an edge from B to A), then B will appear before A in the sorted order.
+* **Multiple Solutions:**  DAGs can often have multiple valid topological orderings.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm (using in-degree):**
+
+   This algorithm iteratively finds nodes with an in-degree of 0 (nodes with no incoming edges) and adds them to the sorted list.  It then removes those nodes and updates the in-degree of their neighbors. This process repeats until all nodes are processed.
+
+   * **Steps:**
+      1. Compute the in-degree of each node (the number of incoming edges).
+      2. Add all nodes with an in-degree of 0 to a queue.
+      3. While the queue is not empty:
+         * Dequeue a node.
+         * Add the node to the sorted list.
+         * For each neighbor of the node:
+            * Decrement its in-degree.
+            * If its in-degree becomes 0, add it to the queue.
+      4. If the number of nodes in the sorted list equals the total number of nodes, a topological sort is successful. Otherwise, a cycle exists in the graph.
+
+2. **Depth-First Search (DFS) with Post-Order Traversal:**
+
+   This algorithm uses DFS to traverse the graph.  It adds nodes to the sorted list in post-order (after all their descendants have been visited).  The post-order traversal guarantees that all dependencies are met.
+
+   * **Steps:**
+      1. For each node, perform DFS.
+      2. During DFS, when a node's recursive calls finish, add the node to the beginning of the sorted list (prepending).  This is the post-order traversal aspect.
+      3. The final sorted list is the result of the algorithm.  If you visit a node that's already visited during the DFS (except for the current DFS stack), a cycle exists.
+
+
+**Example (Kahn's Algorithm):**
+
+Consider a DAG with the following edges: A -> C, B -> C, B -> D, C -> E.
+
+1. In-degrees: A(0), B(0), C(2), D(1), E(1)
+2. Queue: [A, B]
+3. Process:
+   * Dequeue A, add to sorted list: [A]
+   * Update in-degree of C: C(1) Add C to queue.  Queue = [B, C]
+   * Dequeue B, add to sorted list: [A, B]
+   * Update in-degree of C and D: C(0), D(0) Add C and D to queue. Queue = [C, D]
+   * Dequeue C, add to sorted list: [A, B, C]
+   * Update in-degree of E: E(0) Add E to queue. Queue = [D, E]
+   * Dequeue D, add to sorted list: [A, B, C, D]
+   * Dequeue E, add to sorted list: [A, B, C, D, E]
+
+Therefore, one topological ordering is A, B, C, D, E. Another valid ordering might be B, A, C, D, E.
+
+
+**Applications:**
+
+Topological sorting has many applications in various fields, including:
+
+* **Course Scheduling:** Ordering courses based on prerequisites.
+* **Build Systems (like Make):** Determining the order to compile files.
+* **Dependency Resolution:** Resolving dependencies between software packages or modules.
+* **Data Serialization:** Determining the order to write data to a file or database.
+
+
+Choosing between Kahn's algorithm and DFS depends on the specific application and data structure. Kahn's algorithm is often considered more efficient in practice, especially for sparse graphs.  DFS is more concise and can be easier to understand for some.  Both are effective in detecting cycles.
+
