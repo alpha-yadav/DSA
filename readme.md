@@ -22724,3 +22724,60 @@ print(result)  # Output: [0, 1]
 
 Remember to choose a problem appropriate to your skill level.  Start with easier problems to build your foundation before tackling more complex ones.  Good luck!
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing a more concise version:
+
+**Version 1:  Clear and Readable**
+
+This version uses a `for` loop and `if/else if/else` statements for clear logic:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle cases divisible by both 3 and 5), then 3, then 5. If none of these conditions are met, it prints the number itself.
+
+
+**Version 2:  More Concise with Ternary Operator**
+
+This version uses nested ternary operators for a more compact (though potentially less readable for beginners) solution:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print(i % 15 == 0 ? "FizzBuzz" : (i % 3 == 0 ? "Fizz" : (i % 5 == 0 ? "Buzz" : "\(i)")))
+    }
+}
+
+fizzBuzzConcise(n: 15) //Call the function
+```
+
+This version achieves the same result but nests the conditional logic within the `print` statement using the ternary operator (`condition ? valueIfTrue : valueIfFalse`).
+
+
+**Explanation of Key Concepts:**
+
+* **`%` (Modulo Operator):** This operator gives the remainder of a division.  For example, `10 % 3` equals 1 (because 10 divided by 3 is 3 with a remainder of 1).  We use this to check for divisibility.
+* **`if/else if/else`:**  A standard conditional statement that executes different blocks of code based on different conditions.
+* **Ternary Operator (`condition ? valueIfTrue : valueIfFalse`):** A concise way to write a simple `if/else` statement in a single line.
+* **String Interpolation (`"\(i)"`):**  A way to embed values (like the integer `i`) directly into strings.
+
+
+**Choosing the Right Version:**
+
+For beginners, the first version (`fizzBuzz`) is recommended because it's easier to understand and maintain.  The second version (`fizzBuzzConcise`) is more compact but can be harder to read if you're not familiar with ternary operators.  Choose the version that best suits your current skill level and project requirements.  Readability is generally preferred over extreme conciseness, especially in collaborative projects.
+
