@@ -21842,3 +21842,13 @@ The recursive approach can be adapted, but it's more complex.  You need to itera
 
 Remember to adapt the code to your specific tree structure (e.g., if you use a different way to represent nodes and their connections).  Also, handle edge cases (e.g., one or both nodes not being in the tree, the root being one of the nodes).
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need information about the relationship you want to visualize. For example:
+
+* **A list of points:**  (x1, y1), (x2, y2), (x3, y3), ...
+* **An equation:** y = mx + b  (or something more complex)
+* **A description of the data:**  e.g., "The number of ice cream sales per day for the month of July."
+
+
+Once you give me this information, I can help you graph it.
+
