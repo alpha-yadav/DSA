@@ -16793,3 +16793,75 @@ while reversed_head:
 
 These examples demonstrate the increasing complexity of algorithmic problems.  The difficulty depends on factors like the data structures involved, the required algorithms, and the efficiency requirements (e.g., time and space complexity).  Remember to consider edge cases and optimize your solutions for better performance when tackling more complex problems.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It iterates through a sequence of numbers and prints different outputs depending on whether the number is divisible by 3, 5, or both.
+
+Here's how to implement a simple FizzBuzz algorithm in Swift, along with explanations:
+
+**Version 1: Basic Implementation**
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+**Explanation:**
+
+* `func fizzBuzz(n: Int)`:  This defines a function named `fizzBuzz` that takes an integer `n` as input, representing the upper limit of the sequence.
+* `for i in 1...n`: This loop iterates through numbers from 1 to `n` (inclusive).
+* `if i % 15 == 0`: This checks if the number is divisible by both 3 and 5 (because 15 is the least common multiple of 3 and 5). If it is, "FizzBuzz" is printed.  Checking for divisibility by 15 *first* is crucial for correct output.
+* `else if i % 3 == 0` and `else if i % 5 == 0`: These check for divisibility by 3 and 5 respectively.
+* `else`: If none of the above conditions are met, the number itself is printed.
+
+
+**Version 2:  More Concise with Ternary Operator**
+
+This version uses the ternary conditional operator (`condition ? value1 : value2`) to make the code slightly more compact, although potentially less readable for beginners.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print(i % 15 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+
+**Version 3: Using String Interpolation and a Tuple (Advanced)**
+
+This example demonstrates a more advanced approach using a tuple to store intermediate results and string interpolation for cleaner output construction.
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+  for i in 1...n {
+    let (fizz, buzz) = (i % 3 == 0, i % 5 == 0)
+    var output = ""
+    if fizz { output += "Fizz" }
+    if buzz { output += "Buzz" }
+    print(output.isEmpty ? "\(i)" : output)
+  }
+}
+
+fizzBuzzAdvanced(n: 15)
+```
+
+This version is more efficient because it avoids redundant checks. It only evaluates divisibility by 3 and 5 once each.
+
+
+Choose the version that best suits your understanding and coding style.  The first version is generally recommended for beginners due to its clarity.  Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).
+
