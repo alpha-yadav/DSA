@@ -22632,3 +22632,95 @@ else:
 
 Remember to be patient and persistent. Learning algorithms takes time and effort, but the rewards are significant.  Focus on understanding the underlying concepts rather than memorizing code.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Find the maximum value in a given array of integers.
+
+**Input:** An array of integers (e.g., `[3, 1, 4, 1, 5, 9, 2, 6, 5, 3]`)
+
+**Output:** The maximum integer in the array (e.g., `9`)
+
+**Solution Idea:** Iterate through the array, keeping track of the largest value encountered so far.
+
+
+**Medium:**
+
+**Problem:**  Reverse a linked list.
+
+**Input:** A singly linked list (you'll need a node definition:  `class Node: def __init__(self, data): ...`)
+
+**Output:** The same linked list with its nodes in reversed order.
+
+**Solution Idea:** Iterative or recursive approaches are common.  Iterative involves using three pointers to track the current node, the previous node, and the next node.
+
+
+**Hard:**
+
+**Problem:**  Find the shortest path between two nodes in a weighted graph using Dijkstra's algorithm.
+
+**Input:** A graph represented as an adjacency matrix or adjacency list, along with a source node and a destination node.  Weights represent the cost of traversing an edge.
+
+**Output:** The shortest distance between the source and destination nodes, and the path itself.
+
+**Solution Idea:** Dijkstra's algorithm uses a priority queue to efficiently explore the graph, always visiting the node with the smallest tentative distance first.
+
+
+**Here's a more specific example of a Medium problem with a Python solution:**
+
+**Problem:** Two Sum
+
+**Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+
+**Example 1:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Example 2:**
+
+```
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+```
+
+**Example 3:**
+
+```
+Input: nums = [3,3], target = 6
+Output: [0,1]
+```
+
+**Python Solution:**
+
+```python
+def two_sum(nums, target):
+    num_map = {}  # Create a dictionary to store numbers and their indices
+
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]  # Found the pair
+        num_map[num] = i  # Add the number and its index to the dictionary
+
+    return None  # No solution found
+
+# Example usage
+nums = [2, 7, 11, 15]
+target = 9
+result = two_sum(nums, target)
+print(result)  # Output: [0, 1]
+```
+
+Remember to choose a problem appropriate to your skill level.  Start with easier problems to build your foundation before tackling more complex ones.  Good luck!
+
