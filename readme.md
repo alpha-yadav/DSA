@@ -22988,3 +22988,67 @@ Big-O (O) notation describes the *upper bound* (worst-case) complexity, while Bi
 
 In summary, Big-Omega notation is an essential tool for understanding and analyzing the efficiency of algorithms, providing valuable insights into their best-case performance characteristics.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *worst-case* scenario of how the runtime or space requirements of an algorithm grow as the input size grows.  It focuses on the dominant factors affecting performance and ignores constant factors and smaller terms.
+
+Here's a breakdown of key aspects:
+
+**What Big O describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases with the input size (n).  This is the most common use of Big O.
+* **Space Complexity:** How the memory usage of an algorithm increases with the input size (n).
+
+**Why we use Big O:**
+
+* **Algorithm Comparison:**  It allows us to compare the efficiency of different algorithms regardless of the specific hardware or implementation details.
+* **Scalability Analysis:** It helps determine how well an algorithm will perform as the input size gets very large.
+* **Problem Solving:** Understanding Big O helps choose the most appropriate algorithm for a given problem.
+
+**Common Big O Notations and their meanings:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Examples: Accessing an array element by index, returning a value from a hash table.  This is the best possible time complexity.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Examples: Binary search in a sorted array, searching a balanced binary search tree.  Very efficient for large datasets.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Examples:  Searching an unsorted array, iterating through a linked list.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Examples: Merge sort, heap sort (efficient sorting algorithms).
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Examples: Nested loops iterating over the input data, bubble sort, selection sort (less efficient sorting algorithms).
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Examples: Finding all subsets of a set, traveling salesman problem (brute-force approach).  These algorithms become impractical for even moderately sized inputs.
+
+* **O(n!) - Factorial Time:** The runtime is the factorial of the input size.  Examples:  Generating all permutations of a sequence.  Extremely computationally expensive and only feasible for very small inputs.
+
+
+**How to analyze Big O:**
+
+1. **Identify the dominant operations:** Focus on the operations that are executed most frequently within the algorithm.  Ignore less significant operations.
+
+2. **Express the number of operations as a function of the input size (n):** Count how many times the dominant operations are executed as a function of the input size.
+
+3. **Simplify the function using Big O notation:** Ignore constant factors and lower-order terms. For example, O(2n + 5) simplifies to O(n).
+
+**Example:**
+
+Consider this function:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The dominant operation is the loop. The loop iterates `n` times (where `n` is the length of the array).  Therefore, the time complexity is O(n).
+
+**Important Considerations:**
+
+* **Best-case, Average-case, Worst-case:** Big O typically focuses on the worst-case scenario, but analyzing the best-case and average-case can also be valuable.
+* **Space Complexity:** Analyzing space complexity uses the same principles as time complexity, but focuses on the amount of memory used.
+* **Amortized Analysis:**  This analysis considers the average time complexity over a sequence of operations, even if individual operations have different complexities.
+
+
+Big O notation is a crucial tool for understanding and comparing the efficiency of algorithms.  While it doesn't give precise runtime measurements, it provides a powerful way to assess scalability and make informed choices about algorithm selection.
+
