@@ -19318,3 +19318,90 @@ Thorup's algorithm is quite complex and involves several sophisticated technique
 
 In summary, Thorup's algorithm is a theoretical marvel, representing a significant advancement in the field of minimum spanning tree algorithms. Its near-linear time complexity is a landmark achievement, though its practical implementation and application are challenging due to its inherent complexity.
 
+#  Graph Traversals 
+Graph traversals are algorithms used to visit every node in a graph in a systematic way.  There are several common traversal methods, each with its own properties and applications:
+
+**1. Breadth-First Search (BFS):**
+
+* **Idea:** Explores the graph level by level.  It starts at a root node and visits all its neighbors before moving to their neighbors.  Uses a queue data structure.
+* **Algorithm:**
+    1. Start at a root node and mark it as visited.
+    2. Add the root node to a queue.
+    3. While the queue is not empty:
+        * Dequeue a node.
+        * Process the node (e.g., print its value).
+        * Add all unvisited neighbors of the node to the queue and mark them as visited.
+* **Applications:**
+    * Finding the shortest path in unweighted graphs.
+    * Crawling web pages.
+    * Finding connected components.
+    * Social networking analysis.
+
+
+**2. Depth-First Search (DFS):**
+
+* **Idea:** Explores the graph as deeply as possible along each branch before backtracking. Uses a stack (implicitly through recursion or explicitly).
+* **Algorithm (Recursive):**
+    1. Mark the current node as visited.
+    2. For each unvisited neighbor of the current node:
+        * Recursively call DFS on the neighbor.
+* **Algorithm (Iterative):**
+    1. Push the starting node onto a stack.
+    2. While the stack is not empty:
+        * Pop a node from the stack.
+        * If the node is not visited:
+            * Mark it as visited.
+            * Process it.
+            * Push its unvisited neighbors onto the stack.
+* **Applications:**
+    * Topological sorting.
+    * Detecting cycles in a graph.
+    * Finding strongly connected components.
+    * Solving puzzles like mazes.
+
+
+**3. Variations and Considerations:**
+
+* **Directed vs. Undirected Graphs:** The algorithms adapt slightly depending on whether the graph is directed (edges have a direction) or undirected (edges are bidirectional).  In directed graphs, you only follow edges in the allowed direction.
+
+* **Weighted Graphs:**  For weighted graphs (edges have associated costs),  Dijkstra's algorithm (for shortest paths) and Prim's/Kruskal's algorithms (for minimum spanning trees) are commonly used instead of BFS.
+
+* **Data Structures:** The choice of data structure (queue for BFS, stack for DFS) significantly impacts the order of node visitation.
+
+* **Space Complexity:** BFS generally has higher space complexity than DFS, especially in wide graphs, because it needs to store all nodes at a given level in the queue. DFS's space complexity is proportional to the depth of the graph.
+
+
+**Example (Python - BFS):**
+
+```python
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+
+    while queue:
+        vertex = queue.popleft()
+        print(vertex, end=" ")
+
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+bfs(graph, 'A') # Output: A B C D E F (order may vary slightly depending on implementation)
+```
+
+Remember to choose the appropriate traversal algorithm based on the specific problem and the characteristics of the graph.  The choice often hinges on whether you need to find shortest paths, explore all possibilities systematically, or achieve a specific ordering of nodes.
+
