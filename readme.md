@@ -24722,3 +24722,109 @@ If each node in the tree has a parent pointer, finding the LCA becomes significa
 
 Remember to handle edge cases like empty trees, nodes that don't exist in the tree, and cases where one node is an ancestor of the other.  The provided recursive solution includes some basic error handling.  More robust error handling may be necessary depending on your specific needs.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree or graph is a fundamental problem in computer science with applications in various fields.  The most efficient algorithms depend heavily on the type of tree (binary tree, general tree, etc.) and whether the tree is rooted or unrooted.
+
+Here's a breakdown of how to find the LCA for different scenarios:
+
+**1. Binary Tree (Most Common Case):**
+
+* **Rooted Binary Tree (Most common scenario):**  We generally assume a rooted binary tree unless specified otherwise. There are two main approaches:
+
+    * **Recursive Approach:** This is a clean and intuitive method.  The algorithm checks if either `node p` or `node q` is the current node. If either is found, it returns the current node. Otherwise, it recursively searches in the left and right subtrees.  If both left and right subtrees return a node (meaning p and q are in different subtrees), the current node is the LCA. If one subtree returns `null`, the LCA is in the other subtree.
+
+    ```python
+    class TreeNode:
+        def __init__(self, val=0, left=None, right=None):
+            self.val = val
+            self.left = left
+            self.right = right
+
+    def lowestCommonAncestor(self, root, p, q):
+        if not root or root == p or root == q:
+            return root
+
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+
+        if left and right:
+            return root
+        return left if left else right
+    ```
+
+    * **Iterative Approach (using parent pointers):** If each node in the binary tree has a pointer to its parent, an iterative solution can be more efficient.  We traverse up the tree from both `p` and `q`, storing their ancestors in separate sets. The LCA is the lowest node that's present in both sets.
+
+    ```python
+    def lowestCommonAncestor_iterative(root, p, q):
+        # Requires parent pointers in the tree nodes.  Implementation omitted for brevity.
+        ancestors_p = set()
+        ancestors_q = set()
+
+        curr = p
+        while curr:
+            ancestors_p.add(curr)
+            curr = curr.parent  # Assuming parent pointer exists
+
+        curr = q
+        while curr:
+            if curr in ancestors_p:
+                return curr
+            ancestors_q.add(curr)
+            curr = curr.parent
+
+        return None # p and q are not in the same tree
+    ```
+
+
+**2. General Tree (Not Binary):**
+
+The recursive approach can be adapted to general trees, but it's slightly more complex as a node can have multiple children.  The core idea remains the same: recursively search down the tree, checking if both `p` and `q` are found in the subtrees of a node.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, children=None):
+        self.val = val
+        self.children = children or []
+
+def lowestCommonAncestor_general_tree(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    found_p = False
+    found_q = False
+    for child in root.children:
+        ancestor = lowestCommonAncestor_general_tree(child, p, q)
+        if ancestor == p:
+            found_p = True
+        if ancestor == q:
+            found_q = True
+        if ancestor and ancestor != p and ancestor != q:
+            return ancestor # Found in subtree
+    if found_p and found_q:
+        return root
+    return None
+
+```
+
+
+**3. Unrooted Tree:**
+
+Finding the LCA in an unrooted tree is more challenging.  Algorithms often involve rooting the tree arbitrarily at one point and then applying the rooted tree algorithms.  More sophisticated methods using graph algorithms may be needed for optimal solutions.
+
+
+**4. Graph (Not a Tree):**
+
+If the structure is a graph (contains cycles), the concept of a "lowest common ancestor" needs careful definition.  You might be looking for the shortest path between the nodes and the node where the paths diverge.  Algorithms involving breadth-first search (BFS) or depth-first search (DFS) are often used in this case, potentially needing adjustments for directed vs. undirected graphs.
+
+**Choosing the Right Algorithm:**
+
+The best approach depends heavily on your specific needs:
+
+* **Efficiency:** For large binary trees, the iterative approach with parent pointers (if available) can be more efficient than recursion.  For general trees, the recursive approach is often simpler to implement.
+* **Space Complexity:** The recursive approach might have higher space complexity due to the call stack, especially for deep trees.  The iterative approach usually has lower space complexity.
+* **Tree Structure:**  The algorithm needs to match the type of tree (binary, general, unrooted).
+* **Availability of Parent Pointers:** The iterative approach for binary trees requires parent pointers.
+
+
+Remember to handle edge cases, such as when one or both nodes are not in the tree, or when the tree is empty.  Choose the method that best fits your constraints and data structure.
+
