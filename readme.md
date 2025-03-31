@@ -21852,3 +21852,105 @@ Please provide me with the data or equation you would like me to graph.  I need 
 
 Once you give me this information, I can help you graph it.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using adjacency matrices is a common approach, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, its advantages, disadvantages, and implementation details:
+
+**Concept:**
+
+An adjacency matrix represents a graph as a square matrix where each element `matrix[i][j]` indicates the existence (and possibly weight) of an edge between vertex `i` and vertex `j`.
+
+* **Unweighted Graph:**  `matrix[i][j] = 1` if there's an edge from vertex `i` to vertex `j`, and `matrix[i][j] = 0` otherwise.
+* **Weighted Graph:** `matrix[i][j]` holds the weight of the edge between vertex `i` and vertex `j`.  If there's no edge, a special value (like `-1`, `infinity`, or `0`) is used to represent its absence.
+* **Directed Graph:** The matrix is not necessarily symmetric. `matrix[i][j]` might be different from `matrix[j][i]`.
+* **Undirected Graph:** The matrix is symmetric. `matrix[i][j] = matrix[j][i]`.
+
+**Example (Unweighted, Directed):**
+
+Consider a graph with 4 vertices (A, B, C, D) and edges A->B, A->C, B->D, C->D.  The adjacency matrix would be:
+
+```
+   A B C D
+A  0 1 1 0
+B  0 0 0 1
+C  0 0 0 1
+D  0 0 0 0
+```
+
+**Example (Weighted, Undirected):**
+
+Consider a graph with 3 vertices (A, B, C) and edges A-B (weight 2), B-C (weight 5), A-C (weight 1). The adjacency matrix would be:
+
+```
+   A B C
+A  0 2 1
+B  2 0 5
+C  1 5 0
+```
+
+
+**Implementation (Python):**
+
+```python
+class Graph:
+    def __init__(self, num_vertices, directed=False, weighted=False):
+        self.num_vertices = num_vertices
+        self.directed = directed
+        self.weighted = weighted
+        self.matrix = [[0] * num_vertices for _ in range(num_vertices)] # Initialize with 0s
+
+
+    def add_edge(self, u, v, weight=1): #weight is only used if weighted = True
+        if not 0 <= u < self.num_vertices or not 0 <= v < self.num_vertices:
+            raise ValueError("Invalid vertex indices")
+
+        self.matrix[u][v] = weight
+        if not self.directed: #If undirected, add the opposite edge as well
+            self.matrix[v][u] = weight
+
+    def print_matrix(self):
+        for row in self.matrix:
+            print(row)
+
+# Example usage:
+#Unweighted directed graph
+graph1 = Graph(4, directed=True)
+graph1.add_edge(0, 1)
+graph1.add_edge(0, 2)
+graph1.add_edge(1, 3)
+graph1.add_edge(2,3)
+print("Unweighted Directed Graph:")
+graph1.print_matrix()
+
+#Weighted undirected graph
+graph2 = Graph(3, directed=False, weighted=True)
+graph2.add_edge(0, 1, 2)
+graph2.add_edge(1, 2, 5)
+graph2.add_edge(0, 2, 1)
+print("\nWeighted Undirected Graph:")
+graph2.print_matrix()
+```
+
+**Advantages:**
+
+* **Easy to check for edge existence:**  O(1) time complexity.
+* **Simple implementation:** Relatively straightforward to understand and implement.
+* **Finding neighbors is easy:**  You can find all neighbors of a vertex by examining a single row (or column).
+
+**Disadvantages:**
+
+* **Space complexity:** O(V²) where V is the number of vertices. This becomes inefficient for large, sparse graphs (graphs with few edges).
+* **Adding/removing vertices:** Inefficient; requires matrix resizing, which can be costly.
+* **Adding/removing edges:**  O(1) for adding and deleting an edge.
+
+
+**When to use Adjacency Matrices:**
+
+* Dense graphs (many edges).
+* When fast edge existence checks are crucial.
+* When the graph's size is relatively small.
+
+
+**Alternatives:**
+
+For sparse graphs, adjacency lists are generally a better choice due to their better space efficiency.  Other representations like incidence matrices also exist but are less commonly used.
+
