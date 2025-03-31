@@ -17555,3 +17555,48 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Remember to handle the base cases (empty trees) correctly in both methods to avoid errors.  The examples show how to use the functions with sample binary trees.  You'll need to adapt the code to your specific tree implementation if it differs from the `Node` class shown here.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They're tree-like structures where each node has at most two children, referred to as the left child and the right child.  The key property that defines a BST is the *search property*:
+
+* **Search Property:** For every node in the tree:
+    * All nodes in its left subtree have keys *less than* the node's key.
+    * All nodes in its right subtree have keys *greater than* the node's key.
+
+This property allows for efficient searching, insertion, and deletion of elements.
+
+**Key Operations:**
+
+* **Search:**  The most important operation.  It involves traversing the tree, comparing the search key with the node's key at each step.  If the key matches, the node is found. If the key is smaller, the search continues in the left subtree; if larger, in the right subtree.  The time complexity of a successful search is O(h), where h is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes (O(log n) time complexity).  In a worst-case scenario (a skewed tree resembling a linked list), h can be n, resulting in O(n) time complexity.
+
+* **Insertion:** A new node is added to the tree by traversing it similarly to a search.  The new node becomes a leaf node, placed in the appropriate subtree based on its key value.  Time complexity is also O(h), similar to search.
+
+* **Deletion:**  This is the most complex operation.  There are three cases to consider:
+    * **Node with no children:** Simply remove the node.
+    * **Node with one child:** Replace the node with its child.
+    * **Node with two children:**  Several approaches exist, including:
+        * **In-order successor:** Find the smallest node in the right subtree (the in-order successor) and replace the node to be deleted with it.  Then delete the in-order successor from its original location (which will be a node with at most one child).
+        * **In-order predecessor:** Find the largest node in the left subtree (the in-order predecessor) and replace the node to be deleted with it. Then delete the in-order predecessor from its original location.
+  Deletion also has a time complexity of O(h).
+
+* **Minimum/Maximum:** Finding the minimum or maximum element in a BST is straightforward.  The minimum element is the leftmost node, and the maximum element is the rightmost node.  This operation takes O(h) time.
+
+**Advantages of BSTs:**
+
+* **Efficient search, insertion, and deletion (in balanced trees):**  O(log n) time complexity for these operations in a balanced tree makes BSTs very efficient for many applications.
+* **Ordered data:** BSTs inherently maintain the data in sorted order, facilitating tasks like range queries and finding the k-th smallest/largest element.
+
+**Disadvantages of BSTs:**
+
+* **Performance degrades with unbalanced trees:**  In the worst-case scenario (a skewed tree), the time complexity becomes O(n), making the performance similar to a linked list.  Self-balancing BSTs (like AVL trees and red-black trees) address this issue.
+* **Not suitable for all applications:**  If the data is frequently updated or requires frequent random access, other data structures might be more appropriate.
+
+
+**Self-Balancing BSTs:**
+
+To mitigate the issue of unbalanced trees, self-balancing BSTs are used. These data structures automatically adjust their structure during insertions and deletions to maintain a relatively balanced shape, ensuring logarithmic time complexity for operations even in the worst case. Examples include:
+
+* **AVL trees:**  Maintain a balance factor for each node to ensure that the height difference between the left and right subtrees is at most 1.
+* **Red-black trees:**  Use a coloring scheme to maintain balance, ensuring that the path from the root to any leaf is not more than twice as long as the shortest path.
+
+In summary, BSTs are a valuable data structure, especially when dealing with sorted data and requiring efficient searching, insertion, and deletion. However, understanding their limitations and considering self-balancing variants is crucial for achieving optimal performance in various applications.
+
