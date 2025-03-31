@@ -19833,3 +19833,58 @@ Big-Theta gives a precise characterization of the growth rate of an algorithm's 
 
 **In summary:** Big-Theta notation provides a precise and powerful way to analyze the efficiency of algorithms and data structures by characterizing their asymptotic runtime and space complexity.  It's a fundamental concept in algorithm analysis.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input grows arbitrarily large.  They're crucial in computer science for analyzing the efficiency of algorithms.  Here's a comparison of the most common notations:
+
+**Big O (O-notation):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is f(n) = 2n² + 5n + 1, we can say its time complexity is O(n²).  We ignore the lower-order terms and the constant factor because they become insignificant as n grows very large.
+* **Focus:** Worst-case performance.  It tells us how bad things *could* get.
+
+**Big Omega (Ω-notation):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function.  It describes the *best-case* scenario (or a guaranteed minimum). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is f(n) = n² + 5n + 1, we can say its time complexity is Ω(n²).
+* **Focus:** Best-case or guaranteed minimum performance. It tells us how good things *will* be at least.
+
+**Big Theta (Θ-notation):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows at the *same rate* as another function, both upper and lower bound.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is f(n) = 2n² + 5n + 1, we can say its time complexity is Θ(n²).
+* **Focus:** Precise asymptotic behavior. It gives a clear picture of how the function scales.
+
+**Little o (o-notation):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  We say f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+* **Focus:**  Showing a significant difference in growth rates.
+
+**Little omega (ω-notation):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function.  We say f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+* **Focus:** Showing a significant difference in growth rates.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Example         |
+|---------|----------------------------------------------|-----------------|
+| O(g(n)) | Upper bound                                  | 2n² + 5n + 1 = O(n²) |
+| Ω(g(n)) | Lower bound                                  | 2n² + 5n + 1 = Ω(n²) |
+| Θ(g(n)) | Tight bound (both upper and lower)          | 2n² + 5n + 1 = Θ(n²) |
+| o(g(n)) | Strictly slower than                         | n = o(n²)       |
+| ω(g(n)) | Strictly faster than                         | n² = ω(n)       |
+
+
+**Relationships:**
+
+* Θ(g(n)) implies both O(g(n)) and Ω(g(n)).
+* O(g(n)) does *not* imply Ω(g(n)) (and vice-versa).  For example, n = O(n²) but n ≠ Ω(n²).
+* o(g(n)) is a *stronger* statement than O(g(n)).
+* ω(g(n)) is a *stronger* statement than Ω(g(n)).
+
+
+Understanding these notations is essential for comparing the efficiency of different algorithms and choosing the best one for a given task. Remember that asymptotic analysis focuses on the behavior as input size approaches infinity; it doesn't provide exact runtime for small inputs.
+
