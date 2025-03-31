@@ -19731,3 +19731,62 @@ This version builds the output string incrementally.  If the string is empty aft
 
 For beginners, the first (`fizzBuzz`) version is the easiest to understand and maintain. The others offer slightly better conciseness, but readability might suffer slightly depending on your experience level.  Choose the version that best suits your understanding and coding style. Remember that readability and maintainability are often more important than extreme conciseness, especially in larger projects.
 
+#  Algorithm Complexity 
+Algorithm complexity is a crucial concept in computer science that describes how the runtime or space requirements of an algorithm grow as the input size increases.  It's not about the exact runtime for a specific input, but rather how the runtime scales.  We typically analyze complexity using asymptotic notation, focusing on the dominant factors as the input size approaches infinity.
+
+Here's a breakdown of key aspects:
+
+**1. Types of Complexity:**
+
+* **Time Complexity:**  Measures how the runtime of an algorithm increases with the input size.  This is often the most important aspect.
+* **Space Complexity:** Measures how the memory usage of an algorithm increases with the input size.  This includes both the algorithm's working space and any data structures it uses.
+
+**2. Asymptotic Notation:**
+
+Asymptotic notation provides a way to express the growth rate of an algorithm's complexity without getting bogged down in constant factors or small input sizes.  The most common notations are:
+
+* **Big O (O):** Represents the *upper bound* of the growth rate.  It describes the worst-case scenario.  We say an algorithm is O(f(n)) if its runtime is at most a constant multiple of f(n) for sufficiently large n (where n is the input size).
+
+* **Big Omega (Ω):** Represents the *lower bound* of the growth rate. It describes the best-case scenario (though often less important than Big O).  An algorithm is Ω(f(n)) if its runtime is at least a constant multiple of f(n) for sufficiently large n.
+
+* **Big Theta (Θ):** Represents the *tight bound*.  An algorithm is Θ(f(n)) if its runtime is both O(f(n)) and Ω(f(n)).  This means the growth rate is precisely f(n), ignoring constant factors.
+
+**3. Common Complexity Classes:**
+
+These are common growth rates you'll encounter when analyzing algorithms.  They are listed in increasing order of growth:
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array by index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching an unsorted array for a specific element.
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Bubble sort, selection sort, nested loops iterating over the same input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Finding all permutations of a sequence.
+
+
+**4. Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Identify the dominant term:** Ignore constant factors and lower-order terms, focusing on the term that grows fastest as n increases.
+4. **Express the complexity using asymptotic notation:** Use Big O, Big Omega, or Big Theta to describe the growth rate.
+
+**Example:**
+
+Consider a simple function that sums the elements of an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for i in range(len(arr)):
+    total += arr[i]
+  return total
+```
+
+The loop iterates `n` times (where `n` is the length of the array).  The addition operation is performed `n` times. Therefore, the time complexity is O(n) – linear time.  The space complexity is O(1) because it uses a constant amount of extra space regardless of the array size.
+
+
+Understanding algorithm complexity is critical for choosing the right algorithm for a given task, optimizing existing algorithms, and predicting the performance of software systems as they scale.  Choosing an O(n²) algorithm for a large dataset might be disastrous, while an O(log n) solution could be incredibly efficient.
+
