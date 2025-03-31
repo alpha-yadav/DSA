@@ -22781,3 +22781,68 @@ This version achieves the same result but nests the conditional logic within the
 
 For beginners, the first version (`fizzBuzz`) is recommended because it's easier to understand and maintain.  The second version (`fizzBuzzConcise`) is more compact but can be harder to read if you're not familiar with ternary operators.  Choose the version that best suits your current skill level and project requirements.  Readability is generally preferred over extreme conciseness, especially in collaborative projects.
 
+#  Algorithm Complexity 
+Algorithm complexity describes how the runtime or space requirements of an algorithm grow as the input size grows.  It's a crucial concept in computer science because it allows us to compare the efficiency of different algorithms and predict their performance on large datasets.  We typically analyze complexity using *Big O notation*.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:** Measures how the runtime of an algorithm scales with the input size.  It focuses on the dominant operations and ignores constant factors.
+
+* **Space Complexity:** Measures how the memory usage of an algorithm scales with the input size. This includes the space used for input, output, and temporary variables.
+
+* **Big O Notation (O):**  A mathematical notation used to classify algorithms based on their growth rates. It describes the upper bound of the runtime or space complexity.  It focuses on the dominant term as the input size approaches infinity.  We ignore constant factors and lower-order terms.
+
+**Common Big O Notations and Their Growth Rates:**
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example:  Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size. Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime increases factorially with the input size. Example: Finding all permutations of a set.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, we typically follow these steps:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime.
+
+2. **Count the number of times these operations are executed:** Express this count as a function of the input size (usually denoted as 'n').
+
+3. **Express the function using Big O notation:**  Identify the dominant term and ignore constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple algorithm that sums all elements in an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for num in arr:
+    total += num
+  return total
+```
+
+* **Basic operation:**  The addition operation (`total += num`)
+* **Count:** The addition operation is executed 'n' times (where 'n' is the length of the array).
+* **Big O notation:** The time complexity is O(n) – linear time.
+
+
+**Space Complexity Analysis:**
+
+Space complexity analysis is similar to time complexity but focuses on memory usage.  We consider the space used for variables, data structures, and function calls.  The same Big O notation applies.
+
+
+**Choosing Algorithms:**
+
+Understanding algorithm complexity is crucial for choosing the most efficient algorithm for a given task.  For large datasets, the difference between an O(n) algorithm and an O(n²) algorithm can be dramatic.  Algorithms with lower Big O complexity are generally preferred.
+
