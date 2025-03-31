@@ -25092,3 +25092,73 @@ The space complexity of an adjacency list is O(V + E), where V is the number of 
 
 The best implementation depends on your specific needs and the size of your graph.  For simplicity and small graphs, Python lists might suffice.  For larger graphs or when performance is critical, dictionaries or custom classes offer better efficiency and maintainability.  Consider using a graph library (like NetworkX in Python) for larger and more complex graph processing tasks.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's an ordering where you can follow the arrows without ever going backward.  If a graph has cycles, a topological sort is impossible.
+
+**When is it useful?**
+
+Topological sorting is crucial in situations where dependencies exist between tasks or elements.  Some common applications include:
+
+* **Build systems (like Make):** Determining the order to compile source code files.  A header file needs to be compiled before the files that include it.
+* **Instruction scheduling in compilers:**  Instructions dependent on each other need to be executed in the correct order.
+* **Dependency resolution in software package management:** Packages with dependencies must be installed before those that depend on them.
+* **Course scheduling:** Prerequisites for courses must be completed before taking the course.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue.  It starts by finding nodes with an in-degree of 0 (nodes with no incoming edges).  These nodes are added to the queue.  Then, it iteratively removes nodes from the queue, adding them to the sorted list and decrementing the in-degree of their neighbors.  This continues until the queue is empty.
+
+   * **Steps:**
+     1. Compute the in-degree (number of incoming edges) for each node.
+     2. Add all nodes with an in-degree of 0 to a queue.
+     3. While the queue is not empty:
+        * Remove a node from the queue and add it to the sorted list.
+        * For each neighbor of the removed node:
+           * Decrement its in-degree.
+           * If its in-degree becomes 0, add it to the queue.
+     4. If the sorted list contains all nodes, the topological sort is successful.  Otherwise, a cycle exists in the graph.
+
+
+2. **Depth-First Search (DFS) Algorithm:**
+
+   This algorithm uses DFS to recursively traverse the graph.  It adds nodes to the sorted list in post-order (after all their descendants have been visited).
+
+   * **Steps:**
+     1. For each node, mark it as unvisited.
+     2. Create an empty sorted list.
+     3. For each node, if it is unvisited:
+        * Perform a DFS starting from that node.
+        * Append the node to the sorted list after the DFS call (post-order).
+     4. Reverse the sorted list. This reversed list represents the topological ordering.
+
+
+**Example (Kahn's Algorithm):**
+
+Let's say we have a graph with nodes A, B, C, D, and E, and edges:  A -> B, A -> C, B -> D, C -> D, D -> E.
+
+1. In-degrees: A=0, B=1, C=1, D=2, E=1
+2. Queue: [A]
+3. Iteration 1: Remove A, add to sorted list: [A], update in-degrees: B=0, C=0
+4. Queue: [B, C]
+5. Iteration 2: Remove B, add to sorted list: [A, B], update in-degrees: D=1
+6. Queue: [C, D]
+7. Iteration 3: Remove C, add to sorted list: [A, B, C], update in-degrees: D=0
+8. Queue: [D]
+9. Iteration 4: Remove D, add to sorted list: [A, B, C, D], update in-degrees: E=0
+10. Queue: [E]
+11. Iteration 5: Remove E, add to sorted list: [A, B, C, D, E]
+
+The topological sort is: A, B, C, D, E.
+
+
+**Detecting Cycles:**
+
+Both algorithms can detect cycles.  In Kahn's algorithm, if the final sorted list doesn't contain all nodes, a cycle exists.  In DFS, visiting a node that is already visited (but not finished) indicates a cycle.
+
+
+In summary, topological sorting provides a valuable way to order tasks or elements with dependencies, and understanding both Kahn's algorithm and the DFS-based approach offers flexibility in implementing it. Remember that the resulting topological order is not necessarily unique.
+
