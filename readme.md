@@ -18255,3 +18255,112 @@ print(is_bst_minmax(root)) #Output: True
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the recursive approach, where H is the height of the tree (O(N) in the worst case of a skewed tree and O(log N) in the best case of a balanced tree).  The iterative inorder traversal approach would have O(1) space complexity.  Choose the method that best suits your needs and coding style.  The min-max approach might be slightly easier to understand conceptually for some.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree adheres to the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* The value of the left subtree's nodes is less than the node's value.
+* The value of the right subtree's nodes is greater than the node's value.
+
+Here are three methods, ranging from simple recursion to more optimized iterative approaches:
+
+**Method 1: Recursive Approach (Simplest)**
+
+This method recursively checks the BST property for each subtree.  It's easy to understand but can be less efficient for deeply nested trees due to recursive function calls.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """Recursively checks if a given tree is a BST."""
+
+    def helper(node, min_val, max_val):
+        if node is None:
+            return True
+
+        if not (min_val < node.data < max_val):
+            return False
+
+        return (helper(node.left, min_val, node.data) and
+                helper(node.right, node.data, max_val))
+
+    return helper(node, float('-inf'), float('inf'))
+
+
+#Example usage
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_recursive(root))  #Output: True (if the tree is a BST)
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5)
+
+print(is_bst_recursive(root2)) #Output: False (This is NOT a BST)
+```
+
+
+**Method 2: Inorder Traversal (Efficient)**
+
+A BST, when traversed in-order (left, root, right), produces a sorted sequence. This method performs an inorder traversal and checks if the resulting list is sorted. It's generally more efficient than the recursive approach for large trees because it avoids recursive function calls.
+
+```python
+def is_bst_inorder(node):
+    """Checks if a tree is a BST using inorder traversal."""
+    result = []
+
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.data)
+            inorder(node.right)
+
+    inorder(node)
+    for i in range(1, len(result)):
+        if result[i] < result[i-1]:
+            return False
+    return True
+
+# Example Usage (same as above,  try with root and root2)
+print(is_bst_inorder(root)) #Output: True (if the tree is a BST)
+print(is_bst_inorder(root2)) #Output: False
+
+```
+
+**Method 3: Iterative Approach (More Memory Efficient)**
+
+This iterative approach uses a stack to mimic the recursion of the first method, making it more memory-efficient than the purely recursive approach, especially for very deep trees that might cause stack overflow errors.
+
+```python
+def is_bst_iterative(node):
+    """Checks if a tree is a BST using iterative inorder traversal."""
+    stack = []
+    prev = float('-inf')
+    while stack or node:
+        while node:
+            stack.append(node)
+            node = node.left
+        node = stack.pop()
+        if node.data <= prev:
+            return False
+        prev = node.data
+        node = node.right
+    return True
+
+
+# Example Usage (same as above, try with root and root2)
+print(is_bst_iterative(root))  #Output: True (if the tree is a BST)
+print(is_bst_iterative(root2))  #Output: False
+
+```
+
+Choose the method that best suits your needs. The inorder traversal method (Method 2) is generally a good balance of simplicity and efficiency for most cases.  The iterative method (Method 3) is preferred when dealing with extremely deep trees to prevent potential stack overflow issues.  Method 1 is primarily for illustrative purposes to show a clear recursive implementation.  Remember to adapt the `Node` class definition if your tree structure is different.
+
