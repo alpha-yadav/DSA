@@ -20319,3 +20319,16 @@ The optimal representation depends on the specific use case. Consider these fact
 
 For many applications, the **list of children** representation provides a good balance between flexibility and efficiency, especially if you frequently need to access individual children without traversing siblings.  If you have a complete tree, the **array representation** is very efficient in terms of space and access time.  The **child-sibling** representation is a good compromise if you're mainly performing child-to-child traversals.
 
+#  Introduction 
+Please provide me with context!  I need to know what you want an introduction *to*.  For example, are you looking for an introduction to:
+
+* **A specific topic?** (e.g., "an introduction to quantum physics," "an introduction to the French Revolution")
+* **A person?** (e.g., "an introduction to my friend, Sarah")
+* **A book, movie, or song?** (e.g., "an introduction to the plot of Hamlet")
+* **An event?** (e.g., "an introduction to the upcoming company picnic")
+* **A presentation or speech?** (e.g., "an introduction to my research on climate change")
+* **A piece of writing?** (e.g., "an introduction to a short story about a talking dog")
+
+
+Tell me what you need an introduction for, and I'll do my best to help!
+
