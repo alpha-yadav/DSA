@@ -17114,3 +17114,76 @@ While Big O focuses on the upper bound, other notations provide a more complete 
 
 Understanding Big O notation is crucial for any computer scientist or software engineer to write efficient and scalable code.  It's a fundamental tool for analyzing and comparing algorithms.
 
+#  A Simple Loop 
+The simplest loop in most programming languages is the `while` loop.  It continues to execute a block of code as long as a given condition is true. Here are examples in a few popular languages:
+
+**Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This loop prints the numbers 0 through 4.  The condition `count < 5` is checked before each iteration. When `count` becomes 5, the condition is false, and the loop terminates.
+
+
+**JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+This is functionally identical to the Python example.
+
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+This C++ example does the same thing, but includes the necessary header file for input/output and uses `std::cout` for printing.
+
+
+**Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+This Java example requires a class and a `main` method.
+
+
+These are all variations of the same basic concept.  The core elements are:
+
+* **Initialization:** A variable is initialized (e.g., `count = 0`).
+* **Condition:** A condition is tested (e.g., `count < 5`).
+* **Body:** A block of code is executed repeatedly as long as the condition is true.
+* **Update:** The variable is updated within the loop body (e.g., `count += 1` or `count++`) to eventually make the condition false and terminate the loop.  Without this update, you'd have an *infinite loop*.
+
+
+Remember to always ensure your loop condition will eventually become false to avoid infinite loops.  Infinite loops can crash your program or freeze your computer.
+
