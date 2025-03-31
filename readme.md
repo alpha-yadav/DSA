@@ -22152,3 +22152,78 @@ The space complexity of an adjacency list is O(V + E), where V is the number of 
 
 Remember to choose the implementation that best suits your needs and the characteristics of your graph.  Consider the trade-offs between memory usage and the frequency of operations like adding, deleting, and checking edges.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so you can follow the arrows without ever going backwards.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):**  Topological sorting only works on DAGs.  A cycle in the graph would make it impossible to create a linear order satisfying the condition.
+* **Linear Ordering:** The output is a sequence of nodes.
+* **Precedence:** The order respects the dependencies defined by the edges. If there's an edge from A to B, A must come before B in the sorted order.
+* **Multiple Solutions:**  DAGs can often have multiple valid topological sorts.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue to process nodes with no incoming edges.
+
+   * **Initialization:**
+     * Find all nodes with an in-degree (number of incoming edges) of 0. Add them to a queue.
+     * Initialize an empty list to store the sorted nodes.
+
+   * **Iteration:**
+     * While the queue is not empty:
+       * Remove a node from the queue.
+       * Add the node to the sorted list.
+       * For each neighbor (outgoing edge) of the node:
+         * Decrement the neighbor's in-degree.
+         * If the neighbor's in-degree becomes 0, add it to the queue.
+
+   * **Cycle Detection:** If the final sorted list doesn't contain all nodes, the graph contains a cycle.
+
+2. **Depth-First Search (DFS) based Algorithm:**
+
+   This algorithm uses DFS to recursively traverse the graph.
+
+   * **Initialization:**
+     * Initialize an empty list to store the sorted nodes.
+     * Set a visited array for each node.
+
+   * **DFS function:**
+     * Mark the current node as visited.
+     * Recursively call DFS on all unvisited neighbors.
+     * Add the current node to the beginning of the sorted list (important: prepend, not append).
+
+
+   * **Cycle Detection:**  If a node is visited and then encountered again during a DFS traversal (detecting back edge), it indicates a cycle.
+
+
+**Example (Kahn's Algorithm):**
+
+Consider a DAG with nodes A, B, C, D, and E, and edges: A->C, B->C, C->D, B->E, D->E.
+
+1. **Initialization:** Queue = {A, B}, In-degrees: A=0, B=0, C=2, D=1, E=2, Sorted List = {}
+2. **Iteration 1:** Remove A, add A to Sorted List, decrement C's in-degree to 1. Queue = {B}, Sorted List = {A}
+3. **Iteration 2:** Remove B, add B to Sorted List, decrement C's and E's in-degrees to 0 and 1, respectively. Queue = {C}, Sorted List = {A, B}
+4. **Iteration 3:** Remove C, add C to Sorted List, decrement D's in-degree to 0. Queue = {C, D}, Sorted List = {A, B, C}
+5. **Iteration 4:** Remove D, add D to Sorted List, decrement E's in-degree to 0. Queue = {E}, Sorted List = {A, B, C, D}
+6. **Iteration 5:** Remove E, add E to Sorted List. Queue = {}, Sorted List = {A, B, C, D, E}
+
+The topological sort is: A, B, C, D, E (or other variations depending on queue order).
+
+
+**Applications:**
+
+Topological sorting has numerous applications, including:
+
+* **Course Scheduling:**  Ensuring prerequisites are taken before courses that depend on them.
+* **Build Systems (Make):** Determining the order to compile files in a project.
+* **Dependency Resolution:**  Managing dependencies between software packages.
+* **Data Serialization:** Ordering operations in a process.
+
+
+Choosing between Kahn's algorithm and the DFS-based algorithm often depends on the specific application and data structures used. Kahn's algorithm is generally easier to understand and implement, while the DFS-based approach can be more efficient in some cases.  Both effectively detect cycles.
+
