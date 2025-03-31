@@ -23211,3 +23211,29 @@ Nested loops can be computationally expensive, especially with large datasets.  
 
 In summary, nested loops provide a powerful way to process data in a structured, multi-dimensional manner, but their computational cost should be carefully considered when dealing with large datasets.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  Their runtime increases logarithmically with the input size (n).  This means that for every doubling of the input size, the runtime only increases by a constant amount.  This is achievable because these algorithms typically work by repeatedly dividing the problem size in half (or by some other constant factor).
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential O(log n) algorithm.  It works by repeatedly dividing the search interval in half.  It's used to efficiently search a *sorted* array or list.  If the target element is not present, it will determine that in O(log n) time as well.
+
+* **Binary Tree Operations (search, insertion, deletion in a balanced tree):**  In a balanced binary search tree (like an AVL tree or a red-black tree),  finding, inserting, or deleting a node takes O(log n) time on average (and in the worst case for balanced trees). This is because the height of a balanced binary tree is proportional to log₂(n), where n is the number of nodes.
+
+* **Efficient exponentiation:**  Algorithms like exponentiation by squaring calculate a<sup>b</sup> in O(log b) time.  This is achieved by repeatedly squaring the base and adjusting the exponent.
+
+* **Finding the kth smallest element using Quickselect (on average):** While Quickselect's worst-case time complexity is O(n), its *average-case* time complexity is O(n) for finding the kth smallest element and it can use binary search ideas in finding a good pivot value, influencing a logarithmic aspect in the overall process.  The median of medians algorithm guarantees O(n) worst-case time.
+
+* **Tree Traversal with constant nodes visited:**  If you are only traversing a certain constant number of branches in a balanced tree for each operation, the time complexity will be logarithmic.  For example, in a specific kind of tree, you might be consistently querying only the left or right subtree of a node, while ignoring many others.
+
+* **Some Graph Algorithms:** Certain graph algorithms on specific types of graphs can exhibit logarithmic complexity under certain conditions.  For example, if the graph has a highly structured form that allows the algorithm to perform operations in a divide-and-conquer manner.  These algorithms are less common than the ones listed above.
+
+**Key characteristics that lead to O(log n) complexity:**
+
+* **Divide and conquer:** The problem is repeatedly divided into smaller subproblems of roughly equal size.
+* **Sorted data:**  Many O(log n) algorithms rely on the input data being sorted (e.g., binary search).
+* **Balanced data structures:**  Balanced trees ensure that the height of the tree remains logarithmic, leading to logarithmic-time operations.
+
+
+It's crucial to remember that the "n" in O(log n) refers to the size of the input data that the algorithm is working with.  The base of the logarithm (e.g., base 2, base 10) doesn't affect the overall time complexity classification because changing the base only changes the algorithm's runtime by a constant factor.
+
