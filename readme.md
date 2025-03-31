@@ -19657,3 +19657,77 @@ Several algorithms can solve this problem, including:
 
 This is a well-defined algorithmic problem with various solutions, making it a good example to illustrate different algorithmic techniques and their trade-offs.  The problem can be extended to include constraints (e.g., maximum number of edges allowed in the path) or variations (e.g., finding the shortest path between all pairs of nodes).
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more refined version:
+
+**Simple Version:**
+
+This version uses a straightforward `for` loop and `if/else if/else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks for divisibility by 15 first (to handle both 3 and 5).
+* Then it checks for divisibility by 3.
+* Then it checks for divisibility by 5.
+* If none of the above are true, it prints the number itself.
+
+
+**Slightly More Refined Version (using a ternary operator):**
+
+This version uses a ternary operator for slightly more concise code:
+
+```swift
+func fizzBuzzRefined(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzRefined(n: 15) // Example Usage
+```
+
+This achieves the same result but nests ternary operators to create a single expression for the output.  While more compact, it might be slightly less readable for beginners.
+
+**Even More Concise (using String interpolation and optional chaining):**
+
+This version leverages string interpolation and optional chaining for a more expressive and potentially slightly faster approach:
+
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += i % 3 == 0 ? "Fizz" : ""
+        output += i % 5 == 0 ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This version builds the output string incrementally.  If the string is empty after checking for "Fizz" and "Buzz", it defaults to printing the number.
+
+**Choosing the Best Version:**
+
+For beginners, the first (`fizzBuzz`) version is the easiest to understand and maintain. The others offer slightly better conciseness, but readability might suffer slightly depending on your experience level.  Choose the version that best suits your understanding and coding style. Remember that readability and maintainability are often more important than extreme conciseness, especially in larger projects.
+
