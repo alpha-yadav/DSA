@@ -16927,3 +16927,38 @@ The number of print operations is directly proportional to the size of the array
 
 Understanding algorithm complexity is crucial for choosing efficient algorithms and optimizing software performance, particularly when dealing with large datasets.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a fundamental concept in computer science used to describe the **tight bound** of an algorithm's time or space complexity.  Unlike Big-O notation, which provides an upper bound, and Big-Ω (Omega) notation, which provides a lower bound, Big-Theta provides both an upper and lower bound simultaneously.  This means it precisely characterizes the growth rate of a function.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*), written as *f(n) = Θ(g(n))*, if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is bounded both above and below by constant multiples of *g(n)*.  In simpler terms, *f(n)* grows at the same rate as *g(n)*.
+
+**Intuitive Understanding:**
+
+Imagine plotting *f(n)* and *g(n)* on a graph.  If *f(n) = Θ(g(n))*, then for large *n*, the graph of *f(n)* will lie within a "cone" defined by *c₁ * g(n)* and *c₂ * g(n)*.  The cone's boundaries are proportional to *g(n)*.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1; g(n) = n²:**  f(n) = Θ(n²) because we can find constants *c₁*, *c₂*, and *n₀* that satisfy the definition.  For example, if we choose *c₁ = 1*, *c₂ = 3*, and *n₀ = 1*, the inequality holds true for all *n ≥ n₀*.
+
+* **f(n) = n log n; g(n) = n log n:** f(n) = Θ(n log n). This is a straightforward case where the functions are identical.
+
+* **f(n) = n; g(n) = n²:** f(n) is *not* Θ(n²). While f(n) = O(n²), it's not bounded below by a constant multiple of n².
+
+* **f(n) = 2ⁿ; g(n) = n²:** f(n) is *not* Θ(n²).  Exponential functions grow much faster than polynomial functions.
+
+**Key Differences from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  f(n) = O(g(n)) means f(n) grows no faster than g(n).
+* **Big-Ω (Ω):** Provides a *lower bound*. f(n) = Ω(g(n)) means f(n) grows at least as fast as g(n).
+* **Big-Θ (Θ):** Provides a *tight bound*. f(n) = Θ(g(n)) means f(n) grows at the *same rate* as g(n).
+
+**Importance in Algorithm Analysis:**
+
+Big-Theta notation is crucial for accurately characterizing the performance of algorithms.  It allows us to compare algorithms rigorously and choose the most efficient one for a given task. While Big-O is often sufficient for analyzing worst-case scenarios, Big-Theta provides a more complete picture when the algorithm's behavior is consistent across different inputs.  It helps to avoid misleading conclusions about the scalability and efficiency of an algorithm.
+
