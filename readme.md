@@ -20530,3 +20530,134 @@ class BST:
 
 This is a basic example.  For a robust implementation, you'd need to add error handling, the search and delete methods, and potentially consider using a self-balancing BST for better performance guarantees.
 
+#  Binary Search Tree - Insertion (Python) 
+There are several ways to implement insertion into a Binary Search Tree (BST) in Python. Here are two common approaches:
+
+**Method 1: Recursive Insertion**
+
+This method is generally considered more elegant and easier to understand.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    def inorder_traversal(self):  #For testing/viewing the tree
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_recursive(node.right, result)
+
+
+# Example usage:
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:", bst.inorder_traversal()) # Output should be a sorted list
+```
+
+**Method 2: Iterative Insertion**
+
+This method avoids recursion, which can be more efficient for very large trees and avoids potential stack overflow issues.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        node = Node(data)
+        if self.root is None:
+            self.root = node
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = node
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = node
+                    break
+                else:
+                    current = current.right
+
+    def inorder_traversal(self): #For testing/viewing the tree
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_recursive(node.right, result)
+
+
+# Example Usage (same as before, but with iterative insert):
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:", bst.inorder_traversal()) # Output should be a sorted list
+
+```
+
+Both methods achieve the same result:  inserting a node into the correct position within the BST to maintain the BST property (left subtree < node < right subtree). Choose the method that best suits your needs and coding style.  The iterative approach might be slightly more efficient for very large trees, while the recursive approach is often considered more readable.  Remember to include a function (like `inorder_traversal` shown above) to verify your insertion is working correctly.
+
