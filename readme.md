@@ -23150,3 +23150,64 @@ public class Main {
 
 These examples all perform the same basic task: printing the numbers 0 through 4.  The choice between a `for` loop and a `while` loop depends on whether you know the number of iterations in advance.  If you do, a `for` loop is often more concise and readable.  If you don't, a `while` loop is necessary.  Both are considered "simple loops" due to their straightforward structure and functionality.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows for processing data in a multi-dimensional way, often used for tasks like iterating over matrices, generating combinations, or performing searches within nested data structures.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop runs first.  Each iteration of the outer loop starts a new cycle for the inner loop.
+* **Inner Loop:** This loop is entirely contained within the outer loop. It executes multiple times for *each* single iteration of the outer loop.
+
+**Example (Python):**
+
+This example prints a multiplication table using nested loops:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This code will produce a 10x10 multiplication table.  The outer loop iterates through the rows (1 to 10), and for each row, the inner loop iterates through the columns (1 to 10), calculating and printing the product `i * j`.
+
+
+**Example (JavaScript):**
+
+This example iterates through a 2D array:
+
+```javascript
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+for (let i = 0; i < matrix.length; i++) { // Outer loop (rows)
+  for (let j = 0; j < matrix[i].length; j++) { // Inner loop (columns)
+    console.log(matrix[i][j]);
+  }
+}
+```
+
+This will print each element of the `matrix` array sequentially.
+
+
+**Common Uses:**
+
+* **Matrix/Array processing:**  Iterating over rows and columns of matrices or multi-dimensional arrays.
+* **Combinations and permutations:** Generating all possible combinations or permutations of elements from multiple sets.
+* **Pattern printing:** Creating various patterns like triangles, squares, or other shapes using characters.
+* **Nested data structures:** Traversing nested structures like JSON objects or XML trees.
+* **Search algorithms:**  Searching through nested data structures for specific values.
+
+
+**Performance Considerations:**
+
+Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly as the number of nested loops and the size of the data increase.  It's crucial to consider optimization techniques if performance becomes a bottleneck.
+
+
+In summary, nested loops provide a powerful way to process data in a structured, multi-dimensional manner, but their computational cost should be carefully considered when dealing with large datasets.
+
