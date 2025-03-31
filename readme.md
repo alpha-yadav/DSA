@@ -21718,3 +21718,127 @@ This approach requires modifying the tree nodes to include a parent pointer.  It
 
 The recursive approach is generally preferred for its simplicity and elegance, unless memory usage is a significant constraint and the tree is very large.  Remember that both approaches assume the nodes `p` and `q` exist in the tree.  Error handling should be added for robustness in a production environment.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (or graph) is a classic algorithm problem.  There are several ways to approach it, each with different trade-offs in terms of time and space complexity.  Here's a breakdown of common methods:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a simple and elegant approach, particularly effective for binary trees.  It relies on the fact that the LCA must be either the current node, the LCA in the left subtree, or the LCA in the right subtree.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example Usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"Lowest Common Ancestor: {lca.val}") # Output: 3
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (worst case: skewed tree).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursion stack).  In a balanced binary tree, H is log₂N.
+
+
+**2. Iterative Approach (for Binary Trees):**
+
+This avoids recursion, potentially improving performance for very deep trees and preventing stack overflow issues.
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    stack = [root]
+    parent = {root: None}
+
+    while p not in parent or q not in parent:
+        node = stack.pop()
+        if node.left:
+            parent[node.left] = node
+            stack.append(node.left)
+        if node.right:
+            parent[node.right] = node
+            stack.append(node.right)
+
+    ancestors = set()
+    while p:
+        ancestors.add(p)
+        p = parent[p]
+
+    while q not in ancestors:
+        q = parent[q]
+
+    return q
+
+#Example Usage (same tree as above):
+lca_iterative = lowestCommonAncestorIterative(root,p,q)
+print(f"Lowest Common Ancestor (Iterative): {lca_iterative.val}") # Output: 3
+
+```
+
+**Time Complexity:** O(N)
+**Space Complexity:** O(N) in the worst case (skewed tree), but typically less than recursive approach.
+
+
+**3. Using Parent Pointers (for any Tree):**
+
+If you already have parent pointers in your tree structure (each node knows its parent), finding the LCA becomes significantly easier. You simply traverse upwards from each node, storing their ancestors in sets, and find the first common ancestor.
+
+```python
+# Assuming each TreeNode has a 'parent' attribute
+
+def lowestCommonAncestorParentPointers(p, q):
+    ancestors_p = set()
+    while p:
+        ancestors_p.add(p)
+        p = p.parent
+
+    while q:
+        if q in ancestors_p:
+            return q
+        q = q.parent
+
+    return None # p and q are not related
+```
+
+**Time Complexity:** O(H), where H is the height of the tree.
+**Space Complexity:** O(H)
+
+
+**4.  For General Trees (not necessarily binary):**
+
+The recursive approach can be adapted, but it's more complex.  You need to iterate through all children instead of just left and right.  A breadth-first search (BFS) approach can also be efficient.
+
+
+**Choosing the Right Approach:**
+
+* For binary trees, the recursive approach is often the clearest and easiest to implement.
+* For very deep binary trees or general trees, the iterative approach or BFS might be preferred for performance and to avoid stack overflow.
+* If parent pointers are readily available, that method is the most efficient.
+
+
+Remember to adapt the code to your specific tree structure (e.g., if you use a different way to represent nodes and their connections).  Also, handle edge cases (e.g., one or both nodes not being in the tree, the root being one of the nodes).
+
