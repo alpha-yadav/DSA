@@ -24966,3 +24966,129 @@ This introduction provides a basic overview.  Further study would delve into mor
 
 Graph theory is a rich and powerful field with many fascinating concepts and applications. This introduction serves as a springboard for exploring its vast landscape.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient technique, particularly when the graph is sparse (has relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, including different implementations and considerations:
+
+**Concept:**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each element in the array corresponds to a vertex in the graph. The list at the *i*-th index contains all the vertices that are adjacent (directly connected) to vertex *i*.
+
+**Implementation Examples:**
+
+Let's consider a simple undirected graph with vertices {0, 1, 2, 3} and edges {(0, 1), (0, 2), (1, 2), (2, 3)}.
+
+**1. Using Python lists:**
+
+```python
+graph = [
+    [1, 2],  # Neighbors of vertex 0
+    [0, 2],  # Neighbors of vertex 1
+    [0, 1, 3],  # Neighbors of vertex 2
+    [2]       # Neighbors of vertex 3
+]
+
+# Accessing neighbors of vertex 2:
+neighbors_of_2 = graph[2]  # Output: [0, 1, 3]
+
+#Checking if an edge exists:
+def has_edge(graph, u, v):
+    return v in graph[u]
+
+print(has_edge(graph,0,1)) #True
+print(has_edge(graph,0,3)) #False
+
+```
+
+**2. Using Python dictionaries:**
+
+Dictionaries provide a more readable and potentially faster lookup (especially for larger graphs) compared to lists, because dictionaries use hash tables for key lookups.
+
+```python
+graph = {
+    0: [1, 2],
+    1: [0, 2],
+    2: [0, 1, 3],
+    3: [2]
+}
+
+# Accessing neighbors of vertex 2:
+neighbors_of_2 = graph[2]  # Output: [0, 1, 3]
+
+#Checking if an edge exists:
+def has_edge(graph, u, v):
+    return v in graph.get(u,[]) #handles cases where u might not exist
+
+print(has_edge(graph,0,1)) #True
+print(has_edge(graph,0,3)) #False
+
+
+```
+
+**3. Using a custom class (for better organization and extensibility):**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.adj_list = [[] for _ in range(num_vertices)]
+
+    def add_edge(self, u, v):
+        self.adj_list[u].append(v)
+        # For undirected graph, add the reverse edge as well:
+        self.adj_list[v].append(u)
+
+    def get_neighbors(self, u):
+        return self.adj_list[u]
+
+
+graph = Graph(4)
+graph.add_edge(0, 1)
+graph.add_edge(0, 2)
+graph.add_edge(1, 2)
+graph.add_edge(2, 3)
+
+print(graph.get_neighbors(2))  # Output: [0, 1, 3]
+```
+
+
+**Weighted Graphs:**
+
+For weighted graphs (where edges have associated weights), you can adapt the adjacency list to store weight information.  Here are a couple of ways:
+
+* **List of tuples:**  Each element in the adjacency list becomes a list of tuples, where each tuple is `(neighbor, weight)`.
+
+```python
+graph = {
+    0: [(1, 5), (2, 2)],  # (neighbor, weight)
+    1: [(0, 5), (2, 1)],
+    2: [(0, 2), (1, 1), (3, 4)],
+    3: [(2, 4)]
+}
+```
+
+* **Dictionary:** Use a dictionary where keys are neighbors and values are weights.
+
+```python
+graph = {
+    0: {1: 5, 2: 2},
+    1: {0: 5, 2: 1},
+    2: {0: 2, 1: 1, 3: 4},
+    3: {2: 4}
+}
+```
+
+**Directed vs. Undirected Graphs:**
+
+* **Undirected:**  Edges are bidirectional.  In the adjacency list, if there's an edge from `u` to `v`, there's also an edge from `v` to `u`. (See the examples above)
+* **Directed:** Edges are unidirectional.  If there's an edge from `u` to `v`, it doesn't imply an edge from `v` to `u`.  You only add the edge to the list of `u`.
+
+
+**Space Complexity:**
+
+The space complexity of an adjacency list is O(V + E), where V is the number of vertices and E is the number of edges. This is efficient for sparse graphs, as it only stores the existing edges.  For dense graphs (many edges), an adjacency matrix might be more space-efficient.
+
+
+**Choosing the Right Implementation:**
+
+The best implementation depends on your specific needs and the size of your graph.  For simplicity and small graphs, Python lists might suffice.  For larger graphs or when performance is critical, dictionaries or custom classes offer better efficiency and maintainability.  Consider using a graph library (like NetworkX in Python) for larger and more complex graph processing tasks.
+
