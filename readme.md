@@ -30309,3 +30309,122 @@ This is a non-recursive version of Method 1, using a stack to simulate recursion
 
 Remember to adapt the `Node` class to your specific needs if your node structure is different.  The core logic for checking the BST property remains the same.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can visit (or "traverse") all the nodes in a binary tree.  There are three main types, and variations on them:
+
+**1. Pre-order Traversal:**
+
+* **Order:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+* **Mnemonic:**  Root, Left, Right (**R**LR)
+* **Example:**  For a tree:
+
+```
+     A
+    / \
+   B   C
+  / \
+ D   E
+```
+
+The pre-order traversal would be: A B D E C
+
+**2. In-order Traversal:**
+
+* **Order:** Recursively traverse the left subtree, visit the root node, then recursively traverse the right subtree.
+* **Mnemonic:** Left, Root, Right (L**R**R)
+* **Example:** For the same tree as above:
+
+The in-order traversal would be: D B E A C
+
+* **Important Note:** In-order traversal of a Binary *Search* Tree (BST) will output the nodes in ascending order of their values.
+
+**3. Post-order Traversal:**
+
+* **Order:** Recursively traverse the left subtree, recursively traverse the right subtree, then visit the root node.
+* **Mnemonic:** Left, Right, Root (LR**R**)
+* **Example:** For the same tree as above:
+
+The post-order traversal would be: D E B C A
+
+
+**Code Examples (Python):**
+
+These examples use a simple Node class to represent nodes in the tree:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Pre-order traversal:")
+preorder(root)  # Output: A B D E C
+print("\nIn-order traversal:")
+inorder(root)   # Output: D B E A C
+print("\nPost-order traversal:")
+postorder(root) # Output: D E B C A
+```
+
+**Applications:**
+
+The choice of traversal method depends on the specific application:
+
+* **Pre-order:**  Often used for creating a copy of the tree or expressing the tree's structure in a prefix notation (like in Polish notation for arithmetic expressions).
+* **In-order:**  Crucial for BSTs because it gives you the sorted sequence of values.
+* **Post-order:**  Useful for deleting nodes in a tree (deleting children before the parent) or evaluating arithmetic expressions represented as a tree (postfix notation).
+
+
+**Level-Order Traversal (Breadth-First Search):**
+
+This is another important traversal that visits nodes level by level, from left to right.  It requires a queue data structure.  It's not recursive in the same way as the others.
+
+```python
+from collections import deque
+
+def levelorder(node):
+    if node is None:
+        return
+
+    queue = deque([node])
+    while(len(queue) > 0):
+        curr = queue.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            queue.append(curr.left)
+
+        if curr.right is not None:
+            queue.append(curr.right)
+
+print("\nLevel-order traversal:")
+levelorder(root) # Output: A B C D E
+```
+
+This provides a comprehensive overview of binary tree traversals. Remember to consider the specific needs of your application when choosing a traversal method.
+
