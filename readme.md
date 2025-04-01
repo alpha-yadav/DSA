@@ -25721,3 +25721,45 @@ This version uses nested ternary operators to achieve the same result in a singl
 
 Remember to choose the version that best suits your needs and understanding. The key is to understand the logic behind the FizzBuzz algorithm, not necessarily to write the shortest possible code.  The simple versions are perfectly acceptable and demonstrate understanding of the core concepts.
 
+#  Algorithm Complexity 
+Algorithm complexity describes how the runtime or space requirements of an algorithm grow as the input size grows.  It's a crucial aspect of algorithm analysis, allowing us to compare the efficiency of different approaches to solving the same problem.  We generally focus on *asymptotic complexity*, which describes the behavior as the input size approaches infinity.  This ignores constant factors and smaller-order terms, focusing on the dominant growth rate.
+
+There are several ways to express algorithm complexity:
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm scales with the input size (often denoted by 'n').
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm scales with the input size.
+
+**Big O Notation (O):**  This is the most common notation used to describe the *upper bound* of an algorithm's complexity.  It represents the worst-case scenario.  For example:
+
+* **O(1): Constant Time:** The runtime remains the same regardless of the input size.  Examples include accessing an element in an array by index or performing a single arithmetic operation.
+* **O(log n): Logarithmic Time:** The runtime increases logarithmically with the input size.  Examples include binary search in a sorted array or finding an element in a balanced binary search tree.
+* **O(n): Linear Time:** The runtime increases linearly with the input size.  Examples include searching an unsorted array or iterating through a list.
+* **O(n log n): Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Examples include efficient sorting algorithms like merge sort and heapsort.
+* **O(n²): Quadratic Time:** The runtime increases proportionally to the square of the input size.  Examples include nested loops iterating over the input data.
+* **O(2ⁿ): Exponential Time:** The runtime doubles with each addition to the input size.  Examples include brute-force solutions to the traveling salesman problem.
+* **O(n!): Factorial Time:** The runtime grows factorially with the input size.  This is extremely slow for even moderately sized inputs.  Examples include generating all permutations of a set.
+
+
+**Other Notations:**
+
+* **Big Omega (Ω):**  Describes the *lower bound* of an algorithm's complexity.  It represents the best-case scenario.
+* **Big Theta (Θ):** Describes the *tight bound* of an algorithm's complexity.  It means the algorithm's complexity is both O(f(n)) and Ω(f(n)), indicating that the growth rate is precisely f(n).
+
+**Example:**
+
+Consider searching for an element in an array:
+
+* **Unsorted array:**  Linear search has a time complexity of O(n) because, in the worst case, you might have to check every element.
+* **Sorted array:** Binary search has a time complexity of O(log n) because it repeatedly halves the search space.
+
+**Factors Affecting Complexity:**
+
+* **Input size:** The primary factor influencing complexity.
+* **Algorithm design:** Different algorithms can have vastly different complexities for the same problem.
+* **Data structures used:** The choice of data structure can significantly impact an algorithm's performance.
+* **Hardware:** While complexity focuses on asymptotic behavior, the actual runtime is influenced by hardware capabilities.
+
+
+Understanding algorithm complexity is crucial for choosing the most efficient solution for a given problem, especially when dealing with large datasets.  It allows developers to anticipate performance bottlenecks and optimize their code for better scalability.
+
