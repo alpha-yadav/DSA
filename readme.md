@@ -32528,3 +32528,60 @@ def are_identical_iterative(root1, root2):
 
 Remember to handle the `None` cases carefully in both methods to avoid errors.  The `None` checks ensure that if one tree has a node where the other doesn't, the function correctly identifies them as different.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science. They're tree-like structures where each node has at most two children, referred to as the *left child* and the *right child*.  The key property that defines a BST is the *search property*:
+
+* **For every node in the tree:**
+    * All nodes in its left subtree have keys less than the node's key.
+    * All nodes in its right subtree have keys greater than the node's key.
+
+This property allows for efficient searching, insertion, and deletion of elements.
+
+**Key Operations:**
+
+* **Search:**  Finding a node with a specific key.  The search algorithm efficiently navigates the tree, going left if the target key is smaller than the current node's key and right if it's larger.  This logarithmic time complexity (O(log n) in a balanced tree) makes BSTs far more efficient than linear searches for large datasets.
+
+* **Insertion:** Adding a new node to the tree while maintaining the BST property.  The new node is inserted in the appropriate location based on its key value.
+
+* **Deletion:** Removing a node from the tree while maintaining the BST property.  This is the most complex operation, as it requires handling different cases (nodes with zero, one, or two children).
+
+* **Minimum/Maximum:** Finding the smallest or largest key in the tree.  These operations can be done efficiently by traversing the leftmost or rightmost branches, respectively.
+
+* **Successor/Predecessor:** Finding the next larger or smaller key in the tree.
+
+* **Traversal:** Visiting all nodes in the tree in a specific order (inorder, preorder, postorder). Inorder traversal yields a sorted sequence of keys.
+
+
+**Advantages of BSTs:**
+
+* **Efficient search, insertion, and deletion:**  O(log n) in the average case for balanced trees.
+* **Ordered data:**  BSTs inherently maintain sorted data.
+* **Flexible:**  Easy to implement and adapt to various applications.
+
+**Disadvantages of BSTs:**
+
+* **Worst-case performance:**  If the tree becomes unbalanced (e.g., a linked list), the time complexity degrades to O(n).
+* **Sensitivity to input order:**  The shape of the tree depends heavily on the order in which elements are inserted.  Inserting elements in sorted order creates a skewed tree, negating the benefits of a BST.
+
+
+**Balancing BSTs:**
+
+To avoid worst-case scenarios, various self-balancing BSTs have been developed, including:
+
+* **AVL trees:**  Maintain a balance factor for each node to ensure that the height difference between the left and right subtrees is at most 1.
+* **Red-black trees:**  Use color attributes (red or black) to maintain balance, allowing for slightly less strict balancing than AVL trees.
+* **B-trees:**  Optimized for disk-based storage, handling large datasets efficiently.
+
+
+**Applications of BSTs:**
+
+BSTs are used in numerous applications, including:
+
+* **Symbol tables:**  Storing and retrieving data associated with keys.
+* **Databases:**  Indexing and organizing data.
+* **Sorting algorithms:**  Some sorting algorithms are based on BSTs.
+* **Expression trees:**  Representing arithmetic expressions.
+
+
+In summary, Binary Search Trees are a powerful and versatile data structure offering efficient search, insertion, and deletion capabilities when properly balanced.  Understanding their properties and limitations is essential for choosing the right data structure for a specific application.  The choice between a standard BST and a self-balancing BST depends on the specific needs of the application and the potential for unbalanced trees.
+
