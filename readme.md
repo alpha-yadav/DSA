@@ -28710,3 +28710,73 @@ This version uses nested ternary operators. While compact, it can become less re
 
 Remember to choose the version that balances conciseness and readability for your specific needs and context.  Version 2 is a good balance for most situations.  You can copy and paste any of these functions into a Swift playground to test them.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (like time and memory) an algorithm consumes as a function of the input size.  It's crucial for understanding an algorithm's efficiency and scalability.  We generally focus on *asymptotic complexity*, which describes the behavior as the input size grows very large. This allows us to compare algorithms independently of specific hardware or implementation details.
+
+There are several ways to analyze algorithm complexity:
+
+**1. Time Complexity:**  Describes how the runtime of an algorithm scales with the size of the input.  We often use Big O notation (O), Big Omega notation (Ω), and Big Theta notation (Θ) to express this:
+
+* **Big O Notation (O):** Represents the *upper bound* of the runtime.  It describes the worst-case scenario.  For example, O(n) means the runtime grows linearly with the input size (n).  O(n²) means it grows quadratically.
+
+* **Big Omega Notation (Ω):** Represents the *lower bound* of the runtime.  It describes the best-case scenario.  Ω(n) means the runtime is at least linear.
+
+* **Big Theta Notation (Θ):** Represents the *tight bound*.  It means the runtime is both O(f(n)) and Ω(f(n)), indicating that the runtime grows proportionally to f(n).
+
+**Common Time Complexities:**
+
+* **O(1):** Constant time. The runtime is independent of the input size.  Example: Accessing an element in an array by index.
+
+* **O(log n):** Logarithmic time. The runtime increases logarithmically with the input size.  Example: Binary search.
+
+* **O(n):** Linear time. The runtime increases linearly with the input size.  Example: Searching an unsorted array.
+
+* **O(n log n):** Linearithmic time.  Example: Merge sort, heap sort.
+
+* **O(n²):** Quadratic time. The runtime increases quadratically with the input size. Example: Bubble sort, selection sort.
+
+* **O(2ⁿ):** Exponential time. The runtime doubles with each increase in input size.  Example: Finding all subsets of a set.
+
+* **O(n!):** Factorial time. The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**2. Space Complexity:** Describes how the memory usage of an algorithm scales with the input size.  Similar notations (O, Ω, Θ) are used.
+
+**Common Space Complexities:**
+
+* **O(1):** Constant space. The memory usage is independent of the input size.
+
+* **O(n):** Linear space. The memory usage increases linearly with the input size.
+
+* **O(log n):** Logarithmic space.
+
+* **O(n²):** Quadratic space.
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity often involves:
+
+* **Identifying the basic operations:** Determine the operations that contribute most to the runtime.
+* **Counting the number of operations:** Express the number of operations as a function of the input size.
+* **Determining the dominant terms:** Ignore lower-order terms and constant factors.  For example, O(n² + n + 1) simplifies to O(n²).
+
+
+**Example:**
+
+Consider a simple function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+The dominant operation is the comparison `x > max_val` inside the loop. This operation is executed `n` times (where `n` is the length of the array). Therefore, the time complexity is O(n) – linear time. The space complexity is O(1) – constant space because it only uses a few variables regardless of the array size.
+
+
+Understanding algorithm complexity is vital for choosing efficient algorithms and predicting their performance on large datasets.  An algorithm with a lower complexity will generally perform better as the input size grows.
+
