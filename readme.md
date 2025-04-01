@@ -33860,3 +33860,6 @@ print(f"LCA of 7 and 5 is: {lca.data}") #Output: 1
 
 The best approach depends on the specific requirements of your application and the characteristics of your tree (e.g., balanced vs. skewed, presence of parent pointers).  For balanced binary trees, the optimized recursive or iterative approaches are generally preferred for their efficiency.  For unbalanced trees or general trees, the DFS with a hash table might be more suitable.  If you have parent pointers available, using them simplifies the process significantly.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about the x and y values (or a function) to create a graph.
+
