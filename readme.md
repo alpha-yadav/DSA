@@ -26045,3 +26045,91 @@ public class Main {
 
 These are just basic examples.  Loops can become much more complex with nested loops (loops inside loops), break and continue statements (to control the flow of the loop), and more sophisticated conditions.  But these illustrate the fundamental structure of a simple loop in several popular programming languages.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This allows you to iterate over multiple dimensions or perform operations that require repeated iterations within other iterations.
+
+Here's a breakdown with examples in Python and a description of their use cases:
+
+**Basic Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed in the inner loop
+        # This code accesses both outer_loop_variable and inner_loop_variable
+    # Code to be executed after each iteration of the inner loop, but still within the outer loop
+# Code to be executed after all iterations of the outer loop
+```
+
+
+**Example 1: Printing a multiplication table**
+
+This example demonstrates nested loops to create a multiplication table.  The outer loop iterates through rows, and the inner loop iterates through columns.
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for better formatting
+    print()  # Newline after each row
+```
+
+**Example 2: Processing a 2D array (matrix)**
+
+Nested loops are commonly used to iterate over elements in a 2D array (like a matrix).
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()  # Newline after each row
+```
+
+**Example 3: Finding the largest element in a 2D array:**
+
+```python
+matrix = [
+    [1, 5, 2],
+    [8, 3, 9],
+    [4, 7, 6]
+]
+
+largest_element = matrix[0][0]  # Initialize with the first element
+
+for row in matrix:
+    for element in row:
+        if element > largest_element:
+            largest_element = element
+
+print(f"The largest element is: {largest_element}")
+```
+
+
+**Example 4: Nested loops with `while` loops:**
+
+While loops can also be nested:
+
+```python
+i = 0
+while i < 3:
+    j = 0
+    while j < 3:
+        print(f"({i}, {j})")
+        j += 1
+    i += 1
+```
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can lead to a significant increase in execution time, especially with large datasets. The time complexity often grows quadratically (O(n²)) or even higher depending on the number of nested loops and their iterations.
+* **Readability:**  Proper indentation and meaningful variable names are crucial for readability when using nested loops.  Complex nested loops can become difficult to understand and debug if not well-structured.
+
+
+In summary, nested loops are a powerful tool for processing multi-dimensional data and performing operations that require repeated iterations within iterations. However, it's crucial to be mindful of their performance implications, especially when dealing with large datasets.  Consider alternative approaches like vectorization (using libraries like NumPy in Python) for improved efficiency if performance becomes an issue.
+
