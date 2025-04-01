@@ -31855,3 +31855,42 @@ def linear_search(arr, target):
 
 Understanding algorithm complexity is vital for selecting appropriate algorithms for different tasks and optimizing the performance of software systems.  Choosing an algorithm with a lower complexity can lead to significant performance improvements, especially when dealing with large datasets.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a powerful tool in computer science and mathematics used to describe the asymptotic behavior of functions, particularly in the analysis of algorithms.  It provides a tight bound on the growth rate of a function, indicating that the function grows at the same rate as another function, up to constant factors.
+
+**Formal Definition:**
+
+We say that f(n) = Θ(g(n)) if and only if there exist positive constants c₁, c₂, and n₀ such that for all n ≥ n₀:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of n (n ≥ n₀), the function f(n) is always bounded above and below by constant multiples of g(n).  In simpler terms: f(n) grows proportionally to g(n).
+
+**Key Differences from Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  f(n) = O(g(n)) means f(n) grows *no faster* than g(n).  It doesn't say anything about how close the growth rates actually are.
+
+* **Big-Ω (Ω):** Provides a *lower bound*. f(n) = Ω(g(n)) means f(n) grows *at least as fast* as g(n). Again, it doesn't guarantee a proportional relationship.
+
+* **Big-Θ (Θ):** Provides a *tight bound*, combining both upper and lower bounds.  It means f(n) grows *at the same rate* as g(n), within constant factors.
+
+**Example:**
+
+Let's consider the function f(n) = 2n² + 3n + 1.
+
+* **f(n) = Θ(n²)**:  We can find constants:
+    * Let c₁ = 1. For sufficiently large n, 2n² + 3n + 1 ≥ n².
+    * Let c₂ = 3. For sufficiently large n, 2n² + 3n + 1 ≤ 3n².  (The 3n and 1 become insignificant compared to n² as n increases).
+    * Therefore, for some n₀,  n² ≤ 2n² + 3n + 1 ≤ 3n² for all n ≥ n₀.
+
+* **f(n) = O(n²)**: This is true because it's bounded above by a constant multiple of n².
+
+* **f(n) = Ω(n²)**: This is also true because it's bounded below by a constant multiple of n².
+
+
+**Uses in Algorithm Analysis:**
+
+Big-Theta notation is crucial for analyzing the efficiency of algorithms.  It allows us to compare the performance of different algorithms by focusing on their dominant terms and ignoring constant factors. For example, if two algorithms have time complexities of Θ(n log n) and Θ(n²), we can confidently say the Θ(n log n) algorithm is more efficient for large input sizes, regardless of the specific constants involved.
+
+**In summary:** Big-Theta notation provides a precise and informative way to express the growth rate of functions, making it indispensable for algorithm analysis and the comparison of algorithm performance.  It's more precise than Big-O notation alone because it describes both the upper and lower bounds, making the growth rate description more complete.
+
