@@ -28202,3 +28202,126 @@ print(f"Topological sort: {sorted_nodes}")  # Output: Topological sort: ['A', 'B
 
 Remember to adapt the graph representation (adjacency list, adjacency matrix) to your specific needs.  The core principles of the algorithms remain the same.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) is a common graph algorithm.  Here's how it works, along with explanations and code examples (Python):
+
+**The Idea**
+
+The key is to track the state of each node during the traversal:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (on the recursion stack).
+* **Visited:** The node has been completely explored.
+
+A cycle exists if, during the traversal, we encounter a node that is already in the `Visiting` state.  This means we've encountered a back edge – an edge that leads to a node higher up in the recursion stack.
+
+**Algorithm**
+
+1. **Initialization:** Create a `visited` array/dictionary to track the state of each node (initially all `Unvisited`).  You might also use a `recursion_stack` to track nodes currently in the `Visiting` state.
+
+2. **DFS:**  Perform a Depth-First Search (recursive or iterative) on each unvisited node.
+
+3. **During DFS:** For each node:
+   - Mark the node as `Visiting` (add it to `recursion_stack`).
+   - Recursively explore its neighbors.
+   - If a neighbor is already `Visiting`, a cycle is detected.  Return `True` immediately.
+   - After exploring all neighbors, mark the node as `Visited` (remove it from `recursion_stack`).
+
+4. **Cycle Detection:** If the DFS completes without finding a `Visiting` neighbor, no cycle exists in that component. If you've searched all components and found no cycle, the graph is acyclic.
+
+
+**Python Code (Recursive)**
+
+```python
+def has_cycle_directed(graph):
+    """
+    Detects cycles in a directed graph using Depth First Traversal.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and 
+               values are lists of their neighbors.
+
+    Returns:
+        True if a cycle exists, False otherwise.
+    """
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: Unvisited, 1: Visiting, 2: Visited
+    recursion_stack = [False] * num_nodes
+
+    def dfs(node):
+        visited[node] = 1  # Mark as Visiting
+        recursion_stack[node] = True
+
+        for neighbor in graph.get(node, []):
+            if not visited[neighbor]:
+                if dfs(neighbor):
+                    return True
+            elif recursion_stack[neighbor]:  # Cycle detected!
+                return True
+
+        recursion_stack[node] = False  # Mark as Visited after exploring all neighbors
+        visited[node] = 2
+        return False
+
+    for node in graph:
+        if not visited[node]:
+            if dfs(node):
+                return True
+
+    return False
+
+
+# Example Usage:
+graph1 = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: []
+}
+
+graph2 = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [0] #Cycle present
+}
+
+print(f"Graph 1 has cycle: {has_cycle_directed(graph1)}")  # Output: False
+print(f"Graph 2 has cycle: {has_cycle_directed(graph2)}")  # Output: True
+```
+
+**Python Code (Iterative)**
+
+The iterative approach uses a stack explicitly:
+
+```python
+def has_cycle_directed_iterative(graph):
+    num_nodes = len(graph)
+    visited = [0] * num_nodes
+    stack = []
+
+    for node in graph:
+        if visited[node] == 0:
+            stack.append((node, 0)) # (node, state) 0:Visiting, 1: Visited
+
+            while stack:
+                curr_node, state = stack.pop()
+                if state == 0:
+                    visited[curr_node] = 1
+                    for neighbor in graph.get(curr_node,[]):
+                        if visited[neighbor] == 0:
+                            stack.append((neighbor, 0))
+                        elif visited[neighbor] == 1:
+                            return True #cycle detected
+                    stack.append((curr_node, 1))
+                else:
+                    visited[curr_node] = 2 #Marked as visited
+
+    return False
+
+# Example usage (same as above, will produce identical output)
+
+```
+
+Remember to adapt the graph representation (adjacency list, adjacency matrix) to your specific needs.  The core algorithm remains the same.  The iterative version is generally preferred for very large graphs to avoid potential stack overflow issues inherent in deep recursion.
+
