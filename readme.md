@@ -26442,3 +26442,91 @@ print(are_identical_iterative(root1, None)) # Output: False
 
 Both methods achieve the same result. The recursive approach is generally considered more elegant and easier to understand, while the iterative approach can be beneficial for extremely large trees to avoid potential stack overflow issues. Choose the method that best suits your needs and coding style. Remember to handle the `None` cases properly to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They're based on the principle of a binary tree where each node has at most two children (left and right) and follows a specific ordering property:
+
+**Key Property:**  For every node in a BST:
+
+* The value of its left subtree's nodes is less than the node's value.
+* The value of its right subtree's nodes is greater than the node's value.
+
+
+**Structure:**
+
+A BST consists of nodes, each containing:
+
+* **Key:**  A value that uniquely identifies the node.
+* **Data:**  Associated data (can be anything) linked to the key.
+* **Left Child Pointer:** A pointer to the left child node.
+* **Right Child Pointer:** A pointer to the right child node.
+
+**Operations:**
+
+Several key operations are commonly performed on BSTs:
+
+* **Search:**  Find a node with a specific key.  The search is efficient because the tree structure allows us to eliminate half the search space with each comparison.  The average time complexity is O(log n), where n is the number of nodes, but it can degrade to O(n) in the worst case (e.g., a skewed tree).
+
+* **Insertion:** Add a new node with a specific key and data. The new node is placed in the correct position to maintain the BST property.  Average time complexity is O(log n), worst case O(n).
+
+* **Deletion:** Remove a node with a specific key.  Deletion is more complex than insertion because it needs to handle cases where the node has zero, one, or two children.  Average time complexity is O(log n), worst case O(n).
+
+* **Minimum and Maximum:** Find the node with the smallest or largest key.  This is efficient because the minimum is always the leftmost node, and the maximum is always the rightmost node.  Time complexity is O(h), where h is the height of the tree (O(log n) on average, O(n) in the worst case).
+
+* **Successor and Predecessor:** Find the next larger or next smaller key in the BST.
+
+* **Traversal:** Visit all nodes in a specific order. Common traversal methods include:
+    * **In-order:**  Visits nodes in ascending order of their keys.
+    * **Pre-order:**  Visits the root node, then the left subtree, then the right subtree.
+    * **Post-order:** Visits the left subtree, then the right subtree, then the root node.
+
+
+**Advantages of BSTs:**
+
+* **Efficient Search, Insertion, and Deletion:**  O(log n) on average.
+* **Ordered Data:**  Provides naturally sorted data.
+* **Flexible Data:** Can store various data types.
+
+**Disadvantages of BSTs:**
+
+* **Worst-Case Performance:**  Degrades to O(n) if the tree becomes skewed (e.g., all nodes on one side).  Self-balancing trees (like AVL trees and red-black trees) address this issue.
+* **Implementation Complexity:**  Deletion can be tricky to implement correctly.
+
+
+
+**Example (Python):**
+
+A simplified Node class and insertion function:
+
+```python
+class Node:
+    def __init__(self, key, data):
+        self.key = key
+        self.data = data
+        self.left = None
+        self.right = None
+
+def insert(root, key, data):
+    if root is None:
+        return Node(key, data)
+    else:
+        if key < root.key:
+            root.left = insert(root.left, key, data)
+        else:
+            root.right = insert(root.right, key, data)
+        return root
+
+# Example usage:
+root = None
+root = insert(root, 50, "Fifty")
+root = insert(root, 30, "Thirty")
+root = insert(root, 20, "Twenty")
+root = insert(root, 40, "Forty")
+root = insert(root, 70, "Seventy")
+root = insert(root, 60, "Sixty")
+root = insert(root, 80, "Eighty")
+
+#Further operations (search, deletion, traversal etc.) would be added here.
+```
+
+This is a basic illustration.  Real-world implementations often include more sophisticated error handling, balancing mechanisms, and optimized algorithms.  Understanding BSTs is crucial for anyone working with data structures and algorithms.
+
