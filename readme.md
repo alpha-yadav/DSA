@@ -31894,3 +31894,50 @@ Big-Theta notation is crucial for analyzing the efficiency of algorithms.  It al
 
 **In summary:** Big-Theta notation provides a precise and informative way to express the growth rate of functions, making it indispensable for algorithm analysis and the comparison of algorithm performance.  It's more precise than Big-O notation alone because it describes both the upper and lower bounds, making the growth rate description more complete.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input approaches infinity.  They're crucial in computer science for analyzing the efficiency of algorithms. Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than the square of the input size.  It could be faster, but it won't be significantly slower.
+* **Focus:** Worst-case complexity.  It doesn't say anything about the best-case or average-case performance.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (in some contexts). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size. It could be faster, but it won't be significantly slower than linear.
+* **Focus:** Best-case complexity.  Similar to Big O, it doesn't fully describe the overall behavior.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function. It means the function grows *both* at least as fast and at most as fast as the given function.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.  The algorithm's runtime is essentially bound to this growth rate.
+* **Focus:** Precise characterization of the growth rate.  This is often the most desirable notation to use when possible, as it gives the most complete picture.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Example:**  f(n) = o(n²) means f(n) grows slower than n².  This is a *strict* inequality; f(n) cannot be proportional to n².
+* **Focus:** Asymptotic dominance.  One function's growth is insignificant compared to the other.
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Example:** f(n) = ω(n) means f(n) grows faster than n.  This is a *strict* inequality; f(n) cannot be proportional to n.
+* **Focus:** Asymptotic dominance; similar to little o, but in the opposite direction.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Relationship |
+|----------|----------------------------------------------|---------------|
+| O(g(n))  | Upper bound (at most as fast as g(n))        | f(n) ≤ g(n)   |
+| Ω(g(n))  | Lower bound (at least as fast as g(n))       | f(n) ≥ g(n)   |
+| Θ(g(n))  | Tight bound (both upper and lower bound)     | f(n) = g(n)   |
+| o(g(n))  | Strictly slower than g(n)                   | f(n) < g(n)   |
+| ω(g(n))  | Strictly faster than g(n)                   | f(n) > g(n)   |
+
+
+It's important to note that these notations describe asymptotic behavior; they don't give precise runtime for small input sizes.  They're most useful for comparing algorithms as the input size becomes very large.
+
