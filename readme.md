@@ -29778,3 +29778,103 @@ deleteTree(root);
 
 This improved example provides a more robust and complete solution for deleting nodes from a BST in C++.  Remember to carefully consider error handling and memory management in a production environment.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where we consider a node to be a descendant of itself).
+
+There are several ways to find the LCA in a BST. Here's a breakdown of the most efficient approach, along with explanations and code examples in Python:
+
+**Efficient Approach: Recursive Traversal**
+
+This approach leverages the BST property:  all nodes smaller than a node are in its left subtree, and all nodes larger are in its right subtree.
+
+1. **Base Cases:**
+   - If the root is `None`, return `None`.
+   - If either `node1` or `node2` is equal to the root, the root is the LCA (return root).
+
+2. **Recursive Steps:**
+   - If `node1` and `node2` are both smaller than the root, the LCA lies in the left subtree. Recursively call the function on the left subtree.
+   - If `node1` and `node2` are both larger than the root, the LCA lies in the right subtree. Recursively call the function on the right subtree.
+   - Otherwise, the root is the LCA (because one node is smaller and one is larger).
+
+**Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_bst(root, node1, node2):
+    """
+    Finds the Lowest Common Ancestor (LCA) of node1 and node2 in a BST.
+
+    Args:
+        root: The root of the BST.
+        node1: The first node.
+        node2: The second node.
+
+    Returns:
+        The LCA node, or None if either node1 or node2 is not found.
+    """
+    if root is None:
+        return None
+
+    if root.data == node1.data or root.data == node2.data:
+        return root
+
+    if node1.data < root.data and node2.data < root.data:
+        return lca_bst(root.left, node1, node2)
+    elif node1.data > root.data and node2.data > root.data:
+        return lca_bst(root.right, node1, node2)
+    else:
+        return root
+
+
+# Example Usage
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+
+node1 = Node(10)
+node2 = Node(14)
+
+lca = lca_bst(root, node1, node2)
+if lca:
+    print("LCA of", node1.data, "and", node2.data, "is:", lca.data)
+else:
+    print("One or both nodes not found in the BST.")
+
+
+node1 = Node(10)
+node2 = Node(22)
+lca = lca_bst(root, node1, node2)
+if lca:
+    print("LCA of", node1.data, "and", node2.data, "is:", lca.data)
+else:
+    print("One or both nodes not found in the BST.")
+
+
+node1 = Node(4)
+node2 = Node(14)
+lca = lca_bst(root, node1, node2)
+if lca:
+    print("LCA of", node1.data, "and", node2.data, "is:", lca.data)
+else:
+    print("One or both nodes not found in the BST.")
+
+```
+
+**Time and Space Complexity:**
+
+- **Time Complexity:** O(H), where H is the height of the BST. In the worst case (a skewed tree), H can be equal to N (number of nodes).  In a balanced BST, H is log₂(N).
+- **Space Complexity:** O(H) due to the recursive call stack.  Again, this is O(log₂(N)) for a balanced BST and O(N) for a skewed tree.
+
+
+This recursive approach is generally preferred for its clarity and efficiency, especially when dealing with balanced BSTs.  For unbalanced trees, iterative approaches might offer slightly better performance in the worst case, but the recursive solution is often simpler to understand and implement.
+
