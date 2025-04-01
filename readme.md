@@ -27712,3 +27712,113 @@ def lowestCommonAncestor_iterative(root, p, q):
 
 Remember that the iterative approach requires adding parent pointers to the tree nodes, which is not always feasible or desirable.  The recursive approach is generally sufficient for most applications unless extreme performance optimization is required.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a common problem in computer science.  The approach depends on the type of tree and whether you have parent pointers or not.
+
+**Methods:**
+
+**1. Using Parent Pointers (if available):**
+
+This is the simplest method if each node in the tree stores a pointer to its parent.
+
+* **Algorithm:**
+    1. Traverse upwards from each node (node1 and node2) storing the ancestors of each in separate sets (or lists).
+    2. Find the deepest common ancestor in both sets.  This will be the LCA.
+
+* **Python Code (for a binary tree):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+        self.left = None
+        self.right = None
+
+def lca_with_parent(node1, node2):
+    ancestors1 = set()
+    ancestors2 = set()
+
+    current = node1
+    while current:
+        ancestors1.add(current)
+        current = current.parent
+
+    current = node2
+    while current:
+        if current in ancestors1:
+            return current
+        ancestors2.add(current)
+        current = current.parent
+
+    return None # No common ancestor (e.g., nodes in different subtrees)
+
+
+#Example usage (you'd need to build your tree first)
+root = Node(1)
+# ... build your tree ...
+lca = lca_with_parent(node1,node2)
+print(f"LCA: {lca.data}")
+```
+
+
+**2. Without Parent Pointers (Binary Tree):**
+
+This method is more common and requires a recursive approach.
+
+* **Algorithm:**
+    1. If the current node is `None`, return `None`.
+    2. If the current node is either `node1` or `node2`, return the current node.
+    3. Recursively search the left and right subtrees.
+    4. If both recursive calls return non-`None` values, the current node is the LCA.
+    5. Otherwise, return the non-`None` result from the recursive calls (or `None` if both are `None`).
+
+
+* **Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_without_parent(root, node1, node2):
+    if root is None:
+        return None
+    if root == node1 or root == node2:
+        return root
+
+    left_lca = lca_without_parent(root.left, node1, node2)
+    right_lca = lca_without_parent(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+#Example Usage (you'd need to build your tree first)
+root = Node(1)
+# ... build your tree ...
+lca = lca_without_parent(root,node1,node2)
+print(f"LCA: {lca.data}")
+
+```
+
+
+**3. Without Parent Pointers (General Tree):**
+
+For general trees (where a node can have more than two children), you'll need a slightly modified approach.  One efficient method involves using Depth-First Search (DFS) to find paths from the root to each node (`node1` and `node2`). Then, compare the paths to find the longest common prefix.  The last node in the common prefix is the LCA.
+
+
+**Important Considerations:**
+
+* **Error Handling:**  The code examples above don't explicitly handle cases where `node1` or `node2` are not in the tree.  You should add checks for this.
+* **Efficiency:** The parent-pointer method is generally more efficient (O(h), where h is the height of the tree), while the recursive methods without parent pointers are O(n) in the worst case (n being the number of nodes).
+* **Tree Structure:**  Make sure your tree is correctly built before using these functions.
+
+
+Remember to adapt these code snippets to your specific tree implementation and data structures.  Choose the method that best suits your needs based on whether you have parent pointers available and the structure of your tree.
+
