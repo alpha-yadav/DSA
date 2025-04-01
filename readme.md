@@ -31791,3 +31791,67 @@ This uses tuples in the `switch` statement to handle multiple conditions.  Howev
 
 For FizzBuzz, **Version 2 (`fizzBuzzEfficient`)** offers a good balance of readability and efficiency.  Version 1 is perfectly acceptable for beginners, though.  Avoid Version 3 unless you specifically want to practice using `switch` statements in a less-than-ideal scenario.  The key takeaway is understanding the logic of checking for divisibility and handling the different cases. Remember to choose the version that is most understandable and maintainable for your specific context.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (typically time and space) an algorithm requires to solve a problem as a function of the input size.  It's a crucial aspect of algorithm analysis, allowing us to compare the efficiency of different algorithms and predict their performance on larger datasets.
+
+There are two main types of complexity analysis:
+
+**1. Time Complexity:** This measures how the runtime of an algorithm grows as the input size increases.  We usually express time complexity using Big O notation (O), which describes the upper bound of the growth rate.  It focuses on the dominant operations and ignores constant factors.
+
+* **Common Time Complexities (in ascending order of efficiency):**
+
+    * **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+    * **O(log n) - Logarithmic Time:** The runtime grows logarithmically with the input size.  Example: Binary search in a sorted array.
+    * **O(n) - Linear Time:** The runtime grows linearly with the input size. Example: Searching for an element in an unsorted array.
+    * **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+    * **O(n²) - Quadratic Time:** The runtime grows proportionally to the square of the input size. Example: Bubble sort, selection sort.
+    * **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+    * **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Finding all permutations of a set.
+
+
+* **Big Omega (Ω) and Big Theta (Θ):** While Big O describes the upper bound, Big Omega (Ω) describes the lower bound, and Big Theta (Θ) describes both the upper and lower bounds (tight bound).  Big O is most commonly used for a general overview of algorithm efficiency.
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm grows as the input size increases.  Similar to time complexity, it's also expressed using Big O notation.
+
+* **Common Space Complexities:**  Similar categories exist for space complexity as for time complexity (O(1), O(n), O(n²), etc.).  The difference lies in what's being measured:  memory instead of time.
+
+
+**Factors Affecting Complexity:**
+
+* **Input Size:** The primary factor influencing complexity.
+* **Algorithm Design:** Different algorithms solving the same problem can have drastically different complexities.
+* **Data Structures:** The choice of data structure significantly impacts both time and space complexity.
+* **Hardware:** While complexity analysis abstracts away hardware specifics, the actual runtime is influenced by factors like processor speed and memory access times.
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing complexity usually involves:
+
+1. **Identifying the basic operations:** Determine the most frequent operations within the algorithm.
+2. **Counting the number of operations:**  Express the number of operations as a function of the input size (n).
+3. **Determining the dominant term:** Ignore constant factors and lower-order terms, focusing on the term that grows fastest as n increases.
+4. **Expressing the complexity using Big O notation:**  Write the dominant term using Big O notation.
+
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* The basic operation is the comparison (`arr[i] == target`).
+* In the worst case (target not found), the comparison is performed `n` times, where `n` is the length of the array.
+* The dominant term is `n`.
+* Therefore, the time complexity of linear search is O(n).  The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is vital for selecting appropriate algorithms for different tasks and optimizing the performance of software systems.  Choosing an algorithm with a lower complexity can lead to significant performance improvements, especially when dealing with large datasets.
+
