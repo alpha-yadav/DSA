@@ -29878,3 +29878,113 @@ else:
 
 This recursive approach is generally preferred for its clarity and efficiency, especially when dealing with balanced BSTs.  For unbalanced trees, iterative approaches might offer slightly better performance in the worst case, but the recursive solution is often simpler to understand and implement.
 
+#  Binary Search Tree - Python 
+A Binary Search Tree (BST) is a tree data structure where each node has at most two children, referred to as the left child and the right child, and satisfies the following property:  The value of the key in any node is greater than the key values in all nodes in its left subtree and less than the key values in all nodes in its right subtree.  This property allows for efficient searching, insertion, and deletion of nodes.
+
+Here's a Python implementation of a Binary Search Tree, along with explanations:
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        if self.root is None:
+            self.root = Node(key)
+        else:
+            self._insert_recursive(self.root, key)
+
+    def _insert_recursive(self, node, key):
+        if key < node.key:
+            if node.left is None:
+                node.left = Node(key)
+            else:
+                self._insert_recursive(node.left, key)
+        else:
+            if node.right is None:
+                node.right = Node(key)
+            else:
+                self._insert_recursive(node.right, key)
+
+    def search(self, key):
+        return self._search_recursive(self.root, key)
+
+    def _search_recursive(self, node, key):
+        if node is None or node.key == key:
+            return node
+        if key < node.key:
+            return self._search_recursive(node.left, key)
+        else:
+            return self._search_recursive(node.right, key)
+
+    def delete(self, key):
+        self.root = self._delete_recursive(self.root, key)
+
+    def _delete_recursive(self, node, key):
+        if node is None:
+            return node
+
+        if key < node.key:
+            node.left = self._delete_recursive(node.left, key)
+        elif key > node.key:
+            node.right = self._delete_recursive(node.right, key)
+        else: # key == node.key
+            if node.left is None:
+                return node.right
+            elif node.right is None:
+                return node.left
+            else: # Node has two children
+                # Find the inorder successor (smallest in the right subtree)
+                temp = self._find_min(node.right)
+                node.key = temp.key
+                node.right = self._delete_recursive(node.right, temp.key)
+
+        return node
+
+    def _find_min(self, node):
+        while node.left is not None:
+            node = node.left
+        return node
+
+
+    def inorder_traversal(self): #Inorder traversal gives sorted output
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.key)
+            self._inorder_recursive(node.right, result)
+
+
+# Example Usage
+bst = BinarySearchTree()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+
+print("Inorder Traversal:", bst.inorder_traversal()) # should be sorted
+print("Search for 6:", bst.search(6).key if bst.search(6) else "Not Found")
+print("Search for 15:", bst.search(15) ) #Should be None
+bst.delete(8)
+print("Inorder Traversal after deleting 8:", bst.inorder_traversal())
+
+```
+
+This code includes methods for insertion, searching, deletion, and an inorder traversal (which visits nodes in ascending order of their keys).  The deletion method handles the case of nodes with two children by finding the inorder successor.  Remember that the efficiency of BST operations depends heavily on the balance of the tree.  For very unbalanced trees, performance can degrade to O(n) in the worst case.  For better performance with large datasets, consider using self-balancing BSTs like AVL trees or red-black trees.
+
