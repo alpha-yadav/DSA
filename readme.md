@@ -33767,3 +33767,96 @@ if lca:
 
 The **recursive approach (Method 1)** is generally preferred because it's more efficient (O(N) time complexity, where N is the number of nodes) and avoids the overhead of constructing and comparing entire paths.  The path approach (Method 2) has a higher time complexity.  Therefore, unless you have a specific reason to use the path-based method, stick with the recursive solution.  Remember to handle edge cases like empty trees or nodes not present in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science with applications in various domains like phylogenetics, file systems, and version control systems.  There are several ways to solve this problem, each with varying time and space complexities.
+
+**Methods for finding the LCA:**
+
+**1. Brute-Force Approach (Recursive):**
+
+This method recursively traverses the tree from the root.  For each node, it checks if both target nodes are present in its left and right subtrees.  If both are present in the same subtree, the LCA is recursively searched in that subtree. If each node is in a different subtree, the current node is the LCA.  If one node is not found in either subtree, it means one of the nodes isn't in the tree.
+
+* **Time Complexity:** O(N), where N is the number of nodes in the tree (worst-case, if the tree is skewed).
+* **Space Complexity:** O(H), where H is the height of the tree (due to recursive call stack).
+
+**2. Using Parent Pointers:**
+
+If each node in the tree stores a pointer to its parent, finding the LCA becomes simpler.  We can trace the paths from each node up to the root, storing the path in a set or list.  Then, we find the last common node in both paths.
+
+* **Time Complexity:** O(H), where H is the height of the tree.
+* **Space Complexity:** O(H) to store the paths.
+
+**3. Binary Tree Approach (Iterative):**
+
+This approach uses iterative traversal of a binary tree.  It maintains two pointers, one for each node.  While the pointers are not the same, we move them up the tree based on certain conditions.
+
+
+* **Time Complexity:** O(H), where H is the height of the tree.
+* **Space Complexity:** O(1)
+
+
+**4. Using Depth First Search (DFS) and a Hash Table:**
+
+This method performs a depth-first search to store the paths from the root to each node. This is often more efficient than tracing paths from the node to root.
+
+* **Time Complexity:** O(N) to store paths
+* **Space Complexity:** O(N) for the hash table
+
+
+**5. Efficient Approach for Binary Trees (Optimized):**
+
+This is an optimized recursive method that takes advantage of the binary tree structure.  If a node is not found in a subtree, it continues the search from the other subtree.
+
+
+* **Time Complexity:** O(H), where H is the height of the tree.
+* **Space Complexity:** O(H) for the recursive call stack.
+
+
+**Example (Python - Recursive approach for Binary Trees):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def findLCA(root, n1, n2):
+    if root is None:
+        return None
+
+    if root.data == n1 or root.data == n2:
+        return root
+
+    left_lca = findLCA(root.left, n1, n2)
+    right_lca = findLCA(root.right, n1, n2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+lca = findLCA(root, 4, 5)
+print(f"LCA of 4 and 5 is: {lca.data}")  # Output: 2
+
+lca = findLCA(root, 4, 6)
+print(f"LCA of 4 and 6 is: {lca.data}")  # Output: 1
+
+lca = findLCA(root, 7, 5)
+print(f"LCA of 7 and 5 is: {lca.data}") #Output: 1
+
+```
+
+The best approach depends on the specific requirements of your application and the characteristics of your tree (e.g., balanced vs. skewed, presence of parent pointers).  For balanced binary trees, the optimized recursive or iterative approaches are generally preferred for their efficiency.  For unbalanced trees or general trees, the DFS with a hash table might be more suitable.  If you have parent pointers available, using them simplifies the process significantly.
+
