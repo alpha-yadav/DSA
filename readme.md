@@ -32419,3 +32419,14 @@ The best representation depends on the specific operations you need to perform f
 
 Remember that you can also combine elements of these representations to optimize for your specific needs. For instance, you could use a list of children alongside parent pointers.
 
+#  Introduction 
+Please provide me with some context!  I need to know what you want an introduction *to*.  An introduction to what topic, subject, or piece of writing?  For example, are you looking for an introduction to:
+
+* **A specific topic?** (e.g., the history of the Roman Empire, the benefits of exercise, quantum physics)
+* **A story?** (e.g., a mystery novel, a fairy tale, a personal anecdote)
+* **An essay?** (e.g., an argumentative essay, an expository essay, a persuasive essay)
+* **A presentation?** (e.g., a business presentation, a scientific presentation)
+* **A report?** (e.g., a lab report, a research report)
+
+Once you tell me what you need an introduction *for*, I can help you write one.
+
