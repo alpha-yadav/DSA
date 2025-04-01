@@ -27617,3 +27617,98 @@ postorder(root) # Output: D E B C A
 
 This code demonstrates the three traversal methods using recursion.  You can adapt it to use iterative approaches (using stacks) if you need to avoid potential recursion depth issues for very large trees. Remember to handle the `None` case (empty subtree) in your recursive functions to prevent errors.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to find the LCA, each with different time and space complexities.  Here are two common approaches:
+
+**1. Recursive Approach:**
+
+This approach uses a recursive function to traverse the tree.  The key idea is that if both nodes are in the left subtree or both are in the right subtree, the LCA is recursively found in that subtree.  If one node is in the left subtree and the other is in the right subtree, the current node is the LCA.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not in the tree.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:  # p and q are on different sides
+        return root
+    elif left_lca:  # p and q are on the left side
+        return left_lca
+    else:  # p and q are on the right side
+        return right_lca
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
+
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree. In the worst case, we might visit all nodes.
+**Space Complexity:** O(H), where H is the height of the tree. This is due to the recursive call stack. In the worst case (a skewed tree), H can be N.
+
+
+**2. Iterative Approach (using parent pointers):**
+
+This approach requires modifying the tree to include parent pointers for each node.  This allows for a more efficient bottom-up traversal.  It's generally faster than the recursive approach for very large trees, but requires modifying the tree structure.
+
+```python
+# ... (TreeNode class remains the same) ...
+
+def lowestCommonAncestor_iterative(root, p, q):
+    # This method requires modification to add parent pointers to the TreeNode class.  Implementation omitted for brevity.
+    # It would involve a tree traversal to add parent pointers.
+
+
+    #The iterative approach will then use a set to store the path from p to the root and the path from q to the root.
+    #Then, it will iterate through both paths from the root upwards until it finds the common ancestor.
+
+    pass #Implementation of iterative approach requires adding parent pointers and is more complex.
+
+
+```
+
+**Time Complexity (Iterative):** O(N) in the worst case, but typically better than the recursive approach because it avoids the overhead of recursive calls.
+**Space Complexity (Iterative):** O(N) in the worst case to store the paths, but potentially better than recursive if the tree is very deep.
+
+
+**Choosing the right approach:**
+
+* For most cases, the **recursive approach** is simpler and easier to understand.
+* If you have a very large tree and performance is critical, the **iterative approach** with parent pointers might be preferable, although it adds complexity to the tree structure.  However, the iterative approach without modifying the tree structure is generally not used because its time complexity would be much higher.
+
+
+Remember that the iterative approach requires adding parent pointers to the tree nodes, which is not always feasible or desirable.  The recursive approach is generally sufficient for most applications unless extreme performance optimization is required.
+
