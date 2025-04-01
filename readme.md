@@ -31713,3 +31713,81 @@ def longest_palindrome(s):
 
 These examples demonstrate different levels of complexity and require different algorithmic approaches.  Remember to consider time and space complexity when designing your solutions.  There are many online resources (like LeetCode, HackerRank, Codewars) with thousands more problems to practice with.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's simple to understand but helps illustrate basic programming concepts like loops and conditional statements. Here's how to implement it in Swift, starting with the simplest version and progressing to more sophisticated approaches:
+
+**Version 1: Basic Implementation**
+
+This version uses a `for` loop and `if/else if/else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This is straightforward and easy to understand.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5.
+
+
+**Version 2: Slightly More Efficient**
+
+This version avoids redundant checks:
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzEfficient(n: 15)
+```
+
+This version builds the output string (`output`). If it's empty after checking for divisibility by 3 and 5, it prints the number itself. This is slightly more efficient because it doesn't have nested `if/else if` checks.
+
+
+**Version 3: Using a `switch` statement (less readable for this specific problem)**
+
+While possible, a `switch` statement isn't the most natural fit for FizzBuzz:
+
+```swift
+func fizzBuzzSwitch(n: Int) {
+    for i in 1...n {
+        switch (i % 3, i % 5) {
+        case (0, 0): print("FizzBuzz")
+        case (0, _): print("Fizz")
+        case (_, 0): print("Buzz")
+        default: print(i)
+        }
+    }
+}
+
+fizzBuzzSwitch(n: 15)
+```
+
+This uses tuples in the `switch` statement to handle multiple conditions.  However, for FizzBuzz, the previous versions are generally clearer.
+
+
+**Choosing the Best Version:**
+
+For FizzBuzz, **Version 2 (`fizzBuzzEfficient`)** offers a good balance of readability and efficiency.  Version 1 is perfectly acceptable for beginners, though.  Avoid Version 3 unless you specifically want to practice using `switch` statements in a less-than-ideal scenario.  The key takeaway is understanding the logic of checking for divisibility and handling the different cases. Remember to choose the version that is most understandable and maintainable for your specific context.
+
