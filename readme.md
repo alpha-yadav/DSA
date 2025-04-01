@@ -33275,3 +33275,100 @@ print(f"Is the tree a BST? {is_bst_minmax(root2)}")  # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive methods, where H is the height of the tree (O(log N) for a balanced tree, O(N) for a skewed tree).  You can modify them to use iterative approaches with a stack to achieve O(1) space complexity in the best and average case if you are concerned about space usage in the case of very deep trees.  However, the recursive versions are generally simpler to understand and implement.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* The value of the node in the left subtree is less than the value of the node.
+* The value of the node in the right subtree is greater than the value of the node.
+
+Here are a few methods, ranging from simple recursive solutions to more optimized approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This is a classic and elegant solution.  A BST, when traversed in-order (left, root, right), will produce a sorted sequence of its nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """Checks if a tree is a BST using recursive in-order traversal."""
+    values = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            values.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    return all(values[i] <= values[i+1] for i in range(len(values)-1))
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+print(is_bst_recursive(root))  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) #Violation
+print(is_bst_recursive(root2)) # Output: False
+
+```
+
+**Method 2: Recursive with Bounds**
+
+This method is more efficient because it avoids creating a separate sorted list.  It recursively checks each subtree, passing down minimum and maximum allowed values.
+
+```python
+def is_bst_recursive_bounds(node, min_val=-float('inf'), max_val=float('inf')):
+    """Checks if a tree is a BST using recursion and bounds."""
+    if not node:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive_bounds(node.left, min_val, node.data) and
+            is_bst_recursive_bounds(node.right, node.data, max_val))
+
+# Example Usage (same as above, will produce the same output)
+print(is_bst_recursive_bounds(root)) #True
+print(is_bst_recursive_bounds(root2)) #False
+```
+
+**Method 3: Iterative In-order Traversal** (More memory-efficient than deep recursion)
+
+This approach uses an iterative in-order traversal to avoid potential stack overflow issues with very deep trees.
+
+```python
+def is_bst_iterative(root):
+    stack = []
+    prev = -float('inf')
+    curr = root
+    while curr or stack:
+        while curr:
+            stack.append(curr)
+            curr = curr.left
+        curr = stack.pop()
+        if curr.data <= prev:
+            return False
+        prev = curr.data
+        curr = curr.right
+    return True
+```
+
+**Choosing the Best Method:**
+
+* **Method 2 (Recursive with Bounds):**  Generally preferred for its efficiency and clarity. It directly checks the BST property without extra memory overhead for sorting.
+* **Method 1 (Recursive In-order):** Simple to understand, but less efficient due to the creation of the sorted list.
+* **Method 3 (Iterative In-order):** Best for very large or deep trees to avoid stack overflow errors.
+
+
+Remember to adapt the `Node` class definition to match your specific implementation if necessary.  Choose the method that best suits your needs and understanding.  Method 2 is a good balance of efficiency and readability for most cases.
+
