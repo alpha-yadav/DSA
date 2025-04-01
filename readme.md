@@ -32585,3 +32585,124 @@ BSTs are used in numerous applications, including:
 
 In summary, Binary Search Trees are a powerful and versatile data structure offering efficient search, insertion, and deletion capabilities when properly balanced.  Understanding their properties and limitations is essential for choosing the right data structure for a specific application.  The choice between a standard BST and a self-balancing BST depends on the specific needs of the application and the potential for unbalanced trees.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement insertion into a Binary Search Tree (BST) in Python.  Here are a couple, with explanations:
+
+**Method 1: Recursive Insertion**
+
+This method is generally considered more elegant and easier to understand.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    #Optional:  Method to print the tree (inorder traversal) for verification
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+# Example usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:")
+bst.inorder_traversal(bst.root) #Output should be: 1 3 4 6 7 8 10 13 14
+```
+
+**Method 2: Iterative Insertion**
+
+This method uses a loop instead of recursion. It can be slightly more efficient in some cases, avoiding the overhead of recursive function calls.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        new_node = Node(data)
+        if self.root is None:
+            self.root = new_node
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = new_node
+                    return
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = new_node
+                    return
+                else:
+                    current = current.right
+
+    #Optional:  Method to print the tree (inorder traversal) for verification - same as above
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+
+# Example usage (same as before, will produce the same output)
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("\nInorder traversal:")
+bst.inorder_traversal(bst.root)
+```
+
+Both methods achieve the same result: inserting a node into the correct position in the BST to maintain the BST property (left subtree < node < right subtree). Choose the method that you find more readable and maintainable for your project.  The recursive version is often preferred for its clarity, while the iterative version might offer a slight performance advantage in certain scenarios. Remember to include a method to traverse and print the tree to verify the insertion.
+
