@@ -26996,3 +26996,122 @@ This improved version includes:
 
 Remember that the efficiency of BST operations (insertion, search, deletion) is O(h), where h is the height of the tree.  In a balanced BST, h is approximately log₂(n), where n is the number of nodes, leading to efficient logarithmic time complexity. However, in a skewed BST (worst case), h can be n, resulting in linear time complexity.  Self-balancing BSTs (like AVL trees or red-black trees) are used to mitigate this worst-case scenario.
 
+#  Check if a tree is BST or not 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST will produce a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    in_order_list = []
+    _in_order_traversal(root, in_order_list)
+
+    # Check if the in-order list is sorted
+    for i in range(1, len(in_order_list)):
+        if in_order_list[i].data < in_order_list[i-1].data:
+            return False
+    return True
+
+def _in_order_traversal(node, in_order_list):
+  """Helper function for recursive in-order traversal."""
+  if node:
+    _in_order_traversal(node.left, in_order_list)
+    in_order_list.append(node)
+    _in_order_traversal(node.right, in_order_list)
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root)}")  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.left = Node(1)
+root2.left.right = Node(12) # this violates BST property
+
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}") # Output: False
+
+```
+
+**Method 2:  Recursive Check with Min and Max Bounds**
+
+This method recursively checks each subtree, ensuring that nodes in the left subtree are smaller than the current node, and nodes in the right subtree are larger.  It's generally more efficient than the in-order traversal method because it avoids creating a separate list.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_minmax(root):
+    """
+    Checks if a binary tree is a BST using recursive min/max bounds.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    return _is_bst_util(root, float('-inf'), float('inf'))
+
+
+def _is_bst_util(node, min_val, max_val):
+    """Helper function for recursive min/max bounds check."""
+    if node is None:
+        return True
+
+    if node.data < min_val or node.data > max_val:
+        return False
+
+    return (_is_bst_util(node.left, min_val, node.data - 1) and
+            _is_bst_util(node.right, node.data + 1, max_val))
+
+
+# Example usage (same trees as before):
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST (min/max method)? {is_bst_recursive_minmax(root)}")  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.left = Node(1)
+root2.left.right = Node(12) # this violates BST property
+
+print(f"Is the tree a BST (min/max method)? {is_bst_recursive_minmax(root2)}") # Output: False
+```
+
+Both methods achieve the same result. The min/max approach is often preferred for its efficiency as it avoids the overhead of creating and sorting a list.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
+
