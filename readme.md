@@ -27822,3 +27822,6 @@ For general trees (where a node can have more than two children), you'll need a 
 
 Remember to adapt these code snippets to your specific tree implementation and data structures.  Choose the method that best suits your needs based on whether you have parent pointers available and the structure of your tree.
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need information about the x and y values (or a function) to create a graph for you.
+
