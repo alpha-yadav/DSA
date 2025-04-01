@@ -27428,3 +27428,105 @@ preorder(root)  # Output: A B D E C
 
 Remember to adapt this code for in-order and post-order traversals by changing the order of the recursive calls.  Iterative implementations would use stacks and loops instead of recursion.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes of a tree level by level.  Here are implementations in Python and JavaScript, along with explanations:
+
+**Python Implementation:**
+
+This implementation uses a queue to store nodes to be visited.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])  # Use deque for efficient queue operations
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root) # Output: 1 2 3 4 5
+```
+
+**Explanation:**
+
+1. **`Node` class:** Defines a node in the binary tree, storing data and pointers to left and right children.
+2. **`levelOrder` function:**
+   - Takes the root node as input.
+   - Handles the case of an empty tree.
+   - Uses a `deque` (double-ended queue) from the `collections` module for efficient queue operations (adding and removing from both ends).  A regular list could also be used, but `deque` is optimized for this purpose.
+   - Initializes the queue with the root node.
+   - While the queue is not empty:
+     - It removes the first element (using `popleft()`) and prints its data.
+     - If the node has left and/or right children, it adds them to the end of the queue.
+
+**JavaScript Implementation:**
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) return;
+
+  const queue = [root];
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    console.log(curr.data, " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+
+// Example usage:
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1  2  3  4  5
+```
+
+**Explanation (JavaScript):**
+
+The JavaScript implementation is very similar to the Python version.  It uses an array as a queue (`queue.shift()` removes from the beginning, `queue.push()` adds to the end).  The logic of traversing level by level remains the same.
+
+
+Remember to adapt the printing mechanism (e.g., `console.log` vs. `print`) according to your preferred output method.  Both implementations provide a basic, clear, and efficient approach to level order traversal.  For very large trees, consider more sophisticated queue implementations for optimal performance.
+
