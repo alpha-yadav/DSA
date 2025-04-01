@@ -27364,3 +27364,67 @@ else:
 
 Both methods achieve the same result. The recursive approach might be slightly more intuitive for understanding the BST property, while the inorder traversal approach can be more efficient in some cases because it avoids multiple recursive calls.  Choose the method that best suits your understanding and needs. Remember to handle edge cases like empty trees appropriately.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can visit each node in a binary tree exactly once.  There are three main types of traversals, and variations on each:
+
+**1. Pre-order Traversal:**
+
+* **Order:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+* **Mnemonic:**  **Root**, Left, Right (**R**LR)
+* **Example:** For a tree with root A, left child B, and right child C:  The pre-order traversal would be A, B, C.  If B had a left child D and a right child E, it would be A, B, D, E, C.
+* **Applications:** Creating a copy of the tree, evaluating an expression tree.
+
+**2. In-order Traversal:**
+
+* **Order:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree.
+* **Mnemonic:** Left, **Root**, Right (L**R**R)
+* **Example:** For the same tree above: The in-order traversal would be B, A, C.  With B's children, it would be D, B, E, A, C.
+* **Applications:**  Sorting nodes in a binary search tree (BST).  In a BST, in-order traversal gives you the nodes in ascending order.
+
+**3. Post-order Traversal:**
+
+* **Order:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node.
+* **Mnemonic:** Left, Right, **Root** (LR**R**)
+* **Example:** For the same tree above: The post-order traversal would be B, C, A.  With B's children, it would be D, E, B, C, A.
+* **Applications:** Deleting a tree (performing actions on nodes before deleting the root), evaluating a postfix expression.
+
+
+**Variations and Considerations:**
+
+* **Iterative Traversals:**  While the above descriptions use recursion, all three traversals can be implemented iteratively using stacks (for pre-order and in-order) or stacks and a flag (for post-order) to avoid potential stack overflow issues with very deep trees.
+
+* **Level-Order Traversal (Breadth-First Search):** This traversal visits nodes level by level, starting from the root.  It's not one of the three main traversals but is very important. It uses a queue data structure.
+
+* **Morris Traversal:** A space-efficient in-order traversal that uses threading (modifying the tree structure temporarily) instead of recursion or a stack.  It's efficient but modifies the original tree (and needs to be undone).
+
+* **Complexity:**  The time complexity of all these traversals is O(N), where N is the number of nodes in the tree. The space complexity is O(H) for recursive implementations (H is the height of the tree), and O(W) for iterative implementations (W is the maximum width of the tree).  Iterative approaches generally have a better space complexity for wide, shallow trees.
+
+
+**Example Code (Python - Recursive Pre-order):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Pre-order traversal:")
+preorder(root)  # Output: A B D E C
+```
+
+Remember to adapt this code for in-order and post-order traversals by changing the order of the recursive calls.  Iterative implementations would use stacks and loops instead of recursion.
+
