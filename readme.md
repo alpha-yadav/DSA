@@ -26133,3 +26133,26 @@ while i < 3:
 
 In summary, nested loops are a powerful tool for processing multi-dimensional data and performing operations that require repeated iterations within iterations. However, it's crucial to be mindful of their performance implications, especially when dealing with large datasets.  Consider alternative approaches like vectorization (using libraries like NumPy in Python) for improved efficiency if performance becomes an issue.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They only require the number of operations to grow logarithmically with the input size (n). This means that as the input size increases exponentially, the algorithm's runtime only increases linearly.  This is achievable because the algorithm typically divides the problem size by a constant factor at each step.
+
+Here are some common types of algorithms exhibiting O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential O(log n) algorithm.  It works on a sorted array (or other sorted data structure) by repeatedly dividing the search interval in half. If the target value is not found, the algorithm terminates, but each comparison eliminates roughly half of the remaining search space.
+
+* **Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  In a balanced binary search tree (like an AVL tree or a red-black tree), finding, inserting, or deleting a node requires traversing a path from the root to a leaf.  Since the tree is balanced, the height of the tree is proportional to log₂(n), where n is the number of nodes.  Therefore, these operations have O(log n) time complexity.  *Note: Unbalanced trees could degrade to O(n) in worst-case scenarios.*
+
+* **Efficient Set/Map Operations (in balanced tree implementations):**  Hash tables (with good hash functions and handling of collisions) ideally achieve O(1) average-case time for lookup, insertion, and deletion. However, balanced tree-based implementations of sets and maps (like those provided by many standard libraries) offer guaranteed O(log n) time complexity for these operations, even in the worst case.
+
+* **Exponentiation by Squaring:** This algorithm computes a<sup>b</sup> (a raised to the power of b) in O(log b) time.  It cleverly uses the property that a<sup>b</sup> = (a<sup>b/2</sup>)<sup>2</sup> if b is even, and a<sup>b</sup> = a * a<sup>(b-1)</sup> if b is odd.  This recursive approach reduces the exponent by roughly half in each step.
+
+
+**Key Characteristics Leading to O(log n) Complexity:**
+
+* **Divide and Conquer:**  The problem is repeatedly divided into smaller subproblems of roughly equal size.
+* **Halving the Search Space:**  Each step eliminates a significant portion (often half) of the remaining possibilities.
+* **Balanced Data Structures:**  Algorithms working on balanced trees or other balanced data structures often exhibit O(log n) behavior.
+
+
+**Important Note:**  The base of the logarithm (e.g., log₂(n), log₁₀(n)) doesn't affect the big O notation because it only introduces a constant factor.  Big O notation focuses on the growth rate, not the exact time.  All logarithmic functions grow at the same rate.
+
