@@ -25646,3 +25646,78 @@ def longest_palindrome(s):
 
 These examples demonstrate different levels of complexity and showcase common algorithmic techniques.  Remember that the "best" solution often depends on factors like time and space complexity, which are important considerations in algorithm design.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's simple to understand but helps assess a candidate's understanding of basic programming concepts like loops and conditional statements.  Here's how to implement it in Swift, starting with a simple version and then showing improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses a `for` loop and nested `if` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This works correctly, but the nested `if` statements can be slightly improved for readability and efficiency.
+
+**Version 2: Improved with `else if` chaining**
+
+The order of the `if` statements is crucial here.  Checking for divisibility by 15 first ensures that "FizzBuzz" is printed correctly and avoids unnecessary checks.
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+**Version 3:  More Concise with Ternary Operator (Advanced)**
+
+For experienced developers, a more concise (but potentially less readable for beginners) version can be achieved using the ternary operator:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Example usage
+```
+
+This version uses nested ternary operators to achieve the same result in a single line within the loop.
+
+
+**Choosing the right version:**
+
+* **Version 1 and 2:** These are the most readable and easiest to understand, especially for beginners.  They are perfectly acceptable solutions.
+* **Version 3:** This is more concise but can be harder to read and debug, particularly for those unfamiliar with the ternary operator.  It's generally best to prioritize readability unless conciseness is paramount.
+
+
+Remember to choose the version that best suits your needs and understanding. The key is to understand the logic behind the FizzBuzz algorithm, not necessarily to write the shortest possible code.  The simple versions are perfectly acceptable and demonstrate understanding of the core concepts.
+
