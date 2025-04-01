@@ -28638,3 +28638,75 @@ Here are a few algorithmic problems of varying difficulty, along with explanatio
 
 The best problem for you depends on your current skill level.  Start with "Two Sum" if you're new to algorithms.  Work your way up to the harder problems as you gain experience.  Remember to focus on understanding the different solution approaches and their time and space complexities.  Practice is key!  Websites like LeetCode, HackerRank, and Codewars offer many more problems and solutions to help you learn.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses a straightforward `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This works correctly, but the nested `if-else if-else` can be slightly improved for readability.
+
+**Version 2: Improved Readability with Early Exit**
+
+This version uses early exits to make the logic clearer:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This version is more concise.  It builds the output string incrementally. If neither 3 nor 5 divides `i`, the `output` string remains empty, and the number itself is printed.
+
+**Version 3: Using a Ternary Operator (More Concise)**
+
+For those comfortable with the ternary operator, you can make it even more compact:
+
+```swift
+func fizzBuzzTernary(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzTernary(n: 15) // Example usage
+```
+
+This version uses nested ternary operators. While compact, it can become less readable if overused.  Choose the version that best suits your preference for readability and maintainability.
+
+
+**Choosing the Best Version:**
+
+* **Version 1** is easiest to understand for beginners.
+* **Version 2** offers improved readability and is generally preferred for its clarity.
+* **Version 3** is the most concise but might be harder to read for those unfamiliar with nested ternary operators.
+
+Remember to choose the version that balances conciseness and readability for your specific needs and context.  Version 2 is a good balance for most situations.  You can copy and paste any of these functions into a Swift playground to test them.
+
