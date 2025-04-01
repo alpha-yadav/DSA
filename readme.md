@@ -30634,3 +30634,117 @@ postorder(root)  # Output: D E B C A
 
 Remember to install the necessary packages if you are running this code in a Jupyter Notebook or other environment.  This code provides a clear and concise way to understand and implement the three fundamental tree traversal methods.  You can adapt and extend it to work with your specific tree structures and data.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the Lowest Common Ancestor (LCA) in a binary tree is a common algorithmic problem.  Unlike in a binary *search* tree, where you can exploit the sorted property, a general binary tree requires a different approach.  Here are two common methods:
+
+**Method 1: Recursive Approach**
+
+This method recursively traverses the tree.  The base cases are:
+
+* **Node is null:**  If either node `p` or `node` `q` is null, return null.
+* **Node is `p` or `q`:** If the current node is either `p` or `q`, return the node.
+
+If the node isn't null, `p`, or `q`, we recursively search the left and right subtrees.  If both subtrees return a non-null value, then the current node is the LCA. If only one subtree returns a non-null value, that value is the LCA. If both subtrees return null, then the LCA is not in this subtree.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node, or None if not found.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    else:
+        return right
+
+```
+
+**Method 2:  Iterative Approach (using parent pointers)**
+
+This approach requires a pre-processing step to add parent pointers to each node in the tree.  Once you have parent pointers, you can efficiently find the LCA using a path-finding approach:
+
+1. **Find paths:** Find the paths from the root to nodes `p` and `q`.
+2. **Find LCA:** Iterate through the paths, finding the last common node.
+
+This method is more efficient in terms of space complexity if you need to find multiple LCAs, as the parent pointers are reused.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None, parent=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.parent = parent
+
+
+def add_parent_pointers(root):
+    """Adds parent pointers to the tree."""
+    queue = [root]
+    while queue:
+        node = queue.pop(0)
+        if node.left:
+            node.left.parent = node
+            queue.append(node.left)
+        if node.right:
+            node.right.parent = node
+            queue.append(node.right)
+
+
+def lowestCommonAncestor_iterative(root, p, q):
+    """Finds LCA iteratively using parent pointers."""
+    add_parent_pointers(root)  # Add parent pointers if not already present
+
+    path_p = []
+    curr = p
+    while curr:
+        path_p.append(curr)
+        curr = curr.parent
+
+    path_q = []
+    curr = q
+    while curr:
+        path_q.append(curr)
+        curr = curr.parent
+
+    lca = None
+    i = len(path_p) - 1
+    j = len(path_q) - 1
+    while i >= 0 and j >= 0 and path_p[i] == path_q[j]:
+        lca = path_p[i]
+        i -= 1
+        j -= 1
+    return lca
+
+```
+
+**Choosing the right method:**
+
+* The **recursive approach** is generally simpler to understand and implement. Its space complexity is O(H), where H is the height of the tree (in the worst case, O(N) for a skewed tree).  Its time complexity is O(N) in the worst case.
+
+* The **iterative approach** is more efficient for finding multiple LCAs because the parent pointers are pre-calculated.  However, it requires modifying the tree structure and adding extra space for parent pointers (O(N)).  Time complexity is O(N) in the worst case.
+
+
+Remember to adapt the `TreeNode` class definition to your specific needs.  Choose the method that best suits your context and performance requirements.  For a single LCA query, the recursive approach is often preferred for its simplicity. For multiple queries, the iterative method with parent pointers can be more efficient.
+
