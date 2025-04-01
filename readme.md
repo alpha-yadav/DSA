@@ -28440,3 +28440,109 @@ Graph traversals are algorithms that systematically visit all the vertices (node
 
 Choosing the appropriate traversal algorithm depends heavily on the specifics of the graph (weighted/unweighted, directed/undirected) and the goal of the traversal (shortest path, cycle detection, topological sort, etc.).
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used to represent the graph (adjacency matrix, adjacency list) and whether you're tracking visited nodes. Here are a few implementations in Python:
+
+**1. DFS using an adjacency list (recursive):**  This is generally the most concise and intuitive implementation for graphs represented as adjacency lists.
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    if visited is None:
+        visited = set()
+
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+    return visited
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Start DFS from node 'A'
+print("\n")
+
+```
+
+
+**2. DFS using an adjacency list (iterative):** This version uses a stack to avoid recursion, which can be more efficient for very deep graphs to prevent stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal of a graph iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    visited = set()
+    stack = [node]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            print(vertex, end=" ")
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)
+    return visited
+
+print("DFS traversal (iterative):")
+dfs_iterative(graph, 'A')
+print("\n")
+```
+
+
+**3. DFS using an adjacency matrix:**  This implementation is less common because adjacency lists are usually more efficient for sparse graphs (graphs with relatively few edges).
+
+```python
+def dfs_matrix(graph, node, visited):
+    visited[node] = True
+    print(node, end=" ")
+    for neighbor in range(len(graph)):
+        if graph[node][neighbor] == 1 and not visited[neighbor]:
+            dfs_matrix(graph, neighbor, visited)
+
+# Example graph represented as an adjacency matrix (0 = no edge, 1 = edge)
+graph_matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0]   # F
+]
+visited_matrix = [False] * len(graph_matrix)
+
+print("DFS traversal (matrix):")
+dfs_matrix(graph_matrix, 0, visited_matrix) #Start at node 0 (which represents 'A' in the adjacency list example)
+print("\n")
+```
+
+Remember to adapt these examples to your specific graph representation and the way you want to process the visited nodes.  The recursive version is often preferred for its readability, but the iterative version is crucial for preventing stack overflow issues in large graphs.  The adjacency matrix version is less efficient unless you're working with a dense graph where the matrix representation is more compact.
+
