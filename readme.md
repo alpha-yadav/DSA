@@ -34399,3 +34399,100 @@ While BFS and DFS are the most common, other traversals exist, often tailored fo
 
 Choosing the right traversal algorithm depends on the specific problem and the properties of the graph.  Consider factors like whether the graph is weighted, whether you need the shortest path, the shape of the graph (wide vs. deep), and memory constraints.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and the specifics of the traversal (pre-order, post-order, in-order for trees).  Below are implementations for graphs using adjacency lists, demonstrating both iterative and recursive approaches.
+
+**1. Recursive DFS (Adjacency List)**
+
+This is generally considered the more elegant and easier-to-understand approach for DFS.
+
+```python
+def dfs_recursive(graph, node, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (default: None).
+        path: A list to store the traversal path (default: None).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(node)
+    path.append(node)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+traversal_path = dfs_recursive(graph, 'A')
+print(f"DFS Recursive Traversal: {traversal_path}")  # Output will vary slightly depending on order of neighbors
+
+```
+
+
+**2. Iterative DFS (Adjacency List)**
+
+This approach uses a stack to mimic the recursive call stack, making it potentially more efficient for very deep graphs where recursion might hit stack overflow limits.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal iteratively.
+
+    Args:
+        graph: A dictionary representing the graph.
+        node: The starting node.
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    visited = set()
+    stack = [node]
+    path = []
+
+    while stack:
+        current_node = stack.pop()
+        if current_node not in visited:
+            visited.add(current_node)
+            path.append(current_node)
+            # Add neighbors to the stack in reverse order to maintain DFS order
+            stack.extend(reversed(graph.get(current_node, [])))
+
+    return path
+
+# Example usage (same graph as above):
+traversal_path = dfs_iterative(graph, 'A')
+print(f"DFS Iterative Traversal: {traversal_path}") # Output might differ slightly from recursive version
+```
+
+
+**Important Considerations:**
+
+* **Graph Representation:** These examples use an adjacency list representation.  For an adjacency matrix, the implementation would differ slightly.
+* **Disconnected Graphs:**  These functions only explore the connected component containing the starting node. To traverse a disconnected graph completely, you'd need to iterate through all nodes and call DFS for each node that hasn't been visited yet.
+* **Variations:**  Different orders of visiting neighbors can lead to different traversal paths.  The recursive version's order depends on the order of neighbors in the `graph` dictionary, while the iterative version uses `reversed()` to ensure a specific order.
+* **Error Handling:**  The code includes basic error handling for nodes without neighbors, but more robust error checks could be added (e.g., checking for invalid input types).
+
+
+Choose the recursive or iterative version based on your preference and the potential depth of your graphs.  The recursive version is often clearer, but the iterative version can be more memory-efficient for very deep graphs. Remember to adapt these functions to your specific graph representation and needs.
+
