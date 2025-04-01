@@ -33958,3 +33958,55 @@ print(weighted_graph.matrix)
 
 Remember to choose the appropriate data structure (adjacency matrix or adjacency list) based on the characteristics of your graph (sparse or dense).  For sparse graphs, an adjacency list is generally more efficient.  For dense graphs, an adjacency matrix is often a better choice.
 
+#  Introduction To Graph Theory 
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph consists of vertices (also called nodes or points) and edges (also called lines or arcs) connecting pairs of vertices.  Think of it like a map where cities are vertices and roads connecting them are edges.
+
+Here's a breakdown of key introductory concepts:
+
+**1. Basic Definitions:**
+
+* **Graph:** A collection of vertices (V) and edges (E), denoted as G = (V, E).
+* **Vertex (or Node):**  A point or node in the graph.
+* **Edge (or Arc):** A connection between two vertices.  Edges can be directed (meaning the connection has a direction, like a one-way street) or undirected (meaning the connection works both ways, like a two-way street).
+* **Directed Graph (or Digraph):** A graph where edges have a direction.  Often represented with arrows on the edges.
+* **Undirected Graph:** A graph where edges have no direction.
+* **Adjacent Vertices:** Two vertices connected by an edge.
+* **Incident Edge:** An edge that connects to a given vertex.
+* **Degree of a Vertex (in an undirected graph):** The number of edges incident to that vertex.
+* **In-degree and Out-degree (in a directed graph):** In-degree is the number of edges pointing *to* a vertex; out-degree is the number of edges pointing *away* from a vertex.
+* **Loop:** An edge that connects a vertex to itself.
+* **Simple Graph:** A graph with no loops and no more than one edge between any two vertices.
+* **Multiple Edges (or Parallel Edges):** More than one edge connecting the same pair of vertices.
+* **Complete Graph (K<sub>n</sub>):** A simple graph where every pair of vertices is connected by an edge.  K<sub>n</sub> has n vertices.
+* **Path:** A sequence of vertices where consecutive vertices are connected by an edge.
+* **Cycle:** A path that starts and ends at the same vertex, with no repeated vertices (except the start/end).
+* **Connected Graph:** A graph where there is a path between any two vertices.
+* **Disconnected Graph:** A graph that is not connected.
+* **Tree:** A connected graph with no cycles.
+* **Subgraph:** A graph whose vertices and edges are subsets of a larger graph.
+* **Spanning Tree:** A subgraph that is a tree and includes all the vertices of the original graph.
+
+
+**2. Representations of Graphs:**
+
+Graphs can be represented in several ways:
+
+* **Adjacency Matrix:** A square matrix where rows and columns represent vertices, and the entry (i, j) indicates whether there's an edge between vertex i and vertex j (often 1 for an edge, 0 for no edge).  For directed graphs, (i,j) indicates an edge from i to j.
+* **Adjacency List:**  A list where each vertex has a list of its adjacent vertices.  This is often more space-efficient for sparse graphs (graphs with relatively few edges).
+
+
+**3. Applications of Graph Theory:**
+
+Graph theory has incredibly wide-ranging applications, including:
+
+* **Social Networks:** Modeling relationships between people.
+* **Computer Networks:** Representing the connections between computers and servers.
+* **Transportation Networks:** Modeling roads, railways, and air routes.
+* **Mapping and Navigation:** Finding shortest paths and optimal routes.
+* **Biology:** Modeling biological networks like protein-protein interaction networks.
+* **Chemistry:** Representing molecules and chemical reactions.
+* **Algorithm Design:** Many algorithms rely heavily on graph concepts.
+
+
+This introduction provides a foundation for further exploration of graph theory.  More advanced topics include graph coloring, network flows, planarity, and various graph algorithms like Dijkstra's algorithm and breadth-first search.
+
