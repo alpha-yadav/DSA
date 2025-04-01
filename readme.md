@@ -25891,3 +25891,59 @@ This means that for sufficiently large inputs (n ≥ n₀), f(n) is always great
 
 In summary, Big-Omega provides a valuable tool for characterizing the lower bounds of algorithms, contributing to a comprehensive analysis of their efficiency.  It works alongside Big-O and Big-Theta to offer a full understanding of algorithmic growth rates.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation that describes the limiting behavior of a function when the argument tends towards a particular value or infinity.  In computer science, it's used to classify algorithms according to how their runtime or space requirements grow as the input size grows.  It focuses on the dominant factors affecting performance as the input gets very large, ignoring constant factors and smaller terms.
+
+Here's a breakdown of key concepts:
+
+**What Big O Describes:**
+
+* **Worst-case scenario:** Big O notation typically describes the *worst-case* runtime or space complexity of an algorithm.  This means it gives an upper bound on how much time or space the algorithm might need.
+* **Growth rate:** It's not about the exact runtime in milliseconds, but rather how the runtime *scales* with the input size (n).  An algorithm with O(n) runtime might be faster than an O(log n) algorithm for small n, but the O(log n) algorithm will eventually be faster as n increases.
+* **Asymptotic behavior:** Big O describes the behavior of the algorithm as the input size approaches infinity.  Small differences in performance for small inputs are ignored.
+
+**Common Big O Notations and Their Meaning:**
+
+* **O(1) - Constant time:** The runtime is independent of the input size.  Examples: Accessing an element in an array by index, returning the first element of a linked list.
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  Examples: Binary search, finding an element in a balanced binary search tree.
+* **O(n) - Linear time:** The runtime increases linearly with the input size.  Examples: Searching an unsorted array, iterating through a list once.
+* **O(n log n) - Linearithmic time:**  The runtime is a combination of linear and logarithmic growth. Examples: Merge sort, heap sort.
+* **O(n²) - Quadratic time:** The runtime increases proportionally to the square of the input size.  Examples: Nested loops iterating over the same input, bubble sort.
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size.  Examples: Finding all subsets of a set, naive recursive Fibonacci implementation.
+* **O(n!) - Factorial time:** The runtime is the factorial of the input size. Examples: Finding all permutations of a set.
+
+
+**How to Analyze Big O:**
+
+1. **Identify the basic operations:** Determine which operations are the most significant contributors to the runtime (e.g., comparisons, assignments, arithmetic operations).
+2. **Count the operations:** Count how many times these basic operations are performed as a function of the input size (n).
+3. **Identify the dominant terms:**  Ignore constant factors and lower-order terms.  For example, 5n² + 10n + 2 simplifies to O(n²).
+4. **Express the complexity:**  Write the Big O notation using the dominant term.
+
+**Example:**
+
+Consider this code snippet that searches for a specific element in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* The basic operation is the comparison (`arr[i] == target`).
+* This comparison is performed at most `n` times (where `n` is the length of the array).
+* The dominant term is `n`.
+* Therefore, the Big O notation for this algorithm is O(n).
+
+**Other Notations:**
+
+While Big O describes the *worst-case* scenario, other notations exist:
+
+* **Big Omega (Ω):** Describes the *best-case* scenario.
+* **Big Theta (Θ):** Describes the *average-case* scenario (and implies both Big O and Big Omega).
+
+
+Big O notation is a crucial tool for comparing the efficiency of algorithms and making informed decisions about which algorithm to use for a given task.  Understanding it is essential for any serious programmer.
+
