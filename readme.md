@@ -27115,3 +27115,114 @@ print(f"Is the tree a BST (min/max method)? {is_bst_recursive_minmax(root2)}") #
 
 Both methods achieve the same result. The min/max approach is often preferred for its efficiency as it avoids the overhead of creating and sorting a list.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, minVal, maxVal):
+    """Recursive helper function."""
+    if node is None:
+        return True
+
+    if node.data < minVal or node.data > maxVal:
+        return False
+
+    return (isBSTUtil(node.left, minVal, node.data - 1) and
+            isBSTUtil(node.right, node.data + 1, maxVal))
+
+
+def isBST(root):
+    """Checks if a given binary tree is a BST."""
+    minVal = float('-inf')  # Negative infinity
+    maxVal = float('inf')  # Positive infinity
+    return isBSTUtil(root, minVal, maxVal)
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(2)
+root.right = Node(5)
+root.right.left = Node(1)
+root.right.right = Node(6)
+
+if isBST(root):
+    print("IS BST")
+else:
+    print("Not a BST")
+
+root2 = Node(3)
+root2.left = Node(2)
+root2.right = Node(5)
+
+
+if isBST(root2):
+    print("IS BST")
+else:
+    print("Not a BST")
+
+```
+
+**Explanation:**
+
+1. **`Node` class:** Defines a node in the binary tree.
+2. **`isBSTUtil(node, minVal, maxVal)`:** This recursive helper function performs the core BST check.  It takes the current node, the minimum allowed value (`minVal`), and the maximum allowed value (`maxVal`) for that subtree as input.
+   - Base case: If the node is `None`, it's a valid subtree.
+   - It checks if the current node's data is within the allowed range (`minVal` to `maxVal`). If not, it's not a BST.
+   - Recursively checks the left and right subtrees, ensuring that the left subtree only contains values less than the current node and the right subtree only contains values greater than the current node.
+3. **`isBST(root)`:**  This function initializes `minVal` and `maxVal` to negative and positive infinity, respectively, and calls the helper function `isBSTUtil`.
+
+
+**Method 2: Iterative In-order Traversal (Using Stack)**
+
+This method avoids recursion, making it potentially more efficient for very deep trees.  It uses a stack to simulate the in-order traversal.
+
+```python
+def isBSTIterative(root):
+    """Checks if a given binary tree is a BST using iterative in-order traversal."""
+    stack = []
+    prev = float('-inf')  # Initialize previous value to negative infinity
+
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+
+        root = stack.pop()
+        if root.data <= prev:
+            return False  # Not sorted in in-order traversal
+        prev = root.data
+        root = root.right
+
+    return True
+
+# Example Usage (same as before, you can test with root and root2)
+if isBSTIterative(root):
+    print("IS BST (Iterative)")
+else:
+    print("Not a BST (Iterative)")
+
+if isBSTIterative(root2):
+    print("IS BST (Iterative)")
+else:
+    print("Not a BST (Iterative)")
+```
+
+**Explanation:**
+
+1. It uses a stack to keep track of nodes to visit.
+2. It simulates an in-order traversal iteratively.  It pushes nodes onto the stack as it goes left, then pops and processes them, moving to the right subtree after each node.
+3. It keeps track of the previously visited node (`prev`). If the current node's value is less than or equal to `prev`, the in-order traversal is not sorted, indicating that it's not a BST.
+
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach (H is the height of the tree, which can be N in the worst case for a skewed tree) and O(H) for the iterative approach (due to the stack, again potentially O(N) in the worst case).  The iterative approach is generally preferred for its better space efficiency in the worst case.  Choose the method that best suits your needs and coding style.
+
