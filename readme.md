@@ -30095,3 +30095,125 @@ print(f"Is the tree a BST? {is_bst_recursive(root)}")  # False
 
 Both methods achieve the same result. The recursive approach with bounds is generally considered more efficient because it avoids the creation of an extra array.  Choose the method that best suits your understanding and coding style.  Remember to handle edge cases (empty trees).
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Algorithm 1: Recursive In-order Traversal**
+
+This algorithm leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTRecursive(root):
+    """
+    Recursively checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    in_order_list = []
+    
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            in_order_list.append(node.data)
+            inorder(node.right)
+
+    inorder(root)
+
+    #Check if the inorder traversal is sorted
+    for i in range(1, len(in_order_list)):
+        if in_order_list[i] <= in_order_list[i-1]:
+            return False
+    return True
+
+
+#Example Usage
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.left.left = Node(0)
+root.left.right = Node(2)
+
+print(f"Is the tree a BST (recursive method)? {isBSTRecursive(root)}") # True
+
+
+root2 = Node(3)
+root2.left = Node(5)
+root2.right = Node(1)
+
+print(f"Is the tree a BST (recursive method)? {isBSTRecursive(root2)}") # False
+
+```
+
+**Algorithm 2:  Recursive with Min and Max Bounds**
+
+This approach is more efficient because it avoids the creation of an extra list.  It recursively checks each subtree, ensuring that all nodes in the left subtree are less than the current node, and all nodes in the right subtree are greater than the current node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBST(node, min_val, max_val):
+    """
+    Recursively checks if a binary tree is a BST using min/max bounds.
+
+    Args:
+      node: The current node being checked.
+      min_val: The minimum allowed value for this subtree.
+      max_val: The maximum allowed value for this subtree.
+
+    Returns:
+      True if the subtree rooted at 'node' is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (isBST(node.left, min_val, node.data) and
+            isBST(node.right, node.data, max_val))
+
+def isBSTIterative(root):
+    return isBST(root, float('-inf'), float('inf')) #use negative and positive infinity for initial bounds
+
+#Example Usage (same trees as above)
+
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.left.left = Node(0)
+root.left.right = Node(2)
+
+print(f"Is the tree a BST (iterative method)? {isBSTIterative(root)}") # True
+
+
+root2 = Node(3)
+root2.left = Node(5)
+root2.right = Node(1)
+
+print(f"Is the tree a BST (iterative method)? {isBSTIterative(root2)}") # False
+
+```
+
+**Choosing the Right Algorithm:**
+
+* The **recursive in-order traversal** is simpler to understand but less efficient in terms of space complexity (due to the creation of the `in_order_list`).
+
+* The **recursive min/max bounds** method is generally preferred because it's more efficient (O(n) time and O(h) space, where h is the height of the tree), avoiding the extra space for storing the sorted list.  The space complexity becomes O(1) if you are certain your tree is balanced.
+
+
+Both algorithms correctly determine whether a given binary tree is a BST. Choose the algorithm that best suits your needs and understanding.  The second method is generally recommended for its efficiency.
+
