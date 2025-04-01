@@ -32148,3 +32148,73 @@ public class SimpleLoop {
 
 These `for` loop examples all achieve the same result as the `while` loop examples, but in a more compact way.  They initialize a counter (`i`), check a condition (`i < 5`), and increment the counter (`i++`) all within the loop declaration.  Choose whichever loop type best suits your needs and coding style.  `While` loops are best when the number of iterations isn't known beforehand, while `for` loops are best for known iterations.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop will execute completely for each iteration of the outer loop. This creates a pattern where the inner loop's actions are repeated multiple times based on the outer loop's control.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+  # Outer loop code
+  for inner_loop_variable in inner_loop_iterable:
+    # Inner loop code
+  # More outer loop code
+```
+
+or using `while` loops:
+
+```python
+outer_loop_counter = 0
+while outer_loop_condition:
+  # Outer loop code
+  inner_loop_counter = 0
+  while inner_loop_condition:
+    # Inner loop code
+    inner_loop_counter += 1
+  # More outer loop code
+  outer_loop_counter += 1
+```
+
+
+**Example (Python): Printing a multiplication table):**
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+  for j in range(1, 11):  # Inner loop (columns)
+    print(i * j, end="\t")  # \t adds a tab for spacing
+  print()  # Newline after each row
+```
+
+This code will produce a 10x10 multiplication table.  The outer loop iterates through the rows (1 to 10), and for each row, the inner loop iterates through the columns (1 to 10), calculating and printing the product.
+
+**Example (Python):  Nested Loops with Lists:**
+
+```python
+outer_list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+for sublist in outer_list: #Outer Loop iterates through each sublist
+    for item in sublist:   #Inner Loop iterates through each item in the sublist
+        print(item)
+```
+
+This will print: 1 2 3 4 5 6 7 8 9
+
+
+**Time Complexity:**
+
+The time complexity of nested loops is crucial to understand. If both the outer and inner loops iterate `n` times, the total number of iterations becomes `n * n = n²`. This means the time complexity is O(n²), which is often referred to as quadratic time complexity.  The complexity increases significantly as `n` grows.
+
+**Use Cases:**
+
+Nested loops are frequently used for:
+
+* **Matrix operations:** Processing arrays or matrices (like the multiplication table example).
+* **Generating patterns:** Creating various graphical or textual patterns.
+* **Searching and sorting algorithms:** Some algorithms utilize nested loops for their core logic.
+* **Iterating through multi-dimensional data structures:** Processing nested lists, dictionaries, or other complex data structures.
+
+
+In essence, nested loops provide a powerful way to iterate through data structures or perform repetitive tasks where the inner operation needs to be performed repeatedly for each iteration of an outer operation.  However, be mindful of their time complexity as they can become computationally expensive with large datasets.
+
