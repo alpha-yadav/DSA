@@ -26530,3 +26530,130 @@ root = insert(root, 80, "Eighty")
 
 This is a basic illustration.  Real-world implementations often include more sophisticated error handling, balancing mechanisms, and optimized algorithms.  Understanding BSTs is crucial for anyone working with data structures and algorithms.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement insertion into a Binary Search Tree (BST) in Python. Here are a few, starting with a simple recursive approach and then showing an iterative one for improved performance in some cases:
+
+
+**Method 1: Recursive Insertion**
+
+This is a clear and concise approach, leveraging recursion's natural fit for tree traversal:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        self.root = self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        else:
+            node.right = self._insert_recursive(node.right, data)
+        return node
+
+    #Methods for traversal (optional, for demonstration)
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+    def preorder_traversal(self, node):
+        if node:
+            print(node.data, end=" ")
+            self.preorder_traversal(node.left)
+            self.preorder_traversal(node.right)
+
+    def postorder_traversal(self, node):
+        if node:
+            self.postorder_traversal(node.left)
+            self.postorder_traversal(node.right)
+            print(node.data, end=" ")
+
+
+# Example usage
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+bst.insert_recursive(4)
+bst.insert_recursive(7)
+bst.insert_recursive(13)
+
+
+print("Inorder Traversal:")
+bst.inorder_traversal(bst.root)  # Expected: 1 3 4 6 7 8 10 13 14
+print("\nPreorder Traversal:")
+bst.preorder_traversal(bst.root) #Expected: 8 3 1 6 4 7 10 14 13
+print("\nPostorder Traversal:")
+bst.postorder_traversal(bst.root) #Expected: 1 4 7 6 3 13 14 10 8
+
+```
+
+**Method 2: Iterative Insertion**
+
+This method avoids recursion, potentially improving performance for very deep trees (though the difference is often negligible for reasonably sized trees):
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        new_node = Node(data)
+        if self.root is None:
+            self.root = new_node
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = new_node
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = new_node
+                    break
+                else:
+                    current = current.right
+
+#Example Usage (same as above, just replace insert_recursive with insert_iterative)
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+bst.insert_iterative(4)
+bst.insert_iterative(7)
+bst.insert_iterative(13)
+
+# ... (rest of the code remains the same, using inorder_traversal etc.)
+
+```
+
+Choose the method that best suits your needs and coding style.  The recursive version is generally easier to understand, while the iterative version might offer a slight performance advantage for extremely large trees.  Remember to include error handling (e.g., checking for duplicate data) if needed for a production-ready implementation.
+
