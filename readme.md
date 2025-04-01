@@ -30848,3 +30848,119 @@ Please provide me with the data or equation you want me to graph.  I need inform
 
 Once you give me this information, I can help you graph it.  I can't create visual graphs directly, but I can give you the instructions to create one using a graphing calculator or software like Desmos or GeoGebra.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, its advantages and disadvantages, and implementation considerations:
+
+**How it works:**
+
+An adjacency matrix represents a graph as a square matrix, where each element `matrix[i][j]` indicates the presence or weight of an edge between vertex `i` and vertex `j`.
+
+* **Unweighted graph:**  `matrix[i][j]` is typically 1 if an edge exists between vertex `i` and vertex `j`, and 0 otherwise.
+* **Weighted graph:** `matrix[i][j]` represents the weight of the edge between vertex `i` and vertex `j`.  If no edge exists, the value is often represented by a special value like ∞ (infinity) or -1.
+* **Directed graph:** The matrix is asymmetric; `matrix[i][j]` represents an edge from vertex `i` to vertex `j`, and `matrix[j][i]` may be different or 0.
+* **Undirected graph:** The matrix is symmetric; `matrix[i][j] = matrix[j][i]`.
+
+
+**Example (Unweighted, Undirected Graph):**
+
+Consider a graph with 4 vertices (A, B, C, D) and edges: A-B, A-C, B-D, C-D.
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  1  0  0  1
+C  1  0  0  1
+D  0  1  1  0
+```
+
+
+**Example (Weighted, Directed Graph):**
+
+Consider a graph with 3 vertices (A, B, C) and edges: A->B (weight 2), B->C (weight 5), C->A (weight 1).
+
+The adjacency matrix would be:
+
+```
+   A  B  C
+A  0  2  0
+B  0  0  5
+C  1  0  0
+```
+
+
+
+**Advantages of Adjacency Matrix:**
+
+* **Simple Implementation:** Easy to understand and implement.
+* **Fast Edge Existence Check:**  Checking if an edge exists between two vertices is O(1) – just access the matrix element.
+* **Suitable for Dense Graphs:** Efficient for graphs with many edges, where the matrix is relatively full.
+* **Easy to find degree:**  The sum of a row (or column for directed graphs) gives the degree of the vertex.
+
+
+**Disadvantages of Adjacency Matrix:**
+
+* **Space Inefficient for Sparse Graphs:**  Uses O(V²) space, where V is the number of vertices.  For sparse graphs (few edges), this is highly inefficient.  Most of the matrix will be filled with 0s.
+* **Slow for adding/deleting edges:**  Adding or deleting edges might require shifting elements in the matrix. Although not O(n^2), it still makes it slower than other representations for sparse graphs.
+
+
+
+**Implementation Considerations (Python):**
+
+```python
+import numpy as np
+
+class Graph:
+    def __init__(self, num_vertices, weighted=False, directed=False):
+        self.num_vertices = num_vertices
+        self.weighted = weighted
+        self.directed = directed
+        self.matrix = np.zeros((num_vertices, num_vertices), dtype=float) # Use float to handle weights
+
+    def add_edge(self, u, v, weight=1):  # weight only used if weighted=True
+        if self.weighted:
+            self.matrix[u][v] = weight
+            if not self.directed:
+                self.matrix[v][u] = weight
+        else:
+            self.matrix[u][v] = 1
+            if not self.directed:
+                self.matrix[v][u] = 1
+
+    def has_edge(self, u, v):
+        return self.matrix[u][v] != 0  # 0 for unweighted graphs, 0 or special value for weighted
+
+    def get_neighbors(self, u):
+        neighbors = []
+        for v in range(self.num_vertices):
+            if self.matrix[u][v] != 0:
+                neighbors.append(v)
+        return neighbors
+
+#Example Usage
+graph = Graph(4, weighted=False, directed=False)  # Unweighted, undirected graph
+graph.add_edge(0, 1)  #Vertex indices start from 0
+graph.add_edge(0, 2)
+graph.add_edge(1, 3)
+graph.add_edge(2, 3)
+
+print(graph.matrix)
+print(graph.has_edge(0,1)) #True
+print(graph.get_neighbors(0)) #[1,2]
+
+
+
+weighted_graph = Graph(3, weighted=True, directed=True)
+weighted_graph.add_edge(0, 1, weight=2)
+weighted_graph.add_edge(1, 2, weight=5)
+weighted_graph.add_edge(2, 0, weight=1)
+
+print("\nWeighted graph:")
+print(weighted_graph.matrix)
+print(weighted_graph.has_edge(0,1)) #True
+
+```
+
+Remember to choose the appropriate graph representation (adjacency matrix, adjacency list, etc.) based on the characteristics of your graph and the operations you need to perform.  For sparse graphs, an adjacency list is generally more efficient.
+
