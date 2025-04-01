@@ -30748,3 +30748,93 @@ def lowestCommonAncestor_iterative(root, p, q):
 
 Remember to adapt the `TreeNode` class definition to your specific needs.  Choose the method that best suits your context and performance requirements.  For a single LCA query, the recursive approach is often preferred for its simplicity. For multiple queries, the iterative method with parent pointers can be more efficient.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree or graph is a fundamental problem in computer science with applications in various fields like phylogenetic analysis, file systems, and version control systems.  The approach depends on the type of tree (binary, general) and whether the tree is rooted or unrooted.
+
+Here's a breakdown of common methods for finding the LCA, focusing on rooted trees, which are the most prevalent case:
+
+**1. Brute-Force Approach (for general trees):**
+
+* **Algorithm:**  Traverse the tree from the root. For each node, check if both nodes are in its subtree. If so, this node is a common ancestor. Continue traversing to find the lowest such ancestor.
+* **Time Complexity:** O(N), where N is the number of nodes in the tree.  This is because, in the worst case, you might have to traverse the entire tree.
+* **Space Complexity:** O(H), where H is the height of the tree (due to recursive calls in a depth-first search).  This is better for balanced trees, but can be O(N) for skewed trees.
+
+
+**2. Recursive Approach (for binary trees):**
+
+This is an efficient and elegant method for binary trees:
+
+* **Algorithm:**
+    * If the current node is `NULL`, return `NULL`.
+    * If the current node is equal to either `node1` or `node2`, return the current node.
+    * Recursively search the left and right subtrees.
+    * If both recursive calls return non-`NULL` values, it means the current node is the LCA. Return the current node.
+    * Otherwise, return the non-`NULL` result from the recursive calls (or `NULL` if both are `NULL`).
+
+* **Time Complexity:** O(N) in the worst case (skewed tree).  On average, it's much faster.
+* **Space Complexity:** O(H) in the worst case (due to recursion depth).
+
+* **Code Example (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, node1, node2):
+    if root is None:
+        return None
+    if root.data == node1.data or root.data == node2.data:
+        return root
+    left_lca = lca(root.left, node1, node2)
+    right_lca = lca(root.right, node1, node2)
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+# Example Usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.left.right # Node with data 5
+
+lca_node = lca(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca_node.data}") # Output: 2
+
+
+```
+
+
+**3. Using Parent Pointers (for any tree):**
+
+If each node in the tree has a pointer to its parent, finding the LCA is simpler:
+
+* **Algorithm:**
+    1. Find the paths from the root to `node1` and `node2`.
+    2. Iterate through both paths simultaneously. The last common node is the LCA.
+
+* **Time Complexity:** O(H), where H is the height of the tree.  This is significantly faster than the brute-force approach for tall trees.
+* **Space Complexity:** O(H) to store the paths.
+
+**4.  Using Depth First Search (DFS) and a Hash Table (for any tree):**
+
+* **Algorithm:** Perform a DFS traversal to store the path from the root to each node in a hash table.  Then, find the longest common prefix of the paths to `node1` and `node2`. The last node in the common prefix is the LCA.
+* **Time Complexity:** O(N) in the worst case.
+* **Space Complexity:** O(N) in the worst case (to store the paths).
+
+
+**Choosing the Right Method:**
+
+* For binary trees, the recursive approach is generally preferred for its elegance and efficiency.
+* For general trees with parent pointers, the parent pointer approach is the most efficient.
+* If you don't have parent pointers and need a solution for general trees, the brute-force approach is straightforward, while the DFS with a hash table offers better average-case performance.
+
+
+Remember to handle edge cases like one node being an ancestor of the other, or nodes not being present in the tree.  The code examples often need slight modifications to incorporate these checks for robustness.
+
