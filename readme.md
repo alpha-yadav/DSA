@@ -29205,3 +29205,59 @@ Not all divide and conquer algorithms are O(log n), but some are.  The key is th
 
 It's crucial to understand the underlying data structure and algorithm's properties to determine if it truly exhibits O(log n) complexity.  The balanced nature of the data structure is often the critical factor for achieving logarithmic time.
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array or list.  It works by repeatedly dividing the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process is repeated until the target value is found or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the upper half
+        else:
+            high = mid - 1  # Search in the lower half
+
+    return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+
+```
+
+**Why is it O(log n)?**
+
+With each comparison, we eliminate roughly half of the remaining search space.  This is the key to the logarithmic time complexity.  Let's say we start with 'n' elements.  After one comparison, we have at most n/2 elements left. After two comparisons, we have at most n/4. After k comparisons, we have at most n/2<sup>k</sup> elements.  The algorithm terminates when we have only a few elements left (or find the target),  meaning n/2<sup>k</sup> is approximately 1.  Solving for k:
+
+2<sup>k</sup> ≈ n  => k ≈ log₂(n)
+
+Therefore, the number of comparisons (and thus the time complexity) is proportional to the logarithm of the input size (base 2, but the base doesn't matter in Big O notation).  This makes binary search significantly faster than linear search (O(n)) for large sorted datasets.
+
+
+Other examples of O(log n) algorithms include:
+
+* **Tree traversals (balanced trees):**  Finding a specific node in a balanced binary search tree.
+* **Efficient exponentiation:** Calculating a<sup>b</sup> using exponentiation by squaring.
+
+
+It's crucial to remember that O(log n) algorithms require the input data to be sorted or structured in a way that allows for efficient halving of the search space.  If the data is unsorted,  you'll generally need to sort it first (which has a time complexity greater than O(log n), often O(n log n)).
+
