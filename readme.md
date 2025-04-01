@@ -27226,3 +27226,141 @@ else:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach (H is the height of the tree, which can be N in the worst case for a skewed tree) and O(H) for the iterative approach (due to the stack, again potentially O(N) in the worst case).  The iterative approach is generally preferred for its better space efficiency in the worst case.  Choose the method that best suits your needs and coding style.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property. Here are two common methods:
+
+**Method 1: Recursive Approach**
+
+This approach recursively checks the BST property for each node.  A node is valid if:
+
+1. Its left subtree contains only nodes with values less than its own.
+2. Its right subtree contains only nodes with values greater than its own.
+3. Both its left and right subtrees are also valid BSTs.
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst(node):
+    """
+    Recursively checks if a given tree is a Binary Search Tree.
+
+    Args:
+        node: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    return _is_bst_util(node, float('-inf'), float('inf'))
+
+def _is_bst_util(node, min_val, max_val):
+    """
+    Recursive helper function for is_bst.
+    """
+    if node is None:
+        return True
+
+    if node.data < min_val or node.data > max_val:
+        return False
+
+    return (is_bst(node.left) and
+            is_bst(node.right) and
+            _is_bst_util(node.left, min_val, node.data -1) and
+            _is_bst_util(node.right, node.data + 1, max_val))
+
+
+
+# Example usage
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.right = Node(18)
+
+
+if is_bst(root):
+    print("The given tree is a BST")
+else:
+    print("The given tree is not a BST")
+
+
+root2 = Node(10)
+root2.left = Node(15) #Violation
+root2.right = Node(5) #Violation
+
+if is_bst(root2):
+    print("The given tree is a BST")
+else:
+    print("The given tree is not a BST")
+```
+
+**Method 2: Inorder Traversal**
+
+A BST, when traversed in inorder (left, root, right), will produce a sorted sequence of its nodes.  This method leverages this property.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(node):
+    """
+    Checks if a tree is a BST using inorder traversal.
+
+    Args:
+        node: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    values = []
+    _inorder_traversal(node, values)
+    for i in range(1, len(values)):
+        if values[i] <= values[i - 1]:
+            return False
+    return True
+
+def _inorder_traversal(node, values):
+    """
+    Helper function to perform inorder traversal.
+    """
+    if node:
+        _inorder_traversal(node.left, values)
+        values.append(node.data)
+        _inorder_traversal(node.right, values)
+
+
+# Example Usage (same as above,  just change the function call)
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.right = Node(18)
+
+if is_bst_inorder(root):
+    print("The given tree is a BST")
+else:
+    print("The given tree is not a BST")
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5)
+
+if is_bst_inorder(root2):
+    print("The given tree is a BST")
+else:
+    print("The given tree is not a BST")
+
+```
+
+Both methods achieve the same result. The recursive approach might be slightly more intuitive for understanding the BST property, while the inorder traversal approach can be more efficient in some cases because it avoids multiple recursive calls.  Choose the method that best suits your understanding and needs. Remember to handle edge cases like empty trees appropriately.
+
