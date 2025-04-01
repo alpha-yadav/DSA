@@ -25561,3 +25561,88 @@ else:
 
 Remember to break down problems into smaller, manageable steps.  Don't be afraid to seek help when you're stuck.  With dedication and practice, you'll steadily improve your algorithmic skills.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:** Reverse a string.
+
+**Input:** A string, e.g., "hello"
+
+**Output:** The reversed string, e.g., "olleh"
+
+**Solution (Python):**
+
+```python
+def reverse_string(s):
+  return s[::-1]
+```
+
+**Medium:**
+
+**Problem:** Find the two numbers in an array that add up to a specific target.
+
+**Input:** An array of integers (e.g., `[2, 7, 11, 15]`) and a target integer (e.g., `9`).
+
+**Output:** The indices of the two numbers that add up to the target (e.g., `[0, 1]`).  Return an empty list if no such pair exists.
+
+**Solution (Python):**
+
+```python
+def find_sum_pair(nums, target):
+    num_map = {}  # Dictionary to store numbers and their indices
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    return [] #No pair found
+
+```
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string (e.g., "babad")
+
+**Output:** The longest palindromic substring (e.g., "bab" or "aba").  If multiple palindromes of the same length exist, return any one.
+
+**Solution (Python - a more efficient approach than brute force):**
+
+```python
+def longest_palindrome(s):
+    n = len(s)
+    if n < 2:
+        return s
+
+    start = 0
+    max_len = 1
+
+    for i in range(n):
+        # Odd length palindromes
+        l, r = i, i
+        while l >= 0 and r < n and s[l] == s[r]:
+            if r - l + 1 > max_len:
+                max_len = r - l + 1
+                start = l
+            l -= 1
+            r += 1
+
+        # Even length palindromes
+        l, r = i, i + 1
+        while l >= 0 and r < n and s[l] == s[r]:
+            if r - l + 1 > max_len:
+                max_len = r - l + 1
+                start = l
+            l -= 1
+            r += 1
+
+    return s[start:start + max_len]
+
+```
+
+
+These examples demonstrate different levels of complexity and showcase common algorithmic techniques.  Remember that the "best" solution often depends on factors like time and space complexity, which are important considerations in algorithm design.
+
