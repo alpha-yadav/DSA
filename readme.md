@@ -36642,3 +36642,95 @@ If you can modify the tree to add parent pointers to each node, finding the LCA 
 
 Remember to handle edge cases such as one or both nodes not being present in the tree.  The recursive solution shown above gracefully handles these cases by returning `null` when appropriate.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree depends heavily on the type of tree you're working with.  Here's a breakdown of common approaches, focusing on binary trees and general trees:
+
+**1. Binary Trees:**
+
+* **Approach 1: Recursive Approach (Most Common & Efficient)**
+
+This approach uses recursion to traverse the tree.  The key idea is:
+
+1. **Base Cases:**
+   * If the current node is `NULL`, return `NULL`.
+   * If the current node is either `p` or `q`, return the current node (we've found one of the targets).
+
+2. **Recursive Step:**
+   * Recursively search for `p` and `q` in the left and right subtrees.
+   * If `p` and `q` are found in *different* subtrees, the current node is the LCA.
+   * Otherwise, the LCA is in the subtree where both `p` and `q` were found.
+
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:  # p and q are in different subtrees
+        return root
+    elif left:          # p and q are in the left subtree
+        return left
+    else:              # p and q are in the right subtree
+        return right
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+```
+
+* **Approach 2: Iterative Approach (Using Parent Pointers)**
+
+If you can modify the tree to include parent pointers (each node knows its parent), you can use an iterative approach.  This involves finding the paths from the root to `p` and `q`, then iterating upwards from the leaves until you find the first common ancestor. This approach is less efficient than the recursive one for most scenarios but might be preferred in specific constrained memory environments.
+
+**2. General Trees (Not necessarily binary)**
+
+For general trees, the recursive approach adapts slightly. The key difference is that each node can have an arbitrary number of children.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, children=None):
+        self.val = val
+        self.children = children if children is not None else []
+
+def lowestCommonAncestor_general(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    for child in root.children:
+        lca = lowestCommonAncestor_general(child, p, q)
+        if lca:  # Found LCA in a subtree
+            return lca
+
+    return None  #Not Found
+
+#Example usage - needs to be adjusted based on your tree structure
+```
+
+**Important Considerations:**
+
+* **Error Handling:**  The code snippets above lack robust error handling (e.g., what if `p` or `q` are not in the tree?).  Production-ready code should include checks for these cases.
+* **Efficiency:** The recursive approach is generally the most efficient for binary trees, having a time complexity of O(N) where N is the number of nodes.  The iterative approach (with parent pointers) is also O(N) but might have higher constant factors.  The general tree approach's efficiency also depends on the tree's structure but is typically O(N).
+* **Space Complexity:** Recursive approaches use stack space proportional to the tree's height (worst-case O(N) for skewed trees), whereas the iterative approach is usually O(1) or O(h) where 'h' is the height of the tree.
+
+
+Remember to choose the approach that best suits your tree structure and performance requirements.  For binary trees, the recursive method is often preferred for its simplicity and efficiency. For general trees, the adapted recursive approach is a good starting point.
+
