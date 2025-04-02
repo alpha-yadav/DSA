@@ -36462,3 +36462,111 @@ Both implementations follow these steps:
 
 These examples provide a basic understanding.  For very large trees, optimizations might be needed to handle memory efficiently.  For instance, you could consider using an iterative approach instead of recursion if you're worried about stack overflow for exceptionally deep trees.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversal refers to the process of visiting (processing) each node in a tree data structure exactly once.  There are three main ways to traverse a binary tree: preorder, inorder, and postorder.  These are all depth-first traversals, meaning they explore as far as possible along each branch before backtracking.
+
+**1. Preorder Traversal:**
+
+* **Visit the root node.**
+* **Recursively traverse the left subtree.**
+* **Recursively traverse the right subtree.**
+
+**Example:**
+
+Consider this binary tree:
+
+```
+     A
+    / \
+   B   C
+  / \
+ D   E
+```
+
+**Preorder traversal:** A B D E C
+
+**Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Preorder traversal:")
+preorder(root)  # Output: Preorder traversal: A B D E C
+```
+
+
+**2. Inorder Traversal:**
+
+* **Recursively traverse the left subtree.**
+* **Visit the root node.**
+* **Recursively traverse the right subtree.**
+
+**Example (same tree as above):**
+
+**Inorder traversal:** D B E A C
+
+**Python Code:**
+
+```python
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+print("\nInorder traversal:")
+inorder(root) # Output: Inorder traversal: D B E A C
+```
+
+
+**3. Postorder Traversal:**
+
+* **Recursively traverse the left subtree.**
+* **Recursively traverse the right subtree.**
+* **Visit the root node.**
+
+**Example (same tree as above):**
+
+**Postorder traversal:** D E B C A
+
+**Python Code:**
+
+```python
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+print("\nPostorder traversal:")
+postorder(root) # Output: Postorder traversal: D E B C A
+```
+
+**Applications:**
+
+The choice of traversal method depends on the application:
+
+* **Preorder:**  Used to create a copy of the tree, or to express the tree as a prefix notation (Polish notation).
+* **Inorder:** For binary search trees, inorder traversal yields the nodes in sorted order.
+* **Postorder:** Used to delete a tree or to express the tree as a postfix notation (Reverse Polish Notation) useful for expression evaluation.
+
+
+Remember to handle the case where the input `node` is `None` (empty subtree) in your recursive functions to prevent errors.  These examples provide a foundational understanding.  More complex tree structures might require adjustments to these basic traversal algorithms.
+
