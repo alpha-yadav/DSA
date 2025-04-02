@@ -34909,3 +34909,46 @@ Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) descr
 
 **Important Note:** Asymptotic notations are concerned with the *growth rate* of functions as the input size approaches infinity.  Constant factors and lower-order terms are typically ignored.  For example, `O(2n)` is equivalent to `O(n)`.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the lower bound of an algorithm's runtime or space complexity.  It provides a guarantee on how *fast* (or *efficient*) an algorithm will *at least* be, in the worst case.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that a function *f(n)* is Ω(*g(n)*) if there exist positive constants *c* and *n₀* such that 0 ≤ *c* *g(n)* ≤ *f(n)* for all *n* ≥ *n₀*.
+
+**What this means:**
+
+* **f(n):** Represents the actual runtime (or space complexity) of your algorithm.
+* **g(n):** Represents a simpler function that describes the growth rate of *f(n)*.  This is often a basic function like n, n², log n, etc.
+* **c:** A positive constant.  It allows for scaling.  We don't care about the exact runtime, just the growth rate.
+* **n₀:** A positive constant threshold.  The inequality only needs to hold for input sizes larger than *n₀*.  This allows us to ignore small input sizes where the algorithm might behave differently.
+
+**In simpler terms:**
+
+Big-Omega notation tells us that the runtime of the algorithm will *never* be slower than *g(n)* (asymptotically, meaning for sufficiently large inputs).  It provides a lower bound on the growth of the runtime.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1**
+
+   This function is Ω(n²).  We can choose *c* = 1 and a sufficiently large *n₀* to satisfy the definition.  For large *n*, the n² term dominates, and the inequality 1*n² ≤ 2n² + 3n + 1 holds.  It's also Ω(n) and Ω(1), but Ω(n²) is a *tighter* lower bound, giving more precise information about the algorithm's efficiency.
+
+* **f(n) = log₂n + 5**
+
+   This function is Ω(log n).  We can choose appropriate *c* and *n₀*.
+
+**Difference from Big-O (O) and Big-Theta (Θ):**
+
+* **Big-O (O):** Describes the *upper bound* of an algorithm's runtime. It tells us how *fast* the algorithm will *at most* be, in the worst case.
+* **Big-Omega (Ω):** Describes the *lower bound*. It tells us how *fast* the algorithm will *at least* be, in the best/worst case (depending on context).
+* **Big-Theta (Θ):** Describes both the upper and lower bounds.  If f(n) = Θ(g(n)), then f(n) is both O(g(n)) and Ω(g(n)).  This means the algorithm's runtime grows proportionally to g(n).
+
+**Why is Big-Omega useful?**
+
+* **Algorithm analysis:** It helps determine the minimum amount of work an algorithm *must* do to solve a problem.  This can be useful for comparing algorithms or for proving lower bounds on the complexity of a problem itself.
+* **Optimization:**  Knowing the lower bound can help determine if an algorithm is optimal or if there's potential for further improvement.
+
+In summary, Big-Omega notation provides valuable insights into the efficiency of algorithms by establishing a lower bound on their runtime or space complexity.  It's a crucial tool in algorithm analysis and design.
+
