@@ -36362,3 +36362,103 @@ class Node:
         self.right = None
 ```
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes at a given level before moving to the next level.  Here are implementations in Python and JavaScript using a queue data structure.
+
+**Python Implementation:**
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+**JavaScript Implementation:**
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) return;
+
+  const queue = [root];
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    console.log(curr.data, " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+
+// Example usage:
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1  2  3  4  5
+```
+
+**Explanation:**
+
+Both implementations follow these steps:
+
+1. **Initialization:** A queue (`nodes` in Python, `queue` in JavaScript) is created and the root node is added to it.
+
+2. **Iteration:**  The `while` loop continues as long as the queue is not empty.
+
+3. **Dequeue:** In each iteration, the first element (front) of the queue is removed using `popleft()` (Python) or `shift()` (JavaScript).  This is the current node being processed.
+
+4. **Processing:** The data of the current node is printed.
+
+5. **Enqueue:** The left and right children of the current node (if they exist) are added to the rear of the queue.
+
+6. **Repeat:** Steps 3-5 are repeated until the queue is empty, ensuring that all nodes are visited level by level.
+
+
+These examples provide a basic understanding.  For very large trees, optimizations might be needed to handle memory efficiently.  For instance, you could consider using an iterative approach instead of recursion if you're worried about stack overflow for exceptionally deep trees.
+
