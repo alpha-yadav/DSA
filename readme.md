@@ -34997,3 +34997,49 @@ The worst-case scenario is that the target element is not in the array, requirin
 
 Big O notation is crucial for comparing the efficiency of different algorithms and making informed decisions about which algorithm to use for a given problem.  Understanding Big O allows developers to choose algorithms that scale well as the input size increases.
 
+#  A Simple Loop 
+The term "simple loop" is quite broad.  To give you a helpful example, I'll show you a simple loop in Python that prints numbers from 1 to 10.  This demonstrates a `for` loop iterating over a `range`.
+
+```python
+for i in range(1, 11):  # range(1, 11) generates numbers from 1 up to (but not including) 11
+    print(i)
+```
+
+This code will produce the following output:
+
+```
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+Here's another example using a `while` loop:
+
+```python
+i = 1
+while i <= 10:
+    print(i)
+    i += 1  # Increment i to avoid an infinite loop
+```
+
+This `while` loop achieves the same result.  It continues to execute as long as `i` is less than or equal to 10.
+
+
+To make it more "simple," we could even print the same thing just once:
+
+
+```python
+print("1 2 3 4 5 6 7 8 9 10")
+```
+
+But that defeats the purpose of demonstrating a loop!
+
+Let me know if you'd like to see examples of more complex loops, loops in other programming languages, or loops that perform specific tasks (like summing numbers, searching for items, etc.).  Just tell me what kind of "simple loop" you're interested in.
+
