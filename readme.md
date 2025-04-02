@@ -34748,3 +34748,73 @@ This uses the `map` function to iterate and transform each number in the range. 
 
 Remember to choose the method that best suits your understanding and the context of your project.  For a simple FizzBuzz implementation, the clarity of Method 1 often outweighs the minor conciseness gains of the other methods.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We generally analyze complexity in terms of the *growth rate* of these resources as the input size increases, ignoring constant factors and smaller terms. This is because the dominant factors determine the algorithm's scalability.
+
+**Big O Notation:**
+
+Big O notation (O) is the most common way to express time and space complexity.  It provides an upper bound on the growth rate of an algorithm.  It describes the *worst-case* scenario.  Other notations like Ω (Omega – lower bound) and Θ (Theta – tight bound) also exist, but Big O is the most frequently used.
+
+Here are some common Big O complexities:
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  This is less efficient for large datasets.  Example: Bubble sort, selection sort, nested loops iterating over the same data.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  This becomes extremely slow for even moderately sized inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size. This is extremely slow and impractical for even small inputs.  Example: Traveling salesperson problem (brute-force approach).
+
+
+**Analyzing Complexity:**
+
+Analyzing algorithm complexity involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most significantly to the algorithm's runtime.
+
+2. **Expressing the number of operations as a function of the input size:**  Count how many times these basic operations are executed as a function of the input size (n).
+
+3. **Using Big O notation to express the growth rate:** Simplify the function, ignoring constant factors and lower-order terms, to obtain the Big O complexity.
+
+
+**Example:**
+
+Consider a function that searches for a number in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Basic operation:** Comparison (`arr[i] == target`)
+* **Number of operations:** In the worst case, the algorithm iterates through the entire array (n elements).  Therefore, the comparison is performed n times.
+* **Big O notation:** O(n) - Linear Time
+
+
+**Space Complexity:**
+
+Space complexity analysis is similar to time complexity analysis but focuses on memory usage. It considers the amount of extra space used by the algorithm, excluding the input itself.
+
+For example:
+
+* An algorithm that uses a constant amount of extra memory has O(1) space complexity.
+* An algorithm that creates a copy of the input array has O(n) space complexity.
+* Recursive algorithms might have O(log n) or O(n) space complexity depending on their recursion depth.
+
+
+Understanding algorithm complexity is crucial for selecting the most efficient algorithms for a given task, particularly when dealing with large datasets where performance differences can be significant.
+
