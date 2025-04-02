@@ -36734,3 +36734,12 @@ def lowestCommonAncestor_general(root, p, q):
 
 Remember to choose the approach that best suits your tree structure and performance requirements.  For binary trees, the recursive method is often preferred for its simplicity and efficiency. For general trees, the adapted recursive approach is a good starting point.
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need information about the relationship you want to visualize.  For example, tell me:
+
+* **The data points:**  A list of x and y values (e.g., (1,2), (2,4), (3,6)).
+* **An equation:**  (e.g., y = 2x, y = x^2 + 1,  y = sin(x)).
+* **The type of graph:** (e.g., line graph, scatter plot, bar chart, pie chart).
+
+Once I have this information, I can help you create a graph.
+
