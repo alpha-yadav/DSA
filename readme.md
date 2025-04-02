@@ -36132,3 +36132,120 @@ else:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the average case (where H is the height of the tree) due to the recursive call stack.  In the worst case (a skewed tree), the space complexity becomes O(N).  The recursive check with min and max might be slightly less efficient in practice due to the extra function call overhead.  However, both are perfectly valid and efficient solutions for determining if a binary tree is a BST.  Choose whichever you find more readable and easier to understand.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property. Here are two common methods, one recursive and one iterative:
+
+**Method 1: Recursive Approach**
+
+This method recursively checks the BST property for each subtree.  It's generally easier to understand.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a given tree is a Binary Search Tree.
+
+    Args:
+        node: The root node of the tree.
+        min_val: The minimum allowed value in the current subtree.
+        max_val: The maximum allowed value in the current subtree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.right = Node(7)
+root2.right.left = Node(12)
+root2.left.right.right = Node(9) #Violation : 9 > 7
+
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") #Output : False
+
+```
+
+**Method 2: Iterative Approach (using Inorder Traversal)**
+
+This method performs an inorder traversal of the tree and checks if the resulting sequence is sorted.  Inorder traversal visits nodes in ascending order for a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_iterative(root):
+    """
+    Iteratively checks if a given tree is a Binary Search Tree using inorder traversal.
+
+    Args:
+        root: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    stack = []
+    prev = -float('inf') # Initialize previous node value to negative infinity
+
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+
+        root = stack.pop()
+        if root.data <= prev:  # Check if the current node's value is less than or equal to the previous node's value
+            return False
+        prev = root.data
+        root = root.right
+
+    return True
+
+# Example Usage (same trees as above):
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_iterative(root)}")  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.right = Node(7)
+root2.right.left = Node(12)
+root2.left.right.right = Node(9) #Violation
+
+print(f"Is the tree a BST? {is_bst_iterative(root2)}") #Output: False
+```
+
+Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand for beginners, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues for very deep trees).  Choose the method that best suits your understanding and needs.  Remember to handle the base case (empty tree) appropriately in both methods.
+
