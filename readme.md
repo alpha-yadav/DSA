@@ -34818,3 +34818,47 @@ For example:
 
 Understanding algorithm complexity is crucial for selecting the most efficient algorithms for a given task, particularly when dealing with large datasets where performance differences can be significant.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a notation used in computer science and mathematics to describe the asymptotic behavior of a function.  Specifically, it describes the tight bound of a function's growth rate.  This means it provides both an upper and lower bound, indicating that the function grows at approximately the same rate as another function.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+In simpler terms:
+
+* **f(n)** is the function we're analyzing (e.g., the runtime of an algorithm).
+* **g(n)** is a simpler function that represents the growth rate of *f(n)* (e.g., n, n², log n).
+* **c₁ and c₂** are positive constants that scale *g(n)*.  They represent the lower and upper bounds, respectively.
+* **n₀** is a threshold value.  The inequality only needs to hold for values of *n* greater than or equal to *n₀*.  This accounts for potential initial variations in the function's behavior.
+
+**What Θ Notation Tells Us:**
+
+Θ notation provides a precise characterization of a function's growth rate.  It ignores constant factors and lower-order terms, focusing on the dominant term that determines the overall growth as *n* becomes large.
+
+**Comparison to Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  *f(n) = O(g(n))* means that *f(n)* grows no faster than *g(n)*.  It's a less precise statement than Θ.
+
+* **Big-Ω (Ω):** Provides a *lower bound*.  *f(n) = Ω(g(n))* means that *f(n)* grows at least as fast as *g(n)*. It's also a less precise statement than Θ.
+
+* **Big-Θ (Θ):** Provides both an upper and lower bound, indicating a *tight bound*.  It's the most precise of the three. If *f(n) = Θ(g(n))*, then it's also true that *f(n) = O(g(n))* and *f(n) = Ω(g(n))*.
+
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1:**  f(n) = Θ(n²)  (The n² term dominates as n grows large.)  We can find constants c₁, c₂, and n₀ to satisfy the definition.
+
+* **f(n) = log₂n + 5:** f(n) = Θ(log n) (The logarithmic term dominates.)
+
+* **f(n) = 7:** f(n) = Θ(1) (A constant function; its growth rate is constant.)
+
+
+**Importance in Algorithm Analysis:**
+
+Θ notation is crucial for analyzing the efficiency of algorithms.  It allows us to compare the runtime of different algorithms independent of specific hardware or implementation details.  By focusing on the dominant growth term, we can make informed decisions about algorithm selection based on scalability.  For instance, an algorithm with Θ(n²) runtime is generally less efficient than an algorithm with Θ(n log n) runtime for large input sizes.
+
