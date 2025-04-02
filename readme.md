@@ -35770,3 +35770,156 @@ print(f"LCA of {p.val} and {q.val}: {lca.val}")
 
 Both methods have a time complexity of O(h), where h is the height of the BST (O(log n) for a balanced tree, O(n) for a skewed tree).  The space complexity is O(h) for the recursive approach (due to the recursive call stack) and O(1) for the iterative approach.  Choose the method that best suits your coding style and the potential size of your BST.  For most cases, the recursive approach is preferred for readability. Remember to handle edge cases like empty trees or nodes not being present in the tree.
 
+#  Binary Search Tree - Python 
+A Binary Search Tree (BST) is a tree data structure where each node has at most two children, referred to as the left child and the right child, and satisfies the binary search property:
+
+* The value of the key of each node in the left subtree is less than the value of the key of its parent node.
+* The value of the key of each node in the right subtree is greater than the value of the key of its parent node.
+
+Here's a Python implementation of a Binary Search Tree, along with explanations and common operations:
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        if self.root is None:
+            self.root = Node(key)
+        else:
+            self._insert_recursive(self.root, key)
+
+    def _insert_recursive(self, node, key):
+        if key < node.key:
+            if node.left is None:
+                node.left = Node(key)
+            else:
+                self._insert_recursive(node.left, key)
+        else:
+            if node.right is None:
+                node.right = Node(key)
+            else:
+                self._insert_recursive(node.right, key)
+
+
+    def search(self, key):
+        return self._search_recursive(self.root, key)
+
+    def _search_recursive(self, node, key):
+        if node is None or node.key == key:
+            return node
+        if key < node.key:
+            return self._search_recursive(node.left, key)
+        else:
+            return self._search_recursive(node.right, key)
+
+    def min_value(self, node):
+      current = node
+      while(current.left is not None):
+        current = current.left
+      return current.key
+
+    def max_value(self, node):
+      current = node
+      while(current.right is not None):
+        current = current.right
+      return current.key
+
+    def delete(self, key):
+        self.root = self._delete_recursive(self.root, key)
+
+    def _delete_recursive(self, node, key):
+        if node is None:
+            return node
+
+        if key < node.key:
+            node.left = self._delete_recursive(node.left, key)
+        elif key > node.key:
+            node.right = self._delete_recursive(node.right, key)
+        else:  # key == node.key
+            # Node with one or no children
+            if node.left is None:
+                return node.right
+            elif node.right is None:
+                return node.left
+
+            # Node with two children: Get the inorder successor (smallest in the right subtree)
+            node.key = self.min_value(node.right)
+            node.right = self._delete_recursive(node.right, node.key)
+
+        return node
+
+    def inorder_traversal(self):
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.key)
+            self._inorder_recursive(node.right, result)
+
+    def preorder_traversal(self):
+        result = []
+        self._preorder_recursive(self.root, result)
+        return result
+
+    def _preorder_recursive(self, node, result):
+        if node:
+            result.append(node.key)
+            self._preorder_recursive(node.left, result)
+            self._preorder_recursive(node.right, result)
+
+    def postorder_traversal(self):
+        result = []
+        self._postorder_recursive(self.root, result)
+        return result
+
+    def _postorder_recursive(self, node, result):
+        if node:
+            self._postorder_recursive(node.left, result)
+            self._postorder_recursive(node.right, result)
+            result.append(node.key)
+
+
+# Example Usage
+bst = BST()
+bst.insert(50)
+bst.insert(30)
+bst.insert(20)
+bst.insert(40)
+bst.insert(70)
+bst.insert(60)
+bst.insert(80)
+
+print("Inorder Traversal:", bst.inorder_traversal())  # Output: [20, 30, 40, 50, 60, 70, 80] (sorted order)
+print("Preorder Traversal:", bst.preorder_traversal()) # Output: [50, 30, 20, 40, 70, 60, 80]
+print("Postorder Traversal:", bst.postorder_traversal()) # Output: [20, 40, 30, 60, 80, 70, 50]
+
+print("Search for 70:", bst.search(70).key) # Output: 70
+print("Search for 90:", bst.search(90)) # Output: None
+
+bst.delete(50)
+print("Inorder Traversal after deleting 50:", bst.inorder_traversal()) # Output will vary slightly depending on how the deletion handles two children nodes.
+
+
+```
+
+This improved code includes:
+
+* **Node Class:**  Represents a node in the tree.
+* **BST Class:** Contains methods for insertion, searching, deletion, and traversals.
+* **Recursive Helper Functions:**  Many operations are implemented recursively for clarity and efficiency.
+* **Inorder, Preorder, and Postorder Traversal:** Demonstrates different ways to visit the nodes.
+* **Deletion Handling:** Correctly handles deletion of nodes with one or two children.
+* **Error Handling (Implicit):**  `search` implicitly handles the case where a key is not found by returning `None`.
+
+Remember that the efficiency of BST operations (insertion, search, deletion) is O(h), where 'h' is the height of the tree.  In a balanced BST, h is approximately log₂(n) (n being the number of nodes), resulting in logarithmic time complexity. However, in a skewed tree (worst-case scenario), h can be n, leading to linear time complexity.  Self-balancing BSTs (like AVL trees or red-black trees) are used to prevent this worst-case scenario.
+
