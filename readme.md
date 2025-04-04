@@ -37538,3 +37538,104 @@ else:
 
 Remember to start small, focus on understanding the fundamentals, and practice consistently.  It takes time and effort, but with dedication, you'll master the art of algorithms!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem samples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string, e.g., "hello"
+
+**Output:** The reversed string, e.g., "olleh"
+
+**Solution (Python):**
+
+```python
+def reverse_string(s):
+  return s[::-1]
+
+print(reverse_string("hello")) # Output: olleh
+```
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return indices of the two numbers such that they add up to `target`.  You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Solution (Python):**
+
+```python
+def two_sum(nums, target):
+    num_map = {}  # Use a dictionary for efficient lookup
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    return [] # No solution found
+
+print(two_sum([2,7,11,15], 9)) # Output: [0, 1]
+```
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+```
+Input: s = "babad"
+Output: "bab"
+Explanation: "aba" is also a valid answer.
+```
+
+**Solution (Python -  a more efficient solution exists using dynamic programming, but this is a simpler approach):**
+
+```python
+def longest_palindrome(s):
+    if not s:
+        return ""
+
+    longest = ""
+    for i in range(len(s)):
+        # Odd length palindromes
+        l, r = i, i
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            if (r - l + 1) > len(longest):
+                longest = s[l:r+1]
+            l -= 1
+            r += 1
+
+        # Even length palindromes
+        l, r = i, i + 1
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            if (r - l + 1) > len(longest):
+                longest = s[l:r+1]
+            l -= 1
+            r += 1
+
+    return longest
+
+print(longest_palindrome("babad")) # Output: bab (or aba)
+```
+
+These examples demonstrate different levels of complexity and showcase common algorithmic patterns.  Remember to consider time and space complexity when designing your solutions.  Many more algorithmic problems can be found on sites like LeetCode, HackerRank, and Codewars.
+
