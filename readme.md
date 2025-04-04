@@ -42273,3 +42273,115 @@ print(is_bst_minmax(root2))  # Output: False
 
 Both methods achieve the same result.  The min/max approach (Method 2) is generally preferred because it avoids the extra space complexity of creating the `in_order_list`.  Its time complexity is O(N), where N is the number of nodes,  and its space complexity is O(H), where H is the height of the tree (O(log N) for balanced trees, O(N) for skewed trees).  The in-order traversal method also has a time complexity of O(N) but a space complexity of O(N) due to the list. Choose the method that best suits your needs and understanding.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree adheres to the Binary Search Tree (BST) property. Here are two common methods, one recursive and one iterative:
+
+**Method 1: Recursive Approach**
+
+This method recursively checks if the left subtree contains only smaller values and the right subtree contains only larger values than the current node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Recursively checks if a tree is a BST.
+
+    Args:
+      node: The root node of the tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    # Check if the left subtree is valid
+    if not is_bst_recursive(node.left):
+        return False
+
+    # Check if the right subtree is valid
+    if not is_bst_recursive(node.right):
+        return False
+
+    #Check current node against its left and right subtrees.
+    if node.left is not None and node.left.data > node.data:
+        return False
+    if node.right is not None and node.right.data < node.data:
+        return False
+
+    return True
+
+# Example Usage
+root = Node(8)
+root.left = Node(3)
+root.right = Node(10)
+root.left.left = Node(1)
+root.left.right = Node(6)
+root.right.right = Node(14)
+
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+root2 = Node(8)
+root2.left = Node(10)
+root2.right = Node(15)
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") # Output: False
+
+```
+
+
+**Method 2: Iterative Approach (using Inorder Traversal)**
+
+This method performs an inorder traversal of the BST.  A correctly structured BST will yield an inorder traversal that is sorted in ascending order.
+
+
+```python
+def is_bst_iterative(node):
+    """
+    Iteratively checks if a tree is a BST using inorder traversal.
+
+    Args:
+      node: The root node of the tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    stack = []
+    prev = None
+    curr = node
+
+    while curr is not None or stack:
+        while curr is not None:
+            stack.append(curr)
+            curr = curr.left
+
+        curr = stack.pop()
+        if prev is not None and curr.data <= prev.data:
+            return False
+        prev = curr
+        curr = curr.right
+
+    return True
+
+
+#Example Usage (using the same trees from above)
+print(f"Is the tree a BST (iterative)? {is_bst_iterative(root)}")  # Output: True
+print(f"Is the tree a BST (iterative)? {is_bst_iterative(root2)}") # Output: False
+```
+
+**Choosing a Method:**
+
+* **Recursive approach:**  More intuitive and easier to understand for those familiar with recursion.  Can be less efficient for very deep trees due to potential stack overflow issues.
+
+* **Iterative approach:** Generally more efficient for large trees as it avoids recursive function calls and potential stack overflow.  May be slightly less readable for beginners.
+
+Both methods provide a correct solution.  Choose the method that best suits your understanding and the potential size of the trees you'll be processing.  For most practical purposes, the iterative method is preferred for its efficiency and avoidance of stack overflow. Remember to handle edge cases like empty trees appropriately.
+
