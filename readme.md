@@ -41106,3 +41106,79 @@ These examples demonstrate both `for` loops (which are ideal when you know the n
 
 Remember to choose the loop type that best suits your needs.  If you know exactly how many times you need to loop, a `for` loop is generally cleaner. If the number of iterations depends on a condition that might change during the loop, a `while` loop is more appropriate.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to perform operations on a two-dimensional (or higher-dimensional) structure efficiently.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+for (outer loop initialization; outer loop condition; outer loop increment) {
+  // Outer loop body
+  for (inner loop initialization; inner loop condition; inner loop increment) {
+    // Inner loop body
+  }
+}
+```
+
+**Example (C++):**
+
+This example prints a multiplication table:
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 1; i <= 10; i++) { // Outer loop (rows)
+    for (int j = 1; j <= 10; j++) { // Inner loop (columns)
+      std::cout << i * j << "\t"; // \t adds a tab for formatting
+    }
+    std::cout << std::endl; // Newline after each row
+  }
+  return 0;
+}
+```
+
+**Explanation:**
+
+1. **Outer loop:** Iterates from `i = 1` to `i = 10`.  This represents the rows of the multiplication table.
+2. **Inner loop:** Iterates from `j = 1` to `j = 10` for *each* value of `i`. This represents the columns.
+3. **Inner loop body:** Calculates and prints the product `i * j`.
+4. **Outer loop body:** After the inner loop completes for a given `i`, a newline is printed to move to the next row.
+
+**Example (Python):**
+
+This example iterates through a list of lists (a matrix):
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")  # Print the element with a space
+    print() # Newline after each row
+```
+
+**Uses of Nested Loops:**
+
+Nested loops are commonly used for:
+
+* **Processing matrices and multi-dimensional arrays:**  Iterating through rows and columns.
+* **Generating patterns:**  Creating output like multiplication tables, triangles, or other shapes.
+* **Nested iteration:**  When you need to perform an operation on each combination of items from multiple sets.
+* **Searching and comparing data:**  Checking for elements in a multi-dimensional structure.
+
+
+**Important Considerations:**
+
+* **Time Complexity:**  Nested loops can significantly increase the time complexity of your algorithm.  A nested loop with two loops that each iterate `n` times has a time complexity of O(n²).  Carefully consider the efficiency of your nested loops, especially with large datasets.
+* **Readability:**  Well-structured nested loops are crucial for code readability.  Use meaningful variable names and appropriate indentation to make your code easier to understand and maintain.
+
+
+Understanding nested loops is fundamental to mastering many programming concepts and algorithms. Remember to carefully analyze the loops' conditions and their impact on your program's performance.
+
