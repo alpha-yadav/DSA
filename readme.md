@@ -40783,3 +40783,63 @@ This approach is arguably the most readable. It builds the output string increme
 
 For beginners, **Version 1** is the easiest to understand.  **Version 3** offers a good balance of readability and conciseness, making it a strong contender for most scenarios.  **Version 2** is the most compact, but readability may suffer.  Choose the version that best suits your understanding and coding style.  Remember that readability is crucial, especially when collaborating or maintaining code.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  This is typically expressed as a function of the input size, and the most commonly considered resources are:
+
+* **Time Complexity:**  How long the algorithm takes to run as a function of the input size.
+* **Space Complexity:** How much memory the algorithm uses as a function of the input size.
+
+Both are usually expressed using Big O notation (and sometimes Big Omega and Big Theta notations as well).  These notations describe the *growth rate* of the resource consumption as the input size increases, ignoring constant factors and lower-order terms.  This allows us to focus on the dominant factors affecting performance for large inputs.
+
+
+**Big O Notation (O)**
+
+Big O notation provides an upper bound on the growth rate of an algorithm's resource consumption.  It gives a worst-case scenario.  For example:
+
+* **O(1): Constant time.** The algorithm's runtime doesn't change with the input size.  Accessing an element in an array by index is O(1).
+* **O(log n): Logarithmic time.** The runtime increases logarithmically with the input size.  Binary search in a sorted array is O(log n).
+* **O(n): Linear time.** The runtime increases linearly with the input size.  Searching an unsorted array for a specific element is O(n).
+* **O(n log n): Linearithmic time.**  Common in efficient sorting algorithms like merge sort and heapsort.
+* **O(n²): Quadratic time.** The runtime increases quadratically with the input size.  Nested loops iterating over the input are often O(n²).  Bubble sort is an example.
+* **O(2ⁿ): Exponential time.** The runtime doubles with each addition to the input size.  Finding all subsets of a set is O(2ⁿ).
+* **O(n!): Factorial time.** The runtime grows factorially with the input size.  This is very slow for even moderately sized inputs.  Finding all permutations of a set is O(n!).
+
+
+**Other Notations**
+
+* **Big Omega (Ω):** Provides a lower bound on the growth rate.  It describes the best-case scenario.
+* **Big Theta (Θ):** Provides both an upper and lower bound, describing the tight bound on the growth rate.  It means the algorithm's complexity is precisely that function.
+
+
+**Factors Affecting Complexity**
+
+* **Input size:** The size of the data the algorithm operates on (e.g., number of elements in an array, number of nodes in a graph).
+* **Algorithm design:**  The choices made in designing the algorithm significantly impact its complexity. Different algorithms for the same problem can have vastly different complexities.
+* **Data structures:** The choice of data structure can significantly affect the complexity of operations. For example, searching in a sorted array using binary search (O(log n)) is much faster than searching in an unsorted array (O(n)).
+* **Hardware:** The hardware on which the algorithm runs influences the actual runtime, but the complexity analysis focuses on the algorithmic aspects, not the specific hardware.
+
+
+**Analyzing Algorithm Complexity**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine which operations contribute most to the runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size.
+3. **Use Big O notation:**  Identify the dominant terms and express the complexity using Big O notation.
+
+
+**Example:**
+
+Consider a simple function that iterates through an array and prints each element:
+
+```python
+def print_array(arr):
+  for element in arr:
+    print(element)
+```
+
+The runtime is directly proportional to the number of elements in the array.  Therefore, the time complexity is O(n), where n is the length of the array. The space complexity is O(1) because it uses a constant amount of extra space regardless of the array size.
+
+
+Understanding algorithm complexity is crucial for selecting efficient algorithms and data structures, especially when dealing with large datasets.  It allows developers to predict the performance of their code and make informed decisions about optimization.
+
