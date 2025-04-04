@@ -38922,3 +38922,114 @@ print("Inorder traversal after deleting 3:", bst.inorder_traversal())
 
 This code includes methods for insertion, searching, deletion, and an inorder traversal (which visits nodes in ascending order).  The deletion method handles the three cases: deleting a node with zero, one, or two children.  The `_min_value` helper function is used to find the inorder successor when deleting a node with two children.  Remember that the efficiency of BST operations (search, insert, delete) is O(h), where h is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes.  In a worst-case scenario (a skewed tree), h can be n, resulting in linear time complexity.  For guaranteed logarithmic time complexity, consider using self-balancing BSTs like AVL trees or red-black trees.
 
+#  Check if a tree is BST or not 
+Several approaches can check if a given binary tree is a Binary Search Tree (BST). Here are two common methods:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST will yield a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Recursively checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+      node: The root node of the tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    inorder = []
+    def inorder_traversal(node):
+        if node:
+            inorder_traversal(node.left)
+            inorder.append(node.data)
+            inorder_traversal(node.right)
+
+    inorder_traversal(node)
+
+    # Check if the inorder traversal is sorted
+    for i in range(1, len(inorder)):
+        if inorder[i] < inorder[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}") # Output: True
+
+
+root2 = Node(2)
+root2.left = Node(1)
+root2.right = Node(3)
+root2.right.left = Node(4)
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") # Output: False
+
+```
+
+**Method 2: Recursive Check with Minimum and Maximum Values**
+
+This approach recursively checks each subtree, ensuring that all nodes in the left subtree are smaller than the current node, and all nodes in the right subtree are larger.  It's generally more efficient than the in-order traversal method because it avoids the need to create and sort a list.
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a binary tree is a BST using min and max values.
+
+    Args:
+      node: The root node of the subtree being checked.
+      min_val: The minimum allowed value for nodes in this subtree.
+      max_val: The maximum allowed value for nodes in this subtree.
+
+    Returns:
+      True if the subtree is a BST, False otherwise.
+    """
+    if not node:
+        return True
+
+    if node.data <= min_val or node.data >= max_val:
+        return False
+
+    return (is_bst_minmax(node.left, min_val, node.data) and
+            is_bst_minmax(node.right, node.data, max_val))
+
+# Example usage (same trees as before):
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(f"Is the tree a BST? {is_bst_minmax(root)}")  # Output: True
+
+root2 = Node(2)
+root2.left = Node(1)
+root2.right = Node(3)
+root2.right.left = Node(4)
+
+print(f"Is the tree a BST? {is_bst_minmax(root2)}")  # Output: False
+```
+
+Both methods achieve the same result.  The min-max approach is generally preferred for its efficiency, especially in larger trees, as it avoids the overhead of creating and sorting an array.  Choose the method that best suits your understanding and needs. Remember to define the `Node` class appropriately for your specific use case.
+
