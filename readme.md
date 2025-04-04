@@ -40403,3 +40403,119 @@ While DFS and BFS are the most common, other graph traversal techniques exist, o
 
 The choice of traversal algorithm depends on the specific problem and the characteristics of the graph.  Understanding the strengths and weaknesses of each algorithm is crucial for efficient graph processing.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on whether you're traversing a graph or a tree, and whether you need to handle cycles.  Here are a few implementations in Python:
+
+**1. DFS for a Tree (Recursive):**
+
+This is the simplest version, suitable for trees where cycles aren't a concern.
+
+```python
+def dfs_tree(node):
+  """
+  Performs a Depth-First Search traversal of a tree.
+
+  Args:
+    node: The root node of the tree.  Each node should have a 'children' attribute, 
+          a list of its child nodes.  You might also want to add a 'visited' attribute
+          for more complex scenarios.
+
+  Returns:
+    A list of nodes visited in DFS order.
+  """
+  visited = []
+  
+  def dfs_recursive(current_node):
+    visited.append(current_node)
+    for child in current_node.children:
+      dfs_recursive(child)
+
+  dfs_recursive(node)
+  return visited
+
+# Example usage (assuming you have a tree structure defined):
+# class Node:
+#   def __init__(self, data):
+#     self.data = data
+#     self.children = []
+
+# root = Node(1)
+# root.children = [Node(2), Node(3)]
+# root.children[0].children = [Node(4), Node(5)]
+
+# visited_nodes = dfs_tree(root)
+# print([node.data for node in visited_nodes])  # Output will depend on your tree structure.
+```
+
+**2. DFS for a Graph (Iterative, with Cycle Detection):**
+
+This version uses a stack and handles cycles by keeping track of visited nodes.
+
+```python
+def dfs_graph_iterative(graph, start_node):
+  """
+  Performs a Depth-First Search traversal of a graph iteratively.
+
+  Args:
+    graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+    start_node: The starting node for the traversal.
+
+  Returns:
+    A list of nodes visited in DFS order.
+  """
+  visited = set()
+  stack = [start_node]
+  visited_nodes = []
+
+  while stack:
+    node = stack.pop()
+    if node not in visited:
+      visited.add(node)
+      visited_nodes.append(node)
+      stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+  return visited_nodes
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+visited_nodes = dfs_graph_iterative(graph, 'A')
+print(visited_nodes) # Example output: ['A', 'C', 'F', 'B', 'E', 'D'] (order might vary slightly)
+
+```
+
+**3. DFS for a Graph (Recursive, with Cycle Detection):**
+
+This recursive version also handles cycles.
+
+```python
+def dfs_graph_recursive(graph, node, visited=None, visited_nodes=None):
+    if visited is None:
+        visited = set()
+    if visited_nodes is None:
+        visited_nodes = []
+
+    visited.add(node)
+    visited_nodes.append(node)
+
+    for neighbor in graph.get(node, []):
+        if neighbor not in visited:
+            dfs_graph_recursive(graph, neighbor, visited, visited_nodes)
+
+    return visited_nodes
+
+# Example usage (same graph as above):
+visited_nodes = dfs_graph_recursive(graph, 'A')
+print(visited_nodes) # Output similar to iterative version.
+
+```
+
+Remember to adapt these examples to your specific data structures.  If your nodes have data associated with them, you'll likely want to modify the functions to return that data along with the node itself.  Choose the implementation that best suits your needs based on whether you are working with a tree or a graph and your preference for iterative or recursive approaches.  The iterative approach generally offers better performance and avoids potential stack overflow errors for very deep graphs.
+
