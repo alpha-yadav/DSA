@@ -42916,3 +42916,18 @@ def find_path(node, target, path):
 
 Remember to adapt the `Node` class and the example usage to your specific tree structure.  The choice of method depends heavily on the characteristics of your tree and the constraints of your problem.  For large binary trees, the recursive approach is generally very efficient. For general trees without parent pointers, DFS is a good strategy.  If you *can* add parent pointers to your tree, that simplifies the solution significantly.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need the information to create the graph for you.  For example, you could give me:
+
+* **A list of points:**  (1,2), (3,4), (5,6)
+* **An equation:** y = x^2
+* **A table of data:**  
+   | x | y |
+   |---|---|
+   | 0 | 1 |
+   | 1 | 3 |
+   | 2 | 5 |
+
+
+Once you provide the data, I'll do my best to create a graph for you.  I can't create visual graphs directly, but I can describe the graph or give you the coordinates to plot yourself.
+
