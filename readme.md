@@ -39033,3 +39033,113 @@ print(f"Is the tree a BST? {is_bst_minmax(root2)}")  # Output: False
 
 Both methods achieve the same result.  The min-max approach is generally preferred for its efficiency, especially in larger trees, as it avoids the overhead of creating and sorting an array.  Choose the method that best suits your understanding and needs. Remember to define the `Node` class appropriately for your specific use case.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Algorithm 1: Recursive In-order Traversal**
+
+This algorithm leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+1. **In-order Traversal:** Perform an in-order traversal of the binary tree.  This means visiting nodes in the order: left subtree, root, right subtree.
+
+2. **Sorted Check:**  As you traverse, keep track of the previously visited node's value (let's call it `prev`).  For each node visited, compare its value to `prev`.  If the current node's value is less than or equal to `prev`, then it's not a BST (because the in-order traversal should be strictly increasing).
+
+3. **Return Value:** If the in-order traversal completes without finding any violations, the tree is a BST; otherwise, it's not.
+
+**Python Code (Algorithm 1):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    prev = [-float('inf')]  # Use a list to allow modification within the function
+
+    def inorder(node):
+        if node:
+            if not inorder(node.left):
+                return False
+            if node.data <= prev[0]:
+                return False
+            prev[0] = node.data
+            if not inorder(node.right):
+                return False
+        return True
+
+    return inorder(root)
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}") # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) # Violation: 8 > 7
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") # Output: False
+```
+
+**Algorithm 2: Recursive Check with Min and Max**
+
+This algorithm recursively checks each subtree to ensure that all nodes in the left subtree are less than the root, and all nodes in the right subtree are greater than the root.  We pass minimum and maximum allowed values for each subtree.
+
+1. **Base Case:** An empty tree is a BST.
+
+2. **Recursive Step:**  For each node:
+   - Check if the node's value is within the allowed range (min < node.data < max).
+   - Recursively check the left subtree with the range (min, node.data).
+   - Recursively check the right subtree with the range (node.data, max).
+
+3. **Return Value:**  If any of the checks fail, it's not a BST.
+
+
+**Python Code (Algorithm 2):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(node, min_val=-float('inf'), max_val=float('inf')):
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_minmax(node.left, min_val, node.data) and
+            is_bst_minmax(node.right, node.data, max_val))
+
+#Example Usage (same trees as before)
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(f"Is the tree a BST? {is_bst_minmax(root)}") # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) # Violation
+
+print(f"Is the tree a BST? {is_bst_minmax(root2)}") # Output: False
+```
+
+Both algorithms have a time complexity of O(N), where N is the number of nodes in the tree.  Algorithm 1 uses less space (O(1) excluding recursion stack) while Algorithm 2 uses slightly more (due to recursive calls).  Choose the algorithm that best suits your needs and coding style.  The recursive min-max approach is often considered more elegant.
+
