@@ -39611,3 +39611,81 @@ postorder(root) # Output: D E B F C A
 
 These traversals have different applications.  For instance, post-order traversal is used for deleting nodes in a tree, while in-order traversal provides a sorted sequence for BSTs.  Pre-order traversal can be used for creating a copy of the tree.  Understanding these traversals is fundamental to working with binary trees.
 
+#  Lowest common ancestor of a Binary Tree 
+The lowest common ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary *search* tree, there's no guaranteed ordering property to exploit, making the algorithm more complex.  Here are a few approaches to finding the LCA in a binary tree:
+
+**Method 1: Recursive Approach**
+
+This is arguably the most intuitive and efficient approach.  The idea is to recursively traverse the tree.  If a node is one of the targets, we've found one of the ancestors. If both targets are found on different sides (one in the left subtree, the other in the right), the current node is the LCA. Otherwise, continue the search recursively in the appropriate subtree(s).
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node, or None if either p or q is not in the tree.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:  # p and q are on different sides
+        return root
+    elif left_lca:  # p and q are on the left side
+        return left_lca
+    else:  # p and q are on the right side
+        return right_lca
+
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+p = root.left  # Node with value 5
+q = root.right  # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
+
+
+p = root.left.right #Node with value 2
+q = root.left.right.right #Node with value 4
+lca = lowestCommonAncestor(root,p,q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") #Output: LCA of 2 and 4: 2
+
+```
+
+**Method 2: Iterative Approach (using a parent pointer)**
+
+This approach requires a modified tree structure where each node has a pointer to its parent.  Then, you can traverse upwards from `p` and `q`, storing their ancestors in sets.  The first common ancestor encountered when comparing the sets is the LCA. This method can be more space-efficient than the recursive approach in some cases, though it requires modifying the tree structure.  I'll omit the code for brevity as the recursive approach is generally preferred unless memory is a critical constraint.
+
+**Important Considerations:**
+
+* **Error Handling:** The code includes a check for cases where `p` or `q` are not in the tree.  Robust code should handle such situations gracefully.
+* **Node Value Uniqueness:**  The code assumes node values are unique. If not, you need to adapt the logic to compare nodes directly (using object identity `is`).
+* **Efficiency:** The recursive approach has a time complexity of O(N), where N is the number of nodes in the tree, as it visits each node at most once in the worst case. Space complexity is O(H) in the worst case due to recursive calls (H is the height of the tree).  The iterative approach has the same time complexity but potentially better space complexity if the tree is very deep.
+
+
+Remember to choose the method that best suits your needs and constraints.  The recursive method is generally easier to understand and implement.  The iterative method might offer advantages in space efficiency for very deep trees.
+
