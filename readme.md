@@ -39815,3 +39815,109 @@ Please provide me with the data or equation you want me to graph.  I need inform
 
 Once you provide this information, I can help you create a graph.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common method, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, its advantages and disadvantages, and different implementation considerations:
+
+**How it Works:**
+
+An adjacency matrix represents a graph as a square matrix where each element `matrix[i][j]` represents the presence or weight of an edge between vertex `i` and vertex `j`.
+
+* **Unweighted Graphs:**  `matrix[i][j]` is typically 1 if there's an edge between vertices `i` and `j`, and 0 otherwise.
+
+* **Weighted Graphs:** `matrix[i][j]` stores the weight of the edge between vertices `i` and `j`.  If no edge exists, a special value (like `Infinity`, -1, or 0 depending on your application) is used.
+
+* **Directed Graphs:** The matrix is not necessarily symmetric.  `matrix[i][j]` represents an edge from vertex `i` to vertex `j`.
+
+* **Undirected Graphs:** The matrix is symmetric. `matrix[i][j] == matrix[j][i]`.
+
+
+**Example (Unweighted, Undirected):**
+
+Consider a graph with 4 vertices:
+
+```
+     A   B   C   D
+A    -   1   1   0
+B    1   -   0   1
+C    1   0   -   1
+D    0   1   1   -
+```
+
+This represents a graph where:
+* A is connected to B and C.
+* B is connected to A and D.
+* C is connected to A and D.
+* D is connected to B and C.
+
+**Example (Weighted, Directed):**
+
+```
+     A   B   C   D
+A    0   2   5   ∞
+B    ∞   0   0   1
+C    ∞   ∞   0   3
+D    1   ∞   ∞   0
+```
+
+This represents a directed graph where:
+* There's an edge from A to B with weight 2.
+* There's an edge from A to C with weight 5.
+* There's an edge from B to D with weight 1.
+* And so on...  `∞` represents the absence of an edge.
+
+
+**Implementation:**
+
+You can implement an adjacency matrix using various data structures:
+
+* **2D Array:**  A simple and straightforward approach, especially for smaller graphs.  In many languages (like C++, Java, Python), this is a natural choice.
+
+* **Dynamically Sized Arrays:**  If the number of vertices isn't known beforehand, you might need dynamic arrays (vectors in C++, ArrayLists in Java).
+
+**Code Example (Python):**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.matrix = [[0] * num_vertices for _ in range(num_vertices)]
+
+    def add_edge(self, u, v, weight=1):  # weight defaults to 1 for unweighted
+        self.matrix[u][v] = weight
+        if weight !=0: #for undirected graph
+          self.matrix[v][u] = weight
+
+    def print_matrix(self):
+        for row in self.matrix:
+            print(row)
+
+# Example usage:
+graph = Graph(4)
+graph.add_edge(0, 1)
+graph.add_edge(0, 2)
+graph.add_edge(1, 3)
+graph.add_edge(2, 3)
+graph.print_matrix() #printing the adjacency matrix
+```
+
+
+**Advantages of Adjacency Matrix:**
+
+* **Simple Implementation:**  Easy to understand and implement.
+* **Fast Edge Existence Check:** Checking if an edge exists between two vertices is O(1) (constant time).
+* **Suitable for Dense Graphs:**  Efficient for graphs where the number of edges is close to the square of the number of vertices.
+
+**Disadvantages of Adjacency Matrix:**
+
+* **Space Inefficient for Sparse Graphs:**  For graphs with relatively few edges compared to the number of vertices (sparse graphs), it wastes a lot of space storing zeros.  The space complexity is O(V²), where V is the number of vertices.
+* **Slow Addition/Deletion of Vertices:** Adding or deleting vertices requires resizing the matrix, which can be slow.
+
+
+**When to Use Adjacency Matrix:**
+
+* Dense graphs.
+* When fast edge existence checks are crucial.
+* When simplicity of implementation is prioritized over space efficiency.
+
+For sparse graphs, consider using an adjacency list, which is generally more space-efficient.
+
