@@ -40712,3 +40712,74 @@ print(longest_palindrome("babad")) # Output: bab (or aba)
 
 These examples showcase different levels of complexity and require different algorithmic approaches.  Remember to consider time and space complexity when designing your solutions.  There are many online resources (like LeetCode, HackerRank, Codewars) with more algorithmic problems to practice.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing some improvements:
+
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if/else if/else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both Fizz and Buzz), then 3, then 5. If none of these conditions are met, it prints the number itself.
+
+
+**Version 2: Slightly More Concise**
+
+We can make the code a little more compact using the ternary conditional operator (`?:`):
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) //Call the function
+```
+
+This version nests ternary operators to achieve the same result with less code.  However, it might be slightly harder to read for beginners.
+
+
+**Version 3:  Using String Interpolation for better readability**
+
+This version improves readability by using string interpolation and separating the logic:
+
+```swift
+func fizzBuzzReadable(n: Int) {
+  for i in 1...n {
+    var output = ""
+    if i % 3 == 0 { output += "Fizz" }
+    if i % 5 == 0 { output += "Buzz" }
+    print(output.isEmpty ? "\(i)" : output)
+  }
+}
+
+fizzBuzzReadable(n: 15) //Call the function
+```
+
+This approach is arguably the most readable. It builds the output string incrementally, adding "Fizz" if divisible by 3 and "Buzz" if divisible by 5. If the `output` string is empty after the checks, it prints the number itself.
+
+
+**Choosing the Best Version:**
+
+For beginners, **Version 1** is the easiest to understand.  **Version 3** offers a good balance of readability and conciseness, making it a strong contender for most scenarios.  **Version 2** is the most compact, but readability may suffer.  Choose the version that best suits your understanding and coding style.  Remember that readability is crucial, especially when collaborating or maintaining code.
+
