@@ -37693,3 +37693,62 @@ fizzBuzzRefined(n: 15) // Call the function
 
 For simple FizzBuzz, either version is fine.  The refined version is slightly more compact but might be less immediately understandable for beginners.  As you tackle more complex problems, learning to write concise and efficient code (like the refined version) becomes increasingly important.  Prioritize readability, especially when starting out! Remember to choose the version that best suits your understanding and the context of the problem.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long it takes to run) and space (how much memory it needs).  We analyze complexity to understand how an algorithm's performance scales with the size of the input.
+
+Here's a breakdown of key aspects:
+
+**1. Time Complexity:**  Measures the algorithm's runtime as a function of the input size (often denoted as 'n').  We're usually interested in the *growth rate* of runtime as 'n' gets large, not the exact runtime.
+
+* **Big O Notation (O):**  Describes the upper bound of an algorithm's time complexity.  It gives the worst-case scenario.  For example, O(n) means the runtime grows linearly with the input size.
+
+* **Big Omega Notation (Ω):**  Describes the lower bound of an algorithm's time complexity.  It represents the best-case scenario.
+
+* **Big Theta Notation (Θ):**  Describes the tight bound of an algorithm's time complexity.  It indicates that the algorithm's runtime grows at the same rate as the given function, both in the best and worst case.
+
+**Common Time Complexities (from best to worst):**
+
+* **O(1) - Constant Time:**  The runtime remains the same regardless of input size (e.g., accessing an array element by index).
+
+* **O(log n) - Logarithmic Time:**  The runtime increases logarithmically with input size (e.g., binary search).
+
+* **O(n) - Linear Time:**  The runtime increases linearly with input size (e.g., searching an unsorted array).
+
+* **O(n log n) - Linearithmic Time:**  Common in efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:**  The runtime increases quadratically with input size (e.g., nested loops iterating through the input).
+
+* **O(2ⁿ) - Exponential Time:**  The runtime doubles with each addition to the input size (e.g., brute-force solving the traveling salesman problem).
+
+* **O(n!) - Factorial Time:**  The runtime grows factorially with input size (e.g., generating all permutations of a set).
+
+
+**2. Space Complexity:** Measures the amount of memory an algorithm uses as a function of the input size.  Similar to time complexity, we use Big O notation to describe it.
+
+**Common Space Complexities:**
+
+* **O(1) - Constant Space:**  The algorithm uses a fixed amount of memory regardless of input size.
+
+* **O(n) - Linear Space:**  The memory used grows linearly with input size (e.g., storing the input in an array).
+
+* **O(log n) - Logarithmic Space:**  The memory used grows logarithmically with input size (e.g., recursive algorithms using a stack).
+
+* **O(n²) - Quadratic Space:**  The memory used grows quadratically with input size (e.g., storing an n x n matrix).
+
+
+**Analyzing Algorithm Complexity:**
+
+* **Best-Case:** The most favorable input scenario.
+* **Average-Case:** The expected runtime for a randomly chosen input.  Often difficult to calculate precisely.
+* **Worst-Case:** The least favorable input scenario.  This is usually the most important to consider for performance guarantees.
+
+
+**Example:**
+
+Consider searching for an element in an array:
+
+* **Unsorted array:**  Worst-case time complexity is O(n) (linear search).
+* **Sorted array:**  Worst-case time complexity is O(log n) (binary search).
+
+Choosing an algorithm with better complexity is crucial for handling large datasets efficiently.  An algorithm with O(n²) complexity will become significantly slower than an O(n log n) algorithm as the input size grows.
+
