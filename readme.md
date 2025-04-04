@@ -42784,3 +42784,135 @@ This approach has a higher time complexity than the recursive approach.
 
 The **recursive approach (Method 1)** is generally the most efficient and preferred method for finding the LCA in a binary tree because it's concise and has good time complexity.  The iterative approach is only advantageous if parent pointers already exist. The hash table approach is less efficient and should be avoided unless there are specific constraints. Remember to handle edge cases such as `p` or `q` not being in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science.  There are several approaches, each with varying efficiency depending on the type of tree and whether you have parent pointers or not.
+
+**1. Using Parent Pointers (Easy, but requires modification of tree structure):**
+
+If each node in the tree has a pointer to its parent, finding the LCA is straightforward.  You simply traverse upwards from each node until you find a common ancestor.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+        self.children = []
+
+def lca_with_parent_pointers(node1, node2):
+    ancestors1 = set()
+    current = node1
+    while current:
+        ancestors1.add(current)
+        current = current.parent
+
+    current = node2
+    while current:
+        if current in ancestors1:
+            return current
+        current = current.parent
+
+    return None  # No common ancestor found
+
+
+#Example Usage (assuming you've built a tree with parent pointers)
+# root = ...  # Your root node
+# node1 = ... # Node 1
+# node2 = ... # Node 2
+
+# lca = lca_with_parent_pointers(node1, node2)
+# if lca:
+#     print(f"LCA of {node1.data} and {node2.data} is: {lca.data}")
+# else:
+#     print("Nodes are not related")
+
+```
+
+
+**2.  Binary Tree - Recursive Approach (Efficient, no parent pointers needed):**
+
+This method is efficient for binary trees.  It recursively searches for the nodes. If both nodes are found in the left subtree, the LCA is in the left subtree.  If both are in the right, it's in the right subtree. Otherwise, the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_binary_tree(root, node1, node2):
+    if not root or root == node1 or root == node2:
+        return root
+
+    left_lca = lca_binary_tree(root.left, node1, node2)
+    right_lca = lca_binary_tree(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+#Example Usage (assuming you've built a binary tree)
+# root = ... #Your root node
+# node1 = ... #Node 1
+# node2 = ... #Node 2
+
+# lca = lca_binary_tree(root, node1, node2)
+# if lca:
+#     print(f"LCA of {node1.data} and {node2.data} is: {lca.data}")
+# else:
+#     print("One or both nodes not found in the tree")
+```
+
+**3.  General Tree -  Using Depth-First Search (DFS):**
+
+For general trees (trees where a node can have more than two children), a DFS approach is commonly used.  This involves searching for the nodes and tracking their paths.  The LCA is the deepest common node in both paths.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+def lca_general_tree(root, node1, node2):
+    path1, path2 = [], []
+    found1, found2 = find_path(root, node1, path1), find_path(root, node2, path2)
+
+    if not found1 or not found2:
+        return None  #One or both nodes not found
+
+    i = 0
+    while i < len(path1) and i < len(path2) and path1[i] == path2[i]:
+        i += 1
+
+    return path1[i - 1] if i > 0 else None  # Return LCA, or None if no common ancestor
+
+
+def find_path(node, target, path):
+    if node is None:
+        return False
+
+    path.append(node)
+    if node == target:
+        return True
+
+    for child in node.children:
+        if find_path(child, target, path):
+            return True
+    path.pop()  #Backtrack if target not found in subtree
+    return False
+
+# Example Usage (assuming you've built a general tree)
+# root = ... # Your root node
+# node1 = ... # Node 1
+# node2 = ... # Node 2
+# lca = lca_general_tree(root, node1, node2)
+# if lca:
+#     print(f"LCA of {node1.data} and {node2.data} is: {lca.data}")
+# else:
+#     print("One or both nodes not found or not related")
+```
+
+Remember to adapt the `Node` class and the example usage to your specific tree structure.  The choice of method depends heavily on the characteristics of your tree and the constraints of your problem.  For large binary trees, the recursive approach is generally very efficient. For general trees without parent pointers, DFS is a good strategy.  If you *can* add parent pointers to your tree, that simplifies the solution significantly.
+
