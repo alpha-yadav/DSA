@@ -41803,3 +41803,96 @@ int main() {
 
 Remember that this code lacks explicit memory management for the entire tree. In a production environment, you'd need to implement a destructor or other memory management techniques to prevent memory leaks.  The `delete` keyword is used to deallocate individual nodes, but a recursive approach is needed to clean up the entire tree.  Consider using smart pointers (like `unique_ptr` or `shared_ptr`) to automate memory management and avoid manual `delete` calls.
 
+#  Lowest common ancestor in a BST 
+The lowest common ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where we consider a node to be a descendant of itself).  There are several ways to find the LCA in a BST, leveraging the BST property that the left subtree contains smaller values and the right subtree contains larger values.
+
+**Method 1: Recursive Approach**
+
+This is arguably the most elegant and efficient approach.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a BST.
+
+    Args:
+      root: The root of the BST.
+      p: The first node.
+      q: The second node.
+
+    Returns:
+      The LCA node, or None if either p or q is not in the tree.
+    """
+    if not root:
+        return None
+
+    if root.data > p.data and root.data > q.data:  # Both p and q are in the left subtree
+        return lowestCommonAncestor(root.left, p, q)
+    elif root.data < p.data and root.data < q.data: # Both p and q are in the right subtree
+        return lowestCommonAncestor(root.right, p, q)
+    else:  # root is the LCA
+        return root
+
+# Example usage:
+root = Node(6)
+root.left = Node(2)
+root.right = Node(8)
+root.left.left = Node(0)
+root.left.right = Node(4)
+root.right.left = Node(7)
+root.right.right = Node(9)
+
+p = root.left  # Node with value 2
+q = root.right # Node with value 8
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 2 and 8: 6
+
+
+p = root.left.right #Node with value 4
+q = root.right.left #Node with value 7
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 4 and 7: 6
+
+
+p = root.left.left #Node with value 0
+q = root.left.right #Node with value 4
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 0 and 4: 2
+```
+
+**Method 2: Iterative Approach**
+
+This approach uses a while loop instead of recursion.
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    while root:
+        if root.data > p.data and root.data > q.data:
+            root = root.left
+        elif root.data < p.data and root.data < q.data:
+            root = root.right
+        else:
+            return root
+    return None #p or q is not in the tree
+
+#Example Usage (same as above, just replace the function call)
+lca = lowestCommonAncestorIterative(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}")
+```
+
+
+**Important Considerations:**
+
+* **Error Handling:**  Both methods implicitly handle cases where `p` or `q` are not in the tree by returning `None` when the root becomes `None`. You might want to add explicit error handling for robustness.
+* **Node Existence Check:** Before calling the LCA function, you might want to verify that nodes `p` and `q` actually exist in the BST.  This would involve searching for them first.
+* **Efficiency:** Both the recursive and iterative approaches have a time complexity of O(h), where h is the height of the BST.  In a balanced BST, h is O(log n), but in a skewed BST, h can be O(n), where n is the number of nodes.
+
+The iterative approach might be slightly more efficient in some cases due to the overhead of recursive function calls, but the recursive approach is generally considered more readable and easier to understand. Choose the method that best suits your needs and coding style.
+
