@@ -40843,3 +40843,37 @@ The runtime is directly proportional to the number of elements in the array.  Th
 
 Understanding algorithm complexity is crucial for selecting efficient algorithms and data structures, especially when dealing with large datasets.  It allows developers to predict the performance of their code and make informed decisions about optimization.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate, meaning it specifies both the upper and lower bounds.  It's a more precise way to characterize the complexity of an algorithm than Big-O notation (which only provides an upper bound) or Big-Omega notation (which only provides a lower bound).
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*), written as *f(n) = Θ(g(n))*, if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.  *g(n)* represents the dominant term in *f(n)*, ignoring constant factors and lower-order terms.
+
+**In simpler terms:**
+
+*f(n) = Θ(g(n))* means that *f(n)* grows at the *same rate* as *g(n)*.  The function *f(n)* is neither significantly faster nor significantly slower than *g(n)* as *n* approaches infinity.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1; g(n) = n²:**  f(n) = Θ(n²) because we can find constants *c₁*, *c₂*, and *n₀* that satisfy the inequality. For example, if we choose c₁ = 1, c₂ = 3, and n₀ = 1, the inequality holds for all n ≥ 1.  The lower-order terms (3n and 1) become insignificant as n grows large.
+
+* **f(n) = 5n log n; g(n) = n log n:** f(n) = Θ(n log n). The constant factor 5 doesn't affect the asymptotic growth rate.
+
+* **f(n) = n²; g(n) = n:** f(n) ≠ Θ(n).  While f(n) = O(n²) (Big-O), it's not Θ(n) because n² grows significantly faster than n.
+
+
+**Why is Big-Theta important?**
+
+* **Precise Complexity Analysis:**  It provides a more precise and complete picture of an algorithm's time or space complexity than Big-O alone.  Big-O only tells us an upper bound;  Θ gives us both an upper and lower bound, indicating the actual growth rate.
+
+* **Algorithm Comparison:** When comparing algorithms, Big-Theta allows for a more accurate comparison of their efficiency.  Two algorithms with the same Big-O complexity might have different Big-Theta complexities, revealing subtle differences in performance.
+
+* **Resource Allocation:** Understanding the tight bound on an algorithm's complexity is crucial for effective resource allocation (e.g., memory, processing time) in system design.
+
+In summary, Big-Theta provides a rigorous and insightful way to analyze the scalability and efficiency of algorithms, making it a fundamental concept in algorithm analysis.
+
