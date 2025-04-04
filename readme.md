@@ -42036,3 +42036,125 @@ This improved version includes:
 
 Remember that the efficiency of a BST depends on its balance.  For extremely unbalanced trees, operations can degrade to O(n) time complexity.  For guaranteed logarithmic time complexity (O(log n)), consider using self-balancing BSTs like AVL trees or red-black trees.  However, for many applications, a simple BST is sufficient.
 
+#  Check if a tree is BST or not 
+Several approaches can check if a given binary tree is a Binary Search Tree (BST). Here are two common methods, one using recursion and another using an iterative approach with in-order traversal:
+
+**Method 1: Recursive Approach**
+
+This method recursively checks if the left subtree is a BST with a maximum value less than the current node's value, and if the right subtree is a BST with a minimum value greater than the current node's value.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val, max_val):
+    """
+    Recursively checks if a given binary tree is a BST.
+
+    Args:
+        node: The root node of the subtree to check.
+        min_val: The minimum allowed value in the subtree.
+        max_val: The maximum allowed value in the subtree.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+def is_bst(root):
+    """
+    Checks if the entire tree is a BST.
+    """
+    return is_bst_recursive(root, float('-inf'), float('inf'))
+
+
+# Example usage:
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.right = Node(18)
+
+print(f"Is the tree a BST? {is_bst(root)}") # Output: False (because 18 > 15)
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst(root2)}") # Output: True
+
+```
+
+**Method 2: Iterative Approach (In-order Traversal)**
+
+This method performs an in-order traversal of the tree.  In a BST, the in-order traversal will yield a sorted sequence.  We can leverage this property to efficiently check for BST properties.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_iterative(root):
+    """
+    Iteratively checks if a given binary tree is a BST using in-order traversal.
+
+    Args:
+        root: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    stack = []
+    prev = float('-inf')  # Initialize with negative infinity
+
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+
+        root = stack.pop()
+        if root.data <= prev:  # Check if the current node's value is less than or equal to the previous node's value.
+            return False
+        prev = root.data
+        root = root.right
+
+    return True
+
+
+#Example Usage (same trees as above)
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.right = Node(18)
+
+print(f"Is the tree a BST? {is_bst_iterative(root)}") # Output: False
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_iterative(root2)}") # Output: True
+```
+
+Both methods achieve the same result. The iterative approach might be slightly more efficient in some cases because it avoids the overhead of recursive function calls,  but the recursive method is often considered more readable.  Choose the method that best suits your needs and coding style. Remember to handle edge cases like empty trees.
+
