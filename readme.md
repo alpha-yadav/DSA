@@ -41214,3 +41214,54 @@ O(log n) algorithms, also known as logarithmic time algorithms, are incredibly e
 
 **Important Note:**  The O(log n) complexity only applies when the algorithm can repeatedly halve (or reduce by a constant factor) the problem size.  If the problem can't be efficiently broken down this way, you won't get logarithmic time.  The base of the logarithm (e.g., base 2 for binary search) is typically ignored in Big O notation because it only affects the constant factor.
 
+#  An O(log n) example 
+The most common example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search works on a *sorted* array (or list).  To find a target value, it repeatedly divides the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process continues until the target value is found or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the upper half
+        else:
+            high = mid - 1  # Search in the lower half
+    return -1  # Target not found
+
+
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+
+```
+
+**Why is it O(log n)?**
+
+With each comparison, we eliminate roughly half of the remaining search space.  Therefore, the number of comparisons needed is approximately the number of times you can halve `n` until you reach 1.  This is equivalent to the base-2 logarithm of `n`, written as log₂(n).  Big O notation ignores constant factors, so we simply say it's O(log n).
+
+
+**Other O(log n) examples:**
+
+While binary search is the most prominent example, other algorithms exhibit O(log n) time complexity in specific scenarios:
+
+* **Tree traversals (balanced trees):**  Searching, insertion, and deletion in a balanced binary search tree (like AVL trees or red-black trees) have an average and worst-case time complexity of O(log n).
+* **Efficient exponentiation:** Calculating a^b using exponentiation by squaring has a time complexity of O(log b).
+* **Finding an element in a heap:** Finding the minimum (or maximum) element in a min-heap (or max-heap) takes O(1) time, but finding an arbitrary element takes O(log n) in the worst case.
+
+
+The key characteristic of O(log n) algorithms is that they repeatedly reduce the problem size by a constant factor at each step.  This leads to significantly faster performance compared to linear O(n) algorithms for large input sizes.
+
