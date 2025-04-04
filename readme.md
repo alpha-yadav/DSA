@@ -41356,3 +41356,15 @@ The best representation depends on:
 
 Often, a combination of approaches or a custom representation might be the most efficient solution for a particular application.
 
+#  Introduction 
+Please provide me with context!  An introduction to *what*?  To give you a good introduction, I need to know the topic.  For example, are you looking for an introduction to:
+
+* **A specific subject:**  (e.g., the history of the Roman Empire, the science of quantum physics, the art of origami)
+* **A story:** (e.g., a fictional tale, a personal anecdote)
+* **An essay:** (e.g., on the benefits of exercise, on climate change)
+* **A presentation:** (e.g., about a new product, about a research project)
+* **A person:** (e.g., a biography)
+* **Something else entirely?**
+
+Tell me what you need an introduction for, and I'll do my best to write one for you.
+
