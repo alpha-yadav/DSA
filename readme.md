@@ -41694,3 +41694,112 @@ bst.insert(10)
 
 Remember to choose the implementation that best suits your needs and consider the potential trade-offs between recursive and iterative approaches.  The duplicate handling version is particularly useful in scenarios where you need to track the frequency of data elements.  You'll also want to add methods for searching, deletion, and traversal to make your BST fully functional.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node:**  Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:** This is the most complex case.  The most common approach is to find the inorder predecessor (largest node in the left subtree) or inorder successor (smallest node in the right subtree), replace the node to be deleted with this successor/predecessor, and then delete the successor/predecessor (which will now be a leaf node or a node with one child, reducing it to cases 1 or 2).
+
+Here's a C++ implementation demonstrating BST deletion, handling all three cases:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+Node* minValueNode(Node* node) {
+    Node* current = node;
+    while (current && current->left != nullptr) {
+        current = current->left;
+    }
+    return current;
+}
+
+Node* deleteNode(Node* root, int key) {
+    // Base Case: If the tree is empty
+    if (root == nullptr) return root;
+
+    // Recursive calls to find the node to delete
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // key == root->data (Node found)
+        // Case 1: Node with 0 or 1 child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Case 2: Node with two children
+        Node* temp = minValueNode(root->right); // Find inorder successor (smallest in right subtree)
+        root->data = temp->data; // Copy the inorder successor's data to the node being deleted
+        root->right = deleteNode(root->right, temp->data); // Delete the inorder successor
+    }
+    return root;
+}
+
+
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    deleteNode(root, 20); //Deleting a leaf node
+
+    std::cout << "Inorder traversal after deleting 20: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    deleteNode(root, 30); //Deleting a node with one child
+
+    std::cout << "Inorder traversal after deleting 30: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    deleteNode(root, 50); //Deleting a node with two children
+
+    std::cout << "Inorder traversal after deleting 50: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    //Remember to deallocate memory after usage -  this is crucial to prevent memory leaks.  A proper destructor would handle this automatically in a more robust implementation.
+    // ... (Code to deallocate the entire tree would go here.  This is omitted for brevity, but it's crucial in a production environment) ...
+
+    return 0;
+}
+```
+
+Remember that this code lacks explicit memory management for the entire tree. In a production environment, you'd need to implement a destructor or other memory management techniques to prevent memory leaks.  The `delete` keyword is used to deallocate individual nodes, but a recursive approach is needed to clean up the entire tree.  Consider using smart pointers (like `unique_ptr` or `shared_ptr`) to automate memory management and avoid manual `delete` calls.
+
