@@ -39689,3 +39689,119 @@ This approach requires a modified tree structure where each node has a pointer t
 
 Remember to choose the method that best suits your needs and constraints.  The recursive method is generally easier to understand and implement.  The iterative method might offer advantages in space efficiency for very deep trees.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic algorithm problem.  There are several approaches, each with varying efficiency depending on the structure of the tree and whether you have parent pointers.
+
+**Methods:**
+
+1. **Recursive Approach (Binary Tree, Parent Pointers Not Available):**
+
+This is a common approach for binary trees where you don't have explicit parent pointers.  It recursively searches for the nodes and returns the LCA when found.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if p or q are not found.
+    """
+
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+root.right.left = Node('F')
+
+p = root.left  # Node B
+q = root.right.left # Node F
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data if lca else 'Not Found'}") # Output: LCA of B and F: A
+
+```
+
+2. **Iterative Approach (Binary Tree, Parent Pointers Not Available):**
+
+While recursion is elegant, an iterative approach can be more efficient for very deep trees to avoid stack overflow issues.  This would involve using a stack or queue to traverse the tree.  It's more complex to implement than the recursive version.
+
+3. **Approach using Parent Pointers:**
+
+If each node has a pointer to its parent, finding the LCA is significantly simpler.  You can trace the paths from both `p` and `q` up to the root, storing them in lists. Then, you find the last common node in those paths.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.parent = None  # Added parent pointer
+
+def lowestCommonAncestorParentPointers(p, q):
+    path_p = []
+    path_q = []
+
+    while p:
+        path_p.append(p)
+        p = p.parent
+    while q:
+        path_q.append(q)
+        q = q.parent
+
+    lca = None
+    i = len(path_p) -1
+    j = len(path_q) -1
+
+    while i >= 0 and j >= 0 and path_p[i] == path_q[j]:
+        lca = path_p[i]
+        i -= 1
+        j -= 1
+    return lca
+
+#Example Usage (requires building the tree with parent pointers set)
+#... (Tree construction with parent pointers set)...
+lca = lowestCommonAncestorParentPointers(p, q)
+print(f"LCA of {p.data} and {q.data} (using parent pointers): {lca.data if lca else 'Not Found'}")
+```
+
+4. **General Trees:**
+
+For general trees (not necessarily binary), you might need a more generalized approach, potentially using depth-first search (DFS) or breadth-first search (BFS) to find paths to `p` and `q`, and then comparing those paths as in the parent-pointer method.
+
+
+**Choosing the Right Method:**
+
+* **Binary tree, no parent pointers:** The recursive approach is often the simplest and most readable.  Consider the iterative approach for very deep trees.
+* **Binary tree with parent pointers:** The parent-pointer method is the most efficient.
+* **General tree:**  A DFS or BFS based approach is needed.
+
+
+Remember to handle edge cases like when one or both nodes are not found in the tree.  Also, consider the space and time complexity of each algorithm when choosing the best one for your specific application.
+
