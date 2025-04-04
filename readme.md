@@ -41182,3 +41182,35 @@ Nested loops are commonly used for:
 
 Understanding nested loops is fundamental to mastering many programming concepts and algorithms. Remember to carefully analyze the loops' conditions and their impact on your program's performance.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  Their runtime increases very slowly as the input size (n) grows.  This typically means they're breaking down the problem into smaller subproblems repeatedly.  Here are some common types and examples:
+
+**1. Binary Search:**
+
+* **Mechanism:**  This is the quintessential O(log n) algorithm.  It works by repeatedly dividing the search interval in half.  If you're searching a sorted array, you check the middle element. If it's the target, you're done.  If the target is smaller, you search the left half; if larger, you search the right half.  This continues until the target is found or the interval is empty.
+* **Example:**  Searching for a specific word in a dictionary.
+
+**2. Balanced Tree Operations (Search, Insertion, Deletion):**
+
+* **Mechanism:**  Self-balancing binary search trees (like AVL trees, red-black trees) maintain a balanced structure, ensuring that the height of the tree remains logarithmic in the number of nodes.  Operations like searching, inserting, or deleting a node involve traversing a path down the tree, which takes O(log n) time.
+* **Example:**  Many database indexing systems use balanced trees to efficiently retrieve data.
+
+**3. Efficient exponentiation (e.g., binary exponentiation):**
+
+* **Mechanism:** Instead of repeatedly multiplying a base 'x' by itself 'n' times, binary exponentiation uses the binary representation of the exponent to calculate x<sup>n</sup> with far fewer multiplications.  It achieves this by cleverly using squares and multiplications based on the bits of n.
+* **Example:** Cryptography algorithms often use efficient exponentiation for modular arithmetic.
+
+
+**4. Change-making algorithms (with suitable coin denominations):**
+
+* **Mechanism:**  While some change-making problems are NP-hard, if you have a set of coin denominations where each denomination is a multiple of the next smaller denomination (e.g., 1, 2, 4, 8,...), you can find the optimal number of coins in O(log n) time. This is because you can determine the largest coin that is less than or equal to the amount to be changed.
+* **Example:**  Finding the minimum number of coins to make a given amount of change using powers of 2.
+
+**5. Algorithms on heaps:**
+
+* **Mechanism:**  Heaps (min-heaps or max-heaps) are tree-based data structures that satisfy the heap property (e.g., in a min-heap, the parent node is always less than or equal to its children).  Operations like finding the minimum/maximum element, inserting an element, or deleting the minimum/maximum element take O(log n) time due to the heap's balanced structure.
+* **Example:**  Priority queues, Dijkstra's algorithm (using a min-heap).
+
+
+**Important Note:**  The O(log n) complexity only applies when the algorithm can repeatedly halve (or reduce by a constant factor) the problem size.  If the problem can't be efficiently broken down this way, you won't get logarithmic time.  The base of the logarithm (e.g., base 2 for binary search) is typically ignored in Big O notation because it only affects the constant factor.
+
