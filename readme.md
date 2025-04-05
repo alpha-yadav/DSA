@@ -45617,3 +45617,104 @@ postorder_iterative(root) # Output: 4 5 2 3 1
 
 Remember to adapt the `Node` class and the traversal functions to your specific data type and tree structure if necessary.  These examples use integers, but you can easily modify them to work with other data types.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes at the same level before moving to the next level.  Here are implementations in Python and JavaScript using a queue:
+
+
+**Python:**
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root) # Output: 1 2 3 4 5
+```
+
+**JavaScript:**
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) {
+    return;
+  }
+
+  const queue = [root];
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    console.log(curr.data, " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+
+// Example Usage
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1 2 3 4 5
+
+```
+
+**Explanation:**
+
+Both implementations follow these steps:
+
+1. **Initialization:**  A queue (`nodes` or `queue`) is created and the root node is added to it.
+2. **Iteration:** While the queue is not empty:
+   - Dequeue (remove from the front) the current node from the queue.
+   - Process the current node's data (print it in this case).
+   - Enqueue (add to the rear) the current node's left and right children (if they exist) to the queue.
+
+This process ensures that nodes are visited level by level, as nodes at a given level are all added to the queue before nodes at the next level.  The queue acts as a FIFO (First-In, First-Out) structure, maintaining the correct order of traversal.
+
+
+Remember to adjust the `print` or `console.log` statements if you need to perform different actions on the nodes during the traversal (e.g., storing the data in an array).
+
