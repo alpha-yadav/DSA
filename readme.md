@@ -47845,3 +47845,113 @@ bst.inorder_traversal(bst.root)  # Output should be the sorted list of inserted 
 
 Remember to choose the method that best suits your needs and coding style.  The recursive version is generally preferred for its readability, while the iterative version might offer a slight performance advantage in some cases.  Both achieve the same result: correctly inserting a node into a BST while maintaining the BST property (left subtree < node < right subtree).
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion because you need to handle several cases:
+
+* **Node with no children:** Simply remove the node.
+* **Node with one child:** Replace the node with its child.
+* **Node with two children:** This is the most complex case.  The standard approach is to replace the node with either its inorder predecessor (largest node in the left subtree) or its inorder successor (smallest node in the right subtree).  Both approaches work equally well.  I'll show the inorder successor approach here.
+
+Here's a C++ implementation of BST deletion using the inorder successor method:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+// Function to find the minimum value node in a BST
+Node* findMin(Node* root) {
+    while (root->left != nullptr) {
+        root = root->left;
+    }
+    return root;
+}
+
+// Function to delete a node from a BST
+Node* deleteNode(Node* root, int key) {
+    if (root == nullptr) {
+        return root; // Key not found
+    }
+
+    // Recursive calls to find the node to delete
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // key found
+        // Case 1: Node with 0 or 1 child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Case 2: Node with two children
+        Node* temp = findMin(root->right); // Find inorder successor
+        root->data = temp->data;          // Copy inorder successor's data to the node being deleted
+        root->right = deleteNode(root->right, temp->data); // Delete the inorder successor
+    }
+    return root;
+}
+
+
+// Inorder traversal for printing the BST (for testing)
+void inorder(Node* root) {
+    if (root != nullptr) {
+        inorder(root->left);
+        std::cout << root->data << " ";
+        inorder(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorder(root);
+    std::cout << std::endl;
+
+    deleteNode(root, 20); // Deleting a leaf node
+
+    std::cout << "Inorder traversal after deletion of 20: ";
+    inorder(root);
+    std::cout << std::endl;
+
+    deleteNode(root, 30); // Deleting a node with one child
+
+    std::cout << "Inorder traversal after deletion of 30: ";
+    inorder(root);
+    std::cout << std::endl;
+
+    deleteNode(root, 50); // Deleting a node with two children
+
+    std::cout << "Inorder traversal after deletion of 50: ";
+    inorder(root);
+    std::cout << std::endl;
+
+
+    // Clean up memory (important to avoid leaks!)
+    //  A proper cleanup would require a recursive function to delete the entire tree.  This is left as an exercise.
+
+    return 0;
+}
+```
+
+Remember to handle memory management carefully, especially when deleting nodes.  The provided `main` function is simplified; a robust solution would include a recursive function to properly deallocate all nodes in the tree after the deletions.  This is left as an exercise to help you solidify your understanding.  Always remember to `delete` nodes you've allocated with `new`.  Failing to do so leads to memory leaks.
+
