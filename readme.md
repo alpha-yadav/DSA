@@ -48738,3 +48738,140 @@ Both implementations follow these steps:
 
 Remember to adapt these implementations to your specific needs, potentially adding features like handling different data structures or more robust error handling.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals (preorder, inorder, postorder) are ways to systematically visit each node in a binary tree exactly once.  They differ in the order in which they visit the root, left subtree, and right subtree.
+
+**Definitions:**
+
+* **Preorder Traversal:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  (Root, Left, Right)
+
+* **Inorder Traversal:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. (Left, Root, Right)  For a Binary *Search* Tree (BST), inorder traversal yields the nodes in ascending order.
+
+* **Postorder Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node. (Left, Right, Root)
+
+
+**Example:**
+
+Let's consider this binary tree:
+
+```
+     A
+    / \
+   B   C
+  / \   \
+ D   E   F
+```
+
+**Traversals:**
+
+* **Preorder:** A B D E C F
+* **Inorder:** D B E A C F
+* **Postorder:** D E B F C A
+
+
+**Python Code Implementation (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+root.right.right = Node('F')
+
+print("Preorder traversal:")
+preorder(root)  # Output: A B D E C F
+print("\nInorder traversal:")
+inorder(root)  # Output: D B E A C F
+print("\nPostorder traversal:")
+postorder(root) # Output: D E B F C A
+
+```
+
+**Python Code Implementation (Iterative - using stack):**
+
+Iterative approaches are generally preferred for larger trees due to their avoidance of potential stack overflow errors from deep recursion.
+
+```python
+def preorder_iterative(root):
+    if root is None:
+        return
+    stack = [root]
+    while stack:
+        node = stack.pop()
+        print(node.data, end=" ")
+        if node.right:
+            stack.append(node.right)
+        if node.left:
+            stack.append(node.left)
+
+def inorder_iterative(root):
+    if root is None:
+        return
+    stack = []
+    node = root
+    while stack or node:
+        if node:
+            stack.append(node)
+            node = node.left
+        else:
+            node = stack.pop()
+            print(node.data, end=" ")
+            node = node.right
+
+
+def postorder_iterative(root): # slightly more complex iterative postorder
+    if root is None:
+        return
+    stack = []
+    last_visited = None
+    node = root
+    while stack or node:
+        if node:
+            stack.append(node)
+            node = node.left
+        else:
+            peek = stack[-1]
+            if peek.right and last_visited != peek.right:
+                node = peek.right
+            else:
+                print(peek.data, end=" ")
+                last_visited = stack.pop()
+
+# Example usage (same tree as above):
+print("\n\nIterative Preorder:")
+preorder_iterative(root) # Output: A B D E C F
+print("\nIterative Inorder:")
+inorder_iterative(root) # Output: D B E A C F
+print("\nIterative Postorder:")
+postorder_iterative(root) # Output: D E B F C A
+
+```
+
+Remember to adapt the node structure and traversal functions if you are using a different tree implementation (e.g.,  a tree with parent pointers).  The core logic (Root, Left, Right; Left, Root, Right; Left, Right, Root) remains the same.
+
