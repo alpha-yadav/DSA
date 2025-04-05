@@ -43822,3 +43822,74 @@ BFS starting at 'A' might return: ['A', 'B', 'C', 'D', 'E', 'F']  (order may var
 
 These examples showcase a range of difficulty and common algorithmic techniques.  Remember that the "best" solution often depends on factors like time and space complexity, and the specific constraints of the problem.  Trying to solve these (or similar problems) will give you valuable experience in algorithmic thinking and problem-solving.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's a great way to learn about loops, conditional statements, and basic output. Here's how to implement it in Swift, starting with the simplest version and then showing a slightly more refined approach:
+
+**Version 1: Basic Implementation**
+
+This version uses a `for` loop and a series of `if` statements:
+
+```swift
+for i in 1...100 {
+    if i % 15 == 0 {
+        print("FizzBuzz")
+    } else if i % 3 == 0 {
+        print("Fizz")
+    } else if i % 5 == 0 {
+        print("Buzz")
+    } else {
+        print(i)
+    }
+}
+```
+
+This code iterates through numbers 1 to 100.  The modulo operator (`%`) checks for divisibility.  If a number is divisible by both 3 and 5 (meaning divisible by 15), it prints "FizzBuzz". Otherwise, it checks for divisibility by 3 ("Fizz") or 5 ("Buzz"), and if neither, it prints the number itself.
+
+
+**Version 2: Slightly More Efficient and Readable**
+
+This version uses a `String` to build the output, making it slightly more efficient by avoiding multiple `print` statements:
+
+
+```swift
+for i in 1...100 {
+    var output = ""
+    if i % 3 == 0 {
+        output += "Fizz"
+    }
+    if i % 5 == 0 {
+        output += "Buzz"
+    }
+    print(output.isEmpty ? i : output)
+}
+```
+
+This version is often considered more elegant because it avoids the nested `if-else if` structure.  It builds the output string incrementally. If `output` is empty after checking for divisibility by 3 and 5, it means the number is not divisible by either, so it prints the number itself.
+
+
+**Version 3: Using a Function (Best Practice)**
+
+Encapsulating the logic within a function improves code organization and reusability:
+
+```swift
+func fizzBuzz(upTo: Int) {
+    for i in 1...upTo {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? i : output)
+    }
+}
+
+fizzBuzz(upTo: 100) // Call the function
+```
+
+This version introduces a function `fizzBuzz` that takes an integer `upTo` as an argument, allowing you to easily change the range.  This is a much more robust and reusable solution.
+
+
+Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using the Swift compiler). Choose the version that best suits your understanding and coding style.  Version 3 is generally preferred for its clarity and reusability.
+
