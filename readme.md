@@ -46809,3 +46809,41 @@ Learning to analyze the efficiency of your algorithms helps you choose the best 
 
 Remember, consistency is key. Start small, gradually increase the complexity of the problems you tackle, and celebrate your progress along the way.  Good luck!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+* **Problem:** Find the largest number in an unsorted array of integers.
+* **Input:** An array of integers (e.g., `[3, 1, 4, 1, 5, 9, 2, 6]`)
+* **Output:** The largest integer in the array (e.g., `9`)
+* **Algorithm:** Iterate through the array, keeping track of the largest number seen so far.
+
+**Medium:**
+
+* **Problem:**  Reverse a linked list.
+* **Input:** A singly linked list.
+* **Output:** The same linked list, but with the nodes in reversed order.
+* **Algorithm:**  Iterative or recursive approaches are common.  The iterative approach involves using three pointers to traverse and reverse the links.
+
+* **Problem:** Two Sum
+* **Input:** An array of integers (e.g., `[2, 7, 11, 15]`) and a target integer (e.g., `9`).
+* **Output:** Indices of the two numbers such that they add up to the target (e.g., `[0, 1]` because 2 + 7 = 9).  Return an empty array if no such pair exists.
+* **Algorithm:**  A hash table (dictionary in Python) can efficiently solve this problem by storing numbers and their indices.
+
+
+**Hard:**
+
+* **Problem:**  Find the kth smallest element in an unsorted array.
+* **Input:** An unsorted array of integers and an integer k.
+* **Output:** The kth smallest element in the array.
+* **Algorithm:**  Quickselect is a commonly used algorithm with an average time complexity of O(n).  Heaps can also be used.
+
+* **Problem:**  Longest Common Subsequence (LCS)
+* **Input:** Two strings (e.g., "AGGTAB" and "GXTXAYB")
+* **Output:** The length of the longest subsequence that is common to both strings (e.g., "GTAB", length 4).
+* **Algorithm:** Dynamic programming is the typical approach to solve this efficiently.
+
+
+These problems demonstrate the range of algorithmic challenges.  The difficulty depends on factors like the required data structures, the complexity of the logic, and the time and space efficiency of the solution.  Remember to consider edge cases and optimize your solution for performance when working on these problems.
+
