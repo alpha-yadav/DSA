@@ -45718,3 +45718,80 @@ This process ensures that nodes are visited level by level, as nodes at a given 
 
 Remember to adjust the `print` or `console.log` statements if you need to perform different actions on the nodes during the traversal (e.g., storing the data in an array).
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals are ways to visit each node in a binary tree exactly once.  Pre-order, in-order, and post-order traversals differ in the *order* in which they visit the nodes.  They're all recursive algorithms.
+
+**1. Binary Tree Representation**
+
+First, let's define a simple binary tree node:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+**2. Traversal Algorithms**
+
+```python
+class BinaryTree:
+    def __init__(self, root):
+        self.root = root
+
+    def preorder(self, node):
+        """Pre-order traversal: Root, Left, Right"""
+        if node:
+            print(node.data, end=" ")
+            self.preorder(node.left)
+            self.preorder(node.right)
+
+    def inorder(self, node):
+        """In-order traversal: Left, Root, Right"""
+        if node:
+            self.inorder(node.left)
+            print(node.data, end=" ")
+            self.inorder(node.right)
+
+    def postorder(self, node):
+        """Post-order traversal: Left, Right, Root"""
+        if node:
+            self.postorder(node.left)
+            self.postorder(node.right)
+            print(node.data, end=" ")
+
+# Example Usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+tree = BinaryTree(root)
+
+print("Pre-order traversal:")
+tree.preorder(root)  # Output: 1 2 4 5 3
+print("\nIn-order traversal:")
+tree.inorder(root)  # Output: 4 2 5 1 3
+print("\nPost-order traversal:")
+tree.postorder(root) # Output: 4 5 2 3 1
+```
+
+
+**3. Explanation of Traversal Orders**
+
+* **Pre-order:**  The root node is visited *before* its left and right subtrees. This is useful for creating a copy of the tree or generating an expression from a tree representing an arithmetic expression.
+
+* **In-order:** The left subtree is visited, then the root node, and finally the right subtree. For a Binary Search Tree (BST), an in-order traversal yields the nodes in ascending order of their values.
+
+* **Post-order:** The left and right subtrees are visited *before* the root node. This is useful for deleting a tree – you delete the children before deleting the parent.
+
+
+**4.  Iterative Approaches (without recursion)**
+
+While the recursive approaches are elegant and easy to understand, iterative approaches using stacks are also possible.  They are generally more memory-efficient for very deep trees, as they avoid potential stack overflow errors from excessive recursive calls.  (Implementation of iterative methods is slightly more complex and left as an exercise - it involves using a stack to mimic the recursive call stack).
+
+
+Remember that the specific output depends on the structure of your binary tree.  These examples demonstrate the traversal algorithms' core logic.
+
