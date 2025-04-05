@@ -45881,3 +45881,110 @@ This iterative approach can be more space-efficient than the recursive method in
 
 Choose the method best suited to your needs and constraints.  The recursive approach is generally easier to understand and implement, while the iterative approach with parent pointers can be more efficient in terms of space if parent pointers are already available or acceptable to add.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree or graph is a common problem in computer science.  The best approach depends on the type of tree (binary tree, general tree) and whether the tree is rooted or unrooted.  Let's explore several solutions:
+
+**1. Binary Tree (Rooted):**
+
+* **Recursive Approach:** This is a classic and efficient solution for binary trees.  The idea is to recursively traverse the tree. If the current node is one of the target nodes, return the node. If both target nodes are found in the left subtree, the LCA is in the left subtree; similarly for the right subtree. If one target node is in the left subtree and the other in the right, the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lca_recursive(root.left, p, q)
+    right_lca = lca_recursive(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+# Example Usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(lca_recursive(root, root.left, root.right).data)  # Output: 1
+print(lca_recursive(root, root.left, root.left.right).data) # Output: 2
+```
+
+* **Iterative Approach (using parent pointers):** If each node has a pointer to its parent, you can use an iterative approach.  Find the paths from the root to each target node (`p` and `q`). Then, iterate upwards from the deeper node until you find a common ancestor.
+
+```python
+def lca_iterative(root, p, q):
+    path_p = []
+    path_q = []
+
+    def find_path(node, target, path):
+        if node is None:
+            return False
+        path.append(node)
+        if node == target:
+            return True
+        if find_path(node.left, target, path) or find_path(node.right, target, path):
+            return True
+        path.pop()
+        return False
+
+
+    find_path(root, p, path_p)
+    find_path(root, q, path_q)
+
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[i] == path_q[i]:
+        i += 1
+    return path_p[i - 1]  # Return the last common ancestor
+
+```
+
+
+**2. General Tree (Rooted):**
+
+The recursive approach can be adapted for general trees (trees where nodes can have more than two children).  Instead of checking left and right subtrees, you check all children.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+def lca_general_tree(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    for child in root.children:
+        lca = lca_general_tree(child, p, q)
+        if lca:  #if LCA is found in one of subtrees
+            return lca
+
+    return None
+```
+
+**3. Unrooted Trees:**
+
+Finding the LCA in an unrooted tree is more complex and requires different algorithms, often involving graph traversal techniques.
+
+**Choosing the right approach:**
+
+* **Binary tree:** The recursive approach is generally preferred for its elegance and efficiency. The iterative approach with parent pointers might be slightly faster in some cases.
+* **General tree:** The adapted recursive approach is a good choice.
+* **Unrooted tree:** More sophisticated algorithms (like those based on depth-first search or tree rooting) are necessary.
+
+
+Remember to handle edge cases like:
+
+* One or both nodes are not in the tree.
+* One node is the ancestor of the other.
+
+
+The choice of the best algorithm will depend on the specific constraints of your problem, including the size of the tree, the structure of the tree, and the availability of parent pointers.  For large trees, consider the space and time complexity carefully.  The recursive approach might lead to stack overflow for very deep trees.  In such cases, an iterative approach or a more sophisticated algorithm might be necessary.
+
