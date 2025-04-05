@@ -48534,3 +48534,97 @@ print(f"Is the tree a BST (inorder)? {is_bst_in2}") # Output: False
 
 Both approaches correctly determine if a tree is a BST.  The recursive approach is generally more efficient in terms of space complexity (especially for balanced trees), while the inorder traversal might be slightly easier to understand. Choose the method that best suits your needs and coding style. Remember to handle edge cases like empty trees appropriately.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit all the nodes in a binary tree.  There are several common types, each resulting in a different ordering of node visits:
+
+**1. Depth-First Traversals:** These traversals prioritize going as deep as possible down one branch before backtracking.  There are three main types:
+
+* **Pre-order Traversal:**  Visit the root node, then recursively traverse the left subtree, then recursively traverse the right subtree.  The order is: **Root, Left, Right**.
+
+  ```
+  Example:
+
+      1
+     / \
+    2   3
+   / \
+  4   5
+
+  Pre-order traversal: 1 2 4 5 3
+  ```
+
+* **In-order Traversal:** Recursively traverse the left subtree, then visit the root node, then recursively traverse the right subtree. The order is: **Left, Root, Right**.  This traversal is particularly useful because for a Binary *Search* Tree (BST), it produces a sorted list of the node values.
+
+  ```
+  Example (same tree as above):
+
+  In-order traversal: 4 2 5 1 3
+  ```
+
+* **Post-order Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, then visit the root node. The order is: **Left, Right, Root**.  This is often used to delete a tree or perform other operations that require processing children before the parent.
+
+
+  ```
+  Example (same tree as above):
+
+  Post-order traversal: 4 5 2 3 1
+  ```
+
+
+**2. Breadth-First Traversal (Level-order Traversal):** This traversal visits nodes level by level, starting from the root and moving down.  It typically uses a queue data structure.
+
+```
+Example (same tree as above):
+
+Level-order traversal: 1 2 3 4 5
+```
+
+**Implementation Notes:**
+
+Most traversals are implemented recursively, although iterative versions using stacks (for depth-first) or queues (for breadth-first) are also possible.  Recursive versions are generally more concise and easier to understand, but iterative versions can be more efficient in some cases (avoiding potential stack overflow issues with very deep trees).
+
+**Python Example (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Pre-order traversal:")
+preorder(root)  # Output: 1 2 4 5 3
+print("\nIn-order traversal:")
+inorder(root)   # Output: 4 2 5 1 3
+print("\nPost-order traversal:")
+postorder(root) # Output: 4 5 2 3 1
+
+```
+
+This example shows the recursive implementations.  You can find many examples of iterative implementations online using stacks and queues.  Remember to choose the traversal method best suited for your specific task.
+
