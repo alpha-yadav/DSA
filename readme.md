@@ -48302,3 +48302,125 @@ print(is_bst_recursive(root2))  # False
 
 Both methods achieve the same result: determining whether the given tree is a BST.  Choose the method that you find more readable and maintainable. Remember to handle edge cases like an empty tree.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.  We perform an in-order traversal, keeping track of the previously visited node.  If the current node's value is less than the previous node's value, the tree is not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, prev):
+    """
+    Recursively checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+        node: The current node being visited.
+        prev: The previously visited node (initially None).
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    # Check left subtree
+    if not is_bst_recursive(node.left, prev):
+        return False
+
+    # Check current node against previous node
+    if prev is not None and node.data <= prev.data:
+        return False
+
+    # Update previous node
+    prev = node
+
+    # Check right subtree
+    return is_bst_recursive(node.right, prev)
+
+
+def isBST(root):
+    """Wrapper function to initiate the recursive check."""
+    return is_bst_recursive(root, None)
+
+
+# Example usage:
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.right = Node(20)
+
+print(f"Is the tree a BST? {isBST(root)}")  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5)
+print(f"Is the tree a BST? {isBST(root2)}") # Output: False
+
+```
+
+**Method 2:  Recursive Check with Min and Max Bounds**
+
+This method recursively checks each subtree, passing down minimum and maximum allowed values for the nodes within that subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(node, min_val, max_val):
+    """
+    Recursively checks if a binary tree is a BST using min/max bounds.
+
+    Args:
+        node: The current node being visited.
+        min_val: The minimum allowed value for the node.
+        max_val: The maximum allowed value for the node.
+
+    Returns:
+        True if the subtree rooted at node is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_minmax(node.left, min_val, node.data) and
+            is_bst_minmax(node.right, node.data, max_val))
+
+
+def isBSTMinMax(root):
+    """Wrapper function to initiate the recursive check."""
+    return is_bst_minmax(root, float('-inf'), float('inf'))
+
+
+# Example usage (same as before):
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.right = Node(20)
+
+print(f"Is the tree a BST? {isBSTMinMax(root)}")  # Output: True
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5)
+print(f"Is the tree a BST? {isBSTMinMax(root2)}")  # Output: False
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the worst case (a skewed tree) due to the recursive call stack, where H is the height of the tree.  In a balanced tree, H is log₂N.  Choose whichever method you find more readable or conceptually easier to understand.  The min-max approach might be slightly more efficient in practice for very deep trees due to potentially fewer recursive calls in some scenarios but the difference is often negligible.
+
