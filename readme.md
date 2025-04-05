@@ -44663,3 +44663,68 @@ print(f"Are root1 and root3 the same (iterative)? {are_trees_same_iterative(root
 
 Both methods achieve the same result. The recursive approach is often considered more concise and easier to understand, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues for extremely deep trees).  Choose the method that best suits your coding style and the constraints of your application. Remember to handle the `None` cases carefully in both approaches.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They offer a balance between the speed of accessing data and the ease of maintaining the structure.  Here's a breakdown of BSTs:
+
+**Key Properties:**
+
+* **Binary:** Each node has at most two children, referred to as the left child and the right child.
+* **Search Tree:** The values within the tree are arranged in a specific order. For every node:
+    * All values in its *left* subtree are *less than* the node's value.
+    * All values in its *right* subtree are *greater than* the node's value.
+
+**Basic Operations:**
+
+* **Search:**  Finds a specific node with a given value.  The search algorithm utilizes the ordered nature of the tree; it recursively traverses the tree, going left if the target value is less than the current node's value and right if it's greater.  The time complexity is O(h), where h is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes.  In a skewed tree, h can be as bad as n.
+
+* **Insertion:** Adds a new node to the tree while maintaining the BST property.  The algorithm is similar to search; it traverses the tree until it finds the appropriate place to insert the new node.  Time complexity is also O(h).
+
+* **Deletion:** Removes a node from the tree while maintaining the BST property. This is the most complex operation.  There are several cases to consider:
+    * Node with no children: Simply remove the node.
+    * Node with one child: Replace the node with its child.
+    * Node with two children:  This is the trickiest case.  Common approaches include:
+        * Finding the inorder successor (smallest node in the right subtree) or inorder predecessor (largest node in the left subtree).
+        * Replacing the node's value with the successor/predecessor's value and then deleting the successor/predecessor node (which will now have at most one child).
+
+* **Minimum/Maximum:** Finding the minimum or maximum value in the tree is straightforward.  The minimum is always the leftmost node, and the maximum is always the rightmost node.  Time complexity is O(h).
+
+* **Traversal:**  Visiting all nodes in the tree in a specific order. Common traversal methods include:
+    * **Inorder traversal:** Visits nodes in ascending order of their values (left, root, right).  This is useful for sorting.
+    * **Preorder traversal:** Visits the root node first, then recursively traverses the left and right subtrees (root, left, right).
+    * **Postorder traversal:** Recursively traverses the left and right subtrees, then visits the root node (left, right, root).
+
+
+**Advantages:**
+
+* **Efficient search, insertion, and deletion:**  In a balanced tree, these operations have an average time complexity of O(log₂(n)).
+* **Simple implementation:**  Relatively easy to understand and implement.
+* **In-order traversal provides sorted data:** Useful for applications requiring sorted output.
+
+
+**Disadvantages:**
+
+* **Performance degrades with unbalanced trees:**  In the worst-case scenario (a skewed tree resembling a linked list), the time complexity becomes O(n).
+* **No inherent support for efficient range queries:**  Finding all nodes within a specific range requires a full traversal of a portion of the tree.
+
+
+**Balancing:**
+
+To mitigate the problem of unbalanced trees, self-balancing BSTs are used.  These include:
+
+* **AVL trees:**  Maintain balance by ensuring the height difference between the left and right subtrees of any node is at most 1.
+* **Red-black trees:**  Use color information to ensure a reasonable level of balance.
+* **B-trees:**  Optimized for disk-based storage.
+
+
+**Applications:**
+
+BSTs are used in various applications, including:
+
+* **Symbol tables:** Storing key-value pairs in programming languages.
+* **Data indexing:**  Efficiently searching and retrieving data based on keys.
+* **Sorting algorithms:**  In-order traversal can be used to sort data.
+* **Expression evaluation:**  Representing arithmetic expressions.
+
+
+In summary, Binary Search Trees are a powerful and versatile data structure. While their performance is highly dependent on their balance, they offer an excellent trade-off between simplicity and efficiency when used appropriately, or when employing self-balancing variants.
+
