@@ -47296,3 +47296,67 @@ for (const fruit of fruits) {
 
 These examples demonstrate basic loop structures.  More complex loops can use `break` statements to exit early or `continue` statements to skip to the next iteration.  The best type of loop to use depends on the specific task.  If you need to iterate a known number of times, a `for` loop is often preferred.  If the number of iterations isn't known in advance, a `while` loop is more suitable.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times based on the outer loop's iterations.
+
+Here's a breakdown:
+
+**How it works:**
+
+1. **Outer Loop:** This loop begins execution first.  It controls the overall number of times the inner loop will run completely.
+
+2. **Inner Loop:** This loop is entirely contained within the outer loop's body.  It executes repeatedly for each single iteration of the outer loop.
+
+3. **Iteration:**  The inner loop completes all its iterations *before* the outer loop moves to its next iteration.
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This code will produce a 10x10 multiplication table.  The outer loop iterates through numbers 1 to 10 (rows), and for each row, the inner loop iterates through numbers 1 to 10 (columns), calculating and printing the product.
+
+**Another Example (JavaScript):**
+
+This example demonstrates nested loops to create a pattern:
+
+```javascript
+for (let i = 1; i <= 5; i++) { // Outer loop
+  let row = "";
+  for (let j = 1; j <= i; j++) { // Inner loop
+    row += "*";
+  }
+  console.log(row);
+}
+```
+
+This will output:
+
+```
+*
+**
+***
+****
+*****
+```
+
+**Uses of Nested Loops:**
+
+Nested loops are commonly used for:
+
+* **Processing multi-dimensional data:**  Iterating through matrices, arrays of arrays, or other tabular data structures.
+* **Creating patterns:**  Generating visual patterns like the star pattern above or other geometric shapes.
+* **Combinatorial problems:**  Exploring all possible combinations of elements from multiple sets.
+* **Searching and sorting algorithms:** Some sorting algorithms (like Bubble Sort) use nested loops.
+
+
+**Efficiency Considerations:**
+
+Nested loops can be computationally expensive, especially with large datasets. The time complexity often increases quadratically (O(n²)) or even higher depending on the number of nested loops.  For large datasets, consider more efficient algorithms to avoid performance bottlenecks.  This often involves using optimized data structures or different algorithmic approaches.
+
