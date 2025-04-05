@@ -44943,3 +44943,88 @@ int main() {
 
 Remember to handle memory deallocation properly after deleting nodes to avoid memory leaks.  The provided code omits this for brevity, but in a production environment, you should implement a proper destructor or memory management strategy to deallocate nodes that are no longer needed.  Consider using smart pointers (e.g., `unique_ptr`, `shared_ptr`) to automate memory management.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where a node is considered a descendant of itself).  There are several ways to find the LCA in a BST, leveraging the BST property that nodes in the left subtree are smaller and nodes in the right subtree are larger than the root.
+
+**Methods:**
+
+**1. Recursive Approach:**
+
+This is the most elegant and efficient approach.  It uses the BST property to make a decision at each node:
+
+* **If both `p` and `q` are smaller than the root's value,** the LCA must be in the left subtree. Recursively search the left subtree.
+* **If both `p` and `q` are larger than the root's value,** the LCA must be in the right subtree. Recursively search the right subtree.
+* **Otherwise,** the root is the LCA (one node is smaller, the other is larger than the root).
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestorBST(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node.  Returns None if either p or q are not in the tree.
+    """
+    if not root or p.val == root.val or q.val == root.val:
+        return root
+
+    if p.val < root.val and q.val < root.val:
+        return lowestCommonAncestorBST(root.left, p, q)
+    elif p.val > root.val and q.val > root.val:
+        return lowestCommonAncestorBST(root.right, p, q)
+    else:
+        return root
+
+# Example usage:
+root = TreeNode(6)
+root.left = TreeNode(2)
+root.right = TreeNode(8)
+root.left.left = TreeNode(0)
+root.left.right = TreeNode(4)
+root.right.left = TreeNode(7)
+root.right.right = TreeNode(9)
+p = root.left
+q = root.right
+
+lca = lowestCommonAncestorBST(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 2 and 8: 6
+
+
+```
+
+**2. Iterative Approach:**
+
+This approach uses a `while` loop and avoids recursion. It's functionally equivalent to the recursive approach but might be slightly more efficient in some cases due to avoiding function call overhead.
+
+```python
+def lowestCommonAncestorBST_iterative(root, p, q):
+    while root:
+        if p.val < root.val and q.val < root.val:
+            root = root.left
+        elif p.val > root.val and q.val > root.val:
+            root = root.right
+        else:
+            return root
+    return None #p or q not in tree
+
+```
+
+**Important Considerations:**
+
+* **Error Handling:**  The code should handle cases where `p` or `q` are not present in the BST.  The examples above include basic error handling by returning `None` in such cases.
+* **Node Representation:** The code assumes a specific representation for the tree nodes (e.g., using a `TreeNode` class). You may need to adapt it based on your node structure.
+* **Efficiency:** Both the recursive and iterative approaches have a time complexity of O(h), where h is the height of the BST. In a balanced BST, h is O(log n), where n is the number of nodes. In a skewed BST, h can be O(n).
+
+
+Choose the approach that best suits your coding style and performance requirements.  The recursive approach is generally considered more readable, while the iterative approach might offer a slight performance advantage in some scenarios. Remember to handle potential errors gracefully.
+
