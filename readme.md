@@ -45795,3 +45795,89 @@ While the recursive approaches are elegant and easy to understand, iterative app
 
 Remember that the specific output depends on the structure of your binary tree.  These examples demonstrate the traversal algorithms' core logic.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary *search* tree, where you can leverage the sorted property, finding the LCA in a general binary tree requires a slightly more sophisticated approach.  Here are a few common methods:
+
+**Method 1: Recursive Approach**
+
+This is a widely used and relatively straightforward approach.  The core idea is:
+
+1. **Base Case:** If the current node is `None` (null), return `None`.
+2. **Check if either node is found:** If either `p` or `q` is equal to the current node, return the current node.
+3. **Recursive calls:** Recursively search for the LCA in the left and right subtrees.
+4. **If both subtrees return a node:** This means both `p` and `q` were found in different subtrees.  Therefore, the current node is their LCA, so return the current node.
+5. **Otherwise:** Return the non-`None` result from the recursive calls (if one subtree found a node).
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node, or None if not found.
+    """
+
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+p = root.left  # Node with value 2
+q = root.left.right  # Node with value 5
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data if lca else 'Not found'}") # Output: LCA of 2 and 5: 2
+
+
+p = root.right # Node with value 3
+q = root.left.left # Node with value 4
+lca = lowestCommonAncestor(root,p,q)
+print(f"LCA of {p.data} and {q.data}: {lca.data if lca else 'Not found'}") # Output: LCA of 3 and 4: 1
+```
+
+**Method 2: Iterative Approach (Using a Parent Pointer)**
+
+If you can modify the tree to include parent pointers (each node stores a reference to its parent), you can efficiently find the LCA iteratively.  This method involves:
+
+1. **Find Paths:**  Traverse the tree from `p` and `q` upwards, storing the paths to the root.
+2. **Find Divergence Point:** Iterate through both paths simultaneously.  The last common node before the paths diverge is the LCA.
+
+This iterative approach can be more space-efficient than the recursive method in cases with very deep trees, as it avoids the recursive call stack.  However, it requires modifying the tree structure.
+
+
+**Important Considerations:**
+
+* **Node Existence:**  The algorithms assume that `p` and `q` actually exist in the tree. You might want to add error handling to check for their presence before proceeding.
+* **Space Complexity:** The recursive approach has a space complexity proportional to the height of the tree (due to the recursive call stack). The iterative approach (with parent pointers) generally has a lower space complexity.
+* **Time Complexity:** Both approaches generally have a time complexity of O(N), where N is the number of nodes in the tree (in the worst case, you might traverse almost the entire tree).
+
+
+Choose the method best suited to your needs and constraints.  The recursive approach is generally easier to understand and implement, while the iterative approach with parent pointers can be more efficient in terms of space if parent pointers are already available or acceptable to add.
+
