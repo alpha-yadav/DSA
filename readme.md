@@ -44278,3 +44278,80 @@ int main() {
 
 These examples demonstrate simple loops.  More complex loops might involve nested loops (loops within loops), `break` statements (to exit a loop prematurely), or `continue` statements (to skip to the next iteration).  The best type of loop to use depends on the specific task.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a structure where you iterate over multiple dimensions or combinations of data.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed for each combination of outer and inner loop variables
+```
+
+**Example: Printing a Multiplication Table**
+
+Let's say we want to print a 10x10 multiplication table.  We can use nested loops:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+This code will:
+
+1. The outer loop iterates through numbers 1 to 10 (rows).
+2. For each row (outer loop iteration), the inner loop iterates through numbers 1 to 10 (columns).
+3. Inside the inner loop, `i * j` calculates the product and is printed.  `end="\t"` prevents a newline after each number, keeping them on the same line.
+4. `print()` after the inner loop adds a newline to move to the next row.
+
+
+**Example: Iterating through a Matrix (2D list)**
+
+Imagine you have a 2D list (a matrix):
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+```
+
+To access each element, you'd use nested loops:
+
+```python
+for row in matrix:
+    for element in row:
+        print(element)
+```
+
+This iterates through each row of the matrix, and then through each element within that row.
+
+
+**Time Complexity:**
+
+Nested loops significantly increase the time complexity of your code.  If both the outer and inner loop iterate `n` times, the overall time complexity becomes O(n²).  This means the execution time grows quadratically with the input size.  For large datasets, this can be very computationally expensive.  Consider using more efficient algorithms if performance is critical.
+
+
+**When to Use Nested Loops:**
+
+Nested loops are useful when you need to iterate through multiple dimensions or combinations of data, such as:
+
+* Processing matrices or multi-dimensional arrays.
+* Generating combinations or permutations.
+* Implementing algorithms that require iterating over all possible pairs or subsets of data.
+
+
+**Important Considerations:**
+
+* **Infinite Loops:**  Be careful to avoid creating infinite loops by ensuring your loop conditions will eventually become false.
+* **Efficiency:**  For large datasets, consider if there are more efficient algorithms than nested loops.  Sometimes, list comprehensions or vectorized operations (using libraries like NumPy) can provide significant performance improvements.
+
+
+Nested loops are a fundamental concept in programming, but understanding their time complexity and potential inefficiencies is crucial for writing efficient and scalable code.
+
