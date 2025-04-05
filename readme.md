@@ -45256,3 +45256,115 @@ print(f"Is the tree a BST? {is_bst_recursive_minmax(root2)}")  # False
 
 Both methods achieve the same result. The second method might be slightly more efficient as it avoids the explicit creation of an in-order list, potentially saving space and time for very large trees.  Choose the method that you find more readable and easier to understand.  Remember that both assume a standard definition of a BST where the left subtree contains smaller values and the right subtree contains larger values.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Inorder Traversal**
+
+This method leverages the property that an inorder traversal of a BST will produce a sorted sequence of nodes.
+
+1. **Inorder Traversal:** Perform an inorder traversal of the binary tree.  This recursively visits the left subtree, then the root, then the right subtree.  Store the visited node values in a list or array.
+
+2. **Sorted Check:**  Check if the resulting list is sorted in ascending order. If it is, the tree is a BST; otherwise, it's not.
+
+**Python Code (Method 1):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node, result):
+    if node:
+        inorder_traversal(node.left, result)
+        result.append(node.data)
+        inorder_traversal(node.right, result)
+
+def is_bst(root):
+    result = []
+    inorder_traversal(root, result)
+    for i in range(1, len(result)):
+        if result[i] < result[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(is_bst(root))  # Output: True
+
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+root2.right.left = Node(6)  #Violation: 6 > 5
+root2.right.right = Node(4)
+
+print(is_bst(root2)) #Output: False
+
+```
+
+
+**Method 2: Recursive Check with Min and Max Bounds**
+
+This approach is generally more efficient because it avoids creating an extra list.  It recursively checks each subtree, keeping track of the minimum and maximum allowed values for each node.
+
+1. **Recursive Function:**  Define a recursive function that takes a node, a minimum value (`min`), and a maximum value (`max`) as input.
+
+2. **Base Case:** If the node is `None`, return `True`.
+
+3. **Check Node Value:** Check if the node's data is within the allowed range (`min < node.data < max`). If not, return `False`.
+
+4. **Recursive Calls:** Recursively call the function for the left subtree (with `max` set to `node.data`) and the right subtree (with `min` set to `node.data`).  Return `True` only if both recursive calls return `True`.
+
+**Python Code (Method 2):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+# Example usage (same trees as before):
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(is_bst_recursive(root))  # Output: True
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+root2.right.left = Node(6)
+root2.right.right = Node(4)
+
+print(is_bst_recursive(root2))  # Output: False
+```
+
+**Which method is better?**
+
+The recursive method (Method 2) is generally preferred because:
+
+* **Efficiency:** It avoids the overhead of creating and sorting a list, making it more space-efficient, especially for large trees.
+* **Early Exit:**  It can often detect that a tree is not a BST earlier than the inorder traversal method, potentially saving time.
+
+
+Remember to adapt the `Node` class definition to match your specific implementation if needed.  The core logic of both algorithms remains the same.
+
