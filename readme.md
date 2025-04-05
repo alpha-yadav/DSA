@@ -43893,3 +43893,68 @@ This version introduces a function `fizzBuzz` that takes an integer `upTo` as an
 
 Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using the Swift compiler). Choose the version that best suits your understanding and coding style.  Version 3 is generally preferred for its clarity and reusability.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  This is usually expressed as a function of the input size (often denoted as 'n'). The two most important aspects are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+Both time and space complexity are usually described using **Big O notation**, which provides an upper bound on the growth rate of the resource consumption as the input size increases.  It simplifies the analysis by focusing on the dominant terms and ignoring constant factors.
+
+Here's a breakdown of common complexities:
+
+**Time Complexity (Big O Notation):**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  This becomes slow for large inputs. Example: Bubble sort, insertion sort (in their naive implementations).
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  These algorithms become impractical for even moderately sized inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  These algorithms are only feasible for very small inputs. Example: Finding all permutations of a set.
+
+
+**Space Complexity (Big O Notation):**
+
+Space complexity follows similar notation.  It describes how much extra memory the algorithm needs beyond the input itself.
+
+* **O(1) - Constant Space:** The algorithm uses a constant amount of extra memory regardless of the input size.
+
+* **O(n) - Linear Space:** The algorithm uses an amount of memory proportional to the input size.
+
+* **O(log n) - Logarithmic Space:** The algorithm uses a logarithmic amount of memory.
+
+* **O(n²) - Quadratic Space:**  The algorithm uses a quadratic amount of memory.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operation:**  The operation that contributes most to the algorithm's running time.
+2. **Count the number of times the basic operation is executed:** Express this as a function of the input size 'n'.
+3. **Use Big O notation to describe the growth rate:**  Focus on the dominant terms and ignore constant factors.
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The basic operation is the comparison (`arr[i] == target`).  This operation is executed at most `n` times (where `n` is the length of the array). Therefore, the time complexity is O(n).  The space complexity is O(1) because it uses a constant amount of extra memory.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance on different input sizes.  For large datasets, the difference between an O(n) algorithm and an O(n²) algorithm can be enormous.
+
