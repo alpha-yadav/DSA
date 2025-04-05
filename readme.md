@@ -47083,3 +47083,47 @@ Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) descr
 
 Remember that these notations are about *asymptotic* behavior—how functions behave as input size approaches infinity.  For small input sizes, the actual runtime might differ significantly.  The focus is on the dominant terms that determine scaling behavior.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is a mathematical notation used in computer science to describe the lower bound of an algorithm's runtime or space complexity.  In simpler terms, it provides a guarantee about the *minimum* amount of resources (time or space) an algorithm will *always* require, regardless of the input.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function `f(n)` is said to be in Ω(g(n)) if there exist positive constants `c` and `n₀` such that `f(n) ≥ c * g(n)` for all `n ≥ n₀`.
+
+**What this means:**
+
+* **`f(n)`:** Represents the actual runtime or space complexity of the algorithm.
+* **`g(n)`:** Represents a simpler function that describes the growth rate of the algorithm's complexity.  Examples include:  `log n`, `n`, `n log n`, `n²`, `2ⁿ`, etc.
+* **`c`:**  A positive constant.  It accounts for constant factors that might be irrelevant when considering large inputs.
+* **`n₀`:** A threshold value.  The inequality only needs to hold for input sizes larger than `n₀`.  This is important because the algorithm's behavior might be different for very small inputs.
+
+**In essence:**  Ω(g(n)) means that the algorithm's complexity will *at least* grow as fast as `g(n)` for sufficiently large inputs.  It provides a lower bound on the complexity.
+
+**Example:**
+
+Let's say we have an algorithm with runtime `f(n) = 2n² + 5n + 1`. We can show that it's in Ω(n²) as follows:
+
+1. **Choose `g(n) = n²`**.  This is the dominant term in `f(n)`.
+
+2. **Find `c` and `n₀`**.  We want to find constants such that `2n² + 5n + 1 ≥ c * n²` for all `n ≥ n₀`.
+
+3. **Simplify the inequality**.  Let's choose `c = 1`.  Then we have:
+
+   `2n² + 5n + 1 ≥ n²`
+
+   `n² + 5n + 1 ≥ 0`
+
+   This inequality holds true for all `n ≥ 1`.  So, we can choose `n₀ = 1`.
+
+4. **Conclusion:** We've found constants `c = 1` and `n₀ = 1` that satisfy the definition.  Therefore, `f(n) = 2n² + 5n + 1` is in Ω(n²).
+
+**Relationship to Big-O and Big-Theta:**
+
+* **Big-O (O):**  Provides an *upper bound* on the algorithm's complexity.  It describes the worst-case scenario.
+* **Big-Ω (Ω):** Provides a *lower bound* on the algorithm's complexity. It describes the best-case or a guaranteed minimum.
+* **Big-Theta (Θ):** Provides both an *upper* and *lower* bound, meaning it tightly bounds the algorithm's complexity.  If `f(n) = Θ(g(n))`, then `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+
+**In summary:** Big-Omega notation is a crucial tool for understanding the fundamental limits of an algorithm's efficiency. It provides a valuable guarantee about the minimum resources an algorithm will consume, helping us compare and analyze different algorithms.
+
