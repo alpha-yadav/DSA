@@ -50291,3 +50291,73 @@ These examples all demonstrate simple loops that print the numbers 0 through 4. 
 
 These are just basic examples. Loops can be much more complex, involving nested loops, break and continue statements, and more sophisticated conditions.  But this gives you a foundation for understanding the fundamental structure of a simple loop.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions of data or perform repetitive tasks with varying parameters.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+outer_loop:
+  for outer_variable in outer_iterable:
+    inner_loop:
+      for inner_variable in inner_iterable:
+        # Code to be executed in the inner loop
+      # Code to be executed after the inner loop completes for one iteration of the outer loop
+  # Code to be executed after the outer loop completes
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+  for j in range(1, 11):  # Inner loop (columns)
+    print(i * j, end="\t")  # \t adds a tab for formatting
+  print()  # Newline after each row
+```
+
+This will output:
+
+```
+1	2	3	4	5	6	7	8	9	10	
+2	4	6	8	10	12	14	16	18	20	
+3	6	9	12	15	18	21	24	27	30	
+4	8	12	16	20	24	28	32	36	40	
+5	10	15	20	25	30	35	40	45	50	
+6	12	18	24	30	36	42	48	54	60	
+7	14	21	28	35	42	49	56	63	70	
+8	16	24	32	40	48	56	64	72	80	
+9	18	27	36	45	54	63	72	81	90	
+10	20	30	40	50	60	70	80	90	100	
+```
+
+**Example (JavaScript):**
+
+This example iterates through a 2D array:
+
+```javascript
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+for (let i = 0; i < matrix.length; i++) { // Outer loop (rows)
+  for (let j = 0; j < matrix[i].length; j++) { // Inner loop (columns)
+    console.log(matrix[i][j]);
+  }
+}
+```
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the time complexity of your code.  A nested loop with `n` iterations in each loop has a time complexity of O(n²).  For large datasets, this can become very slow.
+* **Readability:**  Deeply nested loops can make your code harder to read and understand. Try to keep them as shallow as possible and use more efficient algorithms when feasible.
+* **Optimization:**  Consider optimizing nested loops by using appropriate data structures or algorithms if performance is critical.
+
+
+Nested loops are a fundamental concept in programming and are used extensively in various applications, from processing matrices to traversing trees. Understanding their behavior and limitations is crucial for writing efficient and effective code.
+
