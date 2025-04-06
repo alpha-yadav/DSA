@@ -53711,3 +53711,85 @@ The C++ implementation is very similar to the Python version.  The main differen
 
 Both implementations achieve the same result: a level-order traversal of a binary tree. Choose the implementation that best suits your programming environment and preferences. Remember to handle potential errors, such as null pointers, in a production environment.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals (preorder, inorder, and postorder) are ways to systematically visit every node in a binary tree.  They differ in the order in which they visit the root, left subtree, and right subtree.
+
+**Definitions:**
+
+* **Preorder Traversal:**  Visit the root node first, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  (Root, Left, Right)
+
+* **Inorder Traversal:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. (Left, Root, Right)  For a Binary *Search* Tree (BST), inorder traversal gives you the nodes in ascending order.
+
+* **Postorder Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node. (Left, Right, Root)
+
+
+**Example:**
+
+Let's consider the following binary tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+**Traversals:**
+
+* **Preorder:** 1, 2, 4, 5, 3
+* **Inorder:** 4, 2, 5, 1, 3
+* **Postorder:** 4, 5, 2, 3, 1
+
+
+**Python Code Implementation:**
+
+This code demonstrates all three traversals using recursion:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Preorder traversal:")
+preorder(root)  # Output: 1 2 4 5 3
+print("\nInorder traversal:")
+inorder(root)   # Output: 4 2 5 1 3
+print("\nPostorder traversal:")
+postorder(root) # Output: 4 5 2 3 1
+```
+
+**Iterative Implementations (without recursion):**
+
+While recursive approaches are often clearer, iterative solutions using stacks are also possible and can be more efficient for very large trees to avoid stack overflow issues.  These are more complex to implement and understand.  You'll typically use a stack to simulate the recursive calls.  I'll leave the implementation of iterative versions as an exercise, but you can easily find many examples online searching for "iterative preorder traversal," "iterative inorder traversal," and "iterative postorder traversal."
+
+
+These traversals are fundamental to many binary tree algorithms and understanding them is crucial for working with tree-based data structures.
+
