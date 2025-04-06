@@ -55324,3 +55324,25 @@ This will output:
 
 Nested loops can significantly increase the runtime of your program.  If the outer loop iterates `m` times and the inner loop iterates `n` times, the total number of iterations is `m * n`.  This is known as O(m*n) time complexity, which can be computationally expensive for large values of `m` and `n`.  Always be mindful of the potential performance impact when using nested loops.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to reduce the problem size by a constant factor with each step.  This typically involves dividing the problem in half (or some other constant fraction) repeatedly until a base case is reached.  Here are some common types:
+
+**1. Binary Search:**  This is the quintessential O(log n) algorithm.  It works on sorted data.  To search for a value, you repeatedly compare the target value to the middle element of the current search range. If the target is smaller, you discard the upper half; if larger, you discard the lower half.  This halves the search space with each comparison.
+
+**2. Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  Balanced binary search trees (like AVL trees, red-black trees) maintain a roughly balanced structure, ensuring that the height of the tree is logarithmic in the number of nodes.  Operations like searching, inserting, and deleting a node involve traversing a path down the tree, which takes O(log n) time in a balanced tree.
+
+**3. Merge Sort and Quick Sort (in the average case):** These sorting algorithms have a time complexity of O(n log n). While not strictly O(log n), the logarithmic factor arises from the recursive nature of the algorithms. They repeatedly divide the data into smaller subproblems, which are then recursively sorted and merged. The `log n` part reflects the number of recursive levels.  (Note: QuickSort can be O(n²) in the worst case, but this is less common with good pivot selection).
+
+**4. Exponentiation by Squaring:**  This algorithm calculates a<sup>b</sup> efficiently (where a and b are integers). It works by repeatedly squaring the base and adjusting the exponent, reducing the number of multiplications needed from O(b) to O(log b).
+
+**5. Finding an element in a Trie:** Tries are tree-like data structures used for storing strings. Searching for a specific string in a trie takes O(m log n) time, where 'm' is the length of the string and 'n' is the number of strings in the trie.  The logarithmic component comes from the branching factor of the trie (if it's balanced).
+
+
+**Key characteristics that lead to O(log n) complexity:**
+
+* **Divide and Conquer:** The problem is repeatedly divided into smaller subproblems of roughly equal size.
+* **Halving (or similar constant-factor reduction):**  The size of the problem is reduced by a constant factor in each step.
+* **Sorted Data (often, but not always):**  Many O(log n) algorithms leverage sorted data to efficiently search or operate on elements.
+
+It's important to note that the base of the logarithm (e.g., base 2, base 10) doesn't affect the Big O notation, as it's just a constant factor.  The crucial part is that the number of operations grows logarithmically with the input size.
+
