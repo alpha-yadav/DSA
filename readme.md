@@ -54878,3 +54878,79 @@ print(fizzBuzzMap(n: 15)) // Prints the array of results
 
 Choose the version that best suits your understanding and coding style. The first version is the easiest to grasp for beginners, while the later versions showcase more advanced Swift features.  Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).
 
+#  Algorithm Complexity 
+Algorithm complexity is a crucial aspect of computer science that analyzes the performance and resource consumption of algorithms.  It's about understanding how the runtime and memory usage of an algorithm scale as the input size grows.  There are two primary aspects:
+
+**1. Time Complexity:** This measures how the runtime of an algorithm increases as the input size (usually denoted as 'n') increases.  It's expressed using Big O notation (O), which describes the upper bound of the growth rate.  Common time complexities include:
+
+* **O(1) - Constant Time:** The runtime remains the same regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Bubble sort, selection sort, nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm increases as the input size increases. It's also expressed using Big O notation.  The space complexity considers:
+
+* **Auxiliary Space:** The extra space used by the algorithm beyond the input itself (e.g., space for variables, data structures).
+
+* **Total Space:** The sum of auxiliary space and the input space.
+
+Space complexity can also have similar classifications as time complexity (O(1), O(log n), O(n), O(n²), etc.).
+
+
+**Big O Notation (and related notations):**
+
+Big O notation focuses on the *upper bound* of the growth rate. It provides a worst-case scenario analysis.  Other notations offer a more complete picture:
+
+* **Big Omega (Ω):**  Describes the *lower bound* of the growth rate (best-case scenario).
+
+* **Big Theta (Θ):** Describes the *tight bound*, meaning both the upper and lower bounds are the same order of growth (average-case scenario).
+
+
+**Factors Affecting Complexity:**
+
+Several factors influence an algorithm's complexity:
+
+* **Input Size:** The primary factor affecting complexity.
+* **Algorithm Design:**  Different algorithms for the same problem can have vastly different complexities.
+* **Data Structures:** The choice of data structure significantly impacts performance.
+* **Hardware:**  Processor speed, memory, etc., affect the actual runtime, but complexity analysis focuses on the scaling behavior.
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing complexity involves:
+
+1. **Identifying the basic operations:**  Determine the operations that dominate the runtime (e.g., comparisons, assignments).
+
+2. **Counting the number of operations:** Express the number of operations as a function of the input size 'n'.
+
+3. **Expressing the complexity using Big O notation:**  Identify the dominant term and ignore constant factors.
+
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The dominant operation is the comparison (`arr[i] == target`). This operation is executed at most 'n' times (where 'n' is the length of the array). Therefore, the time complexity is O(n). The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is critical for choosing efficient algorithms and optimizing software performance, especially when dealing with large datasets.
+
