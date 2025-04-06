@@ -56311,3 +56311,121 @@ print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}") # Outp
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree. The space complexity depends on the recursion depth; for balanced trees it's O(log N) for the recursive method, and O(N) in the worst case (for skewed trees) for both methods. The inorder traversal method generally uses less space for skewed trees because it avoids the recursive call stack.  Choose the method that best suits your needs and coding style.  The recursive method is often considered more elegant, while the inorder traversal is arguably simpler to understand and implement.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  Here are two common methods:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST produces a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Recursively checks if a tree is a BST using in-order traversal.
+
+    Args:
+        root: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    in_order_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            in_order_list.append(node.data)
+            inorder(node.right)
+
+    inorder(root)
+
+    # Check if the in-order list is sorted
+    for i in range(1, len(in_order_list)):
+        if in_order_list[i] < in_order_list[i-1]:
+            return False
+    return True
+
+
+
+# Example Usage
+root = Node(50)
+root.left = Node(30)
+root.right = Node(70)
+root.left.left = Node(20)
+root.left.right = Node(40)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}") #True
+
+root2 = Node(50)
+root2.left = Node(30)
+root2.right = Node(70)
+root2.left.left = Node(20)
+root2.left.right = Node(40)
+root2.right.left = Node(60)
+root2.right.right = Node(80)
+root2.left.right.right = Node(45)
+root2.right.left.left = Node(55)
+
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") #True
+
+
+root3 = Node(50)
+root3.left = Node(30)
+root3.right = Node(70)
+root3.left.left = Node(20)
+root3.left.right = Node(60) #Violation here
+
+
+print(f"Is the tree a BST? {is_bst_recursive(root3)}") #False
+
+```
+
+**Method 2:  Recursive Check with Min and Max**
+
+This approach recursively checks each subtree, maintaining the minimum and maximum allowed values for the nodes within that subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(node, min_val, max_val):
+    """
+    Recursively checks if a tree is a BST using min and max values.
+
+    Args:
+      node: The current node being checked.
+      min_val: The minimum allowed value for this node.
+      max_val: The maximum allowed value for this node.
+
+    Returns:
+      True if the subtree rooted at node is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_minmax(node.left, min_val, node.data) and
+            is_bst_minmax(node.right, node.data, max_val))
+
+
+# Example usage (same as above, just replace the function call)
+
+print(f"Is the tree a BST? {is_bst_minmax(root, float('-inf'), float('inf'))}") #True
+print(f"Is the tree a BST? {is_bst_minmax(root2, float('-inf'), float('inf'))}") #True
+print(f"Is the tree a BST? {is_bst_minmax(root3, float('-inf'), float('inf'))}") #False
+
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity depends on the recursion depth, which in the worst case (a skewed tree) could be O(N), but for balanced trees, it's O(log N).  Choose the method that you find more readable and maintainable; they achieve the same result.  The second method might be slightly more efficient in practice for very deep trees because it avoids creating an extra list.
+
