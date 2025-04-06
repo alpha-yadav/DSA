@@ -49896,3 +49896,64 @@ Here are a few algorithmic problem examples, ranging in difficulty:
 
 These examples demonstrate the structure of an algorithmic problem: a clear input, a desired output, and a challenge in efficiently transforming the input into the output.  The "solution idea" provides a hint about algorithmic strategies that might be employed, but the full implementation requires coding skills and knowledge of data structures.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's a great way to learn about loops, conditionals, and modular arithmetic. Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+**Simple Approach (using nested `if` statements):**
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This version directly checks for divisibility by 15, 3, and 5 in that order.  This is efficient because if a number is divisible by 15, it's also divisible by 3 and 5, so we handle the "FizzBuzz" case first.
+
+
+**Slightly More Advanced Approach (using string concatenation):**
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzAdvanced(n: 15) // Call the function to test
+```
+
+This version builds the output string incrementally.  If a number is divisible by 3, "Fizz" is added; if divisible by 5, "Buzz" is added.  If the `output` string is empty after checking both conditions, it means the number is not divisible by 3 or 5, so we print the number itself.  This approach is often considered more elegant and easier to extend if you need to add more conditions in the future.
+
+
+**Explanation:**
+
+* `%` (modulo operator): This gives the remainder of a division.  If `i % 3 == 0`, it means `i` is perfectly divisible by 3.
+* `if-else if-else`: This is a conditional statement that checks the conditions sequentially.
+* `for...in`: This loop iterates through the numbers from 1 to `n`.
+* `String(i)`:  This converts the integer `i` to a string for printing.
+* `output.isEmpty`: This checks if the `output` string is empty.
+
+
+**Choosing the Best Approach:**
+
+For a simple FizzBuzz, either approach works fine. The second approach (string concatenation) is generally preferred for its readability and extensibility.  As the complexity of the problem increases (adding more divisors or conditions), the second approach becomes significantly easier to maintain and understand. Remember to choose the approach that best suits your understanding and the specific requirements of your task.
+
