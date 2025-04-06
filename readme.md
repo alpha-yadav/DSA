@@ -53311,3 +53311,102 @@ print(f"Is the tree a BST? {is_bst(root2)}")  # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive method, where H is the height of the tree (O(log N) for a balanced tree, O(N) for a skewed tree).  The iterative approach (not shown) would have O(1) space complexity.  Choose the method that best suits your needs and coding style.  The second method (using min/max) might be slightly more efficient in some cases as it can potentially prune subtrees earlier if a violation is detected.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+1. **In-order Traversal:**  Recursively traverse the tree in-order (left, root, right).  As you visit each node, store its value.
+
+2. **Sorted Check:**  After the traversal, check if the stored sequence is sorted in ascending order. If it is, the tree is a BST; otherwise, it's not.
+
+**Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """Checks if a binary tree is a BST using recursive in-order traversal."""
+    inorder_list = []
+    
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.data)
+            inorder(node.right)
+
+    inorder(root)
+    
+    # Check if the inorder list is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+# Example Usage
+root = Node(2)
+root.left = Node(1)
+root.right = Node(3)
+print(is_bst_recursive(root))  # Output: True
+
+root = Node(5)
+root.left = Node(1)
+root.right = Node(4)
+root.right.left = Node(3)
+root.right.right = Node(6)
+print(is_bst_recursive(root))  # Output: False
+
+
+```
+
+**Method 2: Recursive Check with Range**
+
+This method is more efficient because it avoids the need to create and sort a list. It recursively checks if each subtree satisfies the BST property within a given range.
+
+1. **Base Case:** An empty subtree is a valid BST.
+
+2. **Recursive Step:** For a node with value `node.data`,  check:
+   - If `node.data` is within the allowed range (`min_val` <= `node.data` < `max_val`).
+   - Recursively check the left subtree with the range [`min_val`, `node.data`).
+   - Recursively check the right subtree with the range [`node.data`, `max_val`).
+
+**Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_range(root, min_val=-float('inf'), max_val=float('inf')):
+    """Checks if a binary tree is a BST using recursive range checking."""
+    if not root:
+        return True
+    if not (min_val <= root.data < max_val):
+        return False
+    return (is_bst_recursive_range(root.left, min_val, root.data) and
+            is_bst_recursive_range(root.right, root.data, max_val))
+
+# Example Usage (same as before, will produce the same output)
+root = Node(2)
+root.left = Node(1)
+root.right = Node(3)
+print(is_bst_recursive_range(root))  # Output: True
+
+root = Node(5)
+root.left = Node(1)
+root.right = Node(4)
+root.right.left = Node(3)
+root.right.right = Node(6)
+print(is_bst_recursive_range(root))  # Output: False
+```
+
+The recursive range checking method is generally preferred because it has a time complexity of O(N) (where N is the number of nodes) and a space complexity of O(H) (where H is the height of the tree), which is better than the first method in the worst case (a skewed tree).  The first method has a space complexity that is O(N) in the worst case.  Both have a time complexity of O(N).
+
