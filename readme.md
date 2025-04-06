@@ -51909,3 +51909,67 @@ This is more efficient because it only calculates the remainders once.  The `?? 
 
 Remember to choose the version that best suits your understanding and the context of your project.  For a simple FizzBuzz implementation, Version 1 is perfectly adequate.  The other versions demonstrate more advanced Swift features.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (like time and memory) an algorithm consumes as the input size grows.  It's crucial for evaluating the efficiency and scalability of algorithms, particularly when dealing with large datasets.  We generally focus on *asymptotic complexity*, which describes the behavior as the input size approaches infinity.
+
+There are two main aspects of algorithm complexity:
+
+* **Time Complexity:** How the runtime of an algorithm scales with the size of the input.
+* **Space Complexity:** How the memory usage of an algorithm scales with the size of the input.
+
+**Notation:**
+
+We use Big O notation (O), Big Omega notation (Ω), and Big Theta notation (Θ) to describe asymptotic complexity.
+
+* **Big O (O):** Represents the *upper bound* of an algorithm's growth rate.  It describes the worst-case scenario.  We say an algorithm is O(f(n)) if its runtime is at most a constant multiple of f(n) for sufficiently large n (where n is the input size).
+
+* **Big Omega (Ω):** Represents the *lower bound* of an algorithm's growth rate. It describes the best-case scenario.  We say an algorithm is Ω(f(n)) if its runtime is at least a constant multiple of f(n) for sufficiently large n.
+
+* **Big Theta (Θ):** Represents the *tight bound*.  An algorithm is Θ(f(n)) if its runtime is both O(f(n)) and Ω(f(n)).  This means the growth rate is precisely f(n).
+
+**Common Complexity Classes:**
+
+These are listed in ascending order of growth rate (from most efficient to least efficient):
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching an unsorted array for a specific element.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Nested loops iterating through an array.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Finding all permutations of a set.
+
+
+**Analyzing Complexity:**
+
+Analyzing the complexity of an algorithm often involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most significantly to the runtime.
+
+2. **Counting the number of operations:** Express the number of operations as a function of the input size (n).
+
+3. **Determining the dominant term:** Ignore constant factors and lower-order terms.  The dominant term determines the asymptotic complexity.
+
+**Example:**
+
+Consider a simple function that sums the elements of an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for num in arr:
+    total += num
+  return total
+```
+
+This function iterates through the array once. The number of additions is directly proportional to the size of the array (n). Therefore, the time complexity is O(n).  The space complexity is O(1) because it uses a constant amount of extra space regardless of the array size.
+
+
+Understanding algorithm complexity is essential for choosing the right algorithm for a given task, optimizing existing algorithms, and predicting performance as the input size scales.  Choosing an algorithm with a lower complexity class is generally preferred, especially when dealing with large datasets.
+
