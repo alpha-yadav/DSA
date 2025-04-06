@@ -49855,3 +49855,44 @@ The key to mastering algorithms is consistent practice.  Work through examples, 
 
 By following these steps, you can build a strong foundation in algorithms and data structures. Remember to start small, build gradually, and enjoy the learning process!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string (e.g., "hello")
+
+**Output:** The reversed string (e.g., "olleh")
+
+**Solution Idea:**  Iterate through the string from the end to the beginning and build a new string.  Or, use built-in string manipulation functions (if allowed).
+
+
+**Medium:**
+
+**Problem:** Find the two numbers in a sorted array that add up to a given target sum.
+
+**Input:** A sorted array of integers (e.g., `[-2, 1, 2, 7, 11, 15]`) and a target sum (e.g., 9).
+
+**Output:** The indices of the two numbers that add up to the target sum (e.g., `[2, 3]` because 2 + 7 = 9).  Return `null` or an appropriate indicator if no such pair exists.
+
+**Solution Idea:** Use a two-pointer approach. One pointer starts at the beginning of the array, the other at the end.  Adjust the pointers based on whether the sum is too high or too low.
+
+
+**Hard:**
+
+**Problem:**  Find the longest palindromic substring within a given string.
+
+**Input:** A string (e.g., "babad")
+
+**Output:** The longest palindromic substring (e.g., "bab" or "aba").  If multiple palindromes have the same maximum length, return any one of them.
+
+
+**Solution Idea:**  There are several approaches, including:
+
+* **Expanding around center:** Check all possible centers (single characters and spaces between characters) and expand outwards to find the longest palindrome centered there.
+* **Dynamic programming:** Create a table to store whether substrings are palindromes.
+
+These examples demonstrate the structure of an algorithmic problem: a clear input, a desired output, and a challenge in efficiently transforming the input into the output.  The "solution idea" provides a hint about algorithmic strategies that might be employed, but the full implementation requires coding skills and knowledge of data structures.
+
