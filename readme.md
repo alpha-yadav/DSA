@@ -55765,3 +55765,113 @@ bst.insert_iterative(14)
 
 Remember to choose the method that best suits your needs and coding style.  The recursive version is often considered more readable, while the iterative version might be slightly more performant for very large trees.  Both achieve the same fundamental goal.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node:**  Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:** This is the most complex case.  The standard approach is to find the inorder predecessor (largest node in the left subtree) or the inorder successor (smallest node in the right subtree), replace the node to be deleted with this successor/predecessor, and then delete the successor/predecessor (which will now be either a leaf or a node with one child, reducing the problem to cases 1 or 2).
+
+Here's a C++ implementation demonstrating BST deletion, handling all three cases:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+Node* minValueNode(Node* node) {
+    Node* current = node;
+    while (current->left != nullptr) {
+        current = current->left;
+    }
+    return current;
+}
+
+Node* deleteNode(Node* root, int key) {
+    // Base Case: If the tree is empty
+    if (root == nullptr) {
+        return root;
+    }
+
+    // Recursive calls to find the node to delete
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // key == root->data (node found)
+        // Case 1: Node with 0 or 1 child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Case 2: Node with two children
+        Node* temp = minValueNode(root->right); // Find inorder successor
+        root->data = temp->data; // Copy successor's data to the node being deleted
+        root->right = deleteNode(root->right, temp->data); // Delete the inorder successor
+    }
+    return root;
+}
+
+
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 20); // Delete a leaf node
+
+    std::cout << "Inorder traversal after deleting 20: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    root = deleteNode(root, 30); // Delete a node with one child
+
+    std::cout << "Inorder traversal after deleting 30: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    root = deleteNode(root, 50); // Delete a node with two children
+
+    std::cout << "Inorder traversal after deleting 50: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    //Remember to free the allocated memory when done, although this is simplified here for brevity.  A proper implementation would recursively free all nodes.
+
+
+    return 0;
+}
+```
+
+This code provides a robust `deleteNode` function that handles all deletion cases correctly.  Remember to compile and run this code using a C++ compiler (like g++).  The `inorderTraversal` function helps verify the correctness of the deletion by printing the BST in sorted order.  Always remember to handle memory management carefully in your BST implementations to avoid memory leaks.  The example shown simplifies memory management for clarity; a production-ready implementation would require more robust memory management.
+
