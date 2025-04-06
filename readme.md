@@ -57117,3 +57117,88 @@ The space complexity of an adjacency list is O(V + E), where V is the number of 
 
 Choosing between adjacency lists and adjacency matrices depends on the specific application and the characteristics of the graph (sparse vs. dense).  Adjacency lists are generally preferred for sparse graphs because of their lower space complexity.
 
+#  Topological Sort 
+A topological sort is a linear ordering of the nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's an ordering where you can follow all the arrows without ever going backwards.
+
+**When is it used?**
+
+Topological sorting is crucial in scenarios involving dependencies, precedence, or ordering.  Some common applications include:
+
+* **Build systems (like Make):** Determining the order to compile source code files.  A `.c` file that depends on another must be compiled after the file it depends on.
+* **Course scheduling:**  Ordering courses based on prerequisites.  You can't take Calculus II before Calculus I.
+* **Dependency resolution in software:**  Installing software packages with dependencies.  A package requiring another must be installed after its dependency.
+* **Data serialization:**  Determining the order to write data to a file when there are dependencies between data elements.
+
+
+**Algorithms for Topological Sorting:**
+
+There are primarily two common algorithms:
+
+1. **Kahn's Algorithm:** This is a breadth-first search (BFS)-based algorithm.
+
+   * **Steps:**
+     1. Find all nodes with no incoming edges (in-degree = 0).  Add these nodes to a queue (or list).
+     2. While the queue is not empty:
+        * Remove a node from the queue and add it to the sorted list.
+        * For each outgoing edge from the removed node:
+           * Decrement the in-degree of the node pointed to by the edge.
+           * If the in-degree of this node becomes 0, add it to the queue.
+     3. If the sorted list contains all nodes, the sorting is successful. Otherwise, the graph contains a cycle, and topological sorting is impossible.
+
+   * **Example (Python):**
+
+     ```python
+     from collections import defaultdict
+
+     def topological_sort(graph):
+         in_degree = defaultdict(int)
+         for node in graph:
+             for neighbor in graph[node]:
+                 in_degree[neighbor] += 1
+
+         queue = [node for node in graph if in_degree[node] == 0]
+         sorted_list = []
+
+         while queue:
+             node = queue.pop(0)
+             sorted_list.append(node)
+             for neighbor in graph[node]:
+                 in_degree[neighbor] -= 1
+                 if in_degree[neighbor] == 0:
+                     queue.append(neighbor)
+
+         if len(sorted_list) != len(graph):
+             return "Graph contains a cycle"  # Topological sort is impossible
+         return sorted_list
+
+     # Example graph represented as an adjacency list
+     graph = {
+         'A': ['C'],
+         'B': ['C', 'D'],
+         'C': ['E'],
+         'D': ['F'],
+         'E': ['H'],
+         'F': ['G', 'H'],
+         'G': ['H'],
+     }
+
+     print(topological_sort(graph))  # Output: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] (or a similar valid ordering)
+
+     ```
+
+
+2. **Depth-First Search (DFS) Algorithm:**  This algorithm uses recursion and a stack.
+
+   * **Steps:**
+     1. Perform a DFS traversal of the graph.
+     2. Add each node to a stack when its DFS traversal is complete (post-order traversal).
+     3. Reverse the stack to get the topologically sorted order.
+     4. If a cycle is detected during DFS (visiting a node already in the recursion stack), topological sorting is impossible.
+
+
+**Cycle Detection:**
+
+Both algorithms implicitly detect cycles.  If, after processing all nodes, you haven't added all nodes to the sorted list (Kahn's algorithm), or if you detect a cycle during DFS, the graph has a cycle, and topological sorting is not possible.
+
+In summary, topological sorting provides a valuable way to order elements based on dependencies, and understanding either Kahn's algorithm or the DFS-based approach is essential for working with directed acyclic graphs.  Kahn's algorithm is often preferred for its iterative nature and slightly better performance in some cases.
+
