@@ -49957,3 +49957,71 @@ This version builds the output string incrementally.  If a number is divisible b
 
 For a simple FizzBuzz, either approach works fine. The second approach (string concatenation) is generally preferred for its readability and extensibility.  As the complexity of the problem increases (adding more divisors or conditions), the second approach becomes significantly easier to maintain and understand. Remember to choose the approach that best suits your understanding and the specific requirements of your task.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm requires to solve a problem as a function of the input size.  It's crucial for understanding an algorithm's efficiency and scalability.  We typically analyze complexity using **asymptotic notation**, which describes the growth rate of resource usage as the input size approaches infinity.  This ignores constant factors and smaller-order terms, focusing on the dominant behavior.
+
+Here's a breakdown of key concepts:
+
+**1. Time Complexity:**  Measures how the runtime of an algorithm scales with the input size.
+
+* **Big O Notation (O):**  Describes the *upper bound* of an algorithm's growth rate. It represents the worst-case scenario.  For example, O(n) means the runtime grows linearly with the input size (n).
+
+* **Big Omega Notation (Ω):** Describes the *lower bound* of an algorithm's growth rate. It represents the best-case scenario.  For example, Ω(n) means the runtime grows at least linearly with the input size.
+
+* **Big Theta Notation (Θ):** Describes the *tight bound*. It means the algorithm's growth rate is both O(f(n)) and Ω(f(n)), indicating that the algorithm's runtime grows proportionally to f(n).
+
+**Common Time Complexities (from best to worst):**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example:  Generating all permutations of a sequence.
+
+
+**2. Space Complexity:** Measures how the memory usage of an algorithm scales with the input size.  The notation used is similar to time complexity (Big O, Big Ω, Big Θ).
+
+* **O(1) - Constant Space:** The memory usage is independent of the input size.
+
+* **O(n) - Linear Space:** The memory usage increases linearly with the input size. Example: Storing the input in an array.
+
+* **O(log n) - Logarithmic Space:** The memory usage increases logarithmically with the input size (often seen in recursive algorithms with logarithmic depth).
+
+* **And so on...**
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing complexity involves:
+
+* **Identifying the basic operations:**  Determine the operations that contribute most significantly to the runtime.
+* **Expressing the number of operations as a function of the input size:**  Count how many times these basic operations are executed as a function of the input size (n).
+* **Using asymptotic notation to simplify the function:**  Ignore constant factors and lower-order terms, focusing on the dominant term.
+
+
+**Example:**
+
+Consider a simple function that finds the maximum element in an unsorted array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+The dominant operation is the comparison `x > max_val`. This operation is executed `n` times (where `n` is the length of the array). Therefore, the time complexity is O(n). The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is critical for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better for large inputs.
+
