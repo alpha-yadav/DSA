@@ -55267,3 +55267,60 @@ These are all simple examples.  Loops can become much more complex by incorporat
 
 Remember to choose the loop type (`for` or `while`) that best suits the situation.  `for` loops are generally preferred when you know the number of iterations in advance, while `while` loops are better when the number of iterations depends on a condition that might change during the loop.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop. This allows you to iterate over multiple dimensions or nested data structures.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_iterable:
+    for inner_loop_variable in inner_iterable:
+        # Code to be executed in the inner loop
+    # Code to be executed after the inner loop completes for one iteration of the outer loop
+# Code to be executed after the outer loop completes
+```
+
+**Example in Python:**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop iterates from 1 to 10
+    for j in range(1, 11):  # Inner loop iterates from 1 to 10
+        print(f"{i} x {j} = {i * j}", end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This will output:
+
+```
+1 x 1 = 1	1 x 2 = 2	1 x 3 = 3	1 x 4 = 4	1 x 5 = 5	1 x 6 = 6	1 x 7 = 7	1 x 8 = 8	1 x 9 = 9	1 x 10 = 10
+2 x 1 = 2	2 x 2 = 4	2 x 3 = 6	2 x 4 = 8	2 x 5 = 10	2 x 6 = 12	2 x 7 = 14	2 x 8 = 16	2 x 9 = 18	2 x 10 = 20
+...and so on...
+```
+
+**Explanation:**
+
+1. **Outer Loop:** The outer loop iterates through numbers 1 to 10 (inclusive).  Each iteration represents a row in the multiplication table.
+
+2. **Inner Loop:** The inner loop also iterates from 1 to 10.  For each iteration of the outer loop, the inner loop calculates and prints the product of the outer loop variable (`i`) and the inner loop variable (`j`).
+
+3. **`end="\t"`:** This argument in the `print()` function prevents a newline after each multiplication result, instead inserting a tab for better formatting.
+
+4. **`print()` (after inner loop):** This newline is crucial; it moves the cursor to the next line after the inner loop finishes each row.
+
+
+**Uses of Nested Loops:**
+
+* **Processing 2D arrays (matrices):** Accessing and manipulating each element in a grid-like structure.
+* **Generating patterns:** Creating visual output like stars, triangles, or other shapes.
+* **Iterating through combinations:** Finding all possible pairings or combinations of elements from multiple sets.
+* **Nested data structures:** Traversing through lists of lists, dictionaries within dictionaries, etc.
+
+
+**Important Consideration: Time Complexity:**
+
+Nested loops can significantly increase the runtime of your program.  If the outer loop iterates `m` times and the inner loop iterates `n` times, the total number of iterations is `m * n`.  This is known as O(m*n) time complexity, which can be computationally expensive for large values of `m` and `n`.  Always be mindful of the potential performance impact when using nested loops.
+
