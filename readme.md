@@ -54150,3 +54150,103 @@ Graph theory has a wide range of applications in various fields, including:
 
 This introduction provides a basic overview.  Further exploration would involve delving into specific algorithms (e.g., Dijkstra's algorithm for shortest paths, breadth-first search, depth-first search) and more advanced concepts.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementations and considerations:
+
+**Concept:**
+
+An adjacency list represents a graph as an array (or a hash table/dictionary) of lists.  Each index in the array corresponds to a vertex in the graph.  The list at that index contains the vertices adjacent to that vertex (i.e., the vertices connected to it by an edge).
+
+**Implementation Variations:**
+
+1. **Using Arrays of Lists (Python):**
+
+   ```python
+   class Graph:
+       def __init__(self, num_vertices):
+           self.num_vertices = num_vertices
+           self.adj_list = [[] for _ in range(num_vertices)]
+
+       def add_edge(self, u, v):
+           self.adj_list[u].append(v)  # Directed graph; for undirected add v to u's list and u to v's list
+           #self.adj_list[v].append(u) # uncomment for undirected graph
+
+       def print_graph(self):
+           for i in range(self.num_vertices):
+               print(f"Vertex {i}: {self.adj_list[i]}")
+
+   # Example usage:
+   graph = Graph(5)
+   graph.add_edge(0, 1)
+   graph.add_edge(0, 4)
+   graph.add_edge(1, 2)
+   graph.add_edge(1, 3)
+   graph.add_edge(1, 4)
+   graph.add_edge(3, 4)
+   graph.print_graph()
+   ```
+
+2. **Using Dictionaries (Python):**  This offers better performance for graphs with non-sequential vertex indices.
+
+   ```python
+   class Graph:
+       def __init__(self):
+           self.adj_list = {}
+
+       def add_edge(self, u, v):
+           self.adj_list.setdefault(u, []).append(v)  #setdefault handles creating the list if it doesn't exist
+           #self.adj_list.setdefault(v, []).append(u) # uncomment for undirected
+
+       def print_graph(self):
+           for vertex, neighbors in self.adj_list.items():
+               print(f"Vertex {vertex}: {neighbors}")
+
+   # Example Usage
+   graph = Graph()
+   graph.add_edge('A', 'B')
+   graph.add_edge('A', 'C')
+   graph.add_edge('B', 'D')
+   graph.print_graph()
+   ```
+
+3. **Other Languages:**  The principles are the same in other languages.  You might use `std::vector<std::vector<int>>` in C++, or similar data structures in Java (e.g., `ArrayList<ArrayList<Integer>>`) or other languages.
+
+
+**Advantages of Adjacency Lists:**
+
+* **Space efficiency for sparse graphs:**  Only the existing edges are stored.  For a graph with `V` vertices and `E` edges, the space complexity is O(V+E).  This is much better than the O(V²) space needed for an adjacency matrix for sparse graphs.
+* **Efficient to find neighbors:**  Finding the neighbors of a vertex takes O(degree(v)) time, where `degree(v)` is the number of edges connected to vertex `v`.
+* **Easy to add/remove edges:**  Adding or removing edges is relatively straightforward.
+
+**Disadvantages of Adjacency Lists:**
+
+* **Less efficient for dense graphs:**  For dense graphs (many edges), the space advantage over adjacency matrices diminishes.
+* **Slower to check for edge existence:** Checking if an edge exists between two specific vertices might require traversing a list, which takes O(degree(v)) time in the worst case.  (An adjacency matrix allows O(1) checking).
+
+
+**Weighted Graphs:**
+
+To represent weighted graphs, you can modify the adjacency list to store pairs (or objects) containing the neighbor vertex and the edge weight.
+
+```python
+class WeightedGraph:
+    def __init__(self):
+        self.adj_list = {}
+
+    def add_edge(self, u, v, weight):
+        self.adj_list.setdefault(u, []).append((v, weight))
+        #self.adj_list.setdefault(v, []).append((u, weight)) # uncomment for undirected graph
+
+    def print_graph(self):
+        for vertex, edges in self.adj_list.items():
+            print(f"Vertex {vertex}: {edges}")
+
+#Example usage
+graph = WeightedGraph()
+graph.add_edge('A', 'B', 5)
+graph.add_edge('A', 'C', 2)
+graph.print_graph()
+```
+
+Remember to choose the implementation that best suits your needs and the characteristics of the graphs you'll be working with.  For sparse graphs, adjacency lists are generally preferred for their space efficiency.
+
