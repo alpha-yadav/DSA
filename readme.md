@@ -52159,3 +52159,108 @@ The worst-case scenario is that the target is at the end of the array (or not pr
 
 In summary, Big O notation is a crucial tool for analyzing and comparing algorithms, helping you choose the most efficient solution for a given problem.  Understanding the different complexities allows you to make informed decisions about algorithm design and optimization.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  Here are examples in a few common programming languages:
+
+**1. `while` loop (general purpose)**
+
+This loop continues as long as a condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+
+**2. `for` loop (iterating over a sequence)**
+
+This loop is often used to iterate over a sequence (like a list or array) or a range of numbers.
+
+* **Python:**
+
+```python
+for i in range(5):
+  print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+**3. `do-while` loop (guaranteed at least one execution)**
+
+This loop executes the code block at least once, and then repeats as long as the condition is true.  Note that `do-while` is not available in all languages (like Python).
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  do {
+    std::cout << count << std::endl;
+    count++;
+  } while (count < 5);
+  return 0;
+}
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+do {
+  console.log(count);
+  count++;
+} while (count < 5);
+```
+
+These are just basic examples.  Loops can be much more complex, involving nested loops, break and continue statements for controlling flow, and iterating over more complex data structures.  The best type of loop to use depends on the specific task.
+
