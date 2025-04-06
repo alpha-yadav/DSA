@@ -53505,3 +53505,100 @@ This method mirrors the recursive approach but uses a stack to avoid potential s
 
 For most cases, the in-order traversal method provides a good balance of simplicity and efficiency.  If you anticipate extremely deep trees, the iterative approach is a safer choice.  The recursive approach is a good compromise between readability and performance for moderately sized trees.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can visit (or "traverse") each node in a binary tree exactly once.  The order in which you visit the nodes matters, and different traversal orders can reveal different aspects of the tree's structure and data.  The most common types are:
+
+**1. Pre-order Traversal:**
+
+* **Order:** Visit the root node first, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+* **Mnemonic:** Root, Left, Right (**Pre**-order means root comes *before* left and right)
+* **Example:** For a tree with root 'A', left subtree 'B' and right subtree 'C', the pre-order traversal would be: A, B, C.  A more complex tree would continue this pattern recursively.
+* **Application:** Creating a prefix expression (Polish notation) from an expression tree.
+
+**2. In-order Traversal:**
+
+* **Order:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree.
+* **Mnemonic:** Left, Root, Right (Root is *in* the middle)
+* **Example:**  For the same tree (A, B, C), the in-order traversal would be: B, A, C.
+* **Application:**  For a binary search tree (BST), an in-order traversal yields the nodes in sorted order.
+
+**3. Post-order Traversal:**
+
+* **Order:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node.
+* **Mnemonic:** Left, Right, Root (Root comes *post* left and right)
+* **Example:** For the same tree (A, B, C), the post-order traversal would be: B, C, A.
+* **Application:**  Evaluating an expression tree or deleting nodes in a tree.
+
+
+**4. Level-order Traversal (Breadth-First Search):**
+
+* **Order:** Visit nodes level by level, starting from the root and going left to right within each level.  This requires a queue data structure.
+* **Mnemonic:** Level by Level
+* **Example:**  For the same tree (A, B, C), the level-order traversal would be: A, B, C.  A more complex tree would traverse each level before moving to the next.
+* **Application:** Finding the shortest path in a tree, implementing a priority queue.
+
+
+
+**Code Examples (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+from collections import deque
+
+def levelorder(node):
+    if node is None:
+        return
+
+    queue = deque([node])
+    while(len(queue) > 0):
+        print(queue[0].data, end=" ")
+        node = queue.popleft()
+
+        if node.left is not None:
+            queue.append(node.left)
+
+        if node.right is not None:
+            queue.append(node.right)
+
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+
+print("Preorder traversal:")
+preorder(root) # Output: A B C
+print("\nInorder traversal:")
+inorder(root)  # Output: B A C
+print("\nPostorder traversal:")
+postorder(root) # Output: B C A
+print("\nLevelorder traversal:")
+levelorder(root) # Output: A B C
+print()
+```
+
+Remember to adapt these code examples to your specific needs and data structures.  The key is understanding the recursive logic behind the different traversal methods.
+
