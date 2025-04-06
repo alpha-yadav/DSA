@@ -57011,3 +57011,109 @@ Many algorithms operate on graphs to solve various problems. Some important exam
 
 This introduction provides a basic foundation for understanding graph theory.  Further study would delve into more advanced topics such as graph coloring, network flows, planarity, and more sophisticated algorithms.  The practical applications are vast, making it a rewarding field to explore.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementations and considerations:
+
+**The Concept**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each index in the array corresponds to a vertex in the graph.  The list at that index contains the vertices that are directly connected (adjacent) to the vertex represented by the index.
+
+**Example:**
+
+Let's say we have a graph with 5 vertices (0, 1, 2, 3, 4) and the following edges:
+
+* 0 -- 1
+* 0 -- 4
+* 1 -- 2
+* 1 -- 3
+* 2 -- 3
+* 3 -- 4
+
+
+The adjacency list representation would look like this:
+
+```
+0: [1, 4]
+1: [2, 3]
+2: [3]
+3: [4]
+4: []
+```
+
+**Implementations**
+
+Several ways exist to implement adjacency lists, depending on the programming language and specific needs:
+
+* **Using arrays of lists (Python):**
+
+```python
+graph = [
+    [1, 4],  # Adjacency list for vertex 0
+    [2, 3],  # Adjacency list for vertex 1
+    [3],     # Adjacency list for vertex 2
+    [4],     # Adjacency list for vertex 3
+    []       # Adjacency list for vertex 4
+]
+
+# Accessing neighbors of vertex 0:
+neighbors_of_0 = graph[0]  # neighbors_of_0 will be [1, 4]
+```
+
+* **Using dictionaries (Python):**  This offers better readability and potentially faster lookups if you use hash tables internally:
+
+```python
+graph = {
+    0: [1, 4],
+    1: [2, 3],
+    2: [3],
+    3: [4],
+    4: []
+}
+
+# Accessing neighbors of vertex 0:
+neighbors_of_0 = graph[0]  # neighbors_of_0 will be [1, 4]
+```
+
+* **Using other data structures:**  In languages like C++, you could use `std::vector<std::vector<int>>` (similar to Python's list of lists) or `std::vector<std::list<int>>` (for better insertion/deletion performance if the graph is dynamic).
+
+
+**Weighted Graphs:**
+
+For weighted graphs (where edges have associated weights), you need to store the weights along with the adjacent vertices.  This is commonly done by using tuples or custom classes:
+
+```python
+# Using tuples (Python):
+graph = {
+    0: [(1, 5), (4, 2)],  # (neighbor, weight)
+    1: [(2, 3), (3, 1)],
+    2: [(3, 4)],
+    3: [(4, 6)],
+    4: []
+}
+
+# Accessing neighbors and weights of vertex 0:
+for neighbor, weight in graph[0]:
+    print(f"Neighbor: {neighbor}, Weight: {weight}")
+```
+
+
+**Directed vs. Undirected Graphs:**
+
+* **Undirected Graph:** In an undirected graph, if there's an edge from A to B, there's also an edge from B to A.  The adjacency list reflects this implicitly.  If `B` is in the adjacency list of `A`, `A` should also be in the adjacency list of `B`.
+
+* **Directed Graph:**  In a directed graph, the direction of the edge matters.  If there's an edge from A to B, it doesn't imply an edge from B to A.  The adjacency list only represents the outgoing edges from each vertex.
+
+
+**Space Complexity:**
+
+The space complexity of an adjacency list is O(V + E), where V is the number of vertices and E is the number of edges. This is efficient for sparse graphs because you only store the existing edges, not all possible edges (like in an adjacency matrix).
+
+
+**Time Complexity:**
+
+* **Adding an edge:** O(1) (if you append to the list)
+* **Checking for an edge:** O(d), where d is the maximum degree of a vertex (the maximum number of edges connected to a single vertex).
+* **Iterating over neighbors:** O(d)
+
+Choosing between adjacency lists and adjacency matrices depends on the specific application and the characteristics of the graph (sparse vs. dense).  Adjacency lists are generally preferred for sparse graphs because of their lower space complexity.
+
