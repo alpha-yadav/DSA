@@ -56203,3 +56203,111 @@ print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}") # Outp
 
 Both methods achieve the same result. The recursive approach is generally preferred for its efficiency, especially for larger trees, as it avoids the overhead of creating and sorting a list.  Choose the method that best suits your needs and understanding. Remember to define the `Node` class as shown in the examples.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Inorder Traversal**
+
+This method leverages the property that an inorder traversal of a BST yields a sorted sequence of nodes.
+
+1. **Inorder Traversal:** Perform an inorder traversal of the binary tree.  This means visiting nodes in the order: left subtree, root, right subtree.  Store the values visited in an array or list.
+
+2. **Check for Sorted Order:** Check if the resulting array/list is sorted in ascending order. If it is, the tree is a BST; otherwise, it's not.
+
+**Python Code (Inorder Traversal):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    inorder_list = []
+    
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.data)
+            inorder(node.right)
+
+    inorder(root)
+    
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+
+# Example Usage
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(f"Is the tree a BST (inorder method)? {is_bst_inorder(root)}")  # Output: True
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+root2.left.right = Node(6) #this makes it not a BST
+
+print(f"Is the tree a BST (inorder method)? {is_bst_inorder(root2)}")  # Output: False
+```
+
+
+**Method 2: Recursive Approach with Min and Max**
+
+This method recursively checks each subtree, maintaining the minimum and maximum allowed values for each node.
+
+1. **Base Case:** An empty tree is a BST.
+
+2. **Recursive Step:** For each node:
+   - The node's value must be greater than the maximum value in its left subtree and less than the minimum value in its right subtree.
+   - Recursively check the left subtree with updated maximum (node.data - 1) and the right subtree with updated minimum (node.data + 1).
+
+**Python Code (Recursive Min/Max):**
+
+```python
+import sys
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+    if node is None:
+        return True
+
+    if node.data <= min_val or node.data >= max_val:
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+# Example Usage (same as above, using the recursive method)
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root)}") # Output: True
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+root2.left.right = Node(6)
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}") # Output: False
+
+```
+
+**Choosing a Method:**
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree. The space complexity depends on the recursion depth; for balanced trees it's O(log N) for the recursive method, and O(N) in the worst case (for skewed trees) for both methods. The inorder traversal method generally uses less space for skewed trees because it avoids the recursive call stack.  Choose the method that best suits your needs and coding style.  The recursive method is often considered more elegant, while the inorder traversal is arguably simpler to understand and implement.
+
