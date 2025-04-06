@@ -53410,3 +53410,98 @@ print(is_bst_recursive_range(root))  # Output: False
 
 The recursive range checking method is generally preferred because it has a time complexity of O(N) (where N is the number of nodes) and a space complexity of O(H) (where H is the height of the tree), which is better than the first method in the worst case (a skewed tree).  The first method has a space complexity that is O(N) in the worst case.  Both have a time complexity of O(N).
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The core idea is to recursively check if, for every node:
+
+1. **All nodes in its left subtree are smaller than the node's value.**
+2. **All nodes in its right subtree are larger than the node's value.**
+
+
+Here are three common methods:
+
+**Method 1: In-order Traversal**
+
+The most elegant and efficient approach utilizes an in-order traversal.  A BST, when traversed in-order (left, root, right), will produce a sorted sequence of its nodes.  Therefore:
+
+1. **Perform an in-order traversal of the tree.** This will visit all nodes in ascending order if it's a BST.
+2. **Check if the resulting sequence is sorted.** If it is, the tree is a BST; otherwise, it isn't.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    for i in range(1, len(result)):
+        if result[i] < result[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(is_bst_inorder(root))  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) #Violation
+
+print(is_bst_inorder(root2))  # Output: False
+
+```
+
+**Method 2: Recursive Check**
+
+This method recursively checks the BST property at each node:
+
+```python
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    if not node:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+#Example usage (same trees as above)
+print(is_bst_recursive(root)) #True
+print(is_bst_recursive(root2)) #False
+
+```
+
+
+**Method 3: Iterative Check (using a stack)**
+
+
+This method mirrors the recursive approach but uses a stack to avoid potential stack overflow errors for very deep trees.  It's more complex but handles large trees more robustly.  The implementation is significantly longer and is omitted for brevity, but the core logic is similar to the recursive approach, managing the minimum and maximum values using a stack.
+
+
+
+**Which Method to Choose?**
+
+* **In-order traversal (Method 1):**  Generally the most efficient and easiest to understand if you're comfortable with tree traversals.  Its time complexity is O(N), where N is the number of nodes.  Space complexity is also O(N) in the worst case (a skewed tree).
+
+* **Recursive check (Method 2):**  Also O(N) time complexity, but might be slightly less efficient due to recursive function calls. Space complexity is O(H) in the average case (H being the height of the tree), and O(N) in the worst case (a skewed tree).
+
+* **Iterative check (Method 3):**  Similar time and space complexity to the recursive method but avoids recursion's overhead, making it more suitable for exceptionally large trees where stack overflow is a concern.
+
+
+For most cases, the in-order traversal method provides a good balance of simplicity and efficiency.  If you anticipate extremely deep trees, the iterative approach is a safer choice.  The recursive approach is a good compromise between readability and performance for moderately sized trees.
+
