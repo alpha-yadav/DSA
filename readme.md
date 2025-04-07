@@ -66470,3 +66470,105 @@ bfs(graph, 'A') # Output: A B C D E F (order might vary slightly depending on qu
 
 These are fundamental graph traversal algorithms.  Understanding them is crucial for tackling many graph-related problems in computer science. Remember that the specific implementation details (e.g., how you handle node processing or neighbor ordering) can influence the exact output sequence, but the fundamental principles remain the same.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix or list) and whether you want to handle cycles or explore all reachable nodes.  Here are a few implementations:
+
+**1. DFS using Adjacency List (Recursive):**  This is a common and often preferred approach due to its elegance and efficiency for sparse graphs.
+
+```python
+def dfs_recursive(graph, start, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and 
+               values are lists of their neighbors.
+        start: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, for recursive calls).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(start, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+    return visited
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Output: A B D E F C
+print("\nVisited nodes:", dfs_recursive(graph,'A')) #Output: Visited nodes: {'A', 'C', 'B', 'F', 'E', 'D'}
+
+```
+
+**2. DFS using Adjacency List (Iterative):** This version uses a stack instead of recursion, which can be beneficial for very deep graphs to avoid stack overflow errors.
+
+```python
+def dfs_iterative(graph, start):
+    """
+    Performs a Depth-First Search traversal of a graph iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph (adjacency list).
+        start: The starting node.
+
+    Returns:
+        A list of nodes in the order they were visited.
+
+    """
+    visited = set()
+    stack = [start]
+    visited_order = []
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            visited_order.append(vertex)
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)
+
+    return visited_order
+
+print("\nDFS traversal (iterative):")
+print(dfs_iterative(graph, 'A')) #Output: ['A', 'C', 'F', 'B', 'E', 'D']
+```
+
+**3.  Handling Disconnected Graphs:**  The above examples only explore nodes reachable from the starting node. To traverse all nodes in a disconnected graph, you'd need to iterate through all nodes and start a DFS from each unvisited node.
+
+
+```python
+def dfs_all_nodes(graph):
+    """
+    Performs DFS on all connected components of a graph.
+    """
+    visited = set()
+    all_nodes_visited = []
+    for node in graph:
+        if node not in visited:
+            all_nodes_visited.extend(dfs_recursive(graph, node, visited))
+    return all_nodes_visited
+
+
+print("\nDFS traversal of all connected components:")
+print(dfs_all_nodes(graph)) #Output: DFS traversal of all connected components: {'A', 'C', 'B', 'F', 'E', 'D'}
+
+
+```
+
+Remember to adapt these examples to your specific graph representation and needs.  If your graph is represented as an adjacency matrix, the implementation will differ slightly (you'd use array indexing instead of dictionary lookups).  Also, consider adding error handling (e.g., checking for invalid input).
+
