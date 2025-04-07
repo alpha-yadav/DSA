@@ -60655,3 +60655,75 @@ function dijkstra(graph, source):
 
 This problem illustrates a common pattern in algorithmic problem-solving: clearly defining the input and output, choosing an appropriate algorithm based on the problem's constraints, and implementing the algorithm efficiently.  The choice of algorithm can significantly impact the runtime and memory usage of the solution.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's simple to understand but helps illustrate fundamental programming concepts like loops and conditional statements. Here's how to implement it in Swift, starting with a basic version and then adding improvements:
+
+**Basic FizzBuzz in Swift:**
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks for divisibility by 15 first (to handle both 3 and 5).
+* Then it checks for divisibility by 3 and 5 individually.
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Improved FizzBuzz (using a ternary operator for conciseness):**
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function
+```
+
+This version uses nested ternary operators to make the code slightly more compact.  It achieves the same result but with a more concise conditional expression.
+
+
+**FizzBuzz with a function for better readability:**
+
+```swift
+func fizzBuzzString(number: Int) -> String {
+    var output = ""
+    if number % 3 == 0 { output += "Fizz" }
+    if number % 5 == 0 { output += "Buzz" }
+    return output.isEmpty ? String(number) : output
+}
+
+func fizzBuzzAdvanced(n: Int) {
+  for i in 1...n {
+    print(fizzBuzzString(number: i))
+  }
+}
+
+fizzBuzzAdvanced(n: 15)
+```
+
+This separates the logic for generating the "Fizz", "Buzz", or "FizzBuzz" string into its own function, improving readability and making the code more modular.  It's easier to understand and potentially easier to test or modify individual components.
+
+
+**Choosing the best approach:**
+
+The best approach depends on your priorities. The basic version is easiest to understand for beginners. The improved version is more concise. The advanced version is better for maintainability and extensibility if you want to add more complex rules later (e.g., "Bang" for multiples of 7).  For a simple FizzBuzz, the basic or improved version is perfectly adequate.  For larger projects or more complicated variations, the advanced approach is generally preferred.  Remember to choose the approach that best balances readability, maintainability, and performance for your specific needs.
+
