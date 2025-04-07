@@ -68775,3 +68775,90 @@ print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
 
 Remember to choose the method that best suits your needs and constraints.  The recursive approach is generally preferred for its simplicity and readability unless parent pointers are readily available.  The iterative approach (with parent pointers) offers potential performance advantages for very large trees.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic computer science problem.  There are several approaches, each with its own trade-offs in terms of time and space complexity.  Let's explore the most common methods:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a simple and elegant approach, particularly well-suited for binary trees.  It relies on the property that the LCA of two nodes lies on the path between them.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowest_common_ancestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowest_common_ancestor(root.left, p, q)
+    right_lca = lowest_common_ancestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA found: p and q are on different subtrees
+    elif left_lca:
+        return left_lca  # LCA is in the left subtree
+    else:
+        return right_lca  # LCA is in the right subtree
+
+
+# Example Usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+lca = lowest_common_ancestor(root, root.left, root.right)
+print(f"LCA of 2 and 3 is: {lca.data}")  # Output: 1
+
+lca = lowest_common_ancestor(root, root.left.left, root.left.right)
+print(f"LCA of 4 and 5 is: {lca.data}")  # Output: 2
+
+lca = lowest_common_ancestor(root, root.left.left, root.right.right)
+print(f"LCA of 4 and 7 is: {lca.data}") #Output: 1
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (worst case, traverse the entire tree).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive calls on the call stack).  In a balanced binary tree, H is log₂N; in a skewed tree, H can be N.
+
+
+**2. Iterative Approach (for Binary Trees):**
+
+This approach uses a stack or queue to simulate the recursion, potentially offering slight performance improvements in some cases and avoiding the risk of stack overflow with very deep trees.
+
+**3. Using Parent Pointers (for any Tree):**
+
+If each node in the tree has a pointer to its parent, finding the LCA becomes much simpler.  You can trace paths from both `p` and `q` up to the root, storing the paths in separate lists. Then, you find the last common node in both lists.
+
+**4.  Binary Lifting (for Binary Trees):**
+
+This advanced technique preprocesses the tree to build a lookup table that allows for O(log N) LCA queries after preprocessing. This is very efficient for multiple LCA queries on the same tree.
+
+
+**Choosing the Right Approach:**
+
+* For a single LCA query in a binary tree, the recursive approach is often the easiest to understand and implement.
+* For multiple LCA queries or very large trees, the binary lifting technique provides superior performance but requires preprocessing.
+* If you have parent pointers, use the parent pointer method; it's the most efficient in that case.
+* The iterative approach offers a middle ground, avoiding potential stack overflow issues while maintaining reasonable efficiency.
+
+
+Remember to adapt the chosen method to the specific type of tree you're working with (binary tree, general tree, etc.) and the constraints of your problem (single query vs. multiple queries, presence of parent pointers).  The recursive approach provided above is a good starting point for many scenarios.
+
