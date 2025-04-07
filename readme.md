@@ -58770,3 +58770,92 @@ int main() {
 
 Remember to add a function to recursively delete all nodes to prevent memory leaks when you're done with the tree.  This is omitted for brevity in the example above but is essential in production code.  Consider adding a destructor to your `Node` class or a separate recursive function to handle this cleanup.  Always handle memory management carefully when working with dynamic data structures in C++.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants.  There are several ways to find the LCA in a BST, but the most efficient leverages the BST property.
+
+**Algorithm using BST Properties:**
+
+This algorithm is O(h) time complexity, where h is the height of the tree (best case O(log n), worst case O(n) for a skewed tree).  It's O(1) space complexity.
+
+1. **Start at the root:** Begin at the root node of the BST.
+
+2. **Compare with node values:**
+   - If both `node1` and `node2` are less than the current node's value, the LCA must be in the left subtree. Recursively search the left subtree.
+   - If both `node1` and `node2` are greater than the current node's value, the LCA must be in the right subtree. Recursively search the right subtree.
+   - Otherwise, the current node is the LCA (one node is in the left subtree and the other in the right, or both are equal to the current node).
+
+3. **Base Case:** If either `node1` or `node2` is not found in the tree, return null or handle the error appropriately.
+
+
+**Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_bst(root, node1, node2):
+    """
+    Finds the Lowest Common Ancestor of node1 and node2 in a BST.
+
+    Args:
+        root: The root node of the BST.
+        node1: The first node.
+        node2: The second node.
+
+    Returns:
+        The LCA node, or None if either node is not found.
+    """
+    if root is None:
+        return None
+
+    if node1.data < root.data and node2.data < root.data:
+        return lca_bst(root.left, node1, node2)
+    elif node1.data > root.data and node2.data > root.data:
+        return lca_bst(root.right, node1, node2)
+    else:
+        return root
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+node1 = root.left.right.left  # Node with value 10
+node2 = root.left.right.right # Node with value 14
+
+lca = lca_bst(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data} is: {lca.data}") # Output: LCA of 10 and 14 is: 12
+
+
+node3 = Node(1) #Node not in the tree
+
+lca = lca_bst(root, node1, node3)
+print(f"LCA of {node1.data} and {node3.data} if node3 is not in tree: {lca}") # Output will be None if you handle the case
+```
+
+**Iterative Approach (slightly more efficient):**
+
+You can also implement this iteratively, avoiding recursive function calls:
+
+```python
+def lca_bst_iterative(root, node1, node2):
+    while root:
+        if node1.data < root.data and node2.data < root.data:
+            root = root.left
+        elif node1.data > root.data and node2.data > root.data:
+            root = root.right
+        else:
+            return root
+    return None
+
+```
+
+Remember to handle edge cases like empty trees or nodes not present in the tree.  Choose the iterative or recursive version based on your preference and coding style; the iterative version is generally slightly more efficient due to the overhead of recursive calls.
+
