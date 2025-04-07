@@ -67036,3 +67036,87 @@ def find_max(arr):
 
 Big O notation is a crucial tool for analyzing and comparing the efficiency of algorithms, allowing programmers to make informed decisions about which algorithm is best suited for a given task.
 
+#  A Simple Loop 
+A simple loop repeats a block of code multiple times.  The specifics depend on the programming language, but the general concept is the same. Here are examples in a few common languages:
+
+**Python:**
+
+```python
+# Loop 10 times
+for i in range(10):
+  print(i)
+
+# While loop until a condition is met
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+**JavaScript:**
+
+```javascript
+// Loop 10 times
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
+
+// While loop until a condition is met
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  // Loop 10 times
+  for (int i = 0; i < 10; i++) {
+    std::cout << i << std::endl;
+  }
+
+  // While loop until a condition is met
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+**Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    // Loop 10 times
+    for (int i = 0; i < 10; i++) {
+      System.out.println(i);
+    }
+
+    // While loop until a condition is met
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples demonstrate both `for` loops (which are best for a known number of iterations) and `while` loops (which continue until a condition becomes false).  The core components are:
+
+* **Initialization:**  Setting up a counter variable (e.g., `i = 0`).
+* **Condition:** A test to determine whether the loop should continue (e.g., `i < 10`, `count < 5`).
+* **Iteration:**  Incrementing or updating the counter (e.g., `i++`, `count += 1`).
+* **Body:** The code that is executed repeatedly within the loop.
+
+
+Remember to choose the loop type that best suits your needs.  If you know the exact number of iterations, a `for` loop is generally preferred.  If the number of iterations depends on a condition, a `while` loop is more appropriate.
+
