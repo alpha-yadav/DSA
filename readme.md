@@ -60409,3 +60409,116 @@ The choice between BFS and DFS depends on the specific problem:
 
 Understanding graph traversals is crucial for solving many problems in computer science, including networking, artificial intelligence, and data analysis.  The algorithms can be implemented using various programming languages and data structures, adapting to the specifics of the graph representation (adjacency matrix, adjacency list).
 
+#  Depth First Search traversal function 
+The Depth-First Search (DFS) algorithm explores a graph by going as deep as possible along each branch before backtracking.  Here are a few implementations of DFS traversal functions, demonstrating different approaches and handling different graph representations:
+
+**1. DFS using Adjacency List (Recursive):**
+
+This is a common and elegant recursive implementation suitable for graphs represented as adjacency lists (where each node has a list of its neighbors).
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+    return visited
+
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Start traversal from node 'A'
+print()
+
+```
+
+**2. DFS using Adjacency List (Iterative):**
+
+This iterative version uses a stack to achieve the same depth-first traversal without recursion.  This can be beneficial for very deep graphs to avoid potential stack overflow errors.
+
+```python
+def dfs_iterative(graph, node):
+    """
+    Performs a Depth-First Search traversal iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        node: The starting node for the traversal.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [node]
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            print(node, end=" ")  # Process the node
+            stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+    return visited
+
+print("DFS traversal (iterative):")
+dfs_iterative(graph, 'A') #Start traversal from node 'A'
+print()
+```
+
+**3. DFS using Adjacency Matrix:**
+
+If your graph is represented as an adjacency matrix (a 2D array where `matrix[i][j] == 1` indicates an edge from node `i` to node `j`), you'll need a slightly different implementation:
+
+```python
+def dfs_adjacency_matrix(matrix, node, visited, n):
+    visited[node] = True
+    print(node, end=" ")
+
+    for neighbor in range(n):
+        if matrix[node][neighbor] == 1 and not visited[neighbor]:
+            dfs_adjacency_matrix(matrix, neighbor, visited, n)
+
+
+# Example graph represented as an adjacency matrix (0-indexed)
+matrix = [
+    [0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0]
+]
+n = len(matrix)  # Number of nodes
+visited = [False] * n
+print("DFS traversal (adjacency matrix):")
+dfs_adjacency_matrix(matrix, 0, visited, n) #Start from node 0
+
+```
+
+Remember to adapt these functions to your specific needs and graph representation.  You might want to modify the `print(node, end=" ")` line to perform other actions on the visited nodes (e.g., adding them to a list, updating a data structure).  The choice between recursive and iterative approaches depends on the size of your graph and whether you need to avoid potential stack overflow issues.  The adjacency matrix version is less common in practice unless your graph is naturally represented that way.
+
