@@ -61719,3 +61719,59 @@ print(f"root1 and root3 are identical (iterative): {are_identical_iterative(root
 
 Remember to handle the base cases (empty trees) correctly in both methods to avoid errors.  Choose the method that you find more comfortable and easier to understand and maintain.  For most situations, the recursive approach is perfectly adequate.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They are tree-like structures where each node has at most two children, referred to as the left child and the right child.  The key property that distinguishes a BST is the *search property*:
+
+* **Search Property:** For every node in the tree:
+    * The value of all nodes in its left subtree is less than the node's value.
+    * The value of all nodes in its right subtree is greater than the node's value.
+
+This property allows for efficient searching, insertion, and deletion of nodes.
+
+**Key Operations:**
+
+* **Search:**  Finding a node with a specific value. This is done recursively or iteratively by comparing the search value to the current node's value and traversing to the left or right subtree accordingly.  The time complexity is O(h), where h is the height of the tree.  In a balanced tree, h is log₂(n), where n is the number of nodes; in a worst-case scenario (a skewed tree), h can be n.
+
+* **Insertion:** Adding a new node to the tree.  The new node is placed in the appropriate subtree based on its value, maintaining the search property. Time complexity is also O(h).
+
+* **Deletion:** Removing a node from the tree.  This is the most complex operation, as it involves several cases depending on the number of children the node has (no children, one child, or two children).  Time complexity is O(h).
+
+* **Minimum/Maximum:** Finding the minimum or maximum value in the tree.  This is easily done by traversing to the leftmost or rightmost node, respectively.  Time complexity is O(h).
+
+* **Successor/Predecessor:** Finding the next larger or next smaller value in the tree.  These operations are also relatively straightforward and have O(h) time complexity.
+
+
+**Advantages of BSTs:**
+
+* **Efficient Search, Insertion, and Deletion:**  In a balanced tree, these operations have logarithmic time complexity, making BSTs significantly faster than linear search for large datasets.
+* **Ordered Data:** BSTs inherently maintain the data in sorted order.
+* **Relatively Simple Implementation:**  The concepts are straightforward, making BSTs easy to understand and implement.
+
+
+**Disadvantages of BSTs:**
+
+* **Performance Degradation in Unbalanced Trees:** In the worst case (a skewed tree resembling a linked list), the performance of all operations degrades to linear time complexity, O(n).
+* **No Built-in Balancing:**  A simple BST implementation doesn't automatically balance itself.  Unbalanced trees can occur if the insertion order is not random.
+
+
+**Self-Balancing BSTs:**
+
+To mitigate the disadvantage of unbalanced trees, self-balancing BST variations have been developed. These include:
+
+* **AVL Trees:**  Maintain balance by ensuring that for every node, the height difference between its left and right subtrees is at most 1.
+* **Red-Black Trees:**  Use a coloring scheme to maintain a relatively balanced structure.
+* **B-Trees:**  Optimized for disk access, frequently used in databases.
+
+
+**Applications of BSTs:**
+
+BSTs are used in numerous applications, including:
+
+* **Symbol Tables:**  Storing and retrieving data associated with keys.
+* **In-memory databases:**  Efficiently storing and retrieving data.
+* **Implementation of other data structures:**  Used as building blocks for more complex data structures.
+* **Sorting algorithms:**  Used in some sorting algorithms like tree sort.
+
+
+In summary, BSTs are a versatile and powerful data structure, but their efficiency heavily relies on maintaining a balanced structure.  Understanding their properties and limitations is crucial for choosing the right data structure for a given task.  If you need guaranteed logarithmic time complexity, consider using a self-balancing BST.
+
