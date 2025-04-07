@@ -64758,3 +64758,117 @@ bst.insert_iterative(14)
 
 Remember to choose the method that best suits your needs and coding style.  The recursive version is generally easier to understand, while the iterative version might offer slight performance advantages in some scenarios.  Always test your implementation thoroughly.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion because you need to handle several cases:
+
+* **Node with no children (leaf node):** Simply remove the node.
+* **Node with one child:** Replace the node with its child.
+* **Node with two children:**  This is the most complex case.  The standard approach is to replace the node with either its inorder predecessor (largest node in the left subtree) or its inorder successor (smallest node in the right subtree).
+
+Here's a C++ implementation of BST deletion, handling all three cases:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left, *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+Node* minValueNode(Node* node) {
+    Node* current = node;
+    while (current->left != nullptr) {
+        current = current->left;
+    }
+    return current;
+}
+
+Node* deleteNode(Node* root, int key) {
+    // Base Case: If the tree is empty
+    if (root == nullptr) {
+        return root;
+    }
+
+    // Recursive calls to find the node to delete
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else {
+        // Node with one or no children
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Node with two children: Get the inorder successor (smallest in the right subtree)
+        Node* temp = minValueNode(root->right);
+
+        // Copy the inorder successor's data to this node
+        root->data = temp->data;
+
+        // Delete the inorder successor
+        root->right = deleteNode(root->right, temp->data);
+    }
+    return root;
+}
+
+
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    deleteNode(root, 20); //Deleting a leaf node
+
+    std::cout << "Inorder traversal after deleting 20: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    deleteNode(root, 30); //Deleting a node with one child
+
+    std::cout << "Inorder traversal after deleting 30: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    deleteNode(root, 50); //Deleting a node with two children
+
+    std::cout << "Inorder traversal after deleting 50: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    //Clean up memory (Important to avoid leaks)
+    //  A more robust solution would use a recursive destructor in the Node class.
+    //This example is simplified for clarity.
+    // ... (Add code to delete all nodes recursively here) ...
+
+
+    return 0;
+}
+```
+
+Remember that this code omits crucial memory management for a production-ready solution.  In a real-world application, you should implement a destructor for the `Node` class to recursively delete all nodes when the tree is no longer needed, preventing memory leaks.  The commented section in `main()` indicates where this would be added.  Consider using smart pointers (e.g., `std::unique_ptr` or `std::shared_ptr`) to manage node memory automatically to make the code more robust and less prone to errors.
+
