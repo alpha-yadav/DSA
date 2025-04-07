@@ -66308,3 +66308,44 @@ print(f"Graph 3 has cycle: {has_cycle(graph3)}")  # True
 
 This approach efficiently detects cycles in directed graphs using the properties of DFS and the node state tracking.  The time complexity is O(V + E), where V is the number of vertices (nodes) and E is the number of edges, which is the typical efficiency of a graph traversal algorithm.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a groundbreaking algorithm for finding minimum spanning trees (MSTs) in undirected graphs.  Its significance lies in its near-linear time complexity, a significant improvement over previously known algorithms.  Let's break down its key aspects:
+
+**Key Features:**
+
+* **Near-linear time complexity:**  The algorithm achieves a time complexity of O(m α(m, n)), where:
+    * `m` is the number of edges in the graph.
+    * `n` is the number of vertices in the graph.
+    * `α(m, n)` is the inverse Ackermann function, which grows incredibly slowly.  For all practical purposes, α(m, n) can be considered a constant.  This makes the algorithm essentially linear in the number of edges.
+
+* **Randomization:** Thorup's algorithm is randomized.  It uses random sampling techniques to efficiently identify a small subset of edges that are likely to be part of the MST.
+
+* **Sophisticated data structures:**  The algorithm leverages sophisticated data structures to efficiently manage and process the graph's information during its execution.
+
+**High-Level Overview:**
+
+The algorithm doesn't directly construct the MST in a single pass. Instead, it employs a multi-stage approach:
+
+1. **Sampling:** It randomly samples a subset of edges from the graph.  The sampling probability is carefully chosen to balance efficiency and the likelihood of capturing MST edges.
+
+2. **Contraction:** The sampled edges are used to contract the graph.  This process merges vertices connected by sampled edges, effectively reducing the graph's size.
+
+3. **Recursive call:** The algorithm recursively calls itself on the contracted graph.
+
+4. **MST construction:** Once the recursive calls reach a sufficiently small graph, a simpler MST algorithm (like Prim's or Kruskal's) is used to find the MST of the contracted graph.
+
+5. **Expansion:** The algorithm then expands the MST back to the original graph size, incorporating edges not initially sampled.  This involves carefully checking the non-sampled edges against the existing MST to ensure that no lighter-weight edges are missed.
+
+
+**Why it's significant:**
+
+Before Thorup's algorithm, the fastest known MST algorithms had complexities that were either O(m log log n) or slightly worse.  Thorup's near-linear time complexity represents a major theoretical advance, pushing the boundaries of what's computationally possible for this fundamental graph problem.
+
+**Limitations:**
+
+* **Randomized:** The algorithm's correctness depends on the random sampling process.  While the probability of failure is extremely low, it's not guaranteed to always produce the correct MST.
+* **Complexity of implementation:** The algorithm is quite complex to implement correctly due to its intricate use of data structures and recursive calls.
+
+
+**In summary:** Thorup's algorithm is a remarkable achievement in algorithm design, showcasing the power of randomization and sophisticated data structures. Although complex to implement, its near-linear time complexity makes it a significant contribution to the field of graph algorithms.  It's more of a theoretical breakthrough than a widely used practical algorithm due to its implementation complexity, but it paves the way for further improvements and understanding in MST computation.
+
