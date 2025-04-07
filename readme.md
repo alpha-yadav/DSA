@@ -59093,3 +59093,103 @@ else:
 
 The **recursive `isBST` (Method 1)** is generally preferred because it's more efficient in terms of space complexity. It avoids creating an extra list to store the in-order traversal.  Method 2 has a space complexity proportional to the number of nodes in the tree, while Method 1's space complexity is proportional to the height of the tree (due to the recursive calls).  For a balanced BST, the height is logarithmic, making Method 1 significantly more efficient for large trees.  Method 2 is simpler to understand for beginners but less optimal.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.  We perform an in-order traversal, keeping track of the previously visited node.  If the current node's value is less than the previous node's value, the tree is not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    prev = [-float('inf')]  # Initialize with negative infinity
+
+    def inorder(node):
+        if node:
+            if not inorder(node.left):
+                return False
+            if node.data <= prev[0]:
+                return False
+            prev[0] = node.data
+            if not inorder(node.right):
+                return False
+        return True
+
+    return inorder(root)
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(12)
+root2.left.right.left = Node(10)
+root2.left.right.right = Node(15) # This violates BST property (15 > 12)
+root2.right.right = Node(21)
+
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}")  # Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each subtree, passing down the minimum and maximum allowed values for that subtree.  A node is valid if its value is within the allowed range, and its left and right subtrees are also valid BSTs within their respective ranges.
+
+```python
+def is_bst_minmax(root, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Checks if a binary tree is a BST using recursive min/max check.
+
+    Args:
+      root: The root node of the binary tree.
+      min_val: The minimum allowed value for the subtree.
+      max_val: The maximum allowed value for the subtree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    if root is None:
+        return True
+
+    if not (min_val < root.data < max_val):
+        return False
+
+    return (is_bst_minmax(root.left, min_val, root.data) and
+            is_bst_minmax(root.right, root.data, max_val))
+
+
+# Example usage (using the same trees as above):
+print(f"Is the tree a BST? {is_bst_minmax(root)}")  # Output: True
+print(f"Is the tree a BST? {is_bst_minmax(root2)}") # Output: False
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the recursive approach, where H is the height of the tree (O(log N) for a balanced BST, O(N) for a skewed tree).  The iterative in-order traversal would have O(1) space complexity.  Choose the method that best suits your needs and coding style.  The recursive min/max approach might be slightly easier to understand conceptually for some.
+
