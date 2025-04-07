@@ -64322,3 +64322,22 @@ This code will output:
 
 In summary, nested loops are a powerful tool for processing data in multiple dimensions but should be used judiciously, keeping their time complexity in mind, and ensuring code readability.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are very efficient.  The time it takes to complete the algorithm increases logarithmically with the input size (n). This means that adding more input data only increases the runtime by a small amount.  This is because the algorithm typically divides the problem size in half with each step.
+
+Here are several types of algorithms that exhibit O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential O(log n) algorithm.  It works on sorted data.  To find a target value, it repeatedly divides the search interval in half. If the target is in the middle element, it's found. Otherwise, the search continues in either the left or right half, effectively halving the search space with each comparison.
+
+* **Binary Tree Operations (Search, Insertion, Deletion - under ideal conditions):**  A balanced binary search tree (BST) allows for O(log n) average-case complexity for searching, inserting, and deleting elements.  This is because the search path from the root to any node is at most the height of the tree, which is approximately log₂(n) for a balanced tree.  However, in a worst-case scenario (e.g., a skewed tree), these operations can degrade to O(n).  Self-balancing trees (like AVL trees or red-black trees) guarantee O(log n) time complexity even in the worst case.
+
+* **Efficient Sorting Algorithms (on sorted data):**  While sorting algorithms themselves are typically O(n log n) (like merge sort and heapsort), if you already have sorted data and need to find an element, a binary search (O(log n)) is far more efficient than a linear search (O(n)).
+
+* **Finding the kth smallest/largest element using QuickSelect:**  QuickSelect is an algorithm that can find the kth smallest (or largest) element in an unordered array in O(n) average-case time, but a cleverly implemented version utilizing techniques akin to binary search can achieve O(log n) in specific scenarios where k is known in advance and properties of the data permit.  This is not the standard QuickSelect behavior, however.
+
+* **Exponentation by squaring:** This algorithm efficiently calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time. It works by repeatedly squaring the base and adjusting the exponent.
+
+* **Tree Traversal (in some cases):** Traversing a balanced binary tree using techniques like breadth-first search or depth-first search will have a time complexity related to the height of the tree, making it O(log n) if the tree is balanced.  However, in unbalanced trees this becomes O(n).
+
+**Important Note:** The O(log n) complexity is often associated with algorithms that repeatedly divide the problem size.  The base of the logarithm (usually base 2 due to binary operations) doesn't affect the overall time complexity classification – it only affects the constant factor hidden within the Big O notation.  Therefore, O(log₂ n) and O(log₁₀ n) are both considered O(log n).  This is a consequence of the change of base rule for logarithms.
+
