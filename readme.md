@@ -69384,3 +69384,67 @@ Thorup's algorithm is quite complex, and a detailed explanation would be lengthy
 
 In summary, Thorup's algorithm represents a significant theoretical advancement in the search for optimal MST algorithms. While its practical applicability might be limited by its complexity and large constants, it remains a landmark achievement in algorithmic design.  It demonstrates that linear-time MST computation is possible under the word RAM model.
 
+#  Graph Traversals 
+Graph traversals are algorithms for visiting every vertex in a graph in a systematic way.  There are several common methods, each with its own properties and applications:
+
+**1. Breadth-First Search (BFS):**
+
+* **Concept:** BFS explores the graph level by level. It starts at a root node and visits all its neighbors before moving to their neighbors, and so on.  It uses a queue data structure.
+* **Algorithm:**
+    1. Start at a root node and mark it as visited.
+    2. Add the root node to a queue.
+    3. While the queue is not empty:
+        * Dequeue a node.
+        * Visit the node (process it).
+        * Add all its unvisited neighbors to the queue and mark them as visited.
+* **Applications:**
+    * Finding the shortest path in an unweighted graph.
+    * Crawling the web.
+    * Social network analysis (finding connections).
+    * Peer-to-peer networks.
+
+
+**2. Depth-First Search (DFS):**
+
+* **Concept:** DFS explores the graph as deeply as possible along each branch before backtracking. It uses a stack (implicitly through recursion or explicitly using a stack data structure).
+* **Algorithm (recursive):**
+    1. Mark the current node as visited.
+    2. For each unvisited neighbor of the current node:
+        * Recursively call DFS on that neighbor.
+* **Algorithm (iterative):**
+    1. Push the starting node onto a stack.
+    2. While the stack is not empty:
+        * Pop a node from the stack.
+        * If the node is not visited:
+            * Mark the node as visited.
+            * Push its unvisited neighbors onto the stack.
+* **Applications:**
+    * Detecting cycles in a graph.
+    * Topological sorting (ordering nodes based on dependencies).
+    * Finding strongly connected components.
+    * Solving puzzles like mazes.
+
+
+**3. Other Traversals:**
+
+While BFS and DFS are the most common, other graph traversals exist, often variations or adaptations of these:
+
+* **Iterative Deepening Depth-First Search (IDDFS):** Combines BFS's completeness with DFS's low memory usage.  It performs repeated DFS searches with increasing depth limits.  Useful for searching very large graphs where memory is a constraint.
+* **A* Search:** An informed search algorithm that uses a heuristic function to guide the search towards the goal node, making it more efficient than BFS or DFS for finding paths in large graphs.  Often used in pathfinding in games.
+* **Dijkstra's Algorithm:**  Finds the shortest paths from a single source node to all other reachable nodes in a weighted graph with non-negative edge weights.  Uses a priority queue.
+* **Bellman-Ford Algorithm:**  Finds the shortest paths from a single source node to all other reachable nodes in a weighted graph, even if some edges have negative weights (but detects negative cycles).
+
+**Choosing the right traversal:**
+
+The best traversal algorithm depends on the specific problem:
+
+* **Unweighted graph, shortest path:** BFS
+* **Detecting cycles, topological sort:** DFS
+* **Large graph, limited memory:** IDDFS
+* **Weighted graph, shortest path (non-negative weights):** Dijkstra's Algorithm
+* **Weighted graph, shortest path (allowing negative weights):** Bellman-Ford Algorithm
+* **Heuristic guided pathfinding:** A* Search
+
+
+This explanation provides a foundational understanding of graph traversals.  Each algorithm has its own nuances and complexities that become clearer through practical implementation and study of its specific use cases.  Consider exploring these algorithms with code examples to solidify your understanding.
+
