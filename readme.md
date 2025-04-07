@@ -64263,3 +64263,62 @@ A `while` loop in C++.
 
 These examples all demonstrate simple loops that iterate a fixed number of times.  More complex loops might involve conditions that depend on data within the loop or break out of the loop early using `break` statements.  But the core principle remains the same:  repeated execution of a code block based on a condition.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop. This allows for processing data in a multi-dimensional way, often used for things like iterating through rows and columns of a matrix or processing combinations of items from multiple lists.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    # Outer loop code
+    for inner_loop_variable in inner_loop_iterable:
+        # Inner loop code
+    # More outer loop code
+```
+
+**Example: Printing a multiplication table**
+
+Let's say we want to print a 5x5 multiplication table.  We can use nested loops:
+
+```python
+for i in range(1, 6):  # Outer loop iterates through rows (1 to 5)
+    for j in range(1, 6):  # Inner loop iterates through columns (1 to 5)
+        print(i * j, end="\t")  # Print the product and a tab for spacing
+    print()  # Newline after each row
+```
+
+This code will output:
+
+```
+1	2	3	4	5	
+2	4	6	8	10	
+3	6	9	12	15	
+4	8	12	16	20	
+5	10	15	20	25
+```
+
+**Explanation:**
+
+1. **Outer loop:** The outer loop iterates from 1 to 5 (inclusive).  This represents the rows of the multiplication table.
+2. **Inner loop:** For each iteration of the outer loop (each row), the inner loop iterates from 1 to 5. This represents the columns.
+3. **Inner loop code:** Inside the inner loop, `i * j` calculates the product of the row number and the column number, which is then printed.  `end="\t"` adds a tab to separate the numbers horizontally.
+4. **Outer loop code:** After the inner loop completes for a row (all columns are processed), `print()` adds a newline character to move to the next row.
+
+**Other uses of Nested Loops:**
+
+* **Matrix operations:**  Processing elements of a two-dimensional array (matrix).
+* **Combinatorics:** Generating all possible combinations or permutations of items from multiple sets.
+* **Pattern printing:** Creating various patterns like triangles, squares, etc., using characters.
+* **Searching and sorting algorithms:** Some algorithms, like bubble sort, utilize nested loops.
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the time complexity of your algorithm.  A nested loop with two loops iterating `n` times each has a time complexity of O(n²).  This means the execution time grows proportionally to the square of the input size.  For large datasets, this can be computationally expensive.
+* **Readability:**  Proper indentation and clear variable names are crucial for making nested loops readable and maintainable.  Avoid excessively deep nesting (more than 3 or 4 levels) as it can become very difficult to understand.
+
+
+In summary, nested loops are a powerful tool for processing data in multiple dimensions but should be used judiciously, keeping their time complexity in mind, and ensuring code readability.
+
