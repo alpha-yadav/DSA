@@ -60962,3 +60962,79 @@ Output: "bab" or "aba" (both are valid answers)
 
 These are just examples.  The difficulty of an algorithmic problem depends on many factors, including the data structures used, the constraints, and the required efficiency.  To improve your algorithmic problem-solving skills, practice regularly on platforms like LeetCode, HackerRank, and Codewars.  Focus on understanding different approaches and choosing the most efficient one based on the problem's constraints.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's simple to understand but helps illustrate basic programming concepts like loops and conditional statements. Here's how to implement it in Swift, starting with a straightforward approach and then showing a slightly more refined version:
+
+**Version 1: Basic Approach**
+
+This version uses a `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by both 3 and 5 (15) – if so, it prints "FizzBuzz".
+* Otherwise, it checks if it's divisible by 3 – if so, it prints "Fizz".
+* Otherwise, it checks if it's divisible by 5 – if so, it prints "Buzz".
+* Otherwise, it prints the number itself.
+
+
+**Version 2: Slightly More Concise**
+
+This version uses the ternary conditional operator (`?:`) to make the code a bit more compact:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+This achieves the same result but nests the conditional logic using the ternary operator.  While shorter, it might be slightly less readable for beginners.
+
+
+**Version 3:  Using String Interpolation for Clarity (and handling 0)**
+
+This version improves readability and handles the case where `n` might be 0:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+  guard n > 0 else { return } //Handle the case where n is 0 or negative
+
+  for i in 1...n {
+    var output = ""
+    if i % 3 == 0 { output += "Fizz" }
+    if i % 5 == 0 { output += "Buzz" }
+    print(output.isEmpty ? "\(i)" : output)
+  }
+}
+
+fizzBuzzImproved(n: 15)
+fizzBuzzImproved(n: 0) //This will now handle 0 gracefully
+```
+
+This version builds the output string incrementally, making the logic clearer. It also handles the edge case of `n` being 0 or negative.
+
+
+Choose the version that best suits your understanding and coding style.  The first version is generally recommended for beginners due to its readability.  Remember to compile and run this code in a Swift environment (like Xcode's playground) to see the output.
+
