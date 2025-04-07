@@ -60151,3 +60151,73 @@ The space complexity of an adjacency list is O(V + E), where V is the number of 
 
 Choosing between an adjacency list and an adjacency matrix depends on the specific application and the characteristics of the graph (sparse vs. dense).  Adjacency lists are generally preferred for sparse graphs due to their better space efficiency.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so that you can follow the arrows without ever going backward.
+
+**Key Characteristics:**
+
+* **Directed Acyclic Graph (DAG):** Topological sorting only works on DAGs.  A cycle (a path that starts and ends at the same node) prevents a topological ordering from being possible.
+* **Linear Ordering:** The output is a sequence of nodes, not a tree or graph structure.
+* **Precedence:**  The order respects the dependencies between nodes. If there's an edge from A to B, A must come before B in the sorted list.
+* **Multiple Solutions:**  For many DAGs, there can be multiple valid topological orderings.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm (using in-degree):**
+
+   This algorithm iteratively removes nodes with zero in-degree (nodes with no incoming edges).
+
+   * **Steps:**
+      1. Calculate the in-degree of each node (the number of incoming edges).
+      2. Add all nodes with in-degree 0 to a queue (or similar data structure).
+      3. While the queue is not empty:
+         * Remove a node from the queue and add it to the sorted list.
+         * For each outgoing edge from the removed node, decrement the in-degree of the destination node.
+         * If the in-degree of a destination node becomes 0, add it to the queue.
+      4. If the sorted list contains all nodes, the sorting was successful. Otherwise, the graph contains a cycle.
+
+   * **Time Complexity:** O(V + E), where V is the number of vertices (nodes) and E is the number of edges.
+
+2. **Depth-First Search (DFS) with Post-Order Traversal:**
+
+   This algorithm uses DFS to recursively explore the graph.  The topological order is obtained by reversing the order in which nodes are visited during the post-order traversal.
+
+   * **Steps:**
+      1. Perform a DFS on the graph.
+      2. During the DFS, when a node's recursion finishes (all its descendants have been visited), add the node to the beginning of the sorted list (or push it onto a stack).  This is the post-order traversal.
+      3. After DFS completes, the sorted list (or the stack's contents reversed) contains a topological ordering.
+      4. If there is a back edge (an edge going to an ancestor), the graph has a cycle, and a topological sort is not possible.
+
+   * **Time Complexity:** O(V + E)
+
+**Example (Kahn's Algorithm):**
+
+Consider a DAG with nodes A, B, C, D, and E, and edges: A -> C, B -> C, C -> D, C -> E, D -> E.
+
+1. In-degrees: A=0, B=0, C=2, D=1, E=2
+2. Queue: [A, B]
+3. Process A: Queue = [B], Sorted = [A]
+4. Process B: Queue = [], Sorted = [A, B]
+5. Decrement in-degree of C (C's in-degree becomes 0). Queue = [C]
+6. Process C: Queue = [], Sorted = [A, B, C]
+7. Decrement in-degree of D and E (D=0, E=1). Queue = [D]
+8. Process D: Queue = [E], Sorted = [A, B, C, D]
+9. Process E: Queue = [], Sorted = [A, B, C, D, E]
+
+The topological sort is [A, B, C, D, E].
+
+
+**Applications:**
+
+Topological sorting has many practical applications, including:
+
+* **Build systems (like Make):** Determining the order in which to compile files.
+* **Dependency resolution:**  Resolving dependencies between software packages.
+* **Course scheduling:** Ordering courses based on prerequisites.
+* **Data serialization:** Ordering data elements based on dependencies.
+
+
+Choosing between Kahn's algorithm and DFS depends on the specific context and implementation preferences. Both have the same time complexity.  Kahn's algorithm might be slightly easier to understand and implement for beginners.  DFS is often preferred when you already have a DFS implementation available.
+
