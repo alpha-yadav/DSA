@@ -67120,3 +67120,74 @@ These examples demonstrate both `for` loops (which are best for a known number o
 
 Remember to choose the loop type that best suits your needs.  If you know the exact number of iterations, a `for` loop is generally preferred.  If the number of iterations depends on a condition, a `while` loop is more appropriate.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This structure is useful for iterating over multiple dimensions of data or performing operations that require repeated execution within a larger iteration.
+
+Here's a breakdown with examples in Python:
+
+**Example 1:  Printing a multiplication table**
+
+This example uses nested loops to print a multiplication table. The outer loop iterates through rows, and the inner loop iterates through columns.
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # Print the product with a tab separator
+    print()  # Newline after each row
+```
+
+This will output a 10x10 multiplication table.
+
+**Example 2: Iterating through a matrix (list of lists)**
+
+Nested loops are frequently used to process matrices or two-dimensional arrays.
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop: iterates through rows
+    for element in row:  # Inner loop: iterates through elements in each row
+        print(element, end=" ")
+    print()  # Newline after each row
+```
+
+This will print:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+**Example 3: Finding the maximum value in a matrix**
+
+```python
+matrix = [
+    [1, 5, 2],
+    [8, 3, 9],
+    [4, 7, 6]
+]
+
+max_value = matrix[0][0]  # Initialize with the first element
+
+for row in matrix:
+    for element in row:
+        if element > max_value:
+            max_value = element
+
+print("The maximum value in the matrix is:", max_value)  # Output: 9
+```
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the time complexity of your code.  A nested loop with `n` iterations in each loop will have a time complexity of O(n²).  This means the execution time grows quadratically with the input size.  For very large datasets, this can become very slow.  Consider optimizing your algorithm if nested loops are causing performance issues.
+* **Readability:**  Deeply nested loops (more than three levels) can be difficult to read and understand.  Try to refactor your code to improve readability if you have many nested loops.  Consider using more efficient data structures or algorithms.
+
+
+Nested loops are a fundamental programming construct, but it's crucial to understand their implications on efficiency and code clarity.  Always strive to write efficient and maintainable code.
+
