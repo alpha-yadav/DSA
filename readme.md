@@ -61038,3 +61038,76 @@ This version builds the output string incrementally, making the logic clearer. I
 
 Choose the version that best suits your understanding and coding style.  The first version is generally recommended for beginners due to its readability.  Remember to compile and run this code in a Swift environment (like Xcode's playground) to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity describes how the runtime or space requirements of an algorithm grow as the input size grows.  It's crucial for understanding an algorithm's efficiency and scalability.  We typically analyze complexity using Big O notation.
+
+Here's a breakdown of key aspects:
+
+**1. Big O Notation:**
+
+Big O notation provides an upper bound on the growth rate of an algorithm's resource consumption (time or space).  It focuses on the dominant terms and ignores constant factors.  For example:
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array by index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating over the input data.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**2. Types of Complexity Analysis:**
+
+* **Time Complexity:**  Analyzes how the runtime of an algorithm scales with the input size.  This is often the most important aspect.
+
+* **Space Complexity:** Analyzes how the memory usage of an algorithm scales with the input size.  This is crucial for large datasets or resource-constrained environments.
+
+* **Best-Case Complexity:**  Describes the algorithm's performance under the most favorable input conditions.
+
+* **Average-Case Complexity:** Describes the algorithm's performance on average, considering various input distributions.
+
+* **Worst-Case Complexity:** Describes the algorithm's performance under the least favorable input conditions.  This is often the most useful measure because it guarantees a minimum level of performance.
+
+
+**3. Factors Affecting Complexity:**
+
+* **Input Size:** The primary factor influencing complexity.  It's often denoted by 'n'.
+
+* **Algorithm Design:**  Different algorithms solving the same problem can have vastly different complexities.
+
+* **Data Structures:** The choice of data structure significantly impacts an algorithm's efficiency.
+
+* **Hardware:**  While Big O ignores constant factors, hardware capabilities (CPU speed, memory) can affect real-world performance.
+
+
+**4. How to Analyze Algorithm Complexity:**
+
+Analyzing complexity often involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most to the runtime.
+2. **Counting the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Identifying the dominant terms:** Focus on the terms that grow fastest as n increases.
+4. **Expressing the complexity using Big O notation:** Drop constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple function that iterates through an array and prints each element:
+
+```python
+def print_array(arr):
+  for element in arr:
+    print(element)
+```
+
+The runtime is directly proportional to the array's size.  Therefore, the time complexity is O(n), where n is the length of the array.  The space complexity is O(1) because the algorithm uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is essential for writing efficient and scalable code. Choosing appropriate algorithms and data structures significantly impacts performance, especially when dealing with large datasets.
+
