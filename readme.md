@@ -65755,3 +65755,85 @@ The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest nod
 
 Choose the method that best suits your needs and constraints. For most cases, the recursive approach offers a good balance of readability and efficiency. Remember to add error handling (e.g., checking for `None` nodes) to make the code robust.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree or graph is a fundamental problem in computer science with applications in various areas like phylogenetics, file systems, and version control systems.  There are several ways to solve this problem, depending on the type of tree (binary, general) and whether the tree is rooted or unrooted.
+
+Here's a breakdown of common approaches:
+
+**1. For Rooted Binary Trees:**
+
+* **Recursive Approach (Top-Down):**  This is arguably the most intuitive approach.  We recursively traverse the tree from the root.  If the current node is either `p` or `q` (the two nodes we're finding the LCA for), we return the current node. If `p` is in the left subtree and `q` is in the right subtree (or vice-versa), then the current node is the LCA. Otherwise, we recursively search the subtree containing `p` and `q`.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right)  # LCA of 4 and 5
+print(f"LCA of 4 and 5 is: {lca.data}")  # Output: 2
+
+lca = lowestCommonAncestor(root, root.left, root.right) # LCA of 2 and 3
+print(f"LCA of 2 and 3 is: {lca.data}") # Output: 1
+```
+
+* **Iterative Approach (Bottom-Up using Parent Pointers):** If each node in the tree has a pointer to its parent, you can efficiently find the LCA iteratively.  Traverse upwards from both `p` and `q`, storing their ancestors in sets. The first common ancestor encountered is the LCA.
+
+```python
+# Assuming each node has a 'parent' attribute
+def lowestCommonAncestor_iterative(p, q):
+    ancestors_p = set()
+    curr = p
+    while curr:
+        ancestors_p.add(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        if curr in ancestors_p:
+            return curr
+        curr = curr.parent
+    return None #Should not happen if p and q are in the same tree.
+```
+
+
+**2. For General Trees (Not necessarily binary):**
+
+The recursive approach can be adapted to general trees.  Instead of checking left and right subtrees, you check all children.
+
+**3. For Unrooted Trees:**
+
+Finding the LCA in an unrooted tree is more complex.  You'll need to root the tree first (choosing an arbitrary node as the root) and then apply one of the methods above.
+
+**4.  Efficiency:**
+
+* The recursive approach for binary trees has a time complexity of O(N), where N is the number of nodes in the tree (worst-case scenario).
+* The iterative approach with parent pointers is typically more efficient, with a time complexity proportional to the depth of the tree.
+
+**5. Considerations:**
+
+* **Error Handling:**  Add checks to handle cases where `p` or `q` are not in the tree.
+* **Node Representation:**  The exact implementation will depend on how your tree nodes are represented (e.g., using classes, dictionaries).
+
+
+Remember to choose the most appropriate method based on the characteristics of your tree and the constraints of your application.  The recursive approach is often the easiest to understand and implement for rooted binary trees, while the iterative approach with parent pointers can offer better performance in some cases.
+
