@@ -67231,3 +67231,65 @@ O(log n) algorithms are characterized by their ability to solve a problem by rep
 
 In essence, O(log n) algorithms are highly efficient for large datasets because the problem size shrinks significantly with each step.  They are frequently used in situations where fast lookups or efficient data management are essential.
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search works on a *sorted* array (or list).  To find a target value, it repeatedly divides the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process continues until the target value is found or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+**Why it's O(log n):**
+
+With each comparison, binary search effectively halves the size of the search space.  This means the number of comparisons required is proportional to the logarithm (base 2) of the input size (n).  Therefore, the time complexity is O(log n).
+
+
+**Other examples of O(log n) algorithms:**
+
+* **Tree traversal (balanced binary search tree):** Finding a specific node in a balanced binary search tree takes O(log n) time because the tree's height is logarithmic with respect to the number of nodes.
+* **Efficient exponentiation:** Algorithms like exponentiation by squaring compute a<sup>b</sup> in O(log b) time.
+* **Some divide-and-conquer algorithms:**  Algorithms that recursively divide the problem into smaller subproblems of roughly half the size at each step often exhibit O(log n) behavior.
+
+
+It's important to note that the base of the logarithm in the Big O notation is usually omitted because it only affects the constant factor, which is insignificant in asymptotic analysis.  O(log₂n) is equivalent to O(log n).
+
