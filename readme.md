@@ -64341,3 +64341,76 @@ Here are several types of algorithms that exhibit O(log n) time complexity:
 
 **Important Note:** The O(log n) complexity is often associated with algorithms that repeatedly divide the problem size.  The base of the logarithm (usually base 2 due to binary operations) doesn't affect the overall time complexity classification – it only affects the constant factor hidden within the Big O notation.  Therefore, O(log₂ n) and O(log₁₀ n) are both considered O(log n).  This is a consequence of the change of base rule for logarithms.
 
+#  An O(log n) example 
+The most common example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  Instead of checking each element one by one (which would be O(n)), it repeatedly divides the search interval in half.
+
+Here's how it works:
+
+1. **Start:** Begin with the entire sorted array as the search interval.
+2. **Midpoint:** Find the middle element of the interval.
+3. **Compare:** Compare the middle element to the target value you're searching for.
+4. **Reduce:**
+   * If the middle element is equal to the target, you've found it!
+   * If the middle element is greater than the target, the target must be in the lower half of the interval.  Discard the upper half.
+   * If the middle element is less than the target, the target must be in the upper half of the interval. Discard the lower half.
+5. **Repeat:** Repeat steps 2-4 with the new, smaller interval until either the target is found or the interval becomes empty (meaning the target is not present).
+
+
+**Why is it O(log n)?**
+
+With each comparison, we effectively halve the size of the search space.  This leads to a logarithmic relationship between the input size (n) and the number of operations.
+
+Let's say you have an array of size n.  The number of times you can halve n before reaching 1 is approximately log₂(n).  This is because:
+
+* n -> n/2 -> n/4 -> n/8 ... -> 1
+
+Therefore, the number of operations is proportional to log₂(n), which is written as O(log n).  The base of the logarithm (2 in this case) is usually omitted in Big O notation because it's a constant factor that doesn't affect the overall growth rate.
+
+
+**Example in Python:**
+
+```python
+def binary_search(arr, target):
+  """Performs binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+arr = [2, 5, 7, 8, 11, 12]
+target = 11
+index = binary_search(arr, target)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+
+```
+
+Other examples of O(log n) algorithms include tree traversal in a balanced binary search tree, efficient exponentiation by squaring, and some searching algorithms in specialized data structures.  The key characteristic is that the algorithm repeatedly reduces the problem size by a constant factor.
+
