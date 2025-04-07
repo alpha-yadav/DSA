@@ -63938,3 +63938,58 @@ You can run this code in a Swift playground (Xcode) or any Swift environment.  I
 
 This comprehensive guide should get you started with the FizzBuzz algorithm in Swift. Remember to experiment and try the different versions to understand how they work!
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (like time and memory) an algorithm consumes as the input size grows.  It's crucial for understanding how an algorithm's performance scales with larger datasets.  We generally focus on *asymptotic complexity*, which describes the behavior as the input size approaches infinity.  This allows us to compare algorithms regardless of constant factors or specific hardware.
+
+There are three main aspects of algorithm complexity:
+
+* **Time Complexity:**  Measures how the runtime of an algorithm scales with the input size.
+* **Space Complexity:** Measures how the memory usage of an algorithm scales with the input size.
+* **Computational Complexity:** A broader term encompassing both time and space complexity, and sometimes other resources like communication bandwidth.
+
+**Notation:**  We use Big O notation (O), Big Omega notation (Ω), and Big Theta notation (Θ) to describe asymptotic complexity:
+
+* **Big O Notation (O):**  Describes the *upper bound* of an algorithm's growth rate.  It represents the worst-case scenario.  For example, O(n²) means the runtime grows no faster than the square of the input size.
+
+* **Big Omega Notation (Ω):** Describes the *lower bound* of an algorithm's growth rate. It represents the best-case scenario.  For example, Ω(n) means the runtime grows at least as fast as the input size.
+
+* **Big Theta Notation (Θ):** Describes the *tight bound*.  It means the algorithm's growth rate is both the upper and lower bound.  For example, Θ(n log n) means the runtime grows proportionally to n log n.
+
+
+**Common Time Complexities (from best to worst):**
+
+* **O(1) - Constant Time:**  The runtime remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching an unsorted array for a specific element.
+
+* **O(n log n) - Linearithmic Time:** The runtime increases proportionally to n log n.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Bubble sort, selection sort, nested loops iterating over the same input.
+
+* **O(n³) - Cubic Time:** The runtime increases proportionally to the cube of the input size.  Example: Some naive matrix multiplication algorithms.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example:  Solving the traveling salesman problem using brute force.
+
+
+**Space Complexity:**  Similar notations (O, Ω, Θ) are used for space complexity.  Common space complexities include:
+
+* **O(1) - Constant Space:**  The algorithm uses a fixed amount of memory regardless of input size.
+* **O(n) - Linear Space:** The algorithm's memory usage grows linearly with the input size.
+* **O(log n) - Logarithmic Space:** The memory usage grows logarithmically with the input size.
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity of an algorithm often involves:
+
+* **Identifying the basic operations:** Determine the operations that contribute most significantly to the runtime.
+* **Counting the number of operations:** Express the number of operations as a function of the input size.
+* **Using asymptotic notation:**  Simplify the function using Big O, Big Omega, or Big Theta notation.
+
+
+Understanding algorithm complexity is essential for choosing the most efficient algorithm for a given task, especially when dealing with large datasets where performance differences can be substantial.
+
