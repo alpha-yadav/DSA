@@ -66695,3 +66695,75 @@ These examples demonstrate a range of difficulty and common algorithmic techniqu
 
 Remember to practice regularly to improve your algorithmic problem-solving skills!  Websites like LeetCode, HackerRank, and Codewars offer a vast collection of problems to practice with.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then progressing to more robust options:
+
+**Version 1: Basic Implementation**
+
+This version directly implements the rules using `if-else if-else` statements.  It's straightforward but can become less readable for more complex scenarios.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+**Version 2: Using a Ternary Operator (Slightly More Concise)**
+
+This version uses Swift's ternary operator (`condition ? value1 : value2`) to make the code a bit more compact.  It's still quite readable for this simple problem.
+
+```swift
+func fizzBuzzTernary(n: Int) {
+    for i in 1...n {
+        print(i % 15 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzzTernary(n: 15) //Call the function to test
+```
+
+**Version 3:  More Extensible with an Array (For Future Modifications)**
+
+This approach uses an array to store the divisors and their corresponding strings.  This makes it easier to add more rules later without modifying the core logic.
+
+```swift
+func fizzBuzzExtensible(n: Int) {
+    let rules: [(Int, String)] = [(3, "Fizz"), (5, "Buzz")] // Add more rules here as needed
+
+    for i in 1...n {
+        var output = ""
+        for (divisor, string) in rules {
+            if i % divisor == 0 {
+                output += string
+            }
+        }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzExtensible(n: 15) //Call the function to test
+
+```
+
+
+**Choosing the Right Version:**
+
+* **Version 1:**  Best for beginners – very easy to understand.
+* **Version 2:** Slightly more concise but might be harder to read for those unfamiliar with ternary operators.
+* **Version 3:**  The most flexible and easily expandable for future modifications or more complex FizzBuzz variations.
+
+
+Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal with Swift installed).  You'll see the FizzBuzz output for numbers 1 through `n`.  Experiment with different values of `n` to see how it works.
+
