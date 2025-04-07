@@ -68320,3 +68320,138 @@ else:
 
 Remember to handle edge cases like empty trees appropriately in your chosen implementation.  The provided code examples include such handling.  Choose the approach that you find more readable and maintainable for your needs.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit all the nodes in a binary tree in a specific order.  There are three main types:
+
+* **Inorder Traversal:**  Left subtree -> Root -> Right subtree
+* **Preorder Traversal:** Root -> Left subtree -> Right subtree
+* **Postorder Traversal:** Left subtree -> Right subtree -> Root
+
+Let's break them down with examples and code (Python):
+
+**1. Inorder Traversal:**
+
+* **Order:**  Visits the nodes in ascending order for a Binary Search Tree (BST).
+* **Example:**  Consider the following tree:
+
+```
+     4
+    / \
+   2   5
+  / \
+ 1   3
+```
+
+Inorder traversal would yield: 1 2 3 4 5
+
+* **Python Code (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+# Example usage:
+root = Node(4)
+root.left = Node(2)
+root.right = Node(5)
+root.left.left = Node(1)
+root.left.right = Node(3)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 1 2 3 4 5
+```
+
+* **Python Code (Iterative):**  Uses a stack to mimic recursion.
+
+```python
+def inorder_traversal_iterative(node):
+    stack = []
+    current = node
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.data, end=" ")
+        current = current.right
+```
+
+
+**2. Preorder Traversal:**
+
+* **Order:**  Visits the root node first, then recursively traverses the left and right subtrees.  Useful for creating a copy of the tree.
+* **Example:** Using the same tree as above:
+
+Preorder traversal would yield: 4 2 1 3 5
+
+* **Python Code (Recursive):**
+
+```python
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+print("\nPreorder traversal:")
+preorder_traversal(root) # Output: 4 2 1 3 5
+```
+
+* **Python Code (Iterative):** Uses a stack.
+
+```python
+def preorder_traversal_iterative(node):
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        print(current.data, end=" ")
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+```
+
+
+**3. Postorder Traversal:**
+
+* **Order:** Visits the left subtree, then the right subtree, and finally the root node. Useful for deleting a tree (freeing memory).
+* **Example:** Using the same tree as above:
+
+Postorder traversal would yield: 1 3 2 5 4
+
+* **Python Code (Recursive):**
+
+```python
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+print("\nPostorder traversal:")
+postorder_traversal(root) # Output: 1 3 2 5 4
+```
+
+* **Python Code (Iterative):**  More complex than inorder and preorder iterative versions, often requiring two stacks or a more sophisticated approach.  It's generally easier to understand the recursive version.
+
+
+**Choosing the Right Traversal:**
+
+The choice of traversal depends on the specific application:
+
+* **Inorder:** Useful for BSTs to get sorted data.
+* **Preorder:** Useful for creating a copy of the tree or representing the tree's structure in a prefix notation.
+* **Postorder:** Useful for deleting a tree or evaluating an expression tree.
+
+
+Remember that these examples use a simple `Node` class.  You might need to adapt them slightly depending on your specific tree implementation.  Also, iterative solutions are generally more memory-efficient for very large trees, avoiding potential stack overflow errors.
+
