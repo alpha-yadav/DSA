@@ -65474,3 +65474,121 @@ Remember to replace  `node.data` with the appropriate way to access the value st
 
 These are the fundamental tree traversals.  There are other less common traversals, but these three cover the majority of use cases.  The choice of which traversal to use depends on the specific task.  Recursive implementations are generally easier to understand, but iterative approaches can be more efficient in some scenarios (especially for very deep trees to avoid stack overflow).
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes at the same level before moving to the next level.  Here are implementations in Python and JavaScript, using a queue data structure:
+
+**Python:**
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    """
+    Performs a level order traversal of a binary tree.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        A list containing the data of nodes in level order.  Returns an empty list if the tree is empty.
+    """
+    if root is None:
+        return []
+
+    nodes = deque([root])
+    result = []
+
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        result.append(curr.data)
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+    return result
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(levelOrder(root))  # Output: [1, 2, 3, 4, 5]
+
+
+root2 = None #Test with empty tree
+print(levelOrder(root2)) # Output: []
+```
+
+
+**JavaScript:**
+
+```javascript
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+function levelOrder(root) {
+    if (root === null) {
+        return [];
+    }
+
+    const queue = [root];
+    const result = [];
+
+    while (queue.length > 0) {
+        const curr = queue.shift();
+        result.push(curr.data);
+
+        if (curr.left !== null) {
+            queue.push(curr.left);
+        }
+        if (curr.right !== null) {
+            queue.push(curr.right);
+        }
+    }
+
+    return result;
+}
+
+
+// Example usage:
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log(levelOrder(root)); // Output: [1, 2, 3, 4, 5]
+
+const root2 = null; //Test with empty tree
+console.log(levelOrder(root2)); // Output: []
+```
+
+Both implementations follow the same basic algorithm:
+
+1. **Initialization:** Create a queue and add the root node to it.  Create an empty list (or array) to store the result.
+2. **Iteration:** While the queue is not empty:
+   - Dequeue a node from the queue.
+   - Add the node's data to the result list.
+   - Enqueue the node's left child (if it exists).
+   - Enqueue the node's right child (if it exists).
+3. **Return:** Return the result list.
+
+
+Remember to handle the case of an empty tree (where the root is `null` or `None`).  These examples include that check.  Choose the implementation (Python or JavaScript) that best suits your needs.
+
