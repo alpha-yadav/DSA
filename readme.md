@@ -61360,3 +61360,73 @@ These examples all demonstrate a simple loop that iterates five times.  The key 
 
 The specific syntax varies slightly between languages, but the fundamental concept remains the same.  More complex loops might involve nested loops, different iteration patterns, or more intricate conditions.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or perform operations that require repeated iterations within iterations.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer loop:** This loop runs first and controls the overall number of iterations.
+* **Inner loop:** This loop runs for each iteration of the outer loop.  Its execution depends on the current state of the outer loop.
+
+**Example (Python):**
+
+This example prints a multiplication table using nested loops:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+**Output:**
+
+```
+1	2	3	4	5	6	7	8	9	10	
+2	4	6	8	10	12	14	16	18	20	
+3	6	9	12	15	18	21	24	27	30	
+4	8	12	16	20	24	28	32	36	40	
+5	10	15	20	25	30	35	40	45	50	
+6	12	18	24	30	36	42	48	54	60	
+7	14	21	28	35	42	49	56	63	70	
+8	16	24	32	40	48	56	64	72	80	
+9	18	27	36	45	54	63	72	81	90	
+10	20	30	40	50	60	70	80	90	100
+```
+
+**Another Example (Processing/Java):**
+
+This example draws a grid of squares using nested loops:
+
+```processing
+void setup() {
+  size(400, 400);
+}
+
+void draw() {
+  background(255);
+  int gridSize = 20;
+
+  for (int i = 0; i < width / gridSize; i++) { //Outer loop (columns)
+    for (int j = 0; j < height / gridSize; j++) { //Inner loop (rows)
+      rect(i * gridSize, j * gridSize, gridSize, gridSize);
+    }
+  }
+}
+```
+
+**When to Use Nested Loops:**
+
+Nested loops are useful for:
+
+* **Iterating over matrices or multi-dimensional arrays:** Accessing each element in a 2D array (like a table or grid).
+* **Generating patterns:** Creating visual patterns or sequences.
+* **Performing calculations on subsets of data:**  Iterating through all possible combinations of data points.
+* **Implementing algorithms like bubble sort or selection sort:** Comparing and swapping elements in an array.
+
+**Performance Considerations:**
+
+Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly as the number of loops and iterations grows.  Consider optimizing nested loops if performance is critical.  Techniques like memoization or algorithmic improvements might be necessary.
+
