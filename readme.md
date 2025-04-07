@@ -60019,3 +60019,135 @@ This introduction provides a basic overview.  Further study would involve explor
 
 Graph theory is a rich and powerful field with many fascinating concepts and applications. This introduction serves as a stepping stone to delve deeper into this area of mathematics.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and efficient technique, especially for sparse graphs (graphs with relatively few edges compared to the number of nodes).  Here's a breakdown of how it works, along with different implementations and considerations:
+
+**The Concept:**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each element in the array corresponds to a node in the graph.  The list at that index contains the nodes adjacent to the node represented by that index.
+
+**Example:**
+
+Consider an undirected graph with 5 nodes (0, 1, 2, 3, 4) and the following edges:
+
+* 0 -- 1
+* 0 -- 4
+* 1 -- 2
+* 1 -- 3
+* 2 -- 3
+* 3 -- 4
+
+
+The adjacency list representation would look like this:
+
+```
+0: [1, 4]
+1: [0, 2, 3]
+2: [1, 3]
+3: [1, 2, 4]
+4: [0, 3]
+```
+
+**Implementations:**
+
+The choice of implementation depends on the programming language and specific needs. Here are a few common approaches:
+
+* **Using Arrays of Lists (Python):**
+
+```python
+graph = [
+    [1, 4],  # Node 0
+    [0, 2, 3], # Node 1
+    [1, 3],  # Node 2
+    [1, 2, 4], # Node 3
+    [0, 3]   # Node 4
+]
+
+# Accessing neighbors of node 1:
+neighbors_of_1 = graph[1]  # Output: [0, 2, 3]
+```
+
+* **Using Dictionaries (Python):**  This offers more flexibility and readability, especially when node IDs are not consecutive integers.
+
+```python
+graph = {
+    0: [1, 4],
+    1: [0, 2, 3],
+    2: [1, 3],
+    3: [1, 2, 4],
+    4: [0, 3]
+}
+
+# Accessing neighbors of node 1:
+neighbors_of_1 = graph[1]  # Output: [0, 2, 3]
+```
+
+* **Using `std::vector` and `std::list` (C++):**
+
+```c++
+#include <iostream>
+#include <vector>
+#include <list>
+
+int main() {
+  std::vector<std::list<int>> graph(5); // 5 nodes
+
+  graph[0].push_back(1);
+  graph[0].push_back(4);
+  graph[1].push_back(0);
+  graph[1].push_back(2);
+  graph[1].push_back(3);
+  // ... add remaining edges
+
+  // Accessing neighbors of node 1:
+  for (int neighbor : graph[1]) {
+    std::cout << neighbor << " ";
+  } // Output: 0 2 3
+  std::cout << std::endl;
+
+  return 0;
+}
+```
+
+* **Using HashMaps (Java):**  Similar to Python's dictionaries.
+
+
+**Weighted Graphs:**
+
+For weighted graphs, you can adapt the adjacency list to store weights along with the nodes.  This can be done by using tuples or custom classes:
+
+* **Python (using tuples):**
+
+```python
+graph = {
+    0: [(1, 5), (4, 2)],  # Node 0: (neighbor, weight)
+    1: [(0, 5), (2, 3), (3, 1)],
+    2: [(1, 3), (3, 4)],
+    3: [(1, 1), (2, 4), (4, 6)],
+    4: [(0, 2), (3, 6)]
+}
+
+# Accessing neighbors and weights of node 1:
+for neighbor, weight in graph[1]:
+    print(f"Neighbor: {neighbor}, Weight: {weight}")
+```
+
+**Directed Graphs:**
+
+For directed graphs, the adjacency list simply represents the direction of the edges.  An edge from node A to node B only appears in the list for node A.
+
+**Space Complexity:**
+
+The space complexity of an adjacency list is O(V + E), where V is the number of vertices (nodes) and E is the number of edges.  This is efficient for sparse graphs because you only store the existing edges, not all possible edges.  For dense graphs (many edges), an adjacency matrix might be slightly more efficient in terms of space.
+
+
+**Time Complexity:**
+
+* **Adding an edge:** O(1) on average (depending on the list implementation)
+* **Checking if an edge exists:** O(degree(v)) where degree(v) is the number of edges connected to a vertex v.  This can be improved to O(1) using a hash table for adjacency lists.
+* **Getting neighbors of a vertex:** O(degree(v))
+* **Traversing the graph:** O(V + E) (e.g., using Breadth-First Search or Depth-First Search)
+
+
+Choosing between an adjacency list and an adjacency matrix depends on the specific application and the characteristics of the graph (sparse vs. dense).  Adjacency lists are generally preferred for sparse graphs due to their better space efficiency.
+
