@@ -59193,3 +59193,103 @@ print(f"Is the tree a BST? {is_bst_minmax(root2)}") # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the recursive approach, where H is the height of the tree (O(log N) for a balanced BST, O(N) for a skewed tree).  The iterative in-order traversal would have O(1) space complexity.  Choose the method that best suits your needs and coding style.  The recursive min/max approach might be slightly easier to understand conceptually for some.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree adheres to the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* The value of the left subtree nodes is less than the node's value.
+* The value of the right subtree nodes is greater than the node's value.
+
+Here are three common methods:
+
+**Method 1: Recursive In-order Traversal**
+
+This is arguably the most elegant and efficient method.  A BST, when traversed in-order (left, root, right), will produce a sorted sequence of its node values.  Therefore, we can perform an in-order traversal and check if the resulting sequence is sorted.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    for i in range(1, len(result)):
+        if result[i] < result[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+
+print(is_bst_recursive(root))  # Output: True
+
+root = Node(10)
+root.left = Node(5)
+root.right = Node(3) #Violation
+
+print(is_bst_recursive(root)) #Output: False
+
+```
+
+**Method 2: Recursive Check during Traversal**
+
+Instead of collecting the values and then checking for sorted order, we can perform the check directly during the recursive traversal. This can be slightly more efficient as it avoids creating the intermediate `result` list.
+
+```python
+def is_bst_recursive2(root, min_val=-float('inf'), max_val=float('inf')):
+    if root is None:
+        return True
+    if not (min_val < root.data < max_val):
+        return False
+    return (is_bst_recursive2(root.left, min_val, root.data) and
+            is_bst_recursive2(root.right, root.data, max_val))
+
+
+# Example usage (same as before, will produce identical output)
+print(is_bst_recursive2(root))
+```
+
+**Method 3: Iterative In-order Traversal (using stack)**
+
+
+This method uses a stack to simulate the recursion of the in-order traversal, making it potentially more memory-efficient for very deep trees.
+
+```python
+def is_bst_iterative(root):
+    stack = []
+    prev = -float('inf')  # Initialize previous value
+    curr = root
+    while curr or stack:
+        while curr:
+            stack.append(curr)
+            curr = curr.left
+        curr = stack.pop()
+        if curr.data < prev:
+            return False
+        prev = curr.data
+        curr = curr.right
+    return True
+
+#Example Usage (same as before, will produce identical output)
+print(is_bst_iterative(root))
+```
+
+
+**Choosing the Best Method:**
+
+* For most cases, the recursive methods (`is_bst_recursive` or `is_bst_recursive2`) offer a good balance of readability and efficiency.  `is_bst_recursive2` is slightly more efficient because it avoids the extra list creation.
+* The iterative method (`is_bst_iterative`) might be preferable for extremely deep trees to avoid potential stack overflow issues.
+
+Remember to handle the edge cases (empty tree, single-node tree) appropriately in your chosen method.  The provided examples demonstrate this. Choose the method that best fits your needs and coding style. Remember to define the `Node` class as shown in the examples.
+
