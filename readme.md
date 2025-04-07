@@ -61161,3 +61161,50 @@ This inequality holds true for sufficiently large *n*.  While the inequality mig
 
 In essence, Θ notation gives a precise description of the growth rate of a function, making it crucial for analyzing algorithm efficiency.  If an algorithm has a time complexity of Θ(n²), we know precisely how its runtime scales with the input size – quadratically.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of functions, particularly useful in analyzing the efficiency of algorithms.  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than a quadratic function of the input size n.
+* **Focus:**  Worst-case performance.  It's the most commonly used notation.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (though not always strictly the best case, just a lower bound). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least as fast as a linear function of the input size n.
+* **Focus:** Best-case performance (or a lower bound on performance).  Less frequently used than Big O.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows at the *same rate* as another function, both upper and lower bounded. We say f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+* **Focus:**  Precise characterization of growth rate.  Indicates that the algorithm's performance is precisely characterized by the given function.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  We say f(n) = o(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  The key is the `<` which implies that f(n) is asymptotically insignificant compared to g(n).
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+* **Focus:**  Asymptotic dominance; one function growing significantly slower.
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. We say f(n) = ω(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.  Again the `<` is key here.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+* **Focus:** Asymptotic dominance; one function growing significantly faster.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                     | Relationship between f(n) and g(n) | Example                               |
+|----------|---------------------------------------------|---------------------------------------|---------------------------------------|
+| O(g(n))  | Upper bound                                  | f(n) ≤ c * g(n)                       | n² = O(n³)                               |
+| Ω(g(n))  | Lower bound                                  | c * g(n) ≤ f(n)                       | n² = Ω(n)                               |
+| Θ(g(n))  | Tight bound                                 | c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)            | n² = Θ(n²)                              |
+| o(g(n))  | Strictly slower                             | f(n) < c * g(n) for all c > 0         | n = o(n²)                               |
+| ω(g(n))  | Strictly faster                             | c * g(n) < f(n) for all c > 0         | n² = ω(n)                               |
+
+
+**Important Note:**  These notations describe *asymptotic* behavior.  They focus on how the functions behave as the input size (n) approaches infinity.  They don't tell you anything about the *absolute* runtime for small values of n.  A O(n²) algorithm might be faster than a O(n) algorithm for small n, but for large n, the O(n²) algorithm will eventually become significantly slower.
+
