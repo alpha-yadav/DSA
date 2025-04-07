@@ -66965,3 +66965,74 @@ Because we can find constants `c = 1` and `n₀ = 1` such that `1 * n² ≤ n² 
 
 Big-Omega notation is a crucial tool for analyzing the efficiency of algorithms.  It provides a valuable lower bound on the runtime or space complexity, offering insights into the best-case performance and helping to compare algorithms.  While Big-O often gets more attention, understanding Big-Omega provides a more complete picture of an algorithm's behavior.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the worst-case scenario of how the runtime or space requirements of an algorithm grow as the input size grows.  It focuses on the *growth rate* rather than the exact time or space used.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases as the input size increases.  This is often the most discussed aspect of Big O.
+* **Space Complexity:** How the amount of memory (space) an algorithm uses increases as the input size increases.
+
+**Key Concepts:**
+
+* **Input Size (n):**  Represents the size of the input data the algorithm is working with.  This could be the number of elements in an array, the number of nodes in a graph, the length of a string, etc.
+
+* **Growth Rate:**  Big O focuses on how the runtime or space usage *scales* with the input size.  We ignore constant factors and smaller terms because they become insignificant as `n` gets large.
+
+* **Asymptotic Analysis:** Big O describes the behavior of an algorithm as the input size approaches infinity.  We're interested in the long-term trends, not the performance on small inputs.
+
+**Common Big O Notations (from best to worst):**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size. Example: Nested loops iterating through an array.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Finding all permutations of a set.
+
+
+**How to Analyze Big O:**
+
+1. **Identify the basic operations:** Determine the core operations that contribute most significantly to the algorithm's runtime.
+
+2. **Count the operations:**  Estimate how many times these operations are executed as a function of the input size `n`.
+
+3. **Express the count using Big O notation:**  Ignore constant factors and lower-order terms.  Focus on the dominant term that determines the growth rate.
+
+
+**Example:**
+
+Consider a function that finds the maximum element in an unsorted array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+* The basic operation is the comparison `x > max_val`.
+* This comparison is executed `n` times (where `n` is the length of the array).
+* Therefore, the time complexity is O(n).
+
+
+**Important Notes:**
+
+* Big O notation provides an upper bound on the runtime or space usage.  The actual performance might be better in some cases.
+* Big O is often used to compare the efficiency of different algorithms.
+* Other notations like Ω (Big Omega, lower bound) and Θ (Big Theta, tight bound) provide a more complete picture of an algorithm's performance but Big O is most commonly used.
+
+
+Big O notation is a crucial tool for analyzing and comparing the efficiency of algorithms, allowing programmers to make informed decisions about which algorithm is best suited for a given task.
+
