@@ -59483,3 +59483,140 @@ The JavaScript code is very similar to the Python code. The main difference is u
 
 Both implementations achieve the same result – a level-order traversal of the binary tree.  Choose the implementation that best suits your programming language preference. Remember to handle potential errors, such as null or empty trees, as shown in the examples.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversal refers to the process of visiting (processing) each node in a tree data structure exactly once.  There are several ways to do this, and pre-order, in-order, and post-order are three common traversal methods for binary trees.  They differ in the *order* in which the node and its subtrees are visited.
+
+**1. Pre-order Traversal:**
+
+* **Rule:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The acronym is **VLR** (Visit Left Right).
+
+* **Algorithm (recursive):**
+
+```python
+def preorder_traversal(node):
+  """Performs a pre-order traversal of a binary tree.
+
+  Args:
+    node: The root node of the subtree to traverse.
+  """
+  if node:
+    print(node.data, end=" ")  # Visit the root
+    preorder_traversal(node.left) # Traverse left subtree
+    preorder_traversal(node.right) # Traverse right subtree
+
+# Example usage (assuming you have a Node class with data, left, and right attributes):
+# root = Node(1)
+# root.left = Node(2)
+# root.right = Node(3)
+# preorder_traversal(root)  # Output: 1 2 3 
+```
+
+* **Algorithm (iterative):**  Using a stack
+
+```python
+def preorder_traversal_iterative(node):
+    if node is None:
+        return
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        print(current.data, end=" ")
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+
+```
+
+
+**2. In-order Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, visit the root node, then recursively traverse the right subtree. The acronym is **LVR** (Left Visit Right).
+
+* **Algorithm (recursive):**
+
+```python
+def inorder_traversal(node):
+  """Performs an in-order traversal of a binary tree."""
+  if node:
+    inorder_traversal(node.left)
+    print(node.data, end=" ")
+    inorder_traversal(node.right)
+
+#Example usage (same as above, assuming you have a Node class)
+# inorder_traversal(root) # Output (for the example tree): 2 1 3
+```
+
+* **Algorithm (iterative):** Using a stack (more complex than pre-order iterative)
+
+```python
+def inorder_traversal_iterative(node):
+    if node is None:
+        return
+    stack = []
+    current = node
+    while True:
+        if current:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.data, end=" ")
+            current = current.right
+        else:
+            break
+```
+
+
+**3. Post-order Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, recursively traverse the right subtree, then visit the root node. The acronym is **LRV** (Left Right Visit).
+
+* **Algorithm (recursive):**
+
+```python
+def postorder_traversal(node):
+  """Performs a post-order traversal of a binary tree."""
+  if node:
+    postorder_traversal(node.left)
+    postorder_traversal(node.right)
+    print(node.data, end=" ")
+
+# Example usage (same as above, assuming you have a Node class)
+# postorder_traversal(root)  # Output (for the example tree): 2 3 1
+```
+
+* **Algorithm (iterative):**  Using two stacks (even more complex than in-order iterative)
+
+```python
+def postorder_traversal_iterative(node):
+    if node is None:
+        return
+    stack1 = [node]
+    stack2 = []
+    while stack1:
+        current = stack1.pop()
+        stack2.append(current)
+        if current.left:
+            stack1.append(current.left)
+        if current.right:
+            stack1.append(current.right)
+    while stack2:
+        print(stack2.pop().data, end=" ")
+```
+
+
+**Node Class (Example):**
+
+You'll need a `Node` class to represent nodes in your binary tree.  Here's a simple example in Python:
+
+```python
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.left = None
+    self.right = None
+```
+
+Remember to replace the comment `# Example usage` with your actual binary tree root node to test the traversal functions.  The output will depend on the structure of your tree.  The iterative approaches are generally more memory-efficient for very large trees, but the recursive versions are often easier to understand and write.
+
