@@ -65847,3 +65847,129 @@ Please provide me with the data or equation you would like me to graph.  I need 
 
 Once I have this information, I can help you create the graph.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, its advantages and disadvantages, and different ways to implement it:
+
+**How it Works:**
+
+An adjacency matrix represents a graph as a square matrix, where each cell `matrix[i][j]` indicates the presence or weight of an edge between vertex `i` and vertex `j`.
+
+* **Unweighted Graph:**  A value of `1` (or `true`) typically represents an edge, while `0` (or `false`) represents the absence of an edge.
+
+* **Weighted Graph:** The cell `matrix[i][j]` contains the weight of the edge between vertices `i` and `j`.  If no edge exists, a special value (e.g., `∞`, `-1`, or a very large number) is used.
+
+* **Directed Graph:** The matrix is asymmetric. `matrix[i][j]` represents an edge from vertex `i` to vertex `j`.  `matrix[j][i]` may or may not contain an edge (depending on whether the graph has an edge from `j` to `i`).
+
+* **Undirected Graph:** The matrix is symmetric. `matrix[i][j] == matrix[j][i]`.  Only the upper or lower triangle needs to be stored to save space.
+
+
+**Example (Unweighted, Undirected Graph):**
+
+Consider a graph with 4 vertices:
+
+```
+   A -- B
+   |  /|
+   | / |
+   C -- D
+```
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  1  0  1  1
+C  1  1  0  1
+D  0  1  1  0
+```
+
+**Example (Weighted, Directed Graph):**
+
+```
+   A --(5)--> B
+   |       /
+   |     (3)
+   |----(2)--> C
+```
+
+The adjacency matrix would be:
+
+```
+   A  B  C
+A  0  5  2
+B  0  0  0
+C  0  0  0
+```
+
+
+**Implementation (Python):**
+
+```python
+import sys
+
+class Graph:
+    def __init__(self, num_vertices, weighted=False, directed=False):
+        self.num_vertices = num_vertices
+        self.weighted = weighted
+        self.directed = directed
+        self.matrix = [[0 for _ in range(num_vertices)] for _ in range(num_vertices)]  # Initialize with 0s
+
+    def add_edge(self, u, v, weight=1):  #weight is only used if weighted is True
+        if self.weighted:
+            self.matrix[u][v] = weight
+        else:
+            self.matrix[u][v] = 1
+        if not self.directed:
+            self.matrix[v][u] = weight if self.weighted else 1
+
+    def print_matrix(self):
+        for row in self.matrix:
+            print(row)
+
+
+# Example usage:
+# Unweighted, undirected graph
+graph1 = Graph(4)
+graph1.add_edge(0, 1)
+graph1.add_edge(0, 2)
+graph1.add_edge(1, 2)
+graph1.add_edge(1, 3)
+graph1.add_edge(2, 3)
+print("Unweighted, Undirected Graph:")
+graph1.print_matrix()
+
+
+# Weighted, directed graph
+graph2 = Graph(3, weighted=True, directed=True)
+graph2.add_edge(0, 1, 5)
+graph2.add_edge(0, 2, 2)
+print("\nWeighted, Directed Graph:")
+graph2.print_matrix()
+```
+
+
+**Advantages of Adjacency Matrix:**
+
+* **Simple Implementation:** Easy to understand and implement.
+* **Fast Edge Existence Check:** Checking if an edge exists between two vertices is O(1).
+* **Easy to find the degree of a vertex:** Sum of the row or column for undirected graphs.  For directed graphs, sum of the row is the out-degree and sum of the column is the in-degree.
+
+
+**Disadvantages of Adjacency Matrix:**
+
+* **Space Inefficiency for Sparse Graphs:**  Uses O(V²) space, where V is the number of vertices.  This is inefficient for sparse graphs (graphs with relatively few edges).
+* **Adding/Removing Vertices:** Requires significant restructuring of the matrix, which can be computationally expensive.
+
+
+**When to Use Adjacency Matrix:**
+
+* Dense graphs (graphs with many edges)
+* When fast edge existence checks are crucial
+* When you need to easily find the degree of a vertex
+
+
+**Alternatives:**
+
+For sparse graphs, an adjacency list is generally a more efficient data structure.  Consider using an adjacency list if memory efficiency is a primary concern.
+
