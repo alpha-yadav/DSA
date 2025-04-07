@@ -58535,3 +58535,124 @@ BSTs can be implemented using various programming languages.  A typical implemen
 
 In summary, Binary Search Trees offer a powerful and efficient way to store and manage ordered data. While a poorly structured BST can be inefficient, the use of self-balancing variants ensures that the benefits of logarithmic time complexity are consistently realized.
 
+#  Binary Search Tree - Insertion (Python) 
+Several Python implementations of Binary Search Tree (BST) insertion exist, each with slightly different characteristics. Here are a few options, ranging from a simple recursive approach to one using a more object-oriented design:
+
+
+**1. Simple Recursive Implementation:**
+
+This version is concise and easy to understand.  It recursively searches for the correct position to insert the new node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def insert(root, data):
+    if root is None:
+        return Node(data)
+    else:
+        if data < root.data:
+            root.left = insert(root.left, data)
+        else:
+            root.right = insert(root.right, data)
+        return root
+
+# Example usage:
+root = None
+root = insert(root, 50)
+root = insert(root, 30)
+root = insert(root, 20)
+root = insert(root, 40)
+root = insert(root, 70)
+root = insert(root, 60)
+root = insert(root, 80)
+
+# (You would typically add a function to traverse and print the tree here to verify)
+```
+
+**2. Iterative Implementation:**
+
+This avoids recursion, potentially improving performance for very deep trees, and can be slightly more memory-efficient.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def insert_iterative(root, data):
+    if root is None:
+        return Node(data)
+
+    current = root
+    parent = None
+    while current:
+        parent = current
+        if data < current.data:
+            current = current.left
+        else:
+            current = current.right
+
+    if data < parent.data:
+        parent.left = Node(data)
+    else:
+        parent.right = Node(data)
+    return root
+
+# Example Usage (same as above, just replace `insert` with `insert_iterative`)
+```
+
+
+**3. Object-Oriented Implementation:**
+
+This approach encapsulates the tree's functionality within a class, leading to better organization and potential for expansion (e.g., adding deletion, search, etc.).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+
+# Example Usage:
+bst = BST()
+bst.insert(50)
+bst.insert(30)
+bst.insert(20)
+bst.insert(40)
+bst.insert(70)
+bst.insert(60)
+bst.insert(80)
+
+# (Again, you'd need a traversal function to inspect the tree)
+```
+
+Remember to add a function to traverse and print (e.g., inorder traversal) the tree to verify the insertion.  Choose the implementation that best suits your needs and coding style.  The object-oriented version is generally preferred for larger projects due to its better organization and extensibility.
+
