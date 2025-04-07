@@ -65689,3 +65689,69 @@ The order of traversal affects the output significantly.  This difference is cru
 
 Remember that these functions assume a binary tree structure where each node has at most two children (left and right).  The traversal methods would need to be adapted for other tree types (e.g., n-ary trees).
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several approaches to finding the LCA, each with different trade-offs in terms of time and space complexity.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This approach recursively traverses the tree.  If a node contains either `node1` or `node2`, it's a potential ancestor. If both are found in the left and right subtrees, the current node is the LCA. If only one is found, the LCA lies in that subtree.  If neither is found, there's no LCA in this subtree.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca(root, node1, node2):
+       if root is None or root.data == node1 or root.data == node2:
+           return root
+
+       left_lca = lca(root.left, node1, node2)
+       right_lca = lca(root.right, node1, node2)
+
+       if left_lca and right_lca:
+           return root
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   # Example usage:
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+   node1 = 4
+   node2 = 5
+   lca_node = lca(root, node1, node2)
+   print(f"LCA of {node1} and {node2}: {lca_node.data}")  # Output: LCA of 4 and 5: 2
+
+
+   ```
+
+2. **Iterative Approach (Using a Stack):**
+
+   Similar to the recursive approach, but uses a stack to simulate recursion, avoiding potential stack overflow issues for very deep trees. This generally requires more manual tracking of parent pointers or paths.
+
+3. **Path Finding and Comparison:**
+
+   This method finds the paths from the root to each node (`node1` and `node2`) separately. Then, it compares these paths to find the last common node, which is the LCA.  Requires extra space to store paths.
+
+4. **Using Parent Pointers:**
+
+   If each node has a pointer to its parent, you can trace the paths upwards from `node1` and `node2` simultaneously. The last common node encountered is the LCA. This approach is efficient but requires modifying the tree structure.
+
+
+**Important Considerations:**
+
+* **Node Existence:**  The algorithms should handle cases where `node1` or `node2` might not exist in the tree.  Error handling is important.
+* **Tree Type:** The provided recursive solution works for general binary trees.  If the tree is a binary *search* tree (BST), more efficient algorithms can be used.  In a BST, if `node1` < `root` < `node2` (or vice versa), the root is the LCA.
+* **Time and Space Complexity:**  The recursive approach generally has O(N) time complexity in the worst case (where N is the number of nodes) and O(H) space complexity (where H is the height of the tree), due to the recursive call stack. The iterative approach has similar time complexity but may reduce space complexity. The path-finding approach also has O(N) time and potentially O(N) space (for storing paths). The parent pointer method can have O(H) time complexity.
+
+Choose the method that best suits your needs and constraints. For most cases, the recursive approach offers a good balance of readability and efficiency. Remember to add error handling (e.g., checking for `None` nodes) to make the code robust.
+
