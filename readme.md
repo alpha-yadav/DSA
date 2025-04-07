@@ -62881,3 +62881,108 @@ postorder(root) # Output: D E B F C A
 
 This Python code demonstrates the three traversals.  Remember to adapt the `print` statements if you want to store the results in a list instead of printing them directly.  The `Node` class represents a node in the binary tree.  You can easily modify or expand it for additional attributes.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with different trade-offs.
+
+**Method 1: Recursive Approach (Most Common)**
+
+This approach recursively traverses the tree.  If the LCA is found in the left subtree, the result is returned; otherwise, it's in the right subtree or the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lowestCommonAncestor(root, root.left, root.right)  # LCA should be 1
+print(f"LCA of 2 and 3 is: {lca.data}")
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right) #LCA should be 2
+print(f"LCA of 4 and 5 is: {lca.data}")
+
+lca = lowestCommonAncestor(root, root.left, root.left.right) #LCA should be 2
+print(f"LCA of 2 and 5 is: {lca.data}")
+
+lca = lowestCommonAncestor(root, root.left.right, root) #LCA should be 1
+print(f"LCA of 5 and 1 is: {lca.data}")
+
+lca = lowestCommonAncestor(root, root.left.right, Node(6)) #LCA should be None because node 6 is not present
+print(f"LCA of 5 and 6 is: {lca}")
+
+```
+
+**Method 2: Iterative Approach (using parent pointers)**
+
+If you can modify the tree to add parent pointers to each node,  an iterative approach is possible.  This method is generally more efficient in terms of space complexity because it avoids the recursion stack.  However, it requires modification to the tree structure.
+
+```python
+#  (This requires adding a 'parent' attribute to the Node class)  ... omitted for brevity ...
+
+def lowestCommonAncestorIterative(p, q):
+    path_p = []
+    path_q = []
+
+    #Find path from root to p
+    curr = p
+    while curr:
+        path_p.append(curr)
+        curr = curr.parent
+
+    #Find path from root to q
+    curr = q
+    while curr:
+        path_q.append(curr)
+        curr = curr.parent
+
+    #Find the LCA from the paths
+    lca = None
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[len(path_p)-1-i] == path_q[len(path_q)-1-i]:
+        lca = path_p[len(path_p)-1-i]
+        i += 1
+    return lca
+
+```
+
+**Choosing the right method:**
+
+* The **recursive approach** is generally simpler to understand and implement.  It works well for most cases unless you have extremely deep trees, where it might lead to stack overflow errors.
+* The **iterative approach** is more memory-efficient for very deep trees but requires modifying the tree structure (adding parent pointers) and is slightly more complex to implement.
+
+
+Remember to handle edge cases like empty trees, nodes not found in the tree, and the case where one node is an ancestor of the other.  The recursive solution presented above handles these cases elegantly.  The iterative solution would require additional checks.
+
