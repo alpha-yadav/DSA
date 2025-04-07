@@ -57829,3 +57829,56 @@ If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).  However, the rever
 
 Big-Theta notation is a powerful tool for analyzing the efficiency of algorithms. By providing a tight bound on the growth rate, it allows for a precise comparison of the performance of different algorithms.  Understanding Big-Theta is fundamental to algorithm analysis and design.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly important in analyzing the efficiency of algorithms.  The most common are Big O (O), Big Omega (Ω), and Big Theta (Θ).  Let's compare them:
+
+**1. Big O Notation (O): Upper Bound**
+
+* **Meaning:**  `f(n) = O(g(n))` means that the growth rate of `f(n)` is *at most* as fast as `g(n)` as `n` approaches infinity.  In simpler terms, `f(n)` is bounded above by `g(n)`.  There exists a constant `c > 0` and `n₀ > 0` such that `0 ≤ f(n) ≤ c*g(n)` for all `n ≥ n₀`.
+
+* **Focus:** Worst-case scenario.  It describes the upper limit of the function's growth.
+
+* **Example:**  If an algorithm's time complexity is `O(n²)`, it means its runtime grows no faster than the square of the input size.  It could be faster, but it won't be significantly worse.
+
+
+**2. Big Omega Notation (Ω): Lower Bound**
+
+* **Meaning:** `f(n) = Ω(g(n))` means that the growth rate of `f(n)` is *at least* as fast as `g(n)` as `n` approaches infinity.  `f(n)` is bounded below by `g(n)`. There exists a constant `c > 0` and `n₀ > 0` such that `0 ≤ c*g(n) ≤ f(n)` for all `n ≥ n₀`.
+
+* **Focus:** Best-case scenario (sometimes). It describes the lower limit of the function's growth. It can also represent a lower bound on the complexity of a problem.
+
+* **Example:** If an algorithm's time complexity is `Ω(n)`, it means its runtime grows at least linearly with the input size.  It could be faster (e.g., if it has some early-exit conditions), but it won't be significantly slower.
+
+
+**3. Big Theta Notation (Θ): Tight Bound**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that the growth rate of `f(n)` is *exactly* the same as `g(n)` as `n` approaches infinity.  It's a tight bound, meaning `f(n)` is both O(g(n)) and Ω(g(n)). There exist constants `c₁ > 0`, `c₂ > 0`, and `n₀ > 0` such that `0 ≤ c₁*g(n) ≤ f(n) ≤ c₂*g(n)` for all `n ≥ n₀`.
+
+* **Focus:**  Precise growth rate.  It provides a very accurate description of the function's behavior.
+
+* **Example:** If an algorithm's time complexity is `Θ(n log n)`, its runtime grows proportionally to `n log n`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Focus                     |
+|----------|----------------------------------------------|--------------------------|
+| O(g(n))  | Upper bound: f(n) grows no faster than g(n) | Worst-case (usually)     |
+| Ω(g(n))  | Lower bound: f(n) grows at least as fast as g(n) | Best-case (sometimes) / Problem complexity |
+| Θ(g(n))  | Tight bound: f(n) grows exactly as fast as g(n) | Precise growth rate      |
+
+
+**Relationship between notations:**
+
+If `f(n) = Θ(g(n))`, then `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  However, the reverse is not always true.  You can have `f(n) = O(g(n))` and `f(n) = Ω(g(n))` without `f(n) = Θ(g(n))`.  For example, `f(n) = n + 10` is both `O(n)` and `Ω(n)`, but it's not `Θ(n²)`
+
+
+**Other notations (less common):**
+
+* **Little o (o):**  `f(n) = o(g(n))` means `f(n)` grows strictly slower than `g(n)`.  The limit of `f(n)/g(n)` as `n` approaches infinity is 0.
+
+* **Little omega (ω):** `f(n) = ω(g(n))` means `f(n)` grows strictly faster than `g(n)`. The limit of `f(n)/g(n)` as `n` approaches infinity is infinity.
+
+
+Understanding these notations is crucial for comparing the efficiency of different algorithms and for selecting the most appropriate algorithm for a given task. Remember that these are *asymptotic* notations—they describe behavior as input size approaches infinity, and might not reflect actual runtime for small input sizes.
+
