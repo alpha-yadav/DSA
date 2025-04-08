@@ -71843,3 +71843,95 @@ print(f"LCA of {p.val} and {q.val}: {lca.val if lca else 'Not Found'}") # Output
 
 Remember to handle edge cases, such as when one or both nodes are not present in the tree, or when one node is an ancestor of the other.  The provided code includes basic error handling for the null case.  More robust error handling might be needed depending on the specific requirements.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science with applications in various fields like file systems, version control systems (like Git), and phylogenetic analysis.  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods for Finding LCA:**
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a simple and elegant method for binary trees.  It recursively traverses the tree.
+
+* **Base Cases:**
+    * If the current node is `NULL`, return `NULL`.
+    * If the current node is equal to either `p` or `q`, return the current node (one of the nodes has been found).
+* **Recursive Step:**
+    * Recursively search the left and right subtrees.
+    * If both the left and right subtrees return non-NULL values, it means the LCA is the current node.
+    * Otherwise, return the non-NULL result (the node found in one subtree).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example Usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lowestCommonAncestor(root, root.left, root.right)
+print(f"LCA of 2 and 3 is: {lca.data}")  # Output: LCA of 2 and 3 is: 1
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right)
+print(f"LCA of 4 and 5 is: {lca.data}")  # Output: LCA of 4 and 5 is: 2
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (worst case: skewed tree).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive calls).  In the worst case (skewed tree), this becomes O(N).
+
+
+**2. Iterative Approach (using Parent Pointers):**
+
+If each node has a pointer to its parent, you can use an iterative approach.
+
+1. Find the paths from the root to each node (`p` and `q`).
+2. Iterate through both paths simultaneously until you find the last common node.  That's the LCA.
+
+**Time Complexity:** O(N) in worst case.
+**Space Complexity:** O(N) in worst case (to store paths).
+
+**3. Using Depth-First Search (DFS) and a Hash Table:**
+
+This is a slightly more complex approach but can be efficient for general trees (not just binary trees).
+
+1. Perform a DFS to find the paths from the root to `p` and `q`, storing the paths in a hash table (using node as key and path as value).
+2. Iterate through the paths to find the longest common prefix.  The last node in the common prefix is the LCA.
+
+**Time Complexity:** O(N)
+**Space Complexity:** O(N)
+
+
+**4. Binary Lifting (for efficient LCA queries):**
+
+For multiple LCA queries on the same tree, binary lifting is a very efficient technique. It preprocesses the tree to answer LCA queries in O(log N) time.  However, it requires more space for preprocessing.
+
+
+**Choosing the Right Method:**
+
+* For single LCA queries in a binary tree, the recursive approach is often the simplest and easiest to understand.
+* For multiple LCA queries or larger trees, binary lifting is significantly more efficient, despite the preprocessing overhead.
+* The iterative approach with parent pointers is efficient if you already have parent pointers in your tree structure.
+* The DFS and hash table approach works well for general trees.
+
+
+Remember to adapt these methods to the specific type of tree you're working with (binary tree, general tree, etc.) and the constraints of your problem.  Consider factors like memory usage and the number of LCA queries you need to perform when selecting the best algorithm.
+
