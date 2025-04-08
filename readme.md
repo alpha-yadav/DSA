@@ -71517,3 +71517,109 @@ level_order(root)
 
 This code demonstrates the four traversal methods. Remember to adapt it to your specific needs and data structures.  The choice of traversal method depends on the application; for example, in-order traversal is crucial for BSTs, while level-order is useful for visualizing the tree structure.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first traversal, visits all nodes of a tree level by level, from left to right.  Here are implementations in Python and JavaScript, along with explanations:
+
+**Python Implementation**
+
+This implementation uses a queue to manage the nodes to be visited.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])  # Use deque for efficient append and popleft
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root) # Output: 1 2 3 4 5
+```
+
+**JavaScript Implementation**
+
+This uses a similar queue-based approach.
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) {
+    return;
+  }
+
+  const queue = [root];
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    console.log(curr.data, " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+
+// Example usage:
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1  2  3  4  5
+```
+
+**Explanation:**
+
+1. **Node Class:**  Both implementations define a `Node` class to represent a node in the binary tree.  Each node stores its data and references to its left and right children.
+
+2. **Queue:** A queue (using `collections.deque` in Python and an array in JavaScript) is used to store nodes that need to be visited.  The queue follows a FIFO (First-In, First-Out) principle.
+
+3. **Traversal:**
+   - The algorithm starts by adding the root node to the queue.
+   - While the queue is not empty:
+     - It removes the first node from the queue (using `popleft()` in Python and `shift()` in JavaScript).
+     - It prints the data of the removed node.
+     - If the removed node has left and/or right children, it adds them to the back of the queue.
+
+**Time and Space Complexity:**
+
+* **Time Complexity:** O(N), where N is the number of nodes in the tree.  Each node is visited and processed exactly once.
+* **Space Complexity:** O(W), where W is the maximum width of the tree. In the worst case (a complete binary tree), W can be equal to N, making the space complexity O(N).  In a balanced tree, it's generally much smaller than N.
+
+
+Remember to adapt the `print` statements to your preferred output method if needed (e.g., storing the results in an array instead of printing directly).
+
