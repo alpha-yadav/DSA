@@ -70410,3 +70410,12 @@ The best representation choice depends on your needs:
 
 Consider the characteristics of your n-ary tree (complete/incomplete, sparse/dense, frequency of operations) to choose the most appropriate representation.
 
+#  Introduction 
+Please provide me with some context!  An introduction to *what*?  I need more information to write an introduction.  For example, tell me:
+
+* **What is the topic?** (e.g., the history of the Roman Empire, the benefits of exercise, a new software program)
+* **Who is the audience?** (e.g., experts, general public, children)
+* **What is the purpose of the introduction?** (e.g., to grab attention, to provide background information, to state a thesis)
+
+Once I have this information, I can write a suitable introduction.
+
