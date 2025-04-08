@@ -72477,3 +72477,114 @@ Thorup also made significant contributions to the field of approximate distance 
 
 **In summary:** Thorup's algorithms represent significant advances in the field of graph algorithms, offering highly efficient solutions for fundamental problems.  While their implementation complexity might be higher than simpler algorithms, the substantial improvements in runtime for very large graphs make them highly valuable in various applications.
 
+#  Graph Traversals 
+Graph traversals are algorithms that systematically visit all the vertices (nodes) of a graph.  There are several ways to do this, each with its own properties and applications.  The most common are Depth-First Search (DFS) and Breadth-First Search (BFS).
+
+**1. Depth-First Search (DFS)**
+
+* **Concept:** DFS explores a graph as deeply as possible along each branch before backtracking.  It uses a stack (explicitly or implicitly through recursion) to keep track of the vertices to visit.
+* **Algorithm (Recursive):**
+
+```python
+def dfs_recursive(graph, node, visited=None):
+  """Performs a Depth-First Search recursively."""
+  if visited is None:
+    visited = set()
+
+  visited.add(node)
+  print(node, end=" ")
+
+  for neighbor in graph[node]:
+    if neighbor not in visited:
+      dfs_recursive(graph, neighbor, visited)
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+dfs_recursive(graph, 'A')  # Output will vary slightly depending on order of neighbors, example: A B D E F C
+```
+
+* **Algorithm (Iterative):**
+
+```python
+def dfs_iterative(graph, start_node):
+    visited = set()
+    stack = [start_node]
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            print(node, end=" ")
+            stack.extend(neighbor for neighbor in graph[node] if neighbor not in visited)
+
+dfs_iterative(graph, 'A') # Output similar to recursive version
+```
+
+* **Applications:**
+    * Finding connected components.
+    * Topological sorting.
+    * Detecting cycles in a graph.
+    * Solving puzzles (e.g., mazes).
+
+
+**2. Breadth-First Search (BFS)**
+
+* **Concept:** BFS explores a graph level by level.  It uses a queue to keep track of the vertices to visit.  It visits all the neighbors of a vertex before moving to the neighbors of those neighbors.
+* **Algorithm:**
+
+```python
+from collections import deque
+
+def bfs(graph, start_node):
+  """Performs a Breadth-First Search."""
+  visited = set()
+  queue = deque([start_node])
+  visited.add(start_node)
+
+  while queue:
+    node = queue.popleft()
+    print(node, end=" ")
+
+    for neighbor in graph[node]:
+      if neighbor not in visited:
+        visited.add(neighbor)
+        queue.append(neighbor)
+
+bfs(graph, 'A') # Output: A B C D E F (Consistent order)
+```
+
+* **Applications:**
+    * Finding the shortest path in an unweighted graph.
+    * Finding the connected components of a graph.
+    * Crawling the web.
+
+
+**Key Differences:**
+
+| Feature       | DFS                         | BFS                         |
+|---------------|-----------------------------|-----------------------------|
+| Data Structure | Stack (recursive or explicit)| Queue                       |
+| Exploration   | Depth-first                 | Breadth-first               |
+| Shortest Path | Not guaranteed              | Guaranteed (unweighted graphs)|
+| Memory Usage  | Can be less (recursive)     | Can be more (queue)         |
+
+
+**Other Traversals:**
+
+While DFS and BFS are the most common, other traversal methods exist, often tailored to specific graph properties or applications:
+
+* **Uniform-Cost Search (UCS):**  Extends BFS to weighted graphs, finding the shortest path based on edge weights.
+* **A* Search:**  A more sophisticated best-first search algorithm that uses a heuristic function to guide the search.
+* **Dijkstra's Algorithm:**  Another algorithm for finding the shortest path in weighted graphs.
+
+
+Choosing the right traversal algorithm depends on the specific problem and the properties of the graph.  Understanding the strengths and weaknesses of each is crucial for efficient graph processing.
+
