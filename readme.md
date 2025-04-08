@@ -70236,3 +70236,32 @@ Nested loops are commonly used for:
 
 In summary, nested loops are a powerful tool, but their use should be carefully considered due to their potential impact on performance and code readability.  They are essential for working with many types of multi-dimensional data and generating various patterns.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They imply that the time it takes to solve a problem grows logarithmically with the input size (n).  This means the time increases very slowly as the input size increases dramatically.  This efficiency typically stems from halving (or similarly reducing) the problem size at each step.
+
+Here are some common types of algorithms exhibiting O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  Given a sorted array or list, binary search repeatedly divides the search interval in half. If the target value is present in the array, binary search will find it in O(log n) time.
+
+* **Efficient Search in Balanced Binary Search Trees (BSTs):**  Operations like searching, insertion, and deletion in a balanced BST (like AVL trees or red-black trees) have a time complexity of O(log n) on average and in the worst case.  The balanced nature ensures the tree's height remains logarithmic with the number of nodes.
+
+* **Finding the kth smallest element using Quickselect (average case):** While the worst-case time complexity of Quickselect is O(n²), its average-case complexity is O(n), and finding the kth smallest often involves a logarithmic number of steps in its partitioning strategy.   (Note:  other techniques like using order statistics trees provide O(log n) worst-case performance)
+
+* **Exponentiation by squaring:**  This technique efficiently computes a<sup>b</sup> (a raised to the power of b) in O(log b) time. It works by repeatedly squaring a and reducing the exponent b.
+
+* **Many Divide and Conquer algorithms (when the problem is halved at each step):**  Many algorithms based on the divide and conquer paradigm achieve O(log n) complexity if the problem size is reduced by a constant factor at each recursive step.  However, this isn't always the case; the overall complexity depends on the specific algorithm.
+
+**Why O(log n)?**
+
+The logarithmic behavior arises because the algorithm effectively eliminates a constant fraction of the remaining search space (or problem size) at each iteration.  Think of it like this:
+
+* You start with n elements.
+* You eliminate roughly half (n/2).
+* Then you eliminate half of the remaining half (n/4).
+* And so on...
+
+This process repeats until you find your solution or the search space is empty.  The number of times you can repeatedly halve n before reaching 1 is approximately log₂(n).  The base of the logarithm (2 in this example) is usually omitted in Big O notation because it's a constant factor.
+
+
+**Important Note:**  The base of the logarithm in O(log n) is not significant in Big O notation because it's just a constant factor.  O(log₂ n), O(log₁₀ n), and O(ln n) (natural logarithm) are all considered O(log n).
+
