@@ -71384,3 +71384,136 @@ else:
 
 Remember to adapt the `Node` class definition to fit your specific implementation if needed.  Both methods provide a robust way to verify the BST property of a given tree. Choose the method that best suits your needs and coding style, considering potential limitations of each.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit (or "traverse") each node in a binary tree exactly once.  There are several common traversal methods, differing in the order in which they visit nodes. These methods are typically categorized as depth-first searches (DFS) and breadth-first searches (BFS).
+
+**Depth-First Search (DFS) Traversal Methods:**
+
+These methods prioritize exploring a branch as deeply as possible before backtracking.  There are three main types:
+
+* **Pre-order Traversal:**  Visit the root node first, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The order is: Root, Left, Right.
+
+   ```
+   Algorithm:
+   1. Visit the root node.
+   2. Recursively traverse the left subtree.
+   3. Recursively traverse the right subtree.
+   ```
+
+* **In-order Traversal:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. The order is: Left, Root, Right.  For a Binary *Search* Tree (BST), an in-order traversal will yield a sorted list of the nodes' values.
+
+   ```
+   Algorithm:
+   1. Recursively traverse the left subtree.
+   2. Visit the root node.
+   3. Recursively traverse the right subtree.
+   ```
+
+* **Post-order Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node. The order is: Left, Right, Root.
+
+   ```
+   Algorithm:
+   1. Recursively traverse the left subtree.
+   2. Recursively traverse the right subtree.
+   3. Visit the root node.
+   ```
+
+
+**Breadth-First Search (BFS) Traversal (Level-Order Traversal):**
+
+This method visits nodes level by level, starting from the root and proceeding to the next level.  It typically uses a queue data structure.
+
+```
+Algorithm:
+1. Create a queue and enqueue the root node.
+2. While the queue is not empty:
+   a. Dequeue a node from the queue.
+   b. Visit the node.
+   c. Enqueue the node's left child (if it exists).
+   d. Enqueue the node's right child (if it exists).
+```
+
+
+**Example:**
+
+Consider the following binary tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+The traversals would yield:
+
+* **Pre-order:** 1, 2, 4, 5, 3
+* **In-order:** 4, 2, 5, 1, 3
+* **Post-order:** 4, 5, 2, 3, 1
+* **Level-order:** 1, 2, 3, 4, 5
+
+
+**Python Code (Illustrative):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def pre_order(node):
+    if node:
+        print(node.data, end=" ")
+        pre_order(node.left)
+        pre_order(node.right)
+
+def in_order(node):
+    if node:
+        in_order(node.left)
+        print(node.data, end=" ")
+        in_order(node.right)
+
+def post_order(node):
+    if node:
+        post_order(node.left)
+        post_order(node.right)
+        print(node.data, end=" ")
+
+from collections import deque
+
+def level_order(node):
+    if node is None:
+        return
+
+    queue = deque([node])
+    while(len(queue) > 0):
+        print(queue[0].data, end=" ")
+        node = queue.popleft()
+
+        if node.left is not None:
+            queue.append(node.left)
+
+        if node.right is not None:
+            queue.append(node.right)
+
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Pre-order traversal: ")
+pre_order(root)
+print("\nIn-order traversal: ")
+in_order(root)
+print("\nPost-order traversal: ")
+post_order(root)
+print("\nLevel-order traversal: ")
+level_order(root)
+```
+
+This code demonstrates the four traversal methods. Remember to adapt it to your specific needs and data structures.  The choice of traversal method depends on the application; for example, in-order traversal is crucial for BSTs, while level-order is useful for visualizing the tree structure.
+
