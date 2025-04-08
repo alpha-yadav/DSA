@@ -72445,3 +72445,35 @@ else:
 
 This code efficiently detects cycles using the described algorithm.  The `recursionStack` list is crucial for identifying the `Visiting` state, and the `visited` list tracks the `Visited` state.  The `isCyclicUtil` function performs the recursive DFS, and `isCyclic` initiates the traversal for all connected components.  Remember that a directed graph can have multiple connected components, so we need to check each component.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focused on solving graph problems efficiently.  The most famous among them are his algorithms for finding minimum spanning trees (MSTs) and approximate distance oracles.  Let's break down the key aspects:
+
+**1. Minimum Spanning Trees (MSTs):**
+
+Thorup's MST algorithm achieved a significant breakthrough by providing a linear-time algorithm for finding MSTs in undirected graphs with integer edge weights.  Previous algorithms had complexities that were either slightly above linear or had significant constant factors, making them less practical for very large graphs.
+
+* **Key Idea:** Thorup's algorithm utilizes a sophisticated combination of techniques, including sophisticated data structures and randomized algorithms.  It leverages the fact that graphs with small integer weights can be handled more efficiently.  Crucially, it avoids the need for sorting edges, which is a bottleneck in many other MST algorithms.
+
+* **Significance:**  While slightly more complex than simpler MST algorithms like Prim's or Kruskal's, Thorup's algorithm's linear time complexity is theoretically optimal and crucial for extremely large datasets where efficiency is paramount.
+
+
+**2. Approximate Distance Oracles:**
+
+Thorup also made significant contributions to the field of approximate distance oracles. These oracles pre-process a graph to answer shortest path queries efficiently, albeit with some approximation error.
+
+* **Key Idea:**  Thorup's distance oracles aim for a balance between the query time and the space required for preprocessing. The algorithm constructs a smaller data structure that approximates the distances in the original graph.  This approximation means that the returned distances might be slightly larger than the true shortest path distance, but within a guaranteed multiplicative factor (e.g., a 2-approximation means the returned distance is at most twice the actual distance).
+
+* **Significance:**  Approximate distance oracles are very useful in applications where fast query time is critical, even if a slight loss of accuracy is acceptable.  Examples include routing protocols, geographic information systems, and social network analysis.
+
+
+**General Characteristics of Thorup's Algorithms:**
+
+* **Randomization:** Many of Thorup's algorithms use randomization, which means they use random choices during execution. This randomness usually improves the expected running time, but does not guarantee the best-case performance on every run.
+
+* **Sophisticated Data Structures:**  He frequently employs novel or highly optimized data structures to achieve the desired efficiency.
+
+* **Theoretical Focus:**  His algorithms often have a strong theoretical focus, proving optimal or near-optimal time complexities.  The practical implementation might require careful attention to constant factors to be truly competitive.
+
+
+**In summary:** Thorup's algorithms represent significant advances in the field of graph algorithms, offering highly efficient solutions for fundamental problems.  While their implementation complexity might be higher than simpler algorithms, the substantial improvements in runtime for very large graphs make them highly valuable in various applications.
+
