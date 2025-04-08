@@ -70183,3 +70183,56 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on whether you know the number of iterations beforehand.  `for` is generally preferred when the number of iterations is known, while `while` is better when the number of iterations depends on a condition that might change during the loop's execution.  Remember to always be mindful of potential infinite loops when using `while` loops.
 
+#  A Nested Loop 
+A nested loop is a programming structure where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a pattern where the inner loop's actions are repeated multiple times based on the number of iterations of the outer loop.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for i in range(outer_iterations):  # Outer loop
+    for j in range(inner_iterations):  # Inner loop
+        # Code to be executed in the inner loop
+    # Code to be executed after each completion of the inner loop
+# Code to be executed after the outer loop completes
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: Iterates through rows (1 to 10)
+    for j in range(1, 11):  # Inner loop: Iterates through columns (1 to 10)
+        product = i * j
+        print(f"{i} x {j} = {product}", end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+This will produce output like this:
+
+```
+1 x 1 = 1	1 x 2 = 2	1 x 3 = 3	1 x 4 = 4	1 x 5 = 5	1 x 6 = 6	1 x 7 = 7	1 x 8 = 8	1 x 9 = 9	1 x 10 = 10
+2 x 1 = 2	2 x 2 = 4	2 x 3 = 6	2 x 4 = 8	2 x 5 = 10	2 x 6 = 12	2 x 7 = 14	2 x 8 = 16	2 x 9 = 18	2 x 10 = 20
+...and so on
+```
+
+**Uses:**
+
+Nested loops are commonly used for:
+
+* **Processing multi-dimensional data:**  Working with matrices, tables, or any data structure with rows and columns.
+* **Generating patterns:**  Creating output like multiplication tables, triangles, or other geometric shapes.
+* **Iterating through combinations:**  Finding all possible pairs or combinations of items from two or more sets.
+* **Searching within nested data structures:**  Looking for elements within lists of lists, dictionaries within dictionaries, etc.
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can be computationally expensive, especially with large numbers of iterations.  The runtime complexity increases significantly (often quadratically or even higher). Consider optimization techniques if performance becomes an issue.
+* **Readability:**  Deeply nested loops can make code hard to read and understand.  Try to keep them as shallow as possible and use meaningful variable names.
+
+
+In summary, nested loops are a powerful tool, but their use should be carefully considered due to their potential impact on performance and code readability.  They are essential for working with many types of multi-dimensional data and generating various patterns.
+
