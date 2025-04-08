@@ -71727,3 +71727,119 @@ class Node:
 
 Remember to replace `# ... (build your tree) ...` in the example usage with code that creates your binary tree structure.  These examples use recursion, but iterative approaches (using stacks) are also possible for each traversal type.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants (where we allow a node to be a descendant of itself).  There are several ways to solve this problem. Here are two common approaches:
+
+**1. Recursive Approach:**
+
+This approach uses recursion to traverse the tree.  The core idea is:
+
+* **Base Case:** If the current node is `null`, return `null`.  If the current node is equal to either `node1` or `node2`, return the current node.
+* **Recursive Step:** Recursively search for the LCA in the left and right subtrees.
+    * If both left and right subtrees return non-`null` values, it means `node1` and `node2` are on different subtrees, so the current node is the LCA.
+    * Otherwise, return the non-`null` result (the LCA is in one of the subtrees).
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    else:
+        return right
+
+# Example Usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+
+```
+
+**2. Iterative Approach (using parent pointers):**
+
+This approach requires a slight modification:  assume each node has a pointer to its parent. Then, we can use two stacks or sets to find the LCA efficiently.
+
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None, parent=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.parent = parent
+
+
+def lowestCommonAncestorIterative(root, p, q):
+    path_p = []
+    path_q = []
+
+    #Find paths to p and q using parent pointers
+    curr = p
+    while curr:
+        path_p.append(curr)
+        curr = curr.parent
+    
+    curr = q
+    while curr:
+        path_q.append(curr)
+        curr = curr.parent
+
+    #Find the LCA by comparing paths
+    lca = None
+    i = len(path_p) -1
+    j = len(path_q) -1
+
+    while i >= 0 and j >= 0 and path_p[i] == path_q[j]:
+        lca = path_p[i]
+        i -=1
+        j -=1
+
+    return lca
+
+
+#Example Usage (requires setting parent pointers during tree construction)
+
+root = TreeNode(3)
+root.left = TreeNode(5, parent=root)
+root.right = TreeNode(1, parent=root)
+root.left.left = TreeNode(6, parent=root.left)
+root.left.right = TreeNode(2, parent=root.left)
+root.right.left = TreeNode(0, parent=root.right)
+root.right.right = TreeNode(8, parent=root.right)
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+
+lca = lowestCommonAncestorIterative(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val if lca else 'Not Found'}") # Output: LCA of 5 and 1: 3
+
+```
+
+**Choosing the Right Approach:**
+
+* The **recursive approach** is generally simpler to understand and implement.  It doesn't require modifying the tree structure.
+* The **iterative approach** can be more efficient in some cases, especially for very deep trees, as it avoids recursive function calls. However, it necessitates adding parent pointers to the tree nodes, which might not be desirable if you're working with a pre-existing tree structure.
+
+Remember to handle edge cases, such as when one or both nodes are not present in the tree, or when one node is an ancestor of the other.  The provided code includes basic error handling for the null case.  More robust error handling might be needed depending on the specific requirements.
+
