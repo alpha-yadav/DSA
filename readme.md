@@ -70265,3 +70265,73 @@ This process repeats until you find your solution or the search space is empty. 
 
 **Important Note:**  The base of the logarithm in O(log n) is not significant in Big O notation because it's just a constant factor.  O(log₂ n), O(log₁₀ n), and O(ln n) (natural logarithm) are all considered O(log n).
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  It works by repeatedly dividing the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process is repeated until the target value is found or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid  # Target found
+    elif arr[mid] < target:
+      low = mid + 1  # Search in the upper half
+    else:
+      high = mid - 1  # Search in the lower half
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+**Why it's O(log n):**
+
+With each comparison, we effectively halve the size of the search space.  This means that the number of comparisons required is proportional to the logarithm (base 2) of the input size (n).  Specifically:
+
+* If n = 1, we do 1 comparison.
+* If n = 2, we do at most 2 comparisons.
+* If n = 4, we do at most 3 comparisons.
+* If n = 8, we do at most 4 comparisons.
+* And so on...
+
+This logarithmic relationship is what gives binary search its efficiency, especially for large arrays.  The time it takes to search doesn't increase linearly with the size of the array; it increases much more slowly.
+
+
+Other examples of O(log n) algorithms include:
+
+* Finding an element in a balanced binary search tree.
+* Calculating the exponentiation by squaring method.
+* Some efficient sorting algorithms like merge sort (though the overall time complexity of merge sort is O(n log n)).
+
+
+Remember that O(log n) complexity assumes that the input is already sorted (in the case of binary search) or structured appropriately (in the case of balanced binary search trees).  The preprocessing steps required to achieve this sorted or structured data might impact the overall efficiency in some scenarios.
+
