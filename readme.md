@@ -69739,3 +69739,79 @@ print(longest_palindrome("cbbd")) # Output: bb
 
 These examples show the progression of algorithmic complexity.  Remember that the "best" solution often involves choosing an appropriate algorithm and data structure based on the problem's constraints.  For harder problems, optimization techniques like dynamic programming or greedy algorithms might be necessary.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It prints numbers from 1 to a given number, but replaces multiples of 3 with "Fizz", multiples of 5 with "Buzz", and multiples of both 3 and 5 with "FizzBuzz".
+
+Here are a few ways to implement it in Swift, starting with the most straightforward approach and progressing to slightly more advanced techniques:
+
+**Method 1: Basic Approach (most readable)**
+
+This method uses a simple `for` loop and `if-else if-else` statements to check for divisibility:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This is easy to understand and maintain, but it's slightly less efficient because it performs multiple modulo operations in each iteration.
+
+**Method 2: Slightly Optimized Approach**
+
+This approach checks for divisibility by 15 first to avoid unnecessary checks:
+
+```swift
+func fizzBuzzOptimized(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzzOptimized(n: 15) // Example usage
+
+```
+
+The difference in performance is negligible for small `n`, but becomes more noticeable for larger values.
+
+**Method 3: Using String Interpolation and Ternary Operator (more concise)**
+
+This approach uses Swift's features to make the code more compact:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let fizz = i % 3 == 0 ? "Fizz" : ""
+        let buzz = i % 5 == 0 ? "Buzz" : ""
+        print(fizz + buzz == "" ? "\(i)" : fizz + buzz)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Example Usage
+```
+
+This version is more concise but might be slightly harder to read for beginners.  The ternary operator `condition ? value1 : value2` assigns `value1` if the condition is true, and `value2` otherwise.
+
+**Choosing the best method:**
+
+For beginners, **Method 1** is recommended for its clarity.  As you gain experience, you might prefer the more concise **Method 3** or the slightly optimized **Method 2**.  The performance differences are usually insignificant unless you're dealing with extremely large values of `n`.  The key is to write code that's both correct and easy to understand.  Remember to choose the approach that best suits your needs and understanding.
+
