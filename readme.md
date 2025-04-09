@@ -76005,3 +76005,36 @@ Asymptotic notations describe the behavior of functions as their input grows arb
 
 Understanding these notations is essential for comparing the efficiency of different algorithms and making informed choices about which algorithm to use for a given problem.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the *lower bound* of a function's growth rate.  In simpler terms, it tells us the minimum amount of time or resources (like memory) an algorithm will *always* require, regardless of the input data.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Big-Omega of *g(n)*, written as *f(n) = Ω(g(n))*, if there exist positive constants *c* and *n₀* such that for all *n ≥ n₀*:
+
+`f(n) ≥ c * g(n)`
+
+This means that for sufficiently large inputs (*n ≥ n₀*), *f(n)* is always greater than or equal to some constant multiple (*c*) of *g(n)*.  The constant *c* is crucial; it allows for scaling, meaning we're not concerned with precise values but rather the overall growth trend.
+
+**What it means:**
+
+* **Lower Bound:** Ω notation provides a lower bound on the growth rate.  It's a guarantee of minimum performance.  An algorithm with a time complexity of Ω(n²) will *at least* take time proportional to the square of the input size for sufficiently large inputs, regardless of whether it's sometimes faster.
+
+* **Best-Case Scenario (often):** While not always the case, Ω often reflects the best-case time complexity of an algorithm.  Think of searching for an item at the beginning of a sorted list.  That's the best-case scenario, and the algorithm's complexity might be Ω(1) (constant time) because it finds it immediately, even though it *could* take longer (linear time, or O(n)).
+
+* **Not the Opposite of Big-O:**  Ω(g(n)) is *not* the exact opposite of O(g(n)).  A function can simultaneously be O(g(n)) and Ω(g(n)).  This means its growth rate is bounded both above and below by g(n), indicating a tight bound.  This is denoted by Θ(g(n)) (Big-Theta notation).
+
+**Example:**
+
+Let's consider an algorithm that searches an unsorted array.
+
+* **Worst-Case:** The algorithm might need to examine every element (O(n)).
+* **Best-Case:** The algorithm might find the element in the first position (Ω(1)).
+* **Average-Case:** This is often more complex to analyze.
+
+**In summary:**
+
+Big-Omega notation (Ω) helps us understand the *minimum* resource requirements of an algorithm.  It's a valuable tool alongside Big-O (upper bound) and Big-Theta (tight bound) to get a complete picture of an algorithm's performance characteristics.
+
