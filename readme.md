@@ -74781,3 +74781,115 @@ postorder(root) # Output: 4 5 2 3 1
 
 These are recursive implementations.  Iterative implementations using stacks are also possible, but they are slightly more complex.  The recursive versions are generally easier to understand and implement.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with different time and space complexities.  Here are two common approaches:
+
+**Method 1: Recursive Approach (Efficient)**
+
+This method uses recursion and is generally the most efficient. It leverages the property that the LCA must exist on the path between the two nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, node1, node2):
+    """
+    Finds the Lowest Common Ancestor (LCA) of node1 and node2 in the binary tree rooted at root.
+
+    Args:
+        root: The root of the binary tree.
+        node1: The first node.
+        node2: The second node.
+
+    Returns:
+        The LCA node, or None if either node1 or node2 is not found.
+    """
+    if root is None or root == node1 or root == node2:
+        return root
+
+    left_lca = lca(root.left, node1, node2)
+    right_lca = lca(root.right, node1, node2)
+
+    if left_lca and right_lca:  # Found node1 and node2 in different subtrees
+        return root
+    elif left_lca:            # node1 and node2 are in the left subtree
+        return left_lca
+    else:                     # node1 and node2 are in the right subtree
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+node1 = root.left.left  # Node 4
+node2 = root.right.right # Node 7
+
+lca_node = lca(root, node1, node2)
+if lca_node:
+    print(f"LCA of {node1.data} and {node2.data} is: {lca_node.data}")
+else:
+    print("One or both nodes not found in the tree.")
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, we might traverse the entire tree.
+**Space Complexity:** O(H), where H is the height of the tree. This is due to the recursive call stack.  In the worst case (a skewed tree), H can be equal to N.
+
+
+**Method 2: Using a Path (Less Efficient)**
+
+This method finds the paths from the root to each node and then finds the last common node in those paths.  It's less efficient than the recursive approach.
+
+```python
+def find_path(root, node, path):
+    """Finds the path from the root to the given node."""
+    if root is None:
+        return False
+
+    path.append(root)
+    if root == node:
+        return True
+    if (find_path(root.left, node, path) or
+            find_path(root.right, node, path)):
+        return True
+    path.pop()
+    return False
+
+
+def lca_path(root, node1, node2):
+    """Finds LCA using path."""
+    path1 = []
+    path2 = []
+
+    if not find_path(root, node1, path1) or not find_path(root, node2, path2):
+        return None
+
+    i = 0
+    while i < len(path1) and i < len(path2) and path1[i] == path2[i]:
+        i += 1
+
+    return path1[i - 1]  # Return the last common ancestor
+
+
+# Example usage (same tree as before):
+lca_node_path = lca_path(root, node1, node2)
+if lca_node_path:
+    print(f"LCA of {node1.data} and {node2.data} is: {lca_node_path.data}")
+else:
+    print("One or both nodes not found in the tree.")
+```
+
+**Time Complexity:** O(N) in the worst case.
+**Space Complexity:** O(N) in the worst case (for storing paths).
+
+
+The **recursive approach (Method 1)** is generally preferred due to its better space complexity in most cases.  Choose the method that best suits your needs and coding style, considering the trade-offs between efficiency and readability. Remember to handle edge cases like empty trees or nodes not being present in the tree.
+
