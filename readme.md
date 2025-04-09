@@ -72751,3 +72751,55 @@ Begin with fundamental algorithms to build a strong foundation. Examples include
 
 By following these steps and consistently practicing, you'll steadily build your understanding and proficiency in algorithms. Remember, it's a journey, not a race.  Enjoy the process of learning!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems with varying difficulty levels:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string `s`.
+**Output:** The reversed string.
+
+**Example:**
+Input: "hello"
+Output: "olleh"
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+**Output:**  Return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`.
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+Input: "babad"
+Output: "bab" or "aba" (both are valid answers)
+
+
+**Expert (Advanced):**
+
+**Problem:**  Find the shortest path in a weighted graph.
+
+**Input:**  A graph represented as an adjacency matrix or adjacency list, where each edge has a weight (cost).  A starting node and an ending node.
+**Output:** The shortest path between the starting and ending nodes, and its total weight.  Consider using Dijkstra's Algorithm.
+
+**Example:**  (requires a graph representation as input, which would be too verbose here).  Output would be something like:  "Shortest path: A -> B -> D, Total weight: 7"
+
+
+These problems showcase different aspects of algorithmic problem-solving, including string manipulation, array manipulation, and graph traversal.  The difficulty increases significantly as you progress through the list.  Remember that the key to solving these types of problems is to break them down into smaller, manageable steps and to choose the most efficient algorithm.
+
