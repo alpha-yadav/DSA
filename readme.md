@@ -75847,3 +75847,67 @@ This version uses the `map` function to transform the range of numbers (1...n) i
 
 For simple FizzBuzz, the basic `for` loop approach is perfectly acceptable and easy to understand.  The functional approach is more elegant and can be advantageous in larger, more complex scenarios.  The improved version offers a minor efficiency gain. Choose the approach that best suits your understanding and the context of your project.  For learning purposes, the basic version is a great starting point. Remember to compile and run this code in a Swift environment (like Xcode's playground) to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most commonly considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We usually express complexity using **Big O notation**, which describes the upper bound of the growth rate of the algorithm's resource consumption as the input size approaches infinity.  Big O notation ignores constant factors and lower-order terms, focusing on the dominant factor that determines growth.
+
+Here's a breakdown of common time complexities (space complexity is analyzed similarly):
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic Time:** The runtime grows logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime grows linearly with the input size.  Example: Searching an unsorted array for a specific element.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime grows proportionally to the square of the input size.  Example: Bubble sort, selection sort, nested loops iterating through the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  This becomes extremely slow for larger inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. This is extremely slow even for small inputs. Example: Traveling salesman problem using brute force.
+
+
+**How to Analyze Algorithm Complexity:**
+
+1. **Identify the basic operation:** Determine the operation that contributes most significantly to the algorithm's runtime.
+
+2. **Count the number of times the basic operation is executed:** Express this count as a function of the input size (n).
+
+3. **Use Big O notation:** Simplify the function by ignoring constant factors and lower-order terms.
+
+
+**Example:**
+
+Let's analyze the time complexity of a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+1. **Basic operation:** Comparing `arr[i]` with `target`.
+
+2. **Count:** In the worst case (target is not found), the comparison is performed `n` times, where `n` is the length of the array.
+
+3. **Big O notation:** The time complexity is O(n), linear time.
+
+
+**Beyond Big O:**
+
+While Big O notation is most common, other notations provide a more complete picture:
+
+* **Big Omega (Ω):** Describes the lower bound of an algorithm's runtime.  It represents the best-case scenario.
+
+* **Big Theta (Θ):** Describes the tight bound, representing both the upper and lower bounds.  It means the algorithm's runtime grows at the same rate as the function.
+
+
+Understanding algorithm complexity is crucial for choosing the most efficient algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower time complexity will generally perform faster.  Space complexity is also vital to ensure the algorithm doesn't consume excessive memory.
+
