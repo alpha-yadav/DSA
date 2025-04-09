@@ -73460,3 +73460,12 @@ The "best" representation depends heavily on your specific needs. Consider the f
 
 Remember to choose the representation that best balances efficiency, simplicity, and memory usage for your specific application.
 
+#  Introduction 
+Please provide me with some context!  To write an introduction, I need to know what the topic is.  For example, tell me:
+
+* **What is the subject of the paper, essay, presentation, or other piece of writing?** (e.g., the history of the Roman Empire, the benefits of recycling, the life cycle of a butterfly)
+* **Who is your intended audience?** (e.g., experts in the field, general public, classmates)
+* **What is the purpose of your writing?** (e.g., to inform, to persuade, to entertain)
+
+Once I have this information, I can help you write a compelling introduction.
+
