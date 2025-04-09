@@ -76082,3 +76082,70 @@ Consider searching for an element in an array:
 
 In conclusion, Big O notation is a crucial tool for analyzing and comparing algorithm efficiency. Understanding it is essential for writing efficient and scalable software.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specified condition is met.  Here are examples in a few common programming languages:
+
+**1. While Loop (Python):**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This loop prints the numbers 0 through 4.  The condition `count < 5` is checked before each iteration.  Once `count` becomes 5, the loop terminates.
+
+**2. For Loop (Python):**
+
+```python
+for i in range(5):
+  print(i)
+```
+
+This loop achieves the same result as the `while` loop above, but more concisely.  `range(5)` generates a sequence of numbers from 0 to 4.
+
+**3. For Loop (JavaScript):**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+Similar to the Python `for` loop, this iterates five times, printing 0 through 4.
+
+**4. While Loop (C++):**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+This C++ example is analogous to the Python `while` loop.  Note the inclusion of `<iostream>` for input/output and the use of `std::cout` and `std::endl`.
+
+**5. For Loop (Java):**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+This Java example uses a `for` loop similar to the JavaScript and Python versions.
+
+
+These are just basic examples. Loops can be much more complex, incorporating nested loops, `break` and `continue` statements for conditional control, and iterating over various data structures.  The specific syntax varies slightly between languages, but the fundamental concept remains the same: repeated execution of a code block.
+
