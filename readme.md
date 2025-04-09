@@ -73236,3 +73236,71 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  To make it more useful, replace `print(i)` or `console.log(i)` or `std::cout << i << std::endl;` or `System.out.println(i);` with the code you want to repeat.  Tell me what you want the loop to *do*, and I can help you write a more specific simple loop.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or perform repetitive tasks that depend on multiple indices.
+
+Here's a breakdown of nested loops:
+
+**Structure:**
+
+The general structure looks like this:
+
+```python
+for i in range(outer_iterations):  # Outer loop
+    # Code executed once per outer iteration
+    for j in range(inner_iterations):  # Inner loop
+        # Code executed once per inner iteration for each outer iteration
+    # Code executed after the inner loop completes for each outer iteration
+# Code executed after the outer loop completes
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: iterates through rows (1 to 10)
+    for j in range(1, 11):  # Inner loop: iterates through columns (1 to 10)
+        print(i * j, end="\t")  # Print the product with a tab separator
+    print()  # Newline after each row
+```
+
+This will output a 10x10 multiplication table.  Notice how the inner loop (calculating and printing the product) runs 10 times for *each* iteration of the outer loop (each row).
+
+**Example (JavaScript):**
+
+This example iterates through a 2D array:
+
+```javascript
+const array2D = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+for (let i = 0; i < array2D.length; i++) { // Outer loop: iterates through rows
+  for (let j = 0; j < array2D[i].length; j++) { // Inner loop: iterates through columns in each row
+    console.log(array2D[i][j]);
+  }
+}
+```
+
+This will print each element of the 2D array.  The inner loop's length depends on the length of the current row in the outer loop.
+
+**When to use Nested Loops:**
+
+Nested loops are useful for:
+
+* **Processing multi-dimensional data:**  Working with matrices, tables, or any data structure with multiple levels.
+* **Generating patterns:** Creating output such as multiplication tables, triangles of numbers, or other graphical patterns.
+* **Iterating through combinations:**  Exploring all possible combinations of items from multiple sets.
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the runtime of your code.  The time complexity often grows quadratically (O(n^2)) or even higher depending on the number of nested loops.  For large datasets, this can be a performance bottleneck.  Consider alternative algorithms if performance is critical.
+* **Readability:**  Deeply nested loops can be difficult to read and understand.  Break down complex logic into smaller, more manageable functions to improve code readability.
+
+
+In summary, nested loops provide a powerful tool for iterating over multiple dimensions and performing complex repetitive tasks, but it's essential to be mindful of their impact on performance and code readability.
+
