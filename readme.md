@@ -73304,3 +73304,23 @@ Nested loops are useful for:
 
 In summary, nested loops provide a powerful tool for iterating over multiple dimensions and performing complex repetitive tasks, but it's essential to be mindful of their impact on performance and code readability.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They only require a number of operations proportional to the logarithm of the input size. This means the time taken increases very slowly as the input size grows.  This efficiency usually comes from repeatedly dividing the problem size in half (or by some other constant factor).
+
+Here are some common types of algorithms that exhibit O(log n) time complexity:
+
+**1. Binary Search:** This is perhaps the quintessential O(log n) algorithm.  It works on sorted data.  In each step, it compares the target value to the middle element of the search range. If they match, the search is successful. If the target is smaller, the search continues in the lower half; otherwise, it continues in the upper half.  The search range is halved in each iteration, leading to logarithmic time complexity.
+
+**2. Balanced Binary Search Trees (BSTs) Operations (Search, Insertion, Deletion):**  In a balanced BST (like AVL trees or red-black trees), the height of the tree is proportional to log n, where n is the number of nodes.  Basic operations like searching, inserting, and deleting nodes involve traversing a path down the tree, taking O(log n) time on average.  (Worst-case scenario can be O(n) for unbalanced trees, but balanced trees are designed to prevent this).
+
+**3. Heap Operations (Insertion, Deletion, Finding Min/Max):**  Heaps are tree-based data structures that satisfy the heap property (e.g., min-heap: parent node is smaller than its children).  Operations like inserting an element, deleting the minimum/maximum element, and finding the minimum/maximum element all have a time complexity of O(log n) because they involve traversing a path from the leaf node to the root or vice versa.
+
+**4. Efficient exponentiation (e.g., using repeated squaring):** Calculating a<sup>b</sup> (a raised to the power of b) naively takes O(b) time. However, using the method of repeated squaring, it can be done in O(log b) time.  This involves cleverly reducing the number of multiplications required.
+
+**5. Finding the kth smallest element using Quickselect (average case):**  While Quickselect's worst-case time complexity is O(n²), its average-case time complexity is O(n).  However, if you're looking for the *k*th smallest element in a sorted array (e.g., finding the median), you can do this in O(log n) using a binary search approach.  This is effectively a specialized case.
+
+**6. Some divide and conquer algorithms:**  Algorithms that recursively divide a problem into smaller subproblems of roughly half the size in each step can have O(log n) time complexity.  However, the overall complexity depends on the work done at each step and the recursion depth.  Many algorithms that seem like they *could* be O(log n) actually have a higher complexity because of the work done at each level of recursion.
+
+
+**Important Note:**  The O(log n) complexity is usually only achieved *on average* or under certain assumptions (e.g., a balanced tree structure for BST operations).  In the worst case, some of these algorithms could degrade to O(n) or even worse.  The base of the logarithm (e.g., base 2, base 10) is usually ignored in Big O notation because it only affects the constant factor.
+
