@@ -75765,3 +75765,85 @@ print(f"Shortest distances from A: {distances}") #Output shows the shortest dist
 
 This problem highlights key aspects of algorithm design:  choosing the right data structure (adjacency list is generally more efficient than adjacency matrix for sparse graphs), understanding algorithm complexity (Dijkstra's is O(E log V) where E is the number of edges and V is the number of vertices), and correctly implementing the chosen algorithm.  Variations of the problem could include finding all shortest paths, or finding the shortest path avoiding certain nodes or edges.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's simple to understand but helps illustrate fundamental concepts like loops and conditional statements.  Here's how to implement it in Swift, starting with a straightforward approach and then showing some more advanced variations.
+
+**Basic FizzBuzz in Swift**
+
+This version uses a `for` loop and `if/else if/else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* If it's divisible by both 3 and 5 (i.e., divisible by 15), it prints "FizzBuzz".
+* If it's divisible by 3, it prints "Fizz".
+* If it's divisible by 5, it prints "Buzz".
+* Otherwise, it prints the number itself.
+
+
+**Slightly Improved Version (More Efficient)**
+
+We can make the code slightly more efficient by checking for divisibility by 15 first:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+The order of the `if` statements doesn't change the output, but checking for divisibility by 15 first avoids unnecessary checks in some cases.
+
+
+**Functional Approach (using `map`):**
+
+Swift's functional programming capabilities allow for a more concise solution:
+
+```swift
+func fizzBuzzFunctional(n: Int) -> [String] {
+    return (1...n).map { i in
+        var result = ""
+        if i % 3 == 0 { result += "Fizz" }
+        if i % 5 == 0 { result += "Buzz" }
+        return result.isEmpty ? String(i) : result
+    }
+}
+
+print(fizzBuzzFunctional(n: 15)) // Prints the array of results
+```
+
+This version uses the `map` function to transform the range of numbers (1...n) into an array of strings.  Each number is processed, and the corresponding "Fizz", "Buzz", "FizzBuzz", or number string is added to the array.
+
+
+**Choosing the Best Approach**
+
+For simple FizzBuzz, the basic `for` loop approach is perfectly acceptable and easy to understand.  The functional approach is more elegant and can be advantageous in larger, more complex scenarios.  The improved version offers a minor efficiency gain. Choose the approach that best suits your understanding and the context of your project.  For learning purposes, the basic version is a great starting point. Remember to compile and run this code in a Swift environment (like Xcode's playground) to see the output.
+
