@@ -75002,3 +75002,14 @@ Remember to handle edge cases like:
 
 The specific implementation will depend on the data structure you're using (how nodes are represented, whether parent pointers exist).  Choose the method that best suits your tree structure and performance needs.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about what you want to graph before I can create a graph for you.  For example, tell me:
+
+* **The type of graph:**  Line graph, bar graph, scatter plot, pie chart, etc.
+* **The data:**  A table of values (x, y coordinates), a list of numbers, or an equation.
+* **The variables:** What do the x and y axes represent?  (e.g., time vs. temperature)
+* **Any labels or titles:**  What should the graph be called, and what should the axes be labeled?
+
+
+Once I have this information, I can help you create a graph.
+
