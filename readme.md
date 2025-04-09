@@ -75947,3 +75947,61 @@ This means that for sufficiently large inputs (*n ≥ n₀*), the function *f(n)
 
 Θ notation is crucial for analyzing the efficiency of algorithms.  It allows us to compare the performance of different algorithms as the input size grows, enabling us to choose the most efficient one for a given task.  For instance, we might say that a sorting algorithm has a time complexity of Θ(n log n), indicating that its runtime grows proportionally to *n log n* as the number of elements to be sorted increases.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input grows arbitrarily large.  They're crucial in computer science for analyzing the efficiency of algorithms. Here's a comparison of the most common ones:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than the square of the input size.  This doesn't mean it *always* takes n² time, just that it's bounded above by a quadratic function for sufficiently large n.
+* **Focus:** Worst-case complexity.
+
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function.  It describes the *best-case* scenario (or a lower bound on the complexity in all cases). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size.
+* **Focus:** Best-case or lower bound complexity.
+
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows both no faster and no slower than a particular function.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+* **Focus:** Precise asymptotic behavior.
+
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  The inequality is strict.
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+* **Focus:**  Showing a function's growth is dominated by another.
+
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function.  f(n) = ω(g(n)) if for every positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀. The inequality is strict.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+* **Focus:** Showing a function's growth dominates another.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Example             | Focus                      |
+|----------|---------------------------------------|----------------------|---------------------------|
+| O(g(n))  | Upper bound                           | n² = O(n³)           | Worst-case                 |
+| Ω(g(n))  | Lower bound                           | n² = Ω(n)            | Best-case or lower bound |
+| Θ(g(n))  | Tight bound (both upper and lower)    | n² = Θ(n²)           | Precise asymptotic behavior |
+| o(g(n))  | Strictly slower growth               | n = o(n²)            | Dominance                  |
+| ω(g(n))  | Strictly faster growth                | n² = ω(n)            | Dominance                  |
+
+
+**Important Considerations:**
+
+* **Constants are ignored:** Asymptotic notations focus on the dominant terms as n approaches infinity. Constants and lower-order terms are dropped.
+* **Input size:**  `n` typically represents the size of the input to the algorithm (e.g., the number of elements in an array).
+* **Approximation:**  These notations provide approximations of the runtime behavior; they don't give precise runtime measurements.
+
+
+Understanding these notations is essential for comparing the efficiency of different algorithms and making informed choices about which algorithm to use for a given problem.
+
