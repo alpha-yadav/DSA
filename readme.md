@@ -75911,3 +75911,39 @@ While Big O notation is most common, other notations provide a more complete pic
 
 Understanding algorithm complexity is crucial for choosing the most efficient algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower time complexity will generally perform faster.  Space complexity is also vital to ensure the algorithm doesn't consume excessive memory.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate, meaning it provides both an upper and a lower bound that are asymptotically proportional.  In simpler terms, it tells us that a function grows at roughly the same rate as another function, ignoring constant factors and smaller-order terms.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large inputs (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.  *g(n)* represents the growth rate of *f(n)*.
+
+**What this means:**
+
+* **Asymptotic Behavior:** Θ notation focuses on the growth rate of a function as the input size (*n*) approaches infinity.  It ignores constant factors and lower-order terms because these become insignificant as *n* gets very large.
+
+* **Tight Bound:** Unlike Big-O (O) notation which only provides an upper bound, and Big-Ω (Ω) which only provides a lower bound, Θ notation provides both.  This makes it a stronger statement about the function's growth rate.  If *f(n)* is Θ(*g(n)*), it means *f(n)* grows at the *same rate* as *g(n)*.
+
+* **Example:**  If *f(n) = 2n² + 5n + 10*, then *f(n)* is Θ(n²).  We can find constants that satisfy the definition:
+
+   * Choose *c₁ = 1*.  For sufficiently large *n*,  *2n² + 5n + 10* will always be greater than or equal to *n²*.
+   * Choose *c₂ = 3*. For sufficiently large *n*, *2n² + 5n + 10* will always be less than or equal to *3n²*.
+   * Therefore, 1*n² ≤ 2n² + 5n + 10 ≤ 3*n² for sufficiently large *n*.
+
+
+**Relationship to Big-O and Big-Ω:**
+
+* If *f(n)* is Θ(*g(n)*), then *f(n)* is both O(*g(n)*) and Ω(*g(n)*).
+* However, if *f(n)* is O(*g(n)*) and Ω(*g(n)*), it's not necessarily Θ(*g(n)*).  For example, *f(n) = n* and *g(n) = n²*.  *f(n)* is both O(n²) and Ω(n), but not Θ(n²), because *f(n)* grows slower than *g(n)*.
+
+
+**Uses in Computer Science:**
+
+Θ notation is crucial for analyzing the efficiency of algorithms.  It allows us to compare the performance of different algorithms as the input size grows, enabling us to choose the most efficient one for a given task.  For instance, we might say that a sorting algorithm has a time complexity of Θ(n log n), indicating that its runtime grows proportionally to *n log n* as the number of elements to be sorted increases.
+
