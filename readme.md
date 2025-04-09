@@ -75289,3 +75289,93 @@ Both Kahn's algorithm and the DFS-based approach are correct. Kahn's algorithm i
 
 Remember that attempting a topological sort on a graph with cycles will result in neither algorithm completing successfully; you'll find a cycle or end with an incomplete sorted list.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on tracking the state of each node during the traversal.  We use three states:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (in the recursion stack).
+* **Visited:** The node and its descendants have been fully explored.
+
+A cycle exists if, during the traversal, we encounter a node that's already in the `Visiting` state. This indicates a back edge, which is a defining characteristic of a cycle in a directed graph.
+
+Here's how it works in detail, along with code examples in Python:
+
+**Algorithm:**
+
+1. **Initialization:**  Mark all nodes as `Unvisited`.
+2. **DFS:** For each node, perform a Depth First Search.
+3. **DFS Helper Function:**  The recursive DFS helper function takes the current node and its state as input.
+   * If the node is `Visited`, return.
+   * If the node is `Visiting`, a cycle is detected.
+   * Mark the node as `Visiting`.
+   * Recursively call the DFS helper function for all neighbors of the current node.
+   * Mark the node as `Visited`.
+
+
+**Python Code:**
+
+```python
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.graph = [[] for _ in range(vertices)]
+
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+
+    def is_cyclic_util(self, v, visited, recStack):
+        visited[v] = True
+        recStack[v] = True
+
+        for neighbor in self.graph[v]:
+            if not visited[neighbor]:
+                if self.is_cyclic_util(neighbor, visited, recStack):
+                    return True
+            elif recStack[neighbor]:
+                return True
+
+        recStack[v] = False
+        return False
+
+    def is_cyclic(self):
+        visited = [False] * self.V
+        recStack = [False] * self.V
+        for node in range(self.V):
+            if not visited[node]:
+                if self.is_cyclic_util(node, visited, recStack):
+                    return True
+        return False
+
+# Example usage:
+g = Graph(4)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(1, 2)
+g.add_edge(2, 0)
+g.add_edge(2, 3)
+g.add_edge(3, 3) # Self-loop, creates a cycle
+
+if g.is_cyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+
+
+g2 = Graph(4)
+g2.add_edge(0,1)
+g2.add_edge(1,2)
+g2.add_edge(2,3)
+
+if g2.is_cyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+```
+
+**Explanation of the Code:**
+
+* `is_cyclic_util`: This recursive function performs the DFS.  `visited` tracks visited nodes, and `recStack` tracks nodes currently in the recursion stack (being visited).
+* `is_cyclic`: This function initializes the `visited` and `recStack` arrays and iterates through all nodes to start the DFS from each unvisited node.
+
+This approach efficiently detects cycles in directed graphs. The time complexity is O(V+E), where V is the number of vertices and E is the number of edges, which is the same as a standard DFS. The space complexity is O(V) due to the `visited` and `recStack` arrays.  Remember that a self-loop (an edge from a node to itself) also constitutes a cycle.
+
