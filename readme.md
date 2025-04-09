@@ -74893,3 +74893,112 @@ else:
 
 The **recursive approach (Method 1)** is generally preferred due to its better space complexity in most cases.  Choose the method that best suits your needs and coding style, considering the trade-offs between efficiency and readability. Remember to handle edge cases like empty trees or nodes not being present in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree depends heavily on the type of tree and the information available.  Here are a few approaches:
+
+**1. Binary Tree (Most Common Case):**
+
+* **Recursive Approach (Efficient):** This is a generally efficient approach for binary trees.  The idea is to recursively traverse the tree. If the current node is one of the targets, return the node.  If the targets are in different subtrees, then the current node is the LCA. Otherwise, recursively search the subtree where both targets are found.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lowestCommonAncestor(root, root.left, root.right)
+print(f"LCA of 2 and 3 is: {lca.data}")  # Output: 1
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right)
+print(f"LCA of 4 and 5 is: {lca.data}") # Output: 2
+```
+
+* **Iterative Approach (Using Parent Pointers):** If each node has a pointer to its parent, you can use an iterative approach.  Find the paths from each target node to the root. Then, traverse both paths simultaneously, stopping when the nodes differ. The last common node is the LCA.
+
+**2. General Tree (Arbitrary Number of Children):**
+
+* **Recursive Approach:** Similar to the binary tree approach, but instead of `left` and `right`, you iterate through all children.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    for child in root.children:
+        lca = lowestCommonAncestor(child, p, q)
+        if lca:
+            return lca
+    return None
+
+# Example usage (requires building a general tree)
+```
+
+**3.  Using Parent Pointers (Efficient for both Binary and General Trees):**
+
+If you have parent pointers, this is often the most efficient approach for any type of tree:
+
+1. **Find Paths:**  Perform Depth-First Search (DFS) or similar to find the paths from each target node (`p` and `q`) to the root.
+2. **Compare Paths:** Iterate through both paths simultaneously.  The last node where the paths are the same is the LCA.
+
+**4.  Binary Tree with Parent Pointers:**
+
+This combines the efficiency of parent pointers with the structure of a binary tree.  The algorithm becomes much simpler.
+
+```python
+# Assuming Node class has a 'parent' attribute
+def lowestCommonAncestor(p, q):
+    ancestors_p = set()
+    curr = p
+    while curr:
+        ancestors_p.add(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        if curr in ancestors_p:
+            return curr
+        curr = curr.parent
+    return None # Should not happen if p and q are in the tree
+```
+
+
+**Choosing the Right Approach:**
+
+* **Binary Tree without Parent Pointers:** Recursive approach is generally best.
+* **Binary Tree with Parent Pointers:** The parent pointer approach is significantly more efficient.
+* **General Tree without Parent Pointers:** Recursive approach is straightforward but might be less efficient for very deep or wide trees.
+* **General Tree with Parent Pointers:**  Parent pointer approach is the most efficient.
+
+
+Remember to handle edge cases like:
+
+* One or both nodes are not in the tree.
+* One node is an ancestor of the other.
+* The root is one of the target nodes.
+
+The specific implementation will depend on the data structure you're using (how nodes are represented, whether parent pointers exist).  Choose the method that best suits your tree structure and performance needs.
+
