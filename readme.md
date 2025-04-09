@@ -72803,3 +72803,78 @@ Output: "bab" or "aba" (both are valid answers)
 
 These problems showcase different aspects of algorithmic problem-solving, including string manipulation, array manipulation, and graph traversal.  The difficulty increases significantly as you progress through the list.  Remember that the key to solving these types of problems is to break them down into smaller, manageable steps and to choose the most efficient algorithm.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's a great introduction to loops and conditional statements. Here's how to implement it in Swift, starting with a simple version and then showing ways to improve it:
+
+
+**Version 1: Basic FizzBuzz**
+
+This version uses a `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test it
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz").
+* Then it checks divisibility by 5 ("Buzz").
+* If none of the above are true, it prints the number itself.
+
+
+**Version 2:  Slightly More Concise FizzBuzz**
+
+This version uses a ternary operator to make the code a bit more compact:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This achieves the same result but nests ternary operators.  While shorter, it can become less readable for more complex conditions.
+
+
+**Version 3: Using String Interpolation and a Tuple** (More advanced)
+
+This version leverages string interpolation and a tuple for better readability and potential extensibility:
+
+```swift
+func fizzBuzzElegant(n: Int) {
+    for i in 1...n {
+        let fizz = (i % 3 == 0) ? "Fizz" : ""
+        let buzz = (i % 5 == 0) ? "Buzz" : ""
+        print("\(fizz)\(buzz) \(fizz.isEmpty && buzz.isEmpty ? i : "")")
+    }
+}
+
+fizzBuzzElegant(n: 15)
+```
+
+This approach is more readable because it clearly separates the Fizz and Buzz logic.  It also uses string interpolation to combine the results elegantly.  The final conditional ensures that the number itself is only printed if neither "Fizz" nor "Buzz" were added.
+
+
+**Choosing the Right Version:**
+
+For a simple understanding, Version 1 is excellent.  Version 2 is more concise but might be less readable for beginners. Version 3 is more sophisticated and shows a better approach for potentially more complex scenarios.  Choose the version that best suits your understanding and the context of your learning.  The key is understanding the underlying logic and how to use loops and conditionals effectively in Swift.
+
