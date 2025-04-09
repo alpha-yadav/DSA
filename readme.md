@@ -74269,3 +74269,125 @@ print(is_bst_recursive(root, float('-inf'), float('inf'))) # Output: False
 
 Both methods achieve the same result. The recursive method is often preferred for its better space complexity in many cases because it avoids creating an array to store the in-order traversal.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Algorithm 1: Recursive Approach (In-order Traversal)**
+
+This algorithm leverages the property that an in-order traversal of a BST will produce a sorted sequence of nodes.  We perform an in-order traversal and keep track of the previously visited node.  If the current node's value is less than the previous node's value, it's not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    prev = [float('-inf')]  # Initialize with negative infinity
+
+    def inorder(node):
+        if node:
+            if not inorder(node.left):
+                return False
+            if node.data <= prev[0]:
+                return False
+            prev[0] = node.data
+            if not inorder(node.right):
+                return False
+        return True
+
+    return inorder(root)
+
+
+# Example usage:
+root = Node(2)
+root.left = Node(1)
+root.right = Node(3)
+print(is_bst_recursive(root))  # Output: True
+
+root = Node(5)
+root.left = Node(1)
+root.right = Node(4)
+root.right.left = Node(3)
+root.right.right = Node(6)
+print(is_bst_recursive(root))  # Output: False (because 3 < 4 and is in the right subtree)
+
+
+root = Node(2)
+root.left = Node(1)
+root.right = Node(3)
+root.right.left = Node(4)
+print(is_bst_recursive(root)) # Output: False
+
+```
+
+**Algorithm 2:  Recursive Approach with Range**
+
+This approach is more efficient in some cases because it avoids the need for a global variable to track the previous node.  It uses recursion to check if the values within each subtree are within the allowed range.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_range(node, min_val, max_val):
+    """
+    Checks if a binary tree is a BST using recursion and range checking.
+
+    Args:
+        node: The current node being checked.
+        min_val: The minimum allowed value for this subtree.
+        max_val: The maximum allowed value for this subtree.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_range(node.left, min_val, node.data) and
+            is_bst_range(node.right, node.data, max_val))
+
+def is_bst(root):
+    """Wrapper function to start the range check"""
+    return is_bst_range(root, float('-inf'), float('inf'))
+
+
+# Example usage (same as before, should produce the same output):
+root = Node(2)
+root.left = Node(1)
+root.right = Node(3)
+print(is_bst(root))  # Output: True
+
+root = Node(5)
+root.left = Node(1)
+root.right = Node(4)
+root.right.left = Node(3)
+root.right.right = Node(6)
+print(is_bst(root))  # Output: False
+
+
+root = Node(2)
+root.left = Node(1)
+root.right = Node(3)
+root.right.left = Node(4)
+print(is_bst(root)) # Output: False
+```
+
+Both algorithms have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity depends on the height of the tree. In the worst case (a skewed tree), it's O(N) (recursive calls on the stack); in the best case (a balanced tree), it's O(log N).  The recursive range approach might be slightly more efficient in practice due to the absence of a global variable.  Choose the algorithm that you find more readable and easier to understand.
+
