@@ -76435,3 +76435,15 @@ The best representation to use will depend on your specific needs.  Consider fac
 
 Remember to choose the representation that best suits your application's requirements.  The examples above are merely starting points; variations and combinations are possible.
 
+#  Introduction 
+Please provide me with context!  "Introduction" to what?  To tell you a good introduction, I need to know the topic.  For example, are you looking for an introduction to:
+
+* **A specific topic?** (e.g., the history of the Roman Empire, the benefits of exercise, quantum physics)
+* **An essay or paper?** (Please give me the essay prompt or topic.)
+* **A presentation?** (What is the presentation about?)
+* **A book?** (What genre and subject matter?)
+* **A person?** (Who?)
+* **A project?** (What kind of project?)
+
+Once you give me more information, I can write a compelling introduction for you.
+
