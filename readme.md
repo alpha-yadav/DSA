@@ -77827,3 +77827,112 @@ This method is more efficient in terms of space complexity if the tree is very d
 
 Remember to choose the method that best suits your needs and the constraints of your problem.  For most general cases, the recursive approach is simpler and easier to understand.  If space complexity is a major concern and you can modify the tree structure, the iterative approach with parent pointers might be preferable.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science with applications in various areas, including file systems, version control systems, and phylogenetic analysis.  The most efficient approach depends on the type of tree and the information available.
+
+Here are common methods for finding the LCA:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a simple and intuitive approach.  The idea is to recursively traverse the tree.  If a node is the same as either `p` or `q`, return the node. If `p` and `q` are on different sides of the current node, then the current node is the LCA. Otherwise, recursively search the subtree where `p` and `q` both reside.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    else:
+        return right
+```
+
+**2. Iterative Approach (for Binary Trees using Parent Pointers):**
+
+If each node in the binary tree has a pointer to its parent, we can use an iterative approach.  This approach involves finding the paths from the root to each node (`p` and `q`), then iterating through the paths to find the last common node.
+
+```python
+def lowestCommonAncestor_iterative(root, p, q):
+    path_p = []
+    path_q = []
+
+    def find_path(node, target, path):
+        if not node:
+            return False
+        path.append(node)
+        if node == target:
+            return True
+        if find_path(node.left, target, path) or find_path(node.right, target, path):
+            return True
+        path.pop()
+        return False
+
+
+    find_path(root, p, path_p)
+    find_path(root, q, path_q)
+
+    lca = root
+    for i in range(min(len(path_p), len(path_q))):
+        if path_p[i] == path_q[i]:
+            lca = path_p[i]
+        else:
+            break
+    return lca
+
+```
+
+
+**3.  Using Depth-First Search (DFS) (for General Trees):**
+
+For general trees (not necessarily binary), you can adapt the recursive approach using DFS.  The core logic remains similar – find the paths to `p` and `q`, and identify the last common node in those paths.
+
+
+**4.  Optimized Approach with Parent Pointers (for Binary Trees):**
+
+This method is very efficient if parent pointers are available.  It finds the paths to p and q by traversing upwards from p and q simultaneously.  The last common node is where the paths converge.
+
+```python
+def lowestCommonAncestor_optimized(root, p, q):
+    path_p = set()
+    path_q = set()
+
+    curr = p
+    while curr:
+        path_p.add(curr)
+        curr = curr.parent  # Assuming each node has a 'parent' attribute
+
+    curr = q
+    while curr:
+        if curr in path_p:
+            return curr
+        path_q.add(curr)
+        curr = curr.parent
+
+    return None # Should not happen if p and q are in the tree
+
+```
+
+
+**Choosing the Right Approach:**
+
+* **Recursive (Binary Trees):** Simple, elegant, and efficient for binary trees without parent pointers.  Space complexity is proportional to the height of the tree (due to the recursive call stack).
+
+* **Iterative (Binary Trees with Parent Pointers):** Efficient if parent pointers are readily available.  Space complexity is O(h) where h is height of the tree.
+
+* **DFS (General Trees):** Suitable for trees that are not binary.
+
+* **Optimized (Binary Trees with Parent Pointers):** Most efficient if parent pointers are available; space complexity is relatively low (O(h)).
+
+Remember to adapt the code based on the specific structure of your tree (e.g., adding a `parent` attribute if needed).  The choice of the best method depends on the tree's properties and the constraints of your application.
+
