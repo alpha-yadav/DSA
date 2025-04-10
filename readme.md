@@ -78862,3 +78862,68 @@ print(longest_palindrome("cbbd"))   # Output: bb
 
 These examples demonstrate the range of algorithmic problems.  Remember that the key aspects are understanding the problem statement, designing an efficient algorithm (considering time and space complexity), and implementing a correct solution.  Many more challenging problems exist in areas like graph theory, dynamic programming, and greedy algorithms.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+
+**Simple Version:**
+
+This version uses a straightforward `for` loop and `if-else if-else` statements.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks for divisibility by 3 ("Fizz") and then by 5 ("Buzz").
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Slightly More Advanced Version (using ternary operator):**
+
+This version uses the ternary operator (`condition ? value1 : value2`) for slightly more concise code.  It's functionally equivalent to the first version but demonstrates a different coding style.
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzAdvanced(n: 15) // Example usage
+```
+
+This version chains ternary operators to determine the output string efficiently.  It's more compact but might be slightly harder to read for beginners.
+
+
+**Choosing the Right Version:**
+
+For learning purposes, the first version is generally preferred because it's easier to understand the logic. The second version is useful for demonstrating more concise Swift syntax once you're comfortable with the basic principles.
+
+
+**Further Improvements (for advanced learners):**
+
+* **Error Handling:** Add error handling to check for invalid input (e.g., negative `n`).
+* **Functional Approach:** Use higher-order functions like `map` to process the range of numbers more functionally.
+* **Testing:** Write unit tests to verify the correctness of the function.
+
+
+Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using the Swift compiler).  Choose the version that best suits your current skill level and gradually explore the more advanced techniques as you gain experience.
+
