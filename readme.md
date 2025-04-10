@@ -79365,3 +79365,26 @@ This will print:
 
 Nested loops are a fundamental programming concept, and understanding how they work is essential for tackling many common programming tasks.  However, it's important to be mindful of their performance implications, especially when dealing with large datasets.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to reduce the problem size by a constant factor with each step.  This typically involves dividing the problem in half (or some other constant fraction) repeatedly until a base case is reached.  This logarithmic time complexity is extremely efficient, especially for large input sizes.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  It works on a sorted array or list by repeatedly dividing the search interval in half. If the target value is in the interval, it will be found in O(log n) comparisons.
+
+* **Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  Balanced binary search trees (like AVL trees or red-black trees) maintain a logarithmic height.  Basic operations like searching, inserting, or deleting a node require traversing a path from the root to a leaf, which takes O(log n) time in a balanced tree.  Note that unbalanced trees can degenerate to O(n) in the worst case.
+
+* **Efficient Sorting Algorithms (based on divide and conquer):** While the overall sorting process might be O(n log n), certain *steps* within these algorithms might be O(log n).  For example, merge sort's merge step might involve operations with logarithmic complexity in specific scenarios.  Similarly, quick sort's partitioning step (in the average case) can also exhibit logarithmic properties in certain aspects.  However, it's important to remember that these algorithms themselves have an overall time complexity of O(n log n), not simply O(log n).
+
+* **Exponentiation by Squaring:**  This algorithm efficiently computes a<sup>n</sup> in O(log n) time by repeatedly squaring the base and adjusting the exponent.
+
+* **Finding the kth smallest element using Quickselect (average case):** Quickselect is a selection algorithm related to quicksort.  While its worst-case time complexity is O(n²), its average-case time complexity is O(n).  However, a sub-step within the algorithm (finding the pivot index) can show logarithmic behavior. It's not strictly O(log n) for the entire algorithm.
+
+* **Some Graph Algorithms:** Certain graph algorithms, particularly those operating on balanced tree-like structures representing the graph or using divide-and-conquer strategies on specific graph problems, may have logarithmic time complexity for certain operations.  But this is not common for most general graph algorithms.
+
+
+**Important Note:**  The O(log n) complexity usually applies to the *number of operations* the algorithm performs, not necessarily the amount of space it uses.  The space complexity of these algorithms can vary.  Binary search, for instance, typically has O(1) space complexity (constant space), while some tree operations might have O(log n) space complexity in the worst case (due to recursion).
+
+
+It's crucial to remember that the base of the logarithm (usually 2) is generally considered a constant and doesn't affect the overall Big O notation.  The key is the logarithmic relationship between the number of operations and the input size.
+
