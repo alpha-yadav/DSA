@@ -78927,3 +78927,71 @@ For learning purposes, the first version is generally preferred because it's eas
 
 Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using the Swift compiler).  Choose the version that best suits your current skill level and gradually explore the more advanced techniques as you gain experience.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long the algorithm takes to run) and space (how much memory the algorithm needs).  We usually analyze complexity in terms of the input size, denoted as 'n'.  Instead of measuring exact execution time (which depends on factors like hardware), we focus on how the time or space requirements *scale* as the input size grows.
+
+Here's a breakdown of key aspects of algorithm complexity:
+
+**1. Time Complexity:**  Describes how the runtime of an algorithm grows as the input size increases.  We use Big O notation (O), Big Omega notation (Ω), and Big Theta notation (Θ) to express time complexity.
+
+* **Big O Notation (O):**  Represents the *upper bound* of an algorithm's runtime. It describes the worst-case scenario.  For example, O(n) means the runtime grows linearly with the input size.  O(n²) indicates quadratic growth.
+
+* **Big Omega Notation (Ω):** Represents the *lower bound* of an algorithm's runtime.  It describes the best-case scenario.
+
+* **Big Theta Notation (Θ):** Represents the *tight bound*.  It means the algorithm's runtime grows at the same rate as the function described.  This implies that both the upper and lower bounds are the same.
+
+
+**Common Time Complexities (from best to worst):**
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Bubble sort, selection sort.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:**  The runtime grows factorially with the input size.  Example:  Traveling salesman problem (brute-force approach).
+
+
+**2. Space Complexity:** Describes how the memory usage of an algorithm grows as the input size increases.  Similar notations (O, Ω, Θ) are used as with time complexity.
+
+**Common Space Complexities:**
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of input size.
+
+* **O(n) - Linear Space:** The memory usage grows linearly with input size.  Example: Storing an array of input values.
+
+* **O(log n) - Logarithmic Space:** The memory usage grows logarithmically with input size (e.g., using recursion with a logarithmic depth).
+
+* **O(n²) - Quadratic Space:** The memory usage grows proportionally to the square of the input size.
+
+
+**Analyzing Complexity:**
+
+Analyzing the complexity of an algorithm typically involves:
+
+* **Identifying the basic operations:** Determine the operations that contribute most significantly to the runtime.
+* **Expressing the number of operations as a function of the input size:**  Count how many times these basic operations are executed as a function of 'n'.
+* **Using Big O notation to express the dominant term:**  Ignore constant factors and lower-order terms, focusing on the term that grows fastest as 'n' increases.
+
+
+**Example:**
+
+Consider a simple function that iterates through an array and prints each element:
+
+```python
+def print_array(arr):
+  for i in range(len(arr)):
+    print(arr[i])
+```
+
+The basic operation is printing an element. This operation is executed `n` times (where `n` is the length of the array).  Therefore, the time complexity is O(n) and the space complexity is O(1) (assuming the array is already in memory).
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and optimizing code performance, particularly when dealing with large datasets.  Algorithms with lower complexity generally perform better for larger inputs.
+
