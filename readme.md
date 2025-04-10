@@ -79290,3 +79290,78 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on the specific task.  `for` loops are generally preferred when the number of iterations is known in advance, while `while` loops are better suited when the loop continues until a certain condition is met, and the number of iterations isn't known beforehand.  Remember to be cautious with `while` loops to avoid infinite loops if the condition never becomes false.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows for processing data in a multi-dimensional way, often used for things like traversing matrices, generating combinations, or working with nested data structures.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed in the inner loop
+    # Code to be executed after the inner loop completes for each iteration of the outer loop
+```
+
+**Example:  Printing a Multiplication Table (Python)**
+
+This example demonstrates a nested loop to generate a 10x10 multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        product = i * j
+        print(f"{product:4}", end="") # :4 ensures consistent spacing
+    print()  # Newline after each row
+```
+
+This code will output:
+
+```
+   1   2   3   4   5   6   7   8   9  10
+   2   4   6   8  10  12  14  16  18  20
+   3   6   9  12  15  18  21  24  27  30
+   4   8  12  16  20  24  28  32  36  40
+   5  10  15  20  25  30  35  40  45  50
+   6  12  18  24  30  36  42  48  54  60
+   7  14  21  28  35  42  49  56  63  70
+   8  16  24  32  40  48  56  64  72  80
+   9  18  27  36  45  54  63  72  81  90
+  10  20  30  40  50  60  70  80  90 100
+```
+
+**Example:  Iterating through a Matrix (Python)**
+
+Let's say you have a matrix represented as a list of lists:
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print() # Newline after each row
+```
+
+This will print:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the runtime of your program, especially with large datasets.  The time complexity is often O(n*m), where 'n' and 'm' are the sizes of the outer and inner loop iterables, respectively.
+* **Readability:**  Proper indentation and clear variable names are crucial for understanding and maintaining nested loops.  Overly complex nested loops can be difficult to debug.
+* **Alternatives:** In some cases, list comprehensions or other techniques can offer more concise and efficient ways to achieve the same result as nested loops.
+
+
+Nested loops are a fundamental programming concept, and understanding how they work is essential for tackling many common programming tasks.  However, it's important to be mindful of their performance implications, especially when dealing with large datasets.
+
