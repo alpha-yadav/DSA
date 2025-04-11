@@ -83164,3 +83164,52 @@ def linear_search(arr, target):
 
 Understanding algorithm complexity is crucial for choosing the right algorithm for a given task and predicting its performance for different input sizes.  Choosing an algorithm with a lower complexity is generally better for efficiency, especially when dealing with large datasets.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate.  This means it provides both an upper and lower bound that are asymptotically proportional to the function.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be in Θ(*g(n)*), written as *f(n) = Θ(g(n))*, if and only if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+```
+c₁g(n) ≤ f(n) ≤ c₂g(n)
+```
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), *f(n)* is always bounded above and below by constant multiples of *g(n)*.  *g(n)* represents the dominant growth term of *f(n)*.
+
+**Intuitive Explanation:**
+
+Imagine you have two functions, *f(n)* and *g(n)*, representing the runtime of two algorithms.  If *f(n) = Θ(g(n))*, it means that both algorithms have essentially the same growth rate as the input size (*n*) increases.  One might be slightly faster than the other for small inputs, but as *n* gets larger, their runtimes will remain proportionally similar.
+
+**Example:**
+
+Let's say *f(n) = 2n² + 3n + 1*. We want to find a *g(n)* such that *f(n) = Θ(g(n))*.
+
+We can ignore lower-order terms (3n and 1) for large *n*.  The dominant term is 2n².  Therefore, we can say:
+
+*f(n) = Θ(n²)*
+
+To prove this formally, we need to find *c₁*, *c₂*, and *n₀* that satisfy the definition:
+
+We can choose:
+
+* c₁ = 1
+* c₂ = 3
+* n₀ = 1
+
+Let's check if the inequality holds for *n ≥ 1*:
+
+1 * n² ≤ 2n² + 3n + 1 ≤ 3 * n²
+
+This inequality is true for *n ≥ 1*.  Thus, we've shown that *f(n) = Θ(n²)*.  The constant factors (like the '2' in 2n²) are not important in Big-Theta notation; only the dominant term and its exponent matter.
+
+**Relationship to Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an upper bound.  *f(n) = O(g(n))* means *f(n)* grows no faster than *g(n)*.
+* **Big-Ω (Ω):** Provides a lower bound. *f(n) = Ω(g(n))* means *f(n)* grows at least as fast as *g(n)*.
+* **Big-Θ (Θ):** Provides both an upper and lower bound, implying a tight bound.  *f(n) = Θ(g(n))* means *f(n) = O(g(n))* AND *f(n) = Ω(g(n))*.
+
+In essence, Big-Theta gives the most precise description of the asymptotic growth rate among the three notations.  It tells us that the function's growth is essentially the same as the given function.
+
