@@ -81574,3 +81574,123 @@ print(f"Is the tree a BST? {is_bst_recursive_range(root2)}") # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the recursive range method (due to the recursive call stack, where H is the height of the tree), and O(N) in the in-order traversal method (due to the list created for storing the in-order traversal).  In a balanced tree, H is log(N), making the recursive range method more space-efficient.  In a skewed tree, H can be N, making the space complexity the same as the in-order method.  The recursive range method is generally preferred for its better space efficiency in many cases.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The core idea is to recursively check that for every node:
+
+* All nodes in its left subtree have keys less than the node's key.
+* All nodes in its right subtree have keys greater than the node's key.
+
+Here are a few ways to implement this check, with varying levels of efficiency:
+
+**Method 1: Recursive In-order Traversal**
+
+This is a highly efficient method.  A BST's in-order traversal yields a sorted sequence of its nodes.  Therefore, if we perform an in-order traversal and store the values in an array, we can simply check if the array is sorted.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    """Checks if a tree is a BST using in-order traversal."""
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    for i in range(1, len(result)):
+        if result[i] < result[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(2)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+
+print(is_bst_inorder(root))  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(2)
+root2.left.right = Node(8) #Violation: 8 > 3 (right subtree not greater)
+root2.right.left = Node(6)
+root2.right.right = Node(9)
+
+
+print(is_bst_inorder(root2))  # Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each node, passing down the minimum and maximum allowed values for its subtree.
+
+```python
+import sys
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+    """Checks if a tree is a BST using min/max bounds."""
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_minmax(node.left, min_val, node.data) and
+            is_bst_minmax(node.right, node.data, max_val))
+
+#Example usage (same trees as above)
+print(is_bst_minmax(root)) #True
+print(is_bst_minmax(root2)) #False
+```
+
+
+**Method 3: Iterative Inorder Traversal (using a stack)**
+
+This is an iterative version of the in-order traversal method, avoiding recursion.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_iterative_inorder(root):
+    stack = []
+    prev = -float('inf')
+    curr = root
+    while curr or stack:
+        while curr:
+            stack.append(curr)
+            curr = curr.left
+        curr = stack.pop()
+        if curr.data < prev:
+            return False
+        prev = curr.data
+        curr = curr.right
+    return True
+
+#Example usage (same trees as above)
+print(is_bst_iterative_inorder(root)) #True
+print(is_bst_iterative_inorder(root2)) #False
+```
+
+The in-order traversal methods (both recursive and iterative) are generally preferred for their efficiency, with a time complexity of O(N) where N is the number of nodes.  The min-max approach also has O(N) time complexity but might be slightly less efficient in practice due to the overhead of recursive calls.  Choose the method that best suits your coding style and understanding.  Remember to handle edge cases like empty trees appropriately.
+
