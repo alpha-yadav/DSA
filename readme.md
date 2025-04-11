@@ -85184,3 +85184,107 @@ Remember to handle edge cases such as `null` root, `p` or `q` not being in the t
 #  Graph 
 Please provide me with the data or equation you want me to graph.  I need the information defining the graph (e.g., points to plot, a function, a description).
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using adjacency matrices is a common approach, especially when dealing with dense graphs (graphs with a relatively large number of edges).  Here's a breakdown of how it works, its advantages and disadvantages, and implementation considerations:
+
+**How it Works:**
+
+An adjacency matrix is a 2D array (typically a square matrix) where each element `matrix[i][j]` represents the connection between vertex `i` and vertex `j`.
+
+* **Value Representation:** The value of `matrix[i][j]` can represent different things:
+    * **0 or 1 (Boolean):**  0 indicates no edge between vertices `i` and `j`; 1 indicates an edge exists. This is suitable for unweighted graphs.
+    * **Weight:**  The value can represent the weight of the edge (e.g., distance, cost).  This is used for weighted graphs.
+    * **Infinity (∞):** Often used to represent the absence of an edge in weighted graphs (avoiding the need for a special "no edge" value).
+    * **-1:** Can be used to indicate no edge.
+
+* **Example (Unweighted, directed graph):**
+
+Let's say we have a directed graph with 4 vertices (A, B, C, D):
+
+* A -> B
+* A -> C
+* B -> D
+* C -> D
+
+The adjacency matrix would look like this:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  0  0  0  1
+C  0  0  0  1
+D  0  0  0  0
+```
+
+* **Example (Weighted, undirected graph):**
+
+Let's say we have an undirected graph with 3 vertices (A, B, C):
+
+* A --B (weight 5)
+* B --C (weight 2)
+
+The adjacency matrix would look like this:
+
+```
+   A  B  C
+A  0  5  ∞
+B  5  0  2
+C  ∞  2  0
+```
+
+
+**Advantages of Adjacency Matrices:**
+
+* **Fast edge existence check:** Checking if an edge exists between two vertices is very fast – O(1) time complexity.
+* **Simple implementation:** Relatively straightforward to implement and understand.
+* **Efficient for dense graphs:** When the number of edges is close to the maximum possible (n*(n-1)/2 for undirected and n*(n-1) for directed graphs, where n is the number of vertices), the space used is not significantly more than other representations.
+
+
+**Disadvantages of Adjacency Matrices:**
+
+* **Space complexity:**  Uses O(V²) space, where V is the number of vertices. This can be very inefficient for sparse graphs (graphs with relatively few edges) because most of the matrix will be filled with zeros or ∞.
+* **Adding/deleting vertices:** Requires resizing the matrix, which can be computationally expensive.
+
+
+**Implementation Considerations:**
+
+* **Data Structure:**  You can use a 2D array (like `int[][]` in Java or `numpy.array` in Python) to represent the adjacency matrix.
+* **Choice of Data Type:** Select the appropriate data type for the matrix elements based on whether the graph is weighted and the range of weights.
+* **Handling Special Values:** Decide how you will represent the absence of an edge (0, ∞, -1, etc.).  Be consistent in your choice.
+* **Directed vs. Undirected:** For undirected graphs, the matrix will be symmetric (`matrix[i][j] == matrix[j][i]`). You can optimize storage by only storing the upper or lower triangle.
+
+
+**Example (Python):**
+
+```python
+import numpy as np
+
+class Graph:
+    def __init__(self, num_vertices, directed=False):
+        self.num_vertices = num_vertices
+        self.directed = directed
+        self.matrix = np.full((num_vertices, num_vertices), np.inf)  # Initialize with infinity
+
+    def add_edge(self, u, v, weight=1):
+        self.matrix[u][v] = weight
+        if not self.directed:
+            self.matrix[v][u] = weight
+
+    def print_matrix(self):
+        print(self.matrix)
+
+# Example usage:
+graph = Graph(4)  # Creates an unweighted graph with 4 vertices.  Default is undirected.
+graph.add_edge(0, 1)
+graph.add_edge(0, 2)
+graph.add_edge(1, 3)
+graph.print_matrix()
+
+weighted_graph = Graph(3, directed=True) # Creates a directed weighted graph
+weighted_graph.add_edge(0, 1, 5)
+weighted_graph.add_edge(1, 2, 2)
+weighted_graph.print_matrix()
+```
+
+Remember to choose the appropriate graph representation (adjacency matrix, adjacency list, etc.) based on the characteristics of your graph and your specific needs.  For sparse graphs, an adjacency list is generally more efficient.
+
