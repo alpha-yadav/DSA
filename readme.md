@@ -80403,3 +80403,53 @@ Let's say we have an algorithm with a runtime of `f(n) = n² + 2n + 1`.  We can 
 
 **Important Note:**  Big-Omega notation focuses on the lower bound.  An algorithm can have a best-case runtime that's significantly better than its average or worst-case runtime.  For instance, a search algorithm might find the target element immediately in the best case (Ω(1)), but in the worst case, it might have to search the entire data structure (O(n)).  The Big-Omega notation only tells us about the minimum possible growth rate, not the typical or worst-case behavior.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of an algorithm's runtime or space requirements as the input size grows.  It focuses on how the runtime or space scales, not the exact runtime for a specific input.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases as the input size (n) increases.
+* **Space Complexity:** How the memory usage of an algorithm increases as the input size (n) increases.
+
+**Key Characteristics:**
+
+* **Asymptotic Analysis:** Big O notation analyzes the behavior of algorithms as the input size approaches infinity.  We're interested in the dominant factors affecting performance as the problem gets very large.  Minor details and constant factors are ignored.
+* **Worst-Case Scenario:** Big O typically represents the worst-case scenario.  It describes the upper bound of the runtime or space, guaranteeing that the performance will never be *worse* than what's indicated.
+* **Upper Bound:** It provides an upper limit on the growth rate. The actual runtime might be better, but it will never be significantly worse than the Big O notation suggests.
+
+
+**Common Big O Notations:**
+
+These are ordered from most efficient to least efficient:
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Nested loops iterating through an array.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime increases factorially with the input size.  Example: The traveling salesman problem (brute-force approach).
+
+
+**Example:**
+
+Let's say we have an algorithm that searches for a specific number in an unsorted array.  In the worst-case scenario, the algorithm might have to check every element in the array before finding the number (or determining it's not present).  If the array has 'n' elements, the runtime is directly proportional to 'n'.  Therefore, the time complexity of this algorithm is O(n).
+
+**Why is Big O Important?**
+
+* **Algorithm Comparison:** It allows you to compare the efficiency of different algorithms without needing to run them on specific hardware or with specific input sizes.
+* **Scalability:** It helps determine how well an algorithm will scale as the input size increases.
+* **Optimization:** It guides the process of optimizing algorithms by identifying performance bottlenecks.
+
+
+**Beyond Big O:**
+
+While Big O is crucial, it's not the only measure of algorithm performance.  Other notations, such as:
+
+* **Big Omega (Ω):** Describes the *lower bound* of an algorithm's runtime.
+* **Big Theta (Θ):** Describes the *tight bound*, representing both the upper and lower bounds.
+
+are also used to provide a more complete picture of an algorithm's performance characteristics.  However, Big O is often the primary focus due to its emphasis on the worst-case scenario and its relative simplicity.
+
