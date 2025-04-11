@@ -83097,3 +83097,70 @@ This version adds a `guard` statement to check if the input `n` is positive.  If
 
 Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using the Swift compiler).  You'll see the FizzBuzz sequence printed to the console.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The most common resources considered are:
+
+* **Time complexity:** How the runtime of an algorithm scales with the input size.
+* **Space complexity:** How the memory usage of an algorithm scales with the input size.
+
+We usually analyze complexity using **Big O notation**, which describes the upper bound of an algorithm's growth rate as the input size approaches infinity.  It focuses on the dominant factors affecting runtime and memory usage, ignoring constant factors and lower-order terms.
+
+Here's a breakdown of common complexities:
+
+**Time Complexity:**
+
+* **O(1) - Constant time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic time:** A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating through an array.  This can become slow quickly with larger inputs.
+
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size.  This is extremely inefficient for large inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial time:** The runtime is the factorial of the input size.  This is incredibly inefficient and only practical for very small inputs.  Example:  Finding all permutations of a set.
+
+
+**Space Complexity:**  Similar notations are used, but it refers to memory usage instead of runtime.
+
+* **O(1) - Constant space:** The algorithm uses a fixed amount of memory regardless of input size.
+
+* **O(n) - Linear space:** The memory usage increases linearly with the input size.  Example: Storing an array of the input elements.
+
+* **O(log n) - Logarithmic space:** Memory usage grows logarithmically with the input size.  Example: Recursive algorithms using a stack.
+
+* **O(n²) - Quadratic space:** Memory usage grows quadratically with the input size.  Example:  Storing an adjacency matrix for a graph.
+
+**Analyzing Complexity:**
+
+Analyzing the complexity of an algorithm often involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most to the runtime or space usage.
+
+2. **Expressing the number of operations as a function of the input size:** This function will usually involve `n` (the input size) and possibly other variables.
+
+3. **Applying Big O notation:**  Simplify the function by ignoring constant factors and lower-order terms to get the Big O complexity.
+
+
+**Example:**
+
+Consider a function that searches for a specific element in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Basic operation:** Comparing `arr[i]` to `target`.
+* **Number of operations:** In the worst case (target not found), this operation is performed `n` times, where `n` is the length of the array.
+* **Big O notation:** The time complexity is O(n) – linear time.  The space complexity is O(1) – constant space.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task and predicting its performance for different input sizes.  Choosing an algorithm with a lower complexity is generally better for efficiency, especially when dealing with large datasets.
+
