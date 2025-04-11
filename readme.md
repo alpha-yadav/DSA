@@ -79592,3 +79592,73 @@ This leverages the `map` function to process the range 1...n more compactly.
 
 Remember to choose the version that best suits your understanding and coding style.  The basic version is easiest to grasp for beginners, while the more concise versions demonstrate more advanced Swift features.  All three achieve the same result.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long it takes to run) and space (how much memory it needs).  We usually express complexity using Big O notation.  Let's break down the key aspects:
+
+**1. Big O Notation:**
+
+Big O notation describes the upper bound of an algorithm's growth rate as the input size (usually denoted as 'n') increases.  It simplifies complexity analysis by focusing on the dominant factors as 'n' gets very large.  We ignore constant factors and lower-order terms.
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Nested loops iterating over the input data.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesperson problem (brute-force approach).
+
+
+**2. Types of Complexity Analysis:**
+
+* **Time Complexity:**  Analyzes how the runtime scales with the input size.  This is the most commonly discussed type of complexity.
+
+* **Space Complexity:** Analyzes how much memory the algorithm uses as the input size increases.  This includes both the space used by the algorithm itself and the space used to store the input data.
+
+**3. Best, Worst, and Average Case:**
+
+The complexity of an algorithm can vary depending on the input data.
+
+* **Best Case:**  The most favorable input scenario.  This is often less important than the worst-case scenario.
+
+* **Worst Case:** The least favorable input scenario. This is crucial for understanding the upper bound of the algorithm's performance.
+
+* **Average Case:** The expected runtime over many different inputs.  This can be difficult to calculate accurately but often provides a more realistic picture than the worst-case scenario.
+
+
+**4. How to Analyze Algorithm Complexity:**
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime.
+
+2. **Count the number of operations:** Express the number of operations as a function of the input size 'n'.
+
+3. **Identify the dominant term:** As 'n' grows large, the dominant term will determine the overall growth rate.  Ignore constant factors and lower-order terms.
+
+4. **Express the complexity using Big O notation:**  Represent the dominant term using Big O notation.
+
+
+**Example:**
+
+Consider a simple algorithm that searches for a specific element in an unsorted array:
+
+```python
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+```
+
+* **Basic operation:** Comparing `arr[i]` to `target`.
+* **Number of operations:** In the worst case, we might have to compare `target` with every element in the array.  This is `n` comparisons, where `n` is the length of the array.
+* **Dominant term:**  `n`
+* **Big O notation:** O(n) - Linear time complexity.
+
+
+Understanding algorithm complexity is essential for choosing the right algorithms for different tasks and optimizing the performance of your programs.  Algorithms with lower complexity are generally preferred, especially when dealing with large datasets.
+
