@@ -82081,3 +82081,103 @@ def lowestCommonAncestorIterative(root, p, q):
 
 The recursive approach is generally preferred for its clarity and simplicity, unless you have specific concerns about stack overflow with very deep trees.  In those cases, an iterative solution using a stack or queue would be necessary.  Remember to fill in the `lowestCommonAncestorIterative` function with the complete iterative implementation if you need it.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (specifically a binary tree or a general tree) is a common problem in computer science.  The approach varies depending on the type of tree and whether you have parent pointers or not.
+
+Here are several methods for finding the LCA:
+
+**1. Using Parent Pointers (Easy, but requires extra space):**
+
+If each node in the tree has a pointer to its parent, finding the LCA is straightforward:
+
+* **Algorithm:**
+    1. Traverse upwards from node `A` and store its ancestors in a set (or list).
+    2. Traverse upwards from node `B` and check if each ancestor is in the set of `A`'s ancestors.
+    3. The first ancestor of `B` found in the set is the LCA.
+
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent(node_a, node_b):
+    ancestors_a = set()
+    current = node_a
+    while current:
+        ancestors_a.add(current)
+        current = current.parent
+
+    current = node_b
+    while current:
+        if current in ancestors_a:
+            return current
+        current = current.parent
+
+    return None  # Nodes are not in the same tree
+
+# Example Usage (you'd need to build your tree first)
+# ... build a tree and set parent pointers ...
+# node_a = ...
+# node_b = ...
+# lca = lca_with_parent(node_a, node_b)
+# print(f"LCA of {node_a.data} and {node_b.data}: {lca.data}")
+```
+
+**2. Recursive Approach (Binary Tree, without parent pointers):**
+
+This method is efficient for binary trees without parent pointers. It leverages recursion:
+
+* **Algorithm:**
+    1. If the current node is `None`, return `None`.
+    2. If the current node is either `A` or `B`, return the current node.
+    3. Recursively search the left and right subtrees.
+    4. If both subtrees return a node (meaning `A` and `B` are in different subtrees), the current node is the LCA.
+    5. Otherwise, return the non-`None` result from the subtrees.
+
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node_a, node_b):
+    if root is None or root.data == node_a or root.data == node_b:
+        return root
+
+    left_lca = lca_recursive(root.left, node_a, node_b)
+    right_lca = lca_recursive(root.right, node_a, node_b)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example Usage (you'd need to build your tree first)
+# ...build your binary tree...
+# root = ...
+# node_a = ... # data of node a
+# node_b = ... # data of node b
+# lca = lca_recursive(root, node_a, node_b)
+# print(f"LCA of {node_a} and {node_b}: {lca.data if lca else 'Not found'}")
+
+```
+
+**3. Iterative Approach (Binary Tree, without parent pointers):**
+
+A non-recursive version is also possible, using a stack or queue to simulate recursion.  It's generally less elegant than the recursive version but might be preferable for extremely deep trees to avoid stack overflow issues.
+
+**4. General Trees (without parent pointers):**
+
+For general trees (not just binary trees), you'll need a more generalized approach.  One method involves creating paths from the root to each node and then finding the longest common prefix of those paths.
+
+
+Remember to handle cases where one or both nodes are not present in the tree.  Choose the method best suited to your specific tree structure and constraints.  The recursive method is generally preferred for its clarity and efficiency for binary trees.  If you have parent pointers, the first method is significantly simpler.
+
