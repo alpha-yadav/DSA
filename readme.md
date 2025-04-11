@@ -80964,3 +80964,124 @@ bst.insert(6)
 
 This is a basic illustration.  A complete implementation would include search, deletion, and traversal methods, along with error handling.  For production use, consider using well-tested libraries or self-balancing BST implementations.
 
+#  Binary Search Tree - Insertion (Python) 
+Several Python implementations for inserting nodes into a Binary Search Tree (BST) are possible, depending on how you represent the tree. Here are a couple of common approaches:
+
+**Method 1: Using a Node Class**
+
+This approach explicitly defines a `Node` class to represent each node in the tree.  This is generally considered better for readability and maintainability, especially for more complex tree operations.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    def inorder_traversal(self): # Helper function for testing
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_recursive(node.right, result)
+
+
+# Example usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:", bst.inorder_traversal()) # Output should be an inorder sorted list
+```
+
+
+**Method 2: Using a dictionary (less common, less efficient)**
+
+While possible, using a dictionary to represent the BST is generally less efficient and less readable for larger trees.  It's included here for completeness.
+
+```python
+class BST:
+    def __init__(self):
+        self.tree = {}
+
+    def insert(self, data):
+        if not self.tree:
+            self.tree = {'data': data, 'left': None, 'right': None}
+            return
+        current = self.tree
+        while True:
+            if data < current['data']:
+                if current['left'] is None:
+                    current['left'] = {'data': data, 'left': None, 'right': None}
+                    break
+                else:
+                    current = current['left']
+            else:
+                if current['right'] is None:
+                    current['right'] = {'data': data, 'left': None, 'right': None}
+                    break
+                else:
+                    current = current['right']
+
+    def inorder_traversal(self): #Helper function for testing
+        result = []
+        self._inorder_recursive(self.tree, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node['left'], result)
+            result.append(node['data'])
+            self._inorder_recursive(node['right'], result)
+
+
+# Example usage (same as above, just with a different BST class)
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:", bst.inorder_traversal()) # Output should be an inorder sorted list
+```
+
+Remember to choose the method that best suits your needs and coding style. The Node class approach is generally preferred for its clarity and extensibility.  The `inorder_traversal` function is provided as a simple way to verify the correctness of your insertion.  A properly built BST will produce an inorder traversal that is a sorted list.
+
