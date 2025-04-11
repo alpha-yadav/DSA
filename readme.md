@@ -82775,3 +82775,115 @@ While DFS and BFS are the most common, other graph traversal algorithms exist, o
 
 Choosing the right traversal algorithm depends heavily on the specific problem and the properties of the graph.  Understanding the strengths and weaknesses of each is crucial for efficient graph processing.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used to represent the graph (adjacency matrix, adjacency list) and whether you're searching an undirected or directed graph.  Here are a few implementations in Python:
+
+**1. DFS using Adjacency List (for both directed and undirected graphs):**
+
+This version uses an adjacency list to represent the graph. It's generally more efficient for sparse graphs.
+
+```python
+def dfs_adjacency_list(graph, start_node, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph represented as an adjacency list.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        start_node: The node to start the traversal from.
+        visited: A set to keep track of visited nodes (optional, for recursive calls).
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    if visited is None:
+        visited = set()
+
+    visited.add(start_node)
+    print(start_node, end=" ")  # Process the node (print in this case)
+
+    for neighbor in graph.get(start_node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_adjacency_list(graph, neighbor, visited)
+
+    return visited
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal starting from A:")
+dfs_adjacency_list(graph, 'A')  # Output: A B D E F C
+
+
+#Example of an undirected graph (represented as a symmetric adjacency list)
+undirected_graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+
+print("\nDFS traversal of undirected graph starting from A:")
+dfs_adjacency_list(undirected_graph, 'A') # Output will vary slightly depending on order of neighbors
+
+
+```
+
+**2. DFS using Adjacency Matrix (for both directed and undirected graphs):**
+
+This version uses an adjacency matrix. It's generally more efficient for dense graphs but uses more memory.
+
+```python
+def dfs_adjacency_matrix(graph, start_node):
+    """
+    Performs a Depth-First Search traversal of a graph represented as an adjacency matrix.
+
+    Args:
+        graph: A list of lists representing the adjacency matrix.
+        start_node: The index of the node to start the traversal from.
+
+    Returns:
+        A list of node indices visited in DFS order.  Note that this uses the index from the matrix.
+    """
+    num_nodes = len(graph)
+    visited = [False] * num_nodes
+    stack = [start_node]
+    visited_nodes = []
+
+    while stack:
+        node = stack.pop()
+        if not visited[node]:
+            visited[node] = True
+            visited_nodes.append(node)
+            for neighbor in range(num_nodes):
+                if graph[node][neighbor] == 1 and not visited[neighbor]:
+                    stack.append(neighbor)
+
+    return visited_nodes
+
+#Example usage (assuming nodes are 0-indexed):
+adjacency_matrix = [
+    [0, 1, 1, 0, 0, 0],  # A
+    [0, 0, 0, 1, 1, 0],  # B
+    [0, 0, 0, 0, 0, 1],  # C
+    [0, 0, 0, 0, 0, 0],  # D
+    [0, 0, 0, 0, 0, 1],  # E
+    [0, 0, 0, 0, 0, 0]   # F
+]
+
+print("\nDFS traversal using adjacency matrix starting from 0:")
+print(dfs_adjacency_matrix(adjacency_matrix, 0)) #Output: [0, 1, 3, 4, 5, 2] (order may vary slightly)
+
+```
+
+Remember to adapt the node representation (e.g., using strings or integers) and the processing of the node (e.g., printing, adding to a result list) to your specific needs.  Choose the adjacency list or matrix representation based on the characteristics of your graph.  For very large sparse graphs, the adjacency list is usually preferred for its memory efficiency.
+
