@@ -83016,3 +83016,84 @@ Given an adjacency list representing a graph, find all nodes reachable from a gi
 
 These examples provide a range of complexity and demonstrate different algorithmic techniques.  Remember to consider time and space complexity when designing your solutions.  Choosing the right data structures is often crucial for efficient algorithms.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then progressing to a more robust one:
+
+
+**Version 1:  Basic FizzBuzz**
+
+This version uses nested `if` statements and is easy to understand:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5.  If none of these conditions are met, it prints the number itself.
+
+
+**Version 2:  Slightly More Efficient FizzBuzz**
+
+This version uses a single `if` statement with a ternary operator for slightly better readability and efficiency (though the difference is negligible for small `n`):
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : ((i % 3 == 0) ? "Fizz" : ((i % 5 == 0) ? "Buzz" : String(i)))
+        print(output)
+    }
+}
+
+fizzBuzzEfficient(n: 15) // Example usage
+```
+
+This version nests ternary operators to achieve the same result in a more compact way.
+
+
+**Version 3:  Handling Errors and Input Validation**
+
+A more robust version would include error handling for invalid input:
+
+```swift
+func fizzBuzzRobust(n: Int) {
+    guard n > 0 else {
+        print("Input must be a positive integer.")
+        return
+    }
+
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : ((i % 3 == 0) ? "Fizz" : ((i % 5 == 0) ? "Buzz" : String(i)))
+        print(output)
+    }
+}
+
+
+fizzBuzzRobust(n: 15)  // Example usage
+fizzBuzzRobust(n: -5) // Example of error handling
+```
+
+This version adds a `guard` statement to check if the input `n` is positive.  If not, it prints an error message and exits.
+
+
+**Choosing the Right Version:**
+
+* For learning and understanding, Version 1 is excellent.
+* For slightly better conciseness, Version 2 is a good option.
+* For production code or situations where input validation is crucial, Version 3 is the most robust.  Remember that robust error handling is very important in real-world applications.
+
+
+Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using the Swift compiler).  You'll see the FizzBuzz sequence printed to the console.
+
