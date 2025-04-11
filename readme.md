@@ -80093,3 +80093,58 @@ else:
 
 Remember to be patient and persistent.  Learning algorithms takes time and practice.  Start with the basics, gradually increase the complexity, and don't be afraid to seek help when needed.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:** Find the largest element in an unsorted array.
+
+**Input:** An array of integers.  Example: `[3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]`
+
+**Output:** The largest integer in the array.  Example: `9`
+
+**Solution Idea:** Iterate through the array, keeping track of the largest element seen so far.
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+Output: `[0,1]`  Because `nums[0] + nums[1] == 9`
+
+
+**Solution Idea:**  You could use a brute-force approach (nested loops), but a more efficient solution involves using a hash map (dictionary in Python) to store numbers and their indices.
+
+
+**Hard:**
+
+**Problem:** Longest Palindromic Substring
+
+**Input:** A string `s`.
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+`s = "babad"`
+Output: `"bab"` or `"aba"` (both are valid)
+
+`s = "cbbd"`
+Output: `"bb"`
+
+
+**Solution Idea:**  There are several approaches, including dynamic programming and expanding around the center.  Dynamic programming is generally more efficient for longer strings.
+
+
+**Choosing a Problem to Solve:**
+
+The best problem for you depends on your current skill level.  If you're new to algorithms, start with the "easy" problem. Once you're comfortable with that, move on to the "medium" and then the "hard" problem.  Remember to focus on understanding the problem statement, designing an efficient algorithm, and writing clean, well-commented code.  Many online resources (like LeetCode, HackerRank, Codewars) provide these problems and allow you to test your solutions.
+
