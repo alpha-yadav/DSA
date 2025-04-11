@@ -80527,3 +80527,51 @@ while i < 5:
 
 This `while` loop continues as long as `i` is less than 5.  Remember to increment `i` inside the loop to avoid an infinite loop.  Choosing between `for` and `while` depends on the specific task; `for` is generally preferred for iterating a known number of times, while `while` is better for situations where the number of iterations isn't known in advance.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's code runs multiple times for a single iteration of the outer loop.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop initiates the overall process. It iterates a certain number of times.
+* **Inner Loop:** This loop is entirely contained within the outer loop.  For each iteration of the outer loop, the inner loop runs its full cycle.
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: iterates from 1 to 10
+    for j in range(1, 11):  # Inner loop: iterates from 1 to 10 for each 'i'
+        product = i * j
+        print(f"{i} x {j} = {product}", end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row of the multiplication table
+```
+
+**Explanation:**
+
+1. The outer loop starts with `i = 1`.
+2. The inner loop then runs from `j = 1` to `j = 10`.  This calculates and prints `1 x 1`, `1 x 2`, ..., `1 x 10`.
+3. After the inner loop completes for `i = 1`, the outer loop increments to `i = 2`.
+4. The inner loop runs again, calculating and printing `2 x 1`, `2 x 2`, ..., `2 x 10`.
+5. This process continues until the outer loop completes its iterations (`i = 10`).
+
+**When to use nested loops:**
+
+Nested loops are useful when you need to process data in a multi-dimensional way, such as:
+
+* **Matrix operations:** Iterating through rows and columns of a matrix.
+* **2D array processing:**  Accessing and modifying elements in a two-dimensional array.
+* **Combinations and permutations:** Generating all possible combinations or permutations of items.
+* **Pattern printing:** Creating patterns like triangles or squares using characters.
+
+**Time Complexity:**
+
+The time complexity of nested loops is generally the product of the complexities of the individual loops.  For example, if both the outer and inner loops iterate `n` times, the overall time complexity is O(n²). This means the execution time increases quadratically with the input size, making it less efficient for very large datasets compared to single loops (O(n)).  Optimization techniques are often necessary for large datasets using nested loops.
+
+
+**Other Programming Languages:**
+
+The concept of nested loops applies to almost all programming languages, including Java, C++, JavaScript, C#, etc. The syntax may vary slightly, but the fundamental principle remains the same.
+
