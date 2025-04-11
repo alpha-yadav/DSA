@@ -79662,3 +79662,38 @@ def linear_search(arr, target):
 
 Understanding algorithm complexity is essential for choosing the right algorithms for different tasks and optimizing the performance of your programs.  Algorithms with lower complexity are generally preferred, especially when dealing with large datasets.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a fundamental concept in computer science used to describe the *tight* asymptotic bound of an algorithm's time or space complexity.  Unlike Big O notation, which provides only an upper bound, and Big Omega (Ω), which provides only a lower bound, Big Theta provides both an upper *and* a lower bound, meaning it precisely characterizes the growth rate of a function.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is bounded both above and below by constant multiples of *g(n)*.  In simpler terms, *f(n)* grows at the same rate as *g(n)*.
+
+**Intuitive Explanation:**
+
+Imagine you have two functions representing the running times of two algorithms.  If both are Θ(n²), it means they both have a quadratic growth rate.  While there might be differences in their constant factors (e.g., one might be 2n² and the other 10n²), their running times fundamentally scale in the same way as the input size (*n*) increases.  Big Theta assures us that neither algorithm will significantly outperform the other in terms of scaling, only in terms of those constant factors.
+
+
+**Example:**
+
+Let's say we have a function `f(n) = 2n² + 5n + 1`.  We can show that `f(n)` is Θ(n²):
+
+1. **Upper Bound:**  We can find *c₂* and *n₀* such that `2n² + 5n + 1 ≤ c₂n²` for all *n ≥ n₀*.  For example, if we choose *c₂ = 3* and *n₀ = 5*, the inequality holds true.  (You can prove this by simplifying the inequality).
+
+2. **Lower Bound:** We can find *c₁* and *n₀* such that `c₁n² ≤ 2n² + 5n + 1` for all *n ≥ n₀*. For example, if we choose *c₁ = 1* and *n₀ = 1*, this inequality also holds. (For larger n, the 2n² term dominates)
+
+Therefore, `f(n) = 2n² + 5n + 1` is Θ(n²).  The lower-order terms (5n and 1) become insignificant as *n* grows large.
+
+
+**Key Differences from Big O and Big Omega:**
+
+* **Big O (O):** Provides an upper bound.  `f(n) = O(g(n))` means `f(n)` grows *no faster* than `g(n)`.
+* **Big Omega (Ω):** Provides a lower bound. `f(n) = Ω(g(n))` means `f(n)` grows *at least as fast* as `g(n)`.
+* **Big Theta (Θ):** Provides both an upper and lower bound. `f(n) = Θ(g(n))` means `f(n)` grows *at the same rate* as `g(n)`.
+
+In essence, Θ provides the most precise description of an algorithm's asymptotic behavior, while O and Ω give partial information.  If you can prove Θ, you automatically know O and Ω.  However, proving Θ is often more challenging than proving just O.
+
