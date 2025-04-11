@@ -81694,3 +81694,85 @@ print(is_bst_iterative_inorder(root2)) #False
 
 The in-order traversal methods (both recursive and iterative) are generally preferred for their efficiency, with a time complexity of O(N) where N is the number of nodes.  The min-max approach also has O(N) time complexity but might be slightly less efficient in practice due to the overhead of recursive calls.  Choose the method that best suits your coding style and understanding.  Remember to handle edge cases like empty trees appropriately.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can systematically visit (or "traverse") all the nodes in a binary tree.  The order in which you visit the nodes matters and leads to different traversal types, each with its own applications.  The three most common types are:
+
+* **Inorder Traversal:**  Visit the left subtree, then the root node, then the right subtree.  For a binary *search* tree (BST), this yields a sorted sequence of the nodes' values.
+
+* **Preorder Traversal:** Visit the root node, then the left subtree, then the right subtree.  This traversal is useful for creating a copy of the tree or expressing the tree's structure in prefix notation.
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root node. This traversal is useful for deleting a tree or evaluating an arithmetic expression represented by the tree (postfix notation).
+
+
+**Illustrative Example:**
+
+Consider the following binary tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+Let's look at the traversals:
+
+* **Inorder:** 4 2 5 1 3
+* **Preorder:** 1 2 4 5 3
+* **Postorder:** 4 5 2 3 1
+
+
+**Code Examples (Python):**
+
+These examples use recursion, which is a common and elegant way to implement tree traversals.  Iterative approaches (using stacks or queues) are also possible.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3
+print("\nPreorder traversal:")
+preorder_traversal(root) # Output: 1 2 4 5 3
+print("\nPostorder traversal:")
+postorder_traversal(root) # Output: 4 5 2 3 1
+```
+
+**Other Traversals (Less Common):**
+
+While inorder, preorder, and postorder are the most frequent, other traversals exist, often variations or combinations of the above, like level-order traversal (breadth-first search).
+
+
+**Choosing the Right Traversal:**
+
+The choice of traversal depends entirely on the task.  If you need a sorted sequence from a BST, inorder is perfect.  If you need to copy the tree structure, preorder is a good option.  For tasks involving deletion or evaluating expressions, postorder is often the most suitable.  Level-order is useful when you need to process nodes level by level (e.g., finding the height of a tree).
+
