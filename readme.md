@@ -85612,3 +85612,47 @@ print(f"Graph 4 has cycle: {has_cycle(graph4)}") #Output: False
 
 This approach efficiently detects cycles in directed graphs using the properties of DFS and the concept of back edges.  The time complexity is O(V + E), where V is the number of vertices and E is the number of edges, which is optimal for graph traversal algorithms.  The space complexity is O(V) due to the `visited` and `recursion_stack` arrays.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a groundbreaking algorithm for finding minimum spanning trees (MSTs) in undirected graphs.  Its significance lies in its nearly linear time complexity, a significant improvement over previous algorithms.  Let's break down its key aspects:
+
+**Key Idea:**  Thorup's algorithm cleverly uses a combination of techniques to achieve its speed.  It doesn't directly construct the MST in the traditional way. Instead, it leverages the power of **Boruvka's algorithm** and advanced data structures to significantly reduce the time complexity.
+
+**Algorithm Steps (High-Level):**
+
+1. **Contraction Phase:** Thorup's algorithm starts by employing a variant of Boruvka's algorithm.  This involves iteratively finding and contracting edges that are guaranteed to be in the MST.  The contraction process merges vertices connected by these edges, effectively reducing the graph's size.
+
+2. **Low-Degree Subgraph:** After a sufficient number of contractions, the algorithm identifies a subgraph containing vertices with relatively low degrees. This subgraph is significantly smaller than the original graph.
+
+3. **Linear-Time MST Algorithm on the Subgraph:** A linear-time MST algorithm (specifics are complex and rely on advanced data structures) is then applied to this low-degree subgraph.
+
+4. **Reconstruction:** The MST of the contracted subgraph is used to reconstruct the MST of the original graph by carefully "uncontracting" the edges.
+
+**Crucial Components and Techniques:**
+
+* **Boruvka's Algorithm:**  This forms the foundation of the contraction phase. It efficiently finds many edges guaranteed to be in the MST in parallel.
+
+* **Low-Degree Subgraph Construction:**  This is a critical step that relies on a careful analysis to ensure the resulting subgraph is small enough for the linear-time MST algorithm to be efficient.
+
+* **Linear-Time MST Algorithm for Low-Degree Subgraphs:** This is where the advanced data structures come into play.  It's highly specialized and not easily explained without delving into significant complexity.
+
+* **Efficient Data Structures:**  The algorithm heavily relies on sophisticated data structures to maintain connectivity information and perform the contraction and reconstruction efficiently.  These often involve advanced techniques from graph theory and data structure design.
+
+**Time Complexity:**
+
+Thorup's algorithm achieves a time complexity of *O(m α(m, n))* where:
+
+* `m` is the number of edges in the graph.
+* `n` is the number of vertices in the graph.
+* `α(m, n)` is the inverse Ackermann function, which grows incredibly slowly and is practically a constant for all realistic input sizes.  This makes the algorithm effectively linear in the number of edges.
+
+**Significance:**
+
+Prior to Thorup's algorithm, the best-known MST algorithms had complexities that were at least slightly super-linear. Thorup's work brought the MST problem closer to the theoretical lower bound of linear time, demonstrating remarkable progress in algorithm design.
+
+**Challenges and Limitations:**
+
+Despite its theoretical elegance and efficiency, Thorup's algorithm is considered complex and difficult to implement efficiently in practice.  The constant factors hidden within the big-O notation might be significant, potentially making it slower than simpler algorithms like Prim's or Kruskal's for smaller graphs.  It's primarily of theoretical interest and less frequently used in practical applications due to its complexity.
+
+
+In summary, Thorup's algorithm is a significant theoretical achievement in algorithm design, demonstrating the possibility of near-linear time MST computation.  However, its practical implementation remains challenging due to its complexity.  Simpler algorithms like Prim's or Kruskal's are generally preferred in most practical scenarios unless the size of the graph is extremely large.
+
