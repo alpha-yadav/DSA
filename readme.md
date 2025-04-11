@@ -85095,3 +85095,89 @@ This method leverages the BST property.  We iterate through the tree:
 
 Remember to choose the appropriate method based on whether your tree is a BST or a general binary tree.  The BST method is significantly faster for BSTs because it avoids recursion and has a time complexity of O(h), where h is the height of the tree, while the general tree method has a time complexity of O(n), where n is the number of nodes.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic computer science problem.  There are several approaches, each with its own trade-offs in terms of time and space complexity.
+
+**Methods:**
+
+1. **Recursive Approach (for Binary Trees):**
+
+   This is a straightforward and intuitive approach for binary trees.  It works by recursively traversing the tree.  The base cases are:
+
+   * If the current node is `null`, return `null`.
+   * If the current node is either `p` or `q` (the two nodes we're looking for), return the current node.
+   * Otherwise, recursively check the left and right subtrees.  If the left subtree returns a node (meaning the LCA is in the left subtree), return that node. Otherwise, if the right subtree returns a node, return that node. If *both* subtrees return a node, then the current node is the LCA.
+
+   ```java
+   class TreeNode {
+       int val;
+       TreeNode left;
+       TreeNode right;
+       TreeNode(int x) { val = x; }
+   }
+
+   public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+       if (root == null || root == p || root == q) return root;
+
+       TreeNode left = lowestCommonAncestor(root.left, p, q);
+       TreeNode right = lowestCommonAncestor(root.right, p, q);
+
+       if (left != null && right != null) return root;
+       return (left != null) ? left : right;
+   }
+   ```
+
+   **Time Complexity:** O(N), where N is the number of nodes in the tree (worst case: skewed tree).
+   **Space Complexity:** O(H), where H is the height of the tree (due to recursive calls).  In a skewed tree, this can be O(N).
+
+
+2. **Iterative Approach (for Binary Trees):**
+
+   This approach uses a stack or queue to simulate the recursion, potentially offering better performance in some cases (especially with deep trees) and avoiding potential stack overflow errors.  It's generally more complex to implement than the recursive approach.
+
+
+3. **Using Parent Pointers (for Binary Trees or General Trees):**
+
+   If each node in the tree has a pointer to its parent, finding the LCA becomes significantly simpler.  You can traverse upward from each node (`p` and `q`) until you reach a common ancestor. The first common ancestor you encounter is the LCA.
+
+   ```java
+   class TreeNode {
+       int val;
+       TreeNode parent; // Added parent pointer
+       TreeNode left;
+       TreeNode right;
+       TreeNode(int x) { val = x; }
+   }
+
+   public TreeNode lowestCommonAncestor(TreeNode p, TreeNode q) {
+       Set<TreeNode> ancestorsP = new HashSet<>();
+       while (p != null) {
+           ancestorsP.add(p);
+           p = p.parent;
+       }
+       while (q != null) {
+           if (ancestorsP.contains(q)) return q;
+           q = q.parent;
+       }
+       return null; //Should not happen if p and q are in the tree
+   }
+   ```
+   **Time Complexity:** O(H), where H is the height of the tree.
+   **Space Complexity:** O(H) in the worst case (due to the set).
+
+
+4. **Binary Lifting (for Binary Trees):**
+
+   A more advanced technique using dynamic programming to precompute the ancestors of each node at different levels.  This allows for extremely fast LCA queries (O(log N) time) once the precomputation is done.  However, it requires extra space for storing the precomputed information.
+
+
+**Choosing the Right Approach:**
+
+* For simple binary trees and if you don't need to perform many LCA queries, the recursive approach is often the easiest and most efficient.
+* If you're dealing with very deep trees, the iterative approach might be preferred to avoid stack overflow.
+* If you have parent pointers, that method is the most efficient.
+* For very frequent LCA queries on large binary trees, Binary Lifting is the best option despite its higher space complexity.
+
+
+Remember to handle edge cases such as `null` root, `p` or `q` not being in the tree, or `p` and `q` being the same node.  The code examples above may need minor adjustments depending on your specific tree structure and requirements.
+
