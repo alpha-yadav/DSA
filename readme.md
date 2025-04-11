@@ -80220,3 +80220,64 @@ This is the most compact but might be harder to understand at first glance.
 
 The "Improved Approach" using string concatenation is generally preferred for its readability and maintainability.  The basic approach is perfectly fine for understanding the core logic, while the concise version demonstrates a more advanced Swift feature, but might sacrifice readability for brevity.  Choose the version that best suits your understanding and coding style, keeping in mind that readability is often more important than sheer compactness, especially in collaborative projects.  Remember to always prioritize code that's easy for others (and your future self) to understand and maintain.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long the algorithm takes to run) and space (how much memory the algorithm needs).  We analyze complexity to predict how the algorithm will perform with different input sizes.
+
+There are two main aspects of algorithm complexity:
+
+* **Time Complexity:**  Measures the time an algorithm takes as a function of the input size.
+* **Space Complexity:** Measures the amount of memory an algorithm uses as a function of the input size.
+
+**Big O Notation:**
+
+We use Big O notation (O) to describe the complexity of algorithms.  Big O focuses on the dominant terms and ignores constant factors, giving us a high-level understanding of how the algorithm scales with input size.  It describes the *upper bound* of the growth rate.
+
+Here are some common Big O notations and their meanings:
+
+* **O(1): Constant Time:** The algorithm's execution time remains the same regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n): Logarithmic Time:** The execution time increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n): Linear Time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n): Linearithmic Time:**  The execution time is a product of linear and logarithmic terms.  Example: Merge sort, heap sort.
+
+* **O(n²): Quadratic Time:** The execution time increases proportionally to the square of the input size.  Example: Bubble sort, selection sort.
+
+* **O(2ⁿ): Exponential Time:** The execution time doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!): Factorial Time:** The execution time grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**Best-Case, Average-Case, and Worst-Case Complexity:**
+
+The complexity of an algorithm can vary depending on the input data.  We often analyze complexity in three scenarios:
+
+* **Best-Case:** The most favorable input scenario.
+* **Average-Case:** The average execution time over all possible inputs.  This is often difficult to calculate accurately.
+* **Worst-Case:** The least favorable input scenario.  This is often the most important analysis because it provides a guarantee on the algorithm's performance.
+
+**Space Complexity:**
+
+Similar to time complexity, space complexity describes the memory usage of an algorithm.  It's also expressed using Big O notation.  For example:
+
+* **O(1): Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+* **O(n): Linear Space:** The algorithm's memory usage increases linearly with the input size.
+
+
+**Example:**
+
+Consider searching for an element in an array.
+
+* **Unsorted array:**
+    * Best-case: O(1) (element is the first one)
+    * Average-case: O(n)
+    * Worst-case: O(n) (element is the last one or not present)
+* **Sorted array (using binary search):**
+    * Best-case: O(1)
+    * Average-case: O(log n)
+    * Worst-case: O(log n)
+
+
+**In summary:**  Understanding algorithm complexity is crucial for selecting efficient algorithms for solving problems.  Big O notation provides a standardized way to compare the performance of algorithms and to predict their behavior with different input sizes.  Analyzing both time and space complexity gives a complete picture of an algorithm's resource usage.
+
