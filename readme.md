@@ -79851,3 +79851,88 @@ Similar to time complexity, space complexity uses Big O notation to describe how
 
 Big O notation is a powerful tool for comparing algorithms, but it's crucial to remember its limitations.  It provides a high-level overview of scalability and doesn't capture all aspects of performance.  Real-world performance can also be influenced by factors like hardware, programming language, and implementation details.
 
+#  A Simple Loop 
+The term "a simple loop" is quite broad, as it depends on the programming language.  Here are a few examples of simple loops in different popular languages:
+
+**1.  `for` loop (C++, Java, JavaScript, Python, etc.):**
+
+This type of loop iterates a specific number of times.
+
+* **C++/Java:**
+
+```c++
+for (int i = 0; i < 10; i++) {
+  System.out.println(i); //or std::cout << i << std::endl; in C++
+}
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
+```
+
+* **Python:**
+
+```python
+for i in range(10):
+  print(i)
+```
+
+These loops all print the numbers 0 through 9.  `range(10)` in Python generates a sequence of numbers from 0 up to (but not including) 10.
+
+
+**2. `while` loop (C++, Java, JavaScript, Python, etc.):**
+
+This loop continues as long as a given condition is true.
+
+* **C++/Java:**
+
+```c++
+int i = 0;
+while (i < 10) {
+  System.out.println(i); //or std::cout << i << std::endl; in C++
+  i++;
+}
+```
+
+* **JavaScript:**
+
+```javascript
+let i = 0;
+while (i < 10) {
+  console.log(i);
+  i++;
+}
+```
+
+* **Python:**
+
+```python
+i = 0
+while i < 10:
+  print(i)
+  i += 1
+```
+
+These also print 0 through 9.  It's crucial to increment `i` inside the loop to avoid an infinite loop.
+
+
+**3. `do-while` loop (C++, Java):**
+
+This is similar to a `while` loop, but the condition is checked *after* the loop body executes at least once.
+
+```c++
+int i = 0;
+do {
+  std::cout << i << std::endl;
+  i++;
+} while (i < 10);
+```
+
+This example also prints 0 through 9.
+
+These are just basic examples.  Loops can become much more complex when combined with other programming constructs like nested loops, conditional statements (`if`, `else`), and break/continue statements.  To get a more tailored example, please specify the programming language you're interested in and what the loop should accomplish.
+
