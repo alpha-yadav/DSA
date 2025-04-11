@@ -84983,3 +84983,115 @@ These traversals have different applications.  For instance:
 
 Remember to handle the `None` case (empty subtree) in your recursive functions to avoid errors.  Iterative versions of these traversals are also possible, using stacks to simulate recursion.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a binary tree is a common problem in computer science.  There are several approaches, with varying complexities depending on whether the tree is binary or binary search tree (BST).
+
+**Methods for a general Binary Tree (not necessarily a BST):**
+
+The most efficient method for a general binary tree uses a recursive approach:
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not found.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:  # p and q are on different subtrees
+        return root
+    elif left_lca:  # p and q are on the left subtree
+        return left_lca
+    else:  # p and q are on the right subtree
+        return right_lca
+
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # Node with value 5
+q = root.right  # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val if lca else None}") # Output: LCA of 5 and 1: 3
+
+```
+
+**Explanation:**
+
+1. **Base Case:** If the current node is `None`, or if the current node is either `p` or `q`, we've found one or both nodes, so we return the current node.
+
+2. **Recursive Calls:** We recursively search for the LCA in the left and right subtrees.
+
+3. **Combining Results:**
+   - If both `left_lca` and `right_lca` are not `None`, it means `p` and `q` are in different subtrees, so the current node (`root`) is their LCA.
+   - If only `left_lca` is not `None`, then the LCA is in the left subtree.
+   - If only `right_lca` is not `None`, then the LCA is in the right subtree.
+
+
+**Method for a Binary Search Tree (BST):**
+
+Since a BST is ordered, a more efficient iterative approach is possible:
+
+
+```python
+def lowestCommonAncestorBST(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a BST.  More efficient than the general tree method.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node.
+    """
+
+    while root:
+        if p.val > root.val and q.val > root.val:
+            root = root.right
+        elif p.val < root.val and q.val < root.val:
+            root = root.left
+        else:
+            return root
+
+# Example usage (same tree structure as above, but assumed to be a BST):
+lca_bst = lowestCommonAncestorBST(root, p, q)
+print(f"LCA of {p.val} and {q.val} (BST): {lca_bst.val}") # Output: LCA of 5 and 1 (BST): 3
+```
+
+**Explanation (BST method):**
+
+This method leverages the BST property.  We iterate through the tree:
+
+- If both `p` and `q` are greater than the current node's value, the LCA must be in the right subtree.
+- If both `p` and `q` are less than the current node's value, the LCA must be in the left subtree.
+- Otherwise, the current node is the LCA.
+
+
+Remember to choose the appropriate method based on whether your tree is a BST or a general binary tree.  The BST method is significantly faster for BSTs because it avoids recursion and has a time complexity of O(h), where h is the height of the tree, while the general tree method has a time complexity of O(n), where n is the number of nodes.
+
