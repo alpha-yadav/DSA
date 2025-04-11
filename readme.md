@@ -83348,3 +83348,107 @@ This function has a time complexity of O(n) because, in the worst case, it might
 
 Big O notation is a crucial tool for any computer scientist or software engineer, allowing for a clear and concise way to discuss the efficiency of algorithms and data structures. While it doesn't provide the exact runtime, it gives a powerful understanding of how an algorithm scales.
 
+#  A Simple Loop 
+The concept of a "simple loop" is broad, depending on the programming language.  Here are examples of simple loops in a few popular languages:
+
+**1. Python:**
+
+This uses a `for` loop to iterate through a range of numbers:
+
+```python
+for i in range(5):  # Prints numbers 0 to 4
+    print(i)
+```
+
+This uses a `while` loop to repeat until a condition is met:
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+
+**2. JavaScript:**
+
+This uses a `for` loop:
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i); // Prints numbers 0 to 4
+}
+```
+
+This uses a `while` loop:
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+
+**3. C++:**
+
+This uses a `for` loop:
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl; // Prints numbers 0 to 4
+  }
+  return 0;
+}
+```
+
+This uses a `while` loop:
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+
+**4. Java:**
+
+This uses a `for` loop:
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i); // Prints numbers 0 to 4
+    }
+  }
+}
+```
+
+This uses a `while` loop:
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These are all examples of very basic loops.  Loops can become much more complex with nested loops, conditional statements within the loop, and more sophisticated iteration techniques.  But these illustrate the fundamental structure of a simple loop.  Specify the language you'd like to see an example in for a more tailored response.
+
