@@ -80874,3 +80874,93 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Both approaches achieve the same result.  The recursive approach is often preferred for its clarity and potentially better performance in some cases (due to less overhead from queue management), while the iterative approach might be slightly more efficient in others (depending on the tree structure and Python's implementation details).  Choose the approach that you find more readable and suitable for your specific needs. Remember to handle the `None` cases carefully in both approaches to avoid `AttributeError` exceptions.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They offer a balance between the speed of access provided by arrays and the flexibility of linked lists.
+
+Here's a breakdown of BSTs, covering their properties, operations, advantages, and disadvantages:
+
+**Properties of a Binary Search Tree:**
+
+* **Binary:** Each node has at most two children, referred to as the left child and the right child.
+* **Ordered:**  For every node:
+    * All values in the left subtree are less than the node's value.
+    * All values in the right subtree are greater than the node's value.
+* **No Duplicates (usually):**  Most implementations don't allow duplicate values.  If duplicates are allowed, they're typically handled by adding a counter to each node or using a slightly modified structure.
+
+**Key Operations:**
+
+* **Search:**  Finds a node with a given value.  The search is efficient because the tree's structure allows you to eliminate half of the remaining nodes with each comparison.  In a balanced tree, search time is O(log n), where n is the number of nodes.  In a worst-case scenario (a skewed tree resembling a linked list), search time becomes O(n).
+
+* **Insertion:** Adds a new node with a given value, maintaining the BST property.  The new node is placed in the appropriate subtree based on its value compared to the existing nodes.  Insertion time is typically O(log n) for balanced trees and O(n) for skewed trees.
+
+* **Deletion:** Removes a node with a given value, maintaining the BST property. This is the most complex operation because removing a node can disrupt the order.  Deletion algorithms handle different cases (node with zero, one, or two children) differently.  Deletion time is typically O(log n) for balanced trees and O(n) for skewed trees.
+
+* **Minimum/Maximum:** Finding the smallest or largest value in the tree is efficient, as the minimum is always the leftmost node, and the maximum is always the rightmost node.  This operation is O(log n) for a balanced tree and O(n) for a skewed tree.
+
+* **Successor/Predecessor:** Finding the next larger or next smaller value in the tree.
+
+* **Traversal:** Visiting all nodes in a specific order:
+    * **In-order traversal:** Visits nodes in ascending order of their values (left subtree, node, right subtree).
+    * **Pre-order traversal:** Visits the node, then the left subtree, then the right subtree.
+    * **Post-order traversal:** Visits the left subtree, then the right subtree, then the node.
+
+**Advantages of BSTs:**
+
+* **Efficient Search, Insertion, and Deletion:**  In a balanced tree, these operations have logarithmic time complexity.
+* **Simple Implementation:**  Relatively straightforward to implement compared to more complex self-balancing trees.
+* **Ordered Data:**  Provides naturally ordered data, making tasks like range queries easier.
+
+**Disadvantages of BSTs:**
+
+* **Worst-Case Performance:**  If the tree becomes unbalanced (e.g., due to insertions of sorted data), the performance degrades to linear time.
+* **No Guaranteed Performance:** Unlike self-balancing trees, the performance of basic BSTs isn't guaranteed to remain logarithmic.
+
+
+**Self-Balancing BSTs:**
+
+To address the problem of unbalanced trees, self-balancing BSTs (like AVL trees, red-black trees, and B-trees) are used. These trees automatically rebalance themselves during insertions and deletions, ensuring that the tree remains relatively balanced and maintaining logarithmic performance.  However, they are more complex to implement.
+
+**Example (Python):**
+
+A simplified (and not fully robust) example of a BST node and insertion:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+# Example usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+```
+
+This is a basic illustration.  A complete implementation would include search, deletion, and traversal methods, along with error handling.  For production use, consider using well-tested libraries or self-balancing BST implementations.
+
