@@ -86077,3 +86077,66 @@ While this is the most concise, it's arguably less readable than the improved ve
 
 For beginners, the "Basic Version" is the easiest to understand. The "Improved Version" offers a better balance between readability and efficiency.  The "Concise Version" showcases advanced Swift features but may be less accessible to newcomers.  Choose the version that best suits your understanding and the context of your use.  The important takeaway is understanding the logic behind the FizzBuzz algorithm.
 
+#  Algorithm Complexity 
+Algorithm complexity is a way to classify algorithms according to how their resource consumption (time, memory, etc.) scales as the input size grows.  It's crucial for understanding how an algorithm will perform with large datasets and comparing the efficiency of different algorithms.  We generally focus on *asymptotic complexity*, which describes the behavior as the input size approaches infinity.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:** Measures how the runtime of an algorithm increases with the input size (n).
+* **Space Complexity:** Measures how the memory usage of an algorithm increases with the input size (n).
+
+**Big O Notation:**
+
+Big O notation (O) is the most common way to express algorithm complexity.  It provides an upper bound on the growth rate of the algorithm's resource consumption.  It focuses on the dominant terms and ignores constant factors.  For example:
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Nested loops iterating through the entire input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example:  Trying all permutations of a set.
+
+**Other Notations:**
+
+While Big O describes the *upper bound*, other notations provide more precise information:
+
+* **Big Omega (Ω):** Describes the *lower bound* of the algorithm's runtime.  It indicates the best-case scenario.
+* **Big Theta (Θ):** Describes the *tight bound*, representing both the upper and lower bounds.  It indicates that the algorithm's runtime grows at a specific rate.
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity of an algorithm often involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most significantly to the runtime.
+2. **Counting the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Determining the dominant terms:** Identify the terms that grow fastest as n increases.
+4. **Applying Big O notation:** Express the complexity using Big O notation, ignoring constant factors and lower-order terms.
+
+**Example:**
+
+Consider a simple function that sums the elements of an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for num in arr:
+    total += num
+  return total
+```
+
+This function iterates through the array once.  Therefore, its time complexity is O(n), where n is the length of the array.  The space complexity is O(1) because it uses a constant amount of extra space regardless of the array size.
+
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity is essential for:
+
+* **Choosing the right algorithm:** Selecting the most efficient algorithm for a given task is crucial for performance.
+* **Optimizing code:** Identifying bottlenecks and improving the efficiency of algorithms.
+* **Predicting performance:** Estimating the runtime and memory usage of algorithms for large inputs.
+* **Scaling applications:** Ensuring that applications can handle increasing amounts of data.
+
+
+By understanding and analyzing algorithm complexity, you can make informed decisions about algorithm selection and optimization, leading to more efficient and scalable software.
+
