@@ -89666,3 +89666,112 @@ To mitigate the worst-case O(n) performance of unbalanced BSTs, self-balancing v
 
 The choice of BST variant depends on the specific application and its requirements regarding performance and space complexity.  For most applications, standard BSTs are sufficient, while for others, a self-balancing variant is necessary for guaranteed performance.
 
+#  Binary Search Tree - Insertion (Python) 
+There are several ways to implement insertion into a Binary Search Tree (BST) in Python. Here are two common approaches:  recursive and iterative.
+
+**Recursive Approach:**
+
+This approach is generally considered more elegant and easier to understand, especially for those familiar with recursion.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        """Inserts a new node with the given data into the BST recursively."""
+        self.root = self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        """Recursive helper function for insertion."""
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        else:
+            node.right = self._insert_recursive(node.right, data)
+        return node
+
+    #Optional:  Methods for traversal (inorder, preorder, postorder)  would be added here for demonstration/use.
+
+# Example usage:
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+
+# (Add traversal methods to verify the structure)
+
+```
+
+
+**Iterative Approach:**
+
+This approach avoids recursion, which can be beneficial for very large trees to prevent stack overflow errors.  It's generally slightly less readable than the recursive version.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        """Inserts a new node with the given data into the BST iteratively."""
+        new_node = Node(data)
+        if self.root is None:
+            self.root = new_node
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = new_node
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = new_node
+                    break
+                else:
+                    current = current.right
+
+
+# Example usage:
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+
+# (Add traversal methods to verify the structure)
+```
+
+**Important Considerations:**
+
+* **Duplicate Values:**  These implementations don't handle duplicate values.  You might want to modify them to either ignore duplicates or handle them in a specific way (e.g., increment a count for each duplicate value).
+* **Error Handling:**  More robust implementations would include error handling (e.g., checking for invalid input).
+* **Tree Traversal:** The example code snippets are missing tree traversal methods (`inorder`, `preorder`, `postorder`).  These are essential for verifying the structure and accessing the data within the BST. You would add methods to recursively walk the tree and print the nodes in the desired order.
+
+
+Remember to add tree traversal methods (inorder, preorder, postorder) to verify the correctness of your BST after insertion.  These methods would recursively explore the tree and print the node values in the appropriate order.  For example, an inorder traversal of a BST will print the nodes in ascending order.
+
