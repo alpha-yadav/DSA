@@ -91017,3 +91017,154 @@ Once you grasp these basics, you can delve into more advanced topics such as:
 
 This introduction provides a foundational understanding of graph theory.  To truly grasp the subject, it's recommended to work through examples, solve problems, and explore more advanced concepts. Numerous online resources, textbooks, and courses are available to further your learning.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and often efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of possible edges).  Here's a breakdown of how to represent a graph using adjacency lists, along with considerations for different programming languages and data structures:
+
+**The Concept:**
+
+An adjacency list represents a graph as a collection of lists, one for each vertex (node). Each list contains the vertices that are directly connected (adjacent) to the corresponding vertex.
+
+**Example:**
+
+Consider an undirected graph with vertices {A, B, C, D, E} and edges {(A, B), (A, C), (B, C), (B, D), (C, E)}:
+
+* **A:** [B, C]
+* **B:** [A, C, D]
+* **C:** [A, B, E]
+* **D:** [B]
+* **E:** [C]
+
+This represents the graph concisely.  To find out which vertices are connected to vertex 'A', you simply look at the list associated with 'A'.
+
+**Implementations in Different Languages:**
+
+The specific implementation will vary depending on the programming language you choose. Here are some examples:
+
+**1. Python:**
+
+Using dictionaries for efficient lookup:
+
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'C', 'D'],
+    'C': ['A', 'B', 'E'],
+    'D': ['B'],
+    'E': ['C']
+}
+
+# Accessing neighbors of vertex 'B':
+neighbors_of_B = graph['B']
+print(f"Neighbors of B: {neighbors_of_B}")
+
+#Checking for an edge
+def has_edge(graph, u, v):
+    return v in graph.get(u, [])
+
+print(f"Has edge (A,C)? {has_edge(graph, 'A', 'C')}")
+print(f"Has edge (A,D)? {has_edge(graph, 'A', 'D')}")
+
+```
+
+Using a list of lists (less efficient for large graphs):
+
+```python
+graph = [
+    ['B', 'C'],  # A
+    ['A', 'C', 'D'], # B
+    ['A', 'B', 'E'], # C
+    ['B'],       # D
+    ['C']        # E
+]
+
+# Accessing neighbors of vertex B (index 1):
+neighbors_of_B = graph[1]
+print(f"Neighbors of B: {neighbors_of_B}")
+```
+
+
+**2. C++:**
+
+Using `std::vector` and `std::list` or `std::vector` of vectors:
+
+```c++
+#include <iostream>
+#include <vector>
+#include <list>
+#include <map>
+
+using namespace std;
+
+int main() {
+    // Using vector of vectors (better for this example)
+    vector<vector<int>> graph(5); // Assume vertices are numbered 0-4
+    graph[0] = {1, 2}; // A
+    graph[1] = {0, 2, 3}; // B
+    graph[2] = {0, 1, 4}; // C
+    graph[3] = {1}; // D
+    graph[4] = {2}; // E
+
+    // Accessing neighbors of vertex 1 (B):
+    for (int neighbor : graph[1]) {
+        cout << neighbor << " ";
+    }
+    cout << endl;
+
+
+    //Using map to maintain Vertex labels:
+    map<char, vector<char>> graph_labeled;
+    graph_labeled['A'] = {'B', 'C'};
+    graph_labeled['B'] = {'A', 'C', 'D'};
+    graph_labeled['C'] = {'A', 'B', 'E'};
+    graph_labeled['D'] = {'B'};
+    graph_labeled['E'] = {'C'};
+    
+    for (char neighbor : graph_labeled['B']) {
+        cout << neighbor << " ";
+    }
+    cout << endl;
+
+
+    return 0;
+}
+```
+
+**3. Java:**
+
+Using `ArrayList` and `HashMap`:
+
+```java
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class AdjacencyList {
+    public static void main(String[] args) {
+        Map<Character, List<Character>> graph = new HashMap<>();
+        graph.put('A', new ArrayList<>(List.of('B', 'C')));
+        graph.put('B', new ArrayList<>(List.of('A', 'C', 'D')));
+        graph.put('C', new ArrayList<>(List.of('A', 'B', 'E')));
+        graph.put('D', new ArrayList<>(List.of('B')));
+        graph.put('E', new ArrayList<>(List.of('C')));
+
+        // Accessing neighbors of vertex 'B':
+        List<Character> neighborsOfB = graph.get('B');
+        System.out.println("Neighbors of B: " + neighborsOfB);
+    }
+}
+```
+
+**Choosing the Right Data Structure:**
+
+* **Dictionaries/Maps:**  Provide fast lookups by vertex label (O(1) on average).  Best for graphs where vertices have meaningful labels.
+* **Lists of Lists/Vectors of Vectors:** Simple but less efficient for lookups (O(n) in the worst case, where n is the number of vertices) if you need to find neighbors quickly. Suitable when vertices are numbered consecutively.
+
+**Directed vs. Undirected Graphs:**
+
+* **Undirected:**  The adjacency list representation shown above works for undirected graphs.  If (A, B) is an edge, both A's list contains B and B's list contains A.
+* **Directed:**  If the graph is directed, only the directed edge is stored. For example, if there's a directed edge from A to B, only B would be in A's adjacency list.
+
+
+Remember to choose the data structure and implementation that best suits your needs and the size and characteristics of your graphs.  For very large graphs, consider more advanced techniques for optimizing memory and search efficiency.
+
