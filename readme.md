@@ -88980,3 +88980,46 @@ A linear search iterates through an unsorted array to find a target element.
 
 Understanding algorithm complexity is critical for choosing efficient algorithms, optimizing existing code, and predicting the performance of your programs as the input size grows.  When designing or selecting an algorithm, aim for the lowest possible complexity class to ensure scalability and performance.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a powerful tool in computer science for describing the asymptotic behavior of algorithms.  It provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds.  Unlike Big-O (O), which only provides an upper bound, and Big-Omega (Ω), which only provides a lower bound, Big-Theta gives a precise characterization of the function's growth.
+
+**Formal Definition:**
+
+We say that f(n) = Θ(g(n)) if and only if there exist positive constants c₁ and c₂, and a positive integer n₀, such that for all n ≥ n₀:
+
+   `c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+In simpler terms:
+
+* **For sufficiently large inputs (n ≥ n₀):** The function f(n) is always bounded both above and below by constant multiples of g(n).
+* **g(n) is the dominant term:**  The function f(n) grows at the same rate as g(n), ignoring constant factors.
+
+
+**Example:**
+
+Let's say we have a function `f(n) = 2n² + 3n + 1`.  We can express its growth using Big-Theta notation as follows:
+
+`f(n) = Θ(n²) `
+
+**Why?**
+
+We can find constants that satisfy the definition:
+
+* Choose `c₁ = 1`. For sufficiently large n, `2n² + 3n + 1` will always be greater than or equal to `n²` (ignoring smaller terms).
+* Choose `c₂ = 3`. For sufficiently large n, `2n² + 3n + 1` will always be less than or equal to `3n²` (the dominant term dominates).
+
+Therefore, we've shown that `1 * n² ≤ 2n² + 3n + 1 ≤ 3 * n²` for sufficiently large n.
+
+**Key Differences from Big-O and Big-Omega:**
+
+* **Big-O (O):**  Provides an upper bound.  `f(n) = O(g(n))` means f(n) grows no faster than g(n).  It's like saying "f(n) is at most g(n) in terms of growth."
+* **Big-Omega (Ω):** Provides a lower bound.  `f(n) = Ω(g(n))` means f(n) grows at least as fast as g(n).  It's like saying "f(n) is at least g(n) in terms of growth."
+* **Big-Theta (Θ):** Provides both an upper and lower bound.  `f(n) = Θ(g(n))` means f(n) grows at the *same rate* as g(n).  It's a tight bound.
+
+**When to Use Big-Theta:**
+
+Big-Theta is preferred when you want a precise and accurate description of an algorithm's time or space complexity. It gives a clearer picture of the algorithm's efficiency compared to using only Big-O or Big-Omega.  However, sometimes finding a tight bound (Θ) is more difficult than finding an upper bound (O), so Big-O is often used in practice even if a tight bound could be found.
+
+
+In summary, Big-Theta provides the most precise description of an algorithm's asymptotic behavior when you need to know both its upper and lower bounds.  It's a critical concept for analyzing and comparing the efficiency of different algorithms.
+
