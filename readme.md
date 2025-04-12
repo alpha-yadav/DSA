@@ -88912,3 +88912,71 @@ This version is more easily extendable.  Adding new conditions (e.g., "Bang" for
 
 Start with Version 1 to grasp the core concept, and then explore the others as your Swift skills develop. Remember to choose the version that best balances readability and maintainability for your specific needs.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (time and space) an algorithm consumes as a function of the size of its input.  It's crucial for understanding an algorithm's efficiency and scalability. We typically analyze complexity using **Big O notation**, which describes the upper bound of the growth rate of the algorithm's resource consumption.
+
+Here's a breakdown of key aspects of algorithm complexity:
+
+**1. Time Complexity:** This measures how the runtime of an algorithm scales with the input size (n).  Common time complexities include:
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Finding all permutations of a set.
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm scales with the input size (n).  The same Big O notation applies as with time complexity.  Examples include:
+
+* **O(1) - Constant Space:** The algorithm uses a constant amount of memory regardless of input size.
+
+* **O(n) - Linear Space:** The memory usage increases linearly with the input size.  Example: Storing the input in an array.
+
+* **O(log n) - Logarithmic Space:**  Memory usage grows logarithmically with input size (e.g., recursive algorithms with logarithmic depth).
+
+* **O(n²) - Quadratic Space:** Memory usage grows quadratically with input size (e.g., storing an adjacency matrix for a graph).
+
+
+**3. Big O Notation:**
+
+Big O notation simplifies the analysis by focusing on the dominant terms and ignoring constant factors. It provides an upper bound on the growth rate, meaning the actual runtime or space usage might be better, but it won't be significantly worse.
+
+* **Example:**  An algorithm with runtime 5n² + 10n + 3 is represented as O(n²) because the n² term dominates as n grows large.
+
+**4. Other Notations:**
+
+While Big O describes the upper bound, other notations provide a more complete picture:
+
+* **Ω (Omega):** Describes the lower bound of the growth rate.
+* **Θ (Theta):** Describes both the upper and lower bounds, indicating a tight bound.
+
+
+**5. Best, Average, and Worst Case:**
+
+Complexity analysis can also consider different scenarios:
+
+* **Best Case:** The most favorable input that leads to the fastest execution.
+* **Average Case:** The expected runtime over all possible inputs.  This is often difficult to calculate precisely.
+* **Worst Case:** The least favorable input that leads to the slowest execution.  This is often the most important consideration for guaranteeing performance.
+
+
+**Example: Linear Search**
+
+A linear search iterates through an unsorted array to find a target element.
+
+* **Best Case:** O(1) – The target is the first element.
+* **Average Case:** O(n) – The target is somewhere in the middle.
+* **Worst Case:** O(n) – The target is the last element or not present.
+* **Space Complexity:** O(1) – Constant extra space is used.
+
+
+Understanding algorithm complexity is critical for choosing efficient algorithms, optimizing existing code, and predicting the performance of your programs as the input size grows.  When designing or selecting an algorithm, aim for the lowest possible complexity class to ensure scalability and performance.
+
