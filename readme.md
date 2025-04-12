@@ -89495,3 +89495,16 @@ The best representation depends on your needs:
 
 Remember that you can often adapt these representations to accommodate specific needs or optimize for particular operations within your application.  For example, you might combine aspects of different approaches for best performance.
 
+#  Introduction 
+Please provide me with some context!  An introduction to *what*?  To give you a good introduction, I need to know the topic.  For example, are you looking for an introduction to:
+
+* **A specific topic?** (e.g., the history of the Roman Empire, the benefits of exercise, quantum physics)
+* **A story?** (e.g., a fictional tale, a personal anecdote)
+* **An essay or paper?** (e.g., on climate change, the impact of social media)
+* **A presentation?** (e.g., about a new product, a research project)
+* **A person?** (e.g., a biographical sketch)
+* **A place?** (e.g., a travelogue)
+
+
+Tell me what you need an introduction for, and I'll help you craft one.
+
