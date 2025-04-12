@@ -87974,3 +87974,101 @@ The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest nod
 
 The recursive approach is generally preferred for its simplicity and efficiency, unless you have specific constraints or performance requirements favoring the other methods.  Remember that the iterative approach requires modification of the original tree structure.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (or more specifically, a rooted tree) is a fundamental problem in computer science with applications in various domains, including file systems, version control systems (like Git), and phylogenetic analysis.  There are several approaches to solve this problem, each with its own trade-offs in terms of time and space complexity.
+
+Here are some common methods:
+
+**1. Recursive Approach (Top-Down):**
+
+This is a straightforward and intuitive approach.  It recursively traverses the tree, starting from the root.  If either node is found, we continue searching in the subtree containing the other node.  If both nodes are found in different subtrees of a node, that node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node1, node2):
+    if root is None or root.data == node1 or root.data == node2:
+        return root
+
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lca_recursive(root, 4, 5)
+print(f"LCA of 4 and 5 is: {lca.data}") # Output: LCA of 4 and 5 is: 2
+
+lca = lca_recursive(root, 4, 3)
+print(f"LCA of 4 and 3 is: {lca.data}") # Output: LCA of 4 and 3 is: 1
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, we might traverse the entire tree).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive call stack).  In a skewed tree, this could be O(N).
+
+
+**2. Bottom-Up Approach (Using Parent Pointers):**
+
+If you have a tree where each node has a pointer to its parent, you can efficiently find the LCA.  You traverse up from each node, storing the ancestors of each node in sets.  The LCA is the deepest ancestor common to both sets.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.parent = None
+
+def lca_bottom_up(node1, node2):
+    ancestors1 = set()
+    current = node1
+    while current:
+        ancestors1.add(current)
+        current = current.parent
+
+    current = node2
+    while current:
+        if current in ancestors1:
+            return current
+        current = current.parent
+
+    return None #Should not reach here if both nodes are in the tree
+
+#Example (requires setting parent pointers during tree construction):
+root = Node(1)
+root.left = Node(2); root.left.parent = root
+root.right = Node(3); root.right.parent = root
+root.left.left = Node(4); root.left.left.parent = root.left
+root.left.right = Node(5); root.left.right.parent = root.left
+
+
+lca = lca_bottom_up(root.left.left, root.left.right)
+print(f"LCA of 4 and 5 is: {lca.data}") #Output: LCA of 4 and 5 is: 2
+```
+
+**Time Complexity:** O(H), where H is the height of the tree.
+**Space Complexity:** O(H) in the worst case (due to ancestor sets).
+
+
+**3. Using Binary Lifting (for efficient LCA queries):**
+
+This technique is particularly useful if you need to answer multiple LCA queries on the same tree.  It preprocesses the tree to build a "jump table" that allows for logarithmic time LCA queries.  It's more complex to implement but very efficient for repeated queries.
+
+
+The best approach depends on your specific needs.  If you only need to find the LCA once, the recursive approach is simple and often sufficient.  If you need to perform many LCA queries on the same tree, the binary lifting technique is the most efficient.  The bottom-up approach is a good alternative if parent pointers are readily available. Remember to handle edge cases like one node being an ancestor of the other, or nodes not existing in the tree.
+
