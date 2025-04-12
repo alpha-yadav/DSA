@@ -89603,3 +89603,66 @@ print(f"Root1 and Root3 are identical (iterative): {are_identical_iterative(root
 
 Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues for very deep trees). Choose the method that best suits your needs and understanding.  Remember to handle the `None` cases carefully in both approaches.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing and retrieving data efficiently.  They offer a way to organize data in a hierarchical manner, allowing for faster searching, insertion, and deletion compared to linear data structures like arrays or linked lists, *provided the data is ordered*.
+
+Here's a breakdown of BSTs:
+
+**Key Properties:**
+
+* **Hierarchical Structure:**  A BST is a tree-like structure where each node has at most two children, referred to as the *left child* and the *right child*.
+
+* **Ordering Property:** The key property that distinguishes a BST is the ordering of its nodes.  For any given node:
+    * All nodes in its *left subtree* have keys *less than* the key of the node.
+    * All nodes in its *right subtree* have keys *greater than* the key of the node.
+
+* **Uniqueness (Often):** While not strictly required, BSTs often (but not always) enforce uniqueness of keys.  This means no two nodes can have the same key.
+
+**Basic Operations:**
+
+* **Search:**  Given a key, search the tree to find the node containing that key.  This operation is efficient, typically taking O(log n) time in a balanced tree (where n is the number of nodes), but can degrade to O(n) in a skewed tree.
+
+* **Insertion:**  Add a new node with a given key to the tree while maintaining the BST properties.
+
+* **Deletion:**  Remove a node with a given key from the tree while preserving the BST properties. This is the most complex operation and has several cases to handle (nodes with zero, one, or two children).
+
+* **Minimum/Maximum:**  Find the node with the smallest or largest key in the tree. This is efficient, requiring traversing only one branch.
+
+* **Successor/Predecessor:**  Find the next largest (successor) or next smallest (predecessor) key in the tree.
+
+**Example:**
+
+Consider the following keys: 8, 3, 10, 1, 6, 14, 4, 7, 13.  A possible BST representation would be:
+
+```
+       8
+     /   \
+    3     10
+   / \     \
+  1   6     14
+     / \    /
+    4   7  13
+```
+
+**Advantages of BSTs:**
+
+* **Efficient Search, Insertion, and Deletion (in balanced trees):**  O(log n) time complexity on average.
+* **Ordered Data:**  Provides an ordered way to store and retrieve data.
+* **Relatively Simple Implementation:**  Compared to more complex self-balancing trees.
+
+**Disadvantages of BSTs:**
+
+* **Worst-Case Performance:**  In a skewed tree (e.g., a linked list), operations can take O(n) time.
+* **Not suitable for all applications:**  If frequent updates (insertions and deletions) are expected, a self-balancing BST might be necessary to avoid performance degradation.
+* **Space Efficiency:**  Each node stores a key and pointers to its children, which can lead to relatively high space overhead compared to simpler structures.
+
+**Self-Balancing BSTs:**
+
+To mitigate the worst-case O(n) performance of unbalanced BSTs, self-balancing variants are used. These include:
+
+* **AVL Trees:**  Maintain a balance factor for each node, ensuring the height difference between the left and right subtrees is at most one.
+* **Red-Black Trees:**  Use color information to maintain balance, allowing for slightly less strict balance constraints than AVL trees.
+* **B-Trees:**  Designed for disk-based storage, optimizing for disk access times.
+
+The choice of BST variant depends on the specific application and its requirements regarding performance and space complexity.  For most applications, standard BSTs are sufficient, while for others, a self-balancing variant is necessary for guaranteed performance.
+
