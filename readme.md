@@ -86821,3 +86821,58 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Remember to handle the `None` cases carefully in both methods to correctly compare empty subtrees.  The provided code includes robust handling of these edge cases.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science. They're a special type of binary tree where each node has at most two children, referred to as the left child and the right child, and they satisfy the following crucial property:
+
+**Binary Search Tree Property:**  For every node in the tree:
+
+* All nodes in its *left* subtree have values *less than* the node's value.
+* All nodes in its *right* subtree have values *greater than* the node's value.
+
+This property makes searching, insertion, and deletion operations significantly more efficient than in a general binary tree or a linked list.
+
+
+**Key Operations:**
+
+* **Search:**  Finding a specific node with a given value.  This is done recursively or iteratively by comparing the target value to the current node's value and traversing either the left or right subtree accordingly.  The time complexity is O(h), where 'h' is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes.  In a worst-case scenario (a skewed tree), h can be n, leading to O(n) time complexity.
+
+* **Insertion:** Adding a new node to the tree.  The algorithm is similar to search; you traverse down the tree, comparing the new value with each node's value until you find the appropriate position to insert the new node as a leaf.  Time complexity is also O(h).
+
+* **Deletion:** Removing a node from the tree. This is the most complex operation because it requires handling three cases:
+    * Node to be deleted is a leaf node (no children): Simply remove the node.
+    * Node to be deleted has one child: Replace the node with its child.
+    * Node to be deleted has two children: This is the most complex case.  The usual approach is to find either the inorder predecessor (largest node in the left subtree) or the inorder successor (smallest node in the right subtree), replace the node's value with the predecessor/successor's value, and then delete the predecessor/successor node (which will now be a node with at most one child). Time complexity is O(h).
+
+* **Minimum/Maximum:** Finding the smallest or largest value in the tree. This can be done efficiently by traversing the leftmost (for minimum) or rightmost (for maximum) path.  Time complexity is O(h).
+
+* **Traversal:** Visiting all nodes in a specific order. Common traversal methods include:
+    * **Inorder Traversal:**  Visit the left subtree, then the current node, then the right subtree.  This produces a sorted sequence of the nodes' values.
+    * **Preorder Traversal:** Visit the current node, then the left subtree, then the right subtree.
+    * **Postorder Traversal:** Visit the left subtree, then the right subtree, then the current node.
+
+
+**Advantages of BSTs:**
+
+* **Efficient search, insertion, and deletion:** O(log n) in average and best cases.
+* **Simple implementation:** Relatively straightforward to understand and implement.
+* **Provides sorted data:** Inorder traversal yields a sorted sequence.
+
+**Disadvantages of BSTs:**
+
+* **Worst-case performance:**  O(n) if the tree becomes skewed (e.g., all nodes inserted in sorted order).
+* **Not suitable for all applications:** Not ideal when frequent updates are needed and balancing is not implemented.
+
+
+**Self-Balancing BSTs:**
+
+To mitigate the problem of skewed trees and ensure O(log n) performance in all cases, self-balancing BSTs are used.  Examples include:
+
+* AVL Trees
+* Red-Black Trees
+* B-Trees (used in databases)
+
+These structures employ sophisticated algorithms to maintain balance during insertion and deletion, ensuring that the height remains logarithmic with respect to the number of nodes.
+
+
+In summary, Binary Search Trees are a valuable data structure for scenarios requiring efficient searching, insertion, deletion, and sorted data retrieval, particularly when the data is relatively static or when using self-balancing variants.  Understanding their properties and limitations is crucial for choosing the appropriate data structure for a given problem.
+
