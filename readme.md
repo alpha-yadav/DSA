@@ -87513,3 +87513,100 @@ print(f"Is the tree a BST? {is_bst_iterative(root)}") #False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach (where H is the height of the tree, potentially O(N) for skewed trees) and O(H) for the iterative approach (again, potentially O(N) for skewed trees) due to the stack.  The iterative method is generally preferred for its avoidance of potential stack overflow errors in extremely deep trees.  Choose the method that best suits your needs and coding style.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree adheres to the Binary Search Tree (BST) property.  The core idea is to recursively check if, for every node:
+
+* All nodes in its left subtree have values less than the node's value.
+* All nodes in its right subtree have values greater than the node's value.
+
+Here are three common approaches:
+
+**1. Recursive Approach (Most common and generally efficient):**
+
+This approach recursively traverses the tree, checking the BST property at each node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Recursively checks if a given tree is a Binary Search Tree.
+    """
+    return is_bst_util(node, float('-inf'), float('inf'))
+
+def is_bst_util(node, min_val, max_val):
+    """
+    Helper function for recursive BST check.
+    """
+    # Empty tree is a BST
+    if node is None:
+        return True
+
+    # Check if the node's value is within the allowed range
+    if not (min_val < node.data < max_val):
+        return False
+
+    # Recursively check left and right subtrees
+    return (is_bst_util(node.left, min_val, node.data) and
+            is_bst_util(node.right, node.data, max_val))
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_recursive(root))  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(5) #Violation! 15 > 10 and 5 < 10
+print(is_bst_recursive(root2)) # Output: False
+
+```
+
+**2. Inorder Traversal and Sorting:**
+
+This approach performs an inorder traversal of the tree.  If the resulting list is sorted, the tree is a BST.
+
+```python
+def inorder_traversal(node):
+    """Performs inorder traversal and returns a list of node values."""
+    result = []
+    if node:
+        result.extend(inorder_traversal(node.left))
+        result.append(node.data)
+        result.extend(inorder_traversal(node.right))
+    return result
+
+def is_bst_inorder(node):
+    """Checks if a tree is a BST using inorder traversal."""
+    inorder_list = inorder_traversal(node)
+    return all(inorder_list[i] <= inorder_list[i+1] for i in range(len(inorder_list)-1))
+
+# Example usage (same trees as above)
+print(is_bst_inorder(root))   #Output: True
+print(is_bst_inorder(root2))  #Output: False
+```
+
+**3. Iterative Approach (Using Stack):**
+
+This approach uses a stack to simulate the recursion, avoiding potential stack overflow issues with very deep trees.  It's conceptually similar to the recursive approach but implemented iteratively.  (Implementation omitted for brevity, but it's a straightforward adaptation of the recursive approach using a stack.)
+
+
+**Choosing the best approach:**
+
+* The **recursive approach** is generally preferred for its clarity and readability. It's also often quite efficient.
+* The **inorder traversal approach** is simple to understand but might be less efficient for very large trees due to the need to create and sort a list.
+* The **iterative approach** is useful when dealing with extremely deep trees to prevent stack overflow errors, but it's slightly more complex to implement.
+
+
+Remember to handle edge cases like empty trees or trees with only one node appropriately in your chosen implementation.  The examples above include such considerations.
+
