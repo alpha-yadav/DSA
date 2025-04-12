@@ -89171,3 +89171,81 @@ Consider searching for an element in an array:
 
 Big O notation is a crucial tool for analyzing algorithms. It helps you compare the efficiency of different algorithms, understand how their performance scales with input size, and make informed decisions about which algorithm to choose for a given problem.  While it doesn't provide exact runtime, it gives a valuable high-level understanding of an algorithm's performance characteristics.
 
+#  A Simple Loop 
+The phrase "a simple loop" is too broad.  A loop is a fundamental programming concept that repeats a block of code.  To give you a "simple loop," I need to know what programming language you'd like to use.
+
+Here are examples of simple loops in a few common languages:
+
+**Python:**
+
+```python
+# Using a for loop to print numbers 0-9
+for i in range(10):
+  print(i)
+
+# Using a while loop to print numbers 0-9
+i = 0
+while i < 10:
+  print(i)
+  i += 1
+```
+
+**JavaScript:**
+
+```javascript
+// Using a for loop to print numbers 0-9
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
+
+// Using a while loop to print numbers 0-9
+let i = 0;
+while (i < 10) {
+  console.log(i);
+  i++;
+}
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  // Using a for loop to print numbers 0-9
+  for (int i = 0; i < 10; i++) {
+    std::cout << i << std::endl;
+  }
+
+  // Using a while loop to print numbers 0-9
+  int i = 0;
+  while (i < 10) {
+    std::cout << i << std::endl;
+    i++;
+  }
+  return 0;
+}
+```
+
+**Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    // Using a for loop to print numbers 0-9
+    for (int i = 0; i < 10; i++) {
+      System.out.println(i);
+    }
+
+    // Using a while loop to print numbers 0-9
+    int i = 0;
+    while (i < 10) {
+      System.out.println(i);
+      i++;
+    }
+  }
+}
+```
+
+These examples all do the same thing: print the numbers 0 through 9.  They demonstrate the basic structure of `for` and `while` loops.  Remember to choose the example that corresponds to the programming language you are using.  If you have a specific task in mind, providing more details will help me create a more relevant and helpful "simple loop" example.
+
