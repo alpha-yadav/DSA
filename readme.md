@@ -88561,3 +88561,66 @@ A full explanation of the algorithm's inner workings would require a deep dive i
 
 In summary, Thorup's algorithms represent a significant advancement in the field of graph algorithms, offering practical and theoretically efficient solutions to critical problems.  While understanding the intricate details requires specialized knowledge, the impact of his work is undeniable.
 
+#  Graph Traversals 
+Graph traversals are algorithms used to systematically visit every node (vertex) in a graph exactly once.  There are several common approaches, each with its own properties and applications:
+
+**1. Breadth-First Search (BFS):**
+
+* **Idea:** Explores the graph level by level.  Starts at a root node and visits all its neighbors before moving to the neighbors of those neighbors.  Uses a queue data structure.
+* **Algorithm:**
+    1. Start at a designated root node.
+    2. Add the root node to a queue.
+    3. While the queue is not empty:
+        a. Remove the first node from the queue.
+        b. Visit the node (mark it as visited).
+        c. Add all unvisited neighbors of the node to the queue.
+* **Applications:**
+    * Finding the shortest path in unweighted graphs.
+    * Crawling the web.
+    * Peer-to-peer networks.
+    * Finding connected components.
+* **Time Complexity:** O(V + E), where V is the number of vertices and E is the number of edges.
+* **Space Complexity:** O(V) in the worst case (queue can hold all vertices).
+
+**2. Depth-First Search (DFS):**
+
+* **Idea:** Explores the graph as deeply as possible along each branch before backtracking. Uses a stack (implicitly through recursion or explicitly using a stack data structure).
+* **Algorithm (recursive):**
+    1. Visit the current node (mark it as visited).
+    2. For each unvisited neighbor of the current node:
+        a. Recursively call DFS on the neighbor.
+* **Algorithm (iterative using a stack):**
+    1. Push the root node onto the stack.
+    2. While the stack is not empty:
+        a. Pop a node from the stack.
+        b. If the node is not visited:
+            i. Visit the node.
+            ii. Push its unvisited neighbors onto the stack.
+* **Applications:**
+    * Topological sorting.
+    * Detecting cycles in a graph.
+    * Finding strongly connected components (using Kosaraju's algorithm or Tarjan's algorithm).
+    * Solving puzzles like mazes.
+* **Time Complexity:** O(V + E)
+* **Space Complexity:** O(V) in the worst case (recursion depth or stack size can be proportional to the number of vertices).
+
+
+**3. Other Traversals:**
+
+* **Dijkstra's Algorithm:** Finds the shortest path in a weighted graph with non-negative edge weights.  Uses a priority queue.
+* **A* Search:**  A more sophisticated shortest path algorithm that uses a heuristic function to guide the search.
+* **Bellman-Ford Algorithm:** Finds the shortest path in a weighted graph, even with negative edge weights (but detects negative cycles).
+
+
+**Key Differences between BFS and DFS:**
+
+| Feature        | BFS                      | DFS                      |
+|----------------|---------------------------|---------------------------|
+| Data Structure | Queue                    | Stack (recursion or explicit) |
+| Search Strategy| Level-order               | Depth-order               |
+| Shortest Path  | Finds shortest path in unweighted graphs | Does not guarantee shortest path |
+| Memory Usage   | Can be higher for wide graphs | Can be higher for deep graphs |
+
+
+Choosing the right traversal algorithm depends on the specific problem and the properties of the graph.  For finding the shortest path in an unweighted graph, BFS is the preferred choice.  For tasks like topological sorting or cycle detection, DFS is often more suitable.  For weighted graphs, Dijkstra's or A* search might be necessary.
+
