@@ -89075,3 +89075,54 @@ Asymptotic notations describe the behavior of functions as their input approache
 
 Understanding these notations is essential for comparing the efficiency of different algorithms and choosing the most appropriate one for a given task.  Remember that asymptotic analysis focuses on the behavior as the input size approaches infinity; it doesn't necessarily reflect the performance for small inputs.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the lower bound of the growth rate of a function.  In simpler terms, it provides a guarantee about the *minimum* amount of resources (like time or memory) an algorithm will use as the input size grows.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that a function *f(n)* is Big-Omega of *g(n)*, written as *f(n) = Ω(g(n))*, if there exist positive constants *c* and *n₀* such that:
+
+`0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`
+
+Let's break this down:
+
+* **`f(n)`:**  Represents the actual resource usage (e.g., running time) of an algorithm as a function of the input size `n`.
+* **`g(n)`:** Represents a simpler function that describes the lower bound of the growth rate of `f(n)`.  This is often a common function like `n`, `n log n`, `n²`, etc.
+* **`c`:** A positive constant.  It allows us to ignore constant factors when comparing growth rates.
+* **`n₀`:** A positive integer.  It allows us to ignore the behavior of the function for small input sizes.  The inequality only needs to hold for input sizes larger than `n₀`.
+
+**What Ω(g(n)) Means:**
+
+* `f(n) = Ω(g(n))` means that `f(n)` grows at least as fast as `g(n)`.  `g(n)` provides a lower bound on the growth of `f(n)`.
+* It doesn't say anything about the upper bound.  The algorithm might actually perform much better than `g(n)` in some cases.  It only guarantees a minimum performance.
+
+
+**Example:**
+
+Let's say we have an algorithm with a running time of:
+
+`f(n) = 3n² + 2n + 1`
+
+We can say that:
+
+`f(n) = Ω(n²)`
+
+To prove this, we need to find constants `c` and `n₀` that satisfy the definition.  Let's choose `c = 1`. Then:
+
+`1 * n² ≤ 3n² + 2n + 1`
+
+This inequality holds for all `n ≥ 1` (so we can choose `n₀ = 1`).
+
+Therefore, we've shown that the algorithm's running time is at least proportional to `n²`.  It could be faster, but it will never be significantly slower than quadratic time for large enough inputs.
+
+
+**Relationship to Big-O and Big-Theta:**
+
+* **Big-O (O):** Describes the *upper bound* of the growth rate.  It indicates the maximum amount of resources an algorithm might use.
+* **Big-Omega (Ω):** Describes the *lower bound* of the growth rate. It indicates the minimum amount of resources an algorithm will use.
+* **Big-Theta (Θ):** Describes both the upper and lower bounds of the growth rate. It means that the algorithm's growth rate is tightly bound by the given function.  If `f(n) = Θ(g(n))`, then `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+
+In essence, Big-Omega provides a valuable tool for understanding the best-case or minimum performance characteristics of an algorithm, complementing the information provided by Big-O.
+
