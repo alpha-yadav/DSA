@@ -90504,3 +90504,108 @@ Similar iterative approaches can be implemented for preorder and postorder trave
 
 Remember that these algorithms assume you have a node structure with `data`, `left`, and `right` attributes.  You'll need to adapt them based on your specific node implementation.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first traversal, visits all nodes of a tree level by level, from left to right.  Here are implementations in Python and JavaScript, along with explanations:
+
+**Python Implementation:**
+
+This uses a queue data structure for efficient level-order traversal.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+**Explanation:**
+
+1. **`Node` class:** Defines a node in the binary tree, containing data and pointers to left and right children.
+2. **`levelOrder` function:**
+   - Takes the root node as input.
+   - Handles the case of an empty tree.
+   - Uses a `deque` (double-ended queue) from the `collections` module.  A deque is efficient for adding and removing elements from both ends.
+   - Initializes the queue with the root node.
+   - Enters a `while` loop that continues as long as the queue is not empty.
+   - In each iteration:
+     - It removes the first element from the queue (`popleft`) and prints its data.
+     - If the node has left and/or right children, it adds them to the end of the queue.  This ensures that nodes at the same level are processed before moving to the next level.
+
+
+**JavaScript Implementation:**
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) {
+    return;
+  }
+
+  const queue = [root];
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    console.log(curr.data);
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+// Example usage:
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1 2 3 4 5
+```
+
+**Explanation (JavaScript):**
+
+The JavaScript code mirrors the Python version closely.  It uses an array as a queue (JavaScript doesn't have a dedicated deque data structure like Python's `collections.deque`, but arrays work well enough for this purpose).  The `shift()` method removes the first element, and `push()` adds to the end.  The logic is identical to the Python version.
+
+
+Both implementations achieve the same result – a level-order traversal of a binary tree.  Choose the implementation that best suits your programming environment and preferences.  Remember to handle potential errors, like an empty tree, as shown in the examples.
+
