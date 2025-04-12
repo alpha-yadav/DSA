@@ -88831,3 +88831,84 @@ Output: "bab" (or "aba")
 
 **Choosing a problem to solve depends on your current skill level.**  If you're new to algorithms, start with the easy one.  Once you're comfortable, move on to the medium, and then the hard.  Remember that the key is not just to find a solution, but to find an *efficient* solution.  Consider the time and space complexity of your algorithms.  There are many online resources (like LeetCode, HackerRank, Codewars) that provide a vast library of algorithmic problems with varying difficulty levels.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple version and then showing improvements:
+
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5. If none of these conditions are met, it prints the number itself.
+
+
+**Version 2: Slightly More Concise**
+
+We can make the code a bit more concise by using a ternary operator and string interpolation:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function
+```
+
+This version nests ternary operators to achieve the same result in a more compact way.
+
+
+**Version 3: Using a Tuple for Improved Readability (Advanced)**
+
+For larger numbers of conditions, a more structured approach is beneficial.  Let's use a tuple to map divisors to strings:
+
+```swift
+func fizzBuzzTuple(n: Int) {
+  let fizzBuzzConditions: [(Int, String)] = [(3, "Fizz"), (5, "Buzz")]
+
+  for i in 1...n {
+    var output = ""
+    for (divisor, word) in fizzBuzzConditions {
+      if i % divisor == 0 {
+        output += word
+      }
+    }
+    print(output.isEmpty ? String(i) : output)
+  }
+}
+
+fizzBuzzTuple(n: 15)
+```
+
+This version is more easily extendable.  Adding new conditions (e.g., "Bang" for multiples of 7) just requires adding another tuple element.  The loop iterates through conditions, appending the string if the divisor divides `i` evenly.  If the `output` remains empty, it means none of the conditions were met, so the number itself is printed.
+
+
+
+**Choosing the Right Version:**
+
+* **Version 1:**  Easiest to understand for beginners.
+* **Version 2:** More compact, but can be harder to read for complex logic.
+* **Version 3:**  Most scalable and maintainable for adding more conditions.
+
+Start with Version 1 to grasp the core concept, and then explore the others as your Swift skills develop. Remember to choose the version that best balances readability and maintainability for your specific needs.
+
