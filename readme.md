@@ -90795,3 +90795,86 @@ The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest nod
 
 The recursive approach is generally preferred for its clarity and efficiency in most scenarios.  The iterative approach is useful if you are concerned about potential stack overflow issues with very deep trees.  The parent pointer method is the fastest if parent pointers are already available in the tree structure.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree is a fundamental problem in computer science with applications in various fields like phylogenetics, version control systems, and file systems.  The optimal approach depends on the type of tree (binary, n-ary) and whether the tree is rooted or unrooted.  Here's a breakdown of common approaches for rooted trees:
+
+**1.  Recursive Approach (for Binary Trees):**
+
+This is a simple and elegant approach for binary trees.  It works by recursively traversing the tree from the root.
+
+* **Base Cases:**
+    * If the current node is `null`, return `null`.
+    * If the current node is `p` or `q`, return the current node.
+
+* **Recursive Step:**
+    * Recursively search the left and right subtrees.
+    * If both subtrees return a non-null node (meaning `p` and `q` are found in different subtrees), the current node is the LCA.
+    * Otherwise, return the non-null result from the recursive calls (meaning `p` and `q` are in the same subtree).
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+p = root.left  # Node B
+q = root.left.right # Node E
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of B and E: B
+
+
+```
+
+**2.  Iterative Approach (using Parent Pointers):**
+
+If each node in the tree has a pointer to its parent, you can use an iterative approach.
+
+1.  Traverse upwards from node `p` to the root, storing the path in a set.
+2.  Traverse upwards from node `q`.  If a node is found in the set (from step 1), that node is the LCA.
+
+This is generally more efficient than recursion, especially in very deep trees, as it avoids recursive function calls.
+
+
+**3.  Binary Lifting (for efficient LCA queries):**
+
+For multiple LCA queries on the same tree, binary lifting offers significant speed improvements.  It preprocesses the tree to build a table allowing you to quickly find the ancestor of a node at a given distance. This method is particularly useful for online LCA queries.
+
+**4.  Euler Tour and Range Minimum Query (RMQ):**
+
+This advanced technique uses an Euler tour of the tree to create an array.  The LCA of two nodes can then be found using a Range Minimum Query (RMQ) on this array.  RMQ can be efficiently solved using techniques like sparse tables or segment trees. This method is very efficient for multiple LCA queries.
+
+**Choosing the Right Approach:**
+
+* **Single LCA query, small tree:** Recursive approach is often sufficient.
+* **Single LCA query, large tree, parent pointers available:** Iterative approach with parent pointers is preferred.
+* **Multiple LCA queries:** Binary Lifting or Euler Tour with RMQ are significantly more efficient.
+* **N-ary trees:**  The recursive and iterative approaches can be adapted, but the Euler Tour/RMQ approach generally scales better.
+
+
+Remember to adapt these algorithms based on the specific data structures and constraints of your problem.  For very large trees, consider the memory usage implications of each method.
+
