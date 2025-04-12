@@ -86413,3 +86413,76 @@ while (count < 5) {
 
 These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on whether you know the number of iterations in advance.  If you do, a `for` loop is generally more readable and less prone to errors.  If you don't, a `while` loop is necessary.  Remember to be cautious with `while` loops to avoid infinite loops if the condition never becomes false.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times based on the outer loop's iterations.
+
+Here's a breakdown:
+
+**How it works:**
+
+1. **Outer Loop:** The outer loop begins its first iteration.
+2. **Inner Loop:** The inner loop executes completely for the current iteration of the outer loop.  This may involve multiple iterations of the inner loop itself.
+3. **Outer Loop Continues:** Once the inner loop completes, the outer loop moves to its next iteration.
+4. **Repeat:** Steps 2 and 3 repeat until the outer loop finishes all its iterations.
+
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+This will output a 10x10 multiplication table because:
+
+* The outer loop iterates 10 times (from 1 to 10).
+* For each iteration of the outer loop, the inner loop iterates 10 times (from 1 to 10).
+* `i * j` calculates the product, and `print()` displays it.
+
+
+**Another Example (JavaScript):**
+
+This example prints a right-angled triangle of asterisks:
+
+```javascript
+for (let i = 1; i <= 5; i++) { // Outer loop: number of rows
+  let row = "";
+  for (let j = 1; j <= i; j++) { // Inner loop: number of asterisks in each row
+    row += "*";
+  }
+  console.log(row);
+}
+```
+
+This will output:
+
+```
+*
+**
+***
+****
+*****
+```
+
+**Uses of Nested Loops:**
+
+Nested loops are commonly used for:
+
+* **Processing multi-dimensional data:**  Working with matrices, tables, or grids.
+* **Generating patterns:**  Creating shapes, figures, or sequences.
+* **Iterating through combinations:**  Exploring all possible pairings or selections from multiple sets.
+* **Implementing algorithms:** Some algorithms inherently require nested loops, such as bubble sort or matrix multiplication.
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can lead to a significant increase in execution time, especially with large datasets.  The time complexity often increases quadratically (or even higher) with the size of the input.  Consider optimizing your code if performance becomes an issue.
+* **Readability:**  Proper indentation and clear variable names are crucial for understanding and maintaining nested loops.  Overly complex nested loops can be difficult to debug.
+
+
+Nested loops are a fundamental programming concept used in various applications to solve problems involving iterative processes over multiple dimensions or collections of data. Understanding how they work and their potential performance implications is essential for any programmer.
+
