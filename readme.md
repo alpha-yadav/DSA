@@ -90715,3 +90715,83 @@ postorder(root) # Output: D E B F C A
 
 Remember that the specific output depends entirely on the structure of your binary tree.  These examples show how the algorithms work in a common scenario.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Efficient):** This is generally the most efficient and elegant method.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca(root, node1, node2):
+       """
+       Finds the LCA of node1 and node2 in a binary tree.
+
+       Args:
+           root: The root of the binary tree.
+           node1: The first node.
+           node2: The second node.
+
+       Returns:
+           The LCA node, or None if either node1 or node2 is not found.
+       """
+
+       if root is None:
+           return None
+
+       if root == node1 or root == node2:
+           return root
+
+       left_lca = lca(root.left, node1, node2)
+       right_lca = lca(root.right, node1, node2)
+
+       if left_lca and right_lca:
+           return root  # LCA found
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   # Example usage:
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+   node1 = root.left.left  # Node with value 4
+   node2 = root.left.right # Node with value 5
+
+   lca_node = lca(root, node1, node2)
+   if lca_node:
+       print(f"LCA of {node1.data} and {node2.data} is: {lca_node.data}")
+   else:
+       print("One or both nodes not found in the tree.")
+
+   ```
+
+   **Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, we traverse the entire tree).
+   **Space Complexity:** O(H), where H is the height of the tree (due to recursive call stack).  In a balanced tree, H = log₂N; in a skewed tree, H = N.
+
+
+2. **Iterative Approach (Using a Stack or Queue):**  An iterative approach can be implemented using a stack (for depth-first search) or a queue (for breadth-first search). It achieves the same time complexity but might have slightly higher space complexity in some cases.  This is less common due to the elegance and often better performance of the recursive approach.
+
+
+3. **Using Parent Pointers (If available):** If each node in the tree has a parent pointer, you can efficiently find the LCA by traversing upwards from each node until you find a common ancestor. This method has a time complexity of O(H), where H is the height of the tree.
+
+
+**Important Considerations:**
+
+* **Node Existence:** The code should handle cases where one or both of the input nodes are not present in the tree.
+* **Error Handling:**  Adding error handling (e.g., raising exceptions) can improve robustness.
+* **Binary Tree vs. Binary Search Tree:**  The algorithms above work for general binary trees.  If you have a *binary search tree*, you can exploit the sorted property for a potentially more efficient solution.
+
+
+The recursive approach is generally preferred for its clarity and efficiency in most scenarios.  The iterative approach is useful if you are concerned about potential stack overflow issues with very deep trees.  The parent pointer method is the fastest if parent pointers are already available in the tree structure.
+
