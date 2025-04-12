@@ -85986,3 +85986,94 @@ def merge_k_sorted_lists(lists):
 
 These examples demonstrate a range of algorithmic challenges. Remember to consider time and space complexity when designing your solutions.  Choosing the right data structure (like a hash table or heap) often significantly impacts efficiency.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's deceptively simple, but it's a good way to test basic programming concepts like loops and conditional statements.  Here's how to implement it in Swift, starting with a basic version and then adding some improvements:
+
+**Basic Version:**
+
+This version uses a simple `for` loop and `if-else if-else` statements to check for divisibility by 3 and 5.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 3 == 0 && i % 5 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This will print:
+
+```
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+```
+
+
+**Improved Version (using string concatenation):**
+
+This version is more concise and uses string concatenation to build the output string.  It's generally considered more efficient and readable.
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This version achieves the same output but with a cleaner, more efficient approach.  The `output.isEmpty ? String(i) : output` part uses a ternary operator to print the number if no "Fizz" or "Buzz" was added.
+
+
+**Even More Concise Version (using a ternary operator within a string interpolation):**
+
+This version takes advantage of Swift's expressive string interpolation capabilities to make the code even more compact:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+  for i in 1...n {
+    print((i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")  == "" ? "\(i)" : (i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : ""))
+  }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+While this is the most concise, it's arguably less readable than the improved version.  Prioritizing readability is often more important than extreme brevity.
+
+
+**Choosing the Right Version:**
+
+For beginners, the "Basic Version" is the easiest to understand. The "Improved Version" offers a better balance between readability and efficiency.  The "Concise Version" showcases advanced Swift features but may be less accessible to newcomers.  Choose the version that best suits your understanding and the context of your use.  The important takeaway is understanding the logic behind the FizzBuzz algorithm.
+
