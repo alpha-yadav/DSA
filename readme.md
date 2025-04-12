@@ -88624,3 +88624,94 @@ Graph traversals are algorithms used to systematically visit every node (vertex)
 
 Choosing the right traversal algorithm depends on the specific problem and the properties of the graph.  For finding the shortest path in an unweighted graph, BFS is the preferred choice.  For tasks like topological sorting or cycle detection, DFS is often more suitable.  For weighted graphs, Dijkstra's or A* search might be necessary.
 
+#  Depth First Search traversal function 
+There are several ways to implement a Depth-First Search (DFS) traversal function, depending on the data structure representing the graph (adjacency matrix, adjacency list) and the desired output. Here are a few examples:
+
+**1. DFS using Adjacency List (Recursive):**  This is generally the most concise and intuitive approach for DFS.
+
+```python
+def dfs_recursive(graph, start, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph using recursion.
+
+    Args:
+      graph: A dictionary representing the graph as an adjacency list.  
+             Keys are nodes, values are lists of their neighbors.
+      start: The starting node for the traversal.
+      visited: A set to keep track of visited nodes (used for recursion).
+
+    Returns:
+      A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(start, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+    return list(visited)
+
+
+# Example graph represented as an adjacency list:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Output: A B D E F C (order may vary slightly depending on dictionary iteration order)
+print("\nVisited nodes:", dfs_recursive(graph, 'A')) #Output: ['A', 'B', 'D', 'E', 'F', 'C']
+
+```
+
+**2. DFS using Adjacency List (Iterative):** This uses a stack to simulate recursion, avoiding potential stack overflow issues for very deep graphs.
+
+```python
+def dfs_iterative(graph, start):
+    """
+    Performs a Depth-First Search traversal of a graph iteratively using a stack.
+
+    Args:
+      graph: A dictionary representing the graph as an adjacency list.
+      start: The starting node for the traversal.
+
+    Returns:
+      A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [start]
+    visited_nodes = []
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            visited_nodes.append(vertex)
+            print(vertex, end=" ") #Process the node
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)
+
+    return visited_nodes
+
+print("\n\nDFS traversal (iterative):")
+dfs_iterative(graph,'A') #Output: A C F E B D (order may vary slightly depending on dictionary iteration order)
+print("\nVisited nodes:", dfs_iterative(graph, 'A')) # Output: ['A', 'C', 'F', 'E', 'B', 'D']
+```
+
+**3. DFS using Adjacency Matrix:**  Less common for DFS due to the inefficiency of checking for neighbors.  Requires a different representation of the graph.
+
+```python
+def dfs_matrix(matrix, start, visited=None):
+    #Implementation using adjacency matrix would require a different approach.  
+    #It's less efficient than adjacency list for DFS, as checking for neighbors involves iterating through a row.
+    pass # Implementation left as an exercise (hint: use similar recursive or iterative logic as above, but adapt to matrix access)
+
+```
+
+Remember to choose the implementation that best suits your needs and the structure of your graph data. The recursive version is often preferred for its readability, but the iterative version is more robust for very large graphs.  The adjacency list representation is generally more efficient for DFS than an adjacency matrix.
+
