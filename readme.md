@@ -92497,3 +92497,94 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Choose the method that best suits your needs and coding style.  The recursive approach is often preferred for its clarity, while the iterative approach might be advantageous for extremely large trees to prevent stack overflow. Remember to handle the `None` cases carefully in both methods.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used for storing data in a sorted way.  They offer efficient searching, insertion, and deletion operations, making them valuable in various applications.  Here's a breakdown of BSTs:
+
+**Key Properties:**
+
+* **Binary:** Each node has at most two children, referred to as the *left child* and the *right child*.
+* **Search Tree:**  The values in the tree are arranged according to a specific ordering.  For every node:
+    * All values in the *left subtree* are less than the node's value.
+    * All values in the *right subtree* are greater than the node's value.
+* **No Duplicates (usually):**  Most implementations don't allow duplicate values.  If duplicates are allowed, strategies need to be implemented to handle them (e.g., storing a count of duplicates at each node).
+
+
+**Basic Operations:**
+
+* **Search:**  To search for a value, start at the root. If the target value is equal to the current node's value, you've found it. If the target is less than the current node's value, recursively search the left subtree; otherwise, search the right subtree.  The time complexity is O(h), where h is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes. In a worst-case scenario (a skewed tree resembling a linked list), h can be n.
+
+* **Insertion:**  To insert a new value, follow the search algorithm. When you reach a node with no child in the appropriate direction (left for values smaller, right for values larger), insert the new node there.  Time complexity is also O(h).
+
+* **Deletion:** Deletion is more complex.  There are three cases:
+    * **Leaf Node:** Simply remove the node.
+    * **Node with One Child:** Replace the node with its child.
+    * **Node with Two Children:** Find the inorder predecessor (largest value in the left subtree) or inorder successor (smallest value in the right subtree), replace the node's value with the predecessor/successor's value, and then delete the predecessor/successor (which will now be a node with at most one child, reducing to one of the simpler cases). Time complexity is O(h).
+
+**Example (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    def search(self, data):
+        return self._search_recursive(self.root, data)
+
+    def _search_recursive(self, node, data):
+        if node is None or node.data == data:
+            return node
+        if data < node.data:
+            return self._search_recursive(node.left, data)
+        return self._search_recursive(node.right, data)
+
+# Example usage
+bst = BinarySearchTree()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+
+print(bst.search(6).data)  # Output: 6
+print(bst.search(15))  # Output: None
+
+```
+
+**Advantages:**
+
+* **Efficient Search, Insertion, and Deletion (in balanced trees):**  O(log₂(n)) on average.
+* **Sorted Data:** Data is inherently sorted, making certain operations easier.
+
+**Disadvantages:**
+
+* **Performance Degradation in Unbalanced Trees:** In the worst case (a skewed tree), performance becomes O(n), similar to a linked list.
+* **Deletion Complexity:** Deletion can be more complex than insertion.
+
+
+**Self-Balancing BSTs:** To mitigate the performance issues of unbalanced trees, self-balancing BSTs like AVL trees and red-black trees are used. These trees employ algorithms to maintain a balanced structure, ensuring logarithmic time complexity for operations even in the worst case.  These are more complex to implement but offer superior performance guarantees.
+
