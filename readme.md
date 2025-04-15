@@ -93369,3 +93369,109 @@ print(f"Is the tree a BST? {is_bst_recursive_bounds(root2)}") # Output: False
 
 Both methods achieve the same result. The second method (using bounds) is generally preferred because it avoids the extra space complexity of creating and storing the `values` list in the first method. Choose the method that best suits your needs and understanding.  Remember to adapt the `Node` class if your input tree uses a different node structure.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit all the nodes in a binary tree.  There are several common traversal methods, each resulting in a different order of node visits.  Here are the most important ones:
+
+**1. Inorder Traversal:**
+
+* **Process:**  Recursively traverse the left subtree, visit the root node, then recursively traverse the right subtree.
+* **Order:** Left, Root, Right
+* **Output (for a binary search tree):**  Produces a sorted sequence of the nodes' values.
+* **Example (recursive implementation in Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3
+```
+
+**2. Preorder Traversal:**
+
+* **Process:** Visit the root node, recursively traverse the left subtree, then recursively traverse the right subtree.
+* **Order:** Root, Left, Right
+* **Output:**  Useful for creating a copy of the tree or generating a prefix expression.
+* **Example (recursive implementation in Python):**
+
+```python
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+print("\nPreorder traversal:")
+preorder_traversal(root)  # Output: 1 2 4 5 3
+```
+
+**3. Postorder Traversal:**
+
+* **Process:** Recursively traverse the left subtree, recursively traverse the right subtree, then visit the root node.
+* **Order:** Left, Right, Root
+* **Output:** Useful for deleting a tree or evaluating a postfix expression.  It's also used in some compiler optimizations.
+* **Example (recursive implementation in Python):**
+
+```python
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+print("\nPostorder traversal:")
+postorder_traversal(root)  # Output: 4 5 2 3 1
+```
+
+
+**Iterative Traversals:**
+
+While recursive approaches are elegant and easy to understand, iterative approaches using stacks (for preorder and inorder) or stacks and queues (for level-order) are often preferred for larger trees to avoid potential stack overflow errors.
+
+
+**4. Level Order Traversal (Breadth-First Search):**
+
+* **Process:**  Visit nodes level by level, from left to right.  This requires using a queue.
+* **Order:** Level by level, left to right
+* **Output:** Useful for visualizing the tree structure or finding the shortest path in a tree.
+* **Example (iterative implementation in Python):**
+
+```python
+from collections import deque
+
+def level_order_traversal(node):
+    if node is None:
+        return
+
+    queue = deque([node])
+    while queue:
+        current_node = queue.popleft()
+        print(current_node.data, end=" ")
+        if current_node.left:
+            queue.append(current_node.left)
+        if current_node.right:
+            queue.append(current_node.right)
+
+print("\nLevel order traversal:")
+level_order_traversal(root)  # Output: 1 2 3 4 5
+```
+
+
+These are the fundamental binary tree traversals. The choice of which traversal to use depends on the specific task or application.  Remember that the efficiency of these traversals is generally O(n), where n is the number of nodes in the tree, for all cases except for potentially recursive calls on unbalanced trees that could lead to stack overflow.  Iterative solutions generally address the stack overflow issue.
+
