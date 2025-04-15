@@ -93769,3 +93769,102 @@ This approach uses a stack to simulate the recursion, which can be more efficien
 
 The recursive approach is generally easier to understand and implement for finding the LCA in a general binary tree.  The iterative approach can be beneficial in scenarios where recursion depth might be a concern (very deep trees). Remember to choose the approach that best suits your needs and coding style.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic algorithm problem.  The approach varies slightly depending on the type of tree and whether you have parent pointers or not.
+
+Here's a breakdown of common methods:
+
+**1. Using Parent Pointers (Simplest):**
+
+If each node in the tree has a pointer to its parent, finding the LCA is straightforward:
+
+1. **Traverse Upward:**  Traverse upwards from each of the two input nodes simultaneously, storing the ancestors of each node in separate sets (or lists).
+2. **Find Intersection:** Find the intersection of the two ancestor sets. The deepest node (farthest from the leaves) in the intersection is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_parent_pointers(node1, node2):
+    ancestors1 = set()
+    curr = node1
+    while curr:
+        ancestors1.add(curr)
+        curr = curr.parent
+
+    ancestors2 = set()
+    curr = node2
+    while curr:
+        ancestors2.add(curr)
+        curr = curr.parent
+
+    common_ancestors = ancestors1.intersection(ancestors2)
+    return max(common_ancestors, key=lambda node: node.data) # Assumes data provides a meaningful depth order
+
+#Example Usage (you'd need to create your tree structure with parent pointers)
+# ... tree creation ...
+# lca = lca_parent_pointers(nodeA, nodeB)
+# print(f"LCA: {lca.data}")
+
+```
+
+**2.  Recursive Approach (Binary Tree, No Parent Pointers):**
+
+This is a common method for binary trees where parent pointers aren't available.  The idea is to recursively search the tree:
+
+1. **Base Case:** If the current node is `None` (empty subtree), return `None`.  If the current node is either `node1` or `node2`, return the current node.
+2. **Recursive Calls:** Recursively search the left and right subtrees.
+3. **LCA Found:** If both recursive calls return non-`None` values, it means `node1` and `node2` are in different subtrees of the current node, so the current node is the LCA.
+4. **Otherwise:** Return whichever recursive call returned a non-`None` value (one of the nodes is in that subtree).
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node1, node2):
+    if root is None or root.data == node1.data or root.data == node2.data:
+        return root
+
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+#Example Usage
+# ... tree creation ...
+# lca = lca_recursive(root, nodeA, nodeB)
+# print(f"LCA: {lca.data}")
+```
+
+**3. Iterative Approach (Binary Tree, No Parent Pointers):**
+
+An iterative version of the recursive approach is also possible, often using a stack to simulate recursion:
+
+(Implementation omitted for brevity, but it would involve using a stack to track nodes to visit, similar to a depth-first search).
+
+
+**4.  General Trees (No Parent Pointers):**
+
+For general trees (not necessarily binary), you might need a more sophisticated approach, potentially involving storing paths from the root to each node and then finding the longest common prefix of those paths.
+
+
+**Choosing the Right Method:**
+
+* If you have parent pointers, the first method is the most efficient.
+* For binary trees without parent pointers, the recursive or iterative methods are standard.
+* For general trees, a path-based approach is often necessary.
+
+
+Remember to handle edge cases like one or both nodes not being in the tree.  The specific implementation details might need slight adjustments based on your tree representation and requirements.
+
