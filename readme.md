@@ -93689,3 +93689,83 @@ postorder(root) # Output: D E B F C A
 
 Remember to adapt the `print` statements if you need to store the traversal results in a list instead of printing them directly.  This code provides a basic framework; you can extend it to handle more complex scenarios or error conditions.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  This differs from the LCA in a binary *search* tree, where a more efficient algorithm is possible.  Here's how to find the LCA in a general binary tree:
+
+**Algorithm 1: Recursive Approach**
+
+This is a straightforward recursive solution.  The core idea is:
+
+1. **Base Cases:**
+   - If the current node is `NULL`, return `NULL`.
+   - If the current node is either `node1` or `node2`, return the current node.
+
+2. **Recursive Calls:**
+   - Recursively search the left and right subtrees.
+   - If both recursive calls return a non-`NULL` value (meaning both `node1` and `node2` were found in different subtrees), the current node is the LCA.
+   - Otherwise, return the non-`NULL` result (the LCA found in one of the subtrees).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, node1, node2):
+    if root is None:
+        return None
+
+    if root.data == node1.data or root.data == node2.data:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, node1, node2)
+    right_lca = lowestCommonAncestor(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+node1 = root.left.left  # Node with data 4
+node2 = root.left.right # Node with data 5
+lca = lowestCommonAncestor(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data} is: {lca.data}") #Output: LCA of 4 and 5 is: 2
+
+
+node1 = root.left  # Node with data 2
+node2 = root.right # Node with data 3
+lca = lowestCommonAncestor(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data} is: {lca.data}") #Output: LCA of 2 and 3 is: 1
+
+node1 = root.left.left # Node with data 4
+node2 = root.right # Node with data 3
+lca = lowestCommonAncestor(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data} is: {lca.data}") #Output: LCA of 4 and 3 is: 1
+
+```
+
+**Algorithm 2: Iterative Approach (Using a Stack)**
+
+This approach uses a stack to simulate the recursion, which can be more efficient in some cases (avoiding function call overhead).  The basic strategy is a depth-first search (DFS) to find the paths from the root to each node, then find the last common node in those paths.
+
+(Implementing the iterative approach is more complex and often less readable than the recursive version.  For most cases, the recursive solution is preferred for its clarity.)
+
+
+**Important Considerations:**
+
+* **Node Existence:**  The algorithms assume `node1` and `node2` actually exist in the tree.  You might want to add checks to handle cases where one or both nodes are not found.
+* **Error Handling:** Robust code would include error handling for invalid inputs (e.g., `root` being `None`).
+* **Time and Space Complexity:** The recursive approach has a time complexity of O(N), where N is the number of nodes in the tree (in the worst case, it visits all nodes). The space complexity is O(H) due to the recursive call stack, where H is the height of the tree. The iterative approach has the same time complexity but can have slightly better space complexity in some cases.
+
+
+The recursive approach is generally easier to understand and implement for finding the LCA in a general binary tree.  The iterative approach can be beneficial in scenarios where recursion depth might be a concern (very deep trees). Remember to choose the approach that best suits your needs and coding style.
+
