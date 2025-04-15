@@ -93153,3 +93153,114 @@ print(f"Is the tree a BST (minmax)? {is_bst_minmax(root2, float('-inf'), float('
 
 Both methods achieve the same result.  The min-max approach might be slightly more efficient in some cases because it can prune branches early if a violation is detected,  avoiding unnecessary recursive calls.  The in-order traversal method is arguably simpler to understand. Choose the method that best suits your needs and understanding.  Remember to handle the cases of empty trees appropriately (as shown in the code).
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST will produce a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Recursively checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+        node: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    in_order_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            in_order_list.append(node.data)
+            inorder(node.right)
+
+    inorder(node)
+    for i in range(1, len(in_order_list)):
+        if in_order_list[i] <= in_order_list[i-1]:
+            return False  # Not sorted, therefore not a BST
+    return True
+
+
+# Example usage
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root)}") # True
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.right = Node(7)
+root2.right.left = Node(12)
+root2.right.right = Node(18)
+root2.left.right.right = Node(9) #this breaks the BST property
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}") #False
+
+
+```
+
+**Method 2:  Recursive with Range Check**
+
+This method recursively checks if the values within each subtree fall within the allowed range defined by the parent node.  It's generally more efficient than the in-order traversal method because it avoids creating a temporary list.
+
+```python
+import sys
+
+def is_bst_recursive_range(node, min_val=-sys.maxsize -1, max_val=sys.maxsize):
+    """
+    Recursively checks if a binary tree is a BST using range checking.
+
+    Args:
+        node: The root node of the subtree being checked.
+        min_val: The minimum allowed value for the node.
+        max_val: The maximum allowed value for the node.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive_range(node.left, min_val, node.data) and
+            is_bst_recursive_range(node.right, node.data, max_val))
+
+
+# Example Usage (same trees as above)
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST (recursive range method)? {is_bst_recursive_range(root)}") # True
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.right = Node(7)
+root2.right.left = Node(12)
+root2.right.right = Node(18)
+root2.left.right.right = Node(9) #this breaks the BST property
+
+print(f"Is the tree a BST (recursive range method)? {is_bst_recursive_range(root2)}") #False
+```
+
+Both methods achieve the same result. The recursive range method is often preferred for its efficiency as it avoids the overhead of creating and sorting a list.  Choose the method that best suits your understanding and coding style.  Remember that  `-sys.maxsize - 1` and `sys.maxsize` are used to represent negative and positive infinity respectively for the initial range checks.
+
