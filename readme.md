@@ -93868,3 +93868,19 @@ For general trees (not necessarily binary), you might need a more sophisticated 
 
 Remember to handle edge cases like one or both nodes not being in the tree.  The specific implementation details might need slight adjustments based on your tree representation and requirements.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need the information to create the graph.  For example, you could give me:
+
+* **A set of points:**  (1,2), (3,4), (5,6)
+* **An equation:** y = 2x + 1
+* **A table of values:**
+  | x | y |
+  |---|---|
+  | 0 | 1 |
+  | 1 | 3 |
+  | 2 | 5 |
+* **A description:**  "A line with a slope of 2 and a y-intercept of 1"
+
+
+Once you provide this information, I can help you graph it.
+
