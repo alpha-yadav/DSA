@@ -92117,3 +92117,67 @@ This loop continues until the user types "quit".
 
 Remember to choose the loop type that best suits your needs.  `for` loops are generally preferred when you know the number of iterations in advance, while `while` loops are better when the number of iterations depends on a condition.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop. This allows you to iterate over multiple dimensions or perform operations that require repeated iterations within iterations.
+
+Here's a breakdown of nested loops:
+
+**Structure:**
+
+```python
+for i in range(outer_iterations):  # Outer loop
+    for j in range(inner_iterations): # Inner loop
+        # Code to be executed for each inner loop iteration
+        print(f"Outer: {i}, Inner: {j}")
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # end="\t" keeps output on same line, separated by tabs
+    print()  # Newline after each row
+```
+
+This will produce a 10x10 multiplication table.  The outer loop controls the rows, and the inner loop controls the columns. For each row (outer loop iteration), the inner loop iterates through all columns, calculating and printing the product.
+
+**Another Example (Python):  Processing a 2D array (matrix):**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for i in range(len(matrix)):  # Iterate through rows
+    for j in range(len(matrix[i])):  # Iterate through columns of the current row
+        print(matrix[i][j], end=" ")
+    print() # Newline after each row
+
+```
+
+This example iterates through a 2D array (a list of lists). The outer loop selects a row, and the inner loop iterates through each element in that row.
+
+
+**When to use Nested Loops:**
+
+Nested loops are useful for:
+
+* **Processing multi-dimensional data:**  Like matrices, tables, or images.
+* **Generating patterns:**  Creating visual patterns or sequences.
+* **Combinatorial problems:**  Exploring all possible combinations of elements from multiple sets.
+* **Implementing algorithms:** Some algorithms, like bubble sort or matrix multiplication, inherently require nested loops.
+
+
+**Considerations:**
+
+* **Complexity:** Nested loops can significantly increase the time complexity of your code (O(n*m) for two loops with n and m iterations). Be mindful of this, especially when dealing with large datasets.  Inefficiently designed nested loops can lead to performance issues.
+* **Readability:**  Deeply nested loops (more than 3-4 levels) can become difficult to read and understand.  Try to refactor complex nested loops to improve clarity.
+
+
+In summary, nested loops provide a powerful way to handle iterative processes involving multiple dimensions or combinations, but it's crucial to be aware of their computational cost and strive for readability in your code.
+
