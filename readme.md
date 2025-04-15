@@ -92809,3 +92809,97 @@ int main() {
 
 This code provides a robust `deleteNode` function and handles all deletion cases correctly. Remember that proper memory management (deallocating nodes after deletion) is crucial in a production environment, though it's omitted here for clarity.  You'd need to add a recursive post-order traversal to free the memory of the deleted node and its descendants.  Consider using smart pointers (like `unique_ptr` or `shared_ptr`) to simplify memory management if you're working on a larger project.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where a node is considered a descendant of itself).  There are several ways to find the LCA in a BST, leveraging the BST property.  Here's a breakdown of the most efficient approach:
+
+**Efficient Approach (Recursive)**
+
+This approach uses the inherent ordering property of a BST to efficiently find the LCA.  The key idea is this:
+
+* If both nodes are greater than the current node's value, the LCA must be in the right subtree.
+* If both nodes are less than the current node's value, the LCA must be in the left subtree.
+* Otherwise, the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q are not in the tree.
+    """
+    if not root:
+        return None
+
+    if p.data < root.data and q.data < root.data:
+        return lowestCommonAncestor(root.left, p, q)  # Search left subtree
+    elif p.data > root.data and q.data > root.data:
+        return lowestCommonAncestor(root.right, p, q) # Search right subtree
+    else:
+        return root  # Current node is the LCA
+
+
+# Example Usage:
+root = Node(6)
+root.left = Node(2)
+root.right = Node(8)
+root.left.left = Node(0)
+root.left.right = Node(4)
+root.right.left = Node(7)
+root.right.right = Node(9)
+
+p = root.left  # Node with value 2
+q = root.right # Node with value 8
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}")  # Output: LCA of 2 and 8: 6
+
+
+p = root.left.right # Node with value 4
+q = root.right.left #Node with value 7
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 4 and 7: 6
+
+p = root.left.left #Node with value 0
+q = root.left.right #Node with value 4
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 0 and 4: 2
+
+```
+
+**Iterative Approach**
+
+While recursion is elegant, an iterative approach can be slightly more efficient in some cases (avoiding function call overhead):
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    while root:
+        if p.data < root.data and q.data < root.data:
+            root = root.left
+        elif p.data > root.data and q.data > root.data:
+            root = root.right
+        else:
+            return root
+    return None # p or q not found
+```
+
+**Important Considerations:**
+
+* **Node Existence:**  The code assumes that both `p` and `q` exist in the BST.  You might want to add error handling (e.g., return `None`) if this isn't guaranteed.
+* **Duplicates:** If the BST allows duplicate values, the algorithm will still correctly find *an* LCA, but there might be multiple LCAs in such cases (the algorithm returns the first one it finds).
+* **Efficiency:** Both the recursive and iterative approaches have a time complexity of O(h), where h is the height of the BST.  In a balanced BST, h is O(log n), while in a skewed BST, h can be O(n).
+
+
+Choose either the recursive or iterative version; they achieve the same result with minor performance differences depending on the implementation and specific BST structure.  The recursive version is often considered more readable.
+
