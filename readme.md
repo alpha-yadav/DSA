@@ -92222,3 +92222,54 @@ O(log n) algorithms, also known as logarithmic time algorithms, are highly effic
 
 In summary, O(log n) algorithms are very efficient because the runtime increases very slowly with input size.  Their use in applications where large datasets are common (databases, search engines, etc.) is crucial for achieving acceptable performance.
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array (or list).  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process is repeated until the target value is found or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the upper half
+        else:
+            high = mid - 1  # Search in the lower half
+    return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+
+```
+
+**Why it's O(log n):**
+
+Each iteration of the `while` loop effectively halves the size of the search space.  Therefore, the maximum number of iterations is proportional to the logarithm base 2 of the input size (n).  More precisely, the number of iterations is at most `ceil(log₂(n+1))`, where `ceil` is the ceiling function (rounding up to the nearest integer).  This logarithmic relationship is what gives binary search its efficiency for large datasets.  The time it takes doesn't increase linearly with the size of the data, but much slower.
+
+
+**Other O(log n) Examples:**
+
+While binary search is the most common example, other algorithms exhibit O(log n) complexity, including:
+
+* **Tree traversal algorithms (balanced trees):**  Operations like searching, insertion, and deletion in balanced binary search trees (like AVL trees or red-black trees) have O(log n) time complexity because the height of a balanced tree is logarithmic with respect to the number of nodes.
+* **Efficient exponentiation:** Algorithms that calculate a<sup>b</sup> (a to the power of b) using repeated squaring can achieve O(log b) time complexity.
+
+
+The key characteristic of O(log n) algorithms is that they repeatedly reduce the problem size by a constant factor in each step.  This leads to significantly faster performance compared to linear (O(n)) or quadratic (O(n²)) algorithms for large inputs.
+
