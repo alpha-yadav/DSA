@@ -91736,3 +91736,78 @@ Given a graph and a starting node, find the shortest path to all other reachable
 
 These problems demonstrate a range of algorithmic concepts and difficulty levels.  Remember to consider time and space complexity when designing your solutions.  Try working through these problems – understanding the solutions is key to improving your algorithmic thinking.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing ways to improve it:
+
+
+**Version 1: Basic Implementation**
+
+This version directly implements the rules using `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This works correctly, but it can be improved for readability and efficiency.
+
+
+**Version 2: Improved Readability with Ternary Operator**
+
+We can make the code slightly more concise using the ternary operator:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This version is shorter, but the nested ternary operators might become harder to read for larger numbers of conditions.
+
+
+**Version 3:  More Readable with a Helper Function**
+
+This version uses a helper function to improve readability and maintainability, especially if the rules were to become more complex:
+
+```swift
+func fizzBuzzHelper(number: Int) -> String {
+    var result = ""
+    if number % 3 == 0 { result += "Fizz" }
+    if number % 5 == 0 { result += "Buzz" }
+    return result.isEmpty ? String(number) : result
+}
+
+func fizzBuzzReadable(n: Int) {
+    for i in 1...n {
+        print(fizzBuzzHelper(number: i))
+    }
+}
+
+fizzBuzzReadable(n: 15) // Example usage
+```
+
+This approach separates the logic for determining the output ("Fizz", "Buzz", "FizzBuzz", or the number itself) from the main loop, making the code easier to understand and modify.
+
+
+**Choosing the Best Version:**
+
+For a simple FizzBuzz like this, Version 3 (with the helper function) offers the best balance of readability and maintainability.  The other versions are perfectly functional, but Version 3 is easier to extend if the rules were to become more complex (e.g., adding "Bang" for multiples of 7).  For extremely simple cases, Version 2 might be acceptable.  Avoid overly nested ternary operators as they can reduce readability significantly. Remember to choose the version that best suits your needs and coding style, prioritizing clarity and maintainability.
+
