@@ -98844,3 +98844,120 @@ print(f"Is the tree a BST (MinMax)? {isBSTMinMax(root2)}") # Output: True
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive method, where H is the height of the tree (it could be O(N) in the worst case of a skewed tree).  The MinMax method also has O(H) space complexity due to the recursive calls.  Choose whichever method you find more readable or that better suits your needs.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence.  We perform an in-order traversal and keep track of the previously visited node's value. If the current node's value is less than the previous node's value, it's not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBST(node):
+    """
+    Checks if a given binary tree is a BST using in-order traversal.
+
+    Args:
+      node: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    prev = [-float('inf')]  # Use a list to allow modification within the function
+
+    def inorder(node):
+        if node:
+            if not inorder(node.left):
+                return False
+            if node.data <= prev[0]:
+                return False
+            prev[0] = node.data
+            if not inorder(node.right):
+                return False
+        return True
+
+    return inorder(node)
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(isBST(root))  # Output: True (This is a BST)
+
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.left = Node(3)
+root2.left.right = Node(7)
+root2.right.right = Node(20)  #Violation: 20 > 15
+
+print(isBST(root2))  # Output: False (Not a BST because 20 is >15)
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This approach recursively checks each subtree, passing down the minimum and maximum allowed values for that subtree. A node is valid if its value falls within the allowed range, and its left and right subtrees are also valid BSTs.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, min_val, max_val):
+    """Recursive helper function for isBST2"""
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (isBSTUtil(node.left, min_val, node.data) and
+            isBSTUtil(node.right, node.data, max_val))
+
+def isBST2(node):
+    """
+    Checks if a given binary tree is a BST using min/max bounds.
+
+    Args:
+      node: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    return isBSTUtil(node, -float('inf'), float('inf'))
+
+
+#Example Usage (same trees as above, should produce same output)
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(isBST2(root))  # Output: True
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.left = Node(3)
+root2.left.right = Node(7)
+root2.right.right = Node(20)
+
+print(isBST2(root2))  # Output: False
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the worst case (for a skewed tree) due to the recursive call stack, where H is the height of the tree.  In the best case (a balanced tree), the space complexity is O(log N).  Method 1 might be slightly more efficient in practice due to its simpler recursive structure.  Choose the method you find more readable and easier to understand.
+
