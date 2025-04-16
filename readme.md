@@ -99579,3 +99579,11 @@ print(f"LCA of {node1.data} and {node2.data}: {lca.data}")  # Output: 1
 
 Remember to choose the method that best fits your specific needs and constraints.  If you have a large tree and many LCA queries, the preprocessing approach is usually the most efficient.  For smaller trees or single queries, the recursive or iterative methods are sufficient.  If you have parent pointers available, that's the most efficient option of all.
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need information such as:
+
+* **The type of graph:**  Is it a line graph, bar graph, scatter plot, pie chart, etc.?
+* **The data:**  This could be a set of x and y values, a function (e.g., y = 2x + 1), or categories and their corresponding values.
+
+Once you give me this information, I can help you graph it.  I can't create visual graphs directly, but I can help you understand how to create one using tools like Excel, Google Sheets, Desmos, or other graphing calculators/software.
+
