@@ -99845,3 +99845,72 @@ Remember to adjust algorithms accordingly when working with weighted graphs.
 
 This comprehensive explanation should help you understand and implement adjacency list representations effectively.  Choose the implementation that best suits your specific needs and context.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's arranging nodes in a way that respects the dependencies between them.  If you think of the edges as representing dependencies (e.g., task A must be completed before task B), a topological sort gives you a valid order in which to perform those tasks.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):** Topological sorting only works on DAGs.  A cycle would create a contradiction, as no linear order can satisfy the dependencies within a cycle.
+* **Linear Ordering:** The result is a sequence, not a tree or graph.
+* **Dependency Respect:** The order respects the direction of edges. If there's an edge from A to B, A comes before B in the sorted list.
+* **Multiple Valid Solutions:**  For many DAGs, there are multiple valid topological sorts.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm (using in-degree):**
+
+   This algorithm uses the concept of in-degree (the number of incoming edges to a node).
+
+   * **Initialization:**  Calculate the in-degree of each node.  Create a queue containing all nodes with an in-degree of 0 (no dependencies).
+   * **Iteration:**  While the queue is not empty:
+      * Dequeue a node.
+      * Add the node to the sorted list.
+      * For each neighbor (outgoing edge) of the dequeued node:
+         * Decrement the neighbor's in-degree.
+         * If the neighbor's in-degree becomes 0, add it to the queue.
+   * **Cycle Detection:** If the final sorted list doesn't contain all nodes, the graph contains a cycle.
+
+2. **Depth-First Search (DFS) with Post-Order Traversal:**
+
+   This algorithm uses Depth-First Search to traverse the graph.
+
+   * **Initialization:**  Create a list to store the sorted nodes (initially empty).
+   * **DFS Function:**
+      * Mark the current node as visited.
+      * Recursively call DFS on all unvisited neighbors.
+      * Add the current node to the *beginning* of the sorted list (post-order).
+   * **Iteration:** Call DFS on each unvisited node.
+
+   The reason for adding to the *beginning* is crucial for post-order traversal.  This ensures that dependencies are satisfied.
+
+
+**Example (Kahn's Algorithm):**
+
+Let's say we have a DAG with nodes A, B, C, D, and edges A->C, B->C, C->D.
+
+1. **In-degree:** A: 0, B: 0, C: 2, D: 1
+2. **Queue:** [A, B]
+3. **Iteration:**
+   * Dequeue A, add A to sorted list: [A]
+   * Decrement C's in-degree (1).
+   * Dequeue B, add B to sorted list: [A, B]
+   * Decrement C's in-degree (0), add C to queue: [C]
+   * Dequeue C, add C to sorted list: [A, B, C]
+   * Decrement D's in-degree (0), add D to queue: [D]
+   * Dequeue D, add D to sorted list: [A, B, C, D]
+
+Therefore, a topological sort is [A, B, C, D].  Another valid sort could be [B, A, C, D].
+
+
+**Applications:**
+
+* **Task scheduling:** Determining the order of tasks in a project.
+* **Course scheduling:** Ordering courses based on prerequisites.
+* **Dependency resolution:** Software package installation, build systems (like Make).
+* **Data serialization:** Ensuring data is written in a consistent order.
+
+
+Choosing between Kahn's algorithm and DFS depends on the specific application and data structure. Kahn's algorithm is generally easier to understand and implement, while DFS might be more efficient in some cases.  Both correctly solve the topological sort problem.
+
