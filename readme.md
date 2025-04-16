@@ -97634,3 +97634,59 @@ Therefore, since we found constants *c₁ = 1*, *c₂ = 3*, and *n₀ = 1* satis
 
 Big-Theta notation is crucial in algorithm analysis for precisely characterizing the time or space complexity of algorithms.  It gives a much more precise picture of an algorithm's performance than just using Big-O notation alone.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of functions, particularly important in computer science for analyzing the efficiency of algorithms.  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Describes the *upper bound* of a function's growth.  It provides a worst-case scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than the square of the input size.  It could be faster (e.g., linear for certain inputs), but it won't be significantly worse.
+* **Focus:** Worst-case analysis; upper bound.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Describes the *lower bound* of a function's growth. It provides a best-case (or sometimes average-case) scenario. We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size.  It could be faster (e.g., logarithmic for certain inputs), but it won't be significantly slower.
+* **Focus:** Best-case/average-case analysis; lower bound.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Describes a *tight bound*.  It means the function's growth is both bounded above and below by the same function.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.  The growth is neither significantly faster nor slower.
+* **Focus:** Precise asymptotic behavior; tight bound.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Describes an *upper bound* that is *not tight*.  It means f(n) grows strictly slower than g(n).  Formally:  For every positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.  The key difference from Big O is that there's no constant c that can make f(n) ≤ c*g(n) for all n.
+* **Example:** n = o(n²) (linear growth is strictly slower than quadratic growth).
+* **Focus:**  Strictly smaller upper bound.
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Describes a *lower bound* that is *not tight*. It means f(n) grows strictly faster than g(n). Formally: For every positive constant c, there exists a constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+* **Focus:** Strictly larger lower bound.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Tightness | Bound Type     |
+|----------|---------------------------------------|-----------|----------------|
+| O        | Upper bound                           | Not always| Upper           |
+| Ω        | Lower bound                           | Not always| Lower           |
+| Θ        | Tight bound (both upper and lower)    | Yes       | Both            |
+| o        | Non-tight upper bound (strictly slower)| No        | Upper           |
+| ω        | Non-tight lower bound (strictly faster)| No        | Lower           |
+
+
+**Relationships:**
+
+* Θ(g(n)) implies both O(g(n)) and Ω(g(n)).
+* O(g(n)) does *not* imply Ω(g(n)) (unless it's Θ(g(n))).
+* Ω(g(n)) does *not* imply O(g(n)) (unless it's Θ(g(n))).
+* o(g(n)) is a stronger statement than O(g(n)).
+* ω(g(n)) is a stronger statement than Ω(g(n)).
+
+
+Understanding these notations is crucial for comparing the efficiency of different algorithms and choosing the best one for a given task.  Remember that these notations describe asymptotic behavior – they focus on how the runtime grows as the input size approaches infinity, not on the exact runtime for specific inputs.
+
