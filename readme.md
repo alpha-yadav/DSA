@@ -95350,3 +95350,86 @@ print(f"Are root1 and root3 the same (iterative)? {are_trees_same_iterative(root
 
 Both methods achieve the same result. The recursive approach is often preferred for its readability and conciseness, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues for very deep trees).  Choose the method that best suits your needs and coding style.  Remember to handle the `None` cases carefully in both methods to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They're a special type of binary tree where the nodes are arranged in a specific order, allowing for efficient searching, insertion, and deletion operations.
+
+Here's a breakdown of BSTs:
+
+**Key Properties:**
+
+* **Binary Tree:** Each node has at most two children, referred to as the left child and the right child.
+* **Ordered Property:**  For every node in the tree:
+    * All nodes in the left subtree have values *less than* the node's value.
+    * All nodes in the right subtree have values *greater than* the node's value.
+* **Unique Keys:**  Generally, BSTs assume that no two nodes have the same value (though variations exist).
+
+**Operations:**
+
+* **Search:**  Finds a node with a given value.  This is highly efficient in a balanced BST.  The search algorithm recursively (or iteratively) moves down the tree, going left if the target value is smaller than the current node's value, and right if it's larger.  If the target value is found, the node is returned; otherwise, `null` (or a similar indicator) is returned.
+
+* **Insertion:** Adds a new node with a given value. The algorithm follows the same path as the search algorithm until it reaches a leaf node (a node with no children). The new node is then inserted as a child of the leaf node, maintaining the ordered property.
+
+* **Deletion:** Removes a node with a given value. This is the most complex operation because it must maintain the ordered property.  Different cases need to be handled:
+    * **Node with no children:** Simply remove the node.
+    * **Node with one child:** Replace the node with its child.
+    * **Node with two children:**  There are several approaches, but a common one involves finding the inorder successor (the smallest node in the right subtree) or inorder predecessor (the largest node in the left subtree), replacing the node's value with the successor/predecessor's value, and then deleting the successor/predecessor node (which now only has one child or no children).
+
+* **Minimum and Maximum:** Finding the minimum or maximum value in a BST is straightforward.  The minimum value is found by repeatedly traversing left until a leaf node is reached; the maximum is found by traversing right.
+
+* **Successor and Predecessor:** Finding the inorder successor (next larger value) or predecessor (next smaller value) for a given node is also efficient.
+
+**Implementation:**
+
+BSTs are typically implemented using nodes that contain:
+
+* `key`: The value stored in the node.
+* `left`: A pointer (reference) to the left child node.
+* `right`: A pointer (reference) to the right child node.
+
+**Advantages:**
+
+* **Efficient Search, Insertion, and Deletion (in a balanced tree):**  Average time complexity is O(log n), where n is the number of nodes.  This is significantly faster than linear search in an unsorted array (O(n)).
+* **Ordered Data:**  The data is inherently sorted, enabling efficient operations like finding the minimum/maximum or range queries.
+
+**Disadvantages:**
+
+* **Performance Degradation in Unbalanced Trees:**  In the worst-case scenario (e.g., a skewed tree resembling a linked list), the time complexity becomes O(n), negating the advantages of a BST.  Self-balancing BSTs (like AVL trees and red-black trees) are designed to mitigate this issue.
+* **Not suitable for all operations:**  Certain operations, like finding the kth smallest element, may be more efficient in other data structures like ordered arrays or heaps.
+
+
+**Example (Python):**
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        if self.root is None:
+            self.root = Node(key)
+        else:
+            self._insert_recursive(self.root, key)
+
+    def _insert_recursive(self, node, key):
+        if key < node.key:
+            if node.left is None:
+                node.left = Node(key)
+            else:
+                self._insert_recursive(node.left, key)
+        else:
+            if node.right is None:
+                node.right = Node(key)
+            else:
+                self._insert_recursive(node.right, key)
+
+    # ... (search, delete, min, max, successor, predecessor methods would go here)
+```
+
+This provides a basic foundation.  More sophisticated implementations would include error handling, balancing mechanisms, and potentially iterative versions of recursive functions for improved efficiency in certain situations.  Remember to consider the implications of unbalanced trees when designing and implementing BSTs for real-world applications.
+
