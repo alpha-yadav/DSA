@@ -95220,3 +95220,13 @@ The choice of representation depends on factors like:
 
 For most general-purpose n-ary trees, the **child-sibling** representation or the **list of children** representation provide a good balance between simplicity, flexibility, and performance.  The array representation is specialized for scenarios where a fixed maximum number of children is known beforehand.
 
+#  Introduction 
+Please provide me with the topic or subject you would like an introduction for.  I need more information to write an introduction.  For example, tell me:
+
+* **What is the overall topic?** (e.g., the history of coffee, the benefits of exercise, the dangers of climate change)
+* **What is the specific focus?** (e.g., the impact of fair trade on coffee farmers, the role of cardiovascular exercise in weight loss, the effects of rising sea levels on coastal communities)
+* **What is the purpose of the introduction?** (e.g., to inform, to persuade, to entertain)
+* **Who is the intended audience?** (e.g., experts, general public, students)
+
+Once I have this information, I can write a compelling introduction for you.
+
