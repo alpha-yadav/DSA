@@ -97469,3 +97469,81 @@ This problem demonstrates several key aspects of algorithmic problem-solving:
 
 This is a rich problem that can be explored at different levels of complexity, making it a good example of an algorithmic problem.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing improvements:
+
+
+**Basic Version:**
+
+This version uses a straightforward `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks divisibility by 15 first (to handle both 3 and 5).
+* Then it checks divisibility by 3 and 5 individually.
+* If none of the above are true, it prints the number.
+
+
+**Improved Version (using string concatenation):**
+
+This version is more concise and efficient by building the output string:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This version uses two `if` statements (instead of `if-else if-else`). If both conditions are true, it concatenates "FizzBuzz". If neither is true, `output` remains empty, and the number itself is printed. This is generally considered more efficient and readable.
+
+
+
+**Even More Concise Version (using ternary operator):**
+
+This version leverages the ternary operator for maximum brevity:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print((i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i))
+    }
+}
+
+fizzBuzzConcise(n: 15) //Example Usage
+
+```
+
+While concise, this version can become less readable for larger numbers of conditions.  The improved version often strikes a good balance between readability and efficiency.
+
+
+Choose the version that best suits your needs and coding style.  The improved version is a good starting point for most cases. Remember to compile and run this code in a Swift environment (like Xcode's playground) to see the output.
+
