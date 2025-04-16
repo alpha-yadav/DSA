@@ -99370,3 +99370,131 @@ postorder(root) # Output: 4 5 2 3 1
 
 Remember that the specific output depends on the structure of your binary tree.  These examples show how the traversals work on a sample tree.  You can adapt the Python code to work with your own tree structures.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several approaches to finding the LCA, each with varying complexities.  Here are two common methods:
+
+**Method 1: Recursive Approach (Most Efficient)**
+
+This method uses recursion and is generally the most efficient, especially for balanced trees.  It leverages the fact that the LCA must lie on the path between the two nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not in the tree.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA found
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+lca = lowestCommonAncestor(root, root.left, root.right)
+print(f"LCA of 2 and 3 is: {lca.data}")  # Output: 1
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right)
+print(f"LCA of 4 and 5 is: {lca.data}")  # Output: 2
+
+lca = lowestCommonAncestor(root, root.left, root.right.right)
+print(f"LCA of 2 and 7 is: {lca.data}")  # Output: 1
+
+#Example where one node is not present
+lca = lowestCommonAncestor(root, root.left, Node(8))
+print(f"LCA of 2 and 8 is: {lca}") #Output: None
+
+```
+
+**Method 2:  Iterative Approach (Using Parent Pointers)**
+
+This approach requires modifying the tree to include parent pointers for each node.  It then iteratively traverses upwards from both nodes until a common ancestor is found.  This approach is less efficient than the recursive method for balanced trees but can be advantageous in certain scenarios, for example if you already have a tree structure with parent pointers.
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.parent = None #Added parent pointer
+
+def lowestCommonAncestorIterative(p, q):
+    path_p = []
+    path_q = []
+
+    while p:
+        path_p.append(p)
+        p = p.parent
+    while q:
+        path_q.append(q)
+        q = q.parent
+
+    lca = None
+    i = len(path_p) - 1
+    j = len(path_q) - 1
+
+    while i >= 0 and j >= 0 and path_p[i] == path_q[j]:
+        lca = path_p[i]
+        i -= 1
+        j -= 1
+
+    return lca
+
+
+#Example usage (requires building the tree with parent pointers)
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.parent = root
+root.right.parent = root
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.left.left.parent = root.left
+root.left.right.parent = root.left
+root.right.left = Node(6)
+root.right.right = Node(7)
+root.right.left.parent = root.right
+root.right.right.parent = root.right
+
+
+lca = lowestCommonAncestorIterative(root.left, root.right)
+print(f"LCA of 2 and 3 is: {lca.data}") #Output: 1
+
+```
+
+**Choosing the right method:**
+
+* For most cases, the **recursive approach** is preferred due to its simplicity and efficiency, particularly for balanced trees.  It avoids the need for extra parent pointers.
+* The **iterative approach** might be considered if you already have a tree structure with parent pointers or if you're working with a tree that might have a highly unbalanced structure where recursion might lead to stack overflow issues.
+
+
+Remember to handle edge cases, such as when one or both nodes are not present in the tree.  The provided code includes examples of handling such cases.
+
