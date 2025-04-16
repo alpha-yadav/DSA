@@ -95990,3 +95990,126 @@ print(is_bst_recursive(root2))  # Output: True
 
 The recursive method (Method 2) is generally preferred because it avoids the extra space complexity of creating an array for the inorder traversal.  Its time complexity is also O(N), where N is the number of nodes, which is the same as the inorder traversal method.  However, the recursive method might be slightly less readable for beginners.  Choose the method that best suits your understanding and coding style.  Both correctly identify whether a given tree is a BST.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property of BSTs that an in-order traversal yields a sorted sequence.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    inorder_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            inorder_list.append(node.data)
+            inorder(node.right)
+    inorder(root)
+
+    # Check if the in-order traversal is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(2)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(2)
+root2.left.right = Node(8) #Violation: 8 > 5
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}")  # Output: False
+
+```
+
+
+**Method 2: Recursive with Min and Max Limits**
+
+This method recursively checks if each node's value is within the allowed range defined by its ancestors.
+
+```python
+import sys
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+def is_bst_recursive_minmax(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+    """
+    Checks if a binary tree is a BST using recursion and min/max limits.
+
+    Args:
+      node: The current node being checked.
+      min_val: The minimum allowed value for the node.
+      max_val: The maximum allowed value for the node.
+
+    Returns:
+      True if the subtree rooted at node is a BST, False otherwise.
+    """
+
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive_minmax(node.left, min_val, node.data) and
+            is_bst_recursive_minmax(node.right, node.data, max_val))
+
+
+# Example Usage (same trees as above):
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(2)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root)}")  # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(2)
+root2.left.right = Node(8)
+
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root2)}")  # Output: False
+
+```
+
+**Choosing the Right Method:**
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) for the recursive methods, where H is the height of the tree (O(N) in the worst case of a skewed tree and O(log N) in the best case of a balanced tree).  The recursive min-max approach might be slightly more efficient in practice because it can prune branches earlier if a violation is detected.  However, the in-order traversal approach is often considered more intuitive and easier to understand.  Choose the method that best suits your needs and understanding.
+
