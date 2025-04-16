@@ -99914,3 +99914,98 @@ Therefore, a topological sort is [A, B, C, D].  Another valid sort could be [B, 
 
 Choosing between Kahn's algorithm and DFS depends on the specific application and data structure. Kahn's algorithm is generally easier to understand and implement, while DFS might be more efficient in some cases.  Both correctly solve the topological sort problem.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) is a common algorithm.  Here's how it works, along with code examples in Python:
+
+**The Algorithm**
+
+The key idea is to track the state of each node during the DFS:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (on the recursion stack).
+* **Visited:** The node has been completely explored.
+
+A cycle exists if, during the DFS, we encounter a node that is already in the `Visiting` state. This means we've found a back edge – an edge that leads to an ancestor in the DFS tree.
+
+**Python Code (using adjacency list)**
+
+```python
+def has_cycle_directed_graph(graph):
+    """
+    Detects cycles in a directed graph using Depth First Traversal.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+
+    Returns:
+        True if a cycle exists, False otherwise.
+    """
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: Unvisited, 1: Visiting, 2: Visited
+    recursion_stack = [False] * num_nodes
+
+
+    def dfs(node):
+        visited[node] = 1  # Mark as Visiting
+        recursion_stack[node] = True
+
+        for neighbor in graph.get(node, []):
+            if visited[neighbor] == 0:
+                if dfs(neighbor):
+                    return True
+            elif recursion_stack[neighbor]:
+                return True  # Cycle detected
+
+        recursion_stack[node] = False  # Remove from recursion stack after exploring
+        visited[node] = 2  # Mark as Visited
+        return False
+
+    for node in graph:
+        if visited[node] == 0:
+            if dfs(node):
+                return True
+
+    return False
+
+
+# Example usage:
+graph1 = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: []
+}
+
+graph2 = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [0] #Cycle here
+}
+
+print(f"Graph 1 has cycle: {has_cycle_directed_graph(graph1)}")  # Output: False
+print(f"Graph 2 has cycle: {has_cycle_directed_graph(graph2)}")  # Output: True
+
+```
+
+**Explanation:**
+
+1. **`has_cycle_directed_graph(graph)`:** This function initializes the `visited` and `recursion_stack` arrays and then iterates through each node in the graph.  If a node is unvisited, it calls the `dfs` function.
+
+2. **`dfs(node)`:** This recursive function performs the Depth First Search.
+   - It marks the current node as `Visiting` (1) and adds it to the `recursion_stack`.
+   - It iterates through the neighbors of the current node:
+     - If a neighbor is `Unvisited` (0), it recursively calls `dfs` on the neighbor. If the recursive call returns `True` (cycle detected), it propagates `True` up.
+     - If a neighbor is `Visiting` (1), a cycle is detected (back edge), and `True` is returned.
+   - After exploring all neighbors, the node is removed from the `recursion_stack` and marked as `Visited` (2).
+   - `False` is returned if no cycle is found during the exploration of this subtree.
+
+**Important Considerations:**
+
+* **Adjacency List:** The code uses an adjacency list representation of the graph.  You can adapt it to use an adjacency matrix if needed.
+* **Error Handling:** You might want to add error handling (e.g., checking for invalid input graph formats).
+* **Efficiency:** The time complexity of this algorithm is O(V + E), where V is the number of vertices and E is the number of edges.  This is linear and efficient.
+
+
+This detailed explanation and code should help you understand and implement cycle detection in directed graphs using Depth First Traversal. Remember to adapt the code to your specific graph representation if necessary.
+
