@@ -94890,3 +94890,60 @@ def find_element(arr, target):
 
 **Important Note:** Big O provides an *upper bound*. An algorithm might perform better in practice (e.g., on average), but Big O gives you a worst-case guarantee.  Other notations like Big Omega (Ω) and Big Theta (Θ) provide lower bounds and tight bounds, respectively, offering a more complete picture of algorithmic complexity.  However, Big O is the most commonly used notation because it's often sufficient to understand the scalability of an algorithm.
 
+#  A Simple Loop 
+The simplest loop in most programming languages is a `for` loop that iterates a specific number of times.  Here are examples in a few popular languages:
+
+**Python:**
+
+```python
+for i in range(5):
+  print(i)
+```
+
+This loop will print the numbers 0, 1, 2, 3, and 4.  `range(5)` generates a sequence of numbers from 0 up to (but not including) 5.
+
+
+**JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+This is functionally identical to the Python example.  It initializes `i` to 0, continues as long as `i` is less than 5, and increments `i` by 1 after each iteration.
+
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+Similar to JavaScript, but requires including the `iostream` library for input/output operations.
+
+
+**Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+Java requires a class structure.  The loop itself is very similar to the C++ example.
+
+
+These examples all demonstrate a simple loop that iterates five times.  You can easily change the number 5 to control how many times the loop runs.  The body of the loop (the code inside the curly braces `{}`) is executed repeatedly.  Remember to adjust the code based on the specific programming language you are using.
+
