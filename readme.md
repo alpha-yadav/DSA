@@ -97547,3 +97547,47 @@ While concise, this version can become less readable for larger numbers of condi
 
 Choose the version that best suits your needs and coding style.  The improved version is a good starting point for most cases. Remember to compile and run this code in a Swift environment (like Xcode's playground) to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources of primary interest are:
+
+* **Time complexity:**  How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm requires as a function of the input size.
+
+We usually analyze complexity using *Big O notation* (and related notations like Big Omega (Ω) and Big Theta (Θ)). Big O notation describes the *upper bound* of the algorithm's growth rate – the worst-case scenario.  Big Omega describes the *lower bound* (best-case scenario), and Big Theta describes a *tight bound* (both upper and lower bound are the same).
+
+Here's a breakdown of common complexities and their meanings:
+
+**Time Complexity:**
+
+* **O(1) - Constant time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array by index.
+* **O(log n) - Logarithmic time:** The execution time increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic time:** The execution time is a product of linear and logarithmic factors.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic time:** The execution time increases quadratically with the input size.  Example: Bubble sort, selection sort, nested loops iterating over the same input.
+* **O(n³) - Cubic time:** The execution time increases cubically with the input size.  Example: Some matrix multiplication algorithms (naive ones).
+* **O(2ⁿ) - Exponential time:** The execution time doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial time:** The execution time grows factorially with the input size. Example:  Generating all permutations of a set.
+
+
+**Space Complexity:**
+
+Space complexity follows similar notation.  It describes the amount of memory used:
+
+* **O(1) - Constant space:** The algorithm uses a constant amount of memory regardless of input size.
+* **O(n) - Linear space:** The memory used increases linearly with the input size. Example:  Storing an array copy.
+* **O(log n) - Logarithmic space:** The memory used grows logarithmically with input size (rare).
+* **O(n²) - Quadratic space:** Memory used grows quadratically.
+* and so on...
+
+
+**Important Considerations:**
+
+* **Best, average, and worst-case:** Big O typically describes the *worst-case* scenario.  The average-case and best-case complexities can be different.
+* **Input size:**  "n" usually represents the input size, but this can vary depending on the algorithm (e.g., number of vertices in a graph, length of a string).
+* **Asymptotic analysis:** Big O notation focuses on the behavior of the algorithm as the input size approaches infinity.  Small inputs might not reflect the true complexity.
+* **Constant factors:** Big O notation ignores constant factors.  An algorithm with O(2n) and O(n) are both considered linear time.
+* **Dominant terms:** When analyzing complexities with multiple terms, we only consider the dominant term as n grows large (e.g., O(n² + n) simplifies to O(n²)).
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance on large datasets.  It allows developers to make informed decisions about which algorithms are suitable for specific applications.
+
