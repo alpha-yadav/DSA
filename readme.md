@@ -96949,3 +96949,104 @@ While not an adjacency list, an adjacency matrix is another way to represent gra
 
 The choice between an adjacency list and an adjacency matrix depends on the characteristics of your graph and the operations you'll be performing.  For sparse graphs, adjacency lists are almost always preferred for their space efficiency. For dense graphs where edge existence checks are frequent, an adjacency matrix might be more suitable.
 
+#  Topological Sort 
+A topological sort is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's an ordering where you can follow the arrows without ever going backwards.  If a graph contains cycles, a topological sort is impossible.
+
+**Key Concepts:**
+
+* **Directed Acyclic Graph (DAG):** A graph where all edges have a direction (indicated by arrows) and there are no cycles (paths that start and end at the same node).
+* **In-degree:** The number of incoming edges to a node.
+* **Out-degree:** The number of outgoing edges from a node.
+* **Sources:** Nodes with an in-degree of 0 (no incoming edges).
+
+
+**Algorithms:**
+
+There are two primary algorithms for topological sorting:
+
+**1. Kahn's Algorithm:**
+
+This algorithm uses a queue to process nodes in topological order.
+
+1. **Find Sources:**  Identify all nodes with an in-degree of 0.  Add these nodes to a queue.
+2. **Process Queue:** While the queue is not empty:
+   - Dequeue a node `u`.
+   - Add `u` to the sorted list.
+   - For each neighbor `v` of `u`:
+     - Decrement the in-degree of `v`.
+     - If the in-degree of `v` becomes 0, add `v` to the queue.
+3. **Check for Cycles:** If the sorted list's length is less than the number of nodes in the graph, a cycle exists, and a topological sort is impossible.
+
+
+**Python Implementation (Kahn's Algorithm):**
+
+```python
+from collections import defaultdict
+
+def topological_sort(graph):
+    """Performs a topological sort using Kahn's algorithm."""
+    in_degree = defaultdict(int)
+    for node in graph:
+        for neighbor in graph[node]:
+            in_degree[neighbor] += 1
+
+    queue = [node for node in graph if in_degree[node] == 0]
+    sorted_list = []
+
+    while queue:
+        node = queue.pop(0)
+        sorted_list.append(node)
+        for neighbor in graph[node]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    if len(sorted_list) != len(graph):
+        return None  # Cycle detected
+
+    return sorted_list
+
+# Example usage:
+graph = {
+    'A': ['C'],
+    'B': ['C', 'D'],
+    'C': ['E'],
+    'D': ['F'],
+    'E': ['F'],
+    'F': []
+}
+
+sorted_nodes = topological_sort(graph)
+print(f"Topological Sort: {sorted_nodes}") # Possible output: ['A', 'B', 'C', 'D', 'E', 'F'] (order may vary)
+
+
+graph_with_cycle = {
+    'A': ['B'],
+    'B': ['C'],
+    'C': ['A']
+}
+
+sorted_nodes = topological_sort(graph_with_cycle)
+print(f"Topological Sort (with cycle): {sorted_nodes}") # Output: None
+```
+
+**2. Depth-First Search (DFS) based Algorithm:**
+
+This algorithm uses DFS to recursively explore the graph.  It adds nodes to the sorted list in reverse post-order (when the recursion finishes for a node).
+
+1. **Perform DFS:**  Perform a DFS traversal of the graph.
+2. **Reverse Post-order:** Add each node to the sorted list when the DFS recursion for that node completes.  The resulting list is in reverse post-order, which is a valid topological sort.
+
+
+**Applications:**
+
+Topological sorting has various applications, including:
+
+* **Course Scheduling:** Ordering courses based on prerequisites.
+* **Build Systems (Makefiles):** Determining the order of compilation of files.
+* **Dependency Resolution:** Resolving dependencies in software projects.
+* **Data Serialization:** Ordering data elements for efficient processing.
+
+
+Remember that the topological sort of a DAG is not unique; multiple valid orderings may exist.  The algorithms above will produce *a* valid ordering, but not necessarily *the* only one.
+
