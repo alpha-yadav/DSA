@@ -99751,3 +99751,97 @@ Graph theory has wide-ranging applications in many fields, including:
 
 This introduction provides a basic overview of graph theory.  Further exploration would involve delving into specific algorithms (e.g., Dijkstra's algorithm for shortest paths, breadth-first search, depth-first search), graph properties (e.g., planarity, coloring), and more advanced topics.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and often efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementation options and their trade-offs:
+
+**The Concept:**
+
+An adjacency list represents a graph as a collection of lists, one for each vertex. Each list contains the vertices that are adjacent (directly connected) to the corresponding vertex.  This means for each vertex, you store a list of its neighbors.
+
+**Implementation Options:**
+
+Several data structures can implement adjacency lists. Here are a few common choices:
+
+1. **Using Arrays of Lists (Dynamic Arrays/Vectors):**
+
+   * **Structure:**  An array (or vector) of size `V` (number of vertices) is used. Each element of the array is a list (dynamic array or linked list) representing the neighbors of the corresponding vertex.
+   * **Pros:**  Simple to implement, generally efficient for access and insertion/deletion of edges.
+   * **Cons:**  Adding a new vertex requires resizing the array, which can be costly if it happens frequently.
+
+   ```python
+   class Graph:
+       def __init__(self, num_vertices):
+           self.num_vertices = num_vertices
+           self.adj_list = [[] for _ in range(num_vertices)] #List of Lists
+
+       def add_edge(self, u, v):
+           self.adj_list[u].append(v)  #Directed graph; for undirected, add v to u's and u to v's list
+           #self.adj_list[v].append(u) # uncomment for undirected graph
+
+       def print_graph(self):
+           for i in range(self.num_vertices):
+               print(f"Vertex {i}: {self.adj_list[i]}")
+
+   #Example Usage
+   g = Graph(4)
+   g.add_edge(0, 1)
+   g.add_edge(0, 2)
+   g.add_edge(1, 2)
+   g.add_edge(2, 3)
+   g.print_graph()
+   ```
+
+2. **Using Dictionaries (Hash Maps):**
+
+   * **Structure:** A dictionary maps each vertex to a list of its neighbors.
+   * **Pros:**  Very efficient for accessing neighbors of a given vertex (O(1) on average).  Adding vertices is easy (no resizing needed). Handles vertices with non-sequential IDs better.
+   * **Cons:**  Slightly more memory overhead compared to arrays of lists due to dictionary overhead.
+
+   ```python
+   class Graph:
+       def __init__(self):
+           self.adj_list = {}
+
+       def add_edge(self, u, v):
+           self.adj_list.setdefault(u, []).append(v) #Handles missing keys gracefully
+           #self.adj_list.setdefault(v, []).append(u) # uncomment for undirected
+
+       def print_graph(self):
+           for vertex, neighbors in self.adj_list.items():
+               print(f"Vertex {vertex}: {neighbors}")
+
+   #Example usage
+   g = Graph()
+   g.add_edge(0, 1)
+   g.add_edge(0, 2)
+   g.add_edge(1, 2)
+   g.add_edge(2, 3)
+   g.add_edge(5,7) #Example of non-sequential vertex
+   g.print_graph()
+   ```
+
+3. **Using Linked Lists for Neighbors:**
+
+   * **Structure:** Each entry in the array (or dictionary) is a linked list of neighbors.
+   * **Pros:**  Efficient insertion and deletion of edges in the middle of the neighbor list (if needed).
+   * **Cons:**  Slightly more overhead than using dynamic arrays for neighbor lists; traversal is slightly slower
+
+
+**Choosing the Right Implementation:**
+
+* For most cases, the **dictionary-based implementation** offers a good balance of performance and ease of use, especially if you don't know the maximum number of vertices in advance or if vertex IDs aren't consecutive integers.
+* The **array-of-lists approach** is suitable if you have a fixed number of vertices and need the best possible memory efficiency.
+
+**Weighted Graphs:**
+
+For weighted graphs (graphs where edges have associated weights), you can modify the adjacency list to store pairs (neighbor, weight) instead of just the neighbor.  For example, in Python:
+
+```python
+self.adj_list.setdefault(u, []).append((v, weight))
+```
+
+Remember to adjust algorithms accordingly when working with weighted graphs.
+
+
+This comprehensive explanation should help you understand and implement adjacency list representations effectively.  Choose the implementation that best suits your specific needs and context.
+
