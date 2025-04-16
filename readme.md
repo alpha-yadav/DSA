@@ -96684,3 +96684,117 @@ Please provide me with the data or equation you want me to graph.  I need inform
 
 Once you give me this information, I can help you graph it.  I can't create a visual graph here, but I can describe the graph or give you the data points to plot yourself.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, particularly useful for dense graphs (graphs with many edges).  Here's a breakdown of how it works, including advantages and disadvantages:
+
+**How it works:**
+
+An adjacency matrix is a 2D array (or a list of lists) where each element `matrix[i][j]` represents the connection between vertex `i` and vertex `j`.
+
+* **Value Representation:** The value of `matrix[i][j]` can represent different things:
+    * **0 or 1:**  A simple representation where 0 indicates no edge between vertices `i` and `j`, and 1 indicates an edge. This is suitable for unweighted graphs.
+    * **Weight:** For weighted graphs, the value can represent the weight of the edge (e.g., distance, cost).  A special value (like `infinity` or `-1`) can represent the absence of an edge.
+    * **Other Data:** The matrix can also store other information associated with the edge, like a string describing the edge's type.
+
+* **Example (Unweighted):**
+
+Consider a graph with 4 vertices (A, B, C, D) and the following edges: A-B, A-C, B-D, C-D.  The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  1  0  0  1
+C  1  0  0  1
+D  0  1  1  0
+```
+
+* **Example (Weighted):**
+
+The same graph, but with weighted edges: A-B (weight 2), A-C (weight 5), B-D (weight 1), C-D (weight 3).
+
+```
+   A  B  C  D
+A  0  2  5  ∞
+B  2  0  ∞  1
+C  5  ∞  0  3
+D  ∞  1  3  0
+```
+
+
+**Implementation (Python):**
+
+```python
+import sys
+
+def create_adjacency_matrix(num_vertices, edges, weighted=False):
+    """Creates an adjacency matrix for a graph.
+
+    Args:
+        num_vertices: The number of vertices in the graph.
+        edges: A list of tuples representing the edges.  For weighted graphs, 
+               each tuple should be (u, v, weight). For unweighted, (u,v).
+        weighted: True if the graph is weighted, False otherwise.
+
+    Returns:
+        A 2D list representing the adjacency matrix.
+    """
+
+    matrix = [[0] * num_vertices for _ in range(num_vertices)]
+
+    for edge in edges:
+        if weighted:
+            u, v, weight = edge
+            matrix[u][v] = weight
+            matrix[v][u] = weight  # Assuming an undirected graph.  Remove for directed.
+        else:
+            u, v = edge
+            matrix[u][v] = 1
+            matrix[v][u] = 1  # Assuming an undirected graph. Remove for directed.
+
+    if weighted:
+      inf = sys.maxsize #Representing infinity for weighted graphs
+      for i in range(num_vertices):
+        for j in range(num_vertices):
+          if matrix[i][j] == 0 and i != j:
+            matrix[i][j] = inf
+
+    return matrix
+
+# Example Usage (Unweighted):
+edges = [(0, 1), (0, 2), (1, 3), (2, 3)]
+matrix_unweighted = create_adjacency_matrix(4, edges)
+print("Unweighted Adjacency Matrix:")
+for row in matrix_unweighted:
+    print(row)
+
+
+# Example Usage (Weighted):
+weighted_edges = [(0, 1, 2), (0, 2, 5), (1, 3, 1), (2, 3, 3)]
+matrix_weighted = create_adjacency_matrix(4, weighted_edges, weighted=True)
+print("\nWeighted Adjacency Matrix:")
+for row in matrix_weighted:
+    print(row)
+
+```
+
+**Advantages:**
+
+* **Simple to implement:** Relatively straightforward to create and manipulate.
+* **Fast edge existence check:**  Checking for an edge between two vertices is O(1) (constant time).
+* **Easy to find neighbors:** Finding all neighbors of a vertex takes O(V) time, where V is the number of vertices.
+
+**Disadvantages:**
+
+* **Space complexity:** Requires O(V²) space, which can be very large for graphs with many vertices. This is especially inefficient for sparse graphs (graphs with few edges).
+* **Adding/Deleting vertices:**  Adding or deleting vertices requires resizing the matrix, which is inefficient.
+
+
+**When to use Adjacency Matrix:**
+
+* **Dense graphs:**  When the number of edges is close to the maximum possible (V*(V-1)/2 for undirected, V*(V-1) for directed).
+* **When you need fast edge existence checks:** If your algorithms frequently need to check if an edge exists between two specific vertices.
+* **Small graphs:**  For graphs with a relatively small number of vertices.
+
+
+For sparse graphs, adjacency lists are generally a more efficient choice.  Consider the density of your graph when choosing a representation.
+
