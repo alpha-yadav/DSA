@@ -98484,3 +98484,98 @@ int main() {
 
 **Important Note:**  The `main` function in this example lacks proper memory cleanup.  After deleting nodes, you should recursively traverse the tree and delete all remaining nodes to prevent memory leaks.  Adding a recursive `deleteTree` function would be a good addition to this code.  For brevity, it's omitted here, but it's crucial for production-ready code.  Consider adding it as an exercise. Remember to always deallocate memory you allocate dynamically.
 
+#  Lowest common ancestor in a BST 
+The lowest common ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants.  There are several ways to find the LCA in a BST, taking advantage of the BST's ordered property. Here's a breakdown of a common and efficient approach:
+
+**Algorithm:**
+
+The key idea is that in a BST:
+
+* If both `node1` and `node2` are less than the current node's value, the LCA must be in the left subtree.
+* If both `node1` and `node2` are greater than the current node's value, the LCA must be in the right subtree.
+* Otherwise, the current node is the LCA (because one node is in the left and the other in the right subtree, or one node is equal to the current node).
+
+**Recursive Implementation (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, node1, node2):
+    """
+    Finds the lowest common ancestor of node1 and node2 in a BST.
+
+    Args:
+      root: The root of the BST.
+      node1: The first node.
+      node2: The second node.
+
+    Returns:
+      The LCA node, or None if either node1 or node2 is not found.
+    """
+
+    if not root:
+        return None
+
+    if node1.data < root.data and node2.data < root.data:
+        return lowestCommonAncestor(root.left, node1, node2)
+    elif node1.data > root.data and node2.data > root.data:
+        return lowestCommonAncestor(root.right, node1, node2)
+    else:
+        return root
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+
+node1 = root.left.right.left # Node with data 10
+node2 = root.left.right.right # Node with data 14
+
+lca = lowestCommonAncestor(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data} is: {lca.data}") # Output: LCA of 10 and 14 is: 12
+
+
+node1 = root.left # Node with data 8
+node2 = root.right # Node with data 22
+
+lca = lowestCommonAncestor(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data} is: {lca.data}") # Output: LCA of 8 and 22 is: 20
+
+node1 = root.left.left # Node with data 4
+node2 = root.left.left #Node with data 4
+
+lca = lowestCommonAncestor(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data} is: {lca.data}") # Output: LCA of 4 and 4 is: 4
+```
+
+**Iterative Implementation (Python):**
+
+An iterative approach avoids the overhead of recursive function calls:
+
+```python
+def lowestCommonAncestor_iterative(root, node1, node2):
+    while root:
+        if node1.data < root.data and node2.data < root.data:
+            root = root.left
+        elif node1.data > root.data and node2.data > root.data:
+            root = root.right
+        else:
+            return root
+    return None # Nodes not found
+
+#Example usage (same as above, just replace the function call)
+lca = lowestCommonAncestor_iterative(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data} is: {lca.data}") 
+```
+
+Both the recursive and iterative solutions have a time complexity of O(h), where h is the height of the BST (which is O(log n) for a balanced BST and O(n) for a skewed BST). The space complexity is O(h) for the recursive approach due to the call stack and O(1) for the iterative approach.  Choose the implementation that best suits your coding style and performance needs.  For most cases, the iterative version is slightly more efficient. Remember to handle edge cases like an empty tree or nodes not present in the tree.
+
