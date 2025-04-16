@@ -96675,3 +96675,12 @@ This technique preprocesses the tree to allow for very fast LCA queries (O(log N
 
 Remember to handle edge cases, such as when one or both nodes are not present in the tree, or when one node is an ancestor of the other.  The provided code examples assume the nodes `p` and `q` exist in the tree.  Robust code would need additional checks for these scenarios.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **Data points:**  A set of (x, y) coordinates.  For example: (1, 2), (3, 4), (5, 6)
+* **Equation:** A mathematical equation, such as y = x^2, y = sin(x), or y = 2x + 1
+* **Type of graph:** Do you want a line graph, scatter plot, bar chart, etc.?
+
+Once you give me this information, I can help you graph it.  I can't create a visual graph here, but I can describe the graph or give you the data points to plot yourself.
+
