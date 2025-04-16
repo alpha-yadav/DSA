@@ -99587,3 +99587,112 @@ Please provide me with the data or equation you would like me to graph.  I need 
 
 Once you give me this information, I can help you graph it.  I can't create visual graphs directly, but I can help you understand how to create one using tools like Excel, Google Sheets, Desmos, or other graphing calculators/software.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, particularly suitable for dense graphs (graphs with many edges).  Here's a breakdown of how it works, along with considerations for different scenarios:
+
+**The Basics**
+
+An adjacency matrix represents a graph as a square matrix where each element `matrix[i][j]` indicates the connection between vertices `i` and `j`.
+
+* **`matrix[i][j] = 1` (or true):**  There's an edge from vertex `i` to vertex `j`.
+* **`matrix[i][j] = 0` (or false):** There's no edge from vertex `i` to vertex `j`.
+
+For **weighted graphs**, `matrix[i][j]` would store the weight of the edge between `i` and `j`.  A value of infinity (or a very large number) could represent the absence of an edge.  For **directed graphs**, the matrix is asymmetric; `matrix[i][j]` might be different from `matrix[j][i]`.  For **undirected graphs**, the matrix is symmetric (`matrix[i][j] = matrix[j][i]`).
+
+**Example (Undirected, Unweighted):**
+
+Consider this graph:
+
+```
+A -- B
+|  / |
+| /  |
+C -- D
+```
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  1  1  0
+B  1  0  1  1
+C  1  1  0  1
+D  0  1  1  0
+```
+
+**Example (Directed, Weighted):**
+
+Consider this graph:
+
+```
+A --> B (weight 5)
+A --> C (weight 2)
+C --> D (weight 3)
+```
+
+The adjacency matrix would be:
+
+```
+   A  B  C  D
+A  0  5  2  ∞
+B  0  0  0  0
+C  0  0  0  3
+D  0  0  0  0
+```  (∞ represents infinity or a very large number)
+
+**Implementation (Python):**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.matrix = [[0] * num_vertices for _ in range(num_vertices)]
+
+    def add_edge(self, u, v, weight=1):  # u and v are vertex indices
+        self.matrix[u][v] = weight
+        # For undirected graphs:
+        self.matrix[v][u] = weight
+
+    def print_matrix(self):
+        for row in self.matrix:
+            print(row)
+
+# Example usage (undirected):
+graph = Graph(4)  # 4 vertices
+graph.add_edge(0, 1)  # Edge between vertex 0 and 1
+graph.add_edge(0, 2)
+graph.add_edge(1, 2)
+graph.add_edge(1, 3)
+graph.add_edge(2, 3)
+graph.print_matrix()
+
+
+# Example usage (directed, weighted)
+graph2 = Graph(4)
+graph2.add_edge(0,1,5)
+graph2.add_edge(0,2,2)
+graph2.add_edge(2,3,3)
+graph2.print_matrix()
+
+```
+
+**Advantages of Adjacency Matrix:**
+
+* **Simple to implement:**  Easy to understand and code.
+* **Efficient for dense graphs:**  Checking for edge existence (`O(1)`) is fast.
+* **Easy to find degrees of vertices:** Sum of row (or column) elements gives the degree.
+
+**Disadvantages of Adjacency Matrix:**
+
+* **Space complexity:**  `O(V^2)`, where V is the number of vertices.  Very inefficient for sparse graphs (graphs with few edges).
+* **Adding/deleting vertices:**  Requires resizing the matrix, which can be expensive.
+
+
+**When to Use Adjacency Matrix:**
+
+* Dense graphs where space efficiency isn't a major concern.
+* Situations where frequent edge existence checks are needed.
+* When you need to easily access the weight of an edge.
+
+For sparse graphs, consider using an adjacency list, which is generally more space-efficient.
+
