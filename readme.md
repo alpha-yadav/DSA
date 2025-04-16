@@ -99498,3 +99498,84 @@ print(f"LCA of 2 and 3 is: {lca.data}") #Output: 1
 
 Remember to handle edge cases, such as when one or both nodes are not present in the tree.  The provided code includes examples of handling such cases.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic computer science problem.  There are several approaches, each with different time and space complexities.  The optimal choice depends on the type of tree and whether preprocessing is allowed.
+
+**Methods:**
+
+1. **Brute-Force Approach (General Trees):**
+
+   * **Concept:**  Traverse the tree from the root. For each node, check if both nodes (let's call them `node1` and `node2`) are present in its subtree. If both are present, this node is a common ancestor. Continue traversing down, finding the deepest such node, which will be the LCA.
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  This is because in the worst case, you might have to visit every node.
+   * **Space Complexity:** O(H) in the worst case (recursive calls), where H is the height of the tree.  Can be O(1) with iterative approach using a stack.
+   * **Suitable for:** General trees, but inefficient for large trees.
+
+2. **Recursive Approach (Binary Trees):**
+
+   * **Concept:**  This method leverages the recursive nature of binary trees.  If `node1` and `node2` are both in the left subtree, recursively find the LCA in the left subtree.  If both are in the right subtree, recursively find the LCA in the right subtree. If `node1` is in the left and `node2` is in the right (or vice versa), the current node is the LCA.
+   * **Time Complexity:** O(N) in the worst case (skewed tree).  O(H) on average, where H is the height of the tree.
+   * **Space Complexity:** O(H) due to recursive calls.
+   * **Suitable for:** Binary trees, reasonably efficient.
+
+3. **Iterative Approach (Binary Trees):**
+
+   * **Concept:**  Use a stack or queue to traverse the tree iteratively.  Keep track of the path from the root to each node (`node1` and `node2`).  Then, find the last common node in these paths.
+   * **Time Complexity:** O(N) in the worst case. O(H) on average.
+   * **Space Complexity:** O(H) to store the paths.
+   * **Suitable for:** Binary trees, avoids recursion overhead.
+
+4. **Using Parent Pointers (Binary Trees or General Trees):**
+
+   * **Concept:** If each node stores a pointer to its parent, you can efficiently find the LCA.  Traverse upwards from `node1` and `node2`, storing the nodes visited in two separate sets. The first common node encountered in the upward traversal is the LCA.
+   * **Time Complexity:** O(H) - proportional to the height of the tree.
+   * **Space Complexity:** O(H) - space to store the visited nodes.
+   * **Suitable for:**  Trees where parent pointers are readily available.  This is generally the most efficient approach if you have the parent pointers.
+
+
+5. **Preprocessing with Depth and Lowest Ancestor (Binary Trees):**
+
+   * **Concept:** Perform a pre-order traversal of the tree to compute the depth of each node and its lowest ancestor in that traversal.  Use this pre-computed information to quickly determine the LCA.
+   * **Time Complexity:** O(N) for preprocessing; O(1) to find LCA afterward.
+   * **Space Complexity:** O(N) to store the pre-computed information.
+   * **Suitable for:**  Binary Trees where many LCA queries will be performed after preprocessing.
+
+
+**Example (Recursive Approach for Binary Trees):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowest_common_ancestor(root, node1, node2):
+    if root is None or root == node1 or root == node2:
+        return root
+
+    left_lca = lowest_common_ancestor(root.left, node1, node2)
+    right_lca = lowest_common_ancestor(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.right     # Node with data 3
+
+lca = lowest_common_ancestor(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca.data}")  # Output: 1
+```
+
+Remember to choose the method that best fits your specific needs and constraints.  If you have a large tree and many LCA queries, the preprocessing approach is usually the most efficient.  For smaller trees or single queries, the recursive or iterative methods are sufficient.  If you have parent pointers available, that's the most efficient option of all.
+
