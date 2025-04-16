@@ -100032,3 +100032,117 @@ Thorup's algorithms represent major advances in graph algorithm design.  His nea
 
 It's important to note that while these algorithms are theoretically very efficient, their practical implementation can be complex, and they may not always outperform simpler algorithms for smaller graphs due to the constant factors hidden in the Big O notation.  However, their theoretical significance remains substantial.
 
+#  Graph Traversals 
+Graph traversals are algorithms for visiting every node in a graph exactly once.  There are several different ways to do this, each with its own properties and applications. The most common are Depth-First Search (DFS) and Breadth-First Search (BFS).
+
+**1. Depth-First Search (DFS)**
+
+DFS explores a graph as deeply as possible along each branch before backtracking.  Imagine it like exploring a maze: you go down one path as far as you can, then backtrack and try another path.
+
+* **Algorithm:**
+    1. Start at a chosen root node.
+    2. Mark the current node as visited.
+    3. Recursively visit all unvisited neighbors of the current node.
+    4. Backtrack to the previous node once all neighbors have been visited.
+
+* **Implementation (recursive):**
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+# Example graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+dfs_recursive(graph, 'A')  # Output will depend on the order of neighbors in the graph, e.g., A B D E F C
+```
+
+* **Implementation (iterative using a stack):**
+
+```python
+def dfs_iterative(graph, start):
+    visited = set()
+    stack = [start]
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            print(vertex, end=" ")
+            stack.extend(neighbor for neighbor in graph[vertex] if neighbor not in visited)
+
+dfs_iterative(graph, 'A') # Output is the same as recursive but the order might slightly vary
+```
+
+* **Applications:**
+    * Finding connected components.
+    * Topological sorting (for Directed Acyclic Graphs - DAGs).
+    * Detecting cycles in a graph.
+    * Solving puzzles like mazes.
+
+
+**2. Breadth-First Search (BFS)**
+
+BFS explores a graph level by level.  It visits all the neighbors of a node before moving on to their neighbors.  Think of it like expanding ripples in a pond.
+
+* **Algorithm:**
+    1. Start at a chosen root node.
+    2. Mark the current node as visited.
+    3. Visit all unvisited neighbors of the current node.
+    4. Add the unvisited neighbors to a queue.
+    5. Repeat steps 2-4 for each node in the queue until the queue is empty.
+
+* **Implementation:**
+
+```python
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+
+    while queue:
+        vertex = queue.popleft()
+        print(vertex, end=" ")
+
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+bfs(graph, 'A') #Output: A B C D E F (Order is consistent assuming consistent neighbor order)
+```
+
+* **Applications:**
+    * Finding the shortest path in an unweighted graph.
+    * Social network analysis (finding connections).
+    * Crawling websites.
+
+
+**Key Differences:**
+
+| Feature       | DFS                               | BFS                                  |
+|---------------|------------------------------------|--------------------------------------|
+| Exploration   | Depth-first (goes deep)            | Breadth-first (level by level)       |
+| Data Structure| Stack (recursive or iterative)     | Queue                                |
+| Shortest Path | Doesn't guarantee shortest path     | Guarantees shortest path (unweighted) |
+| Memory Usage  | Can use less memory (in some cases) | Can use more memory (queue can grow) |
+
+
+Choosing between DFS and BFS depends on the specific problem.  If you need the shortest path in an unweighted graph, BFS is the better choice.  If you need to find connected components or detect cycles, DFS is often more efficient.  For tasks like topological sorting, DFS is essential.
+
