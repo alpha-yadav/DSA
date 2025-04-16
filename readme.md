@@ -97852,3 +97852,76 @@ public class SimpleLoop {
 
 These examples show the basic structure of simple loops.  More complex loops can involve nested loops (loops within loops), loop control statements (like `break` and `continue`), and iteration over collections (like lists or arrays).  The specific syntax varies slightly between languages, but the underlying concept remains the same.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows for processing data in a multi-dimensional way, often used to iterate through rows and columns of a matrix or table, or to perform combinations or permutations of elements.
+
+Here's a breakdown:
+
+**Structure:**
+
+```java
+for (int i = 0; i < outerLoopCount; i++) { // Outer loop
+  for (int j = 0; j < innerLoopCount; j++) { // Inner loop
+    // Code to be executed for each inner loop iteration
+  }
+  // Code to be executed after each outer loop iteration
+}
+```
+
+This can be adapted to use `while` loops as well:
+
+```java
+int i = 0;
+while (i < outerLoopCount) {
+  int j = 0;
+  while (j < innerLoopCount) {
+    // Code to be executed for each inner loop iteration
+    j++;
+  }
+  i++;
+}
+```
+
+**Example: Printing a multiplication table:**
+
+Let's say you want to print a 5x5 multiplication table.  A nested loop is perfect for this:
+
+```java
+public class NestedLoopExample {
+  public static void main(String[] args) {
+    for (int i = 1; i <= 5; i++) { // Outer loop: rows
+      for (int j = 1; j <= 5; j++) { // Inner loop: columns
+        System.out.print(i * j + "\t"); // Print the product with a tab for spacing
+      }
+      System.out.println(); // Newline after each row
+    }
+  }
+}
+```
+
+This code will produce:
+
+```
+1	2	3	4	5	
+2	4	6	8	10	
+3	6	9	12	15	
+4	8	12	16	20	
+5	10	15	20	25
+```
+
+**Common Uses:**
+
+* **Matrix operations:**  Processing elements in a 2D array (or higher dimensional arrays).
+* **Combinations and permutations:** Generating all possible combinations or permutations of a set of items.
+* **Nested data structures:** Traversing nested lists, trees, or graphs.
+* **Game development:**  Iterating through game board cells, handling multiple objects/entities.
+
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the time complexity of your algorithm.  A nested loop with `n` iterations in each loop has a time complexity of O(n²).  With more nested loops, the complexity increases exponentially.  Be mindful of this, especially when dealing with large datasets.
+* **Readability:**  Proper indentation and clear variable names are crucial for making nested loops readable and maintainable.
+
+
+Nested loops are a powerful tool, but use them judiciously to avoid performance bottlenecks and maintain code clarity.  Consider alternative algorithms if nested loops lead to excessive complexity.
+
