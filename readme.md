@@ -100009,3 +100009,26 @@ print(f"Graph 2 has cycle: {has_cycle_directed_graph(graph2)}")  # Output: True
 
 This detailed explanation and code should help you understand and implement cycle detection in directed graphs using Depth First Traversal. Remember to adapt the code to your specific graph representation if necessary.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focused on efficient graph algorithms, particularly those concerning shortest paths and connectivity.  There isn't one single "Thorup's algorithm," but rather several significant contributions with different applications and complexities.  The most famous are likely his near-linear-time algorithms for:
+
+* **Single-Source Shortest Paths (SSSP) in undirected graphs:**  Thorup achieved a groundbreaking result by developing an algorithm that solves SSSP in undirected graphs with non-negative edge weights in near-linear time, specifically O(m α(m, n)), where 'm' is the number of edges, 'n' is the number of nodes, and α(m, n) is the inverse Ackermann function, which grows incredibly slowly and is practically a constant for all realistic graph sizes.  This dramatically improved upon previous algorithms, which were often slower by a logarithmic factor.  This algorithm relies on sophisticated techniques, including the use of hop sets and clever data structures.
+
+* **Minimum Spanning Trees (MST):**  Thorup also contributed to efficient MST algorithms, achieving near-linear time complexity similar to his SSSP algorithm.  These algorithms often share underlying principles with his SSSP work, leveraging techniques like randomized contractions and sophisticated data structures to achieve impressive performance.
+
+* **All-Pairs Shortest Paths (APSP) in undirected graphs:**  While APSP is generally harder than SSSP, Thorup's contributions significantly advanced techniques in this area as well, though the complexities are usually slightly higher than near-linear.
+
+**Key features and techniques often used in Thorup's algorithms:**
+
+* **Randomization:** Many of his algorithms utilize randomization to achieve their efficiency.  This often involves techniques like randomly sampling edges or nodes.
+* **Hop sets:**  These are carefully constructed sets of edges that allow for efficient shortcuts in graph traversals, leading to faster path computations.
+* **Advanced data structures:**  Thorup's algorithms frequently employ sophisticated data structures designed to efficiently manage and access graph information.
+* **Combinatorial techniques:**  Thorup skillfully combines combinatorial insights with algorithmic design to achieve optimal performance.
+
+**Significance:**
+
+Thorup's algorithms represent major advances in graph algorithm design.  His near-linear time algorithms for SSSP and MST in undirected graphs are considered landmark achievements, pushing the boundaries of what was previously thought possible.  These algorithms have had a significant impact on various fields that rely on efficient graph processing, including network routing, computational biology, and social network analysis.
+
+
+It's important to note that while these algorithms are theoretically very efficient, their practical implementation can be complex, and they may not always outperform simpler algorithms for smaller graphs due to the constant factors hidden in the Big O notation.  However, their theoretical significance remains substantial.
+
