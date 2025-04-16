@@ -98092,3 +98092,15 @@ The best representation depends on your specific needs:
 
 Remember to consider the trade-offs between simplicity, memory efficiency, and the performance of different operations when making your selection.  For many applications, the list-of-children or vector-of-children approaches offer a good balance of these factors.
 
+#  Introduction 
+Please provide me with some context!  I need to know what you want an introduction *to*.  For example, are you looking for an introduction to:
+
+* **A specific topic?** (e.g., the history of the Roman Empire, the science of climate change, the works of Shakespeare)
+* **A piece of writing?** (e.g., a research paper, a short story, a business proposal)
+* **A person?** (e.g., a new employee, a guest speaker)
+* **An event?** (e.g., a conference, a concert, a party)
+* **A product?** (e.g., a new phone, a software program, a book)
+
+
+Once you tell me what you need an introduction *for*, I can help you write one.
+
