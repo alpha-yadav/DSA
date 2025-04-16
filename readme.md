@@ -94947,3 +94947,67 @@ Java requires a class structure.  The loop itself is very similar to the C++ exa
 
 These examples all demonstrate a simple loop that iterates five times.  You can easily change the number 5 to control how many times the loop runs.  The body of the loop (the code inside the curly braces `{}`) is executed repeatedly.  Remember to adjust the code based on the specific programming language you are using.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This is a powerful technique for processing multi-dimensional data structures or performing tasks that require repeated iterations within iterations.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    # Outer loop code (executed once per outer loop iteration)
+    for inner_loop_variable in inner_loop_iterable:
+        # Inner loop code (executed once per inner loop iteration)
+    # More outer loop code (executed once per outer loop iteration)
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # Print the product with a tab
+    print()  # New line after each row
+```
+
+This will output a 10x10 multiplication table.  The outer loop iterates through the rows (1 to 10), and the inner loop iterates through the columns (1 to 10) for each row.
+
+**Another Example (Matrix Traversal):**
+
+Imagine you have a 2D list (a matrix) representing a grid:
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element)
+```
+
+This will print each element of the matrix sequentially.
+
+**Efficiency Considerations:**
+
+Nested loops can be computationally expensive, especially with large datasets.  The time complexity of nested loops is generally the product of the complexities of the individual loops.  For example, two nested loops each iterating `n` times will have a time complexity of O(n²).  It's crucial to consider efficiency when using nested loops, and alternative algorithms might be more suitable for very large datasets.
+
+
+**Use Cases:**
+
+Nested loops are commonly used in various programming tasks, including:
+
+* **Matrix operations:** Processing rows and columns of matrices.
+* **2D array manipulation:** Accessing and modifying elements in a 2D array.
+* **Generating patterns:** Creating text or graphical patterns.
+* **Combinatorial problems:** Exploring all possible combinations of elements.
+* **Searching and sorting:** Implementing certain search and sorting algorithms.
+
+
+In summary, nested loops provide a straightforward way to handle iterative tasks involving multiple levels of iteration, but it's important to be mindful of their potential performance implications when dealing with large datasets.
+
