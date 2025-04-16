@@ -98727,3 +98727,120 @@ This improved implementation includes:
 
 Remember that the efficiency of BST operations (search, insertion, deletion) is O(h), where h is the height of the tree. In a balanced BST, h is approximately log₂(n), where n is the number of nodes.  However, in a skewed tree, h can be as bad as n, resulting in linear time complexity.  For guaranteed logarithmic time complexity, consider using self-balancing BSTs like AVL trees or red-black trees.
 
+#  Check if a tree is BST or not 
+There are several ways to check if a binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence.  We perform an in-order traversal, keeping track of the previously visited node's value.  If the current node's value is less than the previous node's value, the tree is not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, prev):
+    """
+    Recursively checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+        node: The current node being visited.
+        prev: The data of the previously visited node.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    # Check left subtree
+    if not is_bst_recursive(node.left, prev):
+        return False
+
+    # Check current node against previous node
+    if prev is not None and node.data <= prev:
+        return False
+
+    # Update previous node
+    prev = node.data
+
+    # Check right subtree
+    return is_bst_recursive(node.right, prev)
+
+
+def isBST(root):
+  """Wrapper function to initiate the recursive check."""
+  return is_bst_recursive(root, None)
+
+
+# Example Usage
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.right = Node(20)
+
+print(f"Is the tree a BST? {isBST(root)}") # Output: False (because 20 > 15)
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(12)
+
+print(f"Is the tree a BST? {isBST(root2)}") # Output: True
+
+```
+
+
+**Method 2:  MinMax Recursive Approach**
+
+This method recursively checks if the values in each subtree respect the BST property.  Each node's value must be greater than the maximum value in its left subtree and less than the minimum value in its right subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(node):
+    """
+    Recursively checks if a binary tree is a BST using min-max approach.
+
+    Args:
+      node: The root of the subtree being checked.
+
+    Returns:
+      A tuple (is_bst, min_val, max_val) where is_bst is a boolean indicating
+      whether the subtree is a BST, min_val is the minimum value in the subtree,
+      and max_val is the maximum value in the subtree.  Returns (False, None, None) if not a BST.
+
+    """
+    if node is None:
+        return True, float('inf'), float('-inf')
+
+    is_left_bst, min_left, max_left = is_bst_minmax(node.left)
+    is_right_bst, min_right, max_right = is_bst_minmax(node.right)
+
+    if not is_left_bst or not is_right_bst or max_left >= node.data or min_right <= node.data:
+        return False, None, None
+
+    return True, min(node.data, min_left), max(node.data, max_right)
+
+
+def isBSTMinMax(root):
+    """Wrapper function to call the recursive function."""
+    return is_bst_minmax(root)[0]
+
+# Example Usage (same trees as before)
+print(f"Is the tree a BST (MinMax)? {isBSTMinMax(root)}") # Output: False
+print(f"Is the tree a BST (MinMax)? {isBSTMinMax(root2)}") # Output: True
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive method, where H is the height of the tree (it could be O(N) in the worst case of a skewed tree).  The MinMax method also has O(H) space complexity due to the recursive calls.  Choose whichever method you find more readable or that better suits your needs.
+
