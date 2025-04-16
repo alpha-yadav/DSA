@@ -97925,3 +97925,25 @@ This code will produce:
 
 Nested loops are a powerful tool, but use them judiciously to avoid performance bottlenecks and maintain code clarity.  Consider alternative algorithms if nested loops lead to excessive complexity.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They mean the time it takes to complete the algorithm grows logarithmically with the input size (n).  This is much faster than linear time (O(n)) or quadratic time (O(n²)).  The base of the logarithm usually doesn't matter in big O notation because it's a constant factor.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential O(log n) algorithm.  It works on a sorted dataset.  The algorithm repeatedly divides the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This continues until the target value is found or the search interval is empty.
+
+* **Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  Self-balancing binary search trees (like AVL trees or red-black trees) maintain a roughly balanced structure, ensuring that the height of the tree is proportional to log n, where n is the number of nodes.  Operations like searching, inserting, and deleting a node typically involve traversing a path from the root to a leaf node, which takes O(log n) time.
+
+* **Efficient Set/Map Operations (in languages with balanced tree implementations):**  Many programming languages' standard library implementations of sets and maps (e.g., `std::set` and `std::map` in C++, `HashSet` and `HashMap` in Java) are based on balanced tree structures or hash tables with good average-case performance.  Operations like searching, insertion, and deletion are often O(log n) on average.  (Hash tables can be O(1) on average, but O(n) in the worst case; balanced trees are typically guaranteed O(log n) in all cases.)
+
+* **Exponential Search:** This algorithm is used to find a value in a sorted, unbounded array. It works by first finding a range that might contain the target, then performing a binary search within that range.
+
+* **Finding the kth smallest element using Quickselect (average case):** While the worst-case time complexity of Quickselect is O(n²), its average-case time complexity is O(n).  However, finding the *k*th smallest element can be improved to O(log n) if the data structure allows for logarithmic-time access to elements (e.g. a balanced binary search tree).
+
+
+**Key Characteristics leading to O(log n) complexity:**
+
+The common thread among these algorithms is the ability to repeatedly reduce the problem size by a constant factor (usually half) in each step. This "divide and conquer" strategy is crucial for achieving logarithmic time complexity.  The algorithm effectively eliminates a large portion of the search space with each iteration.
+
+**Important Note:** The O(log n) complexity only applies when the data is already sorted (as in binary search) or the data structure is inherently logarithmic in nature (like a balanced binary search tree). If the data needs to be sorted before applying a logarithmic algorithm, the overall time complexity will be dominated by the sorting step (usually O(n log n)).
+
