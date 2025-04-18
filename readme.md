@@ -100320,3 +100320,44 @@ This is a simple example, but it illustrates the basic structure of an algorithm
 
 By following these steps and consistently practicing, you'll build a strong foundation in algorithms and data structures.  Remember to start small, be patient, and celebrate your progress!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, along with explanations:
+
+**Problem 1: Two Sum (Easy)**
+
+**Problem Statement:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+`Output: [0,1]`  (Because 2 + 7 = 9)
+
+**Solution Idea:**  Use a hash table (dictionary in Python) to store seen numbers and their indices. Iterate through the array. For each number, check if `target - number` exists in the hash table. If it does, you've found the pair. Otherwise, add the current number and its index to the hash table.
+
+**Problem 2: Reverse a Linked List (Medium)**
+
+**Problem Statement:** Reverse a singly linked list.
+
+**Example:**
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+
+**Solution Idea:**  Iterative approach is most common.  You'll need three pointers: `prev`, `curr`, and `next`.  Iterate through the list, changing the `next` pointer of `curr` to point to `prev`, then updating `prev` and `curr` to move forward.
+
+**Problem 3: Merge k Sorted Lists (Hard)**
+
+**Problem Statement:** You are given an array of `k` linked-lists `lists`, each linked-list is sorted in ascending order.  Merge all the linked-lists into one sorted linked-list and return it.
+
+**Example:**
+
+Input: lists = [[1,4,5],[1,3,4],[2,6]]
+Output: [1,1,2,3,4,4,5,6]
+
+**Solution Idea:**  This problem has several approaches, but a common and efficient one uses a priority queue (min-heap).  Add the first element of each list to the heap along with its list index.  Repeatedly extract the minimum element from the heap, add it to the result, and add the next element from the corresponding list to the heap (if it exists).
+
+
+**Choosing a Problem to Solve:**
+
+The difficulty of these problems increases.  Start with the "Two Sum" problem if you're new to algorithmic problem-solving.  Work your way up to the harder problems as you gain experience.  Remember to focus on understanding the problem statement, devising a solution, writing clean code, and testing thoroughly.  Online platforms like LeetCode, HackerRank, and Codewars provide many more problems with solutions and discussions.
+
