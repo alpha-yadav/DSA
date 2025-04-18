@@ -100445,3 +100445,65 @@ print(fizzBuzzMap(limit: 15)) // Call the function and print the array
 
 Remember to choose the method that best suits your understanding and coding style.  The first and third methods are generally preferred for readability, especially when starting out.  The functional approach (Method 4) is elegant but can be less intuitive for beginners.  The ternary operator (Method 2) can be useful for brevity in simple cases, but it can become hard to read with more complex logic.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm consumes as the input size grows.  It's a crucial concept in computer science because it helps us understand how the performance of an algorithm scales with larger inputs.  We don't usually care about the exact execution time in seconds, as that depends on hardware. Instead, we focus on how the runtime increases *relative* to the input size.
+
+There are two primary aspects of algorithm complexity:
+
+**1. Time Complexity:** This describes how the runtime of an algorithm increases as the input size (often denoted as 'n') increases.
+
+**2. Space Complexity:** This describes how the memory usage of an algorithm increases as the input size increases.
+
+
+**Expressing Complexity:**
+
+We use Big O notation (O), Big Omega notation (Ω), and Big Theta notation (Θ) to express complexity.  These are asymptotic notations, meaning they describe the behavior of the algorithm as the input size approaches infinity.
+
+* **Big O Notation (O):**  Represents the *upper bound* of an algorithm's runtime. It gives the worst-case scenario.  We say an algorithm is O(f(n)) if its runtime grows no faster than a constant multiple of f(n) as n approaches infinity.
+
+* **Big Omega Notation (Ω):** Represents the *lower bound* of an algorithm's runtime. It gives the best-case scenario.  We say an algorithm is Ω(f(n)) if its runtime grows no slower than a constant multiple of f(n) as n approaches infinity.
+
+* **Big Theta Notation (Θ):** Represents the *tight bound*.  It means the algorithm's runtime grows at the same rate as f(n).  This implies both O(f(n)) and Ω(f(n)).
+
+
+**Common Complexity Classes:**
+
+These are listed in increasing order of growth rate (and thus, decreasing efficiency):
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array by index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Bubble sort, selection sort, nested loops iterating over the input.
+
+* **O(n³) - Cubic Time:** The runtime increases cubically with the input size. Example: Some algorithms involving three nested loops.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example:  Traveling salesman problem (brute-force approach).
+
+
+**Space Complexity:**
+
+Space complexity is analyzed similarly using Big O notation. It considers the amount of extra memory used by the algorithm beyond the input itself.  For example:
+
+* **O(1):** Constant extra space.
+* **O(n):** Linear extra space (e.g., creating a copy of the input array).
+* **O(log n):** Logarithmic extra space (e.g., recursive algorithms using a stack).
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity of an algorithm typically involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most to the runtime.
+2. **Counting the number of operations:** Express the number of operations as a function of the input size 'n'.
+3. **Determining the dominant term:** Identify the term that grows fastest as 'n' increases.  This term determines the Big O complexity.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better for larger inputs.
+
