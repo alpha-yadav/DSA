@@ -100361,3 +100361,87 @@ Output: [1,1,2,3,4,4,5,6]
 
 The difficulty of these problems increases.  Start with the "Two Sum" problem if you're new to algorithmic problem-solving.  Work your way up to the harder problems as you gain experience.  Remember to focus on understanding the problem statement, devising a solution, writing clean code, and testing thoroughly.  Online platforms like LeetCode, HackerRank, and Codewars provide many more problems with solutions and discussions.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It prints numbers from 1 to a given limit, but with these replacements:
+
+* If the number is divisible by 3, print "Fizz" instead of the number.
+* If the number is divisible by 5, print "Buzz" instead of the number.
+* If the number is divisible by both 3 and 5 (i.e., by 15), print "FizzBuzz" instead of the number.
+
+Here are several ways to implement FizzBuzz in Swift, starting with a simple approach and progressing to more advanced techniques:
+
+**Method 1: Basic `if-else if-else` approach**
+
+This is the most straightforward method, easy to understand and read:
+
+```swift
+func fizzBuzz(limit: Int) {
+    for i in 1...limit {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(limit: 15) // Call the function
+```
+
+**Method 2: Using a ternary operator for conciseness**
+
+This approach uses nested ternary operators to make the code slightly more compact, but might be less readable for beginners:
+
+```swift
+func fizzBuzzTernary(limit: Int) {
+    for i in 1...limit {
+        print(i % 15 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzzTernary(limit: 15) // Call the function
+```
+
+**Method 3:  More structured approach with string manipulation**
+
+This method builds the output string piece by piece, improving readability and maintainability:
+
+```swift
+func fizzBuzzStructured(limit: Int) {
+    for i in 1...limit {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzStructured(limit: 15) // Call the function
+```
+
+
+**Method 4:  Functional approach using `map`**
+
+This demonstrates a more functional style using the `map` function.  It's concise but might be harder to understand without prior functional programming experience:
+
+```swift
+func fizzBuzzMap(limit: Int) -> [String] {
+    return (1...limit).map { i in
+        i % 15 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : "\(i)"
+    }
+}
+
+print(fizzBuzzMap(limit: 15)) // Call the function and print the array
+```
+
+
+Remember to choose the method that best suits your understanding and coding style.  The first and third methods are generally preferred for readability, especially when starting out.  The functional approach (Method 4) is elegant but can be less intuitive for beginners.  The ternary operator (Method 2) can be useful for brevity in simple cases, but it can become hard to read with more complex logic.
+
