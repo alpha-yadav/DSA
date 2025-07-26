@@ -2555,3 +2555,12 @@ In a general tree (not necessarily binary), you'll need a different approach.  O
 
 Remember to handle edge cases such as one or both nodes not being in the tree.  The examples above include basic error handling (returning `None` if no LCA is found).  You might need more robust error handling depending on your application.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **A set of points (x, y):**  For example, (1,2), (3,4), (5,6)
+* **An equation:** For example, y = 2x + 1,  y = x^2,  y = sin(x)
+* **A description of the graph:**  For example, "a bar chart showing sales for each month"
+
+Once you give me this information, I can help you graph it.  I can't create visual graphs directly, but I can describe the graph or give you the coordinates to plot yourself.
+
