@@ -3402,3 +3402,81 @@ Explanation: "aba" is also a valid answer.
 
 These problems showcase different aspects of algorithm design. The "Reverse a String" problem focuses on string manipulation, "Two Sum" on array traversal and searching, "Longest Palindromic Substring" on dynamic programming or string manipulation techniques, and the graph problem introduces graph traversal algorithms.  Remember to consider time and space complexity when designing your solutions.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then adding improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz") and 5 ("Buzz").
+* If none of the above conditions are met, it prints the number itself.
+
+**Version 2:  Improved Readability with String Interpolation**
+
+This version uses string interpolation for cleaner output:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? i : output)
+    }
+}
+
+fizzBuzz(n: 15)
+```
+
+This version is more concise.  It builds the output string incrementally.  If the string is empty after checking for divisibility by 3 and 5, it prints the number; otherwise, it prints the "Fizz," "Buzz," or "FizzBuzz" string.
+
+**Version 3: Using a `map` for functional approach:**
+
+This version uses the `map` function for a more functional style:
+
+```swift
+func fizzBuzz(n: Int) -> [String] {
+    return (1...n).map { i in
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        return output.isEmpty ? "\(i)" : output
+    }
+}
+
+print(fizzBuzz(n: 15)) // Prints the array of strings
+```
+
+This version returns an array of strings, making it more flexible.  The `map` function applies the logic to each number in the range 1...n.
+
+
+**Choosing the Best Version:**
+
+* **Version 1** is the easiest to understand for beginners.
+* **Version 2** is more concise and efficient.
+* **Version 3** is more functional and might be preferred by experienced Swift developers.
+
+Remember to choose the version that best suits your understanding and the context of your project.  The key takeaway is to understand the core logic of checking for divisibility by 3 and 5.
+
