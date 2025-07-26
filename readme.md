@@ -750,3 +750,93 @@ The runtime of this function is directly proportional to the size of the array. 
 
 While Big O notation focuses on the worst-case scenario, other notations exist to describe average-case (Θ, theta) and best-case (Ω, omega) complexities.  Understanding these provides a more complete picture of an algorithm's performance characteristics.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a certain condition is met.  There are several types of loops, but here are examples of the most common ones in many programming languages:
+
+**1. `for` loop (counter-controlled):**
+
+This loop is ideal when you know the number of iterations in advance.
+
+* **Example (Python):**
+
+```python
+for i in range(5):  # Repeats 5 times (i = 0, 1, 2, 3, 4)
+    print(i)
+```
+
+* **Example (JavaScript):**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **Example (C++):**
+
+```c++
+for (int i = 0; i < 5; i++) {
+  std::cout << i << std::endl;
+}
+```
+
+
+**2. `while` loop (condition-controlled):**
+
+This loop continues as long as a specified condition is true.  Be careful to avoid infinite loops!
+
+* **Example (Python):**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **Example (JavaScript):**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **Example (C++):**
+
+```c++
+int count = 0;
+while (count < 5) {
+  std::cout << count << std::endl;
+  count++;
+}
+```
+
+**3. `do-while` loop (condition-controlled, post-test):**
+
+Similar to a `while` loop, but the condition is checked *after* each iteration.  This guarantees at least one execution of the loop body.  (Not available in all languages, notably Python).
+
+* **Example (JavaScript):**
+
+```javascript
+let count = 0;
+do {
+  console.log(count);
+  count++;
+} while (count < 5);
+```
+
+* **Example (C++):**
+
+```c++
+int count = 0;
+do {
+  std::cout << count << std::endl;
+  count++;
+} while (count < 5);
+```
+
+These examples all print the numbers 0 through 4.  The choice of loop depends on the specific problem you're trying to solve.  If you know the number of iterations beforehand, a `for` loop is usually more efficient and readable.  If the number of iterations depends on a condition that might change during the loop's execution, a `while` loop is more appropriate.  A `do-while` loop is used when you need to ensure at least one iteration, regardless of the initial condition.
+
