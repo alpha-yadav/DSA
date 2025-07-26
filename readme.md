@@ -904,3 +904,27 @@ Nested loops are useful for:
 
 In summary, nested loops are a powerful tool for handling multi-dimensional data and solving problems that require iterative processing across multiple dimensions.  However, it's important to be aware of their computational cost and strive for code clarity.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They imply that the time it takes to complete the algorithm increases logarithmically with the input size (n).  This means that even for very large inputs, the runtime remains relatively small.  This efficiency usually comes from halving (or similarly reducing) the problem size with each step.
+
+Here are some common types of algorithms that exhibit O(log n) time complexity:
+
+* **Binary Search:** This classic search algorithm works on a sorted array or list.  It repeatedly divides the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This continues until the target is found or the interval is empty.
+
+* **Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  In a balanced binary search tree (like AVL trees or red-black trees), finding, inserting, or deleting a node takes O(log n) time on average. This is because the height of a balanced binary tree is logarithmic with respect to the number of nodes.  Operations that traverse the tree from the root to a leaf exhibit this complexity.
+
+* **Efficient exponentiation (exponentiation by squaring):**  Calculating a<sup>b</sup> (a raised to the power of b) can be done in O(log b) time using a method called exponentiation by squaring. This involves repeatedly squaring the base and adjusting the exponent.
+
+* **Finding the kth smallest element using quickselect (average case):**  Quickselect is a selection algorithm that, on average, finds the kth smallest element in an unsorted array in O(n) time.  However, a randomized version, or one that uses median-of-medians for pivot selection, can achieve O(log n) time in certain cases, or on average, for the selection of a single kth smallest element. This is still better than the full O(n) required for sorting.
+
+* **Some Graph Algorithms:**  Certain graph algorithms, especially those working on specific tree structures or exploiting balanced properties, can have logarithmic time complexity for specific operations.  For example, finding the lowest common ancestor (LCA) in a balanced binary tree.
+
+**Key characteristics that lead to O(log n) complexity:**
+
+* **Divide and Conquer:** The algorithm repeatedly divides the problem into smaller subproblems.
+* **Halving (or similar reduction):**  The size of the problem is reduced by a constant factor (usually half) in each step.
+* **Sorted Data (often):** Many O(log n) algorithms require the input data to be sorted (like binary search).
+
+
+It's crucial to remember that the O(log n) complexity usually applies to the *average case* or *best case* scenario.  In some algorithms (like quickselect), worst-case scenarios might lead to O(n) time complexity. The base of the logarithm (e.g., base 2 for binary search) doesn't affect the overall classification as O(log n).  The big O notation only concerns the growth rate of the algorithm as the input size increases.
+
