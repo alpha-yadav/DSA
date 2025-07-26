@@ -3162,3 +3162,131 @@ The choice between BFS and DFS depends on the specific problem:
 
 Understanding these graph traversal algorithms is fundamental to solving many graph-related problems in computer science.  Their applications are vast and span numerous domains.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on whether you're traversing a graph or a tree, and whether you want to use recursion or iteration.  Here are a few implementations:
+
+**1. Recursive DFS for a Graph (using adjacency list):**
+
+This version uses recursion and an adjacency list to represent the graph.  An adjacency list is a dictionary where keys are nodes and values are lists of their neighbors.
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph recursively.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node might not have neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+    return visited
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Output: A B D E F C (order may vary slightly depending on dictionary iteration)
+print("\nVisited nodes:", dfs_recursive(graph,'A'))
+
+```
+
+**2. Iterative DFS for a Graph (using a stack):**
+
+This version uses a stack and avoids recursion, making it suitable for very deep graphs where recursion might lead to stack overflow errors.
+
+```python
+def dfs_iterative(graph, start_node):
+    """
+    Performs a Depth-First Search traversal of a graph iteratively.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        start_node: The starting node for the traversal.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [start_node]
+    visited_order = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            visited_order.append(node)
+            print(node, end=" ")
+            stack.extend(neighbor for neighbor in reversed(graph.get(node, [])) if neighbor not in visited) #reversed for correct DFS order
+
+    return visited_order
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("\n\nDFS traversal (iterative):")
+dfs_iterative(graph, 'A') # Output: A C F B E D (order may vary slightly depending on dictionary iteration)
+```
+
+**3.  DFS for a Tree (recursive):**  Trees are a special case of graphs.  The implementation is simpler because there's no need to track visited nodes to avoid cycles (trees have no cycles).
+
+```python
+def dfs_tree(tree, node):
+    """
+    Performs a Depth-First Search traversal of a tree recursively.
+
+    Args:
+        tree: A dictionary representing the tree where keys are nodes and values are lists of children.
+        node: The root node of the subtree to traverse.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    print(node, end=" ")
+    for child in tree.get(node, []):
+        dfs_tree(tree, child)
+
+
+#Example usage:
+tree = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': [],
+    'F': []
+}
+
+print("\n\nDFS traversal of tree:")
+dfs_tree(tree,'A') # Output: A B D E C F
+```
+
+Remember to adapt these functions to your specific needs.  You might need to modify how nodes are processed (instead of just printing them) or handle different graph representations (e.g., adjacency matrix).  Choose the recursive or iterative version based on the size and structure of your graph and whether you are concerned about stack overflow.  For large graphs, iterative DFS is generally preferred.
+
