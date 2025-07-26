@@ -3805,3 +3805,76 @@ int main() {
 
 These examples all print the numbers 0 through 4.  Remember to choose the loop type that best suits your needs.  `for` loops are generally preferred for iterating a known number of times, while `while` loops are better for situations where the number of iterations isn't known in advance.  `do-while` is used when you need to ensure at least one execution.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop will execute completely for each iteration of the outer loop.  This is a common programming construct used to process multi-dimensional data structures or to perform tasks requiring repetitive execution within a larger repetitive process.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+outer_loop:
+  for i in range(outer_iterations):  // Outer loop iterates 'outer_iterations' times
+    inner_loop:
+      for j in range(inner_iterations): // Inner loop iterates 'inner_iterations' times for EACH iteration of the outer loop
+        # Code to be executed in the inner loop
+    # Code to be executed after the inner loop completes (but still within the outer loop)
+# Code to be executed after the outer loop completes
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This will output:
+
+```
+1	2	3	4	5	6	7	8	9	10	
+2	4	6	8	10	12	14	16	18	20	
+3	6	9	12	15	18	21	24	27	30	
+...and so on
+```
+
+**Explanation:**
+
+* The outer loop iterates through numbers 1 to 10 (rows).
+* For each row (outer loop iteration), the inner loop iterates through numbers 1 to 10 (columns).
+* Inside the inner loop, the product `i * j` is calculated and printed.
+* `end="\t"` prevents printing a newline after each number, keeping them on the same line.
+* `print()` at the end of the outer loop adds a newline to move to the next row.
+
+
+**Example (processing a 2D array):**
+
+```python
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print() # Newline after each row
+```
+
+This will output:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+
+**Time Complexity:**
+
+The time complexity of nested loops is generally the product of the number of iterations of each loop.  For example, if the outer loop iterates `n` times and the inner loop iterates `m` times for each iteration of the outer loop, the total number of iterations is `n * m`.  This means the time complexity is often O(n*m).  This can become computationally expensive for large values of `n` and `m`.
+
+
+Nested loops are powerful but can lead to performance issues if not carefully designed, especially when dealing with large datasets.  Consider alternative algorithms or data structures if performance is a critical concern.
+
