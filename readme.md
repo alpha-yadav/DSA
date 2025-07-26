@@ -3480,3 +3480,52 @@ This version returns an array of strings, making it more flexible.  The `map` fu
 
 Remember to choose the version that best suits your understanding and the context of your project.  The key takeaway is to understand the core logic of checking for divisibility by 3 and 5.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The most common resources considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We typically analyze complexity using **Big O notation**, which describes the upper bound of the growth rate of a function.  It focuses on the dominant terms and ignores constant factors, as these become less significant as the input size grows large.
+
+Here's a breakdown:
+
+**Common Time Complexities (from best to worst):**
+
+* **O(1) - Constant time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+* **O(log n) - Logarithmic time:** The execution time increases logarithmically with the input size.  This is very efficient. Example: Binary search in a sorted array.
+* **O(n) - Linear time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic time:**  A combination of linear and logarithmic time.  Common in efficient sorting algorithms like merge sort and heapsort.
+* **O(n²) - Quadratic time:** The execution time increases quadratically with the input size.  Example: Nested loops iterating through an array.
+* **O(2ⁿ) - Exponential time:** The execution time doubles with each addition to the input size.  This becomes computationally infeasible for even moderately large inputs.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial time:** The execution time grows factorially with the input size.  This is extremely computationally expensive and usually indicates a brute-force approach.  Example: Traveling salesman problem (naive approach).
+
+
+**Space Complexity:**
+
+Space complexity is analyzed similarly using Big O notation.  It describes the amount of memory used by the algorithm as a function of the input size.  Common space complexities include:
+
+* **O(1) - Constant space:** The algorithm uses a constant amount of memory regardless of the input size.
+* **O(n) - Linear space:** The memory used increases linearly with the input size.
+* **O(log n) - Logarithmic space:** The memory used increases logarithmically with the input size.
+* **O(n²) - Quadratic space:** The memory used increases quadratically with the input size.
+
+
+**Factors Affecting Complexity:**
+
+* **Algorithm design:**  Different algorithms solving the same problem can have vastly different complexities.
+* **Data structures:** The choice of data structure significantly impacts the performance of an algorithm.
+* **Input characteristics:**  The complexity might vary depending on the properties of the input data (e.g., sorted vs. unsorted).
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity of an algorithm often involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most to the algorithm's runtime.
+2. **Counting the number of operations:** Express the number of operations as a function of the input size.
+3. **Expressing the complexity using Big O notation:** Identify the dominant term and ignore constant factors.
+
+
+Understanding algorithm complexity is crucial for selecting the most efficient algorithms for a given task, especially when dealing with large datasets.  An algorithm with a lower time and space complexity will generally perform better.
+
