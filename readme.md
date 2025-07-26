@@ -3569,3 +3569,50 @@ This means that for sufficiently large values of *n* (*n ≥ n₀*), the functio
 
 In essence, Big Theta provides the most precise description of the asymptotic growth rate of a function among the three notations.  It's crucial for analyzing algorithm efficiency, allowing us to compare the scalability and performance of different algorithms.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of functions, particularly useful for analyzing the efficiency of algorithms.  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Example:** If an algorithm takes 5n² + 3n + 2 steps, we can say its time complexity is O(n²), because the n² term dominates as n grows large.  The constants and lower-order terms are ignored.
+* **Focus:** Worst-case complexity.  It tells us how bad things *can* get.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function.  It describes the *best-case* scenario (though not necessarily the best-case runtime of an algorithm). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:**  If an algorithm's steps are described by 5n² + 3n + 2, then its time complexity is Ω(n²).
+* **Focus:** Best-case complexity.  It tells us how good things *can* get.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound*, meaning it describes both the upper and lower bounds of a function's growth rate.  It's a precise description of the function's growth.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:**  5n² + 3n + 2 = Θ(n²).
+* **Focus:** Average-case complexity (often, but not always). Provides the most accurate and complete picture of an algorithm's scaling behavior.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.  Crucially, the inequality is strict.
+* **Example:** 3n = o(n²).  n² grows significantly faster than 3n.
+* **Focus:** Asymptotic dominance. Shows when one function is completely overshadowed by another.
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀. The inequality is strict.
+* **Example:** n² = ω(n).
+* **Focus:** Asymptotic dominance.  Shows when one function completely outpaces another.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Relationship                                       | Example        |
+|----------|---------------------------------------|---------------------------------------------------|-----------------|
+| O(g(n))  | Upper bound                            | f(n) ≤ c*g(n) for some c, n ≥ n₀                  | 5n² + 3n + 2 = O(n²) |
+| Ω(g(n))  | Lower bound                            | c*g(n) ≤ f(n) for some c, n ≥ n₀                  | 5n² + 3n + 2 = Ω(n²) |
+| Θ(g(n))  | Tight bound (both upper and lower)     | c₁g(n) ≤ f(n) ≤ c₂g(n) for some c₁, c₂, n ≥ n₀      | 5n² + 3n + 2 = Θ(n²) |
+| o(g(n))  | Strictly slower growth               | f(n) < c*g(n) for all c, n ≥ n₀                   | 3n = o(n²)       |
+| ω(g(n))  | Strictly faster growth               | c*g(n) < f(n) for all c, n ≥ n₀                   | n² = ω(n)       |
+
+
+It's crucial to remember that these notations describe *asymptotic behavior*; they only matter when *n* becomes very large.  For small *n*, the actual runtime might differ significantly from what the asymptotic notation predicts.  Furthermore, constant factors are ignored in these notations.
+
