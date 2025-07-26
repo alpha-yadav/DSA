@@ -691,3 +691,62 @@ If `f(n) = Θ(g(n))`, then `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
 
 In summary, Big-Omega notation is a fundamental tool for analyzing algorithm efficiency, providing valuable insights into the best-case performance and inherent limitations of algorithms.  Understanding it is crucial for anyone serious about algorithm design and analysis.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *worst-case* scenario of how the runtime or space requirements of an algorithm grow as the input size grows.  It focuses on the dominant factors and ignores constant factors, making it a high-level representation of scalability.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases with the input size (number of elements, size of data structure, etc.).
+* **Space Complexity:** How the memory usage of an algorithm increases with the input size.
+
+**Key Concepts:**
+
+* **Input Size (n):**  Usually represented by 'n', this refers to the size of the input data the algorithm operates on.  For example, the number of items in an array, the number of nodes in a graph, or the length of a string.
+
+* **Growth Rate:** Big O notation describes the *rate* at which the runtime or space requirements grow, not the exact runtime or space usage.  It's about the trend as `n` becomes very large.
+
+* **Ignoring Constant Factors:**  Big O notation ignores constant factors.  For example, an algorithm with a runtime of 5n and an algorithm with a runtime of 10n are both considered O(n) because the linear growth is what matters most.
+
+* **Ignoring Lower-Order Terms:**  Big O notation ignores lower-order terms.  For example, an algorithm with a runtime of n² + n is considered O(n²) because the n² term dominates as n gets large.
+
+**Common Big O Notations and Their Meanings:**
+
+| Notation | Description                                      | Example                               |
+|----------|--------------------------------------------------|---------------------------------------|
+| O(1)     | Constant time. Runtime doesn't depend on input size. | Accessing an element in an array by index. |
+| O(log n) | Logarithmic time. Runtime increases logarithmically with input size. | Binary search in a sorted array.     |
+| O(n)     | Linear time. Runtime increases linearly with input size. | Linear search in an unsorted array.    |
+| O(n log n)| Linearithmic time.  Common in efficient sorting algorithms. | Merge sort, heap sort.              |
+| O(n²)    | Quadratic time. Runtime increases quadratically with input size. | Nested loops iterating over the input. |
+| O(2ⁿ)    | Exponential time. Runtime doubles with each addition to the input size. | Finding all subsets of a set.       |
+| O(n!)    | Factorial time. Runtime grows factorially with input size. | Generating all permutations of a set. |
+
+
+**Example:**
+
+Consider a function that searches for a specific element in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The runtime of this function is directly proportional to the size of the array. If the array has `n` elements, the function might have to check all `n` elements in the worst case. Therefore, its time complexity is O(n).
+
+
+**Why Big O Matters:**
+
+* **Algorithm Comparison:** Allows comparing the efficiency of different algorithms regardless of specific hardware or implementation details.
+* **Scalability Prediction:** Helps predict how an algorithm will perform with larger datasets.
+* **Optimization:** Guides the selection and optimization of algorithms for specific applications.
+
+
+**Beyond Big O:**
+
+While Big O notation focuses on the worst-case scenario, other notations exist to describe average-case (Θ, theta) and best-case (Ω, omega) complexities.  Understanding these provides a more complete picture of an algorithm's performance characteristics.
+
