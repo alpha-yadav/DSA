@@ -429,3 +429,71 @@ print(longest_palindrome("babad")) # Output: bab or aba (depending on implementa
 
 These examples demonstrate different levels of complexity and require different algorithmic approaches.  Remember that algorithmic problem-solving involves not just finding a solution, but finding an *efficient* solution.  The efficiency is often measured in terms of time and space complexity (Big O notation).
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple version and then showing improvements:
+
+**Version 1: Basic Implementation**
+
+This version directly translates the FizzBuzz rules into code using `if`, `else if`, and `else`:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This works correctly but can be slightly improved for readability and efficiency.
+
+**Version 2: Improved Readability**
+
+This version uses a more concise `if` statement structure and avoids redundant checks:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function to test
+```
+
+This version is more efficient because it doesn't need nested `if/else if` checks. It builds the output string and prints either the number or the combined "Fizz" and/or "Buzz" string.
+
+
+**Version 3:  Using a Ternary Operator (More Concise but potentially less readable for beginners)**
+
+This version uses a ternary operator for even more compactness, but it might be less readable for those new to Swift:
+
+```swift
+func fizzBuzzTernary(n: Int) {
+    for i in 1...n {
+        print((i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i))
+    }
+}
+
+fizzBuzzTernary(n: 15) // Call the function to test
+
+```
+
+While concise, the nested ternary operators can become hard to read as the logic grows.  Version 2 offers a good balance of readability and efficiency.
+
+**Choosing the Right Version:**
+
+For beginners, **Version 1 or Version 2** are recommended for their clarity.  Version 2 is generally preferred for its efficiency and slightly better readability.  Version 3 is suitable for experienced developers who prioritize conciseness.  Remember that the most important aspect is choosing a solution you understand well and can maintain easily.
+
