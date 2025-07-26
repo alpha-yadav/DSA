@@ -2376,3 +2376,93 @@ postorder(root) # Output: D E B F C A
 
 These traversals are fundamental to many tree algorithms and have applications in various areas like expression evaluation, code generation, and database indexing.  The choice of traversal depends on the specific task. For example, inorder traversal is often used to get a sorted sequence of elements from a binary search tree.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This approach recursively traverses the tree.  If a node is found to contain both `p` and `q` in its left and/or right subtrees, that node is the LCA.  If one node is found in the left subtree and the other in the right subtree, the current node is the LCA.  If both nodes are on the same side, continue the search recursively on that side.
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(self, root, p, q):
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, we might traverse the entire tree.
+   * **Space Complexity:** O(H), where H is the height of the tree.  This is due to the recursive call stack.  In the worst case (a skewed tree), H could be N.
+
+
+2. **Iterative Approach (Using a Stack):**
+
+   This approach uses a stack to simulate the recursion, avoiding the potential stack overflow issues of deep recursive calls.
+
+   ```python
+   def lowestCommonAncestorIterative(self, root, p, q):
+       stack = [root]
+       parent = {root: None} #Store parent-child relationships
+
+       while p not in parent or q not in parent:
+           node = stack.pop()
+           if node.left:
+               parent[node.left] = node
+               stack.append(node.left)
+           if node.right:
+               parent[node.right] = node
+               stack.append(node.right)
+
+       ancestors = set()
+       while p:
+           ancestors.add(p)
+           p = parent[p]
+       while q:
+           if q in ancestors:
+               return q
+           q = parent[q]
+       return root #should not reach here if p and q are in the tree
+
+   ```
+
+   * **Time Complexity:** O(N)
+   * **Space Complexity:** O(N)  in the worst case (a skewed tree), the stack and `parent` dictionary could store all nodes.
+
+
+3. **Using a Parent Pointer:** (Requires pre-processing)
+
+   If you can modify the tree structure to add parent pointers to each node (during a pre-order or post-order traversal), finding the LCA becomes much more efficient.  You can then trace upwards from both `p` and `q` until you find a common ancestor.
+
+
+**Choosing the Best Method:**
+
+* The **recursive approach** is generally preferred for its simplicity and readability.  Unless you are dealing with extremely deep trees where stack overflow is a concern, it's a good choice.
+* The **iterative approach** offers a more robust solution for very deep trees, avoiding potential stack overflow errors.
+* The **parent pointer approach** is the most efficient if you have the luxury of modifying the tree structure beforehand.  It offers O(H) time complexity where H is the tree height.
+
+
+Remember to handle edge cases, such as:
+
+* `p` or `q` not being present in the tree.
+* `p` or `q` being the root node.
+* `p` and `q` being the same node.
+
+
+The provided Python code includes the recursive and iterative solutions. Choose the one that best suits your needs and constraints.  Remember to adapt it based on your specific `TreeNode` class definition.
+
