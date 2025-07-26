@@ -3349,3 +3349,56 @@ When tackling a problem, break it down into smaller, manageable steps. This will
 
 By following these steps and dedicating time to learning and practice, you'll build a strong foundation in algorithms and data structures.  Remember, it's a journey, not a race. Be patient with yourself and celebrate your progress along the way.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Reverse a String
+
+**Description:** Given a string, write an algorithm to reverse it.
+
+**Example:**
+
+Input: "hello"
+Output: "olleh"
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Description:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+**Example:**
+
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Description:** Given a string `s`, find the longest palindromic substring in `s`.
+
+**Example:**
+
+Input: s = "babad"
+Output: "bab"
+Explanation: "aba" is also a valid answer.
+
+
+**Bonus -  Graph Algorithm:**
+
+**Problem:**  Find the shortest path between two nodes in a graph using Breadth-First Search (BFS).
+
+**Description:** Given a graph represented as an adjacency list (or matrix), and two nodes (source and destination), find the shortest path between them.
+
+
+These problems showcase different aspects of algorithm design. The "Reverse a String" problem focuses on string manipulation, "Two Sum" on array traversal and searching, "Longest Palindromic Substring" on dynamic programming or string manipulation techniques, and the graph problem introduces graph traversal algorithms.  Remember to consider time and space complexity when designing your solutions.
+
