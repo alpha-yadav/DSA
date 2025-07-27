@@ -6210,3 +6210,13 @@ This technique uses a pre-processing step to create a table that allows for very
 
 Remember to handle edge cases such as one or both nodes not being present in the tree.  The code examples above provide a basic framework;  you might need to adapt them depending on your specific tree structure and requirements.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **A set of points (x, y):**  For example, {(1,2), (3,4), (5,6)}
+* **An equation:** For example, y = x^2,  y = sin(x), y = 2x + 1
+* **A table of values:**  A table with x and y columns.
+
+
+Once you give me the data, I can tell you how to graph it, or, if you'd like, I can describe the graph's characteristics.  I can't create a visual graph myself, as I'm a text-based AI.
+
