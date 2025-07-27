@@ -4162,3 +4162,62 @@ fizzBuzzReadable(n: 15)
 
 This last approach is often considered the most readable and maintainable, especially as the complexity of the problem increases.  Choose the method that best suits your understanding and coding style.  Remember to compile and run the code in a Swift environment (like Xcode's playground or a terminal with Swift installed) to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (like time and memory) an algorithm consumes as the input size grows.  It's a crucial aspect of algorithm analysis, helping us understand how efficiently an algorithm performs and how well it scales with larger datasets.  We typically express complexity using Big O notation.
+
+Here's a breakdown of key concepts:
+
+**1. Time Complexity:**  Measures how the runtime of an algorithm grows as the input size increases.
+
+* **Big O Notation (O):**  Describes the upper bound of the growth rate.  It focuses on the dominant operations as the input size becomes very large, ignoring constant factors and lower-order terms.  Common time complexities include:
+
+    * **O(1) - Constant Time:**  The runtime remains the same regardless of input size (e.g., accessing an element in an array by index).
+    * **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size (e.g., binary search).  Very efficient.
+    * **O(n) - Linear Time:** The runtime increases linearly with the input size (e.g., searching an unsorted array).
+    * **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+    * **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size (e.g., nested loops iterating through the entire input).  Can become slow for large inputs.
+    * **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size (e.g., finding all subsets of a set).  Becomes impractical for even moderately sized inputs.
+    * **O(n!) - Factorial Time:** The runtime grows factorially with the input size (e.g., traveling salesman problem using brute force). Extremely slow for even small inputs.
+
+
+**2. Space Complexity:** Measures how the memory usage of an algorithm grows as the input size increases.  Similar Big O notation is used.
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of input size.
+* **O(n) - Linear Space:** The memory usage increases linearly with the input size (e.g., creating a copy of an array).
+* **O(log n) - Logarithmic Space:** Memory usage increases logarithmically.
+* **O(n²) - Quadratic Space:** Memory usage increases quadratically.  And so on...
+
+
+**3. Best, Average, and Worst Case:**  These terms describe the runtime or space usage under different input scenarios:
+
+* **Best Case:** The most favorable input that leads to the fastest execution.
+* **Average Case:** The expected runtime or space usage over many different inputs.  Often difficult to calculate precisely.
+* **Worst Case:** The least favorable input that leads to the slowest execution.  Often used for guaranteed performance bounds.
+
+
+**Example:**
+
+Consider searching for an element in an array:
+
+* **Unsorted array:**
+    * **Best Case:** O(1) (element is the first one)
+    * **Average Case:** O(n) (element is somewhere in the middle)
+    * **Worst Case:** O(n) (element is the last one or not present)
+* **Sorted array (using binary search):**
+    * **Best Case:** O(1) (element is the middle one)
+    * **Average Case:** O(log n)
+    * **Worst Case:** O(log n)
+
+
+**Choosing an Algorithm:**
+
+When choosing an algorithm, consider:
+
+* **Input size:** How large will the input data be?
+* **Time constraints:** How quickly does the algorithm need to run?
+* **Memory constraints:** How much memory is available?
+* **Readability and maintainability:**  A slightly less efficient but more understandable algorithm might be preferable in some cases.
+
+
+Understanding algorithm complexity is crucial for writing efficient and scalable software.  By analyzing the complexity of different algorithms, you can make informed decisions about which algorithm to use for a given task.
+
