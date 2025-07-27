@@ -4479,3 +4479,81 @@ These examples all do the same thing: they print the numbers 0 through 4 to the 
 
 Remember to choose the loop type that best suits your needs.  `While` loops are good for situations where the number of iterations isn't known in advance, while `for` loops are better when you know how many times you need to loop.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a pattern where the inner loop's actions are repeated multiple times based on the outer loop's control.
+
+Here's a breakdown:
+
+**Structure:**
+
+```java
+for (int i = 0; i < outerLoopCount; i++) { // Outer loop
+    for (int j = 0; j < innerLoopCount; j++) { // Inner loop
+        // Code to be executed repeatedly
+    }
+}
+```
+
+This structure can be adapted to use `while` loops as well.
+
+
+**Example (Java):**
+
+This example prints a multiplication table:
+
+```java
+public class NestedLoopExample {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 10; i++) { // Outer loop iterates through rows (1 to 10)
+            for (int j = 1; j <= 10; j++) { // Inner loop iterates through columns (1 to 10)
+                System.out.print(i * j + "\t"); // Print the product, tab-separated
+            }
+            System.out.println(); // Newline after each row
+        }
+    }
+}
+```
+
+This will output a 10x10 multiplication table.  The outer loop controls the rows, and the inner loop controls the columns.  For each row (outer loop iteration), the inner loop runs 10 times to calculate and print the products for that row.
+
+**Example (Python):**
+
+This example prints a right-angled triangle of asterisks:
+
+```python
+rows = 5
+for i in range(1, rows + 1):  # Outer loop controls the number of rows
+    for j in range(1, i + 1):  # Inner loop controls the number of asterisks in each row
+        print("*", end="")
+    print()  # Newline after each row
+```
+
+This will output:
+
+```
+*
+**
+***
+****
+*****
+```
+
+
+**Use Cases:**
+
+Nested loops are used extensively in various programming tasks, including:
+
+* **Matrix operations:** Processing two-dimensional arrays (matrices).
+* **Generating patterns:** Creating visual patterns like the asterisk triangle above.
+* **Iterating through combinations:**  Finding all possible pairs or combinations of elements from multiple sets.
+* **Searching and sorting algorithms:**  Some algorithms use nested loops for their core logic.
+
+
+**Important Considerations:**
+
+* **Complexity:**  Nested loops can lead to increased time complexity (e.g., O(n^2) for two nested loops).  Be mindful of performance implications, especially when dealing with large datasets.
+* **Readability:**  Deeply nested loops can make code harder to read and understand.  Strive for clarity and consider breaking down complex logic into smaller, more manageable functions.
+
+
+In essence, nested loops are a powerful tool for handling repetitive tasks involving multiple levels of iteration.  Understanding their structure and potential performance implications is crucial for effective programming.
+
