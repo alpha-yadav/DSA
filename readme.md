@@ -6729,3 +6729,49 @@ int main() {
 
 Both examples demonstrate how to implement the algorithm.  Remember to adapt the graph representation (adjacency list, adjacency matrix) as needed for your specific application.  The time complexity is O(V+E), where V is the number of vertices and E is the number of edges.  The space complexity is O(V) due to the `visited` and `recursionStack` arrays.
 
+#  Thorup's algorithm 
+Thorup's algorithm is a groundbreaking algorithm for finding minimum spanning trees (MSTs) in undirected graphs.  It's notable for its exceptionally fast running time, achieving near-linear complexity.  Unlike many other MST algorithms (like Prim's or Kruskal's), it doesn't rely on sorting the edges.  Instead, it leverages sophisticated techniques from graph theory and randomized algorithms.
+
+Here's a breakdown of its key aspects:
+
+**Core Idea:** Thorup's algorithm cleverly uses a combination of techniques to achieve its speed.  At a high level, it works by:
+
+1. **Partitioning the graph:** The algorithm partitions the graph into smaller clusters using a randomized approach. This partitioning is crucial for efficiency.
+
+2. **Finding MSTs within clusters:**  It then finds MSTs within each of these clusters.  This step is relatively fast because the clusters are small.
+
+3. **Connecting the clusters:**  The algorithm cleverly identifies the "connector edges" – edges that connect different clusters – and uses these to build the MST of the entire graph.  The key here is that it doesn't need to explicitly consider *all* inter-cluster edges, significantly reducing the computational burden.
+
+4. **Randomized Contraction:**  The algorithm uses a randomized contraction technique to achieve its near-linear time complexity.  This randomization introduces a small probability of error, but the error probability can be made arbitrarily small.
+
+**Time Complexity:**
+
+The key achievement of Thorup's algorithm is its near-linear time complexity.  Specifically, it runs in time *O(m α(m, n))*, where:
+
+* `m` is the number of edges in the graph.
+* `n` is the number of vertices in the graph.
+* `α(m, n)` is the inverse Ackermann function, which grows incredibly slowly.  For all practical purposes, α(m, n) can be considered a constant.
+
+This makes the algorithm essentially linear in the size of the input graph, a significant improvement over the *O(m log log n)* complexity of other advanced MST algorithms.
+
+**Comparison to other MST algorithms:**
+
+| Algorithm        | Time Complexity         | Notes                                      |
+|-----------------|--------------------------|------------------------------------------|
+| Prim's           | O(E log V)              | Uses a priority queue                     |
+| Kruskal's        | O(E log E)              | Uses a disjoint-set data structure        |
+| Borůvka's        | O(E log V)              | Simple, iterative algorithm              |
+| Karger-Klein-Tarjan | O(m log log n)      | Randomized, improves on Borůvka's          |
+| Thorup's        | O(m α(m, n)) ≈ O(m)     | Randomized, near-linear time complexity |
+
+
+**Limitations:**
+
+* **Randomized:**  The algorithm is randomized, meaning its running time is not guaranteed in the worst case, but the probability of exceeding the expected running time is extremely small.
+* **Complexity:** While near-linear, the constant factor hidden within the big O notation can still be significant, making it potentially slower than other algorithms for very small graphs.  The algorithm's implementation is complex.
+
+
+**In Summary:**
+
+Thorup's algorithm represents a significant theoretical advance in MST algorithms.  Its near-linear time complexity is remarkable, though the practical advantages may not always outweigh the complexity of implementation for graphs of modest size.  It's a testament to the power of combining sophisticated graph partitioning, randomized techniques, and careful algorithmic design.
+
