@@ -5540,3 +5540,112 @@ print(f"Is root3 a BST? {is_bst_recursive(root3)}")  # Output: True
 
 Both methods achieve the same result. The recursive approach is generally considered more efficient because it avoids the creation of an extra array.  The inorder traversal approach is easier to understand for beginners. Choose the method that best suits your needs and understanding. Remember to define the `TreeNode` class as shown in the examples.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Inorder Traversal and Sorted Array Check**
+
+This method leverages the property that an inorder traversal of a BST produces a sorted array.
+
+1. **Inorder Traversal:** Perform an inorder traversal of the binary tree.  Store the visited nodes' values in an array.
+
+2. **Sorted Array Check:** Check if the array produced in step 1 is sorted in ascending order.  If it is, the tree is a BST; otherwise, it's not.
+
+```python
+def is_bst_inorder(root):
+    """
+    Checks if a binary tree is a BST using inorder traversal.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    if root is None:
+        return True
+
+    result = []
+    inorder_traversal(root, result)
+
+    # Check if the inorder traversal is sorted
+    for i in range(1, len(result)):
+        if result[i] < result[i - 1]:
+            return False
+    return True
+
+
+def inorder_traversal(node, result):
+    """Performs an inorder traversal and appends values to the result list."""
+    if node:
+        inorder_traversal(node.left, result)
+        result.append(node.val)
+        inorder_traversal(node.right, result)
+
+# Example usage (assuming you have a Node class with val, left, and right attributes):
+# root = Node(5)
+# root.left = Node(3)
+# root.right = Node(7)
+# root.left.left = Node(1)
+# root.left.right = Node(4)
+
+# print(is_bst_inorder(root)) # Output: True (if the example tree is correctly built)
+
+```
+
+**Method 2: Recursive Check with Min and Max Values**
+
+This method recursively checks each subtree, ensuring that all nodes in the left subtree are less than the current node, and all nodes in the right subtree are greater than the current node.
+
+```python
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using a recursive approach.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    return check_bst(root, float('-inf'), float('inf'))
+
+
+def check_bst(node, min_val, max_val):
+    """Recursive helper function."""
+    if node is None:
+        return True
+    
+    if not (min_val < node.val < max_val):
+        return False
+
+    return (check_bst(node.left, min_val, node.val) and
+            check_bst(node.right, node.val, max_val))
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(is_bst_recursive(root)) # Output: True (if the example tree is correctly built)
+
+
+root2 = Node(5)
+root2.left = Node(7) # This will make it not a BST
+root2.right = Node(3)
+
+print(is_bst_recursive(root2)) # Output: False
+```
+
+**Which Method to Choose?**
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is also O(N) in the worst case for the inorder traversal method (due to the array) and O(H) in the worst case for the recursive method (due to the recursion depth, where H is the height of the tree).  The recursive method generally uses less space in practice, especially for balanced trees, making it a slightly preferred choice.  However, the inorder traversal approach is also perfectly valid and can be easier to understand for some.  Choose the method that you find more readable and maintainable.
+
