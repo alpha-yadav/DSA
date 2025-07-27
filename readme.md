@@ -6505,3 +6505,84 @@ public class Graph {
 
 Remember to adapt these examples for weighted graphs (by storing weights alongside vertices) and undirected graphs (by adding edges in both directions).  The choice of data structure for the adjacency lists (e.g., `list`, `ArrayList`, `vector`) will depend on the programming language and specific needs.  For very large graphs, you might consider more advanced data structures to optimize performance further.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's a way to arrange the nodes so you can follow the arrows without ever going backward.  If a graph contains cycles, a topological sort is impossible.
+
+**Key Properties:**
+
+* **Directed Acyclic Graph (DAG):** Topological sorting only works on DAGs.  A cycle would create a contradiction, as you'd need to place a node both before and after another node in the ordering.
+* **Linear Ordering:** The result is a sequence of nodes, not a tree or other complex structure.
+* **Preservation of Dependencies:** The order respects the dependencies defined by the edges.  If A depends on B (an edge goes from B to A), B will always appear before A in the topological sort.
+* **Multiple Possible Solutions:**  For many DAGs, multiple valid topological orderings exist.
+
+**Algorithms:**
+
+Two common algorithms are used for topological sorting:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue to process nodes with no incoming edges.
+
+   * **Initialization:**
+     * Calculate the in-degree (number of incoming edges) for each node.
+     * Add all nodes with an in-degree of 0 to a queue.
+   * **Iteration:**
+     * While the queue is not empty:
+       * Remove a node `u` from the queue.
+       * Add `u` to the topological ordering.
+       * For each neighbor `v` of `u`:
+         * Decrement the in-degree of `v`.
+         * If the in-degree of `v` becomes 0, add `v` to the queue.
+   * **Cycle Detection:** If the number of nodes in the final topological ordering is less than the total number of nodes in the graph, the graph contains a cycle.
+
+
+2. **Depth-First Search (DFS):**
+
+   This algorithm uses DFS to recursively explore the graph.  It adds nodes to the topological ordering in reverse post-order (when the DFS finishes exploring a node and its descendants).
+
+   * **Initialization:**
+     * Mark all nodes as unvisited.
+   * **Recursive DFS:**
+     * For each unvisited node `u`:
+       * Recursively call DFS on all unvisited neighbors of `u`.
+       * Mark `u` as visited.
+       * Add `u` to the beginning of the topological ordering (this is the reverse post-order).
+
+
+**Example (Kahn's Algorithm):**
+
+Consider a graph with nodes A, B, C, D, and E, and edges:
+
+* A -> C
+* B -> C
+* B -> D
+* C -> E
+* D -> E
+
+1. **In-degrees:** A=0, B=0, C=2, D=1, E=2
+2. **Queue:** [A, B]
+3. **Iteration:**
+   * Remove A: Ordering = [A], In-degrees: C=1, D=1, E=2
+   * Remove B: Ordering = [A, B], In-degrees: C=1, D=0, E=2
+   * Add D to queue: Queue = [D, C]
+   * Remove D: Ordering = [A, B, D], In-degrees: C=1, E=1
+   * Add C to queue: Queue = [C]
+   * Remove C: Ordering = [A, B, D, C], In-degrees: E=0
+   * Add E to queue: Queue = [E]
+   * Remove E: Ordering = [A, B, D, C, E]
+
+The topological ordering is [A, B, D, C, E].
+
+
+**Applications:**
+
+Topological sorting has numerous applications in various fields, including:
+
+* **Course Scheduling:** Ordering courses based on prerequisites.
+* **Software Build Systems (Makefiles):** Determining the order to compile files.
+* **Data Serialization:**  Determining the order to write data elements.
+* **Dependency Resolution:** Resolving dependencies between software packages.
+
+
+Choosing between Kahn's algorithm and DFS depends on the specific application and data structures used.  Kahn's algorithm is often considered more efficient for large graphs because it avoids the overhead of recursion.  However, DFS can be simpler to implement in some cases.
+
