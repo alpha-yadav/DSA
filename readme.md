@@ -6586,3 +6586,146 @@ Topological sorting has numerous applications in various fields, including:
 
 Choosing between Kahn's algorithm and DFS depends on the specific application and data structures used.  Kahn's algorithm is often considered more efficient for large graphs because it avoids the overhead of recursion.  However, DFS can be simpler to implement in some cases.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on maintaining state information during the traversal.  We use a `visited` array to track visited nodes and a `recursionStack` array to track nodes currently in the recursion stack (nodes being visited in the current DFT branch).  A cycle exists if we encounter a node that's already in the `recursionStack`.
+
+Here's how it works, along with code examples in Python and C++:
+
+**Algorithm:**
+
+1. **Initialization:** Create a `visited` array and a `recursionStack` array, both initialized to `False` for all nodes.
+
+2. **DFT Function:**  For each node in the graph:
+   - If the node is not visited:
+     - Mark the node as visited (`visited[node] = True`).
+     - Add the node to the `recursionStack` (`recursionStack[node] = True`).
+     - Recursively call the DFT function for all neighbors of the node.
+     - After the recursive calls for all neighbors complete, remove the node from the `recursionStack` (`recursionStack[node] = False`).
+   - If the node is already in `recursionStack`, a cycle is detected.  Return `True`.
+
+3. **Cycle Detection:** If the DFT completes without finding a node already in `recursionStack`, there's no cycle. Return `False`.
+
+**Python Code:**
+
+```python
+from collections import defaultdict
+
+class Graph:
+    def __init__(self, vertices):
+        self.graph = defaultdict(list)
+        self.V = vertices
+
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+
+    def isCyclicUtil(self, v, visited, recStack):
+        visited[v] = True
+        recStack[v] = True
+
+        for neighbour in self.graph[v]:
+            if not visited[neighbour]:
+                if self.isCyclicUtil(neighbour, visited, recStack):
+                    return True
+            elif recStack[neighbour]:
+                return True
+
+        recStack[v] = False
+        return False
+
+    def isCyclic(self):
+        visited = [False] * self.V
+        recStack = [False] * self.V
+        for node in range(self.V):
+            if not visited[node]:
+                if self.isCyclicUtil(node, visited, recStack):
+                    return True
+        return False
+
+# Example usage:
+g = Graph(4)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(1, 2)
+g.add_edge(2, 0)
+g.add_edge(2, 3)
+g.add_edge(3, 3)
+
+
+if g.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+```
+
+**C++ Code:**
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Graph {
+public:
+    int V;
+    vector<vector<int>> adj;
+
+    Graph(int V) {
+        this->V = V;
+        adj.resize(V);
+    }
+
+    void addEdge(int u, int v) {
+        adj[u].push_back(v);
+    }
+
+    bool isCyclicUtil(int v, vector<bool>& visited, vector<bool>& recStack) {
+        visited[v] = true;
+        recStack[v] = true;
+
+        for (int neighbor : adj[v]) {
+            if (!visited[neighbor]) {
+                if (isCyclicUtil(neighbor, visited, recStack))
+                    return true;
+            } else if (recStack[neighbor]) {
+                return true;
+            }
+        }
+
+        recStack[v] = false;
+        return false;
+    }
+
+    bool isCyclic() {
+        vector<bool> visited(V, false);
+        vector<bool> recStack(V, false);
+        for (int i = 0; i < V; i++) {
+            if (!visited[i]) {
+                if (isCyclicUtil(i, visited, recStack))
+                    return true;
+            }
+        }
+        return false;
+    }
+};
+
+int main() {
+    Graph g(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
+
+    if (g.isCyclic())
+        cout << "Graph contains cycle" << endl;
+    else
+        cout << "Graph does not contain cycle" << endl;
+
+    return 0;
+}
+```
+
+Both examples demonstrate how to implement the algorithm.  Remember to adapt the graph representation (adjacency list, adjacency matrix) as needed for your specific application.  The time complexity is O(V+E), where V is the number of vertices and E is the number of edges.  The space complexity is O(V) due to the `visited` and `recursionStack` arrays.
+
