@@ -4090,3 +4090,75 @@ print(f"The maximum value is: {max_value}")
 
 These examples illustrate the variety of algorithmic problems.  The difficulty scales with the complexity of the data structures involved, the required algorithms, and the efficiency needed for large inputs.  Remember that a good algorithmic solution focuses not only on correctness but also on efficiency (time and space complexity).
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It prints numbers from 1 to a given number, but with these modifications:
+
+* If the number is divisible by 3, print "Fizz" instead of the number.
+* If the number is divisible by 5, print "Buzz" instead of the number.
+* If the number is divisible by both 3 and 5 (i.e., divisible by 15), print "FizzBuzz" instead of the number.
+
+
+Here are a few ways to implement FizzBuzz in Swift, starting with a simple and straightforward approach, and then showing a slightly more concise version:
+
+
+**Method 1: Simple and Readable**
+
+This method uses a series of `if-else if-else` statements for clarity:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+
+**Method 2:  More Concise using the Ternary Operator**
+
+This version uses nested ternary operators to achieve a more compact solution.  While shorter, it can be slightly less readable for beginners:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print(i % 15 == 0 ? "FizzBuzz" : (i % 3 == 0 ? "Fizz" : (i % 5 == 0 ? "Buzz" : "\(i)")))
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function
+```
+
+
+**Method 3:  Using String Interpolation and a Helper Function (for better readability)**
+
+This example breaks down the logic into smaller, more manageable chunks using a helper function and string interpolation:
+
+```swift
+func fizzBuzzHelper(number: Int) -> String {
+    var output = ""
+    if number % 3 == 0 { output += "Fizz" }
+    if number % 5 == 0 { output += "Buzz" }
+    return output.isEmpty ? "\(number)" : output
+}
+
+func fizzBuzzReadable(n: Int) {
+    for i in 1...n {
+        print(fizzBuzzHelper(number: i))
+    }
+}
+
+fizzBuzzReadable(n: 15)
+```
+
+This last approach is often considered the most readable and maintainable, especially as the complexity of the problem increases.  Choose the method that best suits your understanding and coding style.  Remember to compile and run the code in a Swift environment (like Xcode's playground or a terminal with Swift installed) to see the output.
+
