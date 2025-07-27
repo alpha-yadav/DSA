@@ -5649,3 +5649,95 @@ print(is_bst_recursive(root2)) # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is also O(N) in the worst case for the inorder traversal method (due to the array) and O(H) in the worst case for the recursive method (due to the recursion depth, where H is the height of the tree).  The recursive method generally uses less space in practice, especially for balanced trees, making it a slightly preferred choice.  However, the inorder traversal approach is also perfectly valid and can be easier to understand for some.  Choose the method that you find more readable and maintainable.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property. Here's a breakdown of common methods, with explanations and code examples (in Python):
+
+**Understanding the BST Property**
+
+A Binary Search Tree adheres to these rules:
+
+*   **Left Subtree Property:** All nodes in the left subtree of a node have keys less than the node's key.
+*   **Right Subtree Property:** All nodes in the right subtree of a node have keys greater than the node's key.
+*   **No Duplicates:**  (Conventionally) BSTs don't allow duplicate keys.  How you handle duplicates depends on your specific needs; you might throw an error, allow duplicates on one side (e.g., only on the right), or use a different data structure.
+
+
+**Method 1: Recursive In-order Traversal**
+
+The most elegant and efficient approach involves an in-order traversal.  A correctly ordered BST will produce a sorted sequence of nodes when traversed in-order.
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """Recursively checks if a tree is a BST using in-order traversal."""
+    inorder_list = []
+    def inorder(n):
+        if n:
+            inorder(n.left)
+            inorder_list.append(n.key)
+            inorder(n.right)
+    inorder(node)
+
+    # Check if the inorder list is sorted (handles duplicates)
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+
+#Example Usage
+root = Node(8)
+root.left = Node(3)
+root.right = Node(10)
+root.left.left = Node(1)
+root.left.right = Node(6)
+root.right.right = Node(14)
+
+print(f"Is the tree a BST (recursive)? {is_bst_recursive(root)}") #True
+
+
+root2 = Node(8)
+root2.left = Node(10) #Violation
+root2.right = Node(3) #Violation
+
+print(f"Is the tree a BST (recursive)? {is_bst_recursive(root2)}") #False
+```
+
+
+**Method 2: Recursive Check with Min and Max**
+
+This approach recursively checks each node against minimum and maximum allowed values for its subtree.
+
+```python
+import sys
+
+def is_bst_recursive_minmax(node, min_val=-sys.maxsize, max_val=sys.maxsize):
+  """Recursively checks if a tree is a BST using min/max bounds."""
+  if not node:
+    return True
+
+  if not (min_val < node.key < max_val):  #Check if node key is within bounds
+    return False
+
+  return (is_bst_recursive_minmax(node.left, min_val, node.key) and
+          is_bst_recursive_minmax(node.right, node.key, max_val))
+
+#Example Usage (same root and root2 as above)
+print(f"Is the tree a BST (recursive min/max)? {is_bst_recursive_minmax(root)}") #True
+print(f"Is the tree a BST (recursive min/max)? {is_bst_recursive_minmax(root2)}") #False
+
+```
+
+
+**Choosing a Method**
+
+*   **Recursive In-order Traversal:** Generally preferred for its simplicity and efficiency (O(N) time complexity, where N is the number of nodes).  Handles duplicates by simply checking for a sorted sequence.
+
+*   **Recursive Min/Max:**  Offers a slightly different perspective, explicitly enforcing the min/max constraints at each node.  Its time complexity is also O(N).  Might be slightly less efficient in practice due to the additional comparisons.
+
+Both methods provide a robust way to verify if a tree is a valid Binary Search Tree.  Choose the method that best suits your coding style and understanding.  Remember to handle potential edge cases like empty trees appropriately.
+
