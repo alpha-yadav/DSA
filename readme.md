@@ -4583,3 +4583,45 @@ The common thread among these algorithms is the ability to repeatedly halve (or 
 
 **Important Note:**  The O(log n) complexity usually refers to the *best-case* or *average-case* scenario.  In some algorithms (like Quickselect), worst-case scenarios can lead to linear O(n) time complexity.  Always consider the best, average, and worst-case complexities when analyzing an algorithm.
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a target value within a *sorted* array.  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process is repeated until the target value is found or the search interval is empty.
+
+**Why it's O(log n):**
+
+Each step of binary search effectively halves the size of the search space.  Let's say you start with 'n' elements. After one step, you have n/2 elements. After two steps, you have n/4. After three steps, n/8, and so on.  This continues until the search space is reduced to a single element or the target is found.
+
+The number of times you can divide 'n' by 2 before reaching 1 is approximately log₂(n) (logarithm base 2 of n).  Therefore, the number of steps in binary search is proportional to log₂(n), making its time complexity O(log n).
+
+**Example in Python:**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the upper half
+        else:
+            high = mid - 1  # Search in the lower half
+    return -1  # Target not found
+
+
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+```
+
+This Python code implements binary search.  Notice how the `while` loop continues until the `low` index surpasses the `high` index, effectively halving the search space with each iteration.  This characteristic directly leads to the O(log n) time complexity.  Other algorithms, such as finding a node in a balanced binary search tree, also exhibit this logarithmic behavior.
+
