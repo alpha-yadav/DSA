@@ -6308,3 +6308,59 @@ for row in graph:
 
 In most cases, especially for large or sparse graphs, adjacency *lists* are a more efficient way to represent graphs.  Choose the representation that best suits your specific needs and the characteristics of the graphs you'll be working with.
 
+#  Introduction To Graph Theory 
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph consists of *vertices* (also called nodes or points) and *edges* (also called lines or arcs) that connect pairs of vertices.  Think of it like a network or a map.  Vertices represent objects, and edges represent the relationships between them.
+
+Here's a breakdown of key introductory concepts:
+
+**1. Basic Definitions:**
+
+* **Graph:**  A set of vertices (V) and a set of edges (E), often denoted as G = (V, E).
+* **Vertex (Node):** A point or element in the graph.
+* **Edge (Line, Arc):** A connection between two vertices.  Edges can be:
+    * **Directed:**  The connection has a direction (like a one-way street).  These graphs are called *directed graphs* or *digraphs*.  The edge is represented as an ordered pair (u, v), where u is the source and v is the destination.
+    * **Undirected:** The connection has no direction (like a two-way street). These graphs are called *undirected graphs*.  The edge is represented as an unordered pair {u, v} or simply uv.
+* **Adjacent Vertices:** Two vertices connected by an edge.
+* **Incident Edge:** An edge is incident to the vertices it connects.
+* **Degree (of a vertex):** In an undirected graph, the number of edges connected to a vertex.  In a directed graph, we have *in-degree* (number of edges pointing to the vertex) and *out-degree* (number of edges pointing away from the vertex).
+* **Path:** A sequence of vertices connected by edges.
+* **Cycle:** A path that starts and ends at the same vertex, with no repeated edges.
+* **Connected Graph:** An undirected graph where there is a path between any two vertices.
+* **Disconnected Graph:** An undirected graph that is not connected.
+* **Complete Graph:** An undirected graph where every pair of distinct vertices is connected by a unique edge.  A complete graph with n vertices is denoted as K<sub>n</sub>.
+* **Subgraph:** A graph whose vertices and edges are subsets of another graph.
+* **Tree:** A connected, undirected graph with no cycles.
+* **Weighted Graph:** A graph where each edge has an associated weight (e.g., distance, cost).
+
+
+**2. Types of Graphs:**
+
+* **Undirected Graphs:**  Edges have no direction.
+* **Directed Graphs (Digraphs):** Edges have a direction.
+* **Weighted Graphs:** Edges have weights associated with them.
+* **Simple Graphs:** Graphs with no loops (edges connecting a vertex to itself) and no multiple edges (more than one edge connecting the same pair of vertices).
+* **Multigraphs:** Graphs that allow multiple edges between the same pair of vertices.
+* **Pseudographs:** Graphs that allow both loops and multiple edges.
+
+
+**3. Representations of Graphs:**
+
+Graphs can be represented in several ways:
+
+* **Adjacency Matrix:** A square matrix where the element (i, j) represents the connection between vertex i and vertex j.  For undirected graphs, it's a symmetric matrix.
+* **Adjacency List:**  A list where each element represents a vertex and contains a list of its adjacent vertices.
+
+
+**4. Applications of Graph Theory:**
+
+Graph theory has a wide range of applications in many fields, including:
+
+* **Computer Science:** Network routing, data structures, algorithms, social networks.
+* **Engineering:**  Network design, transportation systems, circuit design.
+* **Operations Research:** Scheduling, logistics.
+* **Social Sciences:**  Social network analysis.
+* **Biology:**  Molecular biology, phylogenetic trees.
+
+
+This introduction provides a basic overview.  Further study delves into more complex concepts like graph traversals (DFS, BFS), graph algorithms (shortest path, minimum spanning tree), graph coloring, and planarity.
+
