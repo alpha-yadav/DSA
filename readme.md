@@ -6364,3 +6364,144 @@ Graph theory has a wide range of applications in many fields, including:
 
 This introduction provides a basic overview.  Further study delves into more complex concepts like graph traversals (DFS, BFS), graph algorithms (shortest path, minimum spanning tree), graph coloring, and planarity.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and often efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices). Here's a breakdown of how it works, along with examples in various programming languages:
+
+**Concept:**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each index in the array represents a vertex in the graph.  The list at that index contains all the vertices adjacent to (directly connected to) the vertex represented by the index.
+
+**Advantages:**
+
+* **Space Efficiency:** For sparse graphs, adjacency lists use significantly less space than adjacency matrices (which require V² space, where V is the number of vertices).  Only the existing edges are stored.
+* **Faster Edge Existence Check:** Checking if an edge exists between two vertices is generally faster than with an adjacency matrix, especially in sparse graphs.  You only need to search a single linked list.
+* **Faster Traversal:** Algorithms like Breadth-First Search (BFS) and Depth-First Search (DFS) are often more efficient when using an adjacency list representation.
+
+**Disadvantages:**
+
+* **Slower to check all edges:** Checking all edges in the graph is less efficient than with an adjacency matrix, requiring iteration over all adjacency lists.
+* **Less efficient for dense graphs:** For dense graphs (many edges), adjacency matrices can be more efficient due to faster random access.
+
+**Implementation Examples:**
+
+**1. Python:**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.adj_list = [[] for _ in range(num_vertices)]
+
+    def add_edge(self, u, v):
+        self.adj_list[u].append(v)  # Directed graph. For undirected, add self.adj_list[v].append(u)
+        #For weighted graphs, you'd append a tuple (v, weight) instead of just v.
+
+    def print_graph(self):
+        for i in range(self.num_vertices):
+            print(f"Vertex {i}: {self.adj_list[i]}")
+
+
+# Example usage:
+graph = Graph(4)
+graph.add_edge(0, 1)
+graph.add_edge(0, 2)
+graph.add_edge(1, 2)
+graph.add_edge(2, 3)
+
+graph.print_graph()
+# Output:
+# Vertex 0: [1, 2]
+# Vertex 1: [2]
+# Vertex 2: [3]
+# Vertex 3: []
+
+```
+
+**2. C++:**
+
+```c++
+#include <iostream>
+#include <vector>
+#include <list>
+
+using namespace std;
+
+class Graph {
+public:
+    Graph(int num_vertices) : num_vertices(num_vertices), adj_list(num_vertices) {}
+
+    void add_edge(int u, int v) {
+        adj_list[u].push_back(v); //Directed graph. For undirected, add adj_list[v].push_back(u);
+    }
+
+    void print_graph() {
+        for (int i = 0; i < num_vertices; ++i) {
+            cout << "Vertex " << i << ": ";
+            for (int neighbor : adj_list[i]) {
+                cout << neighbor << " ";
+            }
+            cout << endl;
+        }
+    }
+
+private:
+    int num_vertices;
+    vector<list<int>> adj_list;
+};
+
+int main() {
+    Graph graph(4);
+    graph.add_edge(0, 1);
+    graph.add_edge(0, 2);
+    graph.add_edge(1, 2);
+    graph.add_edge(2, 3);
+    graph.print_graph();
+    return 0;
+}
+```
+
+**3. Java:**
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Graph {
+    private int numVertices;
+    private List<List<Integer>> adjList;
+
+    public Graph(int numVertices) {
+        this.numVertices = numVertices;
+        this.adjList = new ArrayList<>(numVertices);
+        for (int i = 0; i < numVertices; i++) {
+            adjList.add(new ArrayList<>());
+        }
+    }
+
+    public void addEdge(int u, int v) {
+        adjList.get(u).add(v); //Directed graph. For undirected, add adjList.get(v).add(u);
+    }
+
+    public void printGraph() {
+        for (int i = 0; i < numVertices; i++) {
+            System.out.print("Vertex " + i + ": ");
+            for (int neighbor : adjList.get(i)) {
+                System.out.print(neighbor + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        Graph graph = new Graph(4);
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(1, 2);
+        graph.addEdge(2, 3);
+        graph.printGraph();
+    }
+}
+```
+
+Remember to adapt these examples for weighted graphs (by storing weights alongside vertices) and undirected graphs (by adding edges in both directions).  The choice of data structure for the adjacency lists (e.g., `list`, `ArrayList`, `vector`) will depend on the programming language and specific needs.  For very large graphs, you might consider more advanced data structures to optimize performance further.
+
