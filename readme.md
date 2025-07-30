@@ -7576,3 +7576,72 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The `for` loop is generally preferred when you know the number of iterations in advance, while the `while` loop is better when the number of iterations depends on a condition that might change during the loop's execution.  Remember to choose the loop type that best suits your needs and always ensure your loop will eventually terminate to avoid infinite loops.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to process data in a multi-dimensional way.  Let's look at examples in a few common programming languages:
+
+**Example 1: Printing a Multiplication Table (Python)**
+
+This example demonstrates a nested loop creating a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+This code will print a 10x10 multiplication table. The outer loop iterates through the rows (1 to 10), and the inner loop iterates through the columns (1 to 10) for each row.
+
+
+**Example 2:  Accessing elements of a 2D array (C++)**
+
+This example shows how to access elements of a 2D array using nested loops:
+
+```c++
+#include <iostream>
+
+int main() {
+  int arr[3][4] = {
+    {1, 2, 3, 4},
+    {5, 6, 7, 8},
+    {9, 10, 11, 12}
+  };
+
+  for (int i = 0; i < 3; i++) { // Outer loop: rows
+    for (int j = 0; j < 4; j++) { // Inner loop: columns
+      std::cout << arr[i][j] << " ";
+    }
+    std::cout << std::endl; // Newline after each row
+  }
+  return 0;
+}
+```
+
+This code iterates through the 2D array `arr`, printing each element.
+
+
+**Example 3:  Nested Loops with a Break Statement (JavaScript)**
+
+This demonstrates using a `break` statement to exit the inner loop prematurely:
+
+```javascript
+for (let i = 1; i <= 3; i++) {
+  for (let j = 1; j <= 3; j++) {
+    console.log(i + " " + j);
+    if (j === 2) {
+      break; // Exits the inner loop when j is 2
+    }
+  }
+}
+```
+
+The inner loop will stop executing when `j` reaches 2, even if `i` hasn't finished iterating.
+
+
+**Time Complexity:**
+
+The time complexity of nested loops depends on the number of iterations of each loop.  If both loops iterate `n` times, the overall time complexity is O(n²).  This is because the inner loop executes `n` times for each iteration of the outer loop.  If the loops have different iteration counts, the complexity will reflect that (e.g., O(m*n) for outer loop iterating `m` times and inner loop iterating `n` times).  Nested loops can significantly increase the runtime of a program, especially for large datasets.
+
+
+Nested loops are a fundamental programming concept used in many algorithms and data structures to process multi-dimensional data or perform iterative tasks requiring multiple levels of iteration.  However, it's crucial to be mindful of their time complexity, as they can lead to performance issues if not implemented carefully.
+
