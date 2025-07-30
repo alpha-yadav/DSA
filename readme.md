@@ -7141,3 +7141,64 @@ These problems represent different aspects of algorithmic thinking:
 
 Choose a problem that matches your current skill level.  Try to solve it yourself first, then look for solutions online if you get stuck.  Understanding the solution is just as important as finding it.  Good luck!
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to get started with it in Swift, progressing from a basic solution to a more refined one:
+
+**Basic Solution:**
+
+This approach uses a simple `for` loop and `if/else if/else` statements to check the divisibility of each number.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+**Explanation:**
+
+* `func fizzBuzz(n: Int)`: Defines a function named `fizzBuzz` that takes an integer `n` as input. This `n` represents the upper limit of the range.
+* `for i in 1...n`:  This loop iterates through numbers from 1 to `n` (inclusive).
+* `if i % 15 == 0`: Checks if the number is divisible by both 3 and 5 (hence divisible by 15). If true, it prints "FizzBuzz".  This check is done *first* to avoid printing "Fizz" or "Buzz" in addition to "FizzBuzz".
+* `else if i % 3 == 0`: Checks if the number is divisible by 3. If true, it prints "Fizz".
+* `else if i % 5 == 0`: Checks if the number is divisible by 5. If true, it prints "Buzz".
+* `else`: If none of the above conditions are met, it prints the number itself.
+
+
+**More Concise Solution (using string interpolation and ternary operator):**
+
+This version is more compact and uses Swift's features to make the code shorter and more readable.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? i : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) //Call the function to test
+```
+
+**Explanation:**
+
+* `var output = ""`: Initializes an empty string to store the output for each number.
+* `output += (i % 3 == 0) ? "Fizz" : ""`: This uses the ternary operator. If `i` is divisible by 3, "Fizz" is appended to `output`; otherwise, nothing is appended.  A similar line handles divisibility by 5 and "Buzz".
+* `print(output.isEmpty ? i : output)`:  This prints either the `output` string (if it's not empty) or the number `i` itself (if `output` is still empty, meaning it's not divisible by 3 or 5).
+
+
+Both versions achieve the same result, but the concise version demonstrates more advanced Swift features.  Choose the version that best suits your understanding and coding style. Remember to compile and run this code in a Swift environment (like Xcode's playground or a Swift REPL).
+
