@@ -7478,3 +7478,101 @@ While Big O is crucial, it's not the whole story.  Other notations like:
 
 are also used to provide a more complete picture of an algorithm's performance.  However, Big O is the most commonly used and often sufficient for initial analysis.
 
+#  A Simple Loop 
+A simple loop repeats a block of code a certain number of times or until a condition is met.  Here are examples in a few common programming languages:
+
+**1. Using a `for` loop (iterating a specific number of times):**
+
+* **Python:**
+
+```python
+for i in range(5):  # Repeats 5 times (i = 0, 1, 2, 3, 4)
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. Using a `while` loop (repeating until a condition is false):**
+
+* **Python:**
+
+```python
+i = 0
+while i < 5:
+    print(i)
+    i += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let i = 0;
+while (i < 5) {
+  console.log(i);
+  i++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int i = 0;
+  while (i < 5) {
+    std::cout << i << std::endl;
+    i++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int i = 0;
+    while (i < 5) {
+      System.out.println(i);
+      i++;
+    }
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  The `for` loop is generally preferred when you know the number of iterations in advance, while the `while` loop is better when the number of iterations depends on a condition that might change during the loop's execution.  Remember to choose the loop type that best suits your needs and always ensure your loop will eventually terminate to avoid infinite loops.
+
