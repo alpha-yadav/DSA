@@ -9236,3 +9236,11 @@ For multiple LCA queries on the same tree, binary lifting is highly efficient.  
 
 Remember to adapt these methods for general trees (trees where nodes can have more than two children) as needed. The core concepts remain similar, but the recursive approach will need to iterate through all children instead of just left and right.
 
+#  Graph 
+Please provide me with the data or equation you would like me to graph.  I need the information to create the graph.  For example, tell me:
+
+* **The type of graph:**  (e.g., line graph, bar graph, scatter plot, pie chart)
+* **The data:** (e.g., a table of x and y values, a list of categories and their values, an equation)
+
+Once you provide this information, I can help you.
+
