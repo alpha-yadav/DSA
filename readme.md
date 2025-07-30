@@ -8297,3 +8297,150 @@ def lca_bst_iterative(root, n1, n2):
 
 Both methods have a time complexity of O(H), where H is the height of the BST. In a balanced BST, H is log(N), where N is the number of nodes. In a skewed BST, H could be N in the worst case.  The space complexity is O(1) for the iterative approach and O(H) for the recursive approach (due to the call stack).  For most practical purposes, the iterative approach is preferred for its slightly better performance and constant space complexity. Remember to handle the case where one or both nodes are not present in the tree.
 
+#  Binary Search Tree - Python 
+A Binary Search Tree (BST) is a tree data structure where each node has at most two children, referred to as the left child and the right child.  The key property of a BST is that for every node:
+
+* The value of its left subtree's nodes is less than the node's value.
+* The value of its right subtree's nodes is greater than the node's value.
+
+Here's a Python implementation of a BST, including common operations:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    def search(self, data):
+        return self._search_recursive(self.root, data)
+
+    def _search_recursive(self, node, data):
+        if node is None or node.data == data:
+            return node  # Return the node if found, otherwise None
+        if data < node.data:
+            return self._search_recursive(node.left, data)
+        return self._search_recursive(node.right, data)
+
+    def delete(self, data):
+        self.root = self._delete_recursive(self.root, data)
+
+    def _delete_recursive(self, node, data):
+        if node is None:
+            return node
+
+        if data < node.data:
+            node.left = self._delete_recursive(node.left, data)
+        elif data > node.data:
+            node.right = self._delete_recursive(node.right, data)
+        else:  # Node to be deleted found
+            if node.left is None:
+                return node.right
+            elif node.right is None:
+                return node.left
+            else:  # Node has two children
+                # Find the inorder successor (smallest in the right subtree)
+                temp = self._find_min(node.right)
+                node.data = temp.data
+                node.right = self._delete_recursive(node.right, temp.data)
+
+        return node
+
+    def _find_min(self, node):
+        while node.left:
+            node = node.left
+        return node
+
+    def inorder_traversal(self):
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.data)
+            self._inorder_recursive(node.right, result)
+
+    def preorder_traversal(self):
+      result = []
+      self._preorder_recursive(self.root, result)
+      return result
+
+    def _preorder_recursive(self, node, result):
+      if node:
+        result.append(node.data)
+        self._preorder_recursive(node.left, result)
+        self._preorder_recursive(node.right, result)
+
+    def postorder_traversal(self):
+      result = []
+      self._postorder_recursive(self.root, result)
+      return result
+
+    def _postorder_recursive(self, node, result):
+      if node:
+        self._postorder_recursive(node.left, result)
+        self._postorder_recursive(node.right, result)
+        result.append(node.data)
+
+
+# Example Usage
+bst = BinarySearchTree()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+
+print("Inorder Traversal:", bst.inorder_traversal())  # Sorted output
+print("Preorder Traversal:", bst.preorder_traversal())
+print("Postorder Traversal:", bst.postorder_traversal())
+
+print("Search for 6:", bst.search(6).data)  # Search for a node
+print("Search for 15:", bst.search(15))  # Search for a non-existent node
+
+bst.delete(8)  # Delete the root node
+print("Inorder Traversal after deleting 8:", bst.inorder_traversal())
+
+```
+
+This improved version includes:
+
+*   **Node Class:**  A separate class for nodes to encapsulate data and child pointers.
+*   **Recursive Methods:**  `_insert_recursive`, `_search_recursive`, `_delete_recursive`, and traversal methods use recursion for cleaner code.
+*   **Deletion Handling:** The `delete` method correctly handles deleting nodes with zero, one, or two children.  It uses the inorder successor for deletion of nodes with two children.
+*   **Error Handling (Implicit):** The `search` method implicitly handles the case where the data is not found by returning `None`.
+* **Tree Traversals:** Includes Inorder, Preorder and Postorder traversals.
+
+
+Remember that the efficiency of BST operations (insertion, search, deletion) is O(h), where h is the height of the tree.  In a balanced BST, h is approximately log₂(n), where n is the number of nodes.  However, in a worst-case scenario (a skewed tree), h can be n, resulting in linear time complexity.  Self-balancing BSTs (like AVL trees or red-black trees) are used to mitigate this worst-case scenario.
+
