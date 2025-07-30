@@ -7922,3 +7922,57 @@ print(f"Tree 1 and Tree 3 are same (Iterative): {are_trees_same_iterative(root1,
 
 Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some cases (avoiding potential recursion depth limits). Choose the method that best suits your coding style and performance requirements.  Remember to handle the case where one tree is empty and the other is not.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They're a special type of binary tree where the value of each node satisfies a specific property:
+
+* **The left subtree of a node contains only nodes with keys less than the node's key.**
+* **The right subtree of a node contains only nodes with keys greater than the node's key.**
+* **No duplicate keys are allowed.** (Though some implementations might allow them, often by storing a count in each node).
+
+This property makes BSTs extremely efficient for certain operations, particularly searching, insertion, and deletion.
+
+
+**Key Operations:**
+
+* **Search:**  Finding a specific node with a given key.  This is done recursively or iteratively, following the left or right subtree based on the comparison between the search key and the current node's key.  In a balanced BST, search has a time complexity of O(log n), where n is the number of nodes.  In a worst-case scenario (a skewed tree resembling a linked list), it becomes O(n).
+
+* **Insertion:** Adding a new node with a given key.  The algorithm follows a similar path as the search operation, and the new node is inserted as a leaf node at the appropriate location to maintain the BST property.  Time complexity is generally O(log n) for a balanced tree and O(n) for a skewed tree.
+
+* **Deletion:** Removing a node with a given key. This is the most complex operation.  There are three cases to consider:
+    * **Node to be deleted is a leaf node:** Simply remove it.
+    * **Node to be deleted has one child:** Replace the node with its child.
+    * **Node to be deleted has two children:**  This requires finding the inorder predecessor (largest node in the left subtree) or inorder successor (smallest node in the right subtree), replacing the node's key with the predecessor's or successor's key, and then deleting the predecessor or successor node (which will now be a node with at most one child, reducing it to one of the simpler cases).  Time complexity is generally O(log n) for balanced trees and O(n) for skewed trees.
+
+* **Minimum/Maximum:** Finding the smallest or largest key in the tree.  These operations involve traversing the leftmost or rightmost branches, respectively.  Time complexity is O(log n) for balanced trees and O(n) for skewed trees.
+
+* **Inorder Traversal:** Visiting nodes in ascending order of their keys.  This is done recursively, visiting the left subtree, then the current node, then the right subtree.  It provides a sorted sequence of the keys.
+
+* **Preorder Traversal:** Visiting the root node, then the left subtree, then the right subtree (root-left-right).
+
+* **Postorder Traversal:** Visiting the left subtree, then the right subtree, then the root node (left-right-root).
+
+
+**Advantages of BSTs:**
+
+* Efficient search, insertion, and deletion (in balanced trees).
+* Simple implementation.
+* Provides an ordered sequence of keys through inorder traversal.
+
+
+**Disadvantages of BSTs:**
+
+* Performance degrades significantly with unbalanced trees (becomes O(n) for most operations).
+* Not suitable for scenarios requiring frequent updates or high concurrency.
+
+
+**Balancing BSTs:**
+
+To avoid the worst-case scenario of skewed trees, various self-balancing tree structures are used, such as:
+
+* **AVL trees:**  Maintain a balance factor for each node to ensure that the height difference between the left and right subtrees is at most 1.
+* **Red-black trees:**  Use color information (red or black) to maintain balance properties.
+* **B-trees:**  Optimized for disk-based storage and are not strictly binary trees.
+
+
+Choosing the right type of BST depends on the specific application and its requirements.  For simple applications with relatively few insertions and deletions, a basic BST might suffice.  However, for performance-critical applications or those with frequent updates, a self-balancing BST is usually necessary.
+
