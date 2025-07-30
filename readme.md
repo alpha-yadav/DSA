@@ -7645,3 +7645,35 @@ The time complexity of nested loops depends on the number of iterations of each 
 
 Nested loops are a fundamental programming concept used in many algorithms and data structures to process multi-dimensional data or perform iterative tasks requiring multiple levels of iteration.  However, it's crucial to be mindful of their time complexity, as they can lead to performance issues if not implemented carefully.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They indicate that the time it takes to solve a problem grows logarithmically with the input size (n). This means the time increases very slowly as the input size grows.  The base of the logarithm is usually irrelevant in Big O notation because it's just a constant factor.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential O(log n) algorithm.  It works by repeatedly dividing the search interval in half.  It's used to search a *sorted* list or array.  Each comparison eliminates roughly half of the remaining elements.
+
+* **Efficient Search in Balanced Binary Search Trees (BSTs):**  Operations like searching, insertion, and deletion in a balanced BST (like AVL trees or red-black trees) have O(log n) time complexity on average.  The balanced nature ensures the tree's height remains logarithmic with the number of nodes.
+
+* **Binary Exponentiation:** This technique efficiently calculates powers (a<sup>b</sup>) by repeatedly squaring the base.  It dramatically reduces the number of multiplications needed compared to a naive approach.
+
+* **Finding an element in a heap:**  Heaps are tree-based data structures used for priority queues.  Finding the minimum (or maximum) element is an O(1) operation, while finding an arbitrary element can be done in O(log n) time.  Insertion and deletion also have O(log n) complexity.
+
+* **Some Divide and Conquer Algorithms:**  Algorithms that recursively divide the problem into subproblems of roughly half the size can sometimes achieve O(log n) complexity if the work done in each recursive call is constant or proportional to the input size.  However, many divide-and-conquer algorithms have complexities like O(n log n) due to the work done at each level of recursion.
+
+**Why O(log n) is efficient:**
+
+The logarithmic nature means that even for very large inputs, the algorithm's runtime remains relatively small.  For example:
+
+* If n = 1024, log₂(n) ≈ 10.
+* If n = 1,048,576, log₂(n) ≈ 20.
+
+Doubling the input size only adds a constant amount to the runtime (in the base-2 logarithm case).  This makes O(log n) algorithms extremely scalable.
+
+
+**Important Note:** The O(log n) complexity is usually only achieved under specific conditions.  For example:
+
+* Binary search requires a *sorted* input.
+* The efficiency of BST operations depends on maintaining *balance*.  An unbalanced BST can degrade to O(n) performance in the worst case.
+
+Therefore, it's crucial to understand the assumptions and limitations of an algorithm before concluding it has O(log n) complexity.
+
