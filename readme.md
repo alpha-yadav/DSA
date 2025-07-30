@@ -7677,3 +7677,64 @@ Doubling the input size only adds a constant amount to the runtime (in the base-
 
 Therefore, it's crucial to understand the assumptions and limitations of an algorithm before concluding it has O(log n) complexity.
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a target value within a *sorted* array.  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process continues until the target value is found or the search interval is empty.
+
+**Why it's O(log n):**
+
+With each comparison, we eliminate roughly half of the remaining search space.  Therefore, the maximum number of comparisons needed is proportional to the logarithm (base 2) of the array's size (n).
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the upper half
+        else:
+            high = mid - 1  # Search in the lower half
+
+    return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+
+```
+
+In this code:
+
+* `n` is the length of `arr`.
+* The `while` loop iterates at most log₂(n) times because we halve the search space in each iteration.  Therefore, the time complexity is O(log n).
+
+
+**Other O(log n) examples:**
+
+Other algorithms with O(log n) time complexity include:
+
+* **Finding an element in a balanced binary search tree:**  Similar to binary search, each comparison eliminates roughly half the remaining nodes.
+* **Efficient exponentiation (e.g., using repeated squaring):**  The number of multiplications needed to calculate a^b is logarithmic in b.
+* **Some tree traversal algorithms (depending on the tree structure):**  Traversal algorithms on balanced trees can achieve O(log n) complexity for certain operations.
+
+
+The key characteristic of O(log n) algorithms is that they efficiently handle large datasets by repeatedly reducing the problem size.  This makes them much faster than linear-time O(n) algorithms for large inputs.
+
