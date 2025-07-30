@@ -9763,3 +9763,29 @@ This code efficiently detects cycles using DFS. The `recursion_stack` array is c
 * **Time Complexity:** O(V + E), where V is the number of vertices and E is the number of edges. This is because we visit each vertex and edge once.
 * **Space Complexity:** O(V) due to the `visited` and `recursion_stack` arrays.  The recursion stack in the function calls also contributes to space complexity, which in the worst case (a deeply nested graph without cycles) could also be O(V).
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focused on efficient graph algorithms.  The most famous among them is likely his **linear-time algorithm for finding minimum spanning trees (MSTs)** in undirected graphs with integer edge weights.  However, he's also contributed significantly to other areas like approximate distance oracles and dynamic graph algorithms.
+
+Let's break down the key aspects:
+
+**1. Linear-Time MST Algorithm:**
+
+This is arguably Thorup's most impactful contribution.  Before his work, the best known algorithms for MSTs had a time complexity slightly worse than linear (e.g., O(m log* n), where m is the number of edges and n is the number of vertices, and log* n is the iterated logarithm, which grows extremely slowly).  Thorup's algorithm achieved a true linear time complexity, O(m), under the assumption that the edge weights are integers that fit within a machine word.  This is a significant breakthrough because it implies the algorithm's runtime scales perfectly with the input size.
+
+**Key Ideas behind the Linear-Time MST Algorithm (Simplified):**
+
+* **Borůvka's Algorithm as a foundation:**  It builds upon Borůvka's algorithm, which iteratively finds the minimum-weight edge incident to each connected component.  Thorup's algorithm cleverly accelerates this process.
+* **Randomization:** It uses randomization to efficiently partition the graph and handle edge weights.
+* **Advanced data structures and techniques:**  The linear-time complexity is achieved through sophisticated data structures and techniques that are beyond the scope of a concise explanation.  They involve careful handling of edge weights and efficiently merging components.
+* **Word RAM model:** The linear-time complexity is achieved in the word RAM model, a computational model that assumes arithmetic operations on machine words take constant time.  This assumption is crucial for the algorithm's efficiency.
+
+**2. Other Contributions:**
+
+Thorup has made significant contributions beyond the linear-time MST algorithm.  His work includes:
+
+* **Approximate distance oracles:**  These are data structures that efficiently answer approximate shortest path queries in graphs.  His work here focuses on achieving very good approximations with low space usage and query time.
+* **Dynamic graph algorithms:**  These algorithms deal with graphs that change over time (e.g., edges are added or deleted).  Thorup's research in this area aims to maintain certain graph properties (e.g., connectivity, shortest paths) efficiently as the graph evolves.
+* **Other graph algorithms:** He has made contributions to various other graph problems, further improving efficiency and understanding.
+
+**In summary:** Mikkel Thorup's algorithms are characterized by their efficiency and clever use of randomization and advanced data structures to achieve near-optimal or optimal time complexities for fundamental graph problems.  His linear-time MST algorithm is a landmark result, but his broader contributions to graph algorithm design are equally important.  Understanding the intricate details of his algorithms requires a strong background in algorithms and data structures.
+
