@@ -9665,3 +9665,101 @@ print(topological_sort(graph_with_cycle)) # Output: None
 
 Remember to choose the algorithm that best suits your needs and coding style.  Kahn's algorithm is generally considered more efficient for larger graphs.  DFS is often easier to understand and implement for smaller graphs. Both correctly detect cycles.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) is a common algorithm.  Here's how it works, along with code examples in Python:
+
+**Core Idea:**
+
+The key is to track the state of each node during the DFS. We use three states:
+
+1. **UNVISITED:** The node hasn't been explored yet.
+2. **VISITING:** The node is currently being explored (on the recursion stack).
+3. **VISITED:** The node has been fully explored.
+
+If we encounter a node that's already `VISITING` while traversing, it means we've found a cycle.
+
+**Algorithm:**
+
+1. **Initialization:** Assign all nodes to `UNVISITED`.
+2. **DFS:** For each node, perform a Depth-First Search.
+3. **DFS Helper Function:**
+   - If the node is `VISITING`, a cycle is detected. Return `True`.
+   - If the node is `VISITED`, return `False` (already explored).
+   - Mark the node as `VISITING`.
+   - Recursively call the DFS helper function for all its neighbors.
+   - If any recursive call returns `True`, a cycle is detected. Return `True`.
+   - Mark the node as `VISITED`. Return `False`.
+
+
+**Python Code:**
+
+```python
+class Graph:
+    def __init__(self, vertices):
+        self.vertices = vertices
+        self.graph = [[] for _ in range(vertices)]  # Adjacency list
+
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+
+    def is_cycle_present(self):
+        visited = [0] * self.vertices  # 0: UNVISITED, 1: VISITING, 2: VISITED
+        recursion_stack = [0] * self.vertices # Tracks nodes currently in the recursion stack
+
+        def dfs(v):
+            visited[v] = 1  # Mark as VISITING
+            recursion_stack[v] = 1
+
+            for neighbor in self.graph[v]:
+                if visited[neighbor] == 1 and recursion_stack[neighbor]==1: #cycle detected
+                    return True
+                elif visited[neighbor] == 0:
+                    if dfs(neighbor):
+                        return True
+
+            recursion_stack[v] = 0  # Remove from recursion stack
+            visited[v] = 2  # Mark as VISITED
+            return False
+
+        for node in range(self.vertices):
+            if visited[node] == 0:
+                if dfs(node):
+                    return True
+        return False
+
+
+# Example usage:
+g = Graph(4)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(1, 2)
+g.add_edge(2, 0)  # Creates a cycle
+g.add_edge(2, 3)
+g.add_edge(3, 3) #Self loop is a cycle
+
+if g.is_cycle_present():
+    print("Cycle is present in the graph")
+else:
+    print("Cycle is not present in the graph")
+
+
+g2 = Graph(4)
+g2.add_edge(0,1)
+g2.add_edge(1,2)
+g2.add_edge(2,3)
+
+if g2.is_cycle_present():
+    print("Cycle is present in the graph")
+else:
+    print("Cycle is not present in the graph")
+
+```
+
+This code efficiently detects cycles using DFS. The `recursion_stack` array is crucial for detecting cycles involving back edges (edges that go to an ancestor in the DFS tree).  Remember that a self-loop (a node with an edge to itself) is also considered a cycle.  This improved version handles self loops and back edges correctly.
+
+
+**Time and Space Complexity:**
+
+* **Time Complexity:** O(V + E), where V is the number of vertices and E is the number of edges. This is because we visit each vertex and edge once.
+* **Space Complexity:** O(V) due to the `visited` and `recursion_stack` arrays.  The recursion stack in the function calls also contributes to space complexity, which in the worst case (a deeply nested graph without cycles) could also be O(V).
+
