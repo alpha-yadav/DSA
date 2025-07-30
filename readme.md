@@ -7202,3 +7202,71 @@ fizzBuzzConcise(n: 15) //Call the function to test
 
 Both versions achieve the same result, but the concise version demonstrates more advanced Swift features.  Choose the version that best suits your understanding and coding style. Remember to compile and run this code in a Swift environment (like Xcode's playground or a Swift REPL).
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long the algorithm takes to run) and space (how much memory the algorithm needs).  We analyze complexity to predict how the algorithm's performance will scale as the input size grows.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:**  Measures how the runtime of an algorithm grows as the input size increases.  This is usually expressed using Big O notation (O), which describes the upper bound of the growth rate.  It ignores constant factors and focuses on the dominant terms as the input size approaches infinity.
+
+* **Space Complexity:** Measures how the memory usage of an algorithm grows as the input size increases.  This is also often expressed using Big O notation.  It considers the auxiliary space used by the algorithm (excluding the input itself).
+
+**Common Big O Notations and Their Meanings:**
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Examples: accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Examples: binary search.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Examples: searching an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth. Examples: merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Examples: nested loops iterating through the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Examples: finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Examples: traveling salesman problem (brute-force approach).
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, we typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the algorithm's runtime.
+
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+
+3. **Identify the dominant term:**  Focus on the term that grows fastest as n increases.
+
+4. **Express the complexity using Big O notation:** Drop constant factors and lower-order terms.
+
+**Example:**
+
+Consider a function that iterates through an array and prints each element:
+
+```python
+def print_array(arr):
+  for element in arr:
+    print(element)
+```
+
+The number of operations (print statements) is directly proportional to the size of the array.  Therefore, the time complexity is O(n), where n is the length of the array.  The space complexity is O(1) because it uses a constant amount of extra space regardless of the array size.
+
+
+**Best, Average, and Worst Case Complexity:**
+
+Algorithm complexity can also be categorized into best-case, average-case, and worst-case scenarios.
+
+* **Best Case:** The most favorable scenario.
+* **Average Case:** The expected runtime considering all possible inputs.
+* **Worst Case:** The least favorable scenario.
+
+For example, in a linear search algorithm:
+
+* **Best Case:** O(1) (if the element is found at the beginning)
+* **Average Case:** O(n)
+* **Worst Case:** O(n) (if the element is at the end or not present)
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  Algorithms with lower complexity generally perform better for large inputs.
+
