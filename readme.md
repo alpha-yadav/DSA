@@ -7079,3 +7079,65 @@ else:
 
 Remember to start small, be patient, and enjoy the learning process!  Algorithms are a fundamental building block of computer science, and mastering them will significantly improve your programming skills.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, along with explanations to help you understand them:
+
+
+**Problem 1: Two Sum**
+
+**Description:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+
+Output: `[0,1]`  Because `nums[0] + nums[1] == 9`
+
+
+**Problem 2: Reverse a Linked List**
+
+**Description:** Reverse a singly linked list.
+
+**Example:**
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+
+
+**Problem 3:  Largest Rectangle in Histogram**
+
+**Description:** Given an array of integers `heights` representing the histogram's bar heights where the width of each bar is 1, return *the area of the largest rectangle in the histogram*.
+
+**Example:**
+
+`heights = [2,1,5,6,2,3]`
+
+Output: 10
+
+
+**Problem 4:  Merge k Sorted Lists**
+
+**Description:** You are given an array of `k` linked-lists `lists`, each linked-list is sorted in ascending order.  Merge all the linked-lists into one sorted linked-list and return it.
+
+**Example:**
+
+Input: lists = [[1,4,5],[1,3,4],[2,6]]
+Output: [1,1,2,3,4,4,5,6]
+
+
+**Problem 5:  Graph Traversal (BFS or DFS)**
+
+**Description:** Given a graph represented as an adjacency list or matrix, perform a Breadth-First Search (BFS) or Depth-First Search (DFS) traversal and return the visited nodes in the order they were visited.
+
+
+These problems represent different aspects of algorithmic thinking:
+
+* **Problem 1 (Two Sum):** Focuses on efficient searching and data structure usage (e.g., hash tables).
+* **Problem 2 (Reverse Linked List):** Tests understanding of linked list manipulation and pointer operations.
+* **Problem 3 (Largest Rectangle in Histogram):** Requires a combination of data structures (stack) and algorithmic thinking (monotonic stack).
+* **Problem 4 (Merge k Sorted Lists):** Challenges you to manage multiple sorted inputs efficiently (e.g., using a heap or priority queue).
+* **Problem 5 (Graph Traversal):** Explores graph algorithms and their implementations (recursive vs. iterative approaches).
+
+
+Choose a problem that matches your current skill level.  Try to solve it yourself first, then look for solutions online if you get stuck.  Understanding the solution is just as important as finding it.  Good luck!
+
