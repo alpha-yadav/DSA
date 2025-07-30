@@ -7316,3 +7316,59 @@ This means that for sufficiently large *n* (*n ≥ n₀*), the function *f(n)* i
 
 In summary, Big-Theta notation provides a more precise and complete description of a function's growth rate compared to Big-O or Big-Omega alone, making it a crucial tool in analyzing the efficiency of algorithms.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of a function as its input approaches a certain value (usually infinity).  They're crucial in computer science for analyzing algorithm efficiency.  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than the square of the input size.  It could be faster (e.g., O(n) in some cases), but it will never be significantly worse than n².
+* **Focus:** Worst-case complexity.
+
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (though often used for a lower bound on the runtime regardless of the input). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least as fast as the input size.
+* **Focus:** Best-case or general lower bound complexity.
+
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows *both* at least as fast and no faster than the given function.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+* **Focus:** Tight bound, precise description of growth.
+
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Provides a *strict upper bound*.  It means f(n) grows *significantly slower* than g(n).  Formally, f(n) = o(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  The key difference from Big O is the strict inequality (<) and the absence of a constant factor.
+* **Example:**  n = o(n²)  (n grows significantly slower than n²)
+
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Provides a *strict lower bound*.  It means f(n) grows *significantly faster* than g(n).  Formally, f(n) = ω(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) (n² grows significantly faster than n)
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Relationship to g(n) | Example       |
+|----------|---------------------------------------|-------------------------|----------------|
+| O(g(n))  | Upper bound                           | f(n) ≤ c * g(n)         | n² = O(n³)     |
+| Ω(g(n))  | Lower bound                           | c * g(n) ≤ f(n)         | n² = Ω(n)      |
+| Θ(g(n))  | Tight bound                           | c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) | n² = Θ(n²)     |
+| o(g(n))  | Strict upper bound                    | f(n) < c * g(n)         | n = o(n²)      |
+| ω(g(n))  | Strict lower bound                    | c * g(n) < f(n)         | n² = ω(n)      |
+
+
+**Key Differences and Relationships:**
+
+* **Big O vs. Little o:** Big O allows for a constant multiplicative factor, while little o requires that f(n) grows strictly slower than g(n) without any constant factor.
+* **Big Omega vs. Little omega:** Similar to the above, Big Omega allows a constant factor, while little omega demands significantly faster growth.
+* **Θ implies both O and Ω:** If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).  This represents the most precise asymptotic relationship.
+
+
+Understanding these notations is fundamental to comparing the efficiency of different algorithms and making informed choices about which algorithm to use for a given problem.  They focus on the *relative* growth rates as input size increases, not on precise runtimes for specific input sizes.
+
