@@ -10159,3 +10159,69 @@ def longest_palindrome(s):
 
 These problems illustrate different aspects of algorithmic problem-solving.  Remember to consider time and space complexity when designing your solutions.  The provided solutions are just examples; there are often multiple ways to solve these problems.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It prints numbers from 1 to a given number, but with these rules:
+
+* If the number is divisible by 3, print "Fizz"
+* If the number is divisible by 5, print "Buzz"
+* If the number is divisible by both 3 and 5 (i.e., divisible by 15), print "FizzBuzz"
+* Otherwise, print the number.
+
+
+Here's how to implement FizzBuzz in Swift, starting with a simple approach and then showing a slightly more efficient version:
+
+
+**Version 1: Basic Approach**
+
+This version is easy to understand and follows the logic directly:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+**Version 2: Slightly More Efficient**
+
+This version avoids redundant checks by checking for divisibility by 15 first:
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzEfficient(n: 15) //Call the function
+```
+
+This second version is slightly more efficient because it avoids nested `if-else if` statements.  It builds the output string and only prints it (or the number itself if the string is empty).
+
+
+**Explanation of Version 2:**
+
+1. **Initialization:** An empty string `output` is created for each number.
+2. **Divisibility Checks:** The code checks for divisibility by 3 and 5 separately. If divisible by 3, "Fizz" is appended to `output`; if divisible by 5, "Buzz" is appended.
+3. **Conditional Print:**  The `isEmpty` property checks if `output` is still empty. If it is, the number `i` is printed (as a String). Otherwise, the contents of `output` ("Fizz", "Buzz", or "FizzBuzz") are printed.
+
+Both versions achieve the same result, but the second one demonstrates a slightly more concise and potentially efficient approach for larger input values of `n`.  The difference in performance will be negligible for small `n` but could become noticeable for very large `n`.  For most FizzBuzz implementations, the simpler Version 1 is perfectly acceptable.
+
