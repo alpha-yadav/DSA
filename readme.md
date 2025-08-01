@@ -12669,3 +12669,103 @@ Graph theory finds applications in a vast array of fields, including:
 
 This introduction provides a basic overview.  Further study involves exploring graph algorithms (like Dijkstra's algorithm for shortest paths, breadth-first search, depth-first search), graph properties, and advanced graph structures.  Many excellent textbooks and online resources are available for a deeper dive into this fascinating field.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient method, particularly for sparse graphs (graphs with relatively few edges compared to the number of possible edges).  Here's a breakdown of how it works, along with different implementations and considerations:
+
+**Concept:**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each element in the array corresponds to a vertex (node) in the graph.  The list at each index contains the vertices that are adjacent (directly connected) to the vertex represented by that index.
+
+**Example:**
+
+Consider an undirected graph with vertices {0, 1, 2, 3} and edges {(0, 1), (0, 2), (1, 2), (2, 3)}:
+
+* **Adjacency List Representation:**
+    * `0: [1, 2]`
+    * `1: [0, 2]`
+    * `2: [0, 1, 3]`
+    * `3: [2]`
+
+This means:
+
+* Vertex 0 is connected to vertices 1 and 2.
+* Vertex 1 is connected to vertices 0 and 2.
+* Vertex 2 is connected to vertices 0, 1, and 3.
+* Vertex 3 is connected to vertex 2.
+
+**Implementations:**
+
+The choice of data structure for the adjacency list depends on the programming language and specific needs.  Common choices include:
+
+* **Arrays of Lists (Python):**  A simple and intuitive approach.  We can use Python's built-in `list` to represent both the array and the adjacency lists.
+
+```python
+graph = [
+    [1, 2],  # Adjacency list for vertex 0
+    [0, 2],  # Adjacency list for vertex 1
+    [0, 1, 3], # Adjacency list for vertex 2
+    [2]   # Adjacency list for vertex 3
+]
+```
+
+* **Dictionaries (Python):**  Offers more flexibility, especially if vertices are not necessarily integers starting from 0.  The keys represent vertices, and the values are lists of adjacent vertices.
+
+```python
+graph = {
+    0: [1, 2],
+    1: [0, 2],
+    2: [0, 1, 3],
+    3: [2]
+}
+```
+
+* **`std::vector<std::vector<int>>` (C++):**  Similar to the Python array of lists.  `std::vector` provides dynamic resizing.
+
+```c++
+#include <vector>
+
+std::vector<std::vector<int>> graph = {
+    {1, 2},
+    {0, 2},
+    {0, 1, 3},
+    {2}
+};
+```
+
+* **`std::map<int, std::vector<int>>` (C++):** Similar to the Python dictionary approach, allowing for non-integer or non-consecutive vertex labels.
+
+
+**Weighted Graphs:**
+
+For weighted graphs (where edges have associated weights), the adjacency list can be modified to store the weights as well.  This could be done using tuples or custom classes within the adjacency lists.
+
+* **Python (tuples):**
+
+```python
+graph = {
+    0: [(1, 5), (2, 2)], # (neighbor, weight)
+    1: [(0, 5), (2, 4)],
+    2: [(0, 2), (1, 4), (3, 1)],
+    3: [(2, 1)]
+}
+```
+
+**Directed vs. Undirected Graphs:**
+
+* **Undirected:**  An edge between vertices `u` and `v` is represented by `v` appearing in `u`'s adjacency list and `u` appearing in `v`'s adjacency list.
+* **Directed:**  If there's a directed edge from `u` to `v`, then `v` appears in `u`'s adjacency list, but not necessarily vice-versa.
+
+
+**Advantages of Adjacency Lists:**
+
+* **Space Efficiency:**  Especially good for sparse graphs because you only store the existing edges.
+* **Efficient for finding neighbors:**  Finding all neighbors of a vertex is very fast (O(degree of the vertex)).
+
+**Disadvantages of Adjacency Lists:**
+
+* **Checking edge existence:**  Checking if an edge exists between two vertices can be slower than with an adjacency matrix (O(degree of the vertex) instead of O(1)).
+* **Less efficient for dense graphs:**  Adjacency matrices become more efficient for dense graphs.
+
+
+Choosing the best representation (adjacency list vs. adjacency matrix) depends on the specific application and characteristics of the graph (sparse vs. dense, type of operations performed frequently).  For many applications involving sparse graphs, adjacency lists are the preferred choice.
+
