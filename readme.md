@@ -10730,3 +10730,98 @@ Here's a breakdown of key aspects:
 
 In summary, Big O notation is a powerful tool for analyzing and comparing the efficiency of algorithms, but it's crucial to understand its limitations and use it in conjunction with other performance analysis techniques when making design decisions.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a certain condition is met.  Here are examples in a few common programming languages:
+
+**1. While Loop (condition-controlled):**
+
+This loop continues as long as a specified condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+**2. For Loop (iteration-controlled):**
+
+This loop is typically used to iterate over a sequence (like a list or array) or a range of numbers.
+
+* **Python:**
+
+```python
+for i in range(5):  # range(5) generates numbers 0, 1, 2, 3, 4
+  print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+**3. Do-While Loop (post-condition controlled):**
+
+This loop executes the code block at least once, and then repeats as long as the condition is true.  (Not available in all languages, notably Python)
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  do {
+    std::cout << count << std::endl;
+    count++;
+  } while (count < 5);
+  return 0;
+}
+```
+
+
+These examples all print the numbers 0 through 4.  The choice of which loop to use depends on the specific requirements of your program.  `while` loops are best when the number of iterations isn't known beforehand,  `for` loops are ideal for iterating a known number of times, and `do-while` ensures at least one execution.  Remember to avoid infinite loops by ensuring your loop condition eventually becomes false.
+
