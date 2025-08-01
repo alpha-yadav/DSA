@@ -10923,3 +10923,65 @@ O(log n) algorithms are characterized by their ability to halve (or reduce by a 
 
 In summary, O(log n) algorithms are highly efficient because they significantly reduce the problem size with each step, making them suitable for handling very large datasets.  However, it's crucial to understand the underlying data structures and the assumptions made about the input data (like sortedness or balanced trees) to ensure the algorithm performs as expected.
 
+#  An O(log n) example 
+A classic O(log n) example is **binary search** in a sorted array.
+
+**The Algorithm:**
+
+Binary search works by repeatedly dividing the search interval in half.  If the value you're looking for is less than the middle element, you search the left half; otherwise, you search the right half.  This continues until the value is found or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+**Why it's O(log n):**
+
+With each comparison, we effectively halve the size of the search space.  This means the number of comparisons needed grows logarithmically with the size of the input array (`n`).  Specifically, the maximum number of comparisons is approximately log₂(n) (base-2 logarithm).
+
+**Other O(log n) examples:**
+
+* **Tree traversal (balanced binary search trees):** Finding a node in a balanced binary search tree (like an AVL tree or a red-black tree) takes O(log n) time on average and in the worst case.
+* **Efficient exponentiation (using repeated squaring):** Calculating a<sup>b</sup> can be done in O(log b) time.
+* **Finding an element in a sorted skip list:** Skip lists offer probabilistic logarithmic time complexity for search operations.
+
+
+The key characteristic of O(log n) algorithms is that they reduce the problem size by a constant factor with each step.  This makes them very efficient for large datasets.
+
