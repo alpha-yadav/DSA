@@ -10401,3 +10401,80 @@ print(longest_palindrome("babad")) # Output: bab or aba (depending on implementa
 
 These examples show a progression in difficulty and demonstrate different algorithmic approaches.  Remember that the "best" solution often depends on factors like time and space complexity, which are crucial considerations in algorithm design.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing some more advanced options:
+
+**Basic Implementation:**
+
+This version uses a simple `for` loop and `if`/`else if`/`else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks divisibility by 15 first (to handle both 3 and 5).
+* Then it checks divisibility by 3.
+* Then it checks divisibility by 5.
+* If none of the above are true, it prints the number itself.
+
+
+**Slightly Improved Implementation (using string interpolation):**
+
+This version is more concise using string interpolation:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This approach avoids nested `if/else if` statements. It builds the output string incrementally and only prints the number if the string remains empty.
+
+
+**More Advanced (Functional Approach):**
+
+For those familiar with functional programming concepts, here's a more concise version using `map`:
+
+```swift
+func fizzBuzzFunctional(n: Int) -> [String] {
+    return (1...n).map { i in
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        return output.isEmpty ? String(i) : output
+    }
+}
+
+print(fizzBuzzFunctional(n: 15)) //Prints the result as an array of Strings
+```
+
+This version uses `map` to transform the range of numbers (1...n) into an array of strings, applying the FizzBuzz logic to each number.
+
+
+**Choosing the Right Approach:**
+
+The basic implementation is the easiest to understand, especially for beginners.  The improved version is more concise and efficient. The functional approach is elegant but might be harder to grasp if you're not familiar with functional programming.  Choose the approach that best suits your understanding and coding style.  Remember to always consider readability and maintainability when writing code.
+
