@@ -13457,3 +13457,40 @@ Understanding algorithm complexity helps:
 
 Understanding algorithm complexity is a fundamental skill for any programmer or computer scientist.  It allows for informed decisions about algorithm selection and optimization, leading to more efficient and scalable software.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, indicating that the function grows at the same rate as another function, up to constant factors, both above and below.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that f(n) = Θ(g(n)) if there exist positive constants c₁ and c₂ and a positive integer n₀ such that for all n ≥ n₀:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of n (n ≥ n₀), the function f(n) is always bounded both above and below by constant multiples of g(n).  In other words, f(n) grows at the same rate as g(n).
+
+**Intuitive Explanation:**
+
+Imagine you have two algorithms, A and B.  If the runtime of A is Θ(n²) and the runtime of B is also Θ(n²), it means that both algorithms have a quadratic runtime complexity.  While they might have different constant factors (e.g., A might take 5n² milliseconds and B might take 10n² milliseconds), their runtimes scale with the square of the input size in the same way.  For large inputs, this difference in constant factors becomes less significant compared to the overall quadratic growth.
+
+**Contrast with Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an *upper bound*.  f(n) = O(g(n)) means that f(n) grows *no faster* than g(n).  It's a "worst-case" scenario.
+* **Big-Ω (Ω):** Provides a *lower bound*.  f(n) = Ω(g(n)) means that f(n) grows *at least as fast* as g(n).  It's a "best-case" scenario (sometimes).
+* **Big-Θ (Θ):** Provides a *tight bound*.  It combines both Big-O and Big-Ω, meaning f(n) grows *at the same rate* as g(n).  It's both a "best-case" and "worst-case" scenario (within constant factors).
+
+
+**Example:**
+
+Let's say f(n) = 2n² + 5n + 1.  We can show that f(n) = Θ(n²):
+
+1. **Upper bound:** We can find c₂ and n₀ such that 2n² + 5n + 1 ≤ c₂n² for all n ≥ n₀.  If we choose c₂ = 3 and n₀ = 1, then for n ≥ 1:  2n² + 5n + 1 ≤ 3n².  (This holds true because for n=1, 8≤3 which is false, but for n=2, 19≤12 is also false, but if we pick larger values of c2 such as c2=8, 2n^2 + 5n + 1 ≤ 8n^2.
+
+2. **Lower bound:** We can find c₁ and n₀ such that c₁n² ≤ 2n² + 5n + 1 for all n ≥ n₀.  If we choose c₁ = 1 and n₀ = 1,  then for n ≥ 1: n² ≤ 2n² + 5n + 1.
+
+Therefore, since we've found c₁, c₂, and n₀ that satisfy the definition, we can conclude that f(n) = Θ(n²).
+
+
+**In summary:** Big-Theta notation gives a precise description of the growth rate of a function, showing that it's asymptotically bounded both above and below by the same function (up to constant factors).  It's a crucial tool for analyzing algorithm efficiency and comparing different algorithms.
+
