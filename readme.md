@@ -13389,3 +13389,71 @@ For beginners, **Version 1** is the easiest to understand.  **Version 2** is a g
 
 Remember to run this code in a Swift playground or a Swift project to see the output.  You can adjust the `n` value to test with different ranges.
 
+#  Algorithm Complexity 
+Algorithm complexity describes how the runtime or space requirements of an algorithm grow as the input size grows.  It's crucial for understanding an algorithm's efficiency and scalability.  We usually express complexity using Big O notation, which focuses on the dominant terms as the input size approaches infinity, ignoring constant factors.
+
+Here's a breakdown of key aspects of algorithm complexity:
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm increases with the size of the input.
+
+* **Big O Notation (O):**  Describes the upper bound of the growth rate.  It represents the worst-case scenario.  Common examples include:
+
+    * **O(1): Constant time.** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+    * **O(log n): Logarithmic time.** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+    * **O(n): Linear time.** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+    * **O(n log n): Linearithmic time.**  Common in efficient sorting algorithms like merge sort and heapsort.
+    * **O(n²): Quadratic time.** The runtime increases proportionally to the square of the input size. Example: Nested loops iterating through an array.
+    * **O(2ⁿ): Exponential time.** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+    * **O(n!): Factorial time.**  The runtime grows factorially with the input size.  Example:  Traveling salesman problem using brute force.
+
+
+* **Big Omega Notation (Ω):** Describes the lower bound of the growth rate. It represents the best-case scenario.
+
+* **Big Theta Notation (Θ):** Describes the tight bound of the growth rate.  It means the algorithm's runtime grows at the same rate as the given function, both in the best and worst case.
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm increases with the size of the input.  It's analyzed similarly using Big O notation.  Space complexity can include:
+
+* **Auxiliary Space:** The extra space used by the algorithm beyond the input itself (e.g., stack space for recursive calls).
+* **Total Space:** The total space used, including the input size.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the fundamental operations that contribute most to the runtime (e.g., comparisons, assignments, arithmetic operations).
+2. **Count the number of operations:**  Express the number of operations as a function of the input size (n).
+3. **Identify the dominant terms:**  As n grows large, some terms become insignificant.  Focus on the terms that grow fastest.
+4. **Express the complexity using Big O notation:**  Drop constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a function that finds the maximum element in an unsorted array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+* **Time Complexity:** The loop iterates through the array once, performing a comparison in each iteration.  Therefore, the time complexity is O(n), linear time.
+* **Space Complexity:** The algorithm uses a constant amount of extra space (to store `max_val`).  Therefore, the space complexity is O(1), constant space.
+
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity helps:
+
+* **Choose the right algorithm:**  Select algorithms that are efficient enough for the problem size.
+* **Optimize existing algorithms:** Identify bottlenecks and improve performance.
+* **Predict scalability:** Determine how an algorithm will perform with larger inputs.
+* **Compare different algorithms:**  Evaluate the relative efficiency of different approaches.
+
+
+Understanding algorithm complexity is a fundamental skill for any programmer or computer scientist.  It allows for informed decisions about algorithm selection and optimization, leading to more efficient and scalable software.
+
