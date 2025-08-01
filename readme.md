@@ -10579,3 +10579,65 @@ such that for all `n ≥ n₀`, the inequality `c₁n² ≤ 2n² + 3n + 1 ≤ c�
 
 Big-Theta notation gives us a precise understanding of how the runtime or space requirements of an algorithm scale with the input size.  It's crucial for comparing the efficiency of different algorithms and making informed decisions about which algorithm to use for a given problem.  Knowing the exact growth rate helps optimize code and predict performance for large datasets.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of functions, particularly important in computer science for analyzing algorithm efficiency.  Here's a comparison:
+
+**1. Big O Notation (O)**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.
+* **Formal Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Intuitive Meaning:**  f(n) grows no faster than g(n).
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows at most quadratically with the input size n.  It could be faster, but it won't be asymptotically worse than n².
+
+
+**2. Big Omega Notation (Ω)**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (though not always practically relevant).
+* **Formal Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Intuitive Meaning:** f(n) grows at least as fast as g(n).
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least linearly with the input size n.
+
+
+**3. Big Theta Notation (Θ)**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows *both* at most and at least as fast as the given function.
+* **Formal Definition:** f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Intuitive Meaning:** f(n) grows at the same rate as g(n).  This is the strongest statement we can make about asymptotic growth.
+* **Example:** If an algorithm's runtime is Θ(n log n), its runtime scales proportionally to n log n.
+
+
+**4. Little o Notation (o)**
+
+* **Meaning:** Provides a *strict upper bound*.  It indicates that the function f(n) grows *strictly slower* than g(n).
+* **Formal Definition:** f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Intuitive Meaning:**  The ratio f(n)/g(n) approaches 0 as n approaches infinity.
+* **Example:**  n = o(n²)
+
+
+**5. Little Omega Notation (ω)**
+
+* **Meaning:** Provides a *strict lower bound*.  It indicates that the function f(n) grows *strictly faster* than g(n).
+* **Formal Definition:** f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Intuitive Meaning:** The ratio g(n)/f(n) approaches 0 as n approaches infinity.
+* **Example:** n² = ω(n)
+
+
+**Summary Table:**
+
+| Notation | Meaning                                   | Relationship          |
+|----------|-------------------------------------------|-----------------------|
+| O(g(n))  | Upper bound                               | f(n) ≤ c * g(n)       |
+| Ω(g(n))  | Lower bound                               | c * g(n) ≤ f(n)       |
+| Θ(g(n))  | Tight bound (both upper and lower)         | c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) |
+| o(g(n))  | Strict upper bound                         | f(n) < c * g(n)       |
+| ω(g(n))  | Strict lower bound                         | c * g(n) < f(n)       |
+
+
+**Relationships:**
+
+* Θ(g(n)) implies both O(g(n)) and Ω(g(n)).
+* o(g(n)) is a stronger statement than O(g(n)).
+* ω(g(n)) is a stronger statement than Ω(g(n)).
+
+Big O is the most commonly used notation because it's often sufficient to determine the worst-case performance of an algorithm.  The others are useful for providing a more complete picture of an algorithm's behavior.
+
