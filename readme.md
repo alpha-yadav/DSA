@@ -11162,3 +11162,96 @@ print(f"Are root1 and root3 the same (iterative)? {are_trees_same_iterative(root
 
 Choose the method that best suits your needs and coding style.  The recursive approach is often considered cleaner and easier to understand, but the iterative approach might be preferable for extremely large trees to avoid stack overflow. Remember to handle the `None` cases carefully in both methods to ensure correctness.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They are tree-like structures where each node has at most two children, referred to as the *left child* and the *right child*.  The key defining property of a BST is the *search property*:
+
+* **Search Property:** For every node in the tree, all nodes in its left subtree have keys *less than* the node's key, and all nodes in its right subtree have keys *greater than* the node's key.  (Duplicate keys are generally not allowed.)
+
+
+Here's a breakdown of important aspects of BSTs:
+
+**Key Features and Operations:**
+
+* **Insertion:**  Adding a new node to the tree while maintaining the search property.  This involves traversing the tree until an appropriate location is found for the new node.
+
+* **Deletion:** Removing a node from the tree while preserving the search property.  Deletion can be more complex, especially when dealing with nodes that have two children.  Different deletion strategies exist (e.g., replacing with the inorder successor or predecessor).
+
+* **Search:** Finding a specific node with a given key.  The search property allows for efficient searching – logarithmic time in a balanced tree.
+
+* **Minimum/Maximum:** Finding the smallest or largest key in the tree.  These are found at the far left (minimum) or far right (maximum) of the tree.
+
+* **Successor/Predecessor:** Finding the next larger or next smaller key in the tree.
+
+* **Inorder Traversal:** Visiting nodes in ascending order of their keys. This traversal visits the left subtree, then the root, then the right subtree recursively.  The result is a sorted sequence of keys.
+
+* **Preorder Traversal:** Visiting the root, then the left subtree, then the right subtree recursively.
+
+* **Postorder Traversal:** Visiting the left subtree, then the right subtree, then the root recursively.
+
+**Time Complexity (for balanced BSTs):**
+
+* **Search, Insertion, Deletion:** O(log n) –  where n is the number of nodes.  This is because the tree's height is logarithmic in the number of nodes in a balanced tree.
+* **Inorder, Preorder, Postorder Traversal:** O(n) –  because every node must be visited once.
+
+**Time Complexity (for unbalanced BSTs):**
+
+In the worst-case scenario (e.g., a skewed tree resembling a linked list), the time complexity of search, insertion, and deletion can degrade to O(n).
+
+**Balancing:**
+
+To prevent the worst-case scenario of an unbalanced tree, techniques like self-balancing BSTs are used.  Examples include:
+
+* **AVL Trees:**  Maintain balance by ensuring the height difference between the left and right subtrees of any node is at most 1.
+* **Red-Black Trees:** Use a coloring scheme to maintain balance.  They are less strict than AVL trees, resulting in slightly less overhead but potentially slightly worse performance in some operations.
+* **B-trees:** Used extensively in databases and file systems, optimized for disk access.
+
+**Advantages of BSTs:**
+
+* Efficient searching, insertion, and deletion in a balanced tree.
+* Simple implementation.
+* Useful for implementing sorted data structures.
+
+**Disadvantages of BSTs:**
+
+* Performance degrades significantly if the tree becomes unbalanced.
+* Not ideal for scenarios requiring frequent updates or deletions in specific parts of the tree.
+
+
+**Example (Python):**
+
+A simple (unbalanced) BST node implementation:
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        if self.root is None:
+            self.root = Node(key)
+        else:
+            self._insert_recursive(self.root, key)
+
+    def _insert_recursive(self, node, key):
+        if key < node.key:
+            if node.left is None:
+                node.left = Node(key)
+            else:
+                self._insert_recursive(node.left, key)
+        else:
+            if node.right is None:
+                node.right = Node(key)
+            else:
+                self._insert_recursive(node.right, key)
+
+    # ... (other methods like search, delete, etc. would go here)
+```
+
+This is a basic example.  A complete implementation would include methods for search, deletion, traversal, and potentially balancing.  For production systems, using a well-tested library implementation of a balanced BST (like those found in many standard libraries) is generally recommended.
+
