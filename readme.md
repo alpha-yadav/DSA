@@ -12383,3 +12383,127 @@ This iterative approach can be more space-efficient in some cases, especially if
 
 Choosing the best method depends on the specific constraints of your problem. The recursive approach is generally simpler to implement and understand, while the iterative approach might be preferred for extremely deep trees where the recursive call stack could become a problem.  Remember to handle edge cases such as `p` or `q` not being in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic computer science problem.  The approach varies depending on the type of tree and whether you have parent pointers or only child pointers.
+
+Here's a breakdown of common methods:
+
+**1. Using Parent Pointers:**
+
+If each node in the tree has a pointer to its parent, finding the LCA is relatively straightforward:
+
+* **Algorithm:**
+    1. Traverse upwards from each of the two nodes (`node1` and `node2`) simultaneously, storing their ancestors in separate sets (or lists).
+    2. Find the intersection of the two ancestor sets.  The deepest node (furthest from the root) in the intersection is the LCA.
+
+* **Python Code (using sets):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent_pointers(node1, node2):
+    ancestors1 = set()
+    ancestors2 = set()
+
+    current = node1
+    while current:
+        ancestors1.add(current)
+        current = current.parent
+
+    current = node2
+    while current:
+        ancestors2.add(current)
+        current = current.parent
+
+    common_ancestors = ancestors1.intersection(ancestors2)
+    if not common_ancestors:
+        return None # nodes are not related
+
+    # Find the deepest common ancestor (closest to the nodes)
+    lca = list(common_ancestors)[0]
+    for ancestor in common_ancestors:
+      if ancestor.data > lca.data:
+          lca = ancestor
+
+    return lca
+
+
+# Example usage:
+root = Node(1)
+node2 = Node(2)
+node3 = Node(3)
+node4 = Node(4)
+node5 = Node(5)
+node6 = Node(6)
+
+root.parent = None
+node2.parent = root
+node3.parent = root
+node4.parent = node2
+node5.parent = node2
+node6.parent = node3
+
+print(f"LCA of node4 and node5: {lca_with_parent_pointers(node4, node5).data}") # Output: 2
+print(f"LCA of node4 and node6: {lca_with_parent_pointers(node4, node6).data}") # Output: 1
+
+
+```
+
+**2. Without Parent Pointers (Binary Tree):**
+
+If you only have child pointers (as is common in binary trees), you need a recursive approach:
+
+* **Algorithm:**
+    1. If the current node is `None`, return `None`.
+    2. If the current node is either `node1` or `node2`, return the current node.
+    3. Recursively search the left and right subtrees.
+    4. If both recursive calls return non-`None` values, the current node is the LCA.
+    5. Otherwise, return the non-`None` result (or `None` if both are `None`).
+
+
+* **Python Code (Binary Tree):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_binary_tree(root, node1, node2):
+    if root is None:
+        return None
+    if root == node1 or root == node2:
+        return root
+
+    left_lca = lca_binary_tree(root.left, node1, node2)
+    right_lca = lca_binary_tree(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example Usage
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print(f"LCA of 4 and 5: {lca_binary_tree(root, root.left.left, root.left.right).data}") #Output: 2
+
+```
+
+**3. Without Parent Pointers (General Tree):**
+
+For general trees (trees where a node can have more than two children), the recursive approach can be adapted.  You would recursively search each subtree, and if you find both `node1` and `node2` in different subtrees, the current node is the LCA.
+
+
+Remember to handle edge cases like when one or both nodes are not present in the tree.  The best approach depends on the specifics of your tree structure and whether you have parent pointers available.  The examples above provide a solid starting point for implementing LCA algorithms.
+
