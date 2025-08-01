@@ -12507,3 +12507,6 @@ For general trees (trees where a node can have more than two children), the recu
 
 Remember to handle edge cases like when one or both nodes are not present in the tree.  The best approach depends on the specifics of your tree structure and whether you have parent pointers available.  The examples above provide a solid starting point for implementing LCA algorithms.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need the information defining the graph (e.g., points, function, etc.) before I can create it.
+
