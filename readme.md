@@ -10985,3 +10985,16 @@ With each comparison, we effectively halve the size of the search space.  This m
 
 The key characteristic of O(log n) algorithms is that they reduce the problem size by a constant factor with each step.  This makes them very efficient for large datasets.
 
+#  Trees 
+Trees are amazing and complex organisms!  To give you a helpful response, I need a little more direction.  What about trees are you interested in?  For example, are you interested in:
+
+* **Types of trees?** (e.g., oak, maple, pine, redwood –  I can discuss specific species, their characteristics, and geographic locations)
+* **The biology of trees?** (e.g., photosynthesis, growth rings, reproduction, the role of mycorrhizae)
+* **The ecology of trees?** (e.g., their role in ecosystems, forest management, deforestation, climate change impacts)
+* **The uses of trees?** (e.g., timber, paper, fruit, shade, medicine)
+* **The cultural significance of trees?** (e.g., trees in mythology, religion, art, literature)
+* **Specific tree problems?** (e.g., diseases, pests, identification)
+
+
+Please tell me what you'd like to know about trees, and I'll do my best to answer!
+
