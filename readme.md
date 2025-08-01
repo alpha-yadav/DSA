@@ -12769,3 +12769,98 @@ graph = {
 
 Choosing the best representation (adjacency list vs. adjacency matrix) depends on the specific application and characteristics of the graph (sparse vs. dense, type of operations performed frequently).  For many applications involving sparse graphs, adjacency lists are the preferred choice.
 
+#  Topological Sort 
+A topological sort is a linear ordering of the nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's arranging nodes in a way that respects the dependencies between them.  If you think of the graph as representing tasks and their dependencies (where an edge from A to B means A must be done before B), a topological sort gives you a valid order to execute those tasks.
+
+**Key Characteristics:**
+
+* **Directed Acyclic Graph (DAG):**  Topological sorts only work on DAGs.  A cycle (a path that returns to its starting node) would make a topological sort impossible because you'd never be able to satisfy the dependencies.
+* **Linear Ordering:** The output is a sequence of nodes, not a tree or other complex structure.
+* **Dependency Preservation:** The order respects the dependencies defined by the edges.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm works by repeatedly finding nodes with no incoming edges (in-degree 0), adding them to the sorted list, and then removing them and their outgoing edges from the graph.  This process continues until all nodes are processed.  If a cycle is detected (no nodes with in-degree 0 are found before all nodes are processed), the graph is not a DAG, and a topological sort is impossible.
+
+   ```python
+   from collections import defaultdict
+
+   def topological_sort_kahn(graph):
+       in_degree = defaultdict(int)
+       for node in graph:
+           for neighbor in graph[node]:
+               in_degree[neighbor] += 1
+
+       queue = [node for node in graph if in_degree[node] == 0]
+       sorted_nodes = []
+
+       while queue:
+           node = queue.pop(0)
+           sorted_nodes.append(node)
+
+           for neighbor in graph[node]:
+               in_degree[neighbor] -= 1
+               if in_degree[neighbor] == 0:
+                   queue.append(neighbor)
+
+       if len(sorted_nodes) != len(graph):
+           return None  # Cycle detected
+
+       return sorted_nodes
+
+   # Example usage:
+   graph = {
+       'A': ['C'],
+       'B': ['C', 'D'],
+       'C': ['E'],
+       'D': ['F'],
+       'E': ['F'],
+       'F': []
+   }
+   print(topological_sort_kahn(graph))  # Possible output: ['A', 'B', 'C', 'D', 'E', 'F'] (order may vary)
+
+   ```
+
+
+2. **Depth-First Search (DFS) with Post-Order Traversal:**
+
+   This algorithm uses depth-first search to traverse the graph.  It keeps track of the finishing times of each node during the post-order traversal (nodes are processed after all their descendants have been processed).  The nodes are then sorted in reverse order of their finishing times. This order will be a valid topological sort.
+
+   ```python
+   def topological_sort_dfs(graph):
+       visited = set()
+       stack = []
+
+       def dfs(node):
+           visited.add(node)
+           for neighbor in graph.get(node, []):
+               if neighbor not in visited:
+                   dfs(neighbor)
+           stack.append(node)
+
+       for node in graph:
+           if node not in visited:
+               dfs(node)
+
+       return stack[::-1]  # Reverse the stack for topological order
+
+   # Example usage (same graph as above):
+   print(topological_sort_dfs(graph)) # Possible output: ['A', 'B', 'D', 'C', 'E', 'F'] (order may vary)
+   ```
+
+**Applications:**
+
+Topological sorting has many applications, including:
+
+* **Course Scheduling:** Determining the order in which courses must be taken to satisfy prerequisites.
+* **Build Systems (like Make):** Determining the order in which to compile files in a project.
+* **Dependency Resolution:** Resolving dependencies between software packages or modules.
+* **Data Serialization:** Determining the order in which to write data to a file or database to maintain relationships.
+
+
+**Important Note:**  Multiple valid topological sorts can exist for a given DAG. The algorithms above will produce *a* valid sort, but not necessarily *the* only valid sort.
+
