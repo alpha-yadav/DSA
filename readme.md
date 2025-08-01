@@ -13593,3 +13593,51 @@ This shows that the runtime of the algorithm is at least proportional to *n²*, 
 
 Big-Omega notation is a crucial tool for analyzing algorithms and understanding their efficiency in different scenarios.  It complements Big-O notation, providing a more complete picture of an algorithm's performance characteristics.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the worst-case scenario of an algorithm's runtime or space requirements as the input size grows.  It doesn't tell you the *exact* runtime, but rather how the runtime *scales* with the input size.
+
+Here's a breakdown of key aspects:
+
+**What Big O describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases as the input size (n) increases.  This is often what's meant when someone simply says "Big O".
+* **Space Complexity:** How the memory usage of an algorithm increases as the input size (n) increases.  This is less frequently discussed but equally important.
+
+**Key aspects of Big O notation:**
+
+* **Focus on Growth Rate:** Big O only cares about the dominant factors affecting runtime as n gets very large.  Constant factors and lower-order terms are ignored.  For example, O(2n + 5) simplifies to O(n).
+* **Worst-Case Scenario:** Big O typically represents the worst-case scenario.  An algorithm might perform better on average or in best-case scenarios, but Big O focuses on the upper bound.
+* **Asymptotic Analysis:** Big O describes the behavior of the algorithm as the input size approaches infinity.  It's less concerned with small input sizes.
+
+**Common Big O notations and their meaning:**
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Nested loops iterating over the input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime increases factorially with the input size.  Example: Traveling salesman problem (brute force approach).
+
+
+**Example:**
+
+Let's say you have an algorithm that iterates through an array of size `n` and prints each element.  The runtime is directly proportional to `n`.  Therefore, the time complexity is O(n).  Even if the algorithm includes some extra steps that take a constant amount of time (like initializing a variable), those are insignificant compared to the `n` iterations as `n` grows large, so they are dropped.
+
+**Why is Big O important?**
+
+* **Algorithm Comparison:**  Big O allows you to compare the efficiency of different algorithms.  An O(n log n) algorithm is generally considered more efficient than an O(n²) algorithm for large input sizes.
+* **Performance Prediction:**  Big O provides a way to predict how the runtime will scale as the input size increases. This helps in choosing the right algorithm for a given task.
+* **Code Optimization:** Understanding Big O helps identify bottlenecks in code and optimize for performance.
+
+
+**Beyond Big O:**
+
+While Big O is the most common notation, other notations exist to describe different aspects of algorithm complexity:
+
+* **Big Omega (Ω):** Describes the best-case scenario.
+* **Big Theta (Θ):** Describes both the best-case and worst-case scenarios (tight bound).
+
+
+In summary, Big O notation is a crucial tool for analyzing and comparing the efficiency of algorithms.  Understanding it is essential for any computer scientist or software engineer.
+
