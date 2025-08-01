@@ -13315,3 +13315,77 @@ Output: `[1,1,2,3,4,4,5,6]`
 
 Remember to choose a problem that matches your current skill level and gradually work your way up to more challenging problems.  Practice is key!
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's a great way to learn about loops, conditional statements, and basic programming logic. Here's how to implement it in Swift, starting with a simple version and then progressing to more refined solutions:
+
+
+**Version 1: Basic Implementation**
+
+This version uses a `for` loop and `if-else if-else` statements. It's straightforward and easy to understand:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+**Version 2: Slightly More Efficient**
+
+This version uses a single `if` statement with nested conditions, which is slightly more efficient because it avoids multiple checks:
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzEfficient(n: 15)
+```
+
+**Version 3: Using a Ternary Operator (More Concise)**
+
+This version makes use of the ternary operator (`condition ? value1 : value2`) for a more compact solution, though it might be slightly less readable for beginners:
+
+
+```swift
+func fizzBuzzTernary(n: Int) {
+    for i in 1...n {
+        print((i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i))
+    }
+}
+
+fizzBuzzTernary(n: 15)
+```
+
+
+**Explanation of the Code:**
+
+* **`func fizzBuzz(n: Int)` (and variations):**  This defines a function named `fizzBuzz` that takes an integer `n` as input, representing the upper limit of the range.
+* **`for i in 1...n`:** This loop iterates through numbers from 1 to `n` (inclusive).
+* **`i % 3 == 0`, `i % 5 == 0`, `i % 15 == 0`:** The modulo operator (`%`) calculates the remainder of a division.  If the remainder is 0, it means the number is divisible by 3, 5, or 15.
+* **`print(...)`:** This prints the appropriate output to the console.
+
+
+**Choosing the Best Version:**
+
+For beginners, **Version 1** is the easiest to understand.  **Version 2** is a good compromise between readability and efficiency. **Version 3** is the most concise but can be harder to read if you're not familiar with ternary operators.  Choose the version that best suits your understanding and the context of your project.  Readability is often more important than minor efficiency gains for small programs like this.
+
+
+Remember to run this code in a Swift playground or a Swift project to see the output.  You can adjust the `n` value to test with different ranges.
+
