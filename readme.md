@@ -12510,3 +12510,116 @@ Remember to handle edge cases like when one or both nodes are not present in the
 #  Graph 
 Please provide me with the data or equation you want me to graph.  I need the information defining the graph (e.g., points, function, etc.) before I can create it.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, its advantages and disadvantages, and implementation considerations:
+
+**Concept:**
+
+An adjacency matrix is a 2D array (or a list of lists) where each element `matrix[i][j]` represents the weight or presence of an edge between vertex `i` and vertex `j`.
+
+* **Weighted Graph:**  `matrix[i][j]` holds the weight of the edge between vertices `i` and `j`.  If no edge exists, a special value (e.g., infinity, -1, or 0 depending on your application) is used.
+
+* **Unweighted Graph:** `matrix[i][j]` is typically 1 if an edge exists between vertices `i` and `j`, and 0 otherwise.
+
+* **Directed Graph:** The matrix is not necessarily symmetric.  `matrix[i][j]` might have a value, while `matrix[j][i]` could be 0 (or the special value for no edge).
+
+* **Undirected Graph:** The matrix is symmetric.  `matrix[i][j]` equals `matrix[j][i]`.
+
+
+**Implementation Examples:**
+
+**Python:**
+
+```python
+# Unweighted, undirected graph
+num_vertices = 4
+graph = [[0] * num_vertices for _ in range(num_vertices)]
+graph[0][1] = 1
+graph[1][0] = 1  # Symmetric for undirected graphs
+graph[0][2] = 1
+graph[2][0] = 1
+graph[1][3] = 1
+graph[3][1] = 1
+
+print(graph)
+
+
+# Weighted, directed graph
+num_vertices = 3
+graph = [[float('inf')] * num_vertices for _ in range(num_vertices)] # Initialize with infinity for no edge
+graph[0][1] = 4
+graph[0][2] = 1
+graph[1][2] = 2
+
+print(graph)
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+#include <vector>
+#include <limits> // for numeric_limits
+
+using namespace std;
+
+int main() {
+    // Unweighted, undirected graph
+    int numVertices = 4;
+    vector<vector<int>> graph(numVertices, vector<int>(numVertices, 0));
+    graph[0][1] = 1;
+    graph[1][0] = 1;
+    graph[0][2] = 1;
+    graph[2][0] = 1;
+    graph[1][3] = 1;
+    graph[3][1] = 1;
+
+    for (const auto& row : graph) {
+        for (int val : row) {
+            cout << val << " ";
+        }
+        cout << endl;
+    }
+
+    // Weighted, directed graph
+    numVertices = 3;
+    vector<vector<double>> weightedGraph(numVertices, vector<double>(numVertices, numeric_limits<double>::infinity()));
+    weightedGraph[0][1] = 4;
+    weightedGraph[0][2] = 1;
+    weightedGraph[1][2] = 2;
+
+    cout << endl;
+    for (const auto& row : weightedGraph) {
+        for (double val : row) {
+            cout << val << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+```
+
+
+**Advantages:**
+
+* **Simple Implementation:** Easy to understand and implement.
+* **Efficient Edge Existence Check:** Checking if an edge exists between two vertices takes O(1) time.
+* **Easy to find all neighbors of a vertex:**  Just scan a single row (or column).
+
+**Disadvantages:**
+
+* **Space Complexity:** Requires O(V²) space, where V is the number of vertices. This can be very inefficient for sparse graphs (graphs with few edges).
+* **Adding/Deleting Vertices:** Adding or deleting vertices requires resizing the entire matrix, which can be costly.
+
+
+
+**When to use Adjacency Matrix:**
+
+* **Dense graphs:** When the number of edges is close to the maximum possible (V*(V-1)/2 for undirected, V*(V-1) for directed).
+* **When you need fast edge existence checks:**  The O(1) lookup time is a significant advantage.
+* **When the graph's size is relatively small and known in advance.**
+
+
+For sparse graphs, adjacency lists are generally a more efficient way to represent the graph.  Consider the memory requirements and the types of operations you'll be performing most frequently when choosing a representation.
+
