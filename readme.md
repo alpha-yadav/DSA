@@ -10641,3 +10641,45 @@ Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) descr
 
 Big O is the most commonly used notation because it's often sufficient to determine the worst-case performance of an algorithm.  The others are useful for providing a more complete picture of an algorithm's behavior.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the lower bound of the growth rate of a function.  In simpler terms, it provides a guarantee about the *minimum* amount of time or resources an algorithm will take to complete, regardless of the input.  It's the counterpart to Big-O notation (which describes the upper bound).
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that *f(n)* = Ω(*g(n)*) if there exist positive constants *c* and *n₀* such that 0 ≤ *c* *g(n)* ≤ *f(n)* for all *n* ≥ *n₀*.
+
+Let's break down the elements:
+
+* **f(n):**  The function representing the algorithm's runtime or resource usage.  This is usually expressed in terms of the input size (*n*).
+* **g(n):**  A simpler function representing the lower bound growth rate.  This is often a standard function like n, n², log n, etc.
+* **c:** A positive constant.  This allows us to ignore constant factors when comparing growth rates.
+* **n₀:** A positive constant representing a threshold. The inequality holds true for all input sizes greater than or equal to *n₀*.  This handles the fact that algorithms might have different behavior for small inputs.
+
+**What Ω means:**
+
+Ω(*g(n)*) means that the function *f(n)* grows at least as fast as *g(n)*.  It establishes a lower limit on the algorithm's performance.  The algorithm will *never* perform better than Ω(*g(n)*), although it might perform worse.
+
+**Example:**
+
+Let's say we have an algorithm with a runtime of *f(n) = n² + 2n + 1*. We want to find its Ω notation.
+
+We can choose *g(n) = n²*.  Then we need to find *c* and *n₀* such that *c* *n² ≤ n² + 2n + 1* for all *n* ≥ *n₀*.
+
+If we choose *c = 1/2*, we have:
+
+(1/2)n² ≤ n² + 2n + 1
+
+This inequality will hold true for sufficiently large values of *n*.  For example, if we choose *n₀ = 3*, the inequality holds for all *n* ≥ 3.  Therefore, we can say *f(n) = Ω(n²)*.
+
+**Difference between Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an upper bound on the growth rate.  It represents the *worst-case* scenario.
+* **Big-Ω (Ω):** Provides a lower bound on the growth rate.  It represents the *best-case* scenario (or a guarantee about the minimum amount of work the algorithm *must* do).
+
+**Big-Θ (Θ):**  This notation describes both the upper and lower bounds simultaneously.  If *f(n) = Θ(g(n))*, then *f(n) = O(g(n))* and *f(n) = Ω(g(n))*.  It means that the growth rate of *f(n)* is asymptotically equal to the growth rate of *g(n)*.
+
+
+Big-Omega notation is crucial for understanding the fundamental limitations of an algorithm. While Big-O helps us understand how bad an algorithm can get, Big-Omega tells us how good it can *never* be.  Both are essential for a complete analysis of algorithm performance.
+
