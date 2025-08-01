@@ -13842,3 +13842,24 @@ int main() {
 
 Nested loops are powerful tools but should be used judiciously, considering both their functionality and potential impact on performance.  When dealing with very large datasets, explore alternative approaches like optimized algorithms or vectorized operations.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They mean the time it takes to solve a problem grows logarithmically with the input size (n).  This is significantly faster than linear (O(n)), quadratic (O(n²)), or other polynomial time algorithms.  The base of the logarithm usually doesn't matter in Big O notation because a change of base is just a constant factor.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential O(log n) algorithm. It works on a *sorted* list or array.  It repeatedly divides the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This continues until the target is found or the interval is empty.
+
+* **Binary Tree operations (search, insertion, deletion in a balanced tree):**  In a balanced binary search tree (like an AVL tree or a red-black tree), finding, inserting, or deleting a node takes O(log n) time on average and in the worst case.  This is because the height of a balanced binary tree is proportional to log₂(n), where n is the number of nodes.
+
+* **Efficient exponentiation (e.g., using repeated squaring):**  Calculating a^b (a raised to the power of b) can be done in O(log b) time using the method of repeated squaring (or exponentiation by squaring).  This technique cleverly reduces the number of multiplications required.
+
+* **Finding an element in a sorted array using interpolation search:**  Interpolation search is an improvement over binary search in certain scenarios. It estimates the position of the target value based on its value relative to the minimum and maximum values in the search interval. It offers O(log log n) time complexity in the average case for uniformly distributed data, which is even better than O(log n). However, its worst-case complexity is O(n).
+
+
+**Why O(log n)?**
+
+The logarithmic time complexity arises because the algorithm repeatedly reduces the problem size by a constant factor (typically by half, as in binary search).  Each step effectively eliminates a significant portion of the remaining search space.  This is why the number of steps required grows much slower than the input size.
+
+
+**Important Note:**  The O(log n) complexity only applies when the input is already sorted (as in binary search) or when the data structure used inherently maintains a logarithmic structure (as in balanced binary search trees).  If sorting is required as a preprocessing step, that time complexity must be added to the overall runtime.  For example, if you need to sort an unsorted array before performing a binary search, the overall time complexity would be dominated by the sorting algorithm's complexity (often O(n log n)).
+
