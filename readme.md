@@ -16397,3 +16397,42 @@ print(weighted_graph.matrix)
 
 Remember to adapt the data type and initialization of the matrix based on whether your graph is weighted, directed, or unweighted and undirected.  For very large graphs, consider using sparse matrix representations from libraries like `scipy.sparse` for better memory efficiency.
 
+#  Introduction To Graph Theory 
+## Introduction to Graph Theory
+
+Graph theory is a branch of mathematics that studies graphs, which are mathematical structures used to model pairwise relations between objects.  A graph consists of a set of *vertices* (also called nodes or points) and a set of *edges* (also called lines or arcs) that connect pairs of vertices.  Think of it as a collection of dots (vertices) and lines connecting some (or all) of those dots (edges).
+
+**Basic Terminology:**
+
+* **Vertex (V):** A single point in the graph. Often represented by a circle or dot.
+* **Edge (E):** A connection between two vertices.  Often represented by a line connecting two vertices.
+* **Undirected Graph:** A graph where edges have no direction.  The edge between vertices u and v is the same as the edge between vertices v and u.  Represented by a simple line.
+* **Directed Graph (Digraph):** A graph where edges have a direction.  The edge from vertex u to vertex v is different from the edge from vertex v to u. Represented by an arrow.
+* **Weighted Graph:** A graph where each edge is assigned a weight (e.g., distance, cost, capacity).  Weights are often represented by numbers on the edges.
+* **Adjacent Vertices:** Two vertices are adjacent if there's an edge connecting them.
+* **Incident Edge:** An edge is incident to a vertex if the vertex is one of its endpoints.
+* **Degree of a Vertex (in an undirected graph):** The number of edges incident to a vertex.
+* **In-degree and Out-degree (in a directed graph):** The in-degree of a vertex is the number of edges pointing to it; the out-degree is the number of edges pointing away from it.
+* **Path:** A sequence of vertices where consecutive vertices are adjacent.
+* **Cycle:** A path that starts and ends at the same vertex, with no repeated vertices (except the start/end vertex).
+* **Connected Graph:** An undirected graph where there's a path between any two vertices.
+* **Complete Graph:** An undirected graph where every pair of distinct vertices is connected by a unique edge.  Often denoted as K<sub>n</sub> where n is the number of vertices.
+* **Tree:** A connected, undirected graph with no cycles.
+* **Subgraph:** A graph whose vertices and edges are subsets of another graph.
+
+
+**Examples of Applications:**
+
+Graph theory has a wide range of applications in various fields, including:
+
+* **Computer Science:**  Network routing, data structures (trees, graphs), algorithm design, social network analysis.
+* **Engineering:**  Circuit design, transportation networks, scheduling problems.
+* **Biology:**  Modeling biological networks (e.g., protein-protein interaction networks).
+* **Social Sciences:**  Social network analysis, modeling relationships between people or organizations.
+* **Chemistry:**  Modeling molecular structures.
+
+
+**Further Exploration:**
+
+This introduction provides a basic overview.  Further study involves exploring different types of graphs, graph algorithms (e.g., shortest path algorithms, minimum spanning tree algorithms), graph properties, and advanced topics like graph coloring, planarity, and network flows.  Many excellent textbooks and online resources are available for deeper learning.
+
