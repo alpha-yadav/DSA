@@ -15704,3 +15704,106 @@ The recursive method (Method 2) is generally preferred because:
 
 Remember to define a `Node` class with `val`, `left`, and `right` attributes to use the example code.  The `sys.maxsize` is used to represent the maximum and minimum possible integer values in Python.  You might need to adjust it based on your specific integer type if you're not using Python.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree follows the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* The value of the left subtree's nodes is less than the node's value.
+* The value of the right subtree's nodes is greater than the node's value.
+
+Here are three common approaches, with varying levels of efficiency:
+
+**1. Recursive Approach (In-Order Traversal):**
+
+This is arguably the simplest and most intuitive method.  A BST, when traversed in-order (left, root, right), will produce a sorted sequence.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """Recursively checks if a tree is a BST using in-order traversal."""
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    for i in range(1, len(result)):
+        if result[i] < result[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_recursive(root))  # Output: True (if the tree is correctly structured)
+
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(15) # Violates BST property (15 > 8)
+root2.left.right.left = Node(12)
+
+print(is_bst_recursive(root2)) # Output: False
+```
+
+**2.  Recursive Approach with Min/Max Bounds:**
+
+This approach improves efficiency by avoiding the creation of a separate sorted list. It checks if each subtree satisfies the min/max constraints imposed by its parent node.
+
+```python
+def is_bst_minmax(root, min_val=-float('inf'), max_val=float('inf')):
+    """Recursively checks if a tree is a BST using min/max bounds."""
+    if root is None:
+        return True
+    if not (min_val < root.data < max_val):
+        return False
+    return (is_bst_minmax(root.left, min_val, root.data) and
+            is_bst_minmax(root.right, root.data, max_val))
+
+#Example usage (same trees as above):
+print(is_bst_minmax(root))  # Output: True
+print(is_bst_minmax(root2)) # Output: False
+```
+
+
+**3. Iterative Approach (In-Order Traversal with Stack):**
+
+This approach uses a stack to simulate the recursion of the in-order traversal, avoiding potential stack overflow errors for very deep trees.  It's functionally similar to the first recursive approach but uses iteration instead.
+
+
+```python
+def is_bst_iterative(root):
+    """Iteratively checks if a tree is a BST using in-order traversal with a stack."""
+    stack = []
+    prev = None
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+        root = stack.pop()
+        if prev and root.data <= prev.data:
+            return False
+        prev = root
+        root = root.right
+    return True
+```
+
+**Choosing the Right Approach:**
+
+* **Recursive approaches (methods 1 and 2):**  Clear, easy to understand, but can lead to stack overflow errors for extremely deep trees.  Method 2 is generally more efficient because it avoids creating a new list.
+* **Iterative approach (method 3):** Avoids stack overflow issues, but slightly more complex to implement and understand.
+
+
+For most practical purposes, the recursive approach with min/max bounds (method 2) provides a good balance of readability and efficiency.  If you're dealing with potentially extremely deep trees, the iterative approach is safer. Remember to adapt the `Node` class definition to match your specific tree implementation.
+
