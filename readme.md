@@ -14238,3 +14238,46 @@ def find_max(arr):
 
 Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better as the input size grows.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a fundamental concept in computer science used to describe the **tight bound** of an algorithm's time or space complexity.  Unlike Big-O notation, which provides only an upper bound, and Big-Ω (Omega) notation, which provides only a lower bound, Big-Theta notation provides both an upper and a lower bound simultaneously.  This means it precisely characterizes the growth rate of a function within constant factors.
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) if there exist positive constants c₁ and c₂, and a positive integer n₀ such that for all n ≥ n₀:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+This means that for sufficiently large inputs (n ≥ n₀), the function f(n) is always bounded above and below by constant multiples of g(n).  g(n) represents the growth rate of f(n).
+
+**In simpler terms:**
+
+f(n) = Θ(g(n)) signifies that f(n) grows at the *same rate* as g(n), ignoring constant factors.  The algorithm's performance scales proportionally to g(n).
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1** is Θ(n²).  We can find c₁, c₂, and n₀ to satisfy the definition. For instance, if we choose n₀ = 1:
+
+    * For c₁ = 1,  1*n² ≤ 2n² + 3n + 1 is always true for n ≥ 1.
+    * For c₂ = 6, 2n² + 3n + 1 ≤ 6n² is always true for n ≥ 1.
+
+
+* **f(n) = 5n + log(n)** is Θ(n).  The linear term (5n) dominates the logarithmic term (log(n)) as n grows large.
+
+* **f(n) = 7** is Θ(1). This represents a constant-time algorithm.
+
+
+**Key Differences from Big-O and Big-Ω:**
+
+* **Big-O (O):**  Provides an *upper bound*.  f(n) = O(g(n)) means f(n) grows *no faster* than g(n).
+* **Big-Ω (Ω):** Provides a *lower bound*. f(n) = Ω(g(n)) means f(n) grows *at least as fast* as g(n).
+* **Big-Θ (Θ):** Provides both an *upper and lower bound*.  f(n) = Θ(g(n)) means f(n) grows *at the same rate* as g(n).
+
+**When to use Θ:**
+
+Big-Theta notation is used when you want to give a *precise* characterization of an algorithm's complexity.  It's the most informative of the three notations, providing the tightest bound. However, it's sometimes harder to prove than Big-O, and in some cases, a tight bound may not be necessary or easily obtainable.  Big-O is often used when a precise lower bound is not required or known.
+
+
+In summary, Big-Theta notation is a powerful tool for analyzing the efficiency of algorithms, offering a clear and concise way to describe their scaling behavior.  Understanding its definition and application is crucial for anyone working with algorithms and data structures.
+
