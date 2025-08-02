@@ -14006,3 +14006,101 @@ else:
 
 Remember to be patient and persistent.  Learning algorithms takes time and effort, but the rewards are significant. Start small, focus on understanding the fundamentals, and gradually work your way up to more complex algorithms.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string, e.g., "hello"
+
+**Output:** The reversed string, e.g., "olleh"
+
+**Solution (Python):**
+
+```python
+def reverse_string(s):
+  return s[::-1]
+```
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Indices of the two numbers such that they add up to `target`.  Return an empty array if no two such numbers exist. You may assume that each input would have *exactly* one solution, and you may not use the *same* element twice.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+
+**Output:** `[0, 1]` because `nums[0] + nums[1] == 9`
+
+
+**Solution (Python):**
+
+```python
+def two_sum(nums, target):
+    num_map = {}  # Create a dictionary to store numbers and their indices
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    return [] # No solution found
+```
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+`s = "babad"`
+
+**Output:**  "bab" or "aba" (either is acceptable)
+
+
+**Solution (Python - a more efficient solution exists using Manacher's algorithm, but this is a simpler approach):**
+
+```python
+def longest_palindrome(s):
+    n = len(s)
+    if n < 2:
+        return s
+
+    max_len = 1
+    start = 0
+
+    for i in range(n):
+        # Odd length palindromes
+        l, r = i, i
+        while l >= 0 and r < n and s[l] == s[r]:
+            if r - l + 1 > max_len:
+                max_len = r - l + 1
+                start = l
+            l -= 1
+            r += 1
+
+        # Even length palindromes
+        l, r = i, i + 1
+        while l >= 0 and r < n and s[l] == s[r]:
+            if r - l + 1 > max_len:
+                max_len = r - l + 1
+                start = l
+            l -= 1
+            r += 1
+
+    return s[start:start + max_len]
+```
+
+
+These examples demonstrate the range of algorithmic problems.  The difficulty increases with the complexity of the required data structures and algorithms, and the efficiency requirements (time and space complexity).  Remember to consider different approaches and their trade-offs when solving these types of problems.
+
