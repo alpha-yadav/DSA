@@ -14175,3 +14175,66 @@ This version builds the output string incrementally. If `output` remains empty a
 
 For beginners, **Version 1** is the best choice because of its clarity.  As you become more comfortable with Swift, you can explore the more concise versions.  **Version 3** strikes a good balance between conciseness and readability.  Remember that readability is crucial; choose the version that's easiest for *you* to understand and maintain.
 
+#  Algorithm Complexity 
+Algorithm complexity is a crucial concept in computer science that describes how the runtime or space requirements of an algorithm grow as the input size increases.  It's not about the exact runtime in seconds (which depends on factors like hardware), but rather the *rate* of growth.  We express this growth using Big O notation, along with other related notations like Big Omega (Ω) and Big Theta (Θ).
+
+Here's a breakdown of key aspects:
+
+**1. Time Complexity:** This refers to how the runtime of an algorithm scales with the input size (n).
+
+* **Big O Notation (O):**  Describes the *upper bound* of an algorithm's runtime.  It provides a worst-case scenario.  We say an algorithm is O(f(n)) if its runtime is no worse than a constant multiple of f(n) for sufficiently large n.
+
+* **Common Time Complexities (from best to worst):**
+
+    * **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+    * **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+    * **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+    * **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+    * **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size. Example: Nested loops iterating over the input.
+    * **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+    * **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Finding all permutations of a set.
+
+
+* **Big Omega Notation (Ω):** Describes the *lower bound* of an algorithm's runtime.  It provides a best-case scenario.
+
+* **Big Theta Notation (Θ):** Describes the *tight bound* of an algorithm's runtime.  It means the runtime is both O(f(n)) and Ω(f(n)), indicating that the algorithm's growth is precisely described by f(n).
+
+
+**2. Space Complexity:** This refers to how much memory an algorithm uses as the input size (n) increases.  The notations (O, Ω, Θ) are used similarly to time complexity.
+
+* **Examples:**
+    * An algorithm that uses a fixed amount of extra memory regardless of input size has O(1) space complexity.
+    * An algorithm that creates a copy of the input has O(n) space complexity.
+    * An algorithm that uses recursion without optimization might have exponential space complexity.
+
+
+**3. Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the runtime (e.g., comparisons, assignments, arithmetic operations).
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Identify the dominant term:**  For large n, the dominant term in the function will determine the overall complexity.  Ignore constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a function that finds the maximum element in an unsorted array of size n:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for i in range(1, len(arr)):
+    if arr[i] > max_val:
+      max_val = arr[i]
+  return max_val
+```
+
+* The basic operation is the comparison (`arr[i] > max_val`).
+* This operation is performed n-1 times.
+* The dominant term is n.
+* Therefore, the time complexity is O(n).  The space complexity is O(1) because it uses a fixed amount of extra space (for `max_val`).
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better as the input size grows.
+
