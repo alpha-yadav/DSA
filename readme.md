@@ -14436,3 +14436,101 @@ For a list of 1,000 elements:
 
 In summary, Big O notation provides a powerful and standardized way to analyze and compare the efficiency of algorithms, enabling developers to choose the most appropriate algorithm for a given task, especially when dealing with large datasets.
 
+#  A Simple Loop 
+The concept of a "simple loop" is broad, depending on the programming language.  Here are examples of simple loops in a few common languages:
+
+**1. `for` loop (iterating a specific number of times):**
+
+* **Python:**
+
+```python
+for i in range(5):  # Loops 5 times (i = 0, 1, 2, 3, 4)
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. `while` loop (iterating until a condition is false):**
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples all perform the same basic task: printing the numbers 0 through 4.  The choice between `for` and `while` loops depends on whether you know the number of iterations beforehand.  `for` loops are generally preferred when the number of iterations is known, while `while` loops are better when the number of iterations depends on a condition.  Remember to choose the loop that best suits your specific needs and coding style.
+
