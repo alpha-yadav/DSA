@@ -14654,3 +14654,68 @@ The core reason algorithms achieve O(log n) complexity is their ability to:
 
 It's crucial to remember that O(log n) complexity only applies under certain conditions. For example, binary search requires a sorted input, and the efficiency of QuickSelect relies on the average case behavior of the partitioning step.  Worst-case scenarios might lead to higher time complexities.
 
+#  An O(log n) example 
+A classic O(log n) example is **binary search**.
+
+**Binary Search Algorithm:**
+
+Binary search is an algorithm used to find a target value within a *sorted* array.  It works by repeatedly dividing the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process continues until the target value is found or the search interval is empty.
+
+
+**Python Code:**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target value {target_value} found at index {index}")
+else:
+  print(f"Target value {target_value} not found in the array")
+```
+
+**Why it's O(log n):**
+
+With each comparison in binary search, we effectively eliminate half of the remaining search space.  This halving of the problem size with each step is the key to the logarithmic time complexity.
+
+Let's say the array has `n` elements.  The number of times we can halve `n` before reaching 1 is approximately log₂(n) (the logarithm base 2 of n).  Therefore, the maximum number of comparisons needed is proportional to log₂(n), making the algorithm O(log n).  The base of the logarithm (2 in this case) is usually dropped in Big O notation because it's a constant factor.
+
+
+Other examples of O(log n) algorithms include:
+
+* **Tree Traversal (balanced trees):**  Searching, insertion, and deletion in a balanced binary search tree (like an AVL tree or a red-black tree) are all O(log n) operations.
+* **Efficient exponentiation:**  Algorithms for calculating a<sup>b</sup> (a raised to the power of b) can be implemented in O(log b) time.
+
+
+It's important to remember that O(log n) algorithms are highly efficient for large input sizes because the growth rate of the logarithm function is very slow.
+
