@@ -14534,3 +14534,79 @@ public class Main {
 
 These examples all perform the same basic task: printing the numbers 0 through 4.  The choice between `for` and `while` loops depends on whether you know the number of iterations beforehand.  `for` loops are generally preferred when the number of iterations is known, while `while` loops are better when the number of iterations depends on a condition.  Remember to choose the loop that best suits your specific needs and coding style.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop. This allows you to iterate over multiple dimensions of data or perform repetitive tasks with varying parameters.
+
+Here's a breakdown:
+
+**Structure:**
+
+```c++
+for (int i = 0; i < outerLoopCount; i++) {  // Outer loop
+  for (int j = 0; j < innerLoopCount; j++) { // Inner loop
+    // Code to be executed for each inner loop iteration
+  }
+  // Code to be executed after each outer loop iteration
+}
+```
+
+This example uses `for` loops, but nested loops can be created with `while` or `do-while` loops as well.
+
+**How it works:**
+
+1. **Outer Loop Initialization:** The outer loop starts its initialization.  The counter variable `i` is set to its initial value.
+
+2. **Outer Loop Condition:** The outer loop's condition is checked. If it's true, the loop continues; otherwise, it terminates.
+
+3. **Inner Loop Execution:** If the outer loop condition is true, the inner loop begins.  The inner loop's counter variable `j` is initialized.
+
+4. **Inner Loop Iteration:** The inner loop iterates, executing its code block for each iteration until its condition becomes false.
+
+5. **Outer Loop Iteration:** After the inner loop completes, the outer loop's counter variable `i` is incremented, and the process repeats from step 2.
+
+
+**Example (C++): Printing a multiplication table):**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 1; i <= 10; i++) { // Outer loop: rows
+    for (int j = 1; j <= 10; j++) { // Inner loop: columns
+      std::cout << i * j << "\t"; // \t adds a tab for formatting
+    }
+    std::cout << std::endl; // Newline after each row
+  }
+  return 0;
+}
+```
+
+This code produces a 10x10 multiplication table.  The outer loop controls the rows, and the inner loop controls the columns.
+
+
+**Example (Python): Accessing elements of a 2D list):**
+
+```python
+matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+  for element in row:  # Inner loop iterates through elements in each row
+    print(element, end=" ")
+  print() # Newline after each row
+```
+
+This Python code iterates through a 2D list (a list of lists) and prints each element.
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can be computationally expensive, especially with large iteration counts. The time complexity increases significantly as the number of nested loops grows.  Consider optimizing your algorithms if performance is a concern.
+* **Clarity:**  Nested loops can become difficult to read and understand if they are overly complex. Use clear variable names and comments to enhance readability.
+
+
+Nested loops are a fundamental tool in programming, essential for processing multi-dimensional data and performing repetitive tasks requiring multiple levels of iteration.  Understanding how they work is crucial for writing efficient and effective code.
+
