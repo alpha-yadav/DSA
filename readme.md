@@ -14104,3 +14104,74 @@ def longest_palindrome(s):
 
 These examples demonstrate the range of algorithmic problems.  The difficulty increases with the complexity of the required data structures and algorithms, and the efficiency requirements (time and space complexity).  Remember to consider different approaches and their trade-offs when solving these types of problems.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple, easy-to-understand version and then progressing to a slightly more refined one:
+
+
+**Version 1:  Simple and Readable**
+
+This version prioritizes clarity and readability:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both Fizz and Buzz cases), then 3, then 5.  If none of these conditions are met, it prints the number itself.
+
+
+**Version 2: Slightly More Concise**
+
+This version uses a ternary operator to make the code a bit more compact, but might be slightly less readable for beginners:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This version uses nested ternary operators to achieve the same result in fewer lines.
+
+
+**Version 3:  Using a String Interpolation for Better Readability (slightly more advanced)**
+
+This combines the conciseness of the ternary operator with improved readability using string interpolation:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This version builds the output string incrementally. If `output` remains empty after checking divisibility by 3 and 5, it prints the number; otherwise, it prints the accumulated "Fizz" and/or "Buzz" string.  This approach is often considered more elegant and easier to extend if you need to add more conditions in the future.
+
+
+**Choosing the Right Version:**
+
+For beginners, **Version 1** is the best choice because of its clarity.  As you become more comfortable with Swift, you can explore the more concise versions.  **Version 3** strikes a good balance between conciseness and readability.  Remember that readability is crucial; choose the version that's easiest for *you* to understand and maintain.
+
