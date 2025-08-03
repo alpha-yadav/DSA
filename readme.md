@@ -17470,3 +17470,72 @@ While Big O describes the *upper bound*, other notations exist:
 
 Big O notation is a crucial tool for any computer scientist or software engineer to understand and use effectively.  It provides a standardized way to analyze and compare the efficiency of algorithms.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a certain condition is met.  Here are examples in a few common programming languages:
+
+**1. While Loop (Python):**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This loop will print the numbers 0, 1, 2, 3, and 4.  The loop continues as long as `count` is less than 5.  `count += 1` increments `count` by 1 in each iteration.
+
+
+**2. For Loop (Python):**
+
+```python
+for i in range(5):
+  print(i)
+```
+
+This loop also prints 0, 1, 2, 3, and 4.  `range(5)` generates a sequence of numbers from 0 up to (but not including) 5.
+
+
+**3. While Loop (JavaScript):**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+This is the JavaScript equivalent of the Python `while` loop example.
+
+
+**4. For Loop (JavaScript):**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+This is the JavaScript equivalent of the Python `for` loop example.
+
+
+**5. Do-While Loop (C++):**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  do {
+    std::cout << count << std::endl;
+    count++;
+  } while (count < 5);
+  return 0;
+}
+```
+
+A `do-while` loop executes the code block at least once, then checks the condition.  This will also print 0, 1, 2, 3, and 4.
+
+
+These are just basic examples. Loops can be much more complex, incorporating nested loops, conditional statements within the loop, and various ways to control the loop's iteration.  The choice of which type of loop to use depends on the specific problem you're trying to solve.
+
