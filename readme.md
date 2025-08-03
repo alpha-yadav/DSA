@@ -19188,3 +19188,13 @@ Finding the LCA in an unrooted tree is more complex and requires different algor
 
 Remember to handle edge cases, such as when one or both nodes are not present in the tree.  The code examples provide a solid starting point, but you may need to modify them based on the specific requirements of your problem and tree structure.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **A set of points (x, y):**  For example, (1,2), (3,4), (5,6)
+* **An equation:** For example, y = 2x + 1, y = x², y = sin(x)
+* **A description of the type of graph:**  For example, "a bar chart showing sales per month," or "a scatter plot of height vs. weight."
+
+
+Once you give me the data or equation, I can tell you how to graph it or, if you'd like, point you to a tool that can create the graph for you (like Desmos or GeoGebra).
+
