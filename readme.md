@@ -17313,3 +17313,58 @@ Therefore, `f(n) = Θ(n²)`.  The function grows at the same rate as n².
 
 In essence, Θ notation gives the most precise description of a function's growth rate, making it invaluable for analyzing the efficiency of algorithms.  If an algorithm has a time complexity of Θ(n), it's considered linear; if it has a time complexity of Θ(n log n), it's considered slightly better than quadratic but worse than linear.  Understanding Big-Theta is crucial for comparing and choosing the most efficient algorithms for a given task.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of functions, particularly useful for analyzing the efficiency of algorithms.  Here's a comparison:
+
+**1. Big O Notation (O): Upper Bound**
+
+* **Meaning:**  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  Essentially, `g(n)` is an upper bound for `f(n)` for sufficiently large *n*.  It describes the *worst-case* scenario.
+* **Focus:**  Growth rate from above.  We ignore constant factors and lower-order terms.
+* **Example:**  If `f(n) = 2n² + 5n + 1`, then `f(n) = O(n²)`.  We only care about the dominant term (n²).
+
+**2. Big Omega Notation (Ω): Lower Bound**
+
+* **Meaning:** `f(n) = Ω(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.  `g(n)` is a lower bound for `f(n)` for sufficiently large *n*.  It describes the *best-case* scenario (in some contexts).
+* **Focus:** Growth rate from below.  Again, we ignore constant factors and lower-order terms.
+* **Example:** If `f(n) = 2n² + 5n + 1`, then `f(n) = Ω(n²)`.
+
+**3. Big Theta Notation (Θ): Tight Bound**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  This indicates that `g(n)` is both an upper and lower bound for `f(n)`, meaning that `f(n)` grows at the same rate as `g(n)`. It describes the *average-case* scenario (often).
+* **Focus:**  Precise growth rate.
+* **Example:** If `f(n) = 2n² + 5n + 1`, then `f(n) = Θ(n²)`.
+
+**4. Little o Notation (o): Strict Upper Bound**
+
+* **Meaning:** `f(n) = o(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  `f(n)` grows strictly slower than `g(n)`.
+* **Focus:**  Asymptotically smaller growth rate.
+* **Example:** `n = o(n²)`, `log n = o(n)`.
+
+**5. Little Omega Notation (ω): Strict Lower Bound**
+
+* **Meaning:** `f(n) = ω(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`.  `f(n)` grows strictly faster than `g(n)`.
+* **Focus:** Asymptotically larger growth rate.
+* **Example:** `n² = ω(n)`, `2ⁿ = ω(n²)`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Example                    |
+|----------|----------------------------------------------|-----------------------------|
+| O(g(n))  | Upper bound                                   | 2n² + 5n + 1 = O(n²)       |
+| Ω(g(n))  | Lower bound                                   | 2n² + 5n + 1 = Ω(n²)       |
+| Θ(g(n))  | Tight bound (both upper and lower)           | 2n² + 5n + 1 = Θ(n²)       |
+| o(g(n))  | Strict upper bound (grows strictly slower) | n = o(n²)                   |
+| ω(g(n))  | Strict lower bound (grows strictly faster)  | n² = ω(n)                  |
+
+
+**Important Considerations:**
+
+* Asymptotic notations are concerned with the behavior of functions as *n* approaches infinity.  They don't tell you anything about the performance for small *n*.
+* Constant factors are ignored.  `O(2n)` is the same as `O(n)`.
+* Lower-order terms are ignored.  `O(n² + n)` is the same as `O(n²)`.
+* These notations are used to compare the relative efficiency of algorithms, not to determine the exact running time.
+
+
+Understanding these notations is crucial for analyzing algorithm complexity and making informed decisions about algorithm selection.
+
