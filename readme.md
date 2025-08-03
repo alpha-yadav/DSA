@@ -19361,3 +19361,106 @@ Graph theory has a vast range of applications across diverse fields, including:
 
 This introduction provides a foundational understanding.  Further study delves into graph algorithms (like Dijkstra's algorithm for shortest paths, breadth-first search, depth-first search), graph properties, and more advanced topics.  Many online resources and textbooks are available for deeper exploration.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and often efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementation choices and their trade-offs:
+
+**The Basic Idea**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each element in the array represents a vertex, and its corresponding list contains the vertices adjacent to it (i.e., the vertices connected to it by an edge).
+
+**Example:**
+
+Consider an undirected graph with vertices {A, B, C, D} and edges {(A, B), (A, C), (B, C), (C, D)}.  Its adjacency list representation might look like this:
+
+* A: [B, C]
+* B: [A, C]
+* C: [A, B, D]
+* D: [C]
+
+**Implementation Choices:**
+
+The specific implementation depends on the programming language and the desired features. Here are some common approaches:
+
+* **Using Arrays of Lists (Python):**
+
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'C'],
+    'C': ['A', 'B', 'D'],
+    'D': ['C']
+}
+
+# Accessing neighbors of vertex 'C':
+neighbors_of_C = graph['C']  # ['A', 'B', 'D']
+```
+
+This is a simple and readable way to represent the graph in Python using dictionaries.  Dictionaries provide fast lookups for vertices.
+
+* **Using Arrays of Linked Lists (C++):**
+
+```c++
+#include <iostream>
+#include <vector>
+#include <list>
+
+using namespace std;
+
+int main() {
+  vector<list<int>> graph(4); // Assuming 4 vertices
+
+  // Add edges (assuming vertices are 0-indexed)
+  graph[0].push_back(1); // Edge between 0 and 1
+  graph[0].push_back(2); // Edge between 0 and 2
+  graph[1].push_back(0); // Edge between 1 and 0
+  graph[1].push_back(2); // Edge between 1 and 2
+  graph[2].push_back(0); // Edge between 2 and 0
+  graph[2].push_back(1); // Edge between 2 and 1
+  graph[2].push_back(3); // Edge between 2 and 3
+  graph[3].push_back(2); // Edge between 3 and 2
+
+  // Accessing neighbors of vertex 2:
+  for (int neighbor : graph[2]) {
+    cout << neighbor << " ";
+  }
+  cout << endl; // Output: 0 1 3
+
+  return 0;
+}
+```
+
+This approach uses `std::vector` for the array of lists and `std::list` for the adjacency lists themselves.  `std::list` allows for efficient insertion and deletion of edges.
+
+
+* **Adding Weights (Weighted Graphs):**
+
+For weighted graphs, you'll need to store the weight along with each edge.  You can do this using tuples or custom classes within the adjacency lists.  In Python:
+
+```python
+graph = {
+    'A': [('B', 5), ('C', 2)],  # (neighbor, weight)
+    'B': [('A', 5), ('C', 1)],
+    'C': [('A', 2), ('B', 1), ('D', 3)],
+    'D': [('C', 3)]
+}
+```
+
+* **Directed vs. Undirected Graphs:**
+
+The examples above mostly show undirected graphs (an edge from A to B implies an edge from B to A). For directed graphs, you only add the edge in one direction.  For instance, if there's a directed edge from A to B, you'd only add B to A's adjacency list.
+
+
+**Space Complexity:**
+
+The space complexity of an adjacency list is O(V + E), where V is the number of vertices and E is the number of edges.  This is efficient for sparse graphs because you only store the existing edges, not all possible edges.  For dense graphs (many edges), an adjacency matrix might be more space-efficient.
+
+
+**Time Complexity:**
+
+* **Adding an edge:** O(1) on average (if using a list implementation, it might be slightly more in the worst case due to list resizing).
+* **Removing an edge:** O(E) in the worst case (searching for the edge).  Can be O(1) with better data structures in the adjacency list.
+* **Checking for an edge:** O(degree(v)) where `degree(v)` is the degree of the vertex (number of edges connected to it).
+* **Iterating over neighbors:** O(degree(v))
+
+In summary, adjacency lists are a powerful and often preferred way to represent graphs, particularly when dealing with sparse graphs where the number of edges is significantly smaller than the square of the number of vertices.  The choice of implementation details depends on the specific needs of your application.
+
