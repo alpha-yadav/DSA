@@ -17151,3 +17151,65 @@ Here are a few algorithmic problem samples, ranging in difficulty:
 
 These are just examples.  The difficulty and complexity of algorithmic problems can vary widely depending on constraints, input size, and required efficiency.  Many online resources (like LeetCode, HackerRank, Codewars) offer a wide range of problems with varying difficulty levels and solutions to help you practice.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+
+**Simple Version:**
+
+This version uses a straightforward `for` loop and `if/else if/else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* It checks divisibility by 15 first (to handle both Fizz and Buzz cases).
+* Then it checks divisibility by 3 and 5.
+* If none of the above conditions are met, it prints the number itself.
+
+
+**Slightly More Advanced Version (using string interpolation):**
+
+This version is more concise and uses string interpolation for cleaner output:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function to test
+```
+
+This version builds the output string (`output`) incrementally.  If `output` remains empty after checking for divisibility by 3 and 5, it prints the number; otherwise, it prints the accumulated string.
+
+
+**Explanation of Improvements:**
+
+* **Conciseness:**  The improved version avoids nested `if/else if/else` statements, making the code easier to read.
+* **Readability:** String interpolation (`\(i)`) makes the output cleaner.
+* **Flexibility:**  It's easier to extend this version to handle additional divisibility rules if needed (just add more `if` conditions).
+
+
+Both versions achieve the same result, but the improved version demonstrates a more elegant and efficient approach for a more complex scenario.  Choose the version that best suits your understanding and coding style. Remember to compile and run this code in a Swift environment (like Xcode's playground or a Swift REPL).
+
