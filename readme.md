@@ -17539,3 +17539,76 @@ A `do-while` loop executes the code block at least once, then checks the conditi
 
 These are just basic examples. Loops can be much more complex, incorporating nested loops, conditional statements within the loop, and various ways to control the loop's iteration.  The choice of which type of loop to use depends on the specific problem you're trying to solve.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows for processing data in a multi-dimensional way, often used for tasks like iterating through matrices, generating combinations, or performing complex calculations involving multiple sets of data.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+  # Outer loop code (executed once per outer loop iteration)
+  for inner_loop_variable in inner_loop_iterable:
+    # Inner loop code (executed once per inner loop iteration, for each outer loop iteration)
+  # More outer loop code (executed once per outer loop iteration)
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(f"{i * j:4}", end="")  # :4 formats the output to 4 spaces wide
+    print()  # Newline after each row
+```
+
+This will output:
+
+```
+   1   2   3   4   5   6   7   8   9  10
+   2   4   6   8  10  12  14  16  18  20
+   3   6   9  12  15  18  21  24  27  30
+   4   8  12  16  20  24  28  32  36  40
+   5  10  15  20  25  30  35  40  45  50
+   6  12  18  24  30  36  42  48  54  60
+   7  14  21  28  35  42  49  56  63  70
+   8  16  24  32  40  48  56  64  72  80
+   9  18  27  36  45  54  63  72  81  90
+  10  20  30  40  50  60  70  80  90 100
+```
+
+**Another Example (Processing a Matrix):**
+
+Let's say you have a 2D list (a matrix) representing a grid:
+
+```python
+grid = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in grid:  # Outer loop iterates through rows
+    for cell in row:  # Inner loop iterates through cells in each row
+        print(cell, end=" ")
+    print()  # Newline after each row
+```
+
+This will output:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops can significantly increase the runtime of your program.  If the outer loop iterates `m` times and the inner loop iterates `n` times, the total number of iterations is `m * n`. This is why it's crucial to be mindful of their use, especially with large datasets.
+* **Readability:**  Proper indentation and meaningful variable names are vital for understanding and maintaining nested loops.
+
+Nested loops are powerful tools, but their efficiency should always be considered, especially when dealing with large datasets.  Often, alternative approaches like vectorization or more efficient algorithms can offer substantial performance gains.
+
