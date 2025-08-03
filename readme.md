@@ -18073,3 +18073,119 @@ bst.inorder_traversal(bst.root)  # Output should be a sorted list: 1 3 6 8 10 14
 
 Choose the method that best suits your needs and understanding. The iterative version is generally preferred for production code due to its efficiency and avoidance of stack overflow issues. Remember to always test your code thoroughly.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node:**  Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:** This is the most complex case.  We typically replace the node with its inorder predecessor (the largest node in the left subtree) or its inorder successor (the smallest node in the right subtree).  Both approaches work; I'll show the inorder successor method below.
+
+
+Here's a C++ implementation demonstrating BST deletion, handling all three cases:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+// Function to find the inorder successor (smallest node in right subtree)
+Node* findMin(Node* node) {
+    while (node->left != nullptr) {
+        node = node->left;
+    }
+    return node;
+}
+
+// Function to delete a node from the BST
+Node* deleteNode(Node* root, int key) {
+    if (root == nullptr) {
+        return root; // Key not found
+    }
+
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // key == root->data (node found)
+        // Case 1: Node is a leaf node
+        if (root->left == nullptr && root->right == nullptr) {
+            delete root;
+            return nullptr;
+        }
+        // Case 2: Node has one child
+        else if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+        // Case 3: Node has two children
+        else {
+            Node* temp = findMin(root->right); // Find inorder successor
+            root->data = temp->data;          // Copy successor's data to the node being deleted
+            root->right = deleteNode(root->right, temp->data); // Delete the inorder successor
+        }
+    }
+    return root;
+}
+
+
+// (Helper function for in-order traversal - for testing)
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+
+    std::cout << "Inorder traversal before deletion:\n";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    root = deleteNode(root, 20); // Deleting a leaf node
+
+    std::cout << "Inorder traversal after deleting 20:\n";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    root = deleteNode(root, 30); //Deleting a node with one child
+
+    std::cout << "Inorder traversal after deleting 30:\n";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 50); // Deleting a node with two children
+
+    std::cout << "Inorder traversal after deleting 50:\n";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    //Remember to clean up memory (though this is simplified example)
+    //A more robust implementation would use a destructor and smart pointers.
+    
+    return 0;
+}
+```
+
+Remember to compile and run this code. The `inorderTraversal` function helps verify the correct structure of the BST after each deletion.  For larger applications, consider using smart pointers (like `std::unique_ptr` or `std::shared_ptr`) to automatically manage memory and prevent memory leaks.  This example omits that for simplicity, but it's crucial for production code.
+
