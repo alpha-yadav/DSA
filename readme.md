@@ -17954,3 +17954,122 @@ BSTs are used in numerous applications, including:
 
 In summary, BSTs are a valuable tool for managing ordered data, especially when balanced to ensure optimal performance.  The choice between a standard BST and a self-balancing variant depends on the application's needs and the trade-off between implementation complexity and performance guarantees.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement insertion into a Binary Search Tree (BST) in Python. Here are a few, with explanations:
+
+**Method 1: Recursive Insertion**
+
+This is a concise and elegant approach, leveraging recursion to traverse the tree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+# Example usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+```
+
+**Method 2: Iterative Insertion**
+
+This approach avoids recursion, potentially improving performance for very deep trees, and uses a while loop instead.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+#Example Usage (same as above)
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+```
+
+
+**Choosing between Recursive and Iterative:**
+
+* **Recursive:**  More readable and easier to understand for beginners.  However, it can lead to stack overflow errors with extremely deep trees.
+* **Iterative:**  Generally more efficient for very large trees as it avoids the function call overhead of recursion and the risk of stack overflow.
+
+
+**Important Considerations:**
+
+* **Duplicate Values:**  These implementations don't handle duplicate values. You might want to add logic to either ignore duplicates or handle them in a specific way (e.g., increment a count).
+* **Error Handling:** You might want to add error handling (e.g., `try...except` blocks) to gracefully handle potential issues.
+* **In-order Traversal (Verification):** After insertion, it's useful to have a function to traverse the BST in-order to verify that the tree is correctly structured.  In-order traversal of a BST yields a sorted list of its nodes.
+
+Remember to add a function for traversal (like in-order) to verify the insertion.  Here's an example of an in-order traversal function:
+
+```python
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+# Example usage after insertion:
+bst.inorder_traversal(bst.root)  # Output should be a sorted list: 1 3 6 8 10 14
+```
+
+Choose the method that best suits your needs and understanding. The iterative version is generally preferred for production code due to its efficiency and avoidance of stack overflow issues. Remember to always test your code thoroughly.
+
