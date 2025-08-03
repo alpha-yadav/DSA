@@ -19118,3 +19118,73 @@ If the tree nodes have parent pointers (a link to their parent node), finding th
 
 The recursive approach is generally preferred for its clarity and ease of understanding.  The iterative approach might be beneficial for extremely large trees where recursion could lead to stack overflow errors, but this is less of a concern with modern language implementations. The parent pointer approach is the most efficient if parent pointers are already available, but adding them might require modifying the tree structure.  For most cases, the recursive method is the best balance of simplicity and efficiency.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (or graph) is a common problem in computer science.  The approach varies depending on the type of tree (binary tree, general tree) and whether the tree is rooted or unrooted.  Here's a breakdown of common methods:
+
+**1. Binary Trees (Rooted):**
+
+* **Recursive Approach:** This is a classic and efficient method.  It works by recursively traversing the tree.  If the current node is one of the targets (nodes you're looking for the LCA of), you return the node. If one target is found in the left subtree and the other in the right, the current node is the LCA. Otherwise, recursively search the left or right subtree based on where the target nodes are.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    else:
+        return right
+
+#Example usage
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+
+```
+
+
+* **Iterative Approach (using parent pointers):** If you augment the tree by adding parent pointers to each node (a common modification), you can find the LCA iteratively.  This is often slightly more efficient in terms of memory usage because you avoid the overhead of recursive calls.  You would traverse upwards from both `p` and `q`, keeping track of their ancestors until you find a common ancestor.
+
+**2. General Trees (Rooted):**
+
+The recursive approach can be adapted to general trees.  However, you'll need to iterate through all children instead of just left and right.
+
+**3. Unrooted Trees:**
+
+Finding the LCA in an unrooted tree is more complex and requires different algorithms, often involving graph traversal techniques.
+
+
+**4.  Efficiency:**
+
+* The recursive approach for binary trees has a time complexity of O(N), where N is the number of nodes in the tree, in the worst case (skewed tree).  The space complexity is also O(N) in the worst case due to the recursive call stack.
+* The iterative approach with parent pointers has a time complexity of O(H), where H is the height of the tree, and a space complexity of O(1).
+
+**Choosing the Right Method:**
+
+* For binary trees, the recursive approach is often preferred for its simplicity and readability.
+* For larger trees or when memory is a significant constraint, the iterative approach (if parent pointers are available) might be more efficient.
+* For general trees or unrooted trees, you'll need to adapt the algorithms accordingly, potentially employing graph algorithms like Depth-First Search (DFS) or Breadth-First Search (BFS).
+
+
+Remember to handle edge cases, such as when one or both nodes are not present in the tree.  The code examples provide a solid starting point, but you may need to modify them based on the specific requirements of your problem and tree structure.
+
