@@ -18733,3 +18733,97 @@ This method mimics the recursive approach but uses a stack for iterative process
 
 The recursive methods (especially the min/max version) are generally preferred for their clarity and efficiency for most cases, unless you anticipate extremely deep trees.  Choose the method that best suits your needs and coding style.  Remember to define the `Node` class appropriately for your environment.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit all the nodes in a binary tree.  There are three main types: preorder, inorder, and postorder.  These are all *depth-first* traversals, meaning they explore as far as possible along each branch before backtracking.  There's also a *breadth-first* traversal (level order).
+
+Let's break down each traversal method:
+
+**1. Preorder Traversal:**
+
+* **Order:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+* **Mnemonic:**  Root, Left, Right (**R**LR)
+* **Example:**  For a tree with root `A`, left child `B`, and right child `C`, the preorder traversal would be `A B C`.  If B had a left child `D` and a right child `E`, it would be `A B D E C`.
+
+**2. Inorder Traversal:**
+
+* **Order:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree.
+* **Mnemonic:** Left, Root, Right (L**R**R)
+* **Example:** For the same tree as above, the inorder traversal would be `D B E A C`.  Notice that for a Binary *Search* Tree (BST), inorder traversal yields the nodes in sorted order.
+
+**3. Postorder Traversal:**
+
+* **Order:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node.
+* **Mnemonic:** Left, Right, Root (LR**R**)
+* **Example:** For the same tree as above, the postorder traversal would be `D E B C A`.
+
+**4. Level Order Traversal (Breadth-First Traversal):**
+
+* **Order:** Visits nodes level by level, from left to right.  This requires a queue data structure.
+* **Method:**  Enqueue the root node. While the queue is not empty, dequeue a node, process it, and enqueue its children (left then right).
+* **Example:** For the same tree as above, the level order traversal would be `A B C D E`.
+
+**Code Examples (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+from collections import deque
+
+def levelorder(node):
+    if node is None:
+        return
+
+    queue = deque([node])
+    while(len(queue) > 0):
+        curr = queue.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            queue.append(curr.left)
+
+        if curr.right is not None:
+            queue.append(curr.right)
+
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Preorder:", end=" ")
+preorder(root)
+print("\nInorder:", end=" ")
+inorder(root)
+print("\nPostorder:", end=" ")
+postorder(root)
+print("\nLevelorder:", end=" ")
+levelorder(root)
+print()
+```
+
+These traversals are fundamental to many algorithms working with binary trees, including tree serialization, expression evaluation, and more.  The choice of traversal depends on the specific application.  For example, inorder traversal is crucial for BST operations, while level order traversal is useful for visualizing the tree structure.
+
