@@ -17408,3 +17408,65 @@ Therefore, the algorithm's runtime is at least proportional to n².  It grows at
 
 In summary, Big-Omega notation is a crucial tool for analyzing algorithms.  It provides valuable information about the minimum resource requirements, offering a complementary perspective to Big-O's upper bound analysis.  Often used in conjunction with Big-O and Big-Theta to give a complete picture of an algorithm's performance characteristics.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of an algorithm's runtime or space requirements as the input size grows.  It focuses on the dominant factors affecting performance as the input gets very large, ignoring constant factors and smaller terms.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Time Complexity:** How the runtime of an algorithm scales with the size of the input.  This is the most common use of Big O.
+* **Space Complexity:** How the amount of memory (or storage) used by an algorithm scales with the size of the input.
+
+**Key Concepts:**
+
+* **Input Size (n):**  This represents the size of the input data the algorithm is working with.  For example:
+    * Sorting an array: `n` would be the number of elements in the array.
+    * Searching a list: `n` would be the number of items in the list.
+    * Graph traversal: `n` might be the number of nodes or edges in the graph.
+
+* **Growth Rate:**  Big O describes how the runtime or space usage *grows* as `n` increases.  We're interested in the general trend, not the exact number of operations.
+
+* **Ignoring Constants:** Big O simplifies things by dropping constant factors.  For example, an algorithm with a runtime of `5n + 10` would be described as O(n) because the `5` and `10` become insignificant as `n` gets very large.
+
+* **Dominant Terms:**  Only the fastest-growing term matters.  An algorithm with a runtime of `n² + n + 1` would be described as O(n²) because the `n²` term dominates as `n` increases.
+
+
+**Common Big O Notations and Their Meanings:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Bubble sort, selection sort (nested loops).
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesperson problem (brute-force approach).
+
+
+**Example:**
+
+Let's say we have an algorithm that iterates through an array of size `n` and prints each element.  The runtime is directly proportional to `n`.  Therefore, the time complexity is O(n).
+
+**Why is Big O Important?**
+
+* **Algorithm Comparison:**  It allows us to compare the efficiency of different algorithms, even before implementing them.
+* **Scalability Assessment:** It helps predict how an algorithm will perform with larger inputs, identifying potential bottlenecks.
+* **Optimization Guidance:**  It directs optimization efforts towards the parts of the algorithm that have the biggest impact on performance.
+
+
+**Beyond Big O:**
+
+While Big O describes the *upper bound*, other notations exist:
+
+* **Big Omega (Ω):** Describes the *lower bound* of an algorithm's runtime.
+* **Big Theta (Θ):** Describes both the *upper and lower bounds*, indicating a tight bound on the runtime.
+
+
+Big O notation is a crucial tool for any computer scientist or software engineer to understand and use effectively.  It provides a standardized way to analyze and compare the efficiency of algorithms.
+
