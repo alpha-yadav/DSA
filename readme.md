@@ -17101,3 +17101,53 @@ else:
 
 Remember to start small, focus on understanding the fundamentals, and practice consistently.  Gradually increase the complexity of the algorithms you tackle.  Good luck!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem samples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Find the largest number in an unsorted array.
+
+**Input:** An array of integers.  Example: `[3, 1, 4, 1, 5, 9, 2, 6]`
+
+**Output:** The largest integer in the array.  Example: `9`
+
+**Solution (Conceptual):** Iterate through the array, keeping track of the largest number seen so far.  Initialize the largest number to the first element of the array.  For each subsequent element, if it's larger than the current largest, update the largest.
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  You may assume that each input would have ***exactly* one solution*, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+**Output:** `[0,1]`  Because `nums[0] + nums[1] == 9`
+
+
+**Solution (Conceptual):**  A common approach is to use a hash table (dictionary in Python).  Iterate through the array. For each number, check if `target - number` exists in the hash table. If it does, you've found your pair.  If not, add the number and its index to the hash table.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+`s = "babad"`
+**Output:** `"bab"`  ("aba" is also a valid answer)
+
+
+**Solution (Conceptual):**  Several approaches exist, including dynamic programming and expanding around the center.  The expanding around the center approach involves checking for palindromes centered at each character and between each pair of characters.  Keep track of the longest palindrome found.
+
+
+These are just examples.  The difficulty and complexity of algorithmic problems can vary widely depending on constraints, input size, and required efficiency.  Many online resources (like LeetCode, HackerRank, Codewars) offer a wide range of problems with varying difficulty levels and solutions to help you practice.
+
