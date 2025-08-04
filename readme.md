@@ -21213,3 +21213,70 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The `for` loop is generally preferred when you know the number of iterations in advance, while the `while` loop is better when the number of iterations depends on a condition that might change during the loop's execution.  Remember to avoid infinite loops by ensuring your loop condition eventually becomes false.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop will execute completely for each iteration of the outer loop.  This is a common programming construct used to process multi-dimensional data structures like matrices or tables, or to perform operations that require repeated iterations within iterations.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    # Outer loop code
+    for inner_loop_variable in inner_loop_iterable:
+        # Inner loop code
+    # More outer loop code
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(f"{i * j:4}", end="") # Formatted output for alignment
+    print()  # Newline after each row
+```
+
+This will produce a 10x10 multiplication table.  The outer loop iterates through the rows, and for each row, the inner loop iterates through the columns, calculating and printing the product.
+
+**Another Example (Python):  Iterating through a Matrix (list of lists)**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()  # Newline after each row
+```
+
+This will print:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+
+**Efficiency:**
+
+Nested loops can be computationally expensive, especially when dealing with large datasets.  The time complexity often increases quadratically (O(n²)) or even higher depending on the number of nested loops and the size of the iterables.  It's important to consider the efficiency of nested loops, and explore alternative approaches (like vectorization or algorithms with better time complexity) when performance becomes critical.
+
+
+**Use Cases:**
+
+* **Matrix/Array manipulation:** Processing two-dimensional data structures.
+* **Generating patterns:** Creating visual or textual patterns.
+* **Combinatorial problems:**  Exploring all possible combinations of elements.
+* **Graph traversal:**  Exploring nodes and edges in a graph.
+
+
+In essence, nested loops provide a powerful but potentially computationally intensive way to perform iterative tasks that require multiple levels of iteration.  Understanding their structure and potential performance implications is crucial for writing efficient and effective code.
+
