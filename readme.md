@@ -22704,3 +22704,102 @@ print()
 
 Remember that the order of traversal significantly affects the resulting sequence.  Choosing the right traversal method depends entirely on the specific task you are performing on the tree.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common & Efficient):**
+
+   This approach recursively traverses the tree.  If the current node is either `node1` or `node2`, it's returned.  If `node1` and `node2` are on different subtrees, the current node is the LCA. Otherwise, the recursion continues down the appropriate subtree.
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:  # p and q are on different subtrees
+           return root
+       elif left:          # p and q are on the left subtree
+           return left
+       else:              # p and q are on the right subtree
+           return right
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, you traverse the entire tree.
+   * **Space Complexity:** O(H), where H is the height of the tree.  This is due to the recursive call stack.  In the worst case (a skewed tree), this can be O(N).
+
+
+2. **Iterative Approach (Using Parent Pointers):**
+
+   This approach requires modifying the tree to store parent pointers for each node.  You then traverse upwards from both `p` and `q` until you find a common ancestor.
+
+   ```python
+   #This requires a modified TreeNode class with a parent pointer
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None, parent=None):
+           self.val = val
+           self.left = left
+           self.right = right
+           self.parent = parent
+
+   def lowestCommonAncestor_iterative(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       path_p = []
+       path_q = []
+
+       #Find path from root to p and root to q
+       curr = p
+       while curr:
+           path_p.append(curr)
+           curr = curr.parent
+       curr = q
+       while curr:
+           path_q.append(curr)
+           curr = curr.parent
+
+       #Find LCA by traversing the paths
+       lca = None
+       i = len(path_p) -1
+       j = len(path_q) -1
+       while i >= 0 and j >= 0 and path_p[i] == path_q[j]:
+           lca = path_p[i]
+           i -= 1
+           j -= 1
+       return lca
+   ```
+
+   * **Time Complexity:** O(D), where D is the maximum depth of the tree.  Generally faster than the recursive approach for balanced trees.
+   * **Space Complexity:** O(D)
+
+
+3. **Using a Hash Table (Less Efficient):**
+
+   You can traverse the tree and store the paths from the root to each node in a hash table. Then, find the longest common prefix of the paths to `p` and `q`.
+
+   This method is generally less efficient than the recursive or iterative approaches, so it's not recommended unless you have other constraints.
+
+
+**Choosing the Best Method:**
+
+* For most cases, the **recursive approach** is the simplest and most efficient if you don't need to modify the tree structure.
+* If you have a tree where you've already added parent pointers (or can easily do so), the **iterative approach** is a good alternative.
+
+
+Remember to handle edge cases such as:
+
+* `p` or `q` not being in the tree.
+* `p` or `q` being the root.
+* `p` and `q` being the same node.
+
+
+The recursive approach's code provided above handles these cases gracefully.  You would need to add similar checks to the iterative approach to make it robust. Remember to adapt the `TreeNode` class accordingly depending on which method you choose.
+
