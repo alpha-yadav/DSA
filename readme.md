@@ -21058,3 +21058,60 @@ Big-Omega notation is crucial for:
 
 **In Summary:** Big-Omega notation provides a valuable tool for analyzing and understanding the lower bounds of algorithm complexity, giving us a guarantee on the minimum resources an algorithm will consume as input size grows.  It's a fundamental concept in algorithm design and analysis.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used to describe the limiting behavior of a function when the argument tends towards a particular value or infinity.  In computer science, it's used to classify algorithms according to how their run time or space requirements grow as the input size grows.  It focuses on the dominant factors affecting performance as the input scales, ignoring constant factors and smaller terms.
+
+Here's a breakdown of key concepts:
+
+**What Big O Describes:**
+
+Big O notation describes the *upper bound* of an algorithm's growth rate.  It provides a worst-case scenario estimate of how the runtime or space usage will increase with larger inputs.  It doesn't tell you the *exact* runtime, but rather how the runtime scales.
+
+**Key Aspects:**
+
+* **Input Size (n):**  This is usually the number of elements in the input data (e.g., the number of items in an array, the number of nodes in a graph).
+
+* **Growth Rate:** Big O describes how the runtime or space usage grows as 'n' increases.  We're interested in the dominant factors as 'n' becomes very large.  Constant factors and lower-order terms are ignored.
+
+* **Upper Bound:** Big O gives an upper limit on the growth rate.  The actual runtime might be better in some cases, but it will never be significantly worse than the Big O notation suggests.
+
+
+**Common Big O Notations and Their Growth Rates:**
+
+| Notation | Description                                      | Example                               |
+|----------|--------------------------------------------------|---------------------------------------|
+| O(1)     | Constant time – Runtime doesn't depend on input size | Accessing an array element by index    |
+| O(log n) | Logarithmic time – Runtime increases slowly with input size | Binary search in a sorted array       |
+| O(n)     | Linear time – Runtime increases linearly with input size | Searching an unsorted array          |
+| O(n log n)| Linearithmic time –  Common in efficient sorting algorithms | Merge sort, heap sort                |
+| O(n²)    | Quadratic time – Runtime increases proportionally to the square of the input size | Nested loops iterating over the input |
+| O(2ⁿ)    | Exponential time – Runtime doubles with each addition to the input | Finding all subsets of a set         |
+| O(n!)    | Factorial time – Extremely slow for even moderately sized inputs | Finding all permutations of a set     |
+
+
+**Examples:**
+
+* **Searching an unsorted array:**  If you need to find a specific element in an unsorted array, you might have to check every element in the worst case.  This is O(n) because the runtime is directly proportional to the number of elements.
+
+* **Binary search in a sorted array:**  Binary search repeatedly divides the search interval in half.  This results in a logarithmic runtime, O(log n).
+
+* **Bubble sort:**  Bubble sort compares and swaps adjacent elements repeatedly.  This leads to a quadratic runtime, O(n²).
+
+
+**Ignoring Constants and Lower-Order Terms:**
+
+* `O(2n + 5)` simplifies to `O(n)` because the constant '5' and the factor '2' are insignificant as 'n' grows very large.
+* `O(n² + n)` simplifies to `O(n²)` because the `n²` term dominates as 'n' increases.
+
+
+**Why Big O is Important:**
+
+* **Algorithm Comparison:** Big O allows you to compare the efficiency of different algorithms without needing to run them on specific hardware.
+* **Scalability Assessment:**  It helps predict how an algorithm will perform with larger datasets, enabling informed decisions about which algorithm to choose for a given task.
+* **Optimization Focus:**  It highlights areas of an algorithm where optimization efforts will have the most impact.
+
+
+**Beyond Big O:**
+
+While Big O notation is widely used, it's not the only measure of algorithm efficiency.  Other notations, like Big Omega (Ω) which describes the lower bound, and Big Theta (Θ) which describes a tight bound, provide a more complete picture.  However, Big O is often sufficient for initial algorithm analysis.
+
