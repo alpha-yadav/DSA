@@ -20859,3 +20859,73 @@ This separates the logic for determining "Fizz," "Buzz," or "FizzBuzz" into its 
 
 For a simple FizzBuzz, Version 1 is perfectly acceptable and easy to understand.  Version 2 is slightly more concise but might be less readable for those unfamiliar with nested ternary operators. Version 3 is best for maintainability and scalability if you plan to extend the functionality or make it more complex.  Choose the version that best suits your needs and coding style, prioritizing readability. Remember to always prioritize clear and understandable code.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (like time and memory) an algorithm consumes as a function of the input size.  It's crucial for understanding how an algorithm will perform with large datasets.  We typically analyze complexity using two main perspectives:
+
+**1. Time Complexity:** This analyzes how the runtime of an algorithm grows as the input size increases.
+
+**2. Space Complexity:** This analyzes how the memory usage of an algorithm grows as the input size increases.
+
+
+**Big O Notation:**
+
+Big O notation is the most common way to express algorithm complexity.  It describes the upper bound of the growth rate, focusing on the dominant terms as the input size approaches infinity.  It ignores constant factors and lower-order terms because they become insignificant as the input size grows large.
+
+Here are some common Big O complexities, from best to worst:
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Finding all permutations of a set.
+
+
+**Analyzing Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the runtime (e.g., comparisons, assignments, arithmetic operations).
+
+2. **Count the number of operations:**  Express the number of operations as a function of the input size (n).
+
+3. **Simplify the function:** Use Big O notation to express the dominant term and ignore constant factors and lower-order terms.
+
+
+**Example:**
+
+Let's consider a simple function that sums the elements of an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for num in arr:
+    total += num
+  return total
+```
+
+* **Basic operation:** The addition operation (`total += num`) within the loop.
+* **Number of operations:**  This operation is performed `n` times, where `n` is the length of the array.
+* **Big O notation:** The time complexity is O(n) – linear time.  The space complexity is O(1) – constant space, as we only use a constant amount of extra memory regardless of the array size.
+
+
+**Best, Average, and Worst Case:**
+
+Complexity analysis can also consider:
+
+* **Best Case:** The most favorable scenario (e.g., finding an element at the beginning of an unsorted array).
+* **Average Case:** The expected runtime over many inputs.
+* **Worst Case:** The least favorable scenario (e.g., finding an element at the end of an unsorted array, or searching for a non-existent element).
+
+Often, the worst-case scenario is the most important to consider, as it provides an upper bound on the runtime.
+
+
+Understanding algorithm complexity is essential for choosing the right algorithm for a given task and for predicting its performance with different input sizes.  Choosing an algorithm with better complexity can significantly improve performance, especially when dealing with large datasets.
+
