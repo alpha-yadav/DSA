@@ -22420,3 +22420,86 @@ print(f"Is the tree a BST (inorder)? {is_bst_inorder(root2)}")  # Output: False
 
 Remember to adapt the `Node` class and example trees to match your specific data structure.  The key is understanding the core BST property and using a method that efficiently checks for its adherence throughout the tree.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit all the nodes in a binary tree in a specific order.  There are three main types:
+
+* **Inorder Traversal:**  Left subtree -> Root -> Right subtree
+* **Preorder Traversal:** Root -> Left subtree -> Right subtree
+* **Postorder Traversal:** Left subtree -> Right subtree -> Root
+
+Let's break down each type, including their applications and code examples (Python):
+
+**1. Inorder Traversal:**
+
+* **Order:**  Visits the left subtree recursively, then the root node, then the right subtree recursively.
+* **Application:**  For binary *search* trees (BSTs), inorder traversal yields the nodes in *ascending* order of their values.
+* **Code Example:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3
+```
+
+**2. Preorder Traversal:**
+
+* **Order:** Visits the root node first, then the left subtree recursively, then the right subtree recursively.
+* **Application:**  Creating a copy of the tree, evaluating an expression tree.  Preorder traversal is used to generate a prefix notation (Polish notation) of an expression tree.
+* **Code Example:**
+
+```python
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+print("\nPreorder traversal:")
+preorder_traversal(root)  # Output: 1 2 4 5 3
+```
+
+
+**3. Postorder Traversal:**
+
+* **Order:** Visits the left subtree recursively, then the right subtree recursively, then the root node.
+* **Application:** Deleting a tree (deleting nodes in a specific order to avoid dangling pointers), evaluating an expression tree (in postfix notation). Postorder traversal is used to generate a postfix notation (Reverse Polish Notation) of an expression tree.
+* **Code Example:**
+
+```python
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+print("\nPostorder traversal:")
+postorder_traversal(root)  # Output: 4 5 2 3 1
+```
+
+**Iterative Traversals:**
+
+While the above examples use recursion,  you can also implement these traversals iteratively using stacks (for preorder and inorder) or stacks and a flag (for postorder). Iterative approaches are generally preferred for very large trees to avoid potential stack overflow errors.
+
+
+**Choosing the Right Traversal:**
+
+The choice of traversal depends entirely on the specific application.  Understanding the order in which nodes are visited is crucial for successfully implementing algorithms that work on binary trees.  If you're unsure which traversal to use, carefully consider the order in which you need to process the nodes.
+
