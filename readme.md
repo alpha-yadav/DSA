@@ -20157,3 +20157,55 @@ Imagine you have two functions, f(n) and g(n).  If f(n) = Θ(g(n)), it means tha
 
 Big-Theta notation is essential for analyzing the efficiency of algorithms. It allows us to compare algorithms regardless of the specific hardware or implementation details. We use it to classify algorithms based on their runtime complexity (e.g., linear time, quadratic time) and to choose the most efficient algorithm for a given task.  For instance, if one algorithm is Θ(n) and another is Θ(n²), we prefer the first because it scales much better with increasing input size.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly useful for analyzing the efficiency of algorithms.  Here's a comparison of the most common ones:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Describes the *upper bound* of a function's growth.  It provides a worst-case scenario for how the runtime or space usage of an algorithm scales with input size.
+* **Formal Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means that the runtime grows no faster than the square of the input size.  The actual runtime might be significantly smaller for some inputs, but it's guaranteed not to exceed a constant multiple of n² for sufficiently large n.
+* **Focus:** Worst-case complexity.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Describes the *lower bound* of a function's growth.  It provides a best-case (or sometimes average-case) scenario.
+* **Formal Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means that the runtime grows at least linearly with the input size.
+* **Focus:** Best-case (or average-case) complexity.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Describes a *tight bound*, meaning both the upper and lower bounds are the same. It indicates that the function grows at the same rate as another function.
+* **Formal Definition:** f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime scales proportionally to n log n.  It's both an upper and lower bound.
+* **Focus:** Precise complexity.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Describes an *upper bound* that is *not tight*.  It means f(n) grows strictly slower than g(n).
+* **Formal Definition:** f(n) = o(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  Note the strict inequality (<).
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+* **Focus:** Asymptotically strictly smaller upper bound.
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Describes a *lower bound* that is *not tight*. It means f(n) grows strictly faster than g(n).
+* **Formal Definition:** f(n) = ω(g(n)) if for any positive constant c, there exists a positive constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀. Note the strict inequality (<).
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+* **Focus:** Asymptotically strictly larger lower bound.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Formal Definition (simplified)         | Tight Bound? |
+|---------|---------------------------------------|-----------------------------------------|--------------|
+| O(g(n)) | Upper bound                             | f(n) ≤ c * g(n) for some c, n ≥ n₀    | No            |
+| Ω(g(n)) | Lower bound                             | c * g(n) ≤ f(n) for some c, n ≥ n₀    | No            |
+| Θ(g(n)) | Tight bound (both upper and lower)    | f(n) ≤ c₁ * g(n) and c₂ * g(n) ≤ f(n) | Yes           |
+| o(g(n)) | Upper bound, not tight (strictly slower)| f(n) < c * g(n) for all c, n ≥ n₀      | No            |
+| ω(g(n)) | Lower bound, not tight (strictly faster)| c * g(n) < f(n) for all c, n ≥ n₀      | No            |
+
+
+Remember that these notations focus on the *asymptotic* behavior—how the function behaves as the input size (n) approaches infinity. Constant factors and lower-order terms are typically ignored.  The choice of notation depends on what aspect of the function's growth you want to emphasize.  Θ provides the most precise information, while O and Ω provide useful bounds when a tight bound is difficult or unnecessary to obtain.
+
