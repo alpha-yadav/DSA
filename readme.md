@@ -21115,3 +21115,101 @@ Big O notation describes the *upper bound* of an algorithm's growth rate.  It pr
 
 While Big O notation is widely used, it's not the only measure of algorithm efficiency.  Other notations, like Big Omega (Ω) which describes the lower bound, and Big Theta (Θ) which describes a tight bound, provide a more complete picture.  However, Big O is often sufficient for initial algorithm analysis.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a certain condition is met.  Here are examples in a few common programming languages:
+
+**1. `for` loop (iterating a set number of times):**
+
+* **Python:**
+
+```python
+for i in range(5):  # Iterates 5 times, i = 0, 1, 2, 3, 4
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. `while` loop (repeating until a condition is false):**
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  The `for` loop is generally preferred when you know the number of iterations in advance, while the `while` loop is better when the number of iterations depends on a condition that might change during the loop's execution.  Remember to avoid infinite loops by ensuring your loop condition eventually becomes false.
+
