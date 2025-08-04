@@ -20972,3 +20972,50 @@ This means that for sufficiently large values of `n` (n ≥ n₀), the function 
 
 Big-Theta notation is crucial for analyzing algorithms because it gives a precise characterization of their time or space complexity.  It tells us how the resource requirements of an algorithm scale with the input size, providing a more complete picture than Big O notation alone.  Using Θ notation helps to compare the efficiency of different algorithms accurately.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used in computer science to describe the behavior of functions, especially the running time of algorithms, as their input size grows arbitrarily large.  The most common notations are Big O (O), Big Omega (Ω), and Big Theta (Θ).  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Intuition:**  f(n) grows no faster than g(n).
+* **Example:** If an algorithm has a running time of f(n) = 2n² + 5n + 1, we can say its time complexity is O(n²) because the n² term dominates as n becomes large.  The constants (2, 5, 1) are ignored.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (though not always practically meaningful). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Intuition:** f(n) grows at least as fast as g(n).
+* **Example:** If an algorithm has a running time of f(n) = 2n² + 5n + 1, we can say its time complexity is Ω(n²) because the n² term is the lowest order of the polynomial that still dominates as n becomes large.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows at the *same rate* as another function, both upper and lower bounded.  We say f(n) = Θ(g(n)) if there exist positive constants c₁ , c₂, and n₀ such that 0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n ≥ n₀.
+* **Intuition:** f(n) grows proportionally to g(n).  This is the strongest statement we can make about asymptotic growth.
+* **Example:** If an algorithm has a running time of f(n) = 2n² + 5n + 1, we can say its time complexity is Θ(n²) because its growth is tightly bounded by n².
+
+**Relationships:**
+
+* If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* If f(n) = O(g(n)), it doesn't imply f(n) = Ω(g(n)) (and vice versa).
+* Θ represents a stronger statement than O or Ω individually.
+
+
+**Other Notations (Less Common but Important):**
+
+* **Little o (o):**  f(n) = o(g(n)) means that f(n) grows *strictly slower* than g(n).  Formally: for every constant c > 0, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Little omega (ω):** f(n) = ω(g(n)) means that f(n) grows *strictly faster* than g(n). Formally: for every constant c > 0, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+
+
+**In Summary:**
+
+| Notation | Meaning                                      | Relationship to others                               |
+|----------|-------------------------------------------------|------------------------------------------------------|
+| O        | Upper bound (worst-case)                       | f(n) ≤ c * g(n)                                    |
+| Ω        | Lower bound (best-case)                        | c * g(n) ≤ f(n)                                    |
+| Θ        | Tight bound (average-case)                     | c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)                         |
+| o        | Strictly slower growth                          | f(n) < c * g(n) for all c > 0                     |
+| ω        | Strictly faster growth                          | c * g(n) < f(n) for all c > 0                     |
+
+
+Understanding these notations is crucial for analyzing the efficiency and scalability of algorithms.  Remember that they describe the *asymptotic* behavior – how the function behaves as the input size approaches infinity, not necessarily its performance for small inputs.
+
