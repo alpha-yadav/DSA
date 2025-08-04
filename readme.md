@@ -22103,3 +22103,116 @@ print("Inorder Traversal after deleting 8:", bst.inorder_traversal())
 
 This improved version provides a more complete and robust implementation of a BST, including detailed comments and example usage. Remember that the efficiency of BST operations (search, insert, delete) depends on the balance of the tree.  For very large datasets, consider using self-balancing BSTs like AVL trees or red-black trees to maintain better performance.
 
+#  Check if a tree is BST or not 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST produces a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+      node: The root node of the tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.  Returns True for an empty tree.
+    """
+    in_order_list = []
+    
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            in_order_list.append(node.data)
+            inorder(node.right)
+
+    inorder(node)
+    
+    # Check if the in-order list is sorted.  Handle empty list case.
+    if not in_order_list:
+        return True
+    for i in range(1, len(in_order_list)):
+        if in_order_list[i] < in_order_list[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+root2 = Node(5)
+root2.left = Node(1)
+root2.right = Node(4)
+root2.right.left = Node(3)
+root2.right.right = Node(6)
+print(f"Is the tree a BST? {is_bst_recursive(root2)}")  # Output: False
+
+
+root3 = None #Test empty tree
+print(f"Is the tree a BST? {is_bst_recursive(root3)}")  # Output: True
+
+```
+
+**Method 2:  Recursive with Min/Max bounds**
+
+This method recursively checks if each subtree satisfies the BST property:  all nodes in the left subtree are less than the current node, and all nodes in the right subtree are greater than the current node.  We pass down minimum and maximum bounds to constrain the search.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_minmax(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Checks if a binary tree is a BST using recursion and min/max bounds.
+
+    Args:
+      node: The root node of the tree.
+      min_val: The minimum value allowed in the subtree.
+      max_val: The maximum value allowed in the subtree.
+
+    Returns:
+      True if the subtree rooted at node is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if node.data <= min_val or node.data >= max_val:
+        return False
+
+    return (is_bst_minmax(node.left, min_val, node.data) and
+            is_bst_minmax(node.right, node.data, max_val))
+
+# Example usage (same as before, but using the min/max method):
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+print(f"Is the tree a BST? {is_bst_minmax(root)}")  # Output: True
+
+root2 = Node(5)
+root2.left = Node(1)
+root2.right = Node(4)
+root2.right.left = Node(3)
+root2.right.right = Node(6)
+print(f"Is the tree a BST? {is_bst_minmax(root2)}")  # Output: False
+
+root3 = None #Test empty tree
+print(f"Is the tree a BST? {is_bst_minmax(root3)}")  # Output: True
+```
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive method, where H is the height of the tree (O(N) in the worst case of a skewed tree, O(log N) in the best case of a balanced tree).  The iterative in-order approach would have O(N) space complexity in the worst case due to the list storage.  The min/max method avoids explicit list creation, making it slightly more space-efficient.  Choose the method that best suits your needs and coding style.
+
