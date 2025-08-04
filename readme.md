@@ -20785,3 +20785,77 @@ Output: [1,1,2,3,4,4,5,6]
 
 These examples illustrate the range of algorithmic problems, from simpler ones suitable for beginners to more complex ones requiring advanced data structures and algorithms.  Remember to consider time and space complexity when designing your solution.  Choosing the right algorithm can significantly impact performance.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's deceptively simple, but a good way to test basic programming concepts like loops and conditional statements. Here's how to implement it in Swift, starting with the simplest approach and then adding refinements:
+
+**Version 1: The Basic Approach**
+
+This version uses a `for` loop and a series of `if`/`else if`/`else` statements.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  For each number, it checks for divisibility by 15 (FizzBuzz), 3 (Fizz), and 5 (Buzz) in that order.  If none of these conditions are met, it prints the number itself.
+
+
+**Version 2:  Using the Ternary Operator for Conciseness**
+
+We can make the code slightly more compact using Swift's ternary operator:
+
+```swift
+func fizzBuzzTernary(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzTernary(n: 15) // Call the function
+```
+
+This version nests ternary operators to achieve the same result in a more concise way.  However, excessively nested ternaries can become difficult to read, so this is a trade-off.
+
+
+**Version 3: More Readable with a Helper Function (Optional)**
+
+For larger or more complex FizzBuzz variations, a helper function can improve readability:
+
+```swift
+func fizzBuzzHelper(n: Int) -> String {
+    var output = ""
+    if n % 3 == 0 { output += "Fizz" }
+    if n % 5 == 0 { output += "Buzz" }
+    return output.isEmpty ? String(n) : output
+}
+
+func fizzBuzzHelperFunction(n: Int) {
+    for i in 1...n {
+        print(fizzBuzzHelper(n: i))
+    }
+}
+
+fizzBuzzHelperFunction(n: 15) //Call the function
+```
+
+This separates the logic for determining "Fizz," "Buzz," or "FizzBuzz" into its own function, making the main loop cleaner and easier to understand.  This approach scales better if you need to add more conditions later.
+
+
+**Choosing the Best Version:**
+
+For a simple FizzBuzz, Version 1 is perfectly acceptable and easy to understand.  Version 2 is slightly more concise but might be less readable for those unfamiliar with nested ternary operators. Version 3 is best for maintainability and scalability if you plan to extend the functionality or make it more complex.  Choose the version that best suits your needs and coding style, prioritizing readability. Remember to always prioritize clear and understandable code.
+
