@@ -22907,3 +22907,115 @@ Please provide me with the data or equation you want me to graph.  I need inform
 
 Once you give me this information, I can help you graph it.  I can't create visual graphs directly, but I can help you understand the shape and characteristics of the graph.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, especially when dealing with dense graphs (graphs with many edges).  Here's a breakdown of how it works, along with its advantages and disadvantages:
+
+**How it Works:**
+
+An adjacency matrix is a two-dimensional array (usually a square matrix) where each element `matrix[i][j]` represents the connection between vertex (or node) `i` and vertex `j`.
+
+* **Value Representation:** The value of `matrix[i][j]` can represent different things:
+    * **0 or 1:**  A simple binary representation.  0 means no edge between `i` and `j`, 1 means there is an edge.  This is suitable for unweighted graphs.
+    * **Weight:**  For weighted graphs, the value can represent the weight of the edge between `i` and `j`.  A value of `infinity` (or a large number) can indicate no edge.
+    * **Other Data:** You can store more complex data structures in each cell if needed (e.g., a struct containing weight, color, etc.).
+
+* **Example (Unweighted):**
+
+Consider a graph with 4 vertices (A, B, C, D):
+
+```
+A -- B
+|   /
+|  /
+C -- D
+```
+
+Its adjacency matrix would be:
+
+```
+   A B C D
+A  0 1 1 0
+B  1 0 1 0
+C  1 1 0 1
+D  0 0 1 0
+```
+
+* **Example (Weighted):**
+
+Let's add weights to the edges:
+
+```
+A --(2)-- B
+|       /
+|--(5)--/
+C --(3)-- D
+```
+
+Its adjacency matrix would be:
+
+```
+   A B C D
+A  0 2 5 ∞
+B  2 0 1 ∞
+C  5 1 0 3
+D  ∞ ∞ 3 0
+```  (Here, `∞` represents infinity, indicating no direct edge)
+
+
+**Code Example (Python):**
+
+```python
+import sys
+
+def create_adjacency_matrix(num_vertices, edges):
+    """Creates an adjacency matrix for an unweighted graph."""
+    matrix = [[0] * num_vertices for _ in range(num_vertices)]
+    for u, v in edges:
+        matrix[u][v] = 1
+        matrix[v][u] = 1  # Assuming an undirected graph; comment out for directed
+    return matrix
+
+def create_weighted_adjacency_matrix(num_vertices, weighted_edges):
+    """Creates a weighted adjacency matrix."""
+    matrix = [[float('inf')] * num_vertices for _ in range(num_vertices)]
+    for u, v, weight in weighted_edges:
+        matrix[u][v] = weight
+        matrix[v][u] = weight  # Assuming an undirected graph; comment out for directed
+    return matrix
+
+#Example Usage (Unweighted)
+num_vertices = 4
+edges = [(0, 1), (0, 2), (1, 2), (2, 3)]  #Vertices are 0-indexed
+adjacency_matrix = create_adjacency_matrix(num_vertices, edges)
+print(adjacency_matrix)
+
+#Example Usage (Weighted)
+weighted_edges = [(0, 1, 2), (0, 2, 5), (1, 2, 1), (2, 3, 3)]
+weighted_adjacency_matrix = create_weighted_adjacency_matrix(num_vertices, weighted_edges)
+print(weighted_adjacency_matrix)
+
+```
+
+**Advantages:**
+
+* **Simple to implement:**  Easy to understand and code.
+* **Fast edge checking:** Checking for the existence of an edge between two vertices is O(1) (constant time).
+* **Easy to find neighbors:**  Finding all neighbors of a vertex is O(V) (where V is the number of vertices).
+
+
+**Disadvantages:**
+
+* **Space complexity:** Requires O(V²) space, which can be very large for large graphs, especially sparse graphs (graphs with relatively few edges).
+* **Inefficient for sparse graphs:**  A lot of space is wasted storing zeros for non-existent edges.
+* **Adding/deleting vertices:**  Can be inefficient if you need to frequently add or delete vertices, requiring matrix resizing.
+
+
+**When to Use:**
+
+* **Dense graphs:** Adjacency matrices are best suited for dense graphs where the number of edges is close to V².
+* **Graphs with a relatively small number of vertices:**  The O(V²) space complexity becomes a problem for very large graphs.
+* **When you need fast edge existence checks:** The O(1) edge check is a significant advantage.
+
+
+In summary, adjacency matrices offer a straightforward way to represent graphs, but their space efficiency is a key consideration.  For sparse graphs, other representations like adjacency lists are generally preferred.
+
