@@ -23252,3 +23252,109 @@ Topological sorting is crucial in various applications, including:
 
 Kahn's algorithm is generally preferred for its simplicity and efficiency (O(V + E), where V is the number of vertices and E is the number of edges). DFS is also effective but might be slightly less intuitive for beginners.  Both effectively detect cycles.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on maintaining a `visited` set and a `recursionStack` set.
+
+* **`visited`:**  Keeps track of all vertices visited during the traversal.  A vertex is added to `visited` when it's first explored.
+
+* **`recursionStack`:** Keeps track of vertices currently in the recursion stack (i.e., vertices that are part of the current DFS path).  This is crucial for detecting cycles.
+
+
+**Algorithm:**
+
+1. **Initialization:** Create `visited` and `recursionStack` sets, both initially empty.
+
+2. **DFS Function:**
+   ```python
+   def dfs(node, visited, recursionStack, graph):
+       visited.add(node)
+       recursionStack.add(node)
+
+       for neighbor in graph[node]:
+           if neighbor not in visited:
+               if dfs(neighbor, visited, recursionStack, graph):
+                   return True  # Cycle detected
+           elif neighbor in recursionStack:
+               return True  # Cycle detected (back edge)
+
+       recursionStack.remove(node)  # Remove from recursion stack after exploring all neighbors
+       return False
+   ```
+
+3. **Main Function:**
+   ```python
+   def hasCycle(graph):
+       visited = set()
+       recursionStack = set()
+       for node in graph:
+           if node not in visited:
+               if dfs(node, visited, recursionStack, graph):
+                   return True
+       return False
+   ```
+
+**Explanation:**
+
+* The `dfs` function recursively explores the graph.
+* When a node is first visited, it's added to both `visited` and `recursionStack`.
+* If a neighbor is already in `visited` *and* in `recursionStack`, it means we've found a back edge, indicating a cycle.  This is because the neighbor is already on the current path.
+* If a neighbor is not visited, we recursively call `dfs` on it.
+* If the recursive call returns `True` (cycle detected), we propagate the `True` value up.
+* Once all neighbors of a node are explored, it's removed from `recursionStack`.
+
+
+**Python Example:**
+
+```python
+def hasCycle(graph):
+    visited = set()
+    recursionStack = set()
+    for node in graph:
+        if node not in visited:
+            if dfs(node, visited, recursionStack, graph):
+                return True
+    return False
+
+def dfs(node, visited, recursionStack, graph):
+    visited.add(node)
+    recursionStack.add(node)
+
+    for neighbor in graph.get(node, []): #Handle cases where a node might not have outgoing edges
+        if neighbor not in visited:
+            if dfs(neighbor, visited, recursionStack, graph):
+                return True
+        elif neighbor in recursionStack:
+            return True
+
+    recursionStack.remove(node)
+    return False
+
+# Example graph represented as an adjacency list
+graph = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: [3]
+}
+
+if hasCycle(graph):
+    print("Cycle detected")
+else:
+    print("No cycle detected")
+
+
+graph2 = {
+    0: [1,2],
+    1: [2],
+    2: [3],
+    3: []
+}
+
+if hasCycle(graph2):
+    print("Cycle detected")
+else:
+    print("No cycle detected")
+```
+
+This improved example handles cases where a node might not have any outgoing edges, preventing `KeyError` exceptions.  Remember to adapt the graph representation (adjacency list, adjacency matrix) to your specific needs.  The core algorithm remains the same.
+
