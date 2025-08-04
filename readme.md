@@ -22803,3 +22803,98 @@ Remember to handle edge cases such as:
 
 The recursive approach's code provided above handles these cases gracefully.  You would need to add similar checks to the iterative approach to make it robust. Remember to adapt the `TreeNode` class accordingly depending on which method you choose.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic computer science problem.  The optimal approach depends on the type of tree and whether you have additional information available (like parent pointers).
+
+Here's a breakdown of common approaches and their complexities:
+
+**1. Binary Tree (with parent pointers):**
+
+* **Approach:** If each node has a pointer to its parent, you can simply traverse upwards from both nodes simultaneously.  When you encounter a common ancestor, that's the LCA.  Keep going up until the paths converge.
+
+* **Time Complexity:** O(h), where h is the height of the tree (best case is O(1) if nodes are close to the root).
+* **Space Complexity:** O(1) (constant extra space)
+
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent(node1, node2):
+    ancestors1 = set()
+    current = node1
+    while current:
+        ancestors1.add(current)
+        current = current.parent
+
+    current = node2
+    while current:
+        if current in ancestors1:
+            return current
+        current = current.parent
+    return None # Nodes are not related
+
+
+# Example Usage (assuming you've created a tree with parent pointers):
+# root = ...  # Your root node
+# node1 = ... # Node 1
+# node2 = ... # Node 2
+# lca = lca_with_parent(node1, node2)
+# print(f"LCA: {lca.data}")
+```
+
+**2. Binary Tree (without parent pointers):**
+
+* **Approach:** This is more complex.  The most common efficient approach is a recursive one:
+
+    1. **Base Case:** If the node is null, return null. If the node is `node1` or `node2`, return the node.
+    2. **Recursive Calls:** Recursively search for `node1` and `node2` in the left and right subtrees.
+    3. **Result Combination:** If both subtrees contain `node1` and `node2`, then the current node is the LCA. If only one subtree contains both, then the LCA is in that subtree.  Otherwise, return `None`.
+
+* **Time Complexity:** O(n), where n is the number of nodes in the tree (in the worst case, it might traverse the entire tree).
+* **Space Complexity:** O(h) in the worst case due to recursive calls (h is the height of the tree).
+
+* **Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_without_parent(root, node1, node2):
+    if not root or root == node1 or root == node2:
+        return root
+
+    left_lca = lca_without_parent(root.left, node1, node2)
+    right_lca = lca_without_parent(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage (assuming you have a binary tree rooted at 'root'):
+# lca = lca_without_parent(root, node1, node2)
+# print(f"LCA: {lca.data}")
+```
+
+**3. General Tree (with parent pointers or other structure):**
+
+The approach will depend on how the general tree is represented.  If you have parent pointers, a similar approach to the binary tree with parent pointers can be used. If you have a different representation (e.g., adjacency list), you might need to use a depth-first search (DFS) or breadth-first search (BFS) to find paths from the root to the nodes and then find their common ancestor.
+
+
+**Important Considerations:**
+
+* **Error Handling:**  Add checks to handle cases where `node1` or `node2` are not in the tree.
+* **Node Equality:**  Ensure that your node equality checks (`==`) are correctly implemented.
+
+
+Remember to adapt the code snippets to your specific tree structure and node class.  The choice of algorithm depends on your specific needs and the constraints of your problem (e.g., memory usage, tree size).  For very large trees, optimizing for space or time complexity becomes crucial.
+
