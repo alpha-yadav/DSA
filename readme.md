@@ -23071,3 +23071,109 @@ Graphs can be classified in several ways:
 
 This introduction provides a foundational understanding of graph theory.  The field is rich and vast, encompassing many more advanced topics and applications.  Further exploration will reveal its power and elegance in solving complex problems across various disciplines.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementation choices and considerations:
+
+**The Basic Idea**
+
+An adjacency list represents a graph as an array (or a hash table/dictionary) of lists.  Each index in the array corresponds to a vertex in the graph.  The list at that index contains all the vertices that are adjacent (connected by an edge) to the vertex represented by the index.
+
+**Example:**
+
+Consider an undirected graph with vertices {0, 1, 2, 3} and edges {(0, 1), (0, 2), (1, 2), (2, 3)}.
+
+* **Adjacency List Representation:**
+
+```
+0: [1, 2]
+1: [0, 2]
+2: [0, 1, 3]
+3: [2]
+```
+
+* **Visual Representation:**
+
+```
+   0 --- 1
+   | \   |
+   |  \  |
+   2 --- 3
+```
+
+
+**Implementation Choices:**
+
+* **Data Structure for Vertices:**  You can use integers (as in the example above), strings, or any other suitable data type to represent vertices.
+
+* **Data Structure for Adjacency Lists:**
+
+    * **Arrays of Lists:**  This is a straightforward approach.  Each list can be implemented using a dynamically sized list (e.g., `ArrayList` in Java, `list` in Python).  This allows for efficient insertion and deletion of edges.
+
+    * **Hash Tables/Dictionaries:**  If vertices are represented by non-integer data types (e.g., strings), a hash table (or dictionary) offers faster lookup of neighbors.  The key is the vertex, and the value is its adjacency list.
+
+    * **Linked Lists:** You can use linked lists instead of arrays for the adjacency lists. This can be beneficial for dynamic graph structures where adding and removing vertices/edges is frequent. However, accessing a specific neighbor might be less efficient than with arrays.
+
+* **Weighted vs. Unweighted Graphs:**
+
+    * **Unweighted:** The adjacency list simply contains the IDs of neighboring vertices.
+    * **Weighted:**  Each entry in the adjacency list should be a pair (or tuple) containing the neighbor vertex and the weight of the edge connecting to it.  For example: `0: [(1, 5), (2, 2)]` indicates an edge from vertex 0 to vertex 1 with weight 5 and an edge to vertex 2 with weight 2.
+
+
+**Code Examples (Python):**
+
+**Unweighted Graph:**
+
+```python
+graph = {
+    0: [1, 2],
+    1: [0, 2],
+    2: [0, 1, 3],
+    3: [2]
+}
+
+# Check if there's an edge between vertices u and v
+def has_edge(graph, u, v):
+  return v in graph[u]
+
+print(has_edge(graph, 0, 1))  # True
+print(has_edge(graph, 0, 3))  # False
+
+# Get neighbors of a vertex
+def get_neighbors(graph, u):
+  return graph[u]
+
+print(get_neighbors(graph, 2))  # [0, 1, 3]
+```
+
+**Weighted Graph:**
+
+```python
+graph = {
+    0: [(1, 5), (2, 2)],
+    1: [(0, 5), (2, 1)],
+    2: [(0, 2), (1, 1), (3, 4)],
+    3: [(2, 4)]
+}
+
+# Get neighbors and weights
+def get_neighbors_weighted(graph, u):
+  return graph[u]
+
+print(get_neighbors_weighted(graph, 0)) # [(1, 5), (2, 2)]
+```
+
+
+**Advantages of Adjacency Lists:**
+
+* **Efficient for sparse graphs:**  Only stores existing edges.
+* **Easy to find neighbors:**  Direct access to the list of neighbors for a given vertex.
+* **Efficient for adding/removing edges:**  Simple list operations (append, remove).
+
+**Disadvantages of Adjacency Lists:**
+
+* **Less efficient for dense graphs:**  Can take more space than adjacency matrices for dense graphs (graphs with many edges).
+* **Checking for edge existence can be slower than with an adjacency matrix** (requires a linear scan of the adjacency list).
+
+
+In summary, adjacency lists are a powerful and efficient way to represent graphs, especially sparse ones.  The choice of data structures within the implementation will depend on the specific needs of your application and the nature of your graph.
+
