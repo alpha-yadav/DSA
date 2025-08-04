@@ -22216,3 +22216,120 @@ print(f"Is the tree a BST? {is_bst_minmax(root3)}")  # Output: True
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive method, where H is the height of the tree (O(N) in the worst case of a skewed tree, O(log N) in the best case of a balanced tree).  The iterative in-order approach would have O(N) space complexity in the worst case due to the list storage.  The min/max method avoids explicit list creation, making it slightly more space-efficient.  Choose the method that best suits your needs and coding style.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Algorithm 1: Recursive In-order Traversal**
+
+This algorithm leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.  We perform an in-order traversal, keeping track of the previously visited node. If the current node's value is less than the previous node's value, the tree is not a BST.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBST(node, prev):
+    # An empty tree is BST
+    if node is None:
+        return True
+
+    # Recursively check left subtree
+    if not isBST(node.left, prev):
+        return False
+
+    # Check if the current node's value is greater than the previous node's value
+    if prev is not None and node.data <= prev.data:
+        return False
+
+    # Update previous node
+    prev = node
+
+    # Recursively check right subtree
+    return isBST(node.right, prev)
+
+# Example usage
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.right = Node(20)
+
+prev = None
+if isBST(root, prev):
+  print("Is BST")
+else:
+  print("Not a BST")
+
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.left = Node(3)
+root2.left.right = Node(7)
+root2.right.right = Node(12) #this violates BST property
+
+
+prev = None
+if isBST(root2, prev):
+  print("Is BST")
+else:
+  print("Not a BST")
+
+```
+
+**Algorithm 2:  Recursive Check with Min and Max**
+
+This algorithm recursively checks each subtree.  Each recursive call receives the minimum and maximum allowed values for the current node.  If a node's value falls outside this range, or if a subtree is not a BST, the function returns `False`.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTUtil(node, minVal, maxVal):
+    if node is None:
+        return True
+
+    if node.data < minVal or node.data > maxVal:
+        return False
+
+    return (isBSTUtil(node.left, minVal, node.data - 1) and
+            isBSTUtil(node.right, node.data + 1, maxVal))
+
+def isBST(node):
+    return isBSTUtil(node, float('-inf'), float('inf'))
+
+
+# Example Usage (same trees as above)
+root = Node(10)
+root.left = Node(5)
+root.right = Node(15)
+root.left.left = Node(3)
+root.left.right = Node(7)
+root.right.right = Node(20)
+
+if isBST(root):
+  print("Is BST")
+else:
+  print("Not a BST")
+
+root2 = Node(10)
+root2.left = Node(5)
+root2.right = Node(15)
+root2.left.left = Node(3)
+root2.left.right = Node(7)
+root2.right.right = Node(12) #this violates BST property
+
+if isBST(root2):
+  print("Is BST")
+else:
+  print("Not a BST")
+```
+
+Both algorithms have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the worst case (a skewed tree), where H is the height of the tree (for recursive calls).  In a balanced tree, H is log(N), resulting in O(log N) space complexity.  The first algorithm uses less space in practice because it only needs to track one previous node. Choose the algorithm that best suits your needs and coding style.  The second is generally considered more elegant and directly reflects the definition of a BST.
+
