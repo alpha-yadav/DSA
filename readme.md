@@ -20071,3 +20071,47 @@ FizzBuzz
 
 Remember to choose the version that you find most readable and understandable. The basic version is generally preferred for clarity, especially when learning.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  This is typically expressed as a function of the input size, denoted as 'n'.  The most common resources considered are:
+
+* **Time complexity:** The amount of time an algorithm takes to run as a function of the input size.
+* **Space complexity:** The amount of memory an algorithm takes to run as a function of the input size.
+
+We analyze complexity using **Big O notation**, which describes the upper bound of the growth rate of the algorithm's resource consumption as the input size increases.  It focuses on the dominant terms and ignores constant factors.  Other notations used, though less frequently, include:
+
+* **Big Omega (Ω):** Describes the lower bound of the growth rate.
+* **Big Theta (Θ):** Describes both the upper and lower bounds, indicating a tight bound.
+
+Here's a breakdown of common time complexities, ordered from best to worst:
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient. Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** A combination of linear and logarithmic time.  Often seen in efficient sorting algorithms like merge sort and heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  This can become slow quickly as 'n' grows. Example: Bubble sort, selection sort, nested loops iterating over the same input.
+
+* **O(n³) - Cubic Time:** The runtime increases cubically with the input size.  Even slower than quadratic time. Example:  Some matrix multiplication algorithms (naive approach).
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  These algorithms are impractical for large inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Extremely slow, even for moderately sized inputs. Example:  Trying all permutations of a sequence.
+
+
+**Factors affecting complexity analysis:**
+
+* **Best-case, worst-case, and average-case:**  Analyzing the complexity for different input scenarios can provide a more complete picture.  For example, a search algorithm might find an element immediately (best-case), or it might have to check every element (worst-case). Average-case is often the most relevant.
+
+* **Input data distribution:** The nature of the input data can influence the algorithm's performance.  For instance, a sorting algorithm might perform better on nearly sorted data.
+
+* **Hardware and software:** The specific hardware and software environment can also affect the runtime, but Big O notation abstracts away these specifics.
+
+
+**Space Complexity:**  Similar to time complexity, space complexity describes the memory usage. Common space complexities are also described using Big O notation, with similar interpretations (O(1), O(n), O(n²), etc.).  For example, an algorithm that creates a copy of the input array will have O(n) space complexity.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task and for predicting its performance with different input sizes.  It's essential for writing efficient and scalable software.
+
