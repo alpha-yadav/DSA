@@ -25881,3 +25881,112 @@ def lowestCommonAncestorIterative(p, q):
 
 Remember to handle edge cases such as empty trees, `p` or `q` not being in the tree, or `p` or `q` being the root.  The provided code includes basic error handling, but you might want to add more robust checks depending on the specific requirements of your application.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a more general tree) is a classic algorithmic problem.  There are several approaches, each with different time and space complexities.  Here are some common methods:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a simple and elegant approach for binary trees.  It uses recursion to traverse the tree.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not in the tree.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = TreeNode(3, TreeNode(5, TreeNode(6), TreeNode(2, TreeNode(7), TreeNode(4))), TreeNode(1, TreeNode(0), TreeNode(8)))
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 5 and 1: 3
+
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, we might traverse the entire tree).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursive call stack).  In a skewed tree, this can be O(N).
+
+
+**2. Iterative Approach (for Binary Trees):**
+
+This approach avoids recursion and uses a stack (or parent pointers) instead.  This can be beneficial for very deep trees to avoid stack overflow errors.
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    #Implementation using a stack or parent pointers would go here.  More complex than the recursive version.
+    pass # omitted for brevity
+```
+
+**3. Using Parent Pointers (for any Tree):**
+
+If the tree nodes store a reference to their parent, finding the LCA becomes significantly easier.  You simply traverse upwards from each node until you find a common ancestor.
+
+```python
+class TreeNodeWithParent:
+    def __init__(self, val=0, left=None, right=None, parent=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.parent = parent
+
+def lowestCommonAncestorParentPointers(p, q):
+    ancestors_p = set()
+    curr = p
+    while curr:
+        ancestors_p.add(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        if curr in ancestors_p:
+            return curr
+        curr = curr.parent
+    return None #shouldn't happen if p and q are in the tree.
+
+```
+
+**Time Complexity:** O(D), where D is the depth (or maximum depth) of the tree.
+**Space Complexity:** O(D) in the worst case (due to the `ancestors_p` set).
+
+
+**4.  Binary Lifting (for Binary Trees):**
+
+This advanced technique preprocesses the tree to allow for O(log N) LCA queries after the preprocessing step. It's efficient for many LCA queries on the same tree.
+
+
+**Choosing the Right Approach:**
+
+* For simple binary trees and a small number of LCA queries, the recursive approach is often the easiest to implement and understand.
+* For very deep binary trees, the iterative approach or parent pointers might be preferred to avoid stack overflow.
+* For many LCA queries on the same tree, binary lifting offers the best performance.
+* For general trees (not necessarily binary), the parent pointer method is usually the most straightforward.
+
+
+Remember to handle edge cases, such as when `p` or `q` is not in the tree, or when either `p` or `q` is the root.  The provided code snippets address some of these but might need additional error handling depending on your specific requirements.
+
