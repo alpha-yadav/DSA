@@ -24948,3 +24948,79 @@ int main() {
 
 Remember to compile and run this code using a C++ compiler (like g++).  This improved version includes better error handling and demonstrates deletion of nodes with different characteristics.  Crucially, it highlights the need for proper memory management – in a real-world application, you'd need a more robust method to recursively deallocate all nodes to prevent memory leaks.  The commented-out section indicates where this more comprehensive cleanup would be added.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants (where a node is considered a descendant of itself).
+
+There are several ways to find the LCA in a BST, but the most efficient leverages the BST property:
+
+**Algorithm:**
+
+1. **Start at the root:** Begin your search at the root of the BST.
+
+2. **Compare with node values:**
+   - If both `node1` and `node2` are smaller than the current node's value, the LCA must be in the left subtree.  Recursively search the left subtree.
+   - If both `node1` and `node2` are larger than the current node's value, the LCA must be in the right subtree. Recursively search the right subtree.
+   - Otherwise, the current node is the LCA (because one node is smaller and the other is larger, meaning the current node is the lowest node that encompasses both).
+
+3. **Base Case:** If either `node1` or `node2` is not found in the BST, return `null` (or an appropriate indicator).  This can be incorporated into the recursive calls.
+
+**Python Code:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, node1, node2):
+    """
+    Finds the Lowest Common Ancestor of node1 and node2 in a BST.
+
+    Args:
+        root: The root of the BST.
+        node1: The first node.
+        node2: The second node.
+
+    Returns:
+        The LCA node, or None if either node1 or node2 is not found.
+    """
+
+    if root is None:
+        return None
+
+    if node1.data < root.data and node2.data < root.data:
+        return lowestCommonAncestor(root.left, node1, node2)
+    elif node1.data > root.data and node2.data > root.data:
+        return lowestCommonAncestor(root.right, node1, node2)
+    else:
+        return root
+
+
+# Example Usage
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+node1 = Node(10)  #Make sure these nodes exist in the tree!
+node2 = Node(14)
+
+lca = lowestCommonAncestor(root, node1, node2)
+if lca:
+    print(f"LCA of {node1.data} and {node2.data} is: {lca.data}")
+else:
+    print("One or both nodes not found in the BST.")
+
+```
+
+**Time Complexity:** O(H), where H is the height of the BST.  In a balanced BST, H is log(N), where N is the number of nodes.  In a skewed BST, H can be N.
+
+**Space Complexity:** O(H) due to the recursive call stack.  Again, this is log(N) for a balanced BST and N for a skewed BST.
+
+
+This algorithm is efficient because it avoids unnecessary traversal of the entire tree. It directly focuses on the relevant subtree containing both nodes.  Remember to handle the case where one or both input nodes are not present in the tree.
+
