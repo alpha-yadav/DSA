@@ -25675,3 +25675,106 @@ This recursive approach is less efficient and more complex than the iterative qu
 
 Remember to choose the approach that best suits your needs and understanding.  The iterative queue-based method is generally recommended for its efficiency and clarity.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals (preorder, inorder, and postorder) are ways to visit all nodes in a binary tree in a specific order.  They're fundamental to understanding and working with trees.  Let's break down each one:
+
+**1. Preorder Traversal:**
+
+* **Order:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The acronym is **VLR** (Visit Root Left Right).
+
+* **Algorithm (Recursive):**
+
+```python
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")  # Visit the root
+        preorder_traversal(node.left)  # Traverse left subtree
+        preorder_traversal(node.right) # Traverse right subtree
+
+# Example usage (assuming you have a Node class with data, left, and right attributes):
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Preorder traversal:")
+preorder_traversal(root)  # Output: 1 2 4 5 3
+```
+
+* **Algorithm (Iterative):**  Uses a stack.
+
+```python
+def preorder_traversal_iterative(node):
+    if node is None:
+        return
+
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        print(current.data, end=" ")
+
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+
+print("\nPreorder traversal (iterative):")
+preorder_traversal_iterative(root) # Output: 1 2 4 5 3
+```
+
+
+**2. Inorder Traversal:**
+
+* **Order:** Recursively traverse the left subtree, visit the root node, then recursively traverse the right subtree. The acronym is **LVR** (Left Visit Root Right).
+
+* **Algorithm (Recursive):**
+
+```python
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)  # Traverse left subtree
+        print(node.data, end=" ")  # Visit the root
+        inorder_traversal(node.right) # Traverse right subtree
+
+print("\nInorder traversal:")
+inorder_traversal(root)  # Output: 4 2 5 1 3  (sorted for a Binary Search Tree)
+```
+
+* **Algorithm (Iterative):** Uses a stack.  More complex than preorder iterative.
+
+
+**3. Postorder Traversal:**
+
+* **Order:** Recursively traverse the left subtree, recursively traverse the right subtree, then visit the root node.  The acronym is **LRV** (Left Right Visit).
+
+* **Algorithm (Recursive):**
+
+```python
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)  # Traverse left subtree
+        postorder_traversal(node.right) # Traverse right subtree
+        print(node.data, end=" ")  # Visit the root
+
+print("\nPostorder traversal:")
+postorder_traversal(root)  # Output: 4 5 2 3 1
+```
+
+* **Algorithm (Iterative):**  Also uses a stack, and is the most complex iterative traversal.
+
+
+**Node Class (for Python examples):**
+
+You'll need a simple `Node` class to represent nodes in the binary tree:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+Remember that the output of these traversals depends on the structure of your binary tree.  Inorder traversal produces a sorted sequence *only* if the tree is a Binary Search Tree (BST).  Preorder and postorder don't guarantee any specific ordering unless the tree has a particular structure.
+
