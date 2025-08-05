@@ -25585,3 +25585,93 @@ Similar iterative approaches can be implemented for preorder and postorder trave
 
 Understanding these traversals is fundamental to working with binary trees in various algorithms and data structures.  Remember that the choice of traversal depends on the specific task.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first traversal, visits all the nodes of a tree level by level.  Here's how you can implement it in various ways, along with explanations:
+
+**1. Using a Queue (Most Common Approach):**
+
+This approach uses a queue data structure to store nodes that need to be visited.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])  # Initialize a queue with the root node
+    while(len(nodes) > 0):
+        curr = nodes.popleft()  # Dequeue the front node
+        print(curr.data, end=" ")
+
+        #Enqueue left and right children
+        if curr.left is not None:
+            nodes.append(curr.left)
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root) #Output: 1 2 3 4 5
+```
+
+**Explanation:**
+
+1. **Initialization:** A queue `nodes` is created and the root node is added to it.
+2. **Iteration:** The `while` loop continues as long as the queue is not empty.
+3. **Dequeue:** In each iteration, the front node (the next node to be visited) is dequeued using `nodes.popleft()`.  Its data is printed.
+4. **Enqueue:** The left and right children of the dequeued node are enqueued (added to the back of the queue) if they exist.  This ensures that nodes at the same level are processed before moving to the next level.
+
+
+**2. Recursive Approach (Less Efficient):**
+
+While possible, a purely recursive approach is less efficient for level order traversal because it doesn't naturally lend itself to the breadth-first nature of the algorithm.  It would involve multiple recursive calls for each level, leading to higher space complexity.  Generally, the iterative queue-based approach is preferred.  However, for completeness, here's a sketch of a recursive approach which requires maintaining the level information:
+
+```python
+def levelOrderRecursive(root, level):
+    if root is None:
+        return
+
+    if level == 1:
+        print(root.data, end=" ")
+    elif level > 1:
+        levelOrderRecursive(root.left, level - 1)
+        levelOrderRecursive(root.right, level - 1)
+
+def levelOrderRecursiveHelper(root):
+    h = height(root) #Need a helper function to get tree height
+    for i in range(1, h + 1):
+        levelOrderRecursive(root, i)
+
+# height function (needed for the recursive approach)
+def height(node):
+    if node is None:
+        return 0
+    else:
+        lheight = height(node.left)
+        rheight = height(node.right)
+        return max(lheight, rheight) + 1
+
+
+#Example usage (same tree as before):
+levelOrderRecursiveHelper(root) #Output: 1 2 3 4 5
+```
+
+This recursive approach is less efficient and more complex than the iterative queue-based method.  Stick with the queue-based method for better performance and readability.
+
+
+Remember to choose the approach that best suits your needs and understanding.  The iterative queue-based method is generally recommended for its efficiency and clarity.
+
