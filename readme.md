@@ -24193,3 +24193,69 @@ Big O notation can also be used to describe space complexity, which refers to th
 
 **In summary:** Big O notation provides a crucial tool for comparing the efficiency of different algorithms and making informed decisions about which algorithm to use for a given problem, particularly as the input size scales.  It allows for a high-level understanding of algorithm performance without getting bogged down in implementation details.
 
+#  A Simple Loop 
+The simplest loop in most programming languages is a `while` loop.  It continues to execute a block of code as long as a condition is true.  Here are examples in a few popular languages:
+
+
+**Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This loop prints the numbers 0 through 4.  The condition `count < 5` is checked before each iteration.  Once `count` reaches 5, the condition becomes false, and the loop terminates.
+
+
+**JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+This is functionally identical to the Python example.
+
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+This C++ example does the same thing, using `std::cout` for output and `std::endl` for a newline.
+
+
+**Java:**
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+Java requires a class and a `main` method.  The logic remains the same.
+
+
+These are all examples of a simple `while` loop.  Other loop types, like `for` loops, are often preferred for iterating a known number of times, but the `while` loop demonstrates the fundamental concept of looping while a condition is met.  Remember to always include a way to change the condition within the loop to avoid infinite loops.
+
