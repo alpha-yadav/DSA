@@ -24710,3 +24710,125 @@ To address the problem of unbalanced trees, self-balancing BSTs have been develo
 
 In summary, BSTs are a powerful and versatile data structure with many applications.  While the possibility of unbalanced trees is a concern, the use of self-balancing variants mitigates this issue, making them a preferred choice for scenarios requiring efficient searching and ordered data management.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement insertion into a Binary Search Tree (BST) in Python. Here are a couple, with explanations:
+
+**Method 1: Recursive Insertion**
+
+This method is often considered more elegant and easier to understand.  It recursively traverses the tree to find the correct location for the new node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    #Helper function for printing the tree (inorder traversal)
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+# Example usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal:", end=" ")
+bst.inorder_traversal(bst.root) # Output should be: 1 3 4 6 7 8 10 13 14
+```
+
+
+**Method 2: Iterative Insertion**
+
+This method uses a loop instead of recursion. It might be slightly more efficient in some cases, especially for very deep trees, as it avoids the overhead of recursive function calls.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        new_node = Node(data)
+        if self.root is None:
+            self.root = new_node
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = new_node
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = new_node
+                    break
+                else:
+                    current = current.right
+
+    #Helper function for printing the tree (inorder traversal) - same as above
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+
+# Example Usage (same as above, will produce identical output)
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("\nInorder traversal:", end=" ")
+bst.inorder_traversal(bst.root)
+```
+
+Both methods achieve the same result: inserting a new node into the correct position within the BST to maintain the BST property (left subtree < node < right subtree).  Choose the method that you find more readable and maintainable.  The recursive version is generally preferred for its clarity, while the iterative version might offer a slight performance advantage in certain scenarios. Remember to handle potential errors, such as duplicate entries, if needed, in a production environment.
+
