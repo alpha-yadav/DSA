@@ -25778,3 +25778,106 @@ class Node:
 
 Remember that the output of these traversals depends on the structure of your binary tree.  Inorder traversal produces a sorted sequence *only* if the tree is a Binary Search Tree (BST).  Preorder and postorder don't guarantee any specific ordering unless the tree has a particular structure.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary *search* tree, a general binary tree doesn't have a guaranteed ordering property, making the LCA problem slightly more complex.
+
+There are several ways to solve this problem. Here are two common approaches:
+
+**1. Recursive Approach:**
+
+This approach recursively traverses the tree.  If a node is found to contain both `p` and `q` in its left or right subtree, that node is the LCA.  If `p` is found in one subtree and `q` in the other, the current node is the LCA.  If neither `p` nor `q` are found in either subtree, then the LCA is not in that subtree (return null).
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node, or None if not found.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:  # p and q are on different sides
+        return root
+    elif left_lca:             # p and q are on the left side
+        return left_lca
+    else:                       # p and q are on the right side
+        return right_lca
+
+# Example Usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # Node with value 5
+q = root.right # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
+```
+
+**2. Iterative Approach (using parent pointers):**
+
+This approach is efficient if you can modify the tree to include parent pointers for each node.  You traverse upwards from both `p` and `q`, storing the paths to the root. Then, you find the last common node in both paths.
+
+```python
+# (This approach requires adding parent pointers to the TreeNode class, which is not included here for brevity.  Modifying the previous TreeNode class to include a 'parent' attribute is straightforward.)
+
+def lowestCommonAncestorIterative(p, q):
+    path_p = []
+    path_q = []
+
+    curr = p
+    while curr:  #Traverse up from p storing path
+      path_p.append(curr)
+      curr = curr.parent
+
+    curr = q
+    while curr:  #Traverse up from q storing path
+      path_q.append(curr)
+      curr = curr.parent
+
+    lca = None
+    i = len(path_p) -1
+    j = len(path_q) -1
+    while i >=0 and j>=0 and path_p[i] == path_q[j]:
+        lca = path_p[i]
+        i -= 1
+        j -= 1
+    return lca
+
+
+#Example Usage (requires a tree with parent pointers added)
+# ... (Tree construction with parent pointers) ...
+#lca = lowestCommonAncestorIterative(p, q)
+#print(f"LCA of {p.val} and {q.val}: {lca.val}")
+
+```
+
+**Choosing the right approach:**
+
+* The **recursive approach** is generally simpler to understand and implement. It doesn't require modifying the tree structure.
+* The **iterative approach** (with parent pointers) can be more efficient for large trees if memory usage is a concern because it avoids the recursion overhead. However, adding parent pointers increases the memory usage of the tree itself.
+
+
+Remember to handle edge cases such as empty trees, `p` or `q` not being in the tree, or `p` or `q` being the root.  The provided code includes basic error handling, but you might want to add more robust checks depending on the specific requirements of your application.
+
