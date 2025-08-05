@@ -24259,3 +24259,88 @@ Java requires a class and a `main` method.  The logic remains the same.
 
 These are all examples of a simple `while` loop.  Other loop types, like `for` loops, are often preferred for iterating a known number of times, but the `while` loop demonstrates the fundamental concept of looping while a condition is met.  Remember to always include a way to change the condition within the loop to avoid infinite loops.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions or combinations of data.
+
+Here's a breakdown with examples in several programming languages:
+
+**Basic Concept:**
+
+Imagine you have a grid (like a spreadsheet).  The outer loop iterates through the rows, and the inner loop iterates through the columns in each row.
+
+**Examples:**
+
+**Python:**
+
+```python
+for i in range(3):  # Outer loop (rows)
+    for j in range(2):  # Inner loop (columns)
+        print(f"({i}, {j})", end=" ")  # Output: (0, 0) (0, 1) (1, 0) (1, 1) (2, 0) (2, 1)
+    print() # Newline after each row
+```
+
+This code will print all combinations of `i` (0, 1, 2) and `j` (0, 1).
+
+
+**JavaScript:**
+
+```javascript
+for (let i = 0; i < 3; i++) { // Outer loop
+  for (let j = 0; j < 2; j++) { // Inner loop
+    console.log(`(${i}, ${j})`);
+  }
+}
+```
+
+This produces the same output as the Python example.
+
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 3; i++) { // Outer loop
+    for (int j = 0; j < 2; j++) { // Inner loop
+      std::cout << "(" << i << ", " << j << ")" << std::endl;
+    }
+  }
+  return 0;
+}
+```
+
+
+**Java:**
+
+```java
+public class NestedLoop {
+  public static void main(String[] args) {
+    for (int i = 0; i < 3; i++) { // Outer loop
+      for (int j = 0; j < 2; j++) { // Inner loop
+        System.out.println("(" + i + ", " + j + ")");
+      }
+    }
+  }
+}
+```
+
+
+**Applications:**
+
+Nested loops are commonly used for:
+
+* **Matrix operations:** Processing elements of a 2D array (matrix).
+* **Generating combinations:** Creating all possible combinations of items from multiple sets.
+* **Searching and sorting:** Implementing algorithms like bubble sort or searching within a 2D data structure.
+* **Pattern printing:**  Creating various patterns like triangles or squares using characters.
+
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly with the number of nested loops. Consider optimizing your code if performance becomes an issue.  For example, using more efficient algorithms or data structures.
+* **Readability:**  Use clear variable names and proper indentation to enhance the readability of your nested loops.  This helps prevent errors and makes your code easier to maintain.
+
+
+Nested loops are a fundamental programming construct, and understanding how they work is crucial for tackling many programming tasks effectively. Remember to always carefully consider the number of iterations to avoid performance bottlenecks.
+
