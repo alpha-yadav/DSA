@@ -23679,3 +23679,65 @@ As you progress, learn about Big O notation. This is a way to describe how the r
 
 By following these steps and dedicating time to practice, you'll develop a strong foundation in algorithms and be well-equipped to tackle more advanced concepts. Remember that learning algorithms is an iterative process – be patient, persistent, and enjoy the challenge!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem examples, categorized by difficulty:
+
+**Easy:**
+
+* **Problem:**  Given an array of integers, find the sum of all the even numbers in the array.
+* **Input:** An array of integers (e.g., `[1, 2, 3, 4, 5, 6]`)
+* **Output:** The sum of the even numbers (e.g., 12)
+
+* **Problem:**  Reverse a string.
+* **Input:** A string (e.g., "hello")
+* **Output:** The reversed string (e.g., "olleh")
+
+**Medium:**
+
+* **Problem:** Implement a function to find the kth largest element in an unsorted array.
+* **Input:** An array of integers and an integer k. (e.g., `[3, 2, 1, 5, 6, 4]`, k=2)
+* **Output:** The kth largest element (e.g., 5)
+
+* **Problem:** Given a binary tree, find its maximum depth (height).
+* **Input:** A binary tree.
+* **Output:** The maximum depth of the tree.
+
+
+**Hard:**
+
+* **Problem:** Find the median of two sorted arrays.
+* **Input:** Two sorted arrays.
+* **Output:** The median of the combined sorted arrays.
+
+* **Problem:** Implement Dijkstra's algorithm to find the shortest path between two nodes in a graph.
+* **Input:** A graph represented as an adjacency matrix or list, and a source and destination node.
+* **Output:** The shortest path and its length.
+
+
+**Example Solution (Easy Problem - Sum of Even Numbers):**
+
+```python
+def sum_even_numbers(arr):
+  """
+  Calculates the sum of even numbers in an array.
+
+  Args:
+    arr: An array of integers.
+
+  Returns:
+    The sum of even numbers in the array.
+  """
+  sum = 0
+  for num in arr:
+    if num % 2 == 0:
+      sum += num
+  return sum
+
+# Example usage
+numbers = [1, 2, 3, 4, 5, 6]
+even_sum = sum_even_numbers(numbers)
+print(f"The sum of even numbers is: {even_sum}")  # Output: 12
+```
+
+Remember that solving algorithmic problems involves understanding the problem, designing an efficient algorithm, implementing the algorithm in code, and testing it thoroughly.  The difficulty level depends on the complexity of the algorithm needed and the constraints involved.
+
