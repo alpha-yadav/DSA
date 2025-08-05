@@ -23804,3 +23804,53 @@ This simple example illustrates the basic steps involved in designing and implem
 
 By following these steps and dedicating time to practice, you'll build a strong foundation in algorithms and data structures. Remember that consistency and persistence are key to success.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, with explanations:
+
+
+**Problem 1: Two Sum (Easy)**
+
+**Problem Statement:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+
+Output: `[0,1]` because `nums[0] + nums[1] == 9`
+
+**Solution Approach:**  A brute-force approach would be to check every pair of numbers.  A more efficient approach uses a hash map (dictionary in Python) to store seen numbers and their indices.  As you iterate through the array, check if the complement (`target - current_number`) exists in the hash map.
+
+**Problem 2: Reverse a Linked List (Medium)**
+
+**Problem Statement:** Reverse a singly linked list.
+
+**Example:**
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+
+**Solution Approach:**  This can be solved iteratively or recursively.  The iterative approach involves three pointers: `prev`, `curr`, and `next`.  You iterate through the list, changing the `next` pointer of each node to point to the previous node.
+
+**Problem 3:  Longest Palindromic Substring (Hard)**
+
+**Problem Statement:** Given a string `s`, find the longest palindromic substring in `s`.
+
+**Example:**
+
+Input: "babad"
+Output: "bab" (or "aba", both are valid)
+
+Input: "cbbd"
+Output: "bb"
+
+**Solution Approach:**  Several approaches exist, including:
+
+* **Brute Force:** Check all possible substrings for palindromicity.  Inefficient for large strings.
+* **Dynamic Programming:**  Build a table to store whether substrings are palindromes.  More efficient.
+* **Expand Around Center:**  For each character (or pair of characters), expand outwards to check for palindromes.  Often considered the most efficient.
+
+
+**Choosing a Problem to Solve:**
+
+The best problem for you depends on your current skill level.  If you're new to algorithms, start with "Two Sum."  If you're comfortable with basic data structures, try "Reverse a Linked List."  "Longest Palindromic Substring" is a good challenge for more experienced programmers.  Remember to practice and look for solutions only after you've put in significant effort.  Understanding the solution is just as important as finding it yourself.
+
