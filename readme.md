@@ -23854,3 +23854,77 @@ Output: "bb"
 
 The best problem for you depends on your current skill level.  If you're new to algorithms, start with "Two Sum."  If you're comfortable with basic data structures, try "Reverse a Linked List."  "Longest Palindromic Substring" is a good challenge for more experienced programmers.  Remember to practice and look for solutions only after you've put in significant effort.  Understanding the solution is just as important as finding it yourself.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing some improvements:
+
+**Basic Implementation:**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks divisibility by 15 first (to handle both 3 and 5).
+* Then it checks divisibility by 3.
+* Then it checks divisibility by 5.
+* If none of the above are true, it prints the number itself.
+
+
+**Improved Implementation (using string concatenation):**
+
+This version is more concise and efficient by building the output string:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This approach avoids nested `if-else if` statements.  It builds the `output` string incrementally.  If the string is empty after checking for divisibility by 3 and 5, it prints the number; otherwise, it prints the built string.
+
+
+**Even More Concise (using ternary operator):**
+
+This version uses the ternary operator for even more compact code (though perhaps slightly less readable for beginners):
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print((i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i))
+    }
+}
+
+fizzBuzzConcise(n: 15) // Example usage
+```
+
+This uses nested ternary operators to achieve the same result in a single `print` statement.
+
+
+**Choosing the best implementation:**
+
+The "Improved Implementation" offers a good balance of readability and efficiency. The concise version is shorter but can be harder to understand for those new to Swift.  The basic implementation is the easiest to understand but is less efficient.  Choose the version that best suits your needs and understanding.  Remember that readability is often prioritized over extreme conciseness in professional code.
+
