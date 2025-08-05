@@ -23928,3 +23928,71 @@ This uses nested ternary operators to achieve the same result in a single `print
 
 The "Improved Implementation" offers a good balance of readability and efficiency. The concise version is shorter but can be harder to understand for those new to Swift.  The basic implementation is the easiest to understand but is less efficient.  Choose the version that best suits your needs and understanding.  Remember that readability is often prioritized over extreme conciseness in professional code.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long the algorithm takes to run) and space (how much memory the algorithm requires).  Complexity is usually expressed using Big O notation, which describes the growth rate of the resources used as the input size increases.
+
+Here's a breakdown of key aspects:
+
+**1. Time Complexity:**  This analyzes how the runtime of an algorithm scales with the size of the input.  We're generally interested in the *worst-case* scenario, as that provides an upper bound on the runtime.
+
+* **Common Time Complexities (from best to worst):**
+
+    * **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+    * **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient. Example: Binary search in a sorted array.
+
+    * **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+    * **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+    * **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating through an array.
+
+    * **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  These algorithms become impractical very quickly for larger inputs. Example: Finding all subsets of a set.
+
+    * **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Extremely inefficient for even moderately sized inputs.  Example: Traveling salesman problem using brute force.
+
+
+**2. Space Complexity:**  This analyzes how the memory usage of an algorithm scales with the input size.  Similar to time complexity, we usually focus on the worst-case scenario.
+
+* **Common Space Complexities:**  The same notations (O(1), O(n), O(n²), etc.) apply, but they describe memory usage instead of runtime.
+
+* **In-place algorithms:** Algorithms with O(1) space complexity, meaning they use a constant amount of extra memory regardless of input size.
+
+* **Out-of-place algorithms:** Algorithms that require additional memory proportional to the input size (e.g., O(n)).  Examples include merge sort (requires extra space to merge subarrays).
+
+
+**3. Big O Notation:**
+
+Big O notation simplifies complexity analysis by focusing on the dominant terms and ignoring constant factors.  For example:
+
+* `3n² + 5n + 2` simplifies to `O(n²)`, because the `n²` term dominates as `n` gets large.
+* `100n` simplifies to `O(n)`.
+
+
+**4. Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically need to:
+
+1. **Identify the basic operations:** Determine which operations contribute most significantly to the runtime (e.g., comparisons, assignments, arithmetic operations).
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Determine the dominant term:** Identify the term that grows fastest as n increases.
+4. **Express the complexity using Big O notation:** Drop constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple function that searches for a value in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The worst-case scenario is that the target is not in the array, requiring a traversal of the entire array.  The number of comparisons is directly proportional to the array size (n).  Therefore, the time complexity is O(n).  The space complexity is O(1) because it uses a constant amount of extra space.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and for predicting the performance of your programs as the input size grows.  It allows you to make informed decisions about which algorithms are suitable for a given task and to avoid performance bottlenecks in your applications.
+
