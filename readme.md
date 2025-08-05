@@ -24654,3 +24654,59 @@ print(f"Tree 1 and Tree 3 are same (iterative): {are_trees_same_iterative(tree1,
 
 Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some cases (depending on the tree structure and implementation details) because it avoids the overhead of recursive function calls. Choose the method that best suits your coding style and performance requirements.  Remember to handle the case of empty trees appropriately.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science. They're a special type of binary tree where each node has at most two children, referred to as the left child and the right child, and satisfies the following crucial property:
+
+**The BST Property:**  For every node in the tree:
+
+* All nodes in its *left* subtree have keys *less than* the node's key.
+* All nodes in its *right* subtree have keys *greater than* the node's key.
+
+This property allows for efficient searching, insertion, and deletion of nodes.
+
+**Key Operations:**
+
+* **Search:**  To search for a key, start at the root. If the key matches the root's key, you're done. If the key is less than the root's key, recursively search the left subtree; otherwise, recursively search the right subtree.  This logarithmic time complexity (O(log n) on average, O(n) in the worst case – a skewed tree).
+
+* **Insertion:** To insert a new node, follow the search procedure.  When you reach a leaf node (a node with no children) where the key would be inserted, create a new node there.
+
+* **Deletion:** Deleting a node is more complex and has several cases to consider:
+
+    * **Leaf Node:** Simply remove the node.
+    * **Node with One Child:** Replace the node with its child.
+    * **Node with Two Children:**  There are two common approaches:
+        * **In-order Successor:** Find the smallest node in the right subtree (the in-order successor) and replace the node to be deleted with it. Then delete the in-order successor from its original location.
+        * **In-order Predecessor:** Find the largest node in the left subtree (the in-order predecessor) and replace the node to be deleted with it. Then delete the in-order predecessor from its original location.
+
+
+**Advantages of BSTs:**
+
+* **Efficient Search, Insertion, and Deletion:**  O(log n) on average for balanced trees.
+* **Ordered Data:**  BSTs inherently maintain the data in sorted order, making it easy to perform operations like finding the minimum or maximum element.
+* **Relatively Simple Implementation:** Compared to other self-balancing trees, BSTs are easier to understand and implement.
+
+**Disadvantages of BSTs:**
+
+* **Worst-Case Performance:** In a severely unbalanced tree (e.g., a linked list), the performance degrades to O(n) for all operations.
+* **Unbalanced Trees:**  The efficiency depends heavily on the order in which elements are inserted.  Random insertion generally leads to a reasonably balanced tree, but specific insertion patterns can create highly unbalanced trees.
+
+
+**Balanced BSTs:**
+
+To address the problem of unbalanced trees, self-balancing BSTs have been developed. These data structures automatically rebalance themselves after insertion or deletion to maintain a balanced structure, ensuring O(log n) performance in all cases.  Examples include:
+
+* **AVL Trees:**  Maintain a balance factor (height difference between left and right subtrees) for each node to ensure a relatively balanced structure.
+* **Red-Black Trees:**  Use color properties (red or black) to maintain balance, allowing for more efficient rebalancing operations than AVL trees.
+* **B-Trees:**  Optimized for disk-based storage, suitable for databases and file systems.
+
+
+**Applications of BSTs:**
+
+* **Symbol Tables:**  Storing and retrieving data associated with keys.
+* **Dictionaries:**  Implementing efficient key-value lookups.
+* **Sorting Algorithms:**  BSTs can be used as a basis for sorting algorithms (though not typically the most efficient).
+* **In-memory databases:** Simple in-memory database implementations might use BSTs.
+
+
+In summary, BSTs are a powerful and versatile data structure with many applications.  While the possibility of unbalanced trees is a concern, the use of self-balancing variants mitigates this issue, making them a preferred choice for scenarios requiring efficient searching and ordered data management.
+
