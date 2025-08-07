@@ -27285,3 +27285,60 @@ public class Main {
 
 These examples show the most basic forms. Loops can become much more complex, incorporating nested loops, conditional statements within the loop, and other control flow mechanisms.  The choice between `for` and `while` depends on whether you know the number of iterations beforehand.  `for` is generally preferred when the number of iterations is known, while `while` is better suited for situations where the loop continues until a specific condition is met.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a pattern where the inner loop's actions are repeated multiple times based on the outer loop's iterations.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+for (outer loop initialization; outer loop condition; outer loop increment) {
+  // Outer loop code
+  for (inner loop initialization; inner loop condition; inner loop increment) {
+    // Inner loop code
+  }
+  // More outer loop code
+}
+```
+
+**Example (Python):**
+
+This code prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: iterates from 1 to 10
+  for j in range(1, 11):  # Inner loop: iterates from 1 to 10 for each i
+    print(f"{i} x {j} = {i * j}", end="\t") # \t adds a tab for formatting
+  print()  # Newline after each row
+```
+
+**Output:**
+
+```
+1 x 1 = 1	1 x 2 = 2	1 x 3 = 3	1 x 4 = 4	1 x 5 = 5	1 x 6 = 6	1 x 7 = 7	1 x 8 = 8	1 x 9 = 9	1 x 10 = 10
+2 x 1 = 2	2 x 2 = 4	2 x 3 = 6	2 x 4 = 8	2 x 5 = 10	2 x 6 = 12	2 x 7 = 14	2 x 8 = 16	2 x 9 = 18	2 x 10 = 20
+3 x 1 = 3	3 x 2 = 6	3 x 3 = 9	3 x 4 = 12	3 x 5 = 15	3 x 6 = 18	3 x 7 = 21	3 x 8 = 24	3 x 9 = 27	3 x 10 = 30
+...and so on
+```
+
+**Explanation:**
+
+1. The outer loop iterates through numbers 1 to 10 (representing rows of the table).
+2. For each value of `i` (outer loop), the inner loop iterates from 1 to 10 (representing columns).
+3. Inside the inner loop, the multiplication `i * j` is calculated and printed.
+4. After the inner loop completes for a specific `i`, a newline character is printed to move to the next row.
+
+
+**Uses:**
+
+Nested loops are frequently used for:
+
+* **Processing two-dimensional data:**  Working with matrices, grids, or images.
+* **Generating patterns:** Creating shapes or sequences.
+* **Combinatorial problems:** Finding all possible combinations or permutations.
+* **Iterating through nested data structures:** Processing lists of lists, dictionaries within dictionaries, etc.
+
+
+**Important Note:**  Nested loops can lead to significant performance overhead if not designed carefully, especially with deeply nested loops or large datasets.  Consider the time complexity (often O(n*m) for two nested loops with n and m iterations respectively) and look for opportunities for optimization when working with large datasets.
+
