@@ -27139,3 +27139,51 @@ The statement f(n) = Ω(g(n)) means that the growth rate of f(n) is at least as 
 
 Big-Omega notation gives a crucial perspective on the lower bound of an algorithm's performance. While Big-O is often the focus when analyzing algorithms, understanding Big-Ω helps provide a complete picture of its runtime or space complexity.  It helps to avoid overly pessimistic analysis (by using only Big-O) that might overlook efficient algorithms that are nonetheless Ω(g(n)).
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of the algorithm's runtime or space requirements as the input size grows.  It doesn't tell you the exact runtime, but rather how the runtime *scales* with the input.
+
+Here's a breakdown of key concepts:
+
+**What Big O Describes:**
+
+* **Worst-Case Scenario:** Big O typically focuses on the worst-case scenario for an algorithm's performance.  This provides a guarantee that the algorithm will never perform *worse* than the stated Big O complexity.
+* **Asymptotic Behavior:** Big O describes the behavior of the algorithm as the input size (often denoted as 'n') approaches infinity.  It ignores constant factors and smaller terms because those become insignificant as 'n' grows very large.
+* **Growth Rate:**  The primary concern is the rate at which the runtime or space usage grows, not the absolute runtime for a specific input size.
+
+**Common Big O Notations and Their Meaning:**
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient. Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  This can become slow quickly as the input grows. Example: Nested loops iterating over the entire input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. This is extremely inefficient for large inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. This is exceptionally inefficient and usually intractable for even moderately sized inputs. Example:  Finding all permutations of a set.
+
+
+**Example:**
+
+Let's say we have two algorithms to search a list:
+
+* **Linear Search (O(n)):**  Checks each element one by one.  If the list has 100 elements, it might take 100 steps in the worst case.  If it has 1000 elements, it might take 1000 steps.  The runtime scales linearly with the input size.
+
+* **Binary Search (O(log n)):** Works only on sorted lists.  It repeatedly divides the search interval in half.  If the list has 1000 elements, it will take at most 10 steps (log₂1000 ≈ 10).  The runtime grows much slower than linear search.
+
+
+**Big Omega (Ω) and Big Theta (Θ):**
+
+* **Big Omega (Ω):** Describes the *lower bound* of an algorithm's runtime.  It gives a guarantee that the algorithm will never perform *better* than the stated Ω complexity.
+
+* **Big Theta (Θ):** Describes both the *upper bound* and the *lower bound* of an algorithm's runtime.  It provides a tight bound on the algorithm's complexity.  If an algorithm has a Θ(n) complexity, it means its runtime is both O(n) and Ω(n).
+
+
+**In Summary:**
+
+Big O notation is a crucial tool for analyzing and comparing the efficiency of algorithms. Understanding it allows developers to choose the most appropriate algorithm for a given task, especially when dealing with large datasets where efficiency is paramount.  It focuses on the scalability of the algorithm's performance as the input size grows, providing a high-level overview of its behavior.
+
