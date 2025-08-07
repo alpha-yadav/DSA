@@ -27378,3 +27378,58 @@ O(log n) algorithms, also known as logarithmic time algorithms, are incredibly e
 
 In summary, O(log n) algorithms are highly efficient because the runtime only grows slowly with input size.  They are frequently used in situations where fast search, insertion, or deletion of data is crucial.
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  It works by repeatedly dividing the search interval in half.  If the search key is less than the item in the middle of the interval, the search continues in the lower half. Otherwise, the search continues in the upper half.  This process repeats until the key is found or the interval is empty.
+
+**Why it's O(log n):**
+
+With each comparison, the size of the search space is halved.  This halving process is characteristic of logarithmic complexity. Let's say you have `n` elements.  The number of times you can halve `n` before you reach 1 is approximately log₂(n) (logarithm base 2).
+
+**Example in Python:**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+In this example, if `arr` has 16 elements, binary search will take at most 4 steps (log₂(16) = 4).  If it has 1024 elements, it will take at most 10 steps (log₂(1024) = 10).  The number of operations grows logarithmically with the size of the input.  This makes binary search very efficient for large sorted datasets.  Other O(log n) algorithms exist, but they all share this characteristic of reducing the problem size exponentially with each step.
+
