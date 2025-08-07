@@ -27096,3 +27096,46 @@ Asymptotic notations describe the behavior of functions as their input approache
 
 Understanding these notations is fundamental for comparing algorithm efficiency and choosing the best algorithm for a given problem.  Remember that these are asymptotic bounds—they describe behavior as input size approaches infinity, not necessarily for small inputs.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the lower bound of a function's growth rate.  In simpler terms, it provides a mathematical way to say, "this algorithm will *at least* take this long (or use this much space)."  It's one of the three main asymptotic notations, along with Big-O (upper bound) and Big-Theta (tight bound).
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function f(n) is said to be Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+
+Let's dissect this:
+
+* **f(n):**  The function representing the runtime or space complexity of an algorithm.  'n' usually represents the input size.
+* **g(n):**  A simpler function that describes the lower bound of f(n)'s growth.
+* **c:** A positive constant.  This constant scales g(n) to ensure it's always less than or equal to f(n) for sufficiently large n.
+* **n₀:** A positive constant. This represents a threshold input size. The inequality only needs to hold true for inputs larger than n₀.  This is important because the behavior of an algorithm for small inputs might be irrelevant to its overall complexity.
+
+
+**What Ω(g(n)) Means:**
+
+The statement f(n) = Ω(g(n)) means that the growth rate of f(n) is at least as fast as the growth rate of g(n).  In other words, f(n) is bounded below by g(n) for sufficiently large n.  The algorithm will *never* perform significantly better than g(n) for large inputs.
+
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1; g(n) = n²:**  f(n) = Ω(n²) because we can find constants c and n₀ that satisfy the definition (for example, c = 1 and n₀ = 1).  For n ≥ 1, n² ≤ 2n² + 3n + 1 always holds true.
+
+* **f(n) = 10log(n) + 5; g(n) = log(n):** f(n) = Ω(log(n)).  Again, we can find suitable c and n₀.
+
+* **f(n) = n!; g(n) = 2ⁿ:** While n! grows faster than 2ⁿ for large n, we can *still* say that f(n) = Ω(2ⁿ) because it is at least as fast as exponential time.
+
+
+
+**Difference between Big-O and Big-Ω:**
+
+* **Big-O (O):** Describes the *upper* bound.  It says "the algorithm will *at most* take this long."  It's about the worst-case scenario.
+* **Big-Ω (Ω):** Describes the *lower* bound.  It says "the algorithm will *at least* take this long."  It's about the best-case scenario or a guaranteed minimum.
+* **Big-Θ (Θ):** Describes the *tight* bound.  It says "the algorithm will take approximately this long," implying both upper and lower bounds are the same.
+
+
+**In Summary:**
+
+Big-Omega notation gives a crucial perspective on the lower bound of an algorithm's performance. While Big-O is often the focus when analyzing algorithms, understanding Big-Ω helps provide a complete picture of its runtime or space complexity.  It helps to avoid overly pessimistic analysis (by using only Big-O) that might overlook efficient algorithms that are nonetheless Ω(g(n)).
+
