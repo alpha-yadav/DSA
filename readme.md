@@ -26841,3 +26841,91 @@ def longest_palindrome(s):
 
 These examples showcase a range of difficulty and common algorithmic techniques.  Remember to consider time and space complexity when designing your solutions.  Practice is key to improving your algorithmic problem-solving skills.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  Here's how to implement it in Swift, starting with a simple approach and then adding some refinements:
+
+**Basic Implementation:**
+
+This version uses a `for` loop and conditional statements to check for divisibility by 3 and 5.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This will output:
+
+```
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+```
+
+**Improved Implementation (using string interpolation):**
+
+This version makes the code a bit more concise and readable using string interpolation:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This achieves the same result but avoids nested `if-else` statements.  It builds the output string incrementally. If both `Fizz` and `Buzz` conditions are met, they are concatenated. If neither is met, the number itself is printed.
+
+**Further Refinements (using a function for conciseness):**
+
+We can extract the FizzBuzz logic into its own function for better readability:
+
+```swift
+func fizzBuzzString(number: Int) -> String {
+    var result = ""
+    if number % 3 == 0 { result += "Fizz" }
+    if number % 5 == 0 { result += "Buzz" }
+    return result.isEmpty ? String(number) : result
+}
+
+func fizzBuzzRefined(n: Int) {
+    for i in 1...n {
+        print(fizzBuzzString(number: i))
+    }
+}
+
+fizzBuzzRefined(n: 15)
+```
+
+
+This approach separates concerns, making the code easier to understand, test, and maintain.  Choose the implementation that best suits your needs and coding style.  The improved and refined versions are generally preferred for their clarity and efficiency. Remember to choose the version that best suits your context and coding style.
+
