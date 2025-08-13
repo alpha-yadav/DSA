@@ -30719,3 +30719,6 @@ Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a bin
 
 Remember to handle edge cases like empty trees, one node being an ancestor of the other, or both nodes not being present in the tree.  The code examples above only cover the basic recursive approach for binary trees; adapting them to handle these cases and other tree types requires additional logic.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about the x and y values (or a function) to create a graph.
+
