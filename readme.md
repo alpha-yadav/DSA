@@ -30251,3 +30251,94 @@ print(is_bst_recursive_bounds(root2))  # False
 
 Both methods achieve the same result. The recursive-with-bounds approach might be slightly more efficient in some cases as it can prune branches early if a violation is detected, avoiding unnecessary recursive calls.  However, the in-order traversal method is often easier to understand and implement.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit (or "traverse") all the nodes in a binary tree.  There are three main types of traversals, based on the order in which you visit the root, left subtree, and right subtree:
+
+* **Inorder Traversal:** Left Subtree -> Root -> Right Subtree
+
+    * This traversal visits the nodes in ascending order for a Binary Search Tree (BST).
+    * **Algorithm (Recursive):**
+        1. Traverse the left subtree recursively.
+        2. Visit the root node.
+        3. Traverse the right subtree recursively.
+    * **Algorithm (Iterative):** Uses a stack to simulate recursion.  Push nodes onto the stack as you go left, then pop and process when you reach a null left child.
+
+* **Preorder Traversal:** Root -> Left Subtree -> Right Subtree
+
+    * Often used to create a copy of the tree or to represent the tree's structure in a prefix notation.
+    * **Algorithm (Recursive):**
+        1. Visit the root node.
+        2. Traverse the left subtree recursively.
+        3. Traverse the right subtree recursively.
+    * **Algorithm (Iterative):** Similar to inorder, but pushes the right child *before* the left child onto the stack.
+
+* **Postorder Traversal:** Left Subtree -> Right Subtree -> Root
+
+    * Useful for deleting nodes in a tree or evaluating an expression represented by the tree (postfix notation).
+    * **Algorithm (Recursive):**
+        1. Traverse the left subtree recursively.
+        2. Traverse the right subtree recursively.
+        3. Visit the root node.
+    * **Algorithm (Iterative):** More complex than inorder/preorder iterative approaches.  Often involves two stacks or a single stack with a clever tracking mechanism.
+
+
+**Example:**
+
+Consider this binary tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+* **Inorder Traversal:** 4 2 5 1 3
+* **Preorder Traversal:** 1 2 4 5 3
+* **Postorder Traversal:** 4 5 2 3 1
+
+
+**Python Code (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder(root)  # Output: 4 2 5 1 3
+print("\nPreorder traversal:")
+preorder(root)  # Output: 1 2 4 5 3
+print("\nPostorder traversal:")
+postorder(root) # Output: 4 5 2 3 1
+```
+
+Remember that iterative approaches are generally more memory-efficient for very large trees, as they avoid the potential for stack overflow errors associated with deep recursive calls.  However, recursive solutions are often more concise and easier to understand.  The choice depends on the specific application and constraints.
+
