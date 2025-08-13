@@ -30722,3 +30722,105 @@ Remember to handle edge cases like empty trees, one node being an ancestor of th
 #  Graph 
 Please provide me with the data or equation you want me to graph.  I need information about the x and y values (or a function) to create a graph.
 
+#  Storing Graphs (Adjacency Matrix) 
+Storing graphs using an adjacency matrix is a common approach, especially when dealing with dense graphs (graphs with many edges relative to the number of vertices).  Here's a breakdown of how it works, its advantages, disadvantages, and implementation details:
+
+**How it works:**
+
+An adjacency matrix is a 2D array (or a list of lists) where the element at `matrix[i][j]` represents the weight (or presence) of an edge between vertex `i` and vertex `j`.
+
+* **Unweighted Graphs:**  If the graph is unweighted (edges don't have associated costs), a `0` typically indicates no edge between the vertices, and a `1` indicates an edge.
+
+* **Weighted Graphs:** For weighted graphs, `matrix[i][j]` holds the weight of the edge between vertex `i` and vertex `j`.  A special value (like `infinity` or a very large number) can represent the absence of an edge.
+
+* **Directed Graphs:** In a directed graph, `matrix[i][j]` represents an edge from vertex `i` to vertex `j`.  The matrix is not necessarily symmetric (i.e., `matrix[i][j]` may not equal `matrix[j][i]`).
+
+* **Undirected Graphs:** In an undirected graph, the matrix is symmetric (i.e., `matrix[i][j] == matrix[j][i]`).  You only need to store the upper or lower triangle of the matrix to save space, but accessing elements becomes slightly more complex.
+
+**Example (Weighted Directed Graph):**
+
+Consider a graph with 3 vertices (A, B, C):
+
+* A -> B (weight 5)
+* A -> C (weight 2)
+* B -> C (weight 1)
+
+The adjacency matrix would be:
+
+```
+     A  B  C
+A  [ 0  5  2 ]
+B  [ 0  0  1 ]
+C  [ 0  0  0 ]
+```
+
+**Implementation (Python):**
+
+```python
+import sys
+
+def create_adjacency_matrix(num_vertices, edges):
+    """Creates an adjacency matrix for a weighted directed graph.
+
+    Args:
+        num_vertices: The number of vertices in the graph.
+        edges: A list of tuples, where each tuple represents an edge (source, destination, weight).
+
+    Returns:
+        A list of lists representing the adjacency matrix.  Returns None if input is invalid.
+
+    """
+    if num_vertices <=0 or len(edges) < 0:
+        return None
+
+    matrix = [[sys.maxsize] * num_vertices for _ in range(num_vertices)]  # Initialize with infinity
+
+    for u, v, weight in edges:
+        if 0 <= u < num_vertices and 0 <= v < num_vertices:
+            matrix[u][v] = weight  # Update with edge weight
+        else:
+            return None  #Handle invalid edge indices
+
+
+    return matrix
+
+
+# Example usage:
+num_vertices = 3
+edges = [(0, 1, 5), (0, 2, 2), (1, 2, 1)]  # (source, destination, weight)
+
+adjacency_matrix = create_adjacency_matrix(num_vertices, edges)
+
+if adjacency_matrix:
+    for row in adjacency_matrix:
+        print(row)
+else:
+    print("Invalid input for graph creation.")
+
+
+```
+
+**Advantages:**
+
+* **Simple to implement:** Relatively straightforward to create and understand.
+* **Efficient for checking edge existence:**  Determining if an edge exists between two vertices is a constant-time operation (O(1)).
+* **Easy to find neighbors:**  Getting all neighbors of a vertex involves iterating through a single row or column.
+
+**Disadvantages:**
+
+* **Space complexity:** Requires O(V²) space, where V is the number of vertices. This can be very inefficient for large sparse graphs (graphs with relatively few edges).
+* **Inefficient for adding/deleting edges:**  Adding or deleting edges may require updating multiple elements in the matrix.
+* **Wasted space for sparse graphs:** Most of the matrix will be filled with zeros in a sparse graph, resulting in wasted memory.
+
+
+**When to use it:**
+
+Adjacency matrices are best suited for:
+
+* **Dense graphs:** Where the number of edges is close to V².
+* **Graphs with frequent edge existence queries:**  The O(1) lookup makes this efficient.
+* **Graphs that don't change frequently:**  The cost of adding/removing edges makes this less suitable for dynamic graphs.
+
+
+For sparse graphs, adjacency lists are generally a more efficient data structure.  Consider the trade-offs between space and time complexity when choosing the right representation for your graph.
+
