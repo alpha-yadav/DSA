@@ -30436,3 +30436,121 @@ Both implementations follow these steps:
 
 The use of a queue ensures that nodes at the same level are processed before nodes at deeper levels.  `collections.deque` in Python and arrays in JavaScript provide efficient queue operations (enqueue and dequeue).  Using a standard list in Python for the queue would be less efficient for large trees.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals (preorder, inorder, and postorder) are ways to systematically visit every node in a binary tree.  They differ in the order they visit the root node relative to its left and right subtrees.
+
+**1. Binary Tree Structure (for reference):**
+
+A binary tree consists of nodes, where each node can have at most two children: a left child and a right child.  A node can also have zero children (a leaf node).
+
+```
+     A
+    / \
+   B   C
+  / \   \
+ D   E   F
+```
+
+
+**2. Traversal Algorithms:**
+
+We'll use recursive algorithms which are generally the easiest to understand and implement.  Iterative approaches are also possible but are more complex.
+
+
+**a) Preorder Traversal:**
+
+* **Rule:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.
+
+* **Order:** Root, Left, Right
+
+* **Example (for the tree above):**  A B D E C F
+
+
+* **Recursive Code (Python):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+root.right.right = Node('F')
+
+print("Preorder traversal:")
+preorder(root)  # Output: A B D E C F
+print()
+```
+
+
+**b) Inorder Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree.
+
+* **Order:** Left, Root, Right
+
+* **Example (for the tree above):** D B E A C F
+
+* **Recursive Code (Python):**
+
+```python
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+print("Inorder traversal:")
+inorder(root)  # Output: D B E A C F
+print()
+```
+
+
+**c) Postorder Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node.
+
+* **Order:** Left, Right, Root
+
+* **Example (for the tree above):** D E B F C A
+
+* **Recursive Code (Python):**
+
+```python
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+print("Postorder traversal:")
+postorder(root)  # Output: D E B F C A
+print()
+```
+
+
+**3. Applications:**
+
+The choice of traversal depends on the application:
+
+* **Preorder:**  Used for creating a copy of the tree, or for evaluating expressions represented by the tree (prefix notation).
+
+* **Inorder:**  For binary search trees, inorder traversal yields the nodes in ascending order of their keys.
+
+* **Postorder:**  Used for deleting nodes in a tree or evaluating expressions represented by the tree (postfix notation).
+
+
+Remember to handle the case where the input `node` is `None` (an empty subtree) in your recursive functions to avoid errors.  The `if node:` check does this.
+
