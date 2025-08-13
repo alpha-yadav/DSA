@@ -28631,3 +28631,63 @@ This version emphasizes code organization and reusability.  The `fizzBuzzString`
 
 For simple cases, Version 2 is a good balance of readability and efficiency.  For larger projects or situations where the FizzBuzz logic might be used multiple times, Version 3 is preferred due to its better organization and reusability.  Version 1 is mostly for illustrative purposes to show a more direct approach.  Remember to choose the version that best suits your needs and coding style.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most commonly considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm requires as a function of the input size.
+
+We usually express these complexities using **Big O notation**, which describes the upper bound of the growth rate of the algorithm's resource consumption as the input size grows infinitely large.  Big O ignores constant factors and lower-order terms, focusing on the dominant factor that determines the scaling behavior.
+
+Here's a breakdown of common time complexities (and their typical space complexities):
+
+| Big O Notation | Description                                      | Example Algorithms                                   | Space Complexity (Typical) |
+|-----------------|--------------------------------------------------|----------------------------------------------------|---------------------------|
+| O(1)            | Constant time; runtime is independent of input size | Accessing an array element by index                 | O(1)                     |
+| O(log n)         | Logarithmic time; runtime increases logarithmically with input size | Binary search                                       | O(1)                     |
+| O(n)            | Linear time; runtime increases linearly with input size | Linear search, iterating through an array          | O(1) or O(n)             |
+| O(n log n)       | Linearithmic time; a combination of linear and logarithmic | Merge sort, heap sort                              | O(n)                     |
+| O(n²)            | Quadratic time; runtime increases quadratically with input size | Bubble sort, insertion sort, selection sort        | O(1)                     |
+| O(2ⁿ)            | Exponential time; runtime doubles with each addition to input size | Finding all subsets of a set, traveling salesman (brute force) | O(2ⁿ) or O(n)            |
+| O(n!)            | Factorial time; runtime grows factorially with input size | Finding all permutations of a set                  | O(n!)                    |
+
+
+**Understanding Big O Notation:**
+
+* **O(1):** The algorithm's runtime remains constant regardless of the input size.  This is the ideal scenario.
+* **O(log n):** The runtime increases slowly with the input size.  Often seen in algorithms that divide the problem in half with each step (e.g., binary search).
+* **O(n):** The runtime increases linearly with the input size.  This is generally considered efficient for many tasks.
+* **O(n log n):**  A good compromise between linear and quadratic time.  Common in efficient sorting algorithms.
+* **O(n²):** The runtime increases rapidly with the input size.  Can become very slow for large inputs.  Often found in algorithms with nested loops iterating over the input data.
+* **O(2ⁿ) and O(n!):** These complexities represent algorithms that become extremely slow very quickly as the input size grows. They are generally avoided for large datasets unless there are no better alternatives.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the time complexity of an algorithm, you generally need to consider:
+
+1. **Best-case scenario:** The most favorable input that leads to the fastest execution.
+2. **Average-case scenario:** The typical runtime for a random input.
+3. **Worst-case scenario:** The input that leads to the slowest execution.
+
+
+The worst-case scenario is often the most important to consider because it provides an upper bound on the algorithm's runtime.
+
+
+**Example:**
+
+Let's consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The time complexity of this algorithm is O(n) because, in the worst case (the target is not found or is at the end of the array), the algorithm has to iterate through all `n` elements of the array. The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance for different input sizes.  It allows developers to make informed decisions about which algorithm is best suited for a particular task and to optimize their code for better performance.
+
