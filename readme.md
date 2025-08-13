@@ -28691,3 +28691,52 @@ The time complexity of this algorithm is O(n) because, in the worst case (the ta
 
 Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance for different input sizes.  It allows developers to make informed decisions about which algorithm is best suited for a particular task and to optimize their code for better performance.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds.  Unlike Big O notation, which only provides an upper bound, and Big Omega (Ω), which only provides a lower bound, Big Theta gives a precise characterization of the function's growth.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+In simpler terms:
+
+* **f(n) grows at the same rate as g(n).**  There are constants that can be found to "sandwich" f(n) between scaled versions of g(n) for sufficiently large n.
+
+**What it means:**
+
+* **Tight Bound:** Θ notation provides a tight bound because it specifies both an upper and lower bound that are proportional to the function g(n).  This implies that f(n) is neither significantly faster nor significantly slower than g(n) as n approaches infinity.
+
+* **Asymptotic Behavior:**  The notation focuses on the behavior of functions as the input size (n) becomes very large.  Minor differences in performance for small inputs are ignored.
+
+* **Order of Growth:** It's primarily concerned with the order of growth (linear, quadratic, logarithmic, etc.) rather than precise execution times.
+
+**Example:**
+
+Let's say we have a function:
+
+`f(n) = 2n² + 3n + 1`
+
+We can show that f(n) is Θ(n²):
+
+1. **Find c₁ and n₀:**  We need to find constants such that `c₁n² ≤ 2n² + 3n + 1` for sufficiently large n.  Let's choose c₁ = 1 and n₀ = 1.  For n ≥ 1, it's clearly true that n² ≤ 2n² + 3n + 1.
+
+2. **Find c₂ and n₀:** We need to find constants such that `2n² + 3n + 1 ≤ c₂n²` for sufficiently large n.  We can simplify the inequality:
+
+   `2 + 3/n + 1/n² ≤ c₂`
+
+   As n approaches infinity, the terms 3/n and 1/n² approach 0. Thus, we can choose c₂ = 3 (or any value greater than 3). With n₀ = 1, this inequality holds.
+
+
+Therefore, since we've found c₁ = 1, c₂ = 3, and n₀ = 1 that satisfy the definition, we can say that `f(n) = Θ(n²)`.
+
+**Key Differences from Big O and Big Omega:**
+
+* **Big O (O):**  Provides an *upper bound*.  f(n) = O(g(n)) means f(n) grows no faster than g(n).
+* **Big Omega (Ω):** Provides a *lower bound*.  f(n) = Ω(g(n)) means f(n) grows no slower than g(n).
+* **Big Theta (Θ):** Provides a *tight bound*, combining both upper and lower bounds.  f(n) = Θ(g(n)) means f(n) grows at the same rate as g(n).
+
+
+In essence, Θ provides the most precise and informative description of a function's growth rate among these three notations when it applies.  However, finding the tight bound isn't always easy or possible.
+
