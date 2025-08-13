@@ -29900,3 +29900,127 @@ class BST:
 
 Remember to choose the implementation that best suits your needs. The basic version is simpler, while the improved deletion version provides more robust behavior.  You can extend these further by adding features like finding the minimum/maximum element, tree balancing (to avoid worst-case O(n) performance for operations), or different traversal methods (preorder, postorder).
 
+#  Check if a tree is BST or not 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property of BSTs that an in-order traversal yields a sorted sequence.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        node: The root node of the tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.  Returns True for an empty tree.
+    """
+    in_order_list = []
+    
+    def inorder_traversal(node):
+        if node:
+            inorder_traversal(node.left)
+            in_order_list.append(node.data)
+            inorder_traversal(node.right)
+
+    inorder_traversal(node)
+    
+    if not in_order_list: #handle empty tree
+        return True
+
+    for i in range(1, len(in_order_list)):
+        if in_order_list[i] <= in_order_list[i-1]:
+            return False
+    return True
+
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+print(f"Is the tree a BST? {is_bst_recursive(root)}") # Output: False
+
+root = Node(5)
+root.left = Node(1)
+root.right = Node(4)
+root.right.left = Node(3)
+root.right.right = Node(6)
+print(f"Is the tree a BST? {is_bst_recursive(root)}") #Output: True
+
+root = None #empty tree
+print(f"Is the tree a BST? {is_bst_recursive(root)}") # Output: True
+
+```
+
+**Method 2: Recursive with Min and Max Bounds**
+
+This approach recursively checks if each node's value falls within the valid range defined by its ancestors.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_minmax(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Checks if a binary tree is a BST using recursion and min/max bounds.
+
+    Args:
+        node: The root node of the subtree being checked.
+        min_val: The minimum allowed value for the subtree.
+        max_val: The maximum allowed value for the subtree.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive_minmax(node.left, min_val, node.data) and
+            is_bst_recursive_minmax(node.right, node.data, max_val))
+
+
+# Example usage (same as before, but using the minmax method):
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root)}")  # Output: True
+
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root)}") # Output: False
+
+root = Node(5)
+root.left = Node(1)
+root.right = Node(4)
+root.right.left = Node(3)
+root.right.right = Node(6)
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root)}") #Output: True
+
+root = None #empty tree
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root)}") # Output: True
+```
+
+Both methods achieve the same result.  The min-max approach might be slightly more efficient in some cases because it can prune branches earlier if a violation is detected, but the in-order traversal method is often considered simpler to understand.  Choose the method that best suits your understanding and needs. Remember to handle the case of an empty tree appropriately.
+
