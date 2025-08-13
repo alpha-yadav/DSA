@@ -31272,3 +31272,119 @@ The choice between BFS and DFS depends on the specific application:
 
 This explanation provides a foundation for understanding graph traversals.  Each algorithm has nuances and optimizations that can be explored further depending on your specific needs.  Remember to consider factors like the graph's structure (directed, undirected, weighted), the desired outcome (shortest path, all paths, etc.), and memory constraints when selecting a traversal algorithm.
 
+#  Depth First Search traversal function 
+Depth-First Search (DFS) is a graph traversal algorithm that explores a graph as deep as possible along each branch before backtracking.  Here are several implementations of a DFS traversal function, each with slightly different characteristics:
+
+**1. Iterative DFS using a Stack:**
+
+This version uses a stack to manage the nodes to visit, making it easier to understand and avoids potential recursion depth limitations.
+
+```python
+def dfs_iterative(graph, start):
+    """
+    Performs a Depth-First Search traversal iteratively.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        start: The starting node for the traversal.
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    visited = set()
+    stack = [start]
+    traversal_order = []
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            traversal_order.append(vertex)
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)  # Add unvisited neighbors
+
+    return traversal_order
+
+```
+
+**2. Recursive DFS:**
+
+This version is more concise but relies on recursion, which can lead to stack overflow errors for very deep graphs.
+
+```python
+def dfs_recursive(graph, start, visited=None, traversal_order=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph.
+        start: The starting node.
+        visited: A set to keep track of visited nodes (used for recursion).
+        traversal_order: A list to store the traversal order (used for recursion).
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    if visited is None:
+        visited = set()
+    if traversal_order is None:
+        traversal_order = []
+
+    visited.add(start)
+    traversal_order.append(start)
+
+    for neighbor in graph.get(start, []):
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited, traversal_order)
+
+    return traversal_order
+
+```
+
+**3. DFS with Pre-order, In-order, and Post-order Traversal (for Trees):**
+
+If your graph is a tree, you can adapt DFS to get pre-order, in-order, and post-order traversals.  This example demonstrates pre-order (visit node before children).  In-order and post-order would require slight modifications to the placement of `traversal_order.append(node)`.
+
+```python
+def dfs_preorder(tree, node, traversal_order=None):
+    """
+    Performs a pre-order Depth-First Search traversal on a tree.
+
+    Args:
+        tree: A dictionary representing the tree (node: [children]).
+        node: The starting node.
+        traversal_order: A list to store the traversal order (used for recursion).
+
+    Returns:
+        A list of nodes visited in pre-order DFS order.
+    """
+    if traversal_order is None:
+        traversal_order = []
+
+    traversal_order.append(node)  # Pre-order: Visit node before children
+
+    for child in tree.get(node, []):
+        dfs_preorder(tree, child, traversal_order)
+
+    return traversal_order
+
+```
+
+
+**Example Usage:**
+
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("Iterative DFS:", dfs_iterative(graph, 'A'))  # Output will vary slightly depending on implementation
+print("Recursive DFS:", dfs_recursive(graph, 'A'))
+```
+
+Remember to choose the implementation that best suits your needs and the characteristics of your graph. The iterative approach is generally preferred for its robustness against stack overflow errors, especially when dealing with large or deep graphs.  If you're working with a tree, the pre-order, in-order, and post-order variations might be more relevant.
+
