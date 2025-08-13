@@ -30132,3 +30132,122 @@ else:
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the recursive approach, where H is the height of the tree (O(log N) for a balanced BST, O(N) for a skewed tree).  The iterative in-order traversal can achieve O(1) space complexity if you don't store the entire in-order list.  Choose the method that best suits your needs and coding style.  The min-max approach is generally considered slightly more efficient because it avoids the creation and sorting of the `inorder_list`.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given tree adheres to the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* All nodes in the left subtree have a value less than the node's value.
+* All nodes in the right subtree have a value greater than the node's value.
+
+Here are two common methods:
+
+**Method 1: Recursive In-order Traversal**
+
+This is arguably the most efficient method.  A BST's in-order traversal will always produce a sorted sequence of nodes.  Therefore, we can perform an in-order traversal and check if the resulting sequence is sorted.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a tree is a BST using recursive in-order traversal.
+
+    Args:
+      root: The root node of the tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    in_order_list = []
+    
+    def in_order(node):
+        if node:
+            in_order(node.left)
+            in_order_list.append(node.data)
+            in_order(node.right)
+
+    in_order(root)
+    
+    #Check if sorted
+    for i in range(1, len(in_order_list)):
+        if in_order_list[i] < in_order_list[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_recursive(root))  # True
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(15) #this violates BST property
+root2.right.right = Node(25)
+
+print(is_bst_recursive(root2))  # False
+
+```
+
+**Method 2: Recursive Check with Bounds**
+
+This method recursively checks each node, ensuring its value is within the allowed range defined by its ancestors.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_bounds(root, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Checks if a tree is a BST using recursive checks with bounds.
+
+    Args:
+      root: The root node of the tree.
+      min_val: Minimum allowed value for the node.
+      max_val: Maximum allowed value for the node.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    if root is None:
+        return True
+
+    if not (min_val < root.data < max_val):
+        return False
+
+    return (is_bst_recursive_bounds(root.left, min_val, root.data) and
+            is_bst_recursive_bounds(root.right, root.data, max_val))
+
+# Example usage (same trees as above):
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(is_bst_recursive_bounds(root))  # True
+
+root2 = Node(20)
+root2.left = Node(8)
+root2.right = Node(22)
+root2.left.left = Node(4)
+root2.left.right = Node(15) #this violates BST property
+root2.right.right = Node(25)
+
+print(is_bst_recursive_bounds(root2))  # False
+```
+
+Both methods achieve the same result. The recursive-with-bounds approach might be slightly more efficient in some cases as it can prune branches early if a violation is detected, avoiding unnecessary recursive calls.  However, the in-order traversal method is often easier to understand and implement.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
+
