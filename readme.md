@@ -28740,3 +28740,38 @@ Therefore, since we've found c₁ = 1, c₂ = 3, and n₀ = 1 that satisfy the d
 
 In essence, Θ provides the most precise and informative description of a function's growth rate among these three notations when it applies.  However, finding the tight bound isn't always easy or possible.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly useful in analyzing the efficiency of algorithms.  The most common notations are:
+
+* **Big O (O):**  Represents the *upper bound* of a function's growth.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.  It essentially means "f(n) grows no faster than g(n)".  Big O focuses on the worst-case scenario.
+
+* **Big Omega (Ω):** Represents the *lower bound* of a function's growth.  We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.  It means "f(n) grows at least as fast as g(n)".  Big Omega focuses on the best-case scenario (or a lower bound on the time complexity).
+
+* **Big Theta (Θ):** Represents the *tight bound*.  We say f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁*g(n) ≤ f(n) ≤ c₂*g(n) for all n ≥ n₀.  It means "f(n) grows at the same rate as g(n)".  This indicates a precise characterization of the function's growth.
+
+* **Little o (o):** Represents a *strict upper bound*.  We say f(n) = o(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.  This is stronger than Big O; it means f(n) grows significantly slower than g(n).
+
+* **Little omega (ω):** Represents a *strict lower bound*.  We say f(n) = ω(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.  This is stronger than Big Omega; it means f(n) grows significantly faster than g(n).
+
+
+**Comparison Table:**
+
+| Notation | Meaning                                     | Relationship to other notations | Example                |
+| --------- | ------------------------------------------- | -------------------------------- | ---------------------- |
+| O(g(n))   | Upper bound                                 | Θ(g(n)) ⊆ O(g(n))              | O(n²)                  |
+| Ω(g(n))   | Lower bound                                 | Θ(g(n)) ⊆ Ω(g(n))              | Ω(n log n)            |
+| Θ(g(n))   | Tight bound                                | O(g(n)) ∩ Ω(g(n))             | Θ(n)                   |
+| o(g(n))   | Strict upper bound                          | o(g(n)) ⊂ O(g(n))              | o(n²) (e.g., n log n)   |
+| ω(g(n))   | Strict lower bound                          | ω(g(n)) ⊂ Ω(g(n))              | ω(n) (e.g., n²)        |
+
+
+**Key Differences and Relationships:**
+
+* **O vs. Ω:** O gives an upper bound, while Ω gives a lower bound.  An algorithm might have different O and Ω complexities depending on the input.
+* **Θ:** Θ provides a tight bound, meaning both upper and lower bounds are the same.  It's the most informative notation if available.
+* **o vs. O:** `o` implies a strictly smaller growth rate than `O`.  For example,  `n` is `O(n²)`, but `n` is *not* `o(n²)`, while `n log n` is `o(n²)`.
+* **ω vs. Ω:** Similar to the `o` vs. `O` relationship, `ω` represents a strictly faster growth rate than `Ω`.
+
+
+In algorithm analysis, we often prioritize finding the Big O complexity because it tells us the worst-case time or space requirements.  However, understanding all the notations gives a more complete picture of an algorithm's performance characteristics.
+
