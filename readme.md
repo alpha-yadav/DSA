@@ -28486,3 +28486,70 @@ Learning Big O notation is essential for evaluating the efficiency of your algor
 
 By following these steps, you'll build a solid foundation in algorithms and be well-prepared to tackle more advanced topics. Remember to be patient and persistent – learning algorithms takes time and effort.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, categorized for clarity:
+
+**Easy:**
+
+**Problem:** Find the sum of all even numbers in a given list of integers.
+
+* **Input:** A list of integers (e.g., `[1, 2, 3, 4, 5, 6]`)
+* **Output:** The sum of the even numbers in the list (e.g., `12`)
+
+**Problem:** Reverse a string.
+
+* **Input:** A string (e.g., "hello")
+* **Output:** The reversed string (e.g., "olleh")
+
+
+**Medium:**
+
+**Problem:** Find the longest palindrome substring within a given string.  A palindrome is a string that reads the same backward as forward (e.g., "racecar").
+
+* **Input:** A string (e.g., "bananas")
+* **Output:** The longest palindrome substring (e.g., "anana")
+
+**Problem:** Implement a merge sort algorithm.
+
+* **Input:** An unsorted list of integers.
+* **Output:** A sorted list of integers.
+
+
+**Hard:**
+
+**Problem:**  Find the shortest path between two nodes in a weighted graph using Dijkstra's algorithm.
+
+* **Input:** A graph represented as an adjacency matrix or adjacency list, and the starting and ending node.
+* **Output:** The shortest path (sequence of nodes) and its total weight.
+
+**Problem:** Implement a solution to the 0/1 knapsack problem.
+
+* **Input:** A list of items, each with a weight and a value, and a maximum weight capacity for the knapsack.
+* **Output:** The maximum total value that can be carried in the knapsack without exceeding the weight limit.
+
+
+**Example Solution (Easy Problem - Sum of Even Numbers):**
+
+```python
+def sum_of_evens(numbers):
+  """Calculates the sum of even numbers in a list.
+
+  Args:
+    numbers: A list of integers.
+
+  Returns:
+    The sum of the even numbers in the list.
+  """
+  sum = 0
+  for number in numbers:
+    if number % 2 == 0:
+      sum += number
+  return sum
+
+numbers = [1, 2, 3, 4, 5, 6]
+even_sum = sum_of_evens(numbers)
+print(f"The sum of even numbers is: {even_sum}") # Output: 12
+```
+
+Remember that the difficulty is relative to the programmer's experience and the specific constraints of the problem.  These examples provide a range of challenges to illustrate the concept of algorithmic problems.  Choose one that suits your current skill level and try to solve it!  Let me know if you'd like a more detailed explanation of a specific problem or a solution to one of them.
+
