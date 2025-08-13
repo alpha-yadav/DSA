@@ -28553,3 +28553,81 @@ print(f"The sum of even numbers is: {even_sum}") # Output: 12
 
 Remember that the difficulty is relative to the programmer's experience and the specific constraints of the problem.  These examples provide a range of challenges to illustrate the concept of algorithmic problems.  Choose one that suits your current skill level and try to solve it!  Let me know if you'd like a more detailed explanation of a specific problem or a solution to one of them.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It prints numbers from 1 to a given limit, but replaces multiples of 3 with "Fizz", multiples of 5 with "Buzz", and multiples of both 3 and 5 with "FizzBuzz".
+
+Here's how to implement it in Swift, starting with a simple version and then adding improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses nested `if-else if-else` statements:
+
+```swift
+func fizzBuzz(limit: Int) {
+    for i in 1...limit {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(limit: 15)
+```
+
+This works correctly, but can be improved for readability and efficiency.
+
+
+**Version 2: Improved Readability with String Interpolation**
+
+This version uses string interpolation for cleaner output and a slightly more efficient order of checks:
+
+```swift
+func fizzBuzzImproved(limit: Int) {
+    for i in 1...limit {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(limit: 15)
+```
+
+This version is generally preferred because it's more concise and easier to read.  It checks for divisibility by 3 and 5 separately, and only appends "Fizz" or "Buzz" if the condition is met.  The ternary operator (`condition ? value1 : value2`) elegantly handles printing the number itself if no "Fizz" or "Buzz" was added.
+
+
+**Version 3:  Using a Function for Reusability**
+
+This version extracts the FizzBuzz logic into a separate function, making it more reusable:
+
+```swift
+func fizzBuzzString(number: Int) -> String {
+    var output = ""
+    if number % 3 == 0 { output += "Fizz" }
+    if number % 5 == 0 { output += "Buzz" }
+    return output.isEmpty ? "\(number)" : output
+}
+
+func fizzBuzzAdvanced(limit: Int) {
+    for i in 1...limit {
+        print(fizzBuzzString(number: i))
+    }
+}
+
+fizzBuzzAdvanced(limit: 15)
+```
+
+This version emphasizes code organization and reusability.  The `fizzBuzzString` function can be used independently if needed.
+
+
+**Choosing the Best Version:**
+
+For simple cases, Version 2 is a good balance of readability and efficiency.  For larger projects or situations where the FizzBuzz logic might be used multiple times, Version 3 is preferred due to its better organization and reusability.  Version 1 is mostly for illustrative purposes to show a more direct approach.  Remember to choose the version that best suits your needs and coding style.
+
