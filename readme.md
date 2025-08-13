@@ -29413,3 +29413,128 @@ BSTs are used in various applications, including:
 
 In summary, Binary Search Trees are a powerful and versatile data structure, but their efficiency depends heavily on maintaining a balanced structure. Understanding their properties and limitations is crucial for choosing the right data structure for a given task.  If balancing is a concern, consider using a self-balancing BST.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to insert a node into a Binary Search Tree (BST) in Python. Here are a few implementations, starting with a simple recursive approach and then showing an iterative one for improved efficiency in some cases:
+
+
+**Method 1: Recursive Insertion**
+
+This method is generally easier to understand but can be less efficient for very deep trees due to function call overhead.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        """Inserts a new node with the given data recursively."""
+        self.root = self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        else:
+            node.right = self._insert_recursive(node.right, data)
+        return node
+
+    def inorder_traversal(self):
+      """Performs an inorder traversal (prints nodes in ascending order)."""
+      self._inorder_traversal(self.root)
+      print()
+
+    def _inorder_traversal(self, node):
+      if node:
+        self._inorder_traversal(node.left)
+        print(node.data, end=" ")
+        self._inorder_traversal(node.right)
+
+```
+
+**Method 2: Iterative Insertion**
+
+This method avoids the overhead of recursive function calls, making it generally more efficient, especially for larger trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        """Inserts a new node with the given data iteratively."""
+        new_node = Node(data)
+        if self.root is None:
+            self.root = new_node
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = new_node
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = new_node
+                    break
+                else:
+                    current = current.right
+
+
+    def inorder_traversal(self):
+      """Performs an inorder traversal (prints nodes in ascending order)."""
+      self._inorder_traversal(self.root)
+      print()
+
+    def _inorder_traversal(self, node):
+      if node:
+        self._inorder_traversal(node.left)
+        print(node.data, end=" ")
+        self._inorder_traversal(node.right)
+```
+
+**Example Usage:**
+
+```python
+# Using the recursive version:
+bst_recursive = BST()
+bst_recursive.insert_recursive(8)
+bst_recursive.insert_recursive(3)
+bst_recursive.insert_recursive(10)
+bst_recursive.insert_recursive(1)
+bst_recursive.insert_recursive(6)
+bst_recursive.insert_recursive(14)
+print("Inorder traversal (recursive): ", end="")
+bst_recursive.inorder_traversal()
+
+
+#Using the iterative version:
+bst_iterative = BST()
+bst_iterative.insert_iterative(8)
+bst_iterative.insert_iterative(3)
+bst_iterative.insert_iterative(10)
+bst_iterative.insert_iterative(1)
+bst_iterative.insert_iterative(6)
+bst_iterative.insert_iterative(14)
+print("Inorder traversal (iterative): ", end="")
+bst_iterative.inorder_traversal()
+
+```
+
+Both versions will produce the same inorder traversal (ascending order) output. Choose the iterative version for better performance in most scenarios, especially with larger datasets.  Remember that the `inorder_traversal` method is included to help you verify the correct insertion of nodes.  You can remove it or modify it as needed for your application.
+
