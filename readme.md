@@ -29052,3 +29052,39 @@ Nested loops are used in a wide variety of situations, including:
 
 In summary, nested loops are a powerful tool for iterating over multiple dimensions of data, but their use should be carefully considered due to their potential impact on performance and code readability.  It's often possible to optimize nested loops or replace them with more efficient algorithms for larger datasets.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They only require a number of operations proportional to the logarithm of the input size (n). This means the time it takes to complete increases very slowly as the input size grows.  This is possible because they typically work by repeatedly dividing the problem size.  Common examples include:
+
+**1. Binary Search:**
+
+* **Problem:** Finding a specific element within a *sorted* array or list.
+* **Method:** Repeatedly divide the search interval in half. If the target value is less than the middle element, search the left half; otherwise, search the right half. Continue until the target is found or the interval is empty.
+* **Example:** Searching a phone book for a name.
+
+**2. Balanced Tree Operations (e.g., AVL trees, Red-black trees):**
+
+* **Problem:** Searching, insertion, and deletion of elements in a self-balancing binary search tree.
+* **Method:** These trees maintain a balanced structure, ensuring that the height of the tree remains logarithmic in the number of nodes.  Operations involve traversing down the tree, which takes logarithmic time.
+* **Example:** Implementing a highly efficient dictionary or symbol table.
+
+**3. Exponentiation by Squaring:**
+
+* **Problem:** Calculating a^b (a raised to the power of b) efficiently.
+* **Method:** Uses the property that a^b = (a^(b/2))^2 if b is even, and a^b = a * a^(b-1) if b is odd.  This reduces the number of multiplications significantly.
+* **Example:** Cryptographic algorithms often use this for fast modular exponentiation.
+
+**4. Finding the kth smallest element using Quickselect (average case):**
+
+* **Problem:** Finding the kth smallest element in an unsorted array.
+* **Method:**  Similar to quicksort, but it only recursively processes one partition (either the smaller or larger part, depending on the pivot's position relative to k).  While the worst-case is O(n), the *average* case is O(log n).
+* **Example:** Finding the median of a dataset.
+
+
+**Key Characteristics leading to O(log n) complexity:**
+
+* **Divide and Conquer:** The problem is repeatedly broken down into smaller subproblems.
+* **Halving the Problem Size:**  Each step reduces the problem size by approximately half.
+* **Sorted Data (often):**  Many O(log n) algorithms require the input data to be sorted (Binary Search is a prime example).
+
+**Important Note:**  The base of the logarithm (e.g., base 2, base 10) doesn't affect the Big O notation.  O(log₂n) and O(log₁₀n) are both considered O(log n).  The constant factor hidden within the Big O notation will differ, but the overall growth rate remains logarithmic.
+
