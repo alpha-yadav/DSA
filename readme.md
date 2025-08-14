@@ -31584,3 +31584,67 @@ fizzBuzzFunctional(n: 15) // Example Usage
 
 Start with the method that best suits your current understanding and gradually explore the more advanced techniques as you gain experience. Remember to choose a method that prioritizes readability and maintainability.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  Resources typically include:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We analyze complexity using **Big O notation**, which describes the upper bound of the growth rate of a function.  It focuses on the dominant terms as the input size (n) approaches infinity, ignoring constant factors.
+
+Here's a breakdown of common complexities:
+
+**Time Complexity:**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A combination of linear and logarithmic time.  Very common in efficient sorting algorithms.  Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  This becomes slow for large inputs.  Example: Nested loops iterating through the input data.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each increase in input size.  This is extremely inefficient for even moderately sized inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  This is practically unusable for any but the smallest inputs.  Example: Traveling salesman problem (brute-force approach).
+
+
+**Space Complexity:**  Similar notation is used, but it measures memory usage instead of time.
+
+* **O(1) - Constant Space:** The algorithm uses a constant amount of memory regardless of input size.
+
+* **O(n) - Linear Space:** The memory usage increases linearly with the input size.
+
+* **O(log n) - Logarithmic Space:** Memory usage increases logarithmically.
+
+* **And so on...**  The same notations apply as for time complexity.
+
+
+**Analyzing Complexity:**
+
+Analyzing complexity involves:
+
+1. **Identifying the dominant operations:**  Focus on the operations that are executed most frequently.
+
+2. **Expressing the number of operations as a function of the input size (n).**
+
+3. **Using Big O notation to simplify the function, ignoring constant factors and lower-order terms.**
+
+
+**Example:**
+
+Consider a function that iterates through an array of size `n` and prints each element:
+
+```python
+def print_array(arr):
+  for i in range(len(arr)):
+    print(arr[i])
+```
+
+The loop executes `n` times. The printing operation takes constant time.  Therefore, the time complexity is O(n) (linear time). The space complexity is O(1) (constant space), as it doesn't use extra memory proportional to the input size.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and avoiding performance bottlenecks in software development.  Choosing an algorithm with a lower complexity often leads to significantly better performance, especially for large datasets.
+
