@@ -31687,3 +31687,54 @@ The dominant term (n²) determines the asymptotic behavior, and the lower-order 
 
 Big-Theta notation is crucial for precisely characterizing the efficiency of algorithms.  While Big-O is often sufficient for understanding worst-case performance, Big-Theta provides a more complete picture of an algorithm's growth rate, indicating both its upper and lower bounds.  It's essential for comparing the efficiency of different algorithms and making informed decisions about algorithm selection.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of a function as its input approaches a certain value or infinity.  They're crucial for analyzing the efficiency of algorithms.  Here's a comparison:
+
+**1. Big O Notation (O): Upper Bound**
+
+* **Meaning:**  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  Essentially,  `g(n)` is an upper bound for `f(n)` for sufficiently large *n*.  We only care about the growth rate, not the exact constants.
+* **Use:** Describes the *worst-case* scenario of an algorithm's runtime or space complexity.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say it's `O(n²)`, because the quadratic term dominates as *n* grows large.
+
+
+**2. Big Omega Notation (Ω): Lower Bound**
+
+* **Meaning:** `f(n) = Ω(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.  `g(n)` is a lower bound for `f(n)` for sufficiently large *n*.
+* **Use:** Describes the *best-case* scenario (though often used to describe a lower bound on the complexity of a problem itself, regardless of the algorithm).
+* **Example:**  If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say it's `Ω(n²)`, as the quadratic term determines the minimum growth rate.
+
+
+**3. Big Theta Notation (Θ): Tight Bound**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  In other words, `g(n)` is both an upper and lower bound for `f(n)`.  This provides a precise characterization of the growth rate.
+* **Use:** Describes the *average-case* or *exact* growth rate when both upper and lower bounds match.
+* **Example:** `f(n) = 2n² + 5n + 1` is `Θ(n²)`; the quadratic term dictates both the upper and lower bound.
+
+
+**4. Little o Notation (o): Strict Upper Bound**
+
+* **Meaning:** `f(n) = o(g(n))` means that for any positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  `f(n)` grows *strictly slower* than `g(n)`.
+* **Use:**  Indicates a significantly tighter upper bound than Big O.
+* **Example:** `n = o(n²)`, as `n` grows much slower than `n²`.
+
+
+**5. Little omega Notation (ω): Strict Lower Bound**
+
+* **Meaning:** `f(n) = ω(g(n))` means that for any positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`. `f(n)` grows *strictly faster* than `g(n)`.
+* **Use:** Indicates a significantly tighter lower bound than Big Omega.
+* **Example:** `n² = ω(n)`, as `n²` grows much faster than `n`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                                      | Type of Bound  |
+|-----------|----------------------------------------------|-----------------|
+| O(g(n))   | f(n) ≤ c * g(n) for some c and sufficiently large n | Upper Bound     |
+| Ω(g(n))   | c * g(n) ≤ f(n) for some c and sufficiently large n | Lower Bound     |
+| Θ(g(n))   | c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for some c₁, c₂ and sufficiently large n | Tight Bound     |
+| o(g(n))   | f(n) < c * g(n) for all c and sufficiently large n    | Strict Upper Bound |
+| ω(g(n))   | c * g(n) < f(n) for all c and sufficiently large n    | Strict Lower Bound |
+
+
+Remember that these notations describe *asymptotic* behavior; they don't tell you anything about the performance for small input sizes.  The constants hidden within the notations can be significant in practice.
+
