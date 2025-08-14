@@ -31508,3 +31508,79 @@ Output: [1,1,2,3,4,4,5,6]
 
 Remember to choose a problem that matches your current skill level.  Start with easier problems and gradually work your way up to more challenging ones.  Practice is key to improving your algorithmic problem-solving skills!
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing improvements:
+
+**Method 1: Basic Approach (using `if-else if-else`)**
+
+This is the most straightforward way to implement FizzBuzz. It directly translates the problem's requirements into code.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+**Method 2: Slightly More Concise (using nested `if` statements)**
+
+This version avoids the `else if` chain, making it a bit shorter and arguably easier to read.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Example usage
+```
+
+**Method 3:  Functional Approach (using `map` and a ternary operator)**
+
+This approach leverages Swift's functional capabilities for a more compact and expressive solution.  It's more advanced but demonstrates a different programming style.
+
+```swift
+func fizzBuzzFunctional(n: Int) {
+    (1...n).map { i in
+        let output = (i % 15 == 0) ? "FizzBuzz" :
+                     (i % 3 == 0) ? "Fizz" :
+                     (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzFunctional(n: 15) // Example Usage
+```
+
+
+**Explanation of the Code:**
+
+* **`for i in 1...n`:** This loop iterates through numbers from 1 to `n`.
+* **`i % 3 == 0` and `i % 5 == 0`:** The modulo operator (`%`) gives the remainder of a division.  If the remainder is 0, the number is divisible by 3 or 5.
+* **`print()`:** This function displays the output to the console.
+* **Ternary Operator (`condition ? value1 : value2`):**  This concisely assigns a value based on a condition.
+
+
+**Choosing the Best Method:**
+
+* **Method 1** is the easiest to understand for beginners.
+* **Method 2** is a bit more elegant and efficient.
+* **Method 3** is the most concise but requires familiarity with functional programming concepts.  It might be less readable for someone new to Swift.
+
+Start with the method that best suits your current understanding and gradually explore the more advanced techniques as you gain experience. Remember to choose a method that prioritizes readability and maintainability.
+
