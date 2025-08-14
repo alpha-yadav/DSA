@@ -32040,3 +32040,51 @@ Here are some common types of algorithms exhibiting O(log n) time complexity:
 
 In summary, O(log n) algorithms are extremely efficient because their runtime grows very slowly with increasing input size.  They are often used in scenarios where fast searching, sorting, or data manipulation is crucial.
 
+#  An O(log n) example 
+The most common O(log n) example is **binary search** on a sorted array.
+
+Let's break down why:
+
+* **The Problem:**  You have a sorted array of `n` elements, and you want to find a specific element within it.
+
+* **The Algorithm:** Binary search works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process repeats until the target value is found or the search interval is empty.
+
+* **Why O(log n):**  With each comparison, you eliminate roughly half of the remaining search space.  This means the number of comparisons needed is roughly proportional to the logarithm (base 2) of the number of elements.
+
+**Example in Python:**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+        if arr[mid] == target:
+            return mid  # Target found at index mid
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the upper half
+        else:
+            high = mid - 1  # Search in the lower half
+    return -1  # Target not found
+
+
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+
+```
+
+**Other O(log n) examples:**
+
+* **Tree Traversal (balanced trees):**  Searching, insertion, and deletion in balanced binary search trees (like AVL trees or red-black trees) have a time complexity of O(log n) because the tree's height is logarithmic with respect to the number of nodes.
+* **Efficient exponentiation:** Algorithms like exponentiation by squaring calculate a<sup>b</sup> in O(log b) time.
+* **Finding an element in a sorted linked list using jump search:**  This technique is a variation that reduces the number of comparisons needed compared to a linear search of a sorted linked list, achieving an O(√n) search time in the worst case. While not strictly O(log n), it's a better performance than O(n).
+
+
+The key characteristic of O(log n) algorithms is that they efficiently reduce the problem size by a constant factor at each step. This leads to significantly faster performance than linear O(n) algorithms for large input sizes.
+
