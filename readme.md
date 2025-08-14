@@ -31648,3 +31648,42 @@ The loop executes `n` times. The printing operation takes constant time.  Theref
 
 Understanding algorithm complexity is crucial for choosing efficient algorithms and avoiding performance bottlenecks in software development.  Choosing an algorithm with a lower complexity often leads to significantly better performance, especially for large datasets.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a powerful tool in computer science used to describe the asymptotic behavior of functions, specifically the growth rate of algorithms.  It provides a tighter bound than Big-O notation, indicating that a function's growth is bounded both above and below by the same function (up to constant factors).
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large inputs (*n ≥ n₀*), *f(n)* is always sandwiched between two multiples of *g(n)*.  *g(n)* represents the dominant term determining the growth of *f(n)*.
+
+**Intuitive Explanation:**
+
+Imagine you have two functions, *f(n)* representing the runtime of your algorithm and *g(n)* representing a simpler function (like n², n log n, etc.).  If *f(n)* is Θ(*g(n)*), it means that *f(n)* grows at roughly the same rate as *g(n)*.  The constant factors (*c₁* and *c₂*) and the starting point (*n₀*) are ignored because we are interested in the *overall growth trend* for large inputs.
+
+**Key Differences from Big-O Notation:**
+
+* **Big-O (O):** Provides an *upper bound*.  It tells us that a function grows *no faster* than another function.  It's useful for analyzing worst-case scenarios.
+* **Big-Omega (Ω):** Provides a *lower bound*.  It tells us that a function grows *at least as fast* as another function.  It's useful for analyzing best-case scenarios.
+* **Big-Theta (Θ):** Provides both an *upper and lower bound*.  It tells us that a function grows *at approximately the same rate* as another function.  This gives a more precise description of the algorithm's growth than Big-O alone.
+
+**Example:**
+
+Let's say we have the function:
+
+`f(n) = 2n² + 3n + 1`
+
+We can say that:
+
+* `f(n) = O(n²) ` (f(n) grows no faster than n²)
+* `f(n) = Ω(n²) ` (f(n) grows at least as fast as n²)
+* `f(n) = Θ(n²) ` (f(n) grows at the same rate as n²)
+
+The dominant term (n²) determines the asymptotic behavior, and the lower-order terms (3n and 1) become insignificant as *n* grows large.  We can find constants to satisfy the definition of Θ(n²).
+
+**In Summary:**
+
+Big-Theta notation is crucial for precisely characterizing the efficiency of algorithms.  While Big-O is often sufficient for understanding worst-case performance, Big-Theta provides a more complete picture of an algorithm's growth rate, indicating both its upper and lower bounds.  It's essential for comparing the efficiency of different algorithms and making informed decisions about algorithm selection.
+
