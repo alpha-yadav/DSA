@@ -32747,3 +32747,61 @@ These examples also print 0 through 4. The loop continues until `count` is no lo
 
 This provides a basic overview of simple loops.  More complex loops can involve nested loops (loops inside other loops), loop control statements (like `break` and `continue`), and iteration over collections (like lists or arrays).
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop completes all its iterations for each iteration of the outer loop.  This creates a pattern where the inner loop's code executes many more times than the outer loop's code.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    # Outer loop code (executed once per outer loop iteration)
+    for inner_loop_variable in inner_loop_iterable:
+        # Inner loop code (executed once per inner loop iteration for EACH outer loop iteration)
+    # More outer loop code (executed once per outer loop iteration)
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(f"{i * j:4}", end="")  # Print formatted product
+    print()  # Newline after each row
+```
+
+This will output a 10x10 multiplication table.  The outer loop iterates through the rows (1 to 10), and for each row, the inner loop iterates through the columns (1 to 10), calculating and printing the product.
+
+
+**Example (JavaScript):**
+
+This example creates a nested array:
+
+```javascript
+let nestedArray = [];
+for (let i = 0; i < 3; i++) { // Outer loop
+  let innerArray = [];
+  for (let j = 0; j < 2; j++) { // Inner loop
+    innerArray.push(i * j);
+  }
+  nestedArray.push(innerArray);
+}
+console.log(nestedArray); // Output: [[0, 0], [0, 1], [0, 2]]
+```
+
+
+**When to Use Nested Loops:**
+
+Nested loops are useful when you need to iterate over a two-dimensional structure (like a matrix or table), or when you need to perform a task for every combination of elements from two or more sets.
+
+**Considerations:**
+
+* **Computational Complexity:** Nested loops can significantly increase the runtime of your code. The time complexity is often multiplied.  For example, two nested loops each iterating `n` times will have an O(n²) time complexity.  Be mindful of performance when using deeply nested loops, especially with large datasets.
+* **Readability:**  Deeply nested loops can make code harder to read and understand.  Try to keep the nesting level as shallow as possible. Consider alternative algorithms or data structures if the nesting becomes excessively complex.
+
+
+In summary, nested loops are a powerful tool for processing data with multiple levels of iteration, but it's important to understand their impact on performance and readability.
+
