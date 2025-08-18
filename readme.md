@@ -32435,3 +32435,54 @@ This version uses tuples to check divisibility by 3 and 5 simultaneously.  It's 
 
 Remember to choose the version that best suits your needs and understanding.  The core logic remains the same across all versions.  Focus on understanding the fundamental concept of modulo operations (`%`) and conditional statements.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm requires to solve a problem as a function of the input size.  It's crucial for understanding how an algorithm's performance scales with larger inputs.  We generally analyze complexity in two main ways:
+
+**1. Time Complexity:**  This describes how the runtime of an algorithm grows as the input size grows.
+
+* **Big O Notation (O):**  This expresses the upper bound of the growth rate. It describes the worst-case scenario.  We ignore constant factors and focus on the dominant term as the input size approaches infinity.  Common examples include:
+
+    * **O(1):** Constant time. The runtime is independent of the input size (e.g., accessing an element in an array by index).
+    * **O(log n):** Logarithmic time. The runtime increases logarithmically with the input size (e.g., binary search).
+    * **O(n):** Linear time. The runtime increases linearly with the input size (e.g., searching an unsorted array).
+    * **O(n log n):** Linearithmic time.  A combination of linear and logarithmic growth (e.g., merge sort).
+    * **O(n²):** Quadratic time. The runtime increases proportionally to the square of the input size (e.g., nested loops iterating over the entire input).
+    * **O(2ⁿ):** Exponential time. The runtime doubles with each addition to the input size (e.g., brute-force solving the traveling salesman problem).
+    * **O(n!):** Factorial time. The runtime grows factorially with the input size (e.g., generating all permutations of a sequence).
+
+* **Big Omega Notation (Ω):** This expresses the lower bound of the growth rate. It describes the best-case scenario.
+
+* **Big Theta Notation (Θ):** This expresses the tight bound, meaning both the upper and lower bounds are the same.  It describes the average-case scenario (if it's well-defined).
+
+
+**2. Space Complexity:** This describes how the memory usage of an algorithm grows as the input size grows.  The notation is similar to time complexity, using Big O, Big Omega, and Big Theta.  Space complexity considers:
+
+* **Auxiliary Space:** The extra space used by the algorithm beyond the input itself (e.g., space used for temporary variables, data structures).
+* **Total Space:** The total space used, including the input space and auxiliary space.
+
+
+**Analyzing Algorithm Complexity:**
+
+Several methods are used to analyze algorithm complexity:
+
+* **Empirical Analysis:**  Running the algorithm with various input sizes and measuring the runtime and memory usage. This is practical but can be affected by factors like hardware and implementation details.
+* **Theoretical Analysis:**  Analyzing the algorithm's code to determine the number of operations performed as a function of the input size. This provides a more accurate and generalizable assessment of complexity.
+
+**Example:**
+
+Consider a simple function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+The time complexity of this function is O(n) because it iterates through the array once (linear time). The space complexity is O(1) because it uses a constant amount of extra space regardless of the array's size.
+
+
+Understanding algorithm complexity is crucial for selecting appropriate algorithms for different tasks and for optimizing existing algorithms. Choosing an algorithm with a lower complexity generally leads to better performance, especially with large inputs.
+
