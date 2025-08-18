@@ -34306,3 +34306,95 @@ print()
 
 Remember that these traversals are recursive algorithms.  They break down the problem into smaller subproblems (traversing subtrees) until a base case (empty subtree) is reached.  The results are then combined as the recursion unwinds.
 
+#  Lowest common ancestor of a Binary Tree 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a binary tree is a classic tree traversal problem.  There are several approaches, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most common and efficient):**
+
+   This approach leverages recursion to traverse the tree.  The core idea is:
+
+   * If either `node1` or `node2` is the current node (`root`), the LCA is the current node.
+   * If `node1` and `node2` are on different subtrees (one in the left subtree and one in the right subtree), the LCA is the current node.
+   * Otherwise, recursively search the left and right subtrees.
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(root, p, q):
+       if not root or root == p or root == q:
+           return root
+
+       left = lowestCommonAncestor(root.left, p, q)
+       right = lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+
+   # Example usage:
+   root = TreeNode(3)
+   root.left = TreeNode(5)
+   root.right = TreeNode(1)
+   root.left.left = TreeNode(6)
+   root.left.right = TreeNode(2)
+   root.right.left = TreeNode(0)
+   root.right.right = TreeNode(8)
+   p = root.left  # Node with value 5
+   q = root.right # Node with value 1
+
+   lca = lowestCommonAncestor(root, p, q)
+   print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: 3
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, we traverse the entire tree).
+   * **Space Complexity:** O(H), where H is the height of the tree (due to recursive call stack).  In a skewed tree, this could be O(N).
+
+
+2. **Iterative Approach (using a stack or queue):**
+
+   This approach uses an iterative method (e.g., using a stack for depth-first search or a queue for breadth-first search) to avoid recursion. It's generally less concise but can be more memory-efficient in cases of very deep trees.  However, the space complexity is still potentially O(N) in the worst case.
+
+
+3. **Parent Pointers:**
+
+   If you can modify the tree structure to add parent pointers to each node, finding the LCA becomes much simpler.  You can trace upwards from both `p` and `q` until you find a common ancestor.
+
+   ```python
+   # Assuming a tree structure with parent pointers (add 'parent' attribute to TreeNode)
+   def lowestCommonAncestor_parentPointers(p, q):
+       ancestors_p = set()
+       curr = p
+       while curr:
+           ancestors_p.add(curr)
+           curr = curr.parent
+
+       curr = q
+       while curr:
+           if curr in ancestors_p:
+               return curr
+           curr = curr.parent
+       return None # Should not happen if p and q are in the tree
+   ```
+
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(H)
+
+
+**Choosing the Right Method:**
+
+* The **recursive approach** is generally preferred for its simplicity and readability.  Unless you have memory constraints due to an extremely deep tree, it's the best option.
+* The **iterative approach** might be beneficial for very deep trees to avoid stack overflow.
+* The **parent pointers method** is the most efficient if you can modify the tree structure to include parent pointers, but this is not always possible.
+
+
+Remember to handle edge cases like empty trees, nodes not present in the tree, and when one node is an ancestor of the other.  The code examples above incorporate some of these checks, but it's crucial to consider all possibilities in a production environment.
+
