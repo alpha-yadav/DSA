@@ -32585,3 +32585,35 @@ Asymptotic notations describe the behavior of functions as their input approache
 
 Understanding these notations is essential for effectively analyzing and comparing the efficiency of algorithms.  They allow us to abstract away from implementation details and focus on the fundamental scaling properties of algorithms.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is a mathematical notation used in computer science to describe the lower bound of the growth rate of a function.  In simpler terms, it tells us the minimum amount of time or resources a function will *at least* take, regardless of the input.  It's often used to analyze the best-case complexity of an algorithm.
+
+Here's a breakdown of its key aspects:
+
+* **Formal Definition:**  A function *f(n)* is said to be Ω(*g(n)*) if there exist positive constants *c* and *n₀* such that 0 ≤ *c* *g(n)* ≤ *f(n)* for all *n* ≥ *n₀*.
+
+* **What it means:**  This definition states that for sufficiently large inputs (*n* ≥ *n₀*), the function *f(n)* is always greater than or equal to a constant multiple (*c*) of *g(n)*.  *g(n)* represents the lower bound, and *f(n)* is always above (or at least equal to) that bound, scaled by *c*.
+
+* **Relationship to Big-O and Big-Theta:**
+
+    * **Big-O (O):**  Describes the upper bound of a function's growth rate (worst-case complexity).  If *f(n)* = O(*g(n)*), then *f(n)* grows no faster than *g(n)*.
+    * **Big-Omega (Ω):** Describes the lower bound of a function's growth rate (best-case complexity). If *f(n)* = Ω(*g(n)*), then *f(n)* grows at least as fast as *g(n)*.
+    * **Big-Theta (Θ):** Describes a tight bound, meaning both the upper and lower bounds are the same.  If *f(n)* = Θ(*g(n)*), then *f(n)* grows at the same rate as *g(n)*.  This means *f(n)* = O(*g(n)*) and *f(n)* = Ω(*g(n)*).
+
+* **Examples:**
+
+    * **Linear search:** In the best case, a linear search finds the element at the first position.  Its best-case time complexity is Ω(1) (constant time) because it takes a constant amount of time regardless of the input size.  However, its average and worst-case complexities are O(n) (linear time).
+
+    * **Merge sort:**  Merge sort has a time complexity of Θ(n log n).  This means it's both O(n log n) and Ω(n log n). Its best-case, average-case, and worst-case complexities are all the same.
+
+    * **Function f(n) = n² + 5n + 10:**  This function is Ω(n²) because for sufficiently large *n*, the n² term dominates.  We can choose *c* = 1 and *n₀* = 10 and satisfy the definition.
+
+* **Use Cases:**
+
+    * Analyzing algorithms' best-case performance.
+    * Proving lower bounds on problem complexity – showing that *no* algorithm can solve a problem faster than a certain time.
+    * Guaranteeing minimum performance.
+
+
+**In short:**  Big-Omega notation provides a lower bound on the growth rate of a function, giving us a guarantee about its minimum performance for large inputs. It complements Big-O notation, which provides an upper bound, giving a more complete picture of the algorithm's performance characteristics.
+
