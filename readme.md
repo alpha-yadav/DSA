@@ -33746,3 +33746,129 @@ print(f"Is the tree a BST (Recursive Method): {is_bst_recursive(root2)}") # Fals
 
 Both methods achieve the same result. The recursive method is often preferred for its space efficiency (it avoids creating a list) and potentially better performance in some cases, especially for balanced trees.  The in-order traversal method is simpler to understand for beginners.  Choose the method that best suits your needs and understanding. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Inorder Traversal and Sorted Array**
+
+This method leverages the property that an inorder traversal of a BST yields a sorted array.
+
+1. **Inorder Traversal:** Perform an inorder traversal of the binary tree, storing the visited nodes' values in an array.
+
+2. **Sorted Array Check:** Check if the resulting array is sorted in ascending order. If it is, the tree is a BST; otherwise, it's not.
+
+```python
+def is_bst_inorder(root):
+    """
+    Checks if a binary tree is a BST using inorder traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if root is None:
+        return True
+
+    inorder_list = []
+    _inorder_traversal(root, inorder_list)
+
+    #Check if the list is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+
+def _inorder_traversal(node, inorder_list):
+    """Helper function for inorder traversal."""
+    if node:
+        _inorder_traversal(node.left, inorder_list)
+        inorder_list.append(node.val)
+        _inorder_traversal(node.right, inorder_list)
+
+
+# Example usage (assuming you have a Node class with val, left, and right attributes)
+root = Node(2)
+root.left = Node(1)
+root.right = Node(3)
+print(is_bst_inorder(root))  # Output: True
+
+
+root = Node(5)
+root.left = Node(1)
+root.right = Node(4)
+root.right.left = Node(3)
+root.right.right = Node(6)
+print(is_bst_inorder(root))  # Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each node, ensuring that its value is within the valid range defined by its ancestors.
+
+1. **Base Case:** An empty tree is a BST.
+
+2. **Recursive Step:** For each node:
+   - Check if the node's value is within the allowed range (min_val < node.val < max_val).
+   - Recursively check the left subtree with the updated range (min_val, node.val).
+   - Recursively check the right subtree with the updated range (node.val, max_val).
+
+```python
+import sys
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive approach with min/max.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    return _is_bst_recursive_helper(root, -sys.maxsize, sys.maxsize)
+
+
+def _is_bst_recursive_helper(node, min_val, max_val):
+    """Helper function for recursive BST check."""
+    if node is None:
+        return True
+    if not (min_val < node.val < max_val):
+        return False
+    return (_is_bst_recursive_helper(node.left, min_val, node.val) and
+            _is_bst_recursive_helper(node.right, node.val, max_val))
+
+
+# Example usage (assuming you have a Node class)
+root = Node(2)
+root.left = Node(1)
+root.right = Node(3)
+print(is_bst_recursive(root))  # Output: True
+
+root = Node(5)
+root.left = Node(1)
+root.right = Node(4)
+root.right.left = Node(3)
+root.right.right = Node(6)
+print(is_bst_recursive(root))  # Output: False
+```
+
+**Choosing a Method:**
+
+* The **inorder traversal method** is generally simpler to understand and implement.  It has a time complexity of O(N) due to the traversal and O(N) space complexity in the worst case (for storing the inorder array).
+
+* The **recursive method** is often slightly more efficient in space complexity because it doesn't require creating an extra array, although both have a time complexity of O(N).  The space complexity can be O(h) where h is the height of the tree in the best case (balanced tree).  In the worst case (skewed tree) it could still be O(N).
+
+Remember to adapt these code snippets to your specific `Node` class definition.  Both methods assume you have a `Node` class with `val`, `left`, and `right` attributes.  For example:
+
+```python
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+```
+
