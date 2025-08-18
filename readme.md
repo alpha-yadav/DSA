@@ -35616,3 +35616,46 @@ This algorithm has a time complexity of O(n) because the loop iterates through t
 
 Understanding algorithm complexity is vital for selecting efficient algorithms and optimizing code performance, especially when dealing with large datasets.  Choosing an algorithm with a lower complexity can dramatically improve performance.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds.  In simpler terms, it tells us that a function's growth is *proportional* to another function, ignoring constant factors and smaller terms.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that f(n) = Θ(g(n)) if and only if there exist positive constants c₁ and c₂, and a positive integer n₀, such that for all n ≥ n₀:
+
+`c₁g(n) ≤ f(n) ≤ c₂g(n)`
+
+Let's break this down:
+
+* **f(n):**  The function we're analyzing (e.g., the runtime of an algorithm).
+* **g(n):**  A known function representing the growth rate (e.g., n, n², log n).  This is often a simpler function that captures the dominant behavior of f(n).
+* **c₁ and c₂:** Positive constants.  These constants account for the fact that we're ignoring constant factors in the growth rate.
+* **n₀:** A positive integer. This represents a threshold beyond which the inequality holds.  For smaller values of n, the inequality might not be true.
+
+**Intuitive Explanation:**
+
+Imagine plotting f(n) and g(n).  If f(n) = Θ(g(n)), then for sufficiently large n (n ≥ n₀), the graph of f(n) will fall between two constant multiples of g(n) – `c₁g(n)` and `c₂g(n)`.  Essentially, f(n) grows at the same rate as g(n), up to constant factors.
+
+**Examples:**
+
+* **7n² + 5n + 2 = Θ(n²)**:  The dominant term is n², so we can ignore the lower-order terms (5n and 2).  We can find constants c₁ and c₂ that satisfy the definition.
+
+* **log₂(n) = Θ(log₁₀(n))**:  Different logarithmic bases only differ by a constant factor (change of base formula), so they have the same growth rate.
+
+* **n² ≠ Θ(n³)**:  n³ grows significantly faster than n², so no constants c₁ and c₂ can satisfy the definition for all sufficiently large n.
+
+* **2ⁿ ≠ Θ(n²)**:  Exponential functions grow much faster than polynomial functions.
+
+**Relationship to Big O and Big Omega:**
+
+* **Big O (O):** Provides an *upper bound* on the growth rate.  f(n) = O(g(n)) means f(n) grows no faster than g(n).
+* **Big Omega (Ω):** Provides a *lower bound* on the growth rate. f(n) = Ω(g(n)) means f(n) grows at least as fast as g(n).
+* **Big Theta (Θ):** Provides both an upper and lower bound, meaning it's a *tight bound*.  f(n) = Θ(g(n)) implies both f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+
+**In Summary:**
+
+Big-Theta notation is a powerful tool for analyzing the efficiency of algorithms. It helps us understand how the runtime or space requirements of an algorithm scale with the input size, ignoring unimportant constant factors and focusing on the dominant growth behavior.  It provides a more precise description of asymptotic complexity than Big O alone.
+
