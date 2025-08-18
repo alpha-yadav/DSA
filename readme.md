@@ -33009,3 +33009,14 @@ root.children = [Node(2), Node(3), Node(4)]
 
 The choice of representation depends on the specific needs of your application. If you need efficient traversal and don't need to frequently find parents, the child-sibling or list of children representations might be suitable. If you have a complete n-ary tree and space efficiency is paramount, the array representation could be a better option.  For more flexible scenarios where node identification is not sequential, a dictionary-based representation might be preferable.
 
+#  Introduction 
+Please provide me with context!  I need to know what you want an introduction *to*.  
+
+For example, tell me:
+
+* **What is the topic?** (e.g., the history of the Roman Empire, the benefits of exercise, the plot of a specific movie)
+* **Who is your audience?** (e.g., experts, general public, children)
+* **What is the purpose of the introduction?** (e.g., to grab attention, to provide background information, to state a thesis)
+
+Once I have this information, I can write a suitable introduction for you.
+
