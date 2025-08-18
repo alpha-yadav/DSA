@@ -32486,3 +32486,44 @@ The time complexity of this function is O(n) because it iterates through the arr
 
 Understanding algorithm complexity is crucial for selecting appropriate algorithms for different tasks and for optimizing existing algorithms. Choosing an algorithm with a lower complexity generally leads to better performance, especially with large inputs.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a powerful tool in computer science and mathematics used to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, indicating that the function's growth is bounded both above and below by the same function (up to constant factors).
+
+Here's a breakdown of Big-Theta notation:
+
+**Formal Definition:**
+
+Given two functions *f(n)* and *g(n)*, we say that *f(n)* is Θ(*g(n)*) if and only if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+This means that for sufficiently large values of *n* (i.e., *n ≥ n₀*), the function *f(n)* is always sandwiched between *c₁ * g(n)* and *c₂ * g(n)*.  Essentially, *f(n)* grows at the same rate as *g(n)*, ignoring constant factors.
+
+**Intuitive Explanation:**
+
+Imagine you're comparing the runtime of two algorithms.  If the runtime of algorithm A is Θ(n²) and the runtime of algorithm B is also Θ(n²), it means that both algorithms have a quadratic runtime complexity.  While they might differ in their constant factors (e.g., Algorithm A might take 5n² steps, while Algorithm B takes 10n² steps), their growth rates are fundamentally the same as *n* gets large.  Big-O notation would tell us that both are *O(n²)*, but wouldn't say they're equivalent in growth rate.  Big-Ω notation would tell us both are *Ω(n²)*, but again wouldn't show equivalency in the growth rate.  Only Big-Theta gives this tight bound.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1; g(n) = n²:**  f(n) is Θ(n²).  You can find constants *c₁*, *c₂*, and *n₀* that satisfy the definition.  For example, for *n₀ = 1*, *c₁ = 1*, and *c₂ = 6*, the inequality holds.
+
+* **f(n) = 5n log n; g(n) = n log n:** f(n) is Θ(n log n). The constant factor 5 doesn't affect the asymptotic growth rate.
+
+* **f(n) = n; g(n) = n²:** f(n) is *not* Θ(n²).  While f(n) is O(n²), it's not bounded *below* by a constant multiple of n².
+
+* **f(n) = 2ⁿ; g(n) = n²:** f(n) is *not* Θ(n²). Exponential functions grow much faster than polynomial functions.
+
+**Relationship to Big-O and Big-Ω:**
+
+* **Big-O (O):** Provides an upper bound on the growth rate.  f(n) = O(g(n)) means f(n) grows no faster than g(n).
+
+* **Big-Ω (Ω):** Provides a lower bound on the growth rate. f(n) = Ω(g(n)) means f(n) grows at least as fast as g(n).
+
+* **Big-Theta (Θ):** Provides both an upper and lower bound, meaning the function grows at the same rate as the given function (ignoring constant factors).  If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+**In Summary:**
+
+Big-Theta notation is crucial for analyzing algorithms and understanding their efficiency. It provides a precise description of the growth rate of a function, enabling more accurate comparisons between different algorithms.  When you can prove a Big-Theta bound, you have the most complete and informative characterization of an algorithm's efficiency.
+
