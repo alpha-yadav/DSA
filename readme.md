@@ -34526,3 +34526,13 @@ The recursive approach can be adapted, but you'll need to iterate through all ch
 
 Remember to handle edge cases such as when one or both nodes are not found in the tree.  The examples above generally return `None` in such situations.  You might choose to throw an exception or return a specific error value depending on your requirements.
 
+#  Graph 
+Please provide me with the information needed to create the graph.  I need to know:
+
+* **What type of graph?** (e.g., bar graph, line graph, scatter plot, pie chart, etc.)
+* **What are the data points?** (e.g.,  x and y values, categories and their corresponding values)
+* **What are the labels for the axes (if applicable)?**
+* **What is the title of the graph?**
+
+Once I have this information, I can help you create the graph.  I can't actually *draw* a graph visually, but I can give you the data in a format that's easily copied into a spreadsheet program (like Google Sheets or Excel) or a graphing calculator.
+
