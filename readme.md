@@ -35536,3 +35536,83 @@ This version uses `map` to transform the range of numbers (1...n) into an array 
 
 Remember to choose the version that best suits your needs and coding style. The basic version is easier to understand for beginners, while the improved and map versions are more efficient and demonstrate more advanced Swift features.  The choice depends on the context and your priorities.
 
+#  Algorithm Complexity 
+Algorithm complexity describes how the runtime or space requirements of an algorithm grow as the input size grows.  It's a crucial aspect of algorithm analysis, allowing us to compare the efficiency of different approaches and predict their performance on large datasets.  We typically analyze complexity using Big O notation.
+
+Here's a breakdown of key concepts:
+
+**1. Big O Notation (Asymptotic Analysis):**
+
+Big O notation expresses the upper bound of an algorithm's growth rate. It focuses on the dominant terms as the input size (n) approaches infinity, ignoring constant factors and smaller terms.  We're interested in the *order* of growth, not the precise runtime.
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Nested loops iterating through an array.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Traveling salesman problem (brute-force approach).
+
+
+**2. Other Notations:**
+
+While Big O describes the *upper bound*, other notations provide a more complete picture:
+
+* **Ω (Omega):** Describes the *lower bound* of an algorithm's growth rate.  It represents the best-case scenario.
+
+* **Θ (Theta):** Describes the *tight bound*, indicating both the upper and lower bounds are the same.  This means the algorithm's growth rate is precisely described.
+
+
+**3. Space Complexity:**
+
+Similar to time complexity, space complexity analyzes the amount of memory an algorithm uses as the input size grows.  It's also expressed using Big O notation.  Examples:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of input size.
+
+* **O(n) - Linear Space:** The memory usage grows linearly with the input size.
+
+* **O(log n) - Logarithmic Space:** Memory usage grows logarithmically.
+
+
+**4. Factors Affecting Complexity:**
+
+Several factors influence an algorithm's complexity:
+
+* **Input Size (n):** The primary factor.
+* **Data Structure:** The choice of data structure significantly impacts efficiency.
+* **Algorithm Design:** Different algorithms can solve the same problem with vastly different complexities.
+* **Hardware:** Processing power and memory capacity affect runtime, but Big O focuses on the inherent scaling properties.
+
+
+**5. Analyzing Complexity:**
+
+Analyzing an algorithm's complexity usually involves:
+
+* **Identifying the basic operations:** Determine the operations that contribute most to the runtime.
+* **Counting the number of operations:** Express the number of operations as a function of the input size (n).
+* **Expressing the complexity using Big O notation:**  Identify the dominant term and simplify the expression.
+
+
+**Example:**
+
+Consider a simple function that sums the elements of an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for num in arr:
+    total += num
+  return total
+```
+
+This algorithm has a time complexity of O(n) because the loop iterates through the array once, and the number of operations is directly proportional to the size of the array (n).  Its space complexity is O(1) because it uses a constant amount of extra memory (the `total` variable).
+
+
+Understanding algorithm complexity is vital for selecting efficient algorithms and optimizing code performance, especially when dealing with large datasets.  Choosing an algorithm with a lower complexity can dramatically improve performance.
+
