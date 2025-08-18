@@ -35185,3 +35185,95 @@ bfs(graph, 'A') # Output: A B C D E F (order is consistent)
 
 The choice between DFS and BFS depends on the specific application and the properties of the graph.  If you need the shortest path in an unweighted graph, BFS is the better choice.  If you need to find connected components or detect cycles, DFS is often more suitable.  For weighted graphs, algorithms like Dijkstra's or A* are typically preferred for finding shortest paths.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and whether you need to handle cycles or weighted graphs. Here are a few implementations in Python:
+
+**1. DFS using Adjacency List (Recursive):** This is the most common and arguably the simplest recursive implementation.  It's efficient for graphs that aren't excessively deep.
+
+```python
+def dfs_recursive(graph, start, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph using recursion.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and 
+               values are lists of their neighbors.
+        start: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(start, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+    return visited
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal (recursive):")
+dfs_recursive(graph, 'A')  # Output: A B D E F C (order may vary slightly depending on dict iteration)
+print("\nVisited nodes:", dfs_recursive(graph, 'A')) #shows the set of visited nodes
+
+```
+
+**2. DFS using Adjacency List (Iterative):** This version uses a stack instead of recursion, avoiding potential stack overflow errors for very deep graphs.
+
+```python
+def dfs_iterative(graph, start):
+    """
+    Performs a Depth-First Search traversal of a graph iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph.
+        start: The starting node.
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [start]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            print(vertex, end=" ")  # Process the node
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited) #add unvisited neighbours
+    return visited
+
+# Example usage (same graph as above):
+print("\n\nDFS traversal (iterative):")
+dfs_iterative(graph, 'A') # Output: A C F E B D (order may vary slightly depending on dict iteration)
+print("\nVisited nodes:", dfs_iterative(graph,'A'))
+```
+
+
+**Choosing between Recursive and Iterative:**
+
+* **Recursive:**  More concise and often easier to understand for smaller graphs.  However, it can lead to stack overflow errors for very deep graphs.
+* **Iterative:**  Handles deep graphs better because it uses a stack explicitly.  It might be slightly less readable than the recursive version.
+
+
+**Important Considerations:**
+
+* **Handling Cycles:**  The provided examples don't explicitly handle cycles (loops in the graph).  If you need to detect cycles or prevent infinite loops, you'll need to add a mechanism to track nodes currently being explored (e.g., using a separate "exploring" set).
+* **Weighted Graphs:** For weighted graphs (graphs with edge weights), you'll need modifications to handle the weights,  possibly using algorithms like Dijkstra's or A* instead of a simple DFS.
+* **Adjacency Matrix:**  If your graph is represented as an adjacency matrix, you'd need to adapt the code to use matrix indexing instead of dictionary lookups.
+
+
+Remember to choose the implementation that best suits your needs and the characteristics of your graph.  The recursive version is often preferred for its simplicity unless you anticipate very deep graphs.
+
