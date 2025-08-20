@@ -37047,3 +37047,127 @@ BSTs are used in many applications, including:
 
 In summary, BSTs are a powerful and versatile data structure, but their efficiency heavily relies on maintaining a balanced structure.  Self-balancing variations are typically preferred for practical applications to ensure optimal performance.
 
+#  Binary Search Tree - Insertion (Python) 
+Several implementations of binary search tree (BST) insertion in Python are possible, each with varying levels of efficiency and sophistication. Here are a few, starting with a straightforward approach and progressing to a more robust solution:
+
+**1. Basic Recursive Insertion:**
+
+This version is concise and easy to understand. It recursively traverses the tree to find the correct position for the new node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+# Example usage:
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+```
+
+**2. Iterative Insertion:**
+
+This approach avoids recursion, which can be more efficient for very deep trees and avoids potential stack overflow errors.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+```
+
+**3.  Insertion with Duplicate Handling:**
+
+The previous examples don't handle duplicate values.  This version allows you to specify how to handle duplicates (e.g., ignore them, count them, or replace the existing node).
+
+```python
+class Node:
+    def __init__(self, data, count=1):
+        self.data = data
+        self.count = count #Track duplicates
+        self.left = None
+        self.right = None
+
+class BST:
+    # ... (init method same as before) ...
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data == current.data:
+                current.count += 1  #Increment count for duplicates
+                break
+            elif data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+```
+
+Remember to choose the implementation that best suits your needs.  For most cases, the iterative approach offers a good balance of readability and efficiency.  If you need to handle duplicates, use the third version.  Consider adding methods for searching, deletion, and tree traversal to complete your BST implementation.
+
