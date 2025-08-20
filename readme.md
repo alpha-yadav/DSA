@@ -38272,3 +38272,81 @@ The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest nod
 
 The optimized recursive approach is generally preferred because it's often more concise and easier to understand while maintaining the same time complexity as the brute-force approach. The path-based approach is useful if you need the actual path to the LCA as well.  Remember to adapt the `Node` class to your specific tree implementation.  If you have a *Binary Search Tree* (BST), even more efficient algorithms are possible.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree depends heavily on the type of tree.  Here's how to approach it for different scenarios:
+
+**1. Binary Trees:**
+
+* **Recursive Approach (Most common and efficient):**
+
+This approach leverages the recursive nature of a tree.  The idea is:
+
+1. **Base Case:** If the current node is `null`, return `null`. If the current node is either `node1` or `node2`, return the current node.
+
+2. **Recursive Step:** Recursively search for `node1` and `node2` in the left and right subtrees.
+
+   * If `node1` and `node2` are found in *different* subtrees, the current node is the LCA.
+   * If both `node1` and `node2` are found in the *same* subtree, recursively search in that subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node1, node2):
+    if root is None or root.data == node1 or root.data == node2:
+        return root
+
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root  # LCA found (nodes in different subtrees)
+    elif left_lca:
+        return left_lca  # LCA in left subtree
+    else:
+        return right_lca  # LCA in right subtree
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lca_recursive(root, 4, 5)
+print(f"LCA of 4 and 5: {lca.data}")  # Output: LCA of 4 and 5: 2
+```
+
+
+* **Iterative Approach (Using Parent Pointers):**
+
+If each node in the binary tree has a pointer to its parent, you can use an iterative approach.  This involves finding the paths from the root to each node (`node1` and `node2`), then iterating up those paths until you find the first common ancestor.
+
+**2. General Trees (Not necessarily binary):**
+
+The recursive approach can be adapted for general trees, but the complexity increases.  You'd need to recursively explore all children instead of just left and right.
+
+
+**3. Optimized Approaches (for Binary Trees):**
+
+* **Using a hash table (or set):**  Store the nodes visited during a depth-first search from `node1` and then search for the first node from the DFS of `node2` that is in the hash table.  This approach can be faster than the recursive method in some cases.
+
+
+**Choosing the right approach:**
+
+* For simple binary trees, the recursive approach is generally preferred for its elegance and readability.
+* For larger trees or performance-critical applications, you might consider the iterative approach with parent pointers or the hash table method.
+* General trees require modifications to the recursive approach or more sophisticated algorithms.
+
+
+Remember to handle edge cases such as:
+
+* One or both nodes are not present in the tree.
+* One node is the ancestor of the other.
+
+
+Always consider the specific constraints and characteristics of your tree when selecting the most appropriate LCA algorithm.  The examples above provide a starting point for understanding the core concepts.
+
