@@ -37720,3 +37720,126 @@ print(f"Is the tree a BST (Recursive method)? {is_bst(root2)}") # False
 
 The recursive approach generally has better space complexity for balanced trees, while the inorder traversal method is arguably simpler to understand.  Choose the method that best suits your needs and coding style.
 
+#  If a given input tree follows Binary search tree property or not 
+Several approaches can determine if a given input tree adheres to the Binary Search Tree (BST) property.  The BST property states that for every node:
+
+* The value of the left subtree nodes is less than the node's value.
+* The value of the right subtree nodes is greater than the node's value.
+
+Here are three common methods:
+
+**Method 1: Recursive In-Order Traversal**
+
+This is arguably the most elegant and efficient approach.  A BST, when traversed in-order (left, root, right), will produce a sorted sequence of its nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node):
+    """
+    Recursively checks if a tree is a BST using in-order traversal.
+    """
+    in_order_list = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            in_order_list.append(node.data)
+            inorder(node.right)
+
+    inorder(node)
+    #Check if the inorder traversal is sorted
+    return all(in_order_list[i] <= in_order_list[i+1] for i in range(len(in_order_list)-1))
+
+
+#Example Usage
+root = Node(5)
+root.left = Node(3)
+root.right = Node(8)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(7)
+root.right.right = Node(9)
+
+
+print(is_bst_recursive(root)) # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(8)
+root2.left.left = Node(1)
+root2.left.right = Node(10) # Violates BST property
+
+
+print(is_bst_recursive(root2)) # Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each subtree, passing down minimum and maximum allowed values.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_minmax(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a tree is a BST using min and max values.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive_minmax(node.left, min_val, node.data) and
+            is_bst_recursive_minmax(node.right, node.data, max_val))
+
+# Example usage (same as above, will produce same true/false results)
+print(is_bst_recursive_minmax(root))
+print(is_bst_recursive_minmax(root2))
+```
+
+**Method 3: Iterative In-Order Traversal (using a stack)**
+
+This avoids recursion and might be slightly more efficient in some cases, especially for very deep trees to avoid potential stack overflow issues.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_iterative(node):
+    """
+    Iteratively checks if a tree is a BST using in-order traversal and a stack.
+    """
+    stack = []
+    prev = None
+    while stack or node:
+        while node:
+            stack.append(node)
+            node = node.left
+        node = stack.pop()
+        if prev and node.data <= prev.data:
+            return False
+        prev = node
+        node = node.right
+    return True
+
+#Example usage (same as above, will produce same true/false results)
+print(is_bst_iterative(root))
+print(is_bst_iterative(root2))
+```
+
+All three methods achieve the same goal.  The recursive in-order traversal is often considered the most readable, while the iterative approach might offer a slight performance advantage in certain scenarios. The min-max recursive approach offers a slightly different perspective on the problem. Choose the method that best suits your needs and coding style. Remember to handle edge cases (empty trees) appropriately.
+
