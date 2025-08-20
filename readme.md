@@ -36243,3 +36243,54 @@ This version maps each number in the range 1...n to its FizzBuzz equivalent, ret
 
 Remember to choose the method that best suits your understanding and coding style.  The first method is the most beginner-friendly, while the others showcase more advanced Swift features.  All three achieve the same result: printing the FizzBuzz sequence.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm consumes as a function of the size of its input.  It's a crucial aspect of algorithm analysis, helping us understand how an algorithm's performance scales with larger inputs.  We typically express complexity using Big O notation.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:** Measures how the runtime of an algorithm grows as the input size increases.  This is often the most important aspect to analyze.
+* **Space Complexity:** Measures how the amount of memory (or storage) used by an algorithm grows as the input size increases. This includes both the input data and any auxiliary data structures used by the algorithm.
+* **Best-Case, Average-Case, and Worst-Case Complexity:**  These describe the algorithm's performance under different input scenarios:
+    * **Best-Case:** The most favorable input scenario, resulting in the fastest execution time.
+    * **Average-Case:** The expected performance over a large number of typical inputs. This can be difficult to determine precisely.
+    * **Worst-Case:** The least favorable input scenario, leading to the longest execution time.  This is often the most important complexity to consider because it provides an upper bound on the algorithm's runtime.
+
+**Big O Notation:**
+
+Big O notation simplifies the analysis by focusing on the dominant terms and ignoring constant factors. It provides an upper bound on the growth rate of an algorithm's resource consumption.  Some common Big O complexities (from best to worst):
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+* **O(log n) - Logarithmic Time:** The runtime grows logarithmically with the input size. Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime grows linearly with the input size. Example: Searching an unsorted array for a specific element.
+* **O(n log n) - Linearithmic Time:** The runtime grows proportionally to n multiplied by the logarithm of n. Example: Merge sort, heapsort.
+* **O(n²) - Quadratic Time:** The runtime grows proportionally to the square of the input size. Example: Bubble sort, selection sort.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each increase in input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Finding all permutations of a set.
+
+
+**Example:**
+
+Consider searching for an element in an array:
+
+* **Linear Search (unsorted):**  Worst-case time complexity is O(n) because you might have to check every element.
+* **Binary Search (sorted):** Worst-case time complexity is O(log n) because you repeatedly halve the search space.
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity is critical for:
+
+* **Choosing the right algorithm:**  For large inputs, an algorithm with a lower complexity will significantly outperform one with a higher complexity.
+* **Optimizing code:** Identifying performance bottlenecks and improving the efficiency of algorithms.
+* **Predicting scalability:** Assessing how well an algorithm will handle larger datasets or increased workloads.
+
+
+**Beyond Big O:**
+
+While Big O notation is widely used, other notations exist for more precise analysis, including:
+
+* **Big Omega (Ω):** Provides a lower bound on the growth rate.
+* **Big Theta (Θ):** Provides both an upper and lower bound, indicating a tight bound on the growth rate.
+
+
+In summary, algorithm complexity analysis is a fundamental tool for evaluating and comparing algorithms, ultimately leading to the development of efficient and scalable software.
+
