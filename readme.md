@@ -36658,3 +36658,34 @@ print("Largest element:", largest) # Output: Largest element: 9
 
 In summary, nested loops are a powerful tool for iterating over multi-dimensional data or performing repetitive tasks where the inner task needs to be repeated for each iteration of an outer task. However, be mindful of their potential performance impact and strive for clear and well-structured code.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  Their runtime increases very slowly as the input size (n) grows.  This typically means they're dividing the problem size in half (or some constant fraction) with each step.  Here are some common types:
+
+**1. Binary Search:**
+
+* **Mechanism:**  This is the quintessential O(log n) algorithm. It works on a *sorted* list or array.  It repeatedly divides the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This continues until the target is found or the interval is empty.
+* **Example:** Finding a specific word in a dictionary.
+
+**2. Balanced Binary Search Trees (BSTs) Operations (Search, Insertion, Deletion):**
+
+* **Mechanism:**  These trees maintain a balanced structure, ensuring that the height of the tree remains logarithmic in the number of nodes.  Operations like searching, inserting, and deleting a node involve traversing the tree from the root, making decisions based on the node's value at each level.  Self-balancing trees like AVL trees and red-black trees guarantee logarithmic time complexity for these operations.
+* **Example:** Efficiently storing and retrieving data in a database or an in-memory data structure.
+
+**3. Heap Operations (Insertion, Deletion, Finding Min/Max):**
+
+* **Mechanism:** Heaps are tree-based data structures that satisfy the heap property (e.g., in a min-heap, the parent node is always smaller than its children). Operations like inserting an element, deleting the minimum/maximum element, and finding the minimum/maximum element all have O(log n) time complexity due to the tree's structure.
+* **Example:** Implementing priority queues, heapsort algorithm.
+
+**4. Algorithms using Divide and Conquer with Logarithmic Depth:**
+
+* **Mechanism:** Some divide-and-conquer algorithms recursively break down a problem into subproblems of roughly half the size.  If the number of recursive levels is logarithmic, the overall time complexity can be O(log n).  The crucial aspect is that the work done at each level must be proportional to the size of the subproblem at that level.  Merge sort, while O(n log n) overall, exhibits this logarithmic depth in its recursive calls.
+* **Example:**  Certain types of recursive tree traversal (though not all tree traversals are O(log n)).
+
+**5. Efficient exponentiation:**
+
+* **Mechanism:** Computing x<sup>n</sup> can be done in O(log n) time using exponentiation by squaring.  This algorithm repeatedly squares the base and adjusts the exponent, reducing the number of multiplications required.
+* **Example:** Cryptographic algorithms often leverage this for modular exponentiation.
+
+
+**Important Note:**  The O(log n) time complexity only applies when the algorithm works by repeatedly reducing the problem size by a constant factor. If the problem size is not reduced efficiently at each step, the algorithm will likely have a higher time complexity.  The base of the logarithm (e.g., base 2, base 10) doesn't affect the overall Big O notation because it's just a constant factor.
+
