@@ -38176,3 +38176,99 @@ postorder(root)  # Output: Postorder traversal: 4 5 2 3 1
 
 These examples demonstrate the basic recursive approach. Iterative (non-recursive) solutions are also possible using stacks or other data structures, which can be more memory-efficient for very large trees.  However, the recursive approach is generally clearer and easier to understand.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several approaches to finding the LCA, each with different complexities and assumptions.
+
+**Methods:**
+
+1. **Brute Force (Recursive):**
+
+   This method recursively traverses the tree from the root. For each node, it checks if both nodes (`node1` and `node2`) are present in its left and right subtrees.  If both are found, the current node is the LCA. If only one is found, the LCA lies in the subtree containing that node. If neither is found, the LCA is not in the current subtree.
+
+   ```python
+   def lca_brute_force(root, node1, node2):
+       if root is None or root == node1 or root == node2:
+           return root
+
+       left_lca = lca_brute_force(root.left, node1, node2)
+       right_lca = lca_brute_force(root.right, node1, node2)
+
+       if left_lca and right_lca:  # Both nodes found in different subtrees
+           return root
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   #Example Node Class (adapt to your specific Node structure)
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (in the worst case, it visits all nodes).
+   * **Space Complexity:** O(H), where H is the height of the tree (due to recursive calls).  In a skewed tree, this becomes O(N).
+
+
+2. **Path Based Approach:**
+
+   This approach finds the paths from the root to `node1` and `node2`. The LCA is the last common node in both paths.
+
+   ```python
+   def find_path(root, node, path):
+       if root is None:
+           return False
+       path.append(root)
+       if root == node:
+           return True
+       if find_path(root.left, node, path) or find_path(root.right, node, path):
+           return True
+       path.pop()
+       return False
+
+   def lca_path(root, node1, node2):
+       path1 = []
+       path2 = []
+       if not find_path(root, node1, path1) or not find_path(root, node2, path2):
+           return None  # One or both nodes not found
+
+       i = 0
+       while i < len(path1) and i < len(path2) and path1[i] == path2[i]:
+           i += 1
+       return path1[i - 1] #Return the last common node
+   ```
+
+   * **Time Complexity:** O(N) in the worst case (to traverse paths).
+   * **Space Complexity:** O(N) in the worst case (to store paths – could be improved with iterative approach).
+
+
+3. **Optimized Recursive Approach (Efficient):**
+
+   This recursive approach avoids redundant checks by returning the node itself if it's `node1` or `node2`, or `None` if the node is not an ancestor.
+
+   ```python
+   def lca_optimized(root, node1, node2):
+       if root is None or root == node1 or root == node2:
+           return root
+
+       left = lca_optimized(root.left, node1, node2)
+       right = lca_optimized(root.right, node1, node2)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+   ```
+
+   * **Time Complexity:** O(N) in the worst case.
+   * **Space Complexity:** O(H) in the worst case (due to recursion).
+
+
+**Choosing the Best Method:**
+
+The optimized recursive approach is generally preferred because it's often more concise and easier to understand while maintaining the same time complexity as the brute-force approach. The path-based approach is useful if you need the actual path to the LCA as well.  Remember to adapt the `Node` class to your specific tree implementation.  If you have a *Binary Search Tree* (BST), even more efficient algorithms are possible.
+
