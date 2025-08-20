@@ -36427,3 +36427,64 @@ This means the algorithm's runtime grows at least as fast as *n²*.  The linear 
 
 **In summary:**  Big-Omega notation is a crucial tool for analyzing the efficiency of algorithms by providing a lower bound on their resource usage.  It complements Big-O notation, giving a more complete picture of an algorithm's performance characteristics.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of an algorithm's runtime or space requirements as the input size grows.  It's focused on how the runtime or space scales, not the exact runtime for a particular input size.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases as the input size (n) increases.
+* **Space Complexity:** How the memory usage of an algorithm increases as the input size (n) increases.
+
+**Key Concepts:**
+
+* **Input Size (n):**  This typically refers to the number of elements in an array, the number of nodes in a graph, or the number of digits in a number, etc.  It's the primary factor influencing an algorithm's performance.
+
+* **Upper Bound:** Big O notation only provides an *upper bound* on the growth rate.  It tells us the *worst-case* scenario.  An algorithm might perform better in practice for certain inputs, but Big O focuses on the limiting behavior as n becomes very large.
+
+* **Ignoring Constant Factors:** Big O notation ignores constant factors.  For example, O(2n) and O(n) are both considered the same because as n becomes very large, the constant factor 2 becomes insignificant.
+
+* **Dominant Terms:**  Only the dominant term (the term that grows the fastest) is considered.  For instance, in O(n² + n + 1), the n² term dominates, so it's simplified to O(n²).
+
+**Common Big O Notations:**
+
+| Notation | Description           | Example                                      |
+|----------|-----------------------|----------------------------------------------|
+| O(1)     | Constant Time         | Accessing an element in an array by index    |
+| O(log n) | Logarithmic Time      | Binary search in a sorted array             |
+| O(n)     | Linear Time           | Searching an unsorted array, iterating once  |
+| O(n log n)| Linearithmic Time     | Merge sort, heap sort                        |
+| O(n²)    | Quadratic Time        | Bubble sort, nested loops iterating over n    |
+| O(2ⁿ)    | Exponential Time      | Finding all subsets of a set                 |
+| O(n!)    | Factorial Time        | Generating all permutations of a set          |
+
+
+**Examples:**
+
+* **O(1):**  Accessing an element in an array using its index takes constant time, regardless of the array's size.
+
+* **O(n):**  Iterating through an array to find a specific element takes linear time; the time increases linearly with the number of elements.
+
+* **O(n²):** Nested loops iterating over an array of size n will have a runtime proportional to n².  The time increases quadratically with the input size.
+
+* **O(log n):** Binary search is a good example. With each comparison, you eliminate half the remaining search space.
+
+
+**Why Big O is Important:**
+
+* **Algorithm Comparison:** It allows us to compare the efficiency of different algorithms.
+* **Scalability Analysis:** It helps determine how an algorithm will perform with larger inputs.
+* **Optimization:** It guides developers in choosing the most efficient algorithm for a given task.
+
+
+**Beyond Big O:**
+
+While Big O describes the *worst-case* scenario, other notations exist:
+
+* **Big Omega (Ω):** Describes the *best-case* scenario.
+* **Big Theta (Θ):** Describes the *average-case* scenario (tight bound).
+
+
+Understanding Big O notation is crucial for any programmer to write efficient and scalable code.  It's a fundamental concept in algorithm analysis and design.
+
