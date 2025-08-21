@@ -41233,3 +41233,117 @@ The recursive approach is generally preferred for its simplicity and elegance, p
 
 Remember that these solutions assume that `n1` and `n2` exist in the tree.  You might want to add error handling to check for their presence before proceeding.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science.  The approach depends on the type of tree and whether you have parent pointers or not.
+
+**Methods:**
+
+* **Method 1: Using Parent Pointers (Simplest, if available)**
+
+   If each node in the tree has a pointer to its parent, the LCA can be found efficiently.  The algorithm is:
+
+   1. **Traverse upwards from each node:**  Starting from each of the two input nodes, traverse upwards towards the root, storing the path from each node to the root in two separate lists (e.g., `path1` and `path2`).
+
+   2. **Compare paths:** Compare `path1` and `path2` from the root downwards. The last common node in both paths is the LCA.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.parent = None
+
+   def lca_parent_pointers(node1, node2):
+       path1 = []
+       curr = node1
+       while curr:
+           path1.append(curr)
+           curr = curr.parent
+
+       path2 = []
+       curr = node2
+       while curr:
+           path2.append(curr)
+           curr = curr.parent
+
+       lca = None
+       i = len(path1) - 1
+       j = len(path2) - 1
+       while i >= 0 and j >= 0 and path1[i] == path2[j]:
+           lca = path1[i]
+           i -= 1
+           j -= 1
+       return lca.data
+
+
+   #Example Usage (you'll need to create your tree structure with parent pointers)
+   root = Node("A")
+   # ... (create the tree and set parent pointers) ...
+   node1 = # ... (a node in the tree) ...
+   node2 = # ... (another node in the tree) ...
+   print(f"LCA of {node1.data} and {node2.data}: {lca_parent_pointers(node1, node2)}")
+
+   ```
+
+
+* **Method 2: Without Parent Pointers (Binary Tree)**
+
+   If you don't have parent pointers (common in binary trees), you need a recursive approach.  This method efficiently finds the LCA in a binary tree:
+
+   1. **Base Cases:**
+      * If the current node is `None`, return `None`.
+      * If the current node is either `node1` or `node2`, return the current node.
+
+   2. **Recursive Calls:**
+      * Recursively search for the LCA in the left and right subtrees.
+      * If both recursive calls return a node (meaning `node1` and `node2` are found in different subtrees), then the current node is the LCA.
+      * Otherwise, return the non-`None` result from the recursive calls (the LCA is in one of the subtrees).
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca_binary_tree(root, node1, node2):
+       if root is None:
+           return None
+       if root.data == node1 or root.data == node2:
+           return root
+
+       left_lca = lca_binary_tree(root.left, node1, node2)
+       right_lca = lca_binary_tree(root.right, node1, node2)
+
+       if left_lca and right_lca:
+           return root
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   # Example Usage
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+   print(f"LCA of 4 and 5: {lca_binary_tree(root, 4, 5).data}") # Output: 2
+
+   ```
+
+* **Method 3: Without Parent Pointers (General Tree)**
+
+   For general trees (trees where a node can have more than two children), you might need a more generalized recursive approach or an iterative approach using depth-first search (DFS) or breadth-first search (BFS) to find the paths from the root to the two target nodes.  The path comparison method would then be applied as in Method 1.
+
+
+**Choosing the Right Method:**
+
+The best method depends on your specific needs:
+
+* If you have parent pointers, Method 1 is the most efficient.
+* For binary trees without parent pointers, Method 2 is efficient and elegant.
+* For general trees without parent pointers, a path-finding approach (DFS or BFS) combined with path comparison is necessary.  The complexity might be higher than the binary tree case.
+
+
+Remember to handle edge cases (e.g., one or both nodes are not in the tree) in your implementation.  Always consider the time and space complexity of your chosen approach.  The recursive methods (Methods 2 and 3) have time complexity proportional to the tree's height (O(h)), while the iterative approach (Method 1) also depends on the height but the space complexity is dominated by the lengths of paths, which in the worst case can be O(h).  In balanced trees, h is O(log n), and in skewed trees, it's O(n).
+
