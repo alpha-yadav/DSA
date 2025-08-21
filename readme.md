@@ -39171,3 +39171,89 @@ The best problem for you depends on your current skill level.
 
 Remember to consider the time and space complexity of your solution!  Efficient solutions often leverage appropriate data structures and algorithms.  You can find solutions and discussions for these problems on sites like LeetCode, HackerRank, and others.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's deceptively simple, but a good way to test basic programming concepts.  Here's how to implement it in Swift, starting with a basic version and then showing some improvements:
+
+**Basic Version:**
+
+This version uses a simple `for` loop and `if`/`else if`/`else` statements to check the conditions.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This will output:
+
+```
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+```
+
+**Improved Version (using string interpolation and ternary operator):**
+
+This version is more concise and readable using string interpolation and the ternary operator.
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) //Call the function
+```
+
+This achieves the same result with less code.  The ternary operator (`condition ? valueIfTrue : valueIfFalse`) neatly handles the Fizz and Buzz conditions.  String interpolation (`"\(i)"`) inserts the number directly into the output string.
+
+**Even More Concise Version (using map):**
+
+For a more functional approach, you can use `map` to transform the range of numbers:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    (1...n).map { i in
+        let output = (i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) //Call the function
+```
+
+This version uses a closure within the `map` function, making it more compact.
+
+
+**Choosing the Best Version:**
+
+The best version depends on your priorities.  The basic version is easiest to understand for beginners. The improved and concise versions are more efficient and demonstrate more advanced Swift features. For an interview, showing you can write the basic version correctly and then demonstrate an understanding of how to make it more concise is a good approach.  Focus on readability and clarity, especially in an interview setting.  Don't try to be overly clever at the expense of understandability.
+
