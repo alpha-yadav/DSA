@@ -40808,3 +40808,110 @@ print(f"Is the tree a BST (iterative): {is_bst_iterative(root2)}") #Output: Fals
 
 Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues with very deep trees).  Choose the method that best suits your understanding and needs. Remember to define the `Node` class as shown in the example.
 
+#  Binary Tree traversals 
+Binary tree traversals refer to the different ways you can visit (or "traverse") each node in a binary tree exactly once.  There are three main types:
+
+* **Inorder Traversal:**  Visit the left subtree, then the root node, then the right subtree.  This produces a sorted sequence of nodes for a Binary Search Tree (BST).
+
+* **Preorder Traversal:** Visit the root node, then the left subtree, then the right subtree.
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root node.
+
+
+Let's illustrate with an example tree:
+
+```
+     1
+    / \
+   2   3
+  / \
+ 4   5
+```
+
+**1. Inorder Traversal:**
+
+* Start at the root (1).
+* Go left to 2.
+* Go left to 4.  (4 is a leaf, so process it)
+* Go right from 4 (no right child).
+* Go back up to 2. Process 2.
+* Go right from 2 to 5. (5 is a leaf, so process it)
+* Go back up to 2 (done with left subtree of 1).
+* Process 1 (root).
+* Go right from 1 to 3. (3 is a leaf, so process it).
+
+Result: **4 2 5 1 3**
+
+**2. Preorder Traversal:**
+
+* Start at the root (1).  Process 1.
+* Go left to 2. Process 2.
+* Go left to 4. Process 4.
+* Go right from 4 (no right child).
+* Go back up to 2 (left subtree of 2 complete).
+* Go right from 2 to 5. Process 5.
+* Go back up to 1 (left subtree of 1 complete).
+* Go right from 1 to 3. Process 3.
+
+Result: **1 2 4 5 3**
+
+**3. Postorder Traversal:**
+
+* Start at the root (1).
+* Go left to 2.
+* Go left to 4.  (4 is a leaf, so process it)
+* Go right from 4 (no right child).
+* Go right from 2 to 5. (5 is a leaf, so process it).
+* Process 2.
+* Go right from 1 to 3. (3 is a leaf, so process it)
+* Process 1.
+
+Result: **4 5 2 3 1**
+
+
+**Code Examples (Python):**
+
+These examples use recursion, a common and elegant approach for tree traversals:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:")
+inorder(root)  # Output: 4 2 5 1 3
+print("\nPreorder traversal:")
+preorder(root)  # Output: 1 2 4 5 3
+print("\nPostorder traversal:")
+postorder(root) # Output: 4 5 2 3 1
+```
+
+Remember to adapt the `print` statements if you want to store the traversal results in a list instead of printing them directly.  Iterative approaches (using stacks) are also possible and can be more memory-efficient for very deep trees.
+
