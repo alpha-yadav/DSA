@@ -40027,3 +40027,113 @@ BSTs are used in a wide range of applications, including:
 
 In summary, BSTs offer an efficient way to manage ordered data, but their performance heavily depends on maintaining a balanced structure.  For situations where guaranteed logarithmic performance is needed, self-balancing BSTs are a better choice.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to implement insertion into a Binary Search Tree (BST) in Python. Here are a couple, one iterative and one recursive:
+
+**Iterative Approach:**
+
+This approach uses a `while` loop to traverse the tree and find the correct location for the new node.  It's generally considered more efficient in terms of memory usage, especially for deep trees, as it avoids the overhead of recursive function calls.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        new_node = Node(data)
+        if self.root is None:
+            self.root = new_node
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = new_node
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = new_node
+                    break
+                else:
+                    current = current.right
+
+    def inorder_traversal(self, node): #Helper function for testing
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+
+#Example Usage
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+
+print("Inorder traversal:", end=" ")
+bst.inorder_traversal(bst.root) # Output should be an inorder sorted list: 1 3 6 8 10 14
+print()
+```
+
+**Recursive Approach:**
+
+This approach uses recursion to traverse the tree.  It's often considered more elegant and easier to understand, but it can be less efficient for very deep trees due to function call overhead.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self.insert_recursive(node.left, data)
+        else:
+            node.right = self.insert_recursive(node.right, data)
+        return node
+
+    def inorder_traversal(self, node): #Helper function for testing
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+    def insert(self, data): #Wrapper function for easier use
+        self.root = self.insert_recursive(self.root, data)
+
+
+#Example Usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+
+print("Inorder traversal:", end=" ")
+bst.inorder_traversal(bst.root) # Output should be an inorder sorted list: 1 3 6 8 10 14
+print()
+```
+
+Both versions include a helper function `inorder_traversal` to demonstrate the correct insertion by printing the tree in inorder (sorted) sequence. Choose the iterative version for better performance with large trees, and the recursive version for readability and easier understanding.  Remember to handle potential errors, such as duplicate key insertion, depending on your requirements.
+
