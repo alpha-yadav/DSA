@@ -41679,3 +41679,98 @@ Topological sorting is used in various applications, including:
 
 The choice between Kahn's algorithm and DFS often depends on the specific context and available data structures.  Kahn's algorithm is generally considered more efficient for larger graphs.  DFS is often simpler to implement recursively. Remember that cycle detection is crucial in both algorithms to ensure correctness.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on tracking the state of each node during the traversal.  We'll use three states:
+
+* **UNVISITED:** The node hasn't been explored yet.
+* **VISITING:** The node is currently being explored (on the recursion stack).
+* **VISITED:** The node has been fully explored.
+
+A cycle exists if we encounter a node that's already in the `VISITING` state during the traversal.  This means we've encountered a back edge – an edge leading to an ancestor in the DFS tree.
+
+Here's how to implement it, along with explanations:
+
+**Python Code:**
+
+```python
+from collections import defaultdict
+
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices  # No. of vertices
+        self.graph = defaultdict(list)  # default dictionary to store graph
+
+    def addEdge(self, u, v):
+        self.graph[u].append(v)
+
+    def isCyclicUtil(self, v, visited, recursionStack):
+        # Mark the current node as visited and part of recursion stack
+        visited[v] = True
+        recursionStack[v] = True
+
+        # Recur for all the vertices adjacent to this vertex
+        for neighbour in self.graph[v]:
+            if not visited[neighbour]:
+                if self.isCyclicUtil(neighbour, visited, recursionStack):
+                    return True
+            elif recursionStack[neighbour]:
+                return True
+
+        # Remove the vertex from recursion stack
+        recursionStack[v] = False
+        return False
+
+    def isCyclic(self):
+        visited = [False] * self.V
+        recursionStack = [False] * self.V
+        for node in range(self.V):
+            if not visited[node]:
+                if self.isCyclicUtil(node, visited, recursionStack):
+                    return True
+        return False
+
+
+# Example usage:
+g = Graph(4)
+g.addEdge(0, 1)
+g.addEdge(0, 2)
+g.addEdge(1, 2)
+g.addEdge(2, 0)
+g.addEdge(2, 3)
+g.addEdge(3, 3)
+
+if g.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+
+
+g2 = Graph(3)
+g2.addEdge(0,1)
+g2.addEdge(1,2)
+
+if g2.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+
+```
+
+**Explanation:**
+
+1. **`__init__(self, vertices)`:** Initializes the graph with the number of vertices.
+2. **`addEdge(self, u, v)`:** Adds a directed edge from vertex `u` to vertex `v`.
+3. **`isCyclicUtil(self, v, visited, recursionStack)`:** This is a recursive helper function.
+   - `visited`: A boolean array to mark visited nodes.
+   - `recursionStack`: A boolean array to track nodes currently in the recursion stack (being visited).
+   - It recursively explores the graph.  If it finds a node already in `recursionStack`, a cycle is detected.
+4. **`isCyclic(self)`:** This function initiates the cycle detection. It iterates through all vertices and calls `isCyclicUtil` for each unvisited vertex.
+
+
+**How it works:**
+
+The core idea is the `recursionStack`. When we are exploring a node, we mark it as `VISITING` (by setting `recursionStack[v] = True`). If, during the exploration of its neighbors, we encounter a node that is already marked as `VISITING`, it implies a cycle because we've reached a node that's already on the path from the root of the current DFS subtree.  Once a branch of the recursion completes, the node is removed from the `recursionStack` (`recursionStack[v] = False`).
+
+
+This algorithm has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges, which is linear in the size of the graph.  The space complexity is O(V) due to the `visited` and `recursionStack` arrays.
+
