@@ -41112,3 +41112,124 @@ postorder(root) # Output: D E B F C A
 
 Remember to handle the `None` case (when a node has no left or right child) in your recursive functions to prevent errors.  The code above demonstrates this proper handling.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  This differs from the LCA in a binary *search* tree, where the algorithm can be simpler due to the inherent ordering.  In a general binary tree, we need a more robust approach.
+
+Here are a few common methods to find the LCA in a binary tree:
+
+**Method 1: Recursive Approach (Most Common)**
+
+This method recursively traverses the tree.  If both nodes are found in the left or right subtree, the LCA is recursively found in that subtree. If one node is in the left subtree and the other in the right, the current node is the LCA. If neither is found, the function returns `null`.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, n1, n2):
+    """
+    Finds the lowest common ancestor of n1 and n2 in the binary tree rooted at root.
+
+    Args:
+        root: The root of the binary tree.
+        n1: The first node.
+        n2: The second node.
+
+    Returns:
+        The LCA node, or None if either node is not found.
+    """
+    if root is None:
+        return None
+
+    if root.data == n1 or root.data == n2:
+        return root
+
+    left_lca = lca(root.left, n1, n2)
+    right_lca = lca(root.right, n1, n2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+n1 = 4
+n2 = 5
+lca_node = lca(root, n1, n2)
+print(f"LCA of {n1} and {n2} is: {lca_node.data if lca_node else None}")  # Output: 2
+
+n1 = 4
+n2 = 6
+lca_node = lca(root, n1, n2)
+print(f"LCA of {n1} and {n2} is: {lca_node.data if lca_node else None}")  # Output: 1
+
+n1 = 4
+n2 = 10 # 10 doesn't exist
+lca_node = lca(root, n1, n2)
+print(f"LCA of {n1} and {n2} is: {lca_node.data if lca_node else None}")  # Output: None
+```
+
+**Method 2: Using a Path Approach**
+
+This approach finds the paths from the root to each node (`n1` and `n2`).  Then, it iterates through both paths until it finds the last common node. This node is the LCA.
+
+```python
+def find_path(root, n, path):
+    if root is None:
+        return False
+
+    path.append(root.data)
+
+    if root.data == n:
+        return True
+
+    if (find_path(root.left, n, path) or
+            find_path(root.right, n, path)):
+        return True
+
+    path.pop()
+    return False
+
+def lca_path(root, n1, n2):
+    path1 = []
+    path2 = []
+
+    if not find_path(root, n1, path1) or not find_path(root, n2, path2):
+        return None
+
+    i = 0
+    while i < len(path1) and i < len(path2) and path1[i] == path2[i]:
+        i += 1
+
+    return path1[i-1] #the last common ancestor
+
+
+#Example Usage (same tree as above)
+lca_node = lca_path(root, 4, 5)
+print(f"LCA of 4 and 5 is: {lca_node}") #Output: 2
+
+lca_node = lca_path(root,4,6)
+print(f"LCA of 4 and 6 is: {lca_node}") #Output: 1
+
+```
+
+**Choosing a Method:**
+
+The recursive approach is generally preferred for its simplicity and elegance, particularly if you're already comfortable with recursive tree traversals. The path approach can be more memory-intensive for very deep trees, as it needs to store entire paths.  However, the path approach provides more information (the entire paths) which might be useful in some applications.  The recursive method is generally more efficient in terms of time and space complexity.
+
+
+Remember that these solutions assume that `n1` and `n2` exist in the tree.  You might want to add error handling to check for their presence before proceeding.
+
