@@ -39588,3 +39588,68 @@ int main() {
 
 These examples demonstrate basic `while` and `for` loops.  The specific syntax might vary slightly between languages, but the underlying concept remains the same:  repeated execution of a code block based on a condition.  Remember to avoid infinite loops by ensuring your loop condition eventually becomes false.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times based on the outer loop's iterations.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop controls the overall number of times the inner loop runs.
+* **Inner Loop:** This loop executes repeatedly for each iteration of the outer loop.
+
+**Example (Python):**
+
+This example prints a multiplication table using nested loops:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # Print the product, \t adds a tab for spacing
+    print()  # Newline after each row
+```
+
+This code will produce a 10x10 multiplication table.  The outer loop iterates through numbers 1 to 10 (rows). For each row (outer loop iteration), the inner loop iterates from 1 to 10 (columns), calculating and printing the product `i * j`.
+
+**Another Example (Illustrative):**
+
+Imagine you have a list of outer items and each outer item contains a list of inner items.  You could use nested loops to access each inner item within each outer item:
+
+```python
+outer_list = [
+    ["apple", "banana"],
+    ["orange", "grape", "kiwi"],
+    ["pear"]
+]
+
+for outer_item in outer_list:
+    for inner_item in outer_item:
+        print(inner_item)
+```
+
+This would print:
+
+```
+apple
+banana
+orange
+grape
+kiwi
+pear
+```
+
+
+**Common Uses:**
+
+Nested loops are frequently used for:
+
+* **Matrix/Array manipulation:** Processing two-dimensional data structures like matrices or tables.
+* **Generating patterns:** Creating various shapes or patterns in output (like the multiplication table example).
+* **Combinatorial problems:** Exploring all possible combinations of items from multiple sets.
+* **Searching and sorting:**  Although more efficient algorithms exist, nested loops can be used for simpler searching and sorting tasks.
+
+
+**Time Complexity:**
+
+The time complexity of nested loops is generally the product of the time complexities of the individual loops.  For example, two nested loops each iterating `n` times will have a time complexity of O(n²). This means the execution time grows proportionally to the square of the input size, making them less efficient for very large datasets compared to algorithms with lower time complexities.  This is why optimized algorithms are generally preferred for large-scale processing.
+
