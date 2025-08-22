@@ -42319,3 +42319,44 @@ This algorithm iterates through the array once, performing a comparison in each 
 
 Understanding algorithm complexity is essential for writing efficient and scalable programs.  Choosing the right algorithm can significantly impact the performance of your application, especially when dealing with large datasets.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is used in computer science to describe the tight bound of an algorithm's time or space complexity.  It essentially says that the function's growth rate is *both* upper-bounded and lower-bounded by the same function, within constant factors.  In simpler terms, it describes the exact growth rate of a function as the input size approaches infinity.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+Given two functions f(n) and g(n), we say that f(n) is Θ(g(n)) if and only if there exist positive constants c₁ and c₂, and a positive integer n₀, such that for all n ≥ n₀:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that f(n) is sandwiched between two multiples of g(n) for sufficiently large n.  The constants c₁ and c₂ represent the proportionality constants, and n₀ is the threshold beyond which the inequality holds.
+
+**What this means:**
+
+* **Tight Bound:** Θ notation provides a tight bound, unlike Big O (which is only an upper bound) or Big Ω (which is only a lower bound).  It means the function grows *exactly* at the same rate as g(n), ignoring constant factors.
+
+* **Asymptotic Behavior:** It's concerned with the behavior of the function as the input size (n) becomes very large.  Small input values don't matter.
+
+* **Constant Factors Ignored:** The constants c₁ and c₂ allow us to ignore constant factors in the time or space complexity.  For example, 5n² and 100n² are both Θ(n²).  The difference in constants becomes insignificant as n grows.
+
+**Examples:**
+
+* **f(n) = 2n² + 3n + 1** is Θ(n²)  because for sufficiently large n, the n² term dominates, and we can find constants c₁ and c₂ to satisfy the definition.
+
+* **f(n) = 5n log n** is Θ(n log n)
+
+* **f(n) = 7** is Θ(1) (constant time)
+
+* **f(n) = 2ⁿ** is Θ(2ⁿ) (exponential time)
+
+**Comparison to Big O and Big Ω:**
+
+* **Big O (O):**  Provides an *upper* bound.  f(n) = O(g(n)) means f(n) grows *no faster* than g(n).
+
+* **Big Ω (Ω):** Provides a *lower* bound.  f(n) = Ω(g(n)) means f(n) grows *at least as fast* as g(n).
+
+* **Big Θ (Θ):** Provides a *tight* bound.  f(n) = Θ(g(n)) means f(n) grows *at the same rate* as g(n).
+
+In essence, if f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).  But the converse is not always true.  If you only know f(n) = O(g(n)), you don't know the exact growth rate;  Θ gives you that precision.
+
