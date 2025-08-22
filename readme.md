@@ -42445,3 +42445,59 @@ Therefore, we can write *f(n) = Ω(n²)*. This tells us that the algorithm's run
 
 In summary, Big-Omega notation provides valuable information about the best-case or minimum resource usage of an algorithm, giving us a sense of its inherent efficiency limitations.  Combined with Big-O, it provides a more complete picture of the algorithm's performance characteristics.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *worst-case scenario* runtime or space requirements of an algorithm as the input size grows.  It doesn't tell you the exact time an algorithm will take, but rather how the runtime scales with the input size.
+
+Here's a breakdown of key aspects:
+
+**What Big O Describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases as the input size (n) grows.  This is the most common use of Big O.
+* **Space Complexity:** How the memory usage of an algorithm increases as the input size (n) grows.  This is less frequently discussed but equally important.
+
+**Key Concepts:**
+
+* **Asymptotic Analysis:** Big O focuses on the behavior of the algorithm as the input size approaches infinity.  We ignore constant factors and smaller terms because they become insignificant as n gets very large.
+
+* **Worst-Case Scenario:** Big O describes the upper bound of an algorithm's performance.  It represents the slowest the algorithm could possibly run for a given input size.
+
+* **Ignoring Constants:**  Big O notation drops constant factors.  For example, O(2n) is simplified to O(n) because the constant 2 becomes irrelevant as n becomes large.
+
+* **Dominant Terms:**  Big O focuses on the dominant term in the complexity expression.  For example, in O(n² + n), the n² term dominates as n grows, so it's simplified to O(n²).
+
+**Common Big O Notations and Their Meanings:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Examples: Accessing an element in an array by index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Examples: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Examples: Searching an unsorted array, iterating through a list.
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth. Examples: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Examples: Nested loops iterating over the input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Examples: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Examples: Finding all permutations of a set.
+
+
+**Example:**
+
+Let's say we have a function that searches for a specific element in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+This function has a time complexity of O(n) because, in the worst case (the target is not in the array), it needs to iterate through all n elements.
+
+
+**Other Notations (Related but Different):**
+
+* **Ω (Omega):** Represents the *best-case* scenario.
+* **Θ (Theta):** Represents the *average-case* scenario (tight bound).
+
+
+**In Summary:**
+
+Big O notation provides a crucial tool for analyzing and comparing the efficiency of algorithms.  Understanding it helps you choose the right algorithm for a given task, especially when dealing with large datasets where performance differences become significant.  It's a fundamental concept in computer science and software engineering.
+
