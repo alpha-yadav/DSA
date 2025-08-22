@@ -42175,3 +42175,77 @@ Remember that for each problem, you'll need to consider:
 
 Choose a problem that matches your current skill level and try to solve it!  There are many online resources (like LeetCode, HackerRank, etc.) that provide these types of problems and often have solutions and discussions available.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's deceptively simple, but a good way to test basic programming concepts like loops and conditional statements.  Here's how to implement it in Swift, starting with a straightforward approach and then showing some more advanced variations:
+
+**Basic FizzBuzz in Swift:**
+
+This version uses a `for` loop and `if`/`else if`/`else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* If it's divisible by both 3 and 5 (i.e., divisible by 15), it prints "FizzBuzz".
+* If it's divisible by 3, it prints "Fizz".
+* If it's divisible by 5, it prints "Buzz".
+* Otherwise, it prints the number itself.
+
+
+**More Concise Version (using string concatenation):**
+
+This version is slightly more compact, using string concatenation and the ternary operator:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This version builds the output string piece by piece. If the string remains empty after checking for divisibility by 3 and 5, it prints the number; otherwise, it prints the constructed string.
+
+
+**Even More Concise (using map and compactMap):**
+
+This advanced version uses functional programming concepts for a more elegant, though potentially less readable for beginners, solution:
+
+```swift
+func fizzBuzzFunctional(n: Int) {
+    (1...n).map { i -> String in
+        var result = ""
+        if i % 3 == 0 { result += "Fizz" }
+        if i % 5 == 0 { result += "Buzz" }
+        return result.isEmpty ? String(i) : result
+    }.forEach { print($0) }
+}
+
+fizzBuzzFunctional(n: 15)
+```
+
+This utilizes `map` to transform each number into a string ("Fizz", "Buzz", "FizzBuzz", or the number itself) and then `forEach` to print the results.
+
+Remember to choose the version that best suits your understanding and the context of your project. The basic version is perfectly acceptable and easy to understand, while the more concise versions demonstrate more advanced Swift features.  The functional approach is generally considered more efficient and potentially easier to reason about for large datasets.
+
