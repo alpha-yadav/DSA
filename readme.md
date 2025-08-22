@@ -42599,3 +42599,80 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The key difference between `for` and `while` loops is that `for` loops are typically used when you know the number of iterations in advance, while `while` loops are better suited for situations where the number of iterations depends on a condition that might change during the loop's execution.  Remember to be cautious with `while` loops to avoid infinite loops if the condition never becomes false.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a pattern where the inner loop's actions are repeated multiple times based on the number of iterations of the outer loop.
+
+Here's a breakdown:
+
+**Structure:**
+
+```
+for (outer loop initialization; outer loop condition; outer loop increment) {
+  // Outer loop code
+  for (inner loop initialization; inner loop condition; inner loop increment) {
+    // Inner loop code
+  }
+  // More outer loop code
+}
+```
+
+**Example (C++):**
+
+This example prints a multiplication table:
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 1; i <= 10; ++i) { // Outer loop (rows)
+    for (int j = 1; j <= 10; ++j) { // Inner loop (columns)
+      std::cout << i * j << "\t";
+    }
+    std::cout << std::endl; // Newline after each row
+  }
+  return 0;
+}
+```
+
+In this code:
+
+* The outer loop iterates 10 times (i = 1 to 10).
+* For each iteration of the outer loop, the inner loop also iterates 10 times (j = 1 to 10).
+* The inner loop calculates and prints the product of `i` and `j`.
+* The outer loop then moves to the next row.
+
+**Example (Python):**
+
+This example prints a pattern of asterisks:
+
+```python
+for i in range(1, 6):  # Outer loop (rows)
+  for j in range(i):  # Inner loop (columns)
+    print("*", end="")
+  print() # Newline after each row
+```
+
+This will output:
+
+```
+*
+**
+***
+****
+*****
+```
+
+**Uses of Nested Loops:**
+
+Nested loops are frequently used for tasks involving:
+
+* **Processing two-dimensional data:**  Matrices, tables, images.
+* **Generating patterns:**  Like the asterisk example above.
+* **Iterating through combinations:**  Finding all possible pairs of items in a list.
+* **Nested traversals:**  Exploring tree-like structures or graphs.
+
+
+**Efficiency Considerations:**
+
+Nested loops can significantly increase the runtime of a program, especially if the number of iterations in each loop is large.  The total number of iterations is the product of the number of iterations in each loop.  For example, two loops each iterating 100 times will result in 10,000 iterations.  Therefore, it's crucial to optimize nested loops when dealing with large datasets or computationally intensive tasks.  Consider using more efficient algorithms or data structures if performance becomes a bottleneck.
+
