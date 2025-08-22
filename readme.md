@@ -42249,3 +42249,73 @@ This utilizes `map` to transform each number into a string ("Fizz", "Buzz", "Fiz
 
 Remember to choose the version that best suits your understanding and the context of your project. The basic version is perfectly acceptable and easy to understand, while the more concise versions demonstrate more advanced Swift features.  The functional approach is generally considered more efficient and potentially easier to reason about for large datasets.
 
+#  Algorithm Complexity 
+Algorithm complexity is a crucial concept in computer science that describes how the runtime or space requirements of an algorithm scale with the size of its input.  It's not about the exact runtime in seconds, but rather how the runtime *grows* as the input gets larger. This allows us to compare the efficiency of different algorithms and predict their performance on large datasets.
+
+We typically analyze complexity in two main ways:
+
+**1. Time Complexity:** This analyzes how the runtime of an algorithm grows as the input size increases.
+
+**2. Space Complexity:** This analyzes how the memory usage of an algorithm grows as the input size increases.
+
+**Big O Notation:**
+
+Big O notation (O) is the most common way to express algorithm complexity. It provides an upper bound on the growth rate of the algorithm's resource usage.  It focuses on the dominant terms as the input size approaches infinity, ignoring constant factors and lower-order terms.  This is because for large inputs, the dominant terms overwhelmingly determine the performance.
+
+**Common Big O Notations and their meaning:**
+
+* **O(1) - Constant Time:** The algorithm's runtime remains the same regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  This is very efficient. Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A combination of linear and logarithmic growth.  Common in efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  This can become slow for large inputs.  Example: Bubble sort, selection sort, nested loops iterating through an array.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. This becomes extremely slow very quickly for even moderately sized inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. This is extremely slow and impractical for even small inputs.  Example:  Traveling salesman problem using brute force.
+
+
+**Beyond Big O:**
+
+While Big O is the most common, other notations provide a more complete picture:
+
+* **Big Omega (Ω):** Provides a *lower bound* on the growth rate.  It describes the best-case scenario.
+
+* **Big Theta (Θ):** Provides both an *upper and lower bound*, indicating a tight bound on the growth rate.  This means the algorithm's runtime is both O(f(n)) and Ω(f(n)).
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze an algorithm's complexity, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime (e.g., comparisons, assignments, arithmetic operations).
+
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+
+3. **Identify the dominant terms:** Ignore constant factors and lower-order terms.
+
+4. **Express the complexity using Big O notation:**  Write the complexity as O(f(n)), where f(n) is the dominant term.
+
+
+**Example:**
+
+Consider a simple function that finds the maximum value in an unsorted array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+This algorithm iterates through the array once, performing a comparison in each iteration. Therefore, the number of comparisons is proportional to the size of the array (n).  The time complexity is O(n).
+
+
+Understanding algorithm complexity is essential for writing efficient and scalable programs.  Choosing the right algorithm can significantly impact the performance of your application, especially when dealing with large datasets.
+
