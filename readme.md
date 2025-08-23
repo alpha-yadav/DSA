@@ -42928,3 +42928,83 @@ Starting node: 'A'
 
 These examples showcase a range of algorithmic problem types and complexities.  Remember to consider time and space complexity when designing your solutions.  Choose a problem based on your current skill level and use it as an opportunity to practice your problem-solving abilities.  Good luck!
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then adding some refinements:
+
+**Basic Implementation:**
+
+This version uses a `for` loop and simple `if`/`else if`/`else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz").
+* Then it checks divisibility by 5 ("Buzz").
+* Finally, if none of the above are true, it prints the number itself.
+
+
+**Improved Implementation (using string interpolation):**
+
+This version is more concise using string interpolation and the ternary conditional operator:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15) //Call the function to test
+```
+
+This version builds the output string incrementally.  If a number is divisible by 3, "Fizz" is added; if divisible by 5, "Buzz" is added. If the `output` string remains empty, the number itself is printed.
+
+
+**Further Enhancements (Error Handling and Function Return):**
+
+For more robust code, you might want to add error handling for invalid input and return the results as an array instead of printing them directly:
+
+```swift
+func fizzBuzzAdvanced(n: Int) -> [String] {
+    guard n > 0 else {
+        print("Error: Input must be a positive integer.")
+        return [] // Return an empty array if input is invalid
+    }
+
+    var results: [String] = []
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        results.append(output.isEmpty ? String(i) : output)
+    }
+    return results
+}
+
+let results = fizzBuzzAdvanced(n: 15)
+print(results) // Print the array of results
+```
+
+This version adds a `guard` statement to ensure positive input and returns an array of strings containing the FizzBuzz sequence. This allows for more flexibility in how you use the function's output.  Choose the implementation that best suits your needs and coding style. Remember to compile and run this code in a Swift environment (like Xcode's playground).
+
