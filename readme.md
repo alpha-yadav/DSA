@@ -44469,3 +44469,126 @@ print("Maximum value:", bst.find_max().data) #Should print 14
 
 This improved version includes more robust error handling (though it's still relatively simple) and a more efficient deletion method that handles all cases (nodes with 0, 1, or 2 children). Remember that the efficiency of BST operations (search, insert, delete) depends heavily on the balance of the tree.  For very unbalanced trees, performance can degrade to O(n) in the worst case.  Self-balancing BSTs like AVL trees or red-black trees address this issue.
 
+#  Check if a tree is BST or not 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: In-order Traversal**
+
+This method leverages the property of BSTs that an in-order traversal yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_inorder(root):
+    """
+    Checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    if root is None:
+        return True
+
+    values = []
+    inorder_traversal(root, values)
+
+    for i in range(1, len(values)):
+        if values[i] <= values[i-1]:
+            return False
+    return True
+
+def inorder_traversal(node, values):
+  """Performs in-order traversal and stores values in a list."""
+  if node:
+    inorder_traversal(node.left, values)
+    values.append(node.data)
+    inorder_traversal(node.right, values)
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+print(f"Is the tree a BST? {is_bst_inorder(root)}")  # Output: True
+
+root2 = Node(5)
+root2.left = Node(1)
+root2.right = Node(4)
+root2.right.left = Node(3)
+root2.right.right = Node(6)
+print(f"Is the tree a BST? {is_bst_inorder(root2)}") # Output: False
+
+
+root3 = Node(10)
+root3.left = Node(5)
+root3.right = Node(15)
+root3.left.left = Node(3)
+root3.left.right = Node(7)
+root3.right.right = Node(18)
+print(f"Is the tree a BST? {is_bst_inorder(root3)}") #Output: True
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each subtree to ensure that all nodes in the left subtree are less than the current node, and all nodes in the right subtree are greater than the current node.  This approach is generally more efficient than in-order traversal because it avoids creating an extra list.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Checks if a binary tree is a BST recursively.
+
+    Args:
+      node: The current node being checked.
+      min_val: The minimum allowed value for this subtree.
+      max_val: The maximum allowed value for this subtree.
+
+    Returns:
+      True if the subtree rooted at node is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+# Example usage (same as above, but using is_bst_recursive):
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+root2 = Node(5)
+root2.left = Node(1)
+root2.right = Node(4)
+root2.right.left = Node(3)
+root2.right.right = Node(6)
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") # Output: False
+
+root3 = Node(10)
+root3.left = Node(5)
+root3.right = Node(15)
+root3.left.left = Node(3)
+root3.left.right = Node(7)
+root3.right.right = Node(18)
+print(f"Is the tree a BST? {is_bst_recursive(root3)}") #Output: True
+```
+
+Both methods achieve the same result. The recursive method is often preferred for its efficiency, especially for larger trees, as it avoids the overhead of creating and sorting a list.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
+
