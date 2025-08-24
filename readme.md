@@ -45103,3 +45103,92 @@ class Node:
 
 You'd need to create your tree by instantiating `Node` objects and linking them appropriately before calling the traversal functions.  Iterative versions of these traversals are also possible (using stacks), but the recursive versions are generally simpler to understand and implement.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to find the LCA, each with different trade-offs:
+
+**1. Recursive Approach (Most Common and Efficient):**
+
+This approach leverages the recursive nature of tree traversal.  The core idea is:
+
+* **Base Cases:**
+    * If the current node is `null`, return `null`.
+    * If the current node is either `node1` or `node2`, return the current node.
+
+* **Recursive Step:**
+    * Recursively find the LCA in the left subtree (`leftLCA`).
+    * Recursively find the LCA in the right subtree (`rightLCA`).
+
+* **Combining Results:**
+    * If both `leftLCA` and `rightLCA` are not `null`, it means `node1` and `node2` are on different subtrees, so the current node is their LCA.  Return the current node.
+    * Otherwise, return whichever of `leftLCA` or `rightLCA` is not `null`.
+
+
+Here's Python code illustrating this:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, node1, node2):
+    if root is None:
+        return None
+
+    if root.data == node1.data or root.data == node2.data:
+        return root
+
+    leftLCA = lowestCommonAncestor(root.left, node1, node2)
+    rightLCA = lowestCommonAncestor(root.right, node1, node2)
+
+    if leftLCA and rightLCA:
+        return root
+    elif leftLCA:
+        return leftLCA
+    else:
+        return rightLCA
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = root.left  # Node with data 2
+node2 = root.left.right # Node with data 5
+
+lca = lowestCommonAncestor(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca.data}")  # Output: LCA of 2 and 5: 2
+
+
+node3 = root.left.left # Node with data 4
+node4 = root.right # Node with data 3
+lca = lowestCommonAncestor(root, node3, node4)
+print(f"LCA of {node3.data} and {node4.data}: {lca.data}") # Output: LCA of 4 and 3: 1
+
+```
+
+**2. Iterative Approach using Parent Pointers:**
+
+If you can modify the tree to include parent pointers (each node has a pointer to its parent), you can use an iterative approach. This approach is generally less efficient than the recursive one for large trees because it involves traversing paths upwards from both nodes.
+
+1. **Find Paths:**  Traverse up from `node1` and `node2` to the root, storing the paths in lists.
+2. **Compare Paths:** Iterate through the paths until you find the last common node. That node is the LCA.
+
+**3. Using a HashMap (for very large trees):**
+
+For extremely large trees, a HashMap-based approach can improve performance.  This approach needs to be carefully analyzed.  It would likely involve pre-processing steps to create information, making it less straightforward than the recursive approach.
+
+
+**Important Considerations:**
+
+* **Error Handling:** The code should handle cases where `node1` or `node2` are not in the tree.
+* **Node Equality:** The comparison of nodes (`root.data == node1.data`) should be appropriate for your node data type.  If your nodes have complex data, you might need a more sophisticated equality check.
+* **Space Complexity:** The recursive approach uses space proportional to the height of the tree (due to the recursive call stack). The iterative approach with parent pointers might use less space depending on the structure of the tree and implementation.
+
+
+The recursive approach is generally preferred for its simplicity, clarity, and efficiency for most cases.  The iterative approach is useful when parent pointers are readily available, while the HashMap approach might provide advantages only for very specific scenarios with extremely large trees.
+
