@@ -44033,3 +44033,131 @@ print(bst.search(12)) # Output: None
 
 This is a basic illustration.  For production-level code, you would want to implement more robust deletion and potentially use a self-balancing BST algorithm.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to insert a node into a Binary Search Tree (BST) in Python.  Here are a couple, starting with a recursive approach and then showing an iterative one.  Both versions include error handling for duplicate values.
+
+**Recursive Approach:**
+
+This approach is generally considered more elegant and easier to understand, especially for those familiar with recursion.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        elif data > node.data:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+        else:
+            print(f"Value {data} already exists in the BST.  Not inserting duplicate.")
+
+
+# Example Usage:
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+bst.insert_recursive(4)
+bst.insert_recursive(7)
+bst.insert_recursive(13)
+bst.insert_recursive(10) #Trying to insert a duplicate
+
+# (Add a function to print/traverse the tree here if you want to visualize the result)
+
+```
+
+**Iterative Approach:**
+
+This approach avoids recursion, which can be beneficial for very large trees to prevent stack overflow errors.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            elif data > current.data:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+            else:
+                print(f"Value {data} already exists in the BST. Not inserting duplicate.")
+                break
+
+
+# Example Usage:
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+bst.insert_iterative(4)
+bst.insert_iterative(7)
+bst.insert_iterative(13)
+bst.insert_iterative(10) #Trying to insert a duplicate
+
+# (Add a function to print/traverse the tree here if you want to visualize the result)
+```
+
+Remember to add a tree traversal function (like inorder, preorder, or postorder traversal) to visually inspect the resulting tree structure after insertion if you want to verify the correct placement of nodes.  A simple inorder traversal would be:
+
+```python
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+#Example usage after insertion:
+print("\nInorder Traversal:")
+inorder_traversal(bst.root)
+```
+This will print the nodes in ascending order, confirming the BST property.  Choose either the recursive or iterative `insert` method; they achieve the same result.  The iterative version might be slightly more efficient for very large trees.
+
