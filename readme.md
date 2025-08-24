@@ -44592,3 +44592,116 @@ print(f"Is the tree a BST? {is_bst_recursive(root3)}") #Output: True
 
 Both methods achieve the same result. The recursive method is often preferred for its efficiency, especially for larger trees, as it avoids the overhead of creating and sorting a list.  Choose the method that best suits your understanding and coding style. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: In-order Traversal and Sorted Array**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+1. **In-order Traversal:** Perform an in-order traversal of the binary tree, storing the values of visited nodes in an array or list.
+
+2. **Sorted Check:**  Check if the resulting array is sorted in ascending order. If it is, the tree is a BST; otherwise, it's not.
+
+```python
+def is_bst_inorder(root):
+    """
+    Checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if root is None:
+        return True
+
+    inorder_list = []
+    _inorder_traversal(root, inorder_list)
+
+    #Check if the list is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i-1]:
+            return False
+    return True
+
+
+def _inorder_traversal(node, inorder_list):
+    """Helper function for in-order traversal."""
+    if node:
+        _inorder_traversal(node.left, inorder_list)
+        inorder_list.append(node.data)  #Assuming node has a 'data' attribute
+        _inorder_traversal(node.right, inorder_list)
+
+#Example Node class (replace with your own if needed)
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+
+print(is_bst_inorder(root))  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) #Violation of BST property
+
+
+print(is_bst_inorder(root2)) # Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max Values**
+
+This method recursively checks each subtree, maintaining the minimum and maximum allowed values for nodes within that subtree.
+
+1. **Base Case:** An empty tree is a BST.
+
+2. **Recursive Step:** For a node, check:
+   - If the node's value is within the allowed range (min < node.data < max).
+   - Recursively check the left subtree with the range [min, node.data).
+   - Recursively check the right subtree with the range (node.data, max].
+
+```python
+def is_bst_recursive(root, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Checks if a binary tree is a BST using recursion and min/max values.
+
+    Args:
+        root: The root node of the binary tree.
+        min_val: Minimum allowed value for the subtree.
+        max_val: Maximum allowed value for the subtree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if root is None:
+        return True
+
+    if not (min_val < root.data < max_val):  #Check if current node is within range
+        return False
+
+    return (is_bst_recursive(root.left, min_val, root.data) and
+            is_bst_recursive(root.right, root.data, max_val))
+
+#Example Usage (using the same Node class from before):
+print(is_bst_recursive(root))  #Output: True
+print(is_bst_recursive(root2)) #Output: False
+
+```
+
+**Comparison:**
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(N) for the in-order traversal method (due to the array) and O(H) for the recursive method (due to the recursion stack, where H is the height of the tree).  In the worst case (a skewed tree), H could be N.  The recursive method is generally preferred because it avoids creating an extra array, making it slightly more space-efficient in most scenarios.  Choose the method that best suits your coding style and memory constraints.
+
