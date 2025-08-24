@@ -45192,3 +45192,87 @@ For extremely large trees, a HashMap-based approach can improve performance.  Th
 
 The recursive approach is generally preferred for its simplicity, clarity, and efficiency for most cases.  The iterative approach is useful when parent pointers are readily available, while the HashMap approach might provide advantages only for very specific scenarios with extremely large trees.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a fundamental problem in computer science.  There are several approaches, each with different trade-offs in terms of time and space complexity.
+
+**Methods:**
+
+1. **Brute-force approach (Recursive):**
+
+   * Find the paths from the root to each of the two nodes.
+   * Iterate through the paths simultaneously, comparing nodes until a mismatch is found. The last matching node is the LCA.
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  This is because you might traverse a significant portion of the tree to find the paths.
+   * **Space Complexity:** O(H) in the worst case, where H is the height of the tree (due to recursion stack).  In a balanced binary tree, H = log₂N.
+
+
+2. **Using Parent Pointers:**
+
+   * If each node has a pointer to its parent, you can efficiently find the LCA.
+   * Traverse upwards from each node, storing the path to the root.
+   * Find the deepest common ancestor on both paths.
+
+   * **Time Complexity:** O(H), where H is the height of the tree.
+   * **Space Complexity:** O(H) in the worst case, to store the paths.
+
+
+3. **Recursive Approach with Optimized Base Cases:**
+
+   * This method is more efficient than the brute-force approach because it avoids unnecessary traversal.
+   * If `p` (node 1) or `q` (node 2) is the root, or if `p` and `q` are on different subtrees, the root is the LCA.
+   * Otherwise, recursively check the left and right subtrees, and if both return a node (meaning both p and q are found in a subtree), the current node is the LCA.
+
+   * **Time Complexity:** O(N) in the worst case (skewed tree), but typically much faster than the brute-force method.
+   * **Space Complexity:** O(H) due to recursion.
+
+
+4. **Binary Lifting (for faster queries in a tree with many LCA queries):**
+
+   * Preprocessing step: Create a table `parent[u][i]` that stores the 2<sup>i</sup>-th ancestor of node `u`.
+   * Query:  To find the LCA of nodes `u` and `v`, find their depths and raise the deeper node to the same level as the shallower node using the precomputed `parent` table. Then, simultaneously traverse upwards, one level at a time, until the nodes become equal.  The last common node is the LCA.
+
+   * **Time Complexity:** O(N log N) for preprocessing, O(log N) for each LCA query.
+   * **Space Complexity:** O(N log N) to store the `parent` table.  This method is highly efficient for multiple LCA queries on the same tree.
+
+
+**Example (Recursive approach with optimized base cases):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lca(root.left, p, q)
+    right_lca = lca(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+p = root.left  # Node 2
+q = root.left.right # Node 5
+
+lca_node = lca(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca_node.data}") #Output: LCA of 2 and 5: 2
+
+```
+
+The best method to use depends on the specific requirements of your application. If you only need to find the LCA once, the optimized recursive method is a good choice. If you need to find the LCA many times for the same tree, the binary lifting approach offers superior performance after the preprocessing step.  If you have parent pointers readily available, using those is the most efficient.
+
