@@ -43659,3 +43659,30 @@ The time complexity of nested loops is crucial to understand.  If both the outer
 
 Nested loops are a fundamental programming construct, and understanding how they work is essential for tackling a wide range of programming problems.  They are particularly valuable when dealing with multi-dimensional data and situations requiring repeated iterations within iterations.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They only require a number of operations proportional to the logarithm of the input size. This means the runtime increases very slowly as the input size grows.  This efficiency typically comes from repeatedly dividing the problem size in half (or by some other constant factor).
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This classic algorithm is used to efficiently find a target value within a *sorted* array or list.  It works by repeatedly dividing the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half. This process continues until the target is found or the interval is empty.
+
+* **Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  In a balanced binary search tree (like an AVL tree or a red-black tree), finding, inserting, or deleting a node takes O(log n) time on average because the height of the tree is logarithmic to the number of nodes.  Unbalanced trees can degrade to O(n) in the worst case.
+
+* **Efficient Set/Map Operations (in balanced tree based implementations):**  Many operations on balanced tree-based data structures like sets and maps (e.g., lookup, insertion, deletion) have logarithmic time complexity.  These structures use similar techniques to binary search trees.
+
+* **Exponentiation by Squaring:**  This algorithm efficiently calculates a^n (a raised to the power of n) using a logarithmic number of multiplications.  It leverages the fact that a^(2k) = (a^k)^2.
+
+* **Logarithmic algorithms based on Divide and Conquer:** Many divide-and-conquer algorithms can achieve O(log n) complexity if the subproblems are significantly smaller at each recursive step.
+
+
+**Key Characteristics Leading to O(log n) Complexity:**
+
+* **Repeated halving (or division by a constant factor):** The core idea is to repeatedly reduce the problem size by a constant factor at each step.
+
+* **Sorted Data (often):** Many O(log n) algorithms require the input data to be sorted, particularly algorithms like binary search.
+
+* **Efficient Data Structures:**  Using appropriate data structures like balanced binary search trees is crucial for achieving logarithmic time complexity.
+
+
+**Important Note:** The base of the logarithm doesn't affect the big O notation.  O(log₂n), O(log₁₀n), and O(log n) are all considered O(log n) because they differ only by a constant factor.  The base only affects the constant hidden within the big O notation.
+
