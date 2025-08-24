@@ -43254,3 +43254,58 @@ This uses the ternary operator (`condition ? value1 : value2`) to conditionally 
 
 The refined approach is generally preferred for its brevity and efficiency, demonstrating a more idiomatic Swift style.  Choose whichever version best suits your understanding and coding style. Remember to choose a suitable `n` value when calling the function to test it with a range of numbers.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (like time and space) an algorithm consumes as the input size grows.  It's crucial for understanding how an algorithm will perform on large datasets and for comparing the efficiency of different algorithms.  We generally analyze complexity using *asymptotic notation*, focusing on how the resource usage grows as the input approaches infinity.
+
+Here's a breakdown of key aspects:
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm scales with the input size.
+
+* **Big O Notation (O):**  Describes the *upper bound* of an algorithm's runtime. It represents the worst-case scenario.  We only care about the dominant terms as the input size (n) gets very large; constant factors and lower-order terms are ignored.
+
+    * **O(1):** Constant time. The runtime is independent of the input size (e.g., accessing an element in an array by index).
+    * **O(log n):** Logarithmic time. The runtime increases logarithmically with the input size (e.g., binary search).
+    * **O(n):** Linear time. The runtime increases linearly with the input size (e.g., searching an unsorted array).
+    * **O(n log n):** Linearithmic time.  Common in efficient sorting algorithms like merge sort and heapsort.
+    * **O(n²):** Quadratic time. The runtime increases proportionally to the square of the input size (e.g., bubble sort, selection sort).
+    * **O(2ⁿ):** Exponential time. The runtime doubles with each addition to the input size (e.g., finding all subsets of a set).
+    * **O(n!):** Factorial time. The runtime grows factorially with the input size (e.g., traveling salesman problem using brute force).
+
+* **Big Omega Notation (Ω):** Describes the *lower bound* of an algorithm's runtime. It represents the best-case scenario.
+
+* **Big Theta Notation (Θ):** Describes the *tight bound* of an algorithm's runtime. It means the algorithm's runtime is both O(f(n)) and Ω(f(n)), providing a precise characterization of the runtime.
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm scales with the input size.  The notation (O, Ω, Θ) is used similarly to time complexity.  Space complexity can include:
+
+* **Auxiliary space:** The extra space used by the algorithm beyond the input itself (e.g., space used for variables, data structures).
+* **Total space:** The sum of auxiliary space and the space used for input.
+
+**Examples:**
+
+* **Linear Search:**  Time complexity is O(n) (worst-case), because in the worst case, you have to examine every element. Space complexity is O(1) (constant) because it uses a fixed amount of extra space regardless of input size.
+
+* **Binary Search:** Time complexity is O(log n) because it repeatedly halves the search space.  Space complexity is O(1).
+
+* **Merge Sort:** Time complexity is O(n log n). Space complexity is O(n) because it uses auxiliary space for merging.
+
+
+**Factors Affecting Complexity:**
+
+* **Input size:** The primary factor influencing complexity.
+* **Algorithm design:** Different algorithms for the same problem can have drastically different complexities.
+* **Data structures used:** The choice of data structures significantly impacts performance.
+* **Hardware:**  The underlying hardware can affect runtime, but complexity analysis focuses on algorithmic aspects.
+
+
+**Analyzing Complexity:**
+
+Analyzing the complexity of an algorithm usually involves:
+
+1. **Identifying the basic operations:**  Determine the fundamental operations that contribute most to the runtime.
+2. **Counting operations:**  Count how many times these operations are executed as a function of the input size.
+3. **Expressing the count using asymptotic notation:**  Simplify the count using Big O, Big Omega, or Big Theta notation.
+
+
+Understanding algorithm complexity is vital for choosing the right algorithm for a given task, especially when dealing with large datasets where efficiency is paramount.  A poorly chosen algorithm can lead to unacceptable performance.
+
