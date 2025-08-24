@@ -43192,3 +43192,65 @@ print(longest_palindrome("babad"))  # Output: bab
 
 These examples demonstrate a range of difficulty and common algorithmic techniques.  Remember that the "best" solution often depends on factors like time and space complexity requirements.  Choosing the right algorithm and data structure is crucial for efficient problem-solving.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing a more refined version:
+
+
+**Simple Approach:**
+
+This version uses a straightforward `for` loop and `if-else if-else` statements.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both Fizz and Buzz cases), then 3, then 5. If none of these conditions are met, it prints the number itself.
+
+
+**More Refined Approach (using string interpolation and ternary operator):**
+
+This version is more concise and efficient:
+
+```swift
+func fizzBuzzRefined(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? i : output)
+    }
+}
+
+fizzBuzzRefined(n: 15) // Call the function
+```
+
+This uses the ternary operator (`condition ? value1 : value2`) to conditionally add "Fizz" and "Buzz" to the `output` string.  If `output` is empty after checking divisibility by 3 and 5, it means the number is not divisible by either, so the number itself is printed.
+
+
+**Explanation of the Refined Approach:**
+
+1. **`var output = ""`:**  An empty string is initialized to store the output for each number.
+
+2. **`output += (i % 3 == 0) ? "Fizz" : ""`:** This line checks if `i` is divisible by 3. If it is, "Fizz" is appended to `output`; otherwise, nothing is appended.
+
+3. **`output += (i % 5 == 0) ? "Buzz" : ""`:**  Similar to the previous line, but checks for divisibility by 5 and appends "Buzz" if necessary.
+
+4. **`print(output.isEmpty ? i : output)`:** This line uses the ternary operator again. If `output` is still empty (meaning the number wasn't divisible by 3 or 5), it prints the number `i`; otherwise, it prints the contents of `output` (e.g., "Fizz", "Buzz", or "FizzBuzz").
+
+
+The refined approach is generally preferred for its brevity and efficiency, demonstrating a more idiomatic Swift style.  Choose whichever version best suits your understanding and coding style. Remember to choose a suitable `n` value when calling the function to test it with a range of numbers.
+
