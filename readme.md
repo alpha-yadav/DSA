@@ -43585,3 +43585,77 @@ for (int i = 0; i < 5; i++) {
 
 These examples all achieve the same result: printing the numbers 0 to 4.  The core idea of a simple loop—repeated execution based on a condition—remains consistent across programming languages.  Remember to always be mindful of potential infinite loops when designing your loops.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows you to iterate over multiple dimensions of data or perform operations that require repeated iterations within other iterations.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+  # Outer loop code
+  for inner_loop_variable in inner_loop_iterable:
+    # Inner loop code
+  # More outer loop code
+```
+
+**Example: Printing a Multiplication Table**
+
+This classic example demonstrates a nested loop's usefulness:
+
+```python
+# Create a multiplication table up to 10x10
+for i in range(1, 11):  # Outer loop iterates through rows
+  for j in range(1, 11):  # Inner loop iterates through columns
+    print(i * j, end="\t")  # Print the product, using a tab for spacing
+  print()  # Newline after each row
+```
+
+This code produces a neatly formatted multiplication table because:
+
+1. The outer loop iterates through each row (1 to 10).
+2. For *each* row (each iteration of the outer loop), the inner loop iterates through each column (1 to 10), calculating and printing the product.
+3. `print()` with an empty string adds a newline character after each row is completed.
+
+
+**Example: Iterating Through a Matrix (2D Array)**
+
+Nested loops are essential for working with multi-dimensional data structures like matrices or 2D arrays:
+
+```python
+matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+  for element in row:  # Inner loop iterates through elements in each row
+    print(element, end=" ")
+  print() # New line after each row
+```
+
+This will print:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+**Time Complexity:**
+
+The time complexity of nested loops is crucial to understand.  If both the outer and inner loops iterate `n` times, the total number of iterations is `n * n = n²`.  This is known as O(n²) time complexity, which is significantly slower than a single loop (O(n)) for large values of `n`.  Therefore, it's important to use nested loops judiciously and consider alternative algorithms if performance is a critical factor.
+
+
+**Key Considerations:**
+
+* **Loop Variables:** Choose meaningful names for your loop variables to improve readability.
+* **Iteration Limits:** Ensure your loop iterators cover the correct range.
+* **Performance:**  Be mindful of the time complexity, especially when dealing with large datasets. Consider optimizations if necessary.
+* **Readability:** Use proper indentation and comments to make your nested loops clear and easy to understand.
+
+
+Nested loops are a fundamental programming construct, and understanding how they work is essential for tackling a wide range of programming problems.  They are particularly valuable when dealing with multi-dimensional data and situations requiring repeated iterations within iterations.
+
