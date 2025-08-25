@@ -48185,3 +48185,108 @@ This approach requires modifying the tree to include parent pointers for each no
 
 The recursive approach is generally simpler and easier to understand.  The iterative approach with parent pointers can be more efficient in some scenarios, especially for large trees where recursive calls might lead to stack overflow issues. Choose the approach that best suits your needs and constraints.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic computer science problem.  The approach depends on the type of tree and whether you have parent pointers or only child pointers.
+
+**Methods:**
+
+**1. Using Parent Pointers:**
+
+This is the simplest approach if each node has a pointer to its parent.
+
+* **Algorithm:**
+    1. Traverse upwards from each node, storing the path to the root in two separate lists (or arrays).
+    2. Iterate through both lists simultaneously.  The last node that's common to both lists is the LCA.
+
+
+* **Python Code (Binary Tree with Parent Pointers):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+        self.left = None
+        self.right = None
+
+def lca_parent_pointers(node1, node2):
+    path1 = []
+    path2 = []
+
+    while node1:
+        path1.append(node1)
+        node1 = node1.parent
+    while node2:
+        path2.append(node2)
+        node2 = node2.parent
+
+    lca = None
+    i = len(path1) - 1
+    j = len(path2) - 1
+    while i >= 0 and j >= 0 and path1[i] == path2[j]:
+        lca = path1[i]
+        i -= 1
+        j -= 1
+    return lca
+
+
+# Example usage (You'd need to construct your tree first)
+# ... (Tree construction code) ...
+# node1 = ...  # Some node in the tree
+# node2 = ...  # Another node in the tree
+# lca = lca_parent_pointers(node1, node2)
+# print(f"LCA of {node1.data} and {node2.data}: {lca.data}")
+```
+
+**2. Using Child Pointers (Binary Tree):**
+
+If you only have child pointers (no parent pointers), the most efficient method is a recursive approach.
+
+* **Algorithm:**
+    1. If `node1` or `node2` is the root, return the root.
+    2. If `node1` and `node2` are in different subtrees (one in left, one in right), the root is the LCA.
+    3. Otherwise, recursively search the subtree where both nodes are found.
+
+* **Python Code (Binary Tree without Parent Pointers):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_child_pointers(root, node1, node2):
+    if root is None or root == node1 or root == node2:
+        return root
+
+    left_lca = lca_child_pointers(root.left, node1, node2)
+    right_lca = lca_child_pointers(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root  # Node1 and Node2 are in different subtrees
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+# ... (Tree construction code) ...
+# lca = lca_child_pointers(root, node1, node2)
+# print(f"LCA of {node1.data} and {node2.data}: {lca.data}")
+
+```
+
+**3. Using Child Pointers (General Tree):**
+
+For a general tree (not necessarily binary), you might need a more sophisticated approach, often involving depth-first search (DFS) to find paths from the root to each node and then comparing those paths as in method 1.
+
+
+**Important Considerations:**
+
+* **Error Handling:**  Add checks to handle cases where `node1` or `node2` are not in the tree.
+* **Tree Structure:**  The algorithms above assume a valid tree structure.
+* **Efficiency:** The recursive approach with child pointers generally has a time complexity of O(N) in the worst case (N being the number of nodes), while the parent pointer method is O(H), where H is the height of the tree.
+
+Remember to adapt the code to your specific tree implementation and data structures.  Choose the method that best suits the structure and information available in your tree.
+
