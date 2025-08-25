@@ -46214,3 +46214,74 @@ fizzBuzzFunctional(n: 15) // Call the function
 
 Choose the implementation that best suits your understanding and the context of your project.  The basic `for` loop version is perfectly acceptable for most situations and is the easiest to understand for beginners.  The more concise versions demonstrate more advanced Swift features. Remember to choose readability over extreme brevity, especially when learning.
 
+#  Algorithm Complexity 
+Algorithm complexity is a crucial concept in computer science that describes how the runtime or space requirements of an algorithm grow as the input size increases.  It's not about the exact runtime in seconds, but rather the *rate* of growth.  This allows us to compare algorithms and choose the most efficient one for a given task, especially when dealing with large datasets.
+
+We typically analyze complexity in two primary ways:
+
+**1. Time Complexity:**  This focuses on how the runtime of an algorithm scales with the size of the input (often denoted as 'n').
+
+**2. Space Complexity:** This focuses on how the memory usage of an algorithm scales with the size of the input.
+
+**Big O Notation:**
+
+Big O notation (O-notation) is the most common way to express algorithm complexity. It provides an upper bound on the growth rate of the algorithm's resource usage.  It focuses on the dominant terms as 'n' approaches infinity, ignoring constant factors and lower-order terms.  Common Big O notations include:
+
+* **O(1) - Constant Time:** The runtime doesn't depend on the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime grows logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime grows linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime grows proportionally to the square of the input size.  Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example:  Traveling salesman problem (brute-force approach).
+
+
+**Analyzing Complexity:**
+
+To analyze the complexity of an algorithm, we typically follow these steps:
+
+1. **Identify the basic operation:** Determine the operation that contributes most to the runtime.
+2. **Count the number of times the basic operation is executed:** Express this count as a function of the input size 'n'.
+3. **Express the function using Big O notation:**  Simplify the function by dropping constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple algorithm to find the maximum element in an unsorted array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+* **Basic operation:** The comparison `if x > max_val`
+* **Count:** This comparison is executed 'n' times (where 'n' is the length of the array).
+* **Big O notation:** O(n) - Linear time complexity.
+
+
+**Best, Average, and Worst Case:**
+
+Complexity analysis often considers different cases:
+
+* **Best Case:** The most favorable scenario for the algorithm.
+* **Average Case:** The expected runtime over many inputs.
+* **Worst Case:** The least favorable scenario, often the most important for determining an algorithm's suitability for critical applications.
+
+
+**Space Complexity:**
+
+Space complexity analysis follows a similar approach but focuses on memory usage instead of runtime.  We consider the amount of extra space used by the algorithm beyond the input itself.  The same Big O notation applies.
+
+
+In summary, understanding algorithm complexity is essential for choosing the right algorithms for your applications, especially when dealing with large datasets.  By analyzing the time and space complexity, you can make informed decisions about the efficiency and scalability of your code.
+
