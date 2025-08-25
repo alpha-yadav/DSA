@@ -47972,3 +47972,136 @@ levelOrder(root); // Output: 1 2 3 4 5
 
 The iterative approach using a queue (Methods 1 in both Python and JavaScript) is strongly preferred for level order traversal due to its efficiency and clarity.  The recursive approach is less efficient and more complex to implement correctly for this specific traversal.  Always opt for the iterative queue-based solution for optimal performance. Remember to handle the case where the root is `null` or `None` to prevent errors.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals are ways to systematically visit all nodes in a binary tree.  Pre-order, in-order, and post-order traversals are defined by the order in which you visit the root node relative to its left and right subtrees.
+
+**1. Pre-order Traversal:**
+
+* **Rule:** Visit the root node first, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The acronym is **Root Left Right (R L R)**.
+
+* **Example:**
+
+   Consider this binary tree:
+
+       A
+      / \
+     B   C
+    / \
+   D   E
+
+   Pre-order traversal would visit the nodes in this order: **A B D E C**
+
+
+* **Python Code (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+
+print("Pre-order traversal:")
+preorder(root)  # Output: A B D E C
+```
+
+* **Python Code (Iterative):**  Using a stack.
+
+```python
+def preorder_iterative(node):
+    if not node:
+        return
+    stack = [node]
+    while stack:
+        curr = stack.pop()
+        print(curr.data, end=" ")
+        if curr.right:
+            stack.append(curr.right)
+        if curr.left:
+            stack.append(curr.left)
+
+print("\nPre-order traversal (iterative):")
+preorder_iterative(root) # Output: A B D E C
+```
+
+
+**2. In-order Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, visit the root node, then recursively traverse the right subtree. The acronym is **Left Root Right (L R R)**.
+
+* **Example:**  Using the same tree as above:
+
+   In-order traversal would visit the nodes in this order: **D B E A C**
+
+* **Python Code (Recursive):**
+
+```python
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+print("\nIn-order traversal:")
+inorder(root)  # Output: D B E A C
+```
+
+* **Python Code (Iterative):** Using a stack
+
+```python
+def inorder_iterative(node):
+  if not node:
+    return
+  stack = []
+  curr = node
+  while curr or stack:
+    while curr:
+      stack.append(curr)
+      curr = curr.left
+    curr = stack.pop()
+    print(curr.data, end=" ")
+    curr = curr.right
+print("\nIn-order traversal (iterative):")
+inorder_iterative(root) # Output: D B E A C
+```
+
+
+**3. Post-order Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, recursively traverse the right subtree, then visit the root node. The acronym is **Left Right Root (L R R)**.
+
+* **Example:** Using the same tree as above:
+
+   Post-order traversal would visit the nodes in this order: **D E B C A**
+
+* **Python Code (Recursive):**
+
+```python
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+print("\nPost-order traversal:")
+postorder(root)  # Output: D E B C A
+```
+
+* **Python Code (Iterative):**  This is slightly more complex iteratively and often uses two stacks or a stack and a flag.  I'll omit the iterative version here for brevity, but you can find implementations online if needed.
+
+
+These examples demonstrate both recursive and iterative approaches.  Recursive solutions are often easier to understand, but iterative solutions can be more efficient in some cases (avoiding potential stack overflow issues with very deep trees).  Choose the approach that best suits your needs and understanding. Remember to handle the `None` case (empty subtree) in your recursive functions to avoid errors.
+
