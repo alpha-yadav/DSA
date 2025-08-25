@@ -47875,3 +47875,100 @@ class Node:
 
 Remember to replace the example tree with your own tree structure.  These examples provide a clear understanding of how to implement the three main binary tree traversals recursively and iteratively.  The iterative approaches are generally more memory-efficient for very large trees, avoiding potential stack overflow errors.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first traversal, visits all the nodes of a tree level by level, from left to right.  Here are implementations in Python and JavaScript, demonstrating different approaches:
+
+**Python:**
+
+**Method 1: Using a Queue (Recommended)**
+
+This is the most common and efficient method.  It uses a queue data structure to manage nodes to be visited.
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])  # Use deque for efficient queue operations
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root)  # Output: 1 2 3 4 5
+```
+
+
+**Method 2: Recursive Approach (Less Efficient)**
+
+While possible, a recursive approach is less efficient for level order traversal because it doesn't inherently manage the level order.  It would require multiple recursive calls and significant overhead.  It's generally not recommended for this task.
+
+
+**JavaScript:**
+
+**Method 1: Using a Queue**
+
+This mirrors the Python implementation, using a queue (implemented with an array).
+
+```javascript
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function levelOrder(root) {
+  if (root === null) return;
+
+  let queue = [root];
+  while (queue.length > 0) {
+    let curr = queue.shift();
+    console.log(curr.data, " ");
+
+    if (curr.left !== null) {
+      queue.push(curr.left);
+    }
+    if (curr.right !== null) {
+      queue.push(curr.right);
+    }
+  }
+}
+
+// Example usage:
+let root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+
+console.log("Level Order traversal of binary tree is -");
+levelOrder(root); // Output: 1 2 3 4 5
+```
+
+
+**Choosing the Right Method:**
+
+The iterative approach using a queue (Methods 1 in both Python and JavaScript) is strongly preferred for level order traversal due to its efficiency and clarity.  The recursive approach is less efficient and more complex to implement correctly for this specific traversal.  Always opt for the iterative queue-based solution for optimal performance. Remember to handle the case where the root is `null` or `None` to prevent errors.
+
