@@ -46322,3 +46322,49 @@ Therefore, since we've found *c₁ = 2*, *c₂ = 8*, and *n₀ = 1* that satisfy
 
 **In summary:** Big-Theta provides a precise and powerful way to characterize the growth rate of algorithms and functions, providing a more complete picture than Big O or Big Omega alone. It's crucial for analyzing algorithm efficiency and comparing different approaches.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, particularly useful in analyzing the efficiency of algorithms.  The most common notations are:
+
+* **Big O (O):**  Describes the *upper bound* of a function's growth.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.  It essentially means "f(n) grows no faster than g(n)".  Big O focuses on the worst-case scenario.
+
+* **Big Omega (Ω):** Describes the *lower bound* of a function's growth. We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.  It means "f(n) grows at least as fast as g(n)".  Big Omega focuses on the best-case scenario (or a lower bound on the running time).
+
+* **Big Theta (Θ):** Describes the *tight bound* of a function's growth. We say f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n ≥ n₀.  This means "f(n) grows at the same rate as g(n)". It represents both an upper and lower bound.
+
+* **Little o (o):**  Describes a *strictly smaller* upper bound. We say f(n) = o(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  This implies f(n) grows significantly slower than g(n).
+
+* **Little omega (ω):** Describes a *strictly larger* lower bound. We say f(n) = ω(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀. This implies f(n) grows significantly faster than g(n).
+
+
+**Comparison Table:**
+
+| Notation | Meaning                                      | Relationship to g(n)             | Example                               |
+|---------|----------------------------------------------|------------------------------------|---------------------------------------|
+| O(g(n)) | Upper bound                                   | f(n) grows no faster than g(n)     | n² = O(n³),  log n = O(n)           |
+| Ω(g(n)) | Lower bound                                   | f(n) grows at least as fast as g(n) | n² = Ω(n), n² = Ω(log n)            |
+| Θ(g(n)) | Tight bound                                  | f(n) grows at the same rate as g(n) | n² = Θ(n²), n log n = Θ(n log n)     |
+| o(g(n)) | Strictly smaller upper bound                 | f(n) grows strictly slower than g(n)| n = o(n²), log n = o(n)             |
+| ω(g(n)) | Strictly larger lower bound                  | f(n) grows strictly faster than g(n)| n² = ω(n), n² = ω(log n)            |
+
+
+**Key Differences and Relationships:**
+
+* **O and Ω are not necessarily inverses:**  A function can be both O(g(n)) and Ω(h(n)) where g(n) and h(n) are different functions.
+* **Θ implies both O and Ω:** If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **o and ω are stronger statements than O and Ω:** They imply a strict dominance relationship.
+* **Asymptotic notations only describe behavior for large n:**  They don't tell you anything about the performance for small input sizes.
+
+
+**Example:**
+
+Consider the function f(n) = 2n² + 3n + 1.
+
+* f(n) = O(n²)  (The dominant term is n²)
+* f(n) = Ω(n²)  (The dominant term is n²)
+* f(n) = Θ(n²)  (Tight bound because of the dominant term)
+* f(n) = o(n³)  (grows slower than n³)
+* f(n) = ω(n)   (grows faster than n)
+
+
+Understanding these notations is crucial for comparing algorithm efficiency and choosing the best algorithm for a given task based on its scalability. Remember that these are asymptotic notations; they only give us information about the behavior of the function as the input size approaches infinity.
+
