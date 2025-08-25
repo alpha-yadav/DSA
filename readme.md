@@ -46080,3 +46080,52 @@ else:
 
 Start with the basics, practice consistently, and gradually work your way up to more complex algorithms.  Don't be afraid to struggle – it's part of the learning process!
 
+#  A sample algorithmic problem 
+Here are a few sample algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string (e.g., "hello")
+
+**Output:** The reversed string (e.g., "olleh")
+
+**Solution Idea:**  Iterate through the string from the end to the beginning and build a new string.  Alternatively, use built-in string reversal functions (if allowed).
+
+
+**Medium:**
+
+**Problem:** Find the longest palindromic substring within a given string.
+
+**Input:** A string (e.g., "bananas")
+
+**Output:** The longest palindromic substring (e.g., "anana")
+
+**Solution Idea:**  You could use a dynamic programming approach, or a more efficient approach using expanding around the center of potential palindromes.
+
+
+**Hard:**
+
+**Problem:**  Implement a LRU (Least Recently Used) cache.
+
+**Input:** A sequence of operations (get and put) with keys and values.
+
+**Output:**  The value associated with a key, or -1 if the key is not found. The cache should evict the least recently used item when it's full.
+
+**Solution Idea:**  Use a doubly linked list to track usage order and a hash map for fast key lookups.  When adding a new item, move it to the head of the list.  When the cache is full, remove the tail of the list.
+
+
+**Example of a more specific problem (Medium):**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers (e.g., `[2, 7, 11, 15]`) and a target integer (e.g., `9`).
+
+**Output:**  Indices of the two numbers such that they add up to the target.  Return null if no two such numbers exist.  (e.g., `[0, 1]` because 2 + 7 = 9).
+
+**Solution Idea:** Use a hash map to store seen numbers and their indices.  For each number, check if the complement (target - number) exists in the hash map.
+
+
+These are just examples.  The choice of problem depends heavily on the context (e.g., interview, coding challenge, coursework).  Let me know if you'd like more examples or want a problem tailored to a specific area (e.g., graphs, trees, sorting).
+
