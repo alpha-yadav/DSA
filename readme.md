@@ -46285,3 +46285,40 @@ Space complexity analysis follows a similar approach but focuses on memory usage
 
 In summary, understanding algorithm complexity is essential for choosing the right algorithms for your applications, especially when dealing with large datasets.  By analyzing the time and space complexity, you can make informed decisions about the efficiency and scalability of your code.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the *tight bound* of a function's growth rate.  Unlike Big O notation, which only provides an upper bound, and Big Omega (Ω), which only provides a lower bound, Big Theta provides both an upper and lower bound, meaning the function's growth rate is bounded both above and below by the same function (to within constant factors).
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always between *c₁* times *g(n)* and *c₂* times *g(n)*.  In simpler terms: *f(n)* grows at the same rate as *g(n)*.
+
+**What it means:**
+
+* **Tight Bound:**  Θ notation indicates that the function's growth rate is precisely characterized by *g(n)*.  It's not just "less than or equal to" or "greater than or equal to," but rather "approximately equal to" within constant factors.
+
+* **Asymptotic Behavior:** The definition only considers the behavior of the functions for sufficiently large values of *n*.  The behavior for small values of *n* is irrelevant.
+
+* **Constant Factors are Ignored:**  The constants *c₁* and *c₂* highlight that constant factors are not important in determining the asymptotic growth rate.
+
+
+**Example:**
+
+Let's say we have a function `f(n) = 2n² + 5n + 1`.  We can say that `f(n)` is Θ(n²).  Why?
+
+We need to find constants *c₁*, *c₂*, and *n₀* that satisfy the definition.  Let's choose *n₀ = 1*.
+
+For *n ≥ 1*:
+
+* **Upper bound:** We can find a *c₂* such that `2n² + 5n + 1 ≤ c₂n²`.  If we let *c₂ = 8*, then for *n ≥ 1*, `2n² + 5n + 1 ≤ 8n²` (you can easily verify this).
+
+* **Lower bound:** We can find a *c₁* such that `c₁n² ≤ 2n² + 5n + 1`. If we let *c₁ = 2*, then for *n ≥ 1*, `2n² ≤ 2n² + 5n + 1`.
+
+Therefore, since we've found *c₁ = 2*, *c₂ = 8*, and *n₀ = 1* that satisfy the definition, we can correctly say that `f(n) = 2n² + 5n + 1` is Θ(n²).
+
+
+**In summary:** Big-Theta provides a precise and powerful way to characterize the growth rate of algorithms and functions, providing a more complete picture than Big O or Big Omega alone. It's crucial for analyzing algorithm efficiency and comparing different approaches.
+
