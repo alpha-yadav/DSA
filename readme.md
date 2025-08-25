@@ -46949,3 +46949,47 @@ print(f"root1 and root3 are same (iterative): {are_trees_same_iterative(root1, r
 
 Both methods achieve the same result. The recursive approach is generally considered more concise and easier to understand for smaller trees, while the iterative approach might be slightly more efficient for very large trees (due to potential stack overflow issues with deep recursion).  Choose the method that best suits your needs and coding style. Remember to handle the `None` cases properly in both approaches to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They are tree-like structures where each node holds a value, and the structure is organized according to a specific ordering property:
+
+* **Left Subtree Property:**  All nodes in the left subtree of a node have values *less than* the value of the node.
+* **Right Subtree Property:** All nodes in the right subtree of a node have values *greater than* the value of the node.
+* **No Duplicates:**  Typically, BSTs do not allow duplicate values.  (Handling duplicates requires a slight modification to the structure).
+
+**Key Operations:**
+
+* **Search:** Finding a specific value in the tree.  This operation has an average time complexity of O(log n) where n is the number of nodes, but it can degrade to O(n) in the worst case (e.g., a skewed tree).  The search proceeds by comparing the target value to the current node's value and recursively searching the left or right subtree as appropriate.
+
+* **Insertion:** Adding a new value to the tree.  The new node is inserted in the correct position to maintain the BST properties.  The average time complexity is O(log n), and the worst-case is O(n).
+
+* **Deletion:** Removing a node from the tree.  This is the most complex operation because it requires handling several cases depending on whether the node being deleted has zero, one, or two children.  Common strategies include:
+    * **Node with no children:** Simply remove the node.
+    * **Node with one child:** Replace the node with its child.
+    * **Node with two children:**  Replace the node with its inorder predecessor (largest value in the left subtree) or inorder successor (smallest value in the right subtree).  This maintains the BST properties.  The average and worst-case time complexities are both O(log n) and O(n), respectively.
+
+* **Minimum and Maximum:** Finding the minimum or maximum value in the tree.  This is straightforward; the minimum value is found by traversing the left subtree until a leaf node is reached, and the maximum value is found by traversing the right subtree similarly.  The time complexity is O(h), where h is the height of the tree (which can be up to n in the worst case, but is typically log n).
+
+
+**Advantages of BSTs:**
+
+* **Efficient Search, Insertion, and Deletion:**  In a balanced tree (a BST where the height is approximately log n), these operations are very efficient.
+* **Ordered Data:**  The data is inherently ordered, allowing for efficient retrieval of the smallest, largest, or elements within a given range.
+* **Simple Implementation:**  Relatively easy to implement compared to more complex self-balancing trees.
+
+
+**Disadvantages of BSTs:**
+
+* **Worst-Case Performance:**  If the tree becomes unbalanced (e.g., a linked list), the time complexity of all operations degrades to O(n).
+* **No inherent balancing:**  Insertion and deletion can lead to unbalanced trees, degrading performance.  Self-balancing BSTs (like AVL trees or red-black trees) address this issue.
+
+
+**When to Use BSTs:**
+
+BSTs are a good choice when:
+
+* You need to store and retrieve data efficiently.
+* You need the data to be ordered.
+* You are willing to deal with the potential for unbalanced trees (or are using a self-balancing variant).
+
+If you anticipate a high volume of insertions and deletions and require guaranteed logarithmic time complexity, then self-balancing BSTs are a better choice.  If the data is already sorted, other structures might be more efficient.
+
