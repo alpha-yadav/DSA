@@ -46993,3 +46993,140 @@ BSTs are a good choice when:
 
 If you anticipate a high volume of insertions and deletions and require guaranteed logarithmic time complexity, then self-balancing BSTs are a better choice.  If the data is already sorted, other structures might be more efficient.
 
+#  Binary Search Tree - Insertion (Python) 
+Several Python implementations of a Binary Search Tree (BST) insertion are possible, depending on how you want to handle duplicates and whether you prefer a recursive or iterative approach.  Here are a few examples:
+
+**1. Recursive Insertion (Ignoring Duplicates):**
+
+This version recursively finds the correct position to insert the new node.  If a duplicate is encountered, it's ignored.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, data):
+        self.root = self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        elif data > node.data:
+            node.right = self._insert_recursive(node.right, data)
+        # Ignore duplicates
+        return node
+
+# Example usage:
+bst = BST()
+bst.insert_recursive(8)
+bst.insert_recursive(3)
+bst.insert_recursive(10)
+bst.insert_recursive(1)
+bst.insert_recursive(6)
+bst.insert_recursive(14)
+bst.insert_recursive(4)
+bst.insert_recursive(7)
+bst.insert_recursive(13)
+
+# (Add a function to print the tree for verification - see below)
+```
+
+
+**2. Iterative Insertion (Ignoring Duplicates):**
+
+This version uses iteration instead of recursion, which can be more efficient for very deep trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                current = current.left
+            elif data > current.data:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                current = current.right
+            else: #Duplicate
+                break #Ignore duplicates
+
+# Example usage (same as above, but using insert_iterative)
+bst = BST()
+bst.insert_iterative(8)
+# ...rest of the insertions
+```
+
+
+**3. Recursive Insertion (Handling Duplicates):**
+
+This version allows duplicate values.  You could choose to increment a count within the node or simply add another node with the same value.  Here, we'll increment a count.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.count = 1  # To handle duplicates
+        self.left = None
+        self.right = None
+
+class BST:
+    # ... (rest of the class is similar to the first example)
+
+    def _insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self._insert_recursive(node.left, data)
+        elif data > node.data:
+            node.right = self._insert_recursive(node.right, data)
+        else:  # Duplicate found
+            node.count += 1
+        return node
+```
+
+
+**Helper function to print the tree (inorder traversal):**
+
+To verify the tree's structure, add this function to your `BST` class:
+
+```python
+    def inorder_traversal(self):
+        result = []
+        self._inorder_traversal_recursive(self.root, result)
+        return result
+
+    def _inorder_traversal_recursive(self, node, result):
+        if node:
+            self._inorder_traversal_recursive(node.left, result)
+            result.append(node.data) #Append node.data if you are not handling duplicates with count
+            #result.append((node.data, node.count)) if you are handling duplicates with count
+            self._inorder_traversal_recursive(node.right, result)
+```
+
+Remember to choose the version that best suits your needs.  If you need to handle duplicates, use the third example.  If efficiency is paramount and you don't have to deal with extreme depths, the recursive versions are often cleaner to read and write.  For extremely deep trees, the iterative version might be preferred.  Always include a way to visualize the tree's contents for testing and debugging purposes.
+
