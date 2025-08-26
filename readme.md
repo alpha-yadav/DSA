@@ -49228,3 +49228,81 @@ print(fizzBuzzMap(n: 15)) //Prints the array of results
 
 Choose the version that best suits your understanding and the context of your project.  The first version is generally recommended for beginners due to its clarity.  The other versions demonstrate more advanced Swift techniques. Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using Swift's REPL).
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm consumes as a function of the size of its input.  Analyzing algorithm complexity is crucial for understanding how an algorithm's performance scales with larger inputs.  It allows us to compare different algorithms and choose the most efficient one for a given task.
+
+**Types of Complexity:**
+
+We primarily focus on two types of complexity:
+
+* **Time Complexity:** This measures how the runtime of an algorithm grows as the input size increases.  It's expressed using Big O notation (O), which describes the upper bound of the growth rate.  We ignore constant factors and lower-order terms because we're interested in the dominant behavior as the input size becomes very large.
+
+* **Space Complexity:** This measures how the memory usage of an algorithm grows as the input size increases.  It's also expressed using Big O notation.  This includes both the space used for input data and any extra space the algorithm uses (e.g., auxiliary data structures).
+
+**Big O Notation:**
+
+Big O notation provides a concise way to express the growth rate of an algorithm's time or space complexity. Some common complexities include:
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime grows logarithmically with the input size. Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime grows linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime grows proportionally to n multiplied by the logarithm of n. Example: Merge sort, heap sort.
+
+* **O(n²) - Quadratic Time:** The runtime grows proportionally to the square of the input size. Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Finding all permutations of a set.
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing algorithm complexity involves:
+
+1. **Identifying the basic operation:** Determine the operation that dominates the algorithm's runtime.
+
+2. **Counting the number of times the basic operation is performed:** This count is usually expressed as a function of the input size (n).
+
+3. **Expressing the complexity using Big O notation:**  Simplify the function by dropping constant factors and lower-order terms, focusing on the dominant term.
+
+**Example:**
+
+Consider a function that searches for a value in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Basic operation:** Comparing `arr[i]` with `target`.
+* **Number of comparisons:** In the worst case (target not found), the comparison is performed `n` times, where `n` is the length of the array.
+* **Big O notation:** O(n) - Linear time complexity.
+
+**Best, Average, and Worst-Case Complexity:**
+
+Algorithm complexity can be further categorized into best-case, average-case, and worst-case scenarios:
+
+* **Best-case:** The most favorable scenario for the algorithm.
+* **Average-case:** The expected runtime over many inputs.
+* **Worst-case:** The least favorable scenario for the algorithm.
+
+Usually, the worst-case complexity is the most important to consider, as it provides an upper bound on the algorithm's runtime.
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity is crucial for:
+
+* **Choosing the right algorithm:** Selecting algorithms that scale well with large inputs.
+* **Optimizing code:** Identifying performance bottlenecks and improving efficiency.
+* **Predicting performance:** Estimating the runtime and memory usage for different input sizes.
+* **Designing efficient data structures:** Choosing data structures that optimize algorithm performance.
+
+
+By analyzing algorithm complexity, we can make informed decisions about which algorithms to use and how to optimize their performance to build efficient and scalable software.
+
