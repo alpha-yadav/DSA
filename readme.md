@@ -50001,3 +50001,58 @@ This means the function f(n) grows quadratically. The terms `5n` and `1` become 
 
 Big-Theta notation provides a precise and powerful way to characterize the growth rate of algorithms.  It's crucial for understanding algorithm efficiency and comparing the performance of different algorithms for large input sizes.  While Big-O is often used to express the upper bound of an algorithm's complexity, using Big-Theta gives a more complete picture when possible.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions as their input approaches infinity. They're crucial in algorithm analysis for comparing the efficiency of different algorithms. Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means its runtime grows no faster than the square of the input size.  The actual runtime might be much less, but it will never exceed a constant multiple of n² for sufficiently large n.
+* **Focus:** Worst-case complexity.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (or a lower bound on the growth in all cases).  We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means its runtime grows at least as fast as the input size.
+* **Focus:** Best-case or lower bound complexity.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function grows at the same rate as another function, both upper and lower bounded. We say f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Θ(n log n), it means its runtime grows proportionally to n log n.
+* **Focus:**  Precisely characterizing the growth rate.  This is the strongest statement we can make.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  Formally, f(n) = o(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+* **Focus:** Asymptotic dominance.
+
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. Formally, f(n) = ω(g(n)) if for any positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+* **Focus:** Asymptotic dominance.
+
+
+**Relationships between notations:**
+
+* If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* f(n) = o(g(n)) implies f(n) = O(g(n)), but not vice versa.
+* f(n) = ω(g(n)) implies f(n) = Ω(g(n)), but not vice versa.
+
+
+**In Summary:**
+
+| Notation | Meaning                                      | Focus                               |
+|----------|----------------------------------------------|---------------------------------------|
+| O        | Upper bound                                  | Worst-case complexity                 |
+| Ω        | Lower bound                                  | Best-case or lower bound complexity   |
+| Θ        | Tight bound                                  | Precise growth rate                    |
+| o        | Strictly slower growth                      | Asymptotic dominance                  |
+| ω        | Strictly faster growth                      | Asymptotic dominance                  |
+
+
+These notations are essential tools for analyzing and comparing algorithms, allowing us to focus on their scalability and efficiency as the input size grows large, ignoring constant factors and lower-order terms that become insignificant for large inputs.
+
