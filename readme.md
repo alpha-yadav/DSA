@@ -49836,3 +49836,62 @@ Output: `9` (by selecting items with weights 3 and 4, values 4 and 5 respectivel
 
 These problems showcase a range of algorithmic challenges.  Remember to consider time and space complexity when designing your solutions.  For problems involving graphs or more complex data structures, you might need to design and implement appropriate data structures first.  Good luck!
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing a more refined approach:
+
+
+**Simple Version:**
+
+This version uses nested `if` statements.  It's easy to understand but can become less efficient for larger ranges.
+
+```swift
+func fizzBuzzSimple(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzzSimple(n: 15) // Example usage
+```
+
+**More Efficient Version (using a ternary operator and string interpolation):**
+
+This version is more concise and avoids nested `if` statements. It's generally preferred for readability and slight performance improvements.
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzEfficient(n: 15) // Example usage
+```
+
+**Explanation of the Efficient Version:**
+
+* **`for i in 1...n`:**  This loop iterates through numbers from 1 to `n`.
+* **`var output = ""`:** An empty string is initialized to store the output for each number.
+* **`(i % 3 == 0) ? "Fizz" : ""`:** This is a ternary operator. If `i` is divisible by 3, "Fizz" is appended to `output`; otherwise, nothing is appended.
+* **`(i % 5 == 0) ? "Buzz" : ""`:**  Similar to the above, but for divisibility by 5.
+* **`print(output.isEmpty ? "\(i)" : output)`:** This prints either the number `i` (if `output` is still empty) or the accumulated "Fizz" and/or "Buzz" string.
+
+
+**Choosing the Right Version:**
+
+For most cases, the `fizzBuzzEfficient` function is recommended due to its better readability and slightly improved performance, especially when dealing with a large `n`.  The `fizzBuzzSimple` version is primarily useful for beginners to grasp the fundamental logic more easily.  Both achieve the same result.
+
+
+Remember to run this code in a Swift playground or a Swift project to see the output.  You can adjust the value of `n` to test with different ranges.
+
