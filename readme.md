@@ -49601,3 +49601,60 @@ int main() {
 
 These examples all produce the same basic output: a sequence of numbers from 0 to 4 (or a list of pre-defined numbers).  The choice of which loop to use depends on the specific task and the programming language's features.  `while` loops are more flexible for complex conditions, while `for` loops are often more concise for iterating over collections or a fixed number of times.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times based on the number of iterations of the outer loop.
+
+Here's a breakdown:
+
+**Structure:**
+
+```java
+for (int i = 0; i < outerLoopCount; i++) { // Outer loop
+  for (int j = 0; j < innerLoopCount; j++) { // Inner loop
+    // Code to be executed for each inner loop iteration
+  }
+  // Code to be executed after each outer loop iteration
+}
+```
+
+This can be written in many programming languages; the syntax might vary slightly, but the concept remains the same.
+
+**Example (Java):**
+
+This example prints a multiplication table:
+
+```java
+public class NestedLoopExample {
+  public static void main(String[] args) {
+    for (int i = 1; i <= 10; i++) { // Outer loop (rows)
+      for (int j = 1; j <= 10; j++) { // Inner loop (columns)
+        System.out.print(i * j + "\t"); // Print the product with a tab
+      }
+      System.out.println(); // Newline after each row
+    }
+  }
+}
+```
+
+**Explanation:**
+
+* The outer loop iterates from `i = 1` to `i = 10` (representing the rows of the multiplication table).
+* For each value of `i`, the inner loop iterates from `j = 1` to `j = 10` (representing the columns).
+* Inside the inner loop, `i * j` calculates the product, which is then printed.
+* `\t` adds a tab for formatting, and `System.out.println();` moves to the next line after each row is complete.
+
+
+**Uses:**
+
+Nested loops are used frequently in programming for tasks like:
+
+* **Processing multi-dimensional arrays:**  Iterating through rows and columns of a matrix.
+* **Generating patterns:**  Creating output like multiplication tables, triangles, or other shapes.
+* **Combinations and permutations:**  Finding all possible combinations or permutations of elements from multiple sets.
+* **Graph traversal:**  Exploring nodes and edges in a graph data structure.
+
+
+**Efficiency Considerations:**
+
+Nested loops can significantly increase the execution time of a program, especially if the number of iterations is large.  The overall complexity is often the product of the number of iterations in each loop.  For example, two loops each iterating `n` times results in O(n²) complexity.  It's important to be mindful of the efficiency of nested loops, especially when dealing with large datasets.  Consider alternative approaches if performance becomes a bottleneck.
+
