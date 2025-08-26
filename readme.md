@@ -50784,3 +50784,109 @@ bst.insert(14)
 
 Remember to add methods for searching, deleting, and traversing the BST to make it fully functional.  These examples only show the insertion part.  You'll likely want to add functions like `search`, `delete`, `inorder_traversal`, `preorder_traversal`, and `postorder_traversal`.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node:**  Simply remove the node.
+
+2. **Node to be deleted has one child:** Replace the node with its child.
+
+3. **Node to be deleted has two children:** This is the most complex case.  There are two common approaches:
+
+    * **Inorder predecessor (or successor):** Find the inorder predecessor (the largest node in the left subtree) or the inorder successor (the smallest node in the right subtree).  Replace the node to be deleted with its inorder predecessor/successor, and then delete the predecessor/successor node (which will now be a leaf or a node with one child, making the deletion simpler).
+
+    * **Copying the value:** Copy the value of the inorder predecessor (or successor) to the node being deleted, and then delete the predecessor/successor node.
+
+
+Here's a C++ implementation demonstrating the inorder predecessor method:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left, *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+Node* findMin(Node* root) {
+    while (root->left != nullptr) {
+        root = root->left;
+    }
+    return root;
+}
+
+Node* deleteNode(Node* root, int key) {
+    if (root == nullptr) {
+        return root;
+    }
+
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else {
+        // Node with one or no child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Node with two children: Get the inorder successor (smallest in the right subtree)
+        Node* temp = findMin(root->right);
+        root->data = temp->data; // Copy the inorder successor's data
+        root->right = deleteNode(root->right, temp->data); // Delete the inorder successor
+    }
+    return root;
+}
+
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 20); //Deleting a leaf node
+
+    std::cout << "Inorder traversal after deletion of 20: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 50); //Deleting a node with two children
+
+    std::cout << "Inorder traversal after deletion of 50: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    //Clean up memory (Important to prevent memory leaks)
+    //This requires a recursive function to properly delete the entire tree.  
+    //Implementation omitted for brevity, but it's crucial in real-world applications.
+
+    return 0;
+}
+```
+
+Remember to handle memory management properly to avoid memory leaks.  The `main` function in this example lacks a proper tree cleanup;  in a production environment, you would need a recursive function to delete all nodes after you're done with the tree.  This is particularly important when deleting nodes with two children.  The provided code efficiently deletes nodes but might leave dangling pointers if the tree isn't properly cleaned up later.
+
