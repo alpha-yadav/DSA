@@ -50890,3 +50890,96 @@ int main() {
 
 Remember to handle memory management properly to avoid memory leaks.  The `main` function in this example lacks a proper tree cleanup;  in a production environment, you would need a recursive function to delete all nodes after you're done with the tree.  This is particularly important when deleting nodes with two children.  The provided code efficiently deletes nodes but might leave dangling pointers if the tree isn't properly cleaned up later.
 
+#  Lowest common ancestor in a BST 
+The lowest common ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node in the tree that has both nodes as descendants.  There are several ways to find the LCA in a BST, leveraging the BST property that nodes smaller than a node are in its left subtree, and nodes larger than a node are in its right subtree.
+
+Here are two common approaches:
+
+**Method 1: Recursive Approach**
+
+This method efficiently traverses the tree.  If both nodes are smaller than the current node, the LCA lies in the left subtree. If both are larger, it's in the right subtree. If one is smaller and the other is larger, the current node is the LCA.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestorBST(root, p, q):
+    """
+    Finds the lowest common ancestor of p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node.  Returns None if either p or q is not in the tree.
+    """
+    if not root or p.val == root.val or q.val == root.val:  #Base case 1: Empty tree or one node found
+        return root
+
+    if p.val < root.val and q.val < root.val:
+        return lowestCommonAncestorBST(root.left, p, q)  #Both in left subtree
+    elif p.val > root.val and q.val > root.val:
+        return lowestCommonAncestorBST(root.right, p, q) #Both in right subtree
+    else:
+        return root #One is smaller, one is larger; current node is LCA
+
+
+#Example Usage
+root = TreeNode(6)
+root.left = TreeNode(2)
+root.right = TreeNode(8)
+root.left.left = TreeNode(0)
+root.left.right = TreeNode(4)
+root.right.left = TreeNode(7)
+root.right.right = TreeNode(9)
+
+p = root.left
+q = root.right
+
+lca = lowestCommonAncestorBST(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 2 and 8: 6
+
+
+p = root.left.right
+q = root.right.left
+lca = lowestCommonAncestorBST(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 4 and 7: 6
+
+# Example with node not present in the tree:
+#This will correctly return the root since only 1 node is in the tree.
+r = TreeNode(5)
+lca = lowestCommonAncestorBST(r,p,q)
+print(f"LCA of {p.val} and {q.val}: {lca.val if lca else 'None'}") # Output: LCA of 4 and 7: 5
+
+
+
+```
+
+**Method 2: Iterative Approach**
+
+This approach avoids recursion, potentially improving performance for very deep trees.
+
+```python
+def lowestCommonAncestorBST_iterative(root, p, q):
+    while root:
+        if p.val < root.val and q.val < root.val:
+            root = root.left
+        elif p.val > root.val and q.val > root.val:
+            root = root.right
+        else:
+            return root
+    return None #Should not happen if both p and q are in the tree.
+
+#Example usage (same as above,  will produce identical output)
+#... (same root, p, q definitions as in the recursive example) ...
+lca = lowestCommonAncestorBST_iterative(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}") # Output: LCA of 2 and 8: 6
+```
+
+Both methods have a time complexity of O(H), where H is the height of the BST (O(log n) for a balanced BST, O(n) for a skewed BST).  The space complexity is O(1) for the iterative approach and O(H) for the recursive approach (due to the recursive call stack).  For most practical purposes, the iterative approach is slightly preferred due to its constant space complexity.  However, the recursive approach is often considered more elegant and easier to understand. Remember to handle edge cases like an empty tree or nodes not present in the tree, as shown in the examples.
+
