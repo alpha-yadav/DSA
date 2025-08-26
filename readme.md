@@ -49154,3 +49154,77 @@ Explanation: Because the path 1 → 3 → 1 → 1 → 1 minimizes the sum.
 
 These examples illustrate the range of algorithmic problems.  The difficulty depends on your experience and familiarity with data structures and algorithms.  Remember to consider time and space complexity when designing your solutions.  Practice is key to improving your problem-solving skills.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's designed to test basic programming concepts like loops, conditionals, and modular arithmetic.  Here's how to implement a simple FizzBuzz algorithm in Swift, along with explanations:
+
+**Version 1: Basic `for` loop and `if-else if-else`**
+
+This version is straightforward and easy to understand:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+* **`for i in 1...n`:** This loop iterates through numbers from 1 to `n` (inclusive).
+* **`i % 15 == 0`:** This checks if the number is divisible by both 3 and 5 (hence, 15).  We check this first because it's more specific.
+* **`i % 3 == 0` and `i % 5 == 0`:** These check divisibility by 3 and 5 respectively. The modulo operator (`%`) gives the remainder of a division.
+* **`print()`:** This prints the appropriate output to the console.
+
+
+**Version 2:  Using a Ternary Operator (More Concise)**
+
+This version uses Swift's ternary operator (`condition ? value1 : value2`) to make the code slightly more compact, though perhaps a bit less readable for beginners:
+
+
+```swift
+func fizzBuzzTernary(n: Int) {
+    for i in 1...n {
+        print(i % 15 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzzTernary(n: 15)
+```
+
+This version achieves the same result but nests ternary operators. While shorter, it can become harder to read as complexity increases.
+
+
+**Version 3:  More Functional Approach (Using `map`)**
+
+This approach uses the `map` function for a more functional style.  It's more advanced but demonstrates a different way to think about the problem:
+
+```swift
+func fizzBuzzMap(n: Int) -> [String] {
+    return (1...n).map { i in
+        switch (i % 3 == 0, i % 5 == 0) {
+        case (true, true): return "FizzBuzz"
+        case (true, false): return "Fizz"
+        case (false, true): return "Buzz"
+        default: return "\(i)"
+        }
+    }
+}
+
+print(fizzBuzzMap(n: 15)) //Prints the array of results
+```
+
+* This uses a `switch` statement to handle the different cases more cleanly.
+* The `map` function transforms each integer in the range `1...n` into a String according to the FizzBuzz rules.
+* The result is an array of strings.
+
+Choose the version that best suits your understanding and the context of your project.  The first version is generally recommended for beginners due to its clarity.  The other versions demonstrate more advanced Swift techniques. Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using Swift's REPL).
+
