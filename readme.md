@@ -51861,3 +51861,105 @@ This approach uses a stack or queue for a breadth-first or depth-first traversal
 
 The recursive approach is generally considered more concise and easier to understand for this problem.  Choose the method that best suits your needs and coding style, keeping in mind potential space complexity implications of deep recursion.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a fundamental problem in computer science with applications in various areas like phylogenetic analysis, file systems, and version control.  There are several ways to solve this, depending on the structure of the tree and the information available.
+
+**Methods:**
+
+**1. Recursive Approach (for Binary Trees):**
+
+This is a simple and elegant approach for binary trees.  The core idea is:
+
+* **Base Case:** If the current node is `null`, return `null`. If the current node is either `node1` or `node2`, return the current node.
+* **Recursive Step:** Recursively search for `node1` and `node2` in the left and right subtrees.
+* **Combine Results:**
+    * If both `node1` and `node2` are found in different subtrees (one in the left and one in the right), the current node is the LCA.
+    * If both `node1` and `node2` are found in the same subtree, the LCA is the result from that subtree.
+    * If neither `node1` nor `node2` is found, return `null`.
+
+```python
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+def lca_recursive(root, node1, node2):
+    if root is None or root.val == node1 or root.val == node2:
+        return root
+
+    left_lca = lca_recursive(root.left, node1, node2)
+    right_lca = lca_recursive(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+print(lca_recursive(root, 5, 1).val)  # Output: 3
+print(lca_recursive(root, 5, 4)) # Output: None
+print(lca_recursive(root, 6, 2).val) # Output: 5
+```
+
+
+**2. Iterative Approach (using Parent Pointers):**
+
+If each node in the tree has a pointer to its parent, we can use an iterative approach.
+
+1. **Find Paths:**  Traverse the tree from `node1` and `node2` upward, storing the path to the root in two separate lists.
+2. **Compare Paths:** Iterate through both paths simultaneously.  The last common node in both paths is the LCA.
+
+```python
+# Assuming each node has a parent attribute
+def lca_iterative(node1, node2):
+    path1 = []
+    path2 = []
+
+    #get path from node1 to root
+    curr = node1
+    while curr:
+        path1.append(curr)
+        curr = curr.parent
+
+    #get path from node2 to root
+    curr = node2
+    while curr:
+        path2.append(curr)
+        curr = curr.parent
+    
+    i = len(path1)-1
+    j = len(path2)-1
+    lca = None
+
+    while i>=0 and j>=0 and path1[i] == path2[j]:
+        lca = path1[i]
+        i -= 1
+        j -= 1
+    return lca
+
+```
+
+
+**3. Lowest Common Ancestor in a General Tree:**
+
+For a general tree (not necessarily binary), you often need to use a more general traversal method, such as depth-first search (DFS) or breadth-first search (BFS).  The basic idea remains similar: find the paths from the root to each node and identify the last common ancestor.
+
+
+**Choosing the Right Method:**
+
+* **Binary Trees:** The recursive approach is generally preferred for its simplicity and readability.
+* **Trees with Parent Pointers:** The iterative approach is more efficient in this case.
+* **General Trees:** DFS or BFS are necessary, with the path comparison method used to find the LCA.
+
+Remember to handle edge cases, such as when one or both nodes are not present in the tree, or when one node is an ancestor of the other.  The best approach depends on the specifics of your problem and the structure of your tree.
+
