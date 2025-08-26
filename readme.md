@@ -50469,3 +50469,12 @@ The best representation depends on the specific use case. Consider:
 
 Often, a hybrid approach, combining elements of different representations might be the most effective solution.  For instance, you could use the List of Children representation but also add parent pointers if upward traversal is a frequent operation.
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need more information to write an effective introduction.  For example, tell me:
+
+* **What is the subject of your writing?** (e.g., the history of the Roman Empire, the benefits of exercise, the impact of social media)
+* **What is the purpose of your writing?** (e.g., to inform, to persuade, to entertain)
+* **Who is your target audience?** (e.g., academics, general public, children)
+
+Once I have this information, I can write a compelling introduction for you.
+
