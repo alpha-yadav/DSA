@@ -49951,3 +49951,53 @@ Space complexity refers to the amount of memory an algorithm uses.  It can be an
 
 Understanding algorithm complexity is crucial for writing efficient and scalable programs.  By analyzing the complexity of different algorithms, you can make informed decisions about which algorithm to use for a given task, especially when dealing with large datasets.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds of the function's growth.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function f(n) is said to be Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that for all n ≥ n₀:
+
+```
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)
+```
+
+In simpler terms:
+
+* **f(n)** is the function representing the runtime or space complexity of an algorithm.
+* **g(n)** is a simpler function (often a single term) that captures the dominant growth rate of f(n).  Examples include:  `n` (linear), `n²` (quadratic), `log n` (logarithmic), 2<sup>n</sup> (exponential).
+* **c₁ and c₂** are positive constants that scale the function g(n). These constants allow for ignoring constant factors in the growth rate.
+* **n₀** is a threshold value.  The inequality only needs to hold for values of n greater than or equal to n₀.  This allows us to ignore behavior for small input sizes.
+
+
+**What it Means:**
+
+Big-Theta notation asserts that the function f(n) grows at the *same rate* as g(n), within constant factors.  It's a stronger statement than Big-O (O) notation, which only provides an upper bound, and Big-Ω (Ω) notation, which only provides a lower bound.  Θ gives both, showing that the function's growth is essentially proportional to g(n).
+
+
+**Example:**
+
+Let's say we have a function:
+
+`f(n) = 2n² + 5n + 1`
+
+We can show that f(n) is Θ(n²):
+
+1. **Find upper bound:**  For n ≥ 1,  2n² + 5n + 1 ≤ 2n² + 5n² + n² = 8n².  Thus, we can choose c₂ = 8.
+
+2. **Find lower bound:** For n ≥ 1, 2n² + 5n + 1 ≥ 2n².  Thus, we can choose c₁ = 2.
+
+3. **Choose n₀:** We've already implicitly chosen n₀ = 1 because our inequalities hold for n ≥ 1.
+
+
+Therefore, we can write:  `f(n) = Θ(n²) `
+
+This means the function f(n) grows quadratically. The terms `5n` and `1` become insignificant compared to `2n²` as n grows large.
+
+
+**In Summary:**
+
+Big-Theta notation provides a precise and powerful way to characterize the growth rate of algorithms.  It's crucial for understanding algorithm efficiency and comparing the performance of different algorithms for large input sizes.  While Big-O is often used to express the upper bound of an algorithm's complexity, using Big-Theta gives a more complete picture when possible.
+
