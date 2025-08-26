@@ -51963,3 +51963,12 @@ For a general tree (not necessarily binary), you often need to use a more genera
 
 Remember to handle edge cases, such as when one or both nodes are not present in the tree, or when one node is an ancestor of the other.  The best approach depends on the specifics of your problem and the structure of your tree.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information like:
+
+* **A list of points (x, y):**  e.g., (1, 2), (3, 4), (5, 6)
+* **An equation:** e.g., y = 2x + 1, y = x²,  y = sin(x)
+* **A description of the type of graph:** e.g., bar chart, pie chart, scatter plot
+
+Once you give me this information, I can tell you how to graph it or, if you'd like, I can attempt to generate a textual representation of the graph (though a visual representation would be much better, and I cannot create that directly).
+
