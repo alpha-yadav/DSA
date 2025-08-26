@@ -50142,3 +50142,101 @@ Consider searching for an element in an array:
 
 Big O notation provides a powerful, standardized way to reason about algorithm efficiency and is a fundamental concept in computer science.  Understanding it is key to writing efficient and scalable code.
 
+#  A Simple Loop 
+A simple loop repeats a block of code a certain number of times or until a specific condition is met.  Here are examples in a few common programming languages:
+
+**1. `for` loop (counting loop):** This is used when you know how many times you want the loop to run.
+
+* **Python:**
+
+```python
+for i in range(5):  # Loops 5 times, i takes values 0, 1, 2, 3, 4
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. `while` loop (condition-controlled loop):** This loop continues as long as a specified condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on whether you know the number of iterations in advance.  `for` loops are generally preferred for counting loops, while `while` loops are better for situations where the number of iterations isn't known beforehand.  Remember to avoid infinite loops by ensuring your loop condition eventually becomes false.
+
