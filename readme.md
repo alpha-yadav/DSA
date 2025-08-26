@@ -51129,3 +51129,120 @@ This improved example includes:
 
 Remember that the efficiency of BST operations (search, insertion, deletion) is O(h), where h is the height of the tree.  In a balanced BST, h is approximately log₂(n), where n is the number of nodes, leading to logarithmic time complexity. However, in a skewed tree, h can be as bad as n, resulting in linear time complexity.  For guaranteed logarithmic performance, consider using self-balancing BSTs like AVL trees or red-black trees.
 
+#  Check if a tree is BST or not 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    inorder = []
+    def inorder_traversal(node):
+        if node:
+            inorder_traversal(node.left)
+            inorder.append(node.data)
+            inorder_traversal(node.right)
+
+    inorder_traversal(root)
+
+    # Check if the inorder traversal is sorted
+    for i in range(1, len(inorder)):
+        if inorder[i] <= inorder[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.left.left = Node(0)
+root.left.right = Node(2)
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root)}") # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(1)
+root2.right = Node(4)
+root2.right.left = Node(3)
+root2.right.right = Node(6)
+
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}") # Output: False
+
+```
+
+**Method 2:  Recursive with Range Check**
+
+This method is more efficient because it avoids the need to create a separate inorder list. It recursively checks if each subtree satisfies the BST property within a given range.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+def is_bst_recursive_range(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Checks if a binary tree is a BST using recursive range checking.
+
+    Args:
+      node: The current node being checked.
+      min_val: The minimum allowed value for this node.
+      max_val: The maximum allowed value for this node.
+
+    Returns:
+      True if the subtree rooted at node is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive_range(node.left, min_val, node.data) and
+            is_bst_recursive_range(node.right, node.data, max_val))
+
+# Example Usage (same trees as before):
+
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.left.left = Node(0)
+root.left.right = Node(2)
+
+print(f"Is the tree a BST (range method)? {is_bst_recursive_range(root)}")  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(1)
+root2.right = Node(4)
+root2.right.left = Node(3)
+root2.right.right = Node(6)
+
+print(f"Is the tree a BST (range method)? {is_bst_recursive_range(root2)}")  # Output: False
+
+```
+
+The range checking method is generally preferred because it avoids the extra space complexity of creating and sorting the in-order list.  Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  The space complexity is O(H) for the recursive range method (where H is the height of the tree, potentially O(N) in a skewed tree) and O(N) for the in-order traversal method in the worst case. Choose the method that best suits your needs and coding style. Remember to handle edge cases (empty trees).
+
