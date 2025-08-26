@@ -51455,3 +51455,102 @@ print(f"Is the tree a BST (minmax)? {is_bst_minmax(root2, float('-inf'), float('
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The recursive in-order traversal is generally preferred for its simplicity and slightly better space efficiency in the average case.  Choose the method that you find more readable and maintainable for your needs.  Remember to handle the base cases (empty subtrees) correctly in both implementations.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit (or "traverse") all the nodes in a binary tree.  There are three main types of traversals, categorized by the order in which the root node is visited relative to its left and right subtrees:
+
+* **Inorder Traversal:**  Left subtree -> Root -> Right subtree
+
+* **Preorder Traversal:** Root -> Left subtree -> Right subtree
+
+* **Postorder Traversal:** Left subtree -> Right subtree -> Root
+
+
+Let's break down each traversal method and illustrate with an example:
+
+**Example Binary Tree:**
+
+```
+     A
+    / \
+   B   C
+  / \   \
+ D   E   F
+```
+
+**1. Inorder Traversal:**
+
+* **Algorithm:** Recursively traverse the left subtree, visit the root, then recursively traverse the right subtree.
+
+* **Traversal for the example tree:** D B E A C F
+* **Resulting sequence:** D, B, E, A, C, F  (This often produces a sorted sequence if the tree is a Binary Search Tree (BST))
+
+**2. Preorder Traversal:**
+
+* **Algorithm:** Visit the root, then recursively traverse the left subtree, then recursively traverse the right subtree.
+
+* **Traversal for the example tree:** A B D E C F
+* **Resulting sequence:** A, B, D, E, C, F (This traversal reflects the tree structure directly)
+
+
+**3. Postorder Traversal:**
+
+* **Algorithm:** Recursively traverse the left subtree, then recursively traverse the right subtree, then visit the root.
+
+* **Traversal for the example tree:** D E B F C A
+* **Resulting sequence:** D, E, B, F, C, A (Often used for expression evaluation, where you process operands before operators)
+
+
+**Code Examples (Python):**
+
+These examples use recursion.  Iterative approaches are also possible but generally more complex.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Create the example tree
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+root.right.right = Node('F')
+
+print("Inorder traversal:")
+inorder(root)  # Output: D B E A C F
+print("\nPreorder traversal:")
+preorder(root)  # Output: A B D E C F
+print("\nPostorder traversal:")
+postorder(root) # Output: D E B F C A
+```
+
+**Applications:**
+
+* **Inorder:**  Used to get a sorted list from a BST.
+* **Preorder:**  Used for creating a copy of the tree.  Also used in representing the tree structure in a compact way.
+* **Postorder:**  Used for deleting a tree and evaluating expressions (e.g., in compilers).
+
+
+These are the fundamental tree traversals.  Other less common traversals also exist, such as level-order traversal (breadth-first search), which visits nodes level by level. Remember that the choice of traversal depends on the specific application and the information you need to extract from the tree.
+
