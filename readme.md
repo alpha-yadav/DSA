@@ -49348,3 +49348,57 @@ If *f(n)* is Θ(*g(n)*), then it is also O(*g(n)*) and Ω(*g(n)*).  However, the
 
 In summary, Big-Theta notation is crucial for analyzing algorithms' efficiency. It allows us to precisely compare the performance of different algorithms as the input size grows, focusing on the most significant aspects of their complexity.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used in computer science to describe the behavior of functions, particularly the runtime or space complexity of algorithms, as the input size grows very large.  They focus on the dominant terms and ignore constant factors. Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is f(n) = 2n² + 5n + 1, we can say its time complexity is O(n²) because the n² term dominates as n gets large.  The constant factors (2, 5, 1) are ignored.
+* **Focus:** Worst-case scenario; upper bound on growth.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It describes the *best-case* scenario (or a lower bound for all cases). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is f(n) = 2n² + 5n + 1, we can say its time complexity is Ω(n²) because the n² term is the lower bound of the growth.
+* **Focus:** Best-case scenario (or a lower bound for all cases); lower bound on growth.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function's growth rate is both O(g(n)) and Ω(g(n)).  Essentially, it describes the *average-case* scenario.  We say f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is f(n) = 2n² + 5n + 1, we can say its time complexity is Θ(n²).
+* **Focus:** Average-case scenario; tight bound on growth.
+
+**4. Little O Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) means that for any positive constant c, there exists a constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  The inequality is strict.
+* **Example:**  n = o(n²) because n grows significantly slower than n².
+* **Focus:**  Strictly slower growth.
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function. f(n) = ω(g(n)) means that for any positive constant c, there exists a constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀. The inequality is strict.
+* **Example:** n² = ω(n) because n² grows significantly faster than n.
+* **Focus:** Strictly faster growth.
+
+
+**Relationships:**
+
+* If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* If f(n) = o(g(n)), then f(n) = O(g(n)), but not vice-versa.
+* If f(n) = ω(g(n)), then f(n) = Ω(g(n)), but not vice-versa.
+
+
+This table summarizes the key differences:
+
+| Notation | Meaning                               | Bound Type      | Focus             |
+|----------|---------------------------------------|-----------------|--------------------|
+| O        | Upper bound                            | Asymptotic upper | Worst-case        |
+| Ω        | Lower bound                            | Asymptotic lower | Best-case/Lower bound |
+| Θ        | Tight bound (both upper and lower)    | Asymptotic tight | Average-case      |
+| o        | Strictly slower growth                 | Asymptotic upper | Growth comparison |
+| ω        | Strictly faster growth                 | Asymptotic lower | Growth comparison |
+
+
+Understanding these notations is crucial for analyzing the efficiency of algorithms and comparing their performance.  Remember that asymptotic analysis focuses on the behavior as the input size approaches infinity;  it doesn't tell you the exact runtime for a specific input size.
+
