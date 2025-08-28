@@ -52913,3 +52913,41 @@ Space complexity is analyzed similarly to time complexity, focusing on the amoun
 
 Understanding algorithm complexity is essential for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with better complexity will generally perform much faster and use less memory than an algorithm with worse complexity.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a notation used in computer science to describe the asymptotic behavior of functions, particularly the time or space complexity of algorithms.  It provides a tight bound, meaning it describes both the upper and lower bounds of a function's growth rate.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*), if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is bounded both above and below by constant multiples of *g(n)*.  *g(n)* represents the dominant term in the function's growth.
+
+**What it means:**
+
+* **Tight Bound:**  Unlike Big O notation (which only provides an upper bound) or Big Ω notation (which only provides a lower bound), Big Theta provides a tight bound.  This means that *f(n)* grows at the *same rate* as *g(n)*.  They are essentially proportional to each other for large inputs.
+
+* **Asymptotic Behavior:** Big Theta describes the behavior of the function as the input size (*n*) approaches infinity.  It ignores constant factors and smaller-order terms.
+
+* **Dominant Term:** The function *g(n)* usually represents the dominant term in the complexity of an algorithm. For example, in a function like  `f(n) = 5n² + 10n + 2`, the dominant term is *n²*, and therefore we might say `f(n) = Θ(n²)`.
+
+**Examples:**
+
+* **f(n) = 2n + 5:**  Θ(n)  (Linear time complexity) – The linear term (2n) dominates.
+* **f(n) = n² + 3n + 1:** Θ(n²) (Quadratic time complexity) – The quadratic term (n²) dominates.
+* **f(n) = 10log₂n + 20:** Θ(log₂n) (Logarithmic time complexity) – The logarithmic term dominates.
+* **f(n) = 2ⁿ:** Θ(2ⁿ) (Exponential time complexity)
+
+
+**Difference from Big O and Big Ω:**
+
+* **Big O (O):**  Provides an *upper bound*.  `f(n) = O(g(n))` means *f(n)* grows no faster than *g(n)*.
+* **Big Ω (Ω):** Provides a *lower bound*.  `f(n) = Ω(g(n))` means *f(n)* grows at least as fast as *g(n)*.
+* **Big Θ (Θ):** Provides a *tight bound*, meaning it's both Big O and Big Ω.
+
+If `f(n) = Θ(g(n))`, then it is also true that `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  However, the converse is not always true.  Knowing both the upper and lower bounds is more precise.  Big Theta gives you the most accurate description of the growth rate.
+
+
+In essence, Big Theta notation is the most precise and informative of the three asymptotic notations when characterizing the complexity of algorithms.  It tells you how the algorithm scales with increasing input size in a very specific way.
+
