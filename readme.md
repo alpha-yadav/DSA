@@ -55764,3 +55764,74 @@ This version builds the output string incrementally.  It's more concise and avoi
 
 Both versions work correctly. The first version (simple) might be slightly easier to understand for beginners, while the second (advanced) is more elegant and efficient in terms of code length and potentially slightly faster because it avoids some conditional branches.  For most FizzBuzz implementations, the performance difference is negligible. Choose the version that you find most readable and maintainable.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most commonly considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We usually express complexity using **Big O notation**, which describes the upper bound of the growth rate of a function as the input size approaches infinity.  It focuses on the dominant terms and ignores constant factors, providing a high-level understanding of scalability.
+
+Here's a breakdown:
+
+**Common Big O Notations and their meanings:**
+
+* **O(1) - Constant time:** The algorithm's execution time remains the same regardless of the input size.  Example: Accessing an element in an array by its index.
+
+* **O(log n) - Logarithmic time:** The execution time increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic time:** A combination of linear and logarithmic time.  Often found in efficient sorting algorithms. Example: Merge sort, heapsort.
+
+* **O(n²) - Quadratic time:** The execution time increases proportionally to the square of the input size.  This becomes slow quickly as the input size grows. Example: Nested loops iterating over the input data.
+
+* **O(2ⁿ) - Exponential time:** The execution time doubles with each addition to the input size. This is very inefficient for larger inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial time:** The execution time grows factorially with the input size.  Extremely inefficient and practical only for very small inputs. Example: Finding all permutations of a set.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the algorithm's runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Identify the dominant terms:**  Focus on the terms that grow fastest as n increases.
+4. **Express the complexity using Big O notation:** Drop constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Basic operation:** Comparison (`arr[i] == target`)
+* **Number of operations:** In the worst case (target not found), the comparison happens `n` times, where `n` is the length of the array.
+* **Dominant term:** `n`
+* **Big O notation:** O(n) - Linear time
+
+
+**Space Complexity:**
+
+Space complexity analysis is similar to time complexity analysis but focuses on memory usage.  It considers the amount of extra memory used by the algorithm, excluding the input itself.  Big O notation is also used to describe space complexity.
+
+
+**Best Case, Worst Case, Average Case:**
+
+When analyzing complexity, it's important to consider different scenarios:
+
+* **Best Case:** The most favorable input that leads to the fastest execution time.
+* **Worst Case:** The least favorable input that leads to the slowest execution time. This is often the most important case to consider for practical purposes.
+* **Average Case:** The average execution time over all possible inputs.  This can be harder to calculate.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and for predicting how an algorithm will perform with larger datasets.  It helps in making informed decisions about algorithm selection and optimization.
+
