@@ -56379,3 +56379,57 @@ print(f"The maximum element is: {max_value}") # Output: 8
 
 This is a basic example.  As you progress, you'll tackle much more complex and sophisticated algorithms. Remember to be patient, persistent, and enjoy the learning process!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Find the largest number in an unsorted array.
+
+**Input:** An array of integers.  Example: `[3, 1, 4, 1, 5, 9, 2, 6, 5, 3]`
+
+**Output:** The largest integer in the array. Example: `9`
+
+**Solution Approach:** Iterate through the array, keeping track of the largest number seen so far.
+
+
+**Medium:**
+
+**Problem:**  Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:** Return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+`Output: [0,1]`
+Because `nums[0] + nums[1] == 9`.
+
+
+**Solution Approach:**  You could use a brute-force approach (nested loops), but a more efficient solution involves using a hash table (dictionary in Python) to store seen numbers and their indices.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`.
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+`Input: s = "babad"`
+`Output: "bab" or "aba"` (both are valid answers)
+
+`Input: s = "cbbd"`
+`Output: "bb"`
+
+
+**Solution Approach:**  Several approaches exist, including dynamic programming and expanding around the center.  The expanding around the center approach is often considered more intuitive.
+
+
+These examples demonstrate a range of complexity.  Remember that the "hardness" of an algorithmic problem depends on factors like the required data structures, time complexity, and space complexity of the optimal solution.  Each problem also has multiple ways to solve it, with varying efficiency.  Choose the one that best suits your skill level and time constraints.
+
