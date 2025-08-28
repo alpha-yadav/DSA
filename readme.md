@@ -52782,3 +52782,72 @@ Output: [1,1,2,3,4,4,5,6]
 
 These problems showcase different levels of difficulty and common algorithmic techniques.  Remember to consider time and space complexity when designing your solutions.  Try to solve these problems yourself before looking up solutions online; that's the best way to learn!
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more refined version:
+
+
+**Simple Version:**
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This version directly checks for divisibility by 15, 3, and 5 in that order.  It's straightforward and easy to understand.
+
+
+**Slightly More Refined Version:**
+
+```swift
+func fizzBuzzRefined(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzRefined(n: 15) // Example usage
+```
+
+This version uses a single `output` string.  It appends "Fizz" if divisible by 3 and "Buzz" if divisible by 5. If `output` remains empty after these checks, it prints the number itself. This approach is generally considered more efficient because it avoids nested `if-else if` statements.
+
+
+**Explanation:**
+
+* **`%` (Modulo Operator):** This operator gives the remainder of a division.  If `i % 3 == 0`, it means `i` is perfectly divisible by 3.
+
+* **String Interpolation:** In the refined version, `String(i)` converts the integer `i` to a string for printing.
+
+* **Conditional Statements:**  `if`, `else if`, and `else` control the flow of execution based on the divisibility conditions.
+
+* **Looping:** The `for` loop iterates through the numbers from 1 to `n`.
+
+
+**How to Run This Code:**
+
+1. **Create a new Swift playground or project in Xcode.**
+2. **Copy and paste the code into your main source file.**
+3. **Run the code.**  You should see the FizzBuzz output in the console.
+
+
+These examples provide a solid foundation for understanding and implementing the FizzBuzz algorithm in Swift.  You can modify and extend them to explore different variations or incorporate more advanced techniques as you progress.
+
