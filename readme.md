@@ -55220,3 +55220,85 @@ int main() {
 
 In summary, adjacency lists are a powerful and often preferred way to represent graphs, particularly when dealing with sparse graphs where memory efficiency and neighbor finding are primary concerns.  The choice between using linked lists or dynamic arrays within the adjacency list depends on your specific application's needs regarding insertion/deletion and random access.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's an ordering where you can't go backwards along any arrow.  If a graph has cycles, a topological sort is impossible.
+
+**Key Concepts:**
+
+* **Directed Acyclic Graph (DAG):**  A graph where all edges have a direction (indicated by arrows), and there are no cycles (no way to follow a path and return to the starting node).  Topological sorting only applies to DAGs.
+* **In-degree:** The number of incoming edges to a node.
+* **Out-degree:** The number of outgoing edges from a node.
+
+**Algorithms:**
+
+Two common algorithms for topological sorting are:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue to process nodes.  It starts by adding all nodes with an in-degree of 0 (nodes with no incoming edges) to the queue.  Then, it iteratively removes a node from the queue, adds it to the sorted list, and decrements the in-degree of its neighbors.  Any node whose in-degree becomes 0 is added to the queue.  The algorithm continues until the queue is empty.  If there are any nodes left (meaning there was a cycle), the graph is not a DAG and a topological sort is not possible.
+
+   **Pseudocode:**
+
+   ```
+   function kahn(graph):
+       in_degree = compute_in_degree(graph)
+       queue = [node for node in graph if in_degree[node] == 0]
+       sorted_list = []
+
+       while queue is not empty:
+           node = queue.dequeue()
+           sorted_list.append(node)
+           for neighbor in graph[node]:
+               in_degree[neighbor] -= 1
+               if in_degree[neighbor] == 0:
+                   queue.enqueue(neighbor)
+
+       if len(sorted_list) != len(graph):
+           return "Graph is not a DAG"  // Cycle detected
+       else:
+           return sorted_list
+   ```
+
+2. **Depth-First Search (DFS) based algorithm:**
+
+   This approach uses DFS to traverse the graph.  It keeps track of the finishing times of each node during the DFS traversal.  The topological sort is then the nodes in reverse order of their finishing times.  This works because the node that finishes last in DFS must have no outgoing edges to nodes that haven't finished yet.
+
+   **Pseudocode (simplified):**
+
+   ```
+   function dfs_topological_sort(graph):
+       visited = set()
+       sorted_list = []
+
+       function dfs(node):
+           visited.add(node)
+           for neighbor in graph[node]:
+               if neighbor not in visited:
+                   dfs(neighbor)
+           sorted_list.insert(0, node) // Prepend to reverse order
+
+       for node in graph:
+           if node not in visited:
+               dfs(node)
+
+       return sorted_list
+   ```
+
+
+**Applications:**
+
+Topological sorting has many applications in various fields, including:
+
+* **Course scheduling:**  Ordering courses based on prerequisites.
+* **Build systems (like Make):**  Determining the order to compile files.
+* **Dependency resolution:**  Resolving dependencies between software packages or components.
+* **Data serialization:** Ensuring data is written in a consistent order.
+
+
+**Example:**
+
+Consider a graph with nodes A, B, C, D, and E, and edges A->B, A->C, B->D, C->D, C->E.  Both Kahn's algorithm and DFS would produce a valid topological sort (e.g., A, B, C, D, E or A, C, B, E, D,  etc.), but not something like B, A, C... (because A must come before B).  There might be multiple valid topological sorts for a given DAG.
+
+
+Choosing between Kahn's algorithm and the DFS-based approach often depends on implementation preference and the specific characteristics of the graph.  Kahn's algorithm is generally easier to understand and implement, while the DFS-based approach might be slightly more efficient in some cases.  Both are correct algorithms for topological sorting in a DAG.
+
