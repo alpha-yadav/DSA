@@ -55705,3 +55705,62 @@ These examples showcase different levels of complexity and require different alg
 
 Choosing a problem to tackle depends on your current skill level. Start with the easier ones and gradually work your way up.  Good luck!
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+**Simple Version (using nested `if` statements):**
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This version directly checks for divisibility by 15, 3, and 5 in that order.  This is efficient because if a number is divisible by 15, it's also divisible by 3 and 5, so we avoid redundant checks.
+
+
+**Slightly More Advanced Version (using string concatenation):**
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzAdvanced(n: 15) // Example usage
+```
+
+This version builds the output string incrementally.  It's more concise and avoids the nested `if-else if` structure.  The ternary operator (`condition ? value1 : value2`) neatly handles printing the number itself if no "Fizz" or "Buzz" was added.
+
+
+**Explanation:**
+
+* **`%` (Modulo Operator):** This operator gives you the remainder of a division.  If `i % 3 == 0`, it means `i` is perfectly divisible by 3 (remainder is 0).
+* **String Concatenation:**  The `+=` operator adds strings together.
+* **Ternary Operator:**  `condition ? value1 : value2` evaluates to `value1` if the `condition` is true, and `value2` otherwise.
+* **`isEmpty`:** This property checks if a string is empty.
+
+**Choosing the Best Version:**
+
+Both versions work correctly. The first version (simple) might be slightly easier to understand for beginners, while the second (advanced) is more elegant and efficient in terms of code length and potentially slightly faster because it avoids some conditional branches.  For most FizzBuzz implementations, the performance difference is negligible. Choose the version that you find most readable and maintainable.
+
