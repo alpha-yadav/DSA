@@ -56433,3 +56433,79 @@ Because `nums[0] + nums[1] == 9`.
 
 These examples demonstrate a range of complexity.  Remember that the "hardness" of an algorithmic problem depends on factors like the required data structures, time complexity, and space complexity of the optimal solution.  Each problem also has multiple ways to solve it, with varying efficiency.  Choose the one that best suits your skill level and time constraints.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's deceptively simple, but a good way to test basic understanding of loops and conditionals.  Here's how to implement it in Swift, starting with a simple approach and then showing some refinements:
+
+
+**Basic Implementation:**
+
+This version uses a `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle cases where both 3 and 5 are factors), then 3, then 5.  If none of these conditions are met, it prints the number itself.
+
+
+**Improved Implementation (using the ternary operator):**
+
+We can make the code a bit more concise using Swift's ternary operator (`condition ? value1 : value2`):
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Call the function
+```
+
+This version nests ternary operators to achieve the same logic in a more compact way.
+
+
+**Even More Concise (using string interpolation and a tuple):**
+
+
+This method uses a tuple to store Fizz/Buzz values and leverages string interpolation for a cleaner output:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let (fizz, buzz) = (i % 3 == 0 ? "Fizz" : "", i % 5 == 0 ? "Buzz" : "")
+        print("\(fizz)\(buzz)").isEmpty ? print(i) : print("\(fizz)\(buzz)")
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function
+```
+
+This version is very efficient and readable for experienced programmers.  It avoids unnecessary `if-else` checks, exploiting Swift's string concatenation.
+
+
+**Choosing the Best Implementation:**
+
+The "best" implementation depends on your priorities:
+
+* **Readability:** The basic implementation is the easiest to understand for beginners.
+* **Conciseness:** The improved and concise versions are more compact but might be harder to grasp initially.
+* **Efficiency:** All three versions have similar time complexity (O(n)), so the difference in execution speed is negligible for most practical inputs.
+
+For learning purposes, starting with the basic implementation is recommended.  Once you understand the core logic, you can explore the more concise options to appreciate different coding styles.  Remember to choose the approach that's clearest and most maintainable for your project.
+
