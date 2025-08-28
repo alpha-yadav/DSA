@@ -54557,3 +54557,145 @@ def postorder_traversal(node):
 
 This explanation should give you a good foundation in understanding binary tree traversals. Remember to consider both recursive and iterative approaches depending on your needs and the size of the tree you're working with.
 
+#  Level Order traversal - Implementation 
+Level order traversal, also known as breadth-first search (BFS), visits all nodes of a tree level by level.  Here are implementations in several popular programming languages:
+
+**Python**
+
+This implementation uses a queue (`collections.deque` for efficiency):
+
+```python
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def levelOrder(root):
+    if root is None:
+        return
+
+    nodes = deque([root])
+    while(len(nodes) > 0):
+        curr = nodes.popleft()
+        print(curr.data, end=" ")
+
+        if curr.left is not None:
+            nodes.append(curr.left)
+
+        if curr.right is not None:
+            nodes.append(curr.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Level Order traversal of binary tree is -")
+levelOrder(root) # Output: 1 2 3 4 5
+```
+
+**Java**
+
+This uses a `Queue` from the `java.util` package:
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int item) {
+        data = item;
+        left = right = null;
+    }
+}
+
+class BinaryTree {
+    Node root;
+
+    void printLevelOrder() {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            System.out.print(node.data + " ");
+
+            if (node.left != null)
+                queue.add(node.left);
+
+            if (node.right != null)
+                queue.add(node.right);
+        }
+    }
+
+    public static void main(String args[]) {
+        BinaryTree tree = new BinaryTree();
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+        tree.root.left.right = new Node(5);
+
+        System.out.println("Level order traversal of binary tree is -");
+        tree.printLevelOrder(); // Output: 1 2 3 4 5
+    }
+}
+```
+
+**C++**
+
+This uses `std::queue`:
+
+```cpp
+#include <iostream>
+#include <queue>
+
+class Node {
+public:
+    int data;
+    Node *left, *right;
+
+    Node(int item) {
+        data = item;
+        left = right = nullptr;
+    }
+};
+
+void levelOrder(Node* root) {
+    if (root == nullptr) return;
+
+    std::queue<Node*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Node* current = q.front();
+        q.pop();
+        std::cout << current->data << " ";
+
+        if (current->left != nullptr) q.push(current->left);
+        if (current->right != nullptr) q.push(current->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+
+    std::cout << "Level order traversal of binary tree is -\n";
+    levelOrder(root); // Output: 1 2 3 4 5
+    return 0;
+}
+```
+
+These examples all demonstrate the basic level order traversal.  For very large trees, you might need to consider optimizations like using a more sophisticated queue implementation or handling memory management more carefully.  Remember to handle potential `NullPointerExceptions` or equivalent in your chosen language.
+
