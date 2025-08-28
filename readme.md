@@ -56246,3 +56246,38 @@ O(log n) algorithms are characterized by their ability to solve problems by repe
 
 In summary, O(log n) algorithms are highly efficient for large datasets because the number of operations grows very slowly as the input size increases.  They are often crucial for solving problems efficiently when dealing with large amounts of sorted or structured data.
 
+#  An O(log n) example 
+The quintessential O(log n) example is **binary search**.
+
+Let's say you have a sorted array of `n` elements, and you want to find a specific element within that array.  A linear search (checking each element one by one) would take O(n) time.  However, binary search can do it much faster:
+
+**How Binary Search Works (and why it's O(log n))**
+
+1. **Start in the middle:**  Examine the element in the middle of the array.
+2. **Compare:** If the middle element is the target, you're done!
+3. **Eliminate half:** If the target is smaller than the middle element, discard the right half of the array. If the target is larger, discard the left half.
+4. **Repeat:** Repeat steps 1-3 on the remaining half of the array.
+
+Each step of binary search effectively halves the size of the search space.  This leads to logarithmic time complexity.
+
+**Illustrative Example:**
+
+Let's say you have a sorted array with 16 elements (n = 16).
+
+* **Step 1:** You check the middle element (index 7).
+* **Step 2:** Let's say the target is smaller than the element at index 7. You discard the right half (8 elements).
+* **Step 3:** You now search the left half (8 elements).  You check the middle (index 3).
+* **Step 4:** ...and so on.
+
+With each step, you're cutting the problem size in half.  The maximum number of steps required is the number of times you can divide `n` by 2 before you get down to 1.  This is approximately log₂(n) (log base 2 of n).  Therefore, the time complexity is O(log n).
+
+
+**Other O(log n) examples:**
+
+* **Finding an element in a balanced binary search tree:** Similar to binary search, each comparison eliminates roughly half the remaining tree.
+* **Efficient exponentiation (using repeated squaring):**  Calculating a<sup>b</sup> can be done in O(log b) time.
+* **Some divide-and-conquer algorithms:** Algorithms that recursively break a problem into smaller subproblems of roughly half the size often exhibit O(log n) complexity.
+
+
+The key characteristic of O(log n) algorithms is that they reduce the problem size by a constant factor at each step.  This makes them incredibly efficient for large datasets.
+
