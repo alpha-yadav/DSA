@@ -54262,3 +54262,110 @@ print(f"Is the tree a BST (Recursive method)? {is_bst_recursive(root2)}")  # Fal
 
 Both methods achieve the same result. The recursive approach is generally considered more efficient because it avoids the overhead of creating and sorting an array.  Choose the method that you find more readable and easier to understand.  Remember to handle potential edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-Order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    result = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            result.append(node.val)
+            inorder(node.right)
+
+    inorder(root)
+    for i in range(1, len(result)):
+        if result[i] <= result[i-1]:
+            return False
+    return True
+
+
+# Example Usage
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(3)
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+root = TreeNode(5)
+root.left = TreeNode(1)
+root.right = TreeNode(4)
+root.right.left = TreeNode(3)
+root.right.right = TreeNode(6)
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: False
+
+root = None
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  #Output: True (Empty tree is a BST)
+
+```
+
+**Method 2:  Recursive Check with Min and Max**
+
+This approach recursively checks each subtree, maintaining the minimum and maximum allowed values for each node.  This is generally more efficient than the in-order traversal method because it avoids creating a list.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def is_bst_recursive_minmax(root):
+    """
+    Checks if a binary tree is a BST using recursive min-max bounds.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    def check(node, min_val, max_val):
+        if not node:
+            return True
+        if not (min_val < node.val < max_val):
+            return False
+        return (check(node.left, min_val, node.val) and
+                check(node.right, node.val, max_val))
+
+    return check(root, float('-inf'), float('inf'))
+
+# Example Usage (same as before, should produce identical output)
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(3)
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root)}")  # Output: True
+
+root = TreeNode(5)
+root.left = TreeNode(1)
+root.right = TreeNode(4)
+root.right.left = TreeNode(3)
+root.right.right = TreeNode(6)
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root)}")  # Output: False
+
+root = None
+print(f"Is the tree a BST? {is_bst_recursive_minmax(root)}")  #Output: True
+```
+
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) for the recursive approach (where H is the height of the tree – O(log N) for a balanced tree, O(N) for a skewed tree) due to the recursive call stack. The in-order traversal method has an additional space complexity of O(N) in the worst case (for a completely skewed tree) to store the sorted array.  The min-max approach generally uses less space because it doesn't build a separate array.  Choose the method that best suits your needs and coding style; the min-max approach is often preferred for its slightly better space efficiency in many cases.
+
