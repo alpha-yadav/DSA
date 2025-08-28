@@ -54850,3 +54850,117 @@ You could build a hash table (or dictionary in Python) where keys are nodes and 
 
 The recursive approach is generally preferred for its simplicity, efficiency (O(N) time complexity in the worst case, where N is the number of nodes), and lack of need for modifying the tree structure.  The iterative approach might be slightly faster in some cases but requires modifying the tree or using extra space. The hash table approach is generally less efficient than the recursive solution.  Therefore, unless you have specific constraints (like the need for parent pointers or a pre-built ancestor structure), the recursive approach is recommended.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (or more specifically, a rooted tree) is a common problem in computer science.  There are several ways to solve it, each with different time and space complexities.  The best approach depends on the properties of the tree and the constraints of the problem.
+
+Here are some common methods:
+
+**1. Recursive Approach (for Binary Trees):**
+
+This approach is simple and elegant for binary trees. It recursively traverses the tree. If the current node is one of the target nodes, it returns itself. If both target nodes are found in the left or right subtree, it returns the LCA from that subtree. Otherwise, the current node is the LCA.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    return left_lca if left_lca else right_lca
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+lca = lowestCommonAncestor(root, root.left, root.right)  # LCA of 2 and 3 is 1
+print(f"LCA of 2 and 3 is: {lca.data}")
+
+lca = lowestCommonAncestor(root, root.left.left, root.left.right) # LCA of 4 and 5 is 2
+print(f"LCA of 4 and 5 is: {lca.data}")
+```
+
+**Time Complexity:** O(N), where N is the number of nodes in the tree (worst case).
+**Space Complexity:** O(H), where H is the height of the tree (due to recursion stack).
+
+
+**2. Iterative Approach (using Parent Pointers):**
+
+If each node in the tree has a pointer to its parent, you can efficiently find the LCA using an iterative approach.  This involves traversing upwards from each node until a common ancestor is found.
+
+```python
+# Assuming nodes have a 'parent' attribute
+def lowestCommonAncestor_iterative(p, q):
+    parents_p = set()
+    curr = p
+    while curr:
+        parents_p.add(curr)
+        curr = curr.parent
+
+    curr = q
+    while curr:
+        if curr in parents_p:
+            return curr
+        curr = curr.parent
+    return None #Should not happen if p and q are in the tree
+```
+
+**Time Complexity:** O(H), where H is the height of the tree.
+**Space Complexity:** O(H)
+
+
+**3. Using Depth First Search (DFS) and storing paths:**
+
+This method first performs DFS to find the paths from the root to each target node. Then, it iterates through both paths, finding the last common node.
+
+```python
+def lowestCommonAncestor_dfs(root, p, q):
+    path_p = []
+    path_q = []
+
+    def dfs(node, target, path):
+        if node is None:
+            return False
+        path.append(node)
+        if node == target:
+            return True
+        if dfs(node.left, target, path) or dfs(node.right, target, path):
+            return True
+        path.pop()
+        return False
+
+    dfs(root, p, path_p)
+    dfs(root, q, path_q)
+
+    lca = root
+    for i in range(min(len(path_p), len(path_q))):
+        if path_p[i] == path_q[i]:
+            lca = path_p[i]
+        else:
+            break
+    return lca
+
+```
+
+**Time Complexity:** O(N)  because of DFS
+**Space Complexity:** O(N) in worst case (skewed tree)
+
+
+**4.  Binary Lifting (for efficient queries on a static tree):**
+
+This is a more advanced technique that preprocesses the tree to answer LCA queries in O(log N) time. It involves building a "jump table" that allows you to quickly jump up the tree by powers of 2.  This is efficient if you need to answer many LCA queries on the same tree.
+
+
+Choosing the right method depends on your specific needs.  For simple cases with a binary tree and a small number of queries, the recursive approach is often sufficient. For trees with parent pointers or many queries, the iterative approach or binary lifting might be more efficient.  The DFS approach is a good general-purpose method.  Remember to adapt the code based on how your tree is represented (e.g., adjacency list vs. node objects).
+
