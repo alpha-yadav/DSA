@@ -52851,3 +52851,65 @@ This version uses a single `output` string.  It appends "Fizz" if divisible by 3
 
 These examples provide a solid foundation for understanding and implementing the FizzBuzz algorithm in Swift.  You can modify and extend them to explore different variations or incorporate more advanced techniques as you progress.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (typically time and space) an algorithm consumes as the input size grows.  It's crucial for understanding how an algorithm will perform with large datasets and for comparing different algorithms solving the same problem.  We usually analyze complexity using Big O notation.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:**  Measures how the runtime of an algorithm increases as the input size increases.  It's usually expressed as a function of the input size (often denoted as 'n').
+
+* **Space Complexity:** Measures how much memory an algorithm uses as the input size increases. This includes both the input data and any auxiliary data structures used during computation.  Also expressed as a function of 'n'.
+
+* **Big O Notation (O):**  A mathematical notation used to describe the upper bound of an algorithm's complexity.  It focuses on the dominant terms as 'n' approaches infinity, ignoring constant factors and lower-order terms.  This provides a simplified way to compare algorithms.
+
+**Common Big O Notations and Their Meaning:**
+
+* **O(1) - Constant Time:** The algorithm's runtime remains the same regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size. Example: Nested loops iterating through an array.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  These algorithms are generally impractical for large inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:**  The runtime grows factorially with the input size.  Extremely slow for even moderately sized inputs. Example: Traveling salesman problem (brute-force approach).
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing complexity typically involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most to the runtime.
+
+2. **Counting the operations:** Express the number of operations as a function of the input size 'n'.
+
+3. **Determining the dominant term:** Identify the term that grows fastest as 'n' increases.
+
+4. **Expressing the complexity using Big O notation:** Drop constant factors and lower-order terms.
+
+
+**Example: Linear Search**
+
+A linear search iterates through an unsorted array to find a target element.  In the worst case, it checks every element (n comparisons).  Therefore, its time complexity is O(n).
+
+
+**Best, Worst, and Average Case:**
+
+Complexity analysis often considers:
+
+* **Best Case:** The most favorable scenario for the algorithm.
+* **Worst Case:** The least favorable scenario.
+* **Average Case:** The expected runtime over many different inputs.
+
+
+**Space Complexity Analysis:**
+
+Space complexity is analyzed similarly to time complexity, focusing on the amount of memory used as a function of the input size.  It includes the space used for input data, auxiliary data structures, and the algorithm's working space.
+
+
+Understanding algorithm complexity is essential for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with better complexity will generally perform much faster and use less memory than an algorithm with worse complexity.
+
