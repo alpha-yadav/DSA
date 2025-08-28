@@ -54155,3 +54155,110 @@ print("Inorder Traversal after deleting 8:", bst.inorder_traversal())
 
 This code includes methods for insertion, searching, deletion (handling all three cases), finding the minimum value in a subtree, and an inorder traversal (which visits nodes in ascending order of their keys).  Remember that the efficiency of a BST depends on its balance.  For very unbalanced trees, the performance can degrade to O(n) in the worst case.  Self-balancing BSTs (like AVL trees or red-black trees) address this issue.
 
+#  Check if a tree is BST or not 
+Several approaches can be used to check if a given binary tree is a Binary Search Tree (BST). Here are two common methods:
+
+**Method 1: Inorder Traversal and Sorted Array Check**
+
+This method leverages the property that an inorder traversal of a BST yields a sorted array.
+
+1. **Inorder Traversal:** Perform an inorder traversal of the binary tree.  This will visit nodes in ascending order if it's a BST.
+
+2. **Sorted Array Check:** Store the results of the inorder traversal in an array.  Then, check if the array is sorted in ascending order.  If it is, the tree is a BST; otherwise, it's not.
+
+**Python Code (Method 1):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node, arr):
+    if node:
+        inorder_traversal(node.left, arr)
+        arr.append(node.data)
+        inorder_traversal(node.right, arr)
+
+def is_bst_inorder(root):
+    arr = []
+    inorder_traversal(root, arr)
+    for i in range(1, len(arr)):
+        if arr[i] < arr[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(f"Is the tree a BST (Inorder method)? {is_bst_inorder(root)}") # True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) #Violation here - 8 should be in the right subtree of 7
+
+print(f"Is the tree a BST (Inorder method)? {is_bst_inorder(root2)}") #False
+
+```
+
+
+**Method 2: Recursive Check with Min and Max Bounds**
+
+This method recursively checks each node, ensuring that its value falls within the valid range defined by its ancestors.
+
+1. **Base Case:** If the node is `None`, it's considered a valid BST subtree.
+
+2. **Recursive Step:**  For each node:
+   - Check if its value is within the allowed range (defined by `min` and `max`).
+   - Recursively check its left subtree with an updated `max` bound (the node's value - 1).
+   - Recursively check its right subtree with an updated `min` bound (the node's value + 1).
+
+**Python Code (Method 2):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+# Example Usage (same trees as before)
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(f"Is the tree a BST (Recursive method)? {is_bst_recursive(root)}")  # True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8)
+
+print(f"Is the tree a BST (Recursive method)? {is_bst_recursive(root2)}")  # False
+```
+
+Both methods achieve the same result. The recursive approach is generally considered more efficient because it avoids the overhead of creating and sorting an array.  Choose the method that you find more readable and easier to understand.  Remember to handle potential edge cases like empty trees appropriately.
+
