@@ -59632,3 +59632,74 @@ Learning Big O notation is crucial for understanding the efficiency of your algo
 
 Remember, consistency and practice are key.  Start with simpler algorithms, gradually increase the difficulty, and don't be afraid to look for help and guidance when needed.  Happy coding!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem samples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Find the largest element in an unsorted array.
+
+**Input:** An array of integers.  Example: `[3, 1, 4, 1, 5, 9, 2, 6, 5, 3]`
+
+**Output:** The largest integer in the array. Example: `9`
+
+**Solution Outline:** Iterate through the array, keeping track of the largest element seen so far.
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Solution Outline:**  You could use a brute-force approach (nested loops), but a more efficient solution involves using a hash table (dictionary in Python) to store seen numbers and their indices.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`.
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+```
+Input: s = "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+```
+
+**Solution Outline:**  This problem has several approaches, including dynamic programming, expanding around the center, and Manacher's algorithm.  The expanding around the center approach is relatively straightforward to implement.
+
+
+**How to approach solving these problems:**
+
+1. **Understand the problem:**  Carefully read the problem statement and understand the input, output, and constraints.  What are you being asked to do? What are the limitations (e.g., time complexity, space complexity)?
+
+2. **Develop an algorithm:**  Think about different approaches to solve the problem. Consider the time and space complexity of each approach.  Often, a brute-force solution is a good starting point, even if it's not the most efficient.
+
+3. **Write code:**  Implement your algorithm in your chosen programming language.
+
+4. **Test your code:**  Thoroughly test your code with various inputs, including edge cases and boundary conditions.
+
+5. **Optimize (if necessary):**  If your code is not efficient enough, try to optimize it by using more efficient data structures or algorithms.
+
+
+These examples provide a range of complexity.  Start with the easy one, then move on to the medium and hard problems as you gain confidence.  Remember to practice regularly!
+
