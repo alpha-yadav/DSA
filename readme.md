@@ -56723,3 +56723,30 @@ Don't jump into complex algorithms right away. Begin with the basics:
 
 Learning algorithms takes time and effort. Be patient, persistent, and enjoy the process of improving your problem-solving skills!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+* **Problem:**  Given an array of integers, find the largest number in the array.
+* **Input:** An array of integers (e.g., `[1, 5, 2, 8, 3]`)
+* **Output:** The largest integer in the array (e.g., `8`)
+* **Solution Idea:** Iterate through the array, keeping track of the largest number seen so far.
+
+**Medium:**
+
+* **Problem:** Given a sorted array of integers, find the index of a given target value using binary search.  Return -1 if the target is not found.
+* **Input:** A sorted array of integers (e.g., `[2, 5, 7, 8, 11, 12]`), and a target integer (e.g., `11`)
+* **Output:** The index of the target value (e.g., `4`), or -1 if not found.
+* **Solution Idea:** Use binary search to efficiently search the sorted array.  Divide the search space in half with each comparison.
+
+**Hard:**
+
+* **Problem:** Given a graph represented as an adjacency list, implement Dijkstra's algorithm to find the shortest paths from a single source node to all other reachable nodes.
+* **Input:** A graph represented as an adjacency list (e.g., `{0: [(1, 4), (2, 2)], 1: [(3, 1)], 2: [(1,1), (3,5)], 3: []}` where the numbers represent nodes and the tuples represent (neighbor, weight)), and a source node (e.g., `0`).
+* **Output:**  A dictionary where keys are nodes and values are the shortest distances from the source node to that node (e.g., `{0: 0, 1: 3, 2: 2, 3: 4}`).
+* **Solution Idea:**  Implement Dijkstra's algorithm using a priority queue to efficiently find the shortest paths.
+
+
+These are just examples, and many variations are possible.  The difficulty can be adjusted by changing the constraints (e.g., size of input, allowed data structures, time complexity requirements).  Remember to consider edge cases and test your solutions thoroughly.
+
