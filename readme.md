@@ -58140,3 +58140,119 @@ print(f"Is the tree a BST (iterative)? {is_bst_iterative(root2)}") #Output: Fals
 
 Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some cases, particularly for very deep trees where recursion could lead to stack overflow issues. Choose the method that best suits your needs and understanding. Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches, one using recursion and another using an iterative approach with in-order traversal:
+
+**Method 1: Recursive Approach**
+
+This method recursively checks if the left and right subtrees are BSTs and if the node's value is within the valid range defined by its ancestors.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Recursively checks if a binary tree is a BST.
+
+    Args:
+        node: The root node of the subtree to check.
+        min_val: The minimum allowed value for nodes in this subtree.
+        max_val: The maximum allowed value for nodes in this subtree.
+
+    Returns:
+        True if the subtree is a BST, False otherwise.
+    """
+    if node is None:
+        return True
+
+    if not (min_val < node.data < max_val):
+        return False
+
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+root.left.right.left = Node(10)
+root.left.right.right = Node(14)
+
+if is_bst_recursive(root):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+
+root2 = Node(10)
+root2.left = Node(20)
+root2.right = Node(30) #Not a BST because 20 > 10
+
+if is_bst_recursive(root2):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+```
+
+**Method 2: Iterative Approach (In-order Traversal)**
+
+This method performs an in-order traversal of the tree and checks if the values are in ascending order.  This is efficient because it only visits each node once.
+
+```python
+def is_bst_iterative(root):
+    """
+    Iteratively checks if a binary tree is a BST using in-order traversal.
+
+    Args:
+      root: The root node of the tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    stack = []
+    prev = -float('inf')  # Initialize previous value to negative infinity
+
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+
+        root = stack.pop()
+        if root.data <= prev:  # Check if current value is greater than previous
+            return False
+        prev = root.data
+        root = root.right
+
+    return True
+
+
+#Example usage (same trees as above)
+if is_bst_iterative(root):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+if is_bst_iterative(root2):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+```
+
+**Choosing the Right Method:**
+
+* The **recursive** approach is often more concise and easier to understand.  However, it might lead to stack overflow errors for very deep trees.
+
+* The **iterative** approach using in-order traversal avoids stack overflow issues and is generally preferred for large trees.  It's also slightly more efficient in terms of space complexity in many cases.  The space complexity is O(h) in the worst case (where h is the height of the tree), but for balanced trees, it is O(log n).
+
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree, as they visit each node at least once.  Choose the method that best suits your needs and understanding.  For most practical scenarios, the iterative approach is recommended due to its robustness against stack overflow.
+
