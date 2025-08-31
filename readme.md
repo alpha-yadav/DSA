@@ -58989,3 +58989,149 @@ Graph theory has a wide range of applications in various fields, including:
 
 This is a brief introduction.  The field of graph theory is vast and rich, encompassing many advanced concepts and algorithms.  Further exploration will reveal the depth and power of this mathematical tool.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with different implementation options in various programming languages:
+
+**The Concept**
+
+An adjacency list represents a graph as an array (or list) of lists.  Each element in the main array represents a vertex in the graph.  The corresponding inner list contains the vertices that are directly connected (adjacent) to that vertex.
+
+**Example:**
+
+Consider an undirected graph with vertices {0, 1, 2, 3} and edges {(0,1), (0,2), (1,2), (2,3)}.
+
+* **Adjacency List Representation:**
+
+```
+0: [1, 2]
+1: [0, 2]
+2: [0, 1, 3]
+3: [2]
+```
+
+This shows that:
+
+* Vertex 0 is connected to vertices 1 and 2.
+* Vertex 1 is connected to vertices 0 and 2.
+* Vertex 2 is connected to vertices 0, 1, and 3.
+* Vertex 3 is connected to vertex 2.
+
+
+**Implementation in Different Programming Languages**
+
+**1. Python:**
+
+Using lists of lists:
+
+```python
+graph = {
+    0: [1, 2],
+    1: [0, 2],
+    2: [0, 1, 3],
+    3: [2]
+}
+
+# Accessing neighbors of vertex 2:
+neighbors = graph[2]  # neighbors will be [0, 1, 3]
+```
+
+Using dictionaries for more efficient lookups (especially for larger graphs):
+
+```python
+graph = {
+    0: [1, 2],
+    1: [0, 2],
+    2: [0, 1, 3],
+    3: [2]
+}
+
+# Accessing neighbors of vertex 2:
+neighbors = graph.get(2, []) #Handles cases where a vertex might not exist
+```
+
+**2. C++:**
+
+Using `vector` of `vector`s:
+
+```c++
+#include <vector>
+#include <iostream>
+
+int main() {
+  std::vector<std::vector<int>> graph(4); // Create a graph with 4 vertices
+
+  graph[0].push_back(1);
+  graph[0].push_back(2);
+  graph[1].push_back(0);
+  graph[1].push_back(2);
+  graph[2].push_back(0);
+  graph[2].push_back(1);
+  graph[2].push_back(3);
+  graph[3].push_back(2);
+
+  // Accessing neighbors of vertex 2:
+  for (int neighbor : graph[2]) {
+    std::cout << neighbor << " ";
+  } // Output: 0 1 3
+  std::cout << std::endl;
+
+  return 0;
+}
+```
+
+**3. Java:**
+
+Using `ArrayList` of `ArrayList`s:
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class AdjacencyList {
+    public static void main(String[] args) {
+        List<List<Integer>> graph = new ArrayList<>(4);
+        for (int i = 0; i < 4; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        graph.get(0).add(1);
+        graph.get(0).add(2);
+        graph.get(1).add(0);
+        graph.get(1).add(2);
+        graph.get(2).add(0);
+        graph.get(2).add(1);
+        graph.get(2).add(3);
+        graph.get(3).add(2);
+
+
+        // Accessing neighbors of vertex 2:
+        for (int neighbor : graph.get(2)) {
+            System.out.print(neighbor + " ");
+        } // Output: 0 1 3
+        System.out.println();
+    }
+}
+```
+
+**Weighted Graphs:**
+
+For weighted graphs, you can store the weight along with the neighbor vertex.  This can be done using pairs or custom classes:
+
+
+**Python (Weighted Graph):**
+
+```python
+graph = {
+    0: [(1, 5), (2, 2)],  # (neighbor, weight)
+    1: [(0, 5), (2, 1)],
+    2: [(0, 2), (1, 1), (3, 4)],
+    3: [(2, 4)]
+}
+
+# Accessing neighbors and weights of vertex 2:
+for neighbor, weight in graph[2]:
+    print(f"Neighbor: {neighbor}, Weight: {weight}")
+```
+
+Remember to adapt these examples to your specific needs and the size of your graph.  For extremely large graphs, consider more advanced data structures and techniques for optimization.
+
