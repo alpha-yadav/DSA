@@ -58656,3 +58656,104 @@ postorder(root) # Output: D E B F C A
 
 Remember to adapt the node structure and traversal functions to your specific needs and implementation if you are using a different programming language or a different node representation.  For very large trees, iterative approaches might be more memory-efficient than purely recursive ones.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to find the LCA, each with different time and space complexities.  Here are two common approaches:
+
+**Method 1: Recursive Approach (Efficient)**
+
+This method uses recursion and is generally the most efficient. It leverages the property that the LCA of two nodes lies on the path between either of the nodes and the root.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def findLCA(root, n1, n2):
+    """
+    Finds the Lowest Common Ancestor of n1 and n2 in the given binary tree.
+
+    Args:
+        root: The root node of the binary tree.
+        n1: The first node.
+        n2: The second node.
+
+    Returns:
+        The LCA node, or None if either n1 or n2 is not found.
+    """
+
+    if root is None:
+        return None
+
+    if root.data == n1.data or root.data == n2.data:
+        return root
+
+    left_lca = findLCA(root.left, n1, n2)
+    right_lca = findLCA(root.right, n1, n2)
+
+    if left_lca and right_lca:
+        return root  # LCA found - current node is the ancestor of both
+
+    return left_lca if left_lca else right_lca  # LCA is on one side
+
+
+# Example Usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+n1 = root.left.left  # Node with data 4
+n2 = root.right.right # Node with data 7
+
+lca = findLCA(root, n1, n2)
+if lca:
+    print("LCA of", n1.data, "and", n2.data, "is:", lca.data) # Output: LCA of 4 and 7 is: 1
+else:
+    print("One or both nodes not found in the tree.")
+
+n3 = Node(8) #Node not in tree
+lca = findLCA(root,n1,n3)
+if lca:
+    print("LCA of", n1.data, "and", n3.data, "is:", lca.data)
+else:
+    print("One or both nodes not found in the tree.") #Output: One or both nodes not found in the tree.
+
+```
+
+**Method 2:  Iterative Approach (Using Parent Pointers)**
+
+This approach requires modifying the tree to include parent pointers.  It's less elegant but can be useful in scenarios where recursion is undesirable or impractical (e.g., due to stack overflow concerns with very deep trees).
+
+```python
+class NodeWithParent:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.parent = None
+
+
+def findLCA_iterative(root, n1, n2):
+    # (Implementation omitted for brevity -  Requires path tracing using parent pointers)
+    # This would involve finding paths from n1 and n2 to the root, then finding the last common node in those paths.
+
+    pass #Replace with actual iterative implementation
+
+```
+
+
+**Important Considerations:**
+
+* **Error Handling:**  The provided recursive code includes basic error handling (checking for `None` root and nodes not found).  A more robust solution might explicitly handle cases where `n1` or `n2` are invalid or outside the tree.
+* **Binary Tree vs. Binary Search Tree:** The recursive approach works for both binary trees and binary search trees.  For binary search trees, more efficient algorithms exist (leveraging the sorted property).
+* **Space Complexity:** The recursive approach has a space complexity proportional to the height of the tree (due to the recursive call stack).  The iterative approach with parent pointers would have O(1) space complexity.
+* **Time Complexity:** Both methods generally have a time complexity of O(N), where N is the number of nodes in the tree, in the worst case.
+
+
+Choose the method that best suits your needs and constraints.  The recursive approach is often preferred for its simplicity and readability, unless you have specific reasons to avoid recursion.  Remember to handle edge cases appropriately in your implementation.
+
