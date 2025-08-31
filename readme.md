@@ -57000,3 +57000,47 @@ Asymptotic notations describe the behavior of functions as their input approache
 
 Understanding these notations is essential for effectively analyzing the efficiency and scalability of algorithms.  Remember that asymptotic analysis focuses on the behavior as input size approaches infinity; it doesn't tell you the exact runtime for a specific input size.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is a mathematical notation used in computer science to describe the lower bound of the growth rate of a function.  In simpler terms, it tells us the *minimum* amount of time or resources an algorithm will *always* take, even in the best-case scenario.  It's the counterpart to Big-O notation, which describes the *upper* bound (worst-case scenario).
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that *f(n)* = Ω(*g(n)*) if and only if there exist positive constants *c* and *n₀* such that 0 ≤ *c* *g(n)* ≤ *f(n)* for all *n* ≥ *n₀*.
+
+Let's dissect this:
+
+* **f(n):**  The function representing the actual runtime or resource usage of an algorithm.  This is typically expressed in terms of the input size *n*.
+* **g(n):**  A simpler function that represents the lower bound of *f(n)*.  This usually represents a known function like n, n², log n, etc.
+* **c:** A positive constant.  This constant scales *g(n)* to ensure it's always less than or equal to *f(n)*.  The specific value of *c* is not critical; its existence is what matters.
+* **n₀:** A positive constant representing a threshold.  The inequality holds true only for input sizes greater than or equal to *n₀*. This accounts for the fact that algorithms might behave differently for small input sizes.
+
+
+**What it Means:**
+
+* **Lower Bound:**  Ω(*g(n)*) means that the algorithm's runtime will *never* be less than *c* *g(n)* for sufficiently large input sizes (*n* ≥ *n₀*).  It's a guarantee of minimum performance.
+* **Best-Case Scenario:**  While Big-O describes the worst-case, Big-Omega focuses on the best-case.  An algorithm might perform better sometimes, but it will never perform *significantly* better than what Ω describes.
+* **Asymptotic Behavior:**  Like Big-O, Big-Omega is concerned with the asymptotic behavior of the algorithm – how it scales as the input size grows infinitely large.  Small differences for small inputs are ignored.
+
+**Example:**
+
+Let's say we have an algorithm with a runtime of *f(n) = n² + 2n + 1*.
+
+We can say that *f(n)* = Ω(*n²)*.  Why?
+
+Because we can find constants *c* and *n₀* that satisfy the definition.  For instance, if we choose *c = 1* and *n₀ = 1*, then for all *n* ≥ 1, we have:
+
+1 * n² ≤ n² + 2n + 1
+
+This shows that the runtime grows at least as fast as *n²*.  Even though the algorithm might sometimes run faster (e.g., due to favorable input data), it's guaranteed to take at least time proportional to *n²* in the best case.
+
+
+**Relationship with Big-O and Big-Theta:**
+
+* **Big-O (O):** Provides an upper bound on the growth rate (worst-case).
+* **Big-Omega (Ω):** Provides a lower bound on the growth rate (best-case).
+* **Big-Theta (Θ):** Provides both an upper and a lower bound, implying that the algorithm's growth rate is tightly bound (both best and worst cases grow similarly).  If *f(n)* = Θ(*g(n)*), then *f(n)* = O(*g(n)*) and *f(n)* = Ω(*g(n)*).
+
+In summary, Big-Omega notation is a crucial tool for analyzing algorithm efficiency, offering insights into the best-case performance and providing a complete picture, along with Big-O, of the algorithm's asymptotic behavior.
+
