@@ -59476,3 +59476,93 @@ bfs(graph, 'A')  # Output: A B C D E F (order may vary slightly depending on que
 
 Remember to adapt these algorithms and choose the appropriate data structures based on your specific graph representation (adjacency matrix, adjacency list) and the problem you're trying to solve.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and the specifics of the traversal (recursive vs. iterative).  Here are a few examples:
+
+
+**1. Recursive DFS (Adjacency List):** This is generally the most concise and readable version for graphs represented using adjacency lists.
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        node: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (used for recursion).
+
+    Returns:
+        A list of nodes visited in DFS order.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(node)
+    print(node, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(node, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+
+    return visited
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal starting from A:")
+dfs_recursive(graph, 'A')  # Output: A B D E F C  (order might vary slightly depending on implementation)
+print("\n")
+
+```
+
+
+**2. Iterative DFS (Adjacency List) using a Stack:** This version avoids recursion, making it suitable for very deep graphs where recursion might hit stack overflow limits.
+
+```python
+def dfs_iterative(graph, start_node):
+  """
+  Performs a Depth-First Search traversal iteratively using a stack.
+
+  Args:
+    graph: A dictionary representing the graph.
+    start_node: The starting node for the traversal.
+
+  Returns:
+    A list of nodes visited in DFS order.
+  """
+  visited = set()
+  stack = [start_node]
+  result = []
+
+  while stack:
+    node = stack.pop()
+    if node not in visited:
+      visited.add(node)
+      result.append(node)
+      stack.extend(neighbor for neighbor in graph.get(node, []) if neighbor not in visited)
+
+  return result
+
+
+# Example usage (same graph as above):
+print("Iterative DFS traversal starting from A:")
+print(dfs_iterative(graph, 'A')) # Output: ['A', 'C', 'F', 'B', 'E', 'D'] (order might vary slightly)
+print("\n")
+```
+
+**Choosing the Right Version:**
+
+* **Recursive DFS:** Simpler to understand and implement for most cases.  However, it can lead to stack overflow errors for very deep graphs.
+* **Iterative DFS:** More robust for large or deep graphs, but slightly more complex to implement.
+
+
+Remember to adapt these functions to your specific needs.  You might need to modify the way nodes are processed (instead of just printing them)  or handle different graph representations (e.g., adjacency matrices).  If you are dealing with a weighted graph, you'll need a different algorithm (like Dijkstra's or A*) for finding shortest paths.
+
