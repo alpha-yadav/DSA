@@ -59863,3 +59863,67 @@ print(f"The target number {target} is at index {index}")
 
 Remember to start small, be patient, and enjoy the process of learning!  Algorithms are a fundamental building block of computer science, and the effort you put in will be greatly rewarded.
 
+#  A sample algorithmic problem 
+Let's consider a classic algorithmic problem: **Two Sum**.
+
+**Problem Statement:**
+
+Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Constraints:**
+
+* `2 <= nums.length <= 104`
+* `-109 <= nums[i] <= 109`
+* `-109 <= target <= 109`
+* **Only one valid answer exists.**
+
+
+**Different Approaches (with varying efficiency):**
+
+* **Brute Force:**  This approach iterates through all possible pairs of numbers in the array and checks if their sum equals the target.  Time complexity: O(n²), Space complexity: O(1).
+
+* **Hash Table (Optimal):** This approach uses a hash table (dictionary in Python) to store each number and its index.  For each number, it checks if the complement (target - number) exists in the hash table. If it does, the indices are found. Time complexity: O(n), Space complexity: O(n).
+
+
+**Python Solution (using Hash Table):**
+
+```python
+def two_sum(nums, target):
+    num_map = {}  # Create a hash table (dictionary)
+
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]  # Found the pair
+        num_map[num] = i  # Add the number and its index to the hash table
+
+    return None  # No solution found
+
+# Example usage:
+nums = [2, 7, 11, 15]
+target = 9
+result = two_sum(nums, target)
+print(result)  # Output: [0, 1]
+```
+
+This problem demonstrates several key aspects of algorithmic problem-solving:
+
+* **Understanding the problem:** Clearly defining the input, output, and constraints.
+* **Choosing an appropriate data structure:**  The hash table significantly improves efficiency.
+* **Analyzing time and space complexity:** Evaluating the performance of different solutions.
+* **Implementing a solution:** Writing clean and efficient code.
+
+This is a relatively simple problem, but it serves as a good foundation for understanding more complex algorithmic challenges.  Try implementing the brute-force solution to compare its performance with the hash table approach.  You can then explore variations of this problem, like finding triplets or quadruplets that sum to a target.
+
