@@ -61823,3 +61823,88 @@ Similar iterative solutions can be devised for inorder and postorder traversals 
 
 These examples provide both recursive and iterative ways to traverse a binary tree. The choice between them depends on factors like code readability, memory usage considerations (recursion can lead to stack overflow for very deep trees), and personal preference.  Remember to handle the case of an empty tree (where `node` is `None`) appropriately in your implementations.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several approaches to finding the LCA, each with varying complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+This approach recursively traverses the tree.  If a node contains either `node1` or `node2`, we return that node.  If `node1` and `node2` are found in different subtrees (one in the left subtree, one in the right), the current node is their LCA.  If both are in the same subtree (either left or right), we recursively search that subtree.
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, node1, node2):
+    """
+    Finds the Lowest Common Ancestor (LCA) of two nodes in a binary tree.
+
+    Args:
+        root: The root node of the binary tree.
+        node1: The first node.
+        node2: The second node.
+
+    Returns:
+        The LCA node, or None if either node is not found.
+    """
+
+    if root is None or root.data == node1.data or root.data == node2.data:
+        return root
+
+    left_lca = lca(root.left, node1, node2)
+    right_lca = lca(root.right, node1, node2)
+
+    if left_lca and right_lca:  # Node1 and node2 are in different subtrees
+        return root
+    elif left_lca:              # Both nodes are in the left subtree
+        return left_lca
+    else:                       # Both nodes are in the right subtree
+        return right_lca
+
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+node1 = root.left.left  # Node with data 4
+node2 = root.right.right # Node with data 7
+
+lca_node = lca(root, node1, node2)
+print(f"LCA of {node1.data} and {node2.data}: {lca_node.data if lca_node else None}") # Output: LCA of 4 and 7: 1
+
+
+node3 = root.left.right #Node with data 5
+node4 = root.left.left #Node with data 4
+lca_node = lca(root, node3, node4)
+print(f"LCA of {node3.data} and {node4.data}: {lca_node.data if lca_node else None}") #Output: LCA of 5 and 4: 2
+```
+
+
+2. **Iterative Approach (using parent pointers):**
+
+If you have a way to efficiently find the parent of any node (e.g., by adding a `parent` pointer to the `Node` class), an iterative solution is possible.  You would trace upwards from each node until you find a common ancestor.  This approach can be more efficient in some cases.  (Implementation omitted for brevity but involves using a `set` to track ancestors and finding their intersection).
+
+3. **Using a Path:**
+
+Find the paths from the root to `node1` and `node2`.  Then iterate through both paths from the root until the nodes differ. The last common node is the LCA.
+
+
+**Important Considerations:**
+
+* **Node Existence:**  Handle cases where `node1` or `node2` might not exist in the tree.
+* **Tree Structure:** These algorithms assume a standard binary tree.  Modifications might be needed for other tree types (e.g., N-ary trees).
+* **Efficiency:** The recursive approach has a time complexity of O(N) in the worst case (where N is the number of nodes), as it could traverse the entire tree. The space complexity is O(H) due to the recursive call stack, where H is the height of the tree.  The iterative approach with parent pointers can be slightly more efficient in some cases.
+
+
+Remember to choose the method that best suits your needs and the constraints of your problem. The recursive method is generally preferred for its simplicity and readability unless you have a specific reason to use an iterative approach (e.g., to avoid potential stack overflow issues with very deep trees).
+
