@@ -61721,3 +61721,105 @@ The JavaScript implementation mirrors the Python version closely.  `shift()` is 
 
 Both implementations use a queue to achieve the breadth-first traversal.  This ensures that all nodes at a given level are visited before moving to the next level.  The time complexity is O(N), where N is the number of nodes, and the space complexity is O(W), where W is the maximum width of the tree (the maximum number of nodes at any level).  In a balanced tree, W is proportional to N/2, so the space complexity is effectively O(N) as well.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals (preorder, inorder, and postorder) are ways to systematically visit each node in a binary tree exactly once.  They differ in the order they visit the root, left subtree, and right subtree.
+
+**1. Binary Tree Structure**
+
+We'll represent a node in a binary tree as:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+**2. Traversal Algorithms**
+
+* **Preorder Traversal:**  Root -> Left -> Right
+
+   ```python
+   def preorder(node):
+       if node:
+           print(node.data, end=" ")  # Visit root
+           preorder(node.left)       # Traverse left subtree
+           preorder(node.right)      # Traverse right subtree
+   ```
+
+* **Inorder Traversal:** Left -> Root -> Right
+
+   ```python
+   def inorder(node):
+       if node:
+           inorder(node.left)        # Traverse left subtree
+           print(node.data, end=" ")  # Visit root
+           inorder(node.right)       # Traverse right subtree
+   ```
+
+* **Postorder Traversal:** Left -> Right -> Root
+
+   ```python
+   def postorder(node):
+       if node:
+           postorder(node.left)      # Traverse left subtree
+           postorder(node.right)     # Traverse right subtree
+           print(node.data, end=" ")  # Visit root
+   ```
+
+
+**3. Example Usage:**
+
+Let's create a sample binary tree:
+
+```python
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+```
+
+This tree looks like:
+
+```
+     A
+    / \
+   B   C
+  / \
+ D   E
+```
+
+Now, let's perform the traversals:
+
+```python
+print("Preorder traversal:")
+preorder(root)  # Output: A B D E C
+print("\nInorder traversal:")
+inorder(root)   # Output: D B E A C
+print("\nPostorder traversal:")
+postorder(root) # Output: D E B C A 
+```
+
+
+**4. Iterative Approaches (without recursion):**
+
+While the recursive versions are often easier to understand, iterative approaches using stacks are also possible.  Here's an example for preorder traversal:
+
+```python
+def preorder_iterative(node):
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if current:
+            print(current.data, end=" ")
+            stack.append(current.right)  #Push right first, so it's processed later
+            stack.append(current.left)   #Push left so it's processed before right
+```
+
+Similar iterative solutions can be devised for inorder and postorder traversals using stacks.  For postorder, you might need a slightly more sophisticated stack management strategy.
+
+
+These examples provide both recursive and iterative ways to traverse a binary tree. The choice between them depends on factors like code readability, memory usage considerations (recursion can lead to stack overflow for very deep trees), and personal preference.  Remember to handle the case of an empty tree (where `node` is `None`) appropriately in your implementations.
+
