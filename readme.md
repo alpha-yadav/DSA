@@ -60000,3 +60000,68 @@ fizzBuzzConcise(n: 15)
 
 This nests ternary operators to achieve the same result in a single `print` statement.  Choose the version that best suits your understanding and coding style.  The second (improved) version is generally considered a good balance of readability and efficiency.  Remember to choose the version that's easiest for you to understand and maintain.
 
+#  Algorithm Complexity 
+Algorithm complexity is a crucial aspect of computer science that analyzes how the runtime or space requirements of an algorithm scale with the size of the input.  It's not about the exact number of operations an algorithm takes for a specific input, but rather how that number grows as the input gets larger.  This allows us to compare algorithms and choose the most efficient one for a given task.
+
+We generally categorize complexity using **Big O notation**, which provides an upper bound on the growth rate.  Other notations like Big Omega (Ω) for lower bounds and Big Theta (Θ) for tight bounds also exist, but Big O is the most commonly used.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:**  Describes how the runtime of an algorithm increases as the input size grows.  This is often the most important aspect to consider.
+
+* **Space Complexity:** Describes how the amount of memory (space) used by an algorithm increases as the input size grows.  This is important for memory-constrained systems.
+
+* **Best-Case, Average-Case, Worst-Case:**  The complexity of an algorithm can vary depending on the specific input.
+    * **Best-Case:** The most favorable input scenario.
+    * **Average-Case:** The expected performance over many different inputs.  This is often difficult to calculate precisely.
+    * **Worst-Case:** The least favorable input scenario.  This is often the most important to consider for critical applications, as it guarantees a certain level of performance.
+
+**Common Big O Notations:**
+
+These represent the growth rate of an algorithm's resource usage (time or space) as the input size (n) increases:
+
+* **O(1) - Constant Time:** The algorithm's runtime remains the same regardless of the input size.  Example: Accessing an element in an array by index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Example: Bubble sort, selection sort.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Finding all permutations of a set.
+
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing the complexity often involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most significantly to the runtime.
+
+2. **Counting the number of operations:** Express the number of operations as a function of the input size (n).
+
+3. **Determining the dominant term:** Identify the term in the function that grows fastest as n increases.  This term determines the Big O notation.
+
+4. **Ignoring constant factors:** Constant factors (e.g., multiplying by 2) are dropped in Big O notation because we're focused on the growth rate.
+
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The number of operations is proportional to the length of the array (`n`). In the worst case, we have to iterate through the entire array. Therefore, the time complexity of linear search is O(n).
+
+
+Understanding algorithm complexity is fundamental for writing efficient and scalable programs. By analyzing the complexity, you can make informed decisions about which algorithm to use for a particular task and optimize your code accordingly.
+
