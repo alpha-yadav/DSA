@@ -61908,3 +61908,92 @@ Find the paths from the root to `node1` and `node2`.  Then iterate through both 
 
 Remember to choose the method that best suits your needs and the constraints of your problem. The recursive method is generally preferred for its simplicity and readability unless you have a specific reason to use an iterative approach (e.g., to avoid potential stack overflow issues with very deep trees).
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a common problem in computer science.  The optimal approach depends on the type of tree and whether you have access to parent pointers.  Here's a breakdown of common methods:
+
+**1. Binary Tree (with parent pointers):**
+
+If each node has a pointer to its parent, finding the LCA is straightforward.  You can trace up from each node until you find a common ancestor.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent(node1, node2):
+    ancestors1 = set()
+    curr = node1
+    while curr:
+        ancestors1.add(curr)
+        curr = curr.parent
+
+    curr = node2
+    while curr:
+        if curr in ancestors1:
+            return curr
+        curr = curr.parent
+    return None #Should not happen if node1 and node2 are in the same tree.
+
+#Example usage (requires setting up the tree and parent pointers beforehand)
+# ... (Tree setup) ...
+# node1 = ...
+# node2 = ...
+# lca = lca_with_parent(node1, node2)
+# print(f"LCA of {node1.data} and {node2.data}: {lca.data}")
+```
+
+**2. Binary Tree (without parent pointers):**
+
+This requires a more involved recursive approach.  The algorithm checks if the node is in the subtree of one of the nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_without_parent(root, node1, node2):
+    if not root or root == node1 or root == node2:
+        return root
+
+    left_lca = lca_without_parent(root.left, node1, node2)
+    right_lca = lca_without_parent(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example Usage:
+# root = ... (setup your binary tree)
+# node1 = ...
+# node2 = ...
+# lca = lca_without_parent(root, node1, node2)
+# print(f"LCA of {node1.data} and {node2.data}: {lca.data if lca else None}")
+
+```
+
+**3. General Tree (without parent pointers):**
+
+For general trees (not necessarily binary), the approach is similar to the binary tree without parent pointers, but the recursion needs to handle multiple children.  You'd need to iterate through all children instead of just left and right.
+
+
+**4.  Efficiency:**
+
+* **With parent pointers:**  The time complexity is O(h), where h is the height of the tree.  Space complexity is O(h) in the worst case (for storing the ancestor set).
+* **Without parent pointers:** The time complexity is O(n) in the worst case (where n is the number of nodes), as it might traverse the entire tree.  The space complexity is O(h) due to the recursive calls.
+
+
+**Important Considerations:**
+
+* **Error Handling:**  The code examples above are simplified.  In a production environment, add error handling to check if `node1` and `node2` actually exist in the tree.
+* **Tree Structure:** Make sure the tree structure is correctly set up before using the LCA functions.
+* **Node Representation:** The `Node` class might need adjustments depending on your specific needs (e.g., adding additional data).
+
+
+Remember to choose the algorithm that best suits your specific tree structure and available information (parent pointers).  The algorithms without parent pointers are more general but can be less efficient than the parent-pointer approach.
+
