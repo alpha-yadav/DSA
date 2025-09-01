@@ -61523,3 +61523,96 @@ else:
 
 The iterative approach can be slightly more efficient in terms of space complexity in some cases, especially for highly unbalanced trees where the recursive approach might lead to deeper recursion stacks.  Both methods provide a correct solution. Choose the method you find more readable and maintainable.  Remember to adapt the `Node` class if your tree uses a different structure.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit (or "traverse") all the nodes in a binary tree.  There are three main types:
+
+* **Inorder Traversal:**  Left subtree -> Root -> Right subtree
+* **Preorder Traversal:** Root -> Left subtree -> Right subtree
+* **Postorder Traversal:** Left subtree -> Right subtree -> Root
+
+Let's break down each one, along with examples and their applications:
+
+**1. Inorder Traversal:**
+
+* **Process:**  Recursively visit the left subtree, then the root node, then the right subtree.
+* **Example:** Consider this binary tree:
+
+```
+     4
+    / \
+   2   5
+  / \
+ 1   3
+```
+
+The inorder traversal would be: 1 2 3 4 5
+
+* **Application:** For binary *search* trees (BSTs), an inorder traversal yields the nodes in ascending order of their values.  This is extremely useful for sorted output or searching efficiently.
+
+
+**2. Preorder Traversal:**
+
+* **Process:** Visit the root node, then recursively visit the left subtree, then the right subtree.
+* **Example:**  Using the same tree as above:
+
+The preorder traversal would be: 4 2 1 3 5
+
+* **Application:** Preorder traversal is often used to create a *copy* of a binary tree.  It's also useful in representing the tree's structure in a prefix notation (like in expression trees).
+
+
+**3. Postorder Traversal:**
+
+* **Process:** Recursively visit the left subtree, then the right subtree, then the root node.
+* **Example:** Using the same tree as above:
+
+The postorder traversal would be: 1 3 2 5 4
+
+* **Application:** Postorder traversal is commonly used to delete a binary tree.  It processes nodes after their children, ensuring that you always delete child nodes *before* their parents (preventing dangling pointers).  It's also used in expression evaluation where operations are performed after operands are processed.
+
+
+**Code Examples (Python):**
+
+Let's represent the tree using a Node class:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(4)
+root.left = Node(2)
+root.right = Node(5)
+root.left.left = Node(1)
+root.left.right = Node(3)
+
+print("Inorder traversal:")
+inorder(root)  # Output: 1 2 3 4 5
+print("\nPreorder traversal:")
+preorder(root)  # Output: 4 2 1 3 5
+print("\nPostorder traversal:")
+postorder(root) # Output: 1 3 2 5 4
+```
+
+Remember to adapt these examples to your preferred programming language.  The core recursive logic remains the same.  Iterative versions of these traversals are also possible, often using stacks to mimic the recursion.
+
