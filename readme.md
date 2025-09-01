@@ -60394,3 +60394,30 @@ This will print the elements of the matrix row by row.
 
 Nested loops are a fundamental concept in programming.  They provide a powerful way to iterate over multiple dimensions of data, but it's crucial to be mindful of their potential impact on performance and code readability.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms are characterized by their ability to solve problems by repeatedly dividing the problem size in half (or by some constant factor).  This halving is typically achieved through techniques like binary search, or by processing data structures that inherently have a logarithmic structure, such as balanced binary search trees.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+**1. Binary Search:** This is the quintessential O(log n) algorithm.  It works on a *sorted* array (or list) by repeatedly dividing the search interval in half. If the target value is not present, it will still take O(log n) time to determine that.
+
+**2. Algorithms using Binary Trees (balanced):** Operations on balanced binary search trees (like AVL trees, red-black trees) typically have a logarithmic time complexity.  These operations include:
+
+* **Search:** Finding a specific node.
+* **Insertion:** Adding a new node.
+* **Deletion:** Removing a node.
+* **Minimum/Maximum:** Finding the smallest or largest element.
+
+**3. Efficient Set/Map Operations (using balanced trees):** Many implementations of sets and maps in programming languages use balanced binary search trees under the hood.  Therefore, operations like insertion, deletion, lookup (contains), and finding the minimum/maximum element often have O(log n) complexity.
+
+
+**4. Exponentiation by Squaring:**  This algorithm efficiently calculates a<sup>n</sup> (a raised to the power of n) in O(log n) time by repeatedly squaring the base and adjusting the exponent.
+
+**5. Finding an element in a sorted array using interpolation search:** While similar to binary search, interpolation search uses an interpolation formula to estimate the location of the target, potentially resulting in fewer comparisons in certain scenarios. Its average-case time complexity is O(log log n) and its worst-case time complexity is O(n).
+
+**Important Note on "log" base:**  The base of the logarithm (e.g., base 2, base 10, base e) doesn't affect the big O notation.  O(log₂ n), O(log₁₀ n), and O(logₑ n) are all considered O(log n) because they differ only by a constant factor.  The constant factor is irrelevant in big O analysis, which focuses on the growth rate as n approaches infinity.
+
+**When you might encounter O(log n) algorithms:**
+
+Situations where you can expect O(log n) algorithms often involve working with sorted data, using tree-like structures, or performing operations that can be repeatedly halved.  They are highly efficient and represent a significant improvement over linear O(n) algorithms, especially when dealing with large datasets.
+
