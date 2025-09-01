@@ -59927,3 +59927,76 @@ This problem demonstrates several key aspects of algorithmic problem-solving:
 
 This is a relatively simple problem, but it serves as a good foundation for understanding more complex algorithmic challenges.  Try implementing the brute-force solution to compare its performance with the hash table approach.  You can then explore variations of this problem, like finding triplets or quadruplets that sum to a target.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing some improvements:
+
+**Basic Implementation:**
+
+This version uses a simple `for` loop and `if/else if/else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3 ("Fizz").
+* Then it checks divisibility by 5 ("Buzz").
+* If none of the above are true, it prints the number itself.
+
+
+**Improved Implementation (using string concatenation):**
+
+This version is more concise and efficient because it builds the output string and avoids nested `if/else` statements:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This approach:
+
+1. Initializes an empty string `output`.
+2. Appends "Fizz" if divisible by 3 and "Buzz" if divisible by 5.
+3. Prints either the built `output` string or the number itself if `output` remains empty.
+
+
+**Even More Concise (using ternary operator):**
+
+This version uses the ternary operator for even greater brevity (though readability might be slightly reduced for beginners):
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print((i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i))
+    }
+}
+
+fizzBuzzConcise(n: 15)
+```
+
+This nests ternary operators to achieve the same result in a single `print` statement.  Choose the version that best suits your understanding and coding style.  The second (improved) version is generally considered a good balance of readability and efficiency.  Remember to choose the version that's easiest for you to understand and maintain.
+
