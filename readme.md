@@ -65903,3 +65903,59 @@ This means:
 
 Big Theta notation is crucial in algorithm analysis because it allows us to precisely characterize the time or space complexity of an algorithm.  Knowing the Θ complexity gives a more complete understanding of an algorithm's efficiency than just its Big O complexity.  It tells us how the algorithm scales with the input size.  This is essential for selecting appropriate algorithms for various applications.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of functions, particularly useful for analyzing the efficiency of algorithms.  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  An upper bound on the growth rate of a function.  `f(n) = O(g(n))` means there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  Essentially, *g(n)* grows at least as fast as *f(n)*.
+* **Focus:** Worst-case scenario.  It describes the upper limit of how much an algorithm's runtime or space usage can grow.
+* **Example:**  If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say `f(n) = O(n²)`, ignoring lower-order terms.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** A lower bound on the growth rate of a function. `f(n) = Ω(g(n))` means there exist positive constants *c* and *n₀* such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.  Essentially, *g(n)* grows no faster than *f(n)*.
+* **Focus:** Best-case scenario (sometimes). It provides a lower limit on the growth rate, indicating that the algorithm will *at least* take this long.
+* **Example:** For `f(n) = 2n² + 5n + 1`, we have `f(n) = Ω(n²)`.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** A tight bound on the growth rate of a function. `f(n) = Θ(g(n))` means there exist positive constants *c₁*, *c₂*, and *n₀* such that `0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)` for all `n ≥ n₀`.  This means *f(n)* and *g(n)* grow at the same rate.
+* **Focus:** Average-case scenario (often). It provides a precise characterization of the algorithm's growth.
+* **Example:** `f(n) = 2n² + 5n + 1` is `Θ(n²)`.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  A strict upper bound. `f(n) = o(g(n))` means for every positive constant *c*, there exists a constant *n₀* such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  Essentially, *f(n)* grows strictly slower than *g(n)*.
+* **Focus:** Asymptotically smaller.  It signifies that the growth of *f(n)* is dominated by *g(n)*.
+* **Example:** `f(n) = n` is `o(n²)`.
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** A strict lower bound. `f(n) = ω(g(n))` means for every positive constant *c*, there exists a constant *n₀* such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`.  Essentially, *f(n)* grows strictly faster than *g(n)*.
+* **Focus:** Asymptotically larger.
+* **Example:** `f(n) = n²` is `ω(n)`.
+
+
+**Relationships:**
+
+* `f(n) = Θ(g(n))` implies `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+* `f(n) = o(g(n))` implies `f(n) = O(g(n))`, but not vice-versa.
+* `f(n) = ω(g(n))` implies `f(n) = Ω(g(n))`, but not vice-versa.
+
+
+**In Summary:**
+
+The table below summarizes the key differences:
+
+| Notation | Meaning                               | Type of Bound | Focus                     |
+|----------|---------------------------------------|---------------|--------------------------|
+| O        | Upper bound                           | Asymptotic    | Worst-case (often)       |
+| Ω        | Lower bound                           | Asymptotic    | Best-case (sometimes)   |
+| Θ        | Tight bound (both upper and lower)    | Asymptotic    | Average-case (often)    |
+| o        | Strict upper bound                    | Asymptotic    | Asymptotically smaller   |
+| ω        | Strict lower bound                    | Asymptotic    | Asymptotically larger   |
+
+
+Remember that these notations describe the *asymptotic* behavior—how the function behaves as the input size (`n`) approaches infinity.  They don't provide information about the runtime for small input sizes.
+
