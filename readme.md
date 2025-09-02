@@ -63000,3 +63000,40 @@ The number of print operations is directly proportional to the size of the array
 
 Understanding algorithm complexity is vital for choosing the most efficient algorithm for a given task, especially when dealing with large datasets.  An algorithm with a higher complexity may become impractically slow for even moderately sized inputs.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science and mathematics to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate.  This means it provides both an upper and a lower bound that are asymptotically proportional to the function.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*), written as *f(n) = Θ(g(n))*, if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is bounded both above and below by constant multiples of *g(n)*.  *g(n)* represents the growth rate of *f(n)*.
+
+**In simpler terms:**
+
+Θ(*g(n)*) indicates that *f(n)* grows at the *same rate* as *g(n)*, ignoring constant factors and smaller-order terms.  It's a stronger statement than Big-O notation (O), which only provides an upper bound, and Big-Omega notation (Ω), which only provides a lower bound.
+
+**Example:**
+
+Let's consider the function `f(n) = 2n² + 3n + 1`.
+
+We can say that `f(n) = Θ(n²)`.  To prove this, we need to find constants *c₁*, *c₂*, and *n₀* that satisfy the definition:
+
+1. **Find c₁ and n₀:**  For sufficiently large *n*, the `2n²` term dominates.  Let's choose `c₁ = 1`.  We need to find an *n₀* such that `n² ≤ 2n² + 3n + 1` for all *n ≥ n₀*. This inequality holds for almost all *n*, so we can choose a small value like `n₀ = 1`.
+
+2. **Find c₂ and n₀:** We need to find a constant `c₂` such that `2n² + 3n + 1 ≤ c₂n²` for all *n ≥ n₀*.  Let's try `c₂ = 4`. Then we need to show `2n² + 3n + 1 ≤ 4n²`.  This simplifies to `2n² ≥ 3n + 1`. This inequality holds true for *n* ≥ 2. We can use this value for *n₀*.
+
+Therefore, we've found `c₁ = 1`, `c₂ = 4`, and `n₀ = 2` (we can take the maximum of the two *n₀* values found above), satisfying the condition `1*n² ≤ 2n² + 3n + 1 ≤ 4*n²` for all *n ≥ 2*. This confirms `f(n) = Θ(n²)`.
+
+
+**Relationship to other asymptotic notations:**
+
+* **Big-O (O):**  If *f(n) = Θ(g(n))*, then *f(n) = O(g(n))*.  Θ is a tighter bound than O.
+* **Big-Omega (Ω):** If *f(n) = Θ(g(n))*, then *f(n) = Ω(g(n))*.  Θ is a tighter bound than Ω.
+
+**Use in Algorithm Analysis:**
+
+Big-Theta notation is crucial in algorithm analysis because it precisely describes the time or space complexity of an algorithm.  It allows us to compare the efficiency of different algorithms with a strong, asymptotically tight measure. For example, saying a sorting algorithm has a time complexity of Θ(n log n) means its runtime scales proportionally to *n log n*, regardless of constant factors.
+
