@@ -63231,3 +63231,57 @@ for i in range(5):
 
 This prints "Hello!" five times.  The `i` variable isn't even used.  This is still a loop, but its simplicity highlights the core repetitive nature of looping constructs.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows for processing data in a multi-dimensional way, often used for tasks involving matrices, tables, or any situation needing iteration over combinations of elements.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop controls the major iteration.  It runs a set number of times or until a certain condition is met.
+* **Inner Loop:** This loop is entirely contained within the outer loop. For every single iteration of the outer loop, the inner loop runs its full cycle.
+
+**Example (Python):**
+
+This code prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+**Explanation:**
+
+1. The outer loop iterates from 1 to 10 (inclusive).
+2. For each value of `i` (the row number), the inner loop iterates from 1 to 10 (inclusive).
+3. Inside the inner loop, `i * j` calculates the product and is printed.  `end="\t"` ensures the output is tab-separated, creating a neat table.
+4. `print()` after the inner loop adds a newline to move to the next row.
+
+
+**Another Example (Finding pairs):**
+
+Let's say you have a list of numbers and you want to find all possible pairs:
+
+```python
+numbers = [1, 2, 3, 4]
+for i in range(len(numbers)):
+    for j in range(i + 1, len(numbers)):  # Start j from i+1 to avoid duplicates and self-pairs
+        print(f"Pair: ({numbers[i]}, {numbers[j]})")
+```
+
+**Explanation:**
+
+1. The outer loop iterates through each number in the `numbers` list.
+2. The inner loop iterates from the *next* number after `i` to avoid duplicate pairs (e.g., (1,2) and (2,1) are considered the same).
+3. The pair is printed.
+
+
+**Time Complexity:**
+
+Nested loops significantly increase the time complexity of an algorithm.  If both the outer and inner loops have `n` iterations, the total number of iterations becomes `n * n` or O(n²), which is quadratic time complexity.  This means the runtime grows proportionally to the square of the input size.  For large datasets, nested loops can become very slow.
+
+
+**In summary:**  Nested loops are a powerful tool for processing multi-dimensional data, but their quadratic (or higher) time complexity should be considered when dealing with large datasets.  Optimization techniques might be needed to improve performance for such scenarios.
+
