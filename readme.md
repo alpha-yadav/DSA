@@ -65361,3 +65361,77 @@ Thorup's work has had a substantial impact on the field, leading to further rese
 
 In summary, Thorup's algorithms, particularly those related to near-linear time SSSP, represent a significant advance in the algorithmic efficiency for solving fundamental graph problems.  While the details of his algorithms can be quite intricate, their impact on the field is undeniable.
 
+#  Graph Traversals 
+Graph traversals are algorithms that systematically visit every node in a graph exactly once.  There are several ways to do this, each with its own properties and applications.  The most common are Depth-First Search (DFS) and Breadth-First Search (BFS).
+
+**1. Depth-First Search (DFS)**
+
+DFS explores a graph as deeply as possible along each branch before backtracking.  Think of it like exploring a maze: you go down one path as far as you can, then backtrack to the nearest intersection and try a different path.
+
+* **Algorithm:**  A common implementation uses recursion or a stack.
+
+    * **Recursive Approach:**
+        1. Visit the current node.
+        2. Mark the current node as visited.
+        3. For each neighbor of the current node that hasn't been visited:
+            * Recursively call DFS on that neighbor.
+
+    * **Iterative Approach (using a stack):**
+        1. Push the starting node onto the stack.
+        2. While the stack is not empty:
+            * Pop a node from the stack.
+            * If the node hasn't been visited:
+                * Visit the node.
+                * Mark the node as visited.
+                * Push its unvisited neighbors onto the stack (in any order).
+
+* **Applications:**
+    * Finding paths in a graph.
+    * Topological sorting (ordering nodes such that for every directed edge from node A to node B, A appears before B).
+    * Detecting cycles in a graph.
+    * Solving puzzles like mazes.
+
+
+**2. Breadth-First Search (BFS)**
+
+BFS explores a graph level by level. It visits all the neighbors of a node before moving on to their neighbors.  Think of it like exploring a maze by searching all nearby spaces before going farther away.
+
+* **Algorithm:**  Typically uses a queue.
+
+    1. Add the starting node to the queue.
+    2. While the queue is not empty:
+        * Dequeue a node.
+        * If the node hasn't been visited:
+            * Visit the node.
+            * Mark the node as visited.
+            * Enqueue all of its unvisited neighbors.
+
+* **Applications:**
+    * Finding the shortest path in an unweighted graph.
+    * Social network analysis (finding connections between people).
+    * Crawlers (web crawlers use BFS to traverse the internet).
+    * Finding connected components in a graph.
+
+
+**Comparison:**
+
+| Feature        | DFS                         | BFS                         |
+|----------------|-----------------------------|-----------------------------|
+| Exploration    | Deep, explores one branch fully before another | Breadthwise, explores all neighbors at the same level before going deeper |
+| Data Structure | Stack (recursive or iterative) | Queue                        |
+| Shortest Path  | Doesn't guarantee shortest path in unweighted graphs | Guarantees shortest path in unweighted graphs |
+| Memory Usage   | Can be less memory-intensive for deep, narrow graphs | Can be more memory-intensive for wide graphs |
+| Time Complexity| O(V + E)                     | O(V + E)                     |
+
+
+**Other Traversals:**
+
+While DFS and BFS are the most common, other graph traversal algorithms exist, often tailored to specific graph types or applications.  Examples include:
+
+* **Dijkstra's Algorithm:** Finds the shortest path in a weighted graph with non-negative edge weights.
+* **A* Search:**  An informed search algorithm that uses a heuristic to guide the search towards the goal.
+* **Bellman-Ford Algorithm:** Finds the shortest path in a weighted graph, even with negative edge weights (but detects negative cycles).
+
+
+The choice of which traversal algorithm to use depends heavily on the specific problem and the properties of the graph.  Understanding the strengths and weaknesses of each is crucial for efficient graph processing.
+
