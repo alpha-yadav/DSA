@@ -65152,3 +65152,94 @@ graph = {
 
 Choosing the right implementation depends on the specific requirements of your application, including the size of the graph, the frequency of different operations (e.g., adding/removing edges, checking for edge existence), and the programming language you are using.  For most general graph algorithms, the adjacency list is a very effective choice, especially when dealing with sparse graphs.
 
+#  Topological Sort 
+Topological sorting is a linear ordering of nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's an ordering where you can't go backwards along any arrow.  If you have a cycle in your graph, a topological sort is impossible.
+
+**Key Concepts:**
+
+* **Directed Acyclic Graph (DAG):** A graph with directed edges (arrows) and no cycles (paths that start and end at the same node).  Topological sorting only works on DAGs.
+* **In-degree:** The number of incoming edges to a node.
+* **Out-degree:** The number of outgoing edges from a node.
+
+**Algorithms:**
+
+There are two main algorithms for topological sorting:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue to process nodes.
+
+   * **Initialization:** Find all nodes with an in-degree of 0 (nodes with no incoming edges). Add these nodes to a queue.
+   * **Iteration:** While the queue is not empty:
+     * Remove a node from the queue and add it to the sorted list.
+     * For each outgoing edge from the removed node, decrement the in-degree of the destination node.
+     * If the in-degree of a destination node becomes 0, add it to the queue.
+   * **Result:** If the sorted list contains all nodes, it's a valid topological sort. Otherwise, there's a cycle in the graph.
+
+   **Example (Python):**
+
+   ```python
+   from collections import defaultdict
+
+   def topological_sort(graph):
+       in_degree = defaultdict(int)
+       for node in graph:
+           for neighbor in graph[node]:
+               in_degree[neighbor] += 1
+
+       queue = [node for node in graph if in_degree[node] == 0]
+       sorted_list = []
+
+       while queue:
+           node = queue.pop(0)
+           sorted_list.append(node)
+           for neighbor in graph[node]:
+               in_degree[neighbor] -= 1
+               if in_degree[neighbor] == 0:
+                   queue.append(neighbor)
+
+       return sorted_list if len(sorted_list) == len(graph) else None  # None indicates a cycle
+
+
+   graph = {
+       'A': ['C'],
+       'B': ['C', 'D'],
+       'C': ['E'],
+       'D': ['F'],
+       'E': ['H'],
+       'F': ['H'],
+       'G': ['H'],
+       'H': []
+   }
+
+   sorted_nodes = topological_sort(graph)
+   print(f"Topological sort: {sorted_nodes}") #Possible Output: ['A', 'B', 'G', 'C', 'D', 'E', 'F', 'H']  (Order may vary)
+
+   ```
+
+
+2. **Depth-First Search (DFS) Algorithm:**
+
+   This algorithm uses recursion or a stack.
+
+   * **Initialization:**  Start with an empty sorted list.
+   * **Recursion (or Iteration with a Stack):**  Visit each node.  If a node hasn't been visited, mark it as visited and recursively (or iteratively) visit all its neighbors. After visiting all neighbors, add the node to the beginning of the sorted list.
+   * **Result:** The reversed sorted list is a topological sort.  If you detect a cycle (visiting a node that's already been visited in the current recursion/iteration), a topological sort is not possible.
+
+   **Note:** The DFS approach requires handling cycles explicitly.  If a cycle is found, the algorithm needs to report that a topological sort is impossible.
+
+
+**Applications:**
+
+Topological sorting is used in various applications, including:
+
+* **Dependency resolution:**  Building software, scheduling tasks, resolving dependencies in makefiles.
+* **Course scheduling:** Determining the order to take courses with prerequisites.
+* **Data serialization:**  Representing data in a specific order.
+* **Artificial intelligence:** Planning algorithms and constraint satisfaction problems.
+
+
+**Choosing an Algorithm:**
+
+Kahn's algorithm is generally preferred for its simplicity and efficiency, especially if you need to detect cycles. DFS is a viable alternative but requires more careful handling of cycle detection.  The choice often depends on the specific application and programming style preferences.
+
