@@ -65791,3 +65791,73 @@ This uses the ternary operator (`condition ? value1 : value2`) and the nil-coale
 
 Choose the method that you find most readable and understandable.  For beginners, Method 1 is a good starting point.  Method 2 is slightly more efficient, and Method 3 demonstrates a more advanced Swift technique for conciseness.  Remember to compile and run this code in a Swift environment (like Xcode's playground) to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm requires to solve a problem as a function of the input size.  It's a crucial aspect of algorithm analysis, allowing us to compare the efficiency of different algorithms and predict their performance on larger datasets.  We usually express complexity using Big O notation.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:**  Measures how the runtime of an algorithm scales with the input size.  It focuses on the dominant operations and ignores constant factors.
+
+* **Space Complexity:** Measures how the memory usage of an algorithm scales with the input size.  This includes the space used for variables, data structures, and function calls.
+
+* **Big O Notation:** A mathematical notation used to describe the upper bound of an algorithm's complexity. It provides a simplified way to represent the growth rate of an algorithm's resource consumption as the input size increases.  It focuses on the dominant terms and ignores constant factors.  Common Big O notations include:
+
+    * **O(1): Constant Time:** The algorithm's runtime remains the same regardless of the input size.  Example: Accessing an element in an array using its index.
+
+    * **O(log n): Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+    * **O(n): Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+    * **O(n log n): Linearithmic Time:** The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+
+    * **O(n²): Quadratic Time:** The runtime increases quadratically with the input size. Example: Bubble sort, selection sort, nested loops iterating over the same dataset.
+
+    * **O(2ⁿ): Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+
+    * **O(n!): Factorial Time:** The runtime grows factorially with the input size.  Example: Generating all permutations of a sequence.
+
+
+* **Other Notations:** Besides Big O, we also have:
+
+    * **Ω (Big Omega):** Represents the lower bound of an algorithm's complexity.  It describes the best-case scenario.
+
+    * **Θ (Big Theta):** Represents the tight bound of an algorithm's complexity. It describes both the upper and lower bounds, meaning the algorithm's growth rate is precisely described.
+
+**Factors Affecting Algorithm Complexity:**
+
+* **Input Size:** The primary factor affecting complexity.  Larger inputs generally lead to longer runtimes and greater memory usage.
+
+* **Data Structures:** The choice of data structures significantly impacts an algorithm's performance.  Efficient data structures can drastically reduce runtime.
+
+* **Algorithm Design:** The algorithm's logic and approach directly determine its complexity.  A well-designed algorithm will have better complexity than a poorly designed one.
+
+
+**Analyzing Algorithm Complexity:**
+
+Algorithm complexity analysis usually involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most to the algorithm's runtime.
+
+2. **Expressing the number of operations as a function of input size:**  Count how many times the basic operations are executed as a function of the input size (n).
+
+3. **Using Big O notation to simplify the function:**  Identify the dominant term and ignore constant factors.
+
+
+**Example:**
+
+Consider a simple function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+The dominant operation is the comparison (`x > max_val`).  This operation is executed `n` times (where `n` is the length of the array). Therefore, the time complexity of this function is O(n) – linear time.  The space complexity is O(1) – constant space, as it uses a fixed amount of memory regardless of the array's size.
+
+
+Understanding algorithm complexity is essential for writing efficient and scalable programs, especially when dealing with large datasets. Choosing the right algorithm with the appropriate complexity can significantly improve performance and resource utilization.
+
