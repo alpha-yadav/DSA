@@ -65435,3 +65435,123 @@ While DFS and BFS are the most common, other graph traversal algorithms exist, o
 
 The choice of which traversal algorithm to use depends heavily on the specific problem and the properties of the graph.  Understanding the strengths and weaknesses of each is crucial for efficient graph processing.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used (adjacency matrix, adjacency list) and whether you're looking for a specific node or traversing the entire graph. Here are a few implementations in Python:
+
+**1. DFS using Adjacency List (Recursive):** This is generally the most concise and intuitive approach for graph traversal.
+
+```python
+def dfs_recursive(graph, start, visited=None, path=None):
+    """
+    Performs a Depth-First Search traversal recursively.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        start: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (used for recursion).
+        path: A list to store the traversal path (optional).
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+
+    visited.add(start)
+    path.append(start)
+
+    for neighbor in graph.get(start, []):  # Handle nodes with no outgoing edges
+        if neighbor not in visited:
+            path = dfs_recursive(graph, neighbor, visited, path)
+
+    return path
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+traversal_path = dfs_recursive(graph, 'A')
+print(f"DFS traversal path: {traversal_path}")  # Output will vary slightly depending on order of neighbors
+```
+
+**2. DFS using Adjacency List (Iterative):** This version uses a stack instead of recursion, which can be more efficient for very deep graphs and avoids potential stack overflow errors.
+
+```python
+def dfs_iterative(graph, start):
+    """
+    Performs a Depth-First Search traversal iteratively using a stack.
+
+    Args:
+        graph: A dictionary representing the graph as an adjacency list.
+        start: The starting node for the traversal.
+
+    Returns:
+        A list representing the DFS traversal path.
+    """
+    visited = set()
+    stack = [start]
+    path = []
+
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            path.append(vertex)
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)
+
+    return path
+
+# Example usage (same graph as above):
+traversal_path = dfs_iterative(graph, 'A')
+print(f"DFS traversal path: {traversal_path}")
+```
+
+**3. DFS for finding a specific node:**  This modification stops when the target node is found.
+
+```python
+def dfs_find_node(graph, start, target):
+    """
+    Performs DFS to find a specific node.
+
+    Args:
+        graph: Adjacency list representation of the graph.
+        start: Starting node.
+        target: Node to find.
+
+    Returns:
+        True if the target node is found, False otherwise.  
+        Also prints the path taken if the node is found.
+    """
+    visited = set()
+    stack = [(start, [start])]  # Stack of (node, path_so_far) tuples
+
+    while stack:
+        (vertex, path) = stack.pop()
+        if vertex == target:
+            print(f"Path to target {target}: {path}")
+            return True
+        if vertex not in visited:
+            visited.add(vertex)
+            for neighbor in graph.get(vertex, []):
+                if neighbor not in visited:
+                    stack.append((neighbor, path + [neighbor]))
+
+    return False
+
+
+#Example Usage
+print(dfs_find_node(graph, 'A', 'F')) #True, prints path
+print(dfs_find_node(graph, 'A', 'Z')) #False
+
+```
+
+Remember to adapt these functions to your specific graph representation (e.g., adjacency matrix) if necessary.  The adjacency list is generally preferred for its efficiency in most cases.  Choose the recursive or iterative version based on your needs and the potential depth of your graph.  The iterative approach is safer for very deep graphs to avoid stack overflow.
+
