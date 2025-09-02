@@ -63310,3 +63310,54 @@ Here are some common examples of algorithm types that can achieve O(log n) time 
 
 It's crucial to remember that O(log n) only applies under certain conditions.  For example, a poorly implemented binary tree search could degrade to O(n) if the tree becomes unbalanced.  Therefore, understanding the underlying data structure and algorithm implementation is vital when analyzing time complexity.
 
+#  An O(log n) example 
+The most common example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array or list.  It works by repeatedly dividing the search interval in half. If the value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process is repeated until the element is found or the interval is empty.
+
+**Why it's O(log n):**
+
+With each comparison, we eliminate roughly half of the remaining search space.  Let's say we start with `n` elements.  After one comparison, we have `n/2` elements left.  After two comparisons, we have `n/4` elements.  After three comparisons, `n/8`, and so on.
+
+This continues until we either find the element or are left with only one element (or zero). The number of times we can divide `n` by 2 before reaching 1 is approximately log₂(n) (the base-2 logarithm of n).  Therefore, the time complexity is O(log n).
+
+**Example Code (Python):**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+
+        if arr[mid] == target:
+            return mid  # Element found
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the upper half
+        else:
+            high = mid - 1  # Search in the lower half
+
+    return -1  # Element not found
+
+#Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target = 11
+index = binary_search(sorted_array, target)
+
+if index != -1:
+    print(f"Element found at index: {index}")
+else:
+    print("Element not found")
+```
+
+Other examples of O(log n) algorithms include:
+
+* **Tree traversals (balanced trees):**  Operations like searching, insertion, and deletion in balanced binary search trees (like AVL trees or red-black trees) have a time complexity of O(log n).
+* **Efficient exponentiation:**  Calculating a<sup>b</sup> can be done in O(log b) time using repeated squaring.
+
+
+The key characteristic of O(log n) algorithms is that they efficiently reduce the problem size with each step, leading to a significantly faster runtime than linear O(n) algorithms for large inputs.
+
