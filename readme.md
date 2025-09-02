@@ -66055,3 +66055,120 @@ While Big O focuses on the upper bound, other notations exist:
 
 Understanding Big O notation is crucial for any computer scientist or software engineer. It provides a powerful tool for analyzing and comparing algorithm efficiency and making informed decisions about algorithm selection and optimization.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specific condition is met.  There are several types of loops, but the most common are `for` loops and `while` loops.  Here are examples in a few popular programming languages:
+
+
+**Python:**
+
+```python
+# While loop:  Repeats as long as the condition is True.
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+
+print("\n") #adds a newline for spacing
+
+# For loop: Iterates over a sequence (like a list or range).
+for i in range(5):  # range(5) generates numbers 0, 1, 2, 3, 4
+  print(i)
+
+print("\n") #adds a newline for spacing
+
+# For loop iterating over a list
+my_list = ["apple", "banana", "cherry"]
+for fruit in my_list:
+  print(fruit)
+```
+
+
+**JavaScript:**
+
+```javascript
+// While loop
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+
+console.log("\n"); //adds a newline for spacing
+
+// For loop
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+console.log("\n"); //adds a newline for spacing
+
+// For loop iterating over an array
+const myArray = ["apple", "banana", "cherry"];
+for (let i = 0; i < myArray.length; i++) {
+  console.log(myArray[i]);
+}
+
+console.log("\n"); //adds a newline for spacing
+
+//For...of loop (iterates directly over array elements)
+for (const fruit of myArray){
+    console.log(fruit);
+}
+```
+
+**Java:**
+
+```java
+public class SimpleLoop {
+  public static void main(String[] args) {
+    // While loop
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+
+    System.out.println("\n"); //adds a newline for spacing
+
+
+    // For loop
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+
+    System.out.println("\n"); //adds a newline for spacing
+
+    //For loop iterating over an array (requires more setup)
+    String[] myArray = {"apple", "banana", "cherry"};
+    for(int i = 0; i < myArray.length; i++){
+        System.out.println(myArray[i]);
+    }
+  }
+}
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  // While loop
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+
+  std::cout << std::endl; //adds a newline for spacing
+
+  // For loop
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+These examples show the basic structure of `while` and `for` loops.  The specific syntax might vary slightly between languages, but the fundamental concept remains the same:  repeated execution of code based on a condition.  Remember to be careful to avoid infinite loops (loops that never end) by ensuring your loop condition eventually becomes false.
+
