@@ -65327,3 +65327,37 @@ else:
 
 This implementation efficiently detects cycles in a directed graph using DFS.  The `recursionStack` array is crucial for identifying back edges that indicate cycles.  The time complexity is O(V+E), where V is the number of vertices and E is the number of edges, which is the same as a standard DFS traversal. The space complexity is O(V) due to the `visited` and `recursionStack` arrays.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focused on efficient graph algorithms.  The most famous and impactful among them are his near-linear time algorithms for finding single-source shortest paths (SSSP) in undirected graphs with non-negative edge weights.  These algorithms significantly improved upon previous best-known algorithms.
+
+Here's a breakdown of key aspects:
+
+**Key Contributions & Algorithms:**
+
+* **Near-linear time SSSP for undirected graphs with non-negative weights:** This is arguably his most significant contribution.  Before Thorup's work, the best algorithms for this problem had complexities that were significantly worse than linear time (e.g., Dijkstra's algorithm, which is generally O(E log V) where E is the number of edges and V is the number of vertices).  Thorup's algorithms achieved a runtime of *O(m α(m, n))*, where:
+    * `m` is the number of edges.
+    * `n` is the number of vertices.
+    * `α(m, n)` is the inverse Ackermann function, which grows incredibly slowly.  For all practical purposes, α(m, n) can be considered a constant.  This makes the runtime essentially linear.
+
+* **Techniques used:**  The algorithms cleverly utilize techniques like:
+    * **Randomization:** Many of his algorithms employ randomization to achieve their efficiency.
+    * **Data structures:** He often designs or adapts sophisticated data structures to handle graph traversals and distance calculations efficiently.
+    * **Combinatorial optimization:**  Thorup's algorithms demonstrate deep insights into the combinatorial structure of graphs.
+
+**Significance:**
+
+Thorup's algorithms represent a major breakthrough in the field of graph algorithms.  The near-linear time complexity for SSSP in undirected graphs with non-negative weights was a significant improvement, making these algorithms practically applicable to much larger graphs than previously possible.
+
+**Limitations:**
+
+* **Randomization:** The algorithms often rely on randomization, which means the runtime might deviate slightly from the theoretical bound in some instances.
+* **Undirected graphs:** The most famous near-linear time algorithms predominantly focus on undirected graphs. Extensions to directed graphs are typically more complex.
+* **Non-negative weights:** The near-linear time algorithms are generally applicable to graphs with non-negative edge weights.  Handling negative weights requires different techniques (e.g., Bellman-Ford algorithm).
+
+**Impact:**
+
+Thorup's work has had a substantial impact on the field, leading to further research and improvements in graph algorithms. His algorithms are frequently used in practical applications where efficient shortest path computations are crucial.
+
+
+In summary, Thorup's algorithms, particularly those related to near-linear time SSSP, represent a significant advance in the algorithmic efficiency for solving fundamental graph problems.  While the details of his algorithms can be quite intricate, their impact on the field is undeniable.
+
