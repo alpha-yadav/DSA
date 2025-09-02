@@ -64784,3 +64784,82 @@ This approach requires two separate path-finding algorithms (which can be DFS or
 
 Remember that all these approaches assume the nodes `p` and `q` actually exist in the tree.  You might want to add error handling for cases where one or both nodes are not found.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a common problem in computer science.  There are several approaches, each with different trade-offs depending on the structure of the tree and the constraints of the problem.
+
+**Methods:**
+
+1. **Recursive Approach (Binary Tree):** This is a straightforward and efficient approach for binary trees.  It leverages the recursive nature of the tree structure.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca(root, n1, n2):
+       if root is None:
+           return None
+
+       if root.data == n1 or root.data == n2:
+           return root
+
+       left_lca = lca(root.left, n1, n2)
+       right_lca = lca(root.right, n1, n2)
+
+       if left_lca and right_lca:
+           return root  # LCA found
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   # Example usage:
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+   print(lca(root, 4, 5).data)  # Output: 2
+   print(lca(root, 4, 3).data)  # Output: 1
+   ```
+
+2. **Iterative Approach (Binary Tree):**  This method avoids recursion, potentially improving performance and stack space usage for very deep trees.  It uses a parent pointer for each node.  (If parent pointers aren't available, you'll need to modify the tree structure or use a different method.)
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+           self.parent = None  # Add parent pointer
+
+   def lca_iterative(n1, n2):
+       path1 = []
+       path2 = []
+
+       #This part needs a tree traversal (e.g., DFS) to find paths.  
+       #The implementation is omitted for brevity but is relatively straightforward.
+
+       i = 0
+       while i < len(path1) and i < len(path2) and path1[i] == path2[i]:
+           i += 1
+       return path1[i - 1] #The LCA is the last common ancestor.
+   ```
+
+3. **Using Depth-First Search (DFS) (General Tree):**  For general trees (not necessarily binary), DFS can be adapted to find the LCA.  This involves finding the paths from the root to each node and identifying the last common node in those paths.
+
+4. **Using Lowest Common Ancestor with Path Compression (Union-Find):** This is an advanced technique that uses a disjoint-set data structure (Union-Find) with path compression for highly efficient LCA computation in specific scenarios, particularly when performing many LCA queries on the same tree.
+
+**Choosing the right method:**
+
+* **Binary Tree, single LCA query:** The recursive approach is often the simplest and most efficient.
+* **Binary Tree, many LCA queries:**  An iterative approach with parent pointers or a more sophisticated data structure might be better.
+* **General Tree:**  DFS is a good choice.
+* **Many LCA queries on a large tree:**  Consider a Union-Find-based solution.
+
+
+Remember that the efficiency of each method depends heavily on factors like the tree's structure (balanced vs. unbalanced), the number of nodes, and the number of LCA queries being performed.  For simple scenarios, the recursive approach is a great starting point.  For more complex situations, consider the other methods.  Also, remember to handle edge cases like empty trees or when one or both nodes are not present in the tree.
+
