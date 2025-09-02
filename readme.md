@@ -64382,3 +64382,125 @@ print(f"Is the tree a BST? {is_bst_inorder(root2)}") # Output: False
 
 Both approaches correctly determine if a tree is a BST. The recursive approach is generally easier to understand, while the inorder traversal approach can be more efficient in some scenarios, particularly if you need the sorted list anyway.  The time complexity of both is O(N), where N is the number of nodes in the tree.  The space complexity depends on the tree's height (recursive) or the length of the inorder list (inorder traversal).  In the worst case (a skewed tree), both can be O(N).
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit (or "traverse") all the nodes in a binary tree.  There are three primary ways to do this: inorder, preorder, and postorder.  These differ in the order they visit the root node relative to its left and right subtrees.  Each traversal results in a unique sequence of node visits.
+
+**1. Inorder Traversal:**
+
+* **Order:** Left subtree -> Root -> Right subtree
+* **Result:**  Produces a sorted sequence of nodes if the binary tree is a Binary Search Tree (BST).
+* **Algorithm (Recursive):**
+
+```python
+def inorder_traversal(node):
+  if node:
+    inorder_traversal(node.left)
+    print(node.data, end=" ")  # Process the node (e.g., print its data)
+    inorder_traversal(node.right)
+
+# Example usage (assuming you have a Node class with 'left', 'right', and 'data' attributes):
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+inorder_traversal(root)  # Output: 2 1 3
+```
+
+* **Algorithm (Iterative):**  Uses a stack to simulate recursion.
+
+```python
+def inorder_traversal_iterative(node):
+  stack = []
+  current = node
+  while current or stack:
+    while current:
+      stack.append(current)
+      current = current.left
+    current = stack.pop()
+    print(current.data, end=" ")
+    current = current.right
+```
+
+
+**2. Preorder Traversal:**
+
+* **Order:** Root -> Left subtree -> Right subtree
+* **Result:**  Useful for creating a copy of the tree or for representing the tree's structure in a prefix notation.
+* **Algorithm (Recursive):**
+
+```python
+def preorder_traversal(node):
+  if node:
+    print(node.data, end=" ")
+    preorder_traversal(node.left)
+    preorder_traversal(node.right)
+
+# Example usage:
+preorder_traversal(root) # Output: 1 2 3
+```
+
+* **Algorithm (Iterative):** Uses a stack.
+
+```python
+def preorder_traversal_iterative(node):
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if current:
+            print(current.data, end=" ")
+            stack.append(current.right)
+            stack.append(current.left)
+```
+
+
+**3. Postorder Traversal:**
+
+* **Order:** Left subtree -> Right subtree -> Root
+* **Result:**  Useful for deleting nodes in a tree or evaluating expressions in postfix notation.
+* **Algorithm (Recursive):**
+
+```python
+def postorder_traversal(node):
+  if node:
+    postorder_traversal(node.left)
+    postorder_traversal(node.right)
+    print(node.data, end=" ")
+
+# Example usage:
+postorder_traversal(root)  # Output: 2 3 1
+```
+
+* **Algorithm (Iterative):**  Slightly more complex than inorder and preorder iterative versions, often involving two stacks or a stack and a flag.  One common approach uses two stacks:
+
+```python
+def postorder_traversal_iterative(node):
+    stack1 = [node]
+    stack2 = []
+    while stack1:
+        current = stack1.pop()
+        stack2.append(current)
+        if current.left:
+            stack1.append(current.left)
+        if current.right:
+            stack1.append(current.right)
+    while stack2:
+        print(stack2.pop().data, end=" ")
+```
+
+
+**Choosing the Right Traversal:**
+
+The choice of traversal depends on the specific task.  Inorder is often used for sorted output in BSTs, preorder for creating copies or prefix notation, and postorder for deletion or postfix notation.
+
+
+**Note:**  These examples assume you have a `Node` class defined like this:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+Remember to adapt the `print(node.data, end=" ")` line if you need to process the node data differently (e.g., store it in a list instead of printing it).  The iterative approaches generally have a slight performance advantage over the recursive ones due to the overhead of function calls. However, recursive versions are usually easier to understand and implement.
+
