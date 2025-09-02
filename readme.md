@@ -66172,3 +66172,64 @@ int main() {
 
 These examples show the basic structure of `while` and `for` loops.  The specific syntax might vary slightly between languages, but the fundamental concept remains the same:  repeated execution of code based on a condition.  Remember to be careful to avoid infinite loops (loops that never end) by ensuring your loop condition eventually becomes false.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows for processing data in a multi-dimensional way, often used for tasks involving matrices, grids, or combinations of items.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_loop_variable in outer_loop_iterable:
+    for inner_loop_variable in inner_loop_iterable:
+        # Code to be executed for each inner loop iteration
+        # This code has access to both outer_loop_variable and inner_loop_variable
+    # Code executed after each complete inner loop iteration
+# Code executed after the outer loop completes
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop: rows
+    for j in range(1, 11):  # Inner loop: columns
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This will output a 10x10 multiplication table.  The outer loop iterates through the rows (1 to 10), and for each row, the inner loop iterates through the columns (1 to 10), calculating and printing the product.
+
+**Another Example (Python):  Processing a 2D list (matrix)**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print() # Newline after each row
+```
+
+This will print:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+**Important Considerations:**
+
+* **Time Complexity:** Nested loops significantly increase the time complexity of your code.  If both loops iterate `n` times, the overall complexity becomes O(n²). This means the execution time grows quadratically with the input size.  For large datasets, this can become very slow.  Consider optimizing your algorithms if nested loops are causing performance issues.
+* **Readability:** Properly indenting your nested loops is crucial for readability and understanding the code's logic.
+* **Alternatives:**  In many cases, list comprehensions or other vectorized operations (using libraries like NumPy) can provide more efficient and concise alternatives to nested loops, especially when dealing with numerical data.
+
+
+Nested loops are a fundamental programming concept, but it's important to be aware of their performance implications and use them judiciously.  When possible, strive for more efficient solutions.
+
