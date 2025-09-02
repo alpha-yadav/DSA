@@ -62942,3 +62942,61 @@ This version builds the output string incrementally. If both `Fizz` and `Buzz` c
 
 For beginners, **Version 1** is recommended for its clarity and ease of understanding.  **Version 3** offers a good balance of readability and conciseness, particularly as the number of divisibility checks increases.  **Version 2** is more concise but might be harder to read for those new to Swift.  Choose the version that best suits your understanding and coding style.  Remember that readability is often prioritized over extreme conciseness in professional code.
 
+#  Algorithm Complexity 
+Algorithm complexity describes how the runtime or space requirements of an algorithm grow as the input size grows.  It's crucial for understanding an algorithm's efficiency and scalability.  We generally focus on *asymptotic complexity*, meaning how the algorithm behaves as the input size approaches infinity.  This allows us to compare algorithms regardless of constant factors or specific hardware.
+
+There are two primary aspects of algorithm complexity:
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm increases with the input size.
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm increases with the input size.
+
+
+**Big O Notation (O):**
+
+Big O notation is the most common way to express algorithm complexity. It provides an upper bound on the growth rate of the algorithm's runtime or space requirements.  It focuses on the dominant terms as the input size becomes very large, ignoring constant factors and lower-order terms.
+
+Common Big O complexities (from best to worst):
+
+* **O(1) - Constant Time:** The runtime remains constant regardless of the input size.  Example: Accessing an element in an array by its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating over the input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Traveling salesperson problem (brute-force approach).
+
+
+**Other Notations:**
+
+Besides Big O, other notations are used to provide a more complete picture:
+
+* **Big Omega (Ω):** Provides a lower bound on the growth rate.  It describes the best-case scenario.
+* **Big Theta (Θ):** Provides both an upper and lower bound, indicating a tight bound on the growth rate.  It describes the average-case scenario.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze an algorithm's complexity, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size (n).
+3. **Identify the dominant terms:**  Focus on the terms that grow fastest as n increases.
+4. **Express the complexity using Big O notation:** Drop constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a function that iterates through an array and prints each element:
+
+```python
+def print_array(arr):
+  for item in arr:
+    print(item)
+```
+
+The number of print operations is directly proportional to the size of the array (n). Therefore, the time complexity of this function is O(n).
+
+
+Understanding algorithm complexity is vital for choosing the most efficient algorithm for a given task, especially when dealing with large datasets.  An algorithm with a higher complexity may become impractically slow for even moderately sized inputs.
+
