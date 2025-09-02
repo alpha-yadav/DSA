@@ -65959,3 +65959,48 @@ The table below summarizes the key differences:
 
 Remember that these notations describe the *asymptotic* behavior—how the function behaves as the input size (`n`) approaches infinity.  They don't provide information about the runtime for small input sizes.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the *lower bound* of the growth rate of a function.  In simpler terms, it provides a guarantee about the *minimum* amount of resources (like time or space) an algorithm will consume as the input size grows.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that *f(n)* is Ω(*g(n)*) if there exist positive constants *c* and *n₀* such that  0 ≤ *c* *g(n)* ≤ *f(n)* for all *n* ≥ *n₀*.
+
+Let's break down this definition:
+
+* **f(n):**  This represents the runtime (or space complexity) of your algorithm as a function of the input size *n*.
+* **g(n):** This represents a simpler function that describes the lower bound of *f(n)*'s growth.  It's often a simpler function that captures the dominant term.
+* **c:** This is a positive constant.  It allows for scaling – we're not concerned with precise values, just the general growth rate.
+* **n₀:** This is a threshold value. The inequality only needs to hold for input sizes greater than or equal to *n₀*.  This allows us to ignore smaller input sizes where the algorithm might behave differently.
+
+
+**Intuitive Explanation:**
+
+Imagine you're running an algorithm. Big-Omega tells you that, no matter what, the algorithm will *at least* take as long (or use as much space) as described by *g(n)*, once the input size is sufficiently large (*n* ≥ *n₀*).  It's a lower bound, a guarantee of minimum performance.
+
+**Example:**
+
+Let's say you have an algorithm with a runtime of  `f(n) = 5n² + 3n + 10`.
+
+We can say that `f(n)` is Ω(n²).  Why?
+
+Because we can find constants `c` and `n₀` that satisfy the definition.  For example:
+
+* Let `c = 1`.
+* We need to find an `n₀` such that `n² ≤ 5n² + 3n + 10` for all `n ≥ n₀`.  This inequality is clearly true for sufficiently large `n`. A suitable `n₀` could be found through algebraic manipulation or testing.
+
+We wouldn't say `f(n)` is Ω(n³), because  `n³` grows faster than `f(n)`. Big-Omega describes a *lower bound*, not an upper bound.
+
+
+**Relationship to Other Notations:**
+
+* **Big-O (O):**  Describes the *upper bound* of a function's growth rate.  It provides a guarantee about the *maximum* amount of resources an algorithm will consume.
+* **Big-Theta (Θ):** Describes a *tight bound*.  If `f(n)` is Θ(`g(n)`), it means `f(n)` is both O(`g(n)`) and Ω(`g(n)`). This means the algorithm's growth rate is precisely described by `g(n)`.
+
+
+**In Summary:**
+
+Big-Omega notation is a crucial tool for analyzing the efficiency of algorithms. It provides a valuable lower bound on the resources an algorithm will require, ensuring that we have a minimum performance guarantee.  Using this in conjunction with Big-O gives a more complete understanding of an algorithm's performance characteristics.
+
