@@ -66791,3 +66791,60 @@ Thus, the condition `c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)` is satisfied with  `g
 
 **In summary:** Big Theta notation gives a precise description of the growth rate of a function, making it a powerful tool for analyzing the efficiency of algorithms.  If an algorithm has a time complexity of Θ(n log n), for example, you know exactly how its runtime scales with the input size.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input grows arbitrarily large.  They're crucial in algorithm analysis for comparing the efficiency of different algorithms. Here's a comparison of the most common notations:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It says, "The function grows no faster than this."  It focuses on the worst-case scenario.
+* **Formal Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If f(n) = 2n² + 5n + 1, then f(n) = O(n²) because for sufficiently large n, the n² term dominates.  The constants 2, 5, and 1 become insignificant.
+* **Use Case:**  Describes the worst-case time or space complexity of an algorithm.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function. It says, "The function grows at least as fast as this."  It focuses on the best-case scenario (though often used to describe the lower bound of the complexity in general).
+* **Formal Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If f(n) = 2n² + 5n + 1, then f(n) = Ω(n²) because for sufficiently large n, the n² term dominates the lower bound.
+* **Use Case:**  Describes the best-case time or space complexity of an algorithm.  Also used to prove that an algorithm's lower bound is a particular complexity.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It says, "The function grows at this rate."  It means both O and Ω simultaneously.
+* **Formal Definition:** f(n) = Θ(g(n)) if there exist positive constants c₁, c₂, and n₀ such that 0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n ≥ n₀.
+* **Example:** If f(n) = 2n² + 5n + 1, then f(n) = Θ(n²) because the quadratic term dominates both the upper and lower bounds.
+* **Use Case:**  Describes the average-case or tight bound complexity of an algorithm.  This is the most precise and desirable type of bound.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.
+* **Formal Definition:** f(n) = o(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.
+* **Example:**  n = o(n²) because n grows strictly slower than n².
+* **Use Case:**  Used to express that a function is asymptotically negligible compared to another.
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function.
+* **Formal Definition:** f(n) = ω(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) because n² grows strictly faster than n.
+* **Use Case:**  Used to express that a function is asymptotically dominant compared to another.
+
+
+**Hierarchy (from slowest to fastest growth):**
+
+O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³) < O(2ⁿ) < O(n!)
+
+
+**Key Differences Summarized:**
+
+| Notation | Meaning                               | Bound Type      | Strictness |
+|---------|---------------------------------------|-----------------|------------|
+| O       | Upper bound                           | Asymptotic      | Non-strict |
+| Ω       | Lower bound                           | Asymptotic      | Non-strict |
+| Θ       | Tight bound (both upper and lower)     | Asymptotic      | Non-strict |
+| o       | Strictly slower growth                | Asymptotic      | Strict     |
+| ω       | Strictly faster growth                | Asymptotic      | Strict     |
+
+
+Remember that asymptotic notations are concerned with the *behavior* of functions as input size approaches infinity; they don't provide precise information about the runtime for small inputs.
+
