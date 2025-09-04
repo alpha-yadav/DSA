@@ -66753,3 +66753,41 @@ The basic operation is the comparison `arr[i] == target`.  In the worst case (ta
 
 Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally be more efficient.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions. Specifically, it describes the tight bound of a function's growth rate.  Unlike Big O notation, which provides an upper bound, and Big Omega (Ω), which provides a lower bound, Big Theta provides *both* an upper and lower bound simultaneously.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.  Essentially, *f(n)* grows at the same rate as *g(n)*.
+
+**In simpler terms:**
+
+Imagine you have two functions, *f(n)* and *g(n)*.  If *f(n)* is Θ(*g(n)*), it means that as *n* gets very large, the ratio of *f(n)* to *g(n)* approaches a constant.  Neither function grows significantly faster than the other. They are essentially "the same" in terms of growth rate, ignoring constant factors.
+
+
+**Example:**
+
+Let's say `f(n) = 2n² + 5n + 1`.  We can say that:
+
+`f(n) = Θ(n²) `
+
+Why? Because we can find constants:
+
+* `c₁ = 1`:  For sufficiently large *n*, `2n² + 5n + 1 ≥ n²`
+* `c₂ = 3`:  For sufficiently large *n*, `2n² + 5n + 1 ≤ 3n²`
+
+Thus, the condition `c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)` is satisfied with  `g(n) = n²`, `c₁ = 1`, `c₂ = 3`, and a suitable `n₀`.
+
+
+**Difference from Big O and Big Omega:**
+
+* **Big O (O):**  Provides an upper bound.  *f(n) = O(g(n))* means *f(n)* grows no faster than *g(n)*.  It's a "worst-case" scenario.
+* **Big Omega (Ω):** Provides a lower bound.  *f(n) = Ω(g(n))* means *f(n)* grows at least as fast as *g(n)*. It's a "best-case" scenario.
+* **Big Theta (Θ):** Provides both upper and lower bounds.  *f(n) = Θ(g(n))* means *f(n)* grows at the *same rate* as *g(n)*.  It's a "tight bound".
+
+**In summary:** Big Theta notation gives a precise description of the growth rate of a function, making it a powerful tool for analyzing the efficiency of algorithms.  If an algorithm has a time complexity of Θ(n log n), for example, you know exactly how its runtime scales with the input size.
+
