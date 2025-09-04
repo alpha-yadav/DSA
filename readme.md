@@ -69397,3 +69397,113 @@ bfs(graph, 'A') # Output: A B C D E F (order is consistent)
 
 Choosing between DFS and BFS depends on the specific application and the properties of the graph.  For finding shortest paths in unweighted graphs, BFS is preferred.  For tasks like topological sorting or cycle detection, DFS is often more suitable.  Both algorithms have their own strengths and weaknesses.
 
+#  Depth First Search traversal function 
+Several variations of Depth-First Search (DFS) exist, depending on the data structure used to represent the graph (adjacency matrix, adjacency list) and whether you need to handle cycles or weighted edges.  Below are implementations for common scenarios.
+
+**1. DFS using Adjacency List (for unweighted graphs):**
+
+This version is suitable for unweighted, undirected or directed graphs represented using an adjacency list.  It uses recursion for clarity.
+
+```python
+def dfs_recursive(graph, start, visited=None):
+    """
+    Performs a Depth-First Search traversal of a graph.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+        start: The starting node for the traversal.
+        visited: A set to keep track of visited nodes (optional, defaults to an empty set).
+
+    Returns:
+        A list of nodes in the order they were visited.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")  # Process the node (e.g., print it)
+
+    for neighbor in graph.get(start, []):  # Handle cases where a node has no neighbors
+        if neighbor not in visited:
+            dfs_recursive(graph, neighbor, visited)
+    return visited
+
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+print("DFS traversal starting from A:")
+dfs_recursive(graph, 'A')  # Output: A B D E F C (order may vary slightly depending on implementation)
+print("\nVisited nodes:", dfs_recursive(graph, 'A')) #Output: Visited nodes: {'A', 'B', 'D', 'E', 'F', 'C'}
+
+```
+
+
+**2. DFS using Adjacency List (Iterative):**
+
+This iterative version uses a stack instead of recursion:
+
+```python
+def dfs_iterative(graph, start):
+    """
+    Performs a Depth-First Search traversal iteratively.
+
+    Args:
+      graph: A dictionary representing the graph.
+      start: The starting node.
+
+    Returns:
+      A list of nodes in the order they were visited.
+    """
+    visited = set()
+    stack = [start]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            print(vertex, end=" ")
+            stack.extend(neighbor for neighbor in graph.get(vertex, []) if neighbor not in visited)
+    return visited
+
+# Example usage (same graph as above):
+print("\n\nDFS iterative traversal starting from A:")
+dfs_iterative(graph, 'A') # Output: A C F E B D (order may vary slightly)
+print("\nVisited nodes:", dfs_iterative(graph, 'A')) #Output: Visited nodes: {'A', 'C', 'F', 'E', 'B', 'D'}
+
+```
+
+**3.  Handling Cycles (and potentially weighted graphs):**
+
+For graphs with cycles, you might want to add a `parent` parameter to avoid revisiting nodes and going into infinite loops.  For weighted graphs, you'll likely need a different algorithm like Dijkstra's or A*.
+
+
+```python
+def dfs_with_cycle_detection(graph, start, visited=None, parent=None):
+    """
+    DFS that handles cycles by tracking the parent node.
+    """
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")
+
+    for neighbor in graph.get(start, []):
+        if neighbor != parent and neighbor not in visited:
+            dfs_with_cycle_detection(graph, neighbor, visited, start)
+    return visited
+
+#Example usage (same graph as above, handles cycles gracefully)
+print("\n\nDFS with cycle detection starting from A:")
+dfs_with_cycle_detection(graph, 'A') # Output will be the same as before as the example graph has no cycles.
+
+
+```
+
+Remember to adapt these functions to your specific graph representation and needs.  For large graphs, the iterative approach (using a stack) might be more efficient due to avoiding potential stack overflow issues associated with deep recursion.  The choice between recursive and iterative depends on the context and personal preference, but iterative tends to be more memory-efficient for very large graphs.
+
