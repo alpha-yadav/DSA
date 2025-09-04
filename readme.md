@@ -67256,3 +67256,12 @@ The best representation depends heavily on your specific needs.  Consider:
 
 For many general-purpose applications, the **list of children** or the **child-sibling representation** provides a good balance of flexibility and ease of implementation.  The array representation is excellent for complete trees if memory efficiency is paramount.
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need more information to write an introduction.  For example, tell me:
+
+* **What is the subject of the paper, essay, presentation, etc.?** (e.g., the impact of social media on teenagers, the history of the Roman Empire, the benefits of exercise)
+* **What is the main point or argument you're making?** (e.g., Social media has a detrimental effect on teenagers' mental health, the Roman Empire's decline was caused by internal strife, regular exercise improves cardiovascular health)
+* **Who is your intended audience?** (e.g., academics, general public, teenagers)
+
+Once I have this information, I can write a compelling introduction.
+
