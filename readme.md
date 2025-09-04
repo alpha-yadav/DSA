@@ -71647,3 +71647,101 @@ If you can modify the tree to add parent pointers to each node, finding the LCA 
 
 The recursive approach is generally preferred for its clarity and efficiency unless you anticipate extremely deep trees or have specific memory constraints.  The iterative approach is useful when dealing with potential stack overflow concerns in very deep trees.  The parent pointer method is efficient but requires modifying the tree structure.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a classic algorithm problem.  There are several ways to solve it, each with different trade-offs in terms of time and space complexity.
+
+**Methods for Finding LCA:**
+
+1. **Recursive Approach (for Binary Trees):**
+
+   This is a straightforward and commonly used method for binary trees.  The algorithm recursively searches the tree.  If both nodes are in the left subtree, it recursively calls itself on the left subtree. If both nodes are in the right subtree, it recursively calls itself on the right subtree. If one node is in the left subtree and the other is in the right subtree, the current node is the LCA.  If one of the nodes is not found, it returns `null`.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.left = None
+           self.right = None
+
+   def lca(root, n1, n2):
+       if root is None:
+           return None
+
+       if root.data == n1 or root.data == n2:
+           return root
+
+       left_lca = lca(root.left, n1, n2)
+       right_lca = lca(root.right, n1, n2)
+
+       if left_lca and right_lca:
+           return root
+       elif left_lca:
+           return left_lca
+       else:
+           return right_lca
+
+   # Example usage:
+   root = Node(1)
+   root.left = Node(2)
+   root.right = Node(3)
+   root.left.left = Node(4)
+   root.left.right = Node(5)
+
+   print(lca(root, 4, 5).data)  # Output: 2
+   print(lca(root, 4, 3).data)  # Output: 1
+   ```
+
+2. **Iterative Approach (for Binary Trees):**
+
+   An iterative approach using a stack or queue can be more efficient in terms of space complexity in some cases, especially for deep trees where recursion might lead to stack overflow.  This approach generally involves keeping track of paths from the root to each node and finding the point where the paths diverge.
+
+
+3. **Using Parent Pointers (for Trees):**
+
+   If each node in the tree has a pointer to its parent, finding the LCA becomes much simpler.  You can traverse upwards from each node until you find a common ancestor.
+
+   ```python
+   class Node:
+       def __init__(self, data):
+           self.data = data
+           self.parent = None  # Added parent pointer
+           self.children = []
+
+   def lca_parent_pointers(node1, node2):
+       ancestors1 = set()
+       curr = node1
+       while curr:
+           ancestors1.add(curr)
+           curr = curr.parent
+
+       curr = node2
+       while curr:
+           if curr in ancestors1:
+               return curr
+           curr = curr.parent
+       return None #shouldn't happen if both nodes are in the tree
+
+   #Example Usage (requires creating a tree with parent pointers)
+   ```
+
+4. **Binary Lifting (for Trees):**
+
+   Binary Lifting is an efficient technique that preprocesses the tree to allow for fast LCA queries (O(log n) time per query).  It uses a table to store ancestors at powers of 2.
+
+5. **Lowest Common Ancestor in a DAG (Directed Acyclic Graph):**
+
+   Finding the LCA in a DAG is more complex than in a tree because there can be multiple paths between two nodes.  Algorithms for this often involve depth-first search or topological sort.
+
+
+
+**Choosing the right method:**
+
+* For simple binary trees, the recursive approach is often the easiest to understand and implement.
+* For very deep binary trees, consider the iterative approach to avoid stack overflow.
+* If you have parent pointers, that's the most efficient approach.
+* For many LCA queries on the same tree, Binary Lifting offers the best query time complexity.
+* For DAGs, more sophisticated algorithms are needed.
+
+
+Remember to handle edge cases such as one or both nodes not being present in the tree.  The specific implementation will depend on the type of tree and the constraints of your problem.  Consider the space and time complexity trade-offs when choosing an algorithm.
+
