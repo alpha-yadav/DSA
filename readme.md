@@ -69682,3 +69682,54 @@ This version maps each number in the range 1...n to its corresponding FizzBuzz s
 
 Remember to choose the approach that best suits your understanding and the context of your project.  The core logic remains the same across all versions.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (typically time and space) an algorithm consumes as a function of the size of its input.  It's a crucial aspect of algorithm design and analysis, as it allows us to compare the efficiency of different algorithms and predict their performance on larger datasets.  We generally focus on *asymptotic complexity*, which describes how the resource consumption grows as the input size approaches infinity.
+
+Here's a breakdown of key concepts:
+
+**1. Time Complexity:** Measures how the runtime of an algorithm increases with the input size.
+
+* **Big O Notation (O):** Describes the upper bound of the growth rate.  It represents the worst-case scenario.  We only care about the dominant terms (highest order) as the input size grows large.  Common notations include:
+    * **O(1):** Constant time.  The runtime doesn't depend on the input size.  Example: Accessing an element in an array by index.
+    * **O(log n):** Logarithmic time. The runtime increases logarithmically with the input size. Example: Binary search in a sorted array.
+    * **O(n):** Linear time. The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+    * **O(n log n):** Linearithmic time.  Common in efficient sorting algorithms like merge sort and heapsort.
+    * **O(n²):** Quadratic time. The runtime increases proportionally to the square of the input size. Example: Bubble sort, selection sort.
+    * **O(2ⁿ):** Exponential time. The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+    * **O(n!):** Factorial time. The runtime grows extremely quickly with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+* **Big Omega Notation (Ω):** Describes the lower bound of the growth rate. It represents the best-case scenario.
+
+* **Big Theta Notation (Θ):** Describes the tight bound of the growth rate. It means both the upper and lower bounds are the same.  This indicates a precise characterization of the algorithm's runtime.
+
+
+**2. Space Complexity:** Measures how the memory usage of an algorithm increases with the input size.  The notation is similar to time complexity (O, Ω, Θ).  We consider both the space used by the input itself and any auxiliary space used by the algorithm.
+
+**Example:**
+
+Consider searching for an element in an array:
+
+* **Unsorted array:**  Linear search has a time complexity of O(n) because in the worst case, you might have to check every element.  Its space complexity is O(1) because it uses a constant amount of extra space regardless of the array size.
+
+* **Sorted array:** Binary search has a time complexity of O(log n) because it repeatedly divides the search interval in half. Its space complexity is O(1).
+
+
+**Factors Affecting Complexity:**
+
+* **Algorithm Design:** Different algorithms solving the same problem can have vastly different complexities.
+* **Data Structures:** The choice of data structure significantly impacts an algorithm's efficiency.
+* **Input Characteristics:** The complexity can vary depending on the properties of the input data (e.g., sorted vs. unsorted).
+
+
+**Analyzing Complexity:**
+
+Analyzing algorithm complexity usually involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most significantly to the runtime.
+2. **Expressing the number of operations as a function of the input size:**  Count how many times these basic operations are performed.
+3. **Determining the dominant terms and using Big O notation:** Simplify the function to identify the highest-order term and express the complexity using Big O notation.
+
+
+Understanding algorithm complexity is essential for writing efficient and scalable programs.  Choosing an algorithm with a lower complexity often leads to significant performance improvements, especially when dealing with large datasets.
+
