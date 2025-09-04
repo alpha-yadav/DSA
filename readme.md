@@ -71495,3 +71495,87 @@ Both implementations follow these steps:
 
 This ensures that nodes at the same level are processed before moving to the next level, achieving level order traversal.  The `deque` in Python and the `shift()` and `push()` methods in JavaScript provide efficient queue operations.  Remember to handle the case where the root is `null` or `None`.
 
+#  Pre-order, Inorder and Post Order traversal of a Binary Tree 
+Tree traversals are ways to visit all the nodes of a binary tree in a specific order.  The three main types are pre-order, in-order, and post-order.  They differ in *when* the root node is visited relative to its left and right subtrees.
+
+**1. Pre-order Traversal:**
+
+* **Rule:** Visit the root node, then recursively traverse the left subtree, then recursively traverse the right subtree.
+* **Order:** Root, Left, Right
+* **Example:**  Consider the following binary tree:
+
+```
+     A
+    / \
+   B   C
+  / \   \
+ D   E   F
+```
+
+The pre-order traversal would be: **A B D E C F**
+
+
+**2. In-order Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, then visit the root node, then recursively traverse the right subtree.
+* **Order:** Left, Root, Right
+* **Example:** Using the same tree:
+
+The in-order traversal would be: **D B E A C F**  (Note: This produces a sorted sequence if the tree is a Binary Search Tree (BST).)
+
+
+**3. Post-order Traversal:**
+
+* **Rule:** Recursively traverse the left subtree, then recursively traverse the right subtree, then visit the root node.
+* **Order:** Left, Right, Root
+* **Example:** Using the same tree:
+
+The post-order traversal would be: **D E B F C A**
+
+
+**Python Code Implementation:**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+root.right.right = Node('F')
+
+print("Preorder traversal:")
+preorder(root)  # Output: A B D E C F
+print("\nInorder traversal:")
+inorder(root)   # Output: D B E A C F
+print("\nPostorder traversal:")
+postorder(root) # Output: D E B F C A
+```
+
+This code defines a `Node` class and functions for each traversal type.  Remember to adapt the `root` node creation to match your specific tree structure.  These functions recursively traverse the tree, printing the node data in the appropriate order.  The `end=" "` argument in the `print` function prevents each item from being printed on a new line.
+
