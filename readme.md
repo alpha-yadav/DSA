@@ -68199,3 +68199,153 @@ print(is_bst_iterative(root2)) #Output: False
 
 This iterative approach uses a stack to simulate the recursive calls, providing an alternative solution with potential performance benefits for extremely large trees.  Remember to handle edge cases (empty trees) appropriately in both methods. Choose the method that best suits your needs and coding style.  The recursive version is often easier to understand, while the iterative version might be slightly more efficient for very deep trees.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit each node in a binary tree exactly once.  There are three main types:
+
+* **Inorder Traversal:** Left Subtree -> Root -> Right Subtree
+* **Preorder Traversal:** Root -> Left Subtree -> Right Subtree
+* **Postorder Traversal:** Left Subtree -> Right Subtree -> Root
+
+Let's break down each one with examples and code (using Python):
+
+**1. Inorder Traversal**
+
+* **Explanation:**  This traversal visits the left subtree first, then the root node, and finally the right subtree.  For a binary search tree (BST), an inorder traversal yields the nodes in ascending order.
+
+* **Example:**
+
+   Consider the following binary tree:
+
+       1
+      / \
+     2   3
+    / \
+   4   5
+
+   The inorder traversal would be: 4, 2, 5, 1, 3
+
+* **Python Code (Recursive):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder traversal:", end=" ")
+inorder_traversal(root)  # Output: Inorder traversal: 4 2 5 1 3
+```
+
+* **Python Code (Iterative):**  Using a stack.
+
+```python
+def inorder_traversal_iterative(node):
+    stack = []
+    current = node
+    while True:
+        if current:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.data, end=" ")
+            current = current.right
+        else:
+            break
+
+print("\nInorder traversal (iterative):", end=" ")
+inorder_traversal_iterative(root) # Output: Inorder traversal (iterative): 4 2 5 1 3
+```
+
+
+**2. Preorder Traversal**
+
+* **Explanation:** This traversal visits the root node first, then the left subtree, and finally the right subtree.  It's often used to create a copy of the tree or to express the tree's structure.
+
+* **Example:**  Using the same tree as above, the preorder traversal would be: 1, 2, 4, 5, 3
+
+* **Python Code (Recursive):**
+
+```python
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+print("\nPreorder traversal:", end=" ")
+preorder_traversal(root)  # Output: Preorder traversal: 1 2 4 5 3
+```
+
+* **Python Code (Iterative):** Using a stack
+
+```python
+def preorder_traversal_iterative(node):
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if current:
+            print(current.data, end=" ")
+            stack.append(current.right)
+            stack.append(current.left)
+
+print("\nPreorder traversal (iterative):", end=" ")
+preorder_traversal_iterative(root) # Output: Preorder traversal (iterative): 1 2 4 5 3
+```
+
+
+**3. Postorder Traversal**
+
+* **Explanation:** This traversal visits the left subtree first, then the right subtree, and finally the root node. It's often used for deleting a tree or evaluating expressions represented by a tree.
+
+* **Example:** Using the same tree as above, the postorder traversal would be: 4, 5, 2, 3, 1
+
+* **Python Code (Recursive):**
+
+```python
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+print("\nPostorder traversal:", end=" ")
+postorder_traversal(root)  # Output: Postorder traversal: 4 5 2 3 1
+```
+
+* **Python Code (Iterative):**  This iterative version is a bit more complex than the others.  It uses two stacks.
+
+```python
+def postorder_traversal_iterative(node):
+    stack1 = [node]
+    stack2 = []
+    while stack1:
+        current = stack1.pop()
+        if current:
+            stack2.append(current)
+            stack1.append(current.left)
+            stack1.append(current.right)
+    while stack2:
+        print(stack2.pop().data, end=" ")
+
+
+print("\nPostorder traversal (iterative):", end=" ")
+postorder_traversal_iterative(root) # Output: Postorder traversal (iterative): 4 5 2 3 1
+```
+
+Remember that the iterative approaches are generally more efficient in terms of space complexity (especially for very deep trees) because they avoid the potential stack overflow issues associated with deep recursive calls.  However, recursive solutions are often more concise and easier to understand.  Choose the approach that best suits your needs and understanding.
+
