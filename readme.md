@@ -68599,3 +68599,67 @@ These traversals have various applications in computer science:
 
 Remember to handle the case where the input `node` is `None` (empty subtree) in your recursive functions to prevent errors.  Iterative versions using stacks are more robust for very large trees to avoid stack overflow issues.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants (where we allow a node to be a descendant of itself).  There are several ways to solve this problem, each with different time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This approach recursively traverses the tree.  If the target nodes (`p` and `q`) are found in different subtrees of a node, that node is the LCA.  If both are in the left subtree, recursively search the left subtree; similarly for the right subtree. If one node is found and the other isn't, it means the found node is an ancestor but not the LCA (the LCA will be higher up).
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:  # p and q are in different subtrees
+           return root
+       elif left:          # p and q are in the left subtree
+           return left
+       else:              # p and q are in the right subtree
+           return right
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree (worst case: skewed tree).
+   * **Space Complexity:** O(H), where H is the height of the tree (due to recursive call stack).  In a skewed tree, this can be O(N).
+
+
+2. **Iterative Approach (Using a Stack or Queue):**
+
+   This approach avoids recursion by using a stack (depth-first search) or a queue (breadth-first search).  It's generally less elegant than the recursive approach but can be more efficient in terms of space for very deep trees.  However, it's more complex to implement.
+
+   *(Implementation omitted for brevity; it involves using a stack or queue to mimic the recursive traversal and tracking the path to each node.)*
+
+   * **Time Complexity:** O(N)
+   * **Space Complexity:** O(N) in the worst case (a skewed tree).  Breadth-first search would potentially use more space than depth-first search.
+
+
+3. **Using Parent Pointers (If available):**
+
+   If each node in the tree has a pointer to its parent, you can find the paths from the root to both `p` and `q`.  Then, traverse these paths upwards until you find the first common ancestor.  This is very efficient if parent pointers are already present.
+
+   *(Implementation omitted for brevity; it involves finding the paths and comparing them.)*
+
+   * **Time Complexity:** O(D), where D is the depth of the tree.  In the worst case this is O(N) but likely much less.
+   * **Space Complexity:** O(D)
+
+
+**Choosing the Right Method:**
+
+* For most cases, the **recursive approach** is the simplest and easiest to understand.
+* If you have a very deep tree and memory is a concern, consider an **iterative approach** (although it's more complex).
+* If parent pointers are readily available, using them is the most efficient.
+
+
+**Important Note:**  This problem assumes that both `p` and `q` exist in the tree.  Error handling should be added for cases where one or both nodes are not found.  You might return `None` or raise an exception in such scenarios.
+
