@@ -70509,3 +70509,125 @@ print(bst.search(15))     # Output: None
 
 This is a basic implementation.  More sophisticated implementations would handle deletion and other operations.  Remember to consider self-balancing techniques for real-world applications to ensure optimal performance.
 
+#  Binary Search Tree - Insertion (Python) 
+Several implementations of binary search tree (BST) insertion in Python are possible, each with slight variations in style and handling of edge cases. Here are a few examples:
+
+**Method 1: Recursive Insertion**
+
+This is a concise and elegant approach, leveraging recursion to traverse the tree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+#Example Usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+#Further operations to traverse or search would go here.  (Not included for brevity)
+
+```
+
+**Method 2: Iterative Insertion**
+
+This avoids recursion, potentially offering better performance for very deep trees, and can be slightly easier to understand for those less familiar with recursion.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+#Example usage (same as above,  just replace the BST class definition)
+
+```
+
+**Method 3:  Handling Duplicates (Optional)**
+
+The above methods don't handle duplicate data.  If you need to allow duplicates, you'll need to modify the insertion logic:
+
+```python
+# ... (Node and BST class definitions as in Method 1 or 2) ...
+
+    def insert(self, data):  #Modified to handle duplicates
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+
+    def _insert_recursive(self, node, data): #Modified to handle duplicates
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        elif data > node.data: #only difference here
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+        else: #Handle duplicate
+            # Options: Increment count, ignore, or handle as needed
+            print(f"Duplicate value {data} encountered. Ignoring.") #Example
+
+
+```
+
+
+Remember to choose the method that best suits your needs and coding style.  For most cases, the recursive version (Method 1) is preferred for its readability and conciseness.  If you're concerned about potential stack overflow issues with very deep trees, the iterative approach (Method 2) is a good alternative.  Don't forget to add methods for searching, deletion, and traversal to complete your BST implementation.
+
