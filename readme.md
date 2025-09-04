@@ -66695,3 +66695,61 @@ fizzBuzzImproved(n: 15) // Example usage
 
 Remember to choose the implementation that best suits your needs and coding style.  The improved version is generally preferred for its readability and slight performance advantage.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long it takes to run) and space (how much memory it needs).  We usually analyze complexity in terms of the *input size*, denoted as 'n'.  The goal is to understand how the resource consumption grows as the input size increases.
+
+There are two main ways to express algorithm complexity:
+
+* **Time Complexity:**  Describes how the runtime of an algorithm scales with the input size.
+* **Space Complexity:** Describes how the memory usage of an algorithm scales with the input size.
+
+
+**Big O Notation:**
+
+Big O notation (O) is the most common way to express algorithm complexity. It provides an upper bound on the growth rate of the algorithm's resource consumption.  It focuses on the dominant factors as the input size becomes very large, ignoring constant factors and smaller-order terms.
+
+Common Big O complexities (from best to worst):
+
+* **O(1) - Constant Time:** The algorithm's runtime remains the same regardless of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth. Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size. Example: Bubble sort, selection sort.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**Other Notations:**
+
+Besides Big O, other notations are used to describe complexity:
+
+* **Big Omega (Ω):** Provides a *lower bound* on the growth rate. It represents the best-case scenario.
+* **Big Theta (Θ):** Provides both an *upper and lower bound* on the growth rate. It represents the tight bound.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most significantly to the runtime.
+2. **Count the number of operations:** Express the number of operations as a function of the input size 'n'.
+3. **Use Big O notation:** Simplify the function using Big O notation, focusing on the dominant terms.
+
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The basic operation is the comparison `arr[i] == target`.  In the worst case (target not found), this operation is performed `n` times, where `n` is the length of the array.  Therefore, the time complexity of linear search is O(n).
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally be more efficient.
+
