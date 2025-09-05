@@ -72532,3 +72532,44 @@ print(f"The maximum number is: {max_num}")  # Output: 8
 
 This is a very simple example, but it illustrates the basic principles of an algorithm.  As you progress, you'll tackle far more complex problems. Remember to be patient, persistent, and enjoy the learning process!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem samples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:** Find the maximum element in an array of integers.
+
+**Input:** An array of integers (e.g., `[3, 1, 4, 1, 5, 9, 2, 6, 5, 3]`).
+
+**Output:** The maximum integer in the array (e.g., `9`).
+
+
+**Medium:**
+
+**Problem:** Implement a function that reverses a linked list.
+
+**Input:** A singly linked list.  (You'll need to define a Node class:  `class Node: def __init__(self, data): self.data = data; self.next = None`)
+
+**Output:** The same linked list, but with the nodes in reversed order.
+
+
+**Hard:**
+
+**Problem:** Find the shortest path between two nodes in a weighted graph using Dijkstra's algorithm.
+
+**Input:** A graph represented as an adjacency matrix or adjacency list, and two node IDs representing the start and end nodes.  Edge weights represent the distance between nodes.
+
+**Output:** The shortest distance between the start and end nodes, and the path itself.
+
+
+**Example of a slightly more complex "Medium" problem (with a twist):**
+
+**Problem:**  Given an array of integers, find the longest increasing subsequence.
+
+**Input:** An array of integers (e.g., `[10, 9, 2, 5, 3, 7, 101, 18]`)
+
+**Output:** The length of the longest increasing subsequence (e.g., `4`, corresponding to the subsequence `[2, 3, 7, 101]`).  You only need to return the length, not the subsequence itself.
+
+
+These problems illustrate different aspects of algorithmic thinking:  iteration, recursion, graph traversal, dynamic programming (in the longest increasing subsequence problem).  The choice of which problem to tackle depends on your current skill level.  Remember to consider efficiency (time and space complexity) when designing your solution.
+
