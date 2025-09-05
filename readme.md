@@ -74696,3 +74696,62 @@ print(longest_palindrome("babad")) # Output: bab (or aba)
 
 These examples demonstrate different levels of complexity and require different algorithmic approaches.  Remember that the "best" solution often involves a trade-off between time and space complexity.  Choose the approach that best fits the constraints of the problem.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+
+**Simple Approach:**
+
+This version uses a straightforward `for` loop and `if`/`else if`/`else` statements.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks if it's divisible by both 3 and 5 (15) – prints "FizzBuzz".
+* If divisible by 3 but not 5 – prints "Fizz".
+* If divisible by 5 but not 3 – prints "Buzz".
+* Otherwise, it prints the number itself.
+
+
+**Slightly More Advanced Approach (using the ternary conditional operator):**
+
+This version is more concise using the ternary operator (`condition ? value1 : value2`).  It's functionally equivalent but a bit more compact.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function
+```
+
+This approach nests ternary operators to achieve the same result in a single line within the loop.  While concise, overly nested ternaries can become difficult to read for very complex logic.  The first approach is generally preferred for readability in this specific case.
+
+
+**Choosing the Best Approach:**
+
+For FizzBuzz, the simple approach is usually best because it's clear and easy to understand.  The concise approach might be preferred in situations where brevity is paramount and the logic remains straightforward.  For more complex problems, prioritize readability over extreme conciseness.
+
+
+Remember to run this code in a Swift playground or a Swift project to see the output.  You'll see the numbers 1 through 15 printed, with "Fizz", "Buzz", or "FizzBuzz" replacing the multiples of 3, 5, and 15 respectively.
+
