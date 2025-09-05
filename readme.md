@@ -74844,3 +74844,48 @@ Since we found *c₁ = 1*, *c₂ = 4*, and a suitable *n₀* (we can use the lar
 
 Big Theta notation is crucial for analyzing algorithm efficiency and comparing the performance of different algorithms.  It gives a precise and comprehensive understanding of how an algorithm's runtime scales with the input size.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the limiting behavior of functions, primarily used in computer science to analyze the efficiency of algorithms.  The most common are:
+
+* **Big O (O):**  Represents the *upper bound* of a function's growth.  It describes the worst-case scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.  It focuses on the dominant terms and ignores constant factors.
+
+* **Big Omega (Ω):** Represents the *lower bound* of a function's growth.  It describes the best-case scenario (or a guaranteed minimum). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.  Again, constant factors are ignored.
+
+* **Big Theta (Θ):** Represents the *tight bound*.  It means a function's growth is both O(g(n)) and Ω(g(n)).  This signifies that the function grows at the same rate as g(n), up to constant factors.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+* **Little o (o):** Represents a *strict upper bound*.  f(n) = o(g(n)) means that for any positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.  In essence, f(n) grows strictly slower than g(n).
+
+* **Little omega (ω):** Represents a *strict lower bound*. f(n) = ω(g(n)) means that for any positive constant c, there exists a positive constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.  f(n) grows strictly faster than g(n).
+
+
+**Comparison Table:**
+
+| Notation | Meaning                                     | Relationship to g(n)                      | Example                               |
+|----------|---------------------------------------------|------------------------------------------|---------------------------------------|
+| O(g(n))  | Upper bound                                  | f(n) grows no faster than g(n)           | n² = O(n³)                               |
+| Ω(g(n))  | Lower bound                                  | f(n) grows no slower than g(n)           | n² = Ω(n)                                |
+| Θ(g(n))  | Tight bound                                 | f(n) grows at the same rate as g(n)      | n² = Θ(n²)                               |
+| o(g(n))  | Strict upper bound                          | f(n) grows strictly slower than g(n)     | n = o(n²)                                |
+| ω(g(n))  | Strict lower bound                          | f(n) grows strictly faster than g(n)     | n² = ω(n)                                |
+
+
+**Illustrative Example:**
+
+Let's consider f(n) = 2n² + 3n + 1 and g(n) = n².
+
+* f(n) = O(n²)  (The dominant term is n²)
+* f(n) = Ω(n²)  (The dominant term is n²)
+* f(n) = Θ(n²)  (Because it's both O(n²) and Ω(n²))
+* f(n) = o(n³)  (n² grows strictly slower than n³)
+* f(n) = ω(n)   (n² grows strictly faster than n)
+
+
+**Key takeaways:**
+
+* Big O is most commonly used to express the time or space complexity of an algorithm.
+* Big Theta provides the most precise description of growth.
+* Little o and little ω are less frequently used but provide finer-grained distinctions.
+
+
+Remember that asymptotic notations describe the *behavior as n approaches infinity*.  For small values of n, the actual runtime might differ significantly from what the asymptotic notation predicts.
+
