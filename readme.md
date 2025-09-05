@@ -73897,3 +73897,71 @@ print(f"Are root1 and root3 the same (iterative)? {are_trees_same_iterative(root
 
 Both methods achieve the same result. The recursive approach is generally preferred for its clarity and conciseness, unless you anticipate exceptionally deep trees where stack overflow might be a concern.  The iterative approach using queues avoids this risk.  Choose the method that best suits your needs and coding style. Remember to handle the `None` cases carefully in both approaches to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They're tree-like structures where each node has at most two children, referred to as the left child and the right child.  The key property that defines a BST is the *search property*:
+
+* **Search Property:** For every node in the tree, the value of its left child is *less than* the value of the node, and the value of its right child is *greater than* the value of the node.  (We'll assume here that the values are unique, although this isn't strictly required.)
+
+This property makes searching, insertion, and deletion operations efficient, on average.
+
+Here's a breakdown of key aspects:
+
+**1. Basic Operations:**
+
+* **Search:**  To search for a value, start at the root. If the value is equal to the root's value, you've found it. If the value is less than the root's value, recursively search the left subtree; otherwise, recursively search the right subtree.  This leads to O(h) time complexity, where h is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes, making search O(log n).
+
+* **Insertion:** To insert a new value, follow the search procedure.  When you reach a node with no child in the appropriate direction (left or right), create a new node there with the new value. This also takes O(h) time.
+
+* **Deletion:** Deleting a node is more complex and has several cases to consider:
+
+    * **Node with no children (leaf node):** Simply remove the node.
+    * **Node with one child:** Replace the node with its child.
+    * **Node with two children:**  This is the most complex case.  Common strategies include:
+        * Finding the inorder predecessor (largest value in the left subtree) or inorder successor (smallest value in the right subtree).
+        * Replacing the node's value with the predecessor/successor's value, and then deleting the predecessor/successor node (which will now have at most one child).
+
+Deletion, like insertion, takes O(h) time.
+
+**2. Properties and Characteristics:**
+
+* **Height:** The height of a BST is the length of the longest path from the root to a leaf node.  A balanced BST has a height close to log₂(n).  An unbalanced BST can have a height of up to n (a degenerate case where it's essentially a linked list).
+
+* **Balance:**  The efficiency of BST operations heavily depends on the balance of the tree.  Highly unbalanced trees can lead to O(n) time complexity for operations that should ideally be O(log n).  Self-balancing BSTs (like AVL trees and red-black trees) address this issue by employing algorithms to maintain a relatively balanced structure during insertions and deletions.
+
+* **Traversal:** BSTs can be traversed in several ways:
+    * **Inorder traversal:** Visits nodes in ascending order of their values (left, root, right).
+    * **Preorder traversal:** Visits the root, then the left subtree, then the right subtree.
+    * **Postorder traversal:** Visits the left subtree, then the right subtree, then the root.
+
+**3. Advantages:**
+
+* **Efficient search, insertion, and deletion (on average):** O(log n) for balanced trees.
+* **Simple implementation:** Relatively straightforward to implement compared to other self-balancing trees.
+* **Ordered data:**  Provides a natural ordering of elements.
+
+**4. Disadvantages:**
+
+* **Performance degrades with unbalanced trees:**  Can become O(n) in the worst case.
+* **Not suitable for all applications:**  May not be the best choice when dealing with frequent insertions and deletions that lead to significant imbalance.
+
+
+**5.  Implementations:**
+
+BSTs can be implemented in various programming languages using nodes with pointers to left and right children.  Here's a conceptual example (not a complete implementation):
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    # ... (methods for search, insert, delete, traversal, etc.) ...
+```
+
+In summary, Binary Search Trees are a powerful and versatile data structure, but their efficiency depends critically on maintaining a balanced tree structure.  For applications requiring guaranteed logarithmic time complexity, self-balancing BSTs are often preferred.
+
