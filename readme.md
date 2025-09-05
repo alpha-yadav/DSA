@@ -73593,3 +73593,40 @@ int main() {
 
 These examples demonstrate the basic structure of nested loops. The complexity increases with the number of nested loops and the operations performed within them.  Remember to carefully consider the termination conditions to avoid infinite loops.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  Their runtime increases very slowly as the input size (n) grows.  This usually means they're dividing the problem size in half (or some other constant fraction) with each step.  Here are some common types and examples:
+
+**1. Binary Search:**
+
+* **Description:**  This classic algorithm efficiently searches a *sorted* list (array or data structure) for a target value.  It repeatedly divides the search interval in half. If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.
+* **Example:** Finding a word in a dictionary, searching a sorted array.
+
+**2. Balanced Binary Search Trees (BSTs) Operations:**
+
+* **Description:**  Operations like searching, insertion, and deletion in a *balanced* BST (e.g., AVL trees, red-black trees) have logarithmic time complexity.  The balance ensures that the tree doesn't become skewed, preventing worst-case linear time.
+* **Example:**  Efficiently storing and retrieving data where quick lookups are crucial.
+
+**3. Heap Operations (e.g., Heap Sort):**
+
+* **Description:**  Operations on a min-heap or max-heap (like finding the minimum/maximum element, insertion, deletion of the minimum/maximum) typically have O(log n) complexity.  Heaps are tree-based data structures with specific ordering properties.
+* **Example:**  Priority queues, Heap Sort algorithm (although the overall sort is O(n log n)).
+
+**4. Exponentiation by Squaring:**
+
+* **Description:**  This method computes a<sup>b</sup> (a raised to the power of b) in logarithmic time.  It cleverly reduces the number of multiplications needed by repeatedly squaring the base.
+* **Example:**  Cryptographic algorithms, calculating large powers efficiently.
+
+**5. Logarithmic-Time Recursion:**
+
+* **Description:** Some recursive algorithms that divide the problem into subproblems of roughly half the size at each step will exhibit O(log n) behavior.  The key is the halving (or similar constant-fraction reduction) of the problem size in each recursive call.  It is crucial that the recursive calls are not nested unnecessarily, or it can lead to higher complexity.
+* **Example:** Certain tree traversals (though not all).  Many "divide and conquer" algorithms with proper problem reduction achieve this.
+
+**Important Considerations:**
+
+* **Base of the logarithm:** The base of the logarithm (e.g., base 2, base 10, base *e*) doesn't affect the big O notation, as it's just a constant factor.
+* **Sorted input:**  Many O(log n) algorithms require sorted input (like binary search).  The cost of sorting (often O(n log n)) must be considered if the input is not already sorted.
+* **Worst-case vs. average-case:**  While the average-case complexity might be O(log n), the worst-case complexity could be higher for some algorithms (e.g., unbalanced BSTs).
+
+
+In summary, O(log n) algorithms are extremely efficient for large datasets because the growth of their runtime is very slow relative to the input size.  They are frequently used in applications where speed is critical.
+
