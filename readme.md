@@ -74889,3 +74889,30 @@ Let's consider f(n) = 2n² + 3n + 1 and g(n) = n².
 
 Remember that asymptotic notations describe the *behavior as n approaches infinity*.  For small values of n, the actual runtime might differ significantly from what the asymptotic notation predicts.
 
+#  Big-Omega Notation 
+Big-Omega (Ω) notation is used in computer science to describe the *lower bound* of an algorithm's time or space complexity.  It provides a lower limit on the growth rate of a function, indicating that the function's growth is at least as fast as the specified function.  In simpler terms:  Ω(g(n)) means the algorithm will *never* perform worse than a certain rate of growth, expressed by g(n).
+
+Here's a breakdown:
+
+* **Formal Definition:**  A function f(n) is said to be Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+
+* **What it Means:**  This definition states that from a certain point (n₀), the function f(n) will always be greater than or equal to a constant multiple (c) of g(n).  The constant c is important because it allows for scaling; we're not interested in the precise value, but rather the general growth trend.
+
+* **Contrast with Big O:** Big O (O) notation describes the *upper bound* (worst-case scenario), while Big Omega (Ω) describes the *lower bound* (best-case or average-case scenarios, depending on context).  There's also Big Theta (Θ) which describes a *tight bound*, meaning both the upper and lower bounds are the same.
+
+* **Example:**
+
+Let's say we have an algorithm with time complexity f(n) = n² + 2n + 1.
+
+* We can say f(n) is Ω(n²) because for c = 1 and a sufficiently large n₀,  n² ≤ n² + 2n + 1.  We've found a lower bound.
+* We can *also* say f(n) is Ω(n) because  for a suitable c and n₀, c*n ≤ n² + 2n + 1.  This is a valid lower bound, though less precise than Ω(n²).
+
+* **Why is it Important?**
+
+   * **Guarantees:** Ω notation provides a guarantee about the minimum performance you can expect from an algorithm.  This can be crucial for real-time systems or when performance is paramount.
+   * **Algorithm Comparison:**  While Big O is more commonly used for overall complexity analysis, comparing both Big O and Big Ω gives a more complete picture of an algorithm's behavior across various inputs.  If an algorithm has a tight bound (Θ), then its Big O and Big Ω are the same.
+   * **Lower Bounds of Problems:** Ω notation is also used to establish lower bounds on the complexity of *problems* themselves, showing that *no* algorithm can solve a particular problem faster than a certain rate.
+
+
+**In summary:** Big Omega notation provides a crucial tool for understanding and characterizing the minimum performance of algorithms and the inherent difficulty of computational problems.  It complements Big O notation, giving a more thorough analysis of algorithm efficiency.
+
