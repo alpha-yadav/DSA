@@ -72573,3 +72573,75 @@ Here are a few algorithmic problem samples, ranging in difficulty:
 
 These problems illustrate different aspects of algorithmic thinking:  iteration, recursion, graph traversal, dynamic programming (in the longest increasing subsequence problem).  The choice of which problem to tackle depends on your current skill level.  Remember to consider efficiency (time and space complexity) when designing your solution.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's deceptively simple, but it's a great way to test understanding of basic programming concepts like loops, conditionals, and modulo operations. Here's how to implement it in Swift, starting with a simple approach and then showing a more concise version:
+
+
+**Method 1:  Basic Approach with `if-else if-else`**
+
+This version is easy to read and understand, clearly showing the logic:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates through numbers 1 to `n`.  The modulo operator (`%`) gives the remainder of a division.  If the remainder is 0, the number is divisible.
+
+
+**Method 2:  More Concise Approach with Ternary Operator**
+
+This version uses the ternary operator (`condition ? value1 : value2`) to make the code more compact, although perhaps slightly less readable for beginners:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print((i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : "\(i)")
+    }
+}
+
+fizzBuzzConcise(n: 15) //Call the function to test
+```
+
+This achieves the same result but nests ternary operators.  It's shorter but can become harder to follow with more complex conditions.
+
+
+**Method 3:  Using String Interpolation and a `where` clause (Swift 5.7 and later):**
+
+
+This leverages Swift's powerful string interpolation and `where` clauses for a more elegant solution.  It's efficient and readable for those comfortable with the syntax.
+
+```swift
+func fizzBuzzElegant(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+fizzBuzzElegant(n: 15) // Call the function to test
+
+```
+
+This version builds the output string incrementally, adding "Fizz" and/or "Buzz" as appropriate.  The `isEmpty` check handles cases where neither condition is met.
+
+
+
+**Choosing the Best Method:**
+
+For beginners, **Method 1** is recommended for its clarity.  As you become more comfortable with Swift, **Method 3** offers a good balance of conciseness and readability.  **Method 2** is the most concise, but can be harder to maintain for larger, more complex problems.  Choose the method that best suits your understanding and the context of your project.  Remember to always prioritize code readability and maintainability.
+
