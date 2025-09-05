@@ -74810,3 +74810,37 @@ The loop iterates `n` times (where `n` is the length of the array). The addition
 
 Understanding algorithm complexity is crucial for choosing efficient algorithms and predicting their performance for different input sizes.  An algorithm with a lower time complexity will generally run faster for larger inputs.  Similarly, lower space complexity means less memory usage.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate.  Unlike Big O notation (which provides an upper bound) and Big Omega notation (which provides a lower bound), Big Theta notation provides both an upper *and* a lower bound, meaning the function's growth rate is bounded both above and below by the same function (ignoring constant factors).
+
+**Formal Definition:**
+
+A function *f(n)* is said to be in Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always sandwiched between *c₁ * g(n)* and *c₂ * g(n)*.  The constants *c₁* and *c₂* represent scaling factors, and *n₀* represents a threshold beyond which the inequality holds.  We essentially ignore constant factors and lower-order terms.
+
+**Intuitive Explanation:**
+
+Imagine you're comparing the running time of two algorithms.  If the running time of algorithm A is Θ(n²) and the running time of algorithm B is Θ(n²), it means that both algorithms have the same growth rate: they both grow quadratically with the input size *n*.  One might be slightly faster than the other (due to constant factors), but their performance scales similarly as the input size increases.
+
+**Example:**
+
+Let's say *f(n) = 2n² + 3n + 1*.  We can show that *f(n)* is in Θ(n²):
+
+1. **Find c₁ and n₀:** We need to find a constant *c₁* such that *c₁n² ≤ 2n² + 3n + 1* for sufficiently large *n*.  If we choose *c₁ = 1*, then *n² ≤ 2n² + 3n + 1* is true for all *n ≥ 1* (*n₀ = 1*).
+
+2. **Find c₂ and n₀:** We need to find a constant *c₂* such that *2n² + 3n + 1 ≤ c₂n²* for sufficiently large *n*.  If we choose *c₂ = 4*, then *2n² + 3n + 1 ≤ 4n²* holds for all *n ≥ 2* (*n₀ = 2*).  (We can prove this by algebraic manipulation or considering dominant terms for large n).
+
+Since we found *c₁ = 1*, *c₂ = 4*, and a suitable *n₀* (we can use the larger of the two, which is *n₀ = 2*), we've shown that *f(n) = 2n² + 3n + 1* is in Θ(n²).
+
+**Key Differences from Big O and Big Omega:**
+
+* **Big O (O):** Provides an upper bound.  *f(n) = O(g(n))* means *f(n)* grows no faster than *g(n)*.
+* **Big Omega (Ω):** Provides a lower bound.  *f(n) = Ω(g(n))* means *f(n)* grows at least as fast as *g(n)*.
+* **Big Theta (Θ):** Provides both an upper and lower bound, implying a tight bound.  *f(n) = Θ(g(n))* means *f(n)* grows at the same rate as *g(n)*.
+
+
+Big Theta notation is crucial for analyzing algorithm efficiency and comparing the performance of different algorithms.  It gives a precise and comprehensive understanding of how an algorithm's runtime scales with the input size.
+
