@@ -72705,3 +72705,57 @@ def linear_search(arr, target):
 
 Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with better complexity will generally perform significantly better for large inputs.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate.  It essentially says that a function grows at the same rate as another function, up to constant factors, both above and below.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that *f(n)* = Θ(*g(n)*) if and only if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+   *c₁* *g(n)* ≤ *f(n)* ≤ *c₂* *g(n)*
+
+Let's break this down further:
+
+* **f(n):** The function we're analyzing (e.g., the runtime of an algorithm).
+* **g(n):** A known function that represents the growth rate (e.g., n, n², log n).
+* **c₁ and c₂:** Positive constants.  These constants allow for ignoring constant factors in the growth rate.  We only care about the overall trend.
+* **n₀:** A positive integer. This constant indicates that the inequality holds only for values of *n* greater than or equal to *n₀*.  This accounts for the fact that the behavior of a function for small values of *n* might not reflect its asymptotic behavior.
+
+**In simpler terms:**
+
+Θ(*g(n)*) represents a *set* of functions.  Any function *f(n)* that belongs to this set grows at the same rate as *g(n)*, ignoring constant factors.  Both the upper and lower bounds are essentially the same function (*g(n)*).
+
+
+**Example:**
+
+Let's say we have a function *f(n) = 2n² + 5n + 1*.  We can show that *f(n) = Θ(n²)*.
+
+To prove this, we need to find constants *c₁*, *c₂*, and *n₀* that satisfy the definition:
+
+1. **Find c₁:** We can choose a *c₁* that will make *c₁n² ≤ 2n² + 5n + 1* true for sufficiently large *n*.  Let's choose *c₁ = 1*.  For large enough *n*,  *n²* will be larger than *5n + 1*, so the inequality holds.
+
+2. **Find c₂:** We need to find *c₂* such that *2n² + 5n + 1 ≤ c₂n²* for sufficiently large *n*.  Notice that for large *n*, the terms *5n* and *1* become insignificant compared to *2n²*. We can choose *c₂ = 3*.  Then, *2n² + 5n + 1 ≤ 3n²* will hold for sufficiently large *n*.
+
+3. **Find n₀:** We need to find an *n₀* such that the inequalities hold for all *n ≥ n₀*. A good starting point might be to check for when both inequalities hold.  Let's try solving the inequalities:
+
+   * 1n² ≤ 2n² + 5n + 1
+   * 2n² + 5n + 1 ≤ 3n²
+
+   Experimenting with different values of 'n', we find that the inequalities generally hold for n ≥ 1 or higher values, so we can select *n₀ = 1* or higher.
+
+
+Therefore, we've shown that *f(n) = 2n² + 5n + 1* is Θ(*n²)* because we found constants *c₁ = 1*, *c₂ = 3*, and *n₀ = 1* that satisfy the definition.
+
+**Relationship to Big O and Big Ω:**
+
+* **Big O (O):** Provides an upper bound.  *f(n) = O(g(n))* means *f(n)* grows no faster than *g(n)*.
+* **Big Ω (Ω):** Provides a lower bound. *f(n) = Ω(g(n))* means *f(n)* grows no slower than *g(n)*.
+* **Big Θ (Θ):** Provides both an upper and lower bound.  It's a tight bound, meaning *f(n)* grows at the same rate as *g(n)*.
+
+If *f(n) = Θ(g(n))*, then *f(n) = O(g(n))* and *f(n) = Ω(g(n))*.  However, the converse isn't always true.  Having both O and Ω doesn't automatically mean Θ.  Theta implies a tight bound.
+
+
+Big-Theta notation is crucial for analyzing the efficiency of algorithms because it allows us to compare their performance in a way that's independent of specific hardware or constant factors.  It focuses on the dominant behavior as the input size grows large.
+
