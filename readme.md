@@ -73027,3 +73027,77 @@ print(longest_palindrome("cbbd")) # Output: bb
 
 These examples demonstrate different levels of complexity and require different algorithmic approaches.  Remember that efficient solutions often involve careful consideration of data structures and algorithms.  Consider the time and space complexity of your solution when tackling these problems.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple version and then showing some improvements:
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if`/`else if`/`else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both Fizz and Buzz cases), then by 3, then by 5.  If none of these conditions are met, it prints the number itself.
+
+**Version 2: Using String Interpolation and a Ternary Operator**
+
+This version is more concise and uses string interpolation and a ternary operator for a more compact solution:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This version builds the output string incrementally.  The ternary operator efficiently adds "Fizz" if divisible by 3 and "Buzz" if divisible by 5. If the output string is empty, it prints the number; otherwise, it prints the combined "Fizz" and/or "Buzz" string.
+
+**Version 3:  More Functional Approach (using `map`)**
+
+For a more functional approach, you can use the `map` function:
+
+```swift
+func fizzBuzz(n: Int) -> [String] {
+    return (1...n).map { i in
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        return output.isEmpty ? "\(i)" : output
+    }
+}
+
+print(fizzBuzz(n: 15)) // Example usage
+```
+
+This version returns an array of strings, making it more flexible.  The `map` function applies the provided closure to each element in the range 1...n.
+
+**Choosing the Best Version:**
+
+* **Version 1:** Easiest to understand for beginners.
+* **Version 2:** More concise and efficient.
+* **Version 3:** Most functional and potentially more reusable if you need the results as an array.
+
+
+Remember to choose the version that best suits your understanding and the specific requirements of your project.  All three versions achieve the same result – solving the FizzBuzz problem.  Start with the one you find most readable and gradually explore the more advanced techniques as your Swift skills improve.
+
