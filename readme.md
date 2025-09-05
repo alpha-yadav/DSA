@@ -72645,3 +72645,63 @@ This version builds the output string incrementally, adding "Fizz" and/or "Buzz"
 
 For beginners, **Method 1** is recommended for its clarity.  As you become more comfortable with Swift, **Method 3** offers a good balance of conciseness and readability.  **Method 2** is the most concise, but can be harder to maintain for larger, more complex problems.  Choose the method that best suits your understanding and the context of your project.  Remember to always prioritize code readability and maintainability.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long it takes to run) and space (how much memory it uses).  We analyze complexity to understand how an algorithm's performance scales as the input size grows.
+
+There are two main aspects of algorithm complexity:
+
+**1. Time Complexity:** This describes how the runtime of an algorithm increases with the input size (n). We usually express this using Big O notation (O), which provides an upper bound on the growth rate.  It ignores constant factors and focuses on the dominant terms as n becomes large.
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Nested loops iterating over the input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Generating all permutations of a sequence.
+
+**2. Space Complexity:** This describes how the memory usage of an algorithm increases with the input size (n).  It's also expressed using Big O notation.
+
+* **O(1) - Constant Space:** The memory usage is independent of the input size. Example: Many in-place algorithms.
+* **O(n) - Linear Space:** The memory usage increases linearly with the input size. Example: Storing the input in an array.
+* **O(log n) - Logarithmic Space:** The memory usage increases logarithmically with the input size. Example: Recursive algorithms using a stack.
+* **O(n²) - Quadratic Space:** The memory usage increases quadratically with the input size. Example: Storing an adjacency matrix for a graph.
+
+
+**Analyzing Complexity:**
+
+Analyzing the complexity of an algorithm usually involves:
+
+* **Identifying the basic operations:**  Determine the operations that contribute most significantly to the runtime.
+* **Counting the number of operations:** Express the number of operations as a function of the input size (n).
+* **Determining the dominant term:** Identify the term that grows fastest as n increases. This term determines the Big O notation.
+* **Ignoring constant factors:**  Constant factors are dropped because they are less significant as n becomes very large.
+
+**Best, Average, and Worst Case:**
+
+Complexity analysis often distinguishes between best-case, average-case, and worst-case scenarios:
+
+* **Best-case:** The most favorable input that leads to the fastest execution.
+* **Average-case:** The expected runtime over a large number of inputs.  This can be difficult to calculate precisely.
+* **Worst-case:** The input that leads to the slowest execution.  This is often the most important scenario to consider, as it provides an upper bound on the runtime.
+
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Best-case:** O(1) - If the target is the first element.
+* **Average-case:** O(n) - On average, the target will be found around the middle of the array.
+* **Worst-case:** O(n) - If the target is not in the array or is the last element.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with better complexity will generally perform significantly better for large inputs.
+
