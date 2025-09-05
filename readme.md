@@ -73484,3 +73484,112 @@ int main() {
 
 These are just basic examples.  Loops can be much more complex, involving nested loops, `break` and `continue` statements to control the flow, and different conditions for termination.  The best choice of loop depends on the specific task.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows for processing data in a multi-dimensional way.  They're commonly used for tasks like:
+
+* **Iterating over matrices or 2D arrays:** Accessing each element of a grid or table.
+* **Generating combinations or permutations:** Exploring all possible pairings or arrangements of items.
+* **Implementing algorithms like bubble sort or selection sort:** Comparing and swapping elements repeatedly.
+* **Processing nested data structures:** Traversing through trees or graphs.
+
+
+Here are examples in several programming languages:
+
+**Python:**
+
+```python
+# Print a multiplication table
+rows = 5
+cols = 10
+
+for i in range(1, rows + 1):  # Outer loop
+    for j in range(1, cols + 1):  # Inner loop
+        print(f"{i * j:4}", end="")  # :4 ensures consistent spacing
+    print()  # Newline after each row
+
+# Example with lists of lists
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()
+```
+
+**JavaScript:**
+
+```javascript
+// Print a multiplication table
+const rows = 5;
+const cols = 10;
+
+for (let i = 1; i <= rows; i++) { // Outer loop
+  for (let j = 1; j <= cols; j++) { // Inner loop
+    document.write(i * j + " ");
+  }
+  document.write("<br>"); // Newline after each row
+}
+
+// Example with a 2D array
+const matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+for (let i = 0; i < matrix.length; i++) { // Outer loop
+  for (let j = 0; j < matrix[i].length; j++) { // Inner loop
+    console.log(matrix[i][j]);
+  }
+}
+```
+
+**Java:**
+
+```java
+// Print a multiplication table
+int rows = 5;
+int cols = 10;
+
+for (int i = 1; i <= rows; i++) { // Outer loop
+    for (int j = 1; j <= cols; j++) { // Inner loop
+        System.out.printf("%4d", i * j);
+    }
+    System.out.println(); // Newline after each row
+}
+
+// Example with a 2D array
+int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+for (int i = 0; i < matrix.length; i++) { // Outer loop
+    for (int j = 0; j < matrix[i].length; j++) { // Inner loop
+        System.out.print(matrix[i][j] + " ");
+    }
+    System.out.println();
+}
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  // Print a multiplication table
+  int rows = 5;
+  int cols = 10;
+
+  for (int i = 1; i <= rows; i++) { // Outer loop
+    for (int j = 1; j <= cols; j++) { // Inner loop
+      std::cout << i * j << " ";
+    }
+    std::cout << std::endl; // Newline after each row
+  }
+
+  // Example with a 2D array
+  int matrix[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+  for (int i = 0; i < 3; i++) { // Outer loop
+    for (int j = 0; j < 3; j++) { // Inner loop
+      std::cout << matrix[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+  return 0;
+}
+```
+
+These examples demonstrate the basic structure of nested loops. The complexity increases with the number of nested loops and the operations performed within them.  Remember to carefully consider the termination conditions to avoid infinite loops.
+
