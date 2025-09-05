@@ -73221,3 +73221,57 @@ Therefore, *2n² + 3n + 1 = Θ(n²)*.  The dominant term (n²) determines the gr
 
 Big-Theta notation is crucial for analyzing the efficiency of algorithms. It provides a precise and rigorous way to describe the growth rate of an algorithm's runtime or space requirements, allowing for accurate comparisons between different algorithms.  It's a powerful tool for understanding the scalability and performance characteristics of algorithms as the input size grows.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of a function as the input size grows to infinity. They're crucial for analyzing the efficiency of algorithms. Here's a comparison:
+
+**1. Big O Notation (O): Upper Bound**
+
+* **Meaning:**  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  In simpler terms, *g(n)* is an upper bound for *f(n)*.  It describes the *worst-case* scenario.
+* **Focus:**  Growth rate from above.  We're interested in how fast the function grows at most.
+* **Example:** If `f(n) = 2n² + 5n + 1`, then `f(n) = O(n²)`. We ignore lower-order terms and constant factors.
+
+**2. Big Omega Notation (Ω): Lower Bound**
+
+* **Meaning:** `f(n) = Ω(g(n))` means there exist positive constants *c* and *n₀* such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.  *g(n)* is a lower bound for *f(n)*. It describes the *best-case* scenario (or a lower limit on the growth rate).
+* **Focus:** Growth rate from below. We're interested in how slowly the function grows at least.
+* **Example:** If `f(n) = 2n² + 5n + 1`, then `f(n) = Ω(n²)`.
+
+**3. Big Theta Notation (Θ): Tight Bound**
+
+* **Meaning:** `f(n) = Θ(g(n))` means that there exist positive constants *c₁*, *c₂*, and *n₀* such that `0 ≤ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)` for all `n ≥ n₀`.  This indicates that *f(n)* and *g(n)* have the same growth rate. It's both an upper and lower bound.
+* **Focus:** Precise growth rate. We have a tight characterization of the function's growth.
+* **Example:** If `f(n) = 2n² + 5n + 1`, then `f(n) = Θ(n²)`.
+
+**4. Little o Notation (o): Strict Upper Bound**
+
+* **Meaning:** `f(n) = o(g(n))` means that for every positive constant *c*, there exists a constant *n₀* such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  This signifies that *f(n)* grows strictly slower than *g(n)*.
+* **Focus:**  Asymptotically smaller growth rate.
+* **Example:** `n = o(n²)` because `n` grows significantly slower than `n²`.
+
+**5. Little omega Notation (ω): Strict Lower Bound**
+
+* **Meaning:** `f(n) = ω(g(n))` means that for every positive constant *c*, there exists a constant *n₀* such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`. This means *f(n)* grows strictly faster than *g(n)*.
+* **Focus:** Asymptotically larger growth rate.
+* **Example:** `n² = ω(n)` because `n²` grows significantly faster than `n`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Relationship between f(n) and g(n) |
+|----------|---------------------------------------|--------------------------------------|
+| O(g(n))  | Upper bound                           | f(n) ≤ c * g(n)                      |
+| Ω(g(n))  | Lower bound                           | c * g(n) ≤ f(n)                      |
+| Θ(g(n))  | Tight bound                          | c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)           |
+| o(g(n))  | Strict upper bound                    | f(n) < c * g(n)                      |
+| ω(g(n))  | Strict lower bound                    | c * g(n) < f(n)                      |
+
+
+**Relationships:**
+
+* `f(n) = Θ(g(n))` implies `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.
+* `f(n) = o(g(n))` implies `f(n) = O(g(n))`, but not vice-versa.
+* `f(n) = ω(g(n))` implies `f(n) = Ω(g(n))`, but not vice-versa.
+
+
+These notations are essential for comparing algorithms' efficiency and understanding their scalability as input size increases.  They allow us to focus on the dominant factors affecting runtime without getting bogged down in implementation details.
+
