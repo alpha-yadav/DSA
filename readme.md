@@ -75598,3 +75598,135 @@ inorder_traversal(bst.root)
 
 Both methods achieve the same result: inserting a new node into the BST while maintaining the BST property (left subtree < node < right subtree).  Choose the method that best suits your understanding and the potential scale of your application.  Remember to include a function to traverse and print the tree (like the `inorder_traversal` function above) to verify your insertions.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node:**  Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:** This is the most complex case.  We typically replace the node with either its inorder predecessor (largest node in the left subtree) or its inorder successor (smallest node in the right subtree).  Both approaches are equally valid.  This example will use the inorder successor.
+
+
+Here's a C++ implementation of BST deletion, along with supporting code for insertion and searching:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+// Function to insert a new node
+Node* insert(Node* root, int data) {
+    if (root == nullptr) {
+        return new Node(data);
+    }
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    } else if (data > root->data) {
+        root->right = insert(root->right, data);
+    }
+    return root;
+}
+
+// Function to find the inorder successor
+Node* findMin(Node* root) {
+    while (root->left != nullptr) {
+        root = root->left;
+    }
+    return root;
+}
+
+
+// Function to delete a node
+Node* deleteNode(Node* root, int data) {
+    if (root == nullptr) {
+        return root;
+    }
+
+    if (data < root->data) {
+        root->left = deleteNode(root->left, data);
+    } else if (data > root->data) {
+        root->right = deleteNode(root->right, data);
+    } else {
+        // Node with only one child or no child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Node with two children: Get the inorder successor (smallest in the right subtree)
+        Node* temp = findMin(root->right);
+        root->data = temp->data;
+        root->right = deleteNode(root->right, temp->data);
+    }
+    return root;
+}
+
+
+// Function to search for a node (for testing)
+bool search(Node* root, int data) {
+    if (root == nullptr) {
+        return false;
+    }
+    if (data == root->data) {
+        return true;
+    } else if (data < root->data) {
+        return search(root->left, data);
+    } else {
+        return search(root->right, data);
+    }
+}
+
+//Function to print inorder traversal (for testing)
+void inorder(Node* root) {
+    if (root != nullptr) {
+        inorder(root->left);
+        std::cout << root->data << " ";
+        inorder(root->right);
+    }
+}
+
+
+int main() {
+    Node* root = nullptr;
+    root = insert(root, 50);
+    root = insert(root, 30);
+    root = insert(root, 20);
+    root = insert(root, 40);
+    root = insert(root, 70);
+    root = insert(root, 60);
+    root = insert(root, 80);
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorder(root);
+    std::cout << std::endl;
+
+    root = deleteNode(root, 20); //Deleting a leaf node
+    root = deleteNode(root, 30); //Deleting a node with one child
+    root = deleteNode(root, 50); //Deleting a node with two children
+
+
+    std::cout << "Inorder traversal after deletion: ";
+    inorder(root);
+    std::cout << std::endl;
+
+    std::cout << "Search for 70: " << search(root, 70) << std::endl;
+    std::cout << "Search for 20: " << search(root, 20) << std::endl;
+    std::cout << "Search for 50: " << search(root, 50) << std::endl;
+
+
+    return 0;
+}
+```
+
+Remember to compile this code with a C++ compiler (like g++).  This improved version handles all three deletion cases correctly and includes error handling for an empty tree.  The `inorder` function helps visualize the tree's contents before and after deletion.  The search function is useful for verifying the correctness of the deletion. Remember to handle memory deallocation properly in a real-world application to avoid memory leaks, especially if you are dealing with a very large tree.  This example simplifies memory management for clarity.
+
