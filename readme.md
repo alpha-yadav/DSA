@@ -75177,3 +75177,57 @@ Here are some common types of algorithms that exhibit O(log n) time complexity:
 
 It's important to remember that the "n" in O(log n) refers to the size of the input data.  The base of the logarithm (usually 2, but it doesn't affect the Big O notation) determines the exact number of steps, but the overall growth rate remains logarithmic.
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  It works by repeatedly dividing the search interval in half.  If the value is not in the middle element, the search continues either in the left half or the right half, depending on whether the target value is smaller or larger than the middle element.
+
+**How it achieves O(log n):**
+
+With each comparison, the search space is halved.  This halving continues until either the element is found or the search space is empty.  The number of times you can halve `n` (the size of the array) before reaching 1 is approximately log₂(n).  Therefore, the time complexity is O(log₂n), which is simply written as O(log n) (the base of the logarithm is typically omitted in Big O notation because it's a constant factor).
+
+
+**Example in Python:**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+This Python code demonstrates a clear implementation of binary search, highlighting its logarithmic time complexity.  Other algorithms like finding a node in a balanced binary search tree also exhibit O(log n) time complexity.  The key characteristic is the repeated halving or reduction of the problem size in each step.
+
