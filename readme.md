@@ -76426,3 +76426,50 @@ Asymptotic notations describe the behavior of functions as their input approache
 
 Understanding these notations is crucial for analyzing algorithm efficiency and comparing different approaches to solving a problem.  They allow us to abstract away from specific hardware and focus on the fundamental scaling behavior of algorithms.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the lower bound of the growth rate of a function.  In simpler terms, it provides a measure of how *fast* an algorithm's runtime (or space usage) will *at least* grow as the input size increases.  It's the counterpart to Big-O notation, which describes the *upper* bound.
+
+Here's a breakdown of Big-Omega notation:
+
+**Formal Definition:**
+
+A function f(n) is said to be Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+
+Let's break this down:
+
+* **f(n):** This represents the runtime (or space complexity) of your algorithm as a function of the input size 'n'.
+* **g(n):** This is a simpler function that describes the lower bound growth rate.  Examples include:  1, log n, n, n log n, n², 2ⁿ, etc.
+* **c:** This is a positive constant. It scales the g(n) function.  It accounts for constant factors that might be present in the actual runtime.
+* **n₀:** This is a threshold value.  The inequality only needs to hold true for input sizes larger than or equal to n₀. This allows us to ignore small input sizes where the behavior might be erratic.
+
+
+**What Ω(g(n)) tells us:**
+
+* **Lower Bound:** The function f(n) grows at least as fast as g(n).  It could grow faster, but it will never grow significantly slower.
+* **Best-Case Scenario:**  It often describes the best-case runtime of an algorithm.  While Big-O describes the worst-case, Ω describes the best-case.
+* **Efficiency Guarantee:**  It provides a guarantee about the minimum efficiency the algorithm will achieve, even in the most favorable scenarios.
+
+
+**Example:**
+
+Let's say we have an algorithm with a runtime function:
+
+f(n) = n² + 2n + 1
+
+We can say that f(n) is Ω(n²).  To prove this, we need to find constants c and n₀ that satisfy the definition:
+
+0 ≤ c * n² ≤ n² + 2n + 1  for all n ≥ n₀
+
+We can choose c = 1/2 and n₀ = 2.  For n ≥ 2, the inequality holds true.  There are other choices for c and n₀ that would also work.  The key is that for sufficiently large n, the n² term dominates, and the inequality holds.
+
+**Relationship to Big-O and Big-Theta:**
+
+* **Big-O (O):** Describes the upper bound (worst-case).
+* **Big-Omega (Ω):** Describes the lower bound (best-case).
+* **Big-Theta (Θ):** Describes both the upper and lower bounds (tight bound). If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+
+**In Summary:**
+
+Big-Omega notation is a crucial tool for analyzing algorithms. It helps us understand the minimum performance guarantees we can expect from an algorithm, providing valuable insights into its efficiency.  Using it in conjunction with Big-O gives a more complete picture of an algorithm's runtime behavior.
+
