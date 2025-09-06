@@ -76995,3 +76995,113 @@ BSTs are used in various applications, including:
 
 In summary, Binary Search Trees are a valuable data structure when the order of elements matters and efficient searching, insertion, and deletion are required.  However, it's crucial to be aware of the potential for unbalanced trees and consider self-balancing techniques for optimal performance in real-world applications.
 
+#  Binary Search Tree - Insertion (Python) 
+Several ways exist to insert a node into a Binary Search Tree (BST) in Python. Here are a couple of implementations, one iterative and one recursive:
+
+
+**Iterative Insertion:**
+
+This approach uses a `while` loop to traverse the tree and find the correct insertion point.  It's generally more efficient in terms of memory usage than recursion, especially for deep trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_iterative(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    return
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    return
+                else:
+                    current = current.right
+
+
+#Example usage
+bst = BST()
+bst.insert_iterative(8)
+bst.insert_iterative(3)
+bst.insert_iterative(10)
+bst.insert_iterative(1)
+bst.insert_iterative(6)
+bst.insert_iterative(14)
+
+# (You would typically add a function to traverse and print the tree here to verify the insertion)
+
+```
+
+
+**Recursive Insertion:**
+
+This approach uses recursion to traverse the tree. It's often considered more elegant but can be less efficient for very deep trees due to potential stack overflow issues.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert_recursive(self, node, data):
+        if node is None:
+            return Node(data)
+        if data < node.data:
+            node.left = self.insert_recursive(node.left, data)
+        else:
+            node.right = self.insert_recursive(node.right, data)
+        return node
+
+    def insert(self, data):  # Wrapper function for easier use
+        self.root = self.insert_recursive(self.root, data)
+
+
+# Example Usage
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+
+# (Again, you'd need a tree traversal function to visualize the result)
+```
+
+**Important Considerations:**
+
+* **Duplicate Handling:**  These examples don't explicitly handle duplicate values.  You might want to add logic to either ignore duplicates or to handle them in a specific way (e.g., increment a count associated with the node).
+* **Error Handling:** For robustness, consider adding error handling (e.g., `try-except` blocks) to deal with potential issues like incorrect input data types.
+* **Tree Traversal:**  To verify that the insertion works correctly, you'll need a function to traverse the tree (e.g., inorder, preorder, postorder traversal) and print the nodes.  Add a function like `inorder_traversal` to your `BST` class to test your insertions.  Here's a simple example of an inorder traversal:
+
+```python
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+```
+
+Remember to call `bst.inorder_traversal(bst.root)` after inserting nodes to see the sorted order. Choose the iterative or recursive approach based on your performance needs and preference.  For most cases, the iterative approach is slightly more efficient.
+
