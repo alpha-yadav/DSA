@@ -76701,3 +76701,65 @@ Here are some common types of algorithms that exhibit O(log n) time complexity:
 
 In summary, O(log n) algorithms are remarkably efficient because the growth rate of the time complexity is very slow compared to linear (O(n)) or quadratic (O(n²)) algorithms.  They are essential for handling large datasets efficiently.
 
+#  An O(log n) example 
+A classic O(log n) example is **binary search**.
+
+**Binary Search Algorithm:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process is repeated until the target value is found or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target value {target_value} found at index {index}")
+else:
+  print(f"Target value {target_value} not found in the array")
+```
+
+**Why it's O(log n):**
+
+With each comparison, we eliminate roughly half of the remaining search space.  This halving of the problem size is the key to the logarithmic time complexity.  If we start with `n` elements, after one comparison, we have roughly `n/2` elements left. After two comparisons, we have `n/4`, then `n/8`, and so on.  The number of times we can divide `n` by 2 before reaching 1 is approximately log₂(n).  Therefore, the number of steps (comparisons) required is proportional to log₂(n), making the algorithm O(log n).  The base of the logarithm (2 in this case) doesn't affect the big O notation, so we simply write O(log n).
+
+
+Other examples of O(log n) algorithms include:
+
+* **Finding an element in a balanced binary search tree:** Similar to binary search, but on a tree structure.
+* **Efficient exponentiation (e.g., using exponentiation by squaring):**  Repeatedly squaring the base to compute large powers.
+* **Some divide-and-conquer algorithms:** Algorithms that recursively break down a problem into smaller subproblems.
+
+
+It's crucial to remember that O(log n) algorithms only exhibit this efficiency when the input is sorted or structured in a way that allows for efficient halving or similar logarithmic reduction of the problem size.
+
