@@ -78728,3 +78728,75 @@ Thorup's algorithm cleverly combines several techniques to achieve its near-line
 
 In summary, Thorup's algorithm represents a significant theoretical and practical advancement in minimum spanning tree computation.  Its near-linear time complexity makes it highly efficient for extremely large graphs, although the complexity of implementation should be considered when choosing an algorithm for a particular application.
 
+#  Graph Traversals 
+Graph traversals are algorithms used to visit all the vertices (nodes) in a graph in a systematic way.  There are several common approaches, each with its own properties and applications.  The most common are Breadth-First Search (BFS) and Depth-First Search (DFS).
+
+**1. Breadth-First Search (BFS)**
+
+* **Idea:** BFS explores the graph level by level. It starts at a root node and visits all its neighbors before moving to their neighbors, and so on.  Think of it like expanding a ripple outward from the starting point.
+* **Data Structure:** Typically uses a queue.  Nodes are added to the queue as they're discovered and removed when they're visited.
+* **Algorithm:**
+    1. Start at a root node and mark it as visited.
+    2. Add the root node to a queue.
+    3. While the queue is not empty:
+        a. Dequeue a node.
+        b. For each unvisited neighbor of the dequeued node:
+            i. Mark the neighbor as visited.
+            ii. Add the neighbor to the queue.
+* **Properties:**
+    * Finds the shortest path from the root node to all other reachable nodes in an unweighted graph.
+    * Explores the graph in a "horizontal" manner.
+* **Applications:**
+    * Finding shortest paths in unweighted graphs.
+    * Crawling websites.
+    * Social network analysis (finding connections).
+    * Determining connected components.
+
+**2. Depth-First Search (DFS)**
+
+* **Idea:** DFS explores the graph by going as deep as possible along each branch before backtracking.  It prioritizes exploring one branch fully before moving to another.
+* **Data Structure:** Typically uses a stack (implicitly through recursion or explicitly using a stack data structure).
+* **Algorithm (Recursive):**
+    1. Mark the current node as visited.
+    2. For each unvisited neighbor of the current node:
+        a. Recursively call DFS on the neighbor.
+* **Algorithm (Iterative):**
+    1. Push the root node onto the stack.
+    2. While the stack is not empty:
+        a. Pop a node from the stack.
+        b. If the node is not visited:
+            i. Mark the node as visited.
+            ii. Push its unvisited neighbors onto the stack.
+* **Properties:**
+    * Explores the graph in a "vertical" manner.
+    * Can be used to detect cycles in a graph.
+    * Useful for topological sorting.
+* **Applications:**
+    * Finding paths in a graph.
+    * Detecting cycles.
+    * Topological sorting (ordering nodes in a DAG).
+    * Finding strongly connected components.
+
+
+**Comparison:**
+
+| Feature        | BFS                      | DFS                      |
+|----------------|--------------------------|--------------------------|
+| Exploration    | Level-by-level           | Depth-first              |
+| Data Structure | Queue                    | Stack (recursion or explicit) |
+| Shortest Path  | Finds shortest path (unweighted) | Does not guarantee shortest path |
+| Cycle Detection| Can detect cycles        | Can detect cycles        |
+| Space Complexity| Can be higher (queue)   | Can be lower (stack, especially with recursion) |
+
+
+**Other Traversals:**
+
+While BFS and DFS are the most common, other graph traversals exist, often tailored to specific graph types or applications:
+
+* **Dijkstra's Algorithm:**  Finds the shortest paths in a weighted graph with non-negative edge weights.
+* **A* Search:**  A heuristic search algorithm that finds the shortest path in a weighted graph more efficiently than Dijkstra's.
+* **Bellman-Ford Algorithm:** Finds the shortest paths in a weighted graph, even with negative edge weights (but detects negative cycles).
+
+
+The choice of which traversal algorithm to use depends heavily on the specific problem and the properties of the graph.  Understanding the strengths and weaknesses of each is crucial for efficient graph processing.
+
