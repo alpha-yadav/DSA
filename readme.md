@@ -76611,3 +76611,66 @@ This Java example uses a String array and iterates through it using an index.
 
 These are just basic examples. Loops can be much more complex, incorporating nested loops, `break` and `continue` statements for control flow, and other advanced techniques.  The specific syntax might vary slightly depending on the programming language, but the fundamental concept remains the same:  repeated execution of a block of code.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop completes all its iterations for each iteration of the outer loop.  This creates a pattern where the inner loop's code runs multiple times for each pass of the outer loop.
+
+Here's a breakdown:
+
+**Structure:**
+
+```python
+for outer_variable in outer_iterable:  # Outer loop
+    for inner_variable in inner_iterable:  # Inner loop
+        # Code to be executed repeatedly
+```
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This will output a 10x10 multiplication table.  For each row (outer loop iteration), the inner loop iterates 10 times to calculate and print the product.
+
+**Another Example (Python - Nested Lists):**
+
+Let's say you have a list of lists:
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element)
+```
+
+This will print each element of the matrix, row by row.
+
+
+**How it Works:**
+
+1. **Outer Loop Initialization:** The outer loop starts its first iteration.
+2. **Inner Loop Execution:** The inner loop executes all its iterations completely.
+3. **Outer Loop Iteration:**  Once the inner loop finishes, the outer loop moves to its next iteration.
+4. **Repeat:** Steps 2 and 3 repeat until the outer loop completes all its iterations.
+
+**When to Use Nested Loops:**
+
+Nested loops are useful for processing data structures with multiple levels, such as:
+
+* **Matrices/2D arrays:** Accessing and manipulating elements in rows and columns.
+* **Nested lists:** Iterating through elements within lists of lists.
+* **Generating patterns:** Creating shapes or sequences with repetitive structures.
+
+
+**Important Note:**  Nested loops can significantly increase the runtime complexity of your code.  If the inner and outer loops each iterate `n` times, the total number of iterations is `n*n` (n squared), making the algorithm's efficiency O(n²).  Be mindful of this when using nested loops, especially with large datasets.  Consider alternative approaches like using vectorized operations (if applicable) to improve performance.
+
