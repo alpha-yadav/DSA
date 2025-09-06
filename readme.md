@@ -75950,3 +75950,81 @@ Output: A list of nodes visited in BFS or DFS order.
 
 These problems showcase a range of algorithmic concepts and difficulty levels.  Choosing the right data structure and algorithm is crucial for efficient solutions.  Remember to consider time and space complexity when designing your solution.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple version and then showing some improvements:
+
+**Basic Version:**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* If it's divisible by both 3 and 5 (i.e., 15), it prints "FizzBuzz".
+* If it's divisible by 3, it prints "Fizz".
+* If it's divisible by 5, it prints "Buzz".
+* Otherwise, it prints the number itself.
+
+
+**Improved Version (using string interpolation and ternary operator):**
+
+This version is more concise and uses string interpolation and the ternary operator for a more compact solution:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let fizz = i % 3 == 0 ? "Fizz" : ""
+        let buzz = i % 5 == 0 ? "Buzz" : ""
+        print(fizz + buzz == "" ? "\(i)" : fizz + buzz)
+    }
+}
+
+fizzBuzzImproved(n: 15) // Example usage
+```
+
+This version first determines if "Fizz" or "Buzz" should be added based on divisibility.  If both are empty strings, it prints the number; otherwise, it prints the combined string.
+
+
+**Even More Concise Version (using `map`):**
+
+This version utilizes Swift's functional capabilities for a more elegant solution (although potentially less readable for beginners):
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    (1...n).map { i in
+        let output = (i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Example Usage
+```
+
+This uses the `map` function to iterate and transform each number into its FizzBuzz equivalent.
+
+
+**Choosing the Right Version:**
+
+* The **basic version** is the easiest to understand, especially for beginners.
+* The **improved version** is more concise and efficient.
+* The **concise version** is the most elegant but might be less readable if you're not familiar with functional programming concepts in Swift.
+
+Start with the version that best suits your understanding and gradually explore the more advanced approaches as you gain more experience. Remember to choose the version that prioritizes readability and maintainability for your specific project.
+
