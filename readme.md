@@ -78146,3 +78146,94 @@ This approach avoids recursion but requires modifying the tree structure.  This 
 
 Remember to choose the approach best suited for your specific constraints and needs. If you can modify the tree structure to add parent pointers, the iterative approach might offer some benefits, but the recursive approach is usually simpler and more efficient for standard binary trees.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree (specifically a binary tree or a general tree) is a fundamental problem in computer science.  The approach depends on the type of tree and the information available about the tree structure.
+
+Here's a breakdown of common methods and scenarios:
+
+**1. Binary Trees:**
+
+* **Using Parent Pointers:**  If each node has a pointer to its parent, finding the LCA is straightforward:
+
+    1. **Traverse up:**  Traverse upwards from both nodes simultaneously, storing the path from each node to the root in separate lists.
+    2. **Find the split:** Iterate through both paths from the root.  The last common node before the paths diverge is the LCA.
+
+    ```python
+    class Node:
+        def __init__(self, data):
+            self.data = data
+            self.parent = None
+
+    def lca_parent_pointers(node1, node2):
+        path1 = []
+        path2 = []
+
+        curr = node1
+        while curr:
+            path1.append(curr)
+            curr = curr.parent
+
+        curr = node2
+        while curr:
+            path2.append(curr)
+            curr = curr.parent
+
+        lca = None
+        i = len(path1) -1
+        j = len(path2) -1
+
+        while i >= 0 and j >= 0 and path1[i] == path2[j]:
+            lca = path1[i]
+            i -= 1
+            j -= 1
+
+        return lca.data #or return lca
+
+    #Example Usage (You'd need to create the tree structure first)
+    #root = ...  #your root node
+    #node1 = ... #some node in the tree
+    #node2 = ... #another node in the tree
+    #result = lca_parent_pointers(node1, node2)
+    #print(f"LCA: {result}")
+
+    ```
+
+* **Recursive Approach (without parent pointers):**  This method is efficient but requires a slight modification to handle cases where one or both nodes are not in the tree.
+
+    ```python
+    def lca_recursive(root, node1, node2):
+        if not root or root == node1 or root == node2:
+            return root
+
+        left_lca = lca_recursive(root.left, node1, node2)
+        right_lca = lca_recursive(root.right, node1, node2)
+
+        if left_lca and right_lca:
+            return root
+        elif left_lca:
+            return left_lca
+        else:
+            return right_lca
+
+    #Example Usage (assuming a binary tree with left and right children):
+    #root = ... # your root node
+    #node1 = ... #some node
+    #node2 = ... #another node
+    #result = lca_recursive(root, node1, node2)
+    #print(f"LCA: {result.data}") # Access the data attribute
+    ```
+
+
+**2. General Trees (Non-Binary):**
+
+The recursive approach can be adapted for general trees, but you'll need to handle multiple children per node.  The basic idea remains the same:  if a node contains both `node1` and `node2` in its subtree, it's a potential ancestor.  You return the node closest to the root that satisfies this condition.
+
+**3. Optimizations and Considerations:**
+
+* **Pre-processing:** For repeated LCA queries on the same tree, pre-processing techniques like creating a Lowest Common Ancestor matrix or using a Tarjan's off-line algorithm can greatly improve performance.  These methods are usually more complex to implement.
+* **Error Handling:**  Always consider the case where one or both nodes are not present in the tree. Your algorithm should gracefully handle such situations.
+* **Tree Representation:** The efficiency of your chosen method depends on how the tree is represented (adjacency list, adjacency matrix, nested objects).
+
+
+Remember to choose the approach that best suits your specific needs and the structure of your tree.  If you are dealing with a large tree and many LCA queries, consider the more advanced pre-processing techniques for optimal performance.  If it's a simpler application with a small tree, the recursive method might be sufficient and easier to implement.  Provide more context about your tree structure and requirements for a more tailored solution.
+
