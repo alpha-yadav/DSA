@@ -76193,3 +76193,74 @@ print(longest_palindrome("babad")) # Output: bab
 
 These examples demonstrate a range of complexity.  Remember that algorithmic problems often require careful consideration of time and space complexity (efficiency) in addition to correctness.  Choosing the right data structures and algorithms is key to solving them efficiently.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more refined version:
+
+
+**Version 1: Simple and Readable**
+
+This version is easy to understand and follows the problem's logic directly:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function with the upper limit
+```
+
+This code iterates from 1 to `n`. For each number, it checks for divisibility by 15 (FizzBuzz), 3 (Fizz), and 5 (Buzz) in that order.  If none of these conditions are met, it prints the number itself.
+
+
+**Version 2: Slightly More Efficient**
+
+This version is functionally equivalent but slightly more efficient because it avoids redundant checks:
+
+```swift
+func fizzBuzzEfficient(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+        print(output.isEmpty ? String(i) : output)
+    }
+}
+
+fizzBuzzEfficient(n: 15)
+```
+
+This version builds the output string (`output`).  If it's empty after checking for divisibility by 3 and 5, it means the number is neither divisible by 3 nor 5, so the number itself is printed.  This avoids the nested `if-else if` structure, making it slightly faster for larger values of `n`.
+
+
+**Explanation of Key Concepts:**
+
+* **`%` (Modulo Operator):** This operator gives you the remainder after division.  For example, `10 % 3` equals 1 (because 10 divided by 3 is 3 with a remainder of 1).
+* **`if-else if-else` statements:** These control the flow of execution based on different conditions.
+* **String Interpolation:** In Version 2, `String(i)` converts the integer `i` to a string.  The `output.isEmpty ? String(i) : output` is a ternary operator, a concise way to write an `if-else` statement.
+* **Looping (`for` loop):** This allows us to iterate through a range of numbers.
+
+
+**How to Run This Code:**
+
+1. **Open Xcode:** Create a new Xcode project (choose "App" under iOS or macOS).
+2. **Create a Playground:**  A playground is a great way to experiment with Swift code.  You can create one within your project or as a standalone file.
+3. **Paste the code:** Copy either `fizzBuzz` or `fizzBuzzEfficient` and paste it into the playground.
+4. **Run:** Press the play button to execute the code.  The output will appear in the right-hand pane of the playground.
+
+
+Remember to replace `15` in the `fizzBuzz(n: 15)` or `fizzBuzzEfficient(n: 15)` call with any other positive integer to test with a different upper limit.
+
