@@ -76089,3 +76089,107 @@ It's more important to understand the principles behind algorithms than to memor
 
 By following these steps and dedicating consistent effort, you'll build a strong foundation in algorithms and data structures. Remember to be patient and persistent – it takes time and practice to become proficient.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problem samples, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string, e.g., "hello"
+
+**Output:** The reversed string, e.g., "olleh"
+
+**Solution (Python):**
+
+```python
+def reverse_string(s):
+  return s[::-1]
+
+print(reverse_string("hello"))  # Output: olleh
+```
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Solution (Python):**
+
+```python
+def two_sum(nums, target):
+    num_map = {}  # Create a dictionary to store numbers and their indices
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    return []  # No solution found
+
+print(two_sum([2,7,11,15], 9)) # Output: [0, 1]
+```
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+```
+Input: s = "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+```
+
+**Solution (Python - a more efficient approach using dynamic programming would be better for very large strings, but this is a simpler approach):**
+
+```python
+def longest_palindrome(s):
+    if not s:
+        return ""
+
+    n = len(s)
+    max_len = 1
+    start = 0
+
+    for i in range(n):
+        # Odd length palindromes
+        l, r = i, i
+        while l >= 0 and r < n and s[l] == s[r]:
+            if r - l + 1 > max_len:
+                max_len = r - l + 1
+                start = l
+            l -= 1
+            r += 1
+
+        # Even length palindromes
+        l, r = i, i + 1
+        while l >= 0 and r < n and s[l] == s[r]:
+            if r - l + 1 > max_len:
+                max_len = r - l + 1
+                start = l
+            l -= 1
+            r += 1
+
+    return s[start:start + max_len]
+
+print(longest_palindrome("babad")) # Output: bab
+```
+
+These examples demonstrate a range of complexity.  Remember that algorithmic problems often require careful consideration of time and space complexity (efficiency) in addition to correctness.  Choosing the right data structures and algorithms is key to solving them efficiently.
+
