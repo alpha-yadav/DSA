@@ -78080,3 +78080,69 @@ postorder_traversal(root) # Output: 4 5 2 3 1
 
 Remember to adapt the `Node` class and the example tree to your specific needs.  The core logic of the traversal functions remains the same.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  Unlike in a binary *search* tree, we can't rely on ordering to efficiently find the LCA in a general binary tree.  We need a different approach.
+
+Here are two common approaches to finding the LCA in a binary tree:
+
+**1. Recursive Approach:**
+
+This is a relatively straightforward approach that uses recursion.  The basic idea is:
+
+* **Base Case:** If we reach a `null` node, we return `null`.
+* **Check for Nodes:** If either node `p` or node `q` is found in the current node's subtree (meaning the current node is equal to `p` or `q`), we return the current node.
+* **Recursive Calls:** If neither `p` nor `q` is found in the current node, we recursively check the left and right subtrees.  If both recursive calls return non-`null` values, then the current node is the LCA (because the nodes are in different subtrees). Otherwise, we return the non-`null` result (the node that was found in one of the subtrees).
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the lowest common ancestor of two nodes in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The lowest common ancestor node, or None if not found.
+    """
+
+    if root is None or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+```
+
+**2. Iterative Approach (using parent pointers):**
+
+If you can modify the tree to include parent pointers (each node knows its parent), you can use an iterative approach.  This involves:
+
+1. **Find Paths:** Find the paths from the root to node `p` and the root to node `q`.
+2. **Compare Paths:** Iterate through the paths from the root, comparing the nodes until you find the first differing node.  The parent of that differing node is the LCA.
+
+This approach avoids recursion but requires modifying the tree structure.  This is often less space-efficient than the recursive approach because the path finding might involve large stacks. It can be made more efficient with careful implementation that avoids actually storing the entire path.
+
+**Important Considerations:**
+
+* **Node Existence:**  Both approaches should handle cases where either `p` or `q` might not be present in the tree.  If neither node is found, the function typically returns `None`.
+* **Error Handling:** Consider adding error handling for cases like an empty tree or invalid input.
+* **Efficiency:** The recursive approach is generally considered more efficient in terms of both time and space complexity (O(N) time and O(H) space, where N is the number of nodes and H is the height of the tree), especially when you don't have parent pointers.  The iterative approach, depending on the path-finding method, can use more space.
+
+
+Remember to choose the approach best suited for your specific constraints and needs. If you can modify the tree structure to add parent pointers, the iterative approach might offer some benefits, but the recursive approach is usually simpler and more efficient for standard binary trees.
+
