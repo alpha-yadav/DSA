@@ -76941,3 +76941,57 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues with very deep trees).  Choose the method that best suits your preference and the constraints of your application. Remember to handle the `None` cases carefully in both methods to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science. They are tree-like structures where each node has at most two children, referred to as the left child and the right child.  The key defining characteristic of a BST is the *search property*:
+
+* **Search Property:** For any node in the BST:
+    * All nodes in its left subtree have keys *less than* the node's key.
+    * All nodes in its right subtree have keys *greater than* the node's key.
+
+This property allows for efficient searching, insertion, and deletion of nodes.
+
+**Key Operations:**
+
+* **Search:**  To search for a specific key, start at the root. If the key is equal to the root's key, you've found it. If the key is less than the root's key, recursively search the left subtree. If the key is greater than the root's key, recursively search the right subtree.  This leads to logarithmic time complexity (O(log n) in the average case, where n is the number of nodes) for balanced trees.
+
+* **Insertion:**  To insert a new node, follow the search procedure. When you reach a leaf node (a node with no children), insert the new node as a child of that leaf node, maintaining the search property.
+
+* **Deletion:** Deleting a node is more complex and involves three cases:
+    * **Leaf Node:** Simply remove the node.
+    * **Node with One Child:** Replace the node with its child.
+    * **Node with Two Children:**  This is the most complex case.  Common approaches include:
+        * **In-order successor:** Find the smallest node in the right subtree (the in-order successor) and replace the node to be deleted with it. Then delete the in-order successor from its original location.
+        * **In-order predecessor:**  Similar to the in-order successor, but uses the largest node in the left subtree.
+
+* **Minimum/Maximum:** Finding the minimum (or maximum) value in a BST is straightforward.  The minimum value is the leftmost node, and the maximum value is the rightmost node.  This can be done in O(log n) time on average for balanced trees.
+
+* **Traversal:**  Several ways to visit all nodes in a BST:
+    * **In-order traversal:**  Visits nodes in ascending order of their keys (left subtree, root, right subtree).
+    * **Pre-order traversal:** Visits the root, then the left subtree, then the right subtree.
+    * **Post-order traversal:** Visits the left subtree, then the right subtree, then the root.
+
+
+**Advantages of BSTs:**
+
+* **Efficient search, insertion, and deletion (on average):**  O(log n) for balanced trees.
+* **Simple implementation:** Relatively easy to understand and implement.
+* **Ordered data:**  Provides an ordered sequence of data.
+
+
+**Disadvantages of BSTs:**
+
+* **Worst-case performance:** If the tree becomes unbalanced (e.g., a linked list), the performance degrades to O(n) for search, insertion, and deletion.
+* **Self-balancing required for optimal performance:** To guarantee good performance, techniques like AVL trees or red-black trees (self-balancing BSTs) are often used.
+
+
+**Applications:**
+
+BSTs are used in various applications, including:
+
+* **Databases:**  Indexing and searching data.
+* **Symbol tables:** Storing and retrieving symbols in compilers and interpreters.
+* **Implementation of other data structures:**  Priority queues, sets, maps.
+
+
+In summary, Binary Search Trees are a valuable data structure when the order of elements matters and efficient searching, insertion, and deletion are required.  However, it's crucial to be aware of the potential for unbalanced trees and consider self-balancing techniques for optimal performance in real-world applications.
+
