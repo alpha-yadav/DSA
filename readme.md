@@ -77580,3 +77580,122 @@ print(isBST(root2))  # Output: False
 
 Both methods have a time complexity of O(N), where N is the number of nodes in the tree, because they visit each node once.  The space complexity is O(H) in the worst case for the recursive approaches, where H is the height of the tree (O(N) for a skewed tree, O(log N) for a balanced tree).  An iterative approach could reduce the space complexity to O(1) but might be more complex to implement.  Choose the method that you find clearer and easier to understand.  The in-order traversal method is generally considered slightly simpler.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches, one recursive and one iterative:
+
+**1. Recursive Approach (Most Common and Efficient):**
+
+This approach leverages the BST property:  for every node, all nodes in its left subtree must be less than the node's value, and all nodes in its right subtree must be greater than the node's value.  We use a helper function to maintain the range of valid values.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Recursively checks if a binary tree is a BST.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+
+    def helper(node, min_val, max_val):
+        if node is None:
+            return True
+
+        if not (min_val < node.data < max_val):
+            return False
+
+        return (helper(node.left, min_val, node.data) and
+                helper(node.right, node.data, max_val))
+
+    return helper(root, float('-inf'), float('inf'))
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_recursive(root)}")  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(15)  #Violation
+root2.right = Node(20)
+
+print(f"Is the tree a BST? {is_bst_recursive(root2)}") # Output: False
+```
+
+
+**2. Iterative Approach (using Inorder Traversal):**
+
+This method uses an inorder traversal (left, root, right).  In a BST, an inorder traversal will produce a sorted sequence.  We can check this sorted property iteratively.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_iterative(root):
+    """
+    Iteratively checks if a binary tree is a BST using inorder traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    stack = []
+    prev = float('-inf')  # Initialize with negative infinity
+
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+
+        root = stack.pop()
+        if root.data <= prev:
+            return False
+        prev = root.data
+        root = root.right
+
+    return True
+
+#Example Usage (same trees as above)
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+print(f"Is the tree a BST? {is_bst_iterative(root)}")  # Output: True
+
+
+root2 = Node(10)
+root2.left = Node(15)  #Violation
+root2.right = Node(20)
+
+print(f"Is the tree a BST? {is_bst_iterative(root2)}") # Output: False
+
+```
+
+**Which approach to use?**
+
+* The **recursive approach** is generally considered more elegant and easier to understand.  It directly reflects the BST property.
+
+* The **iterative approach** might be slightly more efficient in terms of space complexity in some cases (avoiding potential recursion depth issues for very deep trees), but it's less intuitive.
+
+For most cases, the recursive solution is perfectly adequate and preferred for readability.  If you are dealing with exceptionally large trees where stack overflow is a concern, the iterative approach might be a safer bet. Remember to handle edge cases like empty trees appropriately in both approaches.
+
