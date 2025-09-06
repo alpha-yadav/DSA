@@ -76264,3 +76264,62 @@ This version builds the output string (`output`).  If it's empty after checking 
 
 Remember to replace `15` in the `fizzBuzz(n: 15)` or `fizzBuzzEfficient(n: 15)` call with any other positive integer to test with a different upper limit.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time and space (memory), although others like communication bandwidth or energy consumption might also be considered depending on the context.  Complexity is usually expressed using Big O notation, which describes the growth rate of the resource usage as the input size increases.
+
+Here's a breakdown of key aspects:
+
+**1. Time Complexity:**  This measures how the runtime of an algorithm scales with the input size (n).
+
+* **Big O Notation (O):**  Describes the upper bound of the algorithm's runtime.  It focuses on the dominant terms and ignores constant factors.  Common examples:
+
+    * **O(1): Constant time:** The runtime remains the same regardless of the input size.  Example: Accessing an element in an array using its index.
+    * **O(log n): Logarithmic time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+    * **O(n): Linear time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+    * **O(n log n): Linearithmic time:**  A combination of linear and logarithmic growth. Example: Merge sort.
+    * **O(n²): Quadratic time:** The runtime increases quadratically with the input size. Example: Bubble sort, selection sort, nested loops iterating over the same input.
+    * **O(2ⁿ): Exponential time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+    * **O(n!): Factorial time:** The runtime grows factorially with the input size. Example: Traveling salesman problem using brute force.
+
+
+* **Other notations:**
+
+    * **Ω (Omega):** Describes the lower bound of the algorithm's runtime.  It represents the best-case scenario.
+    * **Θ (Theta):** Describes the tight bound of the algorithm's runtime. It represents both the upper and lower bounds.
+
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm scales with the input size.  It's also expressed using Big O notation.  Examples:
+
+* **O(1): Constant space:** The algorithm uses a fixed amount of memory regardless of the input size.
+* **O(n): Linear space:** The memory usage increases linearly with the input size. Example: Storing an array of the same size as the input.
+* **O(log n): Logarithmic space:**  The memory usage increases logarithmically with the input size.  Example: Some recursive algorithms that use a stack.
+* **O(n²): Quadratic space:** The memory usage increases quadratically with the input size.  Example: Storing a 2D array of size n x n.
+
+
+**3. Analyzing Complexity:**
+
+Analyzing the complexity of an algorithm involves identifying the dominant operations and determining how their frequency changes with the input size.  This often involves:
+
+* **Best-case, Average-case, Worst-case:**  The complexity can vary depending on the input data.
+* **Asymptotic Analysis:**  Focuses on the behavior of the algorithm as the input size approaches infinity.
+
+
+**4. Importance of Complexity Analysis:**
+
+Understanding algorithm complexity is crucial for:
+
+* **Choosing the right algorithm:**  Selecting the most efficient algorithm for a given task.
+* **Predicting performance:**  Estimating how long an algorithm will take to run with a given input size.
+* **Optimizing algorithms:**  Identifying bottlenecks and improving performance.
+* **Scaling applications:**  Ensuring that an algorithm can handle large inputs efficiently.
+
+
+**Example:**
+
+Consider searching for a specific number in an array.
+
+* **Unsorted array:**  Linear search has a time complexity of O(n) (worst case, average case) because you might have to check every element.
+* **Sorted array:**  Binary search has a time complexity of O(log n) because it repeatedly divides the search interval in half.
+
+This shows how choosing the right algorithm significantly impacts performance, especially for large datasets.
+
