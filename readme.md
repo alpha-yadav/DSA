@@ -78367,3 +78367,116 @@ More advanced topics in graph theory include:
 
 This introduction provides a basic overview.  Each of these concepts can be explored in much greater depth.  To learn more, you can consult textbooks and online resources dedicated to graph theory.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using an adjacency list is a common and often efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of nodes).  Here's a breakdown of how it works, along with various implementation details and considerations:
+
+**The Core Idea:**
+
+An adjacency list represents a graph as an array or dictionary where each index (or key) corresponds to a node in the graph.  The value associated with each index is a list of its neighboring nodes (i.e., nodes it's directly connected to via an edge).
+
+**Implementation Details:**
+
+Several ways exist to implement an adjacency list, depending on the programming language and specific needs:
+
+* **Using an array of lists (Python example):**
+
+```python
+# Undirected graph
+graph = [
+    [1, 2],  # Node 0 connects to nodes 1 and 2
+    [0, 2, 3], # Node 1 connects to nodes 0, 2, and 3
+    [0, 1, 3], # Node 2 connects to nodes 0, 1, and 3
+    [1, 2]   # Node 3 connects to nodes 1 and 2
+]
+
+# Accessing neighbors of node 1: graph[1]  --> [0, 2, 3]
+
+# Directed graph (example)
+directed_graph = [
+    [1,2],
+    [2],
+    [3],
+    []
+]
+
+# Accessing neighbors of node 0: directed_graph[0] --> [1,2] (0 points to 1 and 2)
+# Node 2 only points to node 3 (directed edge)
+```
+
+* **Using a dictionary (Python example):** This approach is more flexible, especially for graphs with nodes that aren't consecutively numbered:
+
+```python
+# Undirected graph
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'C', 'D'],
+    'C': ['A', 'B', 'D'],
+    'D': ['B', 'C']
+}
+
+# Accessing neighbors of node 'B': graph['B'] --> ['A', 'C', 'D']
+
+#Directed Graph example
+directed_graph = {
+    'A': ['B','C'],
+    'B': ['C'],
+    'C': ['D'],
+    'D': []
+}
+```
+
+* **Using other data structures:**  You can adapt the adjacency list concept using other data structures like linked lists (for nodes' neighbor lists) or hash tables (for the overall graph structure).  The choice depends on performance tradeoffs and specific requirements.
+
+
+**Weighted Graphs:**
+
+For weighted graphs (where edges have associated weights), you can modify the adjacency list to store weights alongside the neighbor nodes:
+
+```python
+# Undirected weighted graph (Python dictionary)
+weighted_graph = {
+    'A': [('B', 5), ('C', 2)], #Edge A-B has weight 5, A-C has weight 2
+    'B': [('A', 5), ('C', 4), ('D', 7)],
+    'C': [('A', 2), ('B', 4), ('D', 6)],
+    'D': [('B', 7), ('C', 6)]
+}
+
+#Accessing the weight of edge B-C: Requires searching within the list of tuples.
+for neighbor,weight in weighted_graph['B']:
+  if neighbor == 'C':
+    print(f"Weight of edge B-C: {weight}")
+
+#Alternatively, you can use a dictionary for the neighbors:
+weighted_graph_alt = {
+    'A': {'B':5, 'C':2},
+    'B': {'A':5, 'C':4, 'D':7},
+    'C': {'A':2, 'B':4, 'D':6},
+    'D': {'B':7, 'C':6}
+}
+# Accessing weight of B-C is easier now: weighted_graph_alt['B']['C']
+```
+
+
+**Advantages of Adjacency Lists:**
+
+* **Efficient for sparse graphs:**  Storage space is proportional to the number of edges (plus nodes), making it much more efficient than an adjacency matrix for sparse graphs.
+* **Easy to add/remove edges:** Adding or removing edges involves only modifying the relevant lists.
+* **Easy to find neighbors:** Finding all neighbors of a node is straightforward (O(degree of the node) time complexity, where the degree is the number of edges connected to that node).
+
+**Disadvantages of Adjacency Lists:**
+
+* **Checking for edge existence:** Determining if an edge exists between two specific nodes might require a linear search within a node's neighbor list (unless using a set or a dictionary as the neighbor list).
+* **Less efficient for dense graphs:** For dense graphs (graphs with many edges), an adjacency matrix might be more efficient.
+
+
+**Choosing between Adjacency List and Adjacency Matrix:**
+
+The best choice depends on the characteristics of your graph:
+
+* **Sparse graph:** Use an adjacency list.
+* **Dense graph:** Consider using an adjacency matrix.
+* **Very large graphs:** More sophisticated graph data structures might be necessary.
+
+
+Remember to consider the specific operations you'll perform most frequently on your graph when choosing the appropriate representation.  The time complexity of these operations will vary depending on the data structure used.
+
