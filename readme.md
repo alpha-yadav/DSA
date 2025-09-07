@@ -79880,3 +79880,76 @@ Here are a few algorithmic problems with varying difficulty levels:
 
 These examples demonstrate a range of complexity.  The choice of which problem to tackle depends on your current skill level and the context (e.g., interview preparation, coursework). Remember to consider time and space complexity when designing your solution.  For example, for the "Two Sum" problem, a brute-force approach (checking all pairs) has O(n^2) time complexity, while the hashmap approach has O(n) time complexity.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's a great way to learn about loops and conditional statements. Here's how to implement it in Swift, starting with a simple version and then progressing to a slightly more advanced one:
+
+**Version 1:  Basic Implementation**
+
+This version uses a `for` loop and a series of `if`/`else if`/`else` statements.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks if it's divisible by 3, printing "Fizz" if true.
+* Otherwise, it checks if it's divisible by 5, printing "Buzz" if true.
+* Otherwise, it prints the number itself.
+
+
+**Version 2:  Slightly More Concise**
+
+This version uses the ternary conditional operator (`?:`) to make the code a bit more compact.  It's functionally equivalent to Version 1.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : ((i % 3 == 0) ? "Fizz" : ((i % 5 == 0) ? "Buzz" : String(i)))
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+This nested ternary operator achieves the same logic in a more compact way, but can become less readable as complexity increases.
+
+
+**Version 3: Using String Interpolation for Improved Readability (Similar to Version 1)**
+
+This approach is more readable than the nested ternary operator, especially for larger problems:
+
+
+```swift
+func fizzBuzzReadable(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzReadable(n: 15) //Call the function to test
+```
+
+This version builds the output string incrementally. If both conditions are false, it prints the number.  Otherwise it prints the concatenated string.
+
+Remember to choose the version that best suits your needs and coding style.  For beginners, Version 1 is often the easiest to understand and maintain.  As you become more comfortable with Swift, you can explore the more concise options.  Version 3 offers a good balance between conciseness and readability.
+
