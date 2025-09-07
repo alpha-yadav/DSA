@@ -80804,3 +80804,112 @@ Remember to add a function to traverse and print the tree (inorder traversal is 
 
 You would call it like this: `bst.inorder_traversal(bst.root)` after inserting nodes. Choose either the recursive or iterative `insert` method; don't mix them in the same `BST` class.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion.  There are three cases to consider:
+
+1. **Node to be deleted is a leaf node (no children):** Simply remove the node.
+2. **Node to be deleted has one child:** Replace the node with its child.
+3. **Node to be deleted has two children:** This is the most complex case.  We typically replace the node with its inorder predecessor (largest node in the left subtree) or its inorder successor (smallest node in the right subtree).  Both approaches are equally valid.
+
+Here's a C++ implementation demonstrating BST deletion using the inorder successor method:
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+Node* minValueNode(Node* node) {
+    Node* current = node;
+    while (current->left != nullptr) {
+        current = current->left;
+    }
+    return current;
+}
+
+
+Node* deleteNode(Node* root, int key) {
+    // Base Case: If the tree is empty
+    if (root == nullptr) {
+        return root;
+    }
+
+    // Recursive calls to find the node to delete
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else { // key == root->data (node found)
+
+        // Case 1: Node with 0 or 1 child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Case 2: Node with two children
+        Node* temp = minValueNode(root->right); // Find inorder successor
+        root->data = temp->data; // Copy the inorder successor's data to the node being deleted
+        root->right = deleteNode(root->right, temp->data); // Delete the inorder successor
+    }
+    return root;
+}
+
+
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    int keyToDelete = 20;
+    root = deleteNode(root, keyToDelete);
+
+    std::cout << "Inorder traversal after deletion of " << keyToDelete << ": ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    keyToDelete = 50;
+    root = deleteNode(root, keyToDelete);
+
+    std::cout << "Inorder traversal after deletion of " << keyToDelete << ": ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    //Clean up memory (important to avoid leaks!)  Add similar cleanup after other deletions if needed.
+    //This is a simplified example,  more robust cleanup would be necessary in a larger application.
+
+    // ... (code to recursively delete the rest of the tree) ...
+
+    return 0;
+}
+```
+
+Remember that this code includes a crucial memory management aspect –  you **must** free the dynamically allocated memory when you're finished with the BST to avoid memory leaks.  The provided `main` function only shows a basic example of this; a more complete solution would require a recursive function to properly delete all nodes.  Consider adding such a function for production-level code.  This example uses the inorder successor; you can adapt it to use the inorder predecessor if preferred.  Both methods achieve the same result.
+
