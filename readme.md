@@ -79953,3 +79953,57 @@ This version builds the output string incrementally. If both conditions are fals
 
 Remember to choose the version that best suits your needs and coding style.  For beginners, Version 1 is often the easiest to understand and maintain.  As you become more comfortable with Swift, you can explore the more concise options.  Version 3 offers a good balance between conciseness and readability.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most commonly considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm requires as a function of the input size.
+
+We usually express complexity using Big O notation (O), Big Omega notation (Ω), and Big Theta notation (Θ).  These notations describe the *growth rate* of the resource consumption as the input size grows, ignoring constant factors and smaller-order terms.
+
+**Big O Notation (O):**  Describes the *upper bound* of an algorithm's complexity.  It represents the worst-case scenario.  For example, O(n) means the algorithm's runtime grows linearly with the input size (n).
+
+**Big Omega Notation (Ω):** Describes the *lower bound* of an algorithm's complexity.  It represents the best-case scenario.  For example, Ω(n) means the algorithm's runtime grows at least linearly with the input size.
+
+**Big Theta Notation (Θ):** Describes the *tight bound* of an algorithm's complexity. It means the algorithm's runtime grows both at least and at most proportionally to the specified function.  For example, Θ(n) means the algorithm's runtime grows linearly with the input size.  This provides the most precise description of complexity.
+
+**Common Complexity Classes:**
+
+Here are some common complexity classes, ordered from most efficient to least efficient:
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Accessing an element in an array by index is an example.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Binary search is a classic example.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size.  Searching an unsorted array for a specific element is an example.
+* **O(n log n) - Linearithmic Time:**  The runtime is a combination of linear and logarithmic growth.  Merge sort and heapsort are examples.
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size.  Nested loops iterating over the entire input are a common cause.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Brute-force approaches to many problems fall into this category.
+* **O(n!) - Factorial Time:** The runtime is proportional to the factorial of the input size.  This is extremely slow for even moderately sized inputs.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically follow these steps:
+
+1. **Identify the basic operation:**  This is the operation that contributes most significantly to the algorithm's runtime.
+2. **Count the number of times the basic operation is executed:** Express this count as a function of the input size (n).
+3. **Use Big O notation to express the growth rate of the function.** Ignore constant factors and lower-order terms.
+
+
+**Example:**
+
+Consider a simple algorithm that finds the maximum element in an unsorted array of size n:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+The basic operation is the comparison (`x > max_val`). This operation is executed n times (once for each element in the array). Therefore, the time complexity of this algorithm is O(n).  The space complexity is O(1) because it uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is crucial for choosing efficient algorithms and optimizing code performance, especially when dealing with large datasets.  Inefficient algorithms can quickly become unusable as the input size increases.
+
