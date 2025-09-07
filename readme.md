@@ -78976,3 +78976,74 @@ Begin with fundamental algorithms and data structures:
 
 Learning algorithms is an iterative process.  Be patient, persistent, and enjoy the challenge!  You'll gradually improve your problem-solving skills and become a more proficient programmer.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Problem 1: Two Sum (Easy)**
+
+Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Problem 2: Reverse a Linked List (Medium)**
+
+Reverse a singly linked list.
+
+**Example:**
+
+```
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+```
+
+**Problem 3:  Longest Palindromic Substring (Medium/Hard)**
+
+Given a string `s`, find the longest palindromic substring in `s`.
+
+**Example:**
+
+```
+Input: s = "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+```
+
+**Problem 4:  Graph Traversal (Medium/Hard):**
+
+Given an undirected graph represented as an adjacency list, perform a breadth-first search (BFS) or depth-first search (DFS) traversal and return the visited nodes in the order they were visited.
+
+
+**Example (BFS):**
+
+```
+Graph represented as adjacency list:
+0: [1, 2]
+1: [0, 3]
+2: [0, 4]
+3: [1]
+4: [2]
+
+BFS starting at node 0: [0, 1, 2, 3, 4]
+```
+
+
+These problems demonstrate a range of concepts:
+
+* **Problem 1:**  Focuses on array manipulation and efficient searching (often solved using a hash table).
+* **Problem 2:** Deals with linked lists and pointer manipulation.  Tests understanding of data structures.
+* **Problem 3:** Requires string manipulation, dynamic programming (or a cleverer approach), and potentially optimization for efficiency.
+* **Problem 4:** Tests understanding of graph traversal algorithms and data structures.
+
+
+Choosing the right problem depends on your current skill level.  Start with easier problems and gradually work your way up to harder ones. Remember to consider time and space complexity when designing your solution.
+
