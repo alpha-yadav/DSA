@@ -80197,3 +80197,114 @@ While Big O describes the worst-case scenario, other notations exist:
 
 Understanding Big O notation is crucial for writing efficient and scalable code. It's a fundamental concept in computer science and software engineering.
 
+#  A Simple Loop 
+The term "a simple loop" is very broad.  To give you a helpful answer, I need more context.  A simple loop in what programming language?  What should the loop *do*?
+
+Here are some examples of simple loops in different programming languages:
+
+**Python:**
+
+This loop prints numbers 1 through 5:
+
+```python
+for i in range(1, 6):
+  print(i)
+```
+
+This loop does the same thing, but using a `while` loop:
+
+```python
+i = 1
+while i <= 5:
+  print(i)
+  i += 1
+```
+
+
+**JavaScript:**
+
+This loop prints numbers 1 through 5:
+
+```javascript
+for (let i = 1; i <= 5; i++) {
+  console.log(i);
+}
+```
+
+This loop does the same thing using a `while` loop:
+
+```javascript
+let i = 1;
+while (i <= 5) {
+  console.log(i);
+  i++;
+}
+```
+
+**C++:**
+
+This loop prints numbers 1 through 5:
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 1; i <= 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+This loop does the same thing using a `while` loop:
+
+```c++
+#include <iostream>
+
+int main() {
+  int i = 1;
+  while (i <= 5) {
+    std::cout << i << std::endl;
+    i++;
+  }
+  return 0;
+}
+```
+
+**Java:**
+
+This loop prints numbers 1 through 5:
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 1; i <= 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+This loop does the same thing using a `while` loop:
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int i = 1;
+    while (i <= 5) {
+      System.out.println(i);
+      i++;
+    }
+  }
+}
+```
+
+These are all examples of very simple loops.  To get a more specific and helpful example, please tell me:
+
+* **What programming language are you using?**
+* **What should the loop do?** (e.g., "iterate through a list," "repeat a task a certain number of times," "continue until a condition is met")
+* **What data should the loop process?** (e.g., numbers, strings, objects)
+
+
+With more information, I can provide a much more tailored and useful example.
+
