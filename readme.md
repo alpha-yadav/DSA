@@ -79237,3 +79237,57 @@ Therefore, we can write `f(n) = Θ(n²)`, because `2n² ≤ 2n² + 5n + 1 ≤ 8n
 
 In short, Θ gives a tighter, more precise description of a function's growth rate than O or Ω alone.  If *f(n)* is Θ(*g(n)*), then it's also O(*g(n)*) and Ω(*g(n)*), but the converse is not always true.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of functions, particularly useful in analyzing the efficiency of algorithms.  Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Upper bound.  `f(n) = O(g(n))` means that there exist positive constants `c` and `n₀` such that `0 ≤ f(n) ≤ c*g(n)` for all `n ≥ n₀`.  In simpler terms, `f(n)` grows no faster than `g(n)`.
+* **Focus:** Worst-case scenario.  It tells us the maximum amount of resources (time or space) an algorithm might consume.
+* **Example:** If an algorithm's runtime is `f(n) = 2n² + 5n + 1`, we can say its time complexity is `O(n²)`, ignoring lower-order terms and constant factors.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Lower bound. `f(n) = Ω(g(n))` means there exist positive constants `c` and `n₀` such that `0 ≤ c*g(n) ≤ f(n)` for all `n ≥ n₀`.  `f(n)` grows at least as fast as `g(n)`.
+* **Focus:** Best-case scenario (or a lower bound on the growth rate).  It provides a guarantee on how fast an algorithm will *at least* perform.
+* **Example:** For the same `f(n) = 2n² + 5n + 1`, we can say its time complexity is `Ω(n²)`.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Tight bound. `f(n) = Θ(g(n))` means that `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  In other words, `f(n)` grows at the same rate as `g(n)`.
+* **Focus:** Precise characterization of growth.  It gives a more accurate description of the algorithm's performance compared to just Big O.
+* **Example:** `f(n) = 2n² + 5n + 1` is `Θ(n²)`.
+
+**4. Little o Notation (o):**
+
+* **Meaning:** Strict upper bound. `f(n) = o(g(n))` means that for *every* positive constant `c`, there exists a positive constant `n₀` such that `0 ≤ f(n) < c*g(n)` for all `n ≥ n₀`.  `f(n)` grows strictly slower than `g(n)`.
+* **Focus:** Showing a significant difference in growth rates.
+* **Example:** `n = o(n²)`,  `log n = o(n)`.
+
+**5. Little omega Notation (ω):**
+
+* **Meaning:** Strict lower bound. `f(n) = ω(g(n))` means that for *every* positive constant `c`, there exists a positive constant `n₀` such that `0 ≤ c*g(n) < f(n)` for all `n ≥ n₀`. `f(n)` grows strictly faster than `g(n)`.
+* **Focus:** Showing a significant difference in growth rates.
+* **Example:** `n² = ω(n)`, `2ⁿ = ω(n²)`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Focus                                      | Example                |
+|---------|---------------------------------------|-------------------------------------------|-------------------------|
+| O       | Upper bound                           | Worst-case (or upper bound on growth)     | 2n² + 5n + 1 = O(n²)    |
+| Ω       | Lower bound                           | Best-case (or lower bound on growth)      | 2n² + 5n + 1 = Ω(n²)    |
+| Θ       | Tight bound                           | Precise growth rate                       | 2n² + 5n + 1 = Θ(n²)    |
+| o       | Strict upper bound                    | Showing significantly slower growth        | n = o(n²)              |
+| ω       | Strict lower bound                    | Showing significantly faster growth        | n² = ω(n)              |
+
+
+**Key Differences and Relationships:**
+
+* **Big O vs. Little o:**  Big O allows for the possibility that f(n) might grow at the *same* rate as g(n), while little o requires that f(n) grows strictly slower.
+* **Big Omega vs. Little omega:** Similar to above, but for lower bounds.
+* **Θ implies O and Ω:** If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+
+
+Understanding these notations is crucial for analyzing and comparing the efficiency of different algorithms.  They provide a framework for discussing algorithm performance independent of specific hardware or implementation details.
+
