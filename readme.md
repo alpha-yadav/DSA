@@ -81841,3 +81841,104 @@ The lowest common ancestor (LCA) of two nodes in a binary tree is the lowest nod
 
 Remember to adapt the code to your specific needs and data structures.  The recursive method is usually a great starting point for its simplicity and efficiency.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree or graph is a fundamental problem in computer science with applications in various fields like phylogenetics, file systems, and version control systems.  There are several approaches, each with its own time and space complexity trade-offs.  The best approach depends on the type of tree (binary, general), whether it's rooted or unrooted, and whether you have parent pointers or only child pointers.
+
+Here's a breakdown of common methods:
+
+**1. Recursive Approach (for Binary Trees with Parent Pointers):**
+
+This is a simple and efficient method if you have parent pointers (each node knows its parent).
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.parent = None
+
+def lca_with_parent_pointers(node1, node2):
+    ancestors1 = set()
+    current = node1
+    while current:
+        ancestors1.add(current)
+        current = current.parent
+
+    current = node2
+    while current:
+        if current in ancestors1:
+            return current
+        current = current.parent
+
+    return None  # No LCA found (e.g., nodes in different subtrees)
+
+
+#Example Usage:
+root = Node("A")
+B = Node("B"); B.parent = root
+C = Node("C"); C.parent = root
+D = Node("D"); D.parent = B
+E = Node("E"); E.parent = B
+F = Node("F"); F.parent = C
+
+print(f"LCA of D and E: {lca_with_parent_pointers(D,E).data}") # Output: B
+print(f"LCA of D and F: {lca_with_parent_pointers(D,F).data}") # Output: A
+```
+
+**2. Recursive Approach (for Binary Trees without Parent Pointers):**
+
+If you don't have parent pointers, you need to traverse the tree.  This is more complex but still relatively efficient for binary trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca_without_parent_pointers(root, node1, node2):
+    if not root or root == node1 or root == node2:
+        return root
+
+    left_lca = lca_without_parent_pointers(root.left, node1, node2)
+    right_lca = lca_without_parent_pointers(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example Usage (similar structure to the previous example)
+root = Node("A")
+root.left = Node("B")
+root.right = Node("C")
+root.left.left = Node("D")
+root.left.right = Node("E")
+root.right.left = Node("F")
+
+
+print(f"LCA of D and E: {lca_without_parent_pointers(root, root.left.left, root.left.right).data}") # Output: B
+print(f"LCA of D and F: {lca_without_parent_pointers(root, root.left.left, root.right.left).data}") # Output: A
+
+```
+
+**3. Iterative Approach (using Depth-First Search - DFS):**
+
+This approach is generally suitable for general trees (not just binary trees) and offers flexibility.  It uses DFS to find paths from the root to each node and then finds the LCA by comparing the paths.
+
+**4.  Using Lowest Common Ancestor in a Graph:**
+
+Finding the LCA in a general graph is more complex than in a tree because there might be multiple paths between two nodes.  Algorithms like Tarjan's off-line LCA algorithm are efficient for finding LCAs for multiple pairs of nodes in a graph.
+
+
+**Choosing the Right Approach:**
+
+* **Parent pointers:** If you have parent pointers, the first recursive method is the simplest and most efficient.
+* **Binary tree, no parent pointers:** The second recursive method is a good choice.
+* **General tree, no parent pointers:** An iterative approach using DFS or a more sophisticated algorithm like Tarjan's algorithm might be necessary.
+* **Large datasets, multiple LCA queries:** For many LCA queries on the same tree/graph, consider pre-processing the tree to create a data structure that allows for constant-time LCA lookups (e.g., using the Euler tour technique or binary lifting).
+
+
+Remember to handle edge cases like when one or both nodes are not in the tree, or when the nodes are the same.  Always carefully consider the structure of your tree or graph and the constraints of your problem before selecting an algorithm.
+
