@@ -82251,3 +82251,90 @@ Topological sorting has many applications in various fields, including:
 
 Remember to always check for cycles before attempting a topological sort, as it's not possible on graphs with cycles.  Kahn's algorithm is generally the preferred method due to its efficiency and explicit cycle detection.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) involves tracking the state of each node during the traversal. We use three states for each node:
+
+* **Unvisited:** The node hasn't been explored yet.
+* **Visiting:** The node is currently being explored (in the recursion stack).
+* **Visited:** The node has been fully explored (recursion has completed for it).
+
+A cycle exists if we encounter a node that's already in the "Visiting" state during our DFT. This indicates a back edge – an edge that leads to an ancestor node in the current recursion path.
+
+Here's how it works in detail, along with Python code:
+
+```python
+def has_cycle(graph):
+    """
+    Detects cycles in a directed graph using Depth First Traversal.
+
+    Args:
+      graph: A dictionary representing the graph where keys are nodes and values are lists of their neighbors.
+
+    Returns:
+      True if the graph contains a cycle, False otherwise.
+    """
+    num_nodes = len(graph)
+    visited = [0] * num_nodes  # 0: Unvisited, 1: Visiting, 2: Visited
+
+    def dfs(node):
+        visited[node] = 1  # Mark as Visiting
+        for neighbor in graph.get(node, []):
+            if visited[neighbor] == 1:  # Cycle detected!
+                return True
+            if visited[neighbor] == 0 and dfs(neighbor):
+                return True
+        visited[node] = 2  # Mark as Visited
+        return False
+
+    for node in graph:
+        if visited[node] == 0:
+            if dfs(node):
+                return True
+    return False
+
+
+# Example Usage:
+graph1 = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: []
+}
+
+graph2 = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [0]  # Cycle!
+}
+
+graph3 = {
+    0: [1],
+    1: [2],
+    2: [3],
+    3: []
+}
+
+print(f"Graph 1 has cycle: {has_cycle(graph1)}")  # Output: False
+print(f"Graph 2 has cycle: {has_cycle(graph2)}")  # Output: True
+print(f"Graph 3 has cycle: {has_cycle(graph3)}")  # Output: False
+
+```
+
+**Explanation:**
+
+1. **`has_cycle(graph)`:** This function initializes a `visited` array to track node states and iterates through each node. If a node is unvisited, it calls the `dfs` function.
+
+2. **`dfs(node)`:** This recursive function performs Depth First Search.
+   - It marks the current node as "Visiting" (`visited[node] = 1`).
+   - It iterates through the neighbors of the node.
+   - If a neighbor is already "Visiting," a cycle is detected, and `True` is returned.
+   - If a neighbor is "Unvisited," the `dfs` function is recursively called on it. If the recursive call returns `True` (indicating a cycle), `True` is returned.
+   - After exploring all neighbors, the node is marked as "Visited" (`visited[node] = 2`).
+   - If no cycle is detected during the traversal of this node's subtree, `False` is returned.
+
+3. The main function iterates through all nodes. If any call to `dfs` returns `True`, it means a cycle exists, and the function returns `True`. Otherwise, it returns `False`.
+
+
+This approach efficiently detects cycles in directed graphs using the properties of Depth First Search and the three-state tracking of nodes.  Remember that this code assumes that node indices start from 0 and go up to `len(graph) -1`.  You might need to adjust it if your graph uses different node labels.
+
