@@ -82338,3 +82338,51 @@ print(f"Graph 3 has cycle: {has_cycle(graph3)}")  # Output: False
 
 This approach efficiently detects cycles in directed graphs using the properties of Depth First Search and the three-state tracking of nodes.  Remember that this code assumes that node indices start from 0 and go up to `len(graph) -1`.  You might need to adjust it if your graph uses different node labels.
 
+#  Thorup's algorithm 
+Thorup's algorithm refers to a family of algorithms developed by Mikkel Thorup, primarily focused on efficiently solving graph problems.  The most famous and impactful of these is his algorithm for finding **single-source shortest paths (SSSP)** in undirected graphs with non-negative edge weights.  However, he's also made significant contributions to other graph algorithms.
+
+Let's break down the key aspects, focusing on the SSSP algorithm:
+
+**Thorup's SSSP Algorithm (for undirected graphs with non-negative weights):**
+
+* **Goal:** Find the shortest path from a single source vertex to all other vertices in an undirected graph with non-negative edge weights.
+
+* **Key Idea:**  Thorup's algorithm cleverly combines ideas from Dijkstra's algorithm and sophisticated data structures to achieve near-linear time complexity.  It's based on a technique called *sparse graph representation* and *randomized sampling*.
+
+* **Steps (High-level):**
+
+    1. **Sampling:** The algorithm randomly samples a subset of edges from the graph. This sampled subgraph is significantly smaller than the original graph.
+
+    2. **Shortest Paths in Sampled Graph:** Dijkstra's algorithm (or a similar algorithm) is used to compute shortest paths in this smaller sampled graph.  These paths provide approximate shortest path distances in the original graph.
+
+    3. **Bucket Data Structure:** The algorithm uses a sophisticated bucket data structure to efficiently manage the remaining edges (not included in the sample).  This structure helps to identify edges that could potentially improve the shortest path distances found in step 2.
+
+    4. **Iterative Refinement:** The algorithm iteratively processes the remaining edges, updating shortest path distances whenever a shorter path is found using the bucket structure.  This ensures that the final solution is correct.
+
+* **Time Complexity:**  Thorup's algorithm achieves a near-linear time complexity of  `O(m α(m, n))`, where:
+    * `m` is the number of edges.
+    * `n` is the number of vertices.
+    * `α(m, n)` is the inverse Ackermann function, which grows extremely slowly and is practically a constant for all graphs that could realistically be stored in a computer's memory.  This makes the runtime essentially linear in the number of edges.
+
+* **Space Complexity:** The space complexity is also near-linear.
+
+* **Advantages:**
+    * **Near-linear time complexity:**  Significantly faster than Dijkstra's algorithm for large, sparse graphs.
+    * **Simple to implement (relatively):** While the underlying concepts are sophisticated, the algorithm's implementation is surprisingly manageable compared to its theoretical complexity.
+
+* **Disadvantages:**
+    * **Randomized:** The algorithm's performance relies on the randomness of the sampling process.  While the expected runtime is near-linear, there's a small probability of a worse-case scenario (though highly unlikely in practice).
+    * **Undirected graphs only (in its original form):** The algorithm, in its simplest form, is designed for undirected graphs. Extensions exist for directed graphs, but they are more complex.
+
+
+**Other contributions of Thorup:**
+
+Thorup has made significant contributions to various other areas of graph algorithms, including:
+
+* **Dynamic graph algorithms:** Algorithms that efficiently handle updates (insertions and deletions) to the graph structure.
+* **Minimum spanning tree algorithms:**  Developing highly efficient algorithms for finding minimum spanning trees.
+* **Approximate algorithms:** Algorithms that provide approximate solutions to difficult problems in near-linear time.
+
+
+In summary, Thorup's algorithms, particularly his SSSP algorithm, represent a major advance in the field of graph algorithms, offering near-linear time solutions for problems previously thought to require more time. They are significant for their efficiency and practical applicability to large-scale graph processing.
+
