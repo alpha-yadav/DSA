@@ -79291,3 +79291,51 @@ Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) descr
 
 Understanding these notations is crucial for analyzing and comparing the efficiency of different algorithms.  They provide a framework for discussing algorithm performance independent of specific hardware or implementation details.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is used in computer science to describe the lower bound of an algorithm's runtime or space complexity.  In simpler terms, it provides a guarantee about the *minimum* amount of resources (time or space) an algorithm will *always* require, regardless of the input.  It's a crucial part of analyzing algorithms' efficiency and comparing their performance.
+
+Here's a breakdown of key aspects:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Ω(*g(n)*) if there exist positive constants *c* and *n₀* such that  0 ≤ *c* *g(n)* ≤ *f(n)* for all *n* ≥ *n₀*.
+
+Let's dissect this:
+
+* **f(n):** Represents the actual runtime (or space complexity) of the algorithm as a function of input size *n*.
+* **g(n):** Represents a simpler function that describes the lower bound.  This is often a well-known function like *n*, *n log n*, *n²*, etc.
+* **c:** A positive constant.  It accounts for the fact that we're only interested in the asymptotic behavior (as *n* approaches infinity).  We're not concerned with small constant factors.
+* **n₀:** A positive integer constant. This allows us to ignore small input sizes where the algorithm's behavior might be irregular. The inequality only needs to hold for sufficiently large *n*.
+
+**What Ω Notation Tells Us:**
+
+* **Lower Bound:**  Ω(*g(n)*) means the algorithm's runtime will *always* be at least proportional to *g(n)* for sufficiently large inputs.  It gives us a best-case scenario lower bound.  Even in the most favorable input conditions, the algorithm will take at least that much time (or space).
+* **Asymptotic Behavior:**  Ω notation focuses on the behavior of the algorithm as the input size (*n*) grows very large. We're not concerned with small inputs or constant factors.
+* **Not a Precise Measurement:** Ω doesn't tell us the exact runtime.  It only provides a lower bound.  An algorithm could actually perform much better than the lower bound in practice, but it's guaranteed to never be *significantly* worse.
+
+**Example:**
+
+Let's say we have an algorithm with a runtime function *f(n) = n² + 2n + 1*.
+
+We can say that *f(n)* is Ω(*n²*) because:
+
+1. We can choose *c = 1/2*.
+2. For sufficiently large *n* (e.g., *n₀ = 1*),  *n²/2* ≤ *n² + 2n + 1* always holds true.
+
+
+**Relationship to Big-O and Big-Theta:**
+
+* **Big-O (O):** Describes the upper bound (worst-case scenario) of an algorithm's runtime.
+* **Big-Theta (Θ):** Describes both the upper and lower bounds (tight bound) of an algorithm's runtime.  If *f(n)* = Θ(*g(n)*), then *f(n)* = O(*g(n)*) and *f(n)* = Ω(*g(n)*).
+
+In essence:
+
+* O provides an upper limit.
+* Ω provides a lower limit.
+* Θ provides a tight bound (both upper and lower limits).
+
+
+**In Summary:**
+
+Big-Omega notation is a powerful tool for understanding the fundamental limitations of algorithms.  While Big-O often gets more attention, understanding Ω is equally important for a complete analysis of algorithm efficiency.  It provides a crucial guarantee about the minimum resources an algorithm will always require.
+
