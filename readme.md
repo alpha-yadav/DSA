@@ -81230,3 +81230,126 @@ print(is_bst_recursive(root2))  # Output: False
 
 Both methods effectively solve the problem. Choose the method that best suits your understanding and coding style.  The recursive method might be slightly preferred for its space efficiency in the average case with balanced trees.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Inorder Traversal and Sorted Array**
+
+This method leverages the property that an inorder traversal of a BST yields a sorted sequence of nodes.
+
+1. **Inorder Traversal:** Perform an inorder traversal of the binary tree, storing the values of the visited nodes in an array.
+
+2. **Sorted Check:** Check if the array is sorted in ascending order. If it is, the tree is a BST; otherwise, it's not.
+
+```python
+def is_bst_inorder(root):
+    """Checks if a binary tree is a BST using inorder traversal.
+
+    Args:
+        root: The root node of the binary tree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if root is None:
+        return True
+
+    inorder_list = []
+    _inorder_traversal(root, inorder_list)
+
+    # Check if the inorder traversal is sorted
+    for i in range(1, len(inorder_list)):
+        if inorder_list[i] < inorder_list[i - 1]:
+            return False
+    return True
+
+
+def _inorder_traversal(node, inorder_list):
+    """Performs an inorder traversal and appends values to the list."""
+    if node:
+        _inorder_traversal(node.left, inorder_list)
+        inorder_list.append(node.data)  # Assuming 'data' attribute holds node value
+        _inorder_traversal(node.right, inorder_list)
+
+# Example usage (assuming you have a Node class defined):
+# root = Node(8)
+# root.left = Node(3)
+# root.right = Node(10)
+# root.left.left = Node(1)
+# root.left.right = Node(6)
+# print(is_bst_inorder(root))  # Output: True
+
+
+#Example of a tree that's not a BST
+#root2 = Node(8)
+#root2.left = Node(10)
+#root2.right = Node(3)
+#print(is_bst_inorder(root2)) #Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max**
+
+This method recursively checks each subtree, maintaining the minimum and maximum allowed values for each node.
+
+1. **Base Case:** An empty tree is a BST.
+
+2. **Recursive Step:** For each node:
+   - Check if the node's value is within the allowed range (between `min` and `max`).
+   - Recursively check the left subtree with `max` set to the node's value.
+   - Recursively check the right subtree with `min` set to the node's value.
+
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+def is_bst_recursive(root, min_val=-float('inf'), max_val=float('inf')):
+    """Checks if a binary tree is a BST using recursion.
+
+    Args:
+        root: The root node of the binary tree.
+        min_val: The minimum allowed value for the node.
+        max_val: The maximum allowed value for the node.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if root is None:
+        return True
+
+    if not (min_val < root.data < max_val):
+        return False
+
+    return (is_bst_recursive(root.left, min_val, root.data) and
+            is_bst_recursive(root.right, root.data, max_val))
+
+
+# Example usage:
+root = Node(8)
+root.left = Node(3)
+root.right = Node(10)
+root.left.left = Node(1)
+root.left.right = Node(6)
+print(is_bst_recursive(root))  # Output: True
+
+root2 = Node(8)
+root2.left = Node(10)
+root2.right = Node(3)
+print(is_bst_recursive(root2)) #Output: False
+
+```
+
+**Choosing a Method:**
+
+- The **inorder traversal method** is simpler to understand and implement, but it requires extra space to store the inorder traversal (O(N) space complexity).
+
+- The **recursive method** is generally more efficient in terms of space complexity (O(h), where h is the height of the tree), especially for balanced trees, because it doesn't need to store the entire inorder traversal.  For highly unbalanced trees, it could approach O(N) space complexity in the worst case.
+
+
+Both methods have a time complexity of O(N), where N is the number of nodes in the tree.  Choose the method that best suits your needs and understanding.  The recursive method is often preferred for its space efficiency in most cases.
+
