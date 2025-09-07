@@ -80631,3 +80631,70 @@ print(f"Tree 1 and Tree 3 are same (iterative): {are_trees_same_iterative(root1,
 
 Both methods achieve the same result. The recursive approach is generally considered more elegant and easier to understand, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues with very deep trees).  Choose the method that best suits your coding style and the specific constraints of your application. Remember to handle the case of `None` nodes appropriately in both methods.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used to store data in a sorted way.  They offer efficient searching, insertion, and deletion operations compared to unsorted arrays or linked lists, especially when the data is already somewhat sorted.
+
+**Key Properties of a BST:**
+
+* **Each node contains a key (and optionally, associated data).**
+* **Every node's left subtree contains only nodes with keys less than the node's key.**
+* **Every node's right subtree contains only nodes with keys greater than the node's key.**
+* **There are no duplicate keys.**  (Some implementations allow duplicates, but they complicate the structure and algorithms.)
+
+**Diagrammatic Representation:**
+
+A BST is usually visualized as a tree structure.  For example:
+
+```
+      8
+     / \
+    3   10
+   / \    \
+  1   6    14
+     / \   /
+    4   7 13
+```
+
+In this example:
+
+* 8 is the root node.
+* All nodes in the left subtree of 8 (3, 1, 6, 4, 7) are less than 8.
+* All nodes in the right subtree of 8 (10, 14, 13) are greater than 8.
+* This property holds recursively for all nodes in the tree.
+
+
+**Basic Operations:**
+
+* **Search:**  Starts at the root. If the target key is equal to the current node's key, it's found. If the target key is less, search the left subtree; otherwise, search the right subtree.  This has a time complexity of O(h), where h is the height of the tree.  In a balanced tree, h is approximately log₂(n), where n is the number of nodes.  In a worst-case scenario (a skewed tree resembling a linked list), h could be n.
+
+* **Insertion:** Similar to search, navigate down the tree until you find the appropriate place to insert the new node (as a leaf node).  Time complexity is O(h).
+
+* **Deletion:**  This is the most complex operation.  Several cases need to be handled:
+    * Node to be deleted is a leaf node (easy).
+    * Node to be deleted has one child (relatively easy).
+    * Node to be deleted has two children (more complex; requires finding the inorder successor or predecessor). Time complexity is also O(h).
+
+* **Minimum/Maximum:**  Finding the minimum element involves traversing the left subtree until you reach a leaf node. Finding the maximum involves traversing the right subtree.  Both are O(h).
+
+**Advantages of BSTs:**
+
+* **Efficient search, insertion, and deletion (in balanced trees).**
+* **Data is stored in sorted order.**
+* **Simple implementation (conceptually).**
+
+**Disadvantages of BSTs:**
+
+* **Performance degrades significantly in unbalanced trees (worst-case O(n) for all operations).**  Self-balancing BSTs (like AVL trees or red-black trees) address this issue.
+* **Not suitable for all applications.**  For example, if frequent updates are needed in the middle of the tree, other structures might be more efficient.
+
+
+**Self-Balancing BSTs:**
+
+To mitigate the problem of unbalanced trees, self-balancing BSTs are used. These trees automatically adjust their structure during insertion and deletion to maintain a balanced state, ensuring logarithmic time complexity for operations.  Examples include:
+
+* **AVL Trees:**  Maintain a balance factor for each node to ensure that the height difference between the left and right subtrees is at most 1.
+* **Red-Black Trees:**  Use a coloring scheme to ensure that no path from the root to a leaf is more than twice as long as any other path.
+
+
+In summary, Binary Search Trees provide an efficient way to manage sorted data, but their performance heavily depends on maintaining a balanced tree structure.  For applications where efficiency is critical and the data might become unbalanced, self-balancing BSTs are often preferred.
+
