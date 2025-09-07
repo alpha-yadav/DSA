@@ -80007,3 +80007,35 @@ The basic operation is the comparison (`x > max_val`). This operation is execute
 
 Understanding algorithm complexity is crucial for choosing efficient algorithms and optimizing code performance, especially when dealing with large datasets.  Inefficient algorithms can quickly become unusable as the input size increases.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science and mathematics to describe the asymptotic behavior of functions.  Specifically, it provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds.  Unlike Big-O notation, which only provides an upper bound, and Big-Omega notation (Ω), which only provides a lower bound, Big-Theta gives a much more precise characterization of a function's growth.
+
+**Formal Definition:**
+
+Given two functions *f(n)* and *g(n)*, we say that *f(n)* is Θ(*g(n)*) if and only if there exist positive constants *c<sub>1</sub>*, *c<sub>2</sub>*, and *n<sub>0</sub>* such that for all *n ≥ n<sub>0</sub>*:
+
+`c<sub>1</sub> * g(n) ≤ f(n) ≤ c<sub>2</sub> * g(n)`
+
+This means that *f(n)* is bounded both above and below by constant multiples of *g(n)* for sufficiently large *n*.  The constants *c<sub>1</sub>* and *c<sub>2</sub>* are crucial; they ensure that the growth rates are proportionally related.  *n<sub>0</sub>* represents a threshold value beyond which the inequality holds.
+
+**In simpler terms:**
+
+*f(n) = Θ(g(n))* means that *f(n)* grows at the same rate as *g(n)*.  The functions are asymptotically equivalent in their growth.  They have the same order of growth.
+
+**Examples:**
+
+* **f(n) = 2n + 5; g(n) = n:**  f(n) = Θ(n).  We can find *c<sub>1</sub>*, *c<sub>2</sub>*, and *n<sub>0</sub>* that satisfy the definition.  For instance, if *c<sub>1</sub> = 1*, *c<sub>2</sub> = 3*, and *n<sub>0</sub> = 5*, the inequality holds for all *n ≥ n<sub>0</sub>*.
+
+* **f(n) = n² + 3n + 1; g(n) = n²:** f(n) = Θ(n²).  The higher-order term (n²) dominates the growth.
+
+* **f(n) = 2<sup>n</sup>; g(n) = 3<sup>n</sup>:** f(n) ≠ Θ(g(n)).  While both are exponential, they have different bases, resulting in different growth rates.  f(n) = O(g(n)) (Big O notation) because it is upper bounded by g(n) but they aren't Theta of each other.
+
+**Key differences from Big-O and Big-Omega:**
+
+* **Big-O (O):** Provides an upper bound.  *f(n) = O(g(n))* means *f(n)* grows no faster than *g(n)*.
+* **Big-Omega (Ω):** Provides a lower bound. *f(n) = Ω(g(n))* means *f(n)* grows at least as fast as *g(n)*.
+* **Big-Theta (Θ):** Provides both upper and lower bounds, indicating that *f(n)* and *g(n)* grow at the same rate.  Θ is a stronger statement than O or Ω alone.
+
+
+Big-Theta notation is essential for analyzing the efficiency of algorithms. By determining the time or space complexity of an algorithm using Θ notation, we can compare algorithms and choose the most efficient one for a given problem.  It allows for a more precise analysis than Big-O alone, providing a clearer understanding of an algorithm's scaling properties.
+
