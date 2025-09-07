@@ -81942,3 +81942,6 @@ Finding the LCA in a general graph is more complex than in a tree because there 
 
 Remember to handle edge cases like when one or both nodes are not in the tree, or when the nodes are the same.  Always carefully consider the structure of your tree or graph and the constraints of your problem before selecting an algorithm.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about the x and y values (or a function) to create a graph.
+
