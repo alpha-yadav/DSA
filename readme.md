@@ -80432,3 +80432,16 @@ While binary search is the most common, other algorithms exhibit logarithmic tim
 
 The key characteristic of O(log n) algorithms is that they efficiently reduce the problem size with each step, leading to a significantly faster runtime compared to linear (O(n)) or quadratic (O(n²)) algorithms for large inputs.
 
+#  Trees 
+Trees are fascinating and incredibly important organisms.  To help me give you the best information about trees, could you tell me what you'd like to know?  For example, are you interested in:
+
+* **Specific types of trees?** (e.g., oak trees, redwood trees, maple trees)
+* **The biology of trees?** (e.g., photosynthesis, growth, reproduction)
+* **The ecology of trees?** (e.g., their role in ecosystems, forest management)
+* **The uses of trees?** (e.g., lumber, paper, fruit)
+* **Trees in art, culture, or mythology?**
+* **Threats to trees?** (e.g., deforestation, climate change, disease)
+
+
+The more specific your question, the better I can answer it.
+
