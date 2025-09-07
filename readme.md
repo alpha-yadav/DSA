@@ -82156,3 +82156,98 @@ graph.print_graph()
 
 The best choice between adjacency list and adjacency matrix depends on the specific characteristics of your graph (sparse vs. dense) and the operations you'll be performing most frequently.  For many applications, especially those involving sparse graphs and neighbor discovery, adjacency lists are preferred.
 
+#  Topological Sort 
+A topological sort is a linear ordering of the nodes in a directed acyclic graph (DAG) such that for every directed edge from node A to node B, node A appears before node B in the ordering.  In simpler terms, it's an ordering where you can't go backwards along any edges.  If a graph contains cycles, a topological sort is impossible.
+
+**Key Concepts:**
+
+* **Directed Acyclic Graph (DAG):** A graph where all edges have a direction (arrows), and there are no cycles (paths that start and end at the same node).  Topological sorting only applies to DAGs.
+* **In-degree:** The number of incoming edges to a node.
+* **Out-degree:** The number of outgoing edges from a node.
+
+**Algorithms:**
+
+There are two primary algorithms for topological sorting:
+
+1. **Kahn's Algorithm (using in-degree):**
+
+   This algorithm is generally preferred for its efficiency and clarity.
+
+   * **Initialization:**  Calculate the in-degree of each node. Create a queue `Q` containing all nodes with an in-degree of 0 (nodes with no incoming edges).
+   * **Iteration:**  While `Q` is not empty:
+      * Remove a node `n` from `Q`.
+      * Add `n` to the sorted list (result).
+      * For each neighbor `m` of `n`:
+         * Decrement the in-degree of `m`.
+         * If the in-degree of `m` becomes 0, add `m` to `Q`.
+   * **Cycle Detection:** If the final sorted list has fewer nodes than the total number of nodes in the graph, then a cycle exists, and topological sorting is impossible.
+
+   **Python Code (Kahn's Algorithm):**
+
+   ```python
+   from collections import defaultdict
+
+   def topological_sort(graph):
+       in_degree = defaultdict(int)
+       for node in graph:
+           for neighbor in graph[node]:
+               in_degree[neighbor] += 1
+
+       queue = [node for node in graph if in_degree[node] == 0]
+       result = []
+
+       while queue:
+           node = queue.pop(0)
+           result.append(node)
+           for neighbor in graph[node]:
+               in_degree[neighbor] -= 1
+               if in_degree[neighbor] == 0:
+                   queue.append(neighbor)
+
+       if len(result) != len(graph):
+           return "Cycle detected - topological sort impossible"  #Cycle detection
+
+       return result
+
+   # Example graph represented as an adjacency list
+   graph = {
+       'A': ['C'],
+       'B': ['C', 'D'],
+       'C': ['E'],
+       'D': ['F'],
+       'E': ['H'],
+       'F': ['G','H'],
+       'G': ['H'],
+       'H':[]
+   }
+
+   sorted_nodes = topological_sort(graph)
+   print(f"Topological Sort: {sorted_nodes}")
+   ```
+
+2. **Depth-First Search (DFS) with Post-order Traversal:**
+
+   This algorithm uses DFS to traverse the graph.  The nodes are added to the sorted list in post-order (after all their descendants have been processed).
+
+   * **Initialization:**  Mark all nodes as unvisited.
+   * **Iteration:**  Perform DFS on each unvisited node.
+   * **DFS:**  For each node:
+      * Mark the node as visited.
+      * Recursively call DFS on all unvisited neighbors.
+      * Add the node to the beginning of the sorted list (post-order).
+
+   **Note:** This approach requires handling recursion depth and might be less efficient than Kahn's algorithm for very large graphs.  Cycle detection is implicit in the DFS process; if you encounter a visited node during traversal, there's a cycle.
+
+
+**Applications:**
+
+Topological sorting has many applications in various fields, including:
+
+* **Course scheduling:** Ordering courses based on prerequisites.
+* **Build systems (like Make):** Determining the order to compile files.
+* **Dependency resolution:**  Resolving dependencies between software components.
+* **Data serialization:** Ordering data elements in a way that preserves dependencies.
+
+
+Remember to always check for cycles before attempting a topological sort, as it's not possible on graphs with cycles.  Kahn's algorithm is generally the preferred method due to its efficiency and explicit cycle detection.
+
