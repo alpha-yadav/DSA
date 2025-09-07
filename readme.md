@@ -79828,3 +79828,55 @@ Let's say you want to find a number in a list. A simple algorithm (linear search
 
 This is a very basic example, but it illustrates the core concept of an algorithm. As you progress, you'll learn more sophisticated and efficient algorithms. Remember to start slowly, focus on understanding the concepts, and practice regularly!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems with varying difficulty levels:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string, e.g., "hello"
+
+**Output:** The reversed string, e.g., "olleh"
+
+**Solution Approach:**  Iterate through the string from the end to the beginning and build a new reversed string.  Alternatively, use built-in string reversal functions if available in your chosen language.
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  Assume there is only one solution, and you may not use the *same* element twice.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+
+**Output:** `[0,1]` because `nums[0] + nums[1] == 9`
+
+
+**Solution Approach:**  A common approach involves using a hashmap (dictionary in Python) to store seen numbers and their indices.  Iterate through the array, checking if the complement (`target - current_number`) exists in the hashmap.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring in `s`.  If there are multiple with the same length, return any one.
+
+**Example:**
+
+`s = "babad"`
+
+**Output:** `"bab"` or `"aba"` (both are valid)
+
+
+**Solution Approach:**  This problem has several solutions, including dynamic programming, expanding around the center, and Manacher's algorithm (most efficient).  The expanding around the center approach is relatively straightforward to understand.  It involves checking for palindromes centered at each character (and between characters) and keeping track of the longest one found.
+
+
+These examples demonstrate a range of complexity.  The choice of which problem to tackle depends on your current skill level and the context (e.g., interview preparation, coursework). Remember to consider time and space complexity when designing your solution.  For example, for the "Two Sum" problem, a brute-force approach (checking all pairs) has O(n^2) time complexity, while the hashmap approach has O(n) time complexity.
+
