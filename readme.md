@@ -80039,3 +80039,59 @@ This means that *f(n)* is bounded both above and below by constant multiples of 
 
 Big-Theta notation is essential for analyzing the efficiency of algorithms. By determining the time or space complexity of an algorithm using Θ notation, we can compare algorithms and choose the most efficient one for a given problem.  It allows for a more precise analysis than Big-O alone, providing a clearer understanding of an algorithm's scaling properties.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) describe the limiting behavior of functions, particularly useful for analyzing the efficiency of algorithms.  Here's a comparison:
+
+**1. Big O Notation (O)**
+
+* **Meaning:**  Upper bound.  `f(n) = O(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ f(n) ≤ c * g(n)` for all `n ≥ n₀`.  In simpler terms:  `f(n)` grows no faster than `g(n)`.
+* **Use:**  Describes the *worst-case* scenario of an algorithm's runtime or space complexity.
+* **Example:**  If an algorithm's runtime is `5n² + 3n + 2`, we can say its time complexity is O(n²).  We ignore constant factors and lower-order terms because they become insignificant as *n* grows very large.
+
+**2. Big Omega Notation (Ω)**
+
+* **Meaning:** Lower bound. `f(n) = Ω(g(n))` means that there exist positive constants *c* and *n₀* such that `0 ≤ c * g(n) ≤ f(n)` for all `n ≥ n₀`.  In simpler terms: `f(n)` grows no slower than `g(n)`.
+* **Use:** Describes the *best-case* scenario of an algorithm's runtime or space complexity.
+* **Example:** If an algorithm's runtime is `5n² + 3n + 2`, we can say its time complexity is Ω(n²).
+
+**3. Big Theta Notation (Θ)**
+
+* **Meaning:** Tight bound. `f(n) = Θ(g(n))` means that `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  In simpler terms: `f(n)` grows at the same rate as `g(n)`.
+* **Use:** Provides a precise characterization of an algorithm's complexity.  It's the most informative notation if you can determine it.
+* **Example:** If an algorithm's runtime is `5n² + 3n + 2`, we can say its time complexity is Θ(n²).
+
+
+**4. Little o Notation (o)**
+
+* **Meaning:**  Strictly upper bound. `f(n) = o(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ f(n) < c * g(n)` for all `n ≥ n₀`.  Crucially, `f(n)` grows *strictly slower* than `g(n)`.
+* **Use:**  Indicates a significant difference in growth rates.
+* **Example:**  `n = o(n²)`, `log n = o(n)`.
+
+
+**5. Little omega Notation (ω)**
+
+* **Meaning:** Strictly lower bound. `f(n) = ω(g(n))` means that for every positive constant *c*, there exists a positive constant *n₀* such that `0 ≤ c * g(n) < f(n)` for all `n ≥ n₀`.  Crucially, `f(n)` grows *strictly faster* than `g(n)`.
+* **Use:**  Indicates a significant difference in growth rates.
+* **Example:** `n² = ω(n)`, `2ⁿ = ω(n²)`.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Example                    |
+|----------|---------------------------------------|-----------------------------|
+| O(g(n))  | Upper bound                           | 5n² + 3n + 2 = O(n²)       |
+| Ω(g(n))  | Lower bound                           | 5n² + 3n + 2 = Ω(n²)       |
+| Θ(g(n))  | Tight bound                          | 5n² + 3n + 2 = Θ(n²)       |
+| o(g(n))  | Strictly upper bound                 | n = o(n²)                   |
+| ω(g(n))  | Strictly lower bound                 | n² = ω(n)                   |
+
+
+**Key Differences and Relationships:**
+
+* **O vs. o:**  O provides a loose upper bound; o provides a strict upper bound.  If `f(n) = o(g(n))`, then `f(n) = O(g(n))`, but the converse isn't necessarily true.
+* **Ω vs. ω:**  Ω provides a loose lower bound; ω provides a strict lower bound.  If `f(n) = ω(g(n))`, then `f(n) = Ω(g(n))`, but the converse isn't necessarily true.
+* **Θ:**  Θ implies both O and Ω.  It indicates that the functions grow at the same rate.
+
+
+Understanding these notations is crucial for comparing algorithm efficiency and making informed decisions about which algorithm to use in different contexts. Remember that asymptotic analysis focuses on the behavior as input size approaches infinity;  it doesn't tell you about the performance for small inputs.
+
