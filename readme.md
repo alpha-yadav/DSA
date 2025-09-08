@@ -83268,3 +83268,34 @@ This demonstrates finding all unique pairs of numbers from a list.  The inner lo
 
 Nested loops are a fundamental programming concept, but remember to use them judiciously, considering their impact on performance and code clarity.  For very large datasets, explore alternative approaches like vectorization (using NumPy in Python) to improve efficiency.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  Their runtime increases logarithmically with the input size (n).  This means that as the input size doubles, the runtime only increases by a constant amount.  This is achieved by repeatedly halving or dividing the problem size.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+**1. Binary Search:**  This is perhaps the most well-known O(log n) algorithm. It works by repeatedly dividing the search interval in half.  It's used to efficiently find a specific element within a *sorted* array or list.
+
+**2. Binary Tree Operations (in a balanced tree):**  Many operations on balanced binary search trees (like AVL trees, red-black trees) have logarithmic time complexity. These include:
+
+* **Search:** Finding a specific node.
+* **Insertion:** Adding a new node.
+* **Deletion:** Removing a node.
+* **Minimum/Maximum:** Finding the smallest or largest element.
+
+**3. Efficient exponentiation:** Calculating a<sup>b</sup> (a to the power of b) using exponentiation by squaring has a time complexity of O(log b). This technique involves repeatedly squaring the base and adjusting the exponent.
+
+**4. Finding the kth smallest/largest element using Quickselect (average case):**  While Quickselect's worst-case time complexity is O(n²), its average-case time complexity is O(n). However, if you want to find the *k*th smallest/largest element in a *sorted* array, you can do it in O(log n) using binary search.
+
+**5. Certain Tree Traversal Algorithms (with balanced trees):** Some tree traversal methods, when applied to balanced trees, can achieve O(log n) complexity in certain scenarios.  This is usually related to finding a specific node based on a particular property.
+
+
+**Key Characteristics Leading to O(log n) Complexity:**
+
+The key to achieving O(log n) complexity is often a process of *divide and conquer*:
+
+* **Halving the problem size at each step:** The algorithm repeatedly reduces the problem size by roughly half with each iteration.
+* **Efficient branching/recursion:**  The algorithm uses branching (e.g., if-else statements) or recursion to explore only a fraction of the input space.
+* **Sorted or structured data:** Many O(log n) algorithms require the input data to be sorted or organized in a specific way (e.g., a binary search tree).
+
+**Important Note:**  The "n" in O(log n) refers to the size of the input data.  The base of the logarithm (usually base 2) is often omitted in Big O notation because it's a constant factor that doesn't significantly affect the overall growth rate.  The base only affects the constant factor multiplying the logarithm, not its overall logarithmic nature.
+
