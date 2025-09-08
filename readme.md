@@ -83558,3 +83558,83 @@ print(f"root1 and root3 are identical (iterative): {are_identical_iterative(root
 
 Both methods achieve the same result. The recursive approach is often preferred for its conciseness and readability, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues with very deep trees).  Choose the method that best suits your coding style and the constraints of your application. Remember to handle the `None` cases appropriately in both methods to avoid errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science used to store data in a sorted manner.  They offer efficient searching, insertion, and deletion operations, making them suitable for various applications.
+
+Here's a breakdown of BSTs, covering key concepts and characteristics:
+
+**Key Properties:**
+
+* **Ordered Structure:**  The key property of a BST is that for every node:
+    * All nodes in the *left* subtree have keys *less than* the node's key.
+    * All nodes in the *right* subtree have keys *greater than* the node's key.
+* **Nodes:** Each node in a BST typically contains:
+    * A key (the data being stored).
+    * A pointer to the left child node.
+    * A pointer to the right child node.
+* **No Duplicates (Usually):**  Most implementations don't allow duplicate keys.  If duplicates are needed, you might add a count to each node or use a slightly different structure.
+* **Unbalanced Trees:** BSTs can become unbalanced (one branch much longer than another), which degrades performance to O(n) in the worst case (like a linked list).  Self-balancing BSTs (like AVL trees or red-black trees) address this issue.
+
+
+**Basic Operations:**
+
+* **Search:**  Starts at the root. If the target key is less than the current node's key, search the left subtree; otherwise, search the right subtree.  Continues recursively until the key is found or the subtree is empty.  Time complexity: O(h), where 'h' is the height of the tree.  In a balanced tree, h ≈ log₂(n), where 'n' is the number of nodes.
+* **Insertion:**  Similar to search, find the appropriate position to insert the new node.  If the key is already present (usually an error), handle the duplicate appropriately. Time complexity: O(h).
+* **Deletion:** More complex than insertion.  Three cases:
+    * Node to be deleted is a leaf (no children): Simply remove it.
+    * Node has one child: Replace the node with its child.
+    * Node has two children:  Find the inorder successor (smallest node in the right subtree) or inorder predecessor (largest node in the left subtree), replace the node's key with the successor/predecessor's key, and then delete the successor/predecessor (which is now a node with at most one child). Time complexity: O(h).
+
+
+**Time Complexity (for balanced trees):**
+
+| Operation | Average Case | Worst Case (unbalanced) |
+|---|---|---|
+| Search | O(log₂n) | O(n) |
+| Insertion | O(log₂n) | O(n) |
+| Deletion | O(log₂n) | O(n) |
+
+
+**Space Complexity:** O(n) – the space used is proportional to the number of nodes.
+
+**Advantages:**
+
+* Efficient searching, insertion, and deletion (in balanced trees).
+* Simple implementation compared to more complex self-balancing trees.
+* In-order traversal provides sorted data.
+
+
+**Disadvantages:**
+
+* Performance degrades significantly in unbalanced trees.
+* Not suitable for all applications (e.g., frequent updates on a large dataset might require self-balancing trees).
+
+
+**Applications:**
+
+* Symbol tables in compilers.
+* Indexing in databases.
+* Implementing sets and maps.
+* Representing hierarchical data.
+
+
+**Example (Python):**
+
+A simple (unbalanced) BST node implementation:
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    # ... (search, insert, delete methods would go here) ...
+```
+
+You'd then implement the `search`, `insert`, and `delete` methods, recursively traversing the tree based on the key comparisons.  Remember to handle edge cases (empty tree, key already present, etc.).  For production-level code, consider using a well-tested library or implementing a self-balancing BST for better performance guarantees.
+
