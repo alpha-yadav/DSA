@@ -82933,3 +82933,48 @@ The basic operation is the comparison `arr[i] > max_val`. This operation is exec
 
 Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better as the input size increases.
 
+#  Big-Theta notation 
+Big-Theta (Θ) notation is a mathematical notation used in computer science and mathematics to describe the asymptotic behavior of a function. Specifically, it provides a tight bound on the growth rate of a function, meaning it describes both the upper and lower bounds of the function's growth.  Unlike Big O notation, which only provides an upper bound, and Big Omega (Ω), which only provides a lower bound, Big Theta provides both simultaneously.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*), written as *f(n) = Θ(g(n))*, if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large values of *n* (*n ≥ n₀*), the function *f(n)* is always bounded above and below by constant multiples of *g(n)*.  *g(n)* represents the dominant term that determines the growth rate.
+
+**Explanation:**
+
+* **`c₁ * g(n) ≤ f(n)`:** This part ensures that *f(n)* grows at least as fast as *g(n)*.  It's the lower bound.
+* **`f(n) ≤ c₂ * g(n)`:** This part ensures that *f(n)* doesn't grow significantly faster than *g(n)*. It's the upper bound.
+* **`n ≥ n₀`:** This condition specifies that the bounds hold only for sufficiently large inputs (*n*).  We are interested in the asymptotic behavior, meaning how the function behaves as *n* approaches infinity.  For small values of *n*, the relationship may not hold.
+
+**Example:**
+
+Let's say we have a function `f(n) = 2n² + 3n + 1`.
+
+We can say that `f(n) = Θ(n²)`.
+
+Why?
+
+Because we can find constants:
+
+* `c₁ = 1`:  For sufficiently large *n*, `n² ≤ 2n² + 3n + 1`  (the lower bound)
+* `c₂ = 3`:  For sufficiently large *n*, `2n² + 3n + 1 ≤ 3n²` (the upper bound)
+* `n₀ = 1`: The inequalities hold for all *n* ≥ 1.
+
+
+**Difference from Big O and Big Omega:**
+
+* **Big O (O):** Provides an *upper bound*.  `f(n) = O(g(n))` means that `f(n)` grows no faster than `g(n)`.  It's a less precise statement than Θ.
+* **Big Omega (Ω):** Provides a *lower bound*. `f(n) = Ω(g(n))` means that `f(n)` grows at least as fast as `g(n)`. It's also less precise than Θ.
+* **Big Theta (Θ):** Provides both an upper and lower bound, giving a *tight bound* on the growth rate.  It's the most precise of the three.
+
+
+**In Summary:**
+
+Big-Theta notation is crucial for analyzing the efficiency of algorithms. It precisely characterizes the time or space complexity of an algorithm, allowing for accurate comparisons between different algorithms.  It tells us not just how fast the algorithm *could* be (Big O), or how slow it *could* be (Big Omega), but how fast it *actually* is, asymptotically speaking.
+
