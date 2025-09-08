@@ -82777,3 +82777,95 @@ print(longest_palindrome("cbbd")) #Output: bb
 
 These examples showcase different difficulty levels and algorithmic approaches.  Remember to consider time and space complexity when designing your solutions.  There are many online resources (like LeetCode, HackerRank, Codewars) where you can find more algorithmic problems and practice your skills.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to get started with it in Swift, from a basic implementation to a more robust and flexible version:
+
+**Basic Implementation:**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function
+```
+
+This will print:
+
+```
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+```
+
+
+**Improved Implementation (using a tuple):**
+
+This version is slightly more concise and efficient by using a tuple to check for divisibility:
+
+```swift
+func fizzBuzzImproved(n: Int) {
+    for i in 1...n {
+        let (fizz, buzz) = (i % 3 == 0, i % 5 == 0)
+        print(fizz ? "Fizz" : "") + (buzz ? "Buzz" : "") + (fizz || buzz ? "" : String(i))
+    }
+}
+
+fizzBuzzImproved(n: 15)
+```
+
+This achieves the same output but avoids nested `if` statements.  The ternary operator (`condition ? value1 : value2`) makes it compact.
+
+
+**Even More Robust Implementation (with Function Parameters):**
+
+This version allows customization of the divisors and output strings:
+
+```swift
+func fizzBuzzCustom(n: Int, divisor1: Int, divisor2: Int, output1: String, output2: String) {
+    for i in 1...n {
+        let (fizz, buzz) = (i % divisor1 == 0, i % divisor2 == 0)
+        print(fizz ? output1 : "") + (buzz ? output2 : "") + (fizz || buzz ? "" : String(i))
+    }
+}
+
+fizzBuzzCustom(n: 15, divisor1: 3, divisor2: 5, output1: "Fizz", output2: "Buzz") //Standard FizzBuzz
+fizzBuzzCustom(n: 20, divisor1: 7, divisor2: 11, output1: "Foo", output2: "Bar") //Custom FizzBuzz
+```
+
+This makes the function much more versatile. You can easily change the divisors and the strings printed.
+
+
+**Choosing the Right Version:**
+
+* For learning purposes, the basic implementation is easiest to understand.
+* The improved implementation is more efficient and elegant for simple FizzBuzz.
+* The custom version is best if you need flexibility and want to reuse the function with different parameters.  This is good practice for creating reusable code.
+
+
+Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using Swift's command-line tools). Choose the version that best suits your needs and understanding.  Start with the basic one and gradually work your way up to the more advanced versions as you gain confidence.
+
