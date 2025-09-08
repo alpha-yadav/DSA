@@ -82869,3 +82869,67 @@ This makes the function much more versatile. You can easily change the divisors 
 
 Remember to compile and run this code in a Swift environment (like Xcode's playground or a terminal using Swift's command-line tools). Choose the version that best suits your needs and understanding.  Start with the basic one and gradually work your way up to the more advanced versions as you gain confidence.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  These resources are typically time (how long it takes to run) and space (how much memory it uses).  We analyze complexity to predict how the algorithm will perform with different input sizes.
+
+There are two main aspects of algorithm complexity analysis:
+
+* **Time Complexity:**  This measures the time an algorithm takes as a function of the input size.  We're not interested in the exact execution time (which depends on factors like the hardware), but rather how the runtime *scales* as the input grows larger.
+
+* **Space Complexity:** This measures the amount of memory an algorithm uses as a function of the input size.  This includes both the memory used for the input itself and any extra memory the algorithm requires (e.g., for temporary variables or data structures).
+
+**Big O Notation:**
+
+We use Big O notation to express algorithm complexity.  Big O focuses on the dominant terms in the complexity function and ignores constant factors. It describes the *upper bound* of the growth rate of the algorithm's resource consumption.  Here are some common complexities:
+
+* **O(1) - Constant Time:** The algorithm's runtime doesn't depend on the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size.  Example: Nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example:  Traveling Salesperson Problem (brute force approach).
+
+
+**Other Notations:**
+
+While Big O describes the *worst-case* scenario, other notations provide a more complete picture:
+
+* **Ω (Big Omega):**  Describes the *best-case* scenario.
+* **Θ (Big Theta):** Describes the *average-case* scenario, and implies both Big O and Big Omega are the same.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the algorithm's runtime.
+2. **Count the number of times these operations are executed:** Express this count as a function of the input size (n).
+3. **Identify the dominant terms:** Ignore constant factors and lower-order terms.
+4. **Express the complexity using Big O notation:** This gives you a concise representation of the algorithm's scaling behavior.
+
+
+**Example:**
+
+Consider a simple algorithm that finds the maximum element in an unsorted array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for i in range(1, len(arr)):
+    if arr[i] > max_val:
+      max_val = arr[i]
+  return max_val
+```
+
+The basic operation is the comparison `arr[i] > max_val`. This operation is executed `n-1` times, where `n` is the length of the array.  Therefore, the time complexity is O(n) – linear time. The space complexity is O(1) because the algorithm only uses a constant amount of extra memory.
+
+
+Understanding algorithm complexity is crucial for choosing the right algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better as the input size increases.
+
