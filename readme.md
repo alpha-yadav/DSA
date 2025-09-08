@@ -84438,3 +84438,90 @@ print(f"Is the tree a BST (iterative)? {is_bst4}")
 
 For most practical purposes, the recursive approach is perfectly adequate unless you anticipate dealing with exceptionally deep BSTs.  The iterative version provides a safety net in those cases.  Remember to define the `Node` class as shown in the examples before running the code.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to systematically visit every node in a binary tree exactly once.  There are several common traversal methods, each resulting in a different ordering of the visited nodes.  The primary methods are:
+
+**1. Depth-First Traversals:**  These prioritize going deeper into the tree before exploring siblings.
+
+* **Pre-order Traversal:** Visit the root node, then recursively traverse the left subtree, and finally recursively traverse the right subtree.  The order is: Root, Left, Right.
+
+    * **Example:** For a tree with root 'A', left child 'B', and right child 'C', the pre-order traversal would be: A B C
+
+* **In-order Traversal:** Recursively traverse the left subtree, then visit the root node, and finally recursively traverse the right subtree. The order is: Left, Root, Right.
+
+    * **Example:** For the same tree, the in-order traversal would be: B A C.  This traversal is particularly useful for binary *search* trees, as it produces a sorted list of the nodes' values.
+
+* **Post-order Traversal:** Recursively traverse the left subtree, then recursively traverse the right subtree, and finally visit the root node. The order is: Left, Right, Root.
+
+    * **Example:** For the same tree, the post-order traversal would be: B C A.  This is often used for deleting nodes in a tree or evaluating expressions represented as a tree.
+
+
+**2. Breadth-First Traversal (Level-Order Traversal):** This traversal visits nodes level by level, starting from the root and going down.  It uses a queue data structure.
+
+    * **Example:** For the same tree, the level-order traversal would be: A B C
+
+**Code Examples (Python):**
+
+Let's assume a simple Node class:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+
+**Traversal Functions:**
+
+```python
+def preorder(node):
+    if node:
+        print(node.data, end=" ")
+        preorder(node.left)
+        preorder(node.right)
+
+def inorder(node):
+    if node:
+        inorder(node.left)
+        print(node.data, end=" ")
+        inorder(node.right)
+
+def postorder(node):
+    if node:
+        postorder(node.left)
+        postorder(node.right)
+        print(node.data, end=" ")
+
+def levelorder(node):
+    if node is None:
+        return
+    queue = [node]
+    while(len(queue) > 0):
+        print(queue[0].data, end=" ")
+        node = queue.pop(0)
+        if node.left is not None:
+            queue.append(node.left)
+        if node.right is not None:
+            queue.append(node.right)
+```
+
+**Example Usage:**
+
+```python
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+
+print("Preorder traversal:")
+preorder(root)  # Output: A B C
+print("\nInorder traversal:")
+inorder(root)  # Output: B A C
+print("\nPostorder traversal:")
+postorder(root) # Output: B C A
+print("\nLevelorder traversal:")
+levelorder(root) # Output: A B C
+```
+
+Remember to adapt the `Node` class and traversal functions to suit your specific needs and data structures.  For instance, you might want to return lists instead of printing the values directly.  The core logic of the traversal algorithms remains the same.
+
