@@ -84821,3 +84821,95 @@ def lowestCommonAncestorIterative(root, p, q):
 
 Remember that the iterative solution requires modifying the tree structure to include parent pointers.  The recursive solution is generally preferred unless space complexity is a critical concern and tree modification is acceptable.
 
+#  Finding lowest common ancestor 
+Finding the lowest common ancestor (LCA) of two nodes in a tree depends heavily on the type of tree.  Here's how to approach it for different tree structures:
+
+**1. Binary Trees:**
+
+* **Recursive Approach (Most Common):** This approach is efficient and elegant.  It works by recursively traversing the tree.  If both nodes are in the left subtree, recursively search the left subtree.  If both are in the right subtree, recursively search the right subtree.  If one node is in the left and the other is in the right, the current node is the LCA.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not in the tree.
+    """
+    if not root or root == p or root == q:
+        return root
+
+    left_lca = lowestCommonAncestor(root.left, p, q)
+    right_lca = lowestCommonAncestor(root.right, p, q)
+
+    if left_lca and right_lca:
+        return root  # p and q are on different sides
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example usage:
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = root.left  # Node with value 5
+q = root.right  # Node with value 1
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.val} and {q.val}: {lca.val}")  # Output: LCA of 5 and 1: 3
+```
+
+* **Iterative Approach (Using Parent Pointers):** If you have a binary tree where each node has a pointer to its parent, you can iteratively find the LCA.  This approach involves traversing upwards from both `p` and `q` until you find a common ancestor.
+
+**2. General Trees (N-ary Trees):**
+
+The recursive approach can be adapted for general trees.  Instead of just `left` and `right` subtrees, you iterate through all children.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, children=None):
+        self.val = val
+        self.children = children or []
+
+def lowestCommonAncestor_nary(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    for child in root.children:
+        lca = lowestCommonAncestor_nary(child, p, q)
+        if lca:
+            return lca if lca != p and lca != q else root #added condition to handle edge cases
+    return None
+
+```
+
+**3.  Using a Graph Representation:**
+
+If your tree is represented as a graph (adjacency list or matrix), you can use graph algorithms like Depth-First Search (DFS) or Breadth-First Search (BFS) to find paths from the root to `p` and `q`.  Then, you can compare the paths to find the LCA.
+
+
+**Important Considerations:**
+
+* **Error Handling:**  Always handle cases where `p` or `q` might not be in the tree.
+* **Efficiency:** The recursive approach for binary trees is generally O(N) in time complexity, where N is the number of nodes.  The space complexity depends on the tree's height (can be O(N) in worst case, O(log N) in best case for balanced trees).
+* **Node Representation:**  The code examples use a specific class structure for nodes.  Adapt the code to match your tree's node representation.
+
+
+Remember to choose the approach that best suits your tree structure and constraints.  The recursive approach for binary trees is often the most concise and efficient solution.  For larger or more complex trees, consider the iterative approach or graph algorithms.
+
