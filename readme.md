@@ -87617,3 +87617,65 @@ DFS traversal might output: 0, 1, 2, 3  (depending on implementation)
 
 These problems represent a range of difficulty and algorithmic techniques.  Choosing the right algorithm and data structure is crucial for solving these efficiently.  Try to solve these, and then search for solutions online if you get stuck – understanding different approaches is key to improving your algorithmic skills.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's a great way to practice loops and conditional statements. Here's how to implement a simple FizzBuzz algorithm in Swift, explained step-by-step:
+
+**1. The Basic Approach:**
+
+The goal is to iterate through numbers 1 to 100 (or any specified range). For each number:
+
+* If the number is divisible by both 3 and 5, print "FizzBuzz".
+* If the number is divisible by 3, print "Fizz".
+* If the number is divisible by 5, print "Buzz".
+* Otherwise, print the number itself.
+
+
+**2. Swift Code Implementation:**
+
+```swift
+func fizzBuzz(limit: Int) {
+    for i in 1...limit {
+        if i % 3 == 0 && i % 5 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+// Call the function to run FizzBuzz up to 100
+fizzBuzz(limit: 100)
+```
+
+**3. Explanation:**
+
+* `func fizzBuzz(limit: Int)`: This defines a function named `fizzBuzz` that takes an integer `limit` as input, specifying the upper bound of the range.
+* `for i in 1...limit`: This loop iterates through numbers from 1 to `limit` (inclusive).
+* `i % 3 == 0 && i % 5 == 0`: This condition checks if `i` is divisible by both 3 and 5 using the modulo operator (`%`).  If the remainder is 0, the number is divisible.
+* `else if i % 3 == 0`: Checks if `i` is divisible by 3.
+* `else if i % 5 == 0`: Checks if `i` is divisible by 5.
+* `else`: If none of the above conditions are met, it prints the number itself.
+* `print(...)`: Prints the output to the console.
+* `fizzBuzz(limit: 100)`: This line calls the `fizzBuzz` function with a limit of 100.
+
+
+**4. Running the Code:**
+
+You can copy and paste this code into a Swift playground or a Swift file in Xcode and run it.  The output will be a list of numbers, with "Fizz", "Buzz", and "FizzBuzz" replacing numbers where appropriate.
+
+
+**5.  More Advanced (Optional):**
+
+* **Using a switch statement:**  While not strictly necessary, you could use a switch statement for a slightly different structure (though arguably less readable in this specific case).
+
+* **Extending the function:** You could make the function more flexible by allowing the user to specify the divisors and the corresponding strings to print.
+
+* **Error Handling:**  For production code, you might add error handling (e.g., to check if the input `limit` is valid).
+
+
+This comprehensive guide should get you started with the FizzBuzz algorithm in Swift.  Remember to experiment and try the optional enhancements to further your understanding!
+
