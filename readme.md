@@ -85686,3 +85686,78 @@ else:
 
 This is a very basic example, but it demonstrates the core principles of an algorithm: a clear input, a defined process, and a clear output.  From here, you can build upon this foundation and explore more complex algorithms. Remember to be patient and persistent – mastering algorithms takes time and effort.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, with explanations:
+
+**Problem 1: Two Sum (Easy)**
+
+**Problem Statement:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+
+You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+You can return the answer in any order.
+
+**Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+**Solution Approach:**  The most efficient approach uses a hash map (dictionary in Python).  Iterate through the array. For each number, check if the complement (`target - number`) exists in the hash map. If it does, you've found the pair. Otherwise, add the number and its index to the hash map.
+
+
+**Problem 2: Reverse a Linked List (Medium)**
+
+**Problem Statement:** Reverse a singly linked list.
+
+**Example:**
+
+```
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+```
+
+**Solution Approach:** This problem can be solved iteratively or recursively.  The iterative approach involves three pointers: `prev`, `curr`, and `next`. You iterate through the list, changing the `next` pointer of each node to point to the previous node.
+
+**Problem 3:  Longest Palindromic Substring (Hard)**
+
+**Problem Statement:** Given a string `s`, find the longest palindromic substring in `s`.
+
+**Example:**
+
+```
+Input: s = "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+```
+
+**Solution Approach:**  Several approaches exist, including dynamic programming and expanding around the center.  The expanding around the center approach is often considered more intuitive.  It involves iterating through each character (or pair of characters) as a potential center of a palindrome and expanding outwards to find the longest palindrome centered there.
+
+
+**Problem 4:  Graph Traversal (Medium/Hard - depends on implementation)**
+
+**Problem Statement:** Given a graph represented as an adjacency list or matrix, perform a breadth-first search (BFS) or depth-first search (DFS) traversal and return the visited nodes in order.
+
+**Example:** (assuming an adjacency list representation)
+
+```
+Graph: {
+  'A': ['B', 'C'],
+  'B': ['D', 'E'],
+  'C': ['F'],
+  'D': [],
+  'E': ['F'],
+  'F': []
+}
+
+BFS starting at 'A': ['A', 'B', 'C', 'D', 'E', 'F'] (order may vary slightly depending on implementation)
+DFS starting at 'A': ['A', 'B', 'D', 'E', 'F', 'C'] (order may vary slightly depending on implementation)
+```
+
+**Solution Approach:** BFS uses a queue, while DFS uses a stack (implicitly through recursion or explicitly with a stack data structure).  Both algorithms systematically explore the graph, marking nodes as visited to avoid cycles.
+
+
+These problems showcase different algorithmic concepts and data structures.  Choosing the right approach and data structure is crucial for efficient solutions. Remember to consider time and space complexity when evaluating your solution.
+
