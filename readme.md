@@ -85761,3 +85761,79 @@ DFS starting at 'A': ['A', 'B', 'D', 'E', 'F', 'C'] (order may vary slightly dep
 
 These problems showcase different algorithmic concepts and data structures.  Choosing the right approach and data structure is crucial for efficient solutions. Remember to consider time and space complexity when evaluating your solution.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  It's a great way to practice basic programming concepts like loops, conditional statements, and modulo operations. Here's how to implement it in Swift, starting with a simple approach and then showing a more concise version:
+
+
+**Version 1:  Basic and Readable**
+
+This version is easy to understand, breaking down the logic step-by-step:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        var output = ""
+
+        if i % 3 == 0 {
+            output += "Fizz"
+        }
+        if i % 5 == 0 {
+            output += "Buzz"
+        }
+
+        if output.isEmpty {
+            output = String(i)
+        }
+
+        print(output)
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+1. It checks if the number is divisible by 3 using the modulo operator (`%`). If it is, "Fizz" is added to the `output` string.
+2. It does the same for divisibility by 5, adding "Buzz" if necessary.
+3. If neither condition is met, the number itself is added to `output`.
+4. Finally, the `output` string is printed.
+
+
+**Version 2:  More Concise with a Ternary Operator**
+
+This version uses a ternary operator to make the code slightly more compact:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        print((i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")  ?? String(i))
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+This version combines the conditional checks into a single line using the ternary operator (`condition ? valueIfTrue : valueIfFalse`).  The `?? String(i)` handles the case where both conditions are false, ensuring a number is printed.
+
+
+**Version 3:  Even More Concise with String Interpolation**
+
+This version leverages string interpolation for a more readable concise approach:
+
+```swift
+func fizzBuzzInterpolation(n: Int) {
+    for i in 1...n {
+        var output = ""
+        output += (i % 3 == 0) ? "Fizz" : ""
+        output += (i % 5 == 0) ? "Buzz" : ""
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzInterpolation(n: 15)
+```
+
+
+All three versions achieve the same result. Choose the version that best suits your understanding and coding style.  The first version is generally preferred for beginners due to its clarity.  The others demonstrate more advanced Swift syntax.  Remember to run this code in a Swift playground or within a Swift project to see the output.
+
