@@ -88620,3 +88620,101 @@ Consider two algorithms to search for a specific element in an array:
 
 Understanding Big O notation is crucial for any serious computer scientist or software engineer. It provides a powerful tool for analyzing and comparing the efficiency of algorithms and making informed decisions about which algorithms are best suited for a given task.
 
+#  A Simple Loop 
+A simple loop repeats a block of code a certain number of times or until a condition is met.  Here are examples in a few common programming languages:
+
+**1. Using a `for` loop (iterating a specific number of times):**
+
+* **Python:**
+
+```python
+for i in range(5):  # Repeats 5 times (i = 0, 1, 2, 3, 4)
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. Using a `while` loop (repeating until a condition is false):**
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  The `for` loop is generally preferred when you know the number of iterations in advance, while the `while` loop is better when the number of iterations depends on a condition that might change during the loop's execution.  Remember to choose the loop type that best suits your specific needs.
+
