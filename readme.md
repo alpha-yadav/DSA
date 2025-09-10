@@ -87679,3 +87679,63 @@ You can copy and paste this code into a Swift playground or a Swift file in Xcod
 
 This comprehensive guide should get you started with the FizzBuzz algorithm in Swift.  Remember to experiment and try the optional enhancements to further your understanding!
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (typically time and space) an algorithm consumes as a function of the input size.  It's a crucial aspect of algorithm analysis, allowing us to compare the efficiency of different approaches to solving the same problem.  We generally focus on *asymptotic* complexity, meaning how the resource usage scales as the input size grows very large.
+
+**Key Aspects of Algorithm Complexity:**
+
+* **Time Complexity:**  Measures how the runtime of an algorithm increases with the input size.
+* **Space Complexity:** Measures how the memory usage of an algorithm increases with the input size.
+
+**Big O Notation:**
+
+Big O notation (O) is the most common way to express algorithm complexity. It describes the *upper bound* of the growth rate of an algorithm's resource usage.  It focuses on the dominant terms as the input size (n) approaches infinity, ignoring constant factors and lower-order terms.  For example:
+
+* **O(1): Constant time:** The algorithm's runtime remains the same regardless of the input size.  (e.g., accessing an element in an array by index)
+* **O(log n): Logarithmic time:** The runtime increases logarithmically with the input size.  (e.g., binary search)
+* **O(n): Linear time:** The runtime increases linearly with the input size. (e.g., searching an unsorted array)
+* **O(n log n): Linearithmic time:**  The runtime is a combination of linear and logarithmic growth. (e.g., merge sort)
+* **O(n²): Quadratic time:** The runtime increases proportionally to the square of the input size. (e.g., bubble sort, selection sort)
+* **O(2ⁿ): Exponential time:** The runtime doubles with each addition to the input size. (e.g., finding all subsets of a set)
+* **O(n!): Factorial time:** The runtime grows factorially with the input size. (e.g., traveling salesperson problem using brute force)
+
+**Other Notations:**
+
+Besides Big O, other notations provide a more complete picture:
+
+* **Big Omega (Ω):**  Describes the *lower bound* of the growth rate. It represents the best-case scenario.
+* **Big Theta (Θ):** Describes the *tight bound*, meaning both the upper and lower bounds are the same.  This indicates a precise growth rate.
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing an algorithm's complexity involves:
+
+1. **Identifying the basic operations:** Determine the operations that contribute most significantly to the runtime.
+2. **Expressing the number of operations as a function of the input size (n):**  Count how many times these basic operations are executed.
+3. **Using Big O notation to express the dominant term:** Simplify the function, ignoring constant factors and lower-order terms.
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The basic operation is the comparison (`arr[i] == target`).  This operation is executed at most `n` times (where `n` is the length of the array). Therefore, the time complexity of linear search is O(n).
+
+**Importance of Algorithm Complexity:**
+
+Understanding algorithm complexity is vital for:
+
+* **Choosing the right algorithm:**  Selecting an efficient algorithm can significantly impact performance, especially for large datasets.
+* **Optimizing code:** Identifying performance bottlenecks and improving the algorithm's efficiency.
+* **Predicting scalability:** Estimating how an algorithm will perform as the input size grows.
+
+
+By understanding algorithm complexity, you can make informed decisions about the algorithms you use and write more efficient code.
+
