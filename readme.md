@@ -87923,3 +87923,120 @@ The runtime of this function is directly proportional to the size of the array. 
 
 In summary, Big O notation is a powerful tool for analyzing and comparing the efficiency of algorithms, crucial for writing performant and scalable code.  Understanding its principles is essential for any computer scientist or software developer.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a specific condition is met.  The specifics depend on the programming language, but the general concept remains the same. Here are examples in a few popular languages:
+
+**1. `while` loop (Python, C++, Java, JavaScript, etc.):**
+
+This loop continues as long as a given condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+* **C++:**
+
+```c++
+int count = 0;
+while (count < 5) {
+  std::cout << count << std::endl;
+  count++;
+}
+```
+
+* **Java:**
+
+```java
+int count = 0;
+while (count < 5) {
+  System.out.println(count);
+  count++;
+}
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+**2. `for` loop (Python, C++, Java, JavaScript, etc.):**
+
+This loop is typically used when you know the number of iterations in advance.
+
+* **Python:**
+
+```python
+for i in range(5):
+  print(i)
+```
+
+* **C++:**
+
+```c++
+for (int i = 0; i < 5; i++) {
+  std::cout << i << std::endl;
+}
+```
+
+* **Java:**
+
+```java
+for (int i = 0; i < 5; i++) {
+  System.out.println(i);
+}
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+**3. `do-while` loop (C++, Java, JavaScript):**
+
+This loop executes the code block at least once, then repeats as long as the condition is true.
+
+* **C++:**
+
+```c++
+int count = 0;
+do {
+  std::cout << count << std::endl;
+  count++;
+} while (count < 5);
+```
+
+* **Java:**
+
+```java
+int count = 0;
+do {
+  System.out.println(count);
+  count++;
+} while (count < 5);
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+do {
+  console.log(count);
+  count++;
+} while (count < 5);
+```
+
+All these examples print the numbers 0 through 4.  The choice of which loop to use depends on the specific problem and the preferred coding style.  `while` loops are good for indefinite iteration, `for` loops are good for definite iteration, and `do-while` loops guarantee at least one execution. Remember to always include a condition that will eventually make the loop terminate, otherwise you'll have an infinite loop!
+
