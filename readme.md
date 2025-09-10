@@ -88040,3 +88040,77 @@ do {
 
 All these examples print the numbers 0 through 4.  The choice of which loop to use depends on the specific problem and the preferred coding style.  `while` loops are good for indefinite iteration, `for` loops are good for definite iteration, and `do-while` loops guarantee at least one execution. Remember to always include a condition that will eventually make the loop terminate, otherwise you'll have an infinite loop!
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop completes all its iterations for each iteration of the outer loop.  This creates a pattern where the inner loop's actions are repeated multiple times based on the outer loop's control.
+
+Here's a breakdown with examples in Python:
+
+**Example 1: Printing a multiplication table**
+
+This example uses nested loops to print a multiplication table. The outer loop iterates through the rows, and the inner loop iterates through the columns.
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # Print the product with a tab separator
+    print()  # Move to the next line after each row
+```
+
+This will output a 10x10 multiplication table.
+
+**Example 2:  Iterating through a matrix (2D array)**
+
+Nested loops are commonly used to process two-dimensional data structures like matrices or lists of lists.
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()  # Move to the next line after each row
+```
+
+This will print:
+
+```
+1 2 3 
+4 5 6 
+7 8 9 
+```
+
+**Example 3:  Finding the largest element in a matrix**
+
+```python
+matrix = [
+    [1, 5, 2],
+    [8, 3, 9],
+    [4, 7, 6]
+]
+
+largest = matrix[0][0]  # Initialize largest to the first element
+
+for row in matrix:
+    for element in row:
+        if element > largest:
+            largest = element
+
+print("The largest element is:", largest) # Output: The largest element is: 9
+```
+
+**How Nested Loops Work:**
+
+1. **Outer Loop Initialization:** The outer loop starts its first iteration.
+2. **Inner Loop Execution:** The inner loop executes all its iterations completely.
+3. **Outer Loop Iteration:**  After the inner loop finishes, the outer loop moves to its next iteration.
+4. **Repeat:** Steps 2 and 3 repeat until the outer loop completes all its iterations.
+
+
+**Time Complexity:**
+
+The time complexity of nested loops is generally the product of the complexities of the individual loops.  For example, two nested loops each iterating `n` times have a time complexity of O(n²).  This is because the inner loop runs `n` times for each of the `n` iterations of the outer loop.  This can lead to significantly increased computation time for large datasets.  It's crucial to be mindful of this when using nested loops, especially in performance-critical applications.
+
