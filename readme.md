@@ -88380,3 +88380,61 @@ This approach uses the ternary operator (`condition ? value1 : value2`) to assig
 
 Remember to choose the approach that you find most readable and understandable.  For beginners, the first approach is often easier to grasp. The second demonstrates a more compact and potentially efficient solution once you're more comfortable with Swift's syntax.
 
+#  Algorithm Complexity 
+Algorithm complexity is a crucial concept in computer science that describes how the runtime or space requirements of an algorithm grow as the input size increases.  It's not about the exact runtime in seconds, but rather the *rate* at which runtime or space increases.  We use Big O notation to express this growth rate.
+
+Here's a breakdown of key aspects:
+
+**1. Big O Notation:**
+
+Big O notation provides an upper bound on the growth rate of an algorithm's resource consumption (time or space). It focuses on the dominant terms as the input size (usually denoted by 'n') approaches infinity, ignoring constant factors and lower-order terms.
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime increases proportionally to the square of the input size. Example: Nested loops iterating through an array.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Example: Traveling salesman problem (brute-force approach).
+
+
+**2. Types of Complexity:**
+
+* **Time Complexity:**  Analyzes how the runtime of an algorithm scales with the input size.  This is often the most important aspect.
+
+* **Space Complexity:** Analyzes how the memory usage of an algorithm scales with the input size.  This is crucial when dealing with large datasets or limited memory.
+
+* **Best-Case Complexity:** The fastest runtime an algorithm can achieve for a given input size.  Often less informative than average or worst-case.
+
+* **Average-Case Complexity:** The average runtime over all possible inputs of a given size.  Often a more realistic measure than best or worst-case.
+
+* **Worst-Case Complexity:** The slowest runtime an algorithm can achieve for a given input size.  Often the most important complexity to consider for critical applications.
+
+
+**3. Analyzing Algorithm Complexity:**
+
+Analyzing complexity involves identifying the dominant operations within an algorithm and counting how many times they are executed as a function of the input size.  This often requires understanding the algorithm's structure and data flow.
+
+
+**4. Importance of Algorithm Complexity:**
+
+* **Efficiency:**  Choosing algorithms with lower complexity is essential for handling large datasets and ensuring responsiveness.
+
+* **Scalability:**  Knowing the complexity helps predict how an algorithm will perform as the input size grows.
+
+* **Optimization:**  Complexity analysis guides optimization efforts, allowing developers to focus on the parts of the code that contribute most to the runtime.
+
+
+**Example:**
+
+Consider a simple algorithm to find the maximum element in an unsorted array of size 'n'.  The algorithm iterates through the array once, comparing each element to the current maximum.  This takes 'n' comparisons in the worst case. Therefore, the time complexity is O(n) – linear time.
+
+
+Understanding algorithm complexity is fundamental for writing efficient and scalable software. Choosing the right algorithm can dramatically impact the performance of an application, particularly when dealing with large inputs.
+
