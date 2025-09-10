@@ -88325,3 +88325,58 @@ print(longest_palindrome("cbbd"))  # Output: bb
 
 These problems illustrate different levels of complexity and techniques used in algorithm design.  Remember that the "hardness" is relative and depends on your experience and the tools you're allowed to use.  There are often multiple ways to solve a problem, some more efficient than others.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming interview question.  It's designed to test basic programming concepts like loops, conditional statements, and modulo operations.  Here's how to implement it in Swift, starting with a simple approach and then showing a slightly more advanced version:
+
+**Simple Approach (using a `for` loop and `if-else if-else`):**
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Example usage
+```
+
+This code iterates through numbers 1 to `n`.  It uses the modulo operator (`%`) to check for divisibility by 3 and 5.  The order of the `if` statements is important:  We check for divisibility by 15 first to correctly handle numbers divisible by both 3 and 5.
+
+**Slightly More Advanced Approach (using a ternary operator and string concatenation):**
+
+This version is more concise and demonstrates a more functional style:
+
+
+```swift
+func fizzBuzzAdvanced(n: Int) {
+    for i in 1...n {
+        let fizz = i % 3 == 0 ? "Fizz" : ""
+        let buzz = i % 5 == 0 ? "Buzz" : ""
+        print(fizz + buzz == "" ? "\(i)" : fizz + buzz)
+    }
+}
+
+fizzBuzzAdvanced(n: 15) // Example usage
+
+```
+
+This approach uses the ternary operator (`condition ? value1 : value2`) to assign "Fizz" or "" to the `fizz` variable based on divisibility by 3, and similarly for "Buzz" and divisibility by 5. Then, it cleverly concatenates the strings. If both are empty, it prints the number; otherwise, it prints the combined "Fizz" and/or "Buzz" string.
+
+**Explanation of Key Concepts:**
+
+* **`for` loop:**  Iterates through a sequence of numbers.
+* **`%` (modulo operator):** Returns the remainder of a division.  If `x % y == 0`, then `x` is divisible by `y`.
+* **`if-else if-else` statements:**  Conditional logic to execute different code blocks based on different conditions.
+* **Ternary operator (`?:`):** A concise way to write an `if-else` statement.
+* **String concatenation:** Combining strings using the `+` operator.
+
+Remember to choose the approach that you find most readable and understandable.  For beginners, the first approach is often easier to grasp. The second demonstrates a more compact and potentially efficient solution once you're more comfortable with Swift's syntax.
+
