@@ -87165,3 +87165,114 @@ print(is_bst_recursive(root))  # Output: False
 
 Remember to adapt the `Node` class if your tree implementation uses a different structure.  Both methods accurately determine whether a given tree conforms to the BST definition. Choose the method that best suits your needs in terms of readability and efficiency.
 
+#  Algorithm to check if a given binary tree is BST 
+There are several ways to check if a given binary tree is a Binary Search Tree (BST). Here are two common algorithms:
+
+**Algorithm 1: In-order Traversal**
+
+This algorithm leverages the property that an in-order traversal of a BST will produce a sorted sequence of nodes.
+
+1. **Perform an in-order traversal:**  Traverse the binary tree using in-order traversal (left subtree, root, right subtree). Store the values of the nodes visited in a list or array.
+
+2. **Check for sorted order:** Check if the list/array produced in step 1 is sorted in ascending order. If it is, the tree is a BST; otherwise, it's not.
+
+
+**Python Code (Algorithm 1):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node, traversal):
+    if node:
+        inorder_traversal(node.left, traversal)
+        traversal.append(node.data)
+        inorder_traversal(node.right, traversal)
+
+def is_bst_inorder(root):
+    traversal = []
+    inorder_traversal(root, traversal)
+    for i in range(1, len(traversal)):
+        if traversal[i] < traversal[i-1]:
+            return False
+    return True
+
+# Example usage:
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(is_bst_inorder(root))  # Output: True
+
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+root2.right.left = Node(6) # This violates BST property
+root2.right.right = Node(4)
+
+print(is_bst_inorder(root2))  # Output: False
+
+```
+
+
+**Algorithm 2: Recursive Check with Minimum and Maximum Values**
+
+This algorithm recursively checks each subtree, maintaining the minimum and maximum allowed values for the nodes in that subtree.
+
+1. **Base Case:** If the node is `None`, it's a valid BST subtree (within the given min and max bounds).
+
+2. **Recursive Step:**  For each node:
+   - Check if the node's data is within the allowed range (`min < node.data < max`).
+   - Recursively check the left subtree with the updated range (`min`, `node.data`).
+   - Recursively check the right subtree with the updated range (`node.data`, `max`).
+   - If any of the checks fail, return `False`.
+
+3. **Return `True`:** if all checks pass.
+
+
+**Python Code (Algorithm 2):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(node, min_val, max_val):
+    if node is None:
+        return True
+    if not (min_val < node.data < max_val):
+        return False
+    return (is_bst_recursive(node.left, min_val, node.data) and
+            is_bst_recursive(node.right, node.data, max_val))
+
+# Example usage (same trees as before)
+root = Node(3)
+root.left = Node(1)
+root.right = Node(5)
+root.right.left = Node(4)
+root.right.right = Node(6)
+
+print(is_bst_recursive(root, float('-inf'), float('inf')))  # Output: True
+
+root2 = Node(3)
+root2.left = Node(1)
+root2.right = Node(5)
+root2.right.left = Node(6)  # This violates BST property
+root2.right.right = Node(4)
+
+print(is_bst_recursive(root2, float('-inf'), float('inf')))  # Output: False
+
+```
+
+**Which Algorithm to Choose?**
+
+Both algorithms have a time complexity of O(N), where N is the number of nodes in the tree.  Algorithm 1 (in-order traversal) might be slightly simpler to understand and implement, while Algorithm 2 (recursive check) might be slightly more efficient in some cases because it can potentially stop early if it finds a violation.  The choice depends on your preference and specific requirements.  However, Algorithm 2 is generally preferred for its elegance and potential for early termination in many cases.
+
