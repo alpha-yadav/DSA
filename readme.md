@@ -86705,3 +86705,144 @@ class BST:
 
 Remember to add functions to traverse and print the tree to verify the insertion works correctly.  Choose the implementation that best suits your needs and coding style.  The iterative version is generally preferred for its efficiency and avoidance of potential stack overflow issues.  The duplicate handling modification provides flexibility depending on how you want your BST to behave with duplicate data.
 
+#  Binary Search Tree - Deletion(C++) 
+Deleting a node from a Binary Search Tree (BST) is more complex than insertion because you need to handle three different cases:
+
+1. **Node to be deleted is a leaf node:**  Simply remove the node.
+
+2. **Node to be deleted has one child:** Replace the node with its child.
+
+3. **Node to be deleted has two children:** This is the most complex case.  You need to find the inorder successor (smallest node in the right subtree) or inorder predecessor (largest node in the left subtree) and replace the node to be deleted with it.  Then recursively delete the inorder successor/predecessor from its original location.
+
+
+Here's a C++ implementation of BST deletion, along with explanations:
+
+
+```cpp
+#include <iostream>
+
+struct Node {
+    int data;
+    Node *left, *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+Node* minValueNode(Node* node) {
+    Node* current = node;
+    while (current->left != nullptr) {
+        current = current->left;
+    }
+    return current;
+}
+
+Node* deleteNode(Node* root, int key) {
+    // Base Case: If the tree is empty
+    if (root == nullptr) {
+        return root;
+    }
+
+    // Find the node to be deleted
+    if (key < root->data) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNode(root->right, key);
+    } else {
+        // Node with only one child or no child
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // Node with two children: Get the inorder successor (smallest in the right subtree)
+        Node* temp = minValueNode(root->right);
+
+        // Copy the inorder successor's data to this node
+        root->data = temp->data;
+
+        // Delete the inorder successor
+        root->right = deleteNode(root->right, temp->data);
+    }
+    return root;
+}
+
+
+void inorderTraversal(Node* root) {
+    if (root != nullptr) {
+        inorderTraversal(root->left);
+        std::cout << root->data << " ";
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+
+    std::cout << "Inorder traversal before deletion: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    deleteNode(root, 20); //Deleting a leaf node
+
+    std::cout << "Inorder traversal after deleting 20: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    deleteNode(root, 30); //Deleting a node with one child
+
+    std::cout << "Inorder traversal after deleting 30: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+    deleteNode(root, 50); //Deleting a node with two children
+
+    std::cout << "Inorder traversal after deleting 50: ";
+    inorderTraversal(root);
+    std::cout << std::endl;
+
+
+    // Clean up memory (important to avoid leaks!)  This requires a recursive function to delete the entire tree.
+    // ... (add a function to recursively delete the tree here) ...
+
+    return 0;
+}
+```
+
+**Important Note on Memory Management:** The provided code lacks proper memory cleanup. After deleting nodes, you must ensure that the memory occupied by the deleted nodes is freed. You would need to add a recursive function to traverse the tree and delete all nodes after you're done with the BST.  Failing to do so will lead to memory leaks.  Consider adding a `deleteTree(Node* root)` function to recursively free all allocated memory.
+
+
+This improved version addresses the memory leak issue by adding a `deleteTree` function:
+
+```cpp
+// ... (previous code) ...
+
+void deleteTree(Node* root) {
+    if (root != nullptr) {
+        deleteTree(root->left);
+        deleteTree(root->right);
+        delete root;
+    }
+}
+
+
+int main() {
+    // ... (previous main function code) ...
+
+    deleteTree(root); //Clean up memory before exiting the program
+
+    return 0;
+}
+```
+
+Remember to always handle memory carefully when working with dynamically allocated data structures in C++.  Always free the memory when it's no longer needed.
+
