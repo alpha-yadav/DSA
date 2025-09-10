@@ -88779,3 +88779,30 @@ This code will print all unique pairs of numbers from the list.  Note the `j` lo
 
 Nested loops are a powerful tool, but use them judiciously, considering their impact on performance and code readability.  Often, more efficient algorithms exist to accomplish the same task without nested loops, especially when dealing with large datasets.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  Their runtime grows very slowly as the input size (n) increases.  This typically implies a "divide and conquer" approach where the problem size is halved (or reduced by some constant factor) in each step.
+
+Here are some common types of algorithms with O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  It works on a sorted array or list by repeatedly dividing the search interval in half. If the target value is not found, the algorithm terminates when the search interval is empty.
+
+* **Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  In a balanced binary search tree (like an AVL tree or a red-black tree), finding, inserting, or deleting a node takes logarithmic time because the tree's height is proportional to log₂(n), where n is the number of nodes.  Unbalanced trees can degenerate to O(n) in worst-case scenarios.
+
+* **Efficient exponentiation (e.g., using exponentiation by squaring):** Calculating a<sup>b</sup> (a raised to the power of b) can be done in O(log b) time using this method.  It repeatedly squares the base and adjusts the exponent.
+
+* **Finding an element in a sorted array using interpolation search:**  Interpolation search is similar to binary search but uses interpolation to estimate the position of the target value, making it potentially faster than binary search for uniformly distributed data.  Its average-case time complexity is O(log log n), which is even better than O(log n), but its worst-case complexity is O(n).
+
+* **Some algorithms based on heaps:**  Heaps (like min-heaps or max-heaps) are tree-based data structures.  Operations like finding the minimum/maximum element (peek) and extracting the minimum/maximum element (pop) usually have O(log n) time complexity.  Insertion and deletion of elements are also O(log n).
+
+* **Certain graph algorithms (depending on implementation):**  The time complexity of some graph algorithms depends on the way the graph is represented and the specific algorithm.  However, algorithms leveraging balanced tree structures or efficient search strategies can achieve logarithmic time complexity for certain operations on graphs.
+
+**Key Characteristics Leading to O(log n):**
+
+* **Halving (or reducing by a constant factor) the problem size in each step:** This is the defining feature.  Each step effectively eliminates a significant portion of the remaining search space.
+
+* **Divide and Conquer Paradigm:** This algorithmic strategy is frequently used to achieve logarithmic time complexity.
+
+* **Sorted data (often required):**  Many O(log n) algorithms, like binary search, require the input data to be sorted.
+
+**Important Note:** The base of the logarithm (e.g., base 2, base 10) doesn't affect the overall time complexity classification; it only impacts the constant factor, which is often ignored in Big O notation.  Therefore, O(log₂ n) and O(log₁₀ n) are both considered O(log n).
+
