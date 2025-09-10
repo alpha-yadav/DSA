@@ -86573,3 +86573,135 @@ print(bst.search(15)) # Output: None
 
 This is a basic example;  a robust implementation would include deletion and potentially error handling.  Remember that for optimal performance in real-world applications, consider using self-balancing BSTs.
 
+#  Binary Search Tree - Insertion (Python) 
+Several Python implementations of binary search tree (BST) insertion are possible, each with slightly different trade-offs. Here are a few, progressing from a basic recursive approach to one incorporating iterative improvement and handling of duplicate values:
+
+**1. Basic Recursive Insertion:**
+
+This version is concise and clearly demonstrates the recursive nature of BST insertion.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:  # data >= node.data (Handles duplicates by placing them to the right)
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+
+# Example usage:
+bst = BST()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+# (You would typically add functions to traverse and print the tree here for verification)
+```
+
+**2. Iterative Insertion:**
+
+This version avoids recursion, potentially improving performance for very deep trees and reducing the risk of stack overflow errors.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:  # data >= current.data (Handles duplicates to the right)
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+# Example Usage (same as above)
+```
+
+**3. Insertion with Duplicate Handling (Option):**
+
+You might want to handle duplicate values differently.  Here's a version that counts duplicates instead of inserting them:
+
+```python
+class Node:
+    def __init__(self, data, count=1):
+        self.data = data
+        self.count = count  # Track duplicates
+        self.left = None
+        self.right = None
+
+class BST:
+    # ... (rest of the class is similar to iterative version above, but modified insert)
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+
+        current = self.root
+        while True:
+            if data == current.data:
+                current.count += 1
+                break  # Duplicate found, increment count
+            elif data < current.data:
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                else:
+                    current = current.right
+
+```
+
+Remember to add functions to traverse and print the tree to verify the insertion works correctly.  Choose the implementation that best suits your needs and coding style.  The iterative version is generally preferred for its efficiency and avoidance of potential stack overflow issues.  The duplicate handling modification provides flexibility depending on how you want your BST to behave with duplicate data.
+
