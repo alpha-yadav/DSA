@@ -85837,3 +85837,60 @@ fizzBuzzInterpolation(n: 15)
 
 All three versions achieve the same result. Choose the version that best suits your understanding and coding style.  The first version is generally preferred for beginners due to its clarity.  The others demonstrate more advanced Swift syntax.  Remember to run this code in a Swift playground or within a Swift project to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources primarily considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We analyze these complexities using Big O notation (and related notations like Big Omega and Big Theta).  Big O notation describes the upper bound of the growth rate of the algorithm's resource consumption as the input size increases.  It focuses on the dominant terms and ignores constant factors.
+
+Here's a breakdown:
+
+**1. Time Complexity:**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size. This usually happens with algorithms that divide the problem size in half at each step (e.g., binary search).
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+* **O(n²) - Quadratic Time:** The execution time increases proportionally to the square of the input size.  Example: Nested loops iterating through the input data.
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size. This is characteristic of brute-force approaches to problems like the traveling salesman problem.
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size. This is extremely slow and typically only encountered with very inefficient algorithms.
+
+
+**2. Space Complexity:**  This measures the amount of extra memory (excluding the input itself) used by the algorithm.  The same Big O notation applies:
+
+* **O(1) - Constant Space:** The algorithm uses a fixed amount of memory regardless of the input size.
+* **O(n) - Linear Space:** The memory used increases linearly with the input size.  Example: Creating a copy of an array.
+* **O(log n) - Logarithmic Space:**  Memory usage grows logarithmically. This is less common than linear or constant space.
+* **O(n²) - Quadratic Space:** Memory usage increases with the square of the input size.  This is often seen when creating matrices or storing all pairs of elements.
+
+
+**Analyzing Complexity:**
+
+To analyze the complexity of an algorithm:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the algorithm's runtime or memory usage.
+2. **Count the number of operations:** Express the number of operations as a function of the input size (usually denoted by 'n').
+3. **Identify the dominant term:**  Focus on the term that grows fastest as 'n' increases.  Ignore constant factors and lower-order terms.
+4. **Express the complexity using Big O notation:** This gives a concise description of the algorithm's complexity.
+
+
+**Example:**
+
+Consider a function that finds the maximum element in an unsorted array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+The dominant operation is the comparison (`x > max_val`) inside the loop.  This operation is executed 'n' times (where 'n' is the length of the array). Therefore, the time complexity is O(n) (linear time). The space complexity is O(1) (constant space) because it uses a fixed amount of extra memory regardless of the array size.
+
+
+Understanding algorithm complexity is crucial for choosing the most efficient algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform faster and use less memory.
+
