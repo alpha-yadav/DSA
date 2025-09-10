@@ -86081,3 +86081,70 @@ The number of operations is proportional to the length of the array (n).  In the
 
 It's important to remember that Big O is a simplification and doesn't capture every detail of an algorithm's performance.  Other notations like Big Omega (Ω) for lower bounds and Big Theta (Θ) for tight bounds provide a more complete picture, but Big O is the most commonly used for describing worst-case complexity.
 
+#  A Simple Loop 
+A simple loop repeatedly executes a block of code until a certain condition is met.  There are several types of loops, but here are examples in Python and JavaScript showing a `for` loop and a `while` loop:
+
+
+**Python:**
+
+**`for` loop (iterating over a sequence):**
+
+```python
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+  print(fruit)
+```
+
+This loop iterates through the `fruits` list, printing each fruit on a new line.
+
+
+**`for` loop (using `range` for numerical iteration):**
+
+```python
+for i in range(5):  # Iterates from 0 to 4
+  print(i)
+```
+
+This loop prints the numbers 0, 1, 2, 3, and 4.
+
+
+**`while` loop (condition-based iteration):**
+
+```python
+count = 0
+while count < 5:
+  print(count)
+  count += 1
+```
+
+This loop prints numbers 0 through 4.  It continues as long as `count` is less than 5.
+
+
+**JavaScript:**
+
+**`for` loop (similar to Python's `range` example):**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+This loop prints the numbers 0, 1, 2, 3, and 4.
+
+
+**`while` loop (condition-based iteration):**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+This loop also prints numbers 0 through 4. It continues as long as `count` is less than 5.
+
+
+These are just basic examples. Loops can be much more complex, incorporating nested loops, `break` and `continue` statements for controlling the flow, and other conditional logic.  The best type of loop to use depends on the specific task.  `for` loops are generally preferred when you know the number of iterations in advance, while `while` loops are better suited for situations where the number of iterations is determined by a condition.
+
