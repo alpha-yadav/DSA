@@ -87739,3 +87739,45 @@ Understanding algorithm complexity is vital for:
 
 By understanding algorithm complexity, you can make informed decisions about the algorithms you use and write more efficient code.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a powerful tool in computer science used to describe the *tight asymptotic bound* of an algorithm's time or space complexity.  Unlike Big O notation (O), which provides an upper bound, and Big Omega notation (Ω), which provides a lower bound, Big Theta provides both simultaneously.  It essentially means that the function's growth rate is bounded both above and below by the same function, ignoring constant factors.
+
+**Formal Definition:**
+
+Given two functions *f(n)* and *g(n)*, we say that *f(n)* is Θ(*g(n)*) if and only if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+This means that for sufficiently large input sizes (*n ≥ n₀*), the function *f(n)* is always between *c₁* times *g(n)* and *c₂* times *g(n)*.  In simpler terms, *f(n)* grows at the same rate as *g(n)*.
+
+**What it means:**
+
+* **Tight bound:** Θ provides a much stronger statement than O or Ω alone.  It indicates that the algorithm's performance is not just *at most* or *at least* a certain rate, but *exactly* that rate, within constant factors.
+* **Average and worst-case:**  While Big O often focuses on the worst-case scenario, Θ can be used to describe average-case complexity as well.
+* **Ignoring constants:**  Like O and Ω, Θ ignores constant factors.  This is crucial because hardware and implementation details can significantly impact constant factors, while the overall growth rate remains crucial for scaling analysis.
+
+
+**Examples:**
+
+* **Θ(n):**  Linear time complexity.  Examples include iterating through an array once.
+* **Θ(n²):** Quadratic time complexity.  Examples include nested loops iterating over an array.
+* **Θ(log n):** Logarithmic time complexity.  Examples include binary search in a sorted array.
+* **Θ(1):** Constant time complexity.  Examples include accessing an element in an array by index.
+* **Θ(2ⁿ):** Exponential time complexity. Examples include finding all subsets of a set.
+
+
+**Comparison with O and Ω:**
+
+| Notation | Meaning                                    | Example                               |
+|----------|--------------------------------------------|----------------------------------------|
+| O(g(n))  | Upper bound: f(n) grows no faster than g(n) | f(n) = 2n + 5; O(n)                    |
+| Ω(g(n))  | Lower bound: f(n) grows at least as fast as g(n) | f(n) = 2n + 5; Ω(n)                    |
+| Θ(g(n))  | Tight bound: f(n) grows at the same rate as g(n) | f(n) = 2n + 5; Θ(n)                    |
+
+
+**When to use Θ:**
+
+Use Θ when you can prove both an upper and lower bound for the algorithm's complexity.  If you can only prove an upper bound, use O. If you can only prove a lower bound, use Ω.  If you have both upper and lower bounds, but they are different functions (e.g., O(n²) and Ω(n)), then you only have a partial description of the complexity.
+
+In summary, Big Theta provides the most precise description of an algorithm's asymptotic complexity when both upper and lower bounds are known and are asymptotically equivalent.  It gives a clear understanding of how the algorithm's resource usage scales with the input size.
+
