@@ -89039,3 +89039,54 @@ This achieves the same result but uses nested ternary operators to make the cond
 
 Choose the version that best suits your understanding and needs.  The basic version is excellent for learning, while the refined version demonstrates a more concise coding style. Remember to run this code in a Swift playground or a Swift project to see the output.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (typically time and space) an algorithm consumes as a function of the size of its input.  It's crucial for understanding how an algorithm will perform with different input sizes, allowing us to choose the most efficient algorithm for a given task.  We typically analyze complexity using Big O notation.
+
+Here's a breakdown of key aspects of algorithm complexity:
+
+**1. Time Complexity:** This measures how the runtime of an algorithm grows as the input size increases.
+
+* **Big O Notation (O):**  Expresses the upper bound of the growth rate. It focuses on the dominant terms as the input size approaches infinity, ignoring constant factors and lower-order terms.  For example:
+    * **O(1):** Constant time. The runtime is independent of the input size (e.g., accessing an element in an array by index).
+    * **O(log n):** Logarithmic time. The runtime increases logarithmically with the input size (e.g., binary search).
+    * **O(n):** Linear time. The runtime increases linearly with the input size (e.g., searching an unsorted array).
+    * **O(n log n):** Linearithmic time.  Common in efficient sorting algorithms like merge sort and heapsort.
+    * **O(n²):** Quadratic time. The runtime increases proportionally to the square of the input size (e.g., nested loops iterating over the input).
+    * **O(2ⁿ):** Exponential time. The runtime doubles with each addition to the input size (e.g., brute-force solutions to many problems).
+    * **O(n!):** Factorial time.  The runtime grows factorially with the input size (e.g., generating all permutations of a set).
+
+* **Big Omega Notation (Ω):** Expresses the lower bound of the growth rate. It describes the best-case scenario.
+
+* **Big Theta Notation (Θ):** Expresses both the upper and lower bounds of the growth rate.  It describes the tight bound, meaning the algorithm's runtime will always be within a constant factor of the given function.
+
+**2. Space Complexity:** This measures how the memory usage of an algorithm grows as the input size increases.  It's analyzed similarly using Big O notation.  Space complexity can include:
+
+* **Auxiliary Space:** The extra space used by the algorithm beyond the input itself (e.g., space used for temporary variables or data structures).
+* **Total Space:** The sum of auxiliary space and the space used to store the input.
+
+**Analyzing Algorithm Complexity:**
+
+Analyzing complexity often involves:
+
+* **Best-case scenario:** The most favorable input that leads to the fastest execution time.
+* **Average-case scenario:** The expected runtime for a randomly chosen input.
+* **Worst-case scenario:** The input that leads to the slowest execution time.  Often, the worst-case is most important for guaranteeing performance.
+
+**Example:**
+
+Consider a simple linear search algorithm:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+* **Time Complexity:** O(n) – In the worst case (target not found), the algorithm iterates through the entire array.
+* **Space Complexity:** O(1) – The algorithm uses a constant amount of extra space regardless of the input size.
+
+
+Understanding algorithm complexity is essential for designing and choosing efficient algorithms.  When dealing with large datasets, the difference between an O(n) algorithm and an O(n²) algorithm can be substantial.  Choosing the right algorithm can significantly impact performance and resource usage.
+
