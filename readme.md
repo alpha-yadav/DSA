@@ -88949,3 +88949,35 @@ else:
 
 Remember to start small, focus on understanding the concepts, and practice regularly.  With dedication, you'll build a strong foundation in algorithms.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+* **Problem:**  Given an array of integers, find the largest number in the array.
+* **Input:** An array of integers (e.g., `[1, 5, 2, 8, 3]`)
+* **Output:** The largest integer in the array (e.g., `8`)
+
+**Medium:**
+
+* **Problem:** Given a sorted array of integers and a target integer, determine if the target integer exists in the array using binary search.
+* **Input:** A sorted array of integers (e.g., `[2, 5, 7, 8, 11, 12]`) and a target integer (e.g., `11`)
+* **Output:** `True` if the target integer exists in the array, `False` otherwise.  (e.g., `True`)
+
+
+**Hard:**
+
+* **Problem:** Given a graph represented as an adjacency list, implement Dijkstra's algorithm to find the shortest path from a source node to all other nodes.
+* **Input:**  An adjacency list representing a graph and a source node.  (e.g.,  `graph = {0: [(1, 4), (2, 1)], 1: [(3, 1)], 2: [(1, 2), (3, 5)], 3: []}`, source node = 0)  (where (neighbor, weight) represents an edge)
+* **Output:** A dictionary where keys are nodes and values are the shortest distances from the source node.  (e.g., `{0: 0, 1: 3, 2: 1, 3: 4}`)
+
+
+**For each problem, consider:**
+
+* **Algorithm Design:** What approach will you take to solve the problem efficiently? (e.g., iterative, recursive, dynamic programming)
+* **Time Complexity:** How does the runtime of your algorithm scale with the input size? (e.g., O(n), O(n log n), O(n^2))
+* **Space Complexity:** How much extra memory does your algorithm require? (e.g., O(1), O(n), O(log n))
+
+
+These are just examples.  There are countless algorithmic problems, ranging from simple string manipulations to complex graph traversals and machine learning algorithms.  The best way to improve your algorithmic skills is to practice regularly by solving problems on platforms like LeetCode, HackerRank, or Codewars.
+
