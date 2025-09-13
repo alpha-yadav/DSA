@@ -89761,3 +89761,64 @@ The common thread among these algorithms is the ability to *repeatedly reduce th
 
 **Important Note:** The base of the logarithm (e.g., base 2, base 10) doesn't affect the big O notation because it only introduces a constant factor, which is ignored in asymptotic analysis.  We typically use base 2 because of the frequent use of binary search and binary trees.
 
+#  An O(log n) example 
+The classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a target value within a *sorted* array.  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process is repeated until the target value is found or the search interval is empty.
+
+**Example (Python):**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target value if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found")
+```
+
+**Why is it O(log n)?**
+
+Each step of binary search reduces the search space by half.  Let's say you start with `n` elements.  After one step, you have `n/2` elements.  After two steps, you have `n/4` elements.  After `k` steps, you have `n/2^k` elements.  The algorithm terminates when the search space is reduced to a single element or is empty.  Therefore, we need to find the value of `k` such that `n/2^k <= 1`.  Solving for `k`, we get `k <= log₂(n)`.  This means the number of steps is proportional to the logarithm of the input size, hence the O(log n) time complexity.
+
+**Other O(log n) examples:**
+
+* **Tree traversals (balanced trees):**  Traversing a balanced binary search tree (like an AVL tree or a red-black tree) takes O(log n) time because the height of the tree is logarithmic with respect to the number of nodes.
+* **Efficient exponentiation:** Algorithms like exponentiation by squaring compute a^b in O(log b) time.
+* **Finding an element in a sorted array using interpolation search (under certain conditions):** Interpolation search can perform better than binary search in some cases.
+
+
+It's important to remember that O(log n) algorithms are extremely efficient for large datasets because the number of operations grows very slowly as the input size increases.
+
