@@ -89520,3 +89520,52 @@ Let's say an algorithm's running time is described by the function *f(n) = 2n² 
 
 In summary, Big-Omega notation is a crucial tool for analyzing the efficiency of algorithms and provides valuable insights into their performance characteristics, focusing on the guaranteed minimum resource usage.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *upper bound* of the growth rate of an algorithm's runtime or space requirements as the input size grows.  It doesn't tell you the exact runtime, but rather how the runtime scales with increasing input.  This is crucial for understanding how an algorithm will perform with large datasets.
+
+Here's a breakdown of key aspects:
+
+**What Big O describes:**
+
+* **Worst-case scenario:** Big O notation typically focuses on the worst-case runtime or space complexity.  This is the upper bound, guaranteeing that the algorithm will never perform worse than this.
+* **Asymptotic behavior:**  Big O describes the behavior of the algorithm as the input size (usually denoted as 'n') approaches infinity.  Small differences in performance for small inputs are ignored.  It's about the long-term trend.
+* **Growth rate, not absolute time:** Big O doesn't give you the exact runtime in seconds. It tells you how the runtime *grows* relative to the input size.  An O(n) algorithm might be faster than an O(log n) algorithm for small inputs, but the O(log n) algorithm will eventually be significantly faster as 'n' increases.
+* **Space complexity:** Big O can also be used to describe the space complexity of an algorithm – the amount of memory it uses as a function of the input size.
+
+**Common Big O notations:**
+
+These are listed in order of increasing complexity (slowest to fastest growth rate):
+
+* **O(1) - Constant time:** The runtime is independent of the input size.  Examples: accessing an element in an array by its index, returning the first element of a linked list.
+* **O(log n) - Logarithmic time:** The runtime increases logarithmically with the input size.  Examples: binary search in a sorted array, searching a balanced binary search tree.
+* **O(n) - Linear time:** The runtime increases linearly with the input size. Examples: searching an unsorted array, iterating through a linked list.
+* **O(n log n) - Linearithmic time:**  The runtime is a combination of linear and logarithmic growth.  Examples: merge sort, heap sort.
+* **O(n²) - Quadratic time:** The runtime increases quadratically with the input size.  Examples: nested loops iterating over the same input, bubble sort, selection sort.
+* **O(2ⁿ) - Exponential time:** The runtime doubles with each addition to the input size. Examples: finding all subsets of a set, certain recursive algorithms without memoization.
+* **O(n!) - Factorial time:** The runtime grows factorially with the input size.  Examples: generating all permutations of a sequence (e.g., traveling salesman problem using brute force).
+
+
+**Example:**
+
+Let's say we have a function that searches for a specific element in an unsorted array:
+
+```python
+def linear_search(arr, target):
+  for i in range(len(arr)):
+    if arr[i] == target:
+      return i
+  return -1
+```
+
+The worst-case scenario is that the target element is at the end of the array (or not present).  In this case, the function iterates through the entire array, making the runtime directly proportional to the size of the array. Therefore, the Big O notation for this function is O(n).
+
+
+**Why Big O is important:**
+
+* **Algorithm comparison:**  It allows developers to compare the efficiency of different algorithms objectively.
+* **Scalability analysis:** It helps predict how an algorithm will perform with larger datasets, essential for building scalable applications.
+* **Optimization focus:** It guides optimization efforts by highlighting bottlenecks.
+
+
+Understanding Big O notation is crucial for any computer scientist or software developer to write efficient and scalable code.  While it's an abstraction, it provides invaluable insights into algorithm performance.
+
