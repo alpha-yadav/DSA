@@ -89904,3 +89904,14 @@ There's no single "typical" representation.  The best choice depends on the spec
 
 Consider the frequency of various operations (accessing children, traversing, finding parents, etc.) when making your selection.
 
+#  Introduction 
+Please provide me with some context!  An introduction to *what*?  To give you a good introduction, I need to know the topic.  For example, are you looking for an introduction to:
+
+* **A specific topic?** (e.g., the history of the Roman Empire, the benefits of exercise, quantum physics)
+* **A story?** (e.g., a mystery novel, a personal anecdote)
+* **An essay or paper?** (e.g., on the effects of climate change, on the works of Shakespeare)
+* **A presentation?** (e.g., on a new product, on a research project)
+* **A person?** (e.g., a biography, an interview)
+
+Tell me what you need an introduction for, and I'll do my best to help!
+
