@@ -89736,3 +89736,28 @@ Nested loops can lead to increased computation time, especially when dealing wit
 
 In summary, nested loops are a powerful tool for processing data in multiple dimensions, but their use should be carefully considered regarding computational efficiency, especially when dealing with large datasets.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They only require a number of operations proportional to the logarithm of the input size. This means that as the input size grows, the algorithm's runtime increases much more slowly.  This is achieved by repeatedly dividing the problem size in half (or by some constant factor).
+
+Here are some common types of algorithms exhibiting O(log n) time complexity:
+
+* **Binary Search:** This is the quintessential example.  It works on a sorted array (or data structure) by repeatedly dividing the search interval in half.  If the target value is not found, the algorithm will have checked roughly log₂(n) elements, where n is the size of the array.
+
+* **Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  In a balanced binary search tree (like an AVL tree or a red-black tree), finding, inserting, or deleting a node takes logarithmic time in the average and worst cases.  This is because the tree's height is proportional to log₂(n), where n is the number of nodes.
+
+* **Efficient exponentiation (e.g., using exponentiation by squaring):**  Calculating a^b can be done in O(log b) time by cleverly using repeated squaring.
+
+* **Finding the kth smallest/largest element using Quickselect (average case):** While Quickselect has a worst-case time complexity of O(n²), its average-case complexity is O(n).  However, variations and optimizations can lead to near-O(log n) performance in specific scenarios (e.g., finding the median).
+
+* **Some algorithms on heaps:**  Operations like finding the minimum (or maximum) element, insertion, and deletion in a min-heap (or max-heap) take O(log n) time.
+
+* **Logarithmic time algorithms for some graph problems:** In certain graph problems, logarithmic time complexity might be achieved under specific conditions or using specialized data structures.
+
+
+**Key Characteristics Leading to O(log n):**
+
+The common thread among these algorithms is the ability to *repeatedly reduce the problem size by a constant factor*. This "divide and conquer" strategy is the essence of achieving logarithmic time complexity.  Without this kind of reduction, you won't get O(log n).
+
+
+**Important Note:** The base of the logarithm (e.g., base 2, base 10) doesn't affect the big O notation because it only introduces a constant factor, which is ignored in asymptotic analysis.  We typically use base 2 because of the frequent use of binary search and binary trees.
+
