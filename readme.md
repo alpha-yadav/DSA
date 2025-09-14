@@ -93595,3 +93595,79 @@ print(f"Are root1 and root3 identical (iterative)? {are_identical_iterative(root
 
 Both methods achieve the same result.  The recursive approach is often considered more concise and easier to understand, while the iterative approach might be slightly more efficient in some cases (avoiding potential stack overflow issues with very deep trees).  Choose the method that best suits your coding style and the specific constraints of your application. Remember to handle `None` cases appropriately in both methods to prevent errors.
 
+#  Binary Search Trees 
+Binary Search Trees (BSTs) are a fundamental data structure in computer science.  They're a type of tree data structure with a specific ordering property that makes searching, insertion, and deletion efficient under certain conditions.
+
+**Key Properties:**
+
+* **Ordered Structure:**  For every node in the BST:
+    * The value of its left subtree's nodes is less than the node's value.
+    * The value of its right subtree's nodes is greater than the node's value.
+* **Nodes:** Each node typically contains:
+    * A `key` (the value being stored)
+    * A pointer to its `left` child
+    * A pointer to its `right` child
+* **Root Node:** The top-most node of the tree.
+* **Leaf Nodes:** Nodes with no children.
+
+
+**Operations:**
+
+* **Search:**  To search for a value, start at the root. If the value is equal to the root's key, you've found it. If the value is less than the root's key, recursively search the left subtree; otherwise, recursively search the right subtree.  This has an average time complexity of O(log n), where n is the number of nodes (in a balanced tree).  In a worst-case scenario (a completely skewed tree resembling a linked list), it becomes O(n).
+
+* **Insertion:** To insert a new value, follow the search algorithm.  When you reach a node where the next step would be to a `null` pointer, insert the new node there.  Again, this is O(log n) on average and O(n) in the worst case.
+
+* **Deletion:** Deleting a node is more complex than insertion. There are three cases:
+    * **Node with no children (leaf node):** Simply remove the node.
+    * **Node with one child:** Replace the node with its child.
+    * **Node with two children:**  Find the in-order successor (the smallest node in the right subtree) or in-order predecessor (the largest node in the left subtree), replace the node's key with the successor/predecessor's key, and then delete the successor/predecessor node (which now falls into one of the previous two cases).  Average case is O(log n), worst-case is O(n).
+
+* **Traversal:**  Visiting all nodes in a specific order. Common traversal methods:
+    * **In-order traversal:** Visit the left subtree, then the current node, then the right subtree.  This produces a sorted sequence of the keys.
+    * **Pre-order traversal:** Visit the current node, then the left subtree, then the right subtree.
+    * **Post-order traversal:** Visit the left subtree, then the right subtree, then the current node.
+
+**Advantages:**
+
+* **Efficient Search, Insertion, and Deletion (on average):**  O(log n) time complexity for balanced trees.
+* **Sorted Data:**  In-order traversal provides a sorted sequence.
+* **Flexible Structure:** Can handle a wide range of data.
+
+**Disadvantages:**
+
+* **Worst-Case Performance:**  Degenerates to O(n) time complexity if the tree becomes unbalanced (e.g., a linked list).
+* **Not Ideal for All Applications:** Not the best choice for applications requiring frequent updates or where balanced structure is difficult to maintain.  Other data structures like AVL trees or red-black trees are preferred when strict balancing is required.
+
+
+**Balanced BSTs:**
+
+To mitigate the worst-case scenario, self-balancing BSTs like AVL trees and red-black trees are used. These trees employ algorithms to maintain a roughly balanced structure during insertions and deletions, ensuring that the search, insertion, and deletion operations remain close to O(log n) even in the worst case.
+
+
+**Example (Python):**
+
+A basic (unbalanced) BST node implementation:
+
+```python
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        # ... (Implementation for insertion) ...
+
+    def search(self, key):
+        # ... (Implementation for search) ...
+
+    def inorder_traversal(self, node):
+        # ... (Implementation for inorder traversal) ...
+```
+
+This provides a basic framework.  A full implementation would include the methods for insertion, search, deletion, and the different traversal methods.  Remember to handle edge cases (empty tree, etc.) appropriately.
+
