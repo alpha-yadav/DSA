@@ -94844,3 +94844,108 @@ Remember to handle edge cases like:
 
 The provided Python code (recursive approach) includes basic error handling for `null` root and handles the case where `p` or `q` is the root or is already found.  You should add more robust error checking based on your specific requirements.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (usually a binary tree or a general tree) is a classic algorithmic problem.  The approach varies depending on the type of tree and whether you have parent pointers or not.
+
+**Methods:**
+
+1. **Using Parent Pointers (Simplest, if available):**
+
+   If each node has a pointer to its parent, the algorithm is straightforward:
+
+   * **Algorithm:**
+     1. Traverse upwards from both nodes simultaneously, storing the visited nodes in two sets (or lists).
+     2. The first node encountered that is present in *both* sets is the LCA.
+
+   * **Python Code (Binary Tree with Parent Pointers):**
+
+     ```python
+     class Node:
+         def __init__(self, data):
+             self.data = data
+             self.parent = None
+             self.left = None
+             self.right = None
+
+     def lca_with_parent(node1, node2):
+         set1 = set()
+         curr = node1
+         while curr:
+             set1.add(curr)
+             curr = curr.parent
+         curr = node2
+         while curr:
+             if curr in set1:
+                 return curr
+             curr = curr.parent
+         return None  # Nodes are not in the same tree
+
+     # Example Usage (You'd need to create your tree structure first)
+     root = Node(1)
+     # ... populate the tree and set parent pointers ...
+     lca = lca_with_parent(some_node1, some_node2)
+     print(f"LCA: {lca.data}")
+     ```
+
+
+2. **Without Parent Pointers (Binary Tree):**
+
+   This is more common.  Several approaches exist:
+
+   * **Recursive Approach:** This is a classic and often efficient solution.
+
+     * **Algorithm:**
+       1. If the current node is `None`, return `None`.
+       2. If the current node is either `node1` or `node2`, return the current node.
+       3. Recursively find the LCA in the left and right subtrees.
+       4. If both recursive calls return non-`None` values, the current node is the LCA.
+       5. Otherwise, return the non-`None` result (or `None` if both are `None`).
+
+     * **Python Code:**
+
+       ```python
+       class Node:
+           def __init__(self, data):
+               self.data = data
+               self.left = None
+               self.right = None
+
+       def lca_recursive(root, node1, node2):
+           if root is None:
+               return None
+           if root == node1 or root == node2:
+               return root
+           left_lca = lca_recursive(root.left, node1, node2)
+           right_lca = lca_recursive(root.right, node1, node2)
+           if left_lca and right_lca:
+               return root
+           return left_lca if left_lca else right_lca
+
+       # Example Usage
+       root = Node(1)
+       # ... populate the tree ...
+       lca = lca_recursive(root, some_node1, some_node2)
+       print(f"LCA: {lca.data}")
+       ```
+
+   * **Iterative Approach (using a stack):**  This approach can be slightly more space-efficient in some cases than the deeply recursive solution.
+
+
+3. **General Tree (without parent pointers):**  More complex algorithms might be needed, often involving pre-order or post-order traversal and tracking ancestor information.
+
+
+**Choosing the Right Method:**
+
+* If parent pointers are readily available, the parent pointer method is the easiest and most efficient.
+* For binary trees without parent pointers, the recursive method is often preferred for its simplicity and readability.  The iterative approach might offer slight performance advantages in certain scenarios.
+* For general trees, a more sophisticated algorithm is necessary, often requiring more complex data structures to track ancestry.
+
+
+Remember to handle edge cases like:
+
+* One or both nodes are not in the tree.
+* One node is an ancestor of the other.
+
+
+Remember to replace `some_node1` and `some_node2` with actual nodes in your tree when you use the example code.  You'll need to build your tree structure appropriately before running these examples.
+
