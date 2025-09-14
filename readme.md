@@ -95231,3 +95231,95 @@ The space complexity of an adjacency list is O(V + E), where V is the number of 
 
 Adjacency lists are a powerful and versatile way to represent graphs, particularly suitable when dealing with sparse graphs or situations where efficient neighbor traversal is crucial.  Choose the implementation that best suits your specific needs and data characteristics.
 
+#  Topological Sort 
+A topological sort of a directed acyclic graph (DAG) is a linear ordering of its vertices such that for every directed edge from vertex `u` to vertex `v`, vertex `u` comes before vertex `v` in the ordering.  In simpler terms, it's an ordering where you can follow all the arrows without ever going backwards.  Topological sorts are not unique; a DAG can have multiple valid topological sorts.
+
+**When are Topological Sorts Useful?**
+
+Topological sorts are crucial in situations where order matters, such as:
+
+* **Dependency resolution:**  Think about building software.  Module A might depend on Module B. A topological sort can determine the order to compile or link these modules.
+* **Course scheduling:**  If course A is a prerequisite for course B, a topological sort can determine a valid order to take the courses.
+* **Task scheduling:**  In a project with tasks that have dependencies, a topological sort can determine a valid execution order.
+* **Data serialization:**  Certain data structures need to be processed in a specific order based on their relationships.
+
+**Algorithms for Topological Sorting**
+
+Two common algorithms are used:
+
+1. **Kahn's Algorithm (using in-degree):**
+
+   This algorithm iteratively removes nodes with zero in-degree (nodes with no incoming edges).
+
+   * **Steps:**
+     1. Calculate the in-degree (number of incoming edges) for each node.
+     2. Add all nodes with in-degree 0 to a queue (or list).
+     3. While the queue is not empty:
+        * Remove a node from the queue and add it to the sorted list.
+        * For each neighbor (outgoing edge) of the removed node, decrement its in-degree.
+        * If a neighbor's in-degree becomes 0, add it to the queue.
+     4. If the sorted list contains all nodes, the sort is successful. Otherwise, a cycle exists in the graph (and a topological sort is impossible).
+
+   * **Python Code Example:**
+
+     ```python
+     from collections import deque
+
+     def topological_sort_kahns(graph):
+         in_degree = {node: 0 for node in graph}
+         for node in graph:
+             for neighbor in graph[node]:
+                 in_degree[neighbor] += 1
+
+         queue = deque([node for node in in_degree if in_degree[node] == 0])
+         sorted_nodes = []
+
+         while queue:
+             node = queue.popleft()
+             sorted_nodes.append(node)
+             for neighbor in graph[node]:
+                 in_degree[neighbor] -= 1
+                 if in_degree[neighbor] == 0:
+                     queue.append(neighbor)
+
+         if len(sorted_nodes) != len(graph):
+             return None  # Cycle detected
+
+         return sorted_nodes
+
+
+     graph = {
+         'A': ['C'],
+         'B': ['C', 'D'],
+         'C': ['E'],
+         'D': ['F'],
+         'E': ['H'],
+         'F': ['H'],
+         'G': ['H'],
+         'H': []
+     }
+
+     sorted_graph = topological_sort_kahns(graph)
+     print(f"Topological Sort: {sorted_graph}") #Example output: ['A', 'B', 'G', 'C', 'D', 'E', 'F', 'H'] (order may vary)
+
+
+     ```
+
+2. **Depth-First Search (DFS) with Post-Order Traversal:**
+
+   This algorithm uses depth-first search and adds nodes to the sorted list in post-order (after all its descendants have been visited).
+
+   * **Steps:**
+     1. Perform a DFS on the graph.
+     2. When a node's DFS traversal is finished (all its descendants have been explored), add it to the beginning of the sorted list.
+     3. If a cycle is detected (during DFS, visiting a node already in the recursion stack), a topological sort is impossible.
+
+   * **Note:**  The implementation of DFS-based topological sort is slightly more complex than Kahn's algorithm and often involves recursion or a stack to manage the traversal.  It's less straightforward to explain concisely within this response.
+
+**Choosing an Algorithm:**
+
+Kahn's algorithm is generally considered easier to understand and implement.  DFS is sometimes preferred if you already have a DFS implementation readily available. Both have a time complexity of O(V + E), where V is the number of vertices and E is the number of edges.
+
+
+Remember that if a cycle exists in the graph, a topological sort is not possible.  Both algorithms will detect cycles.
+
