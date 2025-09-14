@@ -90108,3 +90108,56 @@ This is often considered the most readable version, especially as the complexity
 
 For a simple FizzBuzz, the differences are minimal.  Version 1 is easiest for beginners to understand. Version 3 is generally preferred for its clarity and maintainability, especially as the problem expands.  Version 2 is a good middle ground, but can become less readable in more complex scenarios.  Choose the version that best suits your understanding and coding style.  Remember that readability and maintainability are key, especially as codebases grow.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  The resources most commonly considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm needs as a function of the input size.
+
+We usually analyze complexity using **Big O notation**, which describes the upper bound of the growth rate of the algorithm's resource usage as the input size approaches infinity.  It ignores constant factors and lower-order terms, focusing on the dominant factor that determines the scaling behavior.
+
+Here's a breakdown of common complexities, from fastest to slowest:
+
+**Time Complexity:**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Examples include accessing an element in an array by its index or performing a single arithmetic operation.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is typical of algorithms that divide the problem size in half at each step, such as binary search.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Examples include searching through an unsorted array or iterating over a list once.
+
+* **O(n log n) - Linearithmic Time:** A combination of linear and logarithmic time complexities.  This is common in efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases quadratically with the input size.  This often occurs in nested loops where the inner loop iterates through the entire input for each element in the outer loop.  Examples include bubble sort and selection sort.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  This is characteristic of algorithms that explore all possible combinations, such as finding all subsets of a set.  These algorithms become impractical very quickly for larger inputs.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size. This is extremely slow and only suitable for very small inputs.  A classic example is the travelling salesman problem using brute force.
+
+
+**Space Complexity:**  This follows similar notation as time complexity.
+
+* **O(1) - Constant Space:** The algorithm uses a constant amount of memory regardless of the input size.
+
+* **O(n) - Linear Space:** The algorithm's memory usage increases linearly with the input size.
+
+* **O(log n) - Logarithmic Space:** The algorithm's memory usage increases logarithmically with the input size (less common).
+
+* **O(n²) - Quadratic Space:** The algorithm's memory usage increases quadratically with the input size.
+
+
+**Other Notations:**
+
+* **Ω (Big Omega):** Describes the lower bound of an algorithm's resource usage.  It represents the best-case scenario.
+
+* **Θ (Big Theta):** Describes the tight bound, meaning both the upper and lower bounds are the same.  This indicates the exact growth rate.
+
+**Factors Affecting Complexity:**
+
+* **Input data:** The complexity can vary depending on the characteristics of the input data (e.g., sorted vs. unsorted array).  Worst-case, average-case, and best-case complexities are often analyzed.
+* **Algorithm implementation:**  Different implementations of the same algorithm can have different complexities.
+* **Hardware:** The underlying hardware can influence the actual execution time, but the Big O notation abstracts away these hardware-specific details.
+
+
+Understanding algorithm complexity is crucial for selecting efficient algorithms and predicting their performance for large datasets.  Choosing an algorithm with a lower time and space complexity will significantly impact the scalability and responsiveness of your applications.
+
