@@ -92143,3 +92143,6 @@ You can perform a Depth-First Search (DFS) and store the path from the root to e
 
 Remember to handle edge cases, such as when `p` or `q` is not in the tree, or when one is an ancestor of the other.  The recursive approach handles these cases naturally.  Iterative approaches require additional checks.  Always consider the space and time complexity of your chosen algorithm.  The recursive approach is generally O(N) in time complexity and O(H) in space complexity (where N is the number of nodes and H is the height of the tree).  Iterative approaches can have similar complexities, though the space complexity can be reduced if you don't store the full paths.
 
+#  Graph 
+Please provide me with the data or equation you want me to graph.  I need information about the x and y values or a function to create a graph.
+
