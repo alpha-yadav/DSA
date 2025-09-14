@@ -95757,3 +95757,79 @@ Here are a few algorithmic problems of varying difficulty, categorized for clari
 
 These problems illustrate different aspects of algorithmic thinking, from simple iteration to more complex dynamic programming (implied in the "Longest Palindromic Substring" problem).  Choosing a problem depends on your current skill level.  Remember to consider the time and space complexity of your solution as well.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  Here's how to implement it in Swift, starting with a simple approach and then showing a more advanced (and arguably more elegant) version.
+
+
+**Method 1: Basic Approach (using `if-else if-else`)**
+
+This is the most straightforward method, easy to understand for beginners.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  It checks for divisibility by 15 first (to handle both 3 and 5), then 3, then 5.  If none of these conditions are met, it prints the number itself.
+
+
+**Method 2:  More Concise Approach (using ternary operator and string interpolation)**
+
+This approach is more compact and uses Swift's features to make the code more readable.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let fizz = i % 3 == 0 ? "Fizz" : ""
+        let buzz = i % 5 == 0 ? "Buzz" : ""
+        print(fizz + buzz == "" ? "\(i)" : fizz + buzz)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+This version uses the ternary operator (`condition ? value1 : value2`) to concisely determine whether "Fizz" and "Buzz" should be added to the output string.  If both are empty, the number itself is printed.
+
+
+**Method 3:  Functional Approach (using `map` and a closure)**
+
+This method demonstrates a more functional programming style in Swift. It's more advanced but can be more efficient for larger inputs.
+
+```swift
+func fizzBuzzFunctional(n: Int) {
+    (1...n).map { i in
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : "\(i)"
+        print(output)
+    }
+}
+
+fizzBuzzFunctional(n: 15) // Call the function to test
+
+```
+
+This approach uses the `map` function to apply a closure (an anonymous function) to each number in the range 1...n. The closure determines the output string based on divisibility rules.
+
+
+**Choosing the Right Method:**
+
+* **Method 1:** Best for beginners due to its readability and ease of understanding.
+* **Method 2:**  A good compromise between readability and conciseness.  Suitable for intermediate programmers.
+* **Method 3:**  More advanced and demonstrates a functional approach.  May be slightly more efficient for very large `n` values.
+
+
+Remember to choose the method that best suits your understanding and the context of your project.  For a simple FizzBuzz implementation, Method 1 or 2 are perfectly adequate.
+
