@@ -90032,3 +90032,79 @@ Output: "bab" (or "aba")
 
 The best problem for you to practice depends on your current skill level.  Start with the easy problem to get comfortable with the process of defining the problem, designing an algorithm, writing code, and testing your solution. Then, progress to the medium and hard problems as you gain experience.  Remember to consider factors like time and space complexity when designing your algorithm.  For example, a brute-force solution might be simple to understand but could be inefficient for large inputs.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming challenge.  Here's how to implement it in Swift, starting with a simple, easy-to-understand version, and then showing some improvements:
+
+
+**Version 1: Basic Implementation**
+
+This version uses a simple `for` loop and `if-else if-else` statements:
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`.  For each number:
+
+* It checks divisibility by 15 first (to handle both 3 and 5).
+* Then it checks divisibility by 3.
+* Then it checks divisibility by 5.
+* If none of the above are true, it prints the number itself.
+
+
+**Version 2:  Slightly More Concise**
+
+We can slightly improve readability by using a ternary operator for the print statement:
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let output = (i % 15 == 0) ? "FizzBuzz" : (i % 3 == 0) ? "Fizz" : (i % 5 == 0) ? "Buzz" : String(i)
+        print(output)
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+This version achieves the same result with a more compact `print` statement.  However, excessively nested ternary operators can become hard to read in more complex scenarios.
+
+
+**Version 3: Using String Interpolation (for better readability)**
+
+This version uses string interpolation to make the output more clear and maintainable:
+
+```swift
+func fizzBuzzStringInterpolation(n: Int) {
+    for i in 1...n {
+        var output = ""
+        if i % 3 == 0 { output += "Fizz" }
+        if i % 5 == 0 { output += "Buzz" }
+        print(output.isEmpty ? "\(i)" : output)
+    }
+}
+
+fizzBuzzStringInterpolation(n: 15)
+```
+
+This is often considered the most readable version, especially as the complexity of the conditions increases.
+
+
+**Choosing the Best Version:**
+
+For a simple FizzBuzz, the differences are minimal.  Version 1 is easiest for beginners to understand. Version 3 is generally preferred for its clarity and maintainability, especially as the problem expands.  Version 2 is a good middle ground, but can become less readable in more complex scenarios.  Choose the version that best suits your understanding and coding style.  Remember that readability and maintainability are key, especially as codebases grow.
+
