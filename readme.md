@@ -89982,3 +89982,53 @@ This practical experience will reinforce your understanding and help you develop
 
 Remember to start small, be patient, and celebrate your progress.  Learning algorithms is a marathon, not a sprint.  Focus on understanding the underlying concepts, and the rest will follow.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+**Problem:**  Reverse a string.
+
+**Input:** A string, e.g., "hello"
+
+**Output:** The reversed string, e.g., "olleh"
+
+**Solution Idea:**  Iterate through the string from the end to the beginning and build a new string.  Alternatively, you can use built-in string manipulation functions (if allowed).
+
+
+**Medium:**
+
+**Problem:** Two Sum
+
+**Input:** An array of integers `nums` and an integer `target`.
+
+**Output:**  Return *indices* of the two numbers such that they add up to `target`.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.
+
+**Example:**
+
+`nums = [2,7,11,15], target = 9`
+Output: `[0,1]` because `nums[0] + nums[1] == 9`
+
+**Solution Idea:** Use a hash table (dictionary in Python) to store seen numbers and their indices.  For each number, check if `target - number` exists in the hash table.
+
+
+**Hard:**
+
+**Problem:**  Longest Palindromic Substring
+
+**Input:** A string `s`
+
+**Output:** The longest palindromic substring in `s`.
+
+**Example:**
+
+`s = "babad"`
+Output: "bab" (or "aba")
+
+**Solution Idea:** This can be solved using dynamic programming or a more efficient approach like Manacher's algorithm.  The dynamic programming approach builds a table to store whether substrings are palindromes.
+
+
+**Choosing a Problem to Solve:**
+
+The best problem for you to practice depends on your current skill level.  Start with the easy problem to get comfortable with the process of defining the problem, designing an algorithm, writing code, and testing your solution. Then, progress to the medium and hard problems as you gain experience.  Remember to consider factors like time and space complexity when designing your algorithm.  For example, a brute-force solution might be simple to understand but could be inefficient for large inputs.
+
