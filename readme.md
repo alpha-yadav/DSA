@@ -93332,3 +93332,56 @@ Imagine searching for a number in a sorted list of 1,000,000 elements.  A linear
 
 In summary, O(log n) algorithms are exceptionally efficient for large datasets, making them crucial for many applications where speed is critical.  They often rely on the clever use of sorted data and efficient data structures to achieve this performance.
 
+#  An O(log n) example 
+A classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array (or other sorted data structure).  It works by repeatedly dividing the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.  This process is repeated until the target value is found or the search interval is empty.
+
+**Why it's O(log n):**
+
+Each step of binary search reduces the search space by half.  Let's say you start with an array of size 'n'.  After one step, you're left with n/2 elements. After two steps, n/4 elements.  After k steps, you have n/(2<sup>k</sup>) elements.
+
+The algorithm terminates when the search space is reduced to a single element (or becomes empty).  Therefore, we need to find the value of k such that:
+
+n / 2<sup>k</sup> ≤ 1
+
+Solving for k:
+
+2<sup>k</sup> ≥ n
+k ≥ log<sub>2</sub>(n)
+
+This means the maximum number of steps required is proportional to the logarithm base 2 of n.  Therefore, the time complexity is O(log n).  The base of the logarithm (2 in this case) is dropped in Big O notation because it's a constant factor.
+
+
+**Example in Python:**
+
+```python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2  # Integer division
+        if arr[mid] == target:
+            return mid  # Target found
+        elif arr[mid] < target:
+            low = mid + 1  # Search in the right half
+        else:
+            high = mid - 1  # Search in the left half
+    return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+    print(f"Target found at index: {index}")
+else:
+    print("Target not found")
+```
+
+This Python code demonstrates a binary search.  Its efficiency comes directly from the logarithmic reduction of the search space with each iteration, making it a prime example of an O(log n) algorithm.  Other examples include finding a node in a balanced binary search tree, or certain tree traversal algorithms.
+
