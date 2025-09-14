@@ -90485,3 +90485,42 @@ for i in range(1, 5):
 
 Nested loops are a fundamental programming construct. Understanding them is essential for handling multi-dimensional data and performing many common algorithms.  However, always be mindful of their potential performance implications, especially when dealing with large datasets.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are incredibly efficient.  They mean the time it takes to complete the algorithm increases logarithmically with the input size (n).  This is much faster than linear time (O(n)) or quadratic time (O(n²)).
+
+The key characteristic that leads to O(log n) time complexity is the *repeated halving* or *reduction of the problem size by a constant factor* in each step.  This is typically achieved through techniques like binary search or divide and conquer.
+
+
+Here are some common types and examples of algorithms with O(log n) time complexity:
+
+**1. Binary Search:**
+
+* **Concept:**  Efficiently searches a *sorted* array (or list) for a target value.  It repeatedly divides the search interval in half.  If the target value is less than the middle element, the search continues in the lower half; otherwise, it continues in the upper half.
+* **Example:** Finding a word in a dictionary.
+
+**2. Tree Traversal (Balanced Trees):**
+
+* **Concept:**  Operations like searching, insertion, and deletion in a balanced binary search tree (BST), AVL tree, or red-black tree have O(log n) average and worst-case time complexity.  The balanced nature ensures the tree's height remains logarithmic with the number of nodes.
+* **Example:** Finding a specific node in a balanced BST.
+
+**3. Heap Operations (e.g., Min-Heap, Max-Heap):**
+
+* **Concept:**  Operations like insertion, deletion (of the root), and finding the minimum/maximum element in a min-heap or max-heap have O(log n) time complexity due to the heap's tree-like structure.
+* **Example:** Implementing a priority queue using a heap.
+
+**4. Exponentiation by Squaring:**
+
+* **Concept:**  Calculates a<sup>b</sup> (a raised to the power of b) in O(log b) time by repeatedly squaring the base and adjusting the exponent.
+* **Example:** Cryptographic algorithms often use this for efficient modular exponentiation.
+
+
+**5. Logarithmic-Time Sorting Algorithms (in specific contexts):**
+
+* While general-purpose sorting algorithms like merge sort are usually considered O(n log n), some specialized sorting techniques might achieve O(log n) in limited scenarios.  This often involves exploiting pre-sorted data or specific data structures.
+
+
+**Important Note:** The base of the logarithm doesn't affect the Big O notation.  O(log₂ n), O(log₁₀ n), and O(log n) are all considered O(log n) because they differ only by a constant factor (the change of base formula in logarithms).
+
+
+It's crucial to remember that O(log n) time complexity only applies when the algorithm can repeatedly halve the problem size.  If the algorithm doesn't have this property, it won't be O(log n).  For example, a linear search has O(n) time complexity, even if the data is sorted.
+
