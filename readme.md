@@ -92713,3 +92713,107 @@ Let's say you want to find a specific number in a list. A simple algorithm (line
 
 This is a very basic algorithm.  As you learn more, you'll encounter much more complex and efficient ones.  But starting with the basics is key.  Good luck!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems of varying difficulty, with explanations:
+
+**Problem 1: Two Sum** (Easy)
+
+* **Problem Statement:** Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.  You may assume that each input would have **exactly one solution**, and you may not use the *same* element twice.  You can return the answer in any order.
+
+* **Example:**
+
+```
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+```
+
+* **Algorithmic Approach:**  A simple approach uses a hash table (dictionary in Python). Iterate through the array. For each number, check if the `target - number` exists in the hash table. If it does, you've found your pair. If not, add the number and its index to the hash table.
+
+* **Python Code (Efficient):**
+
+```python
+def two_sum(nums, target):
+    num_map = {}  # Dictionary to store numbers and their indices
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    return None  # No solution found
+```
+
+
+**Problem 2: Reverse a Linked List** (Medium)
+
+* **Problem Statement:** Reverse a singly linked list.
+
+* **Example:**
+
+```
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+```
+
+* **Algorithmic Approach:**  Iterative reversal is most efficient.  Keep track of three pointers: `prev`, `curr`, and `next`.  Iterate through the list, reversing the links between nodes.
+
+* **Python Code (Iterative):**
+
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def reverse_linked_list(head):
+    prev = None
+    curr = head
+    while curr:
+        next_node = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next_node
+    return prev
+```
+
+
+**Problem 3:  Longest Palindromic Substring** (Hard)
+
+* **Problem Statement:** Given a string `s`, find the longest palindromic substring in `s`.
+
+* **Example:**
+
+```
+Input: s = "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+```
+
+* **Algorithmic Approach:**  Dynamic Programming or Manacher's Algorithm are common approaches.  Dynamic Programming builds a table to track whether substrings are palindromes.  Manacher's Algorithm is more optimized.
+
+* **Python Code (Dynamic Programming):**
+
+```python
+def longest_palindrome(s):
+    n = len(s)
+    if n < 2:
+        return s
+    dp = [[False] * n for _ in range(n)]
+    max_len = 1
+    start = 0
+    for i in range(n):
+        dp[i][i] = True
+    for length in range(2, n + 1):
+        for i in range(n - length + 1):
+            j = i + length - 1
+            if s[i] == s[j]:
+                if length == 2 or dp[i + 1][j - 1]:
+                    dp[i][j] = True
+                    if length > max_len:
+                        max_len = length
+                        start = i
+    return s[start:start + max_len]
+```
+
+These examples show a range of difficulty and common algorithmic techniques.  Remember to consider time and space complexity when choosing an algorithm.  Practice solving problems like these regularly to improve your skills!
+
