@@ -93051,3 +93051,41 @@ Asymptotic notations describe the behavior of functions as their input approache
 
 Understanding these notations is essential for comparing and evaluating the efficiency of different algorithms.  They allow us to focus on the fundamental growth rate rather than getting bogged down in implementation details.
 
+#  Big-Omega Notation 
+Big-Omega notation (Ω) is a notation used in computer science to describe the lower bound of the growth rate of a function.  In simpler terms, it provides a lower limit on how fast an algorithm's runtime or space usage will grow as the input size increases.  It's part of a family of notations (Big O, Big Theta, etc.) used to analyze algorithm efficiency.
+
+Here's a breakdown:
+
+**Formal Definition:**
+
+We say that *f(n)* is Ω(*g(n)*) if and only if there exist positive constants *c* and *n₀* such that for all *n ≥ n₀*,  0 ≤ *c* *g(n)* ≤ *f(n)*.
+
+**What it means:**
+
+* **Lower Bound:**  Ω notation gives a lower bound on the growth rate.  It means the function *f(n)* grows at least as fast as *g(n)* (up to a constant factor).  The algorithm will *at least* take this long.
+
+* **Constant Factors:** The constants *c* and *n₀* are crucial.  They allow us to ignore constant factors and focus on the dominant growth behavior.  For large enough *n* (*n ≥ n₀*), *f(n)* is always greater than or equal to *c* times *g(n)*.
+
+* **Asymptotic Behavior:**  Ω notation is concerned with the asymptotic behavior of the function – how it behaves as *n* approaches infinity.  Small input sizes are irrelevant.
+
+
+**Example:**
+
+Let's say we have an algorithm with runtime *f(n) = n² + 2n + 1*.
+
+* We can say *f(n)* is Ω(*n²*) because we can find constants *c* and *n₀* that satisfy the definition.  For example, if we choose *c = 1* and *n₀ = 1*, then for all *n ≥ 1*,  *n² ≤ n² + 2n + 1*.
+
+* We can also say *f(n)* is Ω(*n*) and even Ω(*1*).  This is because *n² + 2n + 1* grows faster than both *n* and a constant.  However, Ω(*n²*) is a *tighter* lower bound, giving more precise information about the growth rate.
+
+**Difference from Big O:**
+
+* **Big O (O):** Provides an *upper bound* on the growth rate.  It tells us how fast the algorithm's runtime can *at most* grow.
+
+* **Big Omega (Ω):** Provides a *lower bound* on the growth rate. It tells us how fast the algorithm's runtime will *at least* grow.
+
+* **Big Theta (Θ):** Provides both an *upper and lower bound*, indicating the tightest bound on the growth rate.  If *f(n)* is Θ(*g(n)*), then it is both O(*g(n)*) and Ω(*g(n)*).
+
+**In Summary:**
+
+Big-Omega notation is a valuable tool for understanding the efficiency of algorithms. By establishing a lower bound on the growth rate, it helps us assess the minimum amount of work an algorithm must perform, providing insights into its performance limitations and potential optimizations.  It's often used in conjunction with Big O notation for a complete picture of an algorithm's complexity.
+
