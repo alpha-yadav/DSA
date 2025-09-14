@@ -92429,3 +92429,106 @@ The space complexity of an adjacency list is O(V + E), where V is the number of 
 
 Remember to consider the specific needs of your application and the characteristics of your graph when deciding on the best representation.
 
+#  Topological Sort 
+A topological sort of a directed acyclic graph (DAG) is a linear ordering of its vertices such that for every directed edge from vertex `u` to vertex `v`, vertex `u` comes before vertex `v` in the ordering.  In simpler terms, it's arranging the nodes in a way that respects the direction of all the arrows.  If you can't do this, the graph contains a cycle (it's not a DAG).
+
+**Why is it important?**
+
+Topological sorting is crucial in scenarios where the order of operations matters, such as:
+
+* **Dependency resolution:**  Building software from source code, where some modules depend on others.  The topological sort gives you the correct order to compile these modules.
+* **Task scheduling:**  A sequence of tasks with dependencies (task A must be completed before task B).
+* **Course scheduling:**  Determining the order to take courses, given prerequisites.
+* **Data serialization:**  Determining the order to write data to a file when there are dependencies between data items.
+
+
+**Algorithms for Topological Sorting:**
+
+Two common approaches are:
+
+1. **Kahn's Algorithm:**
+
+   This algorithm uses a queue to process nodes with no incoming edges.
+
+   * **Initialization:**
+     * Calculate the in-degree (number of incoming edges) for each node.
+     * Add all nodes with an in-degree of 0 to a queue.
+
+   * **Iteration:**
+     * While the queue is not empty:
+       * Remove a node `u` from the queue.
+       * Add `u` to the result (topologically sorted list).
+       * For each neighbor `v` of `u`:
+         * Decrement the in-degree of `v`.
+         * If the in-degree of `v` becomes 0, add `v` to the queue.
+
+   * **Cycle Detection:** If, after the iteration, the number of nodes in the result is less than the total number of nodes in the graph, the graph contains a cycle, and a topological sort is impossible.
+
+
+2. **Depth-First Search (DFS):**
+
+   This algorithm uses recursion or a stack to perform a depth-first traversal of the graph.
+
+   * **Initialization:**  Mark all nodes as unvisited.
+   * **Iteration:**
+     * Perform DFS starting from any unvisited node.
+     * When a node's DFS finishes (all its descendants have been visited), add it to the beginning of the result list (because all its dependencies have been processed).
+
+   * **Cycle Detection:** If you encounter a node that's already visited during the DFS recursion (but not finished yet), you have a cycle.
+
+
+**Example (Kahn's Algorithm):**
+
+Consider a graph with nodes A, B, C, and D, and edges A->C, B->C, C->D.
+
+1. **In-degrees:** A: 0, B: 0, C: 2, D: 1
+2. **Queue:** A, B
+3. **Iteration:**
+   * Remove A: Result = [A], In-degree(C) = 1
+   * Remove B: Result = [A, B], In-degree(C) = 0, Add C to queue
+   * Remove C: Result = [A, B, C], In-degree(D) = 0, Add D to queue
+   * Remove D: Result = [A, B, C, D]
+
+The topological sort is [A, B, C, D].
+
+
+**Python Code (Kahn's Algorithm):**
+
+```python
+from collections import defaultdict
+
+def topological_sort(graph):
+    in_degree = defaultdict(int)
+    for node in graph:
+        for neighbor in graph[node]:
+            in_degree[neighbor] += 1
+
+    queue = [node for node in graph if in_degree[node] == 0]
+    result = []
+
+    while queue:
+        node = queue.pop(0)
+        result.append(node)
+        for neighbor in graph[node]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    if len(result) != len(graph):
+        return "Cycle detected"  # Graph is not a DAG
+    else:
+        return result
+
+# Example usage:
+graph = {
+    'A': ['C'],
+    'B': ['C'],
+    'C': ['D'],
+    'D': []
+}
+
+print(topological_sort(graph))  # Output: ['A', 'B', 'C', 'D']
+```
+
+Remember to adapt the code and algorithm choice depending on your specific needs and the size of your graph.  For very large graphs, optimized implementations might be necessary.
+
