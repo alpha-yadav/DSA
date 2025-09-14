@@ -94419,3 +94419,129 @@ print(f"Is the tree a BST? {is_bst_recursive_minmax(root2, float('-inf'), float(
 
 Both methods achieve the same result.  The min/max approach might be slightly more efficient because it can prune subtrees earlier if a violation is detected, avoiding unnecessary recursive calls.  Choose the method that you find more readable and easier to understand.  Remember to handle potential `None` values appropriately in your recursive functions.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit (or "traverse") all the nodes in a binary tree in a specific order.  There are three primary ways to traverse a binary tree:
+
+* **Inorder Traversal:**  Visit the left subtree, then the root node, then the right subtree.  For a binary *search* tree, this traversal yields the nodes in ascending order.
+
+* **Preorder Traversal:** Visit the root node, then the left subtree, then the right subtree.
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root node.
+
+
+Let's illustrate these with an example:
+
+Consider this binary tree:
+
+```
+     A
+    / \
+   B   C
+  / \   \
+ D   E   F
+```
+
+**1. Inorder Traversal:**
+
+The order would be: D B E A C F
+
+* We start at A.
+* We go left to B.
+* We go left to D (leftmost node).  We visit D.
+* We go back up to B.
+* We go right to E. We visit E.
+* We go back up to B. We visit B.
+* We go back up to A.
+* We go right to C.
+* We go right to F (leftmost node in C's subtree). We visit F.
+* We go back up to C. We visit C.
+
+
+**2. Preorder Traversal:**
+
+The order would be: A B D E C F
+
+* We start at A. We visit A.
+* We go left to B. We visit B.
+* We go left to D. We visit D.
+* We go back up to B.
+* We go right to E. We visit E.
+* We go back up to A.
+* We go right to C. We visit C.
+* We go right to F. We visit F.
+
+
+**3. Postorder Traversal:**
+
+The order would be: D E B F C A
+
+* We start at A.
+* We go left to B.
+* We go left to D. We visit D.
+* We go right to E. We visit E.
+* We go back up to B. We visit B.
+* We go back up to A.
+* We go right to C.
+* We go right to F. We visit F.
+* We go back up to C. We visit C.
+* We go back up to A. We visit A.
+
+
+
+**Recursive Implementations (Python):**
+
+These are the most common and elegant ways to implement these traversals:
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node('A')
+root.left = Node('B')
+root.right = Node('C')
+root.left.left = Node('D')
+root.left.right = Node('E')
+root.right.right = Node('F')
+
+print("Inorder traversal:")
+inorder_traversal(root)  # Output: D B E A C F
+print("\nPreorder traversal:")
+preorder_traversal(root) # Output: A B D E C F
+print("\nPostorder traversal:")
+postorder_traversal(root) # Output: D E B F C A
+```
+
+**Iterative Implementations:**  Iterative traversals are also possible using stacks (for preorder and inorder) and stacks/two stacks (for postorder), avoiding recursion and the potential for stack overflow with very deep trees.  These are more complex to implement but can be more efficient in some cases.
+
+
+These traversals have different applications. For example:
+
+* **Inorder:** Useful for binary search trees (sorted output).
+* **Preorder:** Used in expression trees (prefix notation).
+* **Postorder:** Used for deleting nodes in a tree (delete children before parent).
+
+
+Remember to handle the case where the input `node` is `None` (empty tree) in your traversal functions to prevent errors.
+
