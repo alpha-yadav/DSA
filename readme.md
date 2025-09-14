@@ -91665,3 +91665,112 @@ print(f"Is the tree a BST (iterative)? {is_bst_iterative(root2)}")  # Output: Fa
 
 Both methods achieve the same result. Choose the method that best suits your needs and coding style. Remember to handle edge cases like empty trees appropriately.
 
+#  Binary Tree traversals 
+Binary tree traversals are methods for systematically visiting each node in a binary tree exactly once.  There are three main types of traversals:
+
+* **Inorder Traversal:**  Visit the left subtree, then the root node, then the right subtree.  For a Binary Search Tree (BST), this yields the nodes in ascending order of their keys.
+
+* **Preorder Traversal:** Visit the root node, then the left subtree, then the right subtree.  This traversal is useful for creating a copy of the tree or for expressing the tree's structure in prefix notation.
+
+* **Postorder Traversal:** Visit the left subtree, then the right subtree, then the root node.  This is useful for evaluating an arithmetic expression represented by the tree, or for deleting the tree.
+
+
+**Recursive Implementations (Python):**
+
+These are the most common and elegant implementations.  They leverage the recursive nature of the tree structure.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def inorder_traversal(node):
+    if node:
+        inorder_traversal(node.left)
+        print(node.data, end=" ")
+        inorder_traversal(node.right)
+
+def preorder_traversal(node):
+    if node:
+        print(node.data, end=" ")
+        preorder_traversal(node.left)
+        preorder_traversal(node.right)
+
+def postorder_traversal(node):
+    if node:
+        postorder_traversal(node.left)
+        postorder_traversal(node.right)
+        print(node.data, end=" ")
+
+# Example usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Inorder Traversal:", end=" ")
+inorder_traversal(root)
+print("\nPreorder Traversal:", end=" ")
+preorder_traversal(root)
+print("\nPostorder Traversal:", end=" ")
+postorder_traversal(root)
+```
+
+**Iterative Implementations (Python):**
+
+Iterative approaches avoid recursion, which can be beneficial for very deep trees to prevent stack overflow errors. They typically use a stack data structure.
+
+```python
+def inorder_traversal_iterative(node):
+    stack = []
+    current = node
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.data, end=" ")
+        current = current.right
+
+def preorder_traversal_iterative(node):
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        print(current.data, end=" ")
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+
+
+def postorder_traversal_iterative(node):  #slightly more complex
+    stack = []
+    last_visited = None
+    current = node
+    while current or stack:
+        if current:
+            stack.append(current)
+            current = current.left
+        else:
+            peek = stack[-1]
+            if peek.right and last_visited != peek.right:
+                current = peek.right
+            else:
+                print(peek.data, end=" ")
+                last_visited = stack.pop()
+
+# Example usage (same tree as above):
+print("\n\nInorder Traversal (Iterative):", end=" ")
+inorder_traversal_iterative(root)
+print("\nPreorder Traversal (Iterative):", end=" ")
+preorder_traversal_iterative(root)
+print("\nPostorder Traversal (Iterative):", end=" ")
+postorder_traversal_iterative(root)
+
+```
+
+Remember to handle the `None` case (empty subtree) in your recursive functions to prevent errors.  The iterative versions are a bit more complex, especially for postorder traversal, but are valuable for larger trees.  Choose the implementation that best suits your needs and the size of your trees.
+
