@@ -96270,3 +96270,70 @@ O(log n) algorithms are characterized by halving (or similarly reducing) the pro
 
 These are some of the most prevalent examples of O(log n) algorithms. The key takeaway is that they efficiently solve problems by repeatedly reducing the problem size by a constant factor.
 
+#  An O(log n) example 
+A classic example of an O(log n) algorithm is **binary search**.
+
+**Binary Search:**
+
+Binary search is an algorithm used to find a specific element within a *sorted* array.  Its efficiency stems from repeatedly dividing the search interval in half.  If the target element is not in the middle of the interval, it eliminates half of the remaining search space.
+
+**Algorithm:**
+
+1. **Start:** Begin with the entire sorted array as the search interval.
+2. **Midpoint:** Find the middle element of the interval.
+3. **Compare:** Compare the middle element to the target value.
+   * **Match:** If they are equal, the search is successful, and the algorithm terminates.
+   * **Less:** If the target is less than the middle element, the search continues in the lower half of the interval.
+   * **Greater:** If the target is greater than the middle element, the search continues in the upper half of the interval.
+4. **Repeat:** Steps 2 and 3 are repeated until either the target element is found or the search interval is empty (meaning the target is not present).
+
+
+**Time Complexity:**
+
+With each comparison, the size of the search interval is halved.  This halving process continues until the interval is reduced to a single element or becomes empty. The number of times you can halve `n` (the size of the array) before reaching 1 is approximately log₂(n).  Therefore, the time complexity is O(log₂n), which simplifies to O(log n).
+
+
+**Example in Python:**
+
+```python
+def binary_search(arr, target):
+  """
+  Performs a binary search on a sorted array.
+
+  Args:
+    arr: The sorted array to search.
+    target: The value to search for.
+
+  Returns:
+    The index of the target if found, otherwise -1.
+  """
+  low = 0
+  high = len(arr) - 1
+
+  while low <= high:
+    mid = (low + high) // 2  # Integer division
+
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+
+  return -1  # Target not found
+
+
+# Example usage:
+sorted_array = [2, 5, 7, 8, 11, 12]
+target_value = 11
+
+index = binary_search(sorted_array, target_value)
+
+if index != -1:
+  print(f"Target found at index: {index}")
+else:
+  print("Target not found in the array.")
+```
+
+This Python code directly implements the binary search algorithm, showcasing its logarithmic time complexity.  Remember that binary search *requires* the input array to be sorted.  If the array is unsorted, you'd need to sort it first (which adds extra time complexity).
+
