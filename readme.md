@@ -93301,3 +93301,34 @@ This will print:
 
 Nested loops are a fundamental concept in programming, and understanding them is crucial for working with multi-dimensional data and performing iterative operations.  However, remember to be mindful of their potential performance impact and strive for clean, readable code.
 
+#  O(log n) types of Algorithms 
+O(log n) algorithms, also known as logarithmic time algorithms, are highly efficient.  They mean the time it takes to complete the algorithm increases logarithmically with the input size (n).  This is significantly faster than linear time (O(n)) or quadratic time (O(n²)).  The base of the logarithm usually doesn't matter in Big O notation because it's a constant factor.
+
+Here are some common types of algorithms that exhibit O(log n) time complexity:
+
+* **Binary Search:** This classic algorithm is used to efficiently search a *sorted* array or list.  It repeatedly divides the search interval in half.  If the target value is not found in the remaining interval, it's not in the list.
+
+* **Binary Tree Operations (Search, Insertion, Deletion in a balanced tree):**  Balanced binary search trees (like AVL trees or red-black trees) maintain a logarithmic height.  Operations that traverse down the tree (like searching for a specific node) take logarithmic time because each comparison eliminates roughly half the remaining possibilities.
+
+* **Efficient Set/Map Operations (using balanced trees):** Data structures like `std::set` and `std::map` in C++ often use balanced trees underneath, allowing for logarithmic time complexity for operations like insertion, deletion, and lookup.
+
+* **Finding the kth smallest element using Quickselect (average case):** Quickselect is a selection algorithm related to Quicksort. While its worst-case time complexity is O(n²), its average-case time complexity is O(n), but finding the *kth* smallest element can often be done in O(log n) time using optimizations within the algorithm (especially if k is small compared to n).
+
+* **Exponentiation by Squaring:** This technique efficiently computes aⁿ (a raised to the power of n) in O(log n) time by repeatedly squaring the base and adjusting the exponent.
+
+
+**Key Characteristics that lead to O(log n) complexity:**
+
+* **Repeated Halving/Division:** The algorithm repeatedly divides the problem size by a constant factor (usually 2).  This is the hallmark of logarithmic time complexity.
+
+* **Sorted Data (often):** Many O(log n) algorithms, like binary search, require the input data to be sorted beforehand.  Sorting itself is usually not O(log n) (though some specialized sorting algorithms can achieve this under specific conditions).
+
+* **Efficient Data Structures:** Balanced tree-based data structures are essential for achieving O(log n) performance in many scenarios.
+
+
+**Example (Binary Search):**
+
+Imagine searching for a number in a sorted list of 1,000,000 elements.  A linear search (O(n)) might take up to 1,000,000 comparisons in the worst case.  Binary search, however, can find the number (or determine it's absent) in at most log₂(1,000,000) ≈ 20 comparisons.  The difference is dramatic as the input size grows.
+
+In summary, O(log n) algorithms are exceptionally efficient for large datasets, making them crucial for many applications where speed is critical.  They often rely on the clever use of sorted data and efficient data structures to achieve this performance.
+
