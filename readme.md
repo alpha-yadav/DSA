@@ -90406,3 +90406,82 @@ These examples all demonstrate the basic structure of a `while` loop:
 
 If the condition is initially false, the loop body will never execute.  It's crucial to ensure that the loop variable is updated within the loop to prevent an infinite loop.  An infinite loop will run indefinitely, crashing your program or freezing your computer.
 
+#  A Nested Loop 
+A nested loop is a loop inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This creates a structure where you iterate over a multi-dimensional space or perform repetitive tasks with varying parameters.
+
+Here's a breakdown with examples in Python:
+
+**Basic Structure:**
+
+```python
+for outer_variable in outer_sequence:
+    for inner_variable in inner_sequence:
+        # Code to be executed for each inner loop iteration
+        # inner_variable and outer_variable are accessible here
+    # Code to be executed after each outer loop iteration
+```
+
+**Examples:**
+
+**1. Printing a multiplication table:**
+
+```python
+# Print the multiplication table up to 10x10
+for i in range(1, 11):  # Outer loop iterates through rows (1 to 10)
+    for j in range(1, 11):  # Inner loop iterates through columns (1 to 10)
+        print(i * j, end="\t")  # Print the product with a tab for spacing
+    print()  # Newline after each row
+```
+
+**2. Processing a 2D array (matrix):**
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:  # Outer loop iterates through rows
+    for element in row:  # Inner loop iterates through elements in each row
+        print(element, end=" ")
+    print()  # Newline after each row
+```
+
+**3. Finding the maximum value in a 2D array:**
+
+```python
+matrix = [
+    [1, 5, 2],
+    [8, 3, 9],
+    [4, 7, 6]
+]
+
+max_value = matrix[0][0]  # Initialize with the first element
+
+for row in matrix:
+    for element in row:
+        if element > max_value:
+            max_value = element
+
+print("The maximum value is:", max_value)
+```
+
+**4. Nested loops with different ranges:**
+
+```python
+for i in range(1, 5):
+    for j in range(i, i + 3): # Inner loop's range depends on outer loop
+        print(j, end=" ")
+    print()
+```
+
+**Important Considerations:**
+
+* **Efficiency:** Nested loops can be computationally expensive, especially with large datasets.  The time complexity increases significantly (often quadratically or even higher). Consider optimizing your code if performance becomes an issue.  Techniques like vectorization (using NumPy in Python) can be very helpful.
+* **Readability:**  Well-structured nested loops are important for code readability. Use meaningful variable names and comments to explain the logic.  Indentation is crucial for understanding the nested structure.
+* **Avoid infinite loops:**  Carefully check your loop conditions to prevent accidental infinite loops, especially when the inner loop's behavior depends on the outer loop.
+
+
+Nested loops are a fundamental programming construct. Understanding them is essential for handling multi-dimensional data and performing many common algorithms.  However, always be mindful of their potential performance implications, especially when dealing with large datasets.
+
