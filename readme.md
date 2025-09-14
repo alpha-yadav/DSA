@@ -92998,3 +92998,56 @@ f(n) = Θ(g(n)) means that f(n) grows at the *same rate* as g(n).  The constants
 
 In algorithm analysis, Big-Theta is preferred when possible because it gives the most precise description of an algorithm's time or space complexity. Knowing the exact growth rate helps compare the efficiency of different algorithms and make informed decisions about which algorithm is best suited for a given problem.  While Big-O is often used to describe the worst-case scenario, Big-Theta gives a more complete picture when applicable.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations describe the behavior of functions as their input approaches infinity.  They're crucial in computer science for analyzing the efficiency of algorithms.  Here's a comparison of the most common notations:
+
+**1. Big O (O-notation):**
+
+* **Meaning:**  Provides an *upper bound* on the growth rate of a function.  It describes the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than a quadratic function of the input size (n).  It could be faster, but it won't be significantly worse.
+* **Focus:**  Worst-case performance.  It's the most commonly used notation.
+
+**2. Big Omega (Ω-notation):**
+
+* **Meaning:** Provides a *lower bound* on the growth rate of a function.  It describes the *best-case* scenario (or a lower bound on the runtime regardless of the input). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least as fast as a linear function of the input size.
+* **Focus:** Best-case or lower bound on performance. Less frequently used than Big O.
+
+**3. Big Theta (Θ-notation):**
+
+* **Meaning:** Provides a *tight bound* on the growth rate of a function.  It means the function's growth rate is *both* upper and lower bounded by the same function.  f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.  The algorithm's runtime is neither significantly faster nor significantly slower than n log n.
+* **Focus:** Precise characterization of the growth rate.  Ideal but not always achievable.
+
+**4. Little o (o-notation):**
+
+* **Meaning:**  Indicates that a function grows *strictly slower* than another function.  f(n) = o(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c * g(n) for all n ≥ n₀.  The difference is crucial – it means *no matter how small* c is, eventually f(n) will be less than c * g(n).
+* **Example:**  n = o(n²) (linear growth is strictly slower than quadratic growth).
+* **Focus:** Showing a significant difference in growth rates.
+
+**5. Little omega (ω-notation):**
+
+* **Meaning:** Indicates that a function grows *strictly faster* than another function.  f(n) = ω(g(n)) if for every positive constant c, there exists a positive constant n₀ such that 0 ≤ c * g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) (quadratic growth is strictly faster than linear growth).
+* **Focus:** Showing a significant difference in growth rates.
+
+**Comparison Table:**
+
+| Notation | Meaning                               | Example                 | Focus                                  |
+|---------|---------------------------------------|--------------------------|---------------------------------------|
+| O(g(n)) | Upper bound                            | f(n) = O(n²)             | Worst-case performance                 |
+| Ω(g(n)) | Lower bound                            | f(n) = Ω(n)              | Best-case or lower bound on performance |
+| Θ(g(n)) | Tight bound (O and Ω)                  | f(n) = Θ(n log n)        | Precise growth rate                    |
+| o(g(n)) | Strictly slower growth                 | n = o(n²)                | Significant difference in growth rates  |
+| ω(g(n)) | Strictly faster growth                 | n² = ω(n)                | Significant difference in growth rates  |
+
+
+**Relationships:**
+
+* f(n) = Θ(g(n)) implies f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* f(n) = o(g(n)) implies f(n) = O(g(n)) but not vice-versa.
+* f(n) = ω(g(n)) implies f(n) = Ω(g(n)) but not vice-versa.
+
+
+Understanding these notations is essential for comparing and evaluating the efficiency of different algorithms.  They allow us to focus on the fundamental growth rate rather than getting bogged down in implementation details.
+
