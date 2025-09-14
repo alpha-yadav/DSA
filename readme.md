@@ -95897,3 +95897,42 @@ Analyzing the complexity of an algorithm often involves:
 
 Understanding algorithm complexity is crucial for selecting efficient algorithms and predicting the performance of software systems.  Choosing an algorithm with a lower complexity can drastically improve performance, especially for large datasets.
 
+#  Big-Theta notation 
+Big-Theta notation (Θ) is a mathematical notation used in computer science to describe the asymptotic behavior of functions.  Specifically, it describes the tight bound of a function's growth rate, meaning it provides both an upper and a lower bound that are asymptotically proportional.
+
+**Formal Definition:**
+
+A function *f(n)* is said to be Θ(*g(n)*) if there exist positive constants *c₁*, *c₂*, and *n₀* such that for all *n ≥ n₀*:
+
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)`
+
+In simpler terms:
+
+* **Asymptotically Bounded:**  *f(n)* is bounded both above and below by *g(n)*, ignoring constant factors.
+* **Proportional Growth:**  *f(n)* grows at the same rate as *g(n)*.  The difference between them is only a constant factor.
+
+
+**What it means:**
+
+Θ-notation provides a precise characterization of a function's growth rate. It's more informative than Big-O (which only provides an upper bound) or Big-Ω (which only provides a lower bound).  Θ tells us that the function's growth is essentially the same as the function within the Θ.
+
+**Example:**
+
+Let's say we have a function `f(n) = 2n² + 3n + 1`. We can show that `f(n)` is Θ(n²):
+
+1. **Find c₁ and n₀:** We need to find constants `c₁` and `n₀` such that `c₁n² ≤ 2n² + 3n + 1` for all `n ≥ n₀`.  Let's choose `c₁ = 1`. Then we need to find `n₀` where `n² ≤ 2n² + 3n + 1`. This inequality holds for sufficiently large `n` (e.g., `n₀ = 1`).
+
+2. **Find c₂ and n₀:** We also need to find constants `c₂` and `n₀` such that `2n² + 3n + 1 ≤ c₂n²` for all `n ≥ n₀`. We can choose `c₂ = 6` and a suitable `n₀`. For `n ≥ 1`, the inequality holds.
+
+
+Thus, we've shown that `1 * n² ≤ 2n² + 3n + 1 ≤ 6 * n²` for sufficiently large n.  Therefore, `f(n) = 2n² + 3n + 1` is Θ(n²).
+
+**Contrast with Big-O and Big-Ω:**
+
+* **Big-O (O):**  Provides an *upper bound*.  `f(n) = O(g(n))` means that *f(n)* grows *no faster* than *g(n)*.
+* **Big-Ω (Ω):** Provides a *lower bound*. `f(n) = Ω(g(n))` means that *f(n)* grows *at least as fast* as *g(n)*.
+* **Big-Θ (Θ):** Provides both an upper and lower bound, indicating that the growth rates are *asymptotically equivalent*.
+
+
+In essence, if `f(n) = Θ(g(n))`, then `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  However, the converse is not always true;  `f(n) = O(g(n))` and `f(n) = Ω(g(n))` doesn't necessarily imply `f(n) = Θ(g(n))`.  Θ provides a much tighter and more precise characterization of the function's growth.
+
