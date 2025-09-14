@@ -96172,3 +96172,58 @@ int main() {
 
 All of these examples print the numbers 0 through 4.  The choice of which loop to use depends on the specific task.  `while` loops are best when the number of iterations isn't known beforehand, while `for` loops are ideal when you know how many times you need to iterate.  `do-while` loops guarantee at least one execution. Remember to be cautious about infinite loops – ensure your loop condition will eventually become false.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop.  This allows for processing data in a multi-dimensional way, often used to iterate over rows and columns of a matrix or table, or to perform combinations of items from different sets.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop runs first and controls the number of times the inner loop runs.
+* **Inner Loop:** This loop runs for each iteration of the outer loop.  Its iterations are completely contained within a single iteration of the outer loop.
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+**Explanation:**
+
+1. The outer loop iterates from 1 to 10 (inclusive).
+2. For each value of `i` (outer loop), the inner loop iterates from 1 to 10.
+3. Inside the inner loop, `i * j` is calculated and printed.  The `end="\t"` prevents a newline after each number, keeping them on the same line.
+4. After the inner loop completes for a given `i`, `print()` adds a newline, moving to the next row.
+
+**Output:**
+
+```
+1       2       3       4       5       6       7       8       9       10
+2       4       6       8       10      12      14      16      18      20
+3       6       9       12      15      18      21      24      27      30
+4       8       12      16      20      24      28      32      36      40
+5       10      15      20      25      30      35      40      45      50
+6       12      18      24      30      36      42      48      54      60
+7       14      21      28      35      42      49      56      63      70
+8       16      24      32      40      48      56      64      72      80
+9       18      27      36      45      54      63      72      81      90
+10      20      30      40      50      60      70      80      90      100
+```
+
+**Other uses:**
+
+Nested loops are fundamental for many algorithms, including:
+
+* **Matrix operations:**  Processing elements of a 2D array (or higher dimensional arrays).
+* **Searching and sorting:**  Algorithms like bubble sort and selection sort use nested loops.
+* **Combinatorics:**  Generating combinations or permutations of elements.
+* **Graph traversal:** Algorithms like depth-first search and breadth-first search often use nested loops (implicitly or explicitly through recursion).
+
+
+It's crucial to understand that nested loops can lead to significant performance overhead, especially with large datasets. The time complexity increases multiplicatively with the number of nested loops.  Therefore, efficient algorithms are often designed to minimize nested loop usage whenever possible.
+
