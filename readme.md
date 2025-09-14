@@ -95936,3 +95936,57 @@ Thus, we've shown that `1 * n² ≤ 2n² + 3n + 1 ≤ 6 * n²` for sufficiently 
 
 In essence, if `f(n) = Θ(g(n))`, then `f(n) = O(g(n))` and `f(n) = Ω(g(n))`.  However, the converse is not always true;  `f(n) = O(g(n))` and `f(n) = Ω(g(n))` doesn't necessarily imply `f(n) = Θ(g(n))`.  Θ provides a much tighter and more precise characterization of the function's growth.
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations (Big O, Big Omega, Big Theta, Little o, Little omega) are used in computer science and mathematics to describe the limiting behavior of a function as the input size grows to infinity.  They provide a way to compare the efficiency of algorithms without getting bogged down in implementation details or specific hardware. Here's a comparison:
+
+**1. Big O Notation (O):**
+
+* **Meaning:**  Describes the *upper bound* of a function's growth.  It represents the *worst-case* scenario.  We say f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c*g(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is O(n²), it means the runtime grows no faster than the square of the input size (in the worst case).
+* **Focus:** Worst-case performance.
+
+**2. Big Omega Notation (Ω):**
+
+* **Meaning:** Describes the *lower bound* of a function's growth. It represents the *best-case* scenario (or a guarantee on how fast the function grows). We say f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c*g(n) ≤ f(n) for all n ≥ n₀.
+* **Example:** If an algorithm's runtime is Ω(n), it means the runtime grows at least as fast as the input size (in the best case).
+* **Focus:** Best-case/guaranteed performance.
+
+**3. Big Theta Notation (Θ):**
+
+* **Meaning:** Describes the *tight bound* of a function's growth.  It means the function's growth is *both* upper and lower bounded by the same function.  We say f(n) = Θ(g(n)) if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Example:** If an algorithm's runtime is Θ(n log n), it means the runtime grows proportionally to n log n.
+* **Focus:** Precise growth rate.
+
+**4. Little o Notation (o):**
+
+* **Meaning:**  Describes an *upper bound* that is *not tight*.  It means f(n) grows *strictly slower* than g(n).  Formally, f(n) = o(g(n)) if for *any* positive constant c, there exists a positive constant n₀ such that 0 ≤ f(n) < c*g(n) for all n ≥ n₀.  The key difference from Big O is the "strictly slower" aspect.
+* **Example:**  n = o(n²) because n grows significantly slower than n².
+* **Focus:**  Growth rate comparison, showing one function dominates another.
+
+**5. Little Omega Notation (ω):**
+
+* **Meaning:** Describes a *lower bound* that is *not tight*. It means f(n) grows *strictly faster* than g(n). Formally, f(n) = ω(g(n)) if for *any* positive constant c, there exists a positive constant n₀ such that 0 ≤ c*g(n) < f(n) for all n ≥ n₀.
+* **Example:** n² = ω(n) because n² grows significantly faster than n.
+* **Focus:** Growth rate comparison, showing one function dominates another.
+
+
+**Summary Table:**
+
+| Notation | Meaning                               | Tight Bound? | Example                  |
+|----------|---------------------------------------|--------------|---------------------------|
+| O        | Upper bound (worst-case)             | No           | f(n) = O(n²)              |
+| Ω        | Lower bound (best-case/guaranteed)    | No           | f(n) = Ω(n)               |
+| Θ        | Tight bound (both upper and lower)    | Yes          | f(n) = Θ(n log n)         |
+| o        | Non-tight upper bound (strictly slower)| No           | n = o(n²)                 |
+| ω        | Non-tight lower bound (strictly faster)| No           | n² = ω(n)                 |
+
+
+**Relationships:**
+
+* If f(n) = Θ(g(n)), then f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* f(n) = o(g(n)) implies f(n) = O(g(n)), but not vice-versa.
+* f(n) = ω(g(n)) implies f(n) = Ω(g(n)), but not vice-versa.
+
+
+These notations are crucial for analyzing the scalability and efficiency of algorithms, allowing for comparisons independent of specific hardware or constant factors.  They help us understand how an algorithm's performance will change as the input size becomes very large.
+
