@@ -95833,3 +95833,67 @@ This approach uses the `map` function to apply a closure (an anonymous function)
 
 Remember to choose the method that best suits your understanding and the context of your project.  For a simple FizzBuzz implementation, Method 1 or 2 are perfectly adequate.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources an algorithm consumes.  This is usually expressed as a function of the input size (n).  The resources most commonly considered are:
+
+* **Time complexity:** How long the algorithm takes to run as a function of the input size.
+* **Space complexity:** How much memory the algorithm uses as a function of the input size.
+
+We usually analyze the *worst-case* complexity, although *average-case* and *best-case* complexities can also be analyzed.  The analysis often focuses on the *asymptotic* behavior of the algorithm as the input size grows very large, ignoring constant factors and smaller terms.
+
+**Big O Notation:**
+
+Big O notation (O) is the most common way to describe algorithm complexity. It provides an upper bound on the growth rate of the algorithm's resource consumption.  It focuses on the dominant terms as the input size approaches infinity.
+
+Some common Big O complexities (from fastest to slowest):
+
+* **O(1) - Constant time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic time:** The execution time increases logarithmically with the input size.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear time:** The execution time increases linearly with the input size. Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic time:**  A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic time:** The execution time increases proportionally to the square of the input size. Example: Nested loops iterating over the input data.
+
+* **O(2ⁿ) - Exponential time:** The execution time doubles with each increase in input size.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial time:** The execution time grows factorially with the input size.  This is extremely slow for even moderately sized inputs. Example: The traveling salesman problem using brute force.
+
+
+**Other Notations:**
+
+Besides Big O, other notations are used to describe complexity:
+
+* **Big Omega (Ω):** Provides a *lower bound* on the growth rate.  It describes the best-case scenario.
+
+* **Big Theta (Θ):** Provides a *tight bound*, meaning both an upper and lower bound on the growth rate.  It describes the average-case scenario.
+
+
+**Factors Affecting Complexity:**
+
+Several factors can influence the complexity of an algorithm:
+
+* **Data Structures:** The choice of data structure significantly impacts performance.  Using a hash table for searching can reduce complexity from O(n) to O(1) on average.
+
+* **Algorithm Design:** Different algorithms for the same problem can have vastly different complexities.
+
+* **Input Characteristics:** The specific input data can affect the runtime, particularly for algorithms that are sensitive to the order or distribution of the input.
+
+
+**Analyzing Complexity:**
+
+Analyzing the complexity of an algorithm often involves:
+
+1. **Identifying the basic operations:** Determine which operations contribute most to the runtime.
+
+2. **Counting the number of operations:** Express the number of operations as a function of the input size.
+
+3. **Determining the dominant term:** Identify the term that grows fastest as the input size increases.
+
+4. **Expressing the complexity using Big O notation:**  Drop constant factors and lower-order terms.
+
+
+Understanding algorithm complexity is crucial for selecting efficient algorithms and predicting the performance of software systems.  Choosing an algorithm with a lower complexity can drastically improve performance, especially for large datasets.
+
