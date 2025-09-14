@@ -94949,3 +94949,12 @@ Remember to handle edge cases like:
 
 Remember to replace `some_node1` and `some_node2` with actual nodes in your tree when you use the example code.  You'll need to build your tree structure appropriately before running these examples.
 
+#  Graph 
+Please provide me with the data or equation that you want me to graph.  I need information like:
+
+* **Equation:**  e.g., y = 2x + 1,  y = x²,  sin(x)
+* **Data points:**  e.g., (1, 2), (3, 5), (7, 9)  (list of x, y coordinates)
+* **Type of graph:**  (e.g., line graph, scatter plot, bar chart, pie chart)  If not specified, I'll make a reasonable assumption.
+
+Once you give me this information, I can help you graph it.  I can't create visual graphs directly, but I can describe the graph or give you the coordinates to plot yourself.
+
