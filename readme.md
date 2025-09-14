@@ -93089,3 +93089,53 @@ Let's say we have an algorithm with runtime *f(n) = n² + 2n + 1*.
 
 Big-Omega notation is a valuable tool for understanding the efficiency of algorithms. By establishing a lower bound on the growth rate, it helps us assess the minimum amount of work an algorithm must perform, providing insights into its performance limitations and potential optimizations.  It's often used in conjunction with Big O notation for a complete picture of an algorithm's complexity.
 
+#  Big-O Notation 
+Big O notation is a mathematical notation used in computer science to describe the performance or complexity of an algorithm.  Specifically, it describes the *worst-case scenario* for how the runtime or space requirements of an algorithm grow as the input size grows.  It's about the *rate of growth*, not the exact runtime.
+
+Here's a breakdown of key aspects:
+
+**What Big O describes:**
+
+* **Time Complexity:** How the runtime of an algorithm increases with the input size (e.g., number of elements in an array, nodes in a tree).
+* **Space Complexity:** How the memory usage of an algorithm increases with the input size.
+
+**Key aspects of Big O notation:**
+
+* **Focus on Growth Rate:** Big O ignores constant factors and lower-order terms.  It's concerned with the dominant term as the input size approaches infinity.  For example, `O(2n + 5)` is simplified to `O(n)` because the `2` and `5` become insignificant as `n` gets very large.
+* **Worst-Case Scenario:** Big O typically describes the *worst-case* time or space complexity.  This provides an upper bound on the resource usage.
+* **Asymptotic Analysis:** Big O describes the behavior of the algorithm as the input size approaches infinity.  It doesn't tell you the exact runtime for a specific input size, but how the runtime scales.
+
+**Common Big O Notations and their meaning:**
+
+* **O(1) - Constant Time:** The runtime is independent of the input size.  Example: Accessing an element in an array using its index.
+* **O(log n) - Logarithmic Time:** The runtime increases logarithmically with the input size.  Example: Binary search in a sorted array.
+* **O(n) - Linear Time:** The runtime increases linearly with the input size. Example: Searching for an element in an unsorted array.
+* **O(n log n) - Linearithmic Time:** The runtime is a combination of linear and logarithmic growth.  Example: Merge sort, heap sort.
+* **O(n²) - Quadratic Time:** The runtime increases quadratically with the input size. Example: Bubble sort, nested loops iterating through the same input.
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size. Example: Finding all subsets of a set.
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size. Example: Finding all permutations of a set.
+
+
+**Example:**
+
+Let's say we have an algorithm that searches for a specific element in an unsorted array.  In the worst-case scenario, we might have to check every element in the array before finding the target element (or determining it's not present).  Therefore, the time complexity of this algorithm is O(n), where n is the number of elements in the array.
+
+**Other Notations:**
+
+While Big O describes the upper bound (worst-case), other notations exist:
+
+* **Big Omega (Ω):** Describes the lower bound (best-case).
+* **Big Theta (Θ):** Describes both the upper and lower bounds (tight bound).  This means the algorithm's growth rate is precisely described.
+
+
+**Importance of Big O:**
+
+Understanding Big O notation is crucial for:
+
+* **Algorithm Analysis:** Comparing the efficiency of different algorithms.
+* **Algorithm Design:** Choosing the most efficient algorithm for a given task.
+* **Performance Optimization:** Identifying bottlenecks in code and improving performance.
+
+
+Big O notation is a powerful tool for analyzing and comparing algorithms, allowing developers to make informed decisions about the efficiency of their code.  While it doesn't provide exact runtimes, it offers valuable insights into how algorithms scale with increasing input sizes.
+
