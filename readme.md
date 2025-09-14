@@ -92063,3 +92063,83 @@ This method is efficient if parent pointers are already available, but adding th
 
 The recursive method is generally preferred for its simplicity and because it avoids the need for modifying the tree structure by adding parent pointers.  Choose the method most suitable for your specific needs and data structure. Remember to handle edge cases like null nodes and nodes that don't exist in the tree.
 
+#  Finding lowest common ancestor 
+Finding the Lowest Common Ancestor (LCA) of two nodes in a tree (typically a binary tree or a general tree) is a common problem in computer science.  Several algorithms exist, depending on the type of tree and the available information.
+
+Here's a breakdown of common approaches:
+
+**1. Binary Tree LCA:**
+
+* **Recursive Approach (Most Common):** This approach is elegant and efficient.  It checks if either node `p` or `q` is the current node. If so, return the current node. Otherwise, recursively call the function on the left and right subtrees. If one recursive call returns a non-null value, that's the LCA. If both return non-null, the current node is the LCA.  If both return null, there's no LCA in this subtree.
+
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    if not root or root == p or root == q:
+        return root
+
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    if left and right:
+        return root
+    elif left:
+        return left
+    else:
+        return right
+```
+
+* **Iterative Approach (Using Parent Pointers):**  If each node has a pointer to its parent, you can trace upwards from both `p` and `q` until you find a common ancestor.  This approach avoids recursion.
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    # Requires parent pointers in the tree nodes
+    path_p = []
+    path_q = []
+
+    #This function requires modification of the TreeNode class to include a parent attribute
+    def getPath(node, target, path):
+        if not node:
+            return False
+        path.append(node)
+        if node == target:
+            return True
+        if getPath(node.left, target, path) or getPath(node.right, target, path):
+            return True
+        path.pop()
+        return False
+
+    getPath(root, p, path_p)
+    getPath(root, q, path_q)
+
+    lca = None
+    i = 0
+    while i < len(path_p) and i < len(path_q) and path_p[i] == path_q[i]:
+        lca = path_p[i]
+        i += 1
+    return lca
+```
+
+
+**2. General Tree LCA:**
+
+For general trees (trees where a node can have an arbitrary number of children), a similar recursive approach works, but you need to iterate through all children instead of just left and right.  You can also use a Depth-First Search (DFS) or Breadth-First Search (BFS) to find paths from the root to `p` and `q` and then compare the paths to find the LCA.
+
+**3. Using a Hash Table (for General Trees):**
+
+You can perform a Depth-First Search (DFS) and store the path from the root to each node in a hash table.  Then, for each node, you can check the paths to see if it's a common ancestor.  This method is often less efficient than the recursive methods for binary trees, but can be advantageous in certain general tree scenarios.
+
+
+**Choosing the Right Approach:**
+
+* **Binary Tree:** The recursive approach is generally preferred for its elegance and efficiency.
+* **General Tree (with Parent Pointers):** The iterative approach (if parent pointers are available) is a good choice.
+* **General Tree (without Parent Pointers):**  A recursive DFS approach is common, but a hash table approach might be preferable for very large or deep trees where space is less of a constraint.
+
+Remember to handle edge cases, such as when `p` or `q` is not in the tree, or when one is an ancestor of the other.  The recursive approach handles these cases naturally.  Iterative approaches require additional checks.  Always consider the space and time complexity of your chosen algorithm.  The recursive approach is generally O(N) in time complexity and O(H) in space complexity (where N is the number of nodes and H is the height of the tree).  Iterative approaches can have similar complexities, though the space complexity can be reduced if you don't store the full paths.
+
