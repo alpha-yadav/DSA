@@ -92895,3 +92895,63 @@ This version is the most compact but arguably less readable than the improved ve
 
 For beginners, the "Improved Version" offers a good balance of clarity and efficiency.  The basic version is easy to understand, while the concise version showcases a more advanced Swift feature but might be harder to read and maintain.  Choose the version that best suits your understanding and the context of your project.  Remember to always prioritize code readability and maintainability.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm requires to solve a problem as a function of the input size.  It's crucial for understanding how an algorithm's performance scales as the input grows larger.  We generally analyze complexity using Big O notation.
+
+**Big O Notation:** Big O notation describes the upper bound of an algorithm's growth rate.  It simplifies the analysis by focusing on the dominant factors as the input size (often denoted as 'n') approaches infinity.  It ignores constant factors and lower-order terms.
+
+**Common Complexity Classes:**
+
+* **O(1) - Constant Time:** The algorithm's runtime remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The runtime grows logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The runtime grows linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:** A common complexity for efficient sorting algorithms like merge sort and heapsort.
+
+* **O(n²) - Quadratic Time:** The runtime grows proportionally to the square of the input size.  Example: Nested loops iterating through an array.  Can become slow for large inputs.
+
+* **O(2ⁿ) - Exponential Time:** The runtime doubles with each addition to the input size.  This is very inefficient for large inputs.  Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The runtime grows factorially with the input size.  Extremely inefficient, even for moderately sized inputs.  Example: Traveling salesman problem (brute-force approach).
+
+
+**Space Complexity:**  Similar to time complexity, space complexity describes the amount of memory an algorithm uses as a function of the input size.  It's also expressed using Big O notation.  Examples:
+
+* **O(1) - Constant Space:**  The algorithm uses a fixed amount of memory regardless of the input size.
+* **O(n) - Linear Space:** The memory used grows linearly with the input size.
+* **O(log n) - Logarithmic Space:** The memory used grows logarithmically with the input size.
+
+
+**Analyzing Algorithm Complexity:**
+
+To analyze the complexity of an algorithm, you typically:
+
+1. **Identify the basic operations:** Determine the operations that contribute most to the runtime (e.g., comparisons, assignments, arithmetic operations).
+
+2. **Count the number of operations:** Express the number of operations as a function of the input size 'n'.
+
+3. **Identify the dominant terms:**  Focus on the terms that grow fastest as 'n' increases.  Ignore constant factors and lower-order terms.
+
+4. **Express the complexity using Big O notation:**  Write the dominant term using Big O notation.
+
+
+**Example:**
+
+Consider a simple function that finds the maximum element in an array:
+
+```python
+def find_max(arr):
+  max_val = arr[0]
+  for x in arr:
+    if x > max_val:
+      max_val = x
+  return max_val
+```
+
+The algorithm iterates through the array once. The number of comparisons is proportional to the size of the array (n). Therefore, the time complexity is O(n). The space complexity is O(1) because it uses a constant amount of extra memory (just the `max_val` variable).
+
+
+Understanding algorithm complexity is essential for choosing the most efficient algorithm for a given task, especially when dealing with large datasets.  An algorithm with a lower complexity will generally perform better than one with a higher complexity.
+
