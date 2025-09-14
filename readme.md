@@ -90210,3 +90210,45 @@ Therefore, we've shown that `1n² ≤ 2n² + 3n + 1 ≤ 3n²` for `n ≥ 1`, sat
 
 In summary, Big Theta notation provides a precise characterization of the growth rate of a function, making it crucial for analyzing the efficiency of algorithms and data structures.  It tells us that the algorithm's runtime scales proportionally to the given function (ignoring constant factors).
 
+#  Comparison of the asymptotic notations 
+Asymptotic notations are used in computer science to describe the behavior of functions, particularly the runtime or space complexity of algorithms, as the input size grows arbitrarily large.  The most common notations are Big O (O), Big Omega (Ω), and Big Theta (Θ).  Here's a comparison:
+
+**1. Big O Notation (O): Upper Bound**
+
+* **Definition:**  f(n) = O(g(n)) if there exist positive constants c and n₀ such that 0 ≤ f(n) ≤ c * g(n) for all n ≥ n₀.
+* **Meaning:**  f(n) grows *no faster than* g(n).  It provides an upper bound on the growth rate of f(n).  We often say "f(n) is O(g(n))" or "the time complexity is O(g(n))".
+* **Focus:** Worst-case scenario.  It describes the upper limit of how much the function can grow.
+* **Example:** If an algorithm's runtime is 2n² + 5n + 3, we can say its time complexity is O(n²), because the n² term dominates as n gets large.  We ignore constant factors (2) and lower-order terms (5n, 3).
+
+**2. Big Omega Notation (Ω): Lower Bound**
+
+* **Definition:** f(n) = Ω(g(n)) if there exist positive constants c and n₀ such that 0 ≤ c * g(n) ≤ f(n) for all n ≥ n₀.
+* **Meaning:** f(n) grows *at least as fast as* g(n). It provides a lower bound on the growth rate of f(n).
+* **Focus:** Best-case or lower bound on the growth rate. It establishes a minimum growth rate.
+* **Example:**  If an algorithm's runtime is 2n² + 5n + 3, we can say its time complexity is Ω(n²).  Again, the dominant term determines the lower bound.
+
+
+**3. Big Theta Notation (Θ): Tight Bound**
+
+* **Definition:** f(n) = Θ(g(n)) if and only if f(n) = O(g(n)) and f(n) = Ω(g(n)).
+* **Meaning:** f(n) grows *at the same rate as* g(n).  It provides both an upper and lower bound on the growth rate, indicating a tight bound.
+* **Focus:** Precise description of the growth rate.  This is the most informative notation if it applies.
+* **Example:**  If an algorithm's runtime is 2n² + 5n + 3, we can say its time complexity is Θ(n²).  This means the runtime grows proportionally to n².
+
+**Comparison Table:**
+
+| Notation | Meaning                               | Focus                     | Example (for 2n² + 5n + 3) |
+|----------|---------------------------------------|-----------------------------|---------------------------|
+| O(g(n))  | Upper bound: grows no faster than g(n) | Worst-case                  | O(n²)                     |
+| Ω(g(n))  | Lower bound: grows at least as fast as g(n) | Best-case, lower bound    | Ω(n²)                     |
+| Θ(g(n))  | Tight bound: grows at the same rate as g(n) | Precise growth rate       | Θ(n²)                     |
+
+
+**Other Notations (Less Common but Useful):**
+
+* **Little o (o):**  f(n) = o(g(n)) means f(n) grows *strictly slower* than g(n).  (lim (n→∞) f(n)/g(n) = 0)
+* **Little omega (ω):** f(n) = ω(g(n)) means f(n) grows *strictly faster* than g(n). (lim (n→∞) f(n)/g(n) = ∞)
+
+
+In summary, Big O gives the worst-case complexity, Big Omega gives the best-case (or a lower bound), and Big Theta provides a tight bound if the growth rate is precisely determined.  Big O is the most frequently used because it's often sufficient to understand the upper limit of an algorithm's resource consumption.
+
