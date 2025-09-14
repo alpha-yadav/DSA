@@ -92532,3 +92532,93 @@ print(topological_sort(graph))  # Output: ['A', 'B', 'C', 'D']
 
 Remember to adapt the code and algorithm choice depending on your specific needs and the size of your graph.  For very large graphs, optimized implementations might be necessary.
 
+#  Detecting a cycle in a directed graph using Depth First Traversal 
+Detecting cycles in a directed graph using Depth First Traversal (DFT) relies on tracking the state of each node during the traversal.  We use a `color` to represent the state:
+
+* **White:** The node hasn't been visited yet.
+* **Gray:** The node is currently being visited (in the recursion stack).
+* **Black:** The node has been completely visited (recursion has finished for it).
+
+A cycle is detected if we encounter a gray node while exploring from a node. This indicates that we've reached a node that's already on the current path, forming a cycle.
+
+Here's the algorithm in detail, along with Python code:
+
+```python
+from collections import defaultdict
+
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.graph = defaultdict(list)
+
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+
+    def isCyclicUtil(self, v, visited, recStack):
+        visited[v] = True
+        recStack[v] = True
+
+        for neighbour in self.graph[v]:
+            if not visited[neighbour]:
+                if self.isCyclicUtil(neighbour, visited, recStack):
+                    return True
+            elif recStack[neighbour]:
+                return True
+
+        recStack[v] = False
+        return False
+
+
+    def isCyclic(self):
+        visited = [False] * self.V
+        recStack = [False] * self.V
+        for node in range(self.V):
+            if not visited[node]:
+                if self.isCyclicUtil(node, visited, recStack):
+                    return True
+        return False
+
+
+# Example usage:
+g = Graph(4)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(1, 2)
+g.add_edge(2, 0)
+g.add_edge(2, 3)
+g.add_edge(3, 3)  # Self-loop
+
+
+if g.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+
+
+g2 = Graph(3)
+g2.add_edge(0,1)
+g2.add_edge(1,2)
+
+if g2.isCyclic():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle")
+```
+
+**Explanation:**
+
+* `__init__`: Initializes the graph with a given number of vertices.
+* `add_edge`: Adds a directed edge between two vertices.
+* `isCyclicUtil`: This is a recursive helper function.  It performs a Depth First Search starting from a given node (`v`).
+    * `visited`: A boolean array to track visited nodes.
+    * `recStack`: A boolean array to track nodes currently in the recursion stack (gray nodes).
+    * The function returns `True` if a cycle is detected, `False` otherwise.
+* `isCyclic`: This function iterates through all vertices and calls `isCyclicUtil` if a node hasn't been visited yet.  This ensures that all connected components are checked.
+
+**How it works:**
+
+The core idea is the `recStack`. When we visit a node, we mark it as gray (`recStack[v] = True`). If during the exploration of its neighbors, we encounter another gray node, it means we've found a back edge, indicating a cycle.  Once a node's exploration is complete (all its neighbors have been visited), we mark it as black (`recStack[v] = False`).
+
+
+This approach efficiently detects cycles in a directed graph using the properties of Depth-First Search and the concept of back edges.  The time complexity is O(V + E), where V is the number of vertices and E is the number of edges, which is linear and optimal for this problem.
+
