@@ -91977,3 +91977,89 @@ postorder(root) # Output: 4 5 2 3 1
 
 These traversals are fundamental in various tree algorithms and applications, including expression evaluation, creating copies of trees, and more.  The choice of traversal depends on the specific task.  For example, in-order traversal of a Binary Search Tree gives you the nodes in sorted order.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants (where we allow a node to be a descendant of itself).  Finding the LCA is a common problem in computer science with applications in various fields.
+
+There are several ways to solve the LCA problem, each with different time and space complexities. Here are two common approaches:
+
+**Method 1: Recursive Approach (Efficient)**
+
+This method recursively traverses the tree.  If the current node is one of the targets, we return it. If one target is in the left subtree and the other in the right subtree, the current node is the LCA. Otherwise, we recursively search in the subtree containing both targets.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lca(root, node1, node2):
+    """
+    Finds the lowest common ancestor of node1 and node2 in a binary tree.
+
+    Args:
+        root: The root of the binary tree.
+        node1: The first node.
+        node2: The second node.
+
+    Returns:
+        The LCA node, or None if either node is not found.
+    """
+    if root is None or root.data == node1 or root.data == node2:
+        return root
+
+    left_lca = lca(root.left, node1, node2)
+    right_lca = lca(root.right, node1, node2)
+
+    if left_lca and right_lca:
+        return root  # LCA is the current node
+    elif left_lca:
+        return left_lca
+    else:
+        return right_lca
+
+# Example Usage:
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+node1 = 4
+node2 = 5
+lca_node = lca(root, node1, node2)
+print(f"LCA of {node1} and {node2}: {lca_node.data if lca_node else None}") #Output: 2
+
+
+node1 = 4
+node2 = 3
+lca_node = lca(root, node1, node2)
+print(f"LCA of {node1} and {node2}: {lca_node.data if lca_node else None}") #Output: 1
+
+
+node1 = 4
+node2 = 6 #Node 6 doesn't exist
+lca_node = lca(root, node1, node2)
+print(f"LCA of {node1} and {node2}: {lca_node.data if lca_node else None}") #Output: None
+
+
+```
+
+**Method 2: Using Parent Pointers (Less Common)**
+
+If each node in the tree has a pointer to its parent, we can find the LCA using a more efficient path-based approach:
+
+1. Find the paths from the root to `node1` and `node2`.
+2. Iterate through both paths simultaneously until the nodes differ.  The last common node is the LCA.
+
+This method is efficient if parent pointers are already available, but adding them increases space complexity.  The recursive method is generally preferred unless parent pointers are readily available.
+
+
+**Time and Space Complexity:**
+
+* **Recursive Method:**  Time complexity is O(N), where N is the number of nodes in the tree (in the worst case, we might traverse the entire tree). Space complexity is O(H) in the worst case due to recursive calls (H is the height of the tree).
+
+* **Parent Pointer Method:** Time complexity is O(H), where H is the height of the tree (we traverse at most two paths). Space complexity is O(H) in the worst case to store the paths.
+
+The recursive method is generally preferred for its simplicity and because it avoids the need for modifying the tree structure by adding parent pointers.  Choose the method most suitable for your specific needs and data structure. Remember to handle edge cases like null nodes and nodes that don't exist in the tree.
+
