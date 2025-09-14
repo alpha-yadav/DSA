@@ -91431,3 +91431,134 @@ print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root4)}")
 
 Both methods achieve the same result. The recursive approach might be slightly more efficient in some cases because it avoids creating an intermediate list, but the inorder traversal method is arguably easier to understand for beginners. Choose the method that best suits your understanding and coding style. Remember to define your `Node` class appropriately for your environment.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches, one using recursion and another using an iterative approach with inorder traversal:
+
+
+**Method 1: Recursive Approach**
+
+This method recursively checks if each subtree satisfies the BST property:  every node in the left subtree must be less than the current node, and every node in the right subtree must be greater than the current node.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBST(node):
+    """
+    Recursively checks if a given binary tree is a BST.
+
+    Args:
+      node: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    return isBSTUtil(node, float('-inf'), float('inf'))
+
+def isBSTUtil(node, min_val, max_val):
+    """
+    Recursive helper function for isBST.
+    """
+    # An empty tree is a BST
+    if node is None:
+        return True
+
+    # Check if the current node's value is within the allowed range
+    if node.data < min_val or node.data > max_val:
+        return False
+
+    # Recursively check the left and right subtrees
+    return (isBSTUtil(node.left, min_val, node.data - 1) and
+            isBSTUtil(node.right, node.data + 1, max_val))
+
+
+# Example usage:
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+if isBST(root):
+    print("Is BST")
+else:
+    print("Not a BST")
+
+
+root2 = Node(10)
+root2.left = Node(15) #Violation here
+root2.right = Node(20)
+
+if isBST(root2):
+    print("Is BST")
+else:
+    print("Not a BST")
+```
+
+**Method 2: Iterative Approach using Inorder Traversal**
+
+This method performs an inorder traversal of the binary tree.  In a BST, the inorder traversal will always produce a sorted sequence of values.  We can efficiently check this sorted property iteratively.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def isBSTIterative(root):
+    """
+    Iteratively checks if a given binary tree is a BST using inorder traversal.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    stack = []
+    prev = float('-inf')  # Initialize previous value to negative infinity
+
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+
+        root = stack.pop()
+        if root.data <= prev:  #Check if the current node's value is less than or equal to the previous node's value
+            return False
+        prev = root.data
+        root = root.right
+
+    return True
+
+
+# Example Usage (same trees as above)
+root = Node(20)
+root.left = Node(8)
+root.right = Node(22)
+root.left.left = Node(4)
+root.left.right = Node(12)
+
+if isBSTIterative(root):
+    print("Is BST (Iterative)")
+else:
+    print("Not a BST (Iterative)")
+
+
+root2 = Node(10)
+root2.left = Node(15)
+root2.right = Node(20)
+
+if isBSTIterative(root2):
+    print("Is BST (Iterative)")
+else:
+    print("Not a BST (Iterative)")
+```
+
+
+Both methods achieve the same result. The recursive approach is often considered more elegant and easier to understand, while the iterative approach can be more efficient in terms of space complexity (avoiding potential stack overflow issues for very deep trees).  Choose the method that best suits your needs and understanding. Remember to handle edge cases like empty trees appropriately.
+
