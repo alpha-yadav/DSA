@@ -94757,3 +94757,90 @@ Postorder: D E B F C A
 
 These traversal methods are fundamental to many binary tree algorithms.  The order of traversal affects the outcome and is chosen based on the specific application. For example, inorder traversal of a Binary Search Tree (BST) gives you the nodes in sorted order.
 
+#  Lowest common ancestor of a Binary Tree 
+The Lowest Common Ancestor (LCA) of two nodes in a binary tree is the lowest node that has both nodes as descendants.  There are several ways to solve this problem, each with varying time and space complexities.
+
+**Methods:**
+
+1. **Recursive Approach (Most Common):**
+
+   This approach uses recursion to traverse the tree.  The core logic is:
+
+   - If the current node is `null`, return `null`.
+   - If the current node is equal to either `p` or `q`, return the current node (we've found one of the targets).
+   - Recursively check the left and right subtrees.
+   - If both recursive calls return non-`null` values, it means `p` and `q` are in different subtrees, and the current node is their LCA.
+   - Otherwise, return the non-`null` result (if any), indicating that the LCA is in that subtree.
+
+   ```python
+   class TreeNode:
+       def __init__(self, val=0, left=None, right=None):
+           self.val = val
+           self.left = left
+           self.right = right
+
+   def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       if not root or root == p or root == q:
+           return root
+
+       left = self.lowestCommonAncestor(root.left, p, q)
+       right = self.lowestCommonAncestor(root.right, p, q)
+
+       if left and right:
+           return root
+       elif left:
+           return left
+       else:
+           return right
+   ```
+
+   * **Time Complexity:** O(N), where N is the number of nodes in the tree.  In the worst case, we might traverse the entire tree.
+   * **Space Complexity:** O(H), where H is the height of the tree. This is due to the recursive call stack.  In the worst case (a skewed tree), H could be N.
+
+
+2. **Iterative Approach (Using a Stack):**
+
+   This approach uses a stack to simulate the recursion, potentially offering slightly better performance in some cases (though the asymptotic complexity remains the same).  It's generally more complex to implement.
+
+
+3. **Using Parent Pointers (If Available):**
+
+   If each node in the binary tree has a pointer to its parent, finding the LCA becomes much simpler.  You can trace upwards from both `p` and `q` until you find a common ancestor.  This method generally has a better time complexity.
+
+   ```python
+   # Assuming nodes have a 'parent' attribute
+   def lowestCommonAncestor_parentPointers(self, p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+       ancestors_p = set()
+       curr = p
+       while curr:
+           ancestors_p.add(curr)
+           curr = curr.parent
+
+       curr = q
+       while curr:
+           if curr in ancestors_p:
+               return curr
+           curr = curr.parent
+       return None # Should not happen if p and q are in the tree
+   ```
+
+   * **Time Complexity:** O(D), where D is the depth of the deeper node.  Generally much faster than O(N) for balanced trees.
+   * **Space Complexity:** O(D) for the `ancestors_p` set.
+
+
+
+**Choosing the Right Method:**
+
+- The **recursive approach** is generally the easiest to understand and implement.
+- The **iterative approach** might be slightly more efficient in practice but is harder to code.
+- The **parent pointer approach** is the most efficient if parent pointers are already available in the tree structure.  It avoids redundant traversals.
+
+
+Remember to handle edge cases like:
+
+- `p` or `q` not being in the tree.
+- `p` or `q` being the root.
+- `p` and `q` being the same node.
+
+The provided Python code (recursive approach) includes basic error handling for `null` root and handles the case where `p` or `q` is the root or is already found.  You should add more robust error checking based on your specific requirements.
+
