@@ -95115,3 +95115,119 @@ Graph theory has incredibly wide-ranging applications, including:
 
 This introduction provides a basic overview.  Further study delves into specific graph algorithms (like Dijkstra's algorithm for shortest paths, breadth-first search, depth-first search), graph coloring, network flows, and many other advanced topics.
 
+#  Storing Graphs (Adjacency List) 
+Storing graphs using adjacency lists is a common and efficient method, especially for sparse graphs (graphs with relatively few edges compared to the number of vertices).  Here's a breakdown of how it works, along with variations and considerations:
+
+**Basic Concept:**
+
+An adjacency list represents a graph as an array (or other suitable data structure) of lists.  Each index in the array corresponds to a vertex in the graph.  The list at that index contains all the vertices adjacent to (connected to) the vertex represented by the index.
+
+**Example:**
+
+Consider an undirected graph with 4 vertices (A, B, C, D) and the following edges:
+
+* A -- B
+* A -- C
+* B -- D
+
+**Adjacency List Representation:**
+
+```
+0: B, C  (Vertex A is connected to B and C)
+1: A, D  (Vertex B is connected to A and D)
+2: A      (Vertex C is connected to A)
+3: B      (Vertex D is connected to B)
+```
+
+Notice that vertices are often numbered 0 to n-1 where n is the number of vertices. This allows direct indexing into the array.
+
+
+**Implementation Details (Python):**
+
+```python
+class Graph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.adj_list = [[] for _ in range(num_vertices)]  # Initialize adjacency lists
+
+    def add_edge(self, u, v):
+        self.adj_list[u].append(v)  # Add v to u's adjacency list
+        self.adj_list[v].append(u)  # Add u to v's adjacency list (for undirected graph)
+
+    def print_graph(self):
+        for i, neighbors in enumerate(self.adj_list):
+            print(f"{i}: {neighbors}")
+
+
+# Example Usage:
+g = Graph(4)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(1, 3)
+g.print_graph()
+```
+
+This will output:
+
+```
+0: [1, 2]
+1: [0, 3]
+2: [0]
+3: [1]
+```
+
+
+**Variations and Extensions:**
+
+* **Directed Graphs:** For directed graphs, you only add the edge in one direction.  If you have a directed edge from u to v, you only add `v` to `self.adj_list[u]`.
+
+* **Weighted Graphs:** To represent weighted graphs, you can store tuples or custom objects in the adjacency list. Each tuple (or object) could contain the neighboring vertex and the edge weight.
+
+```python
+# Weighted Graph Example (Python)
+class WeightedGraph:
+    def __init__(self, num_vertices):
+        self.num_vertices = num_vertices
+        self.adj_list = [[] for _ in range(num_vertices)]
+
+    def add_edge(self, u, v, weight):
+        self.adj_list[u].append((v, weight))
+        self.adj_list[v].append((u, weight))  # For undirected weighted graph
+
+    def print_graph(self):
+        for i, neighbors in enumerate(self.adj_list):
+            print(f"{i}: {neighbors}")
+
+#Example Usage
+wg = WeightedGraph(4)
+wg.add_edge(0,1,5)
+wg.add_edge(0,2,3)
+wg.print_graph()
+```
+
+* **Using Dictionaries:** Instead of an array of lists, you can use a dictionary where keys are vertices and values are their adjacency lists.  This is particularly useful if vertex labels are not simple integers.
+
+```python
+# Adjacency List with Dictionary (Python)
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D'],
+    'C': ['A'],
+    'D': ['B']
+}
+```
+
+
+**Space Complexity:**
+
+The space complexity of an adjacency list is O(V + E), where V is the number of vertices and E is the number of edges.  This is efficient for sparse graphs because you only store the existing edges.  For dense graphs (many edges), an adjacency matrix might be slightly more efficient in terms of space but access times are generally better with adjacency lists.
+
+**Time Complexity:**
+
+* **Adding an edge:** O(1) on average (amortized), potentially O(E) in the worst case if you need to resize the underlying list.
+* **Checking for an edge:** O(d), where d is the degree (number of neighbors) of the vertex.
+* **Iterating through neighbors:** O(d)
+
+
+Adjacency lists are a powerful and versatile way to represent graphs, particularly suitable when dealing with sparse graphs or situations where efficient neighbor traversal is crucial.  Choose the implementation that best suits your specific needs and data characteristics.
+
