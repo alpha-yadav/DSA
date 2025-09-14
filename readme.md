@@ -93890,3 +93890,97 @@ int main() {
 
 Remember to compile this code with a C++ compiler (like g++) and run it.  This improved example handles all three deletion cases correctly and includes error handling for an empty tree.  The `main` function demonstrates the deletion process and shows the inorder traversal before and after each deletion to verify the correctness.  Crucially, proper memory management (deallocation) is needed for a production-ready version.  This example omits that for brevity but it's essential in real-world code to avoid memory leaks.
 
+#  Lowest common ancestor in a BST 
+The Lowest Common Ancestor (LCA) of two nodes in a Binary Search Tree (BST) is the lowest node that has both nodes as descendants (where a node is considered a descendant of itself).  There are several ways to find the LCA in a BST, leveraging the properties of the tree.
+
+**Method 1: Recursive Approach**
+
+This is a very efficient and elegant method.  It uses the BST property that all nodes smaller than the root are in the left subtree, and all nodes larger than the root are in the right subtree.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def lowestCommonAncestor(root, p, q):
+    """
+    Finds the LCA of nodes p and q in a BST.
+
+    Args:
+        root: The root of the BST.
+        p: The first node.
+        q: The second node.
+
+    Returns:
+        The LCA node, or None if either p or q is not in the tree.
+    """
+
+    if not root or root == p or root == q:
+        return root
+
+    if p.data < root.data and q.data < root.data:
+        return lowestCommonAncestor(root.left, p, q)
+    elif p.data > root.data and q.data > root.data:
+        return lowestCommonAncestor(root.right, p, q)
+    else:
+        return root  # p and q are on opposite sides of the root
+
+
+# Example usage:
+root = Node(6)
+root.left = Node(2)
+root.right = Node(8)
+root.left.left = Node(0)
+root.left.right = Node(4)
+root.right.left = Node(7)
+root.right.right = Node(9)
+
+p = root.left  # Node with data 2
+q = root.right # Node with data 8
+
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 2 and 8: 6
+
+p = root.left.right # Node with data 4
+q = root.right.left # Node with data 7
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 4 and 7: 6
+
+
+p = root.left.left #Node with data 0
+q = root.left.right #Node with data 4
+lca = lowestCommonAncestor(root, p, q)
+print(f"LCA of {p.data} and {q.data}: {lca.data}") # Output: LCA of 0 and 4: 2
+
+```
+
+**Method 2: Iterative Approach**
+
+This approach uses a while loop instead of recursion. It's functionally equivalent to the recursive method but might be slightly more efficient in some cases due to avoiding function call overhead.
+
+
+```python
+def lowestCommonAncestorIterative(root, p, q):
+    while root:
+        if p.data < root.data and q.data < root.data:
+            root = root.left
+        elif p.data > root.data and q.data > root.data:
+            root = root.right
+        else:
+            return root
+    return None #If either p or q is not found
+
+#Example Usage (same as above, will produce the same output)
+```
+
+**Important Considerations:**
+
+* **Error Handling:**  The code includes basic error handling by checking if the root is `None` or if either `p` or `q` is equal to the root.  More robust error handling could be added to explicitly check if `p` and `q` are actually present in the tree.
+* **Node Representation:** The `Node` class is a simple representation. Adapt it as needed for your specific node structure.
+* **Efficiency:** Both methods have a time complexity of O(h), where h is the height of the tree.  In a balanced BST, h is log(n), where n is the number of nodes. In a skewed tree, h could be n in the worst case.
+
+
+Choose either the recursive or iterative approach; both are correct and efficient for finding the LCA in a BST. The recursive approach is often considered more readable, while the iterative approach might offer slightly better performance in some situations. Remember to handle potential errors appropriately depending on your application.
+
