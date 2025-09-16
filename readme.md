@@ -96870,3 +96870,60 @@ public class Main {
 
 These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on whether you know the number of iterations in advance.  If you do, `for` is generally preferred for its clarity.  If the number of iterations depends on a condition, `while` is more appropriate.  Remember to always ensure your loop condition eventually becomes false to avoid an infinite loop.
 
+#  A Nested Loop 
+A nested loop is a programming construct where one loop is placed inside another loop.  The inner loop executes completely for each iteration of the outer loop. This creates a pattern where the inner loop's actions are repeated multiple times based on the outer loop's iterations.
+
+Here's a breakdown:
+
+**How it works:**
+
+* **Outer Loop:** This loop controls the overall number of times the inner loop will run completely.
+* **Inner Loop:** This loop executes for each iteration of the outer loop.  Its iterations are dependent on the current state of the outer loop.
+
+**Example (Python):**
+
+This example prints a multiplication table:
+
+```python
+for i in range(1, 11):  # Outer loop (rows)
+    for j in range(1, 11):  # Inner loop (columns)
+        print(i * j, end="\t")  # \t adds a tab for formatting
+    print()  # Newline after each row
+```
+
+This code will output:
+
+```
+1       2       3       4       5       6       7       8       9       10
+2       4       6       8       10      12      14      16      18      20
+3       6       9       12      15      18      21      24      27      30
+...and so on...
+```
+
+**Explanation:**
+
+1. The outer loop iterates from 1 to 10 (inclusive).  This represents the rows of the multiplication table.
+2. For each value of `i` (the outer loop's counter), the inner loop iterates from 1 to 10. This represents the columns.
+3. Inside the inner loop, `i * j` calculates the product and is printed.
+4. `end="\t"` prevents a newline after each number, keeping them on the same line (separated by tabs).
+5. `print()` after the inner loop adds a newline, moving to the next row.
+
+
+**Uses of Nested Loops:**
+
+Nested loops are used for a variety of tasks, including:
+
+* **Matrix/Array Processing:**  Iterating over rows and columns of matrices or 2D arrays.
+* **Generating Patterns:**  Creating patterns like stars or other shapes in output.
+* **Combinations and Permutations:**  Finding all possible combinations or permutations of a set of items.
+* **Searching and Sorting:**  Although more efficient algorithms exist, nested loops can be used for basic searching and sorting.
+
+
+**Important Considerations:**
+
+* **Computational Complexity:** Nested loops can lead to significantly increased computational time, especially with large datasets. The time complexity often grows proportionally to the product of the number of iterations in each loop (e.g., O(n*m) for two loops iterating n and m times).
+* **Readability:**  Deeply nested loops can make code harder to read and understand.  Consider using functions or more efficient algorithms to improve readability and performance when possible.
+
+
+Understanding nested loops is fundamental to programming.  They're a powerful tool, but it's crucial to be aware of their potential performance implications.
+
