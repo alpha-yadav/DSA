@@ -96419,3 +96419,35 @@ else:
 
 Remember to be patient and persistent. Learning algorithms takes time and effort. Start with the basics, practice consistently, and gradually work your way up to more complex algorithms.  Good luck!
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems, ranging in difficulty:
+
+**Easy:**
+
+* **Problem:**  Given an array of integers, find the largest number in the array.
+* **Input:** An array of integers (e.g., `[1, 5, 2, 8, 3]`)
+* **Output:** The largest integer in the array (e.g., `8`)
+
+**Medium:**
+
+* **Problem:** Given a string, determine if it is a palindrome (reads the same forwards and backward).  Ignore case and non-alphanumeric characters.
+* **Input:** A string (e.g., "A man, a plan, a canal: Panama")
+* **Output:** True or False (e.g., `True`)
+
+
+**Hard:**
+
+* **Problem:** Given a graph represented as an adjacency list, find the shortest path between two nodes using Dijkstra's algorithm.
+* **Input:** An adjacency list representing the graph and the starting and ending node.  The adjacency list should contain edge weights. (e.g.,  `{'A': {'B': 4, 'C': 2}, 'B': {'A': 4, 'D': 5}, 'C': {'A': 2, 'E': 3}, 'D': {'B': 5, 'F': 2}, 'E': {'C': 3, 'F': 4}, 'F': {'D': 2, 'E': 4}}`, starting node 'A', ending node 'F')
+* **Output:** The shortest path and its length (e.g., `['A', 'C', 'E', 'F']`, `9`)
+
+
+**For each problem, consider these aspects when designing a solution:**
+
+* **Algorithm:** What approach will you use to solve the problem (e.g., linear search, dynamic programming, graph traversal)?
+* **Data Structures:** What data structures will be most efficient (e.g., arrays, linked lists, hash tables, graphs)?
+* **Time and Space Complexity:** Analyze the efficiency of your solution in terms of time and space complexity (e.g., O(n), O(n^2), O(log n)).
+
+
+These are just examples.  Many other algorithmic problems exist, spanning various domains like sorting, searching, graph theory, dynamic programming, and more.  The difficulty level depends on your current skill level and the specific problem constraints.  Remember to clearly define the input and output requirements for any algorithmic problem you choose to solve.
+
