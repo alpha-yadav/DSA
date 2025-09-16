@@ -97114,3 +97114,12 @@ root = {
 
 The best choice among these depends on the use case.  For example, if you frequently need to access arbitrary children, the list of children representation is typically preferable. For complete trees with a fixed maximum number of children, the array representation might be the most memory-efficient.  The child-sibling approach offers a good balance between simplicity and efficiency in many situations.  The dictionary-based approach offers greater flexibility, particularly for situations with more complex node attributes.
 
+#  Introduction 
+Please provide me with the topic or subject you'd like an introduction for.  I need more information to write an introduction.  For example, tell me:
+
+* **What is the subject of your paper, essay, presentation, etc.?** (e.g., the impact of social media on teenagers, the history of the Roman Empire, the benefits of exercise)
+* **What is your main point or argument?** (e.g., Social media has a negative impact on teenagers' mental health, the Roman Empire's fall was due to a combination of factors, regular exercise improves cardiovascular health)
+* **Who is your intended audience?** (e.g., academics, general public, teenagers)
+
+Once I have this information, I can write a compelling introduction for you.
+
