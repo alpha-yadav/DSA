@@ -98029,3 +98029,126 @@ print(is_bst_inorder(root2)) #Output: False
 
 The **recursive approach** is generally preferred because it's more efficient in terms of both time and space complexity. The inorder traversal approach is simpler to understand but can be less efficient for very large trees due to the creation and sorting of the inorder list.  For most cases, the recursive method is the better choice.  Choose the method that best suits your needs and understanding. Remember to handle potential `None` values appropriately in your code to avoid errors.
 
+#  Binary Tree traversals 
+Binary tree traversals are ways to visit all the nodes in a binary tree in a specific order.  There are three main types of traversals: inorder, preorder, and postorder.  These are all depth-first traversals, meaning they explore as far as possible along each branch before backtracking.  There's also level-order traversal (breadth-first).
+
+Let's break down each type:
+
+**1. Inorder Traversal:**
+
+* **Order:** Left subtree -> Root -> Right subtree
+* **Result:**  For a binary *search* tree, inorder traversal produces a sorted list of the nodes' values.
+* **Example:**  Consider a tree with root `8`, left child `3`, and right child `10`.  `3` has a left child `1` and a right child `6`. `10` has a right child `14`.
+
+   The inorder traversal would be: `1 3 6 8 10 14`
+
+* **Recursive Implementation (Python):**
+
+```python
+def inorder_traversal(node):
+  if node:
+    inorder_traversal(node.left)
+    print(node.data, end=" ")  # or process node.data as needed
+    inorder_traversal(node.right)
+
+```
+
+* **Iterative Implementation (Python):**  Using a stack.
+
+```python
+def inorder_traversal_iterative(node):
+    stack = []
+    current = node
+    while stack or current:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.data, end=" ")
+        current = current.right
+```
+
+
+**2. Preorder Traversal:**
+
+* **Order:** Root -> Left subtree -> Right subtree
+* **Result:**  Often used for creating a copy of the tree or representing the tree structure in a prefix notation.
+* **Example:** Using the same tree as above, the preorder traversal would be: `8 3 1 6 10 14`
+* **Recursive Implementation (Python):**
+
+```python
+def preorder_traversal(node):
+  if node:
+    print(node.data, end=" ") # or process node.data as needed
+    preorder_traversal(node.left)
+    preorder_traversal(node.right)
+```
+
+* **Iterative Implementation (Python):** Using a stack.
+
+```python
+def preorder_traversal_iterative(node):
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if current:
+            print(current.data, end=" ")
+            stack.append(current.right)
+            stack.append(current.left)
+```
+
+
+**3. Postorder Traversal:**
+
+* **Order:** Left subtree -> Right subtree -> Root
+* **Result:** Often used for deleting a tree or evaluating an arithmetic expression represented by a tree.  In the arithmetic example, operations are performed after evaluating operands.
+* **Example:** Using the same tree as above, the postorder traversal would be: `1 6 3 14 10 8`
+* **Recursive Implementation (Python):**
+
+```python
+def postorder_traversal(node):
+  if node:
+    postorder_traversal(node.left)
+    postorder_traversal(node.right)
+    print(node.data, end=" ") # or process node.data as needed
+```
+
+* **Iterative Implementation (Python):** Using two stacks (more complex than preorder/inorder iterative).  A single stack solution is possible, but less intuitive.
+
+
+**4. Level-Order Traversal (Breadth-First Traversal):**
+
+* **Order:** Level by level, from left to right.
+* **Result:**  Useful for finding the shortest path in a tree or finding nodes at a specific level.
+* **Example:** Using the same tree as above, the level-order traversal would be: `8 3 10 1 6 14`
+* **Implementation (Python):** Using a queue.
+
+```python
+from collections import deque
+
+def levelorder_traversal(node):
+  if not node:
+    return
+
+  queue = deque([node])
+  while queue:
+    current = queue.popleft()
+    print(current.data, end=" ")
+    if current.left:
+      queue.append(current.left)
+    if current.right:
+      queue.append(current.right)
+```
+
+**Important Note:**  These code snippets assume you have a `Node` class defined like this (or something similar):
+
+```python
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.left = None
+    self.right = None
+```
+
+Remember to adapt these snippets to your specific Node class and data structure.  The choice of traversal depends entirely on the specific task you're trying to accomplish.
+
