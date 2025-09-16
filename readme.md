@@ -97828,3 +97828,118 @@ print(f"Is the tree a BST (Recursive method)? {is_bst_recursive(root2)}")  # Out
 
 Both methods achieve the same result.  The in-order traversal method is generally easier to understand, but the recursive range check can be slightly more efficient in some scenarios, particularly for very unbalanced trees. Choose the method that best suits your understanding and needs.  Remember to handle edge cases like empty trees appropriately.
 
+#  Algorithm to check if a given binary tree is BST 
+Several algorithms can check if a given binary tree is a Binary Search Tree (BST). Here are two common approaches:
+
+**Method 1: Recursive In-order Traversal**
+
+This method leverages the property that an in-order traversal of a BST yields a sorted sequence of nodes.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive(root):
+    """
+    Checks if a binary tree is a BST using recursive in-order traversal.
+
+    Args:
+      root: The root node of the binary tree.
+
+    Returns:
+      True if the tree is a BST, False otherwise.
+    """
+    values = []
+    def inorder(node):
+        if node:
+            inorder(node.left)
+            values.append(node.data)
+            inorder(node.right)
+    inorder(root)
+    for i in range(1, len(values)):
+        if values[i] <= values[i-1]:
+            return False
+    return True
+
+
+# Example usage:
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root)}")  # Output: True
+
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8) #Violation: 8 > 5
+
+print(f"Is the tree a BST (recursive method)? {is_bst_recursive(root2)}")  # Output: False
+
+```
+
+**Method 2: Recursive Check with Min and Max Bounds**
+
+This method recursively checks each subtree, maintaining minimum and maximum bounds for the values allowed in that subtree.  This is generally more efficient than the in-order traversal method because it avoids creating and sorting a list.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def is_bst_recursive_minmax(root, min_val=-float('inf'), max_val=float('inf')):
+    """
+    Checks if a binary tree is a BST using recursion and min/max bounds.
+
+    Args:
+        root: The root node of the binary tree.
+        min_val: The minimum allowed value in the subtree.
+        max_val: The maximum allowed value in the subtree.
+
+    Returns:
+        True if the tree is a BST, False otherwise.
+    """
+    if root is None:
+        return True
+
+    if not (min_val < root.data < max_val):
+        return False
+
+    return (is_bst_recursive_minmax(root.left, min_val, root.data) and
+            is_bst_recursive_minmax(root.right, root.data, max_val))
+
+
+# Example usage (same trees as before):
+root = Node(5)
+root.left = Node(3)
+root.right = Node(7)
+root.left.left = Node(1)
+root.left.right = Node(4)
+root.right.left = Node(6)
+root.right.right = Node(8)
+
+print(f"Is the tree a BST (min/max method)? {is_bst_recursive_minmax(root)}")  # Output: True
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(7)
+root2.left.left = Node(1)
+root2.left.right = Node(8)
+
+print(f"Is the tree a BST (min/max method)? {is_bst_recursive_minmax(root2)}")  # Output: False
+
+```
+
+Both methods achieve the same result. The min/max approach is generally preferred for its efficiency, as it avoids the space overhead of creating an array and its improved time complexity in some cases.  Choose the method that best suits your understanding and coding style. Remember to adapt the `Node` class if you are using a different data structure for your tree.
+
