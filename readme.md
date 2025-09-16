@@ -97276,3 +97276,130 @@ To avoid the worst-case scenario of an unbalanced tree, self-balancing BSTs are 
 
 In summary, Binary Search Trees are a powerful and versatile data structure, but their efficiency depends heavily on maintaining a balanced tree structure.  If performance is critical, consider using a self-balancing variant.
 
+#  Binary Search Tree - Insertion (Python) 
+Several variations of binary search tree (BST) insertion exist in Python. Here are a few, starting with a basic recursive approach and then moving to an iterative one for potentially better performance with very deep trees:
+
+
+**1. Recursive Insertion:**
+
+This is a clear and concise approach, especially for understanding the BST's logic.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(self.root, data)
+
+    def _insert_recursive(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self._insert_recursive(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self._insert_recursive(node.right, data)
+
+    #Helper function for printing the tree (Inorder traversal)
+    def inorder_traversal(self,node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+
+# Example usage:
+bst = BinarySearchTree()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal of the BST:")
+bst.inorder_traversal(bst.root) # Output: 1 3 4 6 7 8 10 13 14
+
+```
+
+**2. Iterative Insertion:**
+
+This version avoids the overhead of recursive function calls, potentially leading to better performance, especially for large trees.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        new_node = Node(data)
+        if self.root is None:
+            self.root = new_node
+            return
+
+        current = self.root
+        while True:
+            if data < current.data:
+                if current.left is None:
+                    current.left = new_node
+                    return
+                else:
+                    current = current.left
+            else:
+                if current.right is None:
+                    current.right = new_node
+                    return
+                else:
+                    current = current.right
+
+    #Helper function for printing the tree (Inorder traversal) - same as above
+    def inorder_traversal(self,node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(node.data, end=" ")
+            self.inorder_traversal(node.right)
+
+
+#Example Usage (same as above, just change the BST instantiation)
+
+bst = BinarySearchTree()
+bst.insert(8)
+bst.insert(3)
+bst.insert(10)
+bst.insert(1)
+bst.insert(6)
+bst.insert(14)
+bst.insert(4)
+bst.insert(7)
+bst.insert(13)
+
+print("Inorder traversal of the BST:")
+bst.inorder_traversal(bst.root) # Output: 1 3 4 6 7 8 10 13 14
+
+```
+
+Both versions achieve the same result: inserting nodes into a binary search tree while maintaining the BST property (left subtree < node < right subtree). Choose the iterative version for potentially better performance in scenarios with very deep trees, while the recursive version is often easier to understand initially.  Remember to include a function to traverse and print the tree to verify the insertion.  I've added an `inorder_traversal` method for this purpose.
+
