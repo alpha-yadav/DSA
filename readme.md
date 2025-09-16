@@ -96524,3 +96524,64 @@ This version uses tuples in the `switch` statement to check for divisibility by 
 
 For FizzBuzz, Version 1 (the basic `if-else if-else` approach) is generally preferred for its clarity and readability, especially for beginners.  Version 2 offers a slightly more compact form, but readability can be a trade-off. Version 3 is mainly provided for illustrative purposes of the `switch` statement.  The best version depends on your priorities (readability vs. conciseness). Remember to choose the version that is easiest for you to understand and maintain.
 
+#  Algorithm Complexity 
+Algorithm complexity refers to the amount of resources (primarily time and space) an algorithm consumes as the input size grows.  It's crucial for understanding how an algorithm will perform with large datasets, enabling you to choose the most efficient solution for a given problem.  We generally analyze complexity using **Big O notation**.
+
+**Big O Notation:**
+
+Big O notation describes the upper bound of an algorithm's growth rate. It simplifies complexity analysis by focusing on the dominant terms as the input size (n) approaches infinity.  It ignores constant factors and lower-order terms because their impact diminishes as n becomes large.
+
+**Common Complexity Classes:**
+
+* **O(1) - Constant Time:** The algorithm's execution time remains constant regardless of the input size.  Example: Accessing an element in an array using its index.
+
+* **O(log n) - Logarithmic Time:** The execution time increases logarithmically with the input size.  This is very efficient.  Example: Binary search in a sorted array.
+
+* **O(n) - Linear Time:** The execution time increases linearly with the input size.  Example: Searching for an element in an unsorted array.
+
+* **O(n log n) - Linearithmic Time:**  A common complexity for efficient sorting algorithms.  Example: Merge sort, heapsort.
+
+* **O(n²) - Quadratic Time:** The execution time increases proportionally to the square of the input size.  This becomes inefficient for large datasets.  Example: Bubble sort, selection sort, nested loops iterating over the input.
+
+* **O(2ⁿ) - Exponential Time:** The execution time doubles with each addition to the input size.  These algorithms become impractical very quickly for even moderately sized inputs. Example: Finding all subsets of a set.
+
+* **O(n!) - Factorial Time:** The execution time grows factorially with the input size.  Extremely inefficient for even small inputs. Example: Finding all permutations of a set.
+
+
+**Space Complexity:**
+
+Similar to time complexity, space complexity describes the amount of memory an algorithm uses as the input size grows.  It's also expressed using Big O notation.
+
+**Example: Analyzing Time Complexity**
+
+Let's consider a simple function that sums the elements of an array:
+
+```python
+def sum_array(arr):
+  total = 0
+  for num in arr:
+    total += num
+  return total
+```
+
+This algorithm iterates through the array once.  The number of operations is directly proportional to the size of the array (n). Therefore, its time complexity is **O(n)**.
+
+
+**Factors Affecting Complexity:**
+
+* **Input size:** The primary factor influencing complexity.
+* **Algorithm design:** Different algorithms can solve the same problem with vastly different complexities.
+* **Data structures:** The choice of data structure significantly impacts the efficiency of operations.
+* **Hardware:**  While Big O ignores constant factors, hardware differences can affect the actual runtime.
+
+
+**Importance of Complexity Analysis:**
+
+* **Performance prediction:**  Estimate runtime and memory usage for different input sizes.
+* **Algorithm selection:** Choose the most efficient algorithm for a given problem.
+* **Optimization:** Identify bottlenecks and areas for improvement in existing algorithms.
+* **Scalability:** Ensure an algorithm can handle increasing amounts of data.
+
+
+Understanding algorithm complexity is crucial for any programmer working with substantial datasets or computationally intensive tasks.  It's a fundamental concept in computer science that guides the design and selection of efficient algorithms.
+
