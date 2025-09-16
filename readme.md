@@ -96772,3 +96772,101 @@ Big O notation can also be used to describe the space complexity of an algorithm
 
 **Important Note:** Big O is an *upper bound*.  An algorithm might perform better in practice than its Big O notation suggests (e.g., due to caching or optimizations), but Big O gives a guarantee about the *maximum* resource consumption.  It also doesn't tell the whole story;  knowing the constant factors and lower-bound complexities (e.g., using Big Omega Ω) can be important for detailed analysis.
 
+#  A Simple Loop 
+A simple loop repeats a block of code a certain number of times or until a condition is met.  Here are examples in a few popular programming languages:
+
+**1. For loop (counting loop):**  This is ideal when you know the number of iterations beforehand.
+
+* **Python:**
+
+```python
+for i in range(5):  # Loops 5 times, i takes values 0, 1, 2, 3, 4
+    print(i)
+```
+
+* **JavaScript:**
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << std::endl;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(i);
+    }
+  }
+}
+```
+
+
+**2. While loop (conditional loop):** This loop continues as long as a specified condition is true.
+
+* **Python:**
+
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+* **JavaScript:**
+
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+* **C++:**
+
+```c++
+#include <iostream>
+
+int main() {
+  int count = 0;
+  while (count < 5) {
+    std::cout << count << std::endl;
+    count++;
+  }
+  return 0;
+}
+```
+
+* **Java:**
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    int count = 0;
+    while (count < 5) {
+      System.out.println(count);
+      count++;
+    }
+  }
+}
+```
+
+These examples all print the numbers 0 through 4.  The choice between `for` and `while` depends on whether you know the number of iterations in advance.  If you do, `for` is generally preferred for its clarity.  If the number of iterations depends on a condition, `while` is more appropriate.  Remember to always ensure your loop condition eventually becomes false to avoid an infinite loop.
+
