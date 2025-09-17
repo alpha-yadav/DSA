@@ -98574,3 +98574,103 @@ Once you've mastered the fundamentals, explore more advanced topics such as:
 
 Remember, learning algorithms is an iterative process.  Be patient, persistent, and enjoy the challenge!  Start with the basics, build a strong foundation, and gradually work your way up to more complex algorithms.
 
+#  A sample algorithmic problem 
+Here are a few algorithmic problems with varying difficulty levels, along with explanations:
+
+**Easy:**
+
+**Problem:**  Find the largest number in an unsorted array of integers.
+
+**Input:** An array of integers (e.g., `[3, 1, 4, 1, 5, 9, 2, 6]`)
+
+**Output:** The largest integer in the array (e.g., `9`)
+
+**Algorithm:**  Iterate through the array, keeping track of the largest number encountered so far.  Initialize the largest number to the first element of the array.
+
+
+**Python Code:**
+
+```python
+def find_largest(arr):
+  """Finds the largest number in an array."""
+  if not arr:  # Handle empty array case
+    return None
+  largest = arr[0]
+  for num in arr:
+    if num > largest:
+      largest = num
+  return largest
+
+print(find_largest([3, 1, 4, 1, 5, 9, 2, 6]))  # Output: 9
+```
+
+
+**Medium:**
+
+**Problem:**  Reverse a linked list.
+
+**Input:** A singly linked list.
+
+**Output:** The same linked list with its nodes reversed.
+
+**Algorithm:**  Iterative approach: use three pointers – previous, current, and next – to traverse the list and reverse the links.  Recursive approach: recursively reverse the rest of the list and attach the current node to the end.
+
+
+**Python Code (Iterative):**
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def reverse_linked_list(head):
+    prev = None
+    curr = head
+    while curr:
+        next_node = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next_node
+    return prev
+
+# Example usage:
+head = Node(1)
+head.next = Node(2)
+head.next.next = Node(3)
+
+reversed_head = reverse_linked_list(head)
+while reversed_head:
+    print(reversed_head.data, end=" ")  # Output: 3 2 1
+    reversed_head = reversed_head.next
+```
+
+
+**Hard:**
+
+**Problem:**  Find the kth smallest element in an unsorted array.
+
+**Input:** An unsorted array of integers and an integer k.
+
+**Output:** The kth smallest element in the array.
+
+
+**Algorithm:**  Several approaches exist, including:
+
+* **Sorting:** Sort the array and return the element at index k-1.  (Simple but not optimal for large arrays).
+* **Quickselect:**  A randomized algorithm based on the QuickSort partitioning scheme.  Average time complexity is O(n), but worst-case is O(n^2).
+* **Min-Heap:** Build a min-heap of size k.  This has a time complexity of O(n log k).
+
+**Python Code (using the `heapq` module for a Min-Heap approach):**
+
+```python
+import heapq
+
+def kth_smallest(arr, k):
+    return heapq.nsmallest(k, arr)[-1]
+
+print(kth_smallest([7, 10, 4, 3, 20, 15], 3))  # Output: 7
+```
+
+These are just examples; many other algorithmic problems exist with varying levels of complexity and application areas.  Remember to consider time and space complexity when designing your algorithms.
+
