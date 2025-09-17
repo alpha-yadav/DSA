@@ -98674,3 +98674,66 @@ print(kth_smallest([7, 10, 4, 3, 20, 15], 3))  # Output: 7
 
 These are just examples; many other algorithmic problems exist with varying levels of complexity and application areas.  Remember to consider time and space complexity when designing your algorithms.
 
+#  Getting Started with Simple Fizz Buzz Algorithm in Swift 
+The FizzBuzz algorithm is a classic programming problem.  It's deceptively simple to state, but it's a great way to practice basic programming concepts like loops, conditionals, and modulo arithmetic.  Here's how to implement it in Swift, starting with a straightforward approach and then showing a slightly more advanced version:
+
+
+**Version 1: Basic Approach**
+
+This version uses a `for` loop and a series of `if-else if-else` statements.
+
+```swift
+func fizzBuzz(n: Int) {
+    for i in 1...n {
+        if i % 15 == 0 {
+            print("FizzBuzz")
+        } else if i % 3 == 0 {
+            print("Fizz")
+        } else if i % 5 == 0 {
+            print("Buzz")
+        } else {
+            print(i)
+        }
+    }
+}
+
+fizzBuzz(n: 15) // Call the function to test
+```
+
+This code iterates from 1 to `n`. For each number:
+
+* It checks if it's divisible by 15 (both 3 and 5). If so, it prints "FizzBuzz".
+* Otherwise, it checks divisibility by 3, printing "Fizz" if true.
+* Then it checks divisibility by 5, printing "Buzz" if true.
+* If none of the above are true, it prints the number itself.
+
+
+**Version 2:  Slightly More Concise Approach**
+
+This version uses the ternary conditional operator (`?:`) to make the code a bit more compact.  It also demonstrates string interpolation for a cleaner output.
+
+```swift
+func fizzBuzzConcise(n: Int) {
+    for i in 1...n {
+        let fizz = i % 3 == 0 ? "Fizz" : ""
+        let buzz = i % 5 == 0 ? "Buzz" : ""
+        print("\(fizz)\(buzz) \(fizz.isEmpty && buzz.isEmpty ? i : "")")
+    }
+}
+
+fizzBuzzConcise(n: 15) // Call the function to test
+```
+
+This version first determines whether "Fizz" and "Buzz" should be added to the output string.  If both are empty strings (meaning the number isn't divisible by 3 or 5), the number itself is printed.
+
+
+**Explanation of Key Concepts:**
+
+* **`%` (Modulo Operator):**  This operator returns the remainder of a division.  For example, `10 % 3` equals 1 (because 10 divided by 3 is 3 with a remainder of 1).
+* **`if-else if-else` Statements:** These control the flow of execution based on different conditions.
+* **Ternary Conditional Operator (`?:`):**  This is a shorthand way to write an `if-else` statement in a single line.  The format is `condition ? valueIfTrue : valueIfFalse`.
+* **String Interpolation:**  The `\( ... )` syntax allows you to embed values (like variables or expressions) directly into strings.
+
+
+Remember to choose the version that best suits your understanding and coding style.  The first version is easier to read for beginners, while the second version demonstrates a more concise approach.  Both achieve the same result.
+
